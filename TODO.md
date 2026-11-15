@@ -643,9 +643,10 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   mirror field (struts and reaction ring 3–4× their 1.2 sizes); detachment (DETACHMENT_OPEN). Engine 1.4 (Coupled plasma in MODEL.md) ran the bounded D-21 study: Outcome D, no
   architecture shown to work. Engine 1.5 (Radiation and thermal in MODEL.md): Outcome C, THERMAL_CLOSURE_FAILED; the real hardware covers
   62 % of the sky, not 87 %, but photons are 12.5–85 % of the yield and the radiators would need 854× their capacity even at the most
-  favourable bounds; the requirement is a photon share of at most 0.59 % (SR-1, 21–144× below the source). Next, each needing the owner's
-  go: Geant4 or OpenMC transport with photoelectric and pair data (and the neutron channel), or xraylib for the attenuation tables; a
-  decision whether to record SR-1..4 in the Breakthrough Lab registry; a 2D hybrid-PIC run (about 11 core-hours) and a 3D one (about 12,500
+  favourable bounds; the requirement is a photon share of at most 0.59 % (SR-1, 21–144× below the source; registered as the NON_CANON
+  research requirement BT-008, SR-2..4 kept as its engineering alternatives). EXT-01 (`lab/studies/external-pulse/`) found no external
+  pulse architecture that closes on established physics; owner decision on the next propulsion milestone (EXT-01 REPORT). Deferred by the
+  owner (2026-11-15): Geant4 or OpenMC transport and xraylib attenuation tables. Next, each needing the owner's go: a 2D hybrid-PIC run (about 11 core-hours) and a 3D one (about 12,500
   core-hours, 1 TB); A1 pole steering and A2 aft or
   anisotropic sourcing in that model; the 0.1–5 GW eddy heat in the 20 K cryostat walls; REBCO critical current at the conductor field (OD-024); the
   CONSERVATIVE and EXTREME coil currents, which no member of this envelope survives; the cold-mass supports behind the loop seats and their

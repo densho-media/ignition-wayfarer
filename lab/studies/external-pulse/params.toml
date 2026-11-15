@@ -1,0 +1,156 @@
+# EXT-01 External Pulse Propulsion Architecture: study parameters (research only, NOT canon).
+#
+# Every bracket here is a PROTOTYPE choice of this study unless its note names a source. The mission reference (delta-v, burns,
+# protected mass, tank fraction, departure envelope, radiator, D-3He specific energy, 6 y duration) is read from data/ through
+# src/wayfarer (spec, operating_point), and the fusion-source energy partition from the released Vertex 1.5 evidence
+# (references/evidence/vertex_radiation.json). Nothing from Vertex's engine is carried over: not its thrust, jet share or pulse rate.
+# Brackets are [optimistic, nominal, pessimistic] for the concept unless the note says otherwise.
+
+[study]
+id = "EXT-01"
+version = "1.0.0"
+status = "NON_CANON"
+
+[mission]
+# Share of the LOCKED 6 y mission that the four burns take together (sets the thrust). The code adds the canon schedule's own share
+# (the four power-limited burns, about 28.5 d or 1.3 %); longer burns delay the 6 y mission by half the extra burn time.
+burn_fraction = [0.25, 0.10, 0.05]
+# Exploratory departure-mass multiples of the WORKING envelope upper bound (4.6 kt), to show how far each concept is from closing.
+# Only 1 is the current envelope; the others are not proposals.
+departure_multiples = [1.0, 10.0, 100.0]
+
+[source]
+# Fusion pulse energy partition: photon and neutron shares of the yield are the Vertex 1.5 source cases (LOW, NOMINAL, CONSERVATIVE),
+# because they describe a compact D-3He burn wherever it happens. The rest is charged products and debris kinetic energy.
+cases = ["LOW", "NOMINAL", "CONSERVATIVE"]
+# Pulse fuel burnup (fraction of the D-3He in the pulse that reacts). It caps the debris speed: v_d^2 <= 2 f_k b eps.
+# 0.8 is the operating point's WORKING value for the Vertex burn; lower values are the PROTOTYPE pessimistic side.
+burnup = [0.8, 0.3, 0.05]
+# Share of the photon energy that matter around the burn absorbs and turns into debris kinetic energy, with NO mass penalty
+# (optimistic: real absorbing mass slows the debris). UNVERIFIED for a D-3He pulse: no source establishes it.
+photon_conversion = [0.9, 0.5, 0.0]
+# Share of the debris MASS sent forward into the interaction cone (the rest recoils backward: an isolated pulse has no net momentum).
+# "iso" = isotropic burn (the only form any fusion micro-pulse is known to give). Directed values are UNVERIFIED directional pulses;
+# this study gives no device design for them. 0.5 is the best any directed pulse can do (momentum balance; see ext01._mass_factor).
+directed = ["0.5", "0.7", "iso"]
+
+[A]
+name = "Mechanical pusher plate"
+# Plate half-angle seen from the burn (deg): sets the share of photons, neutrons and isotropic debris it meets.
+half_angle_deg = [30.0, 45.0, 70.0]
+# Restitution of the debris on the plate (stagnating plasma is close to inelastic).
+restitution = [0.5, 0.25, 0.0]
+# Share of the dissipated stagnation energy that the plate absorbs (the rest radiates away from the stagnation layer).
+stagnation_to_plate = [0.25, 0.5, 0.75]
+# Neutron energy deposited per neutron that meets the plate (thickness).
+neutron_absorbed = [0.1, 0.3, 1.0]
+# Effective ablation energy (J/kg) if the plate is cooled by losing surface mass: about 3e7 (sublimation-class) to 1e8 (vapour
+# heated well above sublimation). The ablated mass is expended propellant leaving at low speed.
+ablation_J_kg = [1.0e8, 6.0e7, 3.0e7]
+# Shock-absorber stroke (m): bounds the plate mass needed to keep its per-pulse velocity change within the stroke.
+stroke_m = [10.0, 3.0, 1.0]
+# Largest plate velocity jump per pulse (m/s) the plate and its first shock stage take; with the stroke it floors the plate mass.
+plate_dv_m_s = [30.0, 10.0, 3.0]
+
+[B]
+name = "Magnetic pusher (coil near the burn)"
+# Field reach: the debris turns within k coil radii of the coil (dipole stand-off of order the coil radius).
+reach = [2.0, 1.5, 1.0]
+# Conductor + cryostat + shield thickness over coil radius (what the burn sees of the coil). 0.005 is very thin for a coil that
+# must carry the pulse load and its own shielding.
+thickness_over_radius = [0.005, 0.02, 0.05]
+# Reflection of the captured debris by the field (1 = fully elastic, adiabatic turn).
+restitution = [1.0, 0.8, 0.5]
+# Captured debris kinetic energy that leaks along field lines onto hardware. The project's only evidence is Vertex 1.4's closure
+# brackets for an internal cavity (1, 9, 28 %); 0 is added as the unestablished best case. Not established for an external coil.
+leak = [0.0, 0.01, 0.09, 0.28]
+neutron_absorbed = [0.1, 0.3, 1.0]
+# Share of the coil's heat that reaches its 20 K cold mass (rest stops in the warm shield and goes straight to the radiator).
+cold_share = [0.01, 0.1, 1.0]
+# Specific strength of the magnet structure, sigma/rho (J/kg), for the magnetic virial bound M >= W_B rho / sigma.
+# About 2e6 is the fibre limit (Zylon/CFRP at allowable stress), 1e5 is steel-class structure.
+specific_strength_J_kg = [2.0e6, 5.0e5, 1.0e5]
+# Field energy stored per joule of captured debris kinetic energy at reach 1 (order unity; the dipole outside the bubble scales
+# it by reach^3).
+field_energy_factor = 1.0
+
+[C]
+name = "Remote field coupling (inflated field far from the coil)"
+# Same physics as B, at large reach (inflated or plasma-stretched field; reach values beyond about 3 are UNVERIFIED for this use).
+reach = [30.0, 10.0, 3.0]
+thickness_over_radius = [0.005, 0.02, 0.05]
+restitution = [1.0, 0.8, 0.5]
+leak = [0.0, 0.01, 0.09, 0.28]
+neutron_absorbed = [0.1, 0.3, 1.0]
+cold_share = [0.01, 0.1, 1.0]
+specific_strength_J_kg = [2.0e6, 5.0e5, 1.0e5]
+field_energy_factor = 1.0
+
+[pulse]
+# Pulse-rate ceiling (Hz). The study does not establish any driver repetition rate; Vertex's 5.7 kHz is not carried over.
+# The search runs each case at each rate: faster means smaller pulses and lighter hardware, but more load cycles.
+rate_ceiling_Hz = [1000.0, 100.0, 10.0]
+# Interaction time used for the plate's peak acceleration (s): an upper bound on contact time gives a lower bound on acceleration.
+contact_s = 1.0e-3
+# Structural fatigue: load cycles beyond the tested range of structural materials (ultrasonic giga-cycle tests reach about 1e10).
+fatigue_cycles_limit = 1.0e10
+
+[shielding]
+# Neutron attenuation length of the existing shadow shield material class (m), only to turn a source ratio into extra thickness.
+neutron_attenuation_m = 0.15
+
+# Precedents: what the literature claims. PROPONENT_CLAIM values are design studies, not demonstrations; secondary sources are
+# encyclopaedic summaries (the primary papers were not reachable from this session). None validates a D-3He fusion pulse.
+[[precedent]]
+id = "ORION"
+concept = "A"
+name = "Project Orion (General Atomics, 1958-1965)"
+claim = "Isp about 2,000 to 6,000 s for fission pulse units (Air Force-era estimates 4,000 to 6,000 s); collimation factor near 0.5 when the plate matches the fireball"
+isp_s = [2000.0, 6000.0]
+evidence = "PROPONENT_CLAIM"
+source = "https://en.wikipedia.org/wiki/Project_Orion_(nuclear_propulsion) (secondary)"
+
+[[precedent]]
+id = "DYSON-1968"
+concept = "A"
+name = "F. Dyson, Interstellar Transport, Physics Today 21(10), 41-45 (1968)"
+claim = "Thermonuclear Orion: ship speeds of order 1,000 to 10,000 km/s claimed from debris at 3,000 to 30,000 km/s. Secondary summaries also quote Isp above 75,000 s, which does not reconcile with 10,000 km/s at any practical mass ratio; no Isp is plotted"
+isp_s = []
+evidence = "PROPONENT_CLAIM"
+source = "https://physicstoday.aip.org/features/interstellar-transport (primary, not reachable here); https://en.wikipedia.org/wiki/Nuclear_pulse_propulsion (secondary)"
+
+[[precedent]]
+id = "MEDUSA"
+concept = "A"
+name = "Medusa (J. Solem, early 1990s): sail-like tension canopy ahead of the pulse"
+claim = "Isp 50,000 to 100,000 s"
+isp_s = [50000.0, 100000.0]
+evidence = "PROPONENT_CLAIM"
+source = "https://en.wikipedia.org/wiki/Nuclear_pulse_propulsion (secondary)"
+
+[[precedent]]
+id = "MINI-MAG"
+concept = "B"
+name = "Mini-Mag Orion (Andrews Space; Lenard and Andrews, Acta Astronautica)"
+claim = "Isp 10,000 to 30,000 s, thrust 1 to 2 MN, magnetic nozzle catches the pulse plasma"
+isp_s = [10000.0, 30000.0]
+evidence = "PROPONENT_CLAIM"
+source = "https://en.wikipedia.org/wiki/Mini-Mag_Orion (secondary); https://www.flightglobal.com/nuclear-power-concept-revisited/47904.article"
+
+[[precedent]]
+id = "MAGORION"
+concept = "B"
+name = "MagOrion: superconducting loop as the pusher"
+claim = "Isp above 10,000 s"
+isp_s = [10000.0, 10000.0]
+evidence = "PROPONENT_CLAIM"
+source = "https://en.wikipedia.org/wiki/Nuclear_pulse_propulsion (secondary)"
+
+[[precedent]]
+id = "M2P2"
+concept = "C"
+name = "Mini-Magnetospheric Plasma Propulsion (Winglee et al.): plasma-inflated magnetic field"
+claim = "Field inflated far beyond the coil by injected plasma (for solar-wind sailing, not pulse capture)"
+isp_s = []
+evidence = "PROPONENT_CLAIM"
+source = "Winglee et al., J. Geophys. Res. 105 (2000); contested in later analyses; reach used here is UNVERIFIED"

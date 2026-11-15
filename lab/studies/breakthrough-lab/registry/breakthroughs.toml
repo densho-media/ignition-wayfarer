@@ -302,3 +302,28 @@ references = ["S-T05-GATE", "S-T00-GATE"]
 atlas = ["VTX-02D"]
 materials = ["MAT-CFRP"]
 penalties = { power = "None.", heat = "None.", mass = "Not computed.", maintenance = "None.", booked = [], unbooked = ["Spine mass at the chosen criterion"] }
+
+[[breakthrough]]
+id = "BT-008"
+name = "SR-1 Photon production / thermal closure gap"
+summary = "Research requirement, not a capability: the compact D-3He pulse would have to put at most 0.59 % of its yield into photons (cold parts shielded; 0.046 % as drawn) for four Vertex engines to close on the 14.4 GW radiator. No physical mechanism for this is assumed or assigned to any technology."
+limitation = "Vertex 1.5 models the photon share at 12.5-84.8 % of the yield (bremsstrahlung, line and synchrotron brackets; scan minimum 4.7 % at Ti 150 keV, Te/Ti 0.1). The gap to the threshold is 21-144x; with a 62 % real-mesh intercept the four engines need at least 854x the radiator."
+weakest_links = ["WL-005", "WL-008"]
+basis = "Vertex Engine 1.5 evidence (Bosch-Hale reactivities, bremsstrahlung and synchrotron brackets, 3D ray trace of the 1.2 mesh, Compton-only and full-absorption attenuation brackets). Threshold assumptions: four engines at 8.93 TW each, 14.4 GW ideal rejection, 10.8 GW hot budget, the 1.2 engine geometry, deposited energy = intercepted photon energy within the attenuation brackets."
+level = "C"
+evidence = "CALCULATED"
+development = "PROPOSED"
+canon = "NON_CANON"
+assumption = "None. SR-1 records a gap and its conditions only. Engineering alternatives that act on the same gap without new physics are documented here and are not separate breakthroughs: SR-2 (hardware absorbed fraction <=0.0032 W/W against 0.068), SR-3 (radiator 18-167x the drawn area) and SR-4 (photon conversion or recovery at 0.05 % of power)."
+modifies = []
+unchanged = "Everything: the Wayfarer model, the deployed Vertex engines (M0-NOMINAL prototype), mission physics, fuel cycle, Fiji technology and lore."
+allowed = "Citing the threshold and its assumptions when comparing propulsion architectures (for example EXT-01)."
+forbidden = "Assigning photon suppression or any new property to Fiji technology; treating the threshold as achieved; reducing radiator area to fit."
+energy = "None."
+depends_on = []
+risks = "The attenuation evidence is incomplete (no xraylib/NIST photoabsorption, no Geant4/OpenMC transport): deposition is bracketed between Compton-only and full absorption, so the threshold carries that uncertainty."
+validation = "Owner decision on radiation transport (deferred: no Geant4/OpenMC at this stage). Any proposed mechanism would need its own physical model and evidence class before it could leave Level C."
+references = ["S-VTX-1-5"]
+atlas = []
+materials = []
+penalties = { power = "None.", heat = "None.", mass = "Not computed.", maintenance = "None.", booked = [], unbooked = ["Photon heat into hardware above the 14.4 GW radiator (>=854x as modeled)"] }

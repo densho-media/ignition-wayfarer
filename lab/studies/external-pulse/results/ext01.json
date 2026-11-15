@@ -1,0 +1,2271 @@
+{
+ "study": "EXT-01",
+ "version": "1.0.0",
+ "status": "NON_CANON",
+ "input_hash": "ac654cf9d7a27b08",
+ "reference": {
+  "vertex_burn_fraction": 0.01302648058923249,
+  "dv_burn": 4796679.328,
+  "burns": 4,
+  "dv_total": 19186717.312,
+  "cruise_c": 0.016,
+  "mission_s": 189345600.0,
+  "protected_kg": 1300000.0,
+  "legacy_kg": 600000.0,
+  "tank_fraction": 0.15,
+  "departure_upper_kg": 4600000.0,
+  "departure_kg": 4426074.234859591,
+  "end_kg": 1629487.9436773378,
+  "propellant_kg": 2796586.291182253,
+  "ve_ref": 19201172.08,
+  "eps": 353136315693351.0,
+  "hot_budget_W": 10801125449.17382,
+  "reject_W": 14401500598.898428,
+  "cop": 0.0033707865168539327,
+  "cold_K": 20.0,
+  "carnot": 0.3,
+  "radiator_K": 1800.0,
+  "sources": {
+   "LOW": {
+    "photon": 0.12487246960573131,
+    "neutron": 0.04427745838999864
+   },
+   "NOMINAL": {
+    "photon": 0.21664891043999762,
+    "neutron": 0.04801595163677135
+   },
+   "CONSERVATIVE": {
+    "photon": 0.8475558413773995,
+    "neutron": 0.028693846666179138
+   }
+  },
+  "vertex": {
+   "outcome": "C",
+   "verdict": "PROPULSION_FEASIBILITY_BLOCKED",
+   "thrust_per_engine_N": 725519.2256992677,
+   "fusion_per_engine_W": 8929948500000.0,
+   "radiator_multiple_min": 854.4715831105843,
+   "radiator_multiple": {
+    "LOW": 854.4715831105843,
+    "NOMINAL": 2167.450556115583,
+    "CONSERVATIVE": 11133.421054459297
+   },
+   "heat_per_N_cold_shielded": {
+    "LOW": 105033.76080706713,
+    "NOMINAL": 182229.51712346054,
+    "CONSERVATIVE": 712903.1546740584
+   },
+   "photon_share_needed": 0.005899790835901609,
+   "gap": [
+    21.165575709201942,
+    143.65862535665227
+   ],
+   "neutron_W_per_N": {
+    "LOW": 544982.6953276007,
+    "NOMINAL": 590997.3989753248,
+    "CONSERVATIVE": 353174.0633735973
+   },
+   "budget_W_per_N": 3721.860519534652,
+   "pulse_Hz": 5697.064655767655,
+   "yield_J": 1567464833.1328669,
+   "four_engine_thrust_N": 2902076.902797071
+  },
+  "mission_peak_thrust_N": 21770763.000706356,
+  "mission_peak_fusion_W": 261265104180912.4
+ },
+ "requirement": {
+  "v_eff_needed": {
+   "1.0": 18737680.789653927,
+   "10.0": 10231249.047900587,
+   "100.0": 9500737.482462738
+  },
+  "tank_growth_limit_v_eff": 9419651.210612902,
+  "per_burn_ratio_at": {
+   "30000.0": 2.7481817652825387e+69,
+   "300000.0": 8788293.355776962,
+   "3000000.0": 4.947552992158507,
+   "19201172.08": 1.2837837837421309
+  }
+ },
+ "kappa_allowed_at_ve_ref": {
+  "0.5": 1.0981370651972445e-05,
+  "1.0": 4.392548260788978e-05,
+  "2.0": 0.00017570193043155911
+ },
+ "concepts": {
+  "A": {
+   "name": "Mechanical pusher plate",
+   "summary": {
+    "cases": 104976,
+    "closes": 0,
+    "closes_without_schedule": 0,
+    "ladder": [
+     {
+      "step": "all brackets, including UNVERIFIED ones",
+      "cases": 104976,
+      "closes": 0,
+      "best_closure": 131.5180436452252,
+      "gates": {
+       "mass": 1.361142954956665,
+       "heat": 131.5180436452252,
+       "speed": 1.0,
+       "fatigue": 4.73364,
+       "schedule": 1.1184867597053838
+      },
+      "v_eff": 15869516.044108829,
+      "combo": {
+       "case": "LOW",
+       "burnup": 0.8,
+       "photon_conversion": 0.9,
+       "directed": "0.7",
+       "restitution": 0.5,
+       "neutron_absorbed": 0.1,
+       "rate_Hz": 1000.0,
+       "burn_fraction": 0.25,
+       "half_angle_deg": 30.0,
+       "stagnation_to_plate": 0.25,
+       "cooling": "radiator"
+      },
+      "v_eff_max": 17318072.823155917,
+      "isp_max_s": 1765951.9635304532
+     },
+     {
+      "step": "no photon conversion (a bare burn: absorbing mass is not modelled, so conversion at the fuel-only speed cap is inconsistent)",
+      "cases": 34992,
+      "closes": 0,
+      "best_closure": 160.2778607154044,
+      "gates": {
+       "mass": 1.572119255665293,
+       "heat": 160.2778607154044,
+       "speed": 1.0,
+       "fatigue": 4.73364,
+       "schedule": 1.1184867597053838
+      },
+      "v_eff": 14901267.732821852,
+      "combo": {
+       "case": "LOW",
+       "burnup": 0.8,
+       "photon_conversion": 0.0,
+       "directed": "0.7",
+       "restitution": 0.5,
+       "neutron_absorbed": 0.1,
+       "rate_Hz": 1000.0,
+       "burn_fraction": 0.25,
+       "half_angle_deg": 30.0,
+       "stagnation_to_plate": 0.25,
+       "cooling": "radiator"
+      },
+      "v_eff_max": 16288728.753466416,
+      "isp_max_s": 1660988.0798709465
+     },
+     {
+      "step": "isotropic pulse (no directional fusion pulse is established)",
+      "cases": 11664,
+      "closes": 0,
+      "best_closure": null,
+      "gates": null,
+      "v_eff": 2038606.511628586,
+      "combo": {
+       "case": "LOW",
+       "burnup": 0.8,
+       "photon_conversion": 0.0,
+       "directed": "iso",
+       "restitution": 0.5,
+       "neutron_absorbed": 0.1,
+       "rate_Hz": 1000.0,
+       "burn_fraction": 0.25,
+       "half_angle_deg": 30.0,
+       "stagnation_to_plate": 0.25,
+       "cooling": "radiator"
+      },
+      "v_eff_max": 7200539.40313566,
+      "isp_max_s": 734250.6771563848
+     },
+     {
+      "step": "leak at least the 1.4 minimum (1 %), A unaffected",
+      "cases": 11664,
+      "closes": 0,
+      "best_closure": null,
+      "gates": null,
+      "v_eff": 2038606.511628586,
+      "combo": {
+       "case": "LOW",
+       "burnup": 0.8,
+       "photon_conversion": 0.0,
+       "directed": "iso",
+       "restitution": 0.5,
+       "neutron_absorbed": 0.1,
+       "rate_Hz": 1000.0,
+       "burn_fraction": 0.25,
+       "half_angle_deg": 30.0,
+       "stagnation_to_plate": 0.25,
+       "cooling": "radiator"
+      },
+      "v_eff_max": 7200539.40313566,
+      "isp_max_s": 734250.6771563848
+     }
+    ],
+    "best": {
+     "v_d": 15113074.077789502,
+     "v_eff": 15869516.044108829,
+     "isp_s": 1618240.2802291128,
+     "heat_fraction": 0.05419007498918632,
+     "radiator_per_J": 0.05419007498918632,
+     "heat_per_N": 964691.4688835323,
+     "impulse_per_J": 5.617347798452306e-08,
+     "g_h": 0.06698729810778065,
+     "g_k": 0.7,
+     "mass_ratio": 3.3502325746239627,
+     "propellant_kg": 4392355.224581212,
+     "end_kg": 1868902.3682194469,
+     "departure_kg": 6261257.592800658,
+     "thrust_N": 1472535.9703719923,
+     "burn_s": 47336400.0,
+     "fusion_W": 26214078657862.453,
+     "yield_J": 26214078657.862453,
+     "yield_t_TNT": 6.26531516679313,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 1472.5359703719923,
+     "hardware_kg": 49.08453234573308,
+     "radiator_load_W": 1420542888241.995,
+     "radiator_multiple": 131.5180436452252,
+     "cycles": 47336400000.0,
+     "gates": {
+      "mass": 1.361142954956665,
+      "heat": 131.5180436452252,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "closure": 131.5180436452252,
+     "closes": false,
+     "v_cap": 15113074.077789502,
+     "schedule_delay_y": 0.7109205582323025,
+     "closure_without_schedule": 131.5180436452252,
+     "fuel_kg": 4392355.224581212,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.03693823517324996,
+     "neutron_W_per_N": 788227.1131974058,
+     "heat_W_per_N_budget": 7335.050325762323,
+     "plate_dv_m_s": 30.0,
+     "plate_peak_g": 3059.1486389337847,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.7",
+      "restitution": 0.5,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.25,
+      "half_angle_deg": 30.0,
+      "stagnation_to_plate": 0.25,
+      "cooling": "radiator"
+     }
+    },
+    "best_on_canon_schedule": {
+     "v_d": 15113074.077789502,
+     "v_eff": 15869516.044108829,
+     "isp_s": 1618240.2802291128,
+     "heat_fraction": 0.05419007498918632,
+     "radiator_per_J": 0.05419007498918632,
+     "heat_per_N": 964691.4688835323,
+     "impulse_per_J": 5.617347798452306e-08,
+     "g_h": 0.06698729810778065,
+     "g_k": 0.7,
+     "mass_ratio": 3.3502325746239627,
+     "propellant_kg": 4395598.992668981,
+     "end_kg": 1870282.5584707404,
+     "departure_kg": 6265881.551139722,
+     "thrust_N": 28281304.23837106,
+     "burn_s": 2466506.783056579,
+     "fusion_W": 503463649627732.4,
+     "yield_J": 503463649627.73236,
+     "yield_t_TNT": 120.33070019783278,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 28281.304238371056,
+     "hardware_kg": 942.7101412790352,
+     "radiator_load_W": 27282732927656.246,
+     "radiator_multiple": 2525.9157535054005,
+     "cycles": 2466506783.056579,
+     "gates": {
+      "mass": 1.3621481632912438,
+      "heat": 2525.9157535054005,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "closure": 2525.9157535054005,
+     "closes": false,
+     "v_cap": 15113074.077789502,
+     "schedule_delay_y": 0.0,
+     "closure_without_schedule": 2525.9157535054005,
+     "fuel_kg": 4395598.99266898,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.7089066559501612,
+     "neutron_W_per_N": 788227.1131974058,
+     "heat_W_per_N_budget": 381.917515477212,
+     "plate_dv_m_s": 30.0,
+     "plate_peak_g": 3059.1486389337847,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.7",
+      "restitution": 0.5,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.01302648058923249,
+      "half_angle_deg": 30.0,
+      "stagnation_to_plate": 0.25,
+      "cooling": "radiator"
+     }
+    },
+    "best_without_schedule": {
+     "v_d": 15113074.077789502,
+     "v_eff": 15869516.044108829,
+     "isp_s": 1618240.2802291128,
+     "heat_fraction": 0.05419007498918632,
+     "radiator_per_J": 0.05419007498918632,
+     "heat_per_N": 964691.4688835323,
+     "impulse_per_J": 5.617347798452306e-08,
+     "g_h": 0.06698729810778065,
+     "g_k": 0.7,
+     "mass_ratio": 3.3502325746239627,
+     "propellant_kg": 4392355.224581212,
+     "end_kg": 1868902.3682194469,
+     "departure_kg": 6261257.592800658,
+     "thrust_N": 1472535.9703719923,
+     "burn_s": 47336400.0,
+     "fusion_W": 26214078657862.453,
+     "yield_J": 26214078657.862453,
+     "yield_t_TNT": 6.26531516679313,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 1472.5359703719923,
+     "hardware_kg": 49.08453234573308,
+     "radiator_load_W": 1420542888241.995,
+     "radiator_multiple": 131.5180436452252,
+     "cycles": 47336400000.0,
+     "gates": {
+      "mass": 1.361142954956665,
+      "heat": 131.5180436452252,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "closure": 131.5180436452252,
+     "closes": false,
+     "v_cap": 15113074.077789502,
+     "schedule_delay_y": 0.7109205582323025,
+     "closure_without_schedule": 131.5180436452252,
+     "fuel_kg": 4392355.224581212,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.03693823517324996,
+     "neutron_W_per_N": 788227.1131974058,
+     "heat_W_per_N_budget": 7335.050325762323,
+     "plate_dv_m_s": 30.0,
+     "plate_peak_g": 3059.1486389337847,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.7",
+      "restitution": 0.5,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.25,
+      "half_angle_deg": 30.0,
+      "stagnation_to_plate": 0.25,
+      "cooling": "radiator"
+     }
+    },
+    "fastest": {
+     "v_d": 23085601.981648438,
+     "v_eff": 17318072.823155917,
+     "isp_s": 1765951.9635304532,
+     "heat_fraction": 0.0939931711423391,
+     "radiator_per_J": 0.0939931711423391,
+     "heat_per_N": 1533306.967650988,
+     "impulse_per_J": 6.130094829369736e-08,
+     "g_h": 0.32898992833716556,
+     "g_k": 0.5,
+     "mass_ratio": 3.0279971995876265,
+     "propellant_kg": 3526821.433740741,
+     "end_kg": 1739066.2247748105,
+     "departure_kg": 5265887.658515552,
+     "thrust_N": 1290291.412608253,
+     "burn_s": 47336400.0,
+     "fusion_W": 21048473939201.918,
+     "yield_J": 21048473939.20192,
+     "yield_t_TNT": 5.0307060084134605,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 1290.2914126082533,
+     "hardware_kg": 43.009713753608445,
+     "radiator_load_W": 1978412813252.4702,
+     "radiator_multiple": 183.16728405407042,
+     "cycles": 47336400000.0,
+     "gates": {
+      "mass": 1.1447581866338157,
+      "heat": 183.16728405407042,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "closure": 183.16728405407042,
+     "closes": false,
+     "v_cap": 23085601.981648438,
+     "schedule_delay_y": 0.7109205582323025,
+     "closure_without_schedule": 183.16728405407042,
+     "fuel_kg": 3526821.4337407406,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.03756573119036167,
+     "neutron_W_per_N": 722296.467223673,
+     "heat_W_per_N_budget": 8371.074428326187,
+     "plate_dv_m_s": 30.0,
+     "plate_peak_g": 3059.1486389337847,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.5",
+      "restitution": 0.5,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.25,
+      "half_angle_deg": 70.0,
+      "stagnation_to_plate": 0.25,
+      "cooling": "radiator"
+     }
+    },
+    "fastest_within_heat": null,
+    "coolest_within_mass": null,
+    "closing_counts": {}
+   },
+   "derived": {
+    "fastest_ablative": {
+     "v_eff": 20062.306509928923,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.3,
+      "photon_conversion": 0.9,
+      "directed": "0.7",
+      "restitution": 0.5,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.25,
+      "half_angle_deg": 30.0,
+      "stagnation_to_plate": 0.25,
+      "cooling": "ablative:100000000.0"
+     }
+    },
+    "hardware_sky_range": [
+     0.06698729810778065,
+     0.32898992833716556
+    ]
+   },
+   "nominal": {
+    "v_d": 8752700.09572159,
+    "v_eff": 7664218.527925437,
+    "isp_s": 781532.7892731399,
+    "heat_fraction": 0.13520655680003055,
+    "radiator_per_J": 0.13520655680003055,
+    "heat_per_N": 1868932.0438337224,
+    "impulse_per_J": 7.234428734106492e-08,
+    "g_h": 0.1464466094067262,
+    "g_k": 0.7,
+    "closes": false,
+    "closure": null,
+    "reason": "mass ratio beyond the tank-growth limit",
+    "departure_kg": null,
+    "combo": {
+     "case": "NOMINAL",
+     "burnup": 0.3,
+     "photon_conversion": 0.5,
+     "directed": "0.7",
+     "restitution": 0.25,
+     "neutron_absorbed": 0.1,
+     "rate_Hz": 100.0,
+     "burn_fraction": 0.1,
+     "half_angle_deg": 45.0,
+     "stagnation_to_plate": 0.5,
+     "cooling": "radiator"
+    }
+   },
+   "nominal_ledger": {
+    "hw": {
+     "photon": 0.01586374918279957,
+     "neutron": 0.0007031773314642512,
+     "debris": 0.11863963028576673
+    },
+    "esc": {
+     "photon": 0.09246070603719923,
+     "neutron": 0.0473127743053071,
+     "debris_uncaptured": 0.5905617152002609,
+     "debris_reflected": 0.015818617371435556,
+     "radiated": 0.11863963028576673
+    },
+    "Q": 0.13520655680003055,
+    "I": 7.234428734106492e-08,
+    "v_debris": 7658612.583756391,
+    "m_d": 9.439225548889351e-15,
+    "m_abl": 0.0,
+    "m_exp": 9.439225548889351e-15,
+    "v_eff": 7664218.527925437,
+    "rad": 0.13520655680003055,
+    "g_h": 0.1464466094067262,
+    "g_k": 0.7,
+    "c1": 1.0,
+    "f_k": 0.8436595931432299,
+    "f_g": 0.10832445521999881,
+    "f_n": 0.04801595163677135,
+    "E_c": 0.253097877942969,
+    "exhaust_KE": 0.6063803325716964
+   },
+   "relaxed": {
+    "10.0": {
+     "closure": 131.5180436452252,
+     "gates": {
+      "mass": 0.13611429549566648,
+      "heat": 131.5180436452252,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "v_eff": 15869516.044108829,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.7",
+      "restitution": 0.5,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.25,
+      "half_angle_deg": 30.0,
+      "stagnation_to_plate": 0.25,
+      "cooling": "radiator"
+     },
+     "closes": false
+    },
+    "100.0": {
+     "closure": 131.5180436452252,
+     "gates": {
+      "mass": 0.013611429549566649,
+      "heat": 131.5180436452252,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "v_eff": 15869516.044108829,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.7",
+      "restitution": 0.5,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.25,
+      "half_angle_deg": 30.0,
+      "stagnation_to_plate": 0.25,
+      "cooling": "radiator"
+     },
+     "closes": false
+    }
+   },
+   "sensitivity": [
+    {
+     "lever": "stroke_m",
+     "value": 10.0,
+     "closure": 131.5180436452252,
+     "gates": {
+      "mass": 1.361142954956665,
+      "heat": 131.5180436452252,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "v_eff": 15869516.044108829
+    },
+    {
+     "lever": "stroke_m",
+     "value": 3.0,
+     "closure": 131.5180436452252,
+     "gates": {
+      "mass": 1.361142954956665,
+      "heat": 131.5180436452252,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "v_eff": 15869516.044108829
+    },
+    {
+     "lever": "stroke_m",
+     "value": 1.0,
+     "closure": 131.5180436452252,
+     "gates": {
+      "mass": 1.361142954956665,
+      "heat": 131.5180436452252,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "v_eff": 15869516.044108829
+    },
+    {
+     "lever": "plate_dv_m_s",
+     "value": 30.0,
+     "closure": 131.5180436452252,
+     "gates": {
+      "mass": 1.361142954956665,
+      "heat": 131.5180436452252,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "v_eff": 15869516.044108829
+    },
+    {
+     "lever": "plate_dv_m_s",
+     "value": 10.0,
+     "closure": 131.52871476145,
+     "gates": {
+      "mass": 1.3612533954275567,
+      "heat": 131.52871476145,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "v_eff": 15869516.044108829
+    },
+    {
+     "lever": "plate_dv_m_s",
+     "value": 3.0,
+     "closure": 131.56607730124247,
+     "gates": {
+      "mass": 1.361640078170154,
+      "heat": 131.56607730124247,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "v_eff": 15869516.044108829
+    },
+    {
+     "lever": "neutron_absorbed",
+     "value": 0.1,
+     "closure": 131.5180436452252,
+     "gates": {
+      "mass": 1.361142954956665,
+      "heat": 131.5180436452252,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "v_eff": 15869516.044108829
+    },
+    {
+     "lever": "neutron_absorbed",
+     "value": 0.3,
+     "closure": 132.95773941453547,
+     "gates": {
+      "mass": 1.361142954956665,
+      "heat": 132.95773941453547,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "v_eff": 15869516.044108829
+    },
+    {
+     "lever": "neutron_absorbed",
+     "value": 1.0,
+     "closure": 137.99667460712143,
+     "gates": {
+      "mass": 1.361142954956665,
+      "heat": 137.99667460712143,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "v_eff": 15869516.044108829
+    }
+   ]
+  },
+  "B": {
+   "name": "Magnetic pusher (coil near the burn)",
+   "summary": {
+    "cases": 314928,
+    "closes": 6,
+    "closes_without_schedule": 414,
+    "ladder": [
+     {
+      "step": "all brackets, including UNVERIFIED ones",
+      "cases": 314928,
+      "closes": 6,
+      "best_closure": 1.0,
+      "gates": {
+       "mass": 0.8784278590222021,
+       "heat": 0.40569215856144153,
+       "speed": 1.0,
+       "fatigue": 0.2466506783056579,
+       "schedule": 1.0
+      },
+      "v_eff": 23085604.92348388,
+      "combo": {
+       "case": "LOW",
+       "burnup": 0.8,
+       "photon_conversion": 0.9,
+       "directed": "0.5",
+       "restitution": 1.0,
+       "neutron_absorbed": 0.1,
+       "rate_Hz": 1000.0,
+       "burn_fraction": 0.01302648058923249,
+       "reach": 1.5,
+       "thickness_over_radius": 0.005,
+       "leak": 0.0,
+       "capture_deg": 30.0
+      },
+      "v_eff_max": 23085749.073420335,
+      "isp_max_s": 2354091.2618906903
+     },
+     {
+      "step": "no photon conversion (a bare burn: absorbing mass is not modelled, so conversion at the fuel-only speed cap is inconsistent)",
+      "cases": 104976,
+      "closes": 0,
+      "best_closure": 1.0184867597053837,
+      "gates": {
+       "mass": 0.8909684761735183,
+       "heat": 0.5017511464823116,
+       "speed": 1.0,
+       "fatigue": 0.946728,
+       "schedule": 1.0184867597053837
+      },
+      "v_eff": 21666704.48394172,
+      "combo": {
+       "case": "LOW",
+       "burnup": 0.8,
+       "photon_conversion": 0.0,
+       "directed": "0.5",
+       "restitution": 1.0,
+       "neutron_absorbed": 0.1,
+       "rate_Hz": 1000.0,
+       "burn_fraction": 0.05,
+       "reach": 2.0,
+       "thickness_over_radius": 0.005,
+       "leak": 0.0,
+       "capture_deg": 30.0
+      },
+      "v_eff_max": 21668158.096746333,
+      "isp_max_s": 2209537.2116621207
+     },
+     {
+      "step": "isotropic pulse (no directional fusion pulse is established)",
+      "cases": 34992,
+      "closes": 0,
+      "best_closure": 6.233107791884165,
+      "gates": {
+       "mass": 6.233107791884165,
+       "heat": 5.186944401366437,
+       "speed": 1.0,
+       "fatigue": 4.73364,
+       "schedule": 1.1184867597053838
+      },
+      "v_eff": 10833388.848520424,
+      "combo": {
+       "case": "LOW",
+       "burnup": 0.8,
+       "photon_conversion": 0.0,
+       "directed": "iso",
+       "restitution": 1.0,
+       "neutron_absorbed": 0.1,
+       "rate_Hz": 1000.0,
+       "burn_fraction": 0.25,
+       "reach": 1.5,
+       "thickness_over_radius": 0.005,
+       "leak": 0.0,
+       "capture_deg": 90.0
+      },
+      "v_eff_max": 10834079.048373165,
+      "isp_max_s": 1104768.60583106
+     },
+     {
+      "step": "leak at least the 1.4 minimum (1 %), A unaffected",
+      "cases": 26244,
+      "closes": 0,
+      "best_closure": 221.75910377744708,
+      "gates": {
+       "mass": 6.130185559493512,
+       "heat": 221.75910377744708,
+       "speed": 1.0,
+       "fatigue": 4.73364,
+       "schedule": 1.1184867597053838
+      },
+      "v_eff": 10779250.417452067,
+      "combo": {
+       "case": "LOW",
+       "burnup": 0.8,
+       "photon_conversion": 0.0,
+       "directed": "iso",
+       "restitution": 1.0,
+       "neutron_absorbed": 0.1,
+       "rate_Hz": 1000.0,
+       "burn_fraction": 0.25,
+       "reach": 1.0,
+       "thickness_over_radius": 0.005,
+       "leak": 0.01,
+       "capture_deg": 90.0
+      },
+      "v_eff_max": 10779912.330425596,
+      "isp_max_s": 1099245.1377815662
+     }
+    ],
+    "best": {
+     "v_d": 23085601.981648438,
+     "v_eff": 23085604.92348388,
+     "isp_s": 2354076.5626879595,
+     "heat_fraction": 4.228748199893247e-06,
+     "radiator_per_J": 1.6774034526243212e-05,
+     "heat_per_N": 205.27149352313066,
+     "impulse_per_J": 8.171633692699303e-08,
+     "g_h": 0.0002499999999999999,
+     "g_k": 0.5,
+     "mass_ratio": 2.2958697356874094,
+     "propellant_kg": 2280751.8541087247,
+     "end_kg": 1760016.2973934049,
+     "departure_kg": 4040768.1515021296,
+     "thrust_N": 21347006.46037087,
+     "burn_s": 2466506.783056579,
+     "fusion_W": 261233032012224.2,
+     "yield_J": 261233032012.22418,
+     "yield_t_TNT": 62.43619311955645,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 21347.006460370867,
+     "hardware_kg": 207903.55718436788,
+     "radiator_load_W": 4381931898.368247,
+     "radiator_multiple": 0.40569215856144153,
+     "cycles": 2466506783.056579,
+     "gates": {
+      "mass": 0.8784278590222021,
+      "heat": 0.40569215856144153,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "closure": 1.0,
+     "closes": true,
+     "v_cap": 23085601.981648438,
+     "schedule_delay_y": 0.0,
+     "closure_without_schedule": 1.0,
+     "fuel_kg": 2280751.8541087247,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.7505153407425558,
+     "neutron_W_per_N": 541843.406778708,
+     "heat_W_per_N_budget": 505.9784597538445,
+     "field_energy_J": 415807114368.7358,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.5",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.01302648058923249,
+      "reach": 1.5,
+      "thickness_over_radius": 0.005,
+      "leak": 0.0,
+      "capture_deg": 30.0
+     }
+    },
+    "best_on_canon_schedule": {
+     "v_d": 23085601.981648438,
+     "v_eff": 23085604.92348388,
+     "isp_s": 2354076.5626879595,
+     "heat_fraction": 4.228748199893247e-06,
+     "radiator_per_J": 1.6774034526243212e-05,
+     "heat_per_N": 205.27149352313066,
+     "impulse_per_J": 8.171633692699303e-08,
+     "g_h": 0.0002499999999999999,
+     "g_k": 0.5,
+     "mass_ratio": 2.2958697356874094,
+     "propellant_kg": 2280751.8541087247,
+     "end_kg": 1760016.2973934049,
+     "departure_kg": 4040768.1515021296,
+     "thrust_N": 21347006.46037087,
+     "burn_s": 2466506.783056579,
+     "fusion_W": 261233032012224.2,
+     "yield_J": 261233032012.22418,
+     "yield_t_TNT": 62.43619311955645,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 21347.006460370867,
+     "hardware_kg": 207903.55718436788,
+     "radiator_load_W": 4381931898.368247,
+     "radiator_multiple": 0.40569215856144153,
+     "cycles": 2466506783.056579,
+     "gates": {
+      "mass": 0.8784278590222021,
+      "heat": 0.40569215856144153,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "closure": 1.0,
+     "closes": true,
+     "v_cap": 23085601.981648438,
+     "schedule_delay_y": 0.0,
+     "closure_without_schedule": 1.0,
+     "fuel_kg": 2280751.8541087247,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.7505153407425558,
+     "neutron_W_per_N": 541843.406778708,
+     "heat_W_per_N_budget": 505.9784597538445,
+     "field_energy_J": 415807114368.7358,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.5",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.01302648058923249,
+      "reach": 1.5,
+      "thickness_over_radius": 0.005,
+      "leak": 0.0,
+      "capture_deg": 30.0
+     }
+    },
+    "best_without_schedule": {
+     "v_d": 23085601.981648438,
+     "v_eff": 23085603.71213987,
+     "isp_s": 2354076.439165247,
+     "heat_fraction": 2.487498941113674e-06,
+     "radiator_per_J": 9.867079133084241e-06,
+     "heat_per_N": 120.74794370241335,
+     "impulse_per_J": 8.171633263918705e-08,
+     "g_h": 0.0001470588235294117,
+     "g_k": 0.5,
+     "mass_ratio": 2.2958698358101963,
+     "propellant_kg": 2140119.0456854547,
+     "end_kg": 1651492.292316089,
+     "departure_kg": 3791611.3380015437,
+     "thrust_N": 5218599.237109008,
+     "burn_s": 9467280.0,
+     "fusion_W": 63862376939398.16,
+     "yield_J": 63862376939.398155,
+     "yield_t_TNT": 15.263474411902045,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 5218.599237109008,
+     "hardware_kg": 120474.49585889213,
+     "radiator_load_W": 630135126.8878958,
+     "radiator_multiple": 0.058339765596935544,
+     "cycles": 9467280000.0,
+     "gates": {
+      "mass": 0.8242633343481617,
+      "heat": 0.058339765596935544,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "closure": 1.0184867597053837,
+     "closes": false,
+     "v_cap": 23085601.981648438,
+     "schedule_delay_y": 0.11092055823230254,
+     "closure_without_schedule": 1.0,
+     "fuel_kg": 2140119.0456854543,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.19553146926962947,
+     "neutron_W_per_N": 541843.4352102262,
+     "heat_W_per_N_budget": 2069.736524768553,
+     "field_energy_J": 240948991717.78427,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.5",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.05,
+      "reach": 2.0,
+      "thickness_over_radius": 0.005,
+      "leak": 0.0,
+      "capture_deg": 30.0
+     }
+    },
+    "fastest": {
+     "v_d": 23085601.981648438,
+     "v_eff": 23085749.073420335,
+     "isp_s": 2354091.2618906903,
+     "heat_fraction": 0.00021143740999466244,
+     "radiator_per_J": 0.000838701726312161,
+     "heat_per_N": 10263.510589276242,
+     "impulse_per_J": 8.171684717590418e-08,
+     "g_h": 0.0125,
+     "g_k": 0.5,
+     "mass_ratio": 2.295857821182006,
+     "propellant_kg": 1950724.810187959,
+     "end_kg": 1505354.0429370727,
+     "departure_kg": 3456078.853125032,
+     "thrust_N": 951359.7037226054,
+     "burn_s": 47336400.0,
+     "fusion_W": 11642148915445.828,
+     "yield_J": 11642148915.445827,
+     "yield_t_TNT": 2.782540371760475,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 951.3597037226053,
+     "hardware_kg": 2745.3214406532666,
+     "radiator_load_W": 9764290393.367668,
+     "radiator_multiple": 0.9040067573805043,
+     "cycles": 47336400000.0,
+     "gates": {
+      "mass": 0.7513214898097895,
+      "heat": 0.9040067573805043,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "closure": 4.73364,
+     "closes": false,
+     "v_cap": 23085601.981648438,
+     "schedule_delay_y": 0.7109205582323025,
+     "closure_without_schedule": 4.73364,
+     "fuel_kg": 1950724.810187959,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.03910632007256621,
+     "neutron_W_per_N": 541840.0234493472,
+     "heat_W_per_N_budget": 11353.35605124934,
+     "field_energy_J": 5490642881.306533,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.5",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.25,
+      "reach": 1.0,
+      "thickness_over_radius": 0.05,
+      "leak": 0.0,
+      "capture_deg": 90.0
+     }
+    },
+    "fastest_within_heat": {
+     "v_d": 23085601.981648438,
+     "v_eff": 23085749.073420335,
+     "isp_s": 2354091.2618906903,
+     "heat_fraction": 0.00021143740999466244,
+     "radiator_per_J": 0.000838701726312161,
+     "heat_per_N": 10263.510589276242,
+     "impulse_per_J": 8.171684717590418e-08,
+     "g_h": 0.0125,
+     "g_k": 0.5,
+     "mass_ratio": 2.295857821182006,
+     "propellant_kg": 1950724.810187959,
+     "end_kg": 1505354.0429370727,
+     "departure_kg": 3456078.853125032,
+     "thrust_N": 951359.7037226054,
+     "burn_s": 47336400.0,
+     "fusion_W": 11642148915445.828,
+     "yield_J": 11642148915.445827,
+     "yield_t_TNT": 2.782540371760475,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 951.3597037226053,
+     "hardware_kg": 2745.3214406532666,
+     "radiator_load_W": 9764290393.367668,
+     "radiator_multiple": 0.9040067573805043,
+     "cycles": 47336400000.0,
+     "gates": {
+      "mass": 0.7513214898097895,
+      "heat": 0.9040067573805043,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "closure": 4.73364,
+     "closes": false,
+     "v_cap": 23085601.981648438,
+     "schedule_delay_y": 0.7109205582323025,
+     "closure_without_schedule": 4.73364,
+     "fuel_kg": 1950724.810187959,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.03910632007256621,
+     "neutron_W_per_N": 541840.0234493472,
+     "heat_W_per_N_budget": 11353.35605124934,
+     "field_energy_J": 5490642881.306533,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.5",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.25,
+      "reach": 1.0,
+      "thickness_over_radius": 0.05,
+      "leak": 0.0,
+      "capture_deg": 90.0
+     }
+    },
+    "coolest_within_mass": {
+     "v_d": 23085601.981648438,
+     "v_eff": 23085603.71213987,
+     "isp_s": 2354076.439165247,
+     "heat_fraction": 2.487498941113674e-06,
+     "radiator_per_J": 9.867079133084241e-06,
+     "heat_per_N": 120.74794370241335,
+     "impulse_per_J": 8.171633263918705e-08,
+     "g_h": 0.0001470588235294117,
+     "g_k": 0.5,
+     "mass_ratio": 2.2958698358101963,
+     "propellant_kg": 1982229.4886722097,
+     "end_kg": 1529651.6933221857,
+     "departure_kg": 3511881.1819943953,
+     "thrust_N": 966718.3064619253,
+     "burn_s": 47336400.0,
+     "fusion_W": 11830172442153.084,
+     "yield_J": 11830172442.153084,
+     "yield_t_TNT": 2.827479073172343,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 966.7183064619252,
+     "hardware_kg": 22317.27237845562,
+     "radiator_load_W": 116729247.64475693,
+     "radiator_multiple": 0.01080713747785288,
+     "cycles": 47336400000.0,
+     "gates": {
+      "mass": 0.7634524308683468,
+      "heat": 0.01080713747785288,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "closure": 4.73364,
+     "closes": false,
+     "v_cap": 23085601.981648438,
+     "schedule_delay_y": 0.7109205582323025,
+     "closure_without_schedule": 4.73364,
+     "fuel_kg": 1982229.4886722092,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.039106293853925896,
+     "neutron_W_per_N": 541843.4352102262,
+     "heat_W_per_N_budget": 11172.981184875523,
+     "field_energy_J": 44634544756.91124,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.5",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.25,
+      "reach": 2.0,
+      "thickness_over_radius": 0.005,
+      "leak": 0.0,
+      "capture_deg": 30.0
+     }
+    },
+    "closing_counts": {
+     "case": {
+      "LOW": 232,
+      "NOMINAL": 145,
+      "CONSERVATIVE": 37
+     },
+     "burnup": {
+      "0.8": 414
+     },
+     "photon_conversion": {
+      "0.9": 296,
+      "0.5": 88,
+      "0.0": 30
+     },
+     "directed": {
+      "0.5": 239,
+      "0.7": 175
+     },
+     "restitution": {
+      "1.0": 393,
+      "0.8": 21
+     },
+     "neutron_absorbed": {
+      "0.1": 414
+     },
+     "rate_Hz": {
+      "1000.0": 91,
+      "100.0": 301,
+      "10.0": 22
+     },
+     "burn_fraction": {
+      "0.05": 101,
+      "0.01302648058923249": 6,
+      "0.25": 242,
+      "0.1": 65
+     },
+     "reach": {
+      "2.0": 108,
+      "1.5": 150,
+      "1.0": 156
+     },
+     "thickness_over_radius": {
+      "0.005": 257,
+      "0.02": 108,
+      "0.05": 49
+     },
+     "leak": {
+      "0.0": 414
+     },
+     "capture_deg": {
+      "30.0": 197,
+      "60.0": 116,
+      "90.0": 101
+     }
+    }
+   },
+   "derived": {
+    "hardware_sky_range": [
+     0.0001470588235294117,
+     0.0125
+    ],
+    "leak_allowed_bare_burn": 4.5447907232301084e-05
+   },
+   "nominal": {
+    "v_d": 8752700.09572159,
+    "v_eff": 10979482.699526222,
+    "isp_s": 1119595.651881756,
+    "heat_fraction": 0.003039304114636065,
+    "radiator_per_J": 0.09320532618217267,
+    "heat_per_N": 899337.0559905275,
+    "impulse_per_J": 1.0363781361095654e-07,
+    "g_h": 0.0025,
+    "g_k": 0.7,
+    "closes": false,
+    "closure": null,
+    "reason": "mass ratio beyond the tank-growth limit",
+    "departure_kg": null,
+    "combo": {
+     "case": "NOMINAL",
+     "burnup": 0.3,
+     "photon_conversion": 0.5,
+     "directed": "0.7",
+     "restitution": 0.8,
+     "neutron_absorbed": 0.1,
+     "rate_Hz": 100.0,
+     "burn_fraction": 0.1,
+     "reach": 1.5,
+     "thickness_over_radius": 0.02,
+     "leak": 0.01,
+     "capture_deg": 60.0
+    }
+   },
+   "nominal_ledger": {
+    "hw": {
+     "photon": 0.00027081113804999703,
+     "neutron": 1.200398790919284e-05,
+     "debris": 0.0027564889886768753
+    },
+    "esc": {
+     "photon": 0.10805364408194881,
+     "neutron": 0.048003947648862164,
+     "debris_uncaptured": 0.5905617152002609,
+     "debris_reflected": 0.1603628154646652,
+     "radiated": 0.08997857348962693
+    },
+    "Q": 0.003039304114636065,
+    "I": 1.0363781361095654e-07,
+    "v_debris": 10979387.000073163,
+    "m_d": 9.439225548889351e-15,
+    "m_abl": 0.0,
+    "m_exp": 9.439225548889351e-15,
+    "v_eff": 10979482.699526222,
+    "rad": 0.09320532618217267,
+    "g_h": 0.0025,
+    "g_k": 0.7,
+    "c1": 1.0,
+    "f_k": 0.8436595931432299,
+    "f_g": 0.10832445521999881,
+    "f_n": 0.04801595163677135,
+    "E_c": 0.253097877942969,
+    "exhaust_KE": 0.7509245306649261
+   },
+   "relaxed": {
+    "10.0": {
+     "closure": 1.0,
+     "gates": {
+      "mass": 0.08784278590222021,
+      "heat": 0.40569215856144153,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "v_eff": 23085604.92348388,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.5",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.01302648058923249,
+      "reach": 1.5,
+      "thickness_over_radius": 0.005,
+      "leak": 0.0,
+      "capture_deg": 30.0
+     },
+     "closes": true
+    },
+    "100.0": {
+     "closure": 1.0,
+     "gates": {
+      "mass": 0.00878427859022202,
+      "heat": 0.40569215856144153,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "v_eff": 23085604.92348388,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.5",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.01302648058923249,
+      "reach": 1.5,
+      "thickness_over_radius": 0.005,
+      "leak": 0.0,
+      "capture_deg": 30.0
+     },
+     "closes": true
+    }
+   },
+   "sensitivity": [
+    {
+     "lever": "cold_share",
+     "value": 0.01,
+     "closure": 1.0,
+     "gates": {
+      "mass": 0.8784278590222021,
+      "heat": 0.40569215856144153,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "v_eff": 23085604.92348388
+    },
+    {
+     "lever": "cold_share",
+     "value": 0.1,
+     "closure": 3.1364435787943385,
+     "gates": {
+      "mass": 0.8784278590222021,
+      "heat": 3.1364435787943385,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "v_eff": 23085604.92348388
+    },
+    {
+     "lever": "cold_share",
+     "value": 1.0,
+     "closure": 30.443957781123306,
+     "gates": {
+      "mass": 0.8784278590222021,
+      "heat": 30.443957781123306,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "v_eff": 23085604.92348388
+    },
+    {
+     "lever": "specific_strength_J_kg",
+     "value": 2000000.0,
+     "closure": 1.0,
+     "gates": {
+      "mass": 0.8784278590222021,
+      "heat": 0.40569215856144153,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "v_eff": 23085604.92348388
+    },
+    {
+     "lever": "specific_strength_J_kg",
+     "value": 500000.0,
+     "closure": 1.8129219188668932,
+     "gates": {
+      "mass": 1.8129219188668932,
+      "heat": 0.8372778697924598,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "v_eff": 23085604.92348388
+    },
+    {
+     "lever": "specific_strength_J_kg",
+     "value": 100000.0,
+     "closure": null,
+     "gates": null,
+     "v_eff": 23085604.92348388
+    },
+    {
+     "lever": "neutron_absorbed",
+     "value": 0.1,
+     "closure": 1.0,
+     "gates": {
+      "mass": 0.8784278590222021,
+      "heat": 0.40569215856144153,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "v_eff": 23085604.92348388
+    },
+    {
+     "lever": "neutron_absorbed",
+     "value": 0.3,
+     "closure": 1.0,
+     "gates": {
+      "mass": 0.8784278590222021,
+      "heat": 0.618083826505946,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "v_eff": 23085604.92348388
+    },
+    {
+     "lever": "neutron_absorbed",
+     "value": 1.0,
+     "closure": 1.3614546643117116,
+     "gates": {
+      "mass": 0.8784278590222021,
+      "heat": 1.3614546643117116,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "v_eff": 23085604.92348388
+    }
+   ]
+  },
+  "C": {
+   "name": "Remote field coupling (inflated field far from the coil)",
+   "summary": {
+    "cases": 314928,
+    "closes": 0,
+    "closes_without_schedule": 0,
+    "ladder": [
+     {
+      "step": "all brackets, including UNVERIFIED ones",
+      "cases": 314928,
+      "closes": 0,
+      "best_closure": 1.0674747374617426,
+      "gates": {
+       "mass": 1.0674747374617426,
+       "heat": 1.0436000384146746,
+       "speed": 1.0,
+       "fatigue": 0.946728,
+       "schedule": 1.0184867597053837
+      },
+      "v_eff": 21158326.338408668,
+      "combo": {
+       "case": "LOW",
+       "burnup": 0.8,
+       "photon_conversion": 0.9,
+       "directed": "0.7",
+       "restitution": 1.0,
+       "neutron_absorbed": 0.1,
+       "rate_Hz": 1000.0,
+       "burn_fraction": 0.05,
+       "reach": 3.0,
+       "thickness_over_radius": 0.05,
+       "leak": 0.0,
+       "capture_deg": 60.0
+      },
+      "v_eff_max": 23085631.400002815,
+      "isp_max_s": 2354079.262541522
+     },
+     {
+      "step": "no photon conversion (a bare burn: absorbing mass is not modelled, so conversion at the fuel-only speed cap is inconsistent)",
+      "cases": 104976,
+      "closes": 0,
+      "best_closure": 1.163680379256524,
+      "gates": {
+       "mass": 1.163680379256524,
+       "heat": 1.1140598360644567,
+       "speed": 1.0,
+       "fatigue": 0.946728,
+       "schedule": 1.0184867597053837
+      },
+      "v_eff": 21666716.597381756,
+      "combo": {
+       "case": "LOW",
+       "burnup": 0.8,
+       "photon_conversion": 0.0,
+       "directed": "0.5",
+       "restitution": 1.0,
+       "neutron_absorbed": 0.1,
+       "rate_Hz": 1000.0,
+       "burn_fraction": 0.05,
+       "reach": 3.0,
+       "thickness_over_radius": 0.005,
+       "leak": 0.0,
+       "capture_deg": 90.0
+      },
+      "v_eff_max": 21666981.36257117,
+      "isp_max_s": 2209417.2181704426
+     },
+     {
+      "step": "isotropic pulse (no directional fusion pulse is established)",
+      "cases": 34992,
+      "closes": 0,
+      "best_closure": 14.69811211760061,
+      "gates": {
+       "mass": 14.69811211760061,
+       "heat": 3.975138978328868,
+       "speed": 1.0,
+       "fatigue": 4.73364,
+       "schedule": 1.1184867597053838
+      },
+      "v_eff": 10833358.298690876,
+      "combo": {
+       "case": "LOW",
+       "burnup": 0.8,
+       "photon_conversion": 0.0,
+       "directed": "iso",
+       "restitution": 1.0,
+       "neutron_absorbed": 0.1,
+       "rate_Hz": 1000.0,
+       "burn_fraction": 0.25,
+       "reach": 3.0,
+       "thickness_over_radius": 0.005,
+       "leak": 0.0,
+       "capture_deg": 90.0
+      },
+      "v_eff_max": 10833490.681285582,
+      "isp_max_s": 1104708.609085221
+     },
+     {
+      "step": "leak at least the 1.4 minimum (1 %), A unaffected",
+      "cases": 26244,
+      "closes": 0,
+      "best_closure": 572.8896749375398,
+      "gates": {
+       "mass": 16.325718529827434,
+       "heat": 572.8896749375398,
+       "speed": 1.0,
+       "fatigue": 4.73364,
+       "schedule": 1.1184867597053838
+      },
+      "v_eff": 10779191.580743307,
+      "combo": {
+       "case": "LOW",
+       "burnup": 0.8,
+       "photon_conversion": 0.0,
+       "directed": "iso",
+       "restitution": 1.0,
+       "neutron_absorbed": 0.1,
+       "rate_Hz": 1000.0,
+       "burn_fraction": 0.25,
+       "reach": 3.0,
+       "thickness_over_radius": 0.005,
+       "leak": 0.01,
+       "capture_deg": 90.0
+      },
+      "v_eff_max": 10779323.963338016,
+      "isp_max_s": 1099185.1410357275
+     }
+    ],
+    "best": {
+     "v_d": 15113074.077789502,
+     "v_eff": 21158326.338408668,
+     "isp_s": 2157548.840675324,
+     "heat_fraction": 3.252883230687114e-05,
+     "radiator_per_J": 0.00012903103481725552,
+     "heat_per_N": 1722.8411554557056,
+     "impulse_per_J": 7.489433045446709e-08,
+     "g_h": 0.001923076923076923,
+     "g_k": 0.7,
+     "mass_ratio": 2.476426019543999,
+     "propellant_kg": 2927532.799170504,
+     "end_kg": 1982850.9931535115,
+     "departure_kg": 4910383.792324016,
+     "thrust_N": 6542712.831060719,
+     "burn_s": 9467280.0,
+     "fusion_W": 87359253916268.61,
+     "yield_J": 87359253916.26862,
+     "yield_t_TNT": 20.879362790695176,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 6542.7128310607195,
+     "hardware_kg": 333721.3430126668,
+     "radiator_load_W": 11272054933.67952,
+     "radiator_multiple": 1.0436000384146746,
+     "cycles": 9467280000.0,
+     "gates": {
+      "mass": 1.0674747374617426,
+      "heat": 1.0436000384146746,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "closure": 1.0674747374617426,
+     "closes": false,
+     "v_cap": 15113074.077789502,
+     "schedule_delay_y": 0.11092055823230254,
+     "closure_without_schedule": 1.0674747374617426,
+     "fuel_kg": 2927532.7991705034,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.19357270014209024,
+     "neutron_W_per_N": 591199.0683582873,
+     "heat_W_per_N_budget": 1650.863445801383,
+     "field_energy_J": 667442686025.3336,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.7",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.05,
+      "reach": 3.0,
+      "thickness_over_radius": 0.05,
+      "leak": 0.0,
+      "capture_deg": 60.0
+     }
+    },
+    "best_on_canon_schedule": {
+     "v_d": 15113074.077789502,
+     "v_eff": 21158306.889267933,
+     "isp_s": 2157546.8574149106,
+     "heat_fraction": 4.571619675560267e-06,
+     "radiator_per_J": 1.8134091379722395e-05,
+     "heat_per_N": 242.1292498231002,
+     "impulse_per_J": 7.489426161015729e-08,
+     "g_h": 0.00027027027027027017,
+     "g_k": 0.7,
+     "mass_ratio": 2.4764280838040693,
+     "propellant_kg": 13472225.858325923,
+     "end_kg": 9124877.808890127,
+     "departure_kg": 22597103.667216048,
+     "thrust_N": 115568094.58222853,
+     "burn_s": 2466506.783056579,
+     "fusion_W": 1543083436536010.8,
+     "yield_J": 1543083436536.0107,
+     "yield_t_TNT": 368.8057926711307,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 115568.09458222853,
+     "hardware_kg": 5894737.577715272,
+     "radiator_load_W": 27982416044.680084,
+     "radiator_multiple": 2.5906944768260667,
+     "cycles": 2466506783.056579,
+     "gates": {
+      "mass": 4.91241384069914,
+      "heat": 2.5906944768260667,
+      "speed": 1.0,
+      "fatigue": 0.2466506783056579,
+      "schedule": 1.0
+     },
+     "closure": 4.91241384069914,
+     "closes": false,
+     "v_cap": 15113074.077789502,
+     "schedule_delay_y": 0.0,
+     "closure_without_schedule": 4.91241384069914,
+     "fuel_kg": 13472225.85832592,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.7429968385627505,
+     "neutron_W_per_N": 591199.6118003473,
+     "heat_W_per_N_budget": 93.46113638214091,
+     "field_energy_J": 11789475155430.545,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.7",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.01302648058923249,
+      "reach": 3.0,
+      "thickness_over_radius": 0.02,
+      "leak": 0.0,
+      "capture_deg": 30.0
+     }
+    },
+    "best_without_schedule": {
+     "v_d": 15113074.077789502,
+     "v_eff": 21158326.338408668,
+     "isp_s": 2157548.840675324,
+     "heat_fraction": 3.252883230687114e-05,
+     "radiator_per_J": 0.00012903103481725552,
+     "heat_per_N": 1722.8411554557056,
+     "impulse_per_J": 7.489433045446709e-08,
+     "g_h": 0.001923076923076923,
+     "g_k": 0.7,
+     "mass_ratio": 2.476426019543999,
+     "propellant_kg": 2927532.799170504,
+     "end_kg": 1982850.9931535115,
+     "departure_kg": 4910383.792324016,
+     "thrust_N": 6542712.831060719,
+     "burn_s": 9467280.0,
+     "fusion_W": 87359253916268.61,
+     "yield_J": 87359253916.26862,
+     "yield_t_TNT": 20.879362790695176,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 6542.7128310607195,
+     "hardware_kg": 333721.3430126668,
+     "radiator_load_W": 11272054933.67952,
+     "radiator_multiple": 1.0436000384146746,
+     "cycles": 9467280000.0,
+     "gates": {
+      "mass": 1.0674747374617426,
+      "heat": 1.0436000384146746,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "closure": 1.0674747374617426,
+     "closes": false,
+     "v_cap": 15113074.077789502,
+     "schedule_delay_y": 0.11092055823230254,
+     "closure_without_schedule": 1.0674747374617426,
+     "fuel_kg": 2927532.7991705034,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.19357270014209024,
+     "neutron_W_per_N": 591199.0683582873,
+     "heat_W_per_N_budget": 1650.863445801383,
+     "field_energy_J": 667442686025.3336,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.7",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.05,
+      "reach": 3.0,
+      "thickness_over_radius": 0.05,
+      "leak": 0.0,
+      "capture_deg": 60.0
+     }
+    },
+    "fastest": {
+     "v_d": 23085601.981648438,
+     "v_eff": 23085631.400002815,
+     "isp_s": 2354079.262541522,
+     "heat_fraction": 4.228748199893248e-05,
+     "radiator_per_J": 0.0001677403452624322,
+     "heat_per_N": 2052.712581007378,
+     "impulse_per_J": 8.171643064618079e-08,
+     "g_h": 0.0025,
+     "g_k": 0.5,
+     "mass_ratio": 2.2958675472930765,
+     "propellant_kg": 2073033.0700827793,
+     "end_kg": 1599726.0479383988,
+     "departure_kg": 3672759.118021178,
+     "thrust_N": 1011003.7378412224,
+     "burn_s": 47336400.0,
+     "fusion_W": 12372098607912.877,
+     "yield_J": 12372098607.912876,
+     "yield_t_TNT": 2.957002535352026,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 1011.0037378412225,
+     "hardware_kg": 78771.15051209876,
+     "radiator_load_W": 2075300092.1121626,
+     "radiator_multiple": 0.19213739363344795,
+     "cycles": 47336400000.0,
+     "gates": {
+      "mass": 0.7984258952219953,
+      "heat": 0.19213739363344795,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "closure": 4.73364,
+     "closes": false,
+     "v_cap": 23085601.981648438,
+     "schedule_delay_y": 0.7109205582323025,
+     "closure_without_schedule": 4.73364,
+     "fuel_kg": 2073033.0700827788,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.039106298847987525,
+     "neutron_W_per_N": 541842.7853476987,
+     "heat_W_per_N_budget": 10683.566286547331,
+     "field_energy_J": 157542301024.1975,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.5",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.25,
+      "reach": 3.0,
+      "thickness_over_radius": 0.05,
+      "leak": 0.0,
+      "capture_deg": 90.0
+     }
+    },
+    "fastest_within_heat": {
+     "v_d": 23085601.981648438,
+     "v_eff": 23085631.400002815,
+     "isp_s": 2354079.262541522,
+     "heat_fraction": 4.228748199893248e-05,
+     "radiator_per_J": 0.0001677403452624322,
+     "heat_per_N": 2052.712581007378,
+     "impulse_per_J": 8.171643064618079e-08,
+     "g_h": 0.0025,
+     "g_k": 0.5,
+     "mass_ratio": 2.2958675472930765,
+     "propellant_kg": 2073033.0700827793,
+     "end_kg": 1599726.0479383988,
+     "departure_kg": 3672759.118021178,
+     "thrust_N": 1011003.7378412224,
+     "burn_s": 47336400.0,
+     "fusion_W": 12372098607912.877,
+     "yield_J": 12372098607.912876,
+     "yield_t_TNT": 2.957002535352026,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 1011.0037378412225,
+     "hardware_kg": 78771.15051209876,
+     "radiator_load_W": 2075300092.1121626,
+     "radiator_multiple": 0.19213739363344795,
+     "cycles": 47336400000.0,
+     "gates": {
+      "mass": 0.7984258952219953,
+      "heat": 0.19213739363344795,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "closure": 4.73364,
+     "closes": false,
+     "v_cap": 23085601.981648438,
+     "schedule_delay_y": 0.7109205582323025,
+     "closure_without_schedule": 4.73364,
+     "fuel_kg": 2073033.0700827788,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.039106298847987525,
+     "neutron_W_per_N": 541842.7853476987,
+     "heat_W_per_N_budget": 10683.566286547331,
+     "field_energy_J": 157542301024.1975,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.5",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.25,
+      "reach": 3.0,
+      "thickness_over_radius": 0.05,
+      "leak": 0.0,
+      "capture_deg": 90.0
+     }
+    },
+    "coolest_within_mass": {
+     "v_d": 23085601.981648438,
+     "v_eff": 23085602.776739098,
+     "isp_s": 2354076.343780914,
+     "heat_fraction": 1.1429049188900668e-06,
+     "radiator_per_J": 4.533522844930599e-06,
+     "heat_per_N": 55.47878719228554,
+     "impulse_per_J": 8.171632932813997e-08,
+     "g_h": 6.756756756756754e-05,
+     "g_k": 0.5,
+     "mass_ratio": 2.2958699131250997,
+     "propellant_kg": 2073038.0737672886,
+     "end_kg": 1599726.9886203178,
+     "departure_kg": 3672765.062387606,
+     "thrust_N": 1011004.9245833649,
+     "burn_s": 47336400.0,
+     "fusion_W": 12372128470474.67,
+     "yield_J": 12372128470.47467,
+     "yield_t_TNT": 2.9570096726755906,
+     "rate_Hz": 1000.0,
+     "pulse_impulse_Ns": 1011.0049245833649,
+     "hardware_kg": 78771.3406421991,
+     "radiator_load_W": 56089327.06131318,
+     "radiator_multiple": 0.005192915064754059,
+     "cycles": 47336400000.0,
+     "gates": {
+      "mass": 0.7984271874755665,
+      "heat": 0.005192915064754059,
+      "speed": 1.0,
+      "fatigue": 4.73364,
+      "schedule": 1.1184867597053838
+     },
+     "closure": 4.73364,
+     "closes": false,
+     "v_cap": 23085601.981648438,
+     "schedule_delay_y": 0.7109205582323025,
+     "closure_without_schedule": 4.73364,
+     "fuel_kg": 2073038.0737672886,
+     "ablated_kg": 0.0,
+     "mean_accel_g": 0.03910629368520732,
+     "neutron_W_per_N": 541843.4571650685,
+     "heat_W_per_N_budget": 10683.553745917672,
+     "field_energy_J": 157542681284.3982,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.5",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.25,
+      "reach": 3.0,
+      "thickness_over_radius": 0.005,
+      "leak": 0.0,
+      "capture_deg": 30.0
+     }
+    },
+    "closing_counts": {}
+   },
+   "derived": {
+    "hardware_sky_range": [
+     6.942515967786724e-07,
+     0.0025
+    ],
+    "leak_allowed_bare_burn": 0.0
+   },
+   "nominal": {
+    "v_d": 8752700.09572159,
+    "v_eff": 10979389.849684669,
+    "isp_s": 1119586.1838328757,
+    "heat_fraction": 0.0025461150176988626,
+    "radiator_per_J": 0.07808086054276514,
+    "heat_per_N": 753407.6427488454,
+    "impulse_per_J": 1.0363693718035993e-07,
+    "g_h": 7.444168734491314e-05,
+    "g_k": 0.7,
+    "closes": false,
+    "closure": null,
+    "reason": "mass ratio beyond the tank-growth limit",
+    "departure_kg": null,
+    "combo": {
+     "case": "NOMINAL",
+     "burnup": 0.3,
+     "photon_conversion": 0.5,
+     "directed": "0.7",
+     "restitution": 0.8,
+     "neutron_absorbed": 0.1,
+     "rate_Hz": 100.0,
+     "burn_fraction": 0.1,
+     "reach": 10.0,
+     "thickness_over_radius": 0.02,
+     "leak": 0.01,
+     "capture_deg": 60.0
+    }
+   },
+   "nominal_ledger": {
+    "hw": {
+     "photon": 8.063855227295196e-06,
+     "neutron": 3.5743884593130033e-07,
+     "debris": 0.002537693723625636
+    },
+    "esc": {
+     "photon": 0.10831639136477152,
+     "neutron": 0.04801559419792542,
+     "debris_uncaptured": 0.5905617152002609,
+     "debris_reflected": 0.1603628154646652,
+     "radiated": 0.09019736875467817
+    },
+    "Q": 0.0025461150176988626,
+    "I": 1.0363693718035993e-07,
+    "v_debris": 10979387.000073163,
+    "m_d": 9.439225548889351e-15,
+    "m_abl": 0.0,
+    "m_exp": 9.439225548889351e-15,
+    "v_eff": 10979389.849684669,
+    "rad": 0.07808086054276514,
+    "g_h": 7.444168734491314e-05,
+    "g_k": 0.7,
+    "c1": 1.0,
+    "f_k": 0.8436595931432299,
+    "f_g": 0.10832445521999881,
+    "f_n": 0.04801595163677135,
+    "E_c": 0.253097877942969,
+    "exhaust_KE": 0.7509245306649261
+   },
+   "relaxed": {
+    "10.0": {
+     "closure": 1.0184867597053837,
+     "gates": {
+      "mass": 0.10674757668075313,
+      "heat": 0.5426727143760917,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "v_eff": 21158315.476247054,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.7",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.05,
+      "reach": 3.0,
+      "thickness_over_radius": 0.02,
+      "leak": 0.0,
+      "capture_deg": 90.0
+     },
+     "closes": false
+    },
+    "100.0": {
+     "closure": 1.0184867597053837,
+     "gates": {
+      "mass": 0.010674757668075314,
+      "heat": 0.5426727143760917,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "v_eff": 21158315.476247054,
+     "combo": {
+      "case": "LOW",
+      "burnup": 0.8,
+      "photon_conversion": 0.9,
+      "directed": "0.7",
+      "restitution": 1.0,
+      "neutron_absorbed": 0.1,
+      "rate_Hz": 1000.0,
+      "burn_fraction": 0.05,
+      "reach": 3.0,
+      "thickness_over_radius": 0.02,
+      "leak": 0.0,
+      "capture_deg": 90.0
+     },
+     "closes": false
+    }
+   },
+   "sensitivity": [
+    {
+     "lever": "cold_share",
+     "value": 0.01,
+     "closure": 1.0674747374617426,
+     "gates": {
+      "mass": 1.0674747374617426,
+      "heat": 1.0436000384146746,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "v_eff": 21158326.338408668
+    },
+    {
+     "lever": "cold_share",
+     "value": 0.1,
+     "closure": 8.068168364214294,
+     "gates": {
+      "mass": 1.0674747374617426,
+      "heat": 8.068168364214294,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "v_eff": 21158326.338408668
+    },
+    {
+     "lever": "cold_share",
+     "value": 1.0,
+     "closure": 78.31385162221048,
+     "gates": {
+      "mass": 1.0674747374617426,
+      "heat": 78.31385162221048,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "v_eff": 21158326.338408668
+    },
+    {
+     "lever": "specific_strength_J_kg",
+     "value": 2000000.0,
+     "closure": 1.0674747374617426,
+     "gates": {
+      "mass": 1.0674747374617426,
+      "heat": 1.0436000384146746,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "v_eff": 21158326.338408668
+    },
+    {
+     "lever": "specific_strength_J_kg",
+     "value": 500000.0,
+     "closure": 6.166514258588755,
+     "gates": {
+      "mass": 6.166514258588755,
+      "heat": 6.028596547820883,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "v_eff": 21158326.338408668
+    },
+    {
+     "lever": "specific_strength_J_kg",
+     "value": 100000.0,
+     "closure": null,
+     "gates": null,
+     "v_eff": 21158326.338408668
+    },
+    {
+     "lever": "neutron_absorbed",
+     "value": 0.1,
+     "closure": 1.0674747374617426,
+     "gates": {
+      "mass": 1.0674747374617426,
+      "heat": 1.0436000384146746,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "v_eff": 21158326.338408668
+    },
+    {
+     "lever": "neutron_absorbed",
+     "value": 0.3,
+     "closure": 1.589955071777423,
+     "gates": {
+      "mass": 1.0674747374617426,
+      "heat": 1.589955071777423,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "v_eff": 21158326.338408668
+    },
+    {
+     "lever": "neutron_absorbed",
+     "value": 1.0,
+     "closure": 3.502197688547042,
+     "gates": {
+      "mass": 1.0674747374617426,
+      "heat": 3.502197688547042,
+      "speed": 1.0,
+      "fatigue": 0.946728,
+      "schedule": 1.0184867597053837
+     },
+     "v_eff": 21158326.338408668
+    }
+   ]
+  }
+ },
+ "precedents": [
+  {
+   "id": "ORION",
+   "concept": "A",
+   "name": "Project Orion (General Atomics, 1958-1965)",
+   "claim": "Isp about 2,000 to 6,000 s for fission pulse units (Air Force-era estimates 4,000 to 6,000 s); collimation factor near 0.5 when the plate matches the fireball",
+   "isp_s": [
+    2000.0,
+    6000.0
+   ],
+   "evidence": "PROPONENT_CLAIM",
+   "source": "https://en.wikipedia.org/wiki/Project_Orion_(nuclear_propulsion) (secondary)"
+  },
+  {
+   "id": "DYSON-1968",
+   "concept": "A",
+   "name": "F. Dyson, Interstellar Transport, Physics Today 21(10), 41-45 (1968)",
+   "claim": "Thermonuclear Orion: ship speeds of order 1,000 to 10,000 km/s claimed from debris at 3,000 to 30,000 km/s. Secondary summaries also quote Isp above 75,000 s, which does not reconcile with 10,000 km/s at any practical mass ratio; no Isp is plotted",
+   "isp_s": [],
+   "evidence": "PROPONENT_CLAIM",
+   "source": "https://physicstoday.aip.org/features/interstellar-transport (primary, not reachable here); https://en.wikipedia.org/wiki/Nuclear_pulse_propulsion (secondary)"
+  },
+  {
+   "id": "MEDUSA",
+   "concept": "A",
+   "name": "Medusa (J. Solem, early 1990s): sail-like tension canopy ahead of the pulse",
+   "claim": "Isp 50,000 to 100,000 s",
+   "isp_s": [
+    50000.0,
+    100000.0
+   ],
+   "evidence": "PROPONENT_CLAIM",
+   "source": "https://en.wikipedia.org/wiki/Nuclear_pulse_propulsion (secondary)"
+  },
+  {
+   "id": "MINI-MAG",
+   "concept": "B",
+   "name": "Mini-Mag Orion (Andrews Space; Lenard and Andrews, Acta Astronautica)",
+   "claim": "Isp 10,000 to 30,000 s, thrust 1 to 2 MN, magnetic nozzle catches the pulse plasma",
+   "isp_s": [
+    10000.0,
+    30000.0
+   ],
+   "evidence": "PROPONENT_CLAIM",
+   "source": "https://en.wikipedia.org/wiki/Mini-Mag_Orion (secondary); https://www.flightglobal.com/nuclear-power-concept-revisited/47904.article"
+  },
+  {
+   "id": "MAGORION",
+   "concept": "B",
+   "name": "MagOrion: superconducting loop as the pusher",
+   "claim": "Isp above 10,000 s",
+   "isp_s": [
+    10000.0,
+    10000.0
+   ],
+   "evidence": "PROPONENT_CLAIM",
+   "source": "https://en.wikipedia.org/wiki/Nuclear_pulse_propulsion (secondary)"
+  },
+  {
+   "id": "M2P2",
+   "concept": "C",
+   "name": "Mini-Magnetospheric Plasma Propulsion (Winglee et al.): plasma-inflated magnetic field",
+   "claim": "Field inflated far beyond the coil by injected plasma (for solar-wind sailing, not pulse capture)",
+   "isp_s": [],
+   "evidence": "PROPONENT_CLAIM",
+   "source": "Winglee et al., J. Geophys. Res. 105 (2000); contested in later analyses; reach used here is UNVERIFIED"
+  }
+ ],
+ "verdict": {
+  "outcome": "CONDITIONAL_ON_UNVERIFIED",
+  "ladder": {
+   "A": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "B": [
+    6,
+    0,
+    0,
+    0
+   ],
+   "C": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "optimistic": [
+   "B"
+  ],
+  "established": [],
+  "text": "Only B close(s), and only at the corner where every UNVERIFIED best case holds at once; with an isotropic bare pulse no concept closes the 0.016 c four-burn mission."
+ }
+}
