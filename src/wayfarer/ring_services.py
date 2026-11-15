@@ -635,7 +635,7 @@ def dew_point(p, T, m_w):
 
 # ---------- proof ------------------------------------------------------------------------------------------------------------------------
 
-PROOF_DT_S = 10.0
+PROOF_DT_S = 60.0
 PROOF_END_S = 6*3600.0
 PROOF_EVERY_S = 1800.0
 # The proof run: ring A with six, ring B empty; at 30 min ring A's pump 1 fails, at 1 h its CO2 fan; at 2 h the fusion plant trips (the

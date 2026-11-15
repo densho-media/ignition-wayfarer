@@ -25,7 +25,7 @@ touch button, and saves their stills; --part training-scripted runs their script
 the same checks on the same 1/60 s frames, about ten times sooner than in real time.
 
     python3 tools/web_check.py <site dir> --out <dir> [--chrome google-chrome] [--record] [--part main|equivalence|walk ...] [--frame-shell <chrome-headless-shell>]
-    python3 tools/web_check.py <site dir> --out <dir> --part training [--training systems|deadship|airflow|shared-air[-purge|-separate|-separate-late|-nocontain]] [--no-touch] [--rotate]
+    python3 tools/web_check.py <site dir> --out <dir> --part training [--training systems|deadship|airflow|shared-air[-purge|-separate|-separate-late|-nocontain]|borrowed-air[-pump|-relocate|-cannibalize]|dark-bus[-dark-b|-economy|-keep-garden|-short]] [--no-touch] [--rotate]
     python3 tools/web_check.py <site dir> --merge <part out dir> ... --out <dir> [--record]
 """
 import argparse
@@ -572,7 +572,17 @@ TRAINING = (('systems', '#interior-systems', ('--systems', '--check-systems'), '
             ('shared-air-purge', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=purge'), 'WF_GODOT_SHARED_AIR '),
             ('shared-air-separate', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=separate'), 'WF_GODOT_SHARED_AIR '),
             ('shared-air-separate-late', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=separate_late'), 'WF_GODOT_SHARED_AIR '),
-            ('shared-air-nocontain', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=nocontain'), 'WF_GODOT_SHARED_AIR '))
+            ('shared-air-nocontain', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=nocontain'), 'WF_GODOT_SHARED_AIR '),
+            # Deadship Phases 2C and 3 on the ring services model (SYS-003): each default strategy ends with a replay
+            ('borrowed-air', '#interior-borrowed-air', ('--borrowed-air', '--check-ship-ops'), 'WF_GODOT_SHIP_OPS '),
+            ('borrowed-air-pump', '#interior-borrowed-air', ('--borrowed-air', '--check-ship-ops', '--strategy=borrow_fan_pump'), 'WF_GODOT_SHIP_OPS '),
+            ('borrowed-air-relocate', '#interior-borrowed-air', ('--borrowed-air', '--check-ship-ops', '--strategy=relocate'), 'WF_GODOT_SHIP_OPS '),
+            ('borrowed-air-cannibalize', '#interior-borrowed-air', ('--borrowed-air', '--check-ship-ops', '--strategy=cannibalize'), 'WF_GODOT_SHIP_OPS '),
+            ('dark-bus', '#interior-dark-bus', ('--dark-bus', '--check-ship-ops'), 'WF_GODOT_SHIP_OPS '),
+            ('dark-bus-dark-b', '#interior-dark-bus', ('--dark-bus', '--check-ship-ops', '--strategy=shed_dark_b'), 'WF_GODOT_SHIP_OPS '),
+            ('dark-bus-economy', '#interior-dark-bus', ('--dark-bus', '--check-ship-ops', '--strategy=shed_economy'), 'WF_GODOT_SHIP_OPS '),
+            ('dark-bus-keep-garden', '#interior-dark-bus', ('--dark-bus', '--check-ship-ops', '--strategy=keep_garden'), 'WF_GODOT_SHIP_OPS '),
+            ('dark-bus-short', '#interior-dark-bus', ('--dark-bus', '--check-ship-ops', '--strategy=short_reserve'), 'WF_GODOT_SHIP_OPS '))
 TRAINING_SECONDS = 2400
 
 

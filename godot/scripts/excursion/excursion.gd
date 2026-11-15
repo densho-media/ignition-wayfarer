@@ -104,6 +104,8 @@ var deadship_check: WfDeadshipCheck = null
 var airflow_check: WfAirflowCheck = null   # SYS-002 (`--airflow`, #interior-airflow): `equipment` is then a WfAirflow
 var shared_air: WfSharedAir = null   # Deadship DS-2B "Shared Air" (`--shared-air`, #interior-shared-air): owns `equipment` (its WfAirflow)
 var shared_air_check: WfSharedAirCheck = null
+var ship_ops: WfShipOps = null   # Deadship DS-2C "Borrowed Air" / DS-3 "Dark Bus" (`--borrowed-air`, `--dark-bus`): owns `equipment` (its bay and console)
+var ship_ops_check: WfShipOpsCheck = null
 # LOCO-001 (docs/LOCOMOTION.md): the start (RING: on ring A's deck with the rings turning, the default; STATION: the full excursion from the
 # development station), the trainee's visible MPFB body and its locomotion on the decks.
 var start_mode := "RING"
@@ -135,6 +137,15 @@ static func deadship_requested() -> bool:
 ## SYS-002 (Deadship Phase 2A): ring A's air by compartment rides on the ring start; the default, systems and DS-1 starts never create it.
 static func shared_air_requested() -> bool:
 	return "--shared-air" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "shared-air"
+
+## Deadship Phases 2C and 3 on the ring services model (SYS-003): "" or the scenario's package key.
+static func ship_ops_requested() -> String:
+	var args := OS.get_cmdline_user_args()
+	if "--borrowed-air" in args or WfWebPage.start_variant() == "borrowed-air":
+		return "ds2c"
+	if "--dark-bus" in args or WfWebPage.start_variant() == "dark-bus":
+		return "ds3"
+	return ""
 
 static func airflow_requested() -> bool:
 	return "--airflow" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "airflow"
@@ -222,6 +233,14 @@ func _ready() -> void:
 			push_error("SHARED AIR: the training is unavailable: %s" % str(shared_air.errors))
 		else:
 			say("GU instructor: Shared Air, a training run on ring A's air model. You are sector 1's crew with your partner; pairs B and C are in sectors 2 and 3. Ship time runs x%d. Walk your sector; the map (%s) shows the air." % [int(shared_air.scale()), key("exc.map")])
+	elif ship_ops_requested() != "":
+		ship_ops = WfShipOps.new(ship_ops_requested(), by_name, manifest, self, layer)
+		equipment = ship_ops.eq
+		if not ship_ops.verified:
+			push_error("SHIP OPS: the training is unavailable: %s" % str(ship_ops.errors))
+		else:
+			say("GU instructor: %s, a training run on both rings' services. You are pair A's crew with your partner; pairs B and C are with you in ring A. Ship time runs x%d. The ECLSS bay is in sector 3, the ops console in sector 2; %s anywhere else is the intercom." % [
+				ship_ops.sc["scenario"]["name"], int(ship_ops.scale()), key("exc.ops")])
 	elif airflow_requested():
 		equipment = WfAirflow.new(by_name, manifest, self)
 		var af := equipment as WfAirflow
@@ -259,6 +278,9 @@ func _ready() -> void:
 	elif "--check-shared-air" in OS.get_cmdline_user_args():
 		shared_air_check = WfSharedAirCheck.new()
 		shared_air_check.run(self)
+	elif "--check-ship-ops" in OS.get_cmdline_user_args():
+		ship_ops_check = WfShipOpsCheck.new()
+		ship_ops_check.run(self)
 
 # ---- package ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -704,7 +726,9 @@ func look_basis() -> Basis:
 func _physics_process(dt: float) -> void:
 	if actor == null:
 		return
-	if shared_air != null:
+	if ship_ops != null:
+		ship_ops.step(dt)
+	elif shared_air != null:
 		shared_air.step(dt)
 	elif deadship != null:
 		deadship.step(dt)
@@ -1086,6 +1110,10 @@ func use() -> String:
 		var sr := shared_air.use()
 		if sr != "":
 			return sr
+	if ship_ops != null:
+		var so := ship_ops.use()
+		if so != "":
+			return so
 	var w := _walk_target()
 	var ls_i := _learning_in_reach()
 	if ls_i >= 0 and (learning.open == ls_i or w == ""):
@@ -1243,7 +1271,11 @@ func _toggle_door(id: String) -> String:
 
 ## O: the ship's operating change, asked at a trunk panel (the trainee holding still on a rail inside Wayfarer, in the SHIP frame).
 func ops() -> String:
-	if shared_air != null:
+	if ship_ops != null:
+		var so := ship_ops.ops()
+		if so != "":
+			return so
+	elif shared_air != null:
 		var sr := shared_air.ops()
 		if sr != "":
 			return sr
@@ -1322,6 +1354,8 @@ func _process(dt: float) -> void:
 			rec["deadship"] = deadship.record()
 		if shared_air != null:
 			rec["sharedAir"] = shared_air.record()
+		if ship_ops != null:
+			rec["shipOps"] = ship_ops.record()
 		WfWebPage.publish("wayfarerWalk", rec)
 	var rc: Dictionary = learning.remote_camera() if learning != null else {}
 	var f: Dictionary = _frame_pivot() if rc.is_empty() else frames["STATIONARY"]     # a station's remote camera rides the stationary ship
@@ -1768,6 +1802,8 @@ func _page() -> Control:
 		return deadship.panel
 	if shared_air != null and shared_air.panel.visible:
 		return shared_air.panel
+	if ship_ops != null and ship_ops.panel.visible:
+		return ship_ops.panel
 	if learning != null and learning.panel.visible:
 		return learning.panel
 	return null
@@ -1809,6 +1845,8 @@ func where() -> String:
 	return "crew tube " + "AB"[k]
 
 func _goal_text() -> String:
+	if ship_ops != null:
+		return ship_ops.goal_text()
 	if shared_air != null:
 		return shared_air.goal_text()
 	if deadship != null:
@@ -1881,6 +1919,8 @@ func use_label() -> String:
 		return deadship.use_label()
 	if shared_air != null and shared_air.use_label() != "":
 		return shared_air.use_label()
+	if ship_ops != null and ship_ops.use_label() != "":
+		return ship_ops.use_label()
 	var w := _walk_target()
 	var ls_i := _learning_in_reach()
 	if ls_i >= 0 and (learning.open == ls_i or w == ""):
@@ -1902,7 +1942,10 @@ func touch_state() -> Dictionary:
 		acts.append(["exc.use", u, "primary_game"])
 	if move == "WALK":
 		acts.append(["exc.jump", "Jump", "game"])     # LOCO-003: the phone had no jump; running is the stick pushed to its rim
-	if shared_air != null:
+	if ship_ops != null:
+		if ship_ops.ops_label() != "":
+			acts.append(["exc.ops", ship_ops.ops_label(), "game"])
+	elif shared_air != null:
 		if shared_air.ops_label() != "":
 			acts.append(["exc.ops", shared_air.ops_label(), "game"])
 	elif deadship != null:
@@ -1940,7 +1983,7 @@ func _prompt_text() -> String:
 	else:
 		var d := _walk_target()
 		var ls_i := _learning_in_reach()
-		var dl := deadship.use_label() if deadship != null else (shared_air.use_label() if shared_air != null else "")
+		var dl := deadship.use_label() if deadship != null else (shared_air.use_label() if shared_air != null else (ship_ops.use_label() if ship_ops != null else ""))
 		if dl != "":
 			out.append("%s %s" % [key("exc.use"), dl.trim_prefix("Use · ")])
 		elif ls_i >= 0 and (learning.open == ls_i or d == ""):
@@ -1949,7 +1992,10 @@ func _prompt_text() -> String:
 			out.append("%s take the ladder" % key("exc.use"))
 		elif d != "":
 			out.append("%s %s door %s" % [key("exc.use"), "close" if circ_doors[d]["target"] > 0.0 else "open", str(d).trim_prefix("CIRC.")])
-		if shared_air != null:
+		if ship_ops != null:
+			if ship_ops.ops_label() != "":
+				out.append("%s %s" % [key("exc.ops"), ship_ops.ops_label().trim_prefix("Ops · ")])
+		elif shared_air != null:
 			if shared_air.ops_label() != "":
 				out.append("%s %s" % [key("exc.ops"), shared_air.ops_label().trim_prefix("Ops · ")])
 		elif deadship != null:
@@ -1980,7 +2026,7 @@ func _update_hud() -> void:
 		elif learning.open >= 0:
 			learning.close()
 	var lines_out: Array = []
-	var training_only := shared_air != null and shared_air.verified       # Shared Air shows its own stages, not the walk's tour checklist
+	var training_only := (shared_air != null and shared_air.verified) or (ship_ops != null and ship_ops.verified)       # Shared Air shows its own stages, not the walk's tour checklist
 	for r in ([] if training_only else ["RING_A", "RING_B"]):
 		var rec: Dictionary = progress[r]
 		lines_out.append("%s  %s board  %s circuit (%d%%)  %s back aboard the station" % [("Ring A" if r == "RING_A" else "Ring B"),
@@ -1995,6 +2041,9 @@ func _update_hud() -> void:
 	if shared_air != null and shared_air.verified:
 		lines_out.append_array(shared_air.lines())
 		shared_air.update_panel(get_viewport().get_visible_rect().size)
+	if ship_ops != null and ship_ops.verified:
+		lines_out.append_array(ship_ops.lines())
+		ship_ops.update_panel(get_viewport().get_visible_rect().size)
 	_page_hud()
 	hud_check.text = "\n".join(lines_out)
 	hud_prompt.text = WfKeyText.rich(_prompt_text())

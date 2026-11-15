@@ -16,12 +16,16 @@ A run is a deterministic machine on a fixed step. Actions apply at step boundari
     install <slot>               at the bay: start installing the part in hand (the machine isolated, the part's family fits the slot)
     take <part> / stow           at the bay: a part from the shelf into the hands, or the hands' part onto the shelf
     switch <ring> <load> <bool>  at the console: a load's remote power controller in either ring
-    tie <bool> / reset <bus> / converter <bus> <bool>   at the console: the bus tie, a tripped bus breaker, a battery converter
+    tie <bool> / reset <bus> / converter <bus> <bool> / economy <ring> <bool>   at the console: the bus tie, a tripped bus breaker, a
+                                 battery converter, a ring heat pump's supply setpoint (all remote by design)
+    inspect <power item>         at the console: the electrical overview of a bus, converter, the battery, the packs or the tie
     order <pair> fetch <part>    a pair crosses to ring B, isolates the machine there, removes the part, crosses back and leaves it on the
                                  ring A shelf
-    order <pair> swap <part> <into>   a pair crosses to where `into` is, isolates, swaps the part in, and returns (Phase 3: the power bay)
     order <pair> move <ring>     a pair crosses to the other ring and stays
     watch                        the stability watch from the exact present state to `ship_h`, then the projection to `projection_h`
+
+A scenario may schedule a plant restart (premise restart_h): at that time the battery charges the pulse bank and the plant restarts, or,
+holding less than the pulse bank's energy, it cannot (RESTART_FAILED).
 
 At each boundary: the due actions, then the trainee's work and the pairs' tasks advance, then the occupants are counted in each ring;
 the model steps; each person's limit-hours add their ring's state over the step.
@@ -43,6 +47,8 @@ SCHEMA = 'WF_DEADSHIP_SCENARIO'
 VERSION = 1
 H = 3600.0
 EPS = 1e-6
+VERIFY_AT_LOAD = {'ds2c': 'borrow_fan_pump', 'ds3': 'shed_garden'}   # replayed by Godot to VERIFY_UNTIL_S before the scenario is shown
+VERIFY_UNTIL_S = 3600.0
 ENGINEERING_KEYS = {'C', 'V_m3', 'Q_air', 'UA', 'pump', 'T_s', 'hp_max', 'conv_W', 'gen_W', 'pack_Wh', 'ship_W', 'g_c', 'g_w', 'q_sens',
                     'k_m3_s', 'co2_max', 'co2_target', 'T_max', 'rh_max', 'rh_limit', 'battery_Wh'}
 VALID_ABOVE_LIMIT_K = 8.0   # past T_max + this the model's cabin has left its range: no equipment over-temperature trips, no passive loss
@@ -115,10 +121,8 @@ class Run:
             if float(t) <= 0.0:
                 rs.fail_part(self.st, part)
         self.later_faults = sorted([[float(t), part] for part, t in pr['faults'] if float(t) > 0.0])
-        for e in pr.get('switched_off', []):
-            rs.set_on(self.st, e[0], e[1], False)
-        for part, place in pr.get('spares', []):
-            self.st['parts'][part] = dict(lru=place[0], at=place[1], ok=True)
+        if pr.get('spares'):
+            raise ValueError('spares are not modelled in these scenarios: the premise rests on there being none')
         self.restart_s = float(pr['restart_h'])*H if 'restart_h' in pr else None
         self.restart = None                       # None until the window opens; then dict(ok, battery_kWh, t_s)
         self.trainee = self.people[0]
@@ -133,7 +137,6 @@ class Run:
         self.after24 = dict(co2=None, hot=None, wet=None, cold=None)
         self.peak = dict(co2=0.0, T=0.0, rh=0.0)
         self.shed_J = 0.0                         # discretionary service not delivered (switched off), J
-        self.samples = []
         self.start_parts = {k: v['at'] for k, v in self.st['parts'].items()}
         self._occupy()
 
@@ -274,15 +277,6 @@ class Run:
                 if to == ring:
                     return f'pair {pair} is already in ring {to}'
                 plan = [('cross', T, to)]
-            elif what == 'swap':
-                part, into = a[2], a[3]
-                q = st['parts'].get(part)
-                if q is None or q['at'] != self.sc['crew'].get('swap_store', ''):
-                    return f'{part} is not where the crew keep spares'
-                if st['parts'][part]['lru'] != rs.SLOTS_ALL().get(into):
-                    return f'{part} does not fit {into}'
-                plan = [('go', float(self.sc['crew']['swap_go_s']), ''), ('swap', float(self.sc['crew']['swap_work_s']), [part, into]),
-                        ('return', float(self.sc['crew']['swap_go_s']), '')]
             else:
                 return f'no order {what}'
             for i, m in enumerate(ms):
@@ -303,8 +297,6 @@ class Run:
             q['ring'] = 'X'; q['crossings'] += 1
         elif k == 'isolate' and q['task']['lead']:
             rs.set_isolated(self.st, 'B', arg.split('.')[1], True)
-        elif k == 'go':
-            q['ring'] = 'X'
 
     def _finish(self, q):
         k, _, arg = q['task']['plan'][q['task']['k']]
@@ -315,21 +307,14 @@ class Run:
             rs.move_part(self.st, arg, f"CARRY.{q['pair']}")
         elif k == 'deliver' and lead:
             rs.move_part(self.st, arg, self.sc['crew']['deliver_to'])
-        elif k == 'swap' and lead:
-            part, into = arg
-            old = next((kk for kk, v in self.st['parts'].items() if v['at'] == into), None)
-            if old is not None:
-                rs.move_part(self.st, old, self.sc['crew']['swap_store'])
-            rs.move_part(self.st, part, into)
-        elif k == 'return':
-            q['ring'] = 'A'; q['node'] = 'A2'
 
     def _tasks(self, dt):
         for q in self.people:
             t = q['task']
+            d = dt                                # each person's own share of the step (a zero-length phase ends at once)
             while t is not None:
-                if t['left'] > dt - EPS and t['left'] > EPS:
-                    t['left'] -= dt
+                if t['left'] > d - EPS and t['left'] > EPS:
+                    t['left'] -= d
                     if t['left'] > EPS:
                         break
                 self._finish(q)
@@ -342,7 +327,7 @@ class Run:
                 self._begin(q)
                 if t['left'] > EPS:
                     break
-                dt = 0.0
+                d = 0.0
             self._occupy()
 
     def _work(self, dt):
@@ -356,7 +341,7 @@ class Run:
             rs.move_part(self.st, j['part'], 'CARRY.T'); self.hands = j['part']
         else:
             rs.move_part(self.st, j['part'], j['slot']); self.hands = None
-        self.log.append([self.t, j['kind'] + 'd', [j['slot'], j['part']], ''])
+        self.log.append([self.t, 'removed' if j['kind'] == 'remove' else 'installed', [j['slot'], j['part']], ''])
         self.job = None
 
     # ---- the step ------------------------------------------------------------------------------------------------------------------------
@@ -414,9 +399,6 @@ class Run:
                 if self.phase != 'PROJECTION':
                     self.peak['co2'] = max(self.peak['co2'], x); self.peak['T'] = max(self.peak['T'], T)
                     self.peak['rh'] = max(self.peak['rh'], h)
-        self.samples.append((self.t, {r: (self.st['ring'][r]['T'], rs.rh(p, self.st['ring'][r]['T'], self.st['ring'][r]['m_w']),
-                                          rs.x_co2(p, self.st['ring'][r]['T'], self.st['ring'][r]['m_c'])) for r in rs.RINGS},
-                             self.st['E']))
 
     # ---- the watch -------------------------------------------------------------------------------------------------------------------
     def _start_watch(self):
@@ -426,12 +408,6 @@ class Run:
 
     def watch_end_s(self):
         return max(float(self.sc['watch']['ship_h'])*H, self.watch['t0'] + float(self.sc['watch']['min_h'])*H)
-
-    def run_watch(self):
-        end = self.watch_end_s()
-        while self.t < end - EPS:
-            self.tick(min(self.wdt, end - self.t) if abs((end - self.t) % self.wdt) > EPS and end - self.t < self.wdt else self.wdt)
-        self.finish_watch()
 
     def finish_watch(self):
         self.watch['end_config'] = self.config()
@@ -548,7 +524,8 @@ class Run:
                     ledgers=rs.ledgers(self.st, self.p))
 
     def decisions(self):
-        keep = ('isolate', 'removed', 'installed', 'take', 'stow', 'switch', 'tie', 'reset', 'converter', 'order', 'watch')
+        keep = ('isolate', 'removed', 'installed', 'take', 'stow', 'switch', 'tie', 'reset', 'converter', 'economy', 'order', 'watch',
+                'restart')
         return [[e[0]/H, e[1], e[2]] for e in self.log if e[1] in keep and not e[3]]
 
     def checkpoint(self):
@@ -693,7 +670,9 @@ def contract(name='ds2c', root=ROOT):
     for n, d, a in cases(name):
         r, cps = play(sc, p, a)
         refs.append(dict(name=n, description=d, actions=a, checkpoints=cps, debrief=r.debrief()))
-    return dict(schema=SCHEMA, version=VERSION, scenario={k: v for k, v in sc.items() if not k.startswith('_')}, references=refs,
+    return dict(schema=SCHEMA, version=VERSION, key=name, model=dict(schema=rs.SCHEMA, version=rs.VERSION),
+                verify_at_load=VERIFY_AT_LOAD[name], verify_until_s=VERIFY_UNTIL_S,
+                scenario={k: v for k, v in sc.items() if not k.startswith('_')}, references=refs,
                 notice='SIMULATION: a station-run Deadship training on the ring services model (SYS-003). Unscored; PROTOTYPE values.')
 
 

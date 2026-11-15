@@ -359,12 +359,15 @@ timeout -s KILL 900 godot --headless --fixed-fps 60 --path godot res://scenes/ex
 timeout -s KILL 900 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 120000 -- --deadship --check-deadship   # WF_GODOT_DEADSHIP (DS-1)
 timeout -s KILL 900 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 120000 -- --airflow --check-airflow   # WF_GODOT_AIRFLOW (SYS-002)
 timeout -s KILL 1800 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 300000 -- --shared-air --check-shared-air [--strategy=purge|separate|separate_late|nocontain]   # WF_GODOT_SHARED_AIR (DS-2B: 21-case parity, a strategy played by Use and Ops)
-python3 tools/web_check.py <site> --out <dir> --part training [--training systems|deadship|airflow|shared-air[-purge|-separate|-separate-late|-nocontain]] [--no-touch] [--rotate] [--desktop WxH]   # in Chrome, every action by the player's key or touch button; --rotate turns the phone upright mid-run
+timeout -s KILL 1800 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 400000 -- --borrowed-air --check-ship-ops [--strategy=borrow_fan_shed|borrow_fan_pump|relocate|cannibalize]   # WF_GODOT_SHIP_OPS (DS-2C on SYS-003: 11-case parity, a strategy by Use and Ops, watch, debrief, replay)
+timeout -s KILL 1800 godot --headless --fixed-fps 60 --path godot res://scenes/excursion.tscn --quit-after 400000 -- --dark-bus --check-ship-ops [--strategy=shed_garden|shed_dark_b|shed_economy|keep_garden|short_reserve]   # WF_GODOT_SHIP_OPS (DS-3 on SYS-003: 9-case parity)
+python3 src/wayfarer/ring_services.py; python3 src/wayfarer/ship_ops.py [ds2c|ds3]   # SYS-003's normal state and proof; every reference case's outcome
+python3 tools/web_check.py <site> --out <dir> --part training [--training systems|deadship|airflow|shared-air[-purge|-separate|-separate-late|-nocontain]|borrowed-air[-pump|-relocate|-cannibalize]|dark-bus[-dark-b|-economy|-keep-garden|-short]] [--no-touch] [--rotate] [--desktop WxH]   # in Chrome, every action by the player's key or touch button; --rotate turns the phone upright mid-run
 timeout -s KILL 120 godot --headless --path godot --script res://scripts/check_route.gd    # WF_GODOT_ROUTE (route playback against all rows)
 godot --path godot --script res://scripts/profile_views.gd -- --view=station|ship [--hide-assemblies=RA.EXT,..] [--hide-zone=INTERIOR]
 ```
 
-`runtime-export` runs `check`, `check-docked`, `route`, `excursion`, `systems`, `deadship`, `airflow`, `shared_air` and `characters` (CHECKS in `tools/runtime_export.py`); the
+`runtime-export` runs `check`, `check-docked`, `route`, `excursion`, `systems`, `deadship`, `airflow`, `shared_air`, `borrowed_air`, `dark_bus` and `characters` (CHECKS in `tools/runtime_export.py`); the
 characters check needs the MPFB humans (`workflow.py deps`). Always run headless Godot under `timeout -s KILL`: a script parse error
 hangs it otherwise. Godot's version comes from `WAYFARER_GODOT` (default `/snap/bin/godot-4`).
 

@@ -474,7 +474,7 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   after the whitebox review. **Done when:** the owner accepts or replaces the circulation, the conflicts are canonized or removed and a
   person completes both excursions in the desktop and web builds.
 
-- [ ] **DS — Deadship integration (owner briefs 2026-11-12, 2026-11-13 and 2026-11-14). PHASE 2A BUILT AND FINALIZED; SYS-002 v2 BUILT; PHASE 2B "SHARED AIR" BUILT, AWAITING REVIEW.** Report
+- [ ] **DS — Deadship integration (owner briefs 2026-11-12 to 2026-11-15). PHASES 2A, 2B, 2C AND 3 BUILT AND PLAYABLE ON THE TASK BRANCH, AWAITING REVIEW.** Report
   `work/project-thread-dfyyv7/DEADSHIP_DESIGN.md` (branch `claude/project-thread-dfyyv7`): Deadship as a station-run training simulation
   aboard Wayfarer on reusable conserving ship-systems models (SYS-001 v2, SYS-002 v2, docs/MODEL.md). Built: Phase 0 (`#interior-systems`),
   Phase 1, the unscored DS-1 "Scrubber" tutorial (`#interior-deadship`), finalized for phones, Phase 2A, ring A's air by compartment
@@ -482,7 +482,7 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   bay, exposures against the Rev D SMACs). The first Phase 2B gate failed on CO₂ alone (report §27); the second, on SYS-002 v2 with a
   urine pretreatment failure in hygiene A, passed for the base scenario (report §30: containment is forced, then a real choice between
   keeping the crew's air clean and clearing the habitation sector sooner), not for the source's extremes. Phase 2B "Shared Air" is built and finalized (`#interior-shared-air`, report §34–§36, handoffs §35 and §38; separation now viable with a scheduled reconnection). **Open:** the owner's review
-  of Phases 1 and 2A (checklist §22.4), SYS-002 v2 and the source's PROTOTYPE values; the owner's playtest of 2B (guide §36.10) and release (§36.11); Phase 2C (finite TCC bed, research §37: gate first) needs its own authorization;
+  of Phases 1 and 2A (checklist §22.4), SYS-002 v2 and the source's PROTOTYPE values; the owner's playtest of 2B (guide §36.10) and release (§36.11); the finite TCC bed failed its gate as a gameplay generator (§39); SYS-003 ring services (heat, humidity, CO₂, cooling, buses, battery, survival packs, parts; §40) carries DS-2C "Borrowed Air" (`#interior-borrowed-air`, §41) and DS-3 "Dark Bus" (`#interior-dark-bus`, §42), each with three non-dominated viable strategies; the owner's playtest (guide in the report's handoff) and review of their PROTOTYPE values (the electrical architecture, the 8 kWh packs, the 40 kW converters, the restart reserve taken as the pulse bank's full 200 kWh) are open; Phases 4 and 5 are not started;
   ring ventilation stays PROTOTYPE (DS-O7), the crew-tube hatches outside the model (DS-O8). **Done when:** the owner accepts or
   declines the phases and SYS-002 v2 and squashes or declines them.
 

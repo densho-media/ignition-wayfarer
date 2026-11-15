@@ -2061,6 +2061,36 @@ a timely reconnection (report §36). The package `wf_deadship_ds2.json` carries 
 `godot/scripts/deadship/shared_air.gd` (`WfSharedAir`) mirrors the machine and `check_shared_air.gd` replays all 21 within the
 model's tolerance and plays five strategies through Use and Ops. Tests: `tests/test_shared_air.py` (23).
 
+**Ring services (SYS-003).** `src/wayfarer/ring_services.py` keeps both habitat rings as one well-mixed volume each (466.4 m³, SYS-001's
+resolution): cabin temperature, water vapour and CO₂. It also models the cooling chain that holds them (a CHX fan over an ε-NTU coil,
+a proportional temperature control valve, two coolant pumps, a heat pump at 0.5 of Carnot into the 320 K cold loop, with normal and
+economy setpoints), the electrical side (G1/G2 on buses A/B while the plant runs; the 2 MWh main battery through converters BC-A/BC-B;
+a tie breaker; trips on overload; each ring's survival packs for its survival loads only; the pulse bank's 200 kWh charge for a
+restart) and the line-replaceable parts (ECLSS fan, coolant pump, converter families). Crew loads come from BVAD 2022 and the owner's
+1.0 kg/d CO₂. Every watt drawn in a ring heats it. Water, CO₂, heat, coolant, energy and parts ledgers close. The architecture, the
+capacities and the loads are PROTOTYPE (the whole-ship load `power.rating` and the survival reserve's capacity are OPEN). The
+package `wf_ring_services.json` carries a model proof; `godot/scripts/systems/ring_services.gd` (`WfRingServices`) must reproduce it
+at relative 10⁻⁹ before a scenario starts. Tests: `tests/test_ring_services.py` (8).
+
+**Deadship DS-2C "Borrowed Air" and DS-3 "Dark Bus" (training challenges, unscored).** Both run on SYS-003 through one scenario machine,
+`src/wayfarer/ship_ops.py` (`Run`), mirrored by `godot/scripts/deadship/ship_ops.gd` (`WfShipOps`). The scenarios
+`data/deadship/ds2c_borrowed_air.toml` and `ds3_dark_bus.toml` own only training values (PROTOTYPE); `ship_ops.load` refuses
+engineering keys. The trainee works at ring A's sector 3 ECLSS bay (inspect, isolate, remove and install parts, take and stow) and
+the sector 2 ops console (switch loads, the tie, breaker resets, the economy setpoint), and orders two abstract pairs by intercom (fetch a
+ring B part, move to ring B; a crossing is 15 min). A page pauses the clock. The declared watch runs the same model to 24 h (DS-3:
+through its 48 h restart window), then a 7-day projection. Verdicts: CO2_LIMIT, HEAT_LIMIT, HUMIDITY_LIMIT, COLD_LIMIT,
+RESTART_FAILED, TEMPORARY, STABLE (degraded above the 0.3 % CO₂ target or outside the humidity band). The metrics are shown side by
+side and never weighted.
+- *Borrowed Air* (`#interior-borrowed-air`, `-- --borrowed-air`): ring A's CO₂ fan and pump 1 fail together, no spare, ring B empty
+  in coast setback. Three non-dominated ways out: shed and borrow ring B's fan; borrow its fan and a pump; warm ring B and move the crew.
+- *Dark Bus* (`#interior-dark-bus`, `-- --dark-bus`): plant down for a 48 h service, then converter BC-B fails. Bus B's survival loads
+  fall to the packs, and the tie only holds if enough is shed. Three non-dominated ways through: shed the Garden; darken ring B;
+  economy. Each ends with a different battery margin against the restart's 200 kWh.
+
+The packages `wf_deadship_ds2c.json` (11 reference cases) and `wf_deadship_ds3.json` (9) carry checkpoints and debriefs. Godot replays
+one case at load and all of them in the runtime checks `borrowed_air` and `dark_bus`. Tests: `tests/test_ship_ops.py` (16). Design and
+evidence: report §39–§46 on the task branch.
+
 ## Retired runtime scenes
 
 The Godot review menu, the ship inspector, the guided induction walk, Demonstrator 01 with the Ship Navigator, its SPACE view and the

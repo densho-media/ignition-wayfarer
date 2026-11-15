@@ -623,6 +623,15 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
     import shared_air
     shared_air.write(root, out / shared_air.FILE)
     packaged.append(shared_air.FILE)
+    # SYS-003 ring services (Deadship Phases 2C and 3) and its two scenarios, DS-2C "Borrowed Air" and DS-3 "Dark Bus", with their
+    # reference cases (Godot replays the model's proof and a case before it shows them).
+    import ring_services
+    ring_services.write(root, out / ring_services.FILE)
+    packaged.append(ring_services.FILE)
+    import ship_ops
+    for name in ship_ops.SCENARIOS:
+        ship_ops.write(root, out / ship_ops.FILES[name], name)
+        packaged.append(ship_ops.FILES[name])
     if preset == 'COAST':
         # RT-003: the runtime plays the First Ignition timeline from this copy, checked against the rig's hash.
         timeline = root / rig['flight_timeline']['file']

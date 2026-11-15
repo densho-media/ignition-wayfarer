@@ -2818,3 +2818,261 @@ Answers to the brief's questions 1–15. Evidence is in §36 and §37.
     merged or deployed.
 15. **Is finite TCC capacity justified as Phase 2C's first feature?** As a model, yes. As a gameplay feature, only for a bed near the
     end of its service life, and only after a gate shows it creates a real choice (§37.4).
+
+## 39. Phase 2C gate G1: does a finite TCC bed create a decision? [ENG; gate FAILED as a gameplay generator]
+
+Owner brief 2026-11-15 13:54Z ("Complete Phase 2 and Phase 3"). The §37 recommendation was tested before anything was built on it.
+Study: `work/project-thread-dfyyv7/ds2c_tcc_gate.py` (about 3 min) and its result `ds2c_tcc_gate.json`. Task study only; nothing in the
+build reads it.
+
+**Model (PROTOTYPE).**
+- A Bohart–Adams irreversible-reaction bed solved by the method of lines: K = 20 segments, NTU = 30 for the whole bed.
+- The flight bed's sharp front needs at least ln 600 = 6.4 per fifth of the bed, so NTU = 30 meets it.
+- SYS-002 v2's 0.95 single-pass efficiency is kept as a flow factor (bypass and channelling), so a fresh bed reproduces v2.
+- Initial loading is laid down by the same model at a low inlet concentration, so the front has the model's own shape.
+
+**Sources.**
+- The 22.7 kg phosphoric-acid carbon bed (B-S 3032) at 15.29 m³/h, expendable (NTRS 20060005220).
+- Stoichiometric chemisorption: 0.56 mmol/g of available acid gives 215.9 g NH₃ per bed; the conservative 0.26 mmol/g gives 100 g.
+- The flight bed's segment profile after 2,595 h, and the moist-gas capacities at 5 ppm (ICES-2018-253, NTRS 20180004945).
+- Humidity moves capacity by tens of percent in either direction. It is carried as the capacity range (216 g against 100 g), not as a
+  separate law.
+- ntrs.nasa.gov is unreachable from the container, so the figures come from extracts. They need a direct reading before any value
+  becomes canon.
+
+**Result.** The four Shared Air strategy families (isolate with restore, isolate without a plan, purge, separate with a reconnection
+at 4 h) were rerun at 0, 90, 98 and 99.5 % bed loading, for both capacities.
+
+| Bed | Loading | What changes |
+| --- | --- | --- |
+| 216 g or 100 g | 0 %, 90 %, 98 % | Nothing that matters. Every strategy keeps its verdict. The non-dominated front is unchanged (no strategy dominates another). Isolation's 7-day residue grows (0.64 to 1.37 ppm at 98 %), still inside the reuse criterion. |
+| 216 g or 100 g | 99.5 % | Both isolation strategies become dominated by the purge and by the separation. The near-spent bed removes a choice instead of adding one. |
+
+**Verdict: FAILED as a gameplay generator.** The gate asked whether a new, non-dominated decision appears. Only a bed at the very end
+of its life, beyond the ISS's ordinary replacement point, changes the front at all, and then it removes options. No bed was shrunk to
+force a result. Finite TCC capacity stays a valid model extension (§37.3 A) for a later scenario. It is not Phase 2C's driver.
+
+Phase 2C therefore went to the design's original content (§5.8 DS-2): two interacting problems, humidity and cabin heat stocks, parts
+as entities and a second ring. That needed a new reusable model, SYS-003 (§40).
+
+## 40. SYS-003 ring services: heat, humidity, CO₂, cooling, power and parts [BUILT; VALIDATED]
+
+`src/wayfarer/ring_services.py` (pure, standard library), its package `wf_ring_services.json` and the Godot mirror
+`godot/scripts/systems/ring_services.gd` (`WfRingServices`).
+
+The model is a reusable engineering state. It knows nothing of scenarios, input or scores. The scenario layer (§41, §42) only
+switches, isolates, moves parts and sets the crew.
+
+### 40.1 What it models
+
+**Scope and air.**
+- Two habitat rings, each one well-mixed air volume of 466.4 m³. That is ring A's nine compartments summed (`ring_air`), with ring B
+  its mirror. This is SYS-001's resolution; compartment transport stays SYS-002's job.
+- The rings share no air. Only people and carried parts cross, in a stated transfer time.
+- Each ring carries three states: cabin temperature T, vapour mass m_w and CO₂ mass m_c.
+- The crew's sensible heat (73.0 W), vapour (2.27 kg/d) and CO₂ (the owner's 1.0 kg/d) come from NASA BVAD 2022 and from SYS-001.
+- Every watt of electrical load in a ring ends as heat in that ring's cabin.
+
+**The cooling chain.**
+- A cabin heat exchanger (CHX) fan draws air over a counterflow coil (ε-NTU, a fixed UA).
+- A proportional temperature control valve sets the coil's air share, with a 15 % minimum so the coil keeps condensing.
+- Two coolant pumps (P1, P2), each a part, carry the coil's heat. One pump halves the coolant capacity rate: the coil runs warmer and
+  condenses less.
+- A heat pump lifts the coolant heat into the ring's 320 K cold loop (thermal.loops.cold, WORKING).
+  - Its COP is 0.5 of Carnot (thermal.loops.architecture, WORKING) and its capacity is finite.
+  - Cabin heat at 297 K cannot reach a 320 K radiator without work (thermal.loops.separation_rule, BASELINE).
+- Condensation follows from the coil surface temperature against the cabin dew point (Magnus, Alduchov–Eskridge), solved by four
+  fixed substitutions that Godot repeats.
+- The heat pump has two setpoints: normal (4 °C supply) and economy (12 °C). Economy has the better COP and draws less work, but the
+  coil is warmer, so the cabin dries less.
+
+**Electricity** (a PROTOTYPE architecture on the spec's two generators and buses A/B, BASELINE).
+- G1 feeds bus A and G2 bus B while the fusion plant runs.
+- The main battery (2 MWh usable, WORKING) feeds each bus through its own converter, BC-A or BC-B. Each converter is a part with a
+  40 kW rating.
+- A tie breaker joins the buses.
+- A bus asked for more than its sources can give trips, and stays dead until its breaker is reset.
+- Each ring's survival packs carry only that ring's survival loads, and only when its bus is dead. The loads are the spec's
+  LIFE_SUPPORT, FLIGHT_COMPUTER, COMMS, EMERGENCY_LIGHTING and CRITICAL_PUMPS_VALVES (survival_reserve, BASELINE). The capacity is
+  OPEN, so 8 kWh per ring is PROTOTYPE.
+- The fusion restart charges the pulse bank (200 kWh, WORKING) from the battery before ignition.
+- A load without power does not run, whatever its parts.
+
+**Parts.**
+- Line-replaceable units in three families: the ECLSS process fan (common to the CO₂ unit and the CHX), the coolant pump, and the
+  battery converter.
+- A part fits a slot only within its family. It is always in exactly one place: a slot, a shelf, a store or a carrier.
+
+**Steps.**
+- At each step's start the model settles the switchboard: which loads run and where their power comes from.
+- It then advances one classical RK4 step. The heat pump's draw follows the cabin through the step.
+- Stores are clamped at empty, with the shortfall recorded.
+
+### 40.2 Ledgers (closed in every case, Python and Godot)
+
+| Ledger | Identity |
+| --- | --- |
+| Water, per ring | m_w + condensed = m_w0 + generated |
+| CO₂, per ring | m_c + removed = m_c0 + generated |
+| Cabin heat, per ring | C (T − T0) + removed = crew sensible + electrical |
+| Coolant, per ring | rejected = removed + latent + heat-pump work |
+| Energy | battery drawn + packs drawn + generated = loads served (plus the pulse-bank charge); battery E0 − E = drawn |
+| Parts | every part in exactly one place; none made or lost |
+
+### 40.3 Normal state (`python3 src/wayfarer/ring_services.py`)
+
+After 6 h with six people, ring A sits at:
+- T 23.98 °C, RH 0.392, dew point 9.2 °C, CO₂ 0.151 %;
+- coil 8.0 °C, condensation 0.567 kg/h;
+- heat pump 4.16 kW of work against 13.06 kW of sensible heat.
+
+Ring B, empty and normal, sits at 23.86 °C. Every ledger closes to about 10⁻¹³ kg and 10⁻⁶ J.
+
+### 40.4 Parity
+
+`WfRingServices.load_package` replays the package's model proof (two rings, faults, parts moved, a trip and a reset) to its
+checkpoints at relative 10⁻⁹ before anything is shown. The proof passes in Godot: about 120 ms native, `model_verify_ms` in the check
+notes.
+
+Tests: `tests/test_ring_services.py` (8). They cover:
+- a normal ring holding in band;
+- a CO₂ fan failure rising to the limit, and a pump failure warming the cabin;
+- no temperature change without a flow;
+- condensate only below the dew point;
+- parts in one place and compatible;
+- overload trips, with the packs carrying only survival loads;
+- a deterministic proof.
+
+## 41. DS-2C "Borrowed Air" [BUILT; VALIDATED; PLAYABLE (headless and browser)]
+
+`#interior-borrowed-air` (`-- --borrowed-air`); scenario `data/deadship/ds2c_borrowed_air.toml`, scenario values only (PROTOTYPE).
+`ship_ops.load` refuses engineering keys.
+
+The reference machine is `src/wayfarer/ship_ops.py` (`Run`). The Godot mirror is `godot/scripts/deadship/ship_ops.gd` (`WfShipOps`).
+
+### 41.1 Premise
+
+- In ring A, the CO₂ unit's fan stops and coolant pump 1 seizes in the same hour.
+- No spare is in reach. The one spare ECLSS fan went into this unit at the DS-1 repair, and pumps are kept in the service module,
+  out of reach while the rings turn.
+- Ring B is empty and whole, but it is in coast setback: 12.3 °C and RH 0.60, with its CO₂ unit, lights, lab, galley and Garden off.
+  That is the model's own 72 h equilibrium, not a chosen number.
+- The two ECLSS fans of each ring are one family, and so are their pumps.
+- The trainee is pair A's first member. Pairs B and C are abstract crew who take orders by intercom.
+
+### 41.2 The player's steps (13, all by Use and Ops)
+
+1. Hear the caution and read the ring readings on the map.
+2. Walk to sector 3's ECLSS bay.
+3. Inspect the CO₂ unit: process flow none, its fan FAILED.
+4. Inspect coolant pump 1: no flow with power on.
+5. Inspect the heat exchanger: it is the one fan that both cools and dries.
+6. Check the shelf, with no spare on it.
+7. Ask ring B's machines by intercom.
+8. Walk to sector 2's ops console and shed loads (for example the Garden lights and the lab), or bring ring B out of setback.
+9. Order a pair to fetch ring B's CO₂ fan (and, if wanted, pump 1). Each crossing takes 15 min, plus 10 min of work at ring B's bay.
+10. Back at the bay, isolate the CO₂ unit. Work on a running machine is refused.
+11. Remove the failed fan (5 min) and put it on the shelf.
+12. Take the delivered fan and install it (5 min), then return the unit to service.
+13. When CO₂, temperature and humidity are under control where people are, declare the watch at the intercom.
+
+The model then runs 24 h at ×1800 and the 7-day projection, and the debrief follows (four pages).
+
+### 41.3 Strategies and consequences (Python reference, all 11 cases)
+
+| Case | Family | Verdict | Peak where people are | Cost (shown, not weighted) |
+| --- | --- | --- | --- | --- |
+| nothing | NO_REPAIR | CO2_LIMIT at 9.2 h | CO₂ 1.06 % | — |
+| borrow_fan | BORROW_FAN | HEAT_LIMIT at 6.5 h | 27.3 °C | 1 part from ring B; one pump carries the full load |
+| **borrow_fan_shed** | BORROW_FAN | **STABLE** | 0.18 %, 23.1 °C, RH 0.43 | 1 part from ring B; Garden and lab dark (1,343 kWh shed over 7 d); ring B cannot host |
+| **borrow_fan_pump** | BORROW_FAN_PUMP | **STABLE** | 0.17 %, 24.4 °C, RH 0.42 | 2 parts from ring B (8 crossings); ring B loses CO₂ removal and half its cooling |
+| **relocate** | RELOCATE | **STABLE** | 0.21 %, 24.7 °C, RH 0.45 | 0 parts; 1.5 h warming ring B first; ring A stands empty with its faults |
+| relocate_cold | RELOCATE | COLD_LIMIT at 0.3 h | RH 0.63 | moving before ring B is warm |
+| cannibalize | CANNIBALIZE | HEAT_LIMIT at 0.5 h | 272 °C (beyond validity) | ring A's CHX fan moved to the CO₂ unit: no cooling at all |
+| shed_only | NO_REPAIR | CO2_LIMIT at 9.4 h | 1.05 % | — |
+| late_fetch | BORROW_FAN | STABLE, degraded | 0.36 % (above the 0.3 % target) | the fetch ordered 5 h late |
+| refused | BORROW_FAN | STABLE | 0.18 % | 6 refusals logged, none changes state |
+| replay | — | identical to borrow_fan_shed | | |
+
+**Why the three viable families are non-dominated.**
+
+| Family | Better than the other two in | Worse in |
+| --- | --- | --- |
+| Shed and borrow | Lowest peak temperature; only one part from ring B | Sheds 1,343 kWh of Garden and lab work |
+| Fan and pump | Ring A whole, nothing shed | Two parts taken (ring B can no longer host anyone), twice the crossings |
+| Relocate | Moves no part | Takes longest, and leaves ring A empty and unrepaired |
+
+None of them preserves everything. "Cannibalize" fails, and it teaches why the CHX fan is the cabin's only cooling and drying.
+
+**Peak "beyond validity".** A peak more than 8 K beyond the habitability limit is flagged `beyond_validity`. The model has no passive
+hull loss and no equipment thermal cutouts, so the 272 °C figure only means "far past survivable". The debrief says so.
+
+Tests: `tests/test_ship_ops.py` BorrowedAirTests (9). They cover:
+- the scenario setting no engineering value;
+- refusals changing nothing, and incompatible parts being refused;
+- a fetch taking the crossings and stripping ring B;
+- parts being conserved, and every ledger closing;
+- the outcomes, and the viable strategies differing in cost;
+- an identical replay.
+
+## 42. DS-3 "Dark Bus" (Phase 3) [BUILT; VALIDATED; PLAYABLE (headless and browser)]
+
+`#interior-dark-bus` (`-- --dark-bus`); scenario `data/deadship/ds3_dark_bus.toml` (PROTOTYPE scenario values). It uses the same
+SYS-003 model and the same scenario machine as DS-2C.
+
+### 42.1 Premise
+
+- A planned 48 h coast segment with the fusion plant shut down for service. Both buses run from the main battery through BC-A and
+  BC-B.
+- At the start BC-B fails, so bus B goes dark. That is an **electrical failure**.
+- Bus B's survival loads fall to each ring's survival packs. These are the CHX fans, the second pumps, the TCC and the avionics.
+- No converter spare is in the rings.
+- The plant's restart at 48 h fires from the pulse bank, which the battery must first charge with 200 kWh. If the battery holds less
+  than that when the window opens, the plant cannot restart. That is the **resource trade-off**: battery energy spent now against
+  the black start.
+- Ring B is empty in setback, as in DS-2C.
+
+### 42.2 The coupling the player has to read
+
+- With bus B dark and its packs draining, the CHX fans stop once the packs run out (8 kWh at 0.95 kW: about 8.4 h). Ring A's cabin then heats up, which
+  is the **thermal consequence**.
+- Closing the tie puts both buses on BC-A's 40 kW. With every load on, it trips at once and both buses go dark.
+- Shedding enough load makes the tie hold. What is shed decides the rest:
+  - Keeping the Garden lit means the tie's load grows as the heat pump works harder, and it trips late (3.6 h).
+  - The CO₂ unit then stops. CO₂ and humidity climb, which is the **atmospheric consequence**.
+  - The economy setpoint saves energy but lets the humidity rise to RH 0.59, above the control band.
+
+### 42.3 Strategies and consequences (Python reference, all 9 cases)
+
+| Case | Family | Verdict | Battery at restart (needs 200 kWh) | Cost |
+| --- | --- | --- | --- | --- |
+| nothing | PACKS_ONLY | HEAT_LIMIT at 9.6 h (beyond validity) | 1,048 | packs exhausted, no cooling |
+| tie_only | KEEP_GARDEN | trip at once; CO2_LIMIT at 13 h | 1,999 | both buses dark |
+| **shed_garden** | SHED_GARDEN | **STABLE** | 275 | Garden, galley, lab dark (1,596 kWh shed) |
+| **shed_dark_b** | SHED_DARK_B | **STABLE** | 226 (smallest margin) | Garden and galley dark; empty ring B fully dark (its cooling and pumps off: it cannot be brought up quickly) |
+| **shed_economy** | SHED_ECONOMY | **STABLE, degraded** | 288 (largest margin) | as shed_garden, plus humidity at RH 0.59 (above the 0.50 band, under the 0.75 limit) |
+| short_reserve | SHED_GARDEN | **RESTART_FAILED** | 149 | the cabin holds, but the plant cannot restart |
+| keep_garden | KEEP_GARDEN | late trip at 3.6 h; CO2_LIMIT at 16.5 h | 1,858 | the Garden kept lit costs both buses |
+| refused | SHED_GARDEN | STABLE | 275 | 3 refusals (switching at the bay, the overview away from the console) |
+| replay | — | identical to shed_garden | | |
+
+**The three viable families are non-dominated.** shed_garden has the best air and a mid-size reserve. shed_dark_b keeps the lab
+running but darkens ring B and has the thinnest reserve. shed_economy has the largest reserve but the wettest cabin.
+
+The failure lessons:
+- short_reserve: a stable cabin is not enough; the black start needs its energy.
+- tie_only: a tie is not a free second source.
+- keep_garden: a load that grows with heat trips later.
+
+**Watch and restart.** The watch holds the ship as declared through the 48 h window. At the window it charges the pulse bank and logs
+`restart ok`, or RESTART_FAILED if the battery is short. It then runs the 7-day projection with the plant back on (G1 and G2), BC-B
+still failed and the tie as left.
+
+Tests: `tests/test_ship_ops.py` DarkBusTests (7). They cover:
+- the outcomes;
+- physical trips;
+- the restart drawing the pulse bank;
+- the packs carrying only survival loads;
+- the viable strategies not being dominated;
+- every ledger closing;
+- an identical replay.

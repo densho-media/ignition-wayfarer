@@ -22,7 +22,8 @@ static func requested() -> String:
 
 ## LOCO-001: the start the page asked for within its experience: "deadship" (#interior-deadship: the ring start with the DS-1 training),
 ## "systems" (#interior-systems: the ring start with the SYS-001 proof), "airflow" (#interior-airflow: the ring start with the SYS-002 demo),
-## "shared-air" (#interior-shared-air: the ring start with the DS-2B training),
+## "shared-air" (#interior-shared-air: the ring start with the DS-2B training), "borrowed-air" (#interior-borrowed-air: DS-2C), "dark-bus"
+## (#interior-dark-bus: DS-3),
 ## "excursion" (#interior-excursion: the full walk from the station),
 ## "hatch" (#exterior-hatch or the older #eva: EVA Operations at the EVA hatch), or "" (the default locomotion starts).
 static func start_variant() -> String:
@@ -32,6 +33,10 @@ static func start_variant() -> String:
 	var s := String(h).to_lower() if h != null else ""
 	if s.contains("shared-air"):                 # before "airflow" and "deadship": DS-2B's own start
 		return "shared-air"
+	if s.contains("borrowed-air"):
+		return "borrowed-air"
+	if s.contains("dark-bus"):
+		return "dark-bus"
 	if s.contains("deadship"):
 		return "deadship"
 	if s.contains("airflow"):

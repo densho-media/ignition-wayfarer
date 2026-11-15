@@ -49,6 +49,13 @@ CHECKS = [
     # the watch, the debrief and replay played through the trainee's Use and Ops; WF_GODOT_SHARED_AIR.
     dict(name='shared_air', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '300000', '--', '--shared-air', '--check-shared-air'],
          scene='scenes/excursion.tscn', marker='"result":"PASS"'),
+    # Deadship DS-2C "Borrowed Air" and DS-3 "Dark Bus" (Phases 2C and 3) on the ring services model (SYS-003): every packaged
+    # reference case replays here; each default strategy is played through the trainee's Use and Ops, then the watch, debrief and replay;
+    # WF_GODOT_SHIP_OPS.
+    dict(name='borrowed_air', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '400000', '--', '--borrowed-air', '--check-ship-ops'],
+         scene='scenes/excursion.tscn', marker='"result":"PASS"'),
+    dict(name='dark_bus', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '400000', '--', '--dark-bus', '--check-ship-ops'],
+         scene='scenes/excursion.tscn', marker='"result":"PASS"'),
     # CTRL-001: the player-action registry, the first-visit controls setup, the Controls menu, conflicts, persistence, migration and
     # storage failures, on isolated profiles (needs no package); WF_GODOT_CONTROLS.
     dict(name='controls', args=['--script', 'res://scripts/check_controls.gd'], script='scripts/check_controls.gd', marker='"result":"PASS"',
