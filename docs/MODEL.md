@@ -2234,6 +2234,29 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
     and FRC families give exhausts of 30–200 km/s, far below the mission; A4, a renewable lithium-film first wall (VTX-S6, NON_CANON), only moves the heat to radiators the ship
     lacks. engineering/vertex/
     section 7 reads `references/evidence/vertex_plasma.json` (written by `python3 src/wayfarer/vertex_plasma.py --evidence`).
+- **Radiation and thermal (Engine 1.5, `vertex_radiation.py`, `[vertex_radiation]`).** Radiation physics, the true 3D exposure of the
+  engine's own meshes and the four-engine heat balance. Verdict **Outcome C** (`PROPULSION_FEASIBILITY_BLOCKED`, `THERMAL_CLOSURE_FAILED`):
+  no conventional architecture closes; the missing capability is bounded. The engine, M0-NOMINAL and the 1.2 geometry are unchanged.
+  - *Audit:* 1.4 booked the whole non-jet 21 % of the yield as X-rays, gave neutrons the photon sky and full absorption, and used an
+    axisymmetric screen in which the eight cage longerons were a surface of revolution.
+  - *Sources:* the ledger E = charged + photons + gamma + neutrons closes with nothing unassigned. Photons are 12.5 % (hot-ion R2-A), 21.7 %
+    (thermal R2-A) and 84.8 % (R2-B, a uniform expanding burn of the implied 6.6 mg target, ρR 97 g/cm², which runs away to about 630 keV)
+    of the yield, mostly 30–1000 keV; neutrons 2.9–4.8 % (2.45 MeV D-D, 14.1 MeV bred D-T); 16.4 MeV gammas below 0.01 %. The 1.4 share is
+    inside the bracket (UNDETERMINED), but the design jet's 78 % fits the yield only in the hot-ion case.
+  - *Geometry:* rays through the 263 real part meshes intercept 62 % of the sky (65,536 rays; mesh refinement −0.2 %), not 87 %. In the
+    cluster, neighbours take 0.3 %, radiator blades 0.14 % directly and 3.6 % behind the first part; the cluster frame 6.7 %.
+  - *Transport and loads:* Compton-only deposition (lower bound) to full absorption (upper bound): the engine absorbs 6.8–62 % of the
+    NOMINAL photon energy. Peak first-hit fluxes are 1–5×10⁹ W/m² at the LOW source, hundreds of times a tungsten plasma-facing limit;
+    coils at 20 K absorb 16–242 GW per engine. Photoelectric and pair data and Geant4/OpenMC were not available (bracketed, not run).
+  - *Thermal:* the 14.4 GW hot radiator would need 854× its capacity for four engines' radiation alone at the most favourable bounds
+    (12.3 TW); with 1.4's charged and eddy heat up to about 4×10⁵×. T-REG options do not help; the engine's own heat capacity holds about
+    0.2 s of that heat (storage is not closure).
+  - *Candidates:* opening the structure, larger loops and moving the burn point (A1–A3) reduce interception to 38–58 %; the best bound
+    (no cage, burn 6 m aft, coils perfectly shielded) still needs 18× the radiator. A5 fits at 0.05 % of design power. A pusher standoff
+    closes only as a different engine (shield 470 m from a 37 m ship disc at NOMINAL).
+  - *Gap (SR-1..4, Breakthrough Lab requirement):* photons at most 0.59 % of the yield, against 12.5–85 % (21–144×); the lowest point of the
+    plasma scan (Ti 150 keV, Te/Ti 0.1) is still 8× above. engineering/vertex/ section 8 reads `references/evidence/vertex_radiation.json`
+    (written by `python3 src/wayfarer/vertex_radiation.py --evidence`, about 30 s).
 
 ## Limits
 
