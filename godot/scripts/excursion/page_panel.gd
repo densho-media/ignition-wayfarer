@@ -1,13 +1,13 @@
 class_name WfPagePanel
 extends RefCounted
 ## Where a training page (a learning station, the Deadship tutorial) sits on any screen. One layout rule for every page, no separate
-## mobile pages. Desktop: the right column, as before. Phone or tablet (WfInput.compact): the free band between the page's top row
+## mobile pages. Desktop: the right column, as before, with the type stepped down when a page is taller than the window. Phone or tablet (WfInput.compact): the free band between the page's top row
 ## (Exit, Full screen, Map, ?) and the lowest controls (the touch buttons and the stick), across the width inside the safe area, with
 ## smaller type stepped down until the text fits; the scene hides its goal, prompt and map while a page is open (`open_any`), so the
 ## page covers no touch control and nothing covers the page. Closing the page brings the HUD back on the next frame.
 
 const MARGIN := 8.0
-const DESKTOP_FONT := [15, 16]
+const DESKTOP_FONTS := [[15, 16], [14, 15], [13, 14], [12, 13]]   # stepped down only when a page is taller than a small window
 const COMPACT_FONTS := [[13, 14], [12, 13], [11, 12]]
 
 ## The page's place and type for this screen. desktop_w: the text width on a desktop.
@@ -15,10 +15,13 @@ static func place(panel: PanelContainer, text: RichTextLabel, sz: Vector2, deskt
 	if not panel.visible:
 		return
 	if not WfInput.compact():
-		_font(text, DESKTOP_FONT)
-		text.custom_minimum_size.x = desktop_w
-		panel.custom_minimum_size = Vector2.ZERO
-		panel.reset_size()
+		for f in DESKTOP_FONTS:
+			_font(text, f)
+			text.custom_minimum_size.x = desktop_w
+			panel.custom_minimum_size = Vector2.ZERO
+			panel.reset_size()
+			if panel.size.y <= sz.y - 36.0:
+				break
 		panel.position = Vector2(sz.x - panel.size.x - 18.0, clampf(sz.y - panel.size.y - 18.0, 18.0, 262.0))   # a tall page moves up
 		return
 	var band := free_band(sz, panel)

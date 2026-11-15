@@ -1998,6 +1998,10 @@ func _update_hud() -> void:
 	_page_hud()
 	hud_check.text = "\n".join(lines_out)
 	hud_prompt.text = WfKeyText.rich(_prompt_text())
+	if not WfInput.compact():                     # a small window: the checklist's tail (the hint) gives way to the prompt below it
+		var room := hud_prompt.position.y - 8.0 - hud_check.position.y - 12.0
+		var lh := float(hud_check.get_line_height()) + float(hud_check.get_theme_constant("line_spacing"))
+		hud_check.max_lines_visible = maxi(int(room / maxf(lh, 1.0)) - 1, 1)     # one line spare: the outline and the box margins
 	if WfInput.compact():
 		hud_prompt.position.y = hud_goal.position.y + hud_goal.size.y + 6.0     # the goal's height follows its text
 	var g := actor.field_now.length() / 9.80665
