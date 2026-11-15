@@ -1526,7 +1526,7 @@ func _debrief_lines(small: bool) -> Array:
 		var led := 0.0
 		for k in d["ledgers"]:
 			led = maxf(led, absf(float(d["ledgers"][k])))
-		out.append("[color=#9fb4d0]Every inventory closes (water, CO2, cabin heat, coolant, battery, packs, energy served, parts): largest error %.1e.[/color]" % led)
+		out.append("[color=#9fb4d0]Every inventory closes (water, CO2, cabin heat, coolant, battery, packs, energy served, parts): largest error %s.[/color]" % String.num_scientific(snappedf(led, 1e-15)))
 	elif deb_page == 2:
 		out.append("[b]Crew limit-hours (where each person lived; habitability limits, not injury thresholds)[/b]")
 		var vv: Dictionary = d["watch"]["verdict"]

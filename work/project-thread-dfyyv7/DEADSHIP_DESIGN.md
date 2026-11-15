@@ -3076,3 +3076,93 @@ Tests: `tests/test_ship_ops.py` DarkBusTests (7). They cover:
 - the viable strategies not being dominated;
 - every ledger closing;
 - an identical replay.
+
+## 43. Source and assumption inventory (Phases 2C and 3)
+
+**Spec values used as published (no canon changed).**
+
+| Value | Key | Status |
+| --- | --- | --- |
+| Cabin pressure, CO₂ target 0.3 % and limit 0.5 %, RH band 0.40–0.50 | habitat.atmosphere | WORKING |
+| Ring A gas volume 466.4 m³ (nine compartments) | ring_air topology (SYS-002) | derived |
+| Cold loop 320 K; heat pump 0.5 of Carnot; separation rule | thermal.loops.cold, .architecture, .separation_rule | WORKING, WORKING, BASELINE |
+| Main battery 2 MWh usable | power.storage.main_battery.usable_energy_Wh | WORKING |
+| Pulse bank 200 kWh, charged from the battery | power.storage.pulse_bank.energy_Wh, charge_sources | WORKING |
+| Survival reserve loads and their isolation | power.storage.survival_reserve.loads | BASELINE |
+| CO₂ 1.0 kg per person per day; CO₂ unit removal rate | SYS-001 (owner value), cabin_air | as SYS-001 |
+
+**External references (applied as published, not canon).**
+- NASA BVAD 2022 (NASA/TP-2015-218570/REV2): sensible heat 6.308 MJ/CM-d, vapour 2.27 kg/CM-d, cabin 291–300 K, RH 25–75 %.
+- Saturation pressure by Alduchov–Eskridge (1996).
+- The ISS CDRA, CCAA and TCCS classes, as the scale for powers and flows.
+
+**PROTOTYPE (training and architecture choices; each is flagged in `ring_services.PROTOTYPE`, `EQUIPMENT` or the scenario TOML).**
+- **Cabin and coil:**
+  - the cabin heat capacity, 4.4 MJ/K;
+  - the CHX air flow (1 m³/s), its UA (1.5 kW/K) and the coolant flow (0.2 kg/s per pump);
+  - the supply setpoints (4 °C and economy 12 °C), the control band (2 K) and the coil minimum (15 %);
+  - the heat pump capacity, 16 kW.
+- **Electrical:**
+  - the architecture (G1/G2 per bus, BC-A/BC-B, the tie, trip on overload);
+  - the generator rating, 80 kW (power.rating OPEN);
+  - the converter rating, 40 kW;
+  - the packs, 8 kWh per ring (survival_reserve.capacity OPEN);
+  - the 15 kW per bus of lumped non-habitat ship load (the whole-ship load is OPEN).
+- **Equipment:** the twelve loads' powers and bus assignments, and the three part families (the common ECLSS fan is a commonality
+  choice, not a sourced fact).
+- **Restart reserve.** The fusion restart is taken to need the pulse bank's full 200 kWh charge. The ignition energy itself is OPEN
+  (power.storage.pulse_bank.ignition_energy).
+- **Scenario values:**
+  - the faults;
+  - the setback state (it is the model's own equilibrium);
+  - the crossing time (15 min) and fetch work (10 min);
+  - remove and install (5 min each);
+  - the time scales (×30 live, ×1800 watch);
+  - the 48 h restart window;
+  - the pair layout.
+
+**Invented for balance: none.** No resource cost was set to make a strategy win or lose. The scenarios' outcomes come from the model
+at its PROTOTYPE values. Only ring B's setback was chosen to make relocation cost time, and it is the model's own coast equilibrium,
+not a tuned number.
+
+**Not invented.** No First Ignition accident detail, no medical injury (limits are habitability limits, reported in crew-hours), no
+story events.
+
+## 44. Limitations
+
+1. **Well-mixed rings.** SYS-003 does not resolve compartments. DS-2B's compartment air (SYS-002) and SYS-003 do not run together yet.
+2. **No passive hull loss.** The cabin's only heat sink is the CHX. A cabin without cooling therefore climbs without bound, and peaks
+   more than 8 K beyond the limit are flagged `beyond_validity`, not reported as temperatures to believe. The equipment has no thermal
+   cutouts.
+3. **The survival packs do not recharge** within a scenario, and the battery is not recharged by the plant after the restart.
+4. **The walk stays in ring A** when the crew relocates. The trainee then can use only the intercom. Ring B has no walkable deck in
+   the package.
+5. **Abstract crew.** Pairs B and C are a place and an order, not characters. There is no fatigue, no injury and no error.
+6. **One fault set per scenario**, fixed at the start. There are no random or later faults in the shipped scenarios (the machine
+   supports `later_faults`).
+7. **The restart is a single check** (the battery holds the pulse bank's charge or it does not). There is no ignition model.
+8. **Watch real time.** The 24 h watch takes about 50 s and the 48 h DS-3 window about 1.6 min at ×1800 on a desktop. Phones are
+   untested.
+
+## 45. Roadmap
+
+| Phase | Status |
+| --- | --- |
+| 0 Minimal engineering integration proof | VALIDATED; the owner approved it as the base for Phase 1 (2026-11-13) |
+| 1 DS-1 "Scrubber" tutorial | PLAYABLE (finalized 2026-11-14); awaiting owner acceptance |
+| 2A Atmospheric connectivity | PLAYABLE (finalized 2026-11-14); awaiting owner acceptance |
+| SYS-002 v2 (CO₂ and NH₃) | VALIDATED; OWNER ACCEPTED (2026-11-14) |
+| 2B "Shared Air" | PLAYABLE (finalized 2026-11-15, §36); awaiting owner playtest |
+| 2C gate G1 (finite TCC bed) | RESEARCHED; gate FAILED as a gameplay generator (§39); the model stays an option |
+| SYS-003 ring services | VALIDATED (Python, Godot parity) |
+| 2C "Borrowed Air" | PLAYABLE (§41) |
+| 3 "Dark Bus" (power, thermal, atmosphere) | PLAYABLE (§42) |
+| 4 Competitive Deadship and Hullrun | DESIGNED only; not started (excluded by the brief) |
+| 5 Narrative survival | DESIGNED only; not started (excluded by the brief) |
+
+**Next steps, each needing the owner:**
+1. Playtest 2B, 2C and 3, and accept or change their PROTOTYPE values.
+2. Source the survival reserve's capacity and the whole-ship load, so that Dark Bus's margins become canon-backed.
+3. Optionally, add passive hull loss and equipment cutouts to SYS-003 (limitation 2).
+4. Optionally, couple SYS-002's compartments with SYS-003, for a scenario that needs both.
+5. Phase 4 and 5 only on a separate brief.
