@@ -1091,7 +1091,7 @@ func _items() -> Array:
 				if phase == "LIVE" and not inspected.has(e):
 					out.append(["inspect", "Inspect the %s" % TITLES[e], e])
 				var iso := bool(st["ring"]["A"]["isolated"][e])
-				out.append(["isolate", "%s: %s -> %s" % [TITLES[e].capitalize(), "isolated" if iso else "in service", "return to service" if iso else "isolate"], e, not iso])
+				out.append(["isolate", "%s: %s -> %s" % [(str(TITLES[e]).left(1).to_upper() + str(TITLES[e]).substr(1)), "isolated" if iso else "in service", "return to service" if iso else "isolate"], e, not iso])
 				for sl in e_d["slots"]:
 					var here = _part_at("A." + sl)
 					if here != null:
