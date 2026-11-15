@@ -323,7 +323,8 @@ Higher levels reference lower ones as **linked collection instances with relativ
 
 ## Runtime benchmark protocol
 
-Profile before optimizing, and compare like with like (Vertex Engine 1.2 brief, section 9).
+Profile before optimizing, and compare like with like (Vertex Engine 1.2 brief, section 9). docs/WEB_GRAPHICS.md section 9 extends this protocol to the
+Godot experiences, real devices and the HW / EMU / SW evidence classes.
 
 - **Inputs.** Two sites built by `workflow.py web --pipeline-run <run>` from the two states being compared, served locally the same way,
   on the same machine. Download sizes come from the built release (`release.json`) and, for the deployed site, from the "Verify the live

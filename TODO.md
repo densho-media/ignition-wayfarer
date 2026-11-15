@@ -166,6 +166,58 @@ close-up, regression check, MODEL/TODO and Model Status update.
   flange per unit. Left: the ECLSS units' masses, volumes and powers beyond electrolysis; repair stations beyond the benches wait for G03's
   equipment release (no machine list is selected, so a station would be a guess).
 
+## W — Web Graphics Engineering track (owner brief 2026-11-15, persistent)
+
+The best practical combination of visual fidelity, physical plausibility, browser compatibility and rendering performance for the
+three web experiences. Rules: AGENTS.md "Web Graphics Engineering"; technical standard, renderer limits, budgets and benchmark
+method: [docs/WEB_GRAPHICS.md](docs/WEB_GRAPHICS.md). This section is the only tracker for graphics work. Optional, outside WF-R1.
+One bounded GFX task per session, each with its own baseline, change, comparison and owner review; a phase starts only on the owner's
+go. Evidence classes: HW (real device), EMU (emulation), SW (software WebGL/llvmpipe, relative only). No real-hardware number exists yet.
+
+- [ ] **GFX-1 — Performance baseline. READY (GFX-0 rules approved 2026-11-15); keep it focused and lightweight.** Reuse the viewer `stats`/`?diag`,
+  `web_check.py` metrics, `profile_views.gd` and the IMPLEMENTATION.md benchmark protocol; add no benchmark framework. SW numbers
+  are for reproducibility and relative comparison only, never a statement of real-GPU performance.
+  - 1A Viewer SW baseline: views B1–B3 (WEB_GRAPHICS §9.2) on current `main`, three runs each, recorded in
+    `references/evidence/gfx_baseline.json`; texture and material counts of the GLB included.
+  - 1B Godot camera marks: fixed, repeatable B4–B6 positions or scripted paths (walk corridor, ring A sector, EVA drone/hatch/radiator/
+    cluster), and `profile_views.gd` views for the EVA scene; SW baseline of each.
+  - 1C Web frame-time readout for the Godot build (a `?diag`-style overlay, presentation only), so the owner can read the same numbers
+    on a device as on the viewer.
+  - 1D Owner HW procedure: one page with the URLs, views, resolutions and the record of WEB_GRAPHICS §9.3; the owner's desktop and phone
+    results recorded as HW. **PENDING (HW)** until then; this absorbs the real-hardware items of P05, P4 S11, FSH and WEB-003/004.
+  - **Done when:** every B view has a SW record and a written HW procedure; HW rows exist or are marked pending.
+- [ ] **GFX-2 — Viewer improvements in the existing renderer. AFTER GFX-1A.** One experiment each: baseline, one change, comparison,
+  adopt only if better.
+  - 2A Pixel density: review `min(devicePixelRatio, 2)`; evaluate a cap or preset with input coordinates, picking, canvas size and
+    resize correct.
+  - 2B Render on demand: draw only while the camera moves (damping included), the drive animates, an appearance or panel state changes or
+    the canvas resizes; idle stops drawing. Keep `stats` meaningful (measure only drawn frames).
+  - 2C Depth: bounded near/far per framing, then `reverseDepthBuffer` where `EXT_clip_control` exists, against logarithmic depth;
+    verify overlapping shells, distant parts, picking and the ghost, hologram, outline and shield shaders. Keep log depth as the fallback.
+- [ ] **GFX-3 — High-fidelity reference prototype. AFTER GFX-1; OWNER review before it spreads.** One interior corridor (spine or a ring A
+  sector) and one exterior engineering assembly (a radiator root or the propulsion cluster), in `work/<task>/`, in the Godot web build:
+  PMDS appearance consistency, roughness and normal detail, restrained wear, practical and emissive light, baked indirect light where
+  static (ring-local only on rotating parts), reflection probes, ambient contrast, shadow quality, exposure and colour, hierarchy.
+  Before/after stills and HW frame time where available. No new material selections or engineering assumptions as canon.
+- [ ] **GFX-4 — Draw calls and geometry. AFTER GFX-1A.** Viewer instancing or `BatchedMesh` for shared geometry with a per-instance ID
+  map (selection, hide, highlight, holograms, metadata intact); Godot MultiMesh or merged static detail where nodes are never picked or
+  moved alone; generated render LODs and visibility ranges only after a benchmark (WEB_GRAPHICS §6.1). Includes the radiator blade
+  lineage from P05 if instancing needs it.
+- [ ] **GFX-5 — Godot scene optimization. AFTER GFX-1B and GFX-3.** Interior and exterior separately: the 8-lights-per-mesh limit against
+  the nearest-16 lamps, LightmapGI (bake needs a RenderingDevice machine) and probes, shadow budget, material and shader cost, culling,
+  instance organisation, LOD and visibility ranges, texture memory, transparency and overdraw, camera clip distances (24-bit depth, no
+  reverse Z). Physics, traversal, gravity transitions, mechanisms, EVA and controls unchanged; checked in the actual web export.
+- [ ] **GFX-6 — Adaptive quality profiles. AFTER GFX-2 and GFX-5.** High/Medium/Low with a manual override, stable automatic choice,
+  stored apart from the control profile; generalizes the MOB-001 touch scale (and its P05 tuning) rather than adding a second one.
+- [ ] **GFX-7 — Assets and loading. 7A READY after GFX-1A, the rest AFTER GFX-3.**
+  - 7A The viewer download is 11.38 MB of its 12 MB budget (Vertex 1.2): Draco quantization, meshopt or selective loading of
+    inspection detail, measured, before any further geometry pushes it over (never raise the budget silently).
+  - 7B Texture budgets, mipmaps and formats (S3TC desktop today; ETC2/ASTC or KTX2 for phones) once textures exist.
+  - 7C Cache and wasm start-up cost; reusable material assets; generated render LODs. Deterministic, content-named outputs kept.
+- [ ] **GFX-8 — Cross-browser and devices. AFTER GFX-1D, continuous.** Chromium, Firefox, Safari where accessible, desktop discrete and
+  integrated GPUs, Android, iOS; record unsupported, untested and failing separately (absorbs the Firefox/Safari item of P05).
+  8D WebGPU and other renderers as separate research only, never a production requirement.
+
 ## How to work through this plan
 
 - A01–A03 are done (capture 2026-10-16, full pipeline and runtime export PASS). **Primary focus: S** (the spacecraft). Select one step per implementation slice; the plan itself does not start all steps at once.
@@ -559,9 +611,7 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
 - [ ] **P05 — Website follow-ups (WEB-002). Optional, outside WF-R1.** The site, play build, checks, deploy and verify exist (rollback = revert on main) (docs/wayfarer-web-experience-plan.md); the first deploy (`b1db258`) passed the live verify job. Owner's order:
   - Explore Exterior follow-ups (the two homepage experiences, 2026-11-07): an in-game "back to the hatch" assist and a clearer end-of-session card; the canonical suit and drone
     GLBs in the web package (proxies today); Interior: a free-roam mode switch that hides the guided goal once a ring is done.
-  - Measure on real hardware: frame rates on real GPUs (viewer and Godot, desktop and phone); all numbers so far are software
-    rendering. Record them in the plan §5–6.
-  - Firefox (then Safari on macOS and iOS): test by hand, then add to the browser check where a headless build exists.
+  - Real-hardware frame rates and Firefox/Safari coverage: tracked in section W (GFX-1D, GFX-8).
   - Navigator glyphs ▶ ◆ ○ render as boxes on Web: ship a font with them or use drawn markers (Godot presentation only).
   - Build time: the site walk (5-8 min under software WebGL) is the longest step.
   - Touch (MOB-001, branch `claude/mobile-touch-controls`, docs/wayfarer-mobile-controls-plan.md): test on a real Android phone

@@ -24,6 +24,17 @@ and keep the full pipeline as the pre-commit gate. Use `runtime-check` for
 Godot-only work and `runtime-export` when it reports STALE. Keep Python and
 physical-invariant coverage; report measured savings rather than estimates.
 
+## Web graphics
+
+Apply AGENTS.md "Web Graphics Engineering". Before graphics-related work (Blender visual detail and export, Godot
+scenes and rendering, the three.js viewer, materials, lighting, textures and shaders, browser delivery and loading,
+graphics performance, or the CI and runtime checks around them), read TODO section W for the current state and the
+relevant section of `docs/WEB_GRAPHICS.md`; `.claude/rules/web-graphics.md` is the step list. Continue from the last
+accepted GFX task instead of restarting the roadmap, take one GFX task per session unless the owner asks for more, and
+never start the next phase without the owner's go. Record measurements with their evidence class (HW, EMU, SW); the
+cloud container renders in software, so its frame times are relative only. When an ordinary task touches graphics,
+apply the rules to what it touches and note any later opportunity in TODO W rather than widening the task.
+
 ## Drive delegation
 
 Use `wayfarer-drive-reader` (Sonnet) for substantial Drive retrieval and owner-row

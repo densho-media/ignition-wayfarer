@@ -277,9 +277,42 @@ count or mesh detail, determine when calculation is needed.
 - Current export IDs identify static placements. Add semantic mechanism bindings
   before interaction. Do not derive physics from visual meshes or proxy cages.
 
+## Web Graphics Engineering
+
+Visual fidelity and rendering performance in the browser are one permanent discipline. `docs/WEB_GRAPHICS.md` is the
+technical standard (renderer limits, budgets, benchmark method); TODO section W is its only task tracker. Read the
+standard's relevant section before changing Blender visual detail or export, Godot scenes or rendering, the three.js
+viewer, materials, lighting, textures or shaders, browser delivery, or graphics CI.
+
+- **Fidelity and performance are equally important.** State what a graphical change adds to the image and what it costs
+  (frame time, memory, download, complexity) against the experience's budget. A change need not raise FPS to succeed: a
+  meaningful visual improvement may justify extra rendering cost when it is reviewed, documented and stays within the
+  budget. Evaluate and report performance improvements and visual-quality improvements separately. Prefer measured,
+  meaningful gains over speculative optimization.
+- **Engineering geometry stays authoritative.** Drive → parameters → shared formulas → Blender → exported representations
+  → Godot / three.js. Rendering representations (shared meshes, instances, LODs, batches, baked light) are generated from
+  it and never change dimensions, constraints, component relationships, clearances, routes, colliders, mechanisms, IDs or
+  metadata.
+- **Perceived quality first.** Materials (PMDS appearances only), light, shadow, contrast and composition before polygon
+  count. Physical material properties stay in PMDS; graphics changes only their appearance. No effect the physics or
+  culture does not explain (HSFP).
+- **Browser constraints are first-class.** GitHub Pages, Godot Compatibility on WebGL 2 (single-threaded export),
+  three.js for the viewer. A technique that works in Blender or native Forward+ is not assumed in the browser. No renderer
+  or engine migration without an evidence-backed owner decision.
+- **Optimize by context.** The engineering viewer, the interior walk and the exterior EVA share one ship and have their own
+  runtime assets, profiles and budgets.
+- **Measure before and after** on a comparable view, resolution and machine. Label real-hardware, emulated and
+  software-rendered numbers and never present the last two as device performance (software benchmarks are for
+  reproducibility and relative comparison only); never invent a number. A visual review
+  accompanies every performance claim.
+- **Incremental and reversible.** One controlled change per task with a working baseline; no new frameworks, custom
+  renderers or CI services without need. A change without measured benefit is reverted or moved to `lab/` with its findings.
+  An ordinary modeling or gameplay task applies these rules only to what it touches and adds no graphics work of its own.
+
 ## Incremental optimization
 
-Apply these guidelines when the current task touches the relevant geometry, export or runtime code.
+Apply these guidelines when the current task touches the relevant geometry, export or runtime code; they are the
+working defaults of Web Graphics Engineering above (docs/WEB_GRAPHICS.md section 7).
 Keep the next visible result as the priority; these are defaults for ongoing work, not a separate refactor backlog.
 
 - Make the smallest useful improvement in the area already being changed. Defer unrelated cleanup, framework

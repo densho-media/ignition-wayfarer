@@ -249,4 +249,5 @@ toolchains: 18.7 min for the build job (pipeline 51 s, export and Godot 183 s, b
 - [x] `release.json` identifies every file; the review page shows it.
 - [x] Rollback is documented and automated.
 - [ ] The live deployment is verified by the verify job after the owner approves the squash onto `main`.
-- [ ] Firefox, Safari, phones running the Godot build, and real-GPU frame rates: not yet tested (TODO P05).
+- [ ] Firefox, Safari, phones running the Godot build, and real-GPU frame rates: not yet tested (TODO W, GFX-1 and GFX-8;
+  docs/WEB_GRAPHICS.md).
