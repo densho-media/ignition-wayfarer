@@ -23,7 +23,7 @@ model. Research only, NOT canon.
   literature precedents with their claims (PROPONENT_CLAIM, secondary sources named).
 - `ext01.py`: one energy and momentum ledger per joule of pulse yield for each concept; the mission (the operating point's rocket
   equation with tank growth, thrust from the burn-time share of the LOCKED 6 y mission, the canon radiator's 10.8 GW hot budget); a
-  full-factorial search over the brackets (760,000 cases, about 35 s on 4 cores); the assumption ladder; `results/ext01.json` and the
+  full-factorial search over the brackets (734,832 cases, about 35 s on 4 cores); the assumption ladder; `results/ext01.json` and the
   figures. `python3 lab/studies/external-pulse/ext01.py`.
 - `figures.py`: the two SVG figures. `tests/test_ext01.py`: conservation, the capture bounds, the mission reproduction, the evidence
   (`python3 lab/studies/external-pulse/tests/test_ext01.py`, not CI).
