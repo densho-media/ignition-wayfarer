@@ -586,6 +586,9 @@ func decisions() -> Array:
 	var out := []
 	for e in log:
 		if str(e[1]) in keep and str(e[3]) == "":
+			# A reconnection time stepped through several values in a row counts once, as its last value.
+			if str(e[1]) == "schedule" and not out.is_empty() and str(out[-1][1]) == "schedule":
+				out.pop_back()
 			out.append([float(e[0]) / H, str(e[1]), e[2]])
 	return out
 

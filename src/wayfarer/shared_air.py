@@ -448,10 +448,17 @@ class Run:
 
     def decisions(self):
         """What the trainee decided and what the ship did on its own account, in order: [t_h, kind, args] (refused actions and the
-        trainee's own steps left out; the debrief counts refusals separately)."""
+        trainee's own steps left out; the debrief counts refusals separately). A reconnection time stepped through several values in a
+        row counts once, as its last value."""
         keep = ('contain_start', 'contained', 'door', 'damper', 'vent', 'tcc', 'removal', 'order', 'hold', 'schedule', 'watch', 'reconnect',
                 'restore', 'stopped')
-        return [[e[0]/H, e[1], e[2]] for e in self.log if e[1] in keep and not e[3]]
+        out = []
+        for e in self.log:
+            if e[1] in keep and not e[3]:
+                if e[1] == 'schedule' and out and out[-1][1] == 'schedule':
+                    out.pop()
+                out.append([e[0]/H, e[1], e[2]])
+        return out
 
     def ledgers(self):
         return dict(co2_kg=ring_air.ledger_error(self.st), nh3_kg=ring_air.trace_ledger_error(self.st), release_kg=ring_air.release_ledger_error(self.st))
