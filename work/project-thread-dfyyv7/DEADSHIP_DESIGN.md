@@ -2837,8 +2837,7 @@ build reads it.
 - The flight bed's segment profile after 2,595 h, and the moist-gas capacities at 5 ppm (ICES-2018-253, NTRS 20180004945).
 - Humidity moves capacity by tens of percent in either direction. It is carried as the capacity range (216 g against 100 g), not as a
   separate law.
-- ntrs.nasa.gov is unreachable from the container, so the figures come from extracts. They need a direct reading before any value
-  becomes canon.
+- The NTRS documents were downloaded directly for this study (§37 had only search extracts). They are external references, not canon.
 
 **Result.** The four Shared Air strategy families (isolate with restore, isolate without a plan, purge, separate with a reconnection
 at 4 h) were rerun at 0, 90, 98 and 99.5 % bed loading, for both capacities.
@@ -3166,3 +3165,166 @@ story events.
 3. Optionally, add passive hull loss and equipment cutouts to SYS-003 (limitation 2).
 4. Optionally, couple SYS-002's compartments with SYS-003, for a scenario that needs both.
 5. Phase 4 and 5 only on a separate brief.
+
+## 46. Validation (Phases 2C and 3)
+
+All runs are on `claude/project-thread-dfyyv7`. The site was built from ce0ff4d, and its browser checks ran on that build. The one
+later change, 7a1924d, alters a page label only; it was rechecked headless.
+
+**Reference and tests.**
+
+| Check | Command | Result |
+| --- | --- | --- |
+| Python tests | `python3 -m unittest discover -s tests -k ship_ops -k ring_services` | 24/24 PASS |
+| Python reference outcomes | `python3 src/wayfarer/ship_ops.py ds2c` and `ds3` | 11 and 9 cases as §41.3 and §42.3; every ledger closes; the replays are identical |
+| Godot model proof at load | `WfRingServices.load_package` | PASS at relative 10⁻⁹; 120 ms native, 136–224 ms in software Chrome |
+| Godot scenario parity | `--check-ship-ops` (native: every case) | DS-2C 11/11, DS-3 9/9; checkpoints, verdicts, families, metrics, trips and restart |
+
+**Headless strategy plays.** Every action goes through Use and Ops, followed by the watch, the four debrief pages and a replay compared
+with the start state.
+
+| Strategy | Family, verdict | Result |
+| --- | --- | --- |
+| borrow_fan_shed (default) | BORROW_FAN, STABLE | PASS |
+| borrow_fan_pump | BORROW_FAN_PUMP, STABLE | PASS |
+| relocate | RELOCATE, STABLE | PASS |
+| cannibalize | CANNIBALIZE, HEAT_LIMIT | PASS (failure played) |
+| shed_garden (default) | SHED_GARDEN, STABLE | PASS |
+| shed_dark_b | SHED_DARK_B, STABLE | PASS |
+| shed_economy | SHED_ECONOMY, STABLE (degraded) | PASS |
+| keep_garden | KEEP_GARDEN, CO2_LIMIT (late trip) | PASS (failure played) |
+| short_reserve | SHED_GARDEN, RESTART_FAILED | PASS (failure played) |
+
+**Every play also checks:**
+- a page stops the clock;
+- refusals change nothing;
+- a tie closed with every load on trips;
+- the watch holds the declared state;
+- every ledger closes in the debrief;
+- the replay restarts from the exact start.
+
+**`runtime-export`.** PASS, 14 Godot checks, `borrowed_air` and `dark_bus` included (run 20261115T150934789357Z).
+
+**Browser.** Chrome for Testing 153, SwiftShader software WebGL, headless; every action is answered by the player's key or an
+on-screen touch button (`web_check.py --part training`).
+
+| Run | Inputs | Result |
+| --- | --- | --- |
+| borrowed-air | keys 1280×720; touch on an emulated phone (landscape) | PASS, PASS (192 answered actions each) |
+| borrowed-air `--rotate` | phone turned from landscape to portrait mid-run | PASS |
+| borrowed-air `--desktop 1024x600` | keys in a small window | PASS |
+| borrowed-air-pump, -relocate, -cannibalize | keys | PASS ×3 |
+| dark-bus | keys; touch on an emulated phone | PASS, PASS |
+| dark-bus `--desktop 1024x600` | keys in a small window | PASS |
+| dark-bus-dark-b, -economy, -keep-garden, -short | keys | PASS ×4 |
+
+**What these runs are, and are not.**
+- **Emulation, not hardware.** Phones were emulated in desktop Chrome (touch events, viewport, device scale). No real phone, tablet,
+  Firefox or Safari was used.
+- **Gamepad not run.** The labels show the pad buttons (X Use, Y Ops), but no pad was driven in these runs.
+
+**Performance (measured in the runs above).**
+- Ship-ops frame cost, the model and UI work per frame:
+  - live 1.8–9.4 ms;
+  - watch 3.1–10.3 ms;
+  - projection 6.9–11.1 ms (the worst frame is 11.1 ms, short_reserve's projection);
+  - headless native, worst frame 6.6–14.6 ms.
+- Real time:
+  - the 24 h DS-2C watch takes 42–45 s, and the DS-3 watch to 48 h takes 59 s;
+  - the 7-day projection takes 1.3–2.5 s;
+  - verifying one reference case at load takes 33–39 ms (DS-3) and 150–220 ms (DS-2C).
+- Walking frame rate was 60 fps in software WebGL. During a still's capture the sampled rate falls below 1 fps; this artefact is also
+  seen in the Phase 2A/2B logs.
+
+**Download budget.** `play/` is 79.27 MB of the 90 MB budget, leaving 10.7 MB headroom (at least 5 MB required). The three new
+JSON packages are 0.18 MB uncompressed.
+
+**Existing experiences.** Both new scenarios are opt-in: they start only from `#interior-borrowed-air` or `#interior-dark-bus`, or from
+`--borrowed-air` or `--dark-bus`. Every other start is unchanged; regression results are below.
+
+| Regression (same build) | Result |
+| --- | --- |
+| `--part main` (start page, viewer, Explore Interior and Exterior, controls, switching, phone) | PASS 67/67 |
+| `--part walk` (the touch walk) | PASS 8/8 |
+| Shared Air (DS-2B), Scrubber (DS-1), airflow (2A), systems (Phase 0), keys | PASS ×4 |
+
+## 47. Playtest guide (2C and 3)
+
+Open the site's `play/` with `#interior-borrowed-air` or `#interior-dark-bus`. Locally: `python3 tools/workflow.py web --native --out
+<dir>` and serve `<dir>`. After a squash and deploy, the live site takes the same hashes.
+
+**Controls.**
+
+| Action | Keys | Touch | Pad |
+| --- | --- | --- | --- |
+| Use: open a page at a bay or console; step through items | E | Use | X |
+| Ops: do the selected item; or the intercom away from equipment | O | Ops | Y |
+| Map | M | Map | — |
+
+Any open page stops the clock.
+
+**Borrowed Air.**
+1. Walk to sector 3's ECLSS bay and inspect the machines.
+2. Open the intercom to send pair B for ring B's CO₂ fan.
+3. Shed the Garden and the lab at sector 2's console.
+4. Back at the bay: isolate the CO₂ unit, remove the failed fan, stow it, take the new fan, install it, and return the unit to service.
+5. Declare the watch.
+
+Then try:
+- fetching the pump too;
+- warming ring B (CO₂ unit, lights and Garden on, heat pump off), then moving everyone;
+- moving ring A's own heat exchanger fan;
+- moving into ring B cold.
+
+**Dark Bus.**
+1. At the console, read bus B and the packs.
+2. Shed the Garden, galley and lab.
+3. Close the tie, then reset both breakers.
+4. Declare the watch.
+
+Then try:
+- the tie with everything on;
+- darkening ring B instead of the lab;
+- the economy setpoint;
+- keeping the Garden lit;
+- shedding too little (the restart fails).
+
+**Questions for the owner.**
+1. Does each family feel like a real trade?
+2. Are the costs readable on the debrief?
+3. Is ×30 live time right?
+4. Do the PROTOTYPE electrical values (8 kWh packs, 40 kW converters, 80 kW generators, the 15 kW ship load per bus) and the restart
+   reserve (the full 200 kWh bank) stand, or what are the sourced values?
+
+## 48. Handoff (Phases 2C and 3)
+
+**Commits on `claude/project-thread-dfyyv7`.** Nothing was squashed, merged or deployed.
+
+| Commit | Change |
+| --- | --- |
+| 5d4218b | G1 TCC bed gate study; SYS-003 `ring_services.py`; the `ship_ops.py` machine; DS-2C scenario; tests |
+| d758d0f | DS-3 "Dark Bus" scenario; economy setpoint; pulse-bank restart; tests |
+| 1b0b630 | Godot mirrors (`ring_services.gd`, `ship_ops.gd`), `check_ship_ops.gd`, the export of the three packages, runtime and browser checks, docs §39–§42 |
+| ce0ff4d | The debrief ledger line (GDScript has no `%e`), script uids, §43–§45 |
+| 7a1924d | Bay item titles |
+| The docs commit after 7a1924d | §46–§48, MODEL, TODO |
+
+**Gate summary.**
+
+| Gate | Result |
+| --- | --- |
+| G1: finite TCC bed creates a decision | FAILED (§39); Phase 2C moved to the design's DS-2 content |
+| Reusable model (SYS-003), ledgers closed | PASS (§40) |
+| DS-2C: two or more viable strategies, none preserving everything | PASS: three non-dominated (§41.3) |
+| DS-3: an electrical failure with thermal and atmospheric consequences, a resource trade-off, two or more non-dominated strategies | PASS: three (§42.3) |
+| Python–Godot parity, determinism, replay | PASS (§46) |
+| Playthroughs | PASS: viable, failed (cannibalize, keep_garden), sacrifice (relocate, shed_dark_b), watch failure (keep_garden's late trip), restart failure (short_reserve), replay |
+| Desktop, phone landscape and portrait, rotation, touch, small window | PASS in emulation (§46); real hardware and gamepads untested |
+| Budget, at least 5 MB headroom | PASS: 79.3 of 90 MB |
+| Existing experiences preserved | PASS (regression §46) |
+
+**Recommendation.** Ready for the owner's playtest (§47) and review of the PROTOTYPE values (§43). A squash is reasonable after that
+playtest. Deploy only with the owner's OK.
+
+**Not done, by the brief.** No canon, Drive, geometry or Blender change. No Phase 4 or 5. No multiplayer or leaderboards. No invented
+accident details or injuries.
