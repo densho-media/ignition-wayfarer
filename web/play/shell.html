@@ -104,7 +104,7 @@ const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
   const ALLOWED = ['--disable-render-loop', '--fixed-fps', '30', '60', '--', '--touch', '--no-touch', '--touch-probe', '--check-excursion',
                    '--eva', '--check-eva-ops', '--check-locomotion', '--excursion', '--hatch', '--first-flight',
                    '--systems', '--check-systems', '--deadship', '--check-deadship', '--airflow', '--check-airflow', '--shared-air', '--check-shared-air',
-                   '--strategy=purge', '--strategy=separate', '--strategy=nocontain',
+                   '--strategy=purge', '--strategy=separate', '--strategy=separate_late', '--strategy=nocontain',
                    '--await-player'];   // SYS-001 / DS-1 / SYS-002 browser checks
   const asked = new URLSearchParams(location.search).getAll('arg');
   const args = asked.filter(a => ALLOWED.includes(a));

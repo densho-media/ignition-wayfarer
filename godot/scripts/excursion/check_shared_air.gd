@@ -1,6 +1,6 @@
 class_name WfSharedAirCheck
 extends RefCounted
-## Deadship DS-2B "Shared Air" check (-- --shared-air --check-shared-air [--strategy=isolate|purge|separate|nocontain]; the browser's
+## Deadship DS-2B "Shared Air" check (-- --shared-air --check-shared-air [--strategy=isolate|purge|separate|separate_late|nocontain]; the browser's
 ## --await-player). First every packaged reference case replays in this runtime to the packaged checkpoints and debrief (the browser: three
 ## of them). Then one strategy is played through the trainee's own requests: the clock pauses with a page open; containment is refused
 ## away from the store, takes its full work at the store, pauses when the trainee steps away and keeps its progress; the bay's controls
@@ -9,7 +9,10 @@ extends RefCounted
 ## the 7-day projection; the debrief's numbers are the run's own and every species' ledger closes. The default strategy ends with a
 ## replay from the exact start. Prints one WF_GODOT_SHARED_AIR line and quits.
 
-const PARITY_WEB := ["isolate", "doorway", "watch_restore"]
+const PARITY_WEB := ["isolate", "doorway", "watch_restore", "separate_reconnect"]
+const WANT := {"isolate": ["ISOLATE", "STABLE_RESIDUE"], "purge": ["ROUTE", "STABLE"], "separate": ["SEPARATE", "STABLE"],
+	"separate_late": ["SEPARATE", "CO2_LIMIT"], "nocontain": ["UNCONTAINED", "NOT_CONTAINED"]}
+const RECONNECT_H := {"separate": 4.0, "separate_late": 8.0}     # five sealed in sector 2 (the trainee stays at the bay): 0.5 % at about 6.4 h
 
 var h: WfExcursion
 var sa: WfSharedAir
@@ -89,7 +92,7 @@ func _near(a, b) -> bool:
 
 func _debrief_parity(d: Dictionary, w: Dictionary, name: String) -> Array:
 	var bad := []
-	for k in ["released_g", "retained_g", "removed_g", "airborne_g", "co2_max_pct", "contained_at_h"]:
+	for k in ["released_g", "retained_g", "removed_g", "airborne_g", "co2_max_pct", "contained_at_h", "co2_peak_pct", "co2_peak_h"]:
 		if not _near(d[k], w[k]):
 			bad.append("%s debrief %s %s, reference %s" % [name, k, d[k], w[k]])
 	for k in w["clear_h"]:
@@ -345,6 +348,7 @@ func _play() -> void:
 	await _close_page()
 	await _wait(func(): return sa.alerted, 120.0, "the alert")
 	notes["alert_ship_s"] = sa.t()
+	await _still("SA_0_alert", "hygiene")
 	if strategy != "nocontain":
 		await _contain()
 	# out of sector 1: shut any door of it the steps at the store left open, then to sector 3 by the short way (A1N, AC3, A3P);
@@ -357,7 +361,7 @@ func _play() -> void:
 	match strategy:
 		"purge":
 			ok = await _walk_route(["A1", "AC1a", "AC1b", "A2", "AC2a", "AC2b", "A3"], false)
-		"separate":
+		"separate", "separate_late":
 			ok = await _walk_route(["A1", "AC3b", "AC3a", "A3"], false)
 		_:
 			ok = await _walk_route(["A1", "AC3b", "AC3a", "A3"], true)
@@ -370,14 +374,14 @@ func _play() -> void:
 			await _isolate()
 		"purge":
 			await _purge()
-		"separate":
+		"separate", "separate_late":
 			await _separate()
 		"nocontain":
 			await _isolate()
 	await _page("bay")
-	await _still("SA_2_bay", "bay")
+	await _still("SA_4_bay", "bay")
 	await _intercom("report", [], func(): return sa.page == "report")
-	await _still("SA_3_report", "bay")
+	await _still("SA_5_report", "bay")
 	await _close_page()
 	await _watch()
 	await _debrief()
@@ -454,6 +458,7 @@ func _isolate() -> void:
 	# the partner over to sector 3 (a door route), then sector 1's dampers shut: with its doors shut, sector 1 is sealed
 	await _intercom("order", ["A", "A3"], func(): return not (sa.people[1]["route"] as Array).is_empty())
 	await _close_page()
+	await _still("SA_2_crew_walking", "bay")
 	await _wait(func(): return (sa.people[1]["route"] as Array).is_empty(), 30.0, "the partner to arrive")
 	notes["partner_route"] = sa.people[1]["places"].map(func(pp): return sa.ids[int(pp[1])])
 	await _bay_op("damper", ["A1P"], func(): return not bool(sa.ring.open["IMV.A1P"]))
@@ -507,11 +512,23 @@ func _separate() -> void:
 	await _do("order", ["C", "A2"], func(): return not (sa.people[4]["route"] as Array).is_empty())
 	await _do("plan", [], func(): return sa.plan == "RESTORE")
 	await _close_page()
+	await _still("SA_2_crew_walking", "bay")
 	await _wait(func(): return sa.people.all(func(q): return (q["route"] as Array).is_empty()), 30.0, "the pairs to arrive")
 	await _bay_op("damper", ["A1P"], func(): return not bool(sa.ring.open["IMV.A1P"]))
 	await _bay_op("damper", ["A3N"], func(): return not bool(sa.ring.open["IMV.A3N"]))
-	await _close_page()
 	notes["sealed"] = {"A1P": sa.sealed("CIRC.A1P"), "A3N": sa.sealed("CIRC.A3N"), "doors_open": _open_doors()}
+	# the ducts' reconnection, scheduled at the bay by Ops presses on its item (each press sets the next offered time)
+	var want_s := float(RECONNECT_H[strategy]) * 3600.0
+	var guard := 0
+	while (sa.schedule == null or absf(float(sa.schedule["t_s"]) - want_s) > 1e-6) and guard < 10:
+		var before = null if sa.schedule == null else float(sa.schedule["t_s"])
+		await _do("reconnect", [], func(): return (null if sa.schedule == null else float(sa.schedule["t_s"])) != before)
+		guard += 1
+	if sa.schedule == null or absf(float(sa.schedule["t_s"]) - want_s) > 1e-6:
+		fail("the reconnection could not be scheduled at %.0f h: %s" % [want_s / 3600.0, str(sa.schedule)])
+	notes["schedule_presses"] = guard
+	await _still("SA_3_reconnect_scheduled", "bay")
+	await _close_page()
 
 func _watch() -> void:
 	_trace("watch")
@@ -532,6 +549,8 @@ func _watch() -> void:
 			fail("a door moved during the watch")
 		notes["watch_door_refusal"] = h.refusal
 	var t_real := Time.get_ticks_msec()
+	await _wait(func(): return sa.t() >= 6.5 * 3600.0 or sa.phase != "WATCH", 120.0, "the watch to pass 6.5 h")
+	await _still("SA_6_watch", "bay")
 	await _wait(func(): return sa.phase == "PROJECTION" or sa.phase == "DONE", 240.0, "the watch to end")
 	notes["watch_real_s"] = snappedf((Time.get_ticks_msec() - t_real) / 1000.0, 0.1)
 	notes["watch_end_h"] = float(sa.watch["end_s"]) / 3600.0
@@ -543,9 +562,24 @@ func _watch() -> void:
 	for e in post:
 		kinds[str(e[1])] = true
 	notes["after_watch"] = kinds.keys()
-	await _still("SA_4_debrief", "bay")
-	if sa.plan == "NONE" and not kinds.is_empty():
-		fail("with no plan the watch changed the run: %s" % str(post.slice(0, 3)))
+	await _still("SA_7_debrief_1", "bay")
+	var allowed := {}
+	if sa.watch.get("schedule") != null:
+		allowed["reconnect"] = true
+	if sa.plan == "RESTORE":
+		allowed["restore"] = true
+		allowed["home"] = true
+	var extra := []
+	for e in post:
+		if str(e[3]) == "" and not allowed.has(str(e[1])):
+			extra.append(str(e[1]))
+	if not extra.is_empty():
+		fail("the watch ran operations that were not declared: %s" % str(extra))
+	if strategy in RECONNECT_H:
+		var rec := post.filter(func(e): return str(e[1]) == "reconnect")
+		if rec.size() != 1 or absf(float(rec[0][0]) - float(RECONNECT_H[strategy]) * 3600.0) > 1e-6:
+			fail("the scheduled reconnection ran %s, declared at %.0f h" % [str(rec), RECONNECT_H[strategy]])
+		notes["reconnect_at_h"] = float(rec[0][0]) / 3600.0 if rec.size() == 1 else null
 	if sa.plan == "RESTORE" and not kinds.has("restore"):
 		fail("the declared restore plan did not run")
 
@@ -557,9 +591,10 @@ func _debrief() -> void:
 		return
 	notes["verdict"] = d["watch"]["verdict"]["result"]
 	notes["family"] = d["watch"]["family"]
-	var want_family: String = {"isolate": "ISOLATE", "purge": "ROUTE", "separate": "SEPARATE", "nocontain": "UNCONTAINED"}[strategy]
-	if str(d["watch"]["family"]) != want_family:
-		fail("strategy %s gave family %s" % [strategy, d["watch"]["family"]])
+	if str(d["watch"]["family"]) != str(WANT[strategy][0]) or str(d["watch"]["verdict"]["result"]) != str(WANT[strategy][1]):
+		fail("strategy %s gave %s %s, want %s" % [strategy, d["watch"]["family"], d["watch"]["verdict"]["result"], WANT[strategy]])
+	notes["co2_peak_pct"] = snappedf(float(d["co2_peak_pct"]), 0.001)
+	notes["degraded"] = d["watch"]["verdict"].get("degraded", false)
 	var L: Dictionary = d["ledgers"]
 	var scale := 1e-15 + 1e-10 * sa.ring.S0
 	if absf(float(L["nh3_kg"])) > scale or absf(float(L["release_kg"])) > scale or absf(float(L["co2_kg"])) > 1e-9:
@@ -573,13 +608,13 @@ func _debrief() -> void:
 	notes["debrief"] = {"released_g": d["released_g"], "removed_g": d["removed_g"], "airborne_g": d["airborne_g"], "clear_h": d["clear_h"],
 		"worst_1h": d["people"].map(func(q): return snappedf(float(q["max_1h_ppm"]), 0.01)), "co2_h": d["people"].map(func(q): return snappedf(float(q["co2_above_target_h"]), 0.01))}
 	notes["frame_cost_us"] = sa.frame_cost
-	for k in 3:
+	for k in sa.DEB_PAGES:
 		var pg := sa.deb_page
 		if k > 0:
-			await _still("SA_%d_debrief_%d" % [4 + k, k + 1], "bay")
-		await _use("Use · next page" if pg < 2 else "Use · close", func(): return sa.deb_page != pg)
+			await _still("SA_%d_debrief_%d" % [7 + k, k + 1], "bay")
+		await _use("Use · next page" if pg < sa.DEB_PAGES - 1 else "Use · close", func(): return sa.deb_page != pg)
 	if sa.page != "":
-		fail("the debrief did not close after its third page")
+		fail("the debrief did not close after its last page")
 
 func _replay() -> void:
 	_trace("replay")

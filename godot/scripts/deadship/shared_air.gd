@@ -20,7 +20,8 @@ const EPS := 1e-6
 const SECTORS := ["A1", "A2", "A3"]
 const MAX_STEPS := 40                  # model steps per frame, live or watch (a long frame drops the backlog: display time only)
 const MAX_PROJECTION := 20             # projection steps per frame
-const BAY := ["vent", "A1P", "A1N", "AC1", "AC3", "A2N", "A2P", "A3N", "A3P", "AC2", "removal", "tcc", "intercom", "close"]
+const BAY := ["vent", "A1P", "A1N", "AC1", "AC3", "A2N", "A2P", "A3N", "A3P", "AC2", "reconnect", "removal", "tcc", "intercom", "close"]
+const DEB_PAGES := 4
 const NP := 6
 
 var doc := {}
@@ -47,6 +48,9 @@ var es := PackedFloat64Array()        # each person's exposure at each sample, N
 var contain := {}
 var phase := "LIVE"                   # LIVE, WATCH, PROJECTION, DONE
 var plan := "NONE"
+var schedule = null                    # the declared duct reconnection: {"t_s", "done"} (shared_air.Run.schedule)
+var co2_peak := 0.0                    # the highest CO2 mole fraction where anybody was (live and watch), and when
+var co2_peak_t := 0.0
 var watch := {}
 var log: Array = []
 var alerted := false
@@ -125,6 +129,9 @@ func begin_run() -> void:
 	contain = {"state": "NONE", "progress_s": 0.0}
 	phase = "LIVE"
 	plan = "NONE"
+	schedule = null
+	co2_peak = 0.0
+	co2_peak_t = 0.0
 	watch = {}
 	log = []
 	alerted = false
@@ -273,6 +280,19 @@ func _act(kind: String, a: Array) -> String:
 			if str(contain["state"]) == "WORKING":
 				contain["state"] = "PAUSED"
 			return ""
+		"schedule":
+			if a[0] == null:
+				schedule = null
+				return ""
+			var tsch := float(a[0])
+			if tsch <= t() + EPS:
+				return "that time has passed: a reconnection is scheduled ahead of the ship clock"
+			if absf(tsch / dtv - roundf(tsch / dtv)) > 1e-9:
+				return "a reconnection is scheduled on the %.0f s step" % dtv
+			if tsch > float(sc["watch"]["ship_h"]) * H + EPS:
+				return "a reconnection is scheduled before the watch ends (%.0f h)" % float(sc["watch"]["ship_h"])
+			schedule = {"t_s": tsch, "done": null}
+			return ""
 		"watch":
 			if not str(a[0]) in sc["watch"]["plans"]:
 				return "no plan %s" % a[0]
@@ -298,6 +318,7 @@ func _walks() -> void:
 func tick(dt := -1.0) -> void:
 	if dt < 0.0:
 		dt = dtv
+	_scheduled()
 	_walks()
 	var cs := str(contain["state"])
 	if (cs == "WORKING" or cs == "PAUSED") and float(contain["progress_s"]) >= float(sc["containment"]["work_s"]) - EPS:
@@ -335,11 +356,15 @@ func tick(dt := -1.0) -> void:
 		var r24 := _roll(k, 24.0 * H, float(q["max24"]), int(q["j24"]))
 		q["max24"] = r24[0]
 		q["j24"] = r24[1]
-	if co2_cross == null and (phase == "LIVE" or phase == "WATCH"):
+	if phase == "LIVE" or phase == "WATCH":
+		var xo := 0.0
 		for q in people:
-			if ring.x(int(q["node"])) > float(p["co2_max"]):
-				co2_cross = t()
-				break
+			xo = maxf(xo, ring.x(int(q["node"])))
+		if xo > co2_peak:
+			co2_peak = xo
+			co2_peak_t = t()
+		if co2_cross == null and xo > float(p["co2_max"]):
+			co2_cross = t()
 	for i in N:
 		if float(pp[i]) > reuse:
 			over_last[ids[i]] = t()
@@ -360,6 +385,25 @@ func _roll(k: int, w: float, best: float, j: int) -> Array:
 	var m := (es[n * NP + k] - e0) / w
 	return [m if m > best else best, j]
 
+## The declared duct reconnection when due (shared_air.Run._scheduled): every IMV damper pair open, the fans on; doors stay as they are.
+func _scheduled() -> void:
+	if schedule == null or schedule["done"] != null or t() < float(schedule["t_s"]) - EPS:
+		return
+	var opened := []
+	for e in ring.edges:
+		if str(e["kind"]) == "imv" and not bool(ring.open[e["id"]]):
+			opened.append(str(e["id"]))
+	for id in opened:
+		ring.set_edge(id, true)
+	var fans := ring.vent != "ON"
+	ring.set_vent(true)
+	schedule["done"] = t()
+	log.append([t(), "reconnect", [opened, fans], ""])
+	_event("reconnect")
+	if phase == "LIVE" or phase == "WATCH":
+		_say("Ship T+%s: the scheduled reconnection ran at the ECLSS bay: %s. Doors are as you left them." % [_hm(t()),
+			"%d damper pair(s) opened%s" % [opened.size(), ", fans on" if fans else ""] if not opened.is_empty() or fans else "the ducts were already connected"])
+
 func _start_watch(pl: String) -> void:
 	plan = pl
 	phase = "WATCH"
@@ -367,7 +411,8 @@ func _start_watch(pl: String) -> void:
 		contain["state"] = "PAUSED"
 	var end := maxf(float(sc["watch"]["ship_h"]) * H, t() + float(sc["watch"]["min_h"]) * H)
 	end = ceilf(end / pdt) * pdt
-	watch = {"plan": pl, "t0": t(), "end_s": end, "config": config(), "limit_crossed_at": null, "family": family()}
+	watch = {"plan": pl, "t0": t(), "end_s": end, "config": config(), "limit_crossed_at": null, "family": family(),
+		"schedule": null if schedule == null else (schedule as Dictionary).duplicate()}
 
 ## The end of the watch: the verdict, the declared plan, then the projection (projection_step until DONE).
 func finish_watch() -> void:
@@ -375,7 +420,8 @@ func finish_watch() -> void:
 	if plan == "RESTORE":
 		ring.set_vent(true)
 		for e in ring.edges:
-			ring.set_edge(str(e["id"]), str(e["kind"]) == "imv")
+			if str(e["kind"]) == "imv":
+				ring.set_edge(str(e["id"]), true)          # remote equipment only: the doors stay as the trainee left them
 		ring.set_tcc(true)
 		ring.set_removal(true)
 		log.append([t(), "restore", [], ""])
@@ -430,7 +476,8 @@ func config() -> Dictionary:
 		if not (q["route"] as Array).is_empty():
 			walking[q["id"]] = ids[int(q["route"][-1])]
 	return {"doors_open": dopen, "dampers_closed": dshut, "vent": ring.vent, "tcc": ring.tcc, "removal": ring.removal,
-		"source": ring.source["state"], "places": places, "walking": walking}
+		"source": ring.source["state"], "places": places,
+		"reconnect_at_s": null if schedule == null or schedule["done"] != null else schedule["t_s"], "walking": walking}
 
 ## Which of the gate's families the present configuration belongs to (a description, never a grade).
 func family() -> String:
@@ -476,9 +523,12 @@ func verdict() -> Dictionary:
 	elif not residue.is_empty():
 		result = "STABLE_RESIDUE"
 	var mx := 0.0
+	var co2s := 0.0
 	for q in people:
 		mx = maxf(mx, ring.x(int(q["node"])))
-	return {"result": result, "co2_limit_crossed_at_h": null if co2_cross == null else float(co2_cross) / H, "co2_unremoved_groups": unbounded, "nh3_residue": residue,
+		co2s += float(q["co2_s"])
+	return {"co2_peak_pct": 100.0 * co2_peak, "co2_peak_h": co2_peak_t / H, "co2_above_target_crew_h": co2s / H,
+		"degraded": co2_cross == null and co2s > 0.0, "result": result, "co2_limit_crossed_at_h": null if co2_cross == null else float(co2_cross) / H, "co2_unremoved_groups": unbounded, "nh3_residue": residue,
 		"nh3_airborne_g": air * 1000.0, "nh3_away_from_tcc_g": away * 1000.0, "source": ring.source["state"], "t_h": t() / H,
 		"max_occupied_co2_pct": 100.0 * mx}
 
@@ -526,7 +576,18 @@ func debrief() -> Dictionary:
 			break
 	return {"people": out_p, "released_g": ring.released * 1000.0, "retained_g": ring.S * 1000.0, "removed_g": ring.nh3_removed * 1000.0,
 		"airborne_g": air * 1000.0, "inventory_g": ring.S0 * 1000.0, "co2_mean_pct": 100.0 * mm / float(p["M_CO2"]) / nn, "co2_max_pct": 100.0 * mx,
-		"clear_h": clear, "watch": watch, "plan": plan, "contained_at_h": contained, "ledgers": ledgers()}
+		"clear_h": clear, "watch": watch, "plan": plan, "contained_at_h": contained, "co2_peak_pct": 100.0 * co2_peak, "co2_peak_h": co2_peak_t / H,
+		"schedule": schedule, "decisions": decisions(), "ledgers": ledgers()}
+
+## What the trainee decided and what the ship did on its own account, in order (shared_air.Run.decisions).
+func decisions() -> Array:
+	var keep := ["contain_start", "contained", "door", "damper", "vent", "tcc", "removal", "order", "hold", "schedule", "watch", "reconnect",
+		"restore", "stopped"]
+	var out := []
+	for e in log:
+		if str(e[1]) in keep and str(e[3]) == "":
+			out.append([float(e[0]) / H, str(e[1]), e[2]])
+	return out
 
 func release_ledger_error() -> float:
 	return (ring.S0 - ring.S) - ring.released
@@ -575,6 +636,9 @@ func play(actions: Array, until_s := -1.0) -> Array:
 		if until_s > 0.0 and t() >= until_s - EPS:
 			return cps
 	while t() < float(watch["end_s"]) - EPS:
+		while k < todo.size() and float(todo[k][0]) <= t() + EPS:      # during the watch every action is refused and logged
+			act(str(todo[k][2]), todo[k][3])
+			k += 1
 		tick()
 		if absf(t() / H - roundf(t() / H)) < 1e-9:
 			cps.append(checkpoint())
@@ -780,6 +844,8 @@ func step(dt: float) -> void:
 		acc += dt * scale()
 		var n := 0
 		var was := str(contain["state"])
+		var moving := people.map(func(q): return not (q["route"] as Array).is_empty())
+		var log_n := log.size()
 		while acc >= dtv and n < MAX_STEPS:
 			tick()
 			acc -= dtv
@@ -789,6 +855,7 @@ func step(dt: float) -> void:
 				break
 		if n == MAX_STEPS:
 			acc = 0.0
+		_crew_news(moving, log_n)
 		if was != "DONE" and str(contain["state"]) == "DONE":
 			_say("CONTAINED: the store is bagged and sealed; it releases nothing more. %.2f g of NH3 are in ring A's air, %.2f g stay in the bag." % [
 				_airborne_g(), ring.S * 1000.0])
@@ -798,6 +865,26 @@ func step(dt: float) -> void:
 	frame_cost["max_frame_us"] = maxi(int(frame_cost["max_frame_us"]), us)
 	frame_cost["total_us"] = int(frame_cost.get("total_us", 0)) + us
 	frame_cost["frames"] = int(frame_cost.get("frames", 0)) + 1
+
+## Tell the trainee when an ordered pair arrives or stops at a sealed door (the map shows the same: a solid disc, no route line).
+func _crew_news(moving: Array, log_n: int) -> void:
+	if phase != "LIVE":
+		return
+	var said := {}
+	for e in log.slice(log_n):
+		if str(e[1]) == "stopped":
+			var pr := str(e[2][0]).get_slice("-", 0)
+			if not said.has(pr):
+				said[pr] = true
+				_say("Intercom: %s stopped in %s: the next bulkhead, %s, is sealed (door and dampers shut)." % [
+					"your partner" if pr == "A" else "pair " + pr, ids[int(people.filter(func(q): return str(q["id"]) == str(e[2][0]))[0]["node"])], str(e[2][1]).trim_prefix("CIRC.")])
+	for k in NP:
+		var q: Dictionary = people[k]
+		var pr := str(q["pair"])
+		if bool(moving[k]) and (q["route"] as Array).is_empty() and not said.has(pr):
+			if people.filter(func(o): return str(o["pair"]) == pr).all(func(o): return (o["route"] as Array).is_empty()):
+				said[pr] = true
+				_say("Intercom: %s arrived in %s." % ["your partner" if pr == "A" else "pair " + pr, ids[int(q["node"])]])
 
 func _airborne_g() -> float:
 	var s := 0.0
@@ -812,9 +899,10 @@ func _start_watch_now() -> String:
 	acc = 0.0
 	_close()
 	_event("watch start " + plan)
-	_say("STABILITY WATCH: the same model runs on from the ring exactly as it is now to %d h after the release (x%d), then the 7-day projection. %s" % [
+	_say("STABILITY WATCH: the same model runs on from the ring exactly as it is now to %d h after the release (x%d), then the 7-day projection. %s.%s" % [
 		int(float(watch["end_s"]) / H), int(sc["time"]["watch_scale"]),
-		"Nothing changes on its own." if plan == "NONE" else "At its end the restore plan you declared runs: normal ventilation, both units on, everyone home once their way is under %.0f ppm." % reuse])
+		"Nothing changes on its own" if plan == "NONE" else "At its end the restore plan you declared runs: every damper pair open, fans and both units on, doors as you left them, everyone home once their way is under %.0f ppm" % reuse,
+		"" if schedule == null else " · The reconnection you scheduled runs at T+%s." % _hm(float(schedule["t_s"]))])
 	return ""
 
 func _end_watch() -> void:
@@ -856,7 +944,7 @@ func use() -> String:
 		return ""
 	if page == "debrief":
 		deb_page += 1
-		if deb_page > 2:
+		if deb_page > DEB_PAGES - 1:
 			_close()
 		else:
 			_render()
@@ -971,9 +1059,19 @@ func _items() -> Array:
 					out.append(["close", "Close"])
 				"intercom":
 					out.append(["intercom", "Intercom (orders, crew report, the watch)"])
+				"reconnect":
+					var nx = _next_reconnect()
+					out.append(["reconnect", "Scheduled reconnection: %s -> %s (at that ship time every damper pair opens and the fans run; doors stay as they are)" % [
+						_sched_text(), "none" if nx == null else "T+" + _hm(float(nx))], nx])
 				_:
 					var o := bool(ring.open["IMV." + b])
-					out.append(["damper", "Damper pair %s: %s -> %s" % [b, "open" if o else "shut", "shut" if o else "open"], b, not o])
+					var door_open := bool(ring.open["CIRC." + b])
+					var what := ""
+					if o:
+						what = "door open, so air still passes" if door_open else "door shut, so this seals %s" % b
+					else:
+						what = "unseals %s" % b if not door_open else "the door is open anyway"
+					out.append(["damper", "Damper pair %s: %s -> %s · %s" % [b, "open" if o else "shut", "shut" if o else "open", what], b, not o])
 		return out
 	out.append(["layer", "Map layer: show %s" % ("CO2" if layer == "NH3" else "NH3")])
 	if phase == "LIVE":
@@ -1006,6 +1104,11 @@ func _activate(it: Array) -> String:
 		"intercom":
 			_open("intercom")
 			return "intercom"
+		"reconnect":
+			r = act("schedule", [it[2]])
+			_say(r if r != "" else ("ECLSS: reconnection cancelled. Sealed groups stay sealed until you change them." if schedule == null else
+				"ECLSS: reconnection scheduled at ship T+%s: every damper pair opens and the fans run then, in any phase; doors are never moved remotely. A sealed group's CO2 rises until then (limit %.1f %%)." % [
+				_hm(float(schedule["t_s"])), 100.0 * float(p["co2_max"])]))
 		"layer":
 			layer = "CO2" if layer == "NH3" else "NH3"
 			if layer == "NH3" and str(ring.source["state"]) == "ISOLATED":
@@ -1020,7 +1123,7 @@ func _activate(it: Array) -> String:
 			return "report"
 		"plan":
 			plan = "RESTORE" if plan == "NONE" else "NONE"
-			_say("Recovery plan: %s. %s" % [plan, "At the end of the watch normal ventilation returns, both units run, and each person walks home once their way is under %.0f ppm (checked hourly). It runs only because you declared it." % reuse
+			_say("Recovery plan: %s. %s" % [plan, "At the end of the watch every damper pair opens, the fans and both units run (doors stay as you left them), and each person walks home once their way is under %.0f ppm (checked hourly). It runs only because you declared it." % reuse
 				if plan == "RESTORE" else "The watch changes nothing: the ring stays as you leave it."])
 			_render()
 			return "plan " + plan
@@ -1066,6 +1169,20 @@ func _activate(it: Array) -> String:
 
 # ---- text ---------------------------------------------------------------------------------------------------------------------------------
 
+## The next reconnection time an Ops press would set (the options after the present one and after now; null = cancel).
+func _next_reconnect():
+	var cur := -1.0 if schedule == null or schedule["done"] != null else float(schedule["t_s"])
+	for h in sc["watch"]["reconnect_options_h"]:
+		var tsch := float(h) * H
+		if tsch > maxf(cur, t()) + EPS:
+			return tsch
+	return null
+
+func _sched_text() -> String:
+	if schedule == null:
+		return "none"
+	return ("ran at T+%s" if schedule["done"] != null else "T+%s") % _hm(float(schedule["t_s"]) if schedule["done"] == null else float(schedule["done"]))
+
 func _hm(s: float) -> String:
 	var mins := int(floor(s / 60.0))
 	return "%d:%02d" % [mins / 60, mins % 60]
@@ -1106,9 +1223,10 @@ func goal_text() -> String:
 	var head := "DEADSHIP TRAINING · %s %s (simulation, unscored)" % [sc["scenario"]["id"], sc["scenario"]["name"]]
 	var st: Dictionary = sc["stages"][stage()]
 	if phase == "WATCH":
-		return "%s · Verify: stability watch %.1f of %d h after the release · %s" % [head, t() / H, int(float(watch["end_s"]) / H), _clock()]
+		return "%s · Verify: stability watch, ship T+%s of %d h (x%d), plan %s%s · real %s" % [head, _hm(t()), int(float(watch["end_s"]) / H),
+			int(scale()), plan, "" if schedule == null else " · reconnection %s T+%s" % ["ran at" if schedule["done"] != null else "scheduled at", _hm(float(schedule["t_s"]))], _hm(real_s)]
 	if phase == "PROJECTION":
-		return "%s · Verify: 7-day projection %.0f of %d h · %s" % [head, t() / H, int(sc["watch"]["projection_h"]), _clock()]
+		return "%s · Verify: 7-day projection, computed ahead, ship T+%.0f of %d h · real %s" % [head, t() / H, int(sc["watch"]["projection_h"]), _hm(real_s)]
 	if phase == "DONE":
 		return "%s · Debrief: %s · %s" % [head, _verdict_text(str(watch["verdict"]["result"])), fill(str(sc["debrief"]["replay"]))]
 	if not alerted:
@@ -1142,7 +1260,7 @@ func use_label() -> String:
 	if not verified:
 		return ""
 	if page == "debrief":
-		return "Use · next page" if deb_page < 2 else "Use · close"
+		return "Use · next page" if deb_page < DEB_PAGES - 1 else "Use · close"
 	if ended():
 		return "Use · debrief"
 	if page == "bay" or page == "intercom":
@@ -1236,7 +1354,7 @@ func _render() -> void:
 	var small := WfInput.compact()
 	var out := []
 	var head := "[b]SHARED AIR · %s[/b]" % {"hygiene": "hygiene A", "bay": "sector 3 ECLSS bay", "intercom": "intercom", "report": "crew report",
-		"debrief": "debrief %d of 3" % (deb_page + 1)}[page]
+		"debrief": "debrief %d of %d" % [deb_page + 1, DEB_PAGES]}[page]
 	out.append(head + ("" if small else "  [color=#9fb4d0](simulation, unscored · %s)[/color]" % _clock()))
 	match page:
 		"hygiene":
@@ -1257,7 +1375,9 @@ func _render() -> void:
 				for i in N:
 					rr.append("%s %.2f%% %.1fppm" % [ids[i], 100.0 * ring.x(i), ring.ppm(i)])
 				out.append("[font_size=12]" + ("  ".join(rr.slice(0, 3)) + "\n" + "  ".join(rr.slice(3, 6)) + "\n" + "  ".join(rr.slice(6, 9))) + "[/font_size]")
-				out.append("CO2 unit %s · TCC %s · fans %s · %d group%s" % [ring.removal, ring.tcc, ring.vent, groups().size(), "" if groups().size() == 1 else "s"])
+				out.append("CO2 unit %s (removes CO2) · TCC %s (removes NH3) · fans %s · %d group%s%s" % [ring.removal, ring.tcc, ring.vent, groups().size(),
+					"" if groups().size() == 1 else "s", "" if schedule == null else " · reconnection " + _sched_text()])
+				out.append("[color=#9fb4d0][font_size=12]Air crosses a bulkhead through its door if open and its damper pair if open (fans on). A bulkhead is sealed only when both are shut. Doors are worked where they are; dampers, fans and units from here.[/font_size][/color]")
 			else:
 				out.append("Ring A crew: " + "  ".join(_pair_lines()))
 			var items := _items()
@@ -1369,7 +1489,9 @@ func _debrief_lines(small: bool) -> Array:
 	var fam := str(d["watch"]["family"])
 	var smac: Dictionary = doc["smac"]
 	if deb_page == 0:
-		out.append("[b]Watch (to %d h): %s[/b]" % [int(float(d["watch"]["end_s"]) / H), _verdict_text(str(v["result"]))])
+		out.append_array(_summary_lines(d, small))
+	elif deb_page == 1:
+		out.append("[b]The ship · watch to %d h: %s[/b]" % [int(float(d["watch"]["end_s"]) / H), _verdict_text(str(v["result"]))])
 		out.append("Your configuration at the watch: %s. Plan: %s%s." % [_family_text(fam), d["plan"],
 			" (applied by your declaration at the end of the watch)" if str(d["plan"]) == "RESTORE" else " (nothing changed after you declared)"])
 		var cfg: Dictionary = d["watch"]["config"]
@@ -1380,13 +1502,15 @@ func _debrief_lines(small: bool) -> Array:
 		out.append("Contained at %s. CO2 at 7 days: mean %.2f %%, highest %.2f %%%s." % [
 			"T+%.2f h" % float(d["contained_at_h"]) if d["contained_at_h"] != null else "no time (never contained)", float(d["co2_mean_pct"]), float(d["co2_max_pct"]),
 			"; the 0.5 %% limit was passed at T+%.1f h" % float(v["co2_limit_crossed_at_h"]) if v["co2_limit_crossed_at_h"] != null else ""])
+		out.append("CO2 where people were, live and in the watch: highest %.2f %% at T+%s (target %.1f %%, control limit %.1f %%) · %.1f crew-hours above the target." % [
+			float(d["co2_peak_pct"]), _hm(float(d["co2_peak_h"]) * H), 100.0 * float(p["co2_target"]), 100.0 * float(p["co2_max"]), float(v["co2_above_target_crew_h"])])
 		var clear := []
 		for k in ids:
 			if str(k).length() == 2 or not small:
 				var c = d["clear_h"][k]
 				clear.append("%s %s" % [k, "clean" if c != null and float(c) == 0.0 else ("not within 7 d" if c == null else "%.0f h" % float(c))])
 		out.append("Back under the %.0f ppm reuse criterion (a conservative training rule, not a NASA clearance): %s" % [reuse, ", ".join(clear)])
-	elif deb_page == 1:
+	elif deb_page == 2:
 		out.append("[b]Crew exposure (NH3, ppm; the 1 h / 24 h / 7 d SMACs are %d / %d / %d, duration references, not injury thresholds)[/b]" % [int(smac["1h"]), int(smac["24h"]), int(smac["7d"])])
 		for q in d["people"]:
 			var rt := " ".join((q["route"] as Array).map(func(r): return str(r[1])))
@@ -1395,9 +1519,9 @@ func _debrief_lines(small: bool) -> Array:
 				float(q["co2_above_target_h"]), " · over: " + ", ".join(q["over"]) if not (q["over"] as Array).is_empty() else "", "" if small else " · " + rt])
 		out.append("[color=#9fb4d0]The trainee's (A-1) exposure is where your body was; during the watch and projection the model keeps you where you stood.[/color]")
 	else:
-		out.append("[b]The same model, three reference strategies (computed, not graded)[/b]")
+		out.append("[b]The same model, the reference strategies (computed, not graded)[/b]")
 		var fams: Array = sc["debrief"]["families"]
-		for row in [["isolate", 0], ["purge", 1], ["separate", 2]]:
+		for row in [["isolate", 0], ["purge", 1], ["separate_reconnect", 2], ["separate", 3]]:
 			var c := case_named(str(row[0]))
 			if c.is_empty():
 				continue
@@ -1411,22 +1535,86 @@ func _debrief_lines(small: bool) -> Array:
 				co2h += float(q["co2_above_target_h"])
 			var a1 = cd["clear_h"]["A1"]
 			out.append("· %s" % fams[row[1]])
-			out.append("   worst 1 h %.1f ppm · worst 24 h %.1f ppm · %.0f crew-hours above the CO2 target · A1 reusable %s · %s" % [worst1, worst24, co2h,
-				"not within 7 d" if a1 == null else "after %.0f h" % float(a1), _verdict_text(str(cd["watch"]["verdict"]["result"])).get_slice(" (", 0)])
+			out.append("   worst 1 h %.1f ppm · worst 24 h %.1f ppm · CO2 peak %.2f %%, %.0f crew-hours above target · A1 reusable %s · %s" % [worst1, worst24,
+				float(cd["co2_peak_pct"]), co2h, "not within 7 d" if a1 == null else "after %.0f h" % float(a1), _verdict_text(str(cd["watch"]["verdict"]["result"])).get_slice(" (", 0)])
 		var w1 := 0.0
 		var co2y := 0.0
 		for q in d["people"]:
 			w1 = maxf(w1, float(q["max_1h_ppm"]))
 			co2y += float(q["co2_above_target_h"])
 		var ya1 = d["clear_h"]["A1"]
-		out.append("Yours: worst 1 h %.1f ppm · %.0f crew-hours above the CO2 target · A1 reusable %s." % [w1, co2y, "not within 7 d" if ya1 == null else "after %.0f h" % float(ya1)])
+		out.append("Yours: worst 1 h %.1f ppm · CO2 peak %.2f %%, %.0f crew-hours above target · A1 reusable %s." % [w1, float(d["co2_peak_pct"]), co2y,
+			"not within 7 d" if ya1 == null else "after %.0f h" % float(ya1)])
 		out.append("[color=#9fb4d0]%s[/color]" % sc["debrief"]["references"])
 		out.append(fill(str(sc["debrief"]["replay"])))
 	return out
 
+## Debrief page 1: what happened, what the trainee did, what was saved, what it cost, and whether it holds (numbers from the run).
+func _summary_lines(d: Dictionary, small: bool) -> Array:
+	var out := []
+	var v: Dictionary = d["watch"]["verdict"]
+	var smac: Dictionary = doc["smac"]
+	var res := str(v["result"])
+	var head: String = {"STABLE": "Stable", "STABLE_RESIDUE": "Stable isolation", "TEMPORARY": "Temporary", "CO2_LIMIT": "Operational failure: CO2 control limit",
+		"NOT_CONTAINED": "Operational failure: not contained"}.get(res, res)
+	if bool(v.get("degraded", false)):
+		head += ", with degraded CO2 control"
+	out.append("[b]%s.[/b] %s." % [head, _verdict_text(res)])
+	if d["contained_at_h"] != null:
+		out.append("What happened: hygiene A's store released %.2f g of NH3 before you had it bagged at T+%s; %.2f g stayed in the bag." % [
+			float(d["released_g"]), _hm(float(d["contained_at_h"]) * H), float(d["retained_g"])])
+	else:
+		out.append("What happened: hygiene A's store was never contained and released all %.2f g of NH3." % float(d["released_g"]))
+	var did := []
+	for e in d["decisions"]:
+		var k := str(e[1])
+		var a: Array = e[2]
+		var w := ""
+		match k:
+			"contain_start": w = "containment started"
+			"contained": w = "contained"
+			"order": w = "%s to %s" % ["partner" if str(a[0]) == "A" else "pair " + str(a[0]), a[1]]
+			"hold": w = "%s held" % ("partner" if str(a[0]) == "A" else "pair " + str(a[0]))
+			"damper": w = "damper %s %s" % [a[0], "open" if a[1] else "shut"]
+			"vent": w = "fans %s" % ("on" if a[0] else "off")
+			"tcc": w = "TCC %s" % ("on" if a[0] else "off")
+			"removal": w = "CO2 unit %s" % ("on" if a[0] else "off")
+			"schedule": w = "reconnection cancelled" if a[0] == null else "reconnection set for T+%s" % _hm(float(a[0]))
+			"watch": w = "watch declared (plan %s)" % a[0]
+			"reconnect": w = "ducts reconnected (scheduled)"
+			"restore": w = "restore plan ran"
+			"stopped": w = "%s stopped at a sealed door" % a[0]
+		if w != "" and (k != "contain_start" or did.is_empty() or not str(did[-1]).ends_with("containment started")):
+			did.append("T+%s %s" % [_hm(float(e[0]) * H), w])
+	out.append("What you did: " + (" · ".join(did) if not did.is_empty() else "nothing beyond walking") + " (doors as listed on the next page).")
+	var clean := []
+	for k in ids:
+		if d["clear_h"][k] != null and float(d["clear_h"][k]) == 0.0:
+			clean.append(k)
+	var w1 := 0.0
+	var w24 := 0.0
+	var w7 := 0.0
+	var dose := 0.0
+	for q in d["people"]:
+		w1 = maxf(w1, float(q["max_1h_ppm"]))
+		w24 = maxf(w24, float(q["max_24h_ppm"]) if q["max_24h_ppm"] != null else 0.0)
+		w7 = maxf(w7, float(q["mean_7d_ppm"]) if q["mean_7d_ppm"] != null else 0.0)
+		dose += float(q["dose_ppm_h"]) / float(d["people"].size())
+	var inside := w1 <= float(smac["1h"]) and w24 <= float(smac["24h"]) and w7 <= float(smac["7d"])
+	out.append("Saved: %s; the crew %s the NH3 references (worst 1 h %.1f of %d, 24 h %.1f of %d, 7 d %.2f of %d ppm)." % [
+		"compartments never above %.0f ppm: %s" % [reuse, ", ".join(clean)] if not clean.is_empty() else "no compartment stayed under %.0f ppm (the ducts carried the NH3 everywhere before the ring was set)" % reuse,
+		"stayed inside" if inside else "did not stay inside", w1, int(smac["1h"]), w24, int(smac["24h"]), w7, int(smac["7d"])])
+	var a1 = d["clear_h"]["A1"]
+	out.append("Sacrificed: sector 1 (A1) out of use %s · CO2 above its %.1f %% target for %.1f crew-hours, peak %.2f %%%s · a mean crew NH3 dose of %.0f ppm h over 7 days." % [
+		"for the whole week" if a1 == null else "for %.0f h" % float(a1), 100.0 * float(p["co2_target"]), float(v["co2_above_target_crew_h"]), float(d["co2_peak_pct"]),
+		" (over the %.1f %% limit at T+%.1f h)" % [100.0 * float(p["co2_max"]), float(v["co2_limit_crossed_at_h"])] if v["co2_limit_crossed_at_h"] != null else "", dose])
+	if not small:
+		out.append("[color=#9fb4d0]The 0.3 % CO2 target and 0.5 % control limit are Wayfarer's operating levels (PROTOTYPE), not injury thresholds; the NH3 references are NASA exposure-duration guidelines; the 3 ppm reuse criterion is a training rule. Next pages: the ship, the crew, the alternatives.[/color]")
+	return out
+
 func _family_text(f: String) -> String:
 	return {"ISOLATE": "sector 1 kept apart from the TCC", "ROUTE": "the residue routed to the TCC through occupied air",
-		"SEPARATE": "the purge path joined to the TCC with crew sealed away from it", "UNCONTAINED": "the store still leaking"}.get(f, f)
+		"SEPARATE": "the purge path joined to the TCC with crew sealed away from it%s" % ("" if watch.get("schedule") == null else ", ducts reconnected at T+%s" % _hm(float(watch["schedule"]["t_s"]))), "UNCONTAINED": "the store still leaking"}.get(f, f)
 
 func update_panel(size: Vector2) -> void:
 	if not verified:

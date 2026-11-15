@@ -1980,11 +1980,12 @@ func _update_hud() -> void:
 		elif learning.open >= 0:
 			learning.close()
 	var lines_out: Array = []
-	for r in ["RING_A", "RING_B"]:
+	var training_only := shared_air != null and shared_air.verified       # Shared Air shows its own stages, not the walk's tour checklist
+	for r in ([] if training_only else ["RING_A", "RING_B"]):
 		var rec: Dictionary = progress[r]
 		lines_out.append("%s  %s board  %s circuit (%d%%)  %s back aboard the station" % [("Ring A" if r == "RING_A" else "Ring B"),
 			"[x]" if rec["boarded"] else "[ ]", "[x]" if rec["circuit"] else "[ ]", int(100.0 * rec["bins"].count(1) / BINS), "[x]" if rec["returned"] else "[ ]"])     # ASCII: the web font has no ballot boxes
-	if learning != null and not learning.stations.is_empty():
+	if learning != null and not learning.stations.is_empty() and not training_only:
 		lines_out.append("Learning points %d/%d (ring A)" % [learning.done.size(), learning.stations.size()])
 	if equipment != null:
 		equipment.update()

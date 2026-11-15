@@ -25,7 +25,7 @@ touch button, and saves their stills; --part training-scripted runs their script
 the same checks on the same 1/60 s frames, about ten times sooner than in real time.
 
     python3 tools/web_check.py <site dir> --out <dir> [--chrome google-chrome] [--record] [--part main|equivalence|walk ...] [--frame-shell <chrome-headless-shell>]
-    python3 tools/web_check.py <site dir> --out <dir> --part training [--training systems|deadship|airflow|shared-air[-purge|-separate|-nocontain]] [--no-touch] [--rotate]
+    python3 tools/web_check.py <site dir> --out <dir> --part training [--training systems|deadship|airflow|shared-air[-purge|-separate|-separate-late|-nocontain]] [--no-touch] [--rotate]
     python3 tools/web_check.py <site dir> --merge <part out dir> ... --out <dir> [--record]
 """
 import argparse
@@ -571,6 +571,7 @@ TRAINING = (('systems', '#interior-systems', ('--systems', '--check-systems'), '
             # DS-2B's other strategies (the default above isolates sector 1 and ends with a replay)
             ('shared-air-purge', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=purge'), 'WF_GODOT_SHARED_AIR '),
             ('shared-air-separate', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=separate'), 'WF_GODOT_SHARED_AIR '),
+            ('shared-air-separate-late', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=separate_late'), 'WF_GODOT_SHARED_AIR '),
             ('shared-air-nocontain', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=nocontain'), 'WF_GODOT_SHARED_AIR '))
 TRAINING_SECONDS = 2400
 
