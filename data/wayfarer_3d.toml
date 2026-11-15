@@ -5379,6 +5379,61 @@ candidates = [
   { id = "M4", name = "Speculative: quarter yield per pulse", status = "SPECULATIVE", evidence = "SPECULATIVE", protect = "strict", mode = "force", optimised = false, yield_share = 0.25, from = "M1", note = "VTX-S1 pushed further: a quarter of the C-02 yield per pulse at four times the rate (22.8 kHz, VTX-S2 harder). Field and capture unchanged at half the currents; forces and stored energy a quarter." },
 ]
 
+# Vertex Engine 1.4 coupled plasma dynamics (owner brief 2026-11-15 "Coupled Plasma Dynamics, Magnetic-Nozzle Feasibility & Architecture
+# Decision", bounded D-21): the inputs of vertex_plasma.py. Every value is a stated PROTOTYPE assumption or a cited reference class; the
+# coupled model is a reduced sharp-boundary model with explicit limits, never a demonstration of capture, detachment or thrust.
+[vertex_engine.plasma]
+evidence = "ENGINEERING_PROTOTYPE"
+version = "1.4.0"
+candidates = ["NOMINAL", "M2"]          # M0 (the 1.2 cusp, reference failure) and M2 (the 1.3 best mirror), both research records
+# Charged-energy partition of one pulse (PROTOTYPE, bounded): the share carried by fusion products that leave the burning target at birth
+# energy (14.7 MeV p, 3.6 MeV alpha, split 14.7 : 3.6 by energy); the rest is burn debris at the research exhaust speed, D : 3He one to
+# one by atoms (same speed, so energy splits by mass). The share depends on target areal density, which is OPEN (WL-001).
+fast_product_share = [0.1, 0.3, 0.6]    # low, design, high
+debris_atom_ratio_D_He3 = 1.0
+# Neutral radiation (independent of any field): the non-charged share of the yield is 1 - jet_TW / fusion_TW (X-rays plus neutrons);
+# of it, D-D side-reaction neutrons are about 1 % of fusion power (range 0.5-5 %, physics.operating_point note); the rest is X-ray.
+neutron_share_of_fusion = [0.005, 0.01, 0.05]
+# Coupled cavity model (D21-B): perfectly diamagnetic sharp-boundary plasma (B = 0 inside, flux function 0 on its surface), the surface as
+# n sector markers from the burn point (thin-shell sector approximation, radial force p r^2 dOmega), its sheet current as rings offset
+# inside the surface by ring_offset x the marker spacing, the six coils flux-conserving (superconducting, microsecond pulse).
+cavity_markers = 48
+cavity_markers_convergence = [24, 48, 96]
+cavity_step_m = 0.04                    # largest radial advance of any marker per step
+cavity_step_convergence_m = [0.08, 0.04, 0.02]
+cavity_start_m = 0.3                    # initial cavity radius (the burnt target); excluded field energy there is below 1e-4 of the pulse
+ring_offset = 1.0
+downstream_m = [2.0, 10.0, 30.0, 60.0]  # aft escape planes past the exit for the domain-extension (detachment) test
+# Particle audit: directions per species for the convergence ladder, Boris steps per gyration for the timestep test, target spread for
+# the initial-position test, debris speed spread for the energy test.
+audit_directions = [100, 200, 400, 800]
+audit_dt_gyro = [20, 40, 80]
+audit_origin_m = 0.05
+audit_speed_factors = [0.75, 1.0, 1.25]
+# Instability screen: Rayleigh-Taylor e-folds of the decelerating cavity surface up to the finite-Larmor-radius cut-off (k r_L ~ 1).
+rt_modes = [4, 10, 30]
+# Cryostat wall (the field swing reaches the windings only through it): 316LN at 20 K (resistivity from vertex_engine.magnet), density
+# 7,900 kg/m3, specific heat about 10 J/(kg K) at 20 K (ESTIMATE, cryogenic stainless class; PMDS has no 20 K entry), refrigeration at
+# 20 K about 2 % of input power (ESTIMATE: Carnot 20/280 = 7 %, large plants reach about 30 % of Carnot).
+wall_density_kg_m3 = 7900.0
+wall_cp_20K_J_kgK = 10.0
+cryo_cop_20K = 0.02
+# Reference heat-flux class for plasma-facing tungsten: ITER divertor targets, 10 MW/m2 steady and 20 MW/m2 slow transients (ITER design
+# class, TRANSCRIBED as a reference, not a Vertex qualification).
+pfc_heat_flux_W_m2 = [10.0e6, 20.0e6]
+# Regenerative cooling screen (T-REG, PROTOTYPE): hydrogen working fluid heated to below the 1800 K lithium loop, enthalpy rise from liquid
+# about 25 MJ/kg (ESTIMATE: cp 14-16 kJ/(kg K) to 1700 K plus 20-300 K), expanded at nozzle efficiency 0.7; Brayton conversion of lithium
+# heat at 0.35 (ESTIMATE) for the T2 option.
+treg_outlet_K = 1700.0
+treg_enthalpy_J_kg = 2.5e7
+treg_nozzle_efficiency = 0.7
+treg_brayton_efficiency = 0.35
+# Decision (Gate D21-5, 2026-11-15): filled from vertex_plasma.decision(); the engine stays M0-NOMINAL and PROPULSION_FEASIBILITY_BLOCKED.
+outcome = "D"
+verdict = "PROPULSION_FEASIBILITY_BLOCKED"
+thrust = "THRUST_UNPROVEN"
+detachment = "DETACHMENT_OPEN"
+
 # Engine anatomy (Vertex Engine 1.1, owner brief 2026-11-14): the explanation each functional category carries into Explore Ship's part
 # inspection and the Engineering vertex page. Prose for visitors, not engineering values; physics, speculation and open questions stay
 # apart. weakest_links and breakthroughs name records of lab/studies/breakthrough-lab (not canon; never copied here).
