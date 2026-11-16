@@ -24,6 +24,7 @@ Status: ACTIVE, PARKED, SUPERSEDED (by which entry) or PROMOTED (into which `mai
 | [breakthrough-lab](studies/breakthrough-lab/NOTES.md) | Study | ACTIVE | Which declared breakthroughs, and how few, make the Vertex drive close? | 279a612 (T00 030fc14, T05 f497778 imports, Gate 2) | which breakthroughs to select for experiment; spine stiffness criterion |
 | [assembly-sequence](studies/assembly-sequence/NOTES.md) | Study | ACTIVE | In what order could the approved ship be assembled in orbit, from the first structure to first ignition? | 0aa94a3 | is the order right; the assembly yard |
 | [deadship](studies/deadship/NOTES.md) | Study | PROMOTED into main 2026-11-16 | How should Deadship teach the ship's real systems, and what do its gate and sensitivity studies say? | c77026d | Phase 4 PARKED; sourced power values; cabin hull exchange and heaters |
+| [ignition-failures](studies/ignition-failures/NOTES.md) | Study | ACTIVE | What breaks first when the drawn Vertex cluster ignites at the mission point, and what would a visitor have to change? | bbe1d7e (Vertex b87a9c1 imports) | is the training page right; squash order with the engine studies |
 
 Each entry's `NOTES.md` opens with the same table: kind, status, question, model base, the branch it came from, open owner
 questions and where its review file is.
@@ -36,7 +37,7 @@ questions and where its review file is.
   Lab code may read `data/` and `src/`.
 - Run lab scripts from the repository root (`python3 lab/variants/fdp1/run.py`). Their tests are not part of the pipeline:
   `python3 lab/variants/fdp1/tests/test_fdp1.py`, `python3 lab/studies/four-burn-mission/tests/test_fourburn.py`,
-  `python3 lab/studies/breakthrough-lab/tests/test_breakthrough_lab.py`.
+  `python3 lab/studies/breakthrough-lab/tests/test_breakthrough_lab.py`, `python3 lab/studies/ignition-failures/tests/test_model.py`.
 - A lab number reaches canon only through its Drive owner workbook and the normal loop (AGENTS.md).
 - `.blend` files and renders stay out of Git; the entry's script rebuilds them, and the review copy sits in the project files
   `review/` folder or on GitHub Pages.

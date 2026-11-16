@@ -8,6 +8,8 @@ Writes <site>/engineering/:
                               problem map's `site.py --compare`, drawn by web/engineering/compare.js over the Explore Ship model
   build/                      the assembly sequence: the approved ship put together step by step, from the spine to first ignition,
                               from the assembly-sequence study's `site.py --json`, drawn by web/engineering/build.js over the Explore Ship model
+  ignition/                   the ignition-failures training simulation: the Vertex cluster as budgeted beside the measured physics, from the
+                              ignition-failures study's `site.py --json`, drawn by web/engineering/ignition.js over the engine inspection parts
   baseline/ weakest-links/    Engineering 2.0 (tools/story_lab.py): the scientific reference, the ranked bottlenecks, the Breakthrough
   breakthrough-lab/           Lab over the precomputed scenario grid and true-scale envelopes, from the Breakthrough Lab study's
   evolution/                  `site.py --json` (lab/studies/breakthrough-lab), which validates its registries and stops the build on error
@@ -600,6 +602,124 @@ the propellant and the first burn. {n} steps in {len(seq["phases"])} phases, eac
                                              body, 2, revision, built, BUILD_HEAD))
     return True
 
+IGNITION_HEAD = '''
+<link rel="stylesheet" href="../ignition.css">
+<script type="importmap">
+{ "imports": { "three": "../../viewer/vendor/three/three.module.min.js", "three/addons/": "../../viewer/vendor/three/addons/" } }
+</script>
+<script type="module" src="../ignition.js"></script>'''
+
+
+def ignition_page(e, d, out_dir, revision, built):
+    """engineering/ignition/: the ignition-failures training simulation (web/engineering/ignition.js). Today's Vertex cluster as the
+    budget assumes it beside the same ignition with the measured physics: Overload (energy), Meltdown (heat) and the visitor's own levers.
+    Every number is written into the page from the study's result, so it reads without WebGL; the 3D view loads only the Explore Ship
+    engine-part file (build.engine_file, about 0.4 MB), never the ship GLB."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    keep = ('study', 'evidence', 'canon', 'imports', 'provenance', 'sources', 'constants', 'coils', 'proto', 'levers', 'reference', 'scenarios',
+            'checks', 'parts', 'canon_absorbed_fraction', 'requirement', 'hybrid_with_driver', 'contract')
+    (out_dir / 'ignition.json').write_text(json.dumps({k: d[k] for k in keep if k in d}, separators=(',', ':')))
+    K, r, rq = d['constants'], d['reference'], d['requirement']
+    sci = lambda v: f'{v:,.2g}'
+    tw = lambda w: f'{w / 1e12:,.2f} TW' if w >= 1e11 else (f'{w / 1e9:,.2f} GW' if w >= 1e8 else f'{w / 1e6:,.1f} MW')
+    ms = lambda t: f'{t * 1e3:,.2g} ms' if t < 1 else f'{t:,.2f} s'
+    src = d['sources']; pv = d['provenance']
+    srcl = lambda k: f'<span class="meta">{esc(src[k])}</span>'
+    events = ''.join(
+        f'<li class="ev" data-scn="{sc["id"]}" data-ev="{ev["id"]}" data-t="{ev["t"]}"><b>{esc(ms(ev["t"]) if ev["t"] else "0 s")}</b> '
+        f'<span><strong>{esc(ev["title"])}.</strong> {esc(ev["text"])}</span></li>' for sc in d['scenarios'] for ev in sc['events'])
+    modes = ''.join(f'<button role="tab" data-mode="{sc["id"]}" aria-selected="{"true" if i == 0 else "false"}"><b>{esc(sc["title"])}</b>'
+                    f'<span>{esc(sc["subtitle"])}</span></button>' for i, sc in enumerate(d['scenarios']))
+    modes += '<button role="tab" data-mode="design" aria-selected="false"><b>Your design</b><span>Pull the levers, see what fails first</span></button>'
+    assumes = ''.join(f'<p class="assumes" data-scn="{sc["id"]}"><b>Isolated:</b> {esc(sc["assumes"])}</p>' for sc in d['scenarios'])
+    levers = ''.join(f'''<div class="lever" data-lever="{l["id"]}"><label for="lv-{l["id"]}">{esc(l["label"])} <output id="lo-{l["id"]}"></output></label>
+  <input type="range" id="lv-{l["id"]}" min="0" max="1000" step="1" aria-describedby="lw-{l["id"]}">
+  <span class="meta" id="lw-{l["id"]}">{esc(l["what"])}</span></div>''' for l in d['levers'])
+    ledger = ''.join(f'<tr><td>{a}</td><td class="num">{b}</td><td>{c}</td></tr>' for a, b, c in (
+        ('Fusion power per engine at the mission point', tw(K['Pf']), srcl('ledger')),
+        ('Photons and neutrons absorbed behind the drawn shadow shield', f'{tw(K["PN"])} ({tw(K["PN_unshielded"])} without it)', srcl('ledger')),
+        ('Charged plasma reaching the hardware', f'{tw(K["L"])} ({100 * K["leak0"]:.1f} % of the stream)', srcl('leak')),
+        ('Radiator share per engine (canon: 75 % of 14.4 GW, four engines)', tw(K['cap']), srcl('power')),
+        ('Heat over radiator, from the burn', f'<b>{r["burn_ratio"]:,.0f}×</b>', srcl('ledger')),
+        ('Driver power for the targets (gain 100, 50 % efficient), never budgeted', f'{tw(r["driver_W"])}, {r["bank_ratio"]:,.0f}× the 50 MW pulse bank', srcl('ledger')),
+        ('Heat over radiator, with the driver', f'<b>{r["ratio"]:,.0f}×</b> (1.7 hybrid: {d["hybrid_with_driver"]:,.0f}×)', srcl('ledger')),
+        ('Engine heat capacity for +1000 K (1,244 t, cp 500 J/kg K)', f'{K["E1000"] / 1e12:.2f} TJ: used up in {ms(r["melt_s"])}', '<span class="meta">Vertex 1.5 (main), vertex_radiation.json treg.T3</span>'),
+        (f'Nearest superconductor ({r["coil"]}), unshielded neutron life', f'{ms(r["coil_life_s"])}; four burns need {sci(r["run_s"] / r["coil_life_s"])}× attenuation', srcl('neutrons')),
+        ('Coil shields for four engines (1.6B sizing)', f'{sum(c["shield_kg"] for c in d["coils"]) * 4 / 1e6:,.1f} kt against a {K["margin_kg"] / 1e3:.0f} t margin', srcl('neutrons')),
+        ('Stored field energy released by a quench', f'{K["quench_J"] / 1e9:.1f} GJ per engine (about {K["quench_J"] / 4.184e9:.1f} t TNT)', srcl('quench')),
+    ))
+    checks = ''.join(f'<tr><td>{esc(c["label"])}</td><td class="num">{c["ratio"]:,.4g}×</td><td>{", ".join(c["fails"]) or "<b>holds</b>"}</td></tr>'
+                     for c in d['checks'])
+    proto = ''.join(f'<li><code>{esc(k)}</code> {esc(json.dumps(v))}</li>' for k, v in d['proto'].items())
+    body = f'''<header><p class="eyebrow">Engineering · open problem · training simulation</p><h1>Ignition: what breaks</h1>
+<p class="lead">Today's four-engine Vertex cluster, switched on at the mission point. On the left it ignites the way the ship's budget
+assumes: 80 % of the fusion power leaves as exhaust and only {100 * d["canon_absorbed_fraction"]:.3g} % of it is absorbed by the hardware. On the right, the same ignition with the
+physics our engine studies measured. The heat is {r["burn_ratio"]:,.0f} times what the radiators can carry, the drivers need power
+nobody budgeted, and neutrons end the superconductors in seconds. Nothing on this page is canon: it is the open problem, shown so that you can
+try to solve it.</p>
+<p>{tag("OPEN")} {tag("DIAGNOSTIC")} · numbers from the Vertex 1.5–1.8 studies · <a href="../vertex/">Vertex propulsion lineage</a> ·
+  <a href="../{e["kind_dir"]}/{e["folder"].name}/">the study behind this page</a></p></header>
+<section class="ign">
+  <div class="ign-modes" role="tablist" aria-label="Scenario">{modes}</div>
+  {assumes}<p class="assumes" data-scn="design"><b>Everything together:</b> each failure is shown at its own time, as if the earlier ones had not
+    stopped the burn.</p>
+  <div class="stage" id="stage">
+    <canvas id="ign-view" aria-label="The Vertex cluster at ignition: as budgeted and as measured"></canvas>
+    <div class="side side-a" id="side-a">As the budget assumes<small>{100 * d["canon_absorbed_fraction"]:.3g} % of the fusion power absorbed</small></div><div class="side side-b" id="side-b">As the physics measures</div>
+    <div class="hud" id="hud" hidden></div>
+    <div class="evcap" id="evcap" aria-live="polite"></div>
+    <div class="gate" id="gate"><button id="load" class="primary">Start the simulation</button>
+      <span class="meta">Loads the engine parts of Explore Ship (about 0.4 MB) and three.js. Everything below reads without it.</span></div>
+    <div class="cstatus" id="cstatus" hidden></div>
+  </div>
+  <div class="itools">
+    <span class="nav" role="toolbar" aria-label="Playback"><button id="play" aria-label="Pause">❚❚</button><button id="restart" aria-label="Restart">↺</button></span>
+    <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Physical time">
+    <span class="clock" id="clock">t = 0 s</span>
+    <span class="views" role="toolbar" aria-label="View"><button data-split="split" aria-pressed="true">Side by side</button><button data-split="b" aria-pressed="false">Failure only</button></span>
+  </div>
+  <ol class="events" id="events">{events}</ol>
+  <div class="design" id="design">
+    <div class="levers">{levers}
+      <p class="presets"><button data-preset="drawn">As drawn</button><button data-preset="best">Best the studies found</button>
+        <button data-preset="breakthrough">What holding takes</button><button id="share">Copy a link to this design</button></p></div>
+    <div class="readouts" id="readouts" aria-live="polite"></div>
+  </div>
+</section>
+<section><h2>The question for you</h2>
+<p>How would you manage the energy and the heat? The levers trade radiator area, shielding, plasma capture, a cleaner burn, target gain and a
+  gentler burn against each other. Every lever helps somewhere. None of them closes on established physics, and that is why Wayfarer's drive is
+  still an open problem. The studies found that closing needs a burn about {rq["source_reduction"]:,.0f} times quieter in photons and neutrons,
+  near-perfect plasma capture (even perfect capture leaves {rq["perfect_capture_ratio"]:,.0f}× with the 1.7 hybrid), and a target gain of about
+  {K["D100"] * 100 / K["cap"]:,.0f} for the driver alone. If you find a design that holds, the link button keeps your levers in the address.</p></section>
+<section><h2>The numbers</h2>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Quantity (per engine)</th><th>Value</th><th>Source</th></tr></thead><tbody>{ledger}</tbody></table></div>
+<p class="meta">The unsquashed engine-study records are copied once into the study's imports from <code>{esc(pv["branch"])}</code> at
+  <code>{esc(pv["commit"])}</code>, unchanged.</p></section>
+<section><h2>How the simulation works</h2>
+<p>The page does not run a physics code. It plays the recorded ledger: one lever model, written in the study's <code>model.py</code> and mirrored
+  in the page script (the site check compares the two), scales the recorded powers, lives and energies with your levers. Where the heat lands
+  comes from the 1.5 three-dimensional exposure trace of the engine's own meshes. Each part's share inside its group follows its area over the
+  distance squared to the burn point. Each part warms at its share divided by its drawn mass, and it glows in the colour of a black body at its
+  temperature. The clock shows physical time on a log scale. Motion after a failure is slowed down so that it can be seen.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Lever setting</th><th>Heat / radiator</th><th>Fails</th></tr></thead><tbody>{checks}</tbody></table></div>
+<details><summary>Display choices (PROTOTYPE)</summary><ul class="plain meta">{proto}</ul></details>
+<p class="note">Rendering: the four engines are one instanced mesh of the 264 inspection parts, and their temperatures, melting and fragments
+  live in a small data texture. Each side of the split view takes a handful of draw calls, and nothing is drawn while the view is paused and
+  still. The engine geometry is Explore Ship's inspection file, so this page adds no model download.</p></section>'''
+    (out_dir / 'index.html').write_text(page('Ignition: what breaks · Wayfarer engineering',
+                                             'A training simulation of the open problem: the Vertex cluster at ignition, as budgeted and as measured.',
+                                             body, 2, revision, built, IGNITION_HEAD))
+    return True
+
+
+def ignition_teaser():
+    return """<section id="ignition" class="teaser"><div>
+    <h2>Ignition: what breaks · a training simulation</h2>
+    <p>The drive the ship shows, switched on with the physics our studies measured: the heat it cannot reject, the power nobody budgeted, the
+      superconductors that neutrons end in seconds. Watch it overload and melt beside the budgeted version, then pull the levers yourself.</p>
+    <p><a class="go" href="ignition/">Open the simulation</a> · open problem, not canon</p></div></section>"""
+
 
 def vertex_page(spec, out_dir, revision, built):
     """engineering/vertex/: the propulsion lineage, Vertex Research Demonstrator -> Compact Vertex Engine -> Propulsion Cluster,
@@ -635,7 +755,7 @@ def vertex_page(spec, out_dir, revision, built):
 <p class="lead">The ship now shows a {tag(spec["propulsion_representation"]["status"])} drive: four copies of one reusable Compact Vertex Engine,
   linked from a single source into a Propulsion Cluster behind the {spec["forward_shield"]["diameter"]["value"]:.0f} m shield. It is a working representation,
   not canon: the Fiji Drive canon and every mission number stay as they are, and the research demonstrator it comes from stays BLOCKED.</p>
-  <p><a class="go" href="../../viewer/#drive=SUSTAINED">See the cluster firing in Explore Ship</a> ·
+  <p><a class="go" href="../../viewer/#drive=SUSTAINED">See the cluster firing in Explore Ship</a> · <a href="../ignition/">Ignition: what breaks</a> ·
   <a href="../breakthrough-lab/">Breakthrough Lab</a></p></header>
 {f'<section class="figs">{figs}</section>' if figs else ''}
 <section><h2>1 · Lineage</h2>
@@ -1308,7 +1428,7 @@ def lab_ship(spec):
             'length_m': spec['ship']['length']['value']}
 
 
-def main_page(site, spec, entries, dropped, problem, revision, built, play=True, lab2=None, seq=None, vertex=False):
+def main_page(site, spec, entries, dropped, problem, revision, built, play=True, lab2=None, seq=None, vertex=False, ignition=False):
     import story_lab
     n = ship_numbers(spec)
     b, m, fi = n['burn'], n['mission'], n['fi']
@@ -1392,6 +1512,7 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True,
 {story_lab.teaser(lab2) if lab2 else ''}
 {build_teaser(seq) if seq else ''}
 {vertex_teaser() if vertex else ''}
+{ignition_teaser() if ignition else ''}
 {compare_teaser(prob) if prob.get("compare") else ''}
 
 <section id="goal"><h2>1 · The goal</h2>
@@ -1490,6 +1611,7 @@ def build(root, site, revision=None, built=None, play=True):
             shutil.copy2(src, out / src.name)
     entries, dropped = lab_entries()
     problem = lab2 = seq = None
+    ignition = False
     pages = ['engineering/index.html']
     for e in entries:
         d = out / e['kind_dir'] / e['folder'].name
@@ -1508,6 +1630,9 @@ def build(root, site, revision=None, built=None, play=True):
             seq = data
             build_page(e, seq, out / 'build', revision, built)
             pages.append('engineering/build/index.html')
+        if data and data.get('contract') == 'WF_IGNITION_FAILURES' and not ignition:
+            ignition = ignition_page(e, data, out / 'ignition', revision, built)
+            pages.append('engineering/ignition/index.html')
     if problem is None:
         raise RuntimeError('no lab problem map with a site.py: the Engineering page needs one')
     if lab2 is not None:
@@ -1516,7 +1641,7 @@ def build(root, site, revision=None, built=None, play=True):
     vertex = vertex_page(spec, out / 'vertex', revision, built)
     if vertex:
         pages.append('engineering/vertex/index.html')
-    main_page(Path(site), spec, entries, dropped, problem, revision, built, play, lab2, seq, vertex)
+    main_page(Path(site), spec, entries, dropped, problem, revision, built, play, lab2, seq, vertex, ignition)
     files = sorted(p.relative_to(site).as_posix() for p in out.rglob('*') if p.is_file())
     return {'entry': 'engineering/', 'pages': pages, 'files': len(files),
             'bytes': sum((Path(site) / f).stat().st_size for f in files), 'lab_entries': len(entries),

@@ -1,0 +1,127 @@
+{
+ "task": "ignition-failures page (engineering/ignition/)",
+ "date": "2026-11-16",
+ "experience": "engineering viewer (Engineering 3-D pages)",
+ "classification": "visual-quality addition (a new page); no change to Explore Ship, the walk or EVA",
+ "machine": "cloud container, headless Chromium (Playwright) with SwiftShader software WebGL 2",
+ "evidence_class": "SW (frame times) and EMU (phone viewport); draw calls, triangles and bytes are renderer independent",
+ "method": "bench(30): 30 synchronous redraws of the paused view, each finished with a 1-pixel readPixels; median of 3 page loads; both halves of the split view drawn per frame",
+ "runs": [
+  {
+   "view": "desktop 1280x800 dpr1",
+   "mode": "overload",
+   "u": 8,
+   "p50_ms": 465.3,
+   "p95_ms": 539.7,
+   "calls_per_side": 5,
+   "triangles_per_side": 106584,
+   "dpr": 1,
+   "particles": 4260,
+   "frame_class": "SW"
+  },
+  {
+   "view": "desktop 1280x800 dpr1",
+   "mode": "overload",
+   "u": 22,
+   "p50_ms": 479.3,
+   "p95_ms": 557.9,
+   "calls_per_side": 9,
+   "triangles_per_side": 110424,
+   "dpr": 1,
+   "particles": 4260,
+   "frame_class": "SW"
+  },
+  {
+   "view": "desktop 1280x800 dpr1",
+   "mode": "meltdown",
+   "u": 17,
+   "p50_ms": 460.8,
+   "p95_ms": 517.9,
+   "calls_per_side": 5,
+   "triangles_per_side": 106584,
+   "dpr": 1,
+   "particles": 2040,
+   "frame_class": "SW"
+  },
+  {
+   "view": "desktop 1280x800 dpr1",
+   "mode": "design",
+   "u": 12,
+   "p50_ms": 436.4,
+   "p95_ms": 525.2,
+   "calls_per_side": 5,
+   "triangles_per_side": 106584,
+   "dpr": 1,
+   "particles": 8028,
+   "frame_class": "SW"
+  },
+  {
+   "view": "phone 390x844 dpr2 (EMU)",
+   "mode": "overload",
+   "u": 8,
+   "p50_ms": 124.7,
+   "p95_ms": 141.5,
+   "calls_per_side": 5,
+   "triangles_per_side": 106584,
+   "dpr": 1.5,
+   "particles": 4260,
+   "frame_class": "SW"
+  },
+  {
+   "view": "phone 390x844 dpr2 (EMU)",
+   "mode": "overload",
+   "u": 22,
+   "p50_ms": 128.4,
+   "p95_ms": 161.5,
+   "calls_per_side": 9,
+   "triangles_per_side": 110424,
+   "dpr": 1.5,
+   "particles": 4260,
+   "frame_class": "SW"
+  },
+  {
+   "view": "phone 390x844 dpr2 (EMU)",
+   "mode": "meltdown",
+   "u": 17,
+   "p50_ms": 127.8,
+   "p95_ms": 144,
+   "calls_per_side": 5,
+   "triangles_per_side": 106584,
+   "dpr": 1.5,
+   "particles": 2040,
+   "frame_class": "SW"
+  },
+  {
+   "view": "phone 390x844 dpr2 (EMU)",
+   "mode": "design",
+   "u": 12,
+   "p50_ms": 131.4,
+   "p95_ms": 148.2,
+   "calls_per_side": 5,
+   "triangles_per_side": 106584,
+   "dpr": 1.5,
+   "particles": 8028,
+   "frame_class": "SW"
+  }
+ ],
+ "diagnosis_1280x800_meltdown_u17_SW_ms": {
+  "all": 465,
+  "without_plumes": 435,
+  "plumes_only": 38.5,
+  "without_environment_map": 280,
+  "noaa_all": 168.5,
+  "note": "the engine shading dominates in software; MSAA (desktop only) about 2.8x and the PMREM environment about 1.7x of it there. Neither is representative of a GPU."
+ },
+ "download_bytes": {
+  "ignition.json": 48238,
+  "ignition.js": 45780,
+  "ignition.css": 8448,
+  "index.html": 16618,
+  "engine inspection (shared with Explore Ship)": {
+   "engine.json": 197329,
+   "engine-parts.bin": 228228
+  },
+  "three.js": "the viewer's vendored copy, shared"
+ },
+ "hw": "PENDING (HW)"
+}

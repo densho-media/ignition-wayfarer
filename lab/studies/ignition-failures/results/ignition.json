@@ -1,0 +1,3139 @@
+{
+ "study": "ignition-failures",
+ "evidence": "DIAGNOSTIC",
+ "canon": false,
+ "imports": "vertex_b87a9c1.json",
+ "inputs_hash": "4079a806be5e5bc1",
+ "provenance": {
+  "branch": "claude/project-thread-6qwiwi",
+  "commit": "b87a9c1",
+  "note": "Copied once from the unsquashed Vertex research chain (1.6B, 1.7, 1.8 Phase F) so this study does not depend on the order of the squashes. Values unchanged; each block names its file and key path."
+ },
+ "sources": {
+  "ledger": "references/evidence/vertex_dynamic.json budget.reference / budget.hybrid / budget.driver (Vertex 1.7)",
+  "leak": "references/evidence/vertex_source.json interface.capture (Vertex 1.6B)",
+  "neutrons": "references/evidence/vertex_source.json neutrons.rows[S1] (Vertex 1.6B)",
+  "quench": "references/evidence/vertex_dynamic.json failures F-QUENCH, F-OVERLOAD (Vertex 1.7)",
+  "startup": "work/vertex-1-8/budgets.json startup (Vertex 1.8 Phase F)",
+  "power": "work/vertex-1-8/budgets.json power (Vertex 1.8 Phase F)",
+  "mission": "references/evidence/vertex_dynamic.json mission.rows[static] (B01 point)"
+ },
+ "constants": {
+  "Pf": 71575700000000.0,
+  "PN": 340799000000.0,
+  "PN_unshielded": 16396700000000.0,
+  "L": 17804100000000.0,
+  "loss": 1032200000.0,
+  "cap": 2700280000.0,
+  "leak0": 0.182996,
+  "D100": 2927140000000.0,
+  "eta": 0.5,
+  "E1000": 621852810780.8009,
+  "Pf_n": 118981000000000.0,
+  "bank_J": 720000000.0,
+  "bank_W": 50000000.0,
+  "burn_d": 9.98745,
+  "burns": 4,
+  "margin_kg": 173926.0,
+  "cold_allowed_W": 9071490.0,
+  "quench_J": 9723310000.0,
+  "area_m2": 5040.39457343924,
+  "areal_kg": 10.0,
+  "allowance_s": 9467280.0
+ },
+ "coils": [
+  {
+   "coil": "C1",
+   "distance_m": 5.09017,
+   "life_unshielded_s": 1.25676,
+   "attenuation_needed": 2746480.0,
+   "shield_m": 2.22387,
+   "shield_kg": 707601.0
+  },
+  {
+   "coil": "C2",
+   "distance_m": 4.6114,
+   "life_unshielded_s": 1.03146,
+   "attenuation_needed": 3346390.0,
+   "shield_m": 2.25351,
+   "shield_kg": 1253050.0
+  },
+  {
+   "coil": "L1",
+   "distance_m": 6.18074,
+   "life_unshielded_s": 1.85297,
+   "attenuation_needed": 1862780.0,
+   "shield_m": 2.16564,
+   "shield_kg": 1863480.0
+  },
+  {
+   "coil": "L2",
+   "distance_m": 6.94,
+   "life_unshielded_s": 2.33618,
+   "attenuation_needed": 1477480.0,
+   "shield_m": 2.13088,
+   "shield_kg": 2206280.0
+  },
+  {
+   "coil": "L3",
+   "distance_m": 9.87523,
+   "life_unshielded_s": 4.73022,
+   "attenuation_needed": 729704.0,
+   "shield_m": 2.02506,
+   "shield_kg": 2351620.0
+  },
+  {
+   "coil": "L4",
+   "distance_m": 15.2673,
+   "life_unshielded_s": 11.306,
+   "attenuation_needed": 305294.0,
+   "shield_m": 1.89435,
+   "shield_kg": 2291010.0
+  }
+ ],
+ "proto": {
+  "cp_J_kgK": 500.0,
+  "cold_enthalpy_J_kg": 20000.0,
+  "start_K": {
+   "coil": 20.0,
+   "cryostat": 80.0,
+   "cryo": 30.0
+  },
+  "melt_K": {
+   "structure": 1930.0,
+   "coil": 1358.0,
+   "cryostat": 1700.0,
+   "shield": 961.0,
+   "armour": 3290.0,
+   "hot": 2900.0,
+   "cryo": 1700.0,
+   "power": 1358.0,
+   "fuel": 1700.0,
+   "service": 933.0,
+   "sensor": 1700.0,
+   "lamp": 1700.0
+  },
+  "quench_kinetic_share": 0.1,
+  "cascade_s": 0.004,
+  "radiator_areal_kg_m2": 10.0,
+  "radiator_W_m2": 535727.9,
+  "trip_allowance_yr": 0.3
+ },
+ "levers": [
+  {
+   "id": "rho",
+   "label": "Radiator capacity",
+   "unit": "x today",
+   "min": 1,
+   "max": 100000.0,
+   "value": 1,
+   "log": true,
+   "what": "More radiator area per engine. Canon gives each engine 2.70 GW (75 % of the 14.4 GW radiator, four engines)."
+  },
+  {
+   "id": "att",
+   "label": "Coil neutron shielding",
+   "unit": "x attenuation",
+   "min": 1,
+   "max": 10000000.0,
+   "value": 1,
+   "log": true,
+   "what": "Shielding wrapped round each coil (1.6B). It protects the superconductor; it does not remove heat, it absorbs it."
+  },
+  {
+   "id": "leak",
+   "label": "Plasma leaking onto hardware",
+   "unit": "% of the stream",
+   "min": 0,
+   "max": 0.3,
+   "value": 0.182996,
+   "log": false,
+   "pct": true,
+   "what": "Charged exhaust that the magnetic nozzle fails to send aft (1.6B computed 18.3 %)."
+  },
+  {
+   "id": "src",
+   "label": "Photon and neutron output",
+   "unit": "x today",
+   "min": 1e-07,
+   "max": 1,
+   "value": 1,
+   "log": true,
+   "what": "A cleaner burn: less X-ray and neutron energy per joule of fusion. It also slows the neutron damage to the coils."
+  },
+  {
+   "id": "G",
+   "label": "Target gain",
+   "unit": "fusion / driver energy",
+   "min": 10,
+   "max": 10000000.0,
+   "value": 100,
+   "log": true,
+   "what": "How much fusion energy each joule of driver energy buys. The driver power comes back as heat."
+  },
+  {
+   "id": "tau",
+   "label": "Power throttle",
+   "unit": "of mission power",
+   "min": 1e-06,
+   "max": 1,
+   "value": 1,
+   "log": true,
+   "what": "Run the drive gentler. The burn gets longer in proportion (power-limited)."
+  }
+ ],
+ "reference": {
+  "P_W": 71575700000000.0,
+  "heat_W": 21073071200000.0,
+  "burn_heat_W": 18145931200000.0,
+  "driver_heat_W": 2927140000000.0,
+  "capacity_W": 2700280000.0,
+  "ratio": 7804.031878175597,
+  "burn_ratio": 6720.018368465492,
+  "driver_W": 1431514000000.0,
+  "bank_ratio": 28630.28,
+  "burn_s": 862915.68,
+  "run_s": 3451662.72,
+  "coil": "C2",
+  "coil_life_s": 1.7146062456951172,
+  "added_kg": 0.0,
+  "shield_kg": 0.0,
+  "radiator_kg": 0.0,
+  "melt_s": 0.029513140188269685,
+  "extra_trip_s": 0.0,
+  "fails": [
+   {
+    "id": "POWER",
+    "t": 0.000502963994763586,
+    "what": "the driver needs 1.432e+06 MW; the 50 MW pulse bank, the only budgeted source, is empty"
+   },
+   {
+    "id": "MELT",
+    "t": 0.029513140188269685,
+    "what": "7,804x more heat than the radiators carry: the engine is +1000 K"
+   },
+   {
+    "id": "QUENCH",
+    "t": 1.7146062456951172,
+    "what": "neutrons end the C2 superconductor, it quenches and releases its stored energy"
+   }
+  ]
+ },
+ "scenarios": [
+  {
+   "id": "overload",
+   "title": "Overload",
+   "subtitle": "The energy has nowhere to go",
+   "assumes": "Heat removed perfectly (infinite radiators), so only the energy problems are left.",
+   "clock": [
+    0.0,
+    1.8517747453507267
+   ],
+   "events": [
+    {
+     "t": 0.0,
+     "id": "IGNITE",
+     "title": "Ignition at the mission point",
+     "text": "71.6 TW of fusion per engine. The budget expects 80 % to leave as exhaust and 4e-5 to be absorbed."
+    },
+    {
+     "t": 0.000502963994763586,
+     "id": "POWER",
+     "title": "The pulse bank is empty",
+     "text": "The driver needs 1.43 TW per engine (28,630x the 50 MW bank). Nothing in the ship budget feeds it after the bank (1.7, 1.8 F: driver power was never budgeted)."
+    },
+    {
+     "t": 0.001,
+     "id": "OVERLOAD",
+     "title": "Every pulse squeezes the coils",
+     "text": "Each pulse compresses the coil flux up to 1.86x (1.3), beyond the coil rating: case stress beyond allowable (1.7 F-OVERLOAD)."
+    },
+    {
+     "t": 1.7146062456951172,
+     "id": "QUENCH",
+     "title": "C2 quenches",
+     "text": "Neutrons end the nearest superconductor after 1.71 s (1.6B, unshielded). It turns resistive and dumps 9.7 GJ, about 2.3 t of TNT, into the cold mass (1.7 F-QUENCH)."
+    },
+    {
+     "t": 1.7186062456951172,
+     "id": "CASCADE",
+     "title": "The neighbours follow",
+     "text": "One engine without field leaves unbalanced forces of about 14 MN on its neighbours (1.2); their coils quench in turn."
+    }
+   ]
+  },
+  {
+   "id": "meltdown",
+   "title": "Meltdown",
+   "subtitle": "The heat has nowhere to go",
+   "assumes": "Driver powered from somewhere and coils that never wear out, so only the heat is left.",
+   "clock": [
+    0.0,
+    0.11996125978303365
+   ],
+   "events": [
+    {
+     "t": 0.0,
+     "id": "IGNITE",
+     "title": "Ignition at the mission point",
+     "text": "18.1 TW of heat reaches each engine; its radiators carry 2.70 GW."
+    },
+    {
+     "t": 0.0001,
+     "id": "COLD",
+     "title": "The coils lose their cold",
+     "text": "The 20 K circuit can lift 9 MW per engine (1.6B); the windings receive thousands of times more."
+    },
+    {
+     "t": 0.01206,
+     "id": "ARMOUR",
+     "title": "The armour faces reach their limit",
+     "text": "About 1.2e9 W/m2 on the lit tiles: their limit in about 12 ms (1.7 F-TREAD)."
+    },
+    {
+     "t": 0.03427464565229533,
+     "id": "MELT",
+     "title": "The whole engine is 1000 K hotter",
+     "text": "Heat capacity of 1,244 t for +1000 K is used up in 34 ms (1.5 T3). 6,720x more heat arrives than the radiators carry."
+    },
+    {
+     "t": 0.05483943304367253,
+     "id": "SLUMP",
+     "title": "Parts soften and flow aft",
+     "text": "Under the thrust the softened structure slumps aft along the axis; the lithium hydride shield goes first (961 K)."
+    }
+   ]
+  }
+ ],
+ "checks": [
+  {
+   "label": "as drawn",
+   "levers": {
+    "rho": 1,
+    "att": 1,
+    "leak": 0.182996,
+    "src": 1,
+    "G": 100,
+    "tau": 1
+   },
+   "ratio": 7804.031878175597,
+   "burn_ratio": 6720.018368465492,
+   "melt_s": 0.029513140188269685,
+   "coil_life_s": 1.7146062456951172,
+   "added_kg": 0.0,
+   "fails": [
+    "POWER",
+    "MELT",
+    "QUENCH"
+   ]
+  },
+  {
+   "label": "no driver",
+   "levers": {
+    "rho": 1,
+    "att": 1,
+    "leak": 0.182996,
+    "src": 1,
+    "G": 1000000000000.0,
+    "tau": 1
+   },
+   "ratio": 6720.018368573894,
+   "burn_ratio": 6720.018368465492,
+   "melt_s": 0.03427464565229533,
+   "coil_life_s": 1.7146062456951172,
+   "added_kg": 0.0,
+   "fails": [
+    "MELT",
+    "QUENCH"
+   ]
+  },
+  {
+   "label": "perfect capture",
+   "levers": {
+    "rho": 1,
+    "att": 1,
+    "leak": 0.0,
+    "src": 1,
+    "G": 100,
+    "tau": 1
+   },
+   "ratio": 1210.604529900603,
+   "burn_ratio": 126.59102019049877,
+   "melt_s": 0.19038617004274738,
+   "coil_life_s": 1.7146062456951172,
+   "added_kg": 0.0,
+   "fails": [
+    "POWER",
+    "MELT",
+    "QUENCH"
+   ]
+  },
+  {
+   "label": "gentle",
+   "levers": {
+    "rho": 1,
+    "att": 1,
+    "leak": 0.182996,
+    "src": 1,
+    "G": 100,
+    "tau": 0.0001
+   },
+   "ratio": 0.7804031878175598,
+   "burn_ratio": 0.6720018368465493,
+   "melt_s": null,
+   "coil_life_s": 17146.062456951175,
+   "added_kg": 0.0,
+   "fails": [
+    "POWER",
+    "QUENCH",
+    "SLOW"
+   ]
+  },
+  {
+   "label": "shielded",
+   "levers": {
+    "rho": 1,
+    "att": 3000000.0,
+    "leak": 0.182996,
+    "src": 1,
+    "G": 100,
+    "tau": 1
+   },
+   "ratio": 7804.031878175597,
+   "burn_ratio": 6720.018368465492,
+   "melt_s": 0.029513140188269685,
+   "coil_life_s": 5143818.737085352,
+   "added_kg": 46001760.952774696,
+   "fails": [
+    "POWER",
+    "MELT",
+    "MASS"
+   ]
+  },
+  {
+   "label": "big radiators",
+   "levers": {
+    "rho": 10000.0,
+    "att": 1,
+    "leak": 0.182996,
+    "src": 1,
+    "G": 100,
+    "tau": 1
+   },
+   "ratio": 0.7804031878175597,
+   "burn_ratio": 0.6720018368465492,
+   "melt_s": null,
+   "coil_life_s": 1.7146062456951172,
+   "added_kg": 2015956213.5927584,
+   "fails": [
+    "POWER",
+    "QUENCH",
+    "MASS"
+   ]
+  },
+  {
+   "label": "what holding takes",
+   "levers": {
+    "rho": 1,
+    "att": 1,
+    "leak": 0.0,
+    "src": 1e-07,
+    "G": 3000000.0,
+    "tau": 1
+   },
+   "ratio": 0.4184030593987784,
+   "burn_ratio": 0.38226927574177494,
+   "melt_s": null,
+   "coil_life_s": 17146062.45695117,
+   "added_kg": 0.0,
+   "fails": []
+  },
+  {
+   "label": "best the studies found",
+   "levers": {
+    "rho": 1,
+    "att": 100000.0,
+    "leak": 0.182996,
+    "src": 0.67,
+    "G": 100,
+    "tau": 1
+   },
+   "ratio": 7762.382986208838,
+   "burn_ratio": 6678.369476498733,
+   "melt_s": 0.029671512683156896,
+   "coil_life_s": 255911.3799544951,
+   "added_kg": 35510961.69402012,
+   "fails": [
+    "POWER",
+    "MELT",
+    "QUENCH",
+    "MASS"
+   ]
+  }
+ ],
+ "group_heat_share": {
+  "SHADOW_SHIELD": 0.33755,
+  "TARGET_INJECTOR": 0.00077,
+  "OTHER_ENGINE": 0.00065,
+  "DRIVER_OPTICS": 0.0,
+  "ELECTRICAL": 0.00143,
+  "CLOSURE_COILS": 0.48281,
+  "THERMAL_PLUMBING": 0.00186,
+  "BURN_ARMOUR": 0.06377,
+  "COIL_SUPPORTS": 0.01992,
+  "CAGE": 0.04338,
+  "NOZZLE_LOOPS": 0.04786
+ },
+ "parts": [
+  {
+   "name": "VTX_Cartridge_Shell",
+   "group": "OTHER_ENGINE",
+   "material": "structure",
+   "mass_kg": 9463.7,
+   "pn": 0.00062582,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Nose",
+   "group": "OTHER_ENGINE",
+   "material": "structure",
+   "mass_kg": 2108.4,
+   "pn": 9.242e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Thrust_Collar",
+   "group": "OTHER_ENGINE",
+   "material": "structure",
+   "mass_kg": 101889.8,
+   "pn": 0.00148371,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Cage_Longeron_1",
+   "group": "CAGE",
+   "material": "structure",
+   "mass_kg": 6609.7,
+   "pn": 0.00923872,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Cage_Longeron_2",
+   "group": "CAGE",
+   "material": "structure",
+   "mass_kg": 6609.7,
+   "pn": 0.00923872,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Cage_Longeron_3",
+   "group": "CAGE",
+   "material": "structure",
+   "mass_kg": 6609.7,
+   "pn": 0.00923872,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Cage_Longeron_4",
+   "group": "CAGE",
+   "material": "structure",
+   "mass_kg": 6609.7,
+   "pn": 0.00923872,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Cage_Longeron_5",
+   "group": "CAGE",
+   "material": "structure",
+   "mass_kg": 6609.7,
+   "pn": 0.00923872,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Cage_Longeron_6",
+   "group": "CAGE",
+   "material": "structure",
+   "mass_kg": 6609.7,
+   "pn": 0.00923872,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Cage_Longeron_7",
+   "group": "CAGE",
+   "material": "structure",
+   "mass_kg": 6609.7,
+   "pn": 0.00923872,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Cage_Longeron_8",
+   "group": "CAGE",
+   "material": "structure",
+   "mass_kg": 6609.7,
+   "pn": 0.00923872,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Cage_Hoop_L1",
+   "group": "CAGE",
+   "material": "structure",
+   "mass_kg": 20486.7,
+   "pn": 0.03225108,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L1_1",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00146886,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L1_2",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00146886,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L1_3",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00146889,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L1_4",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00146888,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L1_5",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00146886,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L1_6",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00146886,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L1_7",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00146889,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L1_8",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00146888,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Cage_Hoop_L2",
+   "group": "CAGE",
+   "material": "structure",
+   "mass_kg": 23807.4,
+   "pn": 0.03478724,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L2_1",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00127086,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L2_2",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00127085,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L2_3",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00127087,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L2_4",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00127088,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L2_5",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00127086,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L2_6",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00127086,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L2_7",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00127087,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L2_8",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00127088,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Cage_Hoop_L3",
+   "group": "CAGE",
+   "material": "structure",
+   "mass_kg": 27235.2,
+   "pn": 0.02651042,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L3_1",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 322.4,
+   "pn": 0.00046848,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L3_2",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 322.4,
+   "pn": 0.00046848,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L3_3",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 322.4,
+   "pn": 0.00046848,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L3_4",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 322.4,
+   "pn": 0.00046848,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L3_5",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 322.4,
+   "pn": 0.00046848,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L3_6",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 322.4,
+   "pn": 0.00046848,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L3_7",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 322.4,
+   "pn": 0.00046848,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L3_8",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 322.4,
+   "pn": 0.00046848,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Cage_Hoop_L4",
+   "group": "CAGE",
+   "material": "structure",
+   "mass_kg": 29806.1,
+   "pn": 0.01556087,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L4_1",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00038381,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L4_2",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00038381,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L4_3",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00038381,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L4_4",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00038381,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L4_5",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00038381,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L4_6",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00038381,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L4_7",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00038381,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Loop_Seat_L4_8",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 572.0,
+   "pn": 0.00038381,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Coil_Reaction_Ring",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 16459.2,
+   "pn": 0.03223757,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C1_Strut_1",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 313.3,
+   "pn": 0.00182692,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C1_Strut_2",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 313.3,
+   "pn": 0.00182692,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C1_Strut_3",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 313.3,
+   "pn": 0.00182692,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C1_Strut_4",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 313.3,
+   "pn": 0.00182692,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C1_Strut_5",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 313.3,
+   "pn": 0.00182692,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C1_Strut_6",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 313.3,
+   "pn": 0.00182692,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C2_Strut_1",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 324.2,
+   "pn": 0.00201762,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C2_Strut_2",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 324.2,
+   "pn": 0.00201764,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C2_Strut_3",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 324.2,
+   "pn": 0.00201763,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C2_Strut_4",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 324.2,
+   "pn": 0.00201762,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C2_Strut_5",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 324.2,
+   "pn": 0.00201764,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C2_Strut_6",
+   "group": "COIL_SUPPORTS",
+   "material": "structure",
+   "mass_kg": 324.2,
+   "pn": 0.00201763,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Shadow_Shield",
+   "group": "SHADOW_SHIELD",
+   "material": "shield",
+   "mass_kg": 136547.4,
+   "pn": 0.05115411,
+   "ch": 0.18011814,
+   "start_K": 300.0,
+   "melt_K": 961.0
+  },
+  {
+   "name": "VTX_Shield_Burn_Face",
+   "group": "SHADOW_SHIELD",
+   "material": "armour",
+   "mass_kg": 88956.0,
+   "pn": 0.05250242,
+   "ch": 0.18486567,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L1_Armour_01",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 4526.9,
+   "pn": 0.00710205,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L1_Armour_02",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 4526.9,
+   "pn": 0.00710205,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L1_Armour_03",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 4526.9,
+   "pn": 0.00710205,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L1_Armour_04",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 4526.9,
+   "pn": 0.00710205,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L1_Armour_05",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 4526.9,
+   "pn": 0.00710205,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L1_Armour_06",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 4526.9,
+   "pn": 0.00710205,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L1_Armour_07",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 4526.9,
+   "pn": 0.00710205,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L1_Armour_08",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 4526.9,
+   "pn": 0.00710205,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L2_Armour_01",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 5440.0,
+   "pn": 0.00672418,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L2_Armour_02",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 5440.0,
+   "pn": 0.00672418,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L2_Armour_03",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 5440.0,
+   "pn": 0.00672418,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L2_Armour_04",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 5440.0,
+   "pn": 0.00672418,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L2_Armour_05",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 5440.0,
+   "pn": 0.00672418,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L2_Armour_06",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 5440.0,
+   "pn": 0.00672418,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L2_Armour_07",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 5440.0,
+   "pn": 0.00672418,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L2_Armour_08",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 5440.0,
+   "pn": 0.00672418,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L3_Armour_01",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 6664.6,
+   "pn": 0.00376265,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L3_Armour_02",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 6664.6,
+   "pn": 0.00376265,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L3_Armour_03",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 6664.6,
+   "pn": 0.00376265,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L3_Armour_04",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 6664.6,
+   "pn": 0.00376265,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L3_Armour_05",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 6664.6,
+   "pn": 0.00376265,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L3_Armour_06",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 6664.6,
+   "pn": 0.00376265,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L3_Armour_07",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 6664.6,
+   "pn": 0.00376265,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L3_Armour_08",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 6664.6,
+   "pn": 0.00376265,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L4_Armour_01",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 7702.7,
+   "pn": 0.00169013,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L4_Armour_02",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 7702.7,
+   "pn": 0.00169013,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L4_Armour_03",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 7702.7,
+   "pn": 0.00169013,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L4_Armour_04",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 7702.7,
+   "pn": 0.00169013,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L4_Armour_05",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 7702.7,
+   "pn": 0.00169013,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L4_Armour_06",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 7702.7,
+   "pn": 0.00169013,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L4_Armour_07",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 7702.7,
+   "pn": 0.00169013,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_L4_Armour_08",
+   "group": "BURN_ARMOUR",
+   "material": "armour",
+   "mass_kg": 7702.7,
+   "pn": 0.00169013,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_C1_LiH_Nose",
+   "group": "BURN_ARMOUR",
+   "material": "shield",
+   "mass_kg": 921.0,
+   "pn": 0.02148794,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 961.0
+  },
+  {
+   "name": "VTX_C2_LiH_Nose",
+   "group": "BURN_ARMOUR",
+   "material": "shield",
+   "mass_kg": 1514.4,
+   "pn": 0.04334231,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 961.0
+  },
+  {
+   "name": "VTX_C1_Winding",
+   "group": "CLOSURE_COILS",
+   "material": "coil",
+   "mass_kg": 16597.5,
+   "pn": 0.01434321,
+   "ch": 0.06720089,
+   "start_K": 20.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_C1_Cryostat",
+   "group": "CLOSURE_COILS",
+   "material": "cryostat",
+   "mass_kg": 1480.4,
+   "pn": 0.02585112,
+   "ch": 0.12111778,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_C2_Winding",
+   "group": "CLOSURE_COILS",
+   "material": "coil",
+   "mass_kg": 32009.5,
+   "pn": 0.03033783,
+   "ch": 0.14213892,
+   "start_K": 20.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_C2_Cryostat",
+   "group": "CLOSURE_COILS",
+   "material": "cryostat",
+   "mass_kg": 3009.4,
+   "pn": 0.05613354,
+   "ch": 0.26299709,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L1_Winding",
+   "group": "NOZZLE_LOOPS",
+   "material": "coil",
+   "mass_kg": 62650.5,
+   "pn": 0.02097547,
+   "ch": 0.0,
+   "start_K": 20.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L1_Segment_01",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 702.5,
+   "pn": 0.00547149,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L1_Segment_02",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 702.5,
+   "pn": 0.00547149,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L1_Segment_03",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 702.5,
+   "pn": 0.00547149,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L1_Segment_04",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 702.5,
+   "pn": 0.00547149,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L1_Segment_05",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 702.5,
+   "pn": 0.00547149,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L1_Segment_06",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 702.5,
+   "pn": 0.00547149,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L1_Segment_07",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 702.5,
+   "pn": 0.00547149,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L1_Segment_08",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 702.5,
+   "pn": 0.00547149,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L1_Joint_01",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 298.2,
+   "pn": 0.00091129,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L1_Joint_02",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 298.2,
+   "pn": 0.00091129,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L1_Joint_03",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 298.2,
+   "pn": 0.00091129,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L1_Joint_04",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 298.2,
+   "pn": 0.00091129,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L1_Joint_05",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 298.2,
+   "pn": 0.00091129,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L1_Joint_06",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 298.2,
+   "pn": 0.00091129,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L1_Joint_07",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 298.2,
+   "pn": 0.00091129,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L1_Joint_08",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 298.2,
+   "pn": 0.00091129,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L2_Winding",
+   "group": "NOZZLE_LOOPS",
+   "material": "coil",
+   "mass_kg": 83407.6,
+   "pn": 0.02112741,
+   "ch": 0.0,
+   "start_K": 20.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L2_Segment_01",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 945.4,
+   "pn": 0.00555631,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L2_Segment_02",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 945.4,
+   "pn": 0.00555631,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L2_Segment_03",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 945.4,
+   "pn": 0.00555631,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L2_Segment_04",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 945.4,
+   "pn": 0.00555631,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L2_Segment_05",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 945.4,
+   "pn": 0.00555631,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L2_Segment_06",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 945.4,
+   "pn": 0.00555631,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L2_Segment_07",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 945.4,
+   "pn": 0.00555631,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L2_Segment_08",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 945.4,
+   "pn": 0.00555631,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L2_Joint_01",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 333.7,
+   "pn": 0.00080688,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L2_Joint_02",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 333.7,
+   "pn": 0.00080688,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L2_Joint_03",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 333.7,
+   "pn": 0.00080688,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L2_Joint_04",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 333.7,
+   "pn": 0.00080688,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L2_Joint_05",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 333.7,
+   "pn": 0.00080688,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L2_Joint_06",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 333.7,
+   "pn": 0.00080688,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L2_Joint_07",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 333.7,
+   "pn": 0.00080688,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L2_Joint_08",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 333.7,
+   "pn": 0.00080688,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L3_Winding",
+   "group": "NOZZLE_LOOPS",
+   "material": "coil",
+   "mass_kg": 87123.4,
+   "pn": 0.01219375,
+   "ch": 0.0,
+   "start_K": 20.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L3_Segment_01",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1041.0,
+   "pn": 0.00313138,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L3_Segment_02",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1041.0,
+   "pn": 0.00313138,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L3_Segment_03",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1041.0,
+   "pn": 0.00313138,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L3_Segment_04",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1041.0,
+   "pn": 0.00313138,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L3_Segment_05",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1041.0,
+   "pn": 0.00313138,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L3_Segment_06",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1041.0,
+   "pn": 0.00313138,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L3_Segment_07",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1041.0,
+   "pn": 0.00313138,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L3_Segment_08",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1041.0,
+   "pn": 0.00313138,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L3_Joint_01",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 315.7,
+   "pn": 0.00040003,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L3_Joint_02",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 315.7,
+   "pn": 0.00040003,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L3_Joint_03",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 315.7,
+   "pn": 0.00040003,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L3_Joint_04",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 315.7,
+   "pn": 0.00040003,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L3_Joint_05",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 315.7,
+   "pn": 0.00040003,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L3_Joint_06",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 315.7,
+   "pn": 0.00040003,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L3_Joint_07",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 315.7,
+   "pn": 0.00040003,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L3_Joint_08",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 315.7,
+   "pn": 0.00040003,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L4_Winding",
+   "group": "NOZZLE_LOOPS",
+   "material": "coil",
+   "mass_kg": 75451.0,
+   "pn": 0.00524961,
+   "ch": 0.0,
+   "start_K": 20.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L4_Segment_01",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1017.7,
+   "pn": 0.00136101,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L4_Segment_02",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1017.7,
+   "pn": 0.00136101,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L4_Segment_03",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1017.7,
+   "pn": 0.00136101,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L4_Segment_04",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1017.7,
+   "pn": 0.00136101,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L4_Segment_05",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1017.7,
+   "pn": 0.00136101,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L4_Segment_06",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1017.7,
+   "pn": 0.00136101,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L4_Segment_07",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1017.7,
+   "pn": 0.00136101,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L4_Segment_08",
+   "group": "NOZZLE_LOOPS",
+   "material": "cryostat",
+   "mass_kg": 1017.7,
+   "pn": 0.00136101,
+   "ch": 0.0,
+   "start_K": 80.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L4_Joint_01",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 281.1,
+   "pn": 0.00015825,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L4_Joint_02",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 281.1,
+   "pn": 0.00015825,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L4_Joint_03",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 281.1,
+   "pn": 0.00015825,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L4_Joint_04",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 281.1,
+   "pn": 0.00015825,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L4_Joint_05",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 281.1,
+   "pn": 0.00015825,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L4_Joint_06",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 281.1,
+   "pn": 0.00015825,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L4_Joint_07",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 281.1,
+   "pn": 0.00015825,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_L4_Joint_08",
+   "group": "NOZZLE_LOOPS",
+   "material": "structure",
+   "mass_kg": 281.1,
+   "pn": 0.00015825,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Burn_Chamber_Marker",
+   "group": "OTHER_ENGINE",
+   "material": "sensor",
+   "mass_kg": 4.3,
+   "pn": 0.0001231,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Target_Launcher",
+   "group": "TARGET_INJECTOR",
+   "material": "structure",
+   "mass_kg": 2317.2,
+   "pn": 0.00048298,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Target_Bore",
+   "group": "TARGET_INJECTOR",
+   "material": "armour",
+   "mass_kg": 2430.4,
+   "pn": 0.00039742,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_Sabot_Catcher",
+   "group": "TARGET_INJECTOR",
+   "material": "armour",
+   "mass_kg": 1321.0,
+   "pn": 0.00047636,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_Driver_Final_Stage",
+   "group": "DRIVER_OPTICS",
+   "material": "power",
+   "mass_kg": 34220.4,
+   "pn": 1e-08,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_Driver_Port_1",
+   "group": "DRIVER_OPTICS",
+   "material": "armour",
+   "mass_kg": 1615.1,
+   "pn": 0.0,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_Driver_Optic_1",
+   "group": "DRIVER_OPTICS",
+   "material": "sensor",
+   "mass_kg": 11.6,
+   "pn": 0.0,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Driver_Port_2",
+   "group": "DRIVER_OPTICS",
+   "material": "armour",
+   "mass_kg": 1615.1,
+   "pn": 0.0,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_Driver_Optic_2",
+   "group": "DRIVER_OPTICS",
+   "material": "sensor",
+   "mass_kg": 11.6,
+   "pn": 0.0,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Driver_Port_3",
+   "group": "DRIVER_OPTICS",
+   "material": "armour",
+   "mass_kg": 1615.1,
+   "pn": 0.0,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_Driver_Optic_3",
+   "group": "DRIVER_OPTICS",
+   "material": "sensor",
+   "mass_kg": 11.6,
+   "pn": 0.0,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Driver_Port_4",
+   "group": "DRIVER_OPTICS",
+   "material": "armour",
+   "mass_kg": 1615.1,
+   "pn": 0.0,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_Driver_Optic_4",
+   "group": "DRIVER_OPTICS",
+   "material": "sensor",
+   "mass_kg": 11.6,
+   "pn": 0.0,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Driver_Port_5",
+   "group": "DRIVER_OPTICS",
+   "material": "armour",
+   "mass_kg": 1615.1,
+   "pn": 0.0,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_Driver_Optic_5",
+   "group": "DRIVER_OPTICS",
+   "material": "sensor",
+   "mass_kg": 11.6,
+   "pn": 0.0,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Driver_Port_6",
+   "group": "DRIVER_OPTICS",
+   "material": "armour",
+   "mass_kg": 1615.1,
+   "pn": 0.0,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  },
+  {
+   "name": "VTX_Driver_Optic_6",
+   "group": "DRIVER_OPTICS",
+   "material": "sensor",
+   "mass_kg": 11.6,
+   "pn": 0.0,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Target_Magazine",
+   "group": "TARGET_INJECTOR",
+   "material": "fuel",
+   "mass_kg": 8459.7,
+   "pn": 0.0017322,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Pulse_Pod_1",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 7807.8,
+   "pn": 0.00080653,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_Pulse_Pod_2",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 7807.8,
+   "pn": 0.00080653,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_Pulse_Pod_3",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 7807.8,
+   "pn": 0.00080653,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_Pulse_Pod_4",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 7807.8,
+   "pn": 0.00080653,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_Trunnion_1",
+   "group": "OTHER_ENGINE",
+   "material": "service",
+   "mass_kg": 510.3,
+   "pn": 2.736e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 933.0
+  },
+  {
+   "name": "VTX_Trunnion_2",
+   "group": "OTHER_ENGINE",
+   "material": "service",
+   "mass_kg": 510.3,
+   "pn": 2.736e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 933.0
+  },
+  {
+   "name": "VTX_Trunnion_3",
+   "group": "OTHER_ENGINE",
+   "material": "service",
+   "mass_kg": 510.3,
+   "pn": 2.736e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 933.0
+  },
+  {
+   "name": "VTX_Trunnion_4",
+   "group": "OTHER_ENGINE",
+   "material": "service",
+   "mass_kg": 510.3,
+   "pn": 2.736e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 933.0
+  },
+  {
+   "name": "VTX_Service_Panel",
+   "group": "OTHER_ENGINE",
+   "material": "service",
+   "mass_kg": 1166.4,
+   "pn": 5.792e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 933.0
+  },
+  {
+   "name": "VTX_Nose_Hatch",
+   "group": "OTHER_ENGINE",
+   "material": "service",
+   "mass_kg": 415.1,
+   "pn": 2.648e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 933.0
+  },
+  {
+   "name": "VTX_Handling_Post_1",
+   "group": "OTHER_ENGINE",
+   "material": "service",
+   "mass_kg": 22.0,
+   "pn": 1.1e-06,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 933.0
+  },
+  {
+   "name": "VTX_Handling_Post_2",
+   "group": "OTHER_ENGINE",
+   "material": "service",
+   "mass_kg": 22.0,
+   "pn": 1.1e-06,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 933.0
+  },
+  {
+   "name": "VTX_Handling_Post_3",
+   "group": "OTHER_ENGINE",
+   "material": "service",
+   "mass_kg": 22.0,
+   "pn": 1.1e-06,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 933.0
+  },
+  {
+   "name": "VTX_Handling_Post_4",
+   "group": "OTHER_ENGINE",
+   "material": "service",
+   "mass_kg": 22.0,
+   "pn": 1.1e-06,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 933.0
+  },
+  {
+   "name": "VTX_Exchange_Rail_4",
+   "group": "OTHER_ENGINE",
+   "material": "service",
+   "mass_kg": 246.5,
+   "pn": 6.523e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 933.0
+  },
+  {
+   "name": "VTX_Exchange_Rail_8",
+   "group": "OTHER_ENGINE",
+   "material": "service",
+   "mass_kg": 246.5,
+   "pn": 6.523e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 933.0
+  },
+  {
+   "name": "VTX_Lithium_Manifold",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 2179.2,
+   "pn": 0.00182372,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_Lithium_Supply",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 489.8,
+   "pn": 0.00096381,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_Lithium_Return",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 489.8,
+   "pn": 0.00096381,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_Lithium_Panel_Supply",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 44.8,
+   "pn": 5.904e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_Lithium_Panel_Return",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 44.8,
+   "pn": 5.904e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_Cryo_Header",
+   "group": "THERMAL_PLUMBING",
+   "material": "cryo",
+   "mass_kg": 277.1,
+   "pn": 0.00091843,
+   "ch": 0.0,
+   "start_K": 30.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Cryo_Feed_3",
+   "group": "THERMAL_PLUMBING",
+   "material": "cryo",
+   "mass_kg": 90.7,
+   "pn": 0.00061627,
+   "ch": 0.0,
+   "start_K": 30.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Cryo_Feed_7",
+   "group": "THERMAL_PLUMBING",
+   "material": "cryo",
+   "mass_kg": 90.7,
+   "pn": 0.00061627,
+   "ch": 0.0,
+   "start_K": 30.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Cryo_Feed_C1",
+   "group": "THERMAL_PLUMBING",
+   "material": "cryo",
+   "mass_kg": 23.9,
+   "pn": 0.00026807,
+   "ch": 0.0,
+   "start_K": 30.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Cryo_Feed_C2",
+   "group": "THERMAL_PLUMBING",
+   "material": "cryo",
+   "mass_kg": 22.5,
+   "pn": 0.00025531,
+   "ch": 0.0,
+   "start_K": 30.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Coil_Current_Leads",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 550.6,
+   "pn": 0.0006254,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_Power_Bus",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 362.1,
+   "pn": 0.00017468,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_Diagnostic_Head_1",
+   "group": "OTHER_ENGINE",
+   "material": "sensor",
+   "mass_kg": 90.0,
+   "pn": 1.927e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Diagnostic_Head_2",
+   "group": "OTHER_ENGINE",
+   "material": "sensor",
+   "mass_kg": 90.0,
+   "pn": 1.927e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Diagnostic_Head_3",
+   "group": "OTHER_ENGINE",
+   "material": "sensor",
+   "mass_kg": 90.0,
+   "pn": 1.927e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Diagnostic_Head_4",
+   "group": "OTHER_ENGINE",
+   "material": "sensor",
+   "mass_kg": 90.0,
+   "pn": 1.927e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Status_Lamp_1",
+   "group": "OTHER_ENGINE",
+   "material": "lamp",
+   "mass_kg": 6.9,
+   "pn": 1.34e-06,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Status_Lamp_2",
+   "group": "OTHER_ENGINE",
+   "material": "lamp",
+   "mass_kg": 6.9,
+   "pn": 1.34e-06,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Status_Lamp_3",
+   "group": "OTHER_ENGINE",
+   "material": "lamp",
+   "mass_kg": 6.9,
+   "pn": 1.34e-06,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Status_Lamp_4",
+   "group": "OTHER_ENGINE",
+   "material": "lamp",
+   "mass_kg": 6.9,
+   "pn": 1.34e-06,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Shield_Tie_Rod_1",
+   "group": "SHADOW_SHIELD",
+   "material": "structure",
+   "mass_kg": 1459.0,
+   "pn": 0.00142419,
+   "ch": 0.0050147,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Shield_Tie_Rod_2",
+   "group": "SHADOW_SHIELD",
+   "material": "structure",
+   "mass_kg": 1459.0,
+   "pn": 0.00142419,
+   "ch": 0.0050147,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Shield_Tie_Rod_3",
+   "group": "SHADOW_SHIELD",
+   "material": "structure",
+   "mass_kg": 1459.0,
+   "pn": 0.00142419,
+   "ch": 0.0050147,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Shield_Tie_Rod_4",
+   "group": "SHADOW_SHIELD",
+   "material": "structure",
+   "mass_kg": 1459.0,
+   "pn": 0.00142419,
+   "ch": 0.0050147,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Shield_Tie_Rod_5",
+   "group": "SHADOW_SHIELD",
+   "material": "structure",
+   "mass_kg": 1459.0,
+   "pn": 0.00142419,
+   "ch": 0.0050147,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Shield_Tie_Rod_6",
+   "group": "SHADOW_SHIELD",
+   "material": "structure",
+   "mass_kg": 1459.0,
+   "pn": 0.00142419,
+   "ch": 0.0050147,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Shield_Tie_Rod_7",
+   "group": "SHADOW_SHIELD",
+   "material": "structure",
+   "mass_kg": 1459.0,
+   "pn": 0.00142419,
+   "ch": 0.0050147,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Shield_Tie_Rod_8",
+   "group": "SHADOW_SHIELD",
+   "material": "structure",
+   "mass_kg": 1459.0,
+   "pn": 0.00142419,
+   "ch": 0.0050147,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_C1_Lead_Turret",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 264.6,
+   "pn": 0.00036535,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_C1_Lead_Branch",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 66.2,
+   "pn": 0.00017344,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_C2_Lead_Turret",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 264.6,
+   "pn": 0.00038392,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_C2_Lead_Branch",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 59.9,
+   "pn": 0.00016137,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L1_Lead_Turret",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 297.7,
+   "pn": 0.00024483,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L1_Lead_Branch",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 46.0,
+   "pn": 0.00011967,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L1_Cryo_Branch",
+   "group": "THERMAL_PLUMBING",
+   "material": "cryo",
+   "mass_kg": 10.3,
+   "pn": 0.00012044,
+   "ch": 0.0,
+   "start_K": 30.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L2_Lead_Turret",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 297.7,
+   "pn": 0.00019641,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L2_Lead_Branch",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 49.4,
+   "pn": 0.00010642,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L2_Cryo_Branch",
+   "group": "THERMAL_PLUMBING",
+   "material": "cryo",
+   "mass_kg": 11.2,
+   "pn": 0.00011091,
+   "ch": 0.0,
+   "start_K": 30.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L3_Lead_Turret",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 297.7,
+   "pn": 0.00011143,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L3_Lead_Branch",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 41.2,
+   "pn": 5.086e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L3_Cryo_Branch",
+   "group": "THERMAL_PLUMBING",
+   "material": "cryo",
+   "mass_kg": 9.1,
+   "pn": 5.395e-05,
+   "ch": 0.0,
+   "start_K": 30.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L4_Lead_Turret",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 297.7,
+   "pn": 5.244e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L4_Lead_Branch",
+   "group": "ELECTRICAL",
+   "material": "power",
+   "mass_kg": 55.5,
+   "pn": 3.272e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1358.0
+  },
+  {
+   "name": "VTX_L4_Cryo_Branch",
+   "group": "THERMAL_PLUMBING",
+   "material": "cryo",
+   "mass_kg": 12.8,
+   "pn": 3.574e-05,
+   "ch": 0.0,
+   "start_K": 30.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_L1_Armour_Header",
+   "group": "BURN_ARMOUR",
+   "material": "hot",
+   "mass_kg": 422.0,
+   "pn": 0.01828555,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_L1_Lithium_Supply_Jumper",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 38.6,
+   "pn": 0.00020935,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_L1_Lithium_Return_Jumper",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 38.6,
+   "pn": 0.00020935,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_L2_Armour_Header",
+   "group": "BURN_ARMOUR",
+   "material": "hot",
+   "mass_kg": 497.2,
+   "pn": 0.01687033,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_L2_Lithium_Supply_Jumper",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 42.0,
+   "pn": 0.00018655,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_L2_Lithium_Return_Jumper",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 42.0,
+   "pn": 0.00018655,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_L3_Armour_Header",
+   "group": "BURN_ARMOUR",
+   "material": "hot",
+   "mass_kg": 622.1,
+   "pn": 0.01006492,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_L3_Lithium_Supply_Jumper",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 28.3,
+   "pn": 6.681e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_L3_Lithium_Return_Jumper",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 28.3,
+   "pn": 6.681e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_L4_Armour_Header",
+   "group": "BURN_ARMOUR",
+   "material": "hot",
+   "mass_kg": 723.0,
+   "pn": 0.00474821,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_L4_Lithium_Supply_Jumper",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 34.4,
+   "pn": 3.586e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_L4_Lithium_Return_Jumper",
+   "group": "THERMAL_PLUMBING",
+   "material": "hot",
+   "mass_kg": 34.4,
+   "pn": 3.586e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 2900.0
+  },
+  {
+   "name": "VTX_Target_Transfer",
+   "group": "TARGET_INJECTOR",
+   "material": "fuel",
+   "mass_kg": 12.6,
+   "pn": 1.507e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1700.0
+  },
+  {
+   "name": "VTX_Launcher_Alignment_Ring",
+   "group": "TARGET_INJECTOR",
+   "material": "structure",
+   "mass_kg": 86.7,
+   "pn": 7.836e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Launcher_Actuator_1",
+   "group": "TARGET_INJECTOR",
+   "material": "structure",
+   "mass_kg": 15.4,
+   "pn": 1.916e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Launcher_Actuator_2",
+   "group": "TARGET_INJECTOR",
+   "material": "structure",
+   "mass_kg": 15.4,
+   "pn": 1.916e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Launcher_Actuator_3",
+   "group": "TARGET_INJECTOR",
+   "material": "structure",
+   "mass_kg": 15.4,
+   "pn": 1.916e-05,
+   "ch": 0.0,
+   "start_K": 300.0,
+   "melt_K": 1930.0
+  },
+  {
+   "name": "VTX_Bore_Shutter",
+   "group": "SHADOW_SHIELD",
+   "material": "armour",
+   "mass_kg": 163.3,
+   "pn": 0.00041007,
+   "ch": 0.00144389,
+   "start_K": 300.0,
+   "melt_K": 3290.0
+  }
+ ],
+ "canon_absorbed_fraction": 4e-05,
+ "requirement": {
+  "leak_to_close": null,
+  "leak_computed": 0.182996,
+  "leak_factor": null,
+  "perfect_capture_ratio": 112.267,
+  "source_factor_to_close": 0.00556612,
+  "source_reduction": 179.658
+ },
+ "hybrid_with_driver": 7688.38
+}
