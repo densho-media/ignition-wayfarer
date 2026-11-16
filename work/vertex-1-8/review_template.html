@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vertex A+ Ignition</title>
+<style>
+:root { --bg:#0b0d12; --panel:rgba(18,21,29,.88); --line:#2a3040; --ink:#e8ebf2; --dim:#9aa3b5; --accent:#7fb8ff; --good:#5fd38a; --warn:#f0a83c; --bad:#ff6b6b; --plasma:#c9a3ff; }
+/* single dark viewing world (an engine in space): fixed palette for both host themes */
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:13px/1.4 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; overflow:hidden; }
+#view { position:fixed; inset:0; }
+canvas { display:block; }
+.panel { position:fixed; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:10px 12px; backdrop-filter: blur(6px); }
+#hud { left:max(16px, env(safe-area-inset-left, 0px)); top:calc(16px + env(safe-area-inset-top, 0px)); width:min(440px, calc(100vw - 32px)); }
+#hud h1 { font-size:12px; font-weight:600; color:var(--dim); margin:0 0 6px; letter-spacing:.02em; }
+#state { font-size:18px; font-weight:650; margin:0; }
+#maps { color:var(--dim); font-size:12px; }
+#desc { margin:6px 0 8px; }
+.row { display:flex; justify-content:space-between; gap:10px; padding:2px 0; border-top:1px solid rgba(255,255,255,.05); }
+.row span:first-child { color:var(--dim); }
+.row b { font-weight:600; font-variant-numeric: tabular-nums; }
+#side { right:16px; top:16px; width:min(300px, calc(100vw - 32px)); max-height:calc(100vh - 150px); overflow:auto; }
+#side h2 { font-size:12px; color:var(--dim); margin:8px 0 4px; font-weight:600; }
+.modes { display:flex; flex-wrap:wrap; gap:6px; }
+button, select { background:#1b2030; color:var(--ink); border:1px solid var(--line); border-radius:7px; padding:5px 9px; font:inherit; cursor:pointer; }
+button.on { border-color:var(--accent); color:#fff; background:#20304d; }
+#bar { left:max(16px, env(safe-area-inset-left, 0px)); right:max(16px, env(safe-area-inset-right, 0px)); bottom:calc(16px + env(safe-area-inset-bottom, 0px)); padding:10px 12px; }
+#segs { display:flex; height:30px; gap:2px; margin-top:8px; cursor:pointer; position:relative; }
+.seg { flex:1; background:#1b2030; border-radius:4px; font-size:11px; color:var(--dim); display:flex; align-items:center; justify-content:center; overflow:hidden; white-space:nowrap; position:relative; }
+.seg.cur { background:#22355a; color:#fff; }
+.seg i { position:absolute; left:0; top:0; bottom:0; background:rgba(127,184,255,.25); }
+#controls { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+#clock { margin-left:auto; color:var(--dim); font-variant-numeric: tabular-nums; }
+.lamps { display:flex; gap:6px; margin:4px 0; }
+.lamp { width:14px; height:14px; border-radius:50%; background:#333; border:1px solid #555; }
+.meter { height:8px; background:#1b2030; border-radius:4px; overflow:hidden; margin:3px 0 6px; }
+.meter i { display:block; height:100%; background:var(--accent); }
+.note { color:var(--dim); font-size:12px; }
+.open { color:var(--warn); font-size:12px; }
+#measure { white-space:pre; font:11px ui-monospace, Menlo, monospace; color:var(--dim); }
+@media (max-width: 760px) {
+  #side { display:none; }
+  #hud { width:calc(100vw - 32px); font-size:12px; }
+  .seg { font-size:9px; }
+}
+</style>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
+</head>
+<body>
+<div id="view"></div>
+<div class="panel" id="hud">
+  <h1>G.U. WAYFARER 001 · Vertex 1.8 Adaptive Vertex A+ · PROTOTYPE review, not canon</h1>
+  <p id="state">–</p>
+  <div id="maps"></div>
+  <div id="desc"></div>
+  <div class="row"><span>Physical duration of this state</span><b id="dur">–</b></div>
+  <div class="row"><span>Physical clock (since dormant)</span><b id="pclock">–</b></div>
+  <div class="row"><span>Playback</span><b id="play">–</b></div>
+  <div id="readouts"></div>
+</div>
+<div class="panel" id="side">
+  <h2>View mode</h2>
+  <div class="modes" id="modes"></div>
+  <h2>Engine</h2>
+  <div class="modes"><button id="vA" class="on">A+ prototype</button><button id="vB">Today's engine</button></div>
+  <h2 id="paneltitle">Synchronization</h2>
+  <div id="panel"></div>
+  <h2>Still OPEN</h2>
+  <div class="open" id="open"></div>
+  <h2>Measured here</h2>
+  <div id="measure">–</div>
+</div>
+<div class="panel" id="bar">
+  <div id="controls">
+    <button id="playbtn">Pause</button>
+    <select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+    <button id="cine" class="on">Cinematic camera</button>
+    <span id="clock"></span>
+  </div>
+  <div id="segs"></div>
+</div>
+<script id="data" type="application/json">__DATA__</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+
+const D = JSON.parse(document.getElementById('data').textContent);
+const T = D.timeline, S = D.samples, FX = D.effects, P = D.placements;
+const q = new URLSearchParams(location.search);
+const BENCH = q.get('bench');                       // measurement mode: fixed view, no UI animation
+const b2t = (v) => new THREE.Vector3(v[0], v[2], -v[1]);   // Blender (x, y, z, +Z up) -> three (+Y up), as the glTF exporter converts
+
+// ---------- renderer and scene ----------
+const view = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({ antialias: !BENCH, powerPreference: 'high-performance' });
+renderer.setPixelRatio(BENCH ? 1 : Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight); view.appendChild(renderer.domElement);
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping;
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x07080c);
+const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.5, 6000);
+const controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = true;
+scene.add(new THREE.HemisphereLight(0xb8c6ff, 0x161820, 1.1));
+const sun = new THREE.DirectionalLight(0xfff4e6, 2.4); sun.position.set(300, 400, 200); scene.add(sun);
+addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+
+function b64(s) { const b = atob(s); const u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u.buffer; }
+const draco = new DRACOLoader().setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/libs/draco/gltf/');
+const loader = new GLTFLoader().setDRACOLoader(draco);
+const parse = (key) => new Promise((ok, no) => loader.parse(b64(D.glb[key]), '', ok, no));
+const [gA, gB, gF] = await Promise.all([parse('aplus'), parse('baseline'), parse('effects')]);
+const A = gA.scene, B = gB.scene, F = gF.scene;
+scene.add(A, B, F); B.visible = false;
+const shade = (root) => root.traverse((o) => { if (o.isMesh) { const m = o.material; m.metalness = Math.min(m.metalness ?? 0.3, 0.6); m.roughness = Math.max(m.roughness ?? 0.6, 0.35); o.userData.base = m.color.clone(); } });
+shade(A); shade(B);
+// effects: additive, translucent, driven per sample like the Blender drivers (vertex_cluster.display)
+const fx = {};
+F.traverse((o) => { if (o.isMesh) {
+  const c = o.material.color.clone();
+  o.material = new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide });
+  const [n, ...rest] = o.name.split('_'); const key = rest.join('_'); (fx[key] ||= []).push(o); o.userData.sx = o.scale.x; } });
+
+// ---------- moving groups (names from blend_aplus.build) ----------
+const G = {}; A.traverse((o) => { const m = o.name.match(/^A_N(\d)_(L4|PETAL_L\d_\d|ROTOR_(?:C1|C2|L1|L2|L3|L4))$/); if (m) (G[m[2]] ||= []).push(o); });
+const petals = Object.keys(G).filter((k) => k.startsWith('PETAL_'));
+const lamps = []; A.traverse((o) => { if (o.isMesh && /L4_INSTRUMENTATION_lamp/.test(o.name)) { o.material = o.material.clone(); lamps.push(o); } });
+const beams = []; A.traverse((o) => { if (/FX_METROLOGY/.test(o.name)) { o.traverse((m) => { if (m.isMesh) { m.material = new THREE.MeshBasicMaterial({ color: 0x55ff77, transparent: true, opacity: .9, blending: THREE.AdditiveBlending, depthWrite: false }); } }); beams.push(o); } });
+const dirs = D.petal_dirs;                          // per petal: shell and armour withdrawal vectors (engine frame, Blender axes)
+function setPose(v) {
+  const stow = D.diag.stroke_m * (1 - v.nozzle_deployment), al = D.diag.alignment;
+  const off = (al.fine_m + (al.survey_m - al.fine_m) * (1 - v.field_ring_trim)) * 0.7071;
+  for (const e of G.L4 || []) e.position.copy(b2t([stow, off, off]));
+  for (const k of petals) {
+    const d = dirs[k.replace(/^PETAL_/, '')]; if (!d) continue;
+    for (const e of G[k]) for (const ch of e.children) {
+      const vec = /armour/.test(ch.name) ? d.armour : d.shell;
+      ch.position.copy(b2t(vec.map((x) => x * v.service_petals)));
+    }
+  }
+}
+let rotorAngle = 0;
+function spin(w, dt) { rotorAngle += 2 * Math.PI * D.proto.rotor_display_rev * w * dt; for (const k in G) if (k.startsWith('ROTOR_')) for (const e of G[k]) e.rotation.x = rotorAngle; }
+
+// ---------- field lines and plasma flow (vertex_magnet solution, 1.8 evidence) ----------
+const fieldGroup = new THREE.Group(), flowGroup = new THREE.Group(); scene.add(fieldGroup, flowGroup);
+const lineMat = new THREE.LineBasicMaterial({ color: 0x5aa0ff, transparent: true, opacity: 0.0, depthWrite: false });
+const dashMat = new THREE.LineDashedMaterial({ color: 0xd6b8ff, dashSize: 1.6, gapSize: 2.4, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending });
+for (const pl of P) {
+  const M = new THREE.Matrix4();
+  const ax = pl.axes, o = pl.origin;      // engine frame -> ship frame (Blender axes), then to three
+  for (const line of D.field_lines.canon) for (let k = 0; k < 6; k++) {
+    const az = (k / 6) * 2 * Math.PI + 0.26;
+    const pts = line.map(([x, r]) => { const e = [x, r * Math.cos(az), r * Math.sin(az)];
+      const w = [0, 1, 2].map((i) => o[i] + ax[0][i] * e[0] + ax[1][i] * e[1] + ax[2][i] * e[2]); return b2t(w); });
+    const g = new THREE.BufferGeometry().setFromPoints(pts);
+    fieldGroup.add(new THREE.Line(g, lineMat));
+    const l2 = new THREE.Line(g.clone(), dashMat); l2.computeLineDistances(); flowGroup.add(l2);
+  }
+}
+
+// ---------- view modes ----------
+const MODES = { exterior: 'Exterior', field: 'Field lines', plasma: 'Plasma flow', energy: 'Energy', thermal: 'Thermal', control: 'Control', sync: 'Synchronization' };
+let mode = q.get('mode') || 'exterior';
+const modesEl = document.getElementById('modes');
+for (const [k, label] of Object.entries(MODES)) { const b = document.createElement('button'); b.textContent = label; b.dataset.m = k; b.onclick = () => { mode = k; paintModes(); }; modesEl.appendChild(b); }
+function paintModes() { for (const b of modesEl.children) b.classList.toggle('on', b.dataset.m === mode); }
+paintModes();
+let variant = q.get('variant') || 'A';
+function setVariant(x) { variant = x; A.visible = x === 'A'; B.visible = x === 'B'; vA.classList.toggle('on', x === 'A'); vB.classList.toggle('on', x === 'B'); }
+const vA = document.getElementById('vA'), vB = document.getElementById('vB');
+vA.onclick = () => setVariant('A'); vB.onclick = () => setVariant('B'); setVariant(variant);
+document.getElementById('open').innerHTML = D.open.map((x) => '• ' + x).join('<br>') + '<br><span class="note">A+ improves the machinery and the visuals; it does not close these.</span>';
+
+// ---------- timeline ----------
+const segs = document.getElementById('segs'); const total = T.play_total_s;
+for (const st of T.states) { const d = document.createElement('div'); d.className = 'seg'; d.style.flex = st.play_s; d.innerHTML = `<i></i><span>${st.n} ${st.state.replace(/_/g, ' ').toLowerCase()}</span>`; segs.appendChild(d); }
+let t = BENCH ? Number(q.get('t') || 50) : 0, playing = !BENCH, speed = 1, cine = !BENCH;
+segs.onclick = (e) => { const r = segs.getBoundingClientRect(); t = (e.clientX - r.left) / r.width * total; };
+document.getElementById('playbtn').onclick = (e) => { playing = !playing; e.target.textContent = playing ? 'Pause' : 'Play'; };
+document.getElementById('speed').onchange = (e) => { speed = Number(e.target.value); };
+const cineBtn = document.getElementById('cine'); cineBtn.onclick = () => { cine = !cine; cineBtn.classList.toggle('on', cine); };
+controls.addEventListener('start', () => { if (cine) { cine = false; cineBtn.classList.remove('on'); } });
+
+function sampleAt(t) {
+  const i = Math.min(S.length - 1, Math.max(0, t * D.fps)); const i0 = Math.floor(i), i1 = Math.min(S.length - 1, i0 + 1), f = i - i0;
+  const a = S[i0], b = S[i1]; const v = {}, d = {};
+  for (const k in a.v) v[k] = a.v[k] + (b.state === a.state ? (b.v[k] - a.v[k]) * f : 0);
+  for (const k in a.d) d[k] = a.d[k] + (b.state === a.state ? (b.d[k] - a.d[k]) * f : 0);
+  return { st: T.states[a.state - 1], v, d, fx: FX[i0], u: a.u };
+}
+const fmtDur = (s) => s >= 172800 ? (s / 86400).toFixed(1) + ' days' : s >= 3600 ? (s / 3600).toFixed(1) + ' h' : s >= 60 ? (s / 60).toFixed(1) + ' min' : s.toFixed(0) + ' s';
+const row = (k, v) => `<div class="row"><span>${k}</span><b>${v}</b></div>`;
+
+// ---------- cinematic camera (the Blender review's shots; engine frame of N1 unless C) ----------
+const shipOf = (e) => { const pl = P[0]; return b2t([0, 1, 2].map((i) => pl.origin[i] + pl.axes[0][i] * e[0] + pl.axes[1][i] * e[1] + pl.axes[2][i] * e[2])); };
+const at = (sp) => sp[0] === 'C' ? [b2t(sp[1]), b2t(sp[2])] : [shipOf(sp[0]), shipOf(sp[1])];
+function cameraFor(st, u) {
+  const [a, b] = D.shots[st.state]; const [la, ta] = at(a), [lb, tb] = at(b);
+  return [la.lerp(lb, u), ta.lerp(tb, u)];
+}
+
+// ---------- frame ----------
+const el = (id) => document.getElementById(id);
+let last = performance.now(), frames = 0, acc = 0, prevSt = -1;
+function frame(now) {
+  const dt = Math.min(0.1, (now - last) / 1000); last = now;
+  if (playing) t = (t + dt * speed) % total;
+  const { st, v, d, fx: E, u } = sampleAt(t);
+  setPose(v); spin(v.induction_rotor_speed, playing ? dt * speed : 0);
+  // effects
+  for (const key in fx) { const op = E.o[key] ?? 0, sx = E.s[key] ?? 1; for (const o of fx[key]) { o.visible = op > 0.001; o.material.opacity = Math.min(1, op) * 0.55; if (key === 'FX_PLUME') o.scale.x = o.userData.sx * Math.max(sx, 0.001); } }
+  // lock lamps: amber while the carriage travels, green at a station, bright from Vertex Lock
+  const atStation = v.nozzle_deployment < 0.002 || v.nozzle_deployment > 0.998;
+  for (const m of lamps) { m.material.color.setRGB(atStation ? 0.15 : 1.0, atStation ? 0.55 + 0.45 * v.vertex_lock : 0.55, 0.12); m.material.emissive?.copy(m.material.color).multiplyScalar(0.8); }
+  for (const b of beams) b.visible = st.n === 3;
+  // modes
+  const fieldOn = mode === 'field' || mode === 'plasma';
+  lineMat.opacity = fieldOn ? 0.15 + 0.75 * d.field_fraction : 0; fieldGroup.visible = fieldOn && d.field_fraction > 0.001;
+  flowGroup.visible = mode === 'plasma' && v.drive_active > 0.01; dashMat.opacity = 0.9 * v.drive_active; dashMat.dashSize = 1.6; dashMat.gapSize = 2.4;
+  if (flowGroup.visible) for (const l of flowGroup.children) l.material.dashOffset = -now / 1000 * 40;   // flow direction: out of the nozzle (display speed)
+  const thermal = mode === 'thermal';
+  A.traverse((o) => { if (o.isMesh && o.userData.base) { if (thermal) { const hot = /HOT_THERMAL|armour|SHIELDING/.test(o.name); const k = hot ? v.thermal_load : 0.15 * v.thermal_load; o.material.color.setRGB(0.15 + 0.85 * k, 0.15 + 0.3 * k, 0.6 - 0.5 * k); } else o.material.color.copy(o.userData.base); } });
+  // camera
+  if (cine) { const [loc, tgt] = cameraFor(st, u); camera.position.copy(loc); controls.target.copy(tgt); camera.lookAt(tgt); }
+  controls.update();
+  renderer.render(scene, camera);
+  // HUD (light: ~8 updates per second)
+  acc += dt; frames++;
+  if ((!BENCH || q.get('hud')) && (acc > 0.12 || st.n !== prevSt)) { acc = 0; prevSt = st.n; hud(st, v, d); }
+  requestAnimationFrame(frame);
+}
+function hud(st, v, d) {
+  el('state').textContent = `${st.n}/9 · ${st.state.replace(/_/g, ' ')}`;
+  el('maps').textContent = `existing drive state: ${st.maps_to}`;
+  el('desc').textContent = st.description;
+  el('dur').textContent = st.physical_label;
+  el('pclock').textContent = fmtDur(d.clock_s);
+  el('play').textContent = `${t.toFixed(1)} s of ${total.toFixed(0)} s (state ${st.play_s.toFixed(0)} s)`;
+  el('clock').textContent = `${fmtDur(d.clock_s)} physical · ${t.toFixed(1)} s playback`;
+  el('readouts').innerHTML =
+    row('L4 carriage', `${d.l4_position_m.toFixed(2)} m from the operating station`) +
+    row(`Alignment (worst loop ${D.diag.alignment.loop})`, `${d.alignment_offset_mm.toFixed(2)} mm · ${d.field_tilt_mrad.toFixed(3)} mrad`) +
+    row('Side force if the plume follows', `${d.side_force_kN.toFixed(2)} kN`) +
+    row('Stop field', `${d.stop_field_T.toFixed(2)} T (${(100 * d.field_fraction).toFixed(0)} %)`) +
+    row('Stored field energy', `${d.stored_energy_GJ.toFixed(2)} GJ per engine`) +
+    row('Dynamo rotors', v.induction_rotor_speed > 0.01 ? 'charging' : v.induction_rotor_speed < -0.01 ? 'discharging' : 'still') +
+    row('Thrust (display throttle)', `${d.thrust_MN.toFixed(2)} MN per engine`) +
+    row('Current leads', `none: ${d.lead_heat_avoided_MW.toFixed(1)} MW lead heat avoided per engine`);
+  for (const [i, s] of [...segs.children].entries()) { s.classList.toggle('cur', i === st.n - 1); const st2 = T.states[i]; const f = Math.max(0, Math.min(1, (t - st2.play_t0) / st2.play_s)); s.firstChild.style.width = (100 * f) + '%'; }
+  const pt = el('paneltitle'), pn = el('panel');
+  const meter = (k, x, note) => `<div class="row"><span>${k}</span><b>${note}</b></div><div class="meter"><i style="width:${Math.max(0, Math.min(1, x)) * 100}%"></i></div>`;
+  if (mode === 'energy') { pt.textContent = 'Energy'; pn.innerHTML = meter('Field energy (per engine)', d.field_fraction ** 2, `${d.stored_energy_GJ.toFixed(2)} / ${(D.diag.stored_J / 1e9).toFixed(2)} GJ`) + meter('Driver power (display)', v.drive_active, `${(100 * v.drive_active).toFixed(0)} %`) + `<div class="note">Bootstrap source for the first pulses: OPEN (optional flywheel, hidden; or ship storage). Sustained driver power is one of the open problems.</div>`; }
+  else if (mode === 'thermal') { pt.textContent = 'Thermal'; pn.innerHTML = meter('Drive heat allowance used', v.thermal_load, `${(100 * v.thermal_load).toFixed(0)} %`) + `<div class="note">False colour on the hot circuit and armour, keyed to the share of the drive heat allowance. Thermal closure is OPEN.</div>`; }
+  else if (mode === 'control') { pt.textContent = 'Control'; pn.innerHTML = ['nozzle_deployment', 'field_ring_trim', 'induction_rotor_speed', 'service_petals', 'ai_optimization_state', 'plasma_stability', 'thermal_load', 'vertex_lock', 'manifold_field_strength', 'nozzle_field_strength', 'drive_active'].map((k) => meter(k, Math.abs(v[k]), v[k].toFixed(2))).join('') + `<div class="note">The nine proposed properties beside the existing ones, as keyed on DRIVE_MANIFOLD_CTRL. ai_optimization_state and plasma_stability are displays.</div>`; }
+  else if (mode === 'field' || mode === 'plasma') { pt.textContent = mode === 'field' ? 'Field lines' : 'Plasma flow'; pn.innerHTML = `<div class="note">${mode === 'field' ? '12 lines through the L2 bore from the coil solution (vertex_magnet), brightness by the field fraction.' : 'Dashes move along the same lines while the drive is active. Their speed is a display: exhaust crosses the nozzle in about 400 ns.'}</div>` + row('Field', `${(100 * d.field_fraction).toFixed(0)} %`); }
+  else { pt.textContent = 'Synchronization'; const locked = v.vertex_lock > 0.5; pn.innerHTML = `<div class="lamps">${[1, 2, 3, 4].map(() => `<div class="lamp" style="background:${locked ? 'var(--good)' : (atStationOf(v) ? '#2c6b44' : 'var(--warn)')}"></div>`).join('')}</div>` + meter('AI convergence (display)', v.ai_optimization_state, `${(100 * v.ai_optimization_state).toFixed(0)} %`) + meter('Calibration residual closed (display)', v.plasma_stability, `${(100 * v.plasma_stability).toFixed(0)} %`) + `<div class="note">Four engine lamps; the cluster lock closes only when all four are locked.</div>`; }
+}
+const atStationOf = (v) => v.nozzle_deployment < 0.002 || v.nozzle_deployment > 0.998;
+el('measure').textContent = D.measure_text;
+
+// ---------- measurement hook (Playwright reads it) ----------
+window.__bench = async (n = 120) => {
+  const t0 = performance.now(); let k = 0;
+  await new Promise((ok) => { const f = () => { if (++k >= n) ok(); else requestAnimationFrame(f); }; requestAnimationFrame(f); });
+  const ms = (performance.now() - t0) / n; const info = renderer.info.render;
+  return { ms_per_frame: ms, calls: info.calls, triangles: info.triangles, geometries: renderer.info.memory.geometries };
+};
+if (BENCH) { cine = true; }
+setPose(S[0].v);
+requestAnimationFrame(frame);
+window.__ready = true;
+</script>
+</body>
+</html>

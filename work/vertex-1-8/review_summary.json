@@ -1,0 +1,49 @@
+{
+ "end_frame": 1632,
+ "fps": 24,
+ "hidden": [
+  "ENGINE_N1",
+  "ENGINE_N2",
+  "ENGINE_N3",
+  "ENGINE_N4"
+ ],
+ "objects": 316,
+ "markers": [
+  [
+   1,
+   "DORMANT"
+  ],
+  [
+   169,
+   "MECHANICAL_PREPARATION"
+  ],
+  [
+   385,
+   "DIGITAL_ALIGNMENT"
+  ],
+  [
+   553,
+   "FIELD_FORMATION"
+  ],
+  [
+   793,
+   "PLASMA_CALIBRATION"
+  ],
+  [
+   985,
+   "FIRST_IGNITION"
+  ],
+  [
+   1129,
+   "VERTEX_LOCK"
+  ],
+  [
+   1249,
+   "SUSTAINED_MODULATION"
+  ],
+  [
+   1441,
+   "SHUTDOWN_OR_FAILURE"
+  ]
+ ]
+}
