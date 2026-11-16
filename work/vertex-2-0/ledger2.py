@@ -185,8 +185,8 @@ GRID = dict(ve=(0.05, 0.055, 0.06, 0.064, 0.068, 0.072, 0.075), Tb=4, Rk=(1.0, 1
 
 def best(job):
     """Lightest closed mission of one design over exhaust speed, burn time, ring radius, separation, cluster radius and nozzle option."""
-    name, d, noz, lk, trip_yr = job
-    s = spec.load(ROOT)[0]; S = L.shared(s)
+    name, d, noz, lk, trip_yr = job[:5]
+    s = spec.load(ROOT)[0]; S = L.shared(s); S.update(job[5] if len(job) > 5 else {})
     Tb0 = S['Tb0_s']; Tmax = Tb0+2*trip_yr*YR; n = GRID['Tb']
     rows = []
     for i in range(n):

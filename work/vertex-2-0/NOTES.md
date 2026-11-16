@@ -55,3 +55,11 @@ correction; `ledger2.json`, about 15 min on 4 cores).
   0.6-5.5 million, per-pulse error growth 1.3-1.5x needs sub-ms feedback). Vertex Lock = the pulse the chain no longer needs the
   lighting driver.
 - 2.4 (3D variant) not started: the geometry is credible, but the dimensions depend on which mass lever the owner chooses.
+
+## 2.5 mass levers (owner chose "research the mass levers first", 2026-11-16 17:16Z)
+
+`levers.py` (ledger2 closure; `levers.json`): each lever alone on the 13.8 kt case, then together. Ship dose credit 13.5 kt; burnup 0.95
+12.0; channelling 0.95 11.7; REBCO fluence 1e23 11.7; J_e x2 11.0; J_e x3 9.9; all with J_e x2 7.5; all with J_e x3 **6.9 kt** (2.4 kt
+He-3, 0.072 c); all at +0.3 yr 10.1 kt. Per engine still about 320 t against 85 t allowed, spread over fin, ship shield, structure,
+radiators, conductor, boom and strips. Closure inside 4.6 kt needs a burn with far fewer neutrons and photons per jet watt (a second
+speculative step) or an envelope of about 7 kt.
