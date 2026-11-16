@@ -1,0 +1,14 @@
+r0.5_b0.5          no closure  fails: G1_closes
+r0.5_b0.8          dep 20261 t, sys 3354 t, He-3 5788 t, ve 0.055 c, fusion 67.4 TW, trip +0.60 yr, R 62 m, B0R 12.8, I 20.4 MA, sep 2000, a 744, leak 8.5e-05  fails: G2_departure,G3_propellant,G10_he3_supply
+r1_b0.5            dep 22281 t, sys 2897 t, He-3 9465 t, ve 0.050 c, fusion 68.9 TW, trip +0.60 yr, R 63 m, B0R 9.6, I 15.3 MA, sep 2000, a 754, leak 8.2e-05  fails: G2_departure,G3_propellant,G10_he3_supply
+r1_b0.8            dep 13783 t, sys 2502 t, He-3 5203 t, ve 0.060 c, fusion 60.6 TW, trip +0.60 yr, R 73 m, B0R 6.4, I 10.2 MA, sep 2000, a 877, leak 7.8e-05  fails: G2_departure,G3_propellant,G10_he3_supply
+r3_b0.5            no closure  fails: G1_closes
+r3_b0.8            no closure  fails: G1_closes
+sens_driver_05     dep 13358 t, sys 2398 t, He-3 5043 t, ve 0.060 c, fusion 58.7 TW, trip +0.60 yr, R 72 m, B0R 6.4, I 10.2 MA, sep 2000, a 864, leak 7.8e-05  fails: G2_departure,G3_propellant,G10_he3_supply
+sens_driver_3      dep 15732 t, sys 2982 t, He-3 5464 t, ve 0.060 c, fusion 63.6 TW, trip +0.60 yr, R 60 m, B0R 9.6, I 15.3 MA, sep 2000, a 725, leak 8.3e-05  fails: G2_departure,G3_propellant,G10_he3_supply
+sens_a_5e6         dep 17906 t, sys 4004 t, He-3 6372 t, ve 0.064 c, fusion 74.2 TW, trip +0.60 yr, R 65 m, B0R 12.8, I 20.4 MA, sep 2000, a 783, leak 8.4e-05  fails: G2_departure,G3_propellant,G10_he3_supply
+sens_Je_x2         dep 10950 t, sys 2105 t, He-3 3897 t, ve 0.064 c, fusion 45.4 TW, trip +0.60 yr, R 51 m, B0R 12.8, I 20.4 MA, sep 2000, a 612, leak 8.4e-05  fails: G2_departure,G3_propellant,G10_he3_supply
+sens_channel_066   dep 19957 t, sys 4020 t, He-3 7736 t, ve 0.060 c, fusion 90.1 TW, trip +0.60 yr, R 91 m, B0R 9.6, I 15.3 MA, sep 2000, a 1097, leak 7.5e-05  fails: G2_departure,G3_propellant,G10_he3_supply
+sens_channel_095   dep 11665 t, sys 2300 t, He-3 4373 t, ve 0.064 c, fusion 50.9 TW, trip +0.60 yr, R 51 m, B0R 9.6, I 15.3 MA, sep 2000, a 617, leak 8.7e-05  fails: G2_departure,G3_propellant,G10_he3_supply
+sens_cant_15       dep 14371 t, sys 2647 t, He-3 5219 t, ve 0.060 c, fusion 60.8 TW, trip +0.60 yr, R 59 m, B0R 9.6, I 15.3 MA, sep 2000, a 708, leak 8.4e-05  fails: G2_departure,G3_propellant,G10_he3_supply
+r1_b0.8_trip0.3    dep 24342 t, sys 5098 t, He-3 9189 t, ve 0.060 c, fusion 201.7 TW, trip +0.30 yr, R 133 m, B0R 6.4, I 10.2 MA, sep 2000, a 1601, leak 7.0e-05  fails: G2_departure,G3_propellant,G10_he3_supply

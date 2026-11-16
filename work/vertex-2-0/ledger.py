@@ -73,7 +73,7 @@ def shared(s):
         T_hot_cond=450.0, rho_e_al=4.3e-8, rho_al=2700.0,
         hot_basis='LITERATURE: aluminium resistivity at 450 K about 4.3e-8 ohm m; unshielded metal takes tens of dpa over one mission (swelling and transmutation OPEN)',
         J_e=5e8, rho_cond=8000.0, cond_basis='LITERATURE: REBCO engineering current density 500 A/mm2 at 20 K in moderate field, stabiliser included',
-        driver_kg_W=0.5e-3, driver_basis='EVIDENCE 1.6B nominal: power conditioning and driver plant 0.5 kg per W of average driver power',
+        driver_kg_W=0.5e-3, driver_basis='EVIDENCE 1.6B nominal: power conditioning and driver plant 0.5 kg per kW (0.5e-3 kg/W) of electrical driver power; superseded by ledger2.py (1 kg per kW)',
         start_J_kg=st['energy_J']/st['mass_kg']['flywheel'], start_J=st['energy_J'],
         start_basis='EVIDENCE 1.7: bracket-1 ignition bootstrap 1.74 GJ for the cluster, 30 kJ/kg flywheel class; counted wherever it is mounted',
         tether_k=3.0, A_front=math.pi*25.0**2, phi_ship=6e12*math.exp(5.0), ship_aft_m=250.0,
