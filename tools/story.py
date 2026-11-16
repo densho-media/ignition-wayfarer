@@ -653,7 +653,7 @@ def ignition_page(e, d, out_dir, revision, built):
     proto = ''.join(f'<li><code>{esc(k)}</code> {esc(json.dumps(v))}</li>' for k, v in d['proto'].items())
     body = f'''<header><p class="eyebrow">Engineering · open problem · training simulation</p><h1>Ignition: what breaks</h1>
 <p class="lead">Today's four-engine Vertex cluster, switched on at the mission point. On the left it ignites the way the ship's budget
-assumes: 80 % of the fusion power leaves as exhaust and {d["canon_absorbed_fraction"]:g} of it is absorbed. On the right, the same ignition with the
+assumes: 80 % of the fusion power leaves as exhaust and only {100 * d["canon_absorbed_fraction"]:.3g} % of it is absorbed by the hardware. On the right, the same ignition with the
 physics our engine studies measured. The heat is {r["burn_ratio"]:,.0f} times what the radiators can carry, the drivers need power
 nobody budgeted, and neutrons end the superconductors in seconds. Nothing on this page is canon: it is the open problem, shown so that you can
 try to solve it.</p>
@@ -665,7 +665,7 @@ try to solve it.</p>
     stopped the burn.</p>
   <div class="stage" id="stage">
     <canvas id="ign-view" aria-label="The Vertex cluster at ignition: as budgeted and as measured"></canvas>
-    <div class="side side-a" id="side-a">As the budget assumes<small>{d["canon_absorbed_fraction"]:g} of the fusion power absorbed</small></div><div class="side side-b" id="side-b">As the physics measures</div>
+    <div class="side side-a" id="side-a">As the budget assumes<small>{100 * d["canon_absorbed_fraction"]:.3g} % of the fusion power absorbed</small></div><div class="side side-b" id="side-b">As the physics measures</div>
     <div class="hud" id="hud" hidden></div>
     <div class="evcap" id="evcap" aria-live="polite"></div>
     <div class="gate" id="gate"><button id="load" class="primary">Start the simulation</button>
