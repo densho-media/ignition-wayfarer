@@ -36,6 +36,26 @@ CHECKS = [
     # LOCO-001: Explore Interior on ring A's deck with the newcomer model (walk, run, jump, landing, camera); WF_GODOT_LOCOMOTION.
     dict(name='locomotion', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '60000', '--', '--check-locomotion'],
          scene='scenes/excursion.tscn', marker='"result":"PASS"'),
+    # SYS-001 Phase 0: the ring A CO2 model reproduces its reference; Ops at the ECLSS bay isolates and restores it; WF_GODOT_SYSTEMS.
+    dict(name='systems', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '120000', '--', '--systems', '--check-systems'],
+         scene='scenes/excursion.tscn', marker='"result":"PASS"'),
+    # Deadship DS-1 (Phase 1): the Scrubber tutorial played through the trainee's Use and Ops, watch and debrief; WF_GODOT_DEADSHIP.
+    dict(name='deadship', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '120000', '--', '--deadship', '--check-deadship'],
+         scene='scenes/excursion.tscn', marker='"result":"PASS"'),
+    # SYS-002 (Deadship Phase 2A): ring A's air by compartment; the walk's doors and the bay's ventilation switch connect it; WF_GODOT_AIRFLOW.
+    dict(name='airflow', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '120000', '--', '--airflow', '--check-airflow'],
+         scene='scenes/excursion.tscn', marker='"result":"PASS"'),
+    # Deadship DS-2B "Shared Air" (Phase 2B): every packaged reference case replays here; containment, doors, bay controls, crew orders,
+    # the watch, the debrief and replay played through the trainee's Use and Ops; WF_GODOT_SHARED_AIR.
+    dict(name='shared_air', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '300000', '--', '--shared-air', '--check-shared-air'],
+         scene='scenes/excursion.tscn', marker='"result":"PASS"'),
+    # Deadship DS-2C "Borrowed Air" and DS-3 "Dark Bus" (Phases 2C and 3) on the ring services model (SYS-003): every packaged
+    # reference case replays here; each default strategy is played through the trainee's Use and Ops, then the watch, debrief and replay;
+    # WF_GODOT_SHIP_OPS.
+    dict(name='borrowed_air', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '400000', '--', '--borrowed-air', '--check-ship-ops'],
+         scene='scenes/excursion.tscn', marker='"result":"PASS"'),
+    dict(name='dark_bus', args=['--fixed-fps', '60', 'res://scenes/excursion.tscn', '--quit-after', '400000', '--', '--dark-bus', '--check-ship-ops'],
+         scene='scenes/excursion.tscn', marker='"result":"PASS"'),
     # CTRL-001: the player-action registry, the first-visit controls setup, the Controls menu, conflicts, persistence, migration and
     # storage failures, on isolated profiles (needs no package); WF_GODOT_CONTROLS.
     dict(name='controls', args=['--script', 'res://scripts/check_controls.gd'], script='scripts/check_controls.gd', marker='"result":"PASS"',

@@ -19,10 +19,13 @@ and walks it as a visitor does, recording every request:
 Screenshots, metrics and check.json go to --out; --record writes the summary into the site's release.json. It checks behaviour,
 loading isolation and transfer sizes, not frame rates on real hardware. The viewer's camera damping is switched off before input.
 --part runs one part (main: start, viewer, play, switching, phone, review; equivalence; walk); CI runs each on its own runner and --merge combines their check.json (a missing part fails), recording into
-release.json with --record. --frame-shell runs the equivalence part in a Chrome headless shell with frames on demand (FramePump):
+release.json with --record. On request only (not in CI): --part training plays the SYS-001 systems proof (#interior-systems) and the
+DS-1 Deadship tutorial (#interior-deadship) with every action answered by the player's own key, then on an emulated phone by its
+touch button, and saves their stills; --part training-scripted runs their scripted checks in the browser. --frame-shell runs the equivalence part in a Chrome headless shell with frames on demand (FramePump):
 the same checks on the same 1/60 s frames, about ten times sooner than in real time.
 
     python3 tools/web_check.py <site dir> --out <dir> [--chrome google-chrome] [--record] [--part main|equivalence|walk ...] [--frame-shell <chrome-headless-shell>]
+    python3 tools/web_check.py <site dir> --out <dir> --part training [--training systems|deadship|airflow|shared-air[-purge|-separate|-separate-late|-nocontain]|borrowed-air[-pump|-relocate|-cannibalize]|dark-bus[-dark-b|-economy|-keep-garden|-short]] [--no-touch] [--rotate]
     python3 tools/web_check.py <site dir> --merge <part out dir> ... --out <dir> [--record]
 """
 import argparse
@@ -705,6 +708,185 @@ def run_touch_walk(url, play_release, binary, sandbox, out, record_check, metric
         log.close()
 
 
+# SYS-001 / DS-1 (opt-in part "training", not in the CI parts): the systems proof (#interior-systems) and the Deadship scrubber
+# tutorial (#interior-deadship) run their own checks in the browser with --await-player. The check walks the trainee as before, but
+# at every player action it stops and asks (WF_AWAIT); this driver answers with the player's own input: the key the page publishes
+# for that action (window.wayfarerControls.keys) on a desktop, the on-screen button (window.wayfarerTouch) on an emulated phone.
+# The scene's own input handling then performs the action; a still asked for (WF_SHOT) is a DevTools screenshot of the page. The engine
+# runs with --disable-render-loop (software WebGL draws the ship at about 1 frame/s) and draws only for each still.
+TRAINING = (('systems', '#interior-systems', ('--systems', '--check-systems'), 'WF_GODOT_SYSTEMS '),
+            ('deadship', '#interior-deadship', ('--deadship', '--check-deadship'), 'WF_GODOT_DEADSHIP '),
+            ('airflow', '#interior-airflow', ('--airflow', '--check-airflow'), 'WF_GODOT_AIRFLOW '),
+            ('shared-air', '#interior-shared-air', ('--shared-air', '--check-shared-air'), 'WF_GODOT_SHARED_AIR '),
+            # DS-2B's other strategies (the default above isolates sector 1 and ends with a replay)
+            ('shared-air-purge', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=purge'), 'WF_GODOT_SHARED_AIR '),
+            ('shared-air-separate', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=separate'), 'WF_GODOT_SHARED_AIR '),
+            ('shared-air-separate-late', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=separate_late'), 'WF_GODOT_SHARED_AIR '),
+            ('shared-air-nocontain', '#interior-shared-air', ('--shared-air', '--check-shared-air', '--strategy=nocontain'), 'WF_GODOT_SHARED_AIR '),
+            # Deadship Phases 2C and 3 on the ring services model (SYS-003): each default strategy ends with a replay
+            ('borrowed-air', '#interior-borrowed-air', ('--borrowed-air', '--check-ship-ops'), 'WF_GODOT_SHIP_OPS '),
+            ('borrowed-air-pump', '#interior-borrowed-air', ('--borrowed-air', '--check-ship-ops', '--strategy=borrow_fan_pump'), 'WF_GODOT_SHIP_OPS '),
+            ('borrowed-air-relocate', '#interior-borrowed-air', ('--borrowed-air', '--check-ship-ops', '--strategy=relocate'), 'WF_GODOT_SHIP_OPS '),
+            ('borrowed-air-cannibalize', '#interior-borrowed-air', ('--borrowed-air', '--check-ship-ops', '--strategy=cannibalize'), 'WF_GODOT_SHIP_OPS '),
+            ('dark-bus', '#interior-dark-bus', ('--dark-bus', '--check-ship-ops'), 'WF_GODOT_SHIP_OPS '),
+            ('dark-bus-dark-b', '#interior-dark-bus', ('--dark-bus', '--check-ship-ops', '--strategy=shed_dark_b'), 'WF_GODOT_SHIP_OPS '),
+            ('dark-bus-economy', '#interior-dark-bus', ('--dark-bus', '--check-ship-ops', '--strategy=shed_economy'), 'WF_GODOT_SHIP_OPS '),
+            ('dark-bus-keep-garden', '#interior-dark-bus', ('--dark-bus', '--check-ship-ops', '--strategy=keep_garden'), 'WF_GODOT_SHIP_OPS '),
+            ('dark-bus-short', '#interior-dark-bus', ('--dark-bus', '--check-ship-ops', '--strategy=short_reserve'), 'WF_GODOT_SHIP_OPS '))
+TRAINING_SECONDS = 2400
+
+
+def cdp_key(label):
+    """The DevTools key event of a published binding label's first keyboard entry ('E · X button' -> E), or None."""
+    named = {'Space': ('Space', 32, ' '), 'Enter': ('Enter', 13, 'Enter'), 'Tab': ('Tab', 9, 'Tab'),
+             '↑': ('ArrowUp', 38, 'ArrowUp'), '↓': ('ArrowDown', 40, 'ArrowDown'), '←': ('ArrowLeft', 37, 'ArrowLeft'), '→': ('ArrowRight', 39, 'ArrowRight')}
+    for part in str(label or '').split(' · '):
+        part = part.strip()
+        if len(part) == 1 and part.isalnum():
+            u = part.upper()
+            return ('Key' + u if u.isalpha() else 'Digit' + u), ord(u), part.lower()
+        if part in named:
+            return named[part]
+    return None
+
+
+PORTRAIT = {'width': 390, 'height': 844, 'deviceScaleFactor': 3, 'mobile': True, 'screenOrientation': {'type': 'portraitPrimary', 'angle': 0}}
+LANDSCAPE = {'width': 844, 'height': 390, 'deviceScaleFactor': 3, 'mobile': True, 'screenOrientation': {'type': 'landscapePrimary', 'angle': 90}}
+ROTATE_AFTER = 3          # --rotate: the phone turns upright after this many answered actions
+
+
+def run_training(url, play_release, binary, sandbox, out, record_check, metrics, touch=False, scripted=False, names=None, rotate=False,
+                 desktop=(1280, 720)):
+    """Each training's own check in the browser. touch: an emulated phone answering by its on-screen buttons; rotate: that phone starts
+    in landscape and turns upright mid-run (the buttons then answer at their new places). scripted: no --await-player (the check itself
+    calls the handlers: an in-browser engine run, not player input; the Phase 0 site has no other)."""
+    how = 'scripted' if scripted else (('rotate' if rotate else 'touch') if touch else 'keys')
+    if how == 'keys' and tuple(desktop) != (1280, 720):
+        how = f'keys{desktop[0]}x{desktop[1]}'
+    profile = tempfile.mkdtemp(prefix=f'wf-web-training-{how}-')
+    log = open(out / f'chrome-training-{how}.log', 'w')
+    chrome = Chrome(binary, profile, log, sandbox)
+    shots_dir = out / 'training'
+    shots_dir.mkdir(exist_ok=True)
+    runs = metrics.setdefault('training', {})
+    try:
+        page, traffic = Page(chrome), Traffic(chrome)
+        if touch:
+            page.send('Emulation.setDeviceMetricsOverride', LANDSCAPE)
+            page.send('Emulation.setTouchEmulationEnabled', {'enabled': True, 'maxTouchPoints': 5})
+        else:
+            page.send('Emulation.setDeviceMetricsOverride', {'width': desktop[0], 'height': desktop[1], 'deviceScaleFactor': 1, 'mobile': False})
+        for name, hash_, flags, line_prefix in TRAINING:
+            if names and name not in names:
+                continue
+            mark = traffic.mark()
+            t0 = time.monotonic()
+            args = ['--disable-render-loop', '--fixed-fps', '60', '--', *flags, *([] if scripted else ['--await-player']), *(['--touch-probe'] if touch else [])]
+            if touch:
+                page.send('Emulation.setDeviceMetricsOverride', LANDSCAPE)
+            page.send('Page.navigate', {'url': url + play_release['page'] + '?' + '&'.join(f'arg={a}' for a in args) + hash_})
+            answered, seen, shots, line = [], 0, [], None
+            beat = time.monotonic() + 30
+            end = time.monotonic() + TRAINING_SECONDS
+            while time.monotonic() < end and not traffic.crashed:
+                lines = [t for _, t in traffic.since(mark)[1]]
+                for text in lines[seen:]:
+                    if os.environ.get('WF_TRAINING_TRACE') or text.startswith(('WF_', 'ERROR', 'SCRIPT ERROR', 'Godot Engine', 'check:')):
+                        print(f'  [{name} {how} {round(time.monotonic() - t0)} s] {text[:160]}', flush=True)
+                    if text.startswith('WF_AWAIT '):
+                        rec = json.loads(text.split(' ', 1)[1])
+                        if touch:
+                            b = None
+                            for i in range(120):                 # the button showing the awaited label (the probe publishes every 0.25 s)
+                                st = page.js('window.wayfarerTouch || null') or {}
+                                b = next((b for b in st.get('buttons', []) if b[0] == rec['action'] and (i >= 8 or b[1] == rec.get('label'))), None)
+                                if b:
+                                    break
+                                time.sleep(0.25)
+                            if b:
+                                at = (b[2][0] + b[2][2] / 2, b[2][1] + b[2][3] / 2)
+                                page.touch('touchStart', [at])
+                                time.sleep(0.15)
+                                page.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []})
+                            answered.append({**rec, 'input': 'tap ' + (b[1] if b else 'NO BUTTON')})
+                            if rotate and len(answered) == ROTATE_AFTER:
+                                time.sleep(1.0)                  # the action's own frame first, then the phone turns upright
+                                page.send('Emulation.setDeviceMetricsOverride', PORTRAIT)
+                                answered.append({'action': 'rotate', 'label': 'portrait', 'input': 'turned upright'})
+                                stay = None                      # the shell asks once: turn sideways or continue upright; a person taps
+                                for _ in range(40):
+                                    stay = page.js("(() => { const t = document.getElementById('turn'), b = document.getElementById('turn-stay');"
+                                                   " if (!t || t.hidden || !b) return null; const r = b.getBoundingClientRect();"
+                                                   " return [r.x + r.width / 2, r.y + r.height / 2]; })()")
+                                    if stay:
+                                        break
+                                    time.sleep(0.25)
+                                if stay:
+                                    page.touch('touchStart', [tuple(stay)])
+                                    time.sleep(0.15)
+                                    page.send('Input.dispatchTouchEvent', {'type': 'touchEnd', 'touchPoints': []})
+                                    time.sleep(0.5)
+                                gone = page.js("document.getElementById('turn').hidden")
+                                answered.append({'action': 'turn prompt', 'label': 'Continue upright',
+                                                 'input': 'tap Continue upright' if stay and gone else 'NO PROMPT ANSWER'})
+                        else:
+                            label = (page.js('window.wayfarerControls && window.wayfarerControls.keys') or {}).get(rec['action'])
+                            k = cdp_key(label)
+                            if k:
+                                page.js("document.querySelector('canvas') && document.querySelector('canvas').focus()")
+                                page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': k[2], 'code': k[0], 'windowsVirtualKeyCode': k[1]})
+                                time.sleep(0.15)
+                                page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': k[2], 'code': k[0], 'windowsVirtualKeyCode': k[1]})
+                            answered.append({**rec, 'input': f'key {label}' if k else f'NO KEY for {label}'})
+                    elif text.startswith('WF_SHOT '):
+                        shot = text.split(' ', 1)[1].strip()
+                        try:
+                            page.screenshot(shots_dir / f'{name}_{how}_{shot}.png')
+                            shots.append(shot)
+                        finally:
+                            page.js(f'window.wayfarerShotDone = {json.dumps(shot)}')
+                    elif text.startswith(line_prefix):
+                        line = text
+                seen = len(lines)
+                if line:
+                    break
+                if time.monotonic() > beat:              # a heartbeat: where the trainee is and how fast the page runs
+                    beat = time.monotonic() + 60
+                    try:
+                        w = page.js('window.wayfarerWalk || null') or {}
+                        fps = page.js(RAF_FPS.replace('{ms}', '2000'), timeout=30)
+                        print(f'  [{name} {how} {round(time.monotonic() - t0)} s] at {[round(w.get(k, 0), 1) for k in "xyz"]} {fps}', flush=True)
+                    except (RuntimeError, TimeoutError) as e:
+                        print(f'  [{name} {how}] heartbeat: {e!r}'[:200], flush=True)
+                time.sleep(0.25)
+            time.sleep(TEARDOWN_SECONDS if line else 0)
+            texts = [t for _, t in traffic.since(mark)[1]]
+            cut = texts.index(line) if line in texts else len(texts)
+            errors = [t for t in texts[:cut] if t.startswith(('ERROR', 'SCRIPT ERROR'))]
+            res = json.loads(line.split(' ', 1)[1]) if line else {}
+            seconds = round(time.monotonic() - t0, 1)
+            real = scripted or (answered and all(not a['input'].startswith('NO ') for a in answered))
+            what = {'scripted': 'its scripted check passes in the browser (engine run, no player input)',
+                    'keys': "every action answered by the player's own key in the browser",
+                    'touch': "every action answered by an on-screen button on an emulated phone",
+                    'rotate': "every action answered by an on-screen button on an emulated phone turned upright mid-run"}.get(
+                        how, f"every action answered by the player's own key in a {desktop[0]}x{desktop[1]} desktop viewport")
+            record_check(f'training: {name}: {what}', res.get('result') == 'PASS' and real and not errors and not traffic.crashed,
+                         result=res.get('result'), fails=res.get('fails', [])[:5], answered=answered, shots=shots, errors=errors[:3],
+                         physics_frames=res.get('physics_frames'), seconds=seconds)
+            runs[f'{name}_{how}'] = {'result': res.get('result'), 'answered': len(answered), 'shots': shots, 'seconds': seconds,
+                                     'physics_frames': res.get('physics_frames')}
+            (shots_dir / f'{name}_{how}.json').write_text(json.dumps({'result': res, 'answered': answered, 'errors': errors}, indent=1) + '\n')
+    except Exception as error:
+        log.flush()
+        record_check(f'training: {how} browser session', False, error=repr(error),
+                     chrome_log=(out / f'chrome-training-{how}.log').read_text(errors='replace').splitlines()[-8:])
+    finally:
+        chrome.close()
+        shutil.rmtree(profile, ignore_errors=True)
+        log.close()
+
+
 def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
     """The visitor's walk in one browser: start page, Explore Ship, Explore Interior and Explore Exterior, switching and memory, phone, review."""
     play_release = release['experiences'].get('play')
@@ -1240,6 +1422,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
 
 
 PARTS = ('main', 'equivalence', 'walk')     # the main visitor walk, browser-vs-native, the touch walk
+OPTIONAL_PARTS = ('training', 'training-scripted')   # on request only (not in CI): the SYS-001 / DS-1 trainings, see run_training
 
 
 def record_release(site, release, results, metrics, version):
@@ -1288,7 +1471,7 @@ def merge(site, part_dirs, out, record=False):
 
 
 def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=None, recording=True, touch=True, parts=PARTS,
-          frame_shell=None):
+          frame_shell=None, training_names=None, rotate=False, desktop=(1280, 720)):
     """site: the local site directory, or None with live=<deployed URL ending in />, which reads release.json from there.
     parts: the sessions to run (PARTS); each part's check.json can be merged later (merge)."""
     out.mkdir(parents=True, exist_ok=True)
@@ -1327,6 +1510,14 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
     try:
         if 'main' in parts:
             run_main(url, release, build, binary, sandbox, out, record_check, metrics)
+        if 'training' in parts and play_release:
+            run_training(url, play_release, binary, sandbox, out, record_check, metrics, names=training_names, desktop=desktop)
+            if touch:
+                run_training(url, play_release, binary, sandbox, out, record_check, metrics, touch=True, names=training_names)
+            if rotate:
+                run_training(url, play_release, binary, sandbox, out, record_check, metrics, touch=True, rotate=True, names=training_names)
+        if 'training-scripted' in parts and play_release:
+            run_training(url, play_release, binary, sandbox, out, record_check, metrics, scripted=True, names=training_names)
     finally:
         if side:
             side.join()
@@ -1353,7 +1544,12 @@ if __name__ == '__main__':
     parser.add_argument('--no-sandbox', action='store_true', help="disposable CI VMs whose AppArmor blocks Chrome's namespace sandbox")
     parser.add_argument('--record', action='store_true', help="write the results into the site's release.json (tests)")
     parser.add_argument('--play-seconds', type=int, default=900, help='time allowed for the browser walk check')
-    parser.add_argument('--part', action='append', choices=PARTS, help='run only this part (repeatable; default all): main, equivalence, walk')
+    parser.add_argument('--part', action='append', choices=PARTS + OPTIONAL_PARTS,
+                        help='run only this part (repeatable; default the CI parts main, equivalence, walk); training: the systems proof and the '
+                             'Deadship tutorial answered by real keys and touch; training-scripted: their scripted checks in the browser')
+    parser.add_argument('--rotate', action='store_true', help='with training: also a phone that turns from landscape to portrait mid-run')
+    parser.add_argument('--desktop', default='1280x720', help='with training: the desktop viewport of the keyboard run, WxH (default 1280x720)')
+    parser.add_argument('--training', action='append', choices=[t[0] for t in TRAINING], help='with training or training-scripted: only these trainings')
     parser.add_argument('--frame-shell', type=Path, help='Chrome headless shell binary: run the equivalence part there with frames on demand '
                         '(begin-frame control) instead of in real time; same checks, same frames')
     parser.add_argument('--merge', type=Path, nargs='+', metavar='DIR', help="merge these parts' check.json into --out (with --record, into the site)")
@@ -1363,7 +1559,8 @@ if __name__ == '__main__':
     else:
         report = check(args.site and args.site.resolve(), args.out.resolve(), args.chrome, sandbox=not args.no_sandbox, record=args.record,
                        play_seconds=args.play_seconds, live=args.live, recording=not args.no_recording, touch=not args.no_touch,
-                       parts=tuple(args.part or PARTS), frame_shell=args.frame_shell and str(args.frame_shell.resolve()))
+                       parts=tuple(args.part or PARTS), frame_shell=args.frame_shell and str(args.frame_shell.resolve()),
+                       training_names=args.training, rotate=args.rotate, desktop=tuple(int(v) for v in args.desktop.split('x')))
     print(report['result'], f"{sum(r['ok'] for r in report['checks'])}/{len(report['checks'])} checks")
     if os.environ.get('GITHUB_ACTIONS'):
         loads = {r['check']: r.get('seconds') for r in report['checks'] if 'seconds' in r}

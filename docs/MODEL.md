@@ -1977,6 +1977,137 @@ utility row.
   measured, at spawn). Both excursions take 88,000 physics frames, about 100 s headless natively; the same check passes in the
   WebAssembly build in headless Chromium with drawing off (about 1,470 s), and the scene draws there without errors.
 
+## Ring cabin CO₂ in the walk (SYS-001, SYS-002) and the Deadship scrubber tutorial (DS-1)
+
+`src/wayfarer/cabin_air.py` (v2) is ring A's cabin CO₂ as one engineering state, with no game logic: one well-mixed free gas volume
+(PROTOTYPE 466.4 m³ = the three sectors' net volume + ring A's CIRC-001 corridor gross, crew tubes excluded), the cabin's 80 kPa
+(BASELINE), the 0.3 % target and 0.5 % control maximum (WORKING), 1.0 kg CO₂ per person-day (41!B15, STUDY), and PROTOTYPE values for
+six occupants, 295 K and a removal unit rated to hold twelve at the target (k ≈ 116 m³/h). The step is the exact solution of
+dm/dt = G − k·m/V. The unit has three independent fields: mode RUNNING / ISOLATED, fan OK / FAILED and the spare fan's place
+NONE / BENCH / CARRIED / INSTALLED; it removes CO₂ only when RUNNING with its fan OK. Operations (isolate, restore, fault_fan, take_spare,
+install_spare) come from one table of requirements and effects; a refused operation changes nothing and has a stated reason (a fan is
+replaced only with the unit isolated and the spare carried; a unit with a failed fan is not restored). Component readings
+(`diagnostics`: supply, controller, fan command and speed, scrubbed flow, bed, removal rate) follow from the state. The time to the
+control limit counts from the present state at the present trend. Bands by partial pressure: the control limit (WORKING), plus degraded
+habitability (0.8 kPa) and physiological danger (3.0 kPa), PROTOTYPE reference levels, never canon (medical limits OPEN, 12!G22).
+The ring is one volume because its intermodule ventilation is assumed to mix it (PROTOTYPE); CIRC doors stand normally closed and do
+not change the gas here, so the walk claims no door effect.
+
+The export writes `wf_cabin_air.json` (the operation and refusal tables, 41 checkpoints of a 10 h proof run with its expected
+outcomes, the tolerance 1e-9 relative + 1e-9 kg). In the walk, `WfCabinAir` (`godot/scripts/systems/cabin_air.gd`) must reproduce
+them before anything is shown. `#interior-systems` (`-- --systems`) creates `WfEquipment` (`scripts/excursion/equipment.gd`, a small
+registry of equipment points): at the sector 3 ECLSS bay (`Prod_RA3_GDN_ECLSS`) Ops isolates or restores the unit, and a board above
+the bay shows the readout at a labelled ×60 rate.
+
+**DS-1 "Scrubber"** (`#interior-deadship`, `-- --deadship`; TUTORIAL, unscored) is a scenario on the same model. `data/deadship/
+ds1_scrubber.toml` holds only the scenario: start state, the injected fan fault and how long before the trainee arrives (4.5 h, so
+the ring starts at the model's 0.318 %), time scales, the bench node (`Prod_RA2_WRK_Tools_Workbench`), eight steps with their completion
+conditions on engineering state or player actions, evidence and debrief texts with placeholders filled from the model. It refuses any
+engineering value (`deadship.py`). The export writes `wf_deadship_ds1.json` with the Python reference replay; `WfDeadship`
+(`godot/scripts/deadship/scrubber.gd`) replays it against the runtime model before starting. The trainee recognizes the warning,
+inspects the unit (Use), reads supply, fan, bed and conclusion, isolates (Ops), fetches the spare fan from the sector 2 workbench (one
+carried item), fits it (Use), restores (Ops) and starts a stability watch (Ops): 6 h of ship time on the same model at ×1800, which
+passes when the ring is removing CO₂ and ends at or below the target, then a debrief. Ship time runs ×30 for the CO₂ model only (rings,
+locomotion and doors keep real time) and stops while a page or the controls overlay is open; Ops after the end replays the training.
+Checks: `tests/test_cabin_air.py` (12), `tests/test_deadship.py` (4), the runtime checks `systems` and `deadship`
+(`--deadship --check-deadship`, WF_GODOT_DEADSHIP) and the opt-in browser part `web_check.py --part training` (real keys and touch).
+The default start is unchanged. Design, decisions and the Phase 2B proposal: `lab/studies/deadship/REPORT.md`.
+
+On a phone (`WfInput.compact`) a training page (DS-1 or a learning station) takes the free band between the page's top row and the
+touch buttons, full width inside the safe area, its type stepped down until it fits (`WfPagePanel`, one rule for every screen); the
+goal, prompt and map step aside while it is open and return when it closes. The map stays under the touch utility row, which an
+upright phone moves below the page's Exit row. A training's equipment points (the ECLSS bay, the workbench) are amber marks on the
+map's rim.
+
+**Ring A air by compartment (SYS-002, Deadship Phase 2A).** `src/wayfarer/ring_air.py` splits the same CO₂ into ring A's nine pressure
+compartments: sectors A1–A3 at their net volume and the six corridor halves AC1a–AC3b at their gross cavity, 466.36 m³ in all (the
+SYS-001 volume, nothing counted twice; crew tubes and vestibule outside, their hatches held CLOSED, PROTOTYPE). Connections: the nine
+CIRC doors, one loop round the ring, and one PROTOTYPE intermodule-ventilation duct pair per bulkhead (balanced supply and return,
+0.066 m³/s, with a damper; no ventilation is in canon). An open door exchanges Q = (Cd/3)·W·H·√(g·H·ΔT/T) both ways (Cd 0.6, ΔT 0.5 K,
+PROTOTYPE: about 139 m³/h at ring A's floor gravity); a closed door or damper seals. Every exchange is balanced, so each compartment's
+gas amount stays P·V/(R·T) and no pressure state is needed. The occupants (PROTOTYPE two per sector) add CO₂ where they are; the unit
+draws from sector 3 only, at SYS-001's k. The linear system is stepped exactly, y(t+Δt) = exp(AΔt)·y(t), with the generated and removed
+totals inside the same exponential, so the ledger is a check, not a definition. In DS-1's configuration (doors shut, ventilation on)
+the steady state runs from 0.150 % in sector 3 to 0.223 % in sector 2 (well-mixed: 0.150 %); DS-1 keeps its one well-mixed volume.
+The export writes `wf_ring_air.json` (topology, exchange rates, 11 hourly checkpoints of a 10 h run through cases C, D, E, B and F); `WfRingAir`
+(`godot/scripts/systems/ring_air.gd`) repeats the step operation for operation and must reproduce them first. `#interior-airflow`
+(`-- --airflow`) creates `WfAirflow` (`scripts/excursion/airflow.gd`, a WfEquipment): the walk's CIRC door leaves are the door edges
+(off the seat = open, read every frame, no second door state), Ops at the ECLSS bay switches the ventilation, the bay's instrument panel (a chest-height screen on the bay's face,
+shared with SYS-001's readout, `WfEquipment.mount_display`) lists the nine compartments by sector and the ring map colours them by CO₂ with each bulkhead's connection (green door, blue duct, red none). Checks:
+`tests/test_ring_air.py` (14) and the runtime check `airflow` (`--airflow --check-airflow`, WF_GODOT_AIRFLOW), also in
+`web_check.py --part training`.
+
+**A trace species: NH₃ (SYS-002 v2).** The same compartments and exchange flows carry ammonia as a second, independent species with
+its own state z = [c₁…c₉ (kg), S (kg left in the source), released, removed, ∫c₁…∫c₉], stepped exactly as z(t+Δt) = exp(BΔt)·z(t); the CO₂
+equations and their checkpoints are unchanged (NH₃ never enters A). A source is scenario data, never a default: a finite inventory in one
+compartment releasing at the first-order rate S/τ, LEAKING until it is empty or ISOLATED (what it still holds stays in it, accounted).
+The only NH₃ sink is a trace-contaminant control element (TCC) in the sector 3 ECLSS bay, independent of the CO₂ unit: 15.3 m³/h through
+a phosphoric-acid-treated carbon bed at 0.95 single-pass capture (ISS TCCS values, NASA NTRS 20070019823 and 20170006640; PROTOTYPE for
+Wayfarer). Left out, both conservative: NH₃ dissolving in cabin condensate, and the bed's capacity. Concentrations are kept in kg, mol/m³,
+mole fraction, ppm and Pa (`trace_units`) at the ring's 80 kPa and 295 K. The integral states give each compartment's exact exposure
+(ppm·s); `src/wayfarer/air_exposure.py` adds them along a person's places and takes time-weighted means over the reference durations of
+NASA JSC 20584 Rev D (02/2026) p. 9, ammonia: 1 h 30, 24 h 20, 7 d to 1000 d 3 ppm (`NH3_SMAC`, an external reference, not Wayfarer's
+medical limit, which stays OPEN). The package carries a second checkpoint run (`trace.proof`); `WfRingAir.verify` reproduces both, and
+`godot/scripts/systems/verify_ring_air.gd` reports the deviations and the cost without a scene. Tests: `tests/test_ring_air_nh3.py` (21).
+
+**Deadship DS-2B "Shared Air" (training, unscored).** `#interior-shared-air` (`-- --shared-air`) runs a scenario layer over SYS-002 v2
+without changing it: `data/deadship/ds2_shared_air.toml` (scenario values only, PROTOTYPE; `shared_air.load` refuses engineering keys) sets
+the hygiene A urine source (7 g, τ = 1 h), the alert, the trainee's containment work at the store, three crew pairs and the 3 ppm reuse
+criterion. `src/wayfarer/shared_air.py` (`Run`) is the deterministic reference: a fixed 10 s step; pairs ordered by intercom walk door
+routes at 40 s per compartment and never cross a sealed bulkhead (door and damper pair shut); each person's exposure is the model's
+compartment integral; a watch continues the same model at ×1800 to 24 h, takes a verdict (NOT_CONTAINED, CO2_LIMIT, TEMPORARY,
+STABLE_RESIDUE, STABLE) and projects to 7 d, applying only what the trainee declared: a duct reconnection scheduled at the ECLSS bay (every damper pair
+opens and the fans run at that ship time, doors untouched; `[watch] reconnect_options_h`) and the RESTORE plan at 24 h (dampers, fans
+and both units; doors stay as left). The verdict also reports the CO₂ peak where people were and the crew-hours above the 0.3 %
+target (`degraded`); 0.5 % stays the limit. Three strategies are viable and non-dominated in play: isolate, purge, and separate with
+a timely reconnection (report §36). The package `wf_deadship_ds2.json` carries 21 reference cases with checkpoints;
+`godot/scripts/deadship/shared_air.gd` (`WfSharedAir`) mirrors the machine and `check_shared_air.gd` replays all 21 within the
+model's tolerance and plays five strategies through Use and Ops. Tests: `tests/test_shared_air.py` (23).
+
+**Ring services (SYS-003).** `src/wayfarer/ring_services.py` keeps both habitat rings as one well-mixed volume each (466.4 m³, SYS-001's
+resolution): cabin temperature, water vapour and CO₂. It also models the cooling chain that holds them (a CHX fan over an ε-NTU coil,
+a proportional temperature control valve, two coolant pumps, a heat pump at 0.5 of Carnot into the 320 K cold loop, with normal and
+economy setpoints), the electrical side (G1/G2 on buses A/B while the plant runs; the 2 MWh main battery through converters BC-A/BC-B;
+a tie breaker; trips on overload; each ring's survival packs for its survival loads only; the pulse bank's 200 kWh charge for a
+restart) and the line-replaceable parts (ECLSS fan, coolant pump, converter families). Crew loads come from BVAD 2022 and the owner's
+1.0 kg/d CO₂. Every watt drawn in a ring heats it. Water, CO₂, heat, coolant, energy and parts ledgers close. The architecture, the
+capacities and the loads are PROTOTYPE (the whole-ship load `power.rating` and the survival reserve's capacity are OPEN). The
+package `wf_ring_services.json` carries a model proof; `godot/scripts/systems/ring_services.gd` (`WfRingServices`) must reproduce it
+at relative 10⁻⁹ before a scenario starts. Tests: `tests/test_ring_services.py` (8).
+
+**Deadship DS-2C "Borrowed Air" and DS-3 "Dark Bus" (training challenges, unscored).** Both run on SYS-003 through one scenario machine,
+`src/wayfarer/ship_ops.py` (`Run`), mirrored by `godot/scripts/deadship/ship_ops.gd` (`WfShipOps`). The scenarios
+`data/deadship/ds2c_borrowed_air.toml` and `ds3_dark_bus.toml` own only training values (PROTOTYPE); `ship_ops.load` refuses
+engineering keys. The trainee works at ring A's sector 3 ECLSS bay (inspect, isolate, remove and install parts, take and stow) and
+the sector 2 ops console (switch loads, the tie, breaker resets, the economy setpoint), and orders two abstract pairs by intercom (fetch a
+ring B part, move to ring B; a crossing is 15 min). A page pauses the clock. The declared watch runs the same model to 24 h (DS-3:
+through its 48 h restart window), then a 7-day projection. Verdicts: CO2_LIMIT, HEAT_LIMIT, HUMIDITY_LIMIT, COLD_LIMIT,
+RESTART_FAILED, TEMPORARY, STABLE (degraded above the 0.3 % CO₂ target or outside the humidity band). The metrics are shown side by
+side and never weighted.
+- *Borrowed Air* (`#interior-borrowed-air`, `-- --borrowed-air`): ring A's CO₂ fan and pump 1 fail together, no spare, ring B empty
+  in coast setback. Three non-dominated ways out: shed and borrow ring B's fan; borrow its fan and a pump; warm ring B and move the crew.
+- *Dark Bus* (`#interior-dark-bus`, `-- --dark-bus`): plant down for a 48 h service, then converter BC-B fails. Bus B's survival loads
+  fall to the packs, and the tie only holds if enough is shed. Three non-dominated ways through: shed the Garden; darken ring B;
+  economy. Each ends with a different battery margin against the restart's 200 kWh.
+
+The packages `wf_deadship_ds2c.json` (11 reference cases) and `wf_deadship_ds3.json` (9) carry checkpoints and debriefs. Godot replays
+one case at load and all of them in the runtime checks `borrowed_air` and `dark_bus`. Tests: `tests/test_ship_ops.py` (18).
+
+*Model validity.* SYS-003 is a cabin balance with the CHX as its only heat path. It is valid for cabins between 10 °C and 35 °C
+(the habitability limits ±8 K). Outside that range the omitted mechanisms would act: passive exchange with the lining and hull,
+cabin heaters, and equipment cutouts. Where people live, `ship_ops` records the first step outside the range and the last valid
+state, and keeps peaks inside it. The debrief and readouts show the bound, never an extrapolated temperature. The state is not
+clipped, so the ledgers still close. Every viable strategy stays inside the range. The ring cabins' passive exchange and heater
+power are OPEN.
+
+*Sensitivity.* Dark Bus's viable set depends on three PROTOTYPE or OPEN values within a narrow band: the converter rating
+(≥ ~37.5 kW), the lumped ship load (≤ ~16 kW per bus), and the battery and restart window (within about ±10 % and ±6 h). The
+lessons and the ranking of the strategies' margins hold across every variation. Borrowed Air is insensitive to the electrical values.
+Its one-pump "shed" requirement is a 0.3 K margin result that any passive hull loss would remove.
+
+Phases 2 and 3 are TECHNICALLY COMPLETE and owner-accepted (2026-11-16). Phase 4 (competitive Deadship, Hullrun) is PARKED until the
+spacecraft model is complete and the owner reauthorizes game work. Design and evidence: `lab/studies/deadship/REPORT.md` §39–§58.
+
 ## Retired runtime scenes
 
 The Godot review menu, the ship inspector, the guided induction walk, Demonstrator 01 with the Ship Navigator, its SPACE view and the

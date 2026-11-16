@@ -607,6 +607,31 @@ def export(root, preset='COAST', out=None, identity=None, draco=False):
     import learning_stations
     learning_stations.write(root, out / learning_stations.FILE)
     packaged.append(learning_stations.FILE)
+    # SYS-001: ring A's cabin CO2 model and the checkpoints the walk's runtime copy must reproduce before it shows the state.
+    import cabin_air
+    cabin_air.write(root, out / cabin_air.FILE)
+    packaged.append(cabin_air.FILE)
+    # SYS-002 (Deadship Phase 2A): ring A's CO2 by compartment (doors and ventilation as connections) and its reference checkpoints.
+    import ring_air
+    ring_air.write(root, out / ring_air.FILE)
+    packaged.append(ring_air.FILE)
+    # Deadship DS-1 (Phase 1): the training scenario and its model-level reference replay (data/deadship/, no engineering values).
+    import deadship
+    deadship.write(root, out / deadship.FILE)
+    packaged.append(deadship.FILE)
+    # Deadship DS-2B "Shared Air" (Phase 2B): the scenario over the two-gas ring model and its reference cases (Godot replays them).
+    import shared_air
+    shared_air.write(root, out / shared_air.FILE)
+    packaged.append(shared_air.FILE)
+    # SYS-003 ring services (Deadship Phases 2C and 3) and its two scenarios, DS-2C "Borrowed Air" and DS-3 "Dark Bus", with their
+    # reference cases (Godot replays the model's proof and a case before it shows them).
+    import ring_services
+    ring_services.write(root, out / ring_services.FILE)
+    packaged.append(ring_services.FILE)
+    import ship_ops
+    for name in ship_ops.SCENARIOS:
+        ship_ops.write(root, out / ship_ops.FILES[name], name)
+        packaged.append(ship_ops.FILES[name])
     if preset == 'COAST':
         # RT-003: the runtime plays the First Ignition timeline from this copy, checked against the rig's hash.
         timeline = root / rig['flight_timeline']['file']

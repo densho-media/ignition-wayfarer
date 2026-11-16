@@ -1,0 +1,696 @@
+{
+ "study": "Deadship Phase 2B engineering gate",
+ "date": "2026-11-14",
+ "model": {
+  "file": "src/wayfarer/ring_air.py",
+  "version": 1
+ },
+ "act_h": 0.5,
+ "transit_s": 40.0,
+ "horizons_h": [
+  6.0,
+  12.0
+ ],
+ "objectives": [
+  "peak_after_pct",
+  "crew_h_above_target",
+  "unbounded",
+  "excess_outside_unit_kg"
+ ],
+ "target_pct": 0.3,
+ "limit_pct": 0.5,
+ "step_independence_rel": 6.356132677518e-14,
+ "v1_6h": {
+  "configs": 1024,
+  "viable": 376,
+  "bounded": 93,
+  "pareto": [
+   {
+    "a1_crew": "A3",
+    "doors": [
+     "CIRC.A1P",
+     "CIRC.AC1",
+     "CIRC.A2N",
+     "CIRC.A2P",
+     "CIRC.AC2",
+     "CIRC.A3N",
+     "CIRC.A3P",
+     "CIRC.AC3",
+     "CIRC.A1N"
+    ],
+    "peak_after_pct": 0.216,
+    "crew_h_above_target": 0.0,
+    "end_pct": {
+     "A2": 0.216,
+     "A3": 0.141
+    },
+    "bounded": true,
+    "excess_outside_unit_kg": 0,
+    "crew_groups": 1,
+    "largest_crew_group": 6,
+    "doors_open": 9
+   }
+  ],
+  "pareto_size": 1,
+  "split_and_bounded": 0,
+  "split_and_viable": 283,
+  "max_ledger_kg": 4.907185768843192e-14
+ },
+ "v0_6h": {
+  "configs": 1728,
+  "viable": 297,
+  "pareto_size": 1,
+  "pareto": [
+   {
+    "crews": {
+     "A1": "A3",
+     "A2": "A3",
+     "A3": "A3"
+    },
+    "doors": [
+     "CIRC.A1P",
+     "CIRC.AC1",
+     "CIRC.A2N",
+     "CIRC.A3P",
+     "CIRC.AC3",
+     "CIRC.A1N"
+    ],
+    "peak_after_pct": 0.2149,
+    "crew_h_above_target": 0.0,
+    "bounded": true,
+    "doors_open": 6,
+    "largest_crew_group": 6
+   }
+  ]
+ },
+ "v1_12h": {
+  "configs": 1024,
+  "viable": 172,
+  "bounded": 93,
+  "pareto": [
+   {
+    "a1_crew": "A3",
+    "doors": [
+     "CIRC.A1P",
+     "CIRC.AC1",
+     "CIRC.A2N",
+     "CIRC.A2P",
+     "CIRC.AC2",
+     "CIRC.A3N",
+     "CIRC.A3P",
+     "CIRC.AC3",
+     "CIRC.A1N"
+    ],
+    "peak_after_pct": 0.2262,
+    "crew_h_above_target": 0.0,
+    "end_pct": {
+     "A2": 0.2262,
+     "A3": 0.1463
+    },
+    "bounded": true,
+    "excess_outside_unit_kg": 0,
+    "crew_groups": 1,
+    "largest_crew_group": 6,
+    "doors_open": 9
+   }
+  ],
+  "pareto_size": 1,
+  "split_and_bounded": 0,
+  "split_and_viable": 79,
+  "max_ledger_kg": 1.3722356584366935e-13
+ },
+ "v0_12h": {
+  "configs": 1728,
+  "viable": 146,
+  "pareto_size": 1,
+  "pareto": [
+   {
+    "crews": {
+     "A1": "A3",
+     "A2": "A3",
+     "A3": "A3"
+    },
+    "doors": [
+     "CIRC.A1P",
+     "CIRC.AC1",
+     "CIRC.A2N",
+     "CIRC.A3P",
+     "CIRC.AC3",
+     "CIRC.A1N"
+    ],
+    "peak_after_pct": 0.2149,
+    "crew_h_above_target": 0.0,
+    "bounded": true,
+    "doors_open": 6,
+    "largest_crew_group": 6
+   }
+  ]
+ },
+ "v3_6h": {
+  "configs": 1024,
+  "viable": 376,
+  "bounded": 93,
+  "pareto_size": 1,
+  "pareto": [
+   {
+    "a1_crew": "A3",
+    "doors_open": 8,
+    "doors": [
+     "CIRC.A1P",
+     "CIRC.AC1",
+     "CIRC.A2N",
+     "CIRC.A2P",
+     "CIRC.AC2",
+     "CIRC.A3N",
+     "CIRC.AC3",
+     "CIRC.A1N"
+    ],
+    "peak_after_pct": 0.2664,
+    "crew_h_above_target": 0.0,
+    "end_pct": {
+     "A2": 0.2664,
+     "A3": 0.2229
+    },
+    "bounded": true,
+    "trend_pct_h": 0.009891,
+    "crew_groups": 1
+   }
+  ],
+  "all_good": 23
+ },
+ "v3_12h": {
+  "configs": 1024,
+  "viable": 165,
+  "bounded": 86,
+  "pareto_size": 1,
+  "pareto": [
+   {
+    "a1_crew": "A3",
+    "doors_open": 8,
+    "doors": [
+     "CIRC.A1P",
+     "CIRC.AC1",
+     "CIRC.A2N",
+     "CIRC.A2P",
+     "CIRC.AC2",
+     "CIRC.A3N",
+     "CIRC.AC3",
+     "CIRC.A1N"
+    ],
+    "peak_after_pct": 0.3131,
+    "crew_h_above_target": 3.933,
+    "end_pct": {
+     "A2": 0.3131,
+     "A3": 0.2465
+    },
+    "bounded": true,
+    "trend_pct_h": 0.006304,
+    "crew_groups": 1
+   }
+  ],
+  "all_good": 0
+ },
+ "v4_note": {
+  "start_pct": {
+   "A1": 0.2233,
+   "A2": 0.2233,
+   "A3": 0.15,
+   "AC1a": 0.2233,
+   "AC1b": 0.2233,
+   "AC2a": 0.1989,
+   "AC2b": 0.1744,
+   "AC3a": 0.1744,
+   "AC3b": 0.1989
+  },
+  "twelve_crew_fans_on_steady_pct": {
+   "A1": 0.4466,
+   "A2": 0.4466,
+   "A3": 0.3,
+   "AC1a": 0.4466,
+   "AC1b": 0.4466,
+   "AC2a": 0.3977,
+   "AC2b": 0.3489,
+   "AC3a": 0.3489,
+   "AC3b": 0.3977
+  }
+ },
+ "v4_6h": {
+  "configs": 2048,
+  "viable": 124,
+  "pareto_size": 9,
+  "pareto": [
+   {
+    "orders": {
+     "A1": "A3",
+     "A2": "A3"
+    },
+    "doors_open": 8,
+    "peak_after_pct": 0.4357,
+    "mean_pct": 0.3634,
+    "end_pct": {
+     "A3": 0.4357
+    },
+    "bounded": true
+   },
+   {
+    "orders": {
+     "A1": "A3",
+     "A2": "A3"
+    },
+    "doors_open": 9,
+    "peak_after_pct": 0.4357,
+    "mean_pct": 0.3634,
+    "end_pct": {
+     "A3": 0.4357
+    },
+    "bounded": true
+   },
+   {
+    "orders": {
+     "A1": "A3",
+     "A2": "A2"
+    },
+    "doors_open": 7,
+    "peak_after_pct": 0.4577,
+    "mean_pct": 0.3609,
+    "end_pct": {
+     "A2": 0.4577,
+     "A3": 0.3998
+    },
+    "bounded": false
+   },
+   {
+    "orders": {
+     "A1": "A3",
+     "A2": "A2"
+    },
+    "doors_open": 8,
+    "peak_after_pct": 0.4714,
+    "mean_pct": 0.355,
+    "end_pct": {
+     "A2": 0.4714,
+     "A3": 0.4158
+    },
+    "bounded": true
+   },
+   {
+    "orders": {
+     "A1": "A3",
+     "A2": "A2"
+    },
+    "doors_open": 8,
+    "peak_after_pct": 0.472,
+    "mean_pct": 0.3415,
+    "end_pct": {
+     "A2": 0.472,
+     "A3": 0.4033
+    },
+    "bounded": true
+   },
+   {
+    "orders": {
+     "A1": "A3",
+     "A2": "A2"
+    },
+    "doors_open": 9,
+    "peak_after_pct": 0.4737,
+    "mean_pct": 0.3393,
+    "end_pct": {
+     "A2": 0.4737,
+     "A3": 0.3966
+    },
+    "bounded": true
+   },
+   {
+    "orders": {
+     "A1": "A3",
+     "A2": "A2"
+    },
+    "doors_open": 8,
+    "peak_after_pct": 0.4798,
+    "mean_pct": 0.338,
+    "end_pct": {
+     "A2": 0.4798,
+     "A3": 0.3782
+    },
+    "bounded": true
+   },
+   {
+    "orders": {
+     "A1": "A3",
+     "A2": "A2"
+    },
+    "doors_open": 7,
+    "peak_after_pct": 0.4905,
+    "mean_pct": 0.3357,
+    "end_pct": {
+     "A2": 0.4905,
+     "A3": 0.392
+    },
+    "bounded": true
+   },
+   {
+    "orders": {
+     "A1": "A3",
+     "A2": "A2"
+    },
+    "doors_open": 7,
+    "peak_after_pct": 0.498,
+    "mean_pct": 0.3347,
+    "end_pct": {
+     "A2": 0.498,
+     "A3": 0.3657
+    },
+    "bounded": false
+   }
+  ]
+ },
+ "v4_12h": {
+  "configs": 2048,
+  "viable": 0,
+  "pareto_size": 0,
+  "pareto": []
+ },
+ "named": {
+  "seal": {
+   "6h": {
+    "mean_pct": 0.4078,
+    "peak_pct": 1.0733,
+    "peak_after_pct": 1.0733,
+    "crew_h_above_target": 20.0,
+    "worst": "A1",
+    "h_above_target": 5.083,
+    "h_above_limit": 3.75,
+    "first_limit_h": 2.3333333333333335,
+    "end_pct": {
+     "A1": 1.0733,
+     "A2": 0.9382,
+     "A3": 0.05
+    },
+    "trend_pct_h": 0.153881,
+    "bounded": false,
+    "viable": false,
+    "crew_groups": 3,
+    "largest_crew_group": 2,
+    "doors_open": 0,
+    "excess_outside_unit_kg": 1.0,
+    "ledger_kg": -1.3322676295501878e-15
+   },
+   "12h": {
+    "mean_pct": 0.6921,
+    "peak_pct": 1.9966,
+    "peak_after_pct": 1.9966,
+    "crew_h_above_target": 44.0,
+    "worst": "A1",
+    "h_above_target": 11.083,
+    "h_above_limit": 9.75,
+    "first_limit_h": 2.3333333333333335,
+    "end_pct": {
+     "A1": 1.9966,
+     "A2": 1.7264,
+     "A3": 0.05
+    },
+    "trend_pct_h": 0.153881,
+    "bounded": false,
+    "viable": false,
+    "crew_groups": 3,
+    "largest_crew_group": 2,
+    "doors_open": 0,
+    "excess_outside_unit_kg": 2.0,
+    "ledger_kg": -9.325873406851315e-15
+   }
+  },
+  "buffer sector 2 (2 doors)": {
+   "6h": {
+    "mean_pct": 0.1602,
+    "peak_pct": 0.3826,
+    "peak_after_pct": 0.3826,
+    "crew_h_above_target": 4.6,
+    "worst": "A2",
+    "h_above_target": 2.3,
+    "h_above_limit": 0.0,
+    "first_limit_h": null,
+    "end_pct": {
+     "A2": 0.3826,
+     "A3": 0.1
+    },
+    "trend_pct_h": 0.036973,
+    "bounded": false,
+    "viable": true,
+    "crew_groups": 2,
+    "largest_crew_group": 4,
+    "doors_open": 2,
+    "excess_outside_unit_kg": 0.5435,
+    "ledger_kg": 2.3314683517128287e-14
+   },
+   "12h": {
+    "mean_pct": 0.1959,
+    "peak_pct": 0.6044,
+    "peak_after_pct": 0.6044,
+    "crew_h_above_target": 16.6,
+    "worst": "A2",
+    "h_above_target": 8.3,
+    "h_above_limit": 2.883,
+    "first_limit_h": 9.2,
+    "end_pct": {
+     "A2": 0.6044,
+     "A3": 0.1
+    },
+    "trend_pct_h": 0.036973,
+    "bounded": false,
+    "viable": false,
+    "crew_groups": 2,
+    "largest_crew_group": 4,
+    "doors_open": 2,
+    "excess_outside_unit_kg": 1.0435,
+    "ledger_kg": 6.128431095930864e-14
+   }
+  },
+  "buffer sector 2 (4 doors, all its corridors)": {
+   "6h": {
+    "mean_pct": 0.1469,
+    "peak_pct": 0.2973,
+    "peak_after_pct": 0.2973,
+    "crew_h_above_target": 0.0,
+    "worst": "A2",
+    "h_above_target": 0.0,
+    "h_above_limit": 0.0,
+    "first_limit_h": null,
+    "end_pct": {
+     "A2": 0.2973,
+     "A3": 0.1
+    },
+    "trend_pct_h": 0.021514,
+    "bounded": false,
+    "viable": true,
+    "crew_groups": 2,
+    "largest_crew_group": 4,
+    "doors_open": 4,
+    "excess_outside_unit_kg": 0.5435,
+    "ledger_kg": -1.0436096431476471e-14
+   },
+   "12h": {
+    "mean_pct": 0.1673,
+    "peak_pct": 0.4264,
+    "peak_after_pct": 0.4264,
+    "crew_h_above_target": 11.767,
+    "worst": "A2",
+    "h_above_target": 5.883,
+    "h_above_limit": 0.0,
+    "first_limit_h": null,
+    "end_pct": {
+     "A2": 0.4264,
+     "A3": 0.1
+    },
+    "trend_pct_h": 0.021514,
+    "bounded": false,
+    "viable": true,
+    "crew_groups": 2,
+    "largest_crew_group": 4,
+    "doors_open": 4,
+    "excess_outside_unit_kg": 1.0435,
+    "ledger_kg": -3.5083047578154947e-14
+   }
+  },
+  "join sector 2 to the unit (3 doors), sector 1 crew to 3": {
+   "6h": {
+    "mean_pct": 0.1678,
+    "peak_pct": 0.2602,
+    "peak_after_pct": 0.2602,
+    "crew_h_above_target": 0.0,
+    "worst": "A2",
+    "h_above_target": 0.0,
+    "h_above_limit": 0.0,
+    "first_limit_h": null,
+    "end_pct": {
+     "A2": 0.2602,
+     "A3": 0.1441
+    },
+    "trend_pct_h": 0.004506,
+    "bounded": true,
+    "viable": true,
+    "crew_groups": 1,
+    "largest_crew_group": 6,
+    "doors_open": 3,
+    "excess_outside_unit_kg": 0.0435,
+    "ledger_kg": -5.329070518200751e-15
+   },
+   "12h": {
+    "mean_pct": 0.1777,
+    "peak_pct": 0.2726,
+    "peak_after_pct": 0.2726,
+    "crew_h_above_target": 0.0,
+    "worst": "A2",
+    "h_above_target": 0.0,
+    "h_above_limit": 0.0,
+    "first_limit_h": null,
+    "end_pct": {
+     "A2": 0.2726,
+     "A3": 0.149
+    },
+    "trend_pct_h": 0.000723,
+    "bounded": true,
+    "viable": true,
+    "crew_groups": 1,
+    "largest_crew_group": 6,
+    "doors_open": 3,
+    "excess_outside_unit_kg": 0.0435,
+    "ledger_kg": -1.9539925233402755e-14
+   }
+  },
+  "join both sectors (6 doors), nobody moves": {
+   "6h": {
+    "mean_pct": 0.1954,
+    "peak_pct": 0.2543,
+    "peak_after_pct": 0.2543,
+    "crew_h_above_target": 0.0,
+    "worst": "A1",
+    "h_above_target": 0.0,
+    "h_above_limit": 0.0,
+    "first_limit_h": null,
+    "end_pct": {
+     "A1": 0.2543,
+     "A2": 0.2532,
+     "A3": 0.1379
+    },
+    "trend_pct_h": 0.004763,
+    "bounded": true,
+    "viable": true,
+    "crew_groups": 1,
+    "largest_crew_group": 6,
+    "doors_open": 6,
+    "excess_outside_unit_kg": 0.0,
+    "ledger_kg": 5.551115123125783e-15
+   },
+   "12h": {
+    "mean_pct": 0.2094,
+    "peak_pct": 0.2694,
+    "peak_after_pct": 0.2694,
+    "crew_h_above_target": 0.0,
+    "worst": "A1",
+    "h_above_target": 0.0,
+    "h_above_limit": 0.0,
+    "first_limit_h": null,
+    "end_pct": {
+     "A1": 0.2694,
+     "A2": 0.2691,
+     "A3": 0.1467
+    },
+    "trend_pct_h": 0.001279,
+    "bounded": true,
+    "viable": true,
+    "crew_groups": 1,
+    "largest_crew_group": 6,
+    "doors_open": 6,
+    "excess_outside_unit_kg": 0.0,
+    "ledger_kg": 6.661338147750939e-15
+   }
+  },
+  "open the whole loop (9 doors)": {
+   "6h": {
+    "mean_pct": 0.1812,
+    "peak_pct": 0.2361,
+    "peak_after_pct": 0.2361,
+    "crew_h_above_target": 0.0,
+    "worst": "A1",
+    "h_above_target": 0.0,
+    "h_above_limit": 0.0,
+    "first_limit_h": null,
+    "end_pct": {
+     "A1": 0.2361,
+     "A2": 0.2358,
+     "A3": 0.1295
+    },
+    "trend_pct_h": 0.005839,
+    "bounded": true,
+    "viable": true,
+    "crew_groups": 1,
+    "largest_crew_group": 6,
+    "doors_open": 9,
+    "excess_outside_unit_kg": 0,
+    "ledger_kg": -1.1546319456101628e-14
+   },
+   "12h": {
+    "mean_pct": 0.1965,
+    "peak_pct": 0.259,
+    "peak_after_pct": 0.259,
+    "crew_h_above_target": 0.0,
+    "worst": "A1",
+    "h_above_target": 0.0,
+    "h_above_limit": 0.0,
+    "first_limit_h": null,
+    "end_pct": {
+     "A1": 0.259,
+     "A2": 0.2589,
+     "A3": 0.1416
+    },
+    "trend_pct_h": 0.002389,
+    "bounded": true,
+    "viable": true,
+    "crew_groups": 1,
+    "largest_crew_group": 6,
+    "doors_open": 9,
+    "excess_outside_unit_kg": 0,
+    "ledger_kg": -3.3084646133829665e-14
+   }
+  }
+ },
+ "v2_probe": {
+  "note": "multiples of the species limit at 12 h for each crew; PROTOTYPE probe, not implemented",
+  "source_to_limit_h": 4.0,
+  "tcc_m3_h": 15.0,
+  "results": {
+   "seal": {
+    "crew of A1 (in A1)": 0.0,
+    "crew of A2 (in A2)": 3.0,
+    "crew of A3 (in A3)": 0.0
+   },
+   "buffer sector 2 (2 doors)": {
+    "crew of A1 (in A3)": 0.0,
+    "crew of A2 (in A2)": 0.865,
+    "crew of A3 (in A3)": 0.0
+   },
+   "buffer sector 2 (4 doors, all its corridors)": {
+    "crew of A1 (in A3)": 0.0,
+    "crew of A2 (in A2)": 0.526,
+    "crew of A3 (in A3)": 0.0
+   },
+   "join sector 2 to the unit (3 doors), sector 1 crew to 3": {
+    "crew of A1 (in A3)": 0.389,
+    "crew of A2 (in A2)": 0.569,
+    "crew of A3 (in A3)": 0.389
+   },
+   "join both sectors (6 doors), nobody moves": {
+    "crew of A1 (in A1)": 0.226,
+    "crew of A2 (in A2)": 0.461,
+    "crew of A3 (in A3)": 0.267
+   },
+   "open the whole loop (9 doors)": {
+    "crew of A1 (in A1)": 0.231,
+    "crew of A2 (in A2)": 0.309,
+    "crew of A3 (in A3)": 0.208
+   }
+  }
+ },
+ "deterministic": true
+}

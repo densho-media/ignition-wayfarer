@@ -23,6 +23,7 @@ Status: ACTIVE, PARKED, SUPERSEDED (by which entry) or PROMOTED (into which `mai
 | [fdp1-requirements](problems/fdp1-requirements/NOTES.md) | Problem map | ACTIVE | Where FDP-1 fails: 0.016 c x4 closes, 1 g does not | e251f7c | V3 review; P11; shield mass OD-014 |
 | [breakthrough-lab](studies/breakthrough-lab/NOTES.md) | Study | ACTIVE | Which declared breakthroughs, and how few, make the Vertex drive close? | 279a612 (T00 030fc14, T05 f497778 imports, Gate 2) | which breakthroughs to select for experiment; spine stiffness criterion |
 | [assembly-sequence](studies/assembly-sequence/NOTES.md) | Study | ACTIVE | In what order could the approved ship be assembled in orbit, from the first structure to first ignition? | 0aa94a3 | is the order right; the assembly yard |
+| [deadship](studies/deadship/NOTES.md) | Study | PROMOTED into main 2026-11-16 | How should Deadship teach the ship's real systems, and what do its gate and sensitivity studies say? | c77026d | Phase 4 PARKED; sourced power values; cabin hull exchange and heaters |
 
 Each entry's `NOTES.md` opens with the same table: kind, status, question, model base, the branch it came from, open owner
 questions and where its review file is.

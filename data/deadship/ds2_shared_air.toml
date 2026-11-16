@@ -1,0 +1,123 @@
+# DS-2B "Shared Air": the second Deadship training (owner brief 2026-11-14 20:59Z, Phase 2B; design and gate: lab/studies/deadship/REPORT.md
+# sections 29-31). A station-run training simulation aboard Wayfarer in simulated COAST (the walk's ring start).
+#
+# Scenario-owned values only. Every engineering value (volumes, exchange flows, CO2 rates, the CO2 unit, the trace-contaminant control,
+# the CO2 target and limit, the NH3 exposure references) comes from the ring A air model, src/wayfarer/ring_air.py (SYS-002 v2), and its
+# package. src/wayfarer/shared_air.py refuses a scenario that sets one. Every value below is PROTOTYPE: a training choice, not canon.
+
+[scenario]
+id = "DS-2B"
+name = "Shared Air"
+kind = "CHALLENGE"
+scored = false
+status = "PROTOTYPE"
+system = "RING_A_AIR_CONNECTIVITY"
+note = "Unscored. One release of ammonia in the habitation sector; containment is the opening procedure; after it, every way of handling the residue has a cost the model computes. No points, no ranking."
+
+[source]
+# Approved by the owner 2026-11-14 for this training only (not Wayfarer canon): stored urine in hygiene A whose pretreatment failed; the
+# bag split and the hydrolysed urine gives off ammonia, first order (it empties as exp(-t/tau), it is not gone after one tau).
+compartment = "A1"
+node = "Prod_RA1_BRT_Hygiene"
+reach_m = 2.2
+inventory_kg = 0.007
+tau_s = 3600.0
+basis = "About a litre of stored urine whose urea hydrolysed (up to about 11 g NH3 per litre); the share that evaporates before it is bagged is not modelled, so the inventory carries that uncertainty."
+
+[crew]
+# Three pairs, two per sector. The trainee is pair A's first member, physically controlled; the other five are abstract (a place, an order,
+# a route). Orders move both members of pair B or C, or the trainee's partner for pair A.
+pairs = [["A", "A1"], ["B", "A2"], ["C", "A3"]]
+transit_s = 40.0
+transit_note = "An ordered pair walks the shortest CIRC door route, 40 ship seconds in each compartment it passes (the first 40 s leaving its own). Doors on the route are cycled by the pair and left as they were: their brief exchange is neglected and the walk's leaves do not move. A pair standing in a doorway (the last 10 s of a compartment) blocks that door from closing. A sealed bulkhead (its door shut and its IMV damper pair shut) is the trainee's boundary: no route crosses it, an order that would is refused, and a pair whose next door is sealed after the order stops and waits."
+doorway_s = 10.0
+
+[time]
+# Ship time runs `scale` simulated seconds per real second while playing and `watch_scale` during the stability watch. Only the scenario's
+# clock is scaled (the air model, the pairs' walks, the containment work): walking, doors, the rings' rotation and the camera keep real time.
+scale = 30.0
+watch_scale = 1800.0
+dt_s = 10.0
+projection_dt_s = 300.0
+alert_s = 600.0
+pause = "The scenario's clock (the air, the pairs and the containment) stops while a page or the controls menu is open, while the trainee is off ring A's deck, and after the run ends."
+
+[containment]
+# The opening procedure: at hygiene A, bag the liquid and the absorbent. 10 ship minutes of the trainee's work in reach of the store
+# (20 s real at x30). Work done is kept if the trainee steps away; the release continues at full rate until the last bag is sealed.
+work_s = 600.0
+rule = "Progress is kept when interrupted; the source stays LEAKING until the work is complete."
+
+[watch]
+# The stability watch runs the same model from the trainee's exact state to `ship_h` hours after the release (at least `min_h` more),
+# then the projection to `projection_h`. With no plan nothing changes after the watch starts; with the restore plan, at the end of the
+# watch the ECLSS bay opens every damper pair and runs the fans and both units (remote equipment only: the doors stay as the trainee left
+# them) and each person walks home once every compartment on their way is under the reuse criterion, checked hourly.
+# A reconnection may also be scheduled at the bay before the watch (finalization brief 2026-11-15): at that ship time every damper pair
+# opens and the fans run, in any phase; doors are never moved remotely. The gate reconnected at 4 h (report section 30.5); the options
+# are the ship times the bay offers, in hours after the release.
+ship_h = 24.0
+min_h = 1.0
+projection_h = 168.0
+plans = ["NONE", "RESTORE"]
+reconnect_options_h = [2.0, 3.0, 4.0, 5.0, 6.0, 8.0]
+
+[reuse]
+# The scenario's conservative operating criterion for returning a compartment to service: under 3 ppm NH3, the level of the long-term
+# exposure references, with no time-weighting. A training rule, not a NASA clearance rule (the SMACs are exposure-duration references).
+ppm = 3.0
+
+[alert]
+text = "CAUTION · RING A AIR: odour reported in sector 1 (habitation). Trace-contaminant reading rising in A1."
+
+[[stages]]
+id = "recognize"
+title = "Recognize"
+objective = "Something is wrong with ring A's air. Look at the map ({map}) and the air readings."
+hint = "Two gases matter here: CO2, which the crew make and the CO2 unit removes, and a trace contaminant, which something releases and only the TCC removes."
+
+[[stages]]
+id = "investigate"
+title = "Investigate"
+objective = "Find the source. Hygiene A is in your own sector 1: {use} there to inspect it."
+hint = "A source releases into one compartment. Removal happens only where the sink is, in the sector 3 ECLSS bay."
+
+[[stages]]
+id = "contain"
+title = "Contain"
+objective = "Contain the spill: {ops} at hygiene A starts bagging it ({work_min} ship minutes, stay at the store)."
+hint = "Until the last bag is sealed the store keeps releasing at full rate."
+
+[[stages]]
+id = "assess"
+title = "Assess"
+objective = "The source is contained. {nh3_g} g of NH3 are in the air. Review the ring: the map's NH3 layer and the sector 3 ECLSS bay."
+hint = "Nothing removes NH3 except the TCC in sector 3. Air reaches it only through open doors and ducts."
+
+[[stages]]
+id = "decide"
+title = "Decide and stabilize"
+objective = "Choose how to handle the residue: doors ({use}), ducts and units at the ECLSS bay, the other pairs by intercom ({ops} away from equipment)."
+hint = "Keeping it in sector 1 keeps everyone else's air clean but leaves sector 1 out of use. Sending it to the TCC clears it sooner but spreads it. CO2 still needs removal wherever people are: a sealed group without the CO2 unit needs its ducts reconnected (the bay can schedule it) before CO2 reaches 0.5 %."
+
+[[stages]]
+id = "verify"
+title = "Verify"
+objective = "When the ring is set up as you want it, declare it by intercom: the stability watch runs the model to {watch_h} h after the release, then the 7-day projection."
+hint = "The watch changes nothing except what you declared: a reconnection you scheduled at the bay, and the restore plan at its end."
+
+[[stages]]
+id = "debrief"
+title = "Debrief"
+objective = "Read what your plan saved and what it cost. {ops} replays the challenge."
+hint = "There is no score. Every result comes from the same air model."
+
+[debrief]
+families = [
+  "Isolate the residue: sector 1 kept apart. The other sectors' air stays clean; sector 1 stays out of use until its air is cleared.",
+  "Route it to the TCC: sector 1 joined to the ECLSS sector through occupied air. It clears sooner; more people breathe low levels for a day.",
+  "Separate, then reconnect at 4 h: the purge path joined to the TCC, the crew sealed away from it until the scheduled reconnection. It clears soonest; the sealed group's CO2 runs above its target until then.",
+  "Separate without reconnecting: the same separation, the ducts left shut until the watch's end. The sealed group's CO2 passes the control limit.",
+]
+references = "NH3 references: NASA JSC 20584 Rev D (02/2026), ammonia, 1 h 30 ppm and 24 h 20 ppm (off-nominal events), 7 d 3 ppm (continuous occupancy). They are exposure-duration references, not injury thresholds; an exceedance is a risk to evaluate. CO2: target 0.3 %, control limit 0.5 % (PROTOTYPE control levels, not injury)."
+replay = "{ops} replays the challenge from the same start."

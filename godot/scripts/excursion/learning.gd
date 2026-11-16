@@ -32,7 +32,7 @@ func _init(by_name: Dictionary, layer: CanvasLayer, owner: Node, manifest: Dicti
 			continue
 		stations.append({"rec": rec, "mesh": mesh})
 	var back := StyleBoxFlat.new()
-	back.bg_color = Color(0.02, 0.04, 0.08, 0.86)
+	back.bg_color = Color(0.02, 0.04, 0.08, 0.94)
 	back.border_color = Color(0.30, 0.45, 0.75)
 	back.set_border_width_all(2)
 	back.set_content_margin_all(14.0)
@@ -147,7 +147,8 @@ func update(p: Vector3, zone: String, size: Vector2) -> void:
 	if in_reach(p, zone) != open:
 		close()
 		return
-	panel.position = Vector2(size.x - panel.size.x - 18.0, clampf(size.y - panel.size.y - 18.0, 18.0, 262.0))     # a tall panel (the map) moves up
+	map.custom_minimum_size.x = minf(520.0, WfPagePanel.free_band(size, panel).size.x - 32.0) if WfInput.compact() else 520.0
+	WfPagePanel.place(panel, text, size, 520.0)
 
 func next_label() -> String:
 	return "close" if step == 2 else STEPS[step + 1]

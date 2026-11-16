@@ -39,6 +39,7 @@ var ring_ids := ["", ""]          # rotor id of ring A, ring B
 var drum_ids := ["", ""]
 var check: WfExcursionCheck = null
 var loco_check: WfLocomotionCheck = null
+var systems_check: WfSystemsCheck = null
 var circ_doors := {}              # CIRC door id -> {node, rest, travel, value, target, collider, rec, ring}
 var world := Node3D.new()
 var builder: WfExcursionBuild
@@ -75,6 +76,7 @@ var walk_zone := ""
 var yaw := 0.0
 var pitch := 0.0
 var view_out := false
+var map_hidden_by_page := false   # a training page on a phone set the ring map aside (_page_hud)
 var prompt := ""
 var refusal := ""
 var refusal_t := 0.0
@@ -96,6 +98,14 @@ var hud_status := Label.new()
 var hud_check := Label.new()
 var ring_map: Control = null
 var learning: WfLearning = null   # UJ-013 learning stations (WHAT / WHY / SHOW ME), from the package
+var equipment: WfEquipment = null # SYS-001 Phase 0 proof (`--systems`, #interior-systems): the ECLSS bay operates ring A's CO2 model
+var deadship: WfDeadship = null   # Deadship DS-1 "Scrubber" training (`--deadship`, #interior-deadship): owns `equipment` when present
+var deadship_check: WfDeadshipCheck = null
+var airflow_check: WfAirflowCheck = null   # SYS-002 (`--airflow`, #interior-airflow): `equipment` is then a WfAirflow
+var shared_air: WfSharedAir = null   # Deadship DS-2B "Shared Air" (`--shared-air`, #interior-shared-air): owns `equipment` (its WfAirflow)
+var shared_air_check: WfSharedAirCheck = null
+var ship_ops: WfShipOps = null   # Deadship DS-2C "Borrowed Air" / DS-3 "Dark Bus" (`--borrowed-air`, `--dark-bus`): owns `equipment` (its bay and console)
+var ship_ops_check: WfShipOpsCheck = null
 # LOCO-001 (docs/LOCOMOTION.md): the start (RING: on ring A's deck with the rings turning, the default; STATION: the full excursion from the
 # development station), the trainee's visible MPFB body and its locomotion on the decks.
 var start_mode := "RING"
@@ -116,6 +126,30 @@ static func eva_requested() -> bool:
 
 ## LOCO-001: where the walk begins. The excursion check and `--excursion` (web: #interior-excursion) run the full station-to-ring walk;
 ## everything else starts on ring A's deck.
+## SYS-001: the Phase 0 systems proof rides on the ring start; the default start never creates it.
+static func systems_requested() -> bool:
+	return "--systems" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "systems"
+
+## Deadship DS-1: the training rides on the ring start (simulated COAST); the default and systems starts never create it.
+static func deadship_requested() -> bool:
+	return "--deadship" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "deadship"
+
+## SYS-002 (Deadship Phase 2A): ring A's air by compartment rides on the ring start; the default, systems and DS-1 starts never create it.
+static func shared_air_requested() -> bool:
+	return "--shared-air" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "shared-air"
+
+## Deadship Phases 2C and 3 on the ring services model (SYS-003): "" or the scenario's package key.
+static func ship_ops_requested() -> String:
+	var args := OS.get_cmdline_user_args()
+	if "--borrowed-air" in args or WfWebPage.start_variant() == "borrowed-air":
+		return "ds2c"
+	if "--dark-bus" in args or WfWebPage.start_variant() == "dark-bus":
+		return "ds3"
+	return ""
+
+static func airflow_requested() -> bool:
+	return "--airflow" in OS.get_cmdline_user_args() or WfWebPage.start_variant() == "airflow"
+
 static func requested_start() -> String:
 	var args := OS.get_cmdline_user_args()
 	if "--check-excursion" in args or "--excursion" in args or WfWebPage.start_variant() == "excursion":
@@ -185,6 +219,41 @@ func _ready() -> void:
 	learning = WfLearning.new(by_name, layer, self, manifest)
 	if learning.welcome() != "":
 		say("GU instructor: " + learning.welcome())
+	if deadship_requested():
+		deadship = WfDeadship.new(by_name, manifest, self, layer)
+		equipment = deadship.eq
+		if not deadship.verified:
+			push_error("DEADSHIP: the training is unavailable: %s" % str(deadship.errors))
+		else:
+			say("GU instructor: " + " ".join(deadship.sc["steps"][0]["brief"].map(func(l): return deadship.fill(str(l)))))
+	elif shared_air_requested():
+		shared_air = WfSharedAir.new(by_name, manifest, self, layer)
+		equipment = shared_air.eq
+		if not shared_air.verified:
+			push_error("SHARED AIR: the training is unavailable: %s" % str(shared_air.errors))
+		else:
+			say("GU instructor: Shared Air, a training run on ring A's air model. You are sector 1's crew with your partner; pairs B and C are in sectors 2 and 3. Ship time runs x%d. Walk your sector; the map (%s) shows the air." % [int(shared_air.scale()), key("exc.map")])
+	elif ship_ops_requested() != "":
+		ship_ops = WfShipOps.new(ship_ops_requested(), by_name, manifest, self, layer)
+		equipment = ship_ops.eq
+		if not ship_ops.verified:
+			push_error("SHIP OPS: the training is unavailable: %s" % str(ship_ops.errors))
+		else:
+			say("GU instructor: %s, a training run on both rings' services. You are pair A's crew with your partner; pairs B and C are with you in ring A. Ship time runs x%d. The ECLSS bay is in sector 3, the ops console in sector 2; %s anywhere else is the intercom." % [
+				ship_ops.sc["scenario"]["name"], int(ship_ops.scale()), key("exc.ops")])
+	elif airflow_requested():
+		equipment = WfAirflow.new(by_name, manifest, self)
+		var af := equipment as WfAirflow
+		if af.ring != null and not af.ring.verified:
+			push_error("SYS-002: the runtime air model does not reproduce its reference: %s" % str(af.ring.errors))
+		elif af.ready():
+			say("RING A AIR (simulation): the ring map colours each compartment by its CO2. Ventilation is on, so closed doors still exchange air. Walk to the sector 3 ECLSS bay and press %s to switch it off." % key("exc.ops"))
+	elif systems_requested():
+		equipment = WfEquipment.new(by_name, manifest, self)
+		if equipment.air != null and not equipment.air.verified:
+			push_error("SYS-001: the runtime CO2 model does not reproduce its reference: %s" % str(equipment.air.errors))
+		elif equipment.ready():
+			say("SYSTEMS PROOF (simulation): ring A's CO2-removal unit lives in the sector 3 ECLSS bay. Walk there and press %s." % key("exc.ops"))
 	WfInput.context = "excursion"
 	WfInput.touch_provider = touch_state            # MOB-001: the stick, the look drag and the contextual buttons on a touch device
 	tree_exiting.connect(func(): WfInput.touch_provider = Callable(); WfInput.release_touch())
@@ -197,6 +266,21 @@ func _ready() -> void:
 	elif "--check-locomotion" in OS.get_cmdline_user_args():
 		loco_check = WfLocomotionCheck.new()
 		loco_check.run(self)
+	elif "--check-systems" in OS.get_cmdline_user_args():
+		systems_check = WfSystemsCheck.new()
+		systems_check.run(self)
+	elif "--check-deadship" in OS.get_cmdline_user_args():
+		deadship_check = WfDeadshipCheck.new()
+		deadship_check.run(self)
+	elif "--check-airflow" in OS.get_cmdline_user_args():
+		airflow_check = WfAirflowCheck.new()
+		airflow_check.run(self)
+	elif "--check-shared-air" in OS.get_cmdline_user_args():
+		shared_air_check = WfSharedAirCheck.new()
+		shared_air_check.run(self)
+	elif "--check-ship-ops" in OS.get_cmdline_user_args():
+		ship_ops_check = WfShipOpsCheck.new()
+		ship_ops_check.run(self)
 
 # ---- package ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -613,7 +697,10 @@ func _unhandled_input(e: InputEvent) -> void:
 			get_tree().change_scene_to_file("res://scenes/eva_ops.tscn")
 		"exc.map":
 			if ring_map != null:
-				ring_map.visible = not ring_map.visible
+				if map_hidden_by_page:
+					map_hidden_by_page = false              # Map pressed while a page set it aside: the player keeps it hidden
+				else:
+					ring_map.visible = not ring_map.visible
 		_: return
 	get_viewport().set_input_as_handled()
 
@@ -639,6 +726,14 @@ func look_basis() -> Basis:
 func _physics_process(dt: float) -> void:
 	if actor == null:
 		return
+	if ship_ops != null:
+		ship_ops.step(dt)
+	elif shared_air != null:
+		shared_air.step(dt)
+	elif deadship != null:
+		deadship.step(dt)
+	elif equipment != null:
+		equipment.step(dt)
 	_step_modes(dt)
 	_step_drums(dt)
 	_step_closures(dt)
@@ -1007,6 +1102,18 @@ func use() -> String:
 				return _open_port_gate(k)
 		say("Nothing in reach to operate here.")
 		return ""
+	if deadship != null:
+		var dr := deadship.use()
+		if dr != "":
+			return dr
+	if shared_air != null:
+		var sr := shared_air.use()
+		if sr != "":
+			return sr
+	if ship_ops != null:
+		var so := ship_ops.use()
+		if so != "":
+			return so
 	var w := _walk_target()
 	var ls_i := _learning_in_reach()
 	if ls_i >= 0 and (learning.open == ls_i or w == ""):
@@ -1142,6 +1249,11 @@ func _door_in_reach() -> String:
 
 func _toggle_door(id: String) -> String:
 	var d: Dictionary = circ_doors[id]
+	if shared_air != null:                          # DS-2B: the watch holds the ring as declared; an ordered pair in the doorway blocks a close
+		var why := shared_air.door_refusal(id, d["target"] < 1.0)
+		if why != "":
+			say(why)
+			return ""
 	if d["target"] < 1.0:
 		d["target"] = 1.0
 		_log("door", {"id": id, "open": true})
@@ -1159,6 +1271,23 @@ func _toggle_door(id: String) -> String:
 
 ## O: the ship's operating change, asked at a trunk panel (the trainee holding still on a rail inside Wayfarer, in the SHIP frame).
 func ops() -> String:
+	if ship_ops != null:
+		var so := ship_ops.ops()
+		if so != "":
+			return so
+	elif shared_air != null:
+		var sr := shared_air.ops()
+		if sr != "":
+			return sr
+	elif deadship != null:
+		var dr := deadship.ops()
+		if dr != "":
+			return dr
+	elif equipment != null and move == "WALK" and equipment.in_reach(actor.global_position, walk_zone):
+		var r := equipment.operate()
+		_log("equipment", equipment.record())
+		say(r)
+		return equipment.air.mode
 	if not (move == "LINE" and line.id == "BOARD" and ls > float(hatch["OUTER_HATCH"]["gate"][1])):
 		say("Operations: ask from a panel inside Wayfarer's trunk (past the airlock).")
 		return ""
@@ -1219,6 +1348,14 @@ func _process(dt: float) -> void:
 			"g": snappedf(actor.field_now.length() / 9.80665, 0.001), "third_person": view_out}
 		if loco != null:
 			rec.merge(loco.record())
+		if equipment != null:
+			rec["systems"] = equipment.record()
+		if deadship != null:
+			rec["deadship"] = deadship.record()
+		if shared_air != null:
+			rec["sharedAir"] = shared_air.record()
+		if ship_ops != null:
+			rec["shipOps"] = ship_ops.record()
 		WfWebPage.publish("wayfarerWalk", rec)
 	var rc: Dictionary = learning.remote_camera() if learning != null else {}
 	var f: Dictionary = _frame_pivot() if rc.is_empty() else frames["STATIONARY"]     # a station's remote camera rides the stationary ship
@@ -1648,13 +1785,42 @@ func _layout() -> void:
 		hud_check.visible = false
 		hud_status.visible = false
 		ring_map.size = Vector2(150, 150)
-		ring_map.position = Vector2(sz.x - 162, 74)
+		var map_y := 74.0
+		if WfInput.touch != null:                 # under the touch utility row (an upright phone drops it below the page's Exit row)
+			map_y = maxf(map_y, WfInput.touch.util_top(sz) + WfInput.touch.TARGET + 10.0)
+		ring_map.position = Vector2(sz.x - 162, map_y)
 		return
 	hud_prompt.position = Vector2(18, sz.y - 150)
 	hud_prompt.custom_minimum_size.x = minf(900.0, sz.x - 36.0)
 	hud_status.position = Vector2(18, sz.y - 66)
 	hud_status.custom_minimum_size.x = sz.x - 36.0
 	ring_map.position = Vector2(sz.x - 250, 12)
+
+## The open training page (a learning station or Deadship), or null.
+func _page() -> Control:
+	if deadship != null and deadship.panel.visible:
+		return deadship.panel
+	if shared_air != null and shared_air.panel.visible:
+		return shared_air.panel
+	if ship_ops != null and ship_ops.panel.visible:
+		return ship_ops.panel
+	if learning != null and learning.panel.visible:
+		return learning.panel
+	return null
+
+## On a phone a page takes the band between the top row and the touch buttons (WfPagePanel): the goal, prompt and map step aside while
+## it is open (the page names the step and the next action, the touch buttons the actions) and come back when it closes. The player's
+## own Map choice is kept.
+func _page_hud() -> void:
+	var hide := WfInput.compact() and _page() != null
+	hud_goal.visible = not hide
+	hud_prompt.visible = not hide
+	if hide and ring_map.visible:
+		ring_map.visible = false
+		map_hidden_by_page = true
+	elif not hide and map_hidden_by_page:
+		ring_map.visible = true
+		map_hidden_by_page = false
 
 func key(id: String) -> String:
 	return "[" + WfInput.label(id) + "]"
@@ -1679,6 +1845,14 @@ func where() -> String:
 	return "crew tube " + "AB"[k]
 
 func _goal_text() -> String:
+	if ship_ops != null:
+		return ship_ops.goal_text()
+	if shared_air != null:
+		return shared_air.goal_text()
+	if deadship != null:
+		return deadship.goal_text()
+	if equipment != null and equipment.goal_text() != "":
+		return equipment.goal_text()
 	var w := where()
 	var mv := "%s/%s" % [key("player.move_forward"), key("player.move_back")]
 	if w == "station":
@@ -1741,6 +1915,12 @@ func use_label() -> String:
 				and closures[_port_gate(WfFrames.ring_index(line.zone))]["value"] < 0.999:
 			return "Use · open gate"
 		return ""
+	if deadship != null and deadship.use_label() != "":
+		return deadship.use_label()
+	if shared_air != null and shared_air.use_label() != "":
+		return shared_air.use_label()
+	if ship_ops != null and ship_ops.use_label() != "":
+		return ship_ops.use_label()
 	var w := _walk_target()
 	var ls_i := _learning_in_reach()
 	if ls_i >= 0 and (learning.open == ls_i or w == ""):
@@ -1762,12 +1942,23 @@ func touch_state() -> Dictionary:
 		acts.append(["exc.use", u, "primary_game"])
 	if move == "WALK":
 		acts.append(["exc.jump", "Jump", "game"])     # LOCO-003: the phone had no jump; running is the stick pushed to its rim
+	if ship_ops != null:
+		if ship_ops.ops_label() != "":
+			acts.append(["exc.ops", ship_ops.ops_label(), "game"])
+	elif shared_air != null:
+		if shared_air.ops_label() != "":
+			acts.append(["exc.ops", shared_air.ops_label(), "game"])
+	elif deadship != null:
+		if deadship.ops_label() != "":
+			acts.append(["exc.ops", deadship.ops_label(), "game"])
+	elif equipment != null and move == "WALK" and equipment.in_reach(actor.global_position, walk_zone):
+		acts.append(["exc.ops", "Ops · " + equipment.op_label(), "game"])
 	if move == "LINE" and line.id == "BOARD" and ls > float(hatch["OUTER_HATCH"]["gate"][1]) and not ctl.busy():
 		acts.append(["exc.ops", "Ops · undock" if ctl.mode == "DOCKED" else "Ops · dock", "game"])
 	acts.append(["exc.view", "View", "nav"])
 	return {"move": "1d" if move == "LINE" else "2d", "look": true, "actions": acts, "utility": [["exc.map", "Map"]],
 		"stick_hint": ("climb / down" if on_ladder() else "up / down") if move == "LINE" else "move · rim runs",
-		"probe": touch_probe, "panels": [hud_goal, hud_prompt, ring_map]}
+		"probe": touch_probe, "panels": [hud_goal, hud_prompt, ring_map] + ([_page()] if _page() != null else [])}
 
 ## The excursion state a browser check reads (-- --touch-probe).
 func touch_probe() -> Dictionary:
@@ -1792,12 +1983,26 @@ func _prompt_text() -> String:
 	else:
 		var d := _walk_target()
 		var ls_i := _learning_in_reach()
-		if ls_i >= 0 and (learning.open == ls_i or d == ""):
+		var dl := deadship.use_label() if deadship != null else (shared_air.use_label() if shared_air != null else (ship_ops.use_label() if ship_ops != null else ""))
+		if dl != "":
+			out.append("%s %s" % [key("exc.use"), dl.trim_prefix("Use · ")])
+		elif ls_i >= 0 and (learning.open == ls_i or d == ""):
 			out.append(("%s " + ("learning point: " + learning.title(ls_i) if learning.open != ls_i else learning.next_label())) % key("exc.use"))
 		elif d == "ladder":
 			out.append("%s take the ladder" % key("exc.use"))
 		elif d != "":
 			out.append("%s %s door %s" % [key("exc.use"), "close" if circ_doors[d]["target"] > 0.0 else "open", str(d).trim_prefix("CIRC.")])
+		if ship_ops != null:
+			if ship_ops.ops_label() != "":
+				out.append("%s %s" % [key("exc.ops"), ship_ops.ops_label().trim_prefix("Ops · ")])
+		elif shared_air != null:
+			if shared_air.ops_label() != "":
+				out.append("%s %s" % [key("exc.ops"), shared_air.ops_label().trim_prefix("Ops · ")])
+		elif deadship != null:
+			if deadship.ops_label() != "":
+				out.append("%s %s" % [key("exc.ops"), deadship.ops_label().trim_prefix("Ops · ")])
+		elif equipment != null and equipment.in_reach(actor.global_position, walk_zone):
+			out.append(equipment.prompt(key("exc.ops")))
 	out.append("%s view" % key("exc.view"))
 	var t := "  ·  ".join(out)
 	if prompt != "":
@@ -1821,14 +2026,31 @@ func _update_hud() -> void:
 		elif learning.open >= 0:
 			learning.close()
 	var lines_out: Array = []
-	for r in ["RING_A", "RING_B"]:
+	var training_only := (shared_air != null and shared_air.verified) or (ship_ops != null and ship_ops.verified)       # Shared Air shows its own stages, not the walk's tour checklist
+	for r in ([] if training_only else ["RING_A", "RING_B"]):
 		var rec: Dictionary = progress[r]
 		lines_out.append("%s  %s board  %s circuit (%d%%)  %s back aboard the station" % [("Ring A" if r == "RING_A" else "Ring B"),
 			"[x]" if rec["boarded"] else "[ ]", "[x]" if rec["circuit"] else "[ ]", int(100.0 * rec["bins"].count(1) / BINS), "[x]" if rec["returned"] else "[ ]"])     # ASCII: the web font has no ballot boxes
-	if learning != null and not learning.stations.is_empty():
+	if learning != null and not learning.stations.is_empty() and not training_only:
 		lines_out.append("Learning points %d/%d (ring A)" % [learning.done.size(), learning.stations.size()])
+	if equipment != null:
+		equipment.update()
+	if deadship != null and deadship.verified:
+		lines_out.append_array(deadship.lines())
+		deadship.update_panel(get_viewport().get_visible_rect().size)
+	if shared_air != null and shared_air.verified:
+		lines_out.append_array(shared_air.lines())
+		shared_air.update_panel(get_viewport().get_visible_rect().size)
+	if ship_ops != null and ship_ops.verified:
+		lines_out.append_array(ship_ops.lines())
+		ship_ops.update_panel(get_viewport().get_visible_rect().size)
+	_page_hud()
 	hud_check.text = "\n".join(lines_out)
 	hud_prompt.text = WfKeyText.rich(_prompt_text())
+	if not WfInput.compact():                     # a small window: the checklist's tail (the hint) gives way to the prompt below it
+		var room := hud_prompt.position.y - 8.0 - hud_check.position.y - 12.0
+		var lh := float(hud_check.get_line_height()) + float(hud_check.get_theme_constant("line_spacing"))
+		hud_check.max_lines_visible = maxi(int(room / maxf(lh, 1.0)) - 1, 1)     # one line spare: the outline and the box margins
 	if WfInput.compact():
 		hud_prompt.position.y = hud_goal.position.y + hud_goal.size.y + 6.0     # the goal's height follows its text
 	var g := actor.field_now.length() / 9.80665

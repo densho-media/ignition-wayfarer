@@ -526,6 +526,18 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   after the whitebox review. **Done when:** the owner accepts or replaces the circulation, the conflicts are canonized or removed and a
   person completes both excursions in the desktop and web builds.
 
+- [ ] **DS — Deadship integration (owner briefs 2026-11-12 to 2026-11-15). PHASES 2 AND 3 TECHNICALLY COMPLETE AND OWNER-ACCEPTED (2026-11-16, squashed onto main); PHASE 4 PARKED.** Report
+  `lab/studies/deadship/REPORT.md` (squashed from branch `claude/project-thread-dfyyv7`, last commit 58631f9): Deadship as a station-run training simulation
+  aboard Wayfarer on reusable conserving ship-systems models (SYS-001 v2, SYS-002 v2, docs/MODEL.md). Built: Phase 0 (`#interior-systems`),
+  Phase 1, the unscored DS-1 "Scrubber" tutorial (`#interior-deadship`), finalized for phones, Phase 2A, ring A's air by compartment
+  with the walk's doors as connections (`#interior-airflow`), and SYS-002 v2 (NH₃ beside CO₂: a finite source, a TCC in the sector 3
+  bay, exposures against the Rev D SMACs). The first Phase 2B gate failed on CO₂ alone (report §27); the second, on SYS-002 v2 with a
+  urine pretreatment failure in hygiene A, passed for the base scenario (report §30: containment is forced, then a real choice between
+  keeping the crew's air clean and clearing the habitation sector sooner), not for the source's extremes. Phase 2B "Shared Air" is built and finalized (`#interior-shared-air`, report §34–§36, handoffs §35 and §38; separation now viable with a scheduled reconnection). **Open:** the owner's review
+  of Phases 1 and 2A (checklist §22.4), SYS-002 v2 and the source's PROTOTYPE values; the owner's playtest of 2B (guide §36.10) and release (§36.11); the finite TCC bed failed its gate as a gameplay generator (§39); SYS-003 ring services (heat, humidity, CO₂, cooling, buses, battery, survival packs, parts; §40) carries DS-2C "Borrowed Air" (`#interior-borrowed-air`, §41) and DS-3 "Dark Bus" (`#interior-dark-bus`, §42), each with three non-dominated viable strategies; the owner's playtest (guide in the report's handoff) and review of their PROTOTYPE values (the electrical architecture, the 8 kWh packs, the 40 kW converters, the restart reserve taken as the pulse bank's full 200 kWh) are open; the closeout (report §49–§58) added the model-validity policy and the PROTOTYPE power sensitivity (Dark Bus viable only in a narrow band of converter rating, ship load, battery and window; §51) and records the ring cabins' passive exchange and heaters as OPEN (§52); **Phase 4 (competitive Deadship, Hullrun) is PARKED**: no further game development until the spacecraft design and model are complete, the routes and interfaces are stable and the owner reauthorizes it; Phase 5 stays planned, not authorized;
+  ring ventilation stays PROTOTYPE (DS-O7), the crew-tube hatches outside the model (DS-O8). **Done when:** the owner accepts or
+  declines the phases and SYS-002 v2 and squashes or declines them.
+
 ## K — Finish the two characters, EVA training and production art
 
 - [ ] **LOCO — Character locomotion in both experiences (owner brief 2026-11-08; docs/LOCOMOTION.md).** Built and checked: Explore
