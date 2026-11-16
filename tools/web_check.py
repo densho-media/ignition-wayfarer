@@ -1410,6 +1410,23 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
         rendered = page.wait("document.querySelectorAll('section.panel').length >= 6", 30)
         record_check('status page renders release.json', rendered and release['release'] in page.js('document.body.innerText'))
         page.screenshot(out / 'status.png')
+        # Engineering · Ignition: what breaks, on the phone: the 3D view starts from the engine inspection parts, the page's lever model
+        # gives the study's own check points (lab/studies/ignition-failures, written into ignition.json), Overload reaches its quench
+        if 'engineering/ignition/index.html' in release.get('files', {}):
+            page.send('Page.navigate', {'url': url + 'engineering/ignition/#autostart'})
+            if page.wait('!!(window.__ign && window.__ign.ready)', 120):
+                mirror = page.js("(() => window.__ign.data.checks.map(c => { const o = window.__ign.evaluate(c.levers); "
+                                 "return [c.label, Math.abs(o.ratio / c.ratio - 1) < 1e-9 && o.fails.map(f => f.id).join() === c.fails.join()]; }))()")
+                record_check('ignition: the page model reproduces the study check points', all(ok for _, ok in mirror), points=mirror)
+                page.js('window.__ign.mode("overload"); window.__ign.seek(window.__ign.run.V + 3)')
+                page.frames(4)
+                st = page.js('({stats: window.__ign.stats, run: window.__ign.run, overflow: document.documentElement.scrollWidth > innerWidth})')
+                record_check('ignition: draws both sides with few calls, Overload quenches, no horizontal overflow',
+                             bool(st['stats']) and 0 < st['stats']['calls'] <= 12 and any(e[0] == 'QUENCH' for e in st['run']['events'])
+                             and not st['overflow'], stats=st['stats'], events=st['run']['events'])
+                page.screenshot(out / 'phone_ignition.png')
+            else:
+                record_check('ignition: the 3D view starts', False)
     except SystemExit:
         pass
     except Exception as error:      # a browser session failure is a failed check with Chrome's own last words

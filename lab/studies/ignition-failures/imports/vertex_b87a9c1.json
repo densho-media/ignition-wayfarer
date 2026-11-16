@@ -1,0 +1,210 @@
+{
+ "provenance": {
+  "branch": "claude/project-thread-6qwiwi",
+  "commit": "b87a9c1",
+  "note": "Copied once from the unsquashed Vertex research chain (1.6B, 1.7, 1.8 Phase F) so this study does not depend on the order of the squashes. Values unchanged; each block names its file and key path."
+ },
+ "ledger": {
+  "source": "references/evidence/vertex_dynamic.json budget.reference / budget.hybrid / budget.driver (Vertex 1.7)",
+  "reference": {
+   "case": "S1",
+   "bracket": "optimistic",
+   "Pf_W": 71575700000000.0,
+   "photon_neutron_W": 340799000000.0,
+   "leak_W": 17804100000000.0,
+   "loss_W": 1032200000.0,
+   "reject_W": 18146000000000.0,
+   "capacity_W": 2700280000.0,
+   "ratio": 6720.03
+  },
+  "unshielded": {
+   "photon_neutron_W": 16396700000000.0,
+   "reject_W": 34201900000000.0,
+   "ratio": 12666.0
+  },
+  "hybrid": {
+   "photon_neutron_W": 306175000000.0,
+   "reject_W": 18111400000000.0,
+   "capacity_W": 2736400000.0,
+   "ratio": 6618.68
+  },
+  "driver": {
+   "reject_W": 2927140000000.0,
+   "ratio": 1084.01,
+   "hybrid_with_driver": 7688.38,
+   "gain_to_fit": 108401.0,
+   "note": "Not in the 1.6B ledger: the driver of an inertial burn draws Pf/(G eta) and its losses and the conversion losses that feed it are rejected at loss_K. Shown at the optimistic bracket (G 100, eta 0.5, conversion 0.9).",
+   "gain": 100,
+   "efficiency": 0.5,
+   "conversion": 0.9
+  },
+  "requirement": {
+   "leak_to_close": null,
+   "leak_computed": 0.182996,
+   "leak_factor": null,
+   "perfect_capture_ratio": 112.267,
+   "source_factor_to_close": 0.00556612,
+   "source_reduction": 179.658
+  }
+ },
+ "leak": {
+  "source": "references/evidence/vertex_source.json interface.capture (Vertex 1.6B)",
+  "hardware_fraction": 0.182996,
+  "allowable": [
+   {
+    "cls": "HOT_STRUCTURE",
+    "T_K": 1800.0,
+    "allowed_W": 2700280000.0
+   },
+   {
+    "cls": "RADIATION_FACING_ARMOUR",
+    "T_K": 1300.0,
+    "allowed_W": 1183270000.0
+   },
+   {
+    "cls": "WARM_MACHINERY",
+    "T_K": 440.0,
+    "allowed_W": 238899000.0
+   },
+   {
+    "cls": "CRYOGENIC_SUPERCONDUCTOR",
+    "T_K": 20.0,
+    "allowed_W": 9071490.0
+   }
+  ]
+ },
+ "neutrons": {
+  "source": "references/evidence/vertex_source.json neutrons.rows[S1] (Vertex 1.6B)",
+  "Pf_W": 118981000000000.0,
+  "neutron_W": 5897170000000.0,
+  "coils": [
+   {
+    "coil": "C1",
+    "distance_m": 5.09017,
+    "life_unshielded_s": 1.25676,
+    "attenuation_needed": 2746480.0,
+    "shield_m": 2.22387,
+    "shield_kg": 707601.0
+   },
+   {
+    "coil": "C2",
+    "distance_m": 4.6114,
+    "life_unshielded_s": 1.03146,
+    "attenuation_needed": 3346390.0,
+    "shield_m": 2.25351,
+    "shield_kg": 1253050.0
+   },
+   {
+    "coil": "L1",
+    "distance_m": 6.18074,
+    "life_unshielded_s": 1.85297,
+    "attenuation_needed": 1862780.0,
+    "shield_m": 2.16564,
+    "shield_kg": 1863480.0
+   },
+   {
+    "coil": "L2",
+    "distance_m": 6.94,
+    "life_unshielded_s": 2.33618,
+    "attenuation_needed": 1477480.0,
+    "shield_m": 2.13088,
+    "shield_kg": 2206280.0
+   },
+   {
+    "coil": "L3",
+    "distance_m": 9.87523,
+    "life_unshielded_s": 4.73022,
+    "attenuation_needed": 729704.0,
+    "shield_m": 2.02506,
+    "shield_kg": 2351620.0
+   },
+   {
+    "coil": "L4",
+    "distance_m": 15.2673,
+    "life_unshielded_s": 11.306,
+    "attenuation_needed": 305294.0,
+    "shield_m": 1.89435,
+    "shield_kg": 2291010.0
+   }
+  ],
+  "shield_mass_four_kg": 42692100.0,
+  "mass_margin_kg": 173926.0
+ },
+ "quench": {
+  "source": "references/evidence/vertex_dynamic.json failures F-QUENCH, F-OVERLOAD (Vertex 1.7)",
+  "F-TREAD": {
+   "cause": "a tread stops under the burn",
+   "energy_J": null,
+   "consequence": "the lit tiles take the full face flux (~1.2e+09 W/m2 at mission power, nominal source): they reach Fiji/armour limits in ~12.06 ms; the burn must trip",
+   "visible": "a stationary glowing band on one coil"
+  },
+  "F-QUENCH": {
+   "cause": "superconductor quench (neutron damage, heat leak, flux jump)",
+   "energy_J": 9723310000.0,
+   "consequence": "9.7 GJ per engine dumped into the cold mass (persistent mode: final ~156 K) or a resistor; unbalanced forces on the neighbours (one engine off: LC-06)",
+   "visible": "cryostat vent plume, frost, field-off indicator"
+  },
+  "F-OVERLOAD": {
+   "cause": "flux compression beyond the coil rating (max swing x1.86, 1.3)",
+   "energy_J": null,
+   "consequence": "case stress beyond allowable; quench or structural yield",
+   "visible": "trip, quench vent"
+  },
+  "F-LEAK": {
+   "cause": "plasma leakage above the computed 18 % (detachment failure)",
+   "energy_J": null,
+   "consequence": "hardware heat beyond any radiator; armour erosion; trip",
+   "visible": "plume touching the cage, armour glow"
+  }
+ },
+ "startup": {
+  "source": "work/vertex-1-8/budgets.json startup (Vertex 1.8 Phase F)",
+  "field_energy_cluster_GJ": 38.89324,
+  "main_battery_GJ": 7.2,
+  "pulse_bank_GJ": 0.72,
+  "pulse_bank_MW": 50.0,
+  "bootstrap": [
+   {
+    "bracket": 0,
+    "energy_GJ": 0.313493,
+    "power_MW": 31.3493,
+    "flywheel_t": 3.1349299999999998,
+    "bank_power_ok": true,
+    "battery_energy_ok": true
+   },
+   {
+    "bracket": 1,
+    "energy_GJ": 1.74163,
+    "power_MW": 174.163,
+    "flywheel_t": 58.054300000000005,
+    "bank_power_ok": false,
+    "battery_energy_ok": true
+   },
+   {
+    "bracket": 2,
+    "energy_GJ": 15.6746,
+    "power_MW": 1567.46,
+    "flywheel_t": 1567.46,
+    "bank_power_ok": false,
+    "battery_energy_ok": false
+   }
+  ],
+  "verdict": "OPEN. Charging the four engines' coils takes 38.9 GJ (5.4x the main battery); spread over 31 h it is a 350 kW load the ship bus or the departure station can carry. The first driver pulses need 0.3-15.7 GJ at 31-1,570 MW: the 50 MW pulse bank covers only the lowest bracket, the 58 t flywheel the middle one. Without the flywheel, ignition at the middle bracket has no sourced power path; with it, the mass does not fit. Ignition energy stays OPEN (power.storage.pulse_bank.ignition_energy)."
+ },
+ "power": {
+  "source": "work/vertex-1-8/budgets.json power (Vertex 1.8 Phase F)",
+  "installed_rejection_GW": 14.4015,
+  "drive_share_GW": 10.8011,
+  "per_engine_GW": 2.70028,
+  "canon_absorbed_fraction": 4e-05,
+  "heat_to_reject_per_engine_TW": 34.2019,
+  "ratio_to_drive_share": 12666.0
+ },
+ "mission": {
+  "source": "references/evidence/vertex_dynamic.json mission.rows[static] (B01 point)",
+  "thrust_N": 21770800.0,
+  "ve_m_s": 19201200.0,
+  "margin_kg": 173926.0,
+  "burn_d": 9.98745
+ }
+}

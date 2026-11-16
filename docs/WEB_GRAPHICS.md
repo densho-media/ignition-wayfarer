@@ -51,6 +51,13 @@ headers. Budgets in `tools/web_export.py` (raw bytes): start page 60 kB, viewer 
 (`web-explorer.yml`) builds every branch, checks it in headless Chrome under SwiftShader (begin-frame control for the equivalence run)
 and deploys only `main`.
 
+Engineering · Ignition: what breaks (`web/engineering/ignition.js`, the ignition-failures study): the four engines as one `InstancedMesh`
+of the 264 inspection parts (no ship GLB), per-part temperature, melt, vapour and fragment motion in two float `DataTexture`s read in the
+vertex and fragment shaders (black-body emission, dithered vapour, no transparency sorting), additive plume cones, one particle cloud and
+shock shells; both halves of the split view with one camera through scissor viewports; render on demand while paused; pixel ratio 1.5 on
+touch, 2 on desktop, with a 0.25-step adaptive drop after a slow second. 5–9 draw calls and about 107 k triangles per half; SW frame times
+in `references/evidence/gfx_ignition.json`, HW PENDING.
+
 Diagnostics that exist: the viewer's `stats` / `renderer.info` and `?diag` overlay (frame time mean and p95 over 120 frames, draw calls,
 triangles, geometries, textures, programs, JS heap, transfer); `web_check.py` metrics in `release.json` (`tests.metrics`: ready times,
 transfer, requests, renderer memory); `godot/scripts/profile_views.gd` (native Godot: frame time, draw calls, primitives, objects, video
@@ -256,7 +263,7 @@ Kept results go to `references/evidence/gfx_<task>.json` with the evidence class
 
 | Proven here (built and checked) | Experimental (needs a task and evidence) | Incompatible with the current renderer or hosting |
 | --- | --- | --- |
-| Draco GLB; content naming; click-to-load isolation; context release; RT-005 mesh sharing; production-layer visibility ranges; nearest-lamp culling; touch 3-D scale; stencil-limited ghost/hologram layers; S3TC desktop textures | viewer DPR policy, render on demand, reverse-Z; instancing/batching; LightmapGI bake and web rendering; reflection probes; SSAO on WebGL; normal/roughness maps and trim sheets; decals for wear; render LODs; quality profiles; meshopt/KTX2 | in Godot Compatibility: VoxelGI, SDFGI, SSIL, SSR, volumetric fog, TAA, FSR2, FXAA, SMAA, DOF, HDR output, compute; on Pages: threaded Godot (COOP/COEP), custom headers; any WebGPU-only path as production |
+| Draco GLB; content naming; click-to-load isolation; instanced engine parts with per-part state textures and scissor split views (ignition page); context release; RT-005 mesh sharing; production-layer visibility ranges; nearest-lamp culling; touch 3-D scale; stencil-limited ghost/hologram layers; S3TC desktop textures | viewer DPR policy, render on demand, reverse-Z; instancing/batching; LightmapGI bake and web rendering; reflection probes; SSAO on WebGL; normal/roughness maps and trim sheets; decals for wear; render LODs; quality profiles; meshopt/KTX2 | in Godot Compatibility: VoxelGI, SDFGI, SSIL, SSR, volumetric fog, TAA, FSR2, FXAA, SMAA, DOF, HDR output, compute; on Pages: threaded Godot (COOP/COEP), custom headers; any WebGPU-only path as production |
 
 ## 12. Known bottlenecks and open evidence
 
