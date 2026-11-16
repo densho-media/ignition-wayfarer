@@ -692,7 +692,8 @@ def vertex_page(spec, out_dir, revision, built):
 {radiation_section(spec)}
 {fiji_section(spec)}
 {fiji_a_section(spec)}
-{source_section(spec)}"""
+{source_section(spec)}
+{dynamic_section(spec)}"""
     (out_dir / 'index.html').write_text(page('Vertex propulsion lineage · Wayfarer engineering',
                                              'How the Vertex research demonstrator became the Compact Vertex Engine and the four-engine Propulsion Cluster.',
                                              body, 2, revision, built))
@@ -1232,6 +1233,132 @@ def radiation_section(spec):
 </section>"""
 
 
+
+
+def dynamic_svgs(R):
+    """Two inline figures for Section 12: the timescales on one log axis, and a half-section of the engine with the kept mechanisms."""
+    T = R['timescales']; W = 560
+    items = [('Photon to L2', T['transit_s']['photon']['L2'], 'bad'), ('14.7 MeV proton to L2', T['transit_s']['proton_14_7']['L2'], 'warn'),
+             ('Exhaust to L2', T['transit_s']['exhaust']['L2'], 'warn'), ('Power switch (nominal)', T['switch_s'][1], 'good'),
+             ('Pulse period, mission', T['pulse_period_s']['mission'], 'info'), ('Pulse period, demonstrator', T['pulse_period_s']['demonstrator'], 'info'),
+             ('Crown segment pass, 700 m/s', 1/T['mechanical'][1]['modulation_Hz'], 'accent'), ('Crown turn, 700 m/s', 1/T['mechanical'][1]['rotation_Hz'], 'accent'),
+             ('Petal deployment', R['petals']['deploy_time_s'], 'violet'), ('Coil ramp from the bus', max(r['ramp_s'] for r in R['audit']['field']['rows']), 'violet')]
+    lo, hi = -9.0, 3.0; x0 = 190; bw = W-x0-12; bh = 16; H = 20+len(items)*(bh+6)+26
+    lx = lambda v: x0+(min(max(math.log10(v), lo), hi)-lo)/(hi-lo)*bw
+    bars = ''.join(f'<text class="ax" x="4" y="{20+i*(bh+6)+12}">{esc(n)}</text><rect class="sv-{c if c in ("bad", "warn", "good", "info") else "info"}" x="{x0}" '
+                   f'y="{20+i*(bh+6)}" width="{lx(v)-x0:.1f}" height="{bh}"><title>{esc(n)}: {v:.2g} s</title></rect>' for i, (n, v, c) in enumerate(items))
+    grid = ''.join(f'<line class="axis" x1="{lx(10**e):.1f}" x2="{lx(10**e):.1f}" y1="14" y2="{H-24}"/><text class="ax" x="{lx(10**e)-10:.1f}" y="{H-8}">'
+                   f'{"1 s" if e == 0 else f"1e{e}"}</text>' for e in range(-9, 4, 3))
+    f1 = (f'<figure><svg class="figure-svg field" viewBox="0 0 {W} {H}" role="img" aria-label="Timescales of the plasma, the pulses and the machinery">'
+          f'<rect class="bg" width="{W}" height="{H}"/>{grid}{bars}</svg><figcaption>Seconds, log scale. The plasma crosses the nozzle in a few hundred '
+          f'nanoseconds and the mission pulses repeat every {T["pulse_period_s"]["mission"]*1e6:.0f} µs; the fastest machinery moves on milliseconds to minutes. '
+          f'Motion can only set the geometry between burns, never shape a pulse.</figcaption></figure>')
+    g = R['audit']['geometry']; k = R['petals']['best']['k']; H2 = 250; sx = lambda x: 30+(g['shield_aft_x']+3.0-x)*13.0; sy = lambda r: H2-24-r*9.0
+    burn = f'<circle class="burn" cx="{sx(g["burn_x"]):.1f}" cy="{sy(0):.1f}" r="5"/><text class="lbl" x="{sx(g["burn_x"])-12:.1f}" y="{sy(0)+16:.1f}">burn</text>'
+    shield = f'<rect class="shield" x="{sx(g["shield_aft_x"]+2.2):.1f}" y="{sy(g["shield_aft_radius_m"]):.1f}" width="{2.2*13:.1f}" height="{g["shield_aft_radius_m"]*9:.1f}"/>'
+    coils = ''
+    for c in g['coils']:
+        dz = c['dz_burn']; kk = k if c['group'] == 'loop' else 1.0
+        coils += f'<circle class="coil" cx="{sx(g["burn_x"]+dz*kk):.1f}" cy="{sy(c["r"]*kk):.1f}" r="{c["cryostat"]*9:.1f}"><title>{esc(c["name"])} deployed</title></circle>'
+        if c['group'] == 'loop':
+            coils += (f'<circle cx="{sx(g["burn_x"]+dz):.1f}" cy="{sy(c["r"]):.1f}" r="{c["cryostat"]*9:.1f}" fill="none" stroke="currentColor" stroke-dasharray="3 3" '
+                      f'opacity="0.5"><title>{esc(c["name"])} folded</title></circle>')
+        if c['name'] in {q['name'] for q in R['tread']['coils']}:
+            coils += f'<circle cx="{sx(g["burn_x"]+dz*kk):.1f}" cy="{sy(c["r"]*kk):.1f}" r="{c["cryostat"]*9+4:.1f}" fill="none" class="sl sv-l-good" stroke-dasharray="6 3"/>'
+    hinge = sx(g['shield_aft_x']+1.1); petal = ''.join(f'<line class="sl sv-l-violet" x1="{hinge:.1f}" y1="{sy(g["shield_aft_radius_m"]+0.4):.1f}" '
+                                                     f'x2="{sx(g["burn_x"]+c["dz_burn"]*k):.1f}" y2="{sy(c["r"]*k+c["cryostat"]+0.5):.1f}"/>'
+                                                     for c in g['coils'] if c['group'] == 'loop')
+    axis = f'<line class="axis" x1="20" x2="{W-10}" y1="{sy(0):.1f}" y2="{sy(0):.1f}"/>'
+    leg = (f'<text class="ax" x="{W-250}" y="16">grey dashed: folded · filled: deployed (k {k:.2f})</text>'
+           f'<text class="ax sv-t-good" x="{W-250}" y="30">green ring: armour tread</text><text class="ax sv-t-violet" x="{W-250}" y="44">violet: petal arms from the collar hinge</text>')
+    f2 = (f'<figure><svg class="figure-svg field" viewBox="0 0 {W} {H2}" role="img" aria-label="Half-section of the engine with deployed petals and treads">'
+          f'<rect class="bg" width="{W}" height="{H2}"/>{axis}{shield}{petal}{coils}{burn}{leg}</svg><figcaption>Half-section (axis at the bottom, exhaust to the '
+          f'right). The nozzle loops L1–L4 and their cage ride on petals hinged at the collar and swing out for the burn; C2, L1 and L2 carry circulating '
+          f'armour treads. Schematic scaling, not a field solution.</figcaption></figure>')
+    return f1+f2
+
+
+def dynamic_section(spec):
+    """Section 12 of engineering/vertex/: Engine 1.7 dynamic lattice drive mechanism, read from references/evidence/vertex_dynamic.json
+    (written by `python3 src/wayfarer/vertex_dynamic.py --evidence`; tests/test_vertex_dynamic.py fails when it is stale). Research only."""
+    import json
+    p = ROOT / 'references/evidence/vertex_dynamic.json'
+    if not p.exists():
+        return ''
+    R = json.loads(p.read_text()); A = R['audit']; V = R['verdict']; BU = R['budget']; T = R['timescales']; DY = R['dynamo']; PT = R['petals']; TR = R['tread']
+    pw = lambda v: '—' if v is None else (f'{v/1e12:,.1f} TW' if abs(v) >= 1e12 else f'{v/1e9:,.2f} GW' if abs(v) >= 1e9 else f'{v/1e6:,.1f} MW' if abs(v) >= 1e6 else f'{v/1e3:,.1f} kW')
+    x = lambda v: '—' if v is None else (f'{v:,.0f}×' if abs(v) >= 10 else f'{v:,.2f}×')
+    t_ = lambda v: f'{v/1e3:,.0f} t'
+    cmp_ = ''.join(f'<tr><td><code>{esc(r["id"])}</code> {esc(r["title"])}</td><td>{tag(r["keep"].split()[0])}</td><td class="num">{x(r["ratio"])}</td>'
+                   f'<td class="num">{r["improvement"]:.3f}×</td><td class="num">+{t_(r["added_four_kg"])}</td><td>{esc(r["radiation"])}</td><td>{esc(r["heat"])}</td>'
+                   f'<td>{esc(r["magnetic"])}</td><td>{esc(r["complexity"])}</td><td>{esc(r["visual"])}</td></tr>' for r in R['compare'])
+    bud = ''.join(f'<tr><td>{esc(r["candidate"])}</td><td>{esc(r["bracket"])}</td><td>{"liner" if r["shield"] else "open"}</td><td class="num">{pw(r["photon_neutron_W"])}</td>'
+                  f'<td class="num">{pw(r["leak_W"])}</td><td class="num">{x(r["ratio"])}</td><td class="num">{r["improvement"]:.3f}×</td></tr>'
+                  for r in BU['rows'] if r['candidate'] in ('static', 'C3', 'C4', 'HYBRID'))
+    sp = ''.join(f'<tr><td><code>{esc(s["id"])}</code> {esc(s["name"])}</td><td>{esc(s["supplies"])}</td><td>{esc(s["precedent"])}</td><td>{tag(s["status"])}</td>'
+                 f'<td class="meta">{esc(s["note"])}</td></tr>' for s in V['speculative'])
+    dur = lambda v: '—' if v is None else (f'{v/3600:,.0f} h' if v >= 7200 else f'{v:,.0f} s')
+    seq = ''.join(f'<tr><td>{i+1} · {esc(s["state"].replace("_", " ").lower())}</td><td>{esc(s["description"])}</td><td class="num">{dur(s["duration_s"])}</td>'
+                  + ''.join(f'<td class="num">{s["values"][kk]:g}</td>' for kk in ('bloom', 'tread', 'dynamo', 'field', 'fiji', 'burn')) + '</tr>'
+                  for i, s in enumerate(R['sequence']))
+    fl = ''.join(f'<tr><td><code>{esc(f["id"])}</code></td><td>{esc(f["mechanism"])}</td><td>{esc(f["cause"])}</td><td>{esc(f["consequence"])}</td>'
+                 f'<td class="meta">{esc(f["visible"])}</td></tr>' for f in R['failures'])
+    asm = ''.join(f'<tr><td><code>{esc(a["id"])}</code></td><td>{esc(a["parts"])}</td><td>{esc(a["motion"])}</td><td>{esc(a["material"])}</td></tr>' for a in R['integration']['assemblies'])
+    ans = ''.join(f'<tr><td>{esc(a["q"])}</td><td>{esc(a["a"])}</td></tr>' for a in R['answers'])
+    st = DY['startup'][1]; rc = DY['recirculating']; sw = DY['switched']; best = PT['best']; rq = BU['requirement']; dr = BU['driver']
+    led = ''.join(f'<tr><td><code>{esc(r["id"])}</code></td><td class="num">' + (f'{x(r["ratio"][0])}–{x(r["ratio"][1])}' if isinstance(r['ratio'], list) else x(r['ratio']))
+                  + f'</td><td>{esc(r["configuration"])}</td><td>{esc(r["capacity"])}</td></tr>' for r in A['ledger'])
+    return f"""<section id="dynamic"><h2>12 · Dynamic lattice drive mechanism (Engine {esc(R["version"])})</h2>
+<p class="lead">Could moving machinery — rotating field crowns, flywheels and induction, petals that change the nozzle, a moving Fiji lattice — make the engine
+  better, not just busier? Four candidates were costed on the Section 11 mission budget. The machinery that survives makes the engine open, circulate and
+  charge itself in a visible sequence, and it helps locally: coil sky ×{best["coil_factor"]:.2f}, coil fluence ×{best["fluence_factor"]:.2f}, peak armour flux ÷π.
+  The radiator ratio barely moves ({x(BU["reference"]["ratio"])} → {x(BU["hybrid"]["ratio"])}). {tag(V["label"])} {tag("RESEARCH")} Nothing here is canon;
+  the engine, its geometry and Sections 8–11 are unchanged.</p>
+{dynamic_svgs(R)}
+<h3>Why motion cannot reach the plasma</h3>
+<p>{esc(T["verdict"]["statement"])} Plasma current drive by a rotating field (used on FRC experiments) needs rotation between the ion and electron cyclotron
+  frequencies, {T["rmf"]["gap"]:,.0f} times faster than the fastest rim. An axisymmetric crown turned about its own axis makes exactly the field it made at rest.</p>
+<h3>The candidates against the static engine</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Candidate</th><th>Verdict</th><th>Radiator ×</th><th>Better by</th><th>Mass, 4 engines</th><th>Radiation</th>
+<th>Heat</th><th>Magnetics</th><th>Complexity</th><th>Visible</th></tr></thead><tbody>{cmp_}</tbody></table></div>
+<ul class="plain">
+ <li><b>Rotary Field Crown (rejected):</b> {esc(R["crown"]["field_change"])}. A tungsten-laden crown on a CFRP band is limited to {R["crown"]["v_max_m_s"]:.0f} m/s;
+  a Fiji crown is pulled toward its coil with up to {R["crown"]["fiji_pull_N"]["3.5"]/1e6:.0f} MN.</li>
+ <li><b>Pulsed Lattice Dynamo (two small parts kept):</b> one second of mission power would need {DY["sustained_flywheel_kg"]["1"]/1e9:,.0f} Mt of flywheel. A switched pulse
+  coil exchanging the pulse energy {x(A["pulse"]["rate_mission_Hz"])} per second would have to recover {100*sw["required_recovery"]:.3f} % of it; the best pulsed power
+  recovers {100*max(sw["literature"]):.0f} %. Kept: a flywheel bootstrap for the first ignition pulses ({t_(st["mass_kg"]["flywheel"])} nominal) and leadless persistent coils
+  (HTS dynamo or retractable leads, −{pw(DY["leads"][1]["radiator_W"])} of radiator duty).</li>
+ <li><b>Variable Geometry Flux Nozzle (kept):</b> petals deployed to k {best["k"]:.2f} (the cluster spacing allows {PT["k_max"]:.2f}) keep the field energy, divide the loop
+  forces by {1/best["loop_force_factor"]:.2f} and multiply the pull between engines by {best["inter_engine_factor"]:.1f}; +{t_(best["added_kg"][1])} per engine.</li>
+ <li><b>Armour Tread (added, kept):</b> tiles circulate round C2, L1 and L2; the peak flux falls by π (VTX-S3 {TR["vtx_s3_static"]:.0f}× → {TR["vtx_s3_tread"]:.1f}×), the shadow
+  side radiates {pw(TR["sinks"][1]["W"])} per engine; +{t_(TR["added_kg"])} per engine.</li>
+ <li><b>Dynamic Fiji:</b> a field-following lattice turned with a crown aligns to the field whatever its angle; a thermomagnetic Fiji cycle converts at most
+  {100*DY["fiji_cycle"][0]["efficiency"]:.1f} % of its heat, and Fiji works below the radiator temperature. Fiji's role stays a temperature-scheduled one, not a moving one.</li></ul>
+<h3>Mission-point budget</h3>
+<p>{esc(BU["note"])} The static rows reproduce Section 11 exactly.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Candidate</th><th>Source</th><th>Cold parts</th><th>Photon + neutron heat</th><th>Leakage heat</th><th>Radiator ×</th><th>Better by</th></tr></thead><tbody>{bud}</tbody></table></div>
+<p><b>A channel the earlier budgets left out:</b> the driver. At a target gain of 100 and a 50 % driver, recirculating {100*rc[0]["share"]:.0f} % of the fusion power
+  rejects {x(dr["ratio"])} the drive share by itself; at the nominal gain 30 and a 30 % driver, {x(rc[1]["ratio_to_drive_share"])}. With it the hybrid stands at
+  {x(dr["hybrid_with_driver"])}.</p>
+<h3>What the fiction would have to supply</h3>
+<p>Even with no leakage at all the best source leaves {x(rq["perfect_capture_ratio"])}; the source would have to be {x(rq["source_reduction"])} quieter, and the driver gain
+  would have to approach {dr["gain_to_fit"]:,.0f}. Proposed for the author's decision, none applied:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Principle</th><th>Supplies</th><th>Nearest precedent</th><th>Status</th><th></th></tr></thead><tbody>{sp}</tbody></table></div>
+<h3>The ignition sequence of the recommended hybrid</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>State</th><th>What happens</th><th>Takes</th><th>Bloom</th><th>Tread</th><th>Dynamo</th><th>Field</th><th>Fiji K</th><th>Burn</th></tr></thead><tbody>{seq}</tbody></table></div>
+<h3>Failure modes</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th></th><th>Mechanism</th><th>Cause</th><th>Consequence</th><th>Visible</th></tr></thead><tbody>{fl}</tbody></table></div>
+<h3>Integration plan (not built)</h3>
+<p>{esc(R["integration"]["phase_f"])} {esc(R["integration"]["render"]["note"])}</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Assembly</th><th>Parts</th><th>Motion</th><th>Materials</th></tr></thead><tbody>{asm}</tbody></table></div>
+<h3>The earlier ratios</h3>
+<p>The audit keeps them apart: they answer different questions (source, geometry, thermal convention, capacity).</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Study</th><th>Radiator ×</th><th>Configuration</th><th>Capacity</th></tr></thead><tbody>{led}</tbody></table></div>
+<h3>Answers</h3>
+<div class="scroll" tabindex="0"><table><tbody>{ans}</tbody></table></div>
+<p class="meta">Audit: the engine and frame estimate ({A["mass"]["engines_and_frame_kg"]/1e6:.1f} kt) is not in the ship mass budget ({A["mass"]["protected_ship_kg"]/1e6:.1f} kt
+  protected ship); the drawn pulse pods hold {st["pods_hold_pulses"]:.2f} nominal driver pulses. Evidence <code>references/evidence/vertex_dynamic.json</code>, input
+  {esc(R["input_hash"])}.</p></section>"""
 
 def source_svgs(R):
     """Two inline figures for Section 11: per-case energy destinations (bars) and the photon share against ion temperature (lines),

@@ -2316,6 +2316,28 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
   - *Neutrons:* the nearest REBCO lasts about 1 s unshielded at mission power; a credible life needs ~10⁶ attenuation and ~45 kt
     of wrap shields against a 174 t departure margin (FAIL).
     engineering/vertex/ section 11 reads `references/evidence/vertex_source.json` (`python3 src/wayfarer/vertex_source.py --evidence`, about 1 s).
+- **Dynamic lattice drive mechanism (Engine 1.7, `vertex_dynamic.py`, `[vertex_dynamic]`).** Research only; outcome **C**
+  (DYNAMIC_HELPS_LOCALLY). Four moving-machinery candidates costed on the unchanged 1.6B mission budget; the engine, its geometry, the four
+  independent engines and the 1.5-1.6B evidence are unchanged.
+  - *Timescales:* the exhaust reaches L2 in about 400 ns and mission pulses repeat every 24 µs; a 1 km/s rim moves 0.4 mm in the transit and a
+    segmented crown modulates the field at 0.4 % of the pulse rate, so motion only sets geometry between burns. Rotating-field current drive
+    would need ~1e5 times faster rotation. Static superconducting flux compression is already the lossless dynamic coupling.
+  - *Candidates:* C1 Rotary Field Crown REJECTED (an axisymmetric crown makes the same field turning; a loaded CFRP band is limited to
+    150 m/s; gyroscopic and burst loads); C2 Pulsed Lattice Dynamo: flywheel storage for sustained or kHz power rejected
+    (one second of mission power ~0 Mt), switched pulse coils rejected (need 99.995 % recovery),
+    Fiji thermomagnetic cycle rejected (≤1.8 %, below radiator temperature); kept: an ignition bootstrap flywheel and
+    leadless persistent coils (HTS dynamo or retractable leads); C3 deployable petals KEPT (k 1.40: coil sky ×0.79, coil fluence
+    ×0.51, field energy unchanged, inter-engine pull ×2.7, +193 t per engine); C4 armour treads (added)
+    KEPT (peak flux ÷π, VTX-S3 29× → 9.3×, +151 t per engine).
+  - *Budget:* the recommended hybrid (C3 + C4 + leadless coils, electronic trim) moves the best ratio from 6,720× to
+    6,619× (charged leakage dominates). Audit finding: the driver's recirculating power is outside the 1.6B ledger; at
+    gain 100 and a 50 % driver it alone is 1,084× the drive share. Closing would need near-perfect capture (SP-17A), a
+    180× quieter source (SP-17B) and a target gain near 108,401 (SP-17D), proposed for the
+    author's decision and not applied; SP-17C (Fiji coercivity) helps magnetics only.
+  - *Mass:* every kept part adds mass; the 1.2 engine and frame estimate (6.3 kt) is outside the 1.1 kt ship mass budget.
+  - *Sequence and integration:* nine states (dormant to failure) with bloom, tread, dynamo, field, Fiji temperature and burn values; ten
+    failure modes; a Phase E plan (WORK_VTX17 assemblies, axes, drivers, render cost). Phase F needs a separate go.
+    engineering/vertex/ section 12 reads `references/evidence/vertex_dynamic.json` (`python3 src/wayfarer/vertex_dynamic.py --evidence`, about 1 s).
 
 ## Limits
 

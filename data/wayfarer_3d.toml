@@ -5746,6 +5746,68 @@ cases = [
 ext01_quote = { cases = 734832, verdict = "CONDITIONAL_ON_UNVERIFIED", plate_min_ratio = 132.0, magnetic_closing_cases = 6, tolerable_leak = 5.0e-5, status = "COMPARISON_ONLY" }
 outcome = "C"
 
+# Vertex Engine 1.7 (owner brief 2026-11-16 09:23Z "Dynamic Lattice Drive Mechanism"): moving mechanical and electromagnetic assemblies
+# against the static nozzle (vertex_dynamic.py). A research configuration: it reads the engine, coils, 1.5-1.6B evidence and canon and
+# changes none of them (its own table, so earlier evidence hashes stay valid). Every unsourced physical choice is PROTOTYPE; LITERATURE rows
+# are ranges, not a design. Brackets are [optimistic, nominal, pessimistic]. Nothing here is canon; the candidates are research records.
+[vertex_dynamic]
+evidence = "RESEARCH_MODEL"
+version = "1.7.0"
+baseline_commit = "dab9bb4"
+# Mechanical speed class of a rotating rim (LITERATURE: CFRP flywheel rims 600-1000 m/s; the engine's chopper limit is 700 m/s)
+rim_speed_m_s = [1000.0, 700.0, 300.0]
+switch_time_s = [1.0e-7, 1.0e-6, 1.0e-5]      # power-electronic switching (LITERATURE: SiC / IGBT / thyristor class)
+# C1 Rotary Field Crown: two counter-rotating crowns at L2 (armour or Fiji segments on a CFRP band), PROTOTYPE sizes
+crown_loop = "L2"
+crown_segments = 8
+crown_section_m2 = 0.12                       # loaded cross-section (tiles plus band)
+crown_density_kg_m3 = 8000.0                  # tungsten / Fiji-class segments carried by the band
+crown_band_share = 0.3                        # share of the section that is the CFRP load band
+cfrp_allowable_Pa = 6.0e8                     # MAT-CFRP strength x 0.6 knockdown / 2.0 (vertex_engine.structure rule), screening value
+crown_conductivity_S_m = [1.0e4, 2.5e6, 6.0e7] # CFRP-insulated / tungsten near 1300 K / cold copper class (LITERATURE order)
+slew_rate_deg_s = [0.01, 0.1, 1.0]            # ship attitude rate the gyroscopic load is screened at (PROTOTYPE bracket)
+# C2 Pulsed Lattice Dynamo: storage and conversion (LITERATURE ranges; system level, not rotor or cell level)
+flywheel_J_kg = [2.0e5, 1.0e5, 5.0e4]
+capacitor_J_kg = [4.0e3, 2.0e3, 1.0e3]
+battery_J_kg = [1.0e6, 7.0e5, 4.0e5]
+target_gain = [100.0, 30.0, 10.0]             # fusion yield / driver energy on target (SPECULATIVE for D-3He; IFE high-gain designs 30-150)
+driver_efficiency = [0.5, 0.3, 0.1]           # wall plug to target
+startup_pulses = 10                           # driver pulses buffered for ignition before direct conversion feeds the driver (PROTOTYPE)
+bootstrap_rate_Hz = 1.0                       # pulse rate while the store carries the driver (PROTOTYPE)
+flywheel_W_kg = [1.0e4, 3.0e3, 1.0e3]         # system power density (LITERATURE: composite flywheel systems; JET generators ~0.5 kW/kg rotor)
+battery_W_kg = [5.0e3, 2.0e3, 1.0e3]
+capacitor_W_kg = [1.0e7, 1.0e6, 1.0e5]
+capacitor_J_m3 = [3.0e6, 1.5e6, 0.5e6]        # film pulse capacitors, volumetric (LITERATURE)
+dynamo_voltage_V = [1.0, 0.1, 0.01]           # HTS dynamo (flux pump) output, stacked rotors (LITERATURE: single units mV to tens of mV)
+lead_W_per_kA = [5.0, 20.0, 45.0]             # current-lead heat to the 20 K stage per kA (HTS hybrid to conduction-cooled copper, LITERATURE)
+# integrated enthalpy of 300-series steel from 20 K, kJ/kg (ESTIMATE, NIST cryogenic material data class)
+steel_enthalpy = [[20.0, 0.0], [50.0, 1.2], [77.0, 4.5], [100.0, 9.5], [150.0, 25.0], [200.0, 45.0], [250.0, 68.0], [300.0, 92.0], [400.0, 140.0], [600.0, 240.0]]
+fiji_cycle_thickness_m = 0.005                # Fiji lamina in a thermomagnetic cycle (thermal diffusion sets the cycle rate)
+fiji_diffusivity_m2_s = 1.0e-5                # metal-class thermal diffusivity (ESTIMATE; no Fiji value exists)
+fiji_density_kg_m3 = 8000.0                   # 1.6A Fiji cell density
+fiji_cp_J_kgK = 500.0                         # ESTIMATE
+regeneration = [0.9, 0.5, 0.0]                # share of the sensible heat recycled by a regenerator (AMR class, LITERATURE optimistic)
+recovery_efficiency = [0.95, 0.9, 0.8]        # one switched-coil energy exchange recovered (resonant pulsed power, LITERATURE)
+# C3 Variable Geometry Flux Nozzle: the nozzle loops and cage on hinged petals, deployed by a radial scale factor k for the burn (PROTOTYPE)
+deploy_k = [1.0, 1.1, 1.2, 1.3, 1.4]
+hinge_share = [0.10, 0.20, 0.35]              # hinges, latches and actuators per kg of the deployed cage and loops
+deploy_time_s = 600.0
+behind_hardware_share = "1.5 cluster ray trace"   # where rays freed by a smaller own-engine sky go next (computed, not an input)
+# C4 Armour Tread: tiles circulating poloidally round the burn-facing cryostats (PROTOTYPE)
+tread_coils = ["C2", "L1", "L2"]
+tread_tile_m = 0.05
+tread_tile_density_kg_m3 = 7200.0             # tungsten armour at the 0.6 solid fraction of vertex_engine.materials
+tread_overhead = 0.25                         # rollers, track and drive per kg of tiles
+tread_speed_m_s = 0.5
+tread_T_K = [2000.0, 1600.0, 1300.0]          # tile temperature on the shadow side (1300 K is the 1.6 armour coolant)
+tread_emissivity = [0.9, 0.6, 0.3]            # coated / oxidised / bare tungsten class (LITERATURE)
+tread_space_view = 0.5                        # share of the shadow-side emission that reaches space (PROTOTYPE)
+# Radiation and plasma screens
+photon_keV = [20.0, 50.0, 100.0]              # mean bremsstrahlung photon energy class for the absorption depth screen
+np_barn = 2.5                                 # n-p elastic cross section near 2.45 MeV (LITERATURE ENDF class)
+shielding_precedent = [1000.0, 300.0, 100.0]  # Hall-thruster magnetic shielding: wall erosion reduction factor (LITERATURE, H6MS 2-3 orders)
+outcome = "C"
+
 # --- Asset C: Wayfarer propulsion cluster -----------------------------------------------------------------------------------------------
 [propulsion_cluster]
 id = "WF-VTX-CL4"
