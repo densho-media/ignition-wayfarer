@@ -2324,7 +2324,7 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
     would need ~1e5 times faster rotation. Static superconducting flux compression is already the lossless dynamic coupling.
   - *Candidates:* C1 Rotary Field Crown REJECTED (an axisymmetric crown makes the same field turning; a loaded CFRP band is limited to
     150 m/s; gyroscopic and burst loads); C2 Pulsed Lattice Dynamo: flywheel storage for sustained or kHz power rejected
-    (one second of mission power ~0 Mt), switched pulse coils rejected (need 99.995 % recovery),
+    (one second of mission power needs 327 kt), switched pulse coils rejected (need 99.995 % recovery),
     Fiji thermomagnetic cycle rejected (≤1.8 %, below radiator temperature); kept: an ignition bootstrap flywheel and
     leadless persistent coils (HTS dynamo or retractable leads); C3 deployable petals KEPT (k 1.40: coil sky ×0.79, coil fluence
     ×0.51, field energy unchanged, inter-engine pull ×2.7, +193 t per engine); C4 armour treads (added)
@@ -2338,6 +2338,28 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
   - *Sequence and integration:* nine states (dormant to failure) with bloom, tread, dynamo, field, Fiji temperature and burn values; ten
     failure modes; a Phase E plan (WORK_VTX17 assemblies, axes, drivers, render cost). Phase F needs a separate go.
     engineering/vertex/ section 12 reads `references/evidence/vertex_dynamic.json` (`python3 src/wayfarer/vertex_dynamic.py --evidence`, about 1 s).
+- **Adaptive engine architecture (Engine 1.8, `vertex_adaptive.py`, `[vertex_adaptive]`).** Research and 3D integration design only;
+  nothing in the generators reads it. Recommended concept **A+** (Adaptive Vertex: A with B's visible startup machinery).
+  - *Audit:* the engine is 264 parts in 22 objects (24,950 triangles), placed four times as linked collection instances, so per-engine motion
+    needs per-engine objects in the cluster (the effect-object pattern); 8 merged families hold parts that would move and must be split.
+    Each nozzle loop is one continuous winding inside eight cryostat segments; the cage longerons are conical, so no ring can slide on them as built.
+  - *L4 carriage:* the aft longeron segments become cylindrical rails at the L4 hoop radius (11.13 m; envelope unchanged) and the L3 hoop
+    grows to it; L4 parks 4.8 m forward when cold (engine 27.1 m instead of 31.9 m, L4 cantilever arm ×0.77). Moving L4 aft of its canon
+    station only costs current (+2 m: ×1.34, stored energy ×1.78), so the carriage has two stations. L1-L3 get actuated seats.
+  - *Alignment:* a 10 mm sideways offset of C2 tilts the burn field by 0.50 mrad (2.7 kN on 5.44 MN); 0.5 mm: 0.025 mrad. L2 sits in the
+    burn plane and has no first-order error. The plume's response to field tilt is OPEN.
+  - *Petals:* a petal that moves a winding cuts it (a closed REBCO ring can change radius by centimetres); every turn needs a demountable
+    joint at each boundary. Inner-loop petals inside today's envelope (coil sky ×0.86) need 1,923 joints: at 10 nΩ 26 MW at the radiators
+    and a 61 h decay; persistent mode through a 10-day burn needs < 2.6e-11 Ω per joint (SP-18A, proposed, not applied). 1.7 C3 did
+    not count the joints. Fiji (1.6A) adds 0.3 % of the stop field in the shield shadow for ~700 t; its display stays a thermal-state indicator.
+  - *Concepts:* A Minimal (L4 carriage, seat actuators, 6 HTS dynamos and switches, shared flywheel, trim coils; +48 t per engine, fits the
+    174 t margin only without the flywheel), B Bloom compact (A + inner-loop petals with joints + treads; +259 t), C Integrated (all-loop
+    petals, Fiji carriers, treads; +514 t; SP-18A and SP-17C), A+ (A + service petals that open the L1/L2 shells only cold).
+  - *Sequence:* nine states (dormant, mechanical preparation, digital alignment, field formation, plasma calibration, first ignition, Vertex
+    lock, sustained/modulation, shutdown or failure) mapped onto the five existing STATES, eight subsystem-specific faults, nine proposed
+    controller properties beside the existing ones; view modes for field lines (traced from the coil currents), plasma flow, energy, thermal,
+    control and synchronization. Browser: rigid transforms and a per-state pose table, estimates only until Phase F measures them.
+    engineering/vertex/ section 13 reads `references/evidence/vertex_adaptive.json` (`python3 src/wayfarer/vertex_adaptive.py --evidence`, about 1 s).
 
 ## Limits
 

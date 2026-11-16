@@ -5808,6 +5808,39 @@ np_barn = 2.5                                 # n-p elastic cross section near 2
 shielding_precedent = [1000.0, 300.0, 100.0]  # Hall-thruster magnetic shielding: wall erosion reduction factor (LITERATURE, H6MS 2-3 orders)
 outcome = "C"
 
+[vertex_adaptive]
+# Vertex 1.8 Adaptive Engine 3D integration study (owner brief 2026-11-16 11:08Z): research and design only. Nothing here is read by
+# the generators; every physical choice is PROTOTYPE, every literature value is marked.
+evidence = "RESEARCH_DESIGN_STUDY"
+version = "1.8.0"
+baseline_commit = "ff9f233"
+# Ring carriage: L4 slides on the aft longeron segments, straightened into cylindrical rails at the L4 hoop radius (continuous
+# winding, no superconducting joint); L1-L3 stay at their stations and are aligned by actuated loop seats
+carriage_loops = ["L4"]
+stow_gap_m = 0.3                              # hoop-to-hoop gap when the L4 hoop is parked behind the L3 hoop (PROTOTYPE)
+extend_m = [2.0, 4.0]                         # aft strokes beyond the canon positions tested for the field and the sky
+carriage_share = [0.05, 0.10, 0.20]           # carriage, rail shoes, locks and drives per kg moved (PROTOTYPE)
+carriage_speed_m_s = 0.01                     # slow, load-free positioning before the field (PROTOTYPE)
+# Alignment: lateral loop offset produces a transverse field at the burn
+alignment_offset_m = [0.010, 0.002, 0.0005]   # survey states: as stowed, after a coarse scan, after the AI fine alignment (PROTOTYPE)
+rebco_strain_limit = 0.004                    # REBCO irreversible tensile strain class (LITERATURE ~0.4-0.6 %)
+# Petals that split a winding need demountable superconducting joints, one per turn per petal boundary
+joint_ohm = [1.0e-9, 1.0e-8, 1.0e-7]          # demountable REBCO joint resistance at 20 K (LITERATURE: nOhm to 100 nOhm class)
+petal_boundaries = 8
+persistent_decay_max = 0.01                   # allowed field decay over one burn in persistent mode
+inner_loops = ["L1", "L2"]                    # Concept B: only the inner loops open, inside today's envelope
+# Root machinery (masses PROTOTYPE, LITERATURE class for HTS flux pumps and pulsed alternators)
+dynamo_kg = 1500.0                            # one HTS dynamo with its rotor drive and cryostat port, per coil
+switch_kg = 300.0                             # one persistent-current switch with heater and protection, per coil
+trim_coil_kg = 4000.0                         # one normal-conducting trim coil set at L3/L4, per engine
+# Display and export (Phase F planning numbers; measured in Phase F, never claimed here)
+field_lines = 12
+field_line_points = 96
+state_bytes_per_node = 40                     # one rigid pose per animated node per state (position, quaternion, scale)
+viewer_budget_bytes = 12000000
+viewer_used_bytes = 11380000
+recommended = "A_PLUS"
+
 # --- Asset C: Wayfarer propulsion cluster -----------------------------------------------------------------------------------------------
 [propulsion_cluster]
 id = "WF-VTX-CL4"

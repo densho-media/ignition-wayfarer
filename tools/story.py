@@ -693,7 +693,8 @@ def vertex_page(spec, out_dir, revision, built):
 {fiji_section(spec)}
 {fiji_a_section(spec)}
 {source_section(spec)}
-{dynamic_section(spec)}"""
+{dynamic_section(spec)}
+{adaptive_section(spec)}"""
     (out_dir / 'index.html').write_text(page('Vertex propulsion lineage · Wayfarer engineering',
                                              'How the Vertex research demonstrator became the Compact Vertex Engine and the four-engine Propulsion Cluster.',
                                              body, 2, revision, built))
@@ -1324,7 +1325,7 @@ def dynamic_section(spec):
 <ul class="plain">
  <li><b>Rotary Field Crown (rejected):</b> {esc(R["crown"]["field_change"])}. A tungsten-laden crown on a CFRP band is limited to {R["crown"]["v_max_m_s"]:.0f} m/s;
   a Fiji crown is pulled toward its coil with up to {R["crown"]["fiji_pull_N"]["3.5"]/1e6:.0f} MN.</li>
- <li><b>Pulsed Lattice Dynamo (two small parts kept):</b> one second of mission power would need {DY["sustained_flywheel_kg"]["1"]/1e9:,.0f} Mt of flywheel. A switched pulse
+ <li><b>Pulsed Lattice Dynamo (two small parts kept):</b> one second of mission power would need {DY["sustained_flywheel_kg"]["1"]/1e6:,.0f} kt of flywheel. A switched pulse
   coil exchanging the pulse energy {x(A["pulse"]["rate_mission_Hz"])} per second would have to recover {100*sw["required_recovery"]:.3f} % of it; the best pulsed power
   recovers {100*max(sw["literature"]):.0f} %. Kept: a flywheel bootstrap for the first ignition pulses ({t_(st["mass_kg"]["flywheel"])} nominal) and leadless persistent coils
   (HTS dynamo or retractable leads, −{pw(DY["leads"][1]["radiator_W"])} of radiator duty).</li>
@@ -1359,6 +1360,121 @@ def dynamic_section(spec):
 <p class="meta">Audit: the engine and frame estimate ({A["mass"]["engines_and_frame_kg"]/1e6:.1f} kt) is not in the ship mass budget ({A["mass"]["protected_ship_kg"]/1e6:.1f} kt
   protected ship); the drawn pulse pods hold {st["pods_hold_pulses"]:.2f} nominal driver pulses. Evidence <code>references/evidence/vertex_dynamic.json</code>, input
   {esc(R["input_hash"])}.</p></section>"""
+
+
+def adaptive_svgs(R):
+    """Figure for Section 13: half-section of one engine with the canon field lines, the L4 carriage (canon and stowed) and the straightened rails."""
+    A = R['audit']; C = R['carriages']; W = 560; H = 250
+    sx = lambda x: 24+(-8.0-x)*13.6; sy = lambda r: H-26-r*15.0
+    axis = f'<line class="axis" x1="16" x2="{W-8}" y1="{sy(0):.1f}" y2="{sy(0):.1f}"/>'
+    sh = A['shield']; shield = f'<rect class="shield" x="{sx(sh["aft_x"]+2.2):.1f}" y="{sy(sh["radius_m"]):.1f}" width="{2.2*13.6:.1f}" height="{sh["radius_m"]*15:.1f}"/>'
+    lines = ''.join('<polyline class="sl sv-l-info" fill="none" opacity="0.75" points="' + ' '.join(f'{sx(x):.1f},{sy(r):.1f}' for x, r in L[::3]) + '"/>'
+                    for L in R['field_lines']['canon'])
+    lon = A['cage']['longeron']; cage = '<polyline class="sl" fill="none" stroke="currentColor" opacity="0.55" points="' + ' '.join(f'{sx(x):.1f},{sy(r):.1f}' for x, r in lon) + '"/>'
+    rl = C['rail']; rail = (f'<line class="sl sv-l-violet" stroke-width="3" x1="{sx(rl["from_x"]):.1f}" x2="{sx(rl["to_x"]):.1f}" y1="{sy(rl["radius_m"]):.1f}" '
+                            f'y2="{sy(rl["radius_m"]):.1f}"><title>straightened rail at r {rl["radius_m"]:.2f} m</title></line>')
+    coils = ''
+    for c in A['coils']:
+        coils += f'<circle class="coil" cx="{sx(c["x"]):.1f}" cy="{sy(c["r"]):.1f}" r="{c["cryostat"]*15:.1f}"><title>{esc(c["name"])}</title></circle>'
+        coils += f'<text class="lbl" x="{sx(c["x"])-6:.1f}" y="{sy(c["r"]+c["cryostat"])-4:.1f}">{esc(c["name"])}</text>'
+        if c['name'] in C['stow_stroke_m']:
+            xs = c['x']+C['stow_stroke_m'][c['name']]
+            coils += (f'<circle cx="{sx(xs):.1f}" cy="{sy(c["r"]):.1f}" r="{c["cryostat"]*15:.1f}" fill="none" stroke="currentColor" stroke-dasharray="3 3" opacity="0.6">'
+                      f'<title>{esc(c["name"])} stowed</title></circle>'
+                      f'<line class="sl sv-l-violet" x1="{sx(c["x"])-10:.1f}" x2="{sx(xs)+10:.1f}" y1="{sy(c["r"])+16:.1f}" y2="{sy(c["r"])+16:.1f}" marker-end="url(#ad-arrow)"/>')
+    burn = f'<circle class="burn" cx="{sx(A["burn_x"]):.1f}" cy="{sy(0):.1f}" r="5"/><text class="lbl" x="{sx(A["burn_x"])-12:.1f}" y="{sy(0)+16:.1f}">burn</text>'
+    leg = (f'<text class="ax sv-t-info" x="{W-236}" y="16">blue: field lines at the canon currents</text>'
+           f'<text class="ax sv-t-violet" x="{W-236}" y="30">violet: L4 rail and its {C["stow_stroke_m"]["L4"]:.1f} m stow stroke</text>'
+           f'<text class="ax" x="{W-236}" y="44">dashed: L4 stowed (cold, field down)</text>')
+    defs = '<defs><marker id="ad-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>'
+    return (f'<figure><svg class="figure-svg field" viewBox="0 0 {W} {H}" role="img" aria-label="Half-section of the engine with field lines and the L4 carriage">{defs}'
+            f'<rect class="bg" width="{W}" height="{H}"/>{axis}{lines}{shield}{cage}{rail}{coils}{burn}{leg}</svg><figcaption>Half-section of one engine (axis at the bottom, '
+            f'exhaust to the right). Field lines are traced from the coil currents (thin filaments, vertex_magnet); they are an engineering view, not objects. '
+            f'The L4 loop slides forward on the straightened rail when the engine is cold and returns to its canon station before the field forms.</figcaption></figure>')
+
+
+def adaptive_section(spec):
+    """Section 13 of engineering/vertex/: Engine 1.8 adaptive architecture and 3D integration study, read from
+    references/evidence/vertex_adaptive.json (`python3 src/wayfarer/vertex_adaptive.py --evidence`). Research and design only."""
+    import json
+    p = ROOT / 'references/evidence/vertex_adaptive.json'
+    if not p.exists():
+        return ''
+    R = json.loads(p.read_text()); A = R['audit']; C = R['carriages']; AL = R['alignment']; PE = R['petals']; CO = R['concepts']; V = R['verdict']
+    t_ = lambda v: f'{v/1e3:,.0f} t'
+    pw = lambda v: f'{v/1e6:,.1f} MW' if abs(v) >= 1e6 else f'{v/1e3:,.1f} kW'
+    dur = lambda v: '—' if v is None else (f'{v/86400:,.0f} d' if v >= 2*86400 else f'{v/3600:,.0f} h' if v >= 7200 else f'{v:,.0f} s')
+    fam = ''.join(f'<tr><td><code>{esc(f["object"])}</code></td><td class="num">{f["parts"]}</td><td class="num">{f["tris"]:,}</td><td>{tag(f["status"])}</td>'
+                  f'<td>{esc(", ".join(f["moves_with"]) or "—")}</td></tr>' for f in A['families'] if f['status'] != 'STATIC')
+    car = ''.join(f'<tr><td>{esc(r["case"].replace("_", " ").lower())}</td><td class="num">{r["length_m"]:.1f} m</td><td class="num">{r["current_factor"]:.2f}×</td>'
+                  f'<td class="num">{r["stored_moved_factor"]:.2f}×</td><td class="num">{r["coil_sky_factor"]:.3f}×</td><td class="num">{r["B_exit_T"]:.2f} T</td></tr>' for r in C['rows'])
+    al = ''.join(f'<tr><td>{esc(r["name"])}</td><td class="num">{r["B_perp_T_per_mm"]*1e3:.3f} mT</td>'
+                 + ''.join(f'<td class="num">{t*1e3:.3f} mrad · {f/1e3:,.2f} kN</td>' for t, f in zip(r['tilt_rad'], r['side_force_N'])) + '</tr>' for r in AL['rows'])
+    pe = ''.join(f'<tr><td>{esc(r["case"].replace("_", " "))}</td><td class="num">{r["coil_sky_factor"]:.3f}×</td><td class="num">{r["current_factor"]:.2f}×</td>'
+                 f'<td class="num">{r["joints"]:,.0f}</td>' + ''.join(f'<td class="num">{pw(j["radiator_W"])} · {dur(j["tau_s"])}</td>' for j in r['joint_rows'])
+                 + f'<td class="num">{r["joint_ohm_needed"]:.1e} Ω</td></tr>' for r in PE['rows'])
+    co = ''.join(f'<tr><td><code>{esc(r["id"])}</code> {esc(r["title"])}</td><td>{esc("; ".join(r["parts"]))}</td><td class="num">+{t_(r["added_kg"])}</td>'
+                 f'<td class="num">+{t_(r["added_four_kg"])}</td><td class="num">{r["coil_sky_factor"]:.3f}×</td><td class="num">{r["joints"]:,.0f}</td>'
+                 f'<td class="num">{r["moving_objects"]}</td><td>{esc(", ".join(r["speculative"]) or "none")}</td><td>{esc(r["visual"])}</td></tr>' for r in CO['rows'])
+    SC = R['scores']
+    sc = ''.join(f'<tr><td>{esc(c.replace("_", " "))}</td>' + ''.join(f'<td class="num">{SC["scores"][k][i]}</td>' for k in ('A', 'B', 'C', 'A_PLUS')) + '</tr>'
+                 for i, c in enumerate(SC['criteria'])) + '<tr><td><b>total</b></td>' + ''.join(f'<td class="num"><b>{SC["totals"][k]}</b></td>' for k in ('A', 'B', 'C', 'A_PLUS')) + '</tr>'
+    sq = ''.join(f'<tr><td>{s["n"]} · {esc(s["state"].replace("_", " ").lower())}</td><td><code>{esc(s["maps_to"])}</code></td><td class="num">{dur(s["duration_s"])}</td>'
+                 f'<td>{esc(s["description"])}</td></tr>' for s in R['sequence']['states'])
+    fa = ''.join(f'<tr><td><code>{esc(f["code"])}</code></td><td>{esc(f["subsystem"])}</td><td>{esc(f["cue"])}</td><td>{esc(f["response"])}</td></tr>' for f in R['sequence']['faults'])
+    cs = ''.join(f'<tr><td>{esc(c["mechanism"])}</td><td>{esc(c["purpose"])}</td><td>{esc(c["problem"])}</td><td>{esc(c["benefit"])}</td><td>{esc(c["mass"])}</td>'
+                 f'<td>{esc(c["when"])}</td><td>{esc(c["failures"])}</td></tr>' for c in R['consistency'])
+    br = ''.join(f'<tr><td><code>{esc(b["id"])}</code></td><td class="num">{b["moving_objects_per_engine"]}</td><td class="num">+{b["draw_calls_added"]}</td>'
+                 f'<td class="num">{b["pose_table_bytes"]/1e3:,.0f} kB</td></tr>' for b in R['browser']['rows'])
+    pr = ''.join(f'<tr><td><code>{esc(k)}</code></td><td>{esc(v)}</td></tr>' for k, v in R['sequence']['proposed_properties'].items())
+    rm = ''.join(f'<tr><td class="num">{s["step"]}</td><td>{esc(s["what"])}</td><td class="meta">{esc("; ".join(s["files"]))}</td></tr>' for s in R['roadmap']['steps'])
+    sp = V['speculative'][0]; B = next(r for r in PE['rows'] if r['case'] == 'B_INNER'); jB = B['joint_rows'][1]
+    return f"""<section id="adaptive"><h2>13 · Adaptive engine architecture (Engine {esc(R["version"])}, 3D integration study)</h2>
+<p class="lead">How could the engines visibly wake up before ignition, with every movement doing an engineering job? This study audits the built engine
+  and costs four ways to make it mechanically adaptive. Recommended: <b>{esc(next(r["title"] for r in CO["rows"] if r["id"] == V["recommended"]))}</b>.
+  {tag("RESEARCH")} Nothing is built or canon; the engine, its geometry and Sections 8–12 are unchanged.</p>
+{adaptive_svgs(R)}
+<h3>What the built engine allows today</h3>
+<p>The engine is {A["parts"]} parts in {A["objects"]} objects ({A["tris"]:,} triangles), placed four times as linked collection instances, so anything inside it
+  shows the same pose on every engine; per-engine motion needs per-engine objects in the cluster, as the {A["effects"]["objects"]} effect objects already are.
+  {A["status_counts"]["NEEDS_SPLIT"]} merged object families hold parts that would move and must be split; none can move as it is. {esc(A["winding_note"])}.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Object family</th><th>Parts</th><th>Triangles</th><th>Status</th><th>Moves with</th></tr></thead><tbody>{fam}</tbody></table></div>
+<h3>The L4 carriage</h3>
+<p>{esc(C["rails"])}. Stowed, the engine is {next(r for r in C["rows"] if r["case"] == "STOWED")["length_m"]:.1f} m long instead of {A["envelope"]["length_m"]:.1f} m and the L4
+  cantilever arm shrinks to {C["bending_arm_factor"]["L4"]:.0%}; the envelope radius does not change. Moving L4 aft of its canon station only costs current
+  and stored energy, so the carriage has two stations: stowed (cold, field down) and canon.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>L4 position</th><th>Engine length</th><th>L4 current for the canon stop field</th><th>L4 stored energy</th><th>Coil sky</th><th>Field at L4</th></tr></thead><tbody>{car}</tbody></table></div>
+<h3>Why alignment is a real job</h3>
+<p>{esc(AL["note"])} Transverse field at the burn per millimetre of sideways offset, and the field tilt and side force (on {AL["thrust_N"]/1e6:.2f} MN per engine) for the three
+  survey states:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Coil</th><th>per mm</th><th>{AL["offsets_m"][0]*1e3:g} mm</th><th>{AL["offsets_m"][1]*1e3:g} mm</th><th>{AL["offsets_m"][2]*1e3:g} mm</th></tr></thead><tbody>{al}</tbody></table></div>
+<h3>Field petals need superconducting joints</h3>
+<p>{esc(PE["note"])} Each turn needs a demountable joint at every petal boundary; at 10 nΩ the inner-loop petals alone would put {pw(jB["radiator_W"])} on the radiators
+  and lose persistent current with a {dur(jB["tau_s"])} time constant. Persistent operation through a ten-day burn needs below {B["joint_ohm_needed"]:.1e} Ω per joint
+  (<code>{esc(sp["id"])}</code>, proposed for the author's decision).</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Petal case</th><th>Coil sky</th><th>Current</th><th>Joints</th><th>1 nΩ: radiator · decay</th><th>10 nΩ</th><th>100 nΩ</th><th>Persistent needs</th></tr></thead><tbody>{pe}</tbody></table></div>
+<h3>Fiji</h3>
+<p>{esc(R["fiji"]["rule"])} {esc(R["fiji"]["display"])}</p>
+<h3>Four concepts</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Concept</th><th>Parts</th><th>Per engine</th><th>Four engines</th><th>Coil sky</th><th>SC joints</th><th>Moving objects per engine</th><th>Needs</th><th>Visual</th></tr></thead><tbody>{co}</tbody></table></div>
+<p class="meta">{esc(CO["note"])} Margin {t_(A["mass"]["margin_kg"])} for four engines: A and A+ fit only without the ignition flywheel.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Criterion (1–5)</th><th>A</th><th>B</th><th>C</th><th>A+</th></tr></thead><tbody>{sc}</tbody></table></div>
+<p class="meta">{esc(SC["basis"])}</p>
+<h3>Nine states</h3>
+<p>{esc(R["sequence"]["display_time"])}</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>State</th><th>Existing state</th><th>Takes</th><th>What happens</th></tr></thead><tbody>{sq}</tbody></table></div>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Fault</th><th>Subsystem</th><th>Visible cue</th><th>Response</th></tr></thead><tbody>{fa}</tbody></table></div>
+<h3>Proposed controller properties</h3>
+<p>Added beside the existing DRIVE_MANIFOLD_CTRL properties ({esc(", ".join(A["control"]["properties"]))}), which keep their meaning.</p>
+<div class="scroll" tabindex="0"><table><tbody>{pr}</tbody></table></div>
+<h3>Engineering consistency</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Mechanism</th><th>Purpose</th><th>Problem it addresses</th><th>Benefit</th><th>Mass</th><th>When it moves</th><th>Failures</th></tr></thead><tbody>{cs}</tbody></table></div>
+<h3>Browser cost (estimates, measured only in Phase F)</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Concept</th><th>Moving objects per engine</th><th>Draw calls, four engines</th><th>Pose table</th></tr></thead><tbody>{br}</tbody></table></div>
+<p class="meta">{esc(R["browser"]["caution"])} Field lines for one engine: {R["browser"]["field_line_bytes"]/1e3:.0f} kB. Viewer headroom {R["browser"]["viewer_headroom_bytes"]/1e3:,.0f} kB.</p>
+<h3>Roadmap (needs the owner's go)</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th></th><th>Step</th><th>Files</th></tr></thead><tbody>{rm}</tbody></table></div>
+<p class="meta">{esc(V["statement"])} Evidence <code>references/evidence/vertex_adaptive.json</code>, input {esc(R["input_hash"])}.</p></section>"""
 
 def source_svgs(R):
     """Two inline figures for Section 11: per-case energy destinations (bars) and the photon share against ion temperature (lines),
