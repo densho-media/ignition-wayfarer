@@ -652,7 +652,9 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   the REBCO neutron-fluence finding (OD-024); Engine 1.6A (Fiji material limits in MODEL.md): BOUNDED, geometry dominated (an open shell gives
   76× the liner) but only with an orientation Fiji's one property does not hold and only out of sight of the burn's light, so nothing closes;
   owner decisions on the speculative magnitude (FM-3/FM-4), on allowing coercivity at 1000 K, and on applying the prepared REC-1/REC-4 rows;
-  REBCO neutron damage OPEN; A1 pole steering and A2 aft or
+  REBCO neutron damage OPEN; Engine 1.6B (fusion radiation source in MODEL.md): C, source and interface blocked (best photon share 10 %, neutrons
+  alone hundreds of times the drive share at mission power, leakage 4-6 orders above its allowance); owner decision on the next milestone
+  (radiation-hydrodynamic transport of the dense target, or a mission-level review of the power level); A1 pole steering and A2 aft or
   anisotropic sourcing in that model; the 0.1–5 GW eddy heat in the 20 K cryostat walls; REBCO critical current at the conductor field (OD-024); the
   CONSERVATIVE and EXTREME coil currents, which no member of this envelope survives; the cold-mass supports behind the loop seats and their
   heat leak; the lithium circuit at 1,800 K (no rated alloy) and its capacity; the bore shutter (tungsten chopper strength OPEN); pulse

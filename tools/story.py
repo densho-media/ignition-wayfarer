@@ -691,7 +691,8 @@ def vertex_page(spec, out_dir, revision, built):
 {plasma_section(spec)}
 {radiation_section(spec)}
 {fiji_section(spec)}
-{fiji_a_section(spec)}"""
+{fiji_a_section(spec)}
+{source_section(spec)}"""
     (out_dir / 'index.html').write_text(page('Vertex propulsion lineage · Wayfarer engineering',
                                              'How the Vertex research demonstrator became the Compact Vertex Engine and the four-engine Propulsion Cluster.',
                                              body, 2, revision, built))
@@ -1230,6 +1231,209 @@ def radiation_section(spec):
   <code>python3 src/wayfarer/vertex_radiation.py --evidence</code> in {R["cost"]["wall_s"]:.0f} s ({R["cost"]["workers"]} workers, peak {R["cost"]["peak_rss_MB"]:.0f} MB).</p>
 </section>"""
 
+
+
+def source_svgs(R):
+    """Two inline figures for Section 11: per-case energy destinations (bars) and the photon share against ion temperature (lines),
+    both read from the evidence."""
+    cs = R['cases']; W = 560
+    seg = [('photon_share', 'bad', 'photons'), ('neutron_share', 'warn', 'neutrons'), ('useful_share', 'good', 'useful exhaust'),
+           ('rest', 'info', 'lost / recirculated')]
+    rows = [(cid, c['brackets']['nominal']['best'] or c['brackets']['optimistic']['best'], 'nominal' if c['brackets']['nominal']['best'] else 'optimistic')
+            for cid, c in cs.items()]
+    rows = [r for r in rows if r[1]]
+    bh = 22; H = 24+len(rows)*(bh+8)+28; x0 = 70; bw = W-x0-10; bars = ''
+    for i, (cid, b, bn) in enumerate(rows):
+        y = 20+i*(bh+8); x = x0; vals = dict(photon_share=b['photon_share'], neutron_share=b['neutron_share'], useful_share=max(b['useful_share'], 0.0))
+        vals['rest'] = max(0.0, 1.0-sum(vals.values()))
+        bars += f'<text class="ax" x="4" y="{y+15}">{esc(cid)}{"*" if bn == "optimistic" else ""}</text>'
+        for k, cl, _ in seg:
+            w = vals[k]*bw
+            bars += f'<rect class="sv-{cl}" x="{x:.1f}" y="{y}" width="{w:.1f}" height="{bh}"><title>{esc(cid)} {esc(k)} {100*vals[k]:.1f} %</title></rect>'
+            x += w
+    leg = ''.join(f'<rect class="sv-{cl}" x="{x0+i*130}" y="{H-18}" width="10" height="10"/><text class="ax" x="{x0+i*130+14}" y="{H-9}">{esc(lab)}</text>'
+                  for i, (_, cl, lab) in enumerate(seg))
+    f1 = (f'<figure><svg class="figure-svg field" viewBox="0 0 {W} {H}" role="img" aria-label="Where each source case\'s fusion energy goes">'
+          f'<rect class="bg" width="{W}" height="{H}"/>{bars}{leg}</svg><figcaption>Where the fusion energy of each source case goes, as a share of fusion '
+          f'power (best valid state, nominal bracket; * optimistic where no nominal state is valid). Neutron and photon heat land in the engine; the rest '
+          f'is exhaust that the nozzle loses or the plant recirculates.</figcaption></figure>')
+    Ts = sorted({r['Ti_keV'] for cid, c in cs.items() if cid != 'S0' for r in c['brackets']['optimistic']['scan']})
+    if len(Ts) < 2:
+        return f1
+    H2 = 220; px0, px1, py0, py1 = 46, W-10, 10, H2-28
+    lx = lambda T: px0+(math.log(T)-math.log(Ts[0]))/(math.log(Ts[-1])-math.log(Ts[0]))*(px1-px0)
+    ly = lambda p: py1-(min(p, 0.6)/0.6)*(py1-py0)
+    lines = ''; cols = ['info', 'good', 'accent', 'warn', 'bad', 'violet', 'radiator', 'muted']
+    for i, (cid, c) in enumerate((k, v) for k, v in cs.items() if k != 'S0'):
+        for bn, dash in (('optimistic', '4 3'), ('nominal', '')):
+            pts = []
+            for T in Ts:
+                v = [r['photon_share'] for r in c['brackets'][bn]['scan'] if r['Ti_keV'] == T and r['valid']]
+                if v:
+                    pts.append((lx(T), ly(min(v))))
+            if len(pts) > 1:
+                lines += (f'<polyline class="sl sv-l-{cols[i % len(cols)]}" points="{" ".join(f"{a:.1f},{b:.1f}" for a, b in pts)}"'
+                          f'{f" stroke-dasharray=\"{dash}\"" if dash else ""}><title>{esc(cid)} {bn}</title></polyline>')
+        lines += f'<text class="ax sv-t-{cols[i % len(cols)]}" x="{px1-40}" y="{py0+12+i*13}">{esc(cid)}</text>'
+    grid = ''.join(f'<line class="axis" x1="{px0}" x2="{px1}" y1="{ly(p):.1f}" y2="{ly(p):.1f}"/><text class="ax" x="4" y="{ly(p)+4:.1f}">{100*p:.0f} %</text>'
+                   for p in (0.0, 0.1, 0.2, 0.4, 0.6))
+    tick = ''.join(f'<text class="ax" x="{lx(T)-10:.1f}" y="{H2-10}">{T:g}</text>' for T in Ts)
+    f2 = (f'<figure><svg class="figure-svg field" viewBox="0 0 {W} {H2}" role="img" aria-label="Photon share against ion temperature per case">'
+          f'<rect class="bg" width="{W}" height="{H2}"/>{grid}{tick}{lines}</svg><figcaption>Least photon share of a valid state against ion temperature (keV, log '
+          f'scale) per case; solid nominal, dashed optimistic. The SR-1 requirement at the mission point is below the bottom of the chart.</figcaption></figure>')
+    return f1+f2
+
+
+def source_section(spec):
+    """Section 11 of engineering/vertex/: Engine 1.6B fusion radiation source and plasma-hardware interface, read from
+    references/evidence/vertex_source.json (written by `python3 src/wayfarer/vertex_source.py --evidence`; tests/test_vertex_source.py fails when
+    it is stale). Research only: the engine, its geometry and Sections 8-10 are unchanged."""
+    import json
+    p = ROOT / 'references/evidence/vertex_source.json'
+    if not p.exists():
+        return ''
+    R = json.loads(p.read_text()); cs = R['cases']
+    pct = lambda v, d=1: '—' if v is None else f'{100*v:,.{d}f} %'
+    sci = lambda v: '—' if v is None else f'{v:.2g}'
+    pw = lambda v: '—' if v is None else (f'{v/1e12:,.1f} TW' if abs(v) >= 1e12 else f'{v/1e9:,.2f} GW' if abs(v) >= 1e9 else f'{v/1e6:,.1f} MW')
+    x = lambda v: '—' if v is None else (f'{v:,.0f}×' if abs(v) >= 10 else f'{v:,.2f}×')
+    led = ''.join(f'<tr><td style="white-space:nowrap"><code>{esc(r["id"])}</code></td><td class="num">'
+                  + (f'{x(r["ratio"][0])}–{x(r["ratio"][1])}' if isinstance(r['ratio'], list) else x(r['ratio']))
+                  + (f'<br><span class="meta">recomputed {x(r["recomputed"])}</span>' if r.get('recomputed') else '')
+                  + f'</td><td>{esc(r["configuration"])}</td><td>{esc(r["source"])}</td><td>{esc(r["geometry"])}</td><td>{esc(r["thermal"])}</td></tr>' for r in R['ledger']['rows'])
+    def cell(b):
+        if not b:
+            return '<td class="meta">no valid state</td>'
+        return (f'<td class="num">{pct(b["photon_share"])}<br><span class="meta">n {pct(b["neutron_share"])} · Ti {b["Ti_keV"]:g} / Te {b["Te_keV"]:.0f} keV'
+                f' · aux {pct(b["aux_share"], 0)} · useful {pct(b["useful_share"], 0)} · {esc(b["mode"].lower())}</span></td>')
+    src = ''.join(f'<tr><td><code>{esc(cid)}</code></td><td>{esc(c["name"])}</td>{cell(c["brackets"]["optimistic"]["best"])}{cell(c["brackets"]["nominal"]["best"])}'
+                  f'<td class="num">{pct((c["brackets"]["nominal"]["radiative"] or c["brackets"]["optimistic"]["radiative"] or {}).get("photon_share"))}</td></tr>'
+                  for cid, c in cs.items())
+    fa = R['floor_audit']; ne = R['nonequilibrium']; trp = ne['trapping']; tg = ne['target']
+    neq = ''.join(f'<tr><td><code>{esc(r["case"])}</code></td><td>{tag(r["state"])}</td><td class="num">{r["Te_over_Ti"]:.2f}</td>'
+                  f'<td class="num">{sci(r["ntau_ei_m3s"])}</td><td class="num">{sci(r["ntau_E_m3s"]) if r["ntau_E_m3s"] is not None and r["ntau_E_m3s"] < 1e40 else "∞"}</td>'
+                  f'<td class="num">{pct(r["aux_share"], 0)}</td><td class="meta">{esc(r["note"])}</td></tr>' for r in ne['rows'])
+    I = R['interface']; G = R['geometry']; A = R['allocation']
+    cap = ''.join(f'<tr><td>{esc(k)}</td><td class="num">{pct(v["aft"])}</td><td class="num">{pct(v["hardware"])}</td><td class="num">{pct(v["shield"])}</td></tr>'
+                  for k, v in I['capture'].items())
+    allow = ''.join(f'<tr><td>{esc(a["cls"].replace("_", " ").lower())}</td><td class="num">{a["T_K"]:,.0f} K</td><td class="num">{x(a["cost"])}</td>'
+                    f'<td class="num">{pw(a["mission"]["allowed_W"])}</td><td class="num">{sci(a["demonstrator"]["allowed_share"])}</td>'
+                    f'<td class="num">{sci(a["mission"]["allowed_share"])}</td></tr>' for a in I['allowable'])
+    geo = ''.join(f'<tr><td class="num">{r["shift_m"]:+.0f} m</td><td class="num">{pct(r["coil_sky"])}</td><td class="num">{x(r["current_factor_L2"])}</td></tr>' for r in G['shifts'])
+    comb = [r for r in R['combined']['rows'] if r.get('point') == 'mission' and r.get('shield') and r.get('bracket') in ('optimistic', 'nominal')]
+    cb = ''.join(f'<tr><td><code>{esc(r["case"])}</code></td><td>{esc(r["bracket"])}</td><td class="num">{pw(r["Pf_W"])}</td><td class="num">{x(r["ratio"])}</td>'
+                 f'<td class="num">{x(r["nonphoton_ratio"])}</td><td class="num">{x(r["neutron_alone_ratio"])}</td><td class="num">{sci(r["sr1_photon_only"])}</td>'
+                 f'<td>{tag(r["sr1_status"])}</td></tr>' for r in comb)
+    FE = R['feasibility']; th = FE['thresholds']
+    counts = ''.join(f'<tr><td>{esc(p)}</td>' + ''.join(f'<td class="num">{v[1]:,} / {v[0]:,}</td>' for v in FE['counts'][p].values()) + '</tr>' for p in FE['counts'])
+    N = R['neutrons']
+    nr = ''.join(f'<tr><td><code>{esc(r["case"])}</code></td><td class="num">{sci(r["neutrons_per_s"])}</td><td class="num">{min(c["life_unshielded_s"] for c in r["coils"]):,.2f} s</td>'
+                 f'<td class="num">{sci(max(c["attenuation_needed"] for c in r["coils"]))}</td><td class="num">{r["shield_mass_four_kg"]/1e3:,.0f} t</td>'
+                 f'<td class="num">{r["mass_margin_kg"]/1e3:,.0f} t</td><td class="num">{x(r["shield_ratio"])}</td><td>{tag(r["status"])}</td></tr>' for r in N['rows'])
+    MI = R['mission']; o = MI['operating_point']
+    mr = ''.join(f'<tr><td><code>{esc(r["case"])}</code></td><td class="num">{pct(r.get("useful_share"), 0)}</td><td class="num">{pw(r.get("fusion_four_W"))}</td>'
+                 f'<td class="num">{pw(r.get("wall_W"))}</td><td class="num">{(r.get("fuel_dhe3_kg") or 0)/1e3:,.0f} t</td>'
+                 f'<td class="num">{sci(r.get("radiator_added_m2"))} m²</td><td>{tag(r["status"])}</td></tr>' for r in MI['rows'])
+    se = ''.join(f'<tr><td>{esc(r["param"])}</td><td class="num">{sci(r["current"])}</td><td class="num">{sci(r["best_defensible"])}</td>'
+                 f'<td class="num">{sci(r["required_alone"])}</td><td class="num">{x(r["gap_alone"]) if r["gap_alone"] else "—"}</td><td>{esc(r["literature"])}</td>'
+                 f'<td>{esc(r["mechanisms"])}</td><td class="meta">{esc(r["confidence"])}</td></tr>' for r in R['sensitivity']['rows'])
+    fu = ''.join(f'<tr><td>{esc(f["fuel"])}</td><td class="num">{pct(f["charged_share"])}</td><td class="num">{pct(f["neutron_share"])}</td>'
+                 f'<td class="num">{pct(f["photon_over_fusion"]) if f["photon_over_fusion"] is not None else "—"}</td><td>{tag(f["evidence"])}</td>'
+                 f'<td>{esc(f["availability"])}</td><td class="meta">{esc(f["note"])}</td></tr>' for f in R['fuels'])
+    gates = ''.join(f'<tr><td style="white-space:nowrap"><code>{esc(g["id"])}</code></td><td>{esc(g["name"])}</td><td>{tag(g["status"])}</td>'
+                    f'<td class="meta">{esc(g["note"])}</td></tr>' for g in R['gates'])
+    ans = ''.join(f'<tr><td class="num">{a["q"]}</td><td>{esc(a["question"])}</td><td>{esc(a["answer"])}</td></tr>' for a in R['answers'])
+    val = ''.join(f'<tr><td>{esc(v["case"])}</td><td class="num">{sci(v["rel_error"])}</td><td>{tag("INFO" if v["passes"] is None else "PASS" if v["passes"] else "FAIL")}</td>'
+                  f'<td class="meta">{esc(v["note"])}</td></tr>' for v in R['validation']['rows'])
+    bestN = th['photon']['nominal']; bestO = th['photon']['optimistic']
+    sl = json.dumps(dict(axes=FE['axes'], slices=FE['slices']), separators=(',', ':'))
+    vd = R['verdict']
+    return f"""<section id="source"><h2>11 · Fusion radiation source and plasma–hardware interface (Engine {esc(R["version"])})</h2>
+<p class="lead">Sections 8 to 10 found the engines need hundreds of times the radiator. Can a smarter D–³He burn shed less light, and can the nozzle keep the rest off the
+  hardware? Seven source models, from spin-polarized fuel to hot ions and prompt product escape, bring the photon share down to {pct(bestN)} at best (nominal;
+  {pct(bestO)} optimistic). At the mission's power the engines may put {pw(A["per_engine_W"])} each into their hardware. The neutrons alone are hundreds of times that,
+  and the nozzle leaks thousands of times its allowance. {tag(vd["label"])} {tag("RESEARCH")} The visible engine, its geometry, the four independent engines
+  and Sections 8–10 are unchanged; nothing here is canon.</p>
+{source_svgs(R)}
+<h3>What the earlier ratios measure</h3>
+<p>{esc(R["ledger"]["note"])}</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Study</th><th>Radiator ×</th><th>Configuration</th><th>Source</th><th>Geometry</th><th>Thermal</th></tr></thead><tbody>{led}</tbody></table></div>
+<h3>The source: seven models</h3>
+<p>Every channel is separate: fusion by reaction, the charged products' share to ions and to electrons, channelled or escaping promptly, bremsstrahlung (with
+  electron–electron and impurity terms), cyclotron emission in magnetized cases, prompt gammas, D–D and bred D–T neutrons, electron–ion and ion–ion exchange and
+  auxiliary heating. The electron temperature comes from its own energy balance, or lower when the electrons lose the rest by transport. A state counts only if it
+  still delivers {pct(spec["vertex_source"]["useful_floor"], 0)} of fusion power as useful exhaust.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Case</th><th>Model</th><th>Optimistic</th><th>Nominal</th><th>Radiative only</th></tr></thead><tbody>{src}</tbody></table></div>
+<ul class="plain">
+ <li><b>The 1.6 floor revisited:</b> Engine 1.6's {pct(fa["released_1_6"])} counted four electrons per D–³He pair instead of three, which inflates
+  bremsstrahlung by about a third. With the same levers it is {pct(fa["composition_fixed"])}. The Section 9 record stays as published.</li>
+ <li><b>Reactivity:</b> above 100 keV the 1.5 and 1.6 models held D–D at its fit limit; integrated from the cross sections it is about twice as high at 200 keV,
+  so hot burns make more neutrons than those sections showed.</li>
+ <li><b>Hot ions cost power:</b> keeping Ti above Te means paying the exchange with auxiliary heating, which the plant must make from the exhaust. That is
+  Rider's limit: the nominal brackets of S2–S6 have no valid state.</li>
+ <li><b>Spin polarization</b> raises fusion by at most 1.5× at the same electron heating (S1); the D–D suppression it may bring is disputed.</li></ul>
+<h3>Equilibrium and burn time</h3>
+<p>In the dense target ({sci(tg["ne_m3"])} electrons per m³) electrons and ions trade energy in {pct(tg["ratio"])} of the {tg["burn_s"]*1e12:.0f} ps burn, so a hot-ion
+  start relaxes at once. The coupled 1.6 burns, which include this, never fell below {pct(ne["coupled_min"])}. The target is also opaque to its own light (Compton depth
+  {trp["compton_depth0"]:.0f}): trapped photons could hand at most {1/trp["photon_kept_lower"]:.1f}× of their energy back to the expanding plasma, while Comptonization
+  (y ≈ {trp["kompaneets_y"]:,.0f}) pushes the other way. Which wins needs radiation hydrodynamics.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Case</th><th>State</th><th>Te/Ti</th><th>n τ<sub>ei</sub> (s/m³)</th><th>n τ<sub>E</sub> (s/m³)</th><th>Aux</th><th></th></tr></thead><tbody>{neq}</tbody></table></div>
+<h3>The interface</h3>
+<p>Engine 1.4's capture ledger (charged energy per closure), unchanged:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Closure</th><th>Leaves aft</th><th>Strikes hardware</th><th>Of which shield</th></tr></thead><tbody>{cap}</tbody></table></div>
+<p>Working backwards: canon gives the drive {pct(spec["physics"]["operating_point"]["hot_share"], 0)} of the {pw(A["installed_W"])} radiator ({pw(A["drive_W"])}, {pw(A["per_engine_W"])}
+  per engine); the rest carries EYE, Crown and the ship's machinery. With photons and neutrons at zero, the charged leakage each hardware class could take:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Class</th><th>Temperature</th><th>Radiator W per W</th><th>Allowed per engine</th><th>Share, demonstrator</th><th>Share, mission</th></tr></thead><tbody>{allow}</tbody></table></div>
+<p>Engine 1.4's best closure leaks {pct(I["best_computed_leak"])}. No published experiment or model has measured a fusion-product plume leaking at these
+  levels; laboratory magnetic nozzles detach within metres and run well below unit efficiency.</p>
+<p>Light is harder still. The magnets that surround the burn take {pct(G["coil_sky"])} of its sky by themselves, and shading them puts the shade in the same sky.
+  Moving the burn aft lowers that share, but the coil current for the same field rises fast:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Burn shift</th><th>Coil sky</th><th>L2 current ×</th></tr></thead><tbody>{geo}</tbody></table></div>
+<h3>Combined budget at the mission point</h3>
+<p>Each case runs at the fusion power that gives the B01 jet ({pw(o["jet_W"])}, {o["thrust_N"]/1e6:.1f} MN, v<sub>e</sub> {o["ve_m_s"]/1e3:,.0f} km/s, {o["duration_d"]:.1f} days per
+  burn): less useful energy means more fusion power, not less thrust. Cold parts are shaded behind a 1300 K tungsten liner.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Case</th><th>Bracket</th><th>Fusion / engine</th><th>Radiator ×</th><th>Without photons</th><th>Neutrons alone</th><th>SR-1 (photons only)</th><th>SR-1</th></tr></thead><tbody>{cb}</tbody></table></div>
+<h3>Closure map</h3>
+<p>Every combination of photon share, neutron share, photon deposition, leakage, cryogenic share, radiator capacity and power level, classed by the weakest evidence
+  behind it. Closing combinations / all combinations:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Power</th>{"".join(f"<th>{esc(c.replace('_', ' ').lower())}</th>" for c in FE["counts"]["mission"])}</tr></thead><tbody>{counts}</tbody></table></div>
+<div class="panel" id="src-map"><h4>Explore a slice</h4>
+ <p class="meta">Radiator multiple of the drive share for photon share (rows) × photon deposition in hardware (columns). Green closes.</p>
+ <p><label>Power <select data-k="0"><option>mission</option><option>demonstrator</option></select></label>
+  <label>Neutrons <select data-k="2"><option value="0.01">1 %</option><option value="0.0001">0.01 %</option></select></label>
+  <label>Leakage <select data-k="4"><option value="0.183">18.3 % (1.4)</option><option value="0.01">1 %</option><option value="0.0001">0.01 %</option><option value="1e-06">0.0001 %</option></select></label>
+  <label>Cryogenic share <select data-k="5"><option value="0.2">20 %</option><option value="0">0</option></select></label>
+  <label>Radiator <select data-k="6"><option value="1">as built</option><option value="10">10× (not permitted)</option></select></label></p>
+ <div class="scroll" tabindex="0"><table class="srcmap"><tbody></tbody></table></div></div>
+<script type="application/json" id="src-map-data">{sl.replace("</", "<\\/")}</script>
+<script>(function(){{var d=JSON.parse(document.getElementById('src-map-data').textContent),box=document.getElementById('src-map'),tb=box.querySelector('tbody'),
+sel=box.querySelectorAll('select');function f(v){{return v>=100?Math.round(v).toLocaleString('en')+'×':v>=1?v.toFixed(1)+'×':v.toFixed(2)+'×';}}
+function p(v){{return v>=0.01?(100*v).toFixed(0)+' %':(100*v).toPrecision(1)+' %';}}
+function draw(){{var k={{}};sel.forEach(function(s){{k[s.dataset.k]=s.value;}});var cols=d.axes.deposition,h='<tr><th>photons ↓ / deposition →</th>'+cols.map(function(c){{return '<th>'+p(c)+'</th>';}}).join('')+'</tr>';
+d.axes.photon.forEach(function(ph){{h+='<tr><th>'+p(ph)+'</th>';cols.forEach(function(dp){{var r=d.slices.find(function(s){{return s[0]===k[0]&&s[1]===ph&&s[3]===dp&&String(s[2])===String(Number(k[2]))&&String(s[4])===String(Number(k[4]))&&String(s[5])===String(Number(k[5]))&&String(s[6])===String(Number(k[6]));}});
+h+=r?'<td class="num '+(r[7]<=1?'ok':'no')+'" title="'+r[8]+'">'+f(r[7])+'</td>':'<td>—</td>';}});h+='</tr>';}});tb.innerHTML=h;}}
+sel.forEach(function(s){{s.addEventListener('change',draw);}});draw();}})();</script>
+<h3>Neutrons</h3>
+<p>{esc(N["note"])} Over the mission's four burns:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Case</th><th>Neutrons/s (4 engines)</th><th>Nearest REBCO life, unshielded</th><th>Attenuation needed</th><th>Wrap shields</th><th>Mass margin</th><th>Shield heat ×</th><th></th></tr></thead><tbody>{nr}</tbody></table></div>
+<h3>Mission check</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Case</th><th>Useful share</th><th>Fusion, 4 engines</th><th>Recirculating</th><th>D–³He, 4 burns</th><th>Radiator to add</th><th></th></tr></thead><tbody>{mr}</tbody></table></div>
+<p class="meta">{esc(MI["note"])}</p>
+<h3>Sensitivity</h3>
+<p>The value each parameter would need if every other load were zero, against the best defensible value:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Parameter</th><th>Now</th><th>Best defensible</th><th>Needed alone</th><th>Gap</th><th>Literature</th><th>Mechanisms</th><th>Confidence</th></tr></thead><tbody>{se}</tbody></table></div>
+<h3>Other fuels (comparison only)</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Fuel</th><th>Charged</th><th>Neutrons</th><th>Photons / fusion</th><th>Evidence</th><th>Availability</th><th></th></tr></thead><tbody>{fu}</tbody></table></div>
+<p class="meta">D–³He stays the working fuel; the others are not authorized replacements.</p>
+<h3>Validation</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Check</th><th>Error</th><th></th><th></th></tr></thead><tbody>{val}</tbody></table></div>
+<h3>Gates and verdict</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Gate</th><th></th><th>Status</th><th>Result</th></tr></thead><tbody>{gates}</tbody></table></div>
+<h3>The owner's ten questions</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>#</th><th>Question</th><th>Answer</th></tr></thead><tbody>{ans}</tbody></table></div>
+<p class="meta">Evidence file <code>references/evidence/vertex_source.json</code> (input hash <code>{esc(R["input_hash"])}</code>, baseline {esc(R["baseline_commit"])}), written by
+  <code>python3 src/wayfarer/vertex_source.py --evidence</code> in {R["cost"]["seconds"]:.1f} s.</p>
+</section>"""
 
 
 def fiji_a_svg(R, spec):

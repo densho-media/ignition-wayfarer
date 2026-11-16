@@ -5696,6 +5696,56 @@ displacement_barn = [500.0, 1000.0, 3000.0]
 fluence_limit_n_m2 = [3.0e22, 1.0e22, 3.0e21]
 outcome = "BOUNDED"
 
+# Vertex Engine 1.6B (owner brief 2026-11-16 07:16Z): fusion radiation source and plasma-hardware interface feasibility. RESEARCH ONLY:
+# nothing here is canon, the released engine (four independent Compact Vertex engines, M0-NOMINAL, 1.2 geometry) and the 1.5 / 1.6 / 1.6A
+# tables and evidence are read, never changed. Brackets are [optimistic, nominal, pessimistic] as in [vertex_fiji]. Statuses: LITERATURE
+# (published value or range, not re-verified against the paper here), PROTOTYPE (an engineering choice), ANALYTIC, SPECULATIVE.
+[vertex_source]
+evidence = "RESEARCH_MODEL"
+version = "1.6B.0"
+baseline_commit = "198adbb"
+Ti_grid_keV = [50.0, 70.0, 100.0, 150.0, 200.0, 300.0, 400.0]
+Te_fractions = [1.0, 0.8, 0.6, 0.5, 0.4, 0.3, 0.2, 0.15, 0.1]   # electron temperature / radiative balance value (colder = transport loss)
+useful_floor = 0.3                        # least useful energy per fusion energy for a propulsion state to count (PROTOTYPE; canon directs 0.8)
+xs_points = 4000                          # Maxwellian integration of the Bosch-Hale cross sections (D-D, D-T) beyond the reactivity fit limit
+# D-3He reactivity above the 190 keV fit limit relative to the held fit value (LITERATURE: the NRL table gives about 2.2e-22 m3/s at 1 MeV
+# against 2.68e-22 held; the curve is flat between about 200 and 500 keV). The D-3He cross-section fit is not used (not verified here).
+dhe3_hold = [1.0, 1.0, 0.85]
+impurity_dzeff = [0.0, 0.1, 0.3]          # Zeff added by wall or ash impurities (PROTOTYPE bracket)
+# Cyclotron (synchrotron) emission of a magnetized burn: optically thin power 6.21e-17 B^2 ne Te(keV) (1 + Te/204) W/m3 (LITERATURE, NRL /
+# Trubnikov), field from the plasma beta, times the escaping share after wall reflection and self-absorption (LITERATURE range for reactor
+# plasmas with reflecting walls). The inertial target has no confining field (cases with magnetized = false).
+sync_beta = [1.0, 0.5, 0.1]
+sync_escape = [0.01, 0.05, 0.2]
+# Alpha / product channeling (Fisch-Rax): share of the fast products' electron-bound energy moved by waves to fuel ions or extracted
+# (LITERATURE theory 17-66 %, the 60 % TFTR inference called preliminary by its authors; no burning-plasma demonstration).
+channel_share = [0.66, 0.25, 0.0]
+aux_coupling = [0.9, 0.7, 0.5]            # wall plug to plasma heating efficiency (PROTOTYPE; ion cyclotron / neutral beam class)
+conversion = [0.9, 0.7, 0.5]              # charged-stream direct conversion to electricity (PROTOTYPE; only the recirculating power uses it)
+he3_hot_ratio = [3.0, 1.5, 1.0]           # T(He-3) / T(D) held by minority heating (SPECULATIVE; costs the ion-ion exchange)
+capture = [0.817, 0.517, 0.220]           # charged energy leaving aft as exhaust: Engine 1.4 M0-NOMINAL ledger (aft, channelled, isotropic)
+loss_K = 1000.0                           # temperature at which conversion and heating losses are rejected (PROTOTYPE)
+armour_K = 1300.0                         # radiation-facing W armour coolant (1.6 liner temperature)
+warm_K = 440.0                            # warm machinery (ship WARM section temperature)
+densities_m3 = [1.0e21, 1.0e32]           # magnetized steady burn and dense pulsed target (only the Coulomb logarithm depends on density)
+power_specific_kg_W = [0.1e-3, 0.5e-3, 2.0e-3]   # power conditioning and heating plant mass per W of auxiliary power (PROTOTYPE)
+radiator_kg_m2 = [5.0, 10.0, 20.0]        # added 1800 K radiator areal mass (PROTOTYPE; for the mass of closing by area alone)
+capture_gamma_MeV = [2.2, 5.0, 8.0]       # capture gamma per absorbed neutron in the shield (LITERATURE range: H 2.2 MeV, metals 6-9 MeV)
+neutron_shield_K = 700.0                  # shield temperature (1.6 shield_K)
+cases = [
+  { id = "S0", name = "1.5 reference (LOW, prescribed Te/Ti 0.5)", Te = "prescribed", Te_over_Ti = 0.5, Ti_keV = 110.0, reactivity = "legacy", pol = false, dd = false, channel = false, deposition = 1.0, he3_hot = false, magnetized = false, density = 1, aux = false },
+  { id = "S0-SC", name = "1.5 source, self-consistent electrons", Te = "balance", reactivity = "corrected", pol = false, dd = false, channel = false, deposition = 1.0, he3_hot = false, magnetized = false, density = 1, aux = false },
+  { id = "S1", name = "spin-polarized D-3He", Te = "balance", reactivity = "corrected", pol = true, dd = true, channel = false, deposition = 1.0, he3_hot = false, magnetized = false, density = 1, aux = false },
+  { id = "S2", name = "hot ions (auxiliary ion heating)", Te = "balance", reactivity = "corrected", pol = false, dd = false, channel = false, deposition = 1.0, he3_hot = false, magnetized = true, density = 0, aux = true },
+  { id = "S3", name = "selective ion heating (hot He-3 minority)", Te = "balance", reactivity = "corrected", pol = false, dd = false, channel = false, deposition = 1.0, he3_hot = true, magnetized = true, density = 0, aux = true },
+  { id = "S4", name = "charged-product channeling", Te = "balance", reactivity = "corrected", pol = false, dd = false, channel = true, deposition = 1.0, he3_hot = false, magnetized = true, density = 0, aux = true },
+  { id = "S5", name = "combined (S1 + S3 + S4)", Te = "balance", reactivity = "corrected", pol = true, dd = true, channel = true, deposition = 1.0, he3_hot = true, magnetized = true, density = 0, aux = true },
+  { id = "S6", name = "non-Maxwellian: prompt product escape, ions held by auxiliary heating", Te = "balance", reactivity = "corrected", pol = true, dd = true, channel = false, deposition = 0.0, he3_hot = true, magnetized = true, density = 0, aux = true },
+]
+# EXT-01 (lab/studies/external-pulse, commit 5e008ad) values quoted for the comparison ledger only (src never reads lab/).
+ext01_quote = { cases = 734832, verdict = "CONDITIONAL_ON_UNVERIFIED", plate_min_ratio = 132.0, magnetic_closing_cases = 6, tolerable_leak = 5.0e-5, status = "COMPARISON_ONLY" }
+outcome = "C"
+
 # --- Asset C: Wayfarer propulsion cluster -----------------------------------------------------------------------------------------------
 [propulsion_cluster]
 id = "WF-VTX-CL4"

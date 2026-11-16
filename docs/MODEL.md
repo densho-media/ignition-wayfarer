@@ -2295,6 +2295,27 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
   - *Canon:* B_eff = B_seed·A_B is kept as the single-core calibration; read as a field gain it needs 230–700 T in the best open geometry.
     Successor: B_total = B_coils + B_Fiji(M(T)). REC-1/REC-4 workbook rows prepared cell by cell, not applied.
     engineering/vertex/ section 10 reads `references/evidence/vertex_fiji_a.json` (`python3 src/wayfarer/vertex_fiji_a.py --evidence`, about 15 s).
+- **Fusion radiation source and plasma-hardware interface (Engine 1.6B, `vertex_source.py`, `[vertex_source]`).** Research only; outcome
+  **C** (SOURCE_AND_INTERFACE_BLOCKED). Engines 1.5, 1.6 and 1.6A and their evidence are kept as the record; the engine, its geometry and the
+  four independent engines are unchanged.
+  - *Ledger:* 1.5 F0 854× (recomputed exactly), 1.6 F6 43× and W liner 18×, 1.6A 769–1,112×, EXT-01 ≥132× answer different questions (source,
+    geometry, thermal convention, capacity) and are not a sequence of improvements.
+  - *Source:* a two-temperature, three-species balance with every channel separate; D-D and D-T reactivity beyond the fit limits from the
+    Bosch-Hale cross sections (validated to ~1 % in range; D-D is about 2× the held value at 200 keV), D-3He held above 190 keV with a bracket,
+    cyclotron emission, impurities, ion-ion exchange. Best defensible photon share 10.1 % (S1, nominal, with electron
+    transport), optimistic 8.3 %; radiative-only states stay at about 48 %.
+    1.6's 16.4 % floor counted four electrons per D-3He pair (quasineutrality gives three): with the same levers it is 12.6 %.
+    Hot-ion, channeling and prompt-escape states need auxiliary heating that leaves no valid nominal state (Rider's limit).
+  - *Non-equilibrium:* in the dense target electrons and ions equilibrate in about 1 % of the burn; Compton trapping (depth 18) is an
+    unresolved two-sided bound (at most 3.3× lower).
+  - *Interface:* canon gives the drive 75 % of the 14.4 GW radiator (2.7 GW per engine). Allowed charged leakage at the mission point:
+    5e-05 (hot) to 2e-07 (20 K) of the stream, against 18.3 % computed by Engine 1.4. The coils
+    alone take 43 % of the burn's sky.
+  - *Budget:* at the mission point neutrons alone put ≥424× the drive share into the hardware; with neutrons, leakage and losses at zero,
+    photons could be at most 6.6e-04 of fusion power (SR-1). No case closes; the feasibility map closes only with UNSUPPORTED values.
+  - *Neutrons:* the nearest REBCO lasts about 1 s unshielded at mission power; a credible life needs ~10⁶ attenuation and ~45 kt
+    of wrap shields against a 174 t departure margin (FAIL).
+    engineering/vertex/ section 11 reads `references/evidence/vertex_source.json` (`python3 src/wayfarer/vertex_source.py --evidence`, about 1 s).
 
 ## Limits
 
