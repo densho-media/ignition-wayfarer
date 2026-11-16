@@ -63,3 +63,14 @@ correction; `ledger2.json`, about 15 min on 4 cores).
 He-3, 0.072 c); all at +0.3 yr 10.1 kt. Per engine still about 320 t against 85 t allowed, spread over fin, ship shield, structure,
 radiators, conductor, boom and strips. Closure inside 4.6 kt needs a burn with far fewer neutrons and photons per jet watt (a second
 speculative step) or an envelope of about 7 kt.
+
+## 2.4 Halo Vertex 3D variant (owner chose the ~7 kt research envelope, 2026-11-16 18:35Z)
+
+`make_review_vtx24.py` (Blender, run on work/vertex-1-8/REVIEW_VTX18.blend) builds `REVIEW_VTX24.blend` (packed, not in Git; owner copy
+in project files vertex-2-4/) and `figures/` previews. WORK_VTX24 adds, at the 2.5 all-lever closure (6.9 kt, 33 TW, 0.072 c): four
+41.6 m REBCO rings (20.4 MA, 0.31 T, armour face and 0.96 m neutron fin), burn points 83 m aft on each ring axis, rings canted 9 degrees
+inward, cluster radius 499 m, 2 km triangular compression booms (4 m) from the A+ housings braced at 8 stations, repulsion ties, ship
+shadow plugs (2.7 m) with the burn stations in their shadow, neighbour strips, translucent plume (25 degrees) and forward-stream
+(15 degrees) envelopes. Timeline 1-360: stowed in the A+ housings (silhouette unchanged), booms extend, rings unfurl, burn. Opens
+deployed on CAM_VTX24_DEPLOYED; CAM_VTX24_CLUSTER, CAM_VTX24_RING and CAM_VTX24_STOWED also set. Cables and envelopes drawn thicker than
+real. Not yet in lab/: moves to lab/variants/halo-vertex on owner approval.
