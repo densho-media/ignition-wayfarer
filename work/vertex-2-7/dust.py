@@ -22,6 +22,7 @@ ROOT = HERE.parents[1]
 V26 = ROOT/'work'/'vertex-2-6'
 sys.path.insert(0, str(V26))
 import protect as PR  # noqa: E402
+import fixpath  # noqa: E402,F401  (corrected braking path)
 import t02_environment as E  # noqa: E402
 
 DAY = 86400.0; C = 299792458.0

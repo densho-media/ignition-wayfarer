@@ -1,8 +1,8 @@
-JUSTIFIED ext  200 m dust   3203 t 2.7_point  none
-JUSTIFIED ext  200 m dust   3203 t levers     ve 0.084 c, Tb 467 d (+0.60 yr), dep 12933 t, end 6037 t, prop 6896 t, He-3 4095 t, fusion 59.0 TW, sys 4118 t, coil 5.6 plate 0.10 MW/m2, kappa_eff 0.959
-JUSTIFIED ext  300 m dust   3203 t 2.7_point  none
-JUSTIFIED ext  300 m dust   3203 t levers     ve 0.084 c, Tb 467 d (+0.60 yr), dep 12838 t, end 5992 t, prop 6845 t, He-3 4064 t, fusion 58.6 TW, sys 4080 t, coil 5.6 plate 0.05 MW/m2, kappa_eff 0.959
-JUSTIFIED ext  475 m dust    406 t 2.7_point  ve 0.074 c, Tb 467 d (+0.60 yr), dep 6535 t, end 2752 t, prop 3783 t, He-3 2220 t, fusion 30.7 TW, sys 1299 t, coil 8.7 plate 0.03 MW/m2, kappa_eff 0.869
-JUSTIFIED ext  475 m dust    406 t levers     ve 0.084 c, Tb 467 d (+0.60 yr), dep 5153 t, end 2405 t, prop 2748 t, He-3 1631 t, fusion 23.5 TW, sys 1108 t, coil 2.2 plate 0.01 MW/m2, kappa_eff 0.959
-JUSTIFIED ext  600 m dust    406 t 2.7_point  ve 0.074 c, Tb 467 d (+0.60 yr), dep 6478 t, end 2728 t, prop 3750 t, He-3 2201 t, fusion 30.4 TW, sys 1280 t, coil 8.7 plate 0.02 MW/m2, kappa_eff 0.869
-JUSTIFIED ext  600 m dust    406 t levers     ve 0.084 c, Tb 467 d (+0.60 yr), dep 5134 t, end 2397 t, prop 2738 t, He-3 1626 t, fusion 23.4 TW, sys 1101 t, coil 2.2 plate 0.01 MW/m2, kappa_eff 0.959
+JUSTIFIED ext  200 m dust    216 t 2.7_point  ve 0.074 c, Tb 467 d (+0.60 yr), dep 6218 t, end 2619 t, prop 3600 t, He-3 2113 t, fusion 29.2 TW, sys 1194 t, coil 8.3 plate 0.14 MW/m2, kappa_eff 0.869
+JUSTIFIED ext  200 m dust    216 t levers     ve 0.084 c, Tb 467 d (+0.60 yr), dep 4762 t, end 2223 t, prop 2539 t, He-3 1508 t, fusion 21.7 TW, sys 957 t, coil 2.1 plate 0.04 MW/m2, kappa_eff 0.959
+JUSTIFIED ext  300 m dust    216 t 2.7_point  ve 0.074 c, Tb 467 d (+0.60 yr), dep 6018 t, end 2534 t, prop 3484 t, He-3 2045 t, fusion 28.3 TW, sys 1127 t, coil 8.1 plate 0.07 MW/m2, kappa_eff 0.869
+JUSTIFIED ext  300 m dust    216 t levers     ve 0.084 c, Tb 467 d (+0.60 yr), dep 4693 t, end 2191 t, prop 2503 t, He-3 1486 t, fusion 21.4 TW, sys 930 t, coil 2.0 plate 0.02 MW/m2, kappa_eff 0.959
+JUSTIFIED ext  475 m dust    216 t 2.7_point  ve 0.074 c, Tb 467 d (+0.60 yr), dep 5863 t, end 2469 t, prop 3394 t, He-3 1992 t, fusion 27.5 TW, sys 1075 t, coil 7.8 plate 0.03 MW/m2, kappa_eff 0.869
+JUSTIFIED ext  475 m dust    216 t levers     ve 0.084 c, Tb 467 d (+0.60 yr), dep 4636 t, end 2164 t, prop 2472 t, He-3 1468 t, fusion 21.2 TW, sys 908 t, coil 2.0 plate 0.01 MW/m2, kappa_eff 0.959
+JUSTIFIED ext  600 m dust    216 t 2.7_point  ve 0.074 c, Tb 467 d (+0.60 yr), dep 5812 t, end 2447 t, prop 3364 t, He-3 1975 t, fusion 27.3 TW, sys 1058 t, coil 7.8 plate 0.02 MW/m2, kappa_eff 0.869
+JUSTIFIED ext  600 m dust    216 t levers     ve 0.084 c, Tb 467 d (+0.60 yr), dep 4617 t, end 2155 t, prop 2462 t, He-3 1462 t, fusion 21.1 TW, sys 901 t, coil 2.0 plate 0.01 MW/m2, kappa_eff 0.959

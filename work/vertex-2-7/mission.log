@@ -1,104 +1,104 @@
-ref_2.6_common                     ve 0.078 c, Tb 467 d (+0.60 yr), dep 5711 t, end 2514 t, prop 3197 t, He-3 1887 t, fusion 26.1 TW, sys 1150 t, coil 7.4 plate 0.13 MW/m2, kappa_eff 0.913
-spread_charge                      ve 0.078 c, Tb 467 d (+0.60 yr), dep 5834 t, end 2568 t, prop 3266 t, He-3 1936 t, fusion 26.8 TW, sys 1193 t, coil 7.6 plate 0.13 MW/m2, kappa_eff 0.911
-spread_thermal                     ve 0.074 c, Tb 467 d (+0.60 yr), dep 6224 t, end 2621 t, prop 3603 t, He-3 2115 t, fusion 29.2 TW, sys 1195 t, coil 8.3 plate 0.14 MW/m2, kappa_eff 0.869
-b099_common                        ve 0.080 c, Tb 467 d (+0.60 yr), dep 5554 t, end 2496 t, prop 3059 t, He-3 1822 t, fusion 26.3 TW, sys 1152 t, coil 7.5 plate 0.13 MW/m2, kappa_eff 0.913
-kappa095_common                    ve 0.080 c, Tb 467 d (+0.60 yr), dep 5569 t, end 2502 t, prop 3067 t, He-3 1759 t, fusion 24.3 TW, sys 1157 t, coil 6.9 plate 0.12 MW/m2, kappa_eff 0.950
-kappa097_common                    ve 0.082 c, Tb 467 d (+0.60 yr), dep 5378 t, end 2464 t, prop 2914 t, He-3 1684 t, fusion 23.3 TW, sys 1142 t, coil 6.6 plate 0.11 MW/m2, kappa_eff 0.970
-all_levers_common                  ve 0.084 c, Tb 467 d (+0.60 yr), dep 5247 t, end 2449 t, prop 2798 t, He-3 1629 t, fusion 23.5 TW, sys 1145 t, coil 6.7 plate 0.12 MW/m2, kappa_eff 0.970
-b099_thermal                       ve 0.076 c, Tb 467 d (+0.60 yr), dep 6034 t, end 2600 t, prop 3435 t, He-3 2048 t, fusion 29.5 TW, sys 1199 t, coil 8.4 plate 0.14 MW/m2, kappa_eff 0.867
-kappa095_thermal                   ve 0.076 c, Tb 467 d (+0.60 yr), dep 6032 t, end 2599 t, prop 3434 t, He-3 1964 t, fusion 27.2 TW, sys 1199 t, coil 7.7 plate 0.13 MW/m2, kappa_eff 0.904
-kappa097_thermal                   ve 0.078 c, Tb 467 d (+0.60 yr), dep 5799 t, end 2553 t, prop 3246 t, He-3 1876 t, fusion 25.9 TW, sys 1181 t, coil 7.4 plate 0.13 MW/m2, kappa_eff 0.923
-all_levers_thermal                 ve 0.080 c, Tb 467 d (+0.60 yr), dep 5645 t, end 2536 t, prop 3108 t, He-3 1820 t, fusion 26.2 TW, sys 1185 t, coil 7.5 plate 0.13 MW/m2, kappa_eff 0.921
+ref_2.6_common                     ve 0.078 c, Tb 467 d (+0.60 yr), dep 5404 t, end 2379 t, prop 3025 t, He-3 1786 t, fusion 24.7 TW, sys 1040 t, coil 7.0 plate 0.12 MW/m2, kappa_eff 0.913
+spread_charge                      ve 0.078 c, Tb 467 d (+0.60 yr), dep 5526 t, end 2432 t, prop 3093 t, He-3 1834 t, fusion 25.4 TW, sys 1083 t, coil 7.2 plate 0.12 MW/m2, kappa_eff 0.911
+spread_thermal                     ve 0.074 c, Tb 467 d (+0.60 yr), dep 5889 t, end 2480 t, prop 3409 t, He-3 2001 t, fusion 27.7 TW, sys 1084 t, coil 7.9 plate 0.14 MW/m2, kappa_eff 0.869
+b099_common                        ve 0.080 c, Tb 467 d (+0.60 yr), dep 5255 t, end 2361 t, prop 2894 t, He-3 1724 t, fusion 24.8 TW, sys 1042 t, coil 7.1 plate 0.12 MW/m2, kappa_eff 0.913
+kappa095_common                    ve 0.080 c, Tb 467 d (+0.60 yr), dep 5275 t, end 2370 t, prop 2905 t, He-3 1666 t, fusion 23.0 TW, sys 1049 t, coil 6.6 plate 0.11 MW/m2, kappa_eff 0.950
+kappa097_common                    ve 0.082 c, Tb 467 d (+0.60 yr), dep 5094 t, end 2334 t, prop 2760 t, He-3 1595 t, fusion 22.1 TW, sys 1035 t, coil 6.3 plate 0.11 MW/m2, kappa_eff 0.970
+all_levers_common                  ve 0.084 c, Tb 467 d (+0.60 yr), dep 4970 t, end 2320 t, prop 2650 t, He-3 1543 t, fusion 22.2 TW, sys 1038 t, coil 6.3 plate 0.11 MW/m2, kappa_eff 0.970
+b099_thermal                       ve 0.076 c, Tb 467 d (+0.60 yr), dep 5710 t, end 2460 t, prop 3250 t, He-3 1938 t, fusion 27.9 TW, sys 1087 t, coil 8.0 plate 0.14 MW/m2, kappa_eff 0.867
+kappa095_thermal                   ve 0.076 c, Tb 467 d (+0.60 yr), dep 5714 t, end 2462 t, prop 3252 t, He-3 1860 t, fusion 25.7 TW, sys 1089 t, coil 7.3 plate 0.13 MW/m2, kappa_eff 0.904
+kappa097_thermal                   ve 0.078 c, Tb 467 d (+0.60 yr), dep 5493 t, end 2418 t, prop 3075 t, He-3 1777 t, fusion 24.6 TW, sys 1072 t, coil 7.0 plate 0.12 MW/m2, kappa_eff 0.923
+all_levers_thermal                 ve 0.080 c, Tb 467 d (+0.60 yr), dep 5347 t, end 2402 t, prop 2944 t, He-3 1724 t, fusion 24.8 TW, sys 1076 t, coil 7.1 plate 0.12 MW/m2, kappa_eff 0.921
 trip_0_thermal                     none
 trip_0_all_levers                  none
 trip_0.3_thermal                   none
 trip_0.3_all_levers                none
-trip_1_thermal                     ve 0.074 c, Tb 759 d (+1.00 yr), dep 5685 t, end 2394 t, prop 3291 t, He-3 1931 t, fusion 16.4 TW, sys 1015 t, coil 4.7 plate 0.08 MW/m2, kappa_eff 0.869
-trip_1_all_levers                  ve 0.080 c, Tb 759 d (+1.00 yr), dep 5227 t, end 2349 t, prop 2878 t, He-3 1685 t, fusion 14.9 TW, sys 1032 t, coil 4.3 plate 0.07 MW/m2, kappa_eff 0.921
-trip_2_thermal                     ve 0.074 c, Tb 1490 d (+2.00 yr), dep 5454 t, end 2297 t, prop 3157 t, He-3 1853 t, fusion 8.0 TW, sys 938 t, coil 2.3 plate 0.04 MW/m2, kappa_eff 0.869
-trip_2_all_levers                  ve 0.080 c, Tb 1490 d (+2.00 yr), dep 5040 t, end 2265 t, prop 2776 t, He-3 1625 t, fusion 7.3 TW, sys 963 t, coil 2.1 plate 0.04 MW/m2, kappa_eff 0.921
-feed_r0.5_thermal                  ve 0.062 c, Tb 467 d (+0.60 yr), dep 8106 t, end 2888 t, prop 5219 t, He-3 2150 t, fusion 29.7 TW, sys 1220 t, coil 8.6 plate 0.15 MW/m2, kappa_eff 0.869
-feed_r0.7_thermal                  ve 0.068 c, Tb 467 d (+0.60 yr), dep 6964 t, end 2717 t, prop 4247 t, He-3 2105 t, fusion 29.1 TW, sys 1195 t, coil 8.0 plate 0.14 MW/m2, kappa_eff 0.869
-feed_r1.5_thermal                  ve 0.066 c, Tb 467 d (+0.60 yr), dep 7455 t, end 2827 t, prop 4628 t, He-3 3187 t, fusion 29.4 TW, sys 1248 t, coil 9.5 plate 0.16 MW/m2, kappa_eff 0.876
+trip_1_thermal                     ve 0.074 c, Tb 759 d (+1.00 yr), dep 5388 t, end 2269 t, prop 3119 t, He-3 1831 t, fusion 15.6 TW, sys 916 t, coil 4.4 plate 0.08 MW/m2, kappa_eff 0.869
+trip_1_all_levers                  ve 0.080 c, Tb 759 d (+1.00 yr), dep 4964 t, end 2231 t, prop 2734 t, He-3 1600 t, fusion 14.2 TW, sys 935 t, coil 4.0 plate 0.07 MW/m2, kappa_eff 0.921
+trip_2_thermal                     ve 0.074 c, Tb 1490 d (+2.00 yr), dep 5174 t, end 2179 t, prop 2995 t, He-3 1758 t, fusion 7.6 TW, sys 845 t, coil 2.2 plate 0.04 MW/m2, kappa_eff 0.869
+trip_2_all_levers                  ve 0.080 c, Tb 1490 d (+2.00 yr), dep 4787 t, end 2151 t, prop 2636 t, He-3 1543 t, fusion 7.0 TW, sys 870 t, coil 2.0 plate 0.03 MW/m2, kappa_eff 0.921
+feed_r0.5_thermal                  ve 0.062 c, Tb 467 d (+0.60 yr), dep 7673 t, end 2733 t, prop 4940 t, He-3 2035 t, fusion 28.1 TW, sys 1107 t, coil 8.1 plate 0.14 MW/m2, kappa_eff 0.869
+feed_r0.7_thermal                  ve 0.068 c, Tb 467 d (+0.60 yr), dep 6591 t, end 2572 t, prop 4019 t, He-3 1992 t, fusion 27.5 TW, sys 1084 t, coil 7.6 plate 0.13 MW/m2, kappa_eff 0.869
+feed_r1.5_thermal                  ve 0.066 c, Tb 467 d (+0.60 yr), dep 7060 t, end 2677 t, prop 4383 t, He-3 3018 t, fusion 27.8 TW, sys 1135 t, coil 9.0 plate 0.16 MW/m2, kappa_eff 0.876
 feed_r2_thermal                    none
-spine    25 iso x0.1    fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine    25 iso x0.1    fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine    25 iso x0.05   fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine    25 iso x0.05   fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine    25 iso x0.03   fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine    25 iso x0.03   fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine    25 iso x0.02   fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine    25 iso x0.02   fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine    25 iso x0.01   fwd 2.4e-04 dust    1802 t: dep 12092 t coil 5.4 plate 0.99
-spine    25 iso x0.01   fwd 2.4e-05 dust    1802 t: dep 11189 t coil 5.0 plate 0.92
-spine    25 iso x0.005  fwd 2.4e-04 dust    1802 t: dep 11728 t coil 2.6 plate 0.48
-spine    25 iso x0.005  fwd 2.4e-05 dust    1802 t: dep 10919 t coil 2.4 plate 0.45
-spine    50 iso x0.1    fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine    50 iso x0.1    fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine    50 iso x0.05   fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine    50 iso x0.05   fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine    50 iso x0.03   fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine    50 iso x0.03   fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine    50 iso x0.02   fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine    50 iso x0.02   fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine    50 iso x0.01   fwd 2.4e-04 dust    1802 t: dep 11827 t coil 5.3 plate 0.55
-spine    50 iso x0.01   fwd 2.4e-05 dust    1802 t: dep 10962 t coil 4.9 plate 0.51
-spine    50 iso x0.005  fwd 2.4e-04 dust    1802 t: dep 11571 t coil 2.6 plate 0.27
-spine    50 iso x0.005  fwd 2.4e-05 dust    1802 t: dep 10777 t coil 2.4 plate 0.25
-spine    75 iso x0.1    fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine    75 iso x0.1    fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine    75 iso x0.05   fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine    75 iso x0.05   fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine    75 iso x0.03   fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine    75 iso x0.03   fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine    75 iso x0.02   fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine    75 iso x0.02   fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine    75 iso x0.01   fwd 2.4e-04 dust    1802 t: dep 11659 t coil 5.2 plate 0.35
-spine    75 iso x0.01   fwd 2.4e-05 dust    1802 t: dep 10819 t coil 4.8 plate 0.33
-spine    75 iso x0.005  fwd 2.4e-04 dust    1802 t: dep 11464 t coil 2.5 plate 0.17
-spine    75 iso x0.005  fwd 2.4e-05 dust    1802 t: dep 10680 t coil 2.4 plate 0.16
-spine   100 iso x0.1    fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine   100 iso x0.1    fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine   100 iso x0.05   fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine   100 iso x0.05   fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine   100 iso x0.03   fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine   100 iso x0.03   fwd 2.4e-05 dust    1802 t: no heat-passing closure
-spine   100 iso x0.02   fwd 2.4e-04 dust    1802 t: no heat-passing closure
-spine   100 iso x0.02   fwd 2.4e-05 dust    1802 t: dep 11851 t coil 10.0 plate 0.47
-spine   100 iso x0.01   fwd 2.4e-04 dust    1802 t: dep 11544 t coil 5.1 plate 0.24
-spine   100 iso x0.01   fwd 2.4e-05 dust    1802 t: dep 10719 t coil 4.8 plate 0.23
-spine   100 iso x0.005  fwd 2.4e-04 dust    1802 t: dep 11385 t coil 2.5 plate 0.12
-spine   100 iso x0.005  fwd 2.4e-05 dust    1802 t: dep 10608 t coil 2.4 plate 0.11
-spine   150 iso x0.1    fwd 2.4e-04 dust     217 t: no heat-passing closure
-spine   150 iso x0.1    fwd 2.4e-05 dust     217 t: no heat-passing closure
-spine   150 iso x0.05   fwd 2.4e-04 dust     217 t: no heat-passing closure
-spine   150 iso x0.05   fwd 2.4e-05 dust     217 t: no heat-passing closure
-spine   150 iso x0.03   fwd 2.4e-04 dust     217 t: dep 6402 t coil 8.6 plate 0.23
-spine   150 iso x0.03   fwd 2.4e-05 dust     217 t: dep 5909 t coil 7.9 plate 0.21
-spine   150 iso x0.02   fwd 2.4e-04 dust     217 t: dep 6093 t coil 5.4 plate 0.15
-spine   150 iso x0.02   fwd 2.4e-05 dust     217 t: dep 5644 t coil 5.0 plate 0.13
-spine   150 iso x0.01   fwd 2.4e-04 dust     217 t: dep 5946 t coil 2.6 plate 0.07
-spine   150 iso x0.01   fwd 2.4e-05 dust     217 t: dep 5538 t coil 2.5 plate 0.07
-spine   150 iso x0.005  fwd 2.4e-04 dust     217 t: dep 5885 t coil 1.3 plate 0.04
-spine   150 iso x0.005  fwd 2.4e-05 dust     217 t: dep 5482 t coil 1.2 plate 0.03
-spine   200 iso x0.1    fwd 2.4e-04 dust     217 t: no heat-passing closure
-spine   200 iso x0.1    fwd 2.4e-05 dust     217 t: no heat-passing closure
-spine   200 iso x0.05   fwd 2.4e-04 dust     217 t: no heat-passing closure
-spine   200 iso x0.05   fwd 2.4e-05 dust     217 t: no heat-passing closure
-spine   200 iso x0.03   fwd 2.4e-04 dust     217 t: dep 6224 t coil 8.3 plate 0.14
-spine   200 iso x0.03   fwd 2.4e-05 dust     217 t: dep 5757 t coil 7.7 plate 0.13
-spine   200 iso x0.02   fwd 2.4e-04 dust     217 t: dep 5986 t coil 5.3 plate 0.09
-spine   200 iso x0.02   fwd 2.4e-05 dust     217 t: dep 5553 t coil 4.9 plate 0.09
-spine   200 iso x0.01   fwd 2.4e-04 dust     217 t: dep 5873 t coil 2.6 plate 0.05
-spine   200 iso x0.01   fwd 2.4e-05 dust     217 t: dep 5470 t coil 2.4 plate 0.04
-spine   200 iso x0.005  fwd 2.4e-04 dust     217 t: dep 5819 t coil 1.3 plate 0.02
-spine   200 iso x0.005  fwd 2.4e-05 dust     217 t: dep 5421 t coil 1.2 plate 0.02
-gap_all_levers_thermal             ve 0.080 c, Tb 759 d (+1.00 yr), dep 4951 t, end 2225 t, prop 2727 t, He-3 1592 t, fusion 14.1 TW, sys 931 t, coil 1.3 plate 0.02 MW/m2, kappa_eff 0.921
-gap_all_levers_charge              ve 0.084 c, Tb 759 d (+1.00 yr), dep 4682 t, end 2186 t, prop 2497 t, He-3 1482 t, fusion 13.1 TW, sys 926 t, coil 1.2 plate 0.02 MW/m2, kappa_eff 0.959
-gap_ideal_nozzle                   ve 0.086 c, Tb 759 d (+1.00 yr), dep 4560 t, end 2166 t, prop 2393 t, He-3 1402 t, fusion 12.4 TW, sys 922 t, coil 1.2 plate 0.02 MW/m2, kappa_eff 0.989
-dust_LOW_thermal                   ve 0.074 c, Tb 467 d (+0.60 yr), dep 5858 t, end 2467 t, prop 3391 t, He-3 1990 t, fusion 27.5 TW, sys 1073 t, coil 7.8 plate 0.14 MW/m2, kappa_eff 0.869
+spine    25 iso x0.1    fwd 2.4e-04 dust     854 t: no heat-passing closure
+spine    25 iso x0.1    fwd 2.4e-05 dust     854 t: no heat-passing closure
+spine    25 iso x0.05   fwd 2.4e-04 dust     854 t: no heat-passing closure
+spine    25 iso x0.05   fwd 2.4e-05 dust     854 t: no heat-passing closure
+spine    25 iso x0.03   fwd 2.4e-04 dust     854 t: no heat-passing closure
+spine    25 iso x0.03   fwd 2.4e-05 dust     854 t: no heat-passing closure
+spine    25 iso x0.02   fwd 2.4e-04 dust     854 t: dep 9636 t coil 8.6 plate 1.59
+spine    25 iso x0.02   fwd 2.4e-05 dust     854 t: dep 8832 t coil 7.9 plate 1.45
+spine    25 iso x0.01   fwd 2.4e-04 dust     854 t: dep 8654 t coil 3.9 plate 0.71
+spine    25 iso x0.01   fwd 2.4e-05 dust     854 t: dep 8047 t coil 3.6 plate 0.66
+spine    25 iso x0.005  fwd 2.4e-04 dust     854 t: dep 8463 t coil 1.9 plate 0.35
+spine    25 iso x0.005  fwd 2.4e-05 dust     854 t: dep 7878 t coil 1.8 plate 0.32
+spine    50 iso x0.1    fwd 2.4e-04 dust     854 t: no heat-passing closure
+spine    50 iso x0.1    fwd 2.4e-05 dust     854 t: no heat-passing closure
+spine    50 iso x0.05   fwd 2.4e-04 dust     854 t: no heat-passing closure
+spine    50 iso x0.05   fwd 2.4e-05 dust     854 t: no heat-passing closure
+spine    50 iso x0.03   fwd 2.4e-04 dust     854 t: no heat-passing closure
+spine    50 iso x0.03   fwd 2.4e-05 dust     854 t: no heat-passing closure
+spine    50 iso x0.02   fwd 2.4e-04 dust     854 t: dep 9165 t coil 8.2 plate 0.86
+spine    50 iso x0.02   fwd 2.4e-05 dust     854 t: dep 8435 t coil 7.5 plate 0.79
+spine    50 iso x0.01   fwd 2.4e-04 dust     854 t: dep 8461 t coil 3.8 plate 0.40
+spine    50 iso x0.01   fwd 2.4e-05 dust     854 t: dep 7874 t coil 3.5 plate 0.37
+spine    50 iso x0.005  fwd 2.4e-04 dust     854 t: dep 8325 t coil 1.9 plate 0.19
+spine    50 iso x0.005  fwd 2.4e-05 dust     854 t: dep 7753 t coil 1.7 plate 0.18
+spine    75 iso x0.1    fwd 2.4e-04 dust     854 t: no heat-passing closure
+spine    75 iso x0.1    fwd 2.4e-05 dust     854 t: no heat-passing closure
+spine    75 iso x0.05   fwd 2.4e-04 dust     854 t: no heat-passing closure
+spine    75 iso x0.05   fwd 2.4e-05 dust     854 t: no heat-passing closure
+spine    75 iso x0.03   fwd 2.4e-04 dust     854 t: no heat-passing closure
+spine    75 iso x0.03   fwd 2.4e-05 dust     854 t: no heat-passing closure
+spine    75 iso x0.02   fwd 2.4e-04 dust     854 t: dep 8880 t coil 7.9 plate 0.54
+spine    75 iso x0.02   fwd 2.4e-05 dust     854 t: dep 8194 t coil 7.3 plate 0.50
+spine    75 iso x0.01   fwd 2.4e-04 dust     854 t: dep 8335 t coil 3.7 plate 0.25
+spine    75 iso x0.01   fwd 2.4e-05 dust     854 t: dep 7760 t coil 3.5 plate 0.23
+spine    75 iso x0.005  fwd 2.4e-04 dust     854 t: dep 8229 t coil 1.8 plate 0.12
+spine    75 iso x0.005  fwd 2.4e-05 dust     854 t: dep 7665 t coil 1.7 plate 0.12
+spine   100 iso x0.1    fwd 2.4e-04 dust     129 t: no heat-passing closure
+spine   100 iso x0.1    fwd 2.4e-05 dust     129 t: no heat-passing closure
+spine   100 iso x0.05   fwd 2.4e-04 dust     129 t: no heat-passing closure
+spine   100 iso x0.05   fwd 2.4e-05 dust     129 t: no heat-passing closure
+spine   100 iso x0.03   fwd 2.4e-04 dust     129 t: dep 6341 t coil 8.5 plate 0.40
+spine   100 iso x0.03   fwd 2.4e-05 dust     129 t: dep 5831 t coil 7.8 plate 0.37
+spine   100 iso x0.02   fwd 2.4e-04 dust     129 t: dep 5929 t coil 5.3 plate 0.25
+spine   100 iso x0.02   fwd 2.4e-05 dust     129 t: dep 5480 t coil 4.9 plate 0.23
+spine   100 iso x0.01   fwd 2.4e-04 dust     129 t: dep 5753 t coil 2.6 plate 0.12
+spine   100 iso x0.01   fwd 2.4e-05 dust     129 t: dep 5356 t coil 2.4 plate 0.11
+spine   100 iso x0.005  fwd 2.4e-04 dust     129 t: dep 5678 t coil 1.3 plate 0.06
+spine   100 iso x0.005  fwd 2.4e-05 dust     129 t: dep 5288 t coil 1.2 plate 0.06
+spine   150 iso x0.1    fwd 2.4e-04 dust     129 t: no heat-passing closure
+spine   150 iso x0.1    fwd 2.4e-05 dust     129 t: no heat-passing closure
+spine   150 iso x0.05   fwd 2.4e-04 dust     129 t: no heat-passing closure
+spine   150 iso x0.05   fwd 2.4e-05 dust     129 t: no heat-passing closure
+spine   150 iso x0.03   fwd 2.4e-04 dust     129 t: dep 6058 t coil 8.1 plate 0.22
+spine   150 iso x0.03   fwd 2.4e-05 dust     129 t: dep 5591 t coil 7.5 plate 0.20
+spine   150 iso x0.02   fwd 2.4e-04 dust     129 t: dep 5764 t coil 5.1 plate 0.14
+spine   150 iso x0.02   fwd 2.4e-05 dust     129 t: dep 5340 t coil 4.8 plate 0.13
+spine   150 iso x0.01   fwd 2.4e-04 dust     129 t: dep 5642 t coil 2.5 plate 0.07
+spine   150 iso x0.01   fwd 2.4e-05 dust     129 t: dep 5254 t coil 2.3 plate 0.06
+spine   150 iso x0.005  fwd 2.4e-04 dust     129 t: dep 5581 t coil 1.2 plate 0.03
+spine   150 iso x0.005  fwd 2.4e-05 dust     129 t: dep 5199 t coil 1.2 plate 0.03
+spine   200 iso x0.1    fwd 2.4e-04 dust     129 t: no heat-passing closure
+spine   200 iso x0.1    fwd 2.4e-05 dust     129 t: no heat-passing closure
+spine   200 iso x0.05   fwd 2.4e-04 dust     129 t: no heat-passing closure
+spine   200 iso x0.05   fwd 2.4e-05 dust     129 t: no heat-passing closure
+spine   200 iso x0.03   fwd 2.4e-04 dust     129 t: dep 5889 t coil 7.9 plate 0.14
+spine   200 iso x0.03   fwd 2.4e-05 dust     129 t: dep 5447 t coil 7.3 plate 0.13
+spine   200 iso x0.02   fwd 2.4e-04 dust     129 t: dep 5664 t coil 5.0 plate 0.09
+spine   200 iso x0.02   fwd 2.4e-05 dust     129 t: dep 5254 t coil 4.7 plate 0.08
+spine   200 iso x0.01   fwd 2.4e-04 dust     129 t: dep 5569 t coil 2.5 plate 0.04
+spine   200 iso x0.01   fwd 2.4e-05 dust     129 t: dep 5187 t coil 2.3 plate 0.04
+spine   200 iso x0.005  fwd 2.4e-04 dust     129 t: dep 5516 t coil 1.2 plate 0.02
+spine   200 iso x0.005  fwd 2.4e-05 dust     129 t: dep 5139 t coil 1.1 plate 0.02
+gap_all_levers_thermal             ve 0.080 c, Tb 759 d (+1.00 yr), dep 4699 t, end 2112 t, prop 2588 t, He-3 1511 t, fusion 13.4 TW, sys 838 t, coil 1.3 plate 0.02 MW/m2, kappa_eff 0.921
+gap_all_levers_charge              ve 0.084 c, Tb 759 d (+1.00 yr), dep 4444 t, end 2074 t, prop 2369 t, He-3 1407 t, fusion 12.5 TW, sys 834 t, coil 1.2 plate 0.02 MW/m2, kappa_eff 0.959
+gap_ideal_nozzle                   ve 0.086 c, Tb 759 d (+1.00 yr), dep 4327 t, end 2056 t, prop 2271 t, He-3 1330 t, fusion 11.8 TW, sys 830 t, coil 1.1 plate 0.02 MW/m2, kappa_eff 0.989
+dust_LOW_thermal                   ve 0.074 c, Tb 467 d (+0.60 yr), dep 5619 t, end 2366 t, prop 3253 t, He-3 1909 t, fusion 26.4 TW, sys 993 t, coil 7.5 plate 0.13 MW/m2, kappa_eff 0.869
 dust_HIGH_thermal                  none
-dust_NOMINAL_HILAT_thermal         ve 0.074 c, Tb 467 d (+0.60 yr), dep 6036 t, end 2542 t, prop 3494 t, He-3 2051 t, fusion 28.4 TW, sys 1133 t, coil 8.1 plate 0.14 MW/m2, kappa_eff 0.869
+dust_NOMINAL_HILAT_thermal         ve 0.074 c, Tb 467 d (+0.60 yr), dep 5855 t, end 2465 t, prop 3389 t, He-3 1989 t, fusion 27.5 TW, sys 1072 t, coil 7.8 plate 0.13 MW/m2, kappa_eff 0.869
 envelope ve 0.060: mass ratio 2.906, end <= 1583 t, propulsion system <= 246 t
 envelope ve 0.062: mass ratio 2.807, end <= 1639 t, propulsion system <= 309 t
 envelope ve 0.064: mass ratio 2.718, end <= 1692 t, propulsion system <= 371 t

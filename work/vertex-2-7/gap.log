@@ -1,15 +1,15 @@
-levers_thermal_0.6         ve 0.080 c, Tb 467 d (+0.60 yr), dep 5047 t, end 2268 t, prop 2779 t, He-3 1623 t, fusion 23.4 TW, sys 966 t, coil 2.2 plate 0.04 MW/m2, kappa_eff 0.921
-    over 4.6 kt by 447 t; system 966 t vs allowed 802 t (cut 164 t); He-3 over canon by 529 t; propellant ok True
-    He-3 minimum: ve 0.068 c, Tb 467 d (+0.60 yr), dep 6192 t, end 2416 t, prop 3776 t, He-3 1593 t, fusion 23.0 TW, sys 964 t, coil 2.2 plate 0.04 MW/m2, kappa_eff 0.921
-levers_charge_0.6          ve 0.084 c, Tb 467 d (+0.60 yr), dep 4766 t, end 2225 t, prop 2541 t, He-3 1509 t, fusion 21.7 TW, sys 958 t, coil 2.1 plate 0.04 MW/m2, kappa_eff 0.959
-    over 4.6 kt by 166 t; system 958 t vs allowed 894 t (cut 64 t); He-3 over canon by 415 t; propellant ok True
-    He-3 minimum: ve 0.068 c, Tb 467 d (+0.60 yr), dep 6164 t, end 2405 t, prop 3759 t, He-3 1463 t, fusion 21.1 TW, sys 956 t, coil 2.0 plate 0.03 MW/m2, kappa_eff 0.959
-ideal_nozzle_charge_0.6    ve 0.086 c, Tb 467 d (+0.60 yr), dep 4637 t, end 2203 t, prop 2434 t, He-3 1425 t, fusion 20.5 TW, sys 953 t, coil 2.0 plate 0.03 MW/m2, kappa_eff 0.989
-    over 4.6 kt by 37 t; system 953 t vs allowed 938 t (cut 15 t); He-3 over canon by 331 t; propellant ok True
-    He-3 minimum: ve 0.068 c, Tb 467 d (+0.60 yr), dep 6145 t, end 2397 t, prop 3747 t, He-3 1372 t, fusion 19.8 TW, sys 950 t, coil 1.9 plate 0.03 MW/m2, kappa_eff 0.989
-levers_charge_iso003_0.6   ve 0.084 c, Tb 467 d (+0.60 yr), dep 5272 t, end 2461 t, prop 2811 t, He-3 1673 t, fusion 24.1 TW, sys 1154 t, coil 6.9 plate 0.12 MW/m2, kappa_eff 0.959
-    over 4.6 kt by 672 t; system 1154 t vs allowed 894 t (cut 260 t); He-3 over canon by 579 t; propellant ok True
-    He-3 minimum: ve 0.068 c, Tb 467 d (+0.60 yr), dep 6788 t, end 2648 t, prop 4139 t, He-3 1615 t, fusion 23.3 TW, sys 1142 t, coil 6.6 plate 0.11 MW/m2, kappa_eff 0.959
-levers_charge_1.0          ve 0.084 c, Tb 759 d (+1.00 yr), dep 4682 t, end 2186 t, prop 2497 t, He-3 1482 t, fusion 13.1 TW, sys 926 t, coil 1.2 plate 0.02 MW/m2, kappa_eff 0.959
-    over 4.6 kt by 82 t; system 926 t vs allowed 894 t (cut 32 t); He-3 over canon by 388 t; propellant ok True
-    He-3 minimum: ve 0.068 c, Tb 759 d (+1.00 yr), dep 6058 t, end 2364 t, prop 3694 t, He-3 1437 t, fusion 12.7 TW, sys 924 t, coil 1.2 plate 0.02 MW/m2, kappa_eff 0.959
+levers_thermal_0.6         ve 0.080 c, Tb 467 d (+0.60 yr), dep 4790 t, end 2152 t, prop 2638 t, He-3 1540 t, fusion 22.2 TW, sys 872 t, coil 2.1 plate 0.04 MW/m2, kappa_eff 0.921
+    over 4.6 kt by 190 t; system 872 t vs allowed 802 t (cut 70 t); He-3 over canon by 446 t; propellant ok True
+    He-3 minimum: ve 0.068 c, Tb 467 d (+0.60 yr), dep 5876 t, end 2293 t, prop 3584 t, He-3 1512 t, fusion 21.8 TW, sys 870 t, coil 2.1 plate 0.04 MW/m2, kappa_eff 0.921
+levers_charge_0.6          ve 0.084 c, Tb 467 d (+0.60 yr), dep 4523 t, end 2111 t, prop 2412 t, He-3 1432 t, fusion 20.6 TW, sys 865 t, coil 2.0 plate 0.03 MW/m2, kappa_eff 0.959
+    over 4.6 kt by -77 t; system 865 t vs allowed 894 t (cut -30 t); He-3 over canon by 338 t; propellant ok True
+    He-3 minimum: ve 0.068 c, Tb 467 d (+0.60 yr), dep 5850 t, end 2282 t, prop 3567 t, He-3 1388 t, fusion 20.0 TW, sys 862 t, coil 1.9 plate 0.03 MW/m2, kappa_eff 0.959
+ideal_nozzle_charge_0.6    ve 0.086 c, Tb 467 d (+0.60 yr), dep 4401 t, end 2091 t, prop 2310 t, He-3 1353 t, fusion 19.5 TW, sys 859 t, coil 1.9 plate 0.03 MW/m2, kappa_eff 0.989
+    over 4.6 kt by -199 t; system 859 t vs allowed 938 t (cut -79 t); He-3 over canon by 258 t; propellant ok True
+    He-3 minimum: ve 0.068 c, Tb 467 d (+0.60 yr), dep 5831 t, end 2275 t, prop 3556 t, He-3 1302 t, fusion 18.8 TW, sys 857 t, coil 1.8 plate 0.03 MW/m2, kappa_eff 0.989
+levers_charge_iso003_0.6   ve 0.084 c, Tb 467 d (+0.60 yr), dep 4994 t, end 2331 t, prop 2663 t, He-3 1585 t, fusion 22.8 TW, sys 1046 t, coil 6.5 plate 0.11 MW/m2, kappa_eff 0.959
+    over 4.6 kt by 394 t; system 1046 t vs allowed 894 t (cut 152 t); He-3 over canon by 491 t; propellant ok True
+    He-3 minimum: ve 0.068 c, Tb 467 d (+0.60 yr), dep 6429 t, end 2509 t, prop 3921 t, He-3 1530 t, fusion 22.0 TW, sys 1035 t, coil 6.3 plate 0.11 MW/m2, kappa_eff 0.959
+levers_charge_1.0          ve 0.084 c, Tb 759 d (+1.00 yr), dep 4444 t, end 2074 t, prop 2369 t, He-3 1407 t, fusion 12.5 TW, sys 834 t, coil 1.2 plate 0.02 MW/m2, kappa_eff 0.959
+    over 4.6 kt by -156 t; system 834 t vs allowed 894 t (cut -60 t); He-3 over canon by 313 t; propellant ok True
+    He-3 minimum: ve 0.068 c, Tb 759 d (+1.00 yr), dep 5749 t, end 2243 t, prop 3506 t, He-3 1364 t, fusion 12.1 TW, sys 832 t, coil 1.1 plate 0.02 MW/m2, kappa_eff 0.959

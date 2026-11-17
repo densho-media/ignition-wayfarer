@@ -27,6 +27,7 @@ import ledger as L  # noqa: E402
 import ledger2 as L2  # noqa: E402
 import compact as CP  # noqa: E402
 import protect as PR  # noqa: E402
+import fixpath  # noqa: E402,F401  (corrected braking path)
 import fuel as FU  # noqa: E402
 
 C = L.C; YR = L.YR; DAY = L.DAY

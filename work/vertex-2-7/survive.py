@@ -17,6 +17,7 @@ import dust as DU  # noqa: E402
 import mission as MI  # noqa: E402
 import fuel as FU  # noqa: E402
 import protect as PR  # noqa: E402
+import fixpath  # noqa: E402,F401  (corrected braking path)
 
 DAY = 86400.0; C = 299792458.0
 
