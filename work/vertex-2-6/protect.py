@@ -2,6 +2,9 @@
 
     python3 work/vertex-2-6/protect.py            writes work/vertex-2-6/protect.json and prints the tables (about 1 min)
 
+NOTE 2026-11-17: protect.json / protect.log are the 874dca7 evidence, made with the superseded braking path (kept, not rerun). mission()
+is now the corrected path; Vertex 2.7 and 2.8 use it. Rerunning this script writes corrected numbers over that evidence: do not.
+
 Research, not canon. Standard library only. The dust environment is the Vertex T02 model (t02_environment.py, copied with attribution
 from claude/project-thread-uwi5pl 3c665ec); the impact physics is T02's order-of-magnitude bracket (crater volume proportional to energy,
 bumper cloud spreading over the stand-off), re-implemented here so that it can follow a Vertex burn profile instead of the canon
@@ -100,6 +103,55 @@ def burn_profile(ratio, n=240):
 
 def mission(Tb_total, ve, dest_au=None, t_flip=300.0, n=240):
     """Segments (phase, orientation, r_AU, v, ds) of the full-return mission: accelerate out (bow first), coast, flip at cruise, brake engine
+    first, accelerate home, coast, flip, brake home. Destination: the given heliocentric distance, or the nearest the burns allow.
+
+    CORRECTED 2026-11-17 (Vertex 2.8, the same fix as lab/studies/dust-impacts model.py on claude/project-thread-6ryvmv a62118b): a
+    constant-thrust braking burn covers more distance than an accelerating burn of the same duration (the ship is heaviest, so slowest
+    to change speed, at the start), so each braking burn now starts one *braking*-burn length before its end point. The turn-around moves
+    out to 1 + accelerate + brake distance (324.33 AU on the Vertex research path) and the home braking leg ends at 1.0 AU. The
+    superseded version is kept as mission_superseded_874dca7()."""
+    tb = Tb_total/4; ratio = math.exp(DV/ve); prof = burn_profile(ratio, n)
+    sa = sum(dt*f for dt, f in prof)*VC*tb                    # accelerating-burn distance, m
+    sd = sum(dt*(1-f) for dt, f in prof)*VC*tb                # braking-burn distance, m
+    dmin = 1.0+(sa+sd)/AU
+    D = max(dest_au or 0.0, dmin)
+    segs = []
+
+    def burn(phase, orient, r0, sign, decel):
+        x = 0.0
+        for dt, f in prof:
+            v = VC*(1-f) if decel else VC*f
+            ds = v*dt*tb
+            segs.append(dict(phase=phase, orient=orient, r=r0+sign*(x+ds/2)/AU, v=max(v, 1.0), ds=ds, dt=dt*tb))
+            x += ds
+
+    def coast(phase, r0, r1, k=60):
+        L = abs(r1-r0)*AU
+        for i in range(k if L > 1 else 0):
+            segs.append(dict(phase=phase, orient='BOW_FIRST', r=r0+(r1-r0)*(i+0.5)/k, v=VC, ds=L/k, dt=L/k/VC))
+
+    def flip(phase, r):
+        segs.append(dict(phase=phase, orient='BROADSIDE', r=r, v=VC, ds=VC*t_flip, dt=t_flip))
+
+    burn('accelerate out', 'BOW_FIRST', 1.0, +1, False)
+    coast('coast out', 1.0+sa/AU, D-sd/AU)
+    flip('flip before braking (destination)', D-sd/AU)
+    burn('brake at destination', 'ENGINE_FIRST', D-sd/AU, +1, True)
+    burn('accelerate home', 'BOW_FIRST', D, -1, False)
+    coast('coast home', D-sa/AU, 1.0+sd/AU)
+    flip('flip before braking (home)', 1.0+sd/AU)
+    burn('brake at home', 'ENGINE_FIRST', 1.0+sd/AU, -1, True)
+    meta = dict(Tb_total_d=Tb_total/DAY, burn_d=tb/DAY, ve_c=ve/C, mass_ratio_per_burn=ratio, burn_AU=sa/AU, brake_AU=sd/AU,
+                destination_AU=D, destination_min_AU=dmin, t_flip_s=t_flip, path_AU=sum(s['ds'] for s in segs)/AU,
+                min_r_AU=min(s['r'] for s in segs))
+    return segs, meta
+
+
+def mission_superseded_874dca7(Tb_total, ve, dest_au=None, t_flip=300.0, n=240):
+    """SUPERSEDED 2026-11-17 (kept so the 874dca7 evidence in protect.json can be reproduced; do not use). Its braking burns start one
+    *accelerating*-burn length before their end point, so the home braking leg runs through the Sun (min r -10.96 AU). Use mission().
+
+    Segments (phase, orientation, r_AU, v, ds) of the full-return mission: accelerate out (bow first), coast, flip at cruise, brake engine
     first, accelerate home, coast, flip, brake home. Destination: the given heliocentric distance, or the nearest the burns allow (the
     canon destination is OPEN; T02 assumed a 45 AU Kuiper anchorage, which these long burns cannot stop in)."""
     tb = Tb_total/4; ratio = math.exp(DV/ve); prof = burn_profile(ratio, n)

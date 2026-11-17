@@ -34,6 +34,13 @@ find the shortest defensible spine, and replace HIGH dust with a justified envel
 - 4.6 kt: departure met only with every lever (4,523 t, 77 t under; perfect nozzle 4,401 t), but He-3 +258-338 t, four speculative items and
   HIGH dust still fail. In JUSTIFIED the levers miss by 162 t (200 m) and 17 t (600 m). No all-gates closure.
 
+## Superseded by Vertex 2.8 (2026-11-17)
+
+- The traced kappa 0.883 behind the 2.7 point is a single-ion (low-beta) value. At the ledger's own pulse energy (192 MJ, E_B/E_p 35) the
+  burn is high-beta and the credited collective cosine is 0.47-0.53, so the 2.7 point (5,889 t; JUSTIFIED 6,218 t) and its 200-600 m spine
+  rows rest on a cosine the reference nozzle does not deliver. Results above are kept as evidence; see work/vertex-2-8/NOTES.md.
+- Question 4 is answered there: the nozzle does not remove SR-26F.
+
 ## Open owner questions
 
 1. JUSTIFIED as the dust design envelope? 2. Keep the 200 m research spine (floor ~177 m in JUSTIFIED)? 3. He-3 requirement 1.3-2.2 kt as logistics?

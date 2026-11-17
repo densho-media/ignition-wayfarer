@@ -21,6 +21,21 @@ phase, including braking, and test it on the same mass/heat ledger as Halo Verte
 - `protect.py` -> `protect.json`, `protect.log` (~10 s): dust events, bumper/armour sizing, shadow margins, flips, protection mass per architecture.
 - `compact.py` -> `compact.json`, `compact.log` (~12 s): candidates A-D on the ledger, requirement grid, minimum speculative sets, sensitivities.
 
+## Superseded conclusions (2026-11-17)
+
+The dust numbers below were made with a braking path that ran the home braking leg through the Sun (min r -10.96 AU,
+destination 312 AU). They are kept as the 874dca7 evidence (protect.json, protect.log, compact.json are not rerun). The corrected path
+(turn-around 324.33 AU, min r 1.0 AU) now lives in `protect.mission()`; the old one is `mission_superseded_874dca7()`.
+Regression checks: `work/vertex-2-8/test_trajectory.py`. Corrected numbers are in Vertex 2.7 (work/vertex-2-7, 5e1f559):
+
+| 2.6 statement (superseded) | Corrected (Vertex 2.7 rerun) |
+| --- | --- |
+| ~43,000 engine-front events above 2.6 kJ | x0.365 (dust-impacts: 15,680 breaches NOMINAL) |
+| C protection NOMINAL 217 t | 129 t |
+| HIGH 44 kt (C) | 9.8 kt |
+| C 6,271 t departure | 5,928 t at 0.072 c, common exhaust speed; 6,084 t with the velocity spread |
+| Stern bumper needs 82 m (NOMINAL) | 26 m |
+
 ## Results
 
 - Home braking dominates dust: engine fronts take ~43,000 events above 2.6 kJ. Protection NOMINAL: Halo 2.7 kt, A+ 1.8 kt, C 217 t.
