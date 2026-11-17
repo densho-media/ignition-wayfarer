@@ -1,12 +1,22 @@
-# Vertex 2.0: integrated propulsion closure (work, not canon)
-
-| | |
+<!-- lab entry -->
+| Lab entry | |
 | --- | --- |
-| Kind | study (research and engineering analysis) |
-| Status | ACTIVE; owner Q1-Q4 decided 2026-11-16 15:00Z; 2.2/2.3 rerun: the 2.0 closure does not survive |
-| Question | Can any propulsion architecture close one unified mass, energy, thrust, fuel, radiation and thermal budget for the full-return 0.016 c mission? |
-| Model base | `f1601d4` (Vertex 1.8 Phase F); production geometry and canon unchanged |
-| Report | Claude Doc "Vertex 2.0 — Integrated Propulsion Closure" https://claude.ai/artifact/GaqA2TBvxpKpND5SwaPPiN |
+| Kind | Variant |
+| Status | PARKED (rejected as the propulsion baseline by the owner, 2026-11-17; kept as noncanonical evidence; successor study: Vertex 2.6 compact protected Vertex) |
+| Question | Can a Halo Vertex (four ~40-64 m REBCO halo rings on braced booms about 2 km aft, Vertex Burn Channeling) close the full-return 0.016 c mission ledger? |
+| Model base | f1601d4 (Vertex 1.8 Phase F); production geometry and canon unchanged |
+| Branch | claude/project-thread-6qwiwi, Vertex 2.0-2.5 (b87a9c1, 39ddb77, 44a59c9), 2026-11-16 |
+| Open owner questions | none for the baseline (rejected: 2 km exposed structure, ring dust exposure, compression booms, deployment, silhouette, 6.9 kt vs 4.6 kt); VBC stays a research hypothesis |
+| Review | REVIEW_VTX24.blend (local, not in Git) in the project files vertex-2-4/; figures/ here; report Claude Doc "Vertex 2.0 — Integrated Propulsion Closure" |
+
+# halo-vertex (Vertex 2.0-2.5): notes
+
+Archived unchanged from `work/vertex-2-0/` on 2026-11-17. Scripts run from the repository root (`python3 lab/variants/halo-vertex/ledger2.py`);
+`make_review_vtx24.py` needs the local Phase F review file. Why the owner rejected it as a baseline: the deployed structure is about 2 km
+long and leads into the dust stream during braking, the rings are exposed superconductors, thrust puts the links in compression (booms
+in a braced frame, buckling), deployment is complex, the compact silhouette is lost, and even with every mass lever it closes at
+6.9 kt, not 4.6 kt.
+
 
 ## Function
 

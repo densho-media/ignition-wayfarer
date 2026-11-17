@@ -24,6 +24,7 @@ Status: ACTIVE, PARKED, SUPERSEDED (by which entry) or PROMOTED (into which `mai
 | [breakthrough-lab](studies/breakthrough-lab/NOTES.md) | Study | ACTIVE | Which declared breakthroughs, and how few, make the Vertex drive close? | 279a612 (T00 030fc14, T05 f497778 imports, Gate 2) | which breakthroughs to select for experiment; spine stiffness criterion |
 | [assembly-sequence](studies/assembly-sequence/NOTES.md) | Study | ACTIVE | In what order could the approved ship be assembled in orbit, from the first structure to first ignition? | 0aa94a3 | is the order right; the assembly yard |
 | [external-pulse](studies/external-pulse/NOTES.md) | Study | ACTIVE | EXT-01: is an external pulse drive (plate, magnetic pusher, remote field) worth building for the 0.016 c mission? | eb33a44 | next propulsion milestone; directional pulse and leak-free field stay UNVERIFIED |
+| [halo-vertex](variants/halo-vertex/NOTES.md) | Variant | PARKED (rejected as baseline 2026-11-17) | Vertex 2.0-2.5: four halo rings about 2 km aft with Vertex Burn Channeling; closes at 6.9 kt at best, not 4.6 kt | f1601d4 | none; VBC stays a research hypothesis |
 
 Each entry's `NOTES.md` opens with the same table: kind, status, question, model base, the branch it came from, open owner
 questions and where its review file is.

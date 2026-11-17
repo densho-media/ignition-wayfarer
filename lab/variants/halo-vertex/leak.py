@@ -1,6 +1,6 @@
 """Vertex 2.3: ring-strike (leakage) Monte Carlo at the chosen single-ring design, sized to test the 1e-4 requirement.
 
-  python3 work/vertex-2-0/leak.py [n]     writes work/vertex-2-0/leak.json (default n = 30,000 per case; 3 processes)
+  python3 lab/variants/halo-vertex/leak.py [n]     writes lab/variants/halo-vertex/leak.json (default n = 30,000 per case; 3 processes)
 
 Design: one ring, B0 = 0.2 T at the centre (B0 R = 12.8 T m), burn 2 R aft of the ring plane (trace.py scan). Source: uniform sphere of
 radius r_src about the burn point, isotropic directions. With zero strikes in n samples the one-sided 95 % upper limit is 3/n

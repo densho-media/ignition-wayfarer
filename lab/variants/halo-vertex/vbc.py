@@ -1,6 +1,6 @@
 """Vertex 2.2: Vertex Burn Channeling requirement model (research; VBC is a named speculative principle, not canon).
 
-  python3 work/vertex-2-0/vbc.py        writes work/vertex-2-0/vbc.json and prints the requirements
+  python3 lab/variants/halo-vertex/vbc.py        writes lab/variants/halo-vertex/vbc.json and prints the requirements
 
 What VBC must do, and what established physics already fixes around it. Two findings shape the model:
 1. A continuously fed burn that sustains itself without confinement hardware is an inertial burn; at 5.6 TW per engine the inertial
@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[1]
+ROOT = HERE.parents[2]
 sys.path.insert(0, str(ROOT/'src'/'wayfarer'))
 import spec  # noqa: E402
 import vertex_source as vs  # noqa: E402

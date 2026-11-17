@@ -1,6 +1,6 @@
 """Vertex 2.3: charged-particle trajectories through the Halo Vertex ring field (research, not canon).
 
-  python3 work/vertex-2-0/trace.py        writes work/vertex-2-0/trace.json and prints the tables
+  python3 lab/variants/halo-vertex/trace.py        writes lab/variants/halo-vertex/trace.json and prints the tables
 
 Test-particle model (no collective plasma effects): exact field of circular current loops (vector potential and field from complete
 elliptic integrals by the arithmetic-geometric mean), relativistic Boris push in Cartesian coordinates. A particle born on the axis has

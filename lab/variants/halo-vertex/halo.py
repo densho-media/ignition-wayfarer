@@ -1,6 +1,6 @@
 """Vertex 2.3: the four Halo Vertex rings together (research, not canon).
 
-  python3 work/vertex-2-0/halo.py        prints the four-ring checks for the default design (ledger2.py calls these functions)
+  python3 lab/variants/halo-vertex/halo.py        prints the four-ring checks for the default design (ledger2.py calls these functions)
 
 The ship pushes on four magnetic nozzles, each a single superconducting ring with its burn 2 R aft of the ring plane, about 2 km aft of the
 ship. Checked here, with stated assumptions:

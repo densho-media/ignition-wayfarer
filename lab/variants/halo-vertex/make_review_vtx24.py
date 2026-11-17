@@ -1,10 +1,10 @@
 """Vertex 2.4: Halo Vertex 3D variant review file (work, noncanonical; owner choice 2026-11-16 18:35Z: about 7 kt research envelope).
 
-  /snap/bin/blender -b work/vertex-1-8/REVIEW_VTX18.blend --python work/vertex-2-0/make_review_vtx24.py [-- --no-render]
+  /snap/bin/blender -b work/vertex-1-8/REVIEW_VTX18.blend --python lab/variants/halo-vertex/make_review_vtx24.py [-- --no-render]
 
 Starts from the A+ review (the approved ship with the A+ engines in WORK_VTX18) and adds WORK_VTX24: the deployed Halo Vertex at the
-2.5 all-lever closure (levers.json 'all_stretch': 6.9 kt, 33 TW, 0.072 c). Saves work/vertex-2-0/REVIEW_VTX24.blend (packed) and
-Workbench previews in work/vertex-2-0/figures/. The file opens on the deployed state; press play for the deployment (stowed in the A+
+2.5 all-lever closure (levers.json 'all_stretch': 6.9 kt, 33 TW, 0.072 c). Saves lab/variants/halo-vertex/REVIEW_VTX24.blend (packed) and
+Workbench previews in lab/variants/halo-vertex/figures/. The file opens on the deployed state; press play for the deployment (stowed in the A+
 housings, booms extend, rings unfurl by their own hoop force, burn).
 Per engine: one REBCO ring (armoured face, neutron fin), burn point 2 R aft on the ring axis, ring canted 9 degrees inward, burn
 station inside the shadow of its plug, three neighbour strips, a braced compression boom to the engine housing; bracing cables at 8

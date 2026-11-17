@@ -1,6 +1,6 @@
 """Vertex 2.2 / 2.3: the Halo Vertex closure rerun with every correction the owner asked for (research, not canon).
 
-  python3 work/vertex-2-0/ledger2.py      writes work/vertex-2-0/ledger2.json (needs trace.json, leak.json and vbc.json; several minutes)
+  python3 lab/variants/halo-vertex/ledger2.py      writes lab/variants/halo-vertex/ledger2.json (needs trace.json, leak.json and vbc.json; several minutes)
 
 Corrections against ledger.py (2.0):
 1. Driver plant: 1 kg per kW of electrical driver power (LITERATURE space power conditioning and pulsed power, 0.5-3 kg/kW bracket);
@@ -28,7 +28,7 @@ from multiprocessing import Pool
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[1]
+ROOT = HERE.parents[2]
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(ROOT/'src'/'wayfarer'))
 import spec  # noqa: E402

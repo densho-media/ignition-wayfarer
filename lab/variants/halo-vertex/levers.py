@@ -1,6 +1,6 @@
 """Vertex 2.5: mass levers for Halo Vertex (research, not canon). Owner choice 2026-11-16 17:16Z: research the levers before 2.4.
 
-  python3 work/vertex-2-0/levers.py       writes work/vertex-2-0/levers.json (ledger2.py closure; about 15 min on 4 cores)
+  python3 lab/variants/halo-vertex/levers.py       writes lab/variants/halo-vertex/levers.json (ledger2.py closure; about 15 min on 4 cores)
 
 Each lever alone on the 2.2 best case (1:1 feed, burnup 0.8, +0.6 yr), then combined. Lever values are brackets, each with its basis:
 - burnup b 0.95: inertial burn fraction rho R / (rho R + H_B) at rho R several times H_B (LITERATURE ICF burn fraction; D-He3 H_B larger

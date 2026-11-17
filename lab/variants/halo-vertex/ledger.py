@@ -1,6 +1,6 @@
 """Vertex 2.0: one engineering ledger for every propulsion candidate (research, not canon).
 
-  python3 work/vertex-2-0/ledger.py            writes work/vertex-2-0/ledger.json and prints the comparison
+  python3 lab/variants/halo-vertex/ledger.py            writes lab/variants/halo-vertex/ledger.json and prints the comparison
 
 Owner brief 2026-11-16 13:07Z (IGNITION - VERTEX 2.0, research and engineering analysis only; no production redesign, canon change,
 squash or deployment). The same shared assumptions (SHARED, each with its basis) are applied to every candidate, and the whole mission
@@ -16,7 +16,7 @@ is closed, not an operating point:
   radiation    neutron fluence on superconductors bounded by a shield whose thickness follows the attenuation (calibrated to 1.6B);
                shields, armour, conductor, magnet structure (virial theorem), tethers, driver and startup store all carry mass
 Every candidate parameter states its basis: CANON, EVIDENCE (an earlier Vertex study), LITERATURE, PROTOTYPE or SPECULATIVE.
-Standard library only; reads src/ and references/, writes only into work/vertex-2-0/.
+Standard library only; reads src/ and references/, writes only into lab/variants/halo-vertex/.
 """
 import json
 import math
@@ -24,7 +24,7 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[1]
+ROOT = HERE.parents[2]
 sys.path.insert(0, str(ROOT/'src'/'wayfarer'))
 import spec  # noqa: E402
 import operating_point as op  # noqa: E402
