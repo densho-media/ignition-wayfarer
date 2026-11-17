@@ -1,0 +1,8 @@
+B2d_nc1e18                   kappa 0.905 fwd 0.0070 ship 0.0065 aftcos 0.966 dE 0.087 dP 0.855 315s
+B2d_nc3e16                   kappa 0.848 fwd 0.0002 ship 0.0001 aftcos 0.938 dE 0.190 dP 1.185 316s
+B2d_nc3e17                   kappa 0.789 fwd 0.0029 ship 0.0024 aftcos 0.947 dE 0.249 dP 0.525 317s
+B2d_nc1e17                   kappa 0.731 fwd 0.0036 ship 0.0012 aftcos 0.937 dE 0.341 dP 0.165 319s
+B2d_lowbeta                  kappa 0.947 fwd 0.0291 ship 0.0225 aftcos 0.983 dE 0.000 dP 0.929 248s
+B2d_seed2                    kappa 0.735 fwd 0.0056 ship 0.0013 aftcos 0.938 dE 0.332 dP 0.190 313s
+B2d_np40k                    kappa 0.735 fwd 0.0056 ship 0.0011 aftcos 0.938 dE 0.332 dP 0.185 323s
+B2d_dx0.35                   kappa 0.711 fwd 0.0096 ship 0.0019 aftcos 0.943 dE 0.370 dP 0.122 1097s
