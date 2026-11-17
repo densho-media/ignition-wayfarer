@@ -58,6 +58,14 @@ shock shells; both halves of the split view with one camera through scissor view
 touch, 2 on desktop, with a 0.25-step adaptive drop after a slow second. 5–9 draw calls and about 107 k triangles per half; SW frame times
 in `references/evidence/gfx_ignition.json`, HW PENDING.
 
+Engineering · Dust: what hits at speed (`web/engineering/dust.js`, the dust-impacts study): fully procedural, no model download.
+One grain: section-cut bumper and skin plates whose shader (`onBeforeCompile`) draws the hit spot, heat, scorch, cracks and a
+discarded hole; the debris cloud is an additive point cloud computed from the timeline uniform, so scrubbing runs both ways; sprite
+flashes and a shock shell; the two speeds side by side through scissor viewports. The trip: the ship from lathe, cylinder and box
+primitives, dust streaks as shader-driven `LineSegments`, one CPU-written spark pool. Same render-on-demand and pixel-ratio policy as
+the ignition page. 10 draw calls for the split view, 24–30 for the trip; SW and EMU frame times in
+`references/evidence/gfx_dust.json`, HW PENDING.
+
 Diagnostics that exist: the viewer's `stats` / `renderer.info` and `?diag` overlay (frame time mean and p95 over 120 frames, draw calls,
 triangles, geometries, textures, programs, JS heap, transfer); `web_check.py` metrics in `release.json` (`tests.metrics`: ready times,
 transfer, requests, renderer memory); `godot/scripts/profile_views.gd` (native Godot: frame time, draw calls, primitives, objects, video
@@ -263,7 +271,7 @@ Kept results go to `references/evidence/gfx_<task>.json` with the evidence class
 
 | Proven here (built and checked) | Experimental (needs a task and evidence) | Incompatible with the current renderer or hosting |
 | --- | --- | --- |
-| Draco GLB; content naming; click-to-load isolation; instanced engine parts with per-part state textures and scissor split views (ignition page); context release; RT-005 mesh sharing; production-layer visibility ranges; nearest-lamp culling; touch 3-D scale; stencil-limited ghost/hologram layers; S3TC desktop textures | viewer DPR policy, render on demand, reverse-Z; instancing/batching; LightmapGI bake and web rendering; reflection probes; SSAO on WebGL; normal/roughness maps and trim sheets; decals for wear; render LODs; quality profiles; meshopt/KTX2 | in Godot Compatibility: VoxelGI, SDFGI, SSIL, SSR, volumetric fog, TAA, FSR2, FXAA, SMAA, DOF, HDR output, compute; on Pages: threaded Godot (COOP/COEP), custom headers; any WebGPU-only path as production |
+| Draco GLB; content naming; click-to-load isolation; instanced engine parts with per-part state textures and scissor split views (ignition page); procedural shader impact plates and timeline-driven particle clouds (dust page); context release; RT-005 mesh sharing; production-layer visibility ranges; nearest-lamp culling; touch 3-D scale; stencil-limited ghost/hologram layers; S3TC desktop textures | viewer DPR policy, render on demand, reverse-Z; instancing/batching; LightmapGI bake and web rendering; reflection probes; SSAO on WebGL; normal/roughness maps and trim sheets; decals for wear; render LODs; quality profiles; meshopt/KTX2 | in Godot Compatibility: VoxelGI, SDFGI, SSIL, SSR, volumetric fog, TAA, FSR2, FXAA, SMAA, DOF, HDR output, compute; on Pages: threaded Godot (COOP/COEP), custom headers; any WebGPU-only path as production |
 
 ## 12. Known bottlenecks and open evidence
 

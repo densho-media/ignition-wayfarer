@@ -1,0 +1,35 @@
+/* Engineering · Dust: what hits at speed (web/engineering/dust.js). Builds on ignition.css's .ign layout. */
+.ign .cases { margin: 0; font-size: 13px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.ign .cases button, .ign .grain-ctl .presets button { font: 13px var(--mono); color: var(--ink); background: var(--surface-1); border: 1px solid var(--line-strong);
+  min-height: 32px; border-radius: 4px; padding: 3px 10px; cursor: pointer; }
+.ign .cases button:hover, .ign .grain-ctl .presets button:hover { border-color: var(--accent); background: var(--surface-2); }
+.ign .cases button[aria-pressed="true"], .ign .grain-ctl .presets button[aria-pressed="true"] { border-color: var(--selected); color: var(--ink-strong); background: var(--surface-3); }
+.ign .grain-ctl, .ign .phases { display: none; }
+.ign[data-mode="grain"] .grain-ctl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px 16px; align-items: start; }
+.ign[data-mode="grain"] .grain-ctl .readouts { grid-column: 1 / -1; position: static; }
+.ign[data-mode="trip"] .phases, .ign[data-mode="shield"] .phases { display: grid; }
+.ign[data-mode="shield"] .design { display: grid; }
+.ign:not([data-mode="grain"]) .views { display: none; }
+.ign .stage[data-view="trip"] .side { display: none !important; }
+.ign .stage[data-view="trip"]::after { display: none; }
+.ign .stage[data-view="trip"] .evcap { left: 10px; max-width: min(520px, calc(100% - 290px)); }
+.ign .readouts b.bad { color: var(--bad); }
+.ign .readouts b.ok { color: var(--good); }
+.ign .readouts td.num { white-space: nowrap; }
+.ign .phases { list-style: none; margin: 0; padding: 0; gap: 4px; }
+.ign .phases li { display: grid; grid-template-columns: 240px 1fr; gap: 8px; font-size: 13px; color: var(--muted); padding: 5px 8px; border: 1px solid transparent;
+  border-radius: 4px; cursor: pointer; }
+.ign .phases li b { color: var(--ink); font-weight: 600; }
+.ign .phases li:hover { border-color: var(--line-strong); }
+.ign .phases li.current { border-color: var(--accent); background: var(--surface-1); }
+.ign .grain-ctl .presets { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; }
+@media (max-width: 760px) {
+  .ign[data-mode="grain"] .grain-ctl { grid-template-columns: minmax(0, 1fr); }
+  .ign .grain-ctl .readouts, .ign #s-read { overflow-x: auto; }
+  .ign[data-mode="shield"] .design { grid-template-columns: minmax(0, 1fr); }
+  .ign .phases li { grid-template-columns: 1fr; gap: 2px; }
+  .ign .stage[data-view="trip"] .hud { width: 62%; }
+}
+.ign .stage[data-view="grain"] .hud { top: auto; bottom: 10px; }
+.ign .case-note { display: block; }
+.ign .case-note.stress b, .ign .cases button.stress { color: var(--warn); }
