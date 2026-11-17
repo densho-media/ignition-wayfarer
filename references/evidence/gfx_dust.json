@@ -1,0 +1,19 @@
+{
+ "task": "dust-impacts page (engineering/dust/)",
+ "date": "2026-11-17",
+ "experience": "engineering viewer (Engineering 3-D pages)",
+ "classification": "visual-quality addition (a new procedural page); no change to Explore Ship, the walk, EVA or the ignition page",
+ "machine": "cloud container, headless Chromium (Playwright) with SwiftShader software WebGL 2",
+ "evidence_class": "SW (frame times) and EMU (iPhone 13 viewport); draw calls and bytes are renderer independent; HW pending",
+ "method": "bench(30): 30 synchronous redraws of the paused view, each finished with a 1-pixel readPixels; one page load per view",
+ "runs": [
+  {"view": "desktop 1280x800 dpr1", "mode": "grain (split, 1 mg at cruise, breach)", "p50_ms": 34.0, "p95_ms": 58.3, "calls": 10, "dpr": 1, "frame_class": "SW"},
+  {"view": "desktop 1280x800 dpr1", "mode": "trip", "p50_ms": 24.4, "p95_ms": 30.7, "calls": 30, "dpr": 1, "frame_class": "SW"},
+  {"view": "iPhone 13 emulation", "mode": "grain (split, 1 mg at cruise, breach)", "p50_ms": 10.2, "p95_ms": 16.4, "calls": 10, "dpr": 1.5, "frame_class": "SW/EMU"},
+  {"view": "iPhone 13 emulation", "mode": "trip", "p50_ms": 7.8, "p95_ms": 9.3, "calls": 24, "dpr": 1.5, "frame_class": "SW/EMU"}
+ ],
+ "download_bytes": {"dust.js": 50739, "dust.css": 3008, "dust.json": 143925, "shared": "three.module.min.js, OrbitControls.js, site/story/ignition CSS (already cached by the other Engineering pages)"},
+ "model_download": "none; every mesh is procedural (section-cut plates, lathe Brow, blades, rings, engines)",
+ "visual_review": "desktop and phone screenshots of grain (stopped and breach), trip and shield views checked; no horizontal overflow at 390 px",
+ "notes": "SW frame times are relative only and never stand for real-GPU performance. Rendering is on demand, so a paused view costs nothing."
+}

@@ -1427,6 +1427,24 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
                 page.screenshot(out / 'phone_ignition.png')
             else:
                 record_check('ignition: the 3D view starts', False)
+        # Engineering · Dust: what hits at speed, on the phone: the page's impact rule reproduces the study's check points
+        # (lab/studies/dust-impacts, written into dust.json), a cruise-speed 1 mg grain breaches the skin, nothing overflows
+        if 'engineering/dust/index.html' in release.get('files', {}):
+            page.send('Page.navigate', {'url': url + 'engineering/dust/#autostart'})
+            if page.wait('!!(window.__dust && window.__dust.ready)', 120):
+                mirror = page.js("(() => window.__dust.data.checks.map(c => { const o = window.__dust.impact(c.m, c.v); "
+                                 "return [c.m + ' kg @ ' + c.v + ' m/s', o.outcome === c.r.outcome && Math.abs(o.E_J / c.r.E_J - 1) < 1e-3]; }))()")
+                record_check('dust: the page impact rule reproduces the study check points', bool(mirror) and all(ok for _, ok in mirror),
+                             points=mirror)
+                page.js("document.querySelectorAll('[data-speed]')[5].click(); document.querySelectorAll('[data-mass]')[4].click()")
+                page.frames(4)
+                st = page.js('({stats: window.__dust.stats, outcome: window.__dust.grain && window.__dust.grain.r.outcome, '
+                             'overflow: document.documentElement.scrollWidth > innerWidth})')
+                record_check('dust: draws the split view with few calls, 1 mg at cruise breaches, no horizontal overflow',
+                             bool(st['stats']) and 0 < st['stats']['calls'] <= 16 and st['outcome'] == 'breach' and not st['overflow'], **st)
+                page.screenshot(out / 'phone_dust.png')
+            else:
+                record_check('dust: the 3D view starts', False)
     except SystemExit:
         pass
     except Exception as error:      # a browser session failure is a failed check with Chrome's own last words

@@ -8,6 +8,9 @@ Writes <site>/engineering/:
                               problem map's `site.py --compare`, drawn by web/engineering/compare.js over the Explore Ship model
   build/                      the assembly sequence: the approved ship put together step by step, from the spine to first ignition,
                               from the assembly-sequence study's `site.py --json`, drawn by web/engineering/build.js over the Explore Ship model
+  dust/                       the dust-impacts training simulation: one grain on the Brow stack at any speed, the Vertex research trip
+                              through the T02 dust and the visitor's stand-offs, from the dust-impacts study's `site.py --json`, drawn
+                              by web/engineering/dust.js (procedural, no model file)
   ignition/                   the ignition-failures training simulation: the Vertex cluster as budgeted beside the measured physics, from the
                               ignition-failures study's `site.py --json`, drawn by web/engineering/ignition.js over the engine inspection parts
   baseline/ weakest-links/    Engineering 2.0 (tools/story_lab.py): the scientific reference, the ranked bottlenecks, the Breakthrough
@@ -711,6 +714,157 @@ try to solve it.</p>
                                              'A training simulation of the open problem: the Vertex cluster at ignition, as budgeted and as measured.',
                                              body, 2, revision, built, IGNITION_HEAD))
     return True
+
+
+DUST_HEAD = '''
+<link rel="stylesheet" href="../ignition.css">
+<link rel="stylesheet" href="../dust.css">
+<script type="importmap">
+{ "imports": { "three": "../../viewer/vendor/three/three.module.min.js", "three/addons/": "../../viewer/vendor/three/addons/" } }
+</script>
+<script type="module" src="../dust.js"></script>'''
+
+
+def dust_page(e, d, out_dir, revision, built):
+    """engineering/dust/: the dust-impacts training simulation (web/engineering/dust.js). One grain on the Brow stack at 7 km/s beside the
+    visitor's speed, the Vertex research trip through the T02 dust, and the visitor's stand-offs and attitude. Every number is written into
+    the page from the study's result, so it reads without WebGL; the 3D view is procedural and loads no model file."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    keep = ('study', 'provenance', 'constants', 'stack', 'regimes', 'regime_sources', 'speeds', 'masses', 'largest_stopped_kg', 'trip',
+            'trip_items', 'levers', 'headline', 'vertex_2_6', 'cases', 'case_labels', 'checks', 'proto', 'contract')
+    (out_dir / 'dust.json').write_text(json.dumps({k: d[k] for k in keep if k in d}, separators=(',', ':')))
+    K, h, st, pv = d['constants'], d['headline'], d['stack'], d['provenance']
+    vc = K['v_cruise']
+    sig = lambda v, p=3: f'{float(f"{v:.{p}g}"):,}'.rstrip('0').rstrip('.') if abs(v) < 1e6 else f'{v:.{p}g}'
+    kg = lambda m: (f'{sig(m * 1e3)} g' if m >= 1e-3 else f'{sig(m * 1e6)} mg' if m >= 1e-6 else f'{sig(m * 1e9)} µg' if m >= 1e-9
+                    else f'{sig(m * 1e12)} ng' if m >= 1e-12 else f'{m:.1e} kg')
+    cnt = lambda v: f'{v:,.0f}' if v >= 10 else f'{v:.2g}'
+    ls = d['largest_stopped_kg']
+    lsk = lambda v: ls[min(ls, key=lambda k: abs(float(k) - v))]
+    speeds = ''.join(f'<button data-speed="{i}" aria-pressed="false" title="{esc(n)}">{esc(l)}</button>' for i, (l, v, n) in enumerate(d['speeds']))
+    masses = ''.join(f'<button data-mass="{i}" aria-pressed="false">{esc(l)}</button>' for i, (l, m) in enumerate(d['masses']))
+    nom = d['trip']['NOMINAL']
+    phases = ''.join(f'<li data-i="{i}"><b>{esc(p["name"])}</b> <span>{esc(p["text"])}</span></li>' for i, p in enumerate(nom['phases']))
+    regimes = ''.join(f'<tr><td class="num">{"from " + sig(r[0]) + " km/s" if r[0] else "below 3 km/s"}</td><td><b>{esc(r[1])}</b></td><td>{esc(r[2])}</td></tr>'
+                      for r in d['regimes'])
+    ladder = ''
+    for l, v, n in d['speeds']:
+        e1 = 0.5 * 1e-9 * v * v
+        ladder += (f'<tr><td>{esc(l)}</td><td class="num">{sig(v / 1e3)} km/s</td><td class="num">{sig(e1)} J</td>'
+                   f'<td class="num">{sig(0.5 * K["amu"] * v * v / K["ev"])} eV</td><td>{esc(n)}</td></tr>')
+    lv = d['levers']['NOMINAL']
+    i2 = lv['S'].index(2.0)
+    cases = ''.join(f'<tr><td>{esc(d["case_labels"][c][0])}</td><td class="num">{cnt(d["levers"][c]["brow"][i2])}</td><td class="num">{cnt(d["levers"][c]["engines"][0])}</td>'
+                    f'<td class="num">{cnt(d["levers"][c]["att_items"]["blades"][d["levers"][c]["att"].index(0.2)])}</td>'
+                    f'<td class="num">{cnt(d["levers"][c]["att_items"]["rings"][d["levers"][c]["att"].index(0.2)])}</td></tr>'
+                    for c in d['cases'])
+    proto = ''.join(f'<li><code>{esc(k)}</code> {esc(json.dumps(v))}</li>' for k, v in d['proto'].items())
+    meta = nom['meta']
+    cl = d['case_labels']
+    case_btns = ''.join(f'<button data-case="{c}" aria-pressed="{str(c == "NOMINAL").lower()}" title="{esc(cl[c][1])}"'
+                        f'{" class=stress" if c == "HIGH" else ""}>{esc(cl[c][0])}</button>' for c in d['cases'])
+    case_rows = ''.join(f'<tr><td><b>{esc(cl[c][0])}</b></td><td>{esc(cl[c][1])}.</td></tr>' for c in d['cases'])
+    body = f'''<header><p class="eyebrow">Engineering · open problem · training simulation</p><h1>Dust: what hits at speed</h1>
+<p class="lead">At 0.016 c, {sig(vc / 1e3, 4)} km/s, a grain of fine sand carries the energy of {sig(0.5e-9 * vc * vc / K["tnt"] * 1e3, 3)} g of TNT,
+and every one of its atoms arrives with {sig(0.5 * K["amu"] * vc * vc / K["ev"] / 1e3, 3)} keV. Wayfarer's 90 m Brow and its
+sacrificial layer {sig(st["standoff_m"])} m ahead stop grains up to {kg(lsk(7e3))} at the 7 km/s that shields are tested at, but only up to
+{kg(lsk(vc))} at cruise. Over the Vertex research trip the model expects {cnt(h["brow_breaches"])} grains to get through that layer and about
+{cnt(h["engine_breaches"])} to breach the engine fronts on the way home. Nothing on this page is canon: it is the open problem, shown so that you can
+try to solve it.</p>
+<p>{tag("OPEN")} {tag("DIAGNOSTIC")} · dust and impact rules from the Vertex T02 and 2.6 studies · <a href="../ignition/">Ignition: what breaks</a> ·
+  <a href="../{e["kind_dir"]}/{e["folder"].name}/">the study behind this page</a></p></header>
+<section class="ign" data-mode="grain">
+  <div class="ign-modes" role="tablist" aria-label="View">
+    <button role="tab" data-mode="grain" aria-selected="true"><b>One grain</b><span>The same grain at 7 km/s and at your speed</span></button>
+    <button role="tab" data-mode="trip" aria-selected="false"><b>The trip</b><span>Every grain the ship meets, phase by phase</span></button>
+    <button role="tab" data-mode="shield" aria-selected="false"><b>Your shield</b><span>Move the layers, steer better, see what holds</span></button></div>
+  <p class="cases" role="group" aria-label="Dust environment">Dust: {case_btns}</p>
+  <p class="assumes case-note" id="case-note"></p>
+  <div class="stage" id="stage" data-view="grain">
+    <canvas id="dust-view" aria-label="A dust grain striking the Brow stack, or the ship flying through the dust"></canvas>
+    <div class="side side-a" id="side-a">At 7 km/s, where shields are tested<small></small></div><div class="side side-b" id="side-b">At your speed<small></small></div>
+    <div class="hud" id="hud" hidden></div>
+    <div class="evcap" id="evcap" aria-live="polite"></div>
+    <div class="gate" id="gate"><button id="load" class="primary">Start the simulation</button>
+      <span class="meta">Starts three.js; the scene is drawn from a few shapes, so there is no model to download. Everything below reads without it.</span></div>
+    <div class="cstatus" id="cstatus" hidden></div>
+  </div>
+  <div class="itools">
+    <span class="nav" role="toolbar" aria-label="Playback"><button id="play" aria-label="Pause">❚❚</button><button id="restart" aria-label="Replay">↺</button></span>
+    <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Time">
+    <span class="clock" id="clock"></span>
+    <span class="views" role="toolbar" aria-label="View"><button data-split="split" aria-pressed="true">Side by side</button><button data-split="b" aria-pressed="false">Your speed only</button></span>
+  </div>
+  <div class="grain-ctl">
+    <div class="lever"><label for="g-speed">Impact speed <output id="g-speed-o"></output></label>
+      <input type="range" id="g-speed" min="0" max="1000" step="1"><p class="presets">{speeds}</p></div>
+    <div class="lever"><label for="g-mass">Grain mass <output id="g-mass-o"></output></label>
+      <input type="range" id="g-mass" min="0" max="1000" step="1"><p class="presets">{masses}</p></div>
+    <div class="readouts" id="g-read" aria-live="polite"></div>
+  </div>
+  <ol class="phases" id="phases">{phases}</ol>
+  <div class="design" id="design">
+    <div class="levers">
+      <div class="lever"><label for="lv-brow">Brow layer stand-off <output id="lo-brow"></output></label>
+        <input type="range" id="lv-brow" min="0" max="1000" step="1"><span class="meta">How far the sacrificial layer sits ahead of the Brow. Farther
+        spreads each grain's cloud over more skin.</span></div>
+      <div class="lever"><label for="lv-eng">Engine-front bumper <output id="lo-eng"></output></label>
+        <input type="range" id="lv-eng" min="0" max="1000" step="1"><span class="meta">A layer ahead of the four engine fronts for the braking burns.
+        Where it would sit, the exhaust leaves the engines.</span></div>
+      <div class="lever"><label for="lv-att">Attitude accuracy <output id="lo-att"></output></label>
+        <input type="range" id="lv-att" min="0" max="1000" step="1"><span class="meta">How far the ship's axis may stray from the dust's direction. The
+        radiator blades sit only 2° inside the Brow's shadow.</span></div>
+      <p class="presets"><button data-preset="drawn">As drawn</button><button data-preset="wide">A 30 m layer</button>
+        <button data-preset="all">Everything at its limit</button><button id="share">Copy a link to this design</button></p></div>
+    <div class="readouts" id="s-read" aria-live="polite"></div>
+  </div>
+</section>
+<section><h2>The question for you</h2>
+<p>How would you protect a ship that meets every grain at {sig(vc / 1e3, 4)} km/s? Fields cannot push neutral dust aside, a warning comes
+  milliseconds before the strike, and the exhaust vaporises only the finest smoke. What is left is mass, distance and aim: thicker layers,
+  layers farther ahead, a ship that never turns its side or its engines into the dust, or a route through thinner dust. Each costs mass, length or
+  time. Try the levers above; the link button keeps your design in the address.</p></section>
+<section><h2>The numbers</h2>
+<h3>Speed changes everything</h3>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Impact</th><th>Speed</th><th>Energy of a 1 µg grain</th><th>Per nucleon</th><th></th></tr></thead>
+<tbody>{ladder}</tbody></table></div>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Impact speed</th><th>The grain</th><th></th></tr></thead><tbody>{regimes}</tbody></table></div>
+<p class="meta">{esc(d["regime_sources"])}.</p>
+<h3>The trip</h3>
+<p>The Vertex research mission: four burns of {sig(meta["burn_d"])} days, {sig(meta["burn_AU"])} AU each, to a turn-around {sig(meta["destination_AU"])} AU
+  from the Sun and home, {sig(h["trip_days"])} days in all. The ship accelerates bow first and brakes engine first, and turns twice at full speed.
+  Expected events over one trip:</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Dust case</th><th>What it assumes</th></tr></thead><tbody>{case_rows}</tbody></table></div>
+<p class="meta">Cases are envelopes of the published measurements, not probabilities. The justified envelope is the Engine thread's Vertex 2.7
+  proposal (<code>{esc(pv["justified_commit"])}</code>); its owner decision is open. The stress test stays a conditional safety gate.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Dust</th><th>Through the 2 m layer</th><th>Engine-front breaches</th><th>Blade punctures</th>
+  <th>Ring breaches</th></tr></thead><tbody>{cases}</tbody></table></div>
+<p class="meta">Design rule: at most {K["target_events"]} expected critical events per trip. One correction to the Vertex 2.6 path: a braking
+  burn covers more distance than the accelerating burn of the same length, and Vertex 2.6 started both braking burns too late, so its home braking
+  ran through the Sun ({sig(d["vertex_2_6"]["min_r_AU"])} AU). Corrected, the engine-front breaches fall from {cnt(d["vertex_2_6"]["engine_breaches"])}
+  to {cnt(h["engine_breaches"])}; the Brow's numbers are unchanged. Copied unchanged from <code>{esc(pv["branch"])}</code> at
+  <code>{esc(pv["commit"])}</code>: {", ".join(f"<code>{esc(f)}</code>" for f in pv["files"])}.</p></section>
+<section><h2>How the simulation works</h2>
+<p>The page does not run a physics code. One grain: the energy, size and energy per atom are exact; the outcome follows the order-of-magnitude
+  rules of the Vertex studies. A layer at least a quarter of the grain's diameter thick turns it into a cloud that spreads in a cone over the
+  stand-off, and the skin fails when the cloud lays more than its allowed energy per square metre. Without a layer, the crater volume grows with
+  the energy. The page script mirrors the study's <code>model.py</code>, and the site check compares the two. Nothing has been tested above
+  about 100 km/s, so everything above that is an extrapolation. The trip: the dust model integrates the published dust densities along the
+  path. Sparks stand for many grains each; red sparks for breaches; the counters are the model's numbers. The ship is a schematic of the
+  Explore Ship proportions.</p>
+<details><summary>Display choices (PROTOTYPE)</summary><ul class="plain meta">{proto}</ul></details></section>'''
+    (out_dir / 'index.html').write_text(page('Dust: what hits at speed · Wayfarer engineering',
+                                             'A training simulation of the open problem: what dust does to Wayfarer at speeds up to 0.016 c.',
+                                             body, 2, revision, built, DUST_HEAD))
+    return True
+
+
+def dust_teaser():
+    return """<section id="dust" class="teaser"><div>
+    <h2>Dust: what hits at speed · a training simulation</h2>
+    <p>At 0.016 c a grain of sand carries grams of TNT. See one grain hit the Brow at 7 km/s and at cruise, fly the whole trip through the solar
+      system's dust, and try to build a shield that holds.</p>
+    <p><a class="go" href="dust/">Open the simulation</a> · open problem, not canon</p></div></section>"""
 
 
 def ignition_teaser():
@@ -1428,7 +1582,7 @@ def lab_ship(spec):
             'length_m': spec['ship']['length']['value']}
 
 
-def main_page(site, spec, entries, dropped, problem, revision, built, play=True, lab2=None, seq=None, vertex=False, ignition=False):
+def main_page(site, spec, entries, dropped, problem, revision, built, play=True, lab2=None, seq=None, vertex=False, ignition=False, dust=False):
     import story_lab
     n = ship_numbers(spec)
     b, m, fi = n['burn'], n['mission'], n['fi']
@@ -1513,6 +1667,7 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True,
 {build_teaser(seq) if seq else ''}
 {vertex_teaser() if vertex else ''}
 {ignition_teaser() if ignition else ''}
+{dust_teaser() if dust else ''}
 {compare_teaser(prob) if prob.get("compare") else ''}
 
 <section id="goal"><h2>1 · The goal</h2>
@@ -1611,7 +1766,7 @@ def build(root, site, revision=None, built=None, play=True):
             shutil.copy2(src, out / src.name)
     entries, dropped = lab_entries()
     problem = lab2 = seq = None
-    ignition = False
+    ignition = dust = False
     pages = ['engineering/index.html']
     for e in entries:
         d = out / e['kind_dir'] / e['folder'].name
@@ -1633,6 +1788,9 @@ def build(root, site, revision=None, built=None, play=True):
         if data and data.get('contract') == 'WF_IGNITION_FAILURES' and not ignition:
             ignition = ignition_page(e, data, out / 'ignition', revision, built)
             pages.append('engineering/ignition/index.html')
+        if data and data.get('contract') == 'WF_DUST_IMPACTS' and not dust:
+            dust = dust_page(e, data, out / 'dust', revision, built)
+            pages.append('engineering/dust/index.html')
     if problem is None:
         raise RuntimeError('no lab problem map with a site.py: the Engineering page needs one')
     if lab2 is not None:
@@ -1641,7 +1799,7 @@ def build(root, site, revision=None, built=None, play=True):
     vertex = vertex_page(spec, out / 'vertex', revision, built)
     if vertex:
         pages.append('engineering/vertex/index.html')
-    main_page(Path(site), spec, entries, dropped, problem, revision, built, play, lab2, seq, vertex, ignition)
+    main_page(Path(site), spec, entries, dropped, problem, revision, built, play, lab2, seq, vertex, ignition, dust)
     files = sorted(p.relative_to(site).as_posix() for p in out.rglob('*') if p.is_file())
     return {'entry': 'engineering/', 'pages': pages, 'files': len(files),
             'bytes': sum((Path(site) / f).stat().st_size for f in files), 'lab_entries': len(entries),
