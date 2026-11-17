@@ -1,0 +1,282 @@
+{
+ "2.7_point_ext200": {
+  "ext": 200.0,
+  "dust_t": 3202.751489781581,
+  "best": null
+ },
+ "levers_ext200": {
+  "ext": 200.0,
+  "dust_t": 3202.751489781581,
+  "best": {
+   "ve_c": 0.084,
+   "Tb_d": 466.847532211303,
+   "trip_extra_yr": 0.6,
+   "departure_t": 12933.44103236733,
+   "end_t": 6037.026100737911,
+   "propellant_t": 6896.414931629418,
+   "fuel_t": 6829.413902090048,
+   "he3_t": 4094.8655972790266,
+   "fuel_share": 0.9902846580138213,
+   "fusion_TW": 59.00908551567878,
+   "jet_TW": 54.21313921858185,
+   "thrust_MN": 4.305608745547073,
+   "system_t": 4117.564011711337,
+   "radiator_t_engine": 23.34609284919948,
+   "iso_coil_MW_m2": 5.6023672538797635,
+   "iso_plate_MW_m2": 0.0965096714467963,
+   "useful_share": 0.9187252902636047,
+   "heat_ok": true,
+   "nozzle": {
+    "BR": 16.0,
+    "z0": 2.0,
+    "kappa_eff": 0.95912793548388,
+    "kappa_geom": 0.97
+   },
+   "engine_t": {
+    "coil_conductor": 8.533333333333331,
+    "coil_structure": 13.669932343695848,
+    "coil_armour": 1.032539171391821,
+    "coil_neutron_fin": 18.640984637839072,
+    "ship_shadow_shield": 24.209418526634828,
+    "stern_plate": 31.808625617596654,
+    "driver": 29.504538459121928,
+    "lighting_driver": 3.3333333333333335,
+    "injector_and_feed": 0.4440653135405836,
+    "burn_station": 10.0,
+    "adaptive_machinery": 47.6,
+    "spine": 1.0333459483760776,
+    "dust_protection": 800.6878724453952
+   }
+  }
+ },
+ "2.7_point_ext300": {
+  "ext": 300.0,
+  "dust_t": 3202.751489781581,
+  "best": null
+ },
+ "levers_ext300": {
+  "ext": 300.0,
+  "dust_t": 3202.751489781581,
+  "best": {
+   "ve_c": 0.084,
+   "Tb_d": 466.847532211303,
+   "trip_extra_yr": 0.6,
+   "departure_t": 12837.516368562618,
+   "end_t": 5992.250723663528,
+   "propellant_t": 6845.26564489909,
+   "fuel_t": 6778.761548172654,
+   "he3_t": 4064.4948239665378,
+   "fuel_share": 0.9902846580138213,
+   "fusion_TW": 58.57142730272916,
+   "jet_TW": 53.811051549853474,
+   "thrust_MN": 4.273674933782855,
+   "system_t": 4080.461006737569,
+   "radiator_t_engine": 21.68268269627647,
+   "iso_coil_MW_m2": 5.560815758980116,
+   "iso_plate_MW_m2": 0.04908908790824063,
+   "useful_share": 0.9187252902636047,
+   "heat_ok": true,
+   "nozzle": {
+    "BR": 16.0,
+    "z0": 2.0,
+    "kappa_eff": 0.95912793548388,
+    "kappa_geom": 0.97
+   },
+   "engine_t": {
+    "coil_conductor": 8.533333333333331,
+    "coil_structure": 13.669932343695848,
+    "coil_armour": 1.032539171391821,
+    "coil_neutron_fin": 18.617088314422706,
+    "ship_shadow_shield": 16.342289530304814,
+    "stern_plate": 31.808625617596654,
+    "driver": 29.285709949003873,
+    "lighting_driver": 3.3333333333333335,
+    "injector_and_feed": 0.4440653135405836,
+    "burn_station": 10.0,
+    "adaptive_machinery": 47.6,
+    "spine": 1.5385227816585592,
+    "dust_protection": 800.6878724453952
+   }
+  }
+ },
+ "2.7_point_ext475": {
+  "ext": 475.0,
+  "dust_t": 405.90891003748203,
+  "best": {
+   "ve_c": 0.074,
+   "Tb_d": 466.847532211303,
+   "trip_extra_yr": 0.6,
+   "departure_t": 6534.784034834086,
+   "end_t": 2751.8528108272308,
+   "propellant_t": 3782.9312240068552,
+   "fuel_t": 3702.8907525752356,
+   "he3_t": 2220.2256548783193,
+   "fuel_share": 0.978841679456482,
+   "fusion_TW": 30.701865148740268,
+   "jet_TW": 23.078867051642142,
+   "thrust_MN": 2.0806165962917444,
+   "system_t": 1299.413270490767,
+   "radiator_t_engine": 48.237598273692726,
+   "iso_coil_MW_m2": 8.744574029894613,
+   "iso_plate_MW_m2": 0.03443434639212103,
+   "useful_share": 0.7517089577402789,
+   "heat_ok": true,
+   "nozzle": {
+    "BR": 12.8,
+    "z0": 2.0,
+    "kappa_eff": 0.8687134749881069,
+    "kappa_geom": 0.9130753609343236
+   },
+   "engine_t": {
+    "coil_conductor": 6.826666666666667,
+    "coil_structure": 8.93495443329933,
+    "coil_armour": 0.9491357846279617,
+    "coil_neutron_fin": 18.449032052992994,
+    "ship_shadow_shield": 15.371708812975427,
+    "stern_plate": 31.808625617596654,
+    "driver": 15.3509286986372,
+    "lighting_driver": 3.3333333333333335,
+    "injector_and_feed": 0.3152324219993199,
+    "burn_station": 10.0,
+    "adaptive_machinery": 47.6,
+    "spine": 1.1859511604627178,
+    "dust_protection": 101.47722750937051
+   }
+  }
+ },
+ "levers_ext475": {
+  "ext": 475.0,
+  "dust_t": 405.90891003748203,
+  "best": {
+   "ve_c": 0.084,
+   "Tb_d": 466.847532211303,
+   "trip_extra_yr": 0.6,
+   "departure_t": 5152.857137401999,
+   "end_t": 2405.2325250502595,
+   "propellant_t": 2747.6246123517394,
+   "fuel_t": 2720.930499593101,
+   "he3_t": 1631.4496170690745,
+   "fuel_share": 0.9902846580138215,
+   "fusion_TW": 23.510014597822337,
+   "jet_TW": 21.59924498548591,
+   "thrust_MN": 1.7154125263206736,
+   "system_t": 1108.0889773214344,
+   "radiator_t_engine": 8.405574191643229,
+   "iso_coil_MW_m2": 2.2320581297150723,
+   "iso_plate_MW_m2": 0.008789389002048956,
+   "useful_share": 0.9187252902636047,
+   "heat_ok": true,
+   "nozzle": {
+    "BR": 16.0,
+    "z0": 2.0,
+    "kappa_eff": 0.95912793548388,
+    "kappa_geom": 0.97
+   },
+   "engine_t": {
+    "coil_conductor": 8.533333333333331,
+    "coil_structure": 13.669932343695848,
+    "coil_armour": 1.032539171391821,
+    "coil_neutron_fin": 15.686964504289845,
+    "ship_shadow_shield": 7.372587163474645,
+    "stern_plate": 31.808625617596654,
+    "driver": 11.755003188262513,
+    "lighting_driver": 3.3333333333333335,
+    "injector_and_feed": 0.4440653135405836,
+    "burn_station": 10.0,
+    "adaptive_machinery": 47.6,
+    "spine": 0.9777847980777584,
+    "dust_protection": 101.47722750937051
+   }
+  }
+ },
+ "2.7_point_ext600": {
+  "ext": 600.0,
+  "dust_t": 405.90891003748203,
+  "best": {
+   "ve_c": 0.074,
+   "Tb_d": 466.847532211303,
+   "trip_extra_yr": 0.6,
+   "departure_t": 6477.802280103265,
+   "end_t": 2727.857312110514,
+   "propellant_t": 3749.94496799275,
+   "fuel_t": 3670.602430339407,
+   "he3_t": 2200.865817883099,
+   "fuel_share": 0.978841679456482,
+   "fusion_TW": 30.434152223514474,
+   "jet_TW": 22.877624847647056,
+   "thrust_MN": 2.0624741169157166,
+   "system_t": 1280.3657493209441,
+   "radiator_t_engine": 47.42971004050273,
+   "iso_coil_MW_m2": 8.668322812132438,
+   "iso_plate_MW_m2": 0.022299348704021494,
+   "useful_share": 0.7517089577402789,
+   "heat_ok": true,
+   "nozzle": {
+    "BR": 12.8,
+    "z0": 2.0,
+    "kappa_eff": 0.8687134749881069,
+    "kappa_geom": 0.9130753609343236
+   },
+   "engine_t": {
+    "coil_conductor": 6.826666666666667,
+    "coil_structure": 8.93495443329933,
+    "coil_armour": 0.9491357846279617,
+    "coil_neutron_fin": 18.42318977360728,
+    "ship_shadow_shield": 11.095943936728593,
+    "stern_plate": 31.808625617596654,
+    "driver": 15.217071177041545,
+    "lighting_driver": 3.3333333333333335,
+    "injector_and_feed": 0.3152324219993199,
+    "burn_station": 10.0,
+    "adaptive_machinery": 47.6,
+    "spine": 1.6717780079229074,
+    "dust_protection": 101.47722750937051
+   }
+  }
+ },
+ "levers_ext600": {
+  "ext": 600.0,
+  "dust_t": 405.90891003748203,
+  "best": {
+   "ve_c": 0.084,
+   "Tb_d": 466.847532211303,
+   "trip_extra_yr": 0.6,
+   "departure_t": 5134.364801899828,
+   "end_t": 2396.600737747034,
+   "propellant_t": 2737.7640641527946,
+   "fuel_t": 2711.1657499920802,
+   "he3_t": 1625.594746097639,
+   "fuel_share": 0.9902846580138215,
+   "fusion_TW": 23.425642944191928,
+   "jet_TW": 21.521730613514293,
+   "thrust_MN": 1.7092563331417294,
+   "system_t": 1100.936271627544,
+   "radiator_t_engine": 8.276193758210628,
+   "iso_coil_MW_m2": 2.2240478232361216,
+   "iso_plate_MW_m2": 0.005721385672825645,
+   "useful_share": 0.9187252902636047,
+   "heat_ok": true,
+   "nozzle": {
+    "BR": 16.0,
+    "z0": 2.0,
+    "kappa_eff": 0.95912793548388,
+    "kappa_geom": 0.97
+   },
+   "engine_t": {
+    "coil_conductor": 8.533333333333331,
+    "coil_structure": 13.669932343695848,
+    "coil_armour": 1.032539171391821,
+    "coil_neutron_fin": 15.675424005879176,
+    "ship_shadow_shield": 5.361309250348534,
+    "stern_plate": 31.808625617596654,
+    "driver": 11.712817379145147,
+    "lighting_driver": 3.3333333333333335,
+    "injector_and_feed": 0.4440653135405836,
+    "burn_station": 10.0,
+    "adaptive_machinery": 47.6,
+    "spine": 1.3854705144350112,
+    "dust_protection": 101.47722750937051
+   }
+  }
+ }
+}

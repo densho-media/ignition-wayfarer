@@ -1,0 +1,880 @@
+{
+ "meta": {
+  "title": "Vertex 2.7 dust envelope (research, not canon)",
+  "path": {
+   "Tb_total_d": 466.85,
+   "burn_d": 116.7125,
+   "ve_c": 0.072,
+   "mass_ratio_per_burn": 1.2488488690016821,
+   "burn_AU": 155.68241570653632,
+   "destination_AU": 312.36483141307264,
+   "destination_min_AU": 312.36483141307264,
+   "t_flip_s": 300.0,
+   "path_AU": 646.6798124042722
+  },
+  "evidence": {
+   "ipd_scale": [
+    "MEASURED-MODEL",
+    "Grun et al. 1985 interplanetary flux model, stated accuracy about a factor 2; x2 is its own bound"
+   ],
+   "kb_scale": [
+    "MEASURED",
+    "New Horizons SDC (Bernardoni 2022; Doner 2024: fluxes above models out to 55-60 AU); x3 covers the excess"
+   ],
+   "kb_alpha": [
+    "UNMEASURED",
+    "SDC counts grains above ~0.6 um only; the index above ~10 um is a collisional-cascade assumption (Dohnanyi 0.83); a flat 0.70 index has no measurement behind it"
+   ],
+   "kb_mmax": [
+    "UNMEASURED",
+    "no detector has sampled Kuiper-belt dust heavier than ~1e-11 kg; a 1 g ceiling is a stress assumption"
+   ],
+   "isd_rho": [
+    "MEASURED-MODEL",
+    "interstellar dust mass density 2.1e-24 (Kruger & Strub 2015, Ulysses) to 6.2e-24 kg/m3 (Frisch et al. 1999 from gas depletion); the upper value is literature"
+   ],
+   "isd_tail": [
+    "DISPUTED",
+    "EXTRAPOLATED = the Landgraf 2000 upper bound of the in-situ distribution; RADAR = the AMOR hyperbolic-meteor flux (Baggaley 2000), which later radar surveys (CMOR, Musci 2012; review Hajdukova 2019) did not confirm"
+   ],
+   "K_CRATER": [
+    "EXTRAPOLATION",
+    "cratering coefficient carried from <=70 km/s laboratory data to 4,800 km/s: no data at all; the HIGH value is kept in every justified case"
+   ],
+   "BUMPER": [
+    "EXTRAPOLATION",
+    "debris-cloud spread behind a bumper at impact speeds 100x beyond test ranges: kept conservative"
+   ],
+   "T_OVER_D": [
+    "PROTOTYPE",
+    "bumper thickness per design-grain diameter: kept conservative"
+   ],
+   "WALL_KG_M2": [
+    "PROTOTYPE",
+    "wall behind the bumper: kept conservative"
+   ]
+  },
+  "env_high": {
+   "ipd_scale": 2.0,
+   "kb_scale": 3.0,
+   "kb_alpha": 0.7,
+   "kb_mmax": 0.001,
+   "isd_rho": 6.2e-24,
+   "isd_tail": "RADAR"
+  }
+ },
+ "cases": {
+  "LOW": {
+   "total_t": 120.46098776218005,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 107.97219636949791,
+     "standoff_needed_m": 10.965811134414054,
+     "armour_t_m": 0.0714824238034586
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "bumper",
+     "mass_t": 10.96163358426973,
+     "standoff_needed_m": 21.09906776848421,
+     "armour_t_m": 0.11058110878269048
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 1.5271578084124218,
+     "standoff_needed_m": 2.9824309766361576,
+     "armour_t_m": 0.030006754825953403
+    }
+   ],
+   "brow_standoff_needed_m": 6.285384552214667,
+   "brow_upgrade_t": 13.628986162648811,
+   "optics_replacements": 309.99342701660896,
+   "blade_punctures_1deg": 30.80829974637452,
+   "flip_blade_punctures": 0.0,
+   "brow": 1.8965906114978857
+  },
+  "NOMINAL": {
+   "total_t": 217.43070695922108,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 186.0069200329355,
+     "standoff_needed_m": 42.94643687463663,
+     "armour_t_m": 0.1231449015139837
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "bumper",
+     "mass_t": 28.297764655580078,
+     "standoff_needed_m": 82.22964545940604,
+     "armour_t_m": 0.1898820692437244
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 3.126022270705494,
+     "standoff_needed_m": 15.128408914930992,
+     "armour_t_m": 0.061422456370139544
+    }
+   ],
+   "brow_standoff_needed_m": 27.44741835362523,
+   "brow_upgrade_t": 34.71629228361472,
+   "optics_replacements": 890.93175191002,
+   "blade_punctures_1deg": 139.89225546934796,
+   "flip_blade_punctures": 0.657399307169015,
+   "brow": 2994.681140650837
+  },
+  "N+ipd_scale": {
+   "total_t": 253.75765586431615,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 221.20867953955653,
+     "standoff_needed_m": 55.69763184894765,
+     "armour_t_m": 0.14645004095070047
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "bumper",
+     "mass_t": 29.252295714555054,
+     "standoff_needed_m": 106.77607495632525,
+     "armour_t_m": 0.22600305625759368
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 3.2966806102045787,
+     "standoff_needed_m": 16.384019788884476,
+     "armour_t_m": 0.06477568085299562
+    }
+   ],
+   "brow_standoff_needed_m": 33.849845392366674,
+   "brow_upgrade_t": 35.152485539112995,
+   "optics_replacements": 1465.276705218685,
+   "blade_punctures_1deg": 278.774223768029,
+   "flip_blade_punctures": 0.657399307169015,
+   "brow": 3051.979690234262
+  },
+  "N+kb_scale": {
+   "total_t": 217.82285933874707,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 186.0069200329355,
+     "standoff_needed_m": 42.94643687463663,
+     "armour_t_m": 0.1231449015139837
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "bumper",
+     "mass_t": 28.54143752363704,
+     "standoff_needed_m": 82.22964545940604,
+     "armour_t_m": 0.1898820692437244
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 3.2745017821745144,
+     "standoff_needed_m": 16.218959894393137,
+     "armour_t_m": 0.06433989441929565
+    }
+   ],
+   "brow_standoff_needed_m": 27.44741835362523,
+   "brow_upgrade_t": 34.71629228361472,
+   "optics_replacements": 1522.1341420107021,
+   "blade_punctures_1deg": 139.89225546934796,
+   "flip_blade_punctures": 0.657399307169015,
+   "brow": 8849.002304088435
+  },
+  "N+kb_alpha": {
+   "total_t": 218.35655041512578,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 186.0069200329355,
+     "standoff_needed_m": 42.94643687463663,
+     "armour_t_m": 0.1231449015139837
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "bumper",
+     "mass_t": 28.94217059116924,
+     "standoff_needed_m": 82.22964545940604,
+     "armour_t_m": 0.1898820692437244
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 3.407459791021043,
+     "standoff_needed_m": 17.21675355119997,
+     "armour_t_m": 0.066952354213318
+    }
+   ],
+   "brow_standoff_needed_m": 27.44741835362523,
+   "brow_upgrade_t": 34.71629228361472,
+   "optics_replacements": 1590.3675704705659,
+   "blade_punctures_1deg": 139.89225546934796,
+   "flip_blade_punctures": 0.657399307169015,
+   "brow": 22637.502046278605
+  },
+  "N+kb_mmax": {
+   "total_t": 5297.3676549419215,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 613.0533670290556,
+     "standoff_needed_m": 256.9691028431252,
+     "armour_t_m": 0.40586875204557804
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "armour",
+     "mass_t": 4677.943328638679,
+     "standoff_needed_m": 406.25077336609706,
+     "armour_t_m": 0.5508006927317342
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 6.370959274186345,
+     "standoff_needed_m": 44.01618481322875,
+     "armour_t_m": 0.1251814395955445
+    }
+   ],
+   "brow_standoff_needed_m": 383.32808939849855,
+   "brow_upgrade_t": 48.671206510803536,
+   "optics_replacements": 890.9740237856523,
+   "blade_punctures_1deg": 139.89225546934796,
+   "flip_blade_punctures": 0.657399307169015,
+   "brow": 3129.187914918367
+  },
+  "N+isd_rho": {
+   "total_t": 217.43101586897865,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 186.0069200329355,
+     "standoff_needed_m": 42.94643687463663,
+     "armour_t_m": 0.1231449015139837
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "bumper",
+     "mass_t": 28.298073565337642,
+     "standoff_needed_m": 82.22964545940604,
+     "armour_t_m": 0.1898820692437244
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 3.126022270705494,
+     "standoff_needed_m": 15.128408914930992,
+     "armour_t_m": 0.061422456370139544
+    }
+   ],
+   "brow_standoff_needed_m": 27.44741835362523,
+   "brow_upgrade_t": 34.71629228361472,
+   "optics_replacements": 890.93175191002,
+   "blade_punctures_1deg": 139.89225546934796,
+   "flip_blade_punctures": 0.657399307169015,
+   "brow": 2994.681140650837
+  },
+  "N+isd_tail": {
+   "total_t": 224.28766004554853,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 192.82112589536564,
+     "standoff_needed_m": 45.32787993936746,
+     "armour_t_m": 0.12765621060762597
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "bumper",
+     "mass_t": 28.30647748175893,
+     "standoff_needed_m": 82.22964545940604,
+     "armour_t_m": 0.1898820692437244
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 3.1600566684239793,
+     "standoff_needed_m": 15.376144771075003,
+     "armour_t_m": 0.062091190028417634
+    }
+   ],
+   "brow_standoff_needed_m": 46.32884640380245,
+   "brow_upgrade_t": 35.930656810868975,
+   "optics_replacements": 909.6582193792904,
+   "blade_punctures_1deg": 159.08771171201266,
+   "flip_blade_punctures": 13.147986143380297,
+   "brow": 3188.8993182745157
+  },
+  "N+K_CRATER": {
+   "total_t": 311.34854183256306,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 277.85743144267354,
+     "standoff_needed_m": 42.94643687463663,
+     "armour_t_m": 0.1839540487196815
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "bumper",
+     "mass_t": 28.821453375962143,
+     "standoff_needed_m": 82.22964545940604,
+     "armour_t_m": 0.2836461354649555
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 4.669657013927358,
+     "standoff_needed_m": 15.128408914930992,
+     "armour_t_m": 0.0917529625074418
+    }
+   ],
+   "brow_standoff_needed_m": 27.44741835362523,
+   "brow_upgrade_t": 34.71629228361472,
+   "optics_replacements": 890.93175191002,
+   "blade_punctures_1deg": 302.222367303111,
+   "flip_blade_punctures": 1.2002418777351516,
+   "brow": 2994.681140650837
+  },
+  "N+BUMPER": {
+   "total_t": 1801.7989588284447,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 186.0069200329355,
+     "standoff_needed_m": 168.94814607657034,
+     "armour_t_m": 0.1231449015139837
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "armour",
+     "mass_t": 1612.6660165248038,
+     "standoff_needed_m": 323.48541960427434,
+     "armour_t_m": 0.1898820692437244
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 3.126022270705494,
+     "standoff_needed_m": 59.51405577020862,
+     "armour_t_m": 0.061422456370139544
+    }
+   ],
+   "brow_standoff_needed_m": 107.97613918498126,
+   "brow_upgrade_t": 34.71629228362307,
+   "optics_replacements": 890.93175191002,
+   "blade_punctures_1deg": 139.89225546934796,
+   "flip_blade_punctures": 0.657399307169015,
+   "brow": 31114.614947527534
+  },
+  "N+T_OVER_D": {
+   "total_t": 230.87579207844297,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 186.0069200329355,
+     "standoff_needed_m": 42.94643687463663,
+     "armour_t_m": 0.1231449015139837
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "bumper",
+     "mass_t": 41.74284977480196,
+     "standoff_needed_m": 82.22964545940604,
+     "armour_t_m": 0.1898820692437244
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 3.126022270705494,
+     "standoff_needed_m": 15.128408914930992,
+     "armour_t_m": 0.061422456370139544
+    }
+   ],
+   "brow_standoff_needed_m": 27.44741835362523,
+   "brow_upgrade_t": 43.439292281668905,
+   "optics_replacements": 890.93175191002,
+   "blade_punctures_1deg": 139.89225546934796,
+   "flip_blade_punctures": 0.657399307169015,
+   "brow": 2994.681140650837
+  },
+  "N+WALL_KG_M2": {
+   "total_t": 241.02233855203966,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 186.0069200329355,
+     "standoff_needed_m": 42.94643687463663,
+     "armour_t_m": 0.1231449015139837
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "bumper",
+     "mass_t": 51.88939624839865,
+     "standoff_needed_m": 82.22964545940604,
+     "armour_t_m": 0.1898820692437244
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 3.126022270705494,
+     "standoff_needed_m": 15.128408914930992,
+     "armour_t_m": 0.061422456370139544
+    }
+   ],
+   "brow_standoff_needed_m": 27.44741835362523,
+   "brow_upgrade_t": 66.52491790121135,
+   "optics_replacements": 890.93175191002,
+   "blade_punctures_1deg": 139.89225546934796,
+   "flip_blade_punctures": 0.657399307169015,
+   "brow": 2994.681140650837
+  },
+  "JUSTIFIED_ENV_NOMINAL_DAMAGE": {
+   "total_t": 254.0825525281871,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 221.20867953955653,
+     "standoff_needed_m": 55.69763184894765,
+     "armour_t_m": 0.14645004095070047
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "bumper",
+     "mass_t": 29.496277492369575,
+     "standoff_needed_m": 106.77607495632525,
+     "armour_t_m": 0.22600305625759368
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 3.377595496261007,
+     "standoff_needed_m": 16.99090878910256,
+     "armour_t_m": 0.06636555790060031
+    }
+   ],
+   "brow_standoff_needed_m": 33.849845392366674,
+   "brow_upgrade_t": 35.152485539112995,
+   "optics_replacements": 2096.4790953193656,
+   "blade_punctures_1deg": 278.774223768029,
+   "flip_blade_punctures": 0.657399307169015,
+   "brow": 8906.30085367186
+  },
+  "JUSTIFIED": {
+   "total_t": 3202.751489781581,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 330.4418754893819,
+     "standoff_needed_m": 219.11041582340007,
+     "armour_t_m": 0.2187673028833056
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "armour",
+     "mass_t": 2867.2641567959013,
+     "standoff_needed_m": 420.04928049940065,
+     "armour_t_m": 0.3376037230163797
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 5.045457496297726,
+     "standoff_needed_m": 66.84099424719194,
+     "armour_t_m": 0.09913697539454834
+    }
+   ],
+   "brow_standoff_needed_m": 133.16281955506878,
+   "brow_upgrade_t": 76.9926909212971,
+   "optics_replacements": 2096.4790953193656,
+   "blade_punctures_1deg": 602.598797273925,
+   "flip_blade_punctures": 1.2002418777351516,
+   "brow": 91632.29898117649
+  },
+  "JUSTIFIED+kb_alpha": {
+   "total_t": 3202.971067032905,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 330.4418754893819,
+     "standoff_needed_m": 219.11041582340007,
+     "armour_t_m": 0.2187673028833056
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "armour",
+     "mass_t": 2867.2641567959013,
+     "standoff_needed_m": 420.04928049940065,
+     "armour_t_m": 0.3376037230163797
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 5.26503474762198,
+     "standoff_needed_m": 71.25148759064128,
+     "armour_t_m": 0.10345139575736145
+    }
+   ],
+   "brow_standoff_needed_m": 133.16281955506878,
+   "brow_upgrade_t": 76.9926909212971,
+   "optics_replacements": 4194.786551001008,
+   "blade_punctures_1deg": 602.598797273925,
+   "flip_blade_punctures": 1.2002418777351516,
+   "brow": 494151.86975304026
+  },
+  "JUSTIFIED+kb_mmax": {
+   "total_t": 8838.581386738893,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 1143.7255483542715,
+     "standoff_needed_m": null,
+     "armour_t_m": 0.7571974740841636
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "armour",
+     "mass_t": 7680.39858728041,
+     "standoff_needed_m": null,
+     "armour_t_m": 0.9043223838201038
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 14.457251104211641,
+     "standoff_needed_m": 324.20571017209886,
+     "armour_t_m": 0.28406703416741297
+    }
+   ],
+   "brow_standoff_needed_m": null,
+   "brow_upgrade_t": null,
+   "optics_replacements": 2096.605910946262,
+   "blade_punctures_1deg": 602.598797273925,
+   "flip_blade_punctures": 1.2002418777351516,
+   "brow": 92035.81930397905
+  },
+  "JUSTIFIED+radar": {
+   "total_t": 3206.0136649743167,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 333.6640406652803,
+     "standoff_needed_m": 222.32306064876775,
+     "armour_t_m": 0.2209005203634807
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "armour",
+     "mass_t": 2867.2641567959013,
+     "standoff_needed_m": 420.04928049940065,
+     "armour_t_m": 0.3376037230163797
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 5.085467513135149,
+     "standoff_needed_m": 67.63763283084693,
+     "armour_t_m": 0.09992312254922311
+    }
+   ],
+   "brow_standoff_needed_m": 190.04912907825326,
+   "brow_upgrade_t": 80.57220728503287,
+   "optics_replacements": 2115.2055627886357,
+   "blade_punctures_1deg": 637.6716065875817,
+   "flip_blade_punctures": 24.004837554703023,
+   "brow": 95587.98160417813
+  },
+  "JUSTIFIED_HILAT": {
+   "total_t": 2367.9923623288,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 244.7234369108866,
+     "standoff_needed_m": 139.64768812701908,
+     "armour_t_m": 0.1620178621914636
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "armour",
+     "mass_t": 2119.0643542933885,
+     "standoff_needed_m": 266.87930976659686,
+     "armour_t_m": 0.24950753617350535
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 4.204571124524757,
+     "standoff_needed_m": 50.84808815688717,
+     "armour_t_m": 0.08261460222834127
+    }
+   ],
+   "brow_standoff_needed_m": 94.35172737056648,
+   "brow_upgrade_t": 74.24772572300354,
+   "optics_replacements": 440.27293405131553,
+   "blade_punctures_1deg": 182.07179531478562,
+   "flip_blade_punctures": 1.2002418777351516,
+   "brow": 9868.667624906362
+  },
+  "HIGH": {
+   "total_t": 10186.519312502947,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 1472.9977417201317,
+     "standoff_needed_m": null,
+     "armour_t_m": 0.975190395079536
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "armour",
+     "mass_t": 8675.924447107092,
+     "standoff_needed_m": null,
+     "armour_t_m": 1.0215397793084033
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 37.59712367572342,
+     "standoff_needed_m": null,
+     "armour_t_m": 0.7387367998800878
+    }
+   ],
+   "brow_standoff_needed_m": null,
+   "brow_upgrade_t": null,
+   "optics_replacements": 4215.16018585925,
+   "blade_punctures_1deg": 637.6716065875817,
+   "flip_blade_punctures": 24.004837554703023,
+   "brow": 503348.7480612838
+  }
+ },
+ "route": {
+  "NOMINAL_dest1000": {
+   "total_t": 217.43070695922108,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 186.0069200329355,
+     "standoff_needed_m": 42.94643687463663,
+     "armour_t_m": 0.1231449015139837
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "bumper",
+     "mass_t": 28.297764655580078,
+     "standoff_needed_m": 82.22964545940604,
+     "armour_t_m": 0.1898820692437244
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 3.126022270705494,
+     "standoff_needed_m": 15.128408914930992,
+     "armour_t_m": 0.061422456370139544
+    }
+   ],
+   "brow_standoff_needed_m": 44.18048439578128,
+   "brow_upgrade_t": 35.80221980771075,
+   "optics_replacements": 890.93175191002,
+   "blade_punctures_1deg": 139.89225546934796,
+   "flip_blade_punctures": 0.657399307169015,
+   "brow": 3092.636517142555
+  },
+  "JUSTIFIED_dest1000": {
+   "total_t": 3202.751489781581,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 330.4418754893819,
+     "standoff_needed_m": 219.11041582340007,
+     "armour_t_m": 0.2187673028833056
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "armour",
+     "mass_t": 2867.2641567959013,
+     "standoff_needed_m": 420.04928049940065,
+     "armour_t_m": 0.3376037230163797
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 5.045457496297726,
+     "standoff_needed_m": 66.84099424719194,
+     "armour_t_m": 0.09913697539454834
+    }
+   ],
+   "brow_standoff_needed_m": 184.9148805257783,
+   "brow_upgrade_t": 80.26545259481375,
+   "optics_replacements": 2096.4790953193656,
+   "blade_punctures_1deg": 602.598797273925,
+   "flip_blade_punctures": 1.2002418777351516,
+   "brow": 93626.6066522651
+  },
+  "HIGH_dest1000": {
+   "total_t": 10186.519312502947,
+   "faces": [
+    {
+     "face": "engine fronts less the bores (coil faces, carriage, petals)",
+     "kind": "armour",
+     "mass_t": 1472.9977417201317,
+     "standoff_needed_m": null,
+     "armour_t_m": 0.975190395079536
+    },
+    {
+     "face": "stern annulus (r 45 m less the engine group)",
+     "kind": "armour",
+     "mass_t": 8675.924447107092,
+     "standoff_needed_m": null,
+     "armour_t_m": 1.0215397793084033
+    },
+    {
+     "face": "telescoping spine front",
+     "kind": "armour",
+     "mass_t": 37.59712367572342,
+     "standoff_needed_m": null,
+     "armour_t_m": 0.7387367998800878
+    }
+   ],
+   "brow_standoff_needed_m": null,
+   "brow_upgrade_t": null,
+   "optics_replacements": 4215.16018585925,
+   "blade_punctures_1deg": 637.6716065875817,
+   "flip_blade_punctures": 24.004837554703023,
+   "brow": 543234.9014830629
+  }
+ },
+ "standoff": {
+  "NOMINAL": 82.22964545940604,
+  "NOMINAL_avail25": 1801.7989588284447,
+  "NOMINAL_avail50": 1801.7989588284447,
+  "NOMINAL_avail100": 217.43070695922108,
+  "NOMINAL_avail150": 217.43070695922108,
+  "NOMINAL_avail250": 217.43070695922108,
+  "NOMINAL_avail400": 217.43070695922108,
+  "JUSTIFIED": 420.04928049940065,
+  "JUSTIFIED_avail25": 3202.751489781581,
+  "JUSTIFIED_avail50": 3202.751489781581,
+  "JUSTIFIED_avail100": 3202.751489781581,
+  "JUSTIFIED_avail150": 3202.751489781581,
+  "JUSTIFIED_avail250": 3202.751489781581,
+  "JUSTIFIED_avail400": 3202.751489781581,
+  "HIGH": null,
+  "HIGH_avail25": 10186.519312502947,
+  "HIGH_avail50": 10186.519312502947,
+  "HIGH_avail100": 10186.519312502947,
+  "HIGH_avail150": 10186.519312502947,
+  "HIGH_avail250": 10186.519312502947,
+  "HIGH_avail400": 10186.519312502947
+ },
+ "attitude": {
+  "NOMINAL": {
+   "0.1": {
+    "habitat rings (r 30 m)": 0.02706618909654203,
+    "thermal blades (r 37 m)": 47.30242638278901,
+    "body and tank farm (r 7 m)": 0.05201856437647354
+   },
+   "0.5": {
+    "habitat rings (r 30 m)": 0.02707162666421597,
+    "thermal blades (r 37 m)": 72.62939843665785,
+    "body and tank farm (r 7 m)": 0.07226879892391531
+   },
+   "1": {
+    "habitat rings (r 30 m)": 0.02707162666421597,
+    "thermal blades (r 37 m)": 139.89225546934796,
+    "body and tank farm (r 7 m)": 0.10049360144972103
+   },
+   "1.5": {
+    "habitat rings (r 30 m)": 0.059891836657847516,
+    "thermal blades (r 37 m)": 281.3812028891269,
+    "body and tank farm (r 7 m)": 0.10049963072617168
+   },
+   "2": {
+    "habitat rings (r 30 m)": 0.059891836657847516,
+    "thermal blades (r 37 m)": 6084.675892590971,
+    "body and tank farm (r 7 m)": 0.13824377272606947
+   }
+  },
+  "JUSTIFIED": {
+   "0.1": {
+    "habitat rings (r 30 m)": 0.20127881646410237,
+    "thermal blades (r 37 m)": 225.76293507887286,
+    "body and tank farm (r 7 m)": 0.3179928165142725
+   },
+   "0.5": {
+    "habitat rings (r 30 m)": 0.20129983232758647,
+    "thermal blades (r 37 m)": 334.02779528879705,
+    "body and tank farm (r 7 m)": 0.4915887866988849
+   },
+   "1": {
+    "habitat rings (r 30 m)": 0.20129983232758647,
+    "thermal blades (r 37 m)": 602.598797273925,
+    "body and tank farm (r 7 m)": 0.7312071516966303
+   },
+   "1.5": {
+    "habitat rings (r 30 m)": 0.49599249178344124,
+    "thermal blades (r 37 m)": 1110.5358775898083,
+    "body and tank farm (r 7 m)": 0.7312299270728022
+   },
+   "2": {
+    "habitat rings (r 30 m)": 0.49599249178344124,
+    "thermal blades (r 37 m)": 48344.377364220614,
+    "body and tank farm (r 7 m)": 1.0486015597978982
+   }
+  },
+  "HIGH": {
+   "0.1": {
+    "habitat rings (r 30 m)": 0.4219367403069295,
+    "thermal blades (r 37 m)": 249.9993881308496,
+    "body and tank farm (r 7 m)": 1.0096292717046746
+   },
+   "0.5": {
+    "habitat rings (r 30 m)": 0.42235705757661157,
+    "thermal blades (r 37 m)": 360.261165224906,
+    "body and tank farm (r 7 m)": 1.1835569509135135
+   },
+   "1": {
+    "habitat rings (r 30 m)": 0.42235705757661157,
+    "thermal blades (r 37 m)": 637.6716065875817,
+    "body and tank farm (r 7 m)": 1.4231753159112588
+   },
+   "1.5": {
+    "habitat rings (r 30 m)": 0.7170497170324663,
+    "thermal blades (r 37 m)": 1224.3401082796868,
+    "body and tank farm (r 7 m)": 1.423630823434696
+   },
+   "2": {
+    "habitat rings (r 30 m)": 0.7170497170324663,
+    "thermal blades (r 37 m)": 110534.61829762928,
+    "body and tank farm (r 7 m)": 1.7422511570157253
+   }
+  }
+ }
+}
