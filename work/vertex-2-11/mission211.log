@@ -1,0 +1,32 @@
+B2d_plate_tail0.3                            no heat-passing closure
+A1_plate_tail0.3                             no heat-passing closure
+B2d_plate_tail0.1                            no heat-passing closure
+A1_plate_tail0.1                             no heat-passing closure (lightest failing 13351 t, stern 17.9 MW/m2)
+B2d_plate_tail0.03                           dep   7834 t, fusion 38.2 TW, He-3 2653 t, rad/eng 188 t, stern 5.2 MW/m2
+A1_plate_tail0.03                            dep   6718 t, fusion 32.7 TW, He-3 2266 t, rad/eng 102 t, stern 2.7 MW/m2
+B2d_plate_tail0.01                           dep   6154 t, fusion 30.0 TW, He-3 2084 t, rad/eng 56 t, stern 1.4 MW/m2
+A1_plate_tail0.01                            dep   5881 t, fusion 28.6 TW, He-3 1984 t, rad/eng 36 t, stern 0.8 MW/m2
+A1+D210_facets-10_3D_tail0.1                 no heat-passing closure
+A1+D210_facets-10_3D_tail0.3                 no heat-passing closure
+A1+D210_o1_facets-10_3D_tail0.1              dep   9853 t, fusion 47.9 TW, He-3 3323 t, rad/eng 29 t, stern 0.3 MW/m2
+A1+D210_o1_facets-10_3D_tail0.3              no heat-passing closure
+A1+DBD100_facets-10_3D_tail0.1               no heat-passing closure (lightest failing 42057 t, stern 2.4 MW/m2)
+A1+DBD100_facets-10_3D_tail0.3               dep   8066 t, fusion 39.2 TW, He-3 2721 t, rad/eng 61 t, stern 1.3 MW/m2
+A1+D210_Yp0.3_facets-10_3D_tail0.1           dep   6418 t, fusion 31.2 TW, He-3 2165 t, rad/eng 23 t, stern 0.3 MW/m2
+A1+D210_Yp3_facets-10_3D_tail0.1             no heat-passing closure
+A1+D210_fesc0.1_facets-10_3D_tail0.1         dep   6418 t, fusion 31.2 TW, He-3 2165 t, rad/eng 23 t, stern 0.1 MW/m2
+A1+D210_facets+10_3D_tail0.1                 no heat-passing closure
+A1+D210_facets+10_3D_tail0.3                 no heat-passing closure
+A1+D210_o1_facets+10_3D_tail0.1              no heat-passing closure (lightest failing 47863 t, stern 1.6 MW/m2)
+A1+D210_o1_facets+10_3D_tail0.3              no heat-passing closure
+A1+DBD100_facets+10_3D_tail0.1               no heat-passing closure
+A1+DBD100_facets+10_3D_tail0.3               no heat-passing closure
+A1+D210_Yp0.3_facets+10_3D_tail0.1           dep  12529 t, fusion 60.9 TW, He-3 4226 t, rad/eng 505 t, stern 0.5 MW/m2
+A1+D210_Yp3_facets+10_3D_tail0.1             no heat-passing closure
+A1+D210_fesc0.1_facets+10_3D_tail0.1         dep  12530 t, fusion 60.9 TW, He-3 4226 t, rad/eng 505 t, stern 0.2 MW/m2
+A1+D210_facets-10_3D_supply0.1_tail0.1       dep   8083 t, fusion 39.3 TW, He-3 2726 t, rad/eng 49 t, stern 1.0 MW/m2
+A1+D210_facets-10_3D_supply0.1_tail0.3       no heat-passing closure (lightest failing 18785 t, stern 6.5 MW/m2)
+A1+D210_o1_facets-10_3D_supply0.1_tail0.1    dep   6598 t, fusion 32.1 TW, He-3 2225 t, rad/eng 20 t, stern 0.2 MW/m2
+A1+D210_o1_facets-10_3D_supply0.1_tail0.3    dep   7364 t, fusion 35.8 TW, He-3 2484 t, rad/eng 42 t, stern 0.6 MW/m2
+A1+DBD100_facets-10_3D_supply0.1_tail0.1     dep   8377 t, fusion 40.7 TW, He-3 2826 t, rad/eng 34 t, stern 0.5 MW/m2
+A1+DBD100_facets-10_3D_supply0.1_tail0.3     dep   8066 t, fusion 39.2 TW, He-3 2721 t, rad/eng 61 t, stern 1.3 MW/m2

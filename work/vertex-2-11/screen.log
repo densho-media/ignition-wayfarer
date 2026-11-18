@@ -1,0 +1,64 @@
+Hold-off screen, V_top 10 MV (thermal set) and 17 MV (unthermalized 14.7 MeV protons)
+V   10 MV cranberg_2.10  o 0.001 L     8 m: n    2 stages of   5000 kV /  4.00 m, +2 x 41.4 m terminating gaps (total  90.8 m), ion loss 0.022, with secondaries 0.048
+V   10 MV cranberg_2.10  o 0.001 L    20 m: n    1 stages of  10000 kV / 20.00 m, +2 x 73.2 m terminating gaps (total 166.4 m), ion loss 0.021, with secondaries 0.046
+V   10 MV cranberg_2.10  o 0.001 L    40 m: n    1 stages of  10000 kV / 40.00 m, +2 x 73.2 m terminating gaps (total 186.4 m), ion loss 0.021, with secondaries 0.046
+V   10 MV cranberg_2.10  o 0.001 L   100 m: n    1 stages of  10000 kV / 100.00 m, +2 x 73.2 m terminating gaps (total 246.4 m), ion loss 0.021, with secondaries 0.046
+V   10 MV cranberg_2.10  o 0.002 L     8 m: n    2 stages of   5000 kV /  4.00 m, +2 x 41.4 m terminating gaps (total  90.8 m), ion loss 0.025, with secondaries 0.054
+V   10 MV cranberg_2.10  o 0.002 L    20 m: n    1 stages of  10000 kV / 20.00 m, +2 x 73.2 m terminating gaps (total 166.4 m), ion loss 0.022, with secondaries 0.048
+V   10 MV cranberg_2.10  o 0.002 L    40 m: n    1 stages of  10000 kV / 40.00 m, +2 x 73.2 m terminating gaps (total 186.4 m), ion loss 0.022, with secondaries 0.048
+V   10 MV cranberg_2.10  o 0.002 L   100 m: n    1 stages of  10000 kV / 100.00 m, +2 x 73.2 m terminating gaps (total 246.4 m), ion loss 0.022, with secondaries 0.048
+V   10 MV cranberg_2.10  o 0.005 L     8 m: n    2 stages of   5000 kV /  4.00 m, +2 x 41.4 m terminating gaps (total  90.8 m), ion loss 0.032, with secondaries 0.069
+V   10 MV cranberg_2.10  o 0.005 L    20 m: n    1 stages of  10000 kV / 20.00 m, +2 x 73.2 m terminating gaps (total 166.4 m), ion loss 0.026, with secondaries 0.056
+V   10 MV cranberg_2.10  o 0.005 L    40 m: n    1 stages of  10000 kV / 40.00 m, +2 x 73.2 m terminating gaps (total 186.4 m), ion loss 0.026, with secondaries 0.056
+V   10 MV cranberg_2.10  o 0.005 L   100 m: n    1 stages of  10000 kV / 100.00 m, +2 x 73.2 m terminating gaps (total 246.4 m), ion loss 0.026, with secondaries 0.056
+V   10 MV H1H2           o 0.001 L     8 m: n  215 stages of     47 kV /  0.04 m, +2 x  9.8 m terminating gaps (total  27.7 m), ion loss 0.249, with secondaries 0.541
+V   10 MV H1H2           o 0.001 L    20 m: n   86 stages of    116 kV /  0.23 m, +2 x 10.3 m terminating gaps (total  40.6 m), ion loss 0.119, with secondaries 0.258
+V   10 MV H1H2           o 0.001 L    40 m: n   43 stages of    233 kV /  0.93 m, +2 x 11.0 m terminating gaps (total  62.1 m), ion loss 0.071, with secondaries 0.154
+V   10 MV H1H2           o 0.001 L   100 m: n   18 stages of    556 kV /  5.56 m, +2 x 13.1 m terminating gaps (total 126.2 m), ion loss 0.041, with secondaries 0.090
+V   10 MV H1H2           o 0.002 L     8 m: n  230 stages of     43 kV /  0.03 m, +2 x  9.8 m terminating gaps (total  27.7 m), ion loss 0.446, with secondaries 0.968
+V   10 MV H1H2           o 0.002 L    20 m: n   92 stages of    109 kV /  0.22 m, +2 x 10.2 m terminating gaps (total  40.5 m), ion loss 0.220, with secondaries 0.477
+V   10 MV H1H2           o 0.002 L    40 m: n   46 stages of    217 kV /  0.87 m, +2 x 10.9 m terminating gaps (total  61.9 m), ion loss 0.126, with secondaries 0.273
+V   10 MV H1H2           o 0.002 L   100 m: n   19 stages of    526 kV /  5.26 m, +2 x 12.9 m terminating gaps (total 125.8 m), ion loss 0.065, with secondaries 0.141
+V   10 MV H1H2           o 0.005 L     8 m: n  268 stages of     37 kV /  0.03 m, +2 x  9.8 m terminating gaps (total  27.6 m), ion loss 0.815, with secondaries 1.768
+V   10 MV H1H2           o 0.005 L    20 m: n  107 stages of     93 kV /  0.19 m, +2 x 10.1 m terminating gaps (total  40.3 m), ion loss 0.496, with secondaries 1.076
+V   10 MV H1H2           o 0.005 L    40 m: n   54 stages of    185 kV /  0.74 m, +2 x 10.7 m terminating gaps (total  61.5 m), ion loss 0.299, with secondaries 0.650
+V   10 MV H1H2           o 0.005 L   100 m: n   22 stages of    455 kV /  4.55 m, +2 x 12.4 m terminating gaps (total 124.9 m), ion loss 0.145, with secondaries 0.315
+V   17 MV cranberg_2.10  o 0.001 L     8 m: n    4 stages of   4250 kV /  2.00 m, +2 x 36.6 m terminating gaps (total  81.2 m), ion loss 0.025, with secondaries 0.054
+V   17 MV cranberg_2.10  o 0.001 L    20 m: n    2 stages of   8500 kV / 10.00 m, +2 x 63.7 m terminating gaps (total 147.3 m), ion loss 0.022, with secondaries 0.048
+V   17 MV cranberg_2.10  o 0.001 L    40 m: n    1 stages of  17000 kV / 40.00 m, +2 x 117.8 m terminating gaps (total 275.5 m), ion loss 0.021, with secondaries 0.046
+V   17 MV cranberg_2.10  o 0.001 L   100 m: n    1 stages of  17000 kV / 100.00 m, +2 x 117.8 m terminating gaps (total 335.5 m), ion loss 0.021, with secondaries 0.046
+V   17 MV cranberg_2.10  o 0.002 L     8 m: n    4 stages of   4250 kV /  2.00 m, +2 x 36.6 m terminating gaps (total  81.2 m), ion loss 0.030, with secondaries 0.064
+V   17 MV cranberg_2.10  o 0.002 L    20 m: n    2 stages of   8500 kV / 10.00 m, +2 x 63.7 m terminating gaps (total 147.3 m), ion loss 0.025, with secondaries 0.054
+V   17 MV cranberg_2.10  o 0.002 L    40 m: n    1 stages of  17000 kV / 40.00 m, +2 x 117.8 m terminating gaps (total 275.5 m), ion loss 0.022, with secondaries 0.048
+V   17 MV cranberg_2.10  o 0.002 L   100 m: n    1 stages of  17000 kV / 100.00 m, +2 x 117.8 m terminating gaps (total 335.5 m), ion loss 0.022, with secondaries 0.048
+V   17 MV cranberg_2.10  o 0.005 L     8 m: n    4 stages of   4250 kV /  2.00 m, +2 x 36.6 m terminating gaps (total  81.2 m), ion loss 0.044, with secondaries 0.095
+V   17 MV cranberg_2.10  o 0.005 L    20 m: n    2 stages of   8500 kV / 10.00 m, +2 x 63.7 m terminating gaps (total 147.3 m), ion loss 0.032, with secondaries 0.069
+V   17 MV cranberg_2.10  o 0.005 L    40 m: n    1 stages of  17000 kV / 40.00 m, +2 x 117.8 m terminating gaps (total 275.5 m), ion loss 0.026, with secondaries 0.056
+V   17 MV cranberg_2.10  o 0.005 L   100 m: n    1 stages of  17000 kV / 100.00 m, +2 x 117.8 m terminating gaps (total 335.5 m), ion loss 0.026, with secondaries 0.056
+V   17 MV H1H2           o 0.001 L     8 m: n  620 stages of     27 kV /  0.01 m, +2 x  9.7 m terminating gaps (total  27.4 m), ion loss 0.546, with secondaries 1.184
+V   17 MV H1H2           o 0.001 L    20 m: n  248 stages of     69 kV /  0.08 m, +2 x 10.0 m terminating gaps (total  40.0 m), ion loss 0.279, with secondaries 0.606
+V   17 MV H1H2           o 0.001 L    40 m: n  124 stages of    137 kV /  0.32 m, +2 x 10.4 m terminating gaps (total  60.8 m), ion loss 0.160, with secondaries 0.346
+V   17 MV H1H2           o 0.001 L   100 m: n   50 stages of    340 kV /  2.00 m, +2 x 11.7 m terminating gaps (total 123.4 m), ion loss 0.079, with secondaries 0.171
+V   17 MV H1H2           o 0.002 L     8 m: n  665 stages of     26 kV /  0.01 m, +2 x  9.7 m terminating gaps (total  27.4 m), ion loss 0.812, with secondaries 1.762
+V   17 MV H1H2           o 0.002 L    20 m: n  266 stages of     64 kV /  0.08 m, +2 x 10.0 m terminating gaps (total  39.9 m), ion loss 0.494, with secondaries 1.071
+V   17 MV H1H2           o 0.002 L    40 m: n  133 stages of    128 kV /  0.30 m, +2 x 10.4 m terminating gaps (total  60.7 m), ion loss 0.295, with secondaries 0.641
+V   17 MV H1H2           o 0.002 L   100 m: n   54 stages of    315 kV /  1.85 m, +2 x 11.6 m terminating gaps (total 123.1 m), ion loss 0.143, with secondaries 0.310
+V   17 MV H1H2           o 0.005 L     8 m: n  773 stages of     22 kV /  0.01 m, +2 x  9.7 m terminating gaps (total  27.4 m), ion loss 0.992, with secondaries 2.153
+V   17 MV H1H2           o 0.005 L    20 m: n  310 stages of     55 kV /  0.06 m, +2 x  9.9 m terminating gaps (total  39.8 m), ion loss 0.857, with secondaries 1.860
+V   17 MV H1H2           o 0.005 L    40 m: n  155 stages of    110 kV /  0.26 m, +2 x 10.2 m terminating gaps (total  60.5 m), ion loss 0.626, with secondaries 1.358
+V   17 MV H1H2           o 0.005 L   100 m: n   62 stages of    274 kV /  1.61 m, +2 x 11.3 m terminating gaps (total 122.6 m), ion loss 0.333, with secondaries 0.723
+D210 (1.075 MV per 0.8 m stage, o 0.005): E*V on the wires 2.89e+12 vs allowed 9.35e+10 V^2/m (S 164 m^2): x31 beyond the large-area MeV-accelerator data (voltage per stage x5.6)
+D210 suppressor wires o 0.005: surface field 241 MV/m (limit ~10)
+D210 suppressor wires o 0.01: surface field 120 MV/m (limit ~10)
+D210 suppressor wires o 0.02: surface field 60 MV/m (limit ~10)
+grid heat 10 % (8.3 MW/m2 average, two-way 18 MW/m2): eps 0.3, T 1500 K -> radiative cooling works only for incidence spread below 0.54 deg
+grid heat 10 % (8.3 MW/m2 average, two-way 18 MW/m2): eps 0.3, T 2000 K -> radiative cooling works only for incidence spread below 1.71 deg
+grid heat 10 % (8.3 MW/m2 average, two-way 18 MW/m2): eps 0.8, T 1500 K -> radiative cooling works only for incidence spread below 1.44 deg
+grid heat 10 % (8.3 MW/m2 average, two-way 18 MW/m2): eps 0.8, T 2000 K -> radiative cooling works only for incidence spread below 4.55 deg
+grid heat 30 % (25.5 MW/m2 average, two-way 56 MW/m2): eps 0.3, T 1500 K -> radiative cooling works only for incidence spread below 0.18 deg
+grid heat 30 % (25.5 MW/m2 average, two-way 56 MW/m2): eps 0.3, T 2000 K -> radiative cooling works only for incidence spread below 0.56 deg
+grid heat 30 % (25.5 MW/m2 average, two-way 56 MW/m2): eps 0.8, T 1500 K -> radiative cooling works only for incidence spread below 0.47 deg
+grid heat 30 % (25.5 MW/m2 average, two-way 56 MW/m2): eps 0.8, T 2000 K -> radiative cooling works only for incidence spread below 1.48 deg
+W thermionic emission at 1500 K: 1.02e-03 A/m2 of ribbon surface
+W thermionic emission at 1800 K: 4.88e-01 A/m2 of ribbon surface
+W thermionic emission at 2000 K: 1.10e+01 A/m2 of ribbon surface
