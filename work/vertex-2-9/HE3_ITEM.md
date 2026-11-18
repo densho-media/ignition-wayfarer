@@ -1,6 +1,8 @@
 # PROPOSED Economy / Technology item: helium-3 supply for the Vertex research reference
 
-Status: PROPOSED (owner decision Q4, 2026-11-17 13:26Z). Draft for the owner; nothing is written to the Drive workbooks (Vertex 2.9
+Status: APPROVED FOR AUTHOR REVIEW (owner O3, 2026-11-18; proposed under Q4, 2026-11-17 13:26Z). No source is canonized; lunar
+extraction, D-D breeding and other options stay alternatives. The storage-volume question is routed as an S&E research-queue item
+(`work/vertex-2-10/SE_QUEUE_HE3_STORAGE.md`). Draft for the owner; nothing is written to the Drive workbooks (Vertex 2.9
 development constraint), no canon inventory is changed and no supply chain is created. If accepted, this text is the content of a new
 row in Economy & Currency (`42_SPACE_ECONOMY` or `80_OPEN_VARIABLES`) and Technology (`43_SPACE_MANUFACTURING` / `60_OPEN_VARIABLES`),
 routed through the request Doc as a dated item.

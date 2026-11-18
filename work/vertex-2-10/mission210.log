@@ -1,0 +1,36 @@
+B2d_tail1                          B2d      plate     tail 1     fwd 2.9e-02 k 0.906 spec 2 | no heat-passing closure
+B2d_tail0.3                        B2d      plate     tail 0.3   fwd 8.6e-03 k 0.906 spec 2 | no heat-passing closure
+B2d_tail0.1                        B2d      plate     tail 0.1   fwd 2.9e-03 k 0.906 spec 3 | no heat-passing closure
+B2d_tail0.03                       B2d      plate     tail 0.03  fwd 8.6e-04 k 0.906 spec 3 | dep 7834 t, ve 0.078 c, fusion 38.2 TW, He-3 2653 t, rad/eng 188 t, stern 5.2 MW/m2
+B2d_tail0.01                       B2d      plate     tail 0.01  fwd 2.9e-04 k 0.906 spec 3 | dep 6154 t, ve 0.078 c, fusion 30.0 TW, He-3 2084 t, rad/eng 56 t, stern 1.4 MW/m2
+A1_burn12_tail1                    B2d_z12  plate     tail 1     fwd 1.7e-02 k 0.908 spec 2 | no heat-passing closure
+A1_burn12_tail0.3                  B2d_z12  plate     tail 0.3   fwd 5.2e-03 k 0.908 spec 2 | no heat-passing closure
+A1_burn12_tail0.1                  B2d_z12  plate     tail 0.1   fwd 1.7e-03 k 0.908 spec 3 | no heat-passing closure (lightest failing 13351 t, coil 10.2 stern 17.9 MW/m2)
+A1_burn12_tail0.03                 B2d_z12  plate     tail 0.03  fwd 5.2e-04 k 0.908 spec 3 | dep 6718 t, ve 0.078 c, fusion 32.7 TW, He-3 2266 t, rad/eng 102 t, stern 2.7 MW/m2
+A1_burn12_tail0.01                 B2d_z12  plate     tail 0.01  fwd 1.7e-04 k 0.908 spec 3 | dep 5881 t, ve 0.078 c, fusion 28.6 TW, He-3 1984 t, rad/eng 36 t, stern 0.8 MW/m2
+A2_mirror10_tail1                  M10      plate     tail 1     fwd 1.6e-02 k 0.912 spec 2 | no heat-passing closure
+A2_mirror10_tail0.3                M10      plate     tail 0.3   fwd 4.9e-03 k 0.912 spec 2 | no heat-passing closure
+A2_mirror10_tail0.1                M10      plate     tail 0.1   fwd 1.6e-03 k 0.912 spec 3 | no heat-passing closure (lightest failing 12391 t, coil 11.7 stern 15.4 MW/m2)
+A2_mirror10_tail0.03               M10      plate     tail 0.03  fwd 4.9e-04 k 0.912 spec 3 | dep 6800 t, ve 0.078 c, fusion 32.8 TW, He-3 2276 t, rad/eng 96 t, stern 2.6 MW/m2
+A2_mirror10_tail0.01               M10      plate     tail 0.01  fwd 1.6e-04 k 0.912 spec 3 | dep 6021 t, ve 0.078 c, fusion 29.0 TW, He-3 2015 t, rad/eng 35 t, stern 0.8 MW/m2
+C_collector_tail1                  B2d_z12  collector tail 1     fwd 1.7e-02 k 0.908 spec 2 | no heat-passing closure
+C_collector_tail0.3                B2d_z12  collector tail 0.3   fwd 5.2e-03 k 0.908 spec 2 | no heat-passing closure (lightest failing 24814 t, coil 18.9 stern 99.6 MW/m2)
+C_collector_tail0.1                B2d_z12  collector tail 0.1   fwd 1.7e-03 k 0.908 spec 3 | no heat-passing closure (lightest failing 7727 t, coil 5.9 stern 10.4 MW/m2)
+C_collector_tail0.03               B2d_z12  collector tail 0.03  fwd 5.2e-04 k 0.908 spec 3 | dep 6222 t, ve 0.078 c, fusion 30.2 TW, He-3 2099 t, rad/eng 47 t, stern 2.5 MW/m2
+C_collector_tail0.01               B2d_z12  collector tail 0.01  fwd 1.7e-04 k 0.908 spec 3 | dep 5894 t, ve 0.078 c, fusion 28.6 TW, He-3 1988 t, rad/eng 21 t, stern 0.8 MW/m2
+B_mirror_tail1                     B2d_z12  mirror    tail 1     fwd 1.7e-02 k 0.908 spec 3 | no heat-passing closure (lightest failing 10403 t, coil 7.9 stern 46.4 MW/m2)
+B_mirror_tail0.3                   B2d_z12  mirror    tail 0.3   fwd 5.2e-03 k 0.908 spec 3 | dep 6981 t, ve 0.078 c, fusion 33.9 TW, He-3 2355 t, rad/eng 77 t, stern 9.4 MW/m2
+B_mirror_tail0.1                   B2d_z12  mirror    tail 0.1   fwd 1.7e-03 k 0.908 spec 4 | dep 6380 t, ve 0.078 c, fusion 31.0 TW, He-3 2152 t, rad/eng 30 t, stern 2.9 MW/m2
+B_mirror_tail0.03                  B2d_z12  mirror    tail 0.03  fwd 5.2e-04 k 0.908 spec 4 | dep 6193 t, ve 0.078 c, fusion 30.1 TW, He-3 2089 t, rad/eng 15 t, stern 0.9 MW/m2
+B_mirror_tail0.01                  B2d_z12  mirror    tail 0.01  fwd 1.7e-04 k 0.908 spec 4 | dep 6142 t, ve 0.078 c, fusion 29.9 TW, He-3 2072 t, rad/eng 11 t, stern 0.3 MW/m2
+B_mirror_on_B2d_tail1              B2d      mirror    tail 1     fwd 2.9e-02 k 0.906 spec 3 | no heat-passing closure (lightest failing 19177 t, coil 18.4 stern 141.0 MW/m2)
+B_mirror_on_B2d_tail0.3            B2d      mirror    tail 0.3   fwd 8.6e-03 k 0.906 spec 3 | no heat-passing closure (lightest failing 7716 t, coil 7.4 stern 17.1 MW/m2)
+B_mirror_on_B2d_tail0.1            B2d      mirror    tail 0.1   fwd 2.9e-03 k 0.906 spec 4 | dep 6588 t, ve 0.078 c, fusion 32.2 TW, He-3 2231 t, rad/eng 45 t, stern 4.9 MW/m2
+B_mirror_on_B2d_tail0.03           B2d      mirror    tail 0.03  fwd 8.6e-04 k 0.906 spec 4 | dep 6267 t, ve 0.078 c, fusion 30.6 TW, He-3 2122 t, rad/eng 20 t, stern 1.4 MW/m2
+B_mirror_on_B2d_tail0.01           B2d      mirror    tail 0.01  fwd 2.9e-04 k 0.906 spec 4 | dep 6181 t, ve 0.078 c, fusion 30.2 TW, He-3 2093 t, rad/eng 13 t, stern 0.5 MW/m2
+B_mirror_hB0.02_tail1              B2d_z12  mirror    tail 1     fwd 1.7e-02 k 0.908 spec 3 | no heat-passing closure (lightest failing 9326 t, coil 7.1 stern 41.6 MW/m2)
+B_mirror_hB0.02_tail0.3            B2d_z12  mirror    tail 0.3   fwd 5.2e-03 k 0.908 spec 3 | dep 6822 t, ve 0.078 c, fusion 33.2 TW, He-3 2301 t, rad/eng 65 t, stern 9.2 MW/m2
+B_mirror_hB0.02_tail0.1            B2d_z12  mirror    tail 0.1   fwd 1.7e-03 k 0.908 spec 4 | dep 6335 t, ve 0.078 c, fusion 30.8 TW, He-3 2137 t, rad/eng 27 t, stern 2.9 MW/m2
+B_mirror_hB0.15_tail1              B2d_z12  mirror    tail 1     fwd 1.7e-02 k 0.908 spec 3 | no heat-passing closure (lightest failing 16900 t, coil 12.9 stern 75.4 MW/m2)
+B_mirror_hB0.15_tail0.3            B2d_z12  mirror    tail 0.3   fwd 5.2e-03 k 0.908 spec 3 | no heat-passing closure (lightest failing 7568 t, coil 5.8 stern 10.2 MW/m2)
+B_mirror_hB0.15_tail0.1            B2d_z12  mirror    tail 0.1   fwd 1.7e-03 k 0.908 spec 4 | dep 6535 t, ve 0.078 c, fusion 31.8 TW, He-3 2204 t, rad/eng 42 t, stern 3.0 MW/m2
