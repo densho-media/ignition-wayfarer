@@ -2436,7 +2436,10 @@ inventory: `docs/FUEL_SYSTEM.md`. It joins the existing farm and the four feed r
   and thermal intercepts; PMDs (vanes and outlet sponges) in all 17 tanks; pump, regulator and conditioning detail. Fuel rate and power
   are one gap, ×7.31 in fusion power (`fuel_system.rate_reconciliation`; the V1 ×4.9 set reacted fuel against exhaust mass); the NOMINAL
   73.5 % charged share is the current result and the 80 % jet share is not claimed. Explore Ship adds Target fabrication and Propulsion
-  assembly views. docs/FUEL_SYSTEM.md section 10.
+  assembly views. docs/FUEL_SYSTEM.md section 10. Release readiness (section 11): the cold-strap collars on each engine's target feed and
+  H2 line sit on the lines' radial-in legs, inside the removal passage; removal withdraws the trunnion pins 0.42 m and takes out a spool
+  of 0.30 m (cluster lines) or 0.38 m (H2 branch) at each panel and inlet connection before the engine moves aft on a guidance fixture.
+  The drawn cluster (6.4 kt, frame 1,436 t) stays outside the ship's mass budget, whose drive is the 250 t allowance.
 
 ## Limits
 

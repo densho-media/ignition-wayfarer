@@ -3,7 +3,7 @@
  "evidence": "DIAGNOSTIC",
  "canon": false,
  "imports": "vertex_b87a9c1.json",
- "inputs_hash": "4079a806be5e5bc1",
+ "inputs_hash": "26dc56d05a228b44",
  "provenance": {
   "branch": "claude/project-thread-6qwiwi",
   "commit": "b87a9c1",
@@ -28,7 +28,7 @@
   "leak0": 0.182996,
   "D100": 2927140000000.0,
   "eta": 0.5,
-  "E1000": 621852810780.8009,
+  "E1000": 620852720198.7687,
   "Pf_n": 118981000000000.0,
   "bank_J": 720000000.0,
   "bank_W": 50000000.0,
@@ -199,7 +199,7 @@
   "added_kg": 0.0,
   "shield_kg": 0.0,
   "radiator_kg": 0.0,
-  "melt_s": 0.029513140188269685,
+  "melt_s": 0.02946567587993694,
   "extra_trip_s": 0.0,
   "fails": [
    {
@@ -209,7 +209,7 @@
    },
    {
     "id": "MELT",
-    "t": 0.029513140188269685,
+    "t": 0.02946567587993694,
     "what": "7,804x more heat than the radiators carry: the engine is +1000 K"
    },
    {
@@ -269,7 +269,7 @@
    "assumes": "Driver powered from somewhere and coils that never wear out, so only the heat is left.",
    "clock": [
     0.0,
-    0.11996125978303365
+    0.11976833289738191
    ],
    "events": [
     {
@@ -291,13 +291,13 @@
      "text": "About 1.2e9 W/m2 on the lit tiles: their limit in about 12 ms (1.7 F-TREAD)."
     },
     {
-     "t": 0.03427464565229533,
+     "t": 0.03421952368496626,
      "id": "MELT",
      "title": "The whole engine is 1000 K hotter",
      "text": "Heat capacity of 1,244 t for +1000 K is used up in 34 ms (1.5 T3). 6,720x more heat arrives than the radiators carry."
     },
     {
-     "t": 0.05483943304367253,
+     "t": 0.05475123789594602,
      "id": "SLUMP",
      "title": "Parts soften and flow aft",
      "text": "Under the thrust the softened structure slumps aft along the axis; the lithium hydride shield goes first (961 K)."
@@ -318,7 +318,7 @@
    },
    "ratio": 7804.031878175597,
    "burn_ratio": 6720.018368465492,
-   "melt_s": 0.029513140188269685,
+   "melt_s": 0.02946567587993694,
    "coil_life_s": 1.7146062456951172,
    "added_kg": 0.0,
    "fails": [
@@ -339,7 +339,7 @@
    },
    "ratio": 6720.018368573894,
    "burn_ratio": 6720.018368465492,
-   "melt_s": 0.03427464565229533,
+   "melt_s": 0.03421952368496626,
    "coil_life_s": 1.7146062456951172,
    "added_kg": 0.0,
    "fails": [
@@ -359,7 +359,7 @@
    },
    "ratio": 1210.604529900603,
    "burn_ratio": 126.59102019049877,
-   "melt_s": 0.19038617004274738,
+   "melt_s": 0.19007998277092358,
    "coil_life_s": 1.7146062456951172,
    "added_kg": 0.0,
    "fails": [
@@ -401,7 +401,7 @@
    },
    "ratio": 7804.031878175597,
    "burn_ratio": 6720.018368465492,
-   "melt_s": 0.029513140188269685,
+   "melt_s": 0.02946567587993694,
    "coil_life_s": 5143818.737085352,
    "added_kg": 46001760.952774696,
    "fails": [
@@ -460,7 +460,7 @@
    },
    "ratio": 7762.382986208838,
    "burn_ratio": 6678.369476498733,
-   "melt_s": 0.029671512683156896,
+   "melt_s": 0.029623793673329128,
    "coil_life_s": 255911.3799544951,
    "added_kg": 35510961.69402012,
    "fails": [
@@ -490,7 +490,7 @@
    "group": "OTHER_ENGINE",
    "material": "structure",
    "mass_kg": 9463.7,
-   "pn": 0.00062582,
+   "pn": 0.00064068,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1930.0
@@ -500,7 +500,7 @@
    "group": "OTHER_ENGINE",
    "material": "structure",
    "mass_kg": 2108.4,
-   "pn": 9.242e-05,
+   "pn": 9.462e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1930.0
@@ -510,7 +510,7 @@
    "group": "OTHER_ENGINE",
    "material": "structure",
    "mass_kg": 101889.8,
-   "pn": 0.00148371,
+   "pn": 0.00151895,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1930.0
@@ -2170,7 +2170,7 @@
    "group": "OTHER_ENGINE",
    "material": "sensor",
    "mass_kg": 4.3,
-   "pn": 0.0001231,
+   "pn": 0.00012602,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1700.0
@@ -2350,7 +2350,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 7807.8,
-   "pn": 0.00080653,
+   "pn": 0.00081205,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2360,7 +2360,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 7807.8,
-   "pn": 0.00080653,
+   "pn": 0.00081205,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2370,7 +2370,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 7807.8,
-   "pn": 0.00080653,
+   "pn": 0.00081205,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2380,7 +2380,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 7807.8,
-   "pn": 0.00080653,
+   "pn": 0.00081205,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2389,8 +2389,8 @@
    "name": "VTX_Trunnion_1",
    "group": "OTHER_ENGINE",
    "material": "service",
-   "mass_kg": 510.3,
-   "pn": 2.736e-05,
+   "mass_kg": 218.7,
+   "pn": 1.885e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 933.0
@@ -2399,8 +2399,8 @@
    "name": "VTX_Trunnion_2",
    "group": "OTHER_ENGINE",
    "material": "service",
-   "mass_kg": 510.3,
-   "pn": 2.736e-05,
+   "mass_kg": 218.7,
+   "pn": 1.885e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 933.0
@@ -2409,8 +2409,8 @@
    "name": "VTX_Trunnion_3",
    "group": "OTHER_ENGINE",
    "material": "service",
-   "mass_kg": 510.3,
-   "pn": 2.736e-05,
+   "mass_kg": 218.7,
+   "pn": 1.885e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 933.0
@@ -2419,8 +2419,8 @@
    "name": "VTX_Trunnion_4",
    "group": "OTHER_ENGINE",
    "material": "service",
-   "mass_kg": 510.3,
-   "pn": 2.736e-05,
+   "mass_kg": 218.7,
+   "pn": 1.885e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 933.0
@@ -2429,8 +2429,8 @@
    "name": "VTX_Service_Panel",
    "group": "OTHER_ENGINE",
    "material": "service",
-   "mass_kg": 1166.4,
-   "pn": 5.792e-05,
+   "mass_kg": 419.2,
+   "pn": 3.097e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 933.0
@@ -2440,7 +2440,7 @@
    "group": "OTHER_ENGINE",
    "material": "service",
    "mass_kg": 415.1,
-   "pn": 2.648e-05,
+   "pn": 2.71e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 933.0
@@ -2450,7 +2450,7 @@
    "group": "OTHER_ENGINE",
    "material": "service",
    "mass_kg": 22.0,
-   "pn": 1.1e-06,
+   "pn": 1.12e-06,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 933.0
@@ -2460,7 +2460,7 @@
    "group": "OTHER_ENGINE",
    "material": "service",
    "mass_kg": 22.0,
-   "pn": 1.1e-06,
+   "pn": 1.12e-06,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 933.0
@@ -2470,7 +2470,7 @@
    "group": "OTHER_ENGINE",
    "material": "service",
    "mass_kg": 22.0,
-   "pn": 1.1e-06,
+   "pn": 1.12e-06,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 933.0
@@ -2480,7 +2480,7 @@
    "group": "OTHER_ENGINE",
    "material": "service",
    "mass_kg": 22.0,
-   "pn": 1.1e-06,
+   "pn": 1.12e-06,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 933.0
@@ -2490,7 +2490,7 @@
    "group": "OTHER_ENGINE",
    "material": "service",
    "mass_kg": 246.5,
-   "pn": 6.523e-05,
+   "pn": 6.678e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 933.0
@@ -2500,7 +2500,7 @@
    "group": "OTHER_ENGINE",
    "material": "service",
    "mass_kg": 246.5,
-   "pn": 6.523e-05,
+   "pn": 6.678e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 933.0
@@ -2510,7 +2510,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "hot",
    "mass_kg": 2179.2,
-   "pn": 0.00182372,
+   "pn": 0.00183323,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0
@@ -2520,7 +2520,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "hot",
    "mass_kg": 489.8,
-   "pn": 0.00096381,
+   "pn": 0.00096883,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0
@@ -2530,7 +2530,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "hot",
    "mass_kg": 489.8,
-   "pn": 0.00096381,
+   "pn": 0.00096883,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0
@@ -2539,8 +2539,8 @@
    "name": "VTX_Lithium_Panel_Supply",
    "group": "THERMAL_PLUMBING",
    "material": "hot",
-   "mass_kg": 44.8,
-   "pn": 5.904e-05,
+   "mass_kg": 25.8,
+   "pn": 3.884e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0
@@ -2549,8 +2549,8 @@
    "name": "VTX_Lithium_Panel_Return",
    "group": "THERMAL_PLUMBING",
    "material": "hot",
-   "mass_kg": 44.8,
-   "pn": 5.904e-05,
+   "mass_kg": 25.8,
+   "pn": 3.884e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0
@@ -2560,7 +2560,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "cryo",
    "mass_kg": 277.1,
-   "pn": 0.00091843,
+   "pn": 0.00092322,
    "ch": 0.0,
    "start_K": 30.0,
    "melt_K": 1700.0
@@ -2570,7 +2570,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "cryo",
    "mass_kg": 90.7,
-   "pn": 0.00061627,
+   "pn": 0.00061948,
    "ch": 0.0,
    "start_K": 30.0,
    "melt_K": 1700.0
@@ -2580,7 +2580,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "cryo",
    "mass_kg": 90.7,
-   "pn": 0.00061627,
+   "pn": 0.00061948,
    "ch": 0.0,
    "start_K": 30.0,
    "melt_K": 1700.0
@@ -2590,7 +2590,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "cryo",
    "mass_kg": 23.9,
-   "pn": 0.00026807,
+   "pn": 0.00026947,
    "ch": 0.0,
    "start_K": 30.0,
    "melt_K": 1700.0
@@ -2600,7 +2600,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "cryo",
    "mass_kg": 22.5,
-   "pn": 0.00025531,
+   "pn": 0.00025664,
    "ch": 0.0,
    "start_K": 30.0,
    "melt_K": 1700.0
@@ -2610,7 +2610,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 550.6,
-   "pn": 0.0006254,
+   "pn": 0.00062968,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2619,8 +2619,8 @@
    "name": "VTX_Power_Bus",
    "group": "ELECTRICAL",
    "material": "power",
-   "mass_kg": 362.1,
-   "pn": 0.00017468,
+   "mass_kg": 313.5,
+   "pn": 0.00013465,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2630,7 +2630,7 @@
    "group": "OTHER_ENGINE",
    "material": "sensor",
    "mass_kg": 90.0,
-   "pn": 1.927e-05,
+   "pn": 1.973e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1700.0
@@ -2640,7 +2640,7 @@
    "group": "OTHER_ENGINE",
    "material": "sensor",
    "mass_kg": 90.0,
-   "pn": 1.927e-05,
+   "pn": 1.973e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1700.0
@@ -2650,7 +2650,7 @@
    "group": "OTHER_ENGINE",
    "material": "sensor",
    "mass_kg": 90.0,
-   "pn": 1.927e-05,
+   "pn": 1.973e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1700.0
@@ -2660,7 +2660,7 @@
    "group": "OTHER_ENGINE",
    "material": "sensor",
    "mass_kg": 90.0,
-   "pn": 1.927e-05,
+   "pn": 1.973e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1700.0
@@ -2670,7 +2670,7 @@
    "group": "OTHER_ENGINE",
    "material": "lamp",
    "mass_kg": 6.9,
-   "pn": 1.34e-06,
+   "pn": 1.37e-06,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1700.0
@@ -2680,7 +2680,7 @@
    "group": "OTHER_ENGINE",
    "material": "lamp",
    "mass_kg": 6.9,
-   "pn": 1.34e-06,
+   "pn": 1.37e-06,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1700.0
@@ -2690,7 +2690,7 @@
    "group": "OTHER_ENGINE",
    "material": "lamp",
    "mass_kg": 6.9,
-   "pn": 1.34e-06,
+   "pn": 1.37e-06,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1700.0
@@ -2700,7 +2700,7 @@
    "group": "OTHER_ENGINE",
    "material": "lamp",
    "mass_kg": 6.9,
-   "pn": 1.34e-06,
+   "pn": 1.37e-06,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1700.0
@@ -2790,7 +2790,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 264.6,
-   "pn": 0.00036535,
+   "pn": 0.00036785,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2800,7 +2800,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 66.2,
-   "pn": 0.00017344,
+   "pn": 0.00017463,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2810,7 +2810,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 264.6,
-   "pn": 0.00038392,
+   "pn": 0.00038655,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2820,7 +2820,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 59.9,
-   "pn": 0.00016137,
+   "pn": 0.00016248,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2830,7 +2830,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 297.7,
-   "pn": 0.00024483,
+   "pn": 0.0002465,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2840,7 +2840,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 46.0,
-   "pn": 0.00011967,
+   "pn": 0.00012049,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2850,7 +2850,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "cryo",
    "mass_kg": 10.3,
-   "pn": 0.00012044,
+   "pn": 0.00012107,
    "ch": 0.0,
    "start_K": 30.0,
    "melt_K": 1700.0
@@ -2860,7 +2860,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 297.7,
-   "pn": 0.00019641,
+   "pn": 0.00019776,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2870,7 +2870,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 49.4,
-   "pn": 0.00010642,
+   "pn": 0.00010714,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2880,7 +2880,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "cryo",
    "mass_kg": 11.2,
-   "pn": 0.00011091,
+   "pn": 0.00011149,
    "ch": 0.0,
    "start_K": 30.0,
    "melt_K": 1700.0
@@ -2890,7 +2890,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 297.7,
-   "pn": 0.00011143,
+   "pn": 0.00011219,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2900,7 +2900,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 41.2,
-   "pn": 5.086e-05,
+   "pn": 5.121e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2910,7 +2910,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "cryo",
    "mass_kg": 9.1,
-   "pn": 5.395e-05,
+   "pn": 5.424e-05,
    "ch": 0.0,
    "start_K": 30.0,
    "melt_K": 1700.0
@@ -2920,7 +2920,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 297.7,
-   "pn": 5.244e-05,
+   "pn": 5.28e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2930,7 +2930,7 @@
    "group": "ELECTRICAL",
    "material": "power",
    "mass_kg": 55.5,
-   "pn": 3.272e-05,
+   "pn": 3.295e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 1358.0
@@ -2940,7 +2940,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "cryo",
    "mass_kg": 12.8,
-   "pn": 3.574e-05,
+   "pn": 3.592e-05,
    "ch": 0.0,
    "start_K": 30.0,
    "melt_K": 1700.0
@@ -2960,7 +2960,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "hot",
    "mass_kg": 38.6,
-   "pn": 0.00020935,
+   "pn": 0.00021044,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0
@@ -2970,7 +2970,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "hot",
    "mass_kg": 38.6,
-   "pn": 0.00020935,
+   "pn": 0.00021044,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0
@@ -2990,7 +2990,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "hot",
    "mass_kg": 42.0,
-   "pn": 0.00018655,
+   "pn": 0.00018752,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0
@@ -3000,7 +3000,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "hot",
    "mass_kg": 42.0,
-   "pn": 0.00018655,
+   "pn": 0.00018752,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0
@@ -3020,7 +3020,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "hot",
    "mass_kg": 28.3,
-   "pn": 6.681e-05,
+   "pn": 6.716e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0
@@ -3030,7 +3030,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "hot",
    "mass_kg": 28.3,
-   "pn": 6.681e-05,
+   "pn": 6.716e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0
@@ -3050,7 +3050,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "hot",
    "mass_kg": 34.4,
-   "pn": 3.586e-05,
+   "pn": 3.604e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0
@@ -3060,7 +3060,7 @@
    "group": "THERMAL_PLUMBING",
    "material": "hot",
    "mass_kg": 34.4,
-   "pn": 3.586e-05,
+   "pn": 3.604e-05,
    "ch": 0.0,
    "start_K": 300.0,
    "melt_K": 2900.0

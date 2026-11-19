@@ -84,9 +84,11 @@ decay), fire, or reactor trip. Unresolved: the engine-side target fabrication ra
 38 g/s against the ~185 g/s of fuel per engine the operating point needs), the H2 injection point inside the engine, and who owns the
 service panel's seventh line.
 
-## 5. Model inventory
+## 5. Model inventory (authoritative, V1.1)
 
-Status: planned, blockout, detailed, integrated, validated. Confidence: ESTABLISHED (existing engineering), PLAUSIBLE (extrapolation),
+This table is the one FPS inventory; sections 9.6 and 10.2 describe what each version added. State at V1.1 release readiness (section 11).
+Status: planned, blockout, detailed, integrated, validated (built, clash-screened by `work/fuel-propellant/probe.py --cluster`, pipe ends
+by `endpoints.py`, removal path by `extraction.py`, whole-ship inspection PASS). Confidence: ESTABLISHED (existing engineering), PLAUSIBLE (extrapolation),
 SPECULATIVE (breakthrough), UNSUPPORTED. Every FPS object carries `fps_id`, `function`, `species`, `confidence` and `engineering_status`.
 Positions are ship frame (+X bow); the existing farm items are documented in docs/MODEL.md.
 
@@ -114,13 +116,38 @@ Positions are ship frame (+X bow); the existing farm items are documented in doc
 | FPS-RV / VT | relief valves, vents, tee outlets (4) | Safety | boil-off and overpressure, non-propulsive | run tank → space | X -93.85, hull skin | ESTABLISHED | 2 | blockout | `FPS_Relief_Valve_*`, `FPS_Vent_*` |
 | FPS-PG | He purge bottles and lines (2) | Safety | inert H2 lines | bottle → isolation valve | X -110.95 | ESTABLISHED | 2 | blockout | `FPS_Purge_He_*` |
 | FPS-RF | refuelling receptacle, couplings, fill lines, valves | Refuelling | receive D2, He-3, H2 | tanker → ring mains | farm deck rim, az 242.8° | ESTABLISHED | 2 | blockout | `FPS_Refuel_*` |
-| FPS-TF | target fabrication / fill | Fuel conditioning (engine side) | make D or D-3He targets | `IF_FPS_FUEL_BAY_*` → magazine | cluster bay | SPECULATIVE rate | 1 | conceptual placeholder (V1: dashed leg in the viewer, no geometry) | — |
-| FPS-INJ | H2 injection train | Propulsion interface (engine side) | put H2 into the exhaust | `IF_FPS_H2_ENGINE_0n` → burn face | engine | SPECULATIVE | 1 | V1 candidate, section 9 | `FPS_N*_H2_*` |
-| FPS-PMD | propellant management devices | Propellant storage | coast transfer without settling | in vessels | farm, run tanks | PLAUSIBLE | 3 | planned | — |
+| FPS-XO-H2 | H2 inner–outer crossover + valve | Propellant distribution | let inner-ring H2 vessels reach the trunks | `Fuel_Ring_Main_H2_I` → outer main | farm, az 315° | ESTABLISHED | 1 | validated | `FPS_H2_Crossover*` |
+| FPS-FT-* | hull feedthroughs (6) | Distribution | carry each trunk through the aft hull skin | trunk exterior → interior leg | aft hull skin | ESTABLISHED | 1 | validated | `FPS_Feedthrough_*` |
+| FPS-TI-01..04, FPS-VL-CK-* | run-tank inlet tees, nozzles, inlet and check valves | Distribution | fill each run tank through its cap | trunk → run tank | run-tank caps | ESTABLISHED | 1 | validated | `FPS_Tank_Inlet_*`, `FPS_Check_Valve_*` |
+| FPS-FAB-* | target fabrication: receiver dewars (D2, He-3), purifier/blend unit, fill and layering station, inspection with reject chute, buffer magazine, conveyor | Fuel conditioning (engine side) | make D–³He targets | `IF_FPS_FUEL_BAY_*` → buffer magazine | cluster bay core, r < 1.9 | ESTABLISHED dewars, **SPECULATIVE** process and rate | 1 | blockout, validated geometry | `FPS_Fab_*`, `FPS_Bay_Target_Fabrication_*` |
+| FPS-FAB-XFER | cold-target transfer | Fuel distribution | buffer magazine → target trunk | `IF_FPS_FAB_TRUNK` → `CL_Trunk_TARGET_FEED` | bay aft face | PLAUSIBLE | 1 | validated | `FPS_Target_Transfer_Bay` |
+| FPS-TF-N1..N4 | target feeds, panel → magazine, flanged | Propulsion interface (engine side) | deliver targets into each engine | `TARGET_FEED` slot → `IF_FPS_TARGET_Nj` | engine collar, r 5.8 → 3.7 | PLAUSIBLE | 1 | validated; CANDIDATE for the engine workstream | `FPS_Nj_Target_Feed`, `FPS_Nj_Flanges` |
+| FPS-IJ-N1..N4 | H2 control valve, line, manifold ring, 8 fast-valved ports | Propulsion interface (engine side) | puff H2 ahead of each pulse | `IF_FPS_H2_ENGINE_0n` → `IF_FPS_H2_INJECT_Nj` | collar → burn face | **SPECULATIVE** coupling | 1 | validated; CANDIDATE | `FPS_Nj_H2_*` |
+| FPS-IJ-Nj-P | shielding galleries round each port at the collar and the shadow shield | Shielding | no straight streaming path | — | X −9.15 … −12.30 | PLAUSIBLE | 2 | blockout | in `FPS_Nj_H2_Injectors` |
+| FPS-SS-Nj | target-feed clamps (2 per engine, low-conductance standoffs) and cold-strap collars on the feed and the H2 line, inside the panel/inlet turns | Supporting structure | hold cold lines, intercept heat leaks | — | engine collar | PLAUSIBLE | 2 | validated (collars moved inside the removal passage at release readiness) | `FPS_Nj_Supports` |
+| FPS-TI-V11 | thermal intercepts on the feed lines at the shield sleeve, the feedthroughs and the bay legs | Insulation | cold-strap heat leaks to the LOW loop | — | aft train, bay fore face | PLAUSIBLE | 2 | validated | `FPS_Thermal_Intercepts` |
+| FPS-PMD-* | gallery vanes (4) and aft sponge (8 plates) in 4 run tanks and 13 farm vessels | Propellant storage | coast transfer without settling thrust | vessel → outlet | in the vessels | ESTABLISHED principle, sizing OPEN | 2 | blockout | `FPS_PMD_Run_Tanks`, `FPS_PMD_Farm` |
+| FPS-EQ-* | boost-pump motors, heat-exchanger shells, pressure regulators, flow-meter spools | Conditioning | pump, heat, regulate, meter | on the V0 train | aft train | PLAUSIBLE | 2 | blockout | `FPS_Equipment_Detail_*` |
+| (engine/cluster) | service panel at the shared 0.36 m pitch, forward of the cradle | Propulsion interface | one face for six services | `CL_Nj_Line_*` → `IF_VTX_*` | collar forward face, X −9.2 … −8.3 | PLAUSIBLE | 1 | validated | `VTX_Service_Panel` |
+| (cluster) | flank thrust ties (8), cradle R 6.8 m, trunk spider rings (3), annular power bay | Supporting structure | cradle → thrust ring outside the engines | cradle → ring nodes | cluster frame | PLAUSIBLE (FE screen, section 11.2) | 1 | validated | `CL_Nj_Flank_Tie_A/B`, `CL_Nj_Cradle`, `CL_Trunk_Spider_*` |
+| (removal) | engine removal: pins out, line spools out, engine aft on a guided stroke | Service | replace an engine | — | each engine | PLAUSIBLE; guidance fixture OPEN | 2 | validated geometry (section 11.3) | — |
 | FPS-MLI | MLI and cooled shields | Insulation | 0.3 / 0.15 / 0.01 W/m² | | in the 0.30 m wall stack | ESTABLISHED | 3 | in wall stack, not drawn | — |
 
-Outstanding engineering questions: coast transfer (PMDs, pressurant), pump and heater hardware, line jacket and thermal intercepts, vent
-set points and plume keep-outs, refuelling approach corridor and umbilical loads, the target fabrication rate, the H2 injection point.
+Unresolved engineering assumptions (V1.1):
+
+| Assumption | State | Owner |
+| --- | --- | --- |
+| Engine fusion power is 1/7.31 of the ship operating point (section 10.3) | OPEN, visible | engine workstream |
+| H2 takes its energy from the charged debris (snowplow coupling, section 9.3) | SPECULATIVE, not validated; 80 % jet share not claimed | engine workstream |
+| Target recipe, fill and cryogenic layering, fabrication rate | SPECULATIVE | engine workstream |
+| Drawn Vertex mass (6.4 kt) outside the 250 t drive allowance (section 11.1) | OPEN canon decision | owner |
+| CONSERVATIVE-field frame case (1.66) and the thrust-ring node joints (section 11.2) | OPEN | engine workstream |
+| Removal guidance fixture, spool joints and pin stroke (section 11.3) | PROTOTYPE allowances | FPS / cluster |
+| PMD sizing, pressurant, boil-off return | OPEN | FPS |
+| Pump, heater, valve and regulator hardware; fast-valve life at 5.7 kHz | OPEN | FPS |
+| Clamp spacing against pulse-rate vibration | OPEN | FPS |
+| Vent set points and plume keep-outs; refuelling approach and umbilical loads | OPEN | FPS |
+| Vessel ullage (the +83 t case fills He-3 to 98.4 %) | OPEN | FPS |
 
 ## 6. Trade study
 
@@ -280,7 +307,7 @@ the engine if it moves. No engine or cluster file is edited.
 | Power and control | fast-valve drive (~kW class per engine, PROTOTYPE), sensors to the drive controller | pulse timing signal | OPEN |
 | Mounting and service | lines clamp to the collar; the engine removal breaks at the panel and the H2 inlet flanges | removal axis aft (`IF_VTX_ENGINE_0n_REMOVAL`) | PLAUSIBLE |
 
-### 9.6 Model inventory, V1 status
+### 9.6 Model inventory, V1 status (superseded by section 5)
 
 Statuses: existing and connected; existing but not connected; missing and required; conceptual placeholder; integrated and geometrically
 validated (built, clash-screened by `work/fuel-propellant/probe.py`, whole-ship inspection PASS); assumptions unresolved.
@@ -389,6 +416,145 @@ Two views join the Fuel drawer: **Target fabrication** (the cluster bay core, it
 buttons drive the engines, whose materials and animations are kept). Views now select by chain group as well as species. The combined
 and assembly readouts show the NOMINAL charged share as the current result, the B01 share as not claimed, and the one-gap reconciliation.
 Bookmarks: `#fuel=ACTIVE.fab`, `#fuel=ACTIVE.assembly`.
+
+## 11. V1.1 release readiness
+
+Owner brief 2026-11-19 12:05Z: V1.1 (b274e55) is the provisional mechanical and modeling baseline; the engine positions, the shared
+service pitch, the symmetric flank ties and the removal geometry stay. Study code and results: `work/fuel-propellant/readiness.py`
+(mass, mission, loads; `readiness_v1.json` at dd4a64c and `readiness_v11.json`), `work/fuel-propellant/extraction.py` (the extraction
+path in the saved vehicle, `extraction.json`). Mission targets (0.016 c, the burn delta-v, the drive's power cap, the owner's case E) are
+held in every number below; only consequences move.
+
+### 11.1 Mass, centre of mass, acceleration and mission
+
+The ship's canonical mass account (`physics.mass_budget`, the B02 placement in `mass_model.py`, `operating_point.py`) carries the drive
+as the 250 t `drive_package` allowance and reads no Vertex file. V1.1 therefore changes **no canonical number**: departure 4,426 t,
+2,797 t propellant, 0.50 to 0.64 g, 9.99 days per burn, dry centre of mass X +35.1 m, departure X +89.6 m (identical at V1 and V1.1).
+
+The drawn cluster is an ENGINEERING_PROTOTYPE estimate (`vertex_structure.mass_rollup`): frame 1,353 t (V1) → **1,436 t (V1.1, +83 t:
+the wider cradle rings, the eight flank ties, the trunk spider)**; each engine 1,243.7 → 1,241.7 t (the shorter lugs); the cluster
+6,328 → **6,403 t (+75 t net)**. Placed on the ship (a spec copy, never written back), the same calculations give:
+
+| Case | Dry added | Propellant | Departure | Accel (start–burnout) | Days per burn | Dry CG X | Departure CG X | Vessel fill (He-3 / D2 / H2) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Canon (V1 and V1.1) | — | 2,797 t | 4,426 t | 0.50–0.64 g | 9.99 | +35.1 m | +89.6 m | 0.92 / 0.85 / 0.91 |
+| V1.1 frame delta alone (+82.7 t at the frame centroid X −142.6 m) | +83 t | **2,988 t (+6.8 %)** | **4,729 t** | **0.47–0.60 g** | **10.67** | **+28.2 m** | +87.9 m | 0.98 / 0.91 / 0.98 |
+| Whole drawn cluster in place of the 250 t allowance (context) | +6,153 t | 17,017 t | 26,932 t | 0.08–0.11 g | 60.8 | −56.7 m | — | 5.6 / 5.2 / 5.6 (does not fit) |
+
+- The +83 t alone costs **+191 t of propellant** for the same delta-v (the full-return mass ratio applies to every dry tonne), +29 t of
+  tankage, +0.68 days per burn and 0.03–0.04 g of acceleration. It still fits the existing vessels, with little left: He-3 at 98.4 % and
+  H2 at 97.6 % of liquid capacity (ullage is not budgeted). Lateral CG at departure 37 mm (canon 7 mm, the trimmed loading has less
+  freedom at that fill): 1.4 % differential thrust against the 5 % limit.
+- The whole drawn cluster is 25.6 times the drive allowance and does not fit the ship's mission (5.6 times the He-3 capacity); this is
+  the known Vertex mass gap (lab Vertex 2.x ledgers), not a V1.1 effect. V1.1 adds 1.2 % to it.
+- Not adopted: the drive allowance, the mission targets and the vessel sizes are unchanged. A canon decision is needed before any of the
+  drawn Vertex mass enters `mass_budget` (owner, with the engine workstream).
+
+### 11.2 Structure and the flank-tie load paths
+
+Frame FE (`vertex_structure.cluster_members`, Ti-6Al-4V, unchanged method), governing utilisation per load set, V1 → V1.1:
+
+| Load set | V1 (ring ties) | V1.1 (flank ties) | V1.1 governing member |
+| --- | --- | --- | --- |
+| LC01 engine thrust (C-10, 0.73 MN each) | 0.028 | 0.042 | `CL_N3_Flank_Tie_A` |
+| LC03 NOMINAL field + thrust | **0.815** | **0.412** | `CL_N3_Thrust_Strut_10` |
+| LC03 CONSERVATIVE field + thrust | 3.306 | 1.657 (fails) | `CL_N3_Spoke_B`; flank ties 1.382 |
+| LC06 N2 coils off | 0.990 | 0.524 | `CL_N3_Spoke_B` |
+| LC06 single engine N1 | 0.017 | 0.026 | `CL_N1_Flank_Tie_B` |
+| Ship operating-point thrust, 5.44 MN per engine (new set) | — | 0.313 | `CL_N4_Flank_Tie_B` |
+| + engine inertia at 0.11 g / 0.64 g | — | 0.239 / 0.023 | flank ties |
+| + engine inertia + NOMINAL field | — | 0.396 / 0.438 | thrust strut / spoke |
+
+Engine-mount stiffness: axial 153 → 294 MN/m, tangential 154 → 265 MN/m, radial 3,330 → 3,222 MN/m; lowest rocking mode 1.77 → 2.45 Hz
+(the 5.7 kHz pulse rate stays far above every frame mode); magnetic stiffness margin 1,597 → 1,545.
+
+Attachment points: each tie runs from the cradle flank (engine-local 90° or 270°, between two trunnions) to a thrust-ring node, landing on
+the node's strut foot 0.34 m from the node centre like every thrust strut (the FE treats both as on the node). N1 and N2 take ring nodes
+2/1 and 5/4 with mirror-equal ties (21.75 m, 67.7° to the axis). N3 and N4 mirror each other, but on each, one tie (`N3_A`, `N4_B`) goes
+to the farther node 1 or 5 (24.51 m) because the nearer node fails the comms keep-out; nodes 1 and 5 therefore carry two ties. In thrust
+the ties are compressed (0.52–0.78 MN at LC01) and carry most of the axial load: the cradles now reach the ring outside the engines at
+four points each. Thrust load path: engine collar → trunnion pins → cradle → (two hub-side thrust struts, two flank ties) → thrust-ring
+nodes → ring → ship. The largest ring-node reaction rises from 1.12 to 1.46 MN at LC01.
+
+Findings, not hidden: (1) the 1.2 load sets carry the engine's own 0.73 MN thrust; the ship operating point needs 5.44 MN per engine
+(the same 7.5× as the jet-power gap). With it the frame stays under 0.44 at NOMINAL. (2) CONSERVATIVE currents still fail the frame
+(1.66; V1 3.31): pre-existing, halved by the ties. (3) The thrust-ring node joints and the ring itself are not in the FE (fixed nodes):
+their capacity at 1.46 MN per node and the double-tie nodes 1 and 5 are OPEN.
+
+### 11.3 Engine removal: the whole extraction path
+
+`extraction.py` moves engine N1 and everything it carries (the VTX instance on its placement and every `FPS_N1_*` object) aft along its
+axis by any distance and checks every other evaluated vertex and edge midpoint in the saved vehicle (7,447 static objects: cluster
+frame and lines, the other engines, the FPS lines, the thrust ring, the hull) against the largest moving radius at stations forward of
+it, per 3° azimuth sector. The pure `fuel_system.removal_check` now also includes the clamps and cold-strap collars the engine carries.
+
+Result (V1.1 with the release-readiness fix):
+
+| Check | Result |
+| --- | --- |
+| Pure sweep through the cradle bore (`removal_check`, analytical radii) | no part blocked; least clearance **0.203 m** (the four trunnion lugs), panel 0.207 m, power bus 0.239 m, H2 line 0.26 m |
+| Mesh sweep, whole path, everything not removed first (`extraction.py`) | least clearance **0.194 m**: the cradle ring's inner face against the service panel; the cradle is drawn as a 48-segment polygon whose chord midpoints sit 13 mm inside the true 6.12 m bore. Next: cluster service lines 1.56 m, every other object more than 1.9 m |
+| Found and fixed at release readiness | the two cold-strap collars V1.1 added at the panel and the H2 inlet (`FPS_Nj_Supports`) stood 23 mm proud of the passage (0.177 m on the mesh, outside r 5.92 in the pure sweep, which did not yet include them). Both moved 0.3 m onto the radial-in legs of their lines; the pure sweep now includes clamps and collars |
+| Removed first: trunnion pins | they reach 0.217 m inside the swept envelope (they sit in the lugs): each pin must withdraw radially at least **0.42 m** (0.217 + 0.20) before the stroke |
+| Removed first: line stubs at the panel and the H2 inlet | the six `CL_N1_Line_*` stubs end on the panel (0.06–0.10 m inside the envelope) and `FPS_H2_Branch_N1` on the inlet (0.175 m inside): each needs a **removable spool** of at least 0.30 m (cluster lines) and 0.38 m (H2 branch) between its last flange and the panel or inlet, so the stub ends clear by 0.20 m once the spool is out. The flanges exist (`FPS_*_Flanges`); the spools are a procedure and joint definition, not new geometry |
+
+Procedure the geometry supports: shut down and warm to structure temperature; disconnect and remove the six panel spools and the H2 inlet
+spool (purge first); withdraw the four trunnion pins by 0.42 m or more; translate the engine aft along its axis on a guidance fixture
+until it is clear of the cradle and the neighbouring engines' nozzles (no static object lies within 1.9 m of the path after the cradle).
+
+Thermal expansion and tolerances: removal is a cold, shut-down operation (no hot-circuit growth); the coils' cold-mass contraction is
+inside their cryostats and does not move the outer envelope. The collar and cradle are both titanium (8.6×10⁻⁶ /K): a 100 K difference
+between engine and frame moves the 5.92 m envelope 5 mm against the 6.12 m bore. Clearance stack (PROTOTYPE allowances, not sourced):
+
+| Item | Allowance |
+| --- | --- |
+| Engine/frame temperature difference, 100 K | 5 mm |
+| Cradle ring position and roundness | 15 mm |
+| Panel, lug and FPS part fabrication | 10 mm |
+| Guidance during the stroke (rails or fixture, 0.5 mrad over 20 m) | 10 mm |
+| **Total** | **40 mm of the 203 mm (true geometry); about 160 mm left** |
+
+The drawn mesh's 13 mm tessellation loss (0.194 m) belongs to the proxy, not to the hardware, and is not counted against the stack.
+
+The guidance fixture and its rails are not modeled (OPEN, TODO F06).
+
+### 11.4 Browser performance
+
+Measured with the established checks (`workflow.py web`, which enforces the `web_export.py` budgets) on clean exports of V1 (dd4a64c,
+rebuilt in a worktree) and V1.1 (this branch), and `work/fuel-propellant/perf.js` (`perf_v1.json`, `perf_v11.json`) in the same headless
+Chromium. Evidence class **SW** (SwiftShader, 1400×900, no GPU): frame times are relative only, never device performance.
+
+| Measure | V1 | V1.1 | Change | Budget |
+| --- | --- | --- | --- | --- |
+| Explore Ship download (before compression) | 11.594 MB | 11.699 MB | +105 kB (+0.9 %) | 12 MB: 97.5 % used, PASS |
+| Ship GLB (Draco) | 9.887 MB | 9.990 MB | +103 kB | — |
+| Ship GLB gzipped (if the host compresses it) | 5.81 MB | 5.90 MB | +87 kB | — |
+| Engine part inspection (on demand) | 453.9 kB | 453.8 kB | 0 | 600 kB, PASS |
+| Enter Wayfarer / Explore Exterior package | 66.28 MB | 66.55 MB | +273 kB (+0.4 %) | 90 MB: 74 % used, PASS |
+| Viewer GLB nodes / meshes | 5,383 / 3,844 | 5,404 / 3,865 | +21 / +21 | — |
+| Viewer triangles (file) | 1.175 M | 1.192 M | +17.2 k (+1.5 %) | — |
+| Draw calls, whole ship / Fuel whole / assembly | 5,353 / 5,317 / — | 5,374 / 5,336 / 5,385 | +21 | — |
+| Rendered triangles, whole ship | 1.433 M | 1.450 M | +1.2 % | — |
+| Ready (model shown), SW | 5.95–6.03 s | 5.87–6.27 s | within run spread | — |
+| Frame time median, whole ship, SW | 2.97–3.18 s | 3.03–3.17 s | within run spread | — |
+| Frame time median, Fuel whole view, SW | 1.45 s | 1.48–1.60 s | +2 to +10 % (spread) | — |
+
+No optimization was needed: the 21 FPS nodes cost 0.9 % of the viewer download and 21 draw calls (0.4 %); the viewer stays inside its
+budget. The viewer was already at 96.6 % of its budget at V1; the next addition should come with the GFX-7 download work (Draco settings,
+selective loading) rather than a budget increase (TODO W). The play package's native EVA check fails locally on the known
+"resources still in use at exit" error after all 44 checks pass (pre-existing on main); the export here used `--no-native-check`. The first export stopped on a real release blocker: the ignition-failures study result was stale
+after V1.1 regenerated the engine radiation evidence, which would have failed the site build after a squash; `lab/studies/ignition-failures/model.py`
+was rerun (melt time 29.51 → 29.47 ms, the engine 2 t lighter; nothing else moves).
+
+### 11.5 Open items kept visible
+
+- **Fusion power ×7.31.** The engine point (1.567 GJ × 5,697 Hz × 4) gives 1/7.31 of the 261 TW the ship operating point needs
+  (section 10.3). Unresolved; owned by the engine workstream. Nothing in the FPS hides it: lines are sized for the ship's flows.
+- **Hydrogen energy coupling, SPECULATIVE.** The H2 is placed downstream of the burn and assumed to take momentum from the charged debris
+  (section 9.3). No coupling efficiency, mixing length or tip life is established; the NOMINAL 73.5 % charged share is the current
+  result and the 80 % B01 jet share is not claimed.
+- The drawn Vertex mass outside the ship's mass budget (11.1); the CONSERVATIVE frame case and the thrust-ring node joints (11.2); the
+  removal guidance fixture (11.3).
 
 ## 8. Next priorities
 

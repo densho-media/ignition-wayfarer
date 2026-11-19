@@ -676,9 +676,12 @@ def thermal_intercepts(s):
         if ln['name'].startswith('FPS_Bay_Target_Fabrication'):
             p, u = _at_dist(ln['points'], 0.15); out.append(dict(where=f"{ln['name']} at the bay fore face", center=p, axis=u, R=ln['radius']+q['gap_m']))
     for t in target_feeds(s):
-        p, u = _at_dist(t['points'], 0.25); out.append(dict(where=f"{t['name']} at the panel", center=p, axis=u, R=t['radius']+q['gap_m'], engine=t['engine']))
+        # on the radial-in leg, 0.3 m inside the turn: at the panel's own radius the collar would stand proud of the removal passage
+        d = math.dist(t['local'][0], t['local'][1])+0.3
+        p, u = _at_dist(t['points'], d); out.append(dict(where=f"{t['name']} inside the panel turn", center=p, axis=u, R=t['radius']+q['gap_m'], engine=t['engine']))
     for h in h2_injection(s):
-        p, u = _at_dist(h['line'], 0.05); out.append(dict(where=f"{h['line_name']} at the inlet", center=p, axis=u, R=h['line_radius']+q['gap_m'], engine=h['engine']))
+        d = math.dist(h['line_local'][0], h['line_local'][1])+0.3          # on the radial-in leg, inside the removal passage
+        p, u = _at_dist(h['line'], d); out.append(dict(where=f"{h['line_name']} inside the inlet turn", center=p, axis=u, R=h['line_radius']+q['gap_m'], engine=h['engine']))
     return dict(rings=out, tube=q['tube_m'])
 
 
@@ -752,6 +755,16 @@ def removal_check(s):
     ex.append(('FPS_N1_H2_Manifold', [ve.pol(q['manifold_x_m'], q['manifold_r_m'], 360*k/48) for k in range(49)], q['manifold_tube_m']))
     for k, pts in enumerate(h['ports_local']):
         ex.append((f"{h['ports_name']}_{k+1}", pts, h['port_radius']))
+    # V1.1 parts the engine carries (FPS_N1_Supports): the target-feed clamps and the cold-strap collars on its lines
+    pl = vc.placements(s)[0]; X, Y, Z = pl['axes']; o = pl['origin']
+    loc = lambda p: tuple(sum((p[i]-o[i])*A[i] for i in range(3)) for A in (X, Y, Z))
+    cs = cryo_supports(s)
+    for k, c in enumerate(q for q in cs['clamps'] if q['engine'] == 1):
+        ex.append((f'FPS_N1_Target_Clamp_{k+1}', [loc(p) for p in c['ring']], cs['ring_tube']))
+        ex.append((f'FPS_N1_Target_Clamp_Strut_{k+1}', [loc(p) for p in c['strut']], cs['strut_radius']))
+    ti = thermal_intercepts(s)
+    for k, r in enumerate(q for q in ti['rings'] if q.get('engine') == 1):
+        ex.append((f'FPS_N1_Intercept_{k+1}', [loc(p) for p in _ring_pts(r['center'], r['axis'], r['R'])], ti['tube']))
     return vc.removal_sweep(s, ex)
 
 # FPS V1.1 performance reconciliation (one shared energy account; nothing is tuned to agree)

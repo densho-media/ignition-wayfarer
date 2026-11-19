@@ -199,7 +199,7 @@ Candidates, in the order the evidence suggests; each becomes a TODO task with it
 4. **Draw calls.** Instancing or `BatchedMesh` of shared geometry with an ID map in the viewer; MultiMesh or merged static detail in
    Godot where nodes are not individually picked or animated.
 5. **Lights and shadows in Godot.** Respect 8 lights per mesh; prefer baked light for static interiors; few shadowed lights.
-6. **Download.** The viewer is at 11.38 MB of its 12 MB budget (Vertex 1.2). Draco quantization settings or meshopt, and selective
+6. **Download.** The viewer is at 11.70 MB of its 12 MB budget (FPS V1.1, 2026-11-19; 11.38 MB at Vertex 1.2). Draco quantization settings or meshopt, and selective
    loading of inspection detail, come before any budget increase (budgets are never raised silently). The 39.5 MB engine wasm is 63 % of
    the play download; a custom engine build stays out of scope unless measurements show download is the visitor problem.
 
@@ -276,7 +276,7 @@ Kept results go to `references/evidence/gfx_<task>.json` with the evidence class
 ## 12. Known bottlenecks and open evidence
 
 - **No real-hardware frame time** for any experience (TODO P05, P4 S11, FSH, WEB-003/004). Every bottleneck below is a hypothesis.
-- **Viewer:** 5,241 draw calls; continuous rendering when idle; log depth on every fragment; DPR up to 2; download at 95 % of budget.
+- **Viewer:** 5,374 draw calls (FPS V1.1, SW measurement 2026-11-19; 5,241 earlier); continuous rendering when idle; log depth on every fragment; DPR up to 2; download at 97.5 % of budget.
 - **Godot:** lights beyond 8 per mesh are dropped; LDR buffer; no baked light or probes yet; single-threaded physics plus rendering;
   `profile_views.gd` covers the walk only; no frame-time readout in the web build.
 - **Delivery:** engine wasm 39.5 MB (10 MB gzip), pack 23 MB (2026-10-22 numbers; current sizes in each `release.json`).
