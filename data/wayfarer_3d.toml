@@ -5575,7 +5575,7 @@ fusion_fuel = "deuterium"
 second_fuel = "helium-3"
 reaction_mass_species = "hydrogen"
 feedstock_source = "water ice (orbital/asteroid refinery; the ship receives processed D2, He-3 and H2)"
-he3_per_d_molar = { canon = 1.0, v0 = 0.0 }   # blend setpoint at the target fill: 1:1 is the D-3He canon point, 0 is the V0 D-D mode
+he3_per_d_molar = { canon = 1.0, v0 = 0.0 }   # blend setpoint at the target fill: 1:1 is the D-3He canon point and the V1 baseline (owner 2026-11-19); 0 is the D-D mode kept for evaluation
 open = "line sizes beyond first order, pump and conditioning hardware selection, target fabrication (engine side), H2 injection and energy coupling into the exhaust (engine side, SPECULATIVE), vent and purge sizing, PMDs for coast transfer, refuelling coupling standard"
 
 [fuel_system.feed]
@@ -5595,6 +5595,38 @@ support = { radius_m = 0.035, frame_r_m = 5.10 }
 relief = { size_m = 0.24, vent_radius_m = 0.05, turn_r_m = 5.70, outlet_r_m = 6.30, tee_m = 0.60, exit_offset_deg = -8.0 }   # exit off the casing strap lines
 purge = { radius_m = 0.30, length_m = 1.4, line_radius_m = 0.03, fwd_of_valve_m = 1.35, offset_m = 0.85 }
 refuel = { azimuth_deg = 242.8, r_m = 33.2, panel = [1.2, 1.6, 0.35], coupling_radius_m = 0.14, line_radius_m = 0.10 }
+
+# FPS V1 (owner brief 2026-11-19): the connections that close the chain from the farm to each engine's burn, and the engineering record.
+# D-3He is the fuel baseline (he3_per_d_molar.canon), D-D kept for evaluation; H2 the reaction mass. Built by components/fuel_feed.py:
+# hull feedthroughs on the six transfer trunks, run-tank inlet nozzles and valves, the inner-to-outer H2 ring-main crossover on the farm
+# deck, and on every engine a target feed from its service panel to its target magazine and a hydrogen injection train (fast valve, line,
+# manifold ring in the shield's shadow, dog-legged injector ports through the shadow shield to the burn face). The engine-side parts are
+# CANDIDATES for the engine workstream (docs/FUEL_SYSTEM.md "Interface contract"); engine-frame coordinates are metres in the Vertex
+# engine frame (x along the engine axis, y radial outward, z tangential; the service panel faces the hub at y < 0). Every dimension PROTOTYPE.
+[fuel_system.v1]
+version = "1.0.0"
+feedthrough = { radius_m = 0.20, length_m = 0.70, flange_radius_m = 0.30, flange_m = 0.06 }          # vacuum-jacketed hull feedthrough with a bellows sleeve
+tank_inlet = { tee_fwd_m = 0.9, valve_size_m = 0.28, nozzle_radius_m = 0.14, nozzle_into_m = 0.15, check_valve_m = 0.22 }   # trunks end at a tee on the run-tank axis; fill nozzle, inlet valve, one check valve per trunk
+h2_crossover = { azimuth_deg = 315.0, radius_m = 0.10, valve_size_m = 0.30 }                        # joins the inner H2 ring main to the outer one (the trunks leave the outer)
+target_feed = { radius_m = 0.07, z_m = -0.9, panel_x_m = -9.3, run_r_m = 5.85, x_turn_m = -7.6, inner_r_m = 3.6, x_magazine_m = -4.0, magazine_r_m = 1.75 }
+# H2 injection: the manifold ring sits forward of the thrust collar (aft of it the cage longerons, tie rods and cradle leave no annulus);
+# the eight ports run aft through drilled galleries in the collar, across the gap to the shield and dog-leg (axial, radially in, axial)
+# through the shield to the burn face; one fast valve per port. Port azimuths: one per gap between a cage longeron (22.5 + 45k deg)
+# and the next tie rod (11.25 + 45k), clear of the lithium feeders (28.5, 208.5), coil leads (73.5), the exchange rails and the
+# cluster's strut-ring tie in the z = 0 plane; the service-panel sector (157.5-191.25) carries none, its port moves to 196.9.
+h2_injection = { line_radius_m = 0.06, valve_size_m = 0.30, manifold_x_m = -8.1, manifold_r_m = 5.0, manifold_tube_m = 0.08, port_az_deg = [42.4, 87.4, 129.4, 196.9, 222.4, 264.4, 309.4, 348.75], port_radius_m = 0.035, port_bend_x_m = -12.3, port_in_x_m = -12.5, port_tip = [-12.86, 4.3], port_valve_x_m = -8.3, port_valve_m = 0.11 }
+flange = { radius_factor = 1.45, length_m = 0.05 }                                                 # bolted flange or coupling: drawn at every line end and bend
+pipe = [
+  { id = "LH2-TRUNK", species = "hydrogen", phase = "liquid", T_K = 20.0, p_MPa = 0.6, v_m_s = 2.0, material = "316LN stainless (inner), vacuum jacket 304L, MLI 30 layers", joints = "orbital butt welds; bayonet couplings at equipment" },
+  { id = "LD2-TRUNK", species = "deuterium", phase = "liquid", T_K = 20.0, p_MPa = 0.6, v_m_s = 2.0, material = "316LN stainless (inner), vacuum jacket 304L, MLI 30 layers", joints = "orbital butt welds; bayonet couplings at equipment" },
+  { id = "LHE3-TRUNK", species = "helium-3", phase = "liquid", T_K = 3.0, p_MPa = 0.3, v_m_s = 2.0, material = "316LN stainless (inner), 20 K intercept shield, vacuum jacket 304L", joints = "orbital butt welds; all-metal seals (He-3 leak tightness)" },
+  { id = "GH2-INJECT", species = "hydrogen", phase = "gas", T_K = 300.0, p_MPa = 2.0, v_m_s = 30.0, material = "Inconel 718 (fast valve body), 316L line, foil insulation near the shield", joints = "welded; flanged at the fast valve" },
+  { id = "TARGET-FEED", species = "deuterium", phase = "filled D-3He targets in a cold helium carrier", T_K = 20.0, p_MPa = 0.2, v_m_s = 5.0, material = "316L guide tube, vacuum jacket", joints = "flanged at the panel and the magazine" },
+]
+# Energy ledger of the burn (shares of the fusion power at the operating point; B01 directed_efficiency is the canon jet share). The
+# reaction products' split comes from vertex_radiation.sources; the coupling of the charged debris into the hydrogen and the nozzle is
+# SPECULATIVE. The ledger reports what closes and what does not.
+energy = { regime = "NOMINAL" }
 
 # Owner-independent trade-study constants (established nuclear and isotope data; docs/FUEL_SYSTEM.md "Trade study"). Q values in MeV,
 # neutron share of the released energy, reactants' mass per reaction in atomic mass units.
@@ -5630,13 +5662,20 @@ dot_speed_m_s = 3.0
 dot_spacing_m = 1.6
 dot_radius_m = 0.15
 throttle_h2_factors = [0.0, 0.5, 1.0, 1.5, 2.0, 3.0]
+# V1 views (drive = true: the state buttons also set the drive state of every engine, the `drive` key of each state)
+views = [
+  { id = "whole", label = "Whole propulsion", species = ["deuterium", "helium-3", "target", "hydrogen", "helium"], text = "The whole chain from the farm to the four burn faces." },
+  { id = "fuel", label = "Fuel flow", species = ["deuterium", "helium-3", "target"], text = "Deuterium and helium-3 from the farm to the run tanks, metered to the cluster bay, made into targets (not modeled, dashed) and fed to each engine's magazine." },
+  { id = "h2", label = "Propellant flow", species = ["hydrogen", "helium"], text = "Hydrogen from the farm to the run tanks, pumped and heated, through the header to each engine's manifold and injector ports." },
+  { id = "combined", label = "Combined", drive = true, species = ["deuterium", "helium-3", "target", "hydrogen", "helium"], text = "Fuel and propellant together with the drive: the state buttons also set the engines." },
+]
 states = [
-  { id = "STANDBY", label = "Standby", fuel = 0.0, h2 = 0.0, purge = 0.0, refuel = 0.0, text = "Run tanks isolated and held cold by their cryocoolers; every feed valve closed; boil-off handling OPEN." },
-  { id = "PREP", label = "Prep", fuel = 0.0, h2 = 0.0, purge = 1.0, refuel = 0.0, text = "Chill-down and inerting: helium purges the hydrogen lines and branches; outlet valves open, isolation valves still closed; sensors confirm pressure and temperature." },
-  { id = "IGNITION", label = "Ignition", fuel = 0.1, h2 = 0.0, purge = 0.0, refuel = 0.0, text = "The fuel meters send deuterium (and helium-3 at the blend setpoint) to the cluster bay at a PROTOTYPE 10 % ignition rate; hydrogen stays isolated so the burn starts on fuel alone." },
-  { id = "FEED", label = "Propellant feed", fuel = 1.0, h2 = 0.5, purge = 0.0, refuel = 0.0, text = "Boost pumps start; conditioned hydrogen reaches the header ring and the four engine branches at half the operating-point flow." },
-  { id = "ACTIVE", label = "Active", fuel = 1.0, h2 = 1.0, purge = 0.0, refuel = 0.0, text = "The operating point (B01 peak): fuel at full feed, hydrogen injected downstream of the burn at the operating flow." },
-  { id = "THROTTLE", label = "Throttle", fuel = 1.0, h2 = 2.0, purge = 0.0, refuel = 0.0, text = "Same jet power, more or less hydrogen: thrust rises as exhaust velocity falls (F = sqrt(2 P m)). Choose the hydrogen multiple below." },
-  { id = "SHUTDOWN", label = "Shutdown", fuel = 0.0, h2 = 0.0, purge = 1.0, refuel = 0.0, text = "Hydrogen stops first, then the fuel; isolation valves close and helium purges the hydrogen lines of residual propellant." },
-  { id = "REFUEL", label = "Refuel", fuel = 0.0, h2 = 0.0, purge = 0.0, refuel = 1.0, text = "A tanker umbilical on the refuelling receptacle fills the farm through one line per species to its ring main; the aft feed train stays isolated." },
+  { id = "STANDBY", drive = "OFF", label = "Standby", fuel = 0.0, h2 = 0.0, purge = 0.0, refuel = 0.0, text = "Run tanks isolated and held cold by their cryocoolers; every feed valve closed; boil-off handling OPEN." },
+  { id = "PREP", drive = "PRE_IGNITION", label = "Prep", fuel = 0.0, h2 = 0.0, purge = 1.0, refuel = 0.0, text = "Chill-down and inerting: helium purges the hydrogen lines and branches; outlet valves open, isolation valves still closed; sensors confirm pressure and temperature." },
+  { id = "IGNITION", drive = "IGNITION_PULSE", label = "Ignition", fuel = 0.1, h2 = 0.0, purge = 0.0, refuel = 0.0, text = "The fuel meters send deuterium (and helium-3 at the blend setpoint) to the cluster bay at a PROTOTYPE 10 % ignition rate; hydrogen stays isolated so the burn starts on fuel alone." },
+  { id = "FEED", drive = "SUSTAINED", label = "Propellant feed", fuel = 1.0, h2 = 0.5, purge = 0.0, refuel = 0.0, text = "Boost pumps start; conditioned hydrogen reaches the header ring and the four engine branches at half the operating-point flow." },
+  { id = "ACTIVE", drive = "SUSTAINED", label = "Active", fuel = 1.0, h2 = 1.0, purge = 0.0, refuel = 0.0, text = "The operating point (B01 peak): fuel at full feed, hydrogen injected downstream of the burn at the operating flow." },
+  { id = "THROTTLE", drive = "SUSTAINED", label = "Throttle", fuel = 1.0, h2 = 2.0, purge = 0.0, refuel = 0.0, text = "Same jet power, more or less hydrogen: thrust rises as exhaust velocity falls (F = sqrt(2 P m)). Choose the hydrogen multiple below." },
+  { id = "SHUTDOWN", drive = "SHUTDOWN", label = "Shutdown", fuel = 0.0, h2 = 0.0, purge = 1.0, refuel = 0.0, text = "Hydrogen stops first, then the fuel; isolation valves close and helium purges the hydrogen lines of residual propellant." },
+  { id = "REFUEL", drive = "OFF", label = "Refuel", fuel = 0.0, h2 = 0.0, purge = 0.0, refuel = 1.0, text = "A tanker umbilical on the refuelling receptacle fills the farm through one line per species to its ring main; the aft feed train stays isolated." },
 ]

@@ -393,11 +393,14 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   temperature- and radiation-dependent property tables; creep, fatigue and replacement intervals. **Done when:** each propulsion-chain layer has a screen
   verdict against Drive-sourced operating requirements and the owner has accepted or rejected it in the workbook.
 
-- [ ] **F06 — Fuel & Propellant System after V0 (owner brief 2026-11-18). V0 BUILT (PROTOTYPE), owner review pending.** `docs/FUEL_SYSTEM.md`,
-  `fuel_system.py`, `components/fuel_feed.py`, Explore Ship Fuel drawer. Open: the owner's D-D vs D-3He V0 choice (`he3_per_d_molar`);
-  the engine interfaces `IF_FPS_FUEL_BAY_*` and `IF_FPS_H2_ENGINE_0n` (target fabrication, injection point, energy coupling, a fuel rate
-  of 38 g/s per engine against the 185 g/s needed); hardware sizing for pumps, heaters and valves; vacuum jackets and intercepts; coast
-  transfer (PMDs, pressurisation); boil-off return; vent plume keep-outs; the refuelling approach and its tanker interface.
+- [ ] **F06 — Fuel & Propellant System after V1 (owner briefs 2026-11-18, 2026-11-19). V0 and V1 BUILT (PROTOTYPE), owner review pending.**
+  `docs/FUEL_SYSTEM.md` (section 9 for V1), `fuel_system.py`, `components/fuel_feed.py`, Explore Ship Fuel drawer. Open with the engine
+  workstream: target fabrication in the bay (conceptual, no geometry); adopting or replacing the candidate target feeds and injection
+  trains; the 0.34 vs 0.36 m panel service spacing; `CL_Nj_Strut_Ring_Tie` through the engine body; the fuel rate (the engines' pulse
+  point is 1/7.3 of the operating point); the NOMINAL energy ledger (73.5 % charged against the 80 % jet share); the H2 coupling
+  (SPECULATIVE). FPS side: cold-line supports past the corridor, collar galleries, fast-valve life at 5.7 kHz, hardware sizing for pumps,
+  heaters and valves, vacuum jackets and intercepts, coast transfer (PMDs, pressurisation), boil-off return, vent plume keep-outs, the
+  refuelling approach and its tanker interface; D-D and water as later alternatives.
 
 ## G — Complete habitat, survival and service implementation
 

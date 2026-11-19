@@ -2389,7 +2389,7 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
     plasma scan (Ti 150 keV, Te/Ti 0.1) is still 8× above. engineering/vertex/ section 8 reads `references/evidence/vertex_radiation.json`
     (written by `python3 src/wayfarer/vertex_radiation.py --evidence`, about 30 s).
 
-## Fuel & Propellant System (FPS V0)
+## Fuel & Propellant System (FPS V0, V1)
 
 `[fuel_system]` (PROTOTYPE, `src/wayfarer/fuel_system.py`, generator `components/fuel_feed.py`, built into `WF_STORAGE` when the
 Vertex cluster is the shown drive; the Fiji representation keeps `drive.cryo_feed`). Technical record, trade study and the model
@@ -2416,6 +2416,16 @@ inventory: `docs/FUEL_SYSTEM.md`. It joins the existing farm and the four feed r
 - **Explore Ship.** The Fuel drawer (`web/viewer/fuel.js`, `build.fuel_file` from `fuel_system.web`) isolates the feed train in its
   species colours, animates flow dots along every pipe and shows the eight operating states (standby, prep, ignition, propellant feed,
   active, throttle, shutdown, refuel) with the flows, thrust and exhaust velocity the shared numbers give: a CONCEPTUAL display.
+- **V1 (owner brief 2026-11-19; D–³He baseline, H2 reaction mass; `[fuel_system.v1]`).** The chain is closed from the farm to every burn
+  face: an H2 crossover joins the inner H2 ring main to the outer one; jacketed feedthroughs carry the six transfer trunks through the aft
+  hull skin; the trunks end at a tee on each run tank's axis with a fill nozzle into its cap, an inlet valve and a check valve per trunk.
+  On every engine (CANDIDATES for the engine workstream, built from its placement and stations): a target feed from the service panel's
+  `TARGET_FEED` slot to the target magazine, and a hydrogen injection train (control valve, manifold ring forward of the thrust collar,
+  eight fast-valved injector ports through the collar and dog-legged through the shadow shield to the burn face). Target fabrication in
+  the cluster bay stays conceptual (no geometry). Pipe classes with bore and wall, flanges and instrument sleeves; the energy ledger
+  (the engine burn model's NOMINAL charged share, 73.5 %, falls short of the 80 % jet share) and the fuel-rate finding (the engines' own
+  pulse point is 1/7.3 of the ship operating point) are in docs/FUEL_SYSTEM.md section 9. The Fuel drawer adds the whole-chain, fuel,
+  propellant and combined views (the last also sets the drive state), a component list and markers where flows end unresolved.
 
 ## Limits
 

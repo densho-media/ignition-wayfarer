@@ -1,6 +1,9 @@
 # Fuel & Propellant System (FPS)
 
-Owner brief 2026-11-18 ("Wayfarer Propulsion — Fuel & Propellant System"). Version 0, PROTOTYPE geometry. Code: `src/wayfarer/fuel_system.py`
+Owner briefs 2026-11-18 ("Wayfarer Propulsion — Fuel & Propellant System", V0) and 2026-11-19 ("Fuel & Propellant System V1, Continue
+Engineering, Modeling, and Engine Integration": D–³He fuel baseline with D–D kept for evaluation, H2 reaction mass with water kept as an
+alternative, feedstock water ice refined off-ship). Version 1 (section 9) closes the chain from the farm to every engine's burn.
+PROTOTYPE geometry. Code: `src/wayfarer/fuel_system.py`
 (pure: flows, regimes, trades, routes, fit screen), `src/wayfarer/components/fuel_feed.py` (Blender, `WF_STORAGE`), parameters
 `[fuel_system]` in `data/wayfarer_3d.toml`. The forward storage it starts from is TANK-AXIAL (`fuel_storage.py`, docs/MODEL.md "Tank-farm
 load path"). `python3 src/wayfarer/fuel_system.py` prints every number quoted here.
@@ -111,8 +114,8 @@ Positions are ship frame (+X bow); the existing farm items are documented in doc
 | FPS-RV / VT | relief valves, vents, tee outlets (4) | Safety | boil-off and overpressure, non-propulsive | run tank → space | X -93.85, hull skin | ESTABLISHED | 2 | blockout | `FPS_Relief_Valve_*`, `FPS_Vent_*` |
 | FPS-PG | He purge bottles and lines (2) | Safety | inert H2 lines | bottle → isolation valve | X -110.95 | ESTABLISHED | 2 | blockout | `FPS_Purge_He_*` |
 | FPS-RF | refuelling receptacle, couplings, fill lines, valves | Refuelling | receive D2, He-3, H2 | tanker → ring mains | farm deck rim, az 242.8° | ESTABLISHED | 2 | blockout | `FPS_Refuel_*` |
-| FPS-TF | target fabrication / fill | Fuel conditioning (engine side) | make D or D-3He targets | `IF_FPS_FUEL_BAY_*` → magazine | cluster bay | SPECULATIVE rate | 1 | planned (engine thread) | — |
-| FPS-INJ | H2 injection manifold | Propulsion interface (engine side) | put H2 into the exhaust | `IF_FPS_H2_ENGINE_0n` → plume | engine | SPECULATIVE | 1 | planned (engine thread) | — |
+| FPS-TF | target fabrication / fill | Fuel conditioning (engine side) | make D or D-3He targets | `IF_FPS_FUEL_BAY_*` → magazine | cluster bay | SPECULATIVE rate | 1 | conceptual placeholder (V1: dashed leg in the viewer, no geometry) | — |
+| FPS-INJ | H2 injection train | Propulsion interface (engine side) | put H2 into the exhaust | `IF_FPS_H2_ENGINE_0n` → burn face | engine | SPECULATIVE | 1 | V1 candidate, section 9 | `FPS_N*_H2_*` |
 | FPS-PMD | propellant management devices | Propellant storage | coast transfer without settling | in vessels | farm, run tanks | PLAUSIBLE | 3 | planned | — |
 | FPS-MLI | MLI and cooled shields | Insulation | 0.3 / 0.15 / 0.01 W/m² | | in the 0.30 m wall stack | ESTABLISHED | 3 | in wall stack, not drawn | — |
 
@@ -178,7 +181,136 @@ It is a CONCEPTUAL display. The flows are fractions of the operating point, with
 is a display value. Nothing here is a fluid simulation. Browser check (2026-11-18, software renderer SW, local export without the walk):
 no console errors, the bookmark reopens, and the phone layout keeps the drawer usable.
 
+## 9. Version 1: the chain closed to every engine
+
+### 9.1 Connection audit (M1, 2026-11-19, repository state at 80933b0)
+
+Status words: **connected** (geometry meets geometry), **interface only** (the parts stop at a declared empty with a gap), **missing**.
+
+| Segment | Before V1 | Gap | V1 |
+| --- | --- | --- | --- |
+| Vessels → ring mains (13 outlets, valves) | connected | 0 | unchanged |
+| Inner H2 ring main (`Fuel_Ring_Main_H2_I`, vessels I2, I4) → trunks | **missing**: both H2 trunks leave the outer main, so 2 of 5 H2 vessels could not reach the engines | 14.25 m (r 13.5 → 27.75) | `FPS_H2_Crossover` + valve at az 315° (clear of every vessel) |
+| Ring mains → transfer trunks (exterior legs) | connected | 0 | unchanged |
+| Trunk exterior leg → interior leg at the aft hull skin (6×) | interface only (`IF_FUEL_HULL_*`) | 0.30 m across the skin | `FPS_Feedthrough_*`: jacketed sleeve, bellows, flange each side, process line through |
+| Interior leg → run tank (6×) | **defective**: the trunks entered the run tank through its cap and left through its barrel; no valve | inside the tank | trunks end at a tee on the tank axis 0.9 m forward of the cap; `FPS_Tank_Inlet_0n` nozzle into the cap, inlet valve, one `FPS_Check_Valve_*` per trunk |
+| Run tanks → bay / header → engine collars (V0) | connected | 0 | unchanged |
+| Bay fuel inlets → `CL_Trunk_TARGET_FEED` | **missing**: target fabrication has no geometry | 8 m through the bay | conceptual leg only (engine workstream owns the bay); dashed in the viewer |
+| `CL_Nj_Line_TARGET_FEED` → engine target magazine | interface only: the line ends on the panel's hub face; nothing inside the engine | ~5 m | `FPS_Nj_Target_Feed` from the panel's forward face to the magazine (CANDIDATE) |
+| `IF_FPS_H2_ENGINE_0n` → burn | **missing**: no injection hardware | to the burn face | `FPS_Nj_H2_Injection_Line`, control valve, `FPS_Nj_H2_Manifold`, `FPS_Nj_H2_Injectors` (8 ports, fast valves) (CANDIDATE) |
+| Engine magazine → transfer → launcher → bore → burn | connected (engine-owned) | 0 | unchanged |
+
+Findings for the engine workstream: the cluster spaces the six panel services at 0.34 m (`CL_Nj_Line_*` end at z = (i − 2.5)·0.34) and the
+engine its panel interfaces at 0.36 m (`IF_VTX_*`), so `TARGET_FEED` lands 5 cm apart (z −0.85 against −0.90; the FPS feed follows the
+engine's −0.90). The service panel (r 5.6 to 6.1) reaches into the cradle torus (inner radius 5.92). `CL_Nj_Strut_Ring_Tie` runs from
+the cradle's outer point (engine frame Y +6.6) to the thrust ring (Y −18.7) in the engine's Z = 0 plane, so it passes through the collar
+and cartridge at X ≈ −9.3; the FPS keeps its ports out of that plane.
+
+### 9.2 What was built (M2, M3, M4)
+
+Fuel: farm → crossover/ring mains → trunks → feedthroughs → run-tank tees and nozzles → run tanks 01 (D2), 02 (He-3) → V0 feed lines to the
+bay → (target fabrication, conceptual) → `CL_Trunk_TARGET_FEED` → `CL_Nj_Line_TARGET_FEED` → service panel → `FPS_Nj_Target_Feed`
+(forward along the collar clear of the lithium manifold and cryogen header at r 5.85, radially in at X −7.6 beside the hub-side pulse
+pod, forward outside the cartridge shell at r 3.7 and in through it at X −4.0) → `VTX_Target_Magazine` → the engine's own transfer,
+launcher and bore. Engine-frame coordinates: X along the engine axis, Y radial outward, Z tangential.
+
+Hydrogen: farm (both mains) → trunks → run tanks 03/04 → V0 trunks, header and branches → `IF_FPS_H2_ENGINE_0n` (X −7.9, r 5.9, az 180°)
+→ `FPS_Nj_H2_Control_Valve` → `FPS_Nj_H2_Manifold` (ring X −8.1, R 5.0, forward of the collar: aft of it the cage longerons, tie rods and
+cradle leave no free annulus) → eight `FPS_Nj_H2_Injectors`, one in each gap between a cage longeron (22.5° + 45°k) and the next tie rod
+(11.25° + 45°k), at 42.4°, 87.4°, 129.4°, 196.9°, 222.4°, 264.4°, 309.4° and 348.75° (clear of the lithium feeders, coil leads, exchange
+rails and the cluster's strut-ring tie; the service-panel sector carries none), each with a fast valve at X −8.3, through drilled galleries in the thrust collar, across the gap and into the shadow shield
+at r 5.0, radially in to r 4.3 at X −12.5, then axially to the burn face at X −12.86 (the tips, `IF_FPS_H2_INJECT_Nj`).
+
+Pipe classes (`[fuel_system.v1] pipe`, `fuel_system.pipe_spec`; bore at the class velocity, wall by Barlow at 4× the design pressure,
+316L at 140 MPa, weld efficiency 0.85, +1 mm; the drawn radius is the vacuum jacket or insulation):
+
+| Class | Fluid | Flow per line | Bore mm | Wall mm | OD mm | Material | Joints |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| LH2-TRUNK | H2 liquid, 20 K, 0.6 MPa | 192 g/s | 42 | 1.4 | 44 | 316LN inner, 304L vacuum jacket, MLI 30 layers | orbital butt welds; bayonets at equipment |
+| LD2-TRUNK | D2 liquid, 20 K, 0.6 MPa | 296 g/s | 33 | 1.3 | 35 | as LH2 | as LH2 |
+| LHE3-TRUNK | He-3 liquid, 3 K, 0.3 MPa | 444 g/s | 69 | 1.3 | 72 | 316LN, 20 K intercept shield, vacuum jacket | welds; all-metal seals (He-3 is scarce) |
+| GH2-INJECT | H2 gas, 300 K, 2.0 MPa | 96 g/s | 50 | 2.7 | 56 | 316L line, Inconel 718 valve bodies, foil insulation near the shield | welded; flanged at valves |
+| TARGET-FEED | filled targets in cold He carrier, 20 K | 185 g/s of fuel | 25 (capsule) | 1.1 | 27 | 316L guide tube, vacuum jacket | flanged at the panel and the magazine |
+
+Flanges are drawn at every V1 line end and bend (`FPS_*_Flanges`): an engine removal breaks the target feed at the panel and the H2 line at
+its inlet. Each engine's target feed and H2 line carry a P/T/flow sleeve (`FPS_Nj_Instruments`). Cold-line supports beyond V0's corridor
+clamps, the collar galleries' detail and the fast valves' life at 5.7 kHz are OPEN.
+
+### 9.3 How the hydrogen gets its energy (SPECULATIVE, not validated)
+
+Before each pulse the fast valves puff hydrogen gas from the eight tips into the region ahead of the burn face. The pulse's X-rays ionise
+it within nanoseconds; the expanding charged debris shell (D–³He products at MeV energies) sweeps it up and shares momentum with it by
+collisions and the compressed field (a snowplow). The heated mix is then turned into the exhaust by the loops L1 to L4 like the debris
+itself. This sets the propellant's place: downstream of the burn, never in the target. What is not established: the coupling efficiency,
+the mixing length against the 0.18 ms pulse period, ablation of the tips and the burn face, and whether a puff survives the field. The
+operating point's 80 % jet share assumes the coupling works.
+
+### 9.4 Energy and fuel rate (M6)
+
+`fuel_system.energy_ledger` puts the engine workstream's burn model (`vertex_radiation.sources`) beside B01; nothing is tuned to agree:
+
+| Burn model case | Photons | Neutrons | Charged debris | Against the 80 % canon jet share |
+| --- | --- | --- | --- | --- |
+| LOW (hot-ion lower bound) | 12.5 % | 4.4 % | 83.1 % | closes, 3.1 % left for coupling losses and intercepted heat |
+| NOMINAL | 21.7 % | 4.8 % | 73.5 % | **does not close**: 6.5 % short |
+| CONSERVATIVE | 84.8 % | 2.9 % | 12.4 % | does not close |
+
+At 261 TW the NOMINAL photons are 57 TW and the neutrons 12.5 TW. The canon's absorbed fraction (4×10⁻⁵, about 10 GW) is what the shield
+and armour must reject; the rest leaves the open geometry. The injection hardware sits in the shield's shadow and adds no line of sight.
+
+Fuel rate: one engine's own pulse point is 6.63 mg at 5,697 Hz, 37.8 g/s, 8.9 TW of fusion. Four engines make 35.7 TW, **1/7.3** of the
+ship operating point's 261 TW, which needs 185 g/s of fuel per engine. The "38 vs 185 g/s" gap is therefore the same factor in power, not
+a feed shortfall. The FPS feeds the operating point and changes neither side; the engine workstream owns pulse rate and target mass.
+
+### 9.5 Interface contract with the engine workstream
+
+The FPS-side parts inside an engine are CANDIDATES (`owner_workstream = ENGINE (candidate)`): built by `components/fuel_feed.py` in
+`WF_STORAGE` from the engine's own placement (`vertex_cluster.placements`, `to_ship`) and stations (`vertex_engine.stations`), so they follow
+the engine if it moves. No engine or cluster file is edited.
+
+| Interface | FPS delivers | Engine provides | State |
+| --- | --- | --- | --- |
+| `IF_FPS_FUEL_BAY_D2` / `HE3` | metered D2 (~20 K) and He-3 (~3 K), 296 and 444 g/s peak, blend set at the target fill (D–³He 1:1) | target fabrication in the bay, fill to the `TARGET_FEED` trunk | OPEN (no geometry) |
+| `TARGET_FEED` panel slot → `IF_FPS_TARGET_Nj` | target feed tube from the panel to the magazine, flanged both ends | panel slot, magazine inlet, carrier gas and rate | CANDIDATE |
+| `IF_FPS_H2_ENGINE_0n` | conditioned H2 gas, 300 K, 2 MPa, 96 g/s per engine | — | built |
+| `IF_FPS_H2_INJECT_Nj` | control valve, manifold, 8 fast-valved ports to the burn face | galleries in the collar and shield, timing to the pulse | CANDIDATE |
+| Energy transfer | H2 placed downstream of the burn | coupling of the debris into the H2 (SPECULATIVE) | OPEN |
+| Cooling | the H2 line is warm gas; the target feed is jacketed and cold | the shield and armour reject the absorbed heat | engine |
+| Power and control | fast-valve drive (~kW class per engine, PROTOTYPE), sensors to the drive controller | pulse timing signal | OPEN |
+| Mounting and service | lines clamp to the collar; the engine removal breaks at the panel and the H2 inlet flanges | removal axis aft (`IF_VTX_ENGINE_0n_REMOVAL`) | PLAUSIBLE |
+
+### 9.6 Model inventory, V1 status
+
+Statuses: existing and connected; existing but not connected; missing and required; conceptual placeholder; integrated and geometrically
+validated (built, clash-screened by `work/fuel-propellant/probe.py`, whole-ship inspection PASS); assumptions unresolved.
+
+| ID | Component | Status | Model |
+| --- | --- | --- | --- |
+| FPS-XO-H2 | H2 inner-outer crossover + valve | integrated and geometrically validated | `FPS_H2_Crossover*` |
+| FPS-FT-* | hull feedthroughs (6) | integrated and geometrically validated | `FPS_Feedthrough_*` |
+| FPS-TI-01..04, FPS-VL-CK-* | run-tank nozzles, inlet valves, check valves | integrated and geometrically validated | `FPS_Tank_Inlet_*`, `FPS_Check_Valve_*` |
+| FPS-TF | target fabrication in the bay | conceptual placeholder | dashed viewer leg |
+| FPS-TF-N1..N4 | target feeds, panel → magazine | integrated and geometrically validated; assumptions unresolved (carrier, rate) | `FPS_Nj_Target_Feed` |
+| FPS-IJ-N1..N4 | H2 control valve, line, manifold, 8 ports with fast valves | integrated and geometrically validated; assumptions unresolved (coupling, valve life) | `FPS_Nj_H2_*` |
+| FPS-FL, FPS-IN | flanges, instrument sleeves | integrated | `FPS_*_Flanges`, `FPS_Nj_Instruments` |
+| FPS-PMD, cold-line supports past the corridor, collar galleries | — | missing and required | — |
+
+Physical integration (geometry joins geometry) is separate from conceptual interfaces: the bay leg and the energy coupling are conceptual;
+every other V1 segment is modeled.
+
+### 9.7 Explore Ship (M5)
+
+The Fuel drawer adds views: **Whole propulsion** (farm to burn faces), **Fuel flow** (D, He-3 and target lines with their vessels),
+**Propellant flow** (hydrogen and its helium purge) and **Combined** (everything, the energy readout, and the drive set to match the
+state: Prep → pre-ignition, Ignition → ignition pulse, Active/Feed/Throttle → sustained, Shutdown, Standby/Refuel → off). Each view
+ghosts the rest of the ship, tints its objects by species and frames them. Dots run only on modeled pipes (farm outlets, ring mains as
+loops, trunks, feedthroughs, inlets, the aft train, the cluster's target-feed lines, each engine's feed, line and ports); the bay leg is
+dashed. Amber markers show where a flow ends unresolved (bay inlets, magazines, injector tips, the refuelling receptacle), listed with
+their notes. A component list frames and selects any object in the view. Bookmark: `#fuel=ACTIVE.combined`.
+
 ## 8. Next priorities
+
+V1 status and the remaining work are in section 9. Still open from V0:
 
 Phase 5: choose the hardware for pumps, heaters and valves; design the jackets and thermal intercepts; solve coast transfer; set the
 vent plume keep-outs; plan the refuelling approach. Phase 6: re-run the trades with the engine's target and injection answers, and

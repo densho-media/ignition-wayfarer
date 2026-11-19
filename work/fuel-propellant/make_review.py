@@ -1,11 +1,14 @@
-"""Build work/fuel-propellant/REVIEW_FUEL-PROPELLANT.blend: the owner review file for FPS V0 (opens on the aft feed train, nothing to run).
+"""Build work/fuel-propellant/REVIEW_FUEL-PROPELLANT.blend: the owner review file for FPS V0 and V1 (opens on the aft feed train, nothing to run).
 
   /snap/bin/blender -b --factory-startup --python work/fuel-propellant/make_review.py -- [--render DIR]
 
 The built ship of this branch is appended and made local. Every FPS object and the four feed run tanks are also linked into the pink
 WORK_FUEL_PROPELLANT collection (the generator still owns them). Solid shading with object colour shows the functional species colours.
 The aft hull skin, spine casing and radiator blades are hidden in this file only, and every other part is dark grey, so the train is visible. Scenes: FUEL_PROPELLANT (opens: the feed train alone) and SHIP_CONTEXT (the whole ship). Cameras: CAM_FPS_AFT_TRAIN (opens on it),
-CAM_FPS_BRANCHES (header and engine branches from aft), CAM_FPS_REFUEL (the receptacle on the farm deck). Study helper; nothing reads it.
+CAM_FPS_BRANCHES (header and engine branches from aft), CAM_FPS_REFUEL (the receptacle on the farm deck); V1: CAM_FPS_ENGINE_N1 (target
+feed and H2 injection on engine N1, with the cluster), CAM_FPS_INJECTORS_N1 (manifold and ports from outboard), CAM_FPS_RUN_TANK_INLETS,
+CAM_FPS_FEEDTHROUGHS and CAM_FPS_CROSSOVER. The farm's vessels, mains and trunks and the propulsion cluster are shown in the opening scene
+too (the cluster grey). Study helper; nothing reads it.
 """
 import argparse
 import math
@@ -58,13 +61,14 @@ for c in ship.children_recursive:
     if c.name.split('.')[0] in ('40_SIM_RIG', '30_CAMERAS', '20_HUMAN_SCALE'):
         c.hide_viewport = True; c.hide_render = True
 work = bpy.data.collections.new('WORK_FUEL_PROPELLANT'); work.color_tag = 'COLOR_07'; scene.collection.children.link(work)
-fps = [o for o in bpy.data.objects if o.name.startswith(('FPS_', 'IF_FPS_', 'Feed_Run_Tank'))]
-for o in fps:
+fps = [o for o in bpy.data.objects if o.name.startswith(('FPS_', 'IF_FPS_', 'Feed_Run_Tank', 'Fuel_Tank_', 'Fuel_Ring_Main', 'Fuel_Transfer', 'Fuel_Outlet', 'Fuel_Valve'))]
+context = [o for o in bpy.data.objects if o.name.startswith('Assembly_PROPULSION')]
+for o in fps+context:
     if o.name not in work.objects:
         work.objects.link(o)
 sys.path.insert(0, str(ROOT/'src/wayfarer'))
 import functional_colors as fc  # noqa: E402
-SPC = {'deuterium': 'DEUTERIUM', 'helium-3': 'HELIUM3', 'hydrogen': 'HYDROGEN'}
+SPC = {'deuterium': 'DEUTERIUM', 'helium-3': 'HELIUM3', 'hydrogen': 'HYDROGEN', 'target': 'HELIUM3'}
 hidden = []
 for c in ship.children_recursive:                 # the radiator blades would hide the aft train from every side
     if c.name.split('.')[0] == '13_THERMAL':
@@ -73,7 +77,7 @@ for o in bpy.data.objects:
     if o.name.startswith(CUT):
         o.hide_viewport = True; o.hide_render = True; hidden.append(o.name)
     elif o in fps:                                # species colour (functional_colors); helium purge and service parts cream
-        key = SPC.get(o.get('species', '')) or SPC.get(o.get('fuel_family', '')) or 'SERVICE'
+        key = SPC.get(o.get('species', '')) or SPC.get(o.get('fuel_family', '')) or SPC.get(o.get('fuel_species', '')) or 'SERVICE'
         o.color = fc.PALETTE[key][1]
     elif o.instance_type != 'COLLECTION':         # an instancer's colour would paint everything it instances
         o.color = (0.30, 0.31, 0.33, 1.0)
@@ -81,6 +85,14 @@ cams = bpy.data.collections.new('WORK_FUEL_PROPELLANT_CAMERAS'); work.children.l
 CAMS = [camera('CAM_FPS_AFT_TRAIN', (-54.0, -72.0, 38.0), (-118.0, 0.0, 0.0)),
         camera('CAM_FPS_BRANCHES', (-126.0, 0.0, 42.0), (-138.0, 0.0, 0.0), lens=30),
         camera('CAM_FPS_REFUEL', (101.0, -30.0, -42.0), (109.5, -13.0, -25.0), lens=35)]
+import vertex_cluster as vcl  # noqa: E402
+import spec as _spec  # noqa: E402
+_s = _spec.load()[0]; _pl = vcl.placements(_s)[0]
+CAMS += [camera('CAM_FPS_ENGINE_N1', vcl.to_ship(_pl, (-2.0, -14.0, -9.0)), vcl.to_ship(_pl, (-8.0, -4.5, 0.0)), lens=32),
+         camera('CAM_FPS_INJECTORS_N1', vcl.to_ship(_pl, (-11.0, 9.0, 12.0)), vcl.to_ship(_pl, (-10.5, 0.0, 0.0)), lens=32),
+         camera('CAM_FPS_RUN_TANK_INLETS', (-82.0, -9.0, 12.0), (-93.0, 0.0, 0.0), lens=35),
+         camera('CAM_FPS_FEEDTHROUGHS', (99.0, 16.0, 13.0), (92.27, 2.5, 1.5), lens=35),
+         camera('CAM_FPS_CROSSOVER', (124.0, 30.0, -34.0), (109.5, 14.6, -14.6), lens=35)]
 for c in CAMS:
     cams.objects.link(c)
 scene.camera = CAMS[0]
@@ -90,7 +102,7 @@ ctx = bpy.data.scenes.new('SHIP_CONTEXT'); ctx.collection.children.link(ship); c
 scene.view_layers[0].layer_collection.children[ship.name].exclude = True
 txt = bpy.data.texts.new('README_FUEL_PROPELLANT')
 txt.write(__doc__ + f'\nObjects in WORK_FUEL_PROPELLANT: {len(fps)}. Hidden in this file only: {", ".join(sorted(set(n.split(".")[0] for n in hidden)))}.\n'
-          'Record: docs/FUEL_SYSTEM.md. All dimensions PROTOTYPE; engine interfaces IF_FPS_* OPEN.\n')
+          'Record: docs/FUEL_SYSTEM.md (V1: section 9). All dimensions PROTOTYPE; engine-side parts are CANDIDATES; engine interfaces IF_FPS_* OPEN.\n')
 for sc in (scene, ctx):
     sh = sc.display.shading; sh.light = 'STUDIO'; sh.color_type = 'OBJECT'; sh.show_cavity = True
     sc.render.engine = 'BLENDER_WORKBENCH'; sc.render.resolution_x, sc.render.resolution_y = 1600, 1000

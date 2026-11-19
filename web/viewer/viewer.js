@@ -876,6 +876,8 @@ function ensureFuel() {
   if (!buildInfo?.fuel_file) return Promise.resolve(null);
   fuelLoading ??= import('./fuel.js').then(m => {
     fuel = m.createFuel({ THREE, scene, byId, records, panel: fuelPanel, update, changed: writeHash,
+                          pick: id => { const r = byId.get(id); if (r) select(r); },
+                          drive: name => { if (drive?.states[name]) { driveState.chosen = new Set(Object.keys(drive.engines)); setDrive(name, Object.keys(drive.engines)); } },
                           frameIds: ids => {
                             const b = new THREE.Box3();
                             for (const r of records) if (ids.has(r.id)) for (const mesh of r.meshes) b.expandByObject(mesh);

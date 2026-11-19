@@ -9,6 +9,14 @@ from mathutils.bvhtree import BVHTree
 
 ALLOWED = ('Hull_Aft_Body', 'Feed_Run_Tank', 'Engineering_Envelope', 'Reactor_Shadow_Shield', 'CL_ELECTRICAL', 'Primary_Frame', 'Fuel_Ring_Main', 'Fuel_Deck',
            'Brayton')
+# FPS V1 designed contacts, per object prefix: the feedthroughs, inlets and check valves sit on the transfer trunks they join; the target
+# feed passes through the cartridge shell (VTX_STRUCTURE) into the magazine (VTX_FUEL); the flanges mate the panel and the magazine; the
+# injector ports pass the thrust collar (VTX_STRUCTURE) and the shadow shield and burn-face armour (VTX_SHIELDING) through galleries.
+ALLOWED_BY = {'FPS_Feedthrough': ('Fuel_Transfer',), 'FPS_Farm_Flanges': ('Fuel_Transfer',), 'FPS_Tank_Inlet': ('Fuel_Transfer',),
+              'FPS_Check_Valve': ('Fuel_Transfer',), 'FPS_H2_Crossover': ('Fuel_Ring_Main',),
+              '_Target_Feed': ('VTX_STRUCTURE', 'VTX_FUEL'), '_Flanges': ('VTX_FUEL', 'VTX_SERVICE'), '_H2_Injectors': ('VTX_STRUCTURE', 'VTX_SHIELDING')}
+def allowed(fname, other):
+    return any(a in other for a in ALLOWED) or any(k in fname and any(a in other for a in v) for k, v in ALLOWED_BY.items())
 dg = bpy.context.evaluated_depsgraph_get()
 items = []
 def _poly_c(o, j):
@@ -47,8 +55,8 @@ for f in fps:
                 r = o['bvh'].find_nearest(v)
                 if r[0] is not None and r[3] < near[0]:
                     near = (r[3], o['name'])
-    bad = [h for h in hits if not any(a in h for a in ALLOWED)]
-    out[f['base']] = dict(overlaps=hits, unexpected=bad, nearest=[round(near[0], 3), near[1]], where={k: v for k, v in f.get('where', {}).items() if k in bad})
+    bad = [h for h in hits if not allowed(f['base'], h)]
+    out[f['base']] = dict(overlaps=hits, unexpected=bad, nearest=[round(near[0], 3), near[1]], where={k: v for k, v in f.get('where', {}).items() if k in bad}, designed={k: v for k, v in f.get('where', {}).items() if k not in bad})
 summary = {k: v for k, v in out.items() if v['unexpected']}
 res = dict(objects=len(fps), unexpected=len(summary), detail=out)
 path = sys.argv[sys.argv.index('--')+1] if '--' in sys.argv and len(sys.argv) > sys.argv.index('--')+1 else None
