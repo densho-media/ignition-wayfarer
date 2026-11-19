@@ -1,5 +1,5 @@
 // FPS V1.1 release readiness, item 2: Explore Ship cost at V1 and V1.1 in the same headless browser (SW evidence class: SwiftShader, the
-// numbers are relative only, never device performance). node work/fuel-propellant/perf.js <site_dir> <out.json> [port]
+// numbers are relative only, never device performance). node lab/studies/fuel-propellant/perf.js <site_dir> <out.json> [port]
 // Per site, two runs: load (ready_ms, transferred bytes), the default whole-ship view and the Fuel drawer's whole and assembly views
 // (draw calls, triangles, frame-time median and p95 over 12 s of requestAnimationFrame).
 const { chromium } = require('playwright');

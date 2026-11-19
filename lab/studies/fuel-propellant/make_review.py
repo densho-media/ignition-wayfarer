@@ -1,6 +1,6 @@
-"""Build work/fuel-propellant/REVIEW_FUEL-PROPELLANT.blend: the owner review file for FPS V0, V1 and V1.1 (opens on the whole rear propulsion assembly, nothing to run).
+"""Build runs/fps-review/REVIEW_FUEL-PROPELLANT.blend: the owner review file for FPS V0, V1 and V1.1 (opens on the whole rear propulsion assembly, nothing to run).
 
-  /snap/bin/blender -b --factory-startup --python work/fuel-propellant/make_review.py -- [--render DIR]
+  /snap/bin/blender -b --factory-startup --python lab/studies/fuel-propellant/make_review.py -- [--render DIR]
 
 The built ship of this branch is appended and made local. Every FPS object and the four feed run tanks are also linked into the pink
 WORK_FUEL_PROPELLANT collection (the generator still owns them). Solid shading with object colour shows the functional species colours.
@@ -21,9 +21,9 @@ import bpy
 from mathutils import Vector
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[1]
+ROOT = HERE.parents[2]
 SHIP = ROOT/'assets/wayfarer/WF_WAYFARER_001.blend'
-a = argparse.ArgumentParser(); a.add_argument('--out', type=Path, default=HERE/'REVIEW_FUEL-PROPELLANT.blend'); a.add_argument('--render', type=Path)
+a = argparse.ArgumentParser(); a.add_argument('--out', type=Path, default=ROOT/'runs/fps-review/REVIEW_FUEL-PROPELLANT.blend'); a.add_argument('--render', type=Path)
 a = a.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
 CUT = ('Hull_Aft_Body', 'Prod_SP_CASING', 'Casing_Seams', 'Casing_Access', 'Survival_Crawler_Rail', 'Drone_Rail_DS-13')
 
@@ -130,5 +130,6 @@ if a.render:
         sc.camera = CAMS[0]
 bpy.context.preferences.filepaths.save_version = 0
 bpy.ops.file.pack_all()
+a.out.parent.mkdir(parents=True, exist_ok=True)
 bpy.ops.wm.save_as_mainfile(filepath=str(a.out), compress=True)
 print('WF_REVIEW saved', a.out, len(fps), flush=True)

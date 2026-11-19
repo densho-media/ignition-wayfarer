@@ -9,7 +9,7 @@ read the Vertex cluster at all: the drive is the 250 t 'drive_package' allowance
              allowance, the context the delta sits in.
 Mission targets (0.016 c, delta-v, the drive's power cap, the owner's case E) are held; only the consequences move.
 
-    python3 work/fuel-propellant/readiness.py [repo_root [v1_frame_t]] > out.json
+    python3 lab/studies/fuel-propellant/readiness.py [repo_root [v1_frame_t]] > out.json
 """
 import copy
 import json
@@ -17,7 +17,7 @@ import math
 import sys
 from pathlib import Path
 
-ROOT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path(__file__).resolve().parents[2]
+ROOT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT/'src/wayfarer'))
 from spec import load                                     # noqa: E402
 import mass_model as mm                                   # noqa: E402

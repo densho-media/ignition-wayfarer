@@ -1,9 +1,9 @@
-"""FPS V1.1 pipe-endpoint screen (study code, work/fuel-propellant; pure, no Blender): every end of every FPS, farm-chain and cluster
+"""FPS V1.1 pipe-endpoint screen (check tool, lab/studies/fuel-propellant; pure, no Blender): every end of every FPS, farm-chain and cluster
 service line must land on another line, a piece of equipment, a tank, the cluster bay, an engine service panel or a declared interface.
-python3 work/fuel-propellant/endpoints.py [out.json]"""
+python3 lab/studies/fuel-propellant/endpoints.py [out.json]"""
 import json, math, sys
 from pathlib import Path
-ROOT = Path(__file__).resolve().parents[2]; sys.path.insert(0, str(ROOT/'src'/'wayfarer'))
+ROOT = Path(__file__).resolve().parents[3]; sys.path.insert(0, str(ROOT/'src'/'wayfarer'))
 import spec, fuel_system as fs, fuel_storage as fst, vertex_cluster as vc, vertex_engine as ve
 
 s = spec.load()[0]

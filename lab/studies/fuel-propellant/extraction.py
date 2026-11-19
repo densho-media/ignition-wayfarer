@@ -1,6 +1,6 @@
-"""FPS V1.1 release readiness, item 3: engine N1's whole extraction path (study code, work/fuel-propellant).
+"""FPS V1.1 release readiness, item 3: engine N1's whole extraction path (check tool, lab/studies/fuel-propellant).
 
-blender -b assets/wayfarer/WF_WAYFARER_001.blend --python work/fuel-propellant/extraction.py -- out.json
+blender -b assets/wayfarer/WF_WAYFARER_001.blend --python lab/studies/fuel-propellant/extraction.py -- out.json
 
 vertex_cluster.removal_sweep checks only that every engine part forward of the cradle passes the cradle bore. This screen checks the whole
 path in the saved vehicle: the engine and everything it carries (the VTX instance on N1's placement and the FPS_N1_* objects) moves aft

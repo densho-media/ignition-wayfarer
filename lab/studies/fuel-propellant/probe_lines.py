@@ -1,5 +1,5 @@
 """Sample each FPS line (pure fuel_system polylines) against the saved vehicle's evaluated meshes: points closer than the line radius +
-margin to any object, with that object's name (study code). blender -b <vehicle> --python probe_lines.py -- <name-substring>..."""
+margin to any object, with that object's name (check tool, lab/studies/fuel-propellant). blender -b <vehicle> --python probe_lines.py -- <name-substring>..."""
 import bpy, math, sys
 from mathutils import Vector
 from mathutils.bvhtree import BVHTree

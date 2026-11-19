@@ -87,7 +87,7 @@ service panel's seventh line.
 ## 5. Model inventory (authoritative, V1.1)
 
 This table is the one FPS inventory; sections 9.6 and 10.2 describe what each version added. State at V1.1 release readiness (section 11).
-Status: planned, blockout, detailed, integrated, validated (built, clash-screened by `work/fuel-propellant/probe.py --cluster`, pipe ends
+Status: planned, blockout, detailed, integrated, validated (built, clash-screened by `lab/studies/fuel-propellant/probe.py --cluster`, pipe ends
 by `endpoints.py`, removal path by `extraction.py`, whole-ship inspection PASS). Confidence: ESTABLISHED (existing engineering), PLAUSIBLE (extrapolation),
 SPECULATIVE (breakthrough), UNSUPPORTED. Every FPS object carries `fps_id`, `function`, `species`, `confidence` and `engineering_status`.
 Positions are ship frame (+X bow); the existing farm items are documented in docs/MODEL.md.
@@ -310,7 +310,7 @@ the engine if it moves. No engine or cluster file is edited.
 ### 9.6 Model inventory, V1 status (superseded by section 5)
 
 Statuses: existing and connected; existing but not connected; missing and required; conceptual placeholder; integrated and geometrically
-validated (built, clash-screened by `work/fuel-propellant/probe.py`, whole-ship inspection PASS); assumptions unresolved.
+validated (built, clash-screened by `lab/studies/fuel-propellant/probe.py`, whole-ship inspection PASS); assumptions unresolved.
 
 | ID | Component | Status | Model |
 | --- | --- | --- | --- |
@@ -400,11 +400,11 @@ is shown. At NOMINAL the jet the ship needs (209 TW) takes 284 TW of fusion, not
 
 ### 10.4 Validation
 
-- Mesh screen, whole rear cluster (`work/fuel-propellant/probe.py --cluster`): every FPS and CL object against all other geometry, 185
+- Mesh screen, whole rear cluster (`lab/studies/fuel-propellant/probe.py --cluster`): every FPS and CL object against all other geometry, 185
   objects, no unexpected contact. Designed contacts are listed in the script: cluster lines on the panels, pins in the lugs, struts and
   ties on the thrust ring, the transfer leg on the trunk, the target feed through the panel and the cartridge, the ports through collar
   and shield. No cluster member touches an engine part other than its panel and lugs.
-- Pipe ends (`work/fuel-propellant/endpoints.py`, pure): 288 line ends; every one lands on a line, equipment, tank, the bay, a panel or a
+- Pipe ends (`lab/studies/fuel-propellant/endpoints.py`, pure): 288 line ends; every one lands on a line, equipment, tank, the bay, a panel or a
   declared interface; the only open ends are the documented ones (injector tips `IF_FPS_H2_INJECT_Nj`, magazines `IF_FPS_TARGET_Nj`,
   vents, hull feedthroughs, the refuelling receptacle).
 - Removal sweep: no blocked part, least clearance 0.20 m (section 10.1).
@@ -420,9 +420,9 @@ Bookmarks: `#fuel=ACTIVE.fab`, `#fuel=ACTIVE.assembly`.
 ## 11. V1.1 release readiness
 
 Owner brief 2026-11-19 12:05Z: V1.1 (b274e55) is the provisional mechanical and modeling baseline; the engine positions, the shared
-service pitch, the symmetric flank ties and the removal geometry stay. Study code and results: `work/fuel-propellant/readiness.py`
-(mass, mission, loads; `readiness_v1.json` at dd4a64c and `readiness_v11.json`), `work/fuel-propellant/extraction.py` (the extraction
-path in the saved vehicle, `extraction.json`). Mission targets (0.016 c, the burn delta-v, the drive's power cap, the owner's case E) are
+service pitch, the symmetric flank ties and the removal geometry stay. Study code and results: `lab/studies/fuel-propellant/readiness.py`
+(mass, mission, loads; `results/readiness_v1.json` at dd4a64c and `results/readiness_v11.json`), `lab/studies/fuel-propellant/extraction.py` (the extraction
+path in the saved vehicle, `results/extraction.json`). Mission targets (0.016 c, the burn delta-v, the drive's power cap, the owner's case E) are
 held in every number below; only consequences move.
 
 ### 11.1 Mass, centre of mass, acceleration and mission
@@ -521,7 +521,7 @@ The guidance fixture and its rails are not modeled (OPEN, TODO F06).
 ### 11.4 Browser performance
 
 Measured with the established checks (`workflow.py web`, which enforces the `web_export.py` budgets) on clean exports of V1 (dd4a64c,
-rebuilt in a worktree) and V1.1 (this branch), and `work/fuel-propellant/perf.js` (`perf_v1.json`, `perf_v11.json`) in the same headless
+rebuilt in a worktree) and V1.1 (577bff8), and `lab/studies/fuel-propellant/perf.js` (`results/perf_v1.json`, `results/perf_v11.json`) in the same headless
 Chromium. Evidence class **SW** (SwiftShader, 1400×900, no GPU): frame times are relative only, never device performance.
 
 | Measure | V1 | V1.1 | Change | Budget |

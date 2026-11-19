@@ -393,7 +393,7 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   temperature- and radiation-dependent property tables; creep, fatigue and replacement intervals. **Done when:** each propulsion-chain layer has a screen
   verdict against Drive-sourced operating requirements and the owner has accepted or rejected it in the workbook.
 
-- [ ] **F06 — Fuel & Propellant System after V1.1 (owner briefs 2026-11-18, 2026-11-19). V0, V1 and V1.1 BUILT (PROTOTYPE), owner review pending.**
+- [ ] **F06 — Fuel & Propellant System after V1.1 (owner briefs 2026-11-18, 2026-11-19). V0, V1 and V1.1 BUILT (PROTOTYPE), owner-approved as the engineering prototype baseline 2026-11-19 (not validated propulsion physics); V2 Engineering Convergence next.**
   `docs/FUEL_SYSTEM.md` (sections 9 and 10), `fuel_system.py`, `components/fuel_feed.py`, Explore Ship Fuel drawer. V1.1 resolved the
   panel pitch, the ring tie and the panel/cradle overlap and modeled target fabrication, galleries, supports, intercepts, PMDs and the
   equipment detail. Open with the engine workstream: adopting or replacing the candidate target feeds and injection trains; the fuel rate

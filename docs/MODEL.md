@@ -2411,7 +2411,7 @@ inventory: `docs/FUEL_SYSTEM.md`. It joins the existing farm and the four feed r
   16/35/29 mm at 2 m/s; H2 conditioning 1.7 MW; at the fixed jet power, H2 off gives 17.7 MN at 23,600 km/s and 2× H2 25.2 MN at
   16,600 km/s. The cluster's present target rate carries about 38 g/s of fuel per engine against the 185 g/s the operating point needs:
   reported to the engine workstream, not changed here.
-- **Fit.** `fuel_system.check` (pure) and the BVH screen `work/fuel-propellant/probe.py` on the saved vehicle: no unexpected contact.
+- **Fit.** `fuel_system.check` (pure) and the BVH screen `lab/studies/fuel-propellant/probe.py` on the saved vehicle: no unexpected contact.
   Every dimension is PROTOTYPE; the inspection checks the built lines and interfaces against the pure module.
 - **Explore Ship.** The Fuel drawer (`web/viewer/fuel.js`, `build.fuel_file` from `fuel_system.web`) isolates the feed train in its
   species colours, animates flow dots along every pipe and shows the eight operating states (standby, prep, ignition, propellant feed,

@@ -832,7 +832,7 @@ def polylines(s):
 
 
 def check(s):
-    """First-order fit screen (the built geometry gets the mesh screen in work/fuel-propellant/probe.py): every species has a complete
+    """First-order fit screen (the built geometry gets the mesh screen in lab/studies/fuel-propellant/probe.py): every species has a complete
     path, the H2 lines clear the cluster bay and pass inside the thrust ring, the branches end on their panels, lines of different
     species never touch, and the fuel lines stay inside the bay radius."""
     f = feed_cfg(s); st = stations(s); fails = []

@@ -1,5 +1,5 @@
-"""FPS mesh screen (study code, work/fuel-propellant): every FPS_ object of the saved vehicle against all other evaluated geometry.
-blender -b assets/wayfarer/WF_WAYFARER_001.blend --python work/fuel-propellant/probe.py -- [out.json]
+"""FPS mesh screen (check tool, lab/studies/fuel-propellant): every FPS_ object of the saved vehicle against all other evaluated geometry.
+blender -b assets/wayfarer/WF_WAYFARER_001.blend --python lab/studies/fuel-propellant/probe.py -- [out.json]
 Overlaps (BVH triangle intersection) and the minimum clearance of each FPS object to its nearest non-FPS neighbour, with the expected
 contacts named: the run tank a line leaves, the Engineering_Envelope it passes through, the shadow-shield slab its sleeve crosses, the
 cluster bay face the fuel ends on, the engine panel lines a branch joins, the frames the clamps bear on and the farm mains/deck."""
