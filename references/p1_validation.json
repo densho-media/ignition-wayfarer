@@ -1,7 +1,7 @@
 {
   "result": "PASS",
   "blender": "5.2.2 LTS",
-  "spec_hash": "01e572d5f3b06ece571455b739d9d3da7a9e5ae45d8766671c766ceab837a55d",
+  "spec_hash": "6f84036704e0590ae1d3579c92b6c8e47cb89c068375b1297ad5b27332d0897a",
   "source_map_hash": "fc3d72d053f9141c26c8248844df7159101221c41e998ab051243dc008137806",
   "configurations": {
     "COAST": {
@@ -71,7 +71,7 @@
       },
       "body_bounds": {
         "min_m": [
-          -136.38499450683594,
+          -137.83999633789062,
           -6.5,
           -6.5
         ],
@@ -81,7 +81,7 @@
           6.5
         ],
         "size_m": [
-          281.13499450683594,
+          282.5899963378906,
           13.0,
           13.0
         ]
@@ -118,7 +118,15 @@
         "fuel_support": 64,
         "dry_storage": 54,
         "body_frame": 14,
-        "cryo_feed_line": 8,
+        "fps_support": 2,
+        "fps_purge": 6,
+        "fps_refuel": 10,
+        "fps_feed_line": 17,
+        "fps_valve": 15,
+        "fps_conditioner": 4,
+        "fps_sensor": 8,
+        "fps_vent_line": 12,
+        "fps_pump": 2,
         "body_equipment": 6,
         "power_storage": 4,
         "vtx_structure": 5,
@@ -390,7 +398,7 @@
       },
       "body_bounds": {
         "min_m": [
-          -136.38499450683594,
+          -137.83999633789062,
           -6.5,
           -6.5
         ],
@@ -400,7 +408,7 @@
           6.5
         ],
         "size_m": [
-          281.13499450683594,
+          282.5899963378906,
           13.0,
           13.0
         ]
@@ -437,7 +445,15 @@
         "fuel_support": 64,
         "dry_storage": 54,
         "body_frame": 14,
-        "cryo_feed_line": 8,
+        "fps_support": 2,
+        "fps_purge": 6,
+        "fps_refuel": 10,
+        "fps_feed_line": 17,
+        "fps_valve": 15,
+        "fps_conditioner": 4,
+        "fps_sensor": 8,
+        "fps_vent_line": 12,
+        "fps_pump": 2,
         "body_equipment": 6,
         "power_storage": 4,
         "vtx_structure": 5,
@@ -709,7 +725,7 @@
       },
       "body_bounds": {
         "min_m": [
-          -136.38499450683594,
+          -137.83999633789062,
           -6.5,
           -6.5
         ],
@@ -719,7 +735,7 @@
           6.5
         ],
         "size_m": [
-          281.13499450683594,
+          282.5899963378906,
           13.0,
           13.0
         ]
@@ -756,7 +772,15 @@
         "fuel_support": 64,
         "dry_storage": 54,
         "body_frame": 14,
-        "cryo_feed_line": 8,
+        "fps_support": 2,
+        "fps_purge": 6,
+        "fps_refuel": 10,
+        "fps_feed_line": 17,
+        "fps_valve": 15,
+        "fps_conditioner": 4,
+        "fps_sensor": 8,
+        "fps_vent_line": 12,
+        "fps_pump": 2,
         "body_equipment": 6,
         "power_storage": 4,
         "vtx_structure": 5,
@@ -1025,7 +1049,7 @@
       },
       "body_bounds": {
         "min_m": [
-          -136.38499450683594,
+          -137.83999633789062,
           -6.5,
           -6.5
         ],
@@ -1035,7 +1059,7 @@
           6.5
         ],
         "size_m": [
-          281.13499450683594,
+          282.5899963378906,
           13.0,
           13.0
         ]
@@ -1072,7 +1096,15 @@
         "fuel_support": 64,
         "dry_storage": 54,
         "body_frame": 14,
-        "cryo_feed_line": 8,
+        "fps_support": 2,
+        "fps_purge": 6,
+        "fps_refuel": 10,
+        "fps_feed_line": 17,
+        "fps_valve": 15,
+        "fps_conditioner": 4,
+        "fps_sensor": 8,
+        "fps_vent_line": 12,
+        "fps_pump": 2,
         "body_equipment": 6,
         "power_storage": 4,
         "vtx_structure": 5,
@@ -1341,7 +1373,7 @@
       },
       "body_bounds": {
         "min_m": [
-          -136.38499450683594,
+          -137.83999633789062,
           -6.5,
           -6.5
         ],
@@ -1351,7 +1383,7 @@
           6.5
         ],
         "size_m": [
-          281.13499450683594,
+          282.5899963378906,
           13.0,
           13.0
         ]
@@ -1388,7 +1420,15 @@
         "fuel_support": 64,
         "dry_storage": 54,
         "body_frame": 14,
-        "cryo_feed_line": 8,
+        "fps_support": 2,
+        "fps_purge": 6,
+        "fps_refuel": 10,
+        "fps_feed_line": 17,
+        "fps_valve": 15,
+        "fps_conditioner": 4,
+        "fps_sensor": 8,
+        "fps_vent_line": 12,
+        "fps_pump": 2,
         "body_equipment": 6,
         "power_storage": 4,
         "vtx_structure": 5,
@@ -1657,7 +1697,7 @@
       },
       "body_bounds": {
         "min_m": [
-          -136.38499450683594,
+          -137.83999633789062,
           -6.5,
           -6.5
         ],
@@ -1667,7 +1707,7 @@
           6.5
         ],
         "size_m": [
-          281.13499450683594,
+          282.5899963378906,
           13.0,
           13.0
         ]
@@ -1704,7 +1744,15 @@
         "fuel_support": 64,
         "dry_storage": 54,
         "body_frame": 14,
-        "cryo_feed_line": 8,
+        "fps_support": 2,
+        "fps_purge": 6,
+        "fps_refuel": 10,
+        "fps_feed_line": 17,
+        "fps_valve": 15,
+        "fps_conditioner": 4,
+        "fps_sensor": 8,
+        "fps_vent_line": 12,
+        "fps_pump": 2,
         "body_equipment": 6,
         "power_storage": 4,
         "vtx_structure": 5,
@@ -2817,7 +2865,8 @@
         }
       },
       "WF_STORAGE.blend": {
-        "feed_lines": 4
+        "feed_lines": 8,
+        "fps_interfaces": 12
       },
       "WF_STRUCTURE.blend": {}
     },
@@ -7798,7 +7847,7 @@
       "material_bound_objects": 1
     },
     "subsystems/WF_STORAGE.blend": {
-      "generated_objects": 231,
+      "generated_objects": 290,
       "ids": [
         "Body_CMG_03_1",
         "Body_CMG_03_2",
@@ -7820,10 +7869,6 @@
         "Body_Frame_06_Beam_3",
         "Body_Frame_07",
         "Body_Frame_08",
-        "CRYO_FEED_LINE_01",
-        "CRYO_FEED_LINE_02",
-        "CRYO_FEED_LINE_03",
-        "CRYO_FEED_LINE_04",
         "Dry_Store_M1_S1_1",
         "Dry_Store_M1_S1_2",
         "Dry_Store_M1_S2_1",
@@ -7878,6 +7923,65 @@
         "Dry_Store_M9_S2_2",
         "Dry_Store_M9_S3_1",
         "Dry_Store_M9_S3_2",
+        "FPS_Boost_Pump_H2_A",
+        "FPS_Boost_Pump_H2_B",
+        "FPS_Feed_D2",
+        "FPS_Feed_H2_A",
+        "FPS_Feed_H2_B",
+        "FPS_Feed_He3",
+        "FPS_Fuel_Meter_D2",
+        "FPS_Fuel_Meter_He3",
+        "FPS_H2_Branch_N1",
+        "FPS_H2_Branch_N2",
+        "FPS_H2_Branch_N3",
+        "FPS_H2_Branch_N4",
+        "FPS_H2_Conditioner_H2_A",
+        "FPS_H2_Conditioner_H2_B",
+        "FPS_H2_Header",
+        "FPS_Isolation_Valve_D2",
+        "FPS_Isolation_Valve_H2_A",
+        "FPS_Isolation_Valve_H2_B",
+        "FPS_Isolation_Valve_He3",
+        "FPS_Outlet_Valve_D2",
+        "FPS_Outlet_Valve_H2_A",
+        "FPS_Outlet_Valve_H2_B",
+        "FPS_Outlet_Valve_He3",
+        "FPS_Purge_He_A",
+        "FPS_Purge_He_A_Line",
+        "FPS_Purge_He_B",
+        "FPS_Purge_He_B_Line",
+        "FPS_Refuel_Coupling_D2",
+        "FPS_Refuel_Coupling_H2",
+        "FPS_Refuel_Coupling_He3",
+        "FPS_Refuel_Line_D2",
+        "FPS_Refuel_Line_H2",
+        "FPS_Refuel_Line_He3",
+        "FPS_Refuel_Panel",
+        "FPS_Refuel_Valve_D2",
+        "FPS_Refuel_Valve_H2",
+        "FPS_Refuel_Valve_He3",
+        "FPS_Relief_Valve_01",
+        "FPS_Relief_Valve_02",
+        "FPS_Relief_Valve_03",
+        "FPS_Relief_Valve_04",
+        "FPS_Sensors_D2",
+        "FPS_Sensors_H2_A",
+        "FPS_Sensors_H2_B",
+        "FPS_Sensors_He3",
+        "FPS_Sensors_N1",
+        "FPS_Sensors_N2",
+        "FPS_Sensors_N3",
+        "FPS_Sensors_N4",
+        "FPS_Supports_A",
+        "FPS_Supports_B",
+        "FPS_Vent_01",
+        "FPS_Vent_02",
+        "FPS_Vent_03",
+        "FPS_Vent_04",
+        "FPS_Vent_Tee_01",
+        "FPS_Vent_Tee_02",
+        "FPS_Vent_Tee_03",
+        "FPS_Vent_Tee_04",
         "Feed_Run_Tank_01",
         "Feed_Run_Tank_02",
         "Feed_Run_Tank_03",
@@ -8007,18 +8111,22 @@
         "Fuel_Valve_O7",
         "Fuel_Valve_O8",
         "Fuel_Valve_O9",
-        "IF_CRYO_FEED_CORE_01",
-        "IF_CRYO_FEED_CORE_02",
-        "IF_CRYO_FEED_INJECTION_03",
-        "IF_CRYO_FEED_INJECTION_04",
-        "IF_CRYO_FEED_SHIELD_01",
-        "IF_CRYO_FEED_SHIELD_02",
-        "IF_CRYO_FEED_SHIELD_03",
-        "IF_CRYO_FEED_SHIELD_04",
-        "IF_CRYO_FEED_TANK_01",
-        "IF_CRYO_FEED_TANK_02",
-        "IF_CRYO_FEED_TANK_03",
-        "IF_CRYO_FEED_TANK_04",
+        "IF_FPS_FUEL_BAY_D2",
+        "IF_FPS_FUEL_BAY_HE3",
+        "IF_FPS_H2_ENGINE_01",
+        "IF_FPS_H2_ENGINE_02",
+        "IF_FPS_H2_ENGINE_03",
+        "IF_FPS_H2_ENGINE_04",
+        "IF_FPS_H2_HEADER",
+        "IF_FPS_REFUEL",
+        "IF_FPS_SHIELD_D2",
+        "IF_FPS_SHIELD_H2_A",
+        "IF_FPS_SHIELD_H2_B",
+        "IF_FPS_SHIELD_HE3",
+        "IF_FPS_VENT_01",
+        "IF_FPS_VENT_02",
+        "IF_FPS_VENT_03",
+        "IF_FPS_VENT_04",
         "IF_FUEL_HULL_D2_A",
         "IF_FUEL_HULL_D2_B",
         "IF_FUEL_HULL_H2_A",
@@ -8033,7 +8141,7 @@
         "IF_FUEL_RUN_TANK_HE3_B"
       ],
       "direct_links": [],
-      "material_bound_objects": 59
+      "material_bound_objects": 93
     },
     "subsystems/WF_STRUCTURE.blend": {
       "generated_objects": 738,

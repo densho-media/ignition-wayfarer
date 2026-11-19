@@ -30,6 +30,8 @@ const drivePanel = document.getElementById('drive');
 const driveToggle = document.getElementById('drive-toggle');
 const enginePanel = document.getElementById('engine');
 const engineToggle = document.getElementById('engine-toggle');
+const fuelPanel = document.getElementById('fuel');
+const fuelToggle = document.getElementById('fuel-toggle');
 const legend = document.getElementById('legend');
 const focusBar = document.getElementById('focusbar');
 
@@ -503,7 +505,7 @@ function frameSelection() {
 
 // The bookmark: the camera part first (view= or cam=, as WEB-002/003 links have it), then the appearance state without defaults.
 function writeHash() {
-  const rest = [A.encode(state), driveHash(), inspector?.hash()].filter(Boolean).join('&');
+  const rest = [A.encode(state), driveHash(), inspector?.hash(), fuel?.hash()].filter(Boolean).join('&');
   history.replaceState(null, '', `#${cameraHash}${rest ? '&' + rest : ''}`);
 }
 
@@ -609,7 +611,7 @@ function setStyleLegend(name) {
 // ---- page controls -----------------------------------------------------------------------------------------------------------------
 // One drawer at a time, so a phone keeps the ship in view.
 function openDrawer(which) {
-  for (const [p, t] of [[panel, panelToggle], [appearancePanel, appearanceToggle], [drivePanel, driveToggle], [enginePanel, engineToggle]]) {
+  for (const [p, t] of [[panel, panelToggle], [appearancePanel, appearanceToggle], [drivePanel, driveToggle], [enginePanel, engineToggle], [fuelPanel, fuelToggle]]) {
     const open = p === which && p.hidden;
     p.hidden = !open;
     t.setAttribute('aria-expanded', String(open));
@@ -621,6 +623,7 @@ panelToggle.addEventListener('click', () => openDrawer(panel));
 appearanceToggle.addEventListener('click', () => openDrawer(appearancePanel));
 driveToggle.addEventListener('click', () => openDrawer(drivePanel));
 engineToggle.addEventListener('click', () => openEngine());
+fuelToggle.addEventListener('click', () => openFuel());
 document.getElementById('show-all').addEventListener('click', showAll);
 document.getElementById('show-all-2').addEventListener('click', showAll);
 document.getElementById('reset-appearance').addEventListener('click', resetAppearance);
@@ -656,6 +659,7 @@ window.addEventListener('keydown', e => {
   if (k === 'f') frameSelection();
   if (k === 'd' && drive) openDrawer(drivePanel);
   if (k === 'i' && buildInfo?.engine_file) openEngine();
+  if (k === 'p' && buildInfo?.fuel_file) openFuel();
 });
 window.addEventListener('resize', () => { resize(); });
 
@@ -865,6 +869,29 @@ function makeInspector(createInspector) {
   return inspector;
 }
 
+// ---- Fuel & Propellant System (fuel.js, owner brief 2026-11-18) ----------------------------------------------------------------------
+// fuel.js and its data load only when someone opens the Fuel drawer (or a link names a fuel state).
+let fuel = null, fuelLoading = null;
+function ensureFuel() {
+  if (!buildInfo?.fuel_file) return Promise.resolve(null);
+  fuelLoading ??= import('./fuel.js').then(m => {
+    fuel = m.createFuel({ THREE, scene, byId, records, panel: fuelPanel, update, changed: writeHash,
+                          frameIds: ids => {
+                            const b = new THREE.Box3();
+                            for (const r of records) if (ids.has(r.id)) for (const mesh of r.meshes) b.expandByObject(mesh);
+                            if (!b.isEmpty()) { fitBox(b, camera.position.clone().sub(controls.target).normalize(), camera.up.clone()); bookmark(); }
+                          } });
+    return fuel;
+  }).catch(err => { console.error(err); return null; });
+  return fuelLoading;
+}
+async function openFuel() {
+  if (!(await ensureFuel())) return;
+  openDrawer(fuelPanel);
+  if (!(await fuel.load(buildInfo))) fuelPanel.querySelector('.fuel-body').textContent = 'The fuel system data could not be loaded.';
+  writeHash();
+}
+
 let buildInfo = null;
 async function load() {
   const openedHash = location.hash;     // the bookmark as opened (the first appearance pass rewrites the hash)
@@ -907,11 +934,13 @@ async function load() {
   buildPanel();
   await loadDrive(build);
   engineToggle.hidden = !build?.engine_file;
+  fuelToggle.hidden = !build?.fuel_file;
   const asked = openBookmark(openedHash);
   status.hidden = true;
   await update(s => Object.assign(s, asked));
   applyDrive();
   if (/(?:^|[#&])(?:eng|part)=/.test(openedHash) && await ensureInspector()) await inspector.openFrom(openedHash, build);
+  if (/(?:^|[#&])fuel=/.test(openedHash) && await ensureFuel() && await fuel.openFrom(openedHash, build)) openDrawer(fuelPanel);
   stats.ready_ms = Math.round(performance.now());
   window.wayfarer = { model, groups, camera, controls, frame, build, box, renderer, stats, records, byId, state,   // for inspection and the checks
                       style: () => appliedStyle, select: node => select(node ? byId.get(node.name || node) : null), update, pickAt,
@@ -921,7 +950,7 @@ async function load() {
                       drive: () => ({ engines: { ...driveState.engines }, chosen: [...driveState.chosen], schedule: schedule.length,
                                       hot: Object.fromEntries(hotLevel), clock: driveClock }),
                       chooseEngines: list => { driveState.chosen = new Set(list); syncDrive(); },
-                      inspect: () => inspector, openEngine };
+                      inspect: () => inspector, openEngine, openFuel, fuel: () => fuel };
 }
 
 // Diagnostics (always measured, shown with ?diag): frame time over the last 120 frames, draw calls, GPU objects and transfer sizes.
@@ -956,6 +985,7 @@ let lastFrame = performance.now(), readoutAt = 0;
 renderer.setAnimationLoop(() => {
   const now = performance.now(), dt = Math.min(0.25, (now - lastFrame) / 1000); lastFrame = now;
   if (drive && !window.wayfarer?.frozenDrive && driveTick(dt) && now - readoutAt > 200) { readoutAt = now; syncDrive(); }
+  if (fuel && !window.wayfarer?.frozenFuel) fuel.tick(dt);
   controls.update(); renderer.render(scene, camera); measure();
 });
 load().catch(err => {

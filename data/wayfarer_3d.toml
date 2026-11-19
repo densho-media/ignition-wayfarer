@@ -5554,3 +5554,89 @@ visual_ratio_target = [0.72, 0.92]    # cluster outer diameter / forward shield 
 future_configurations = [
   { name = "SIX_ENGINE", engine_count = 6, pitch_radius_m = 28.0, note = "PARKED: parametric alternative; not built or validated" },
 ]
+
+# ======================================================================================================================================
+# Fuel & Propellant System (FPS, owner brief 2026-11-18 "Wayfarer Propulsion — Fuel & Propellant System"). Version 0: deuterium fusion
+# fuel (the reactor interface also takes helium-3, the canon second fuel, by a blend setpoint), hydrogen reaction mass on its own path,
+# water ice as the industrial feedstock refined off the ship. The storage (TANK-AXIAL farm, transfer trunks, feed run tanks) is
+# [fuel_storage] and unchanged; this table adds what joins the run tanks to the shown Vertex cluster (fuel_system.py,
+# components/fuel_feed.py): outlet valves, metering and conditioning units, boost pumps, emergency isolation, the shield sleeves, the fuel
+# delivery into the cluster's power and conditioning bay, a hydrogen header and one hydrogen branch to each engine's service panel, run-tank
+# relief and paired non-propulsive vents, a helium purge store, line instrumentation and supports, and the refuelling receptacle on the
+# farm deck. Every dimension is PROTOTYPE; flows derive from physics.operating_point. Built only while propulsion_representation is
+# VERTEX_CLUSTER (the Fiji representation keeps drive.cryo_feed). Engine internals (target fabrication, injection, nozzle coupling) belong
+# to the engine workstream: the FPS stops at declared interfaces (IF_FPS_*). Inventory and status: docs/FUEL_SYSTEM.md.
+[fuel_system]
+status = "PROTOTYPE"
+id = "WF-FPS"
+version = "0.1.0"
+baseline = "V0"
+fusion_fuel = "deuterium"
+second_fuel = "helium-3"
+reaction_mass_species = "hydrogen"
+feedstock_source = "water ice (orbital/asteroid refinery; the ship receives processed D2, He-3 and H2)"
+he3_per_d_molar = { canon = 1.0, v0 = 0.0 }   # blend setpoint at the target fill: 1:1 is the D-3He canon point, 0 is the V0 D-D mode
+open = "line sizes beyond first order, pump and conditioning hardware selection, target fabrication (engine side), H2 injection and energy coupling into the exhaust (engine side, SPECULATIVE), vent and purge sizing, PMDs for coast transfer, refuelling coupling standard"
+
+[fuel_system.feed]
+line_radius_m = 0.08                 # jacketed vacuum line OD/2 (the liquid bore is ~3 cm at the peak flow, docs/FUEL_SYSTEM.md)
+outlet_valve = { offset_m = 0.30, size_m = 0.34 }
+fuel_unit = { gap_m = 1.30, length_m = 2.0, width_m = 0.80, height_m = 0.70 }     # metering and conditioning unit, aft of the run-tank cap
+pump = { gap_m = 1.05, length_m = 0.90, radius_m = 0.30 }                          # H2 boost pump
+h2_skid = { gap_m = 2.10, length_m = 2.2, width_m = 0.90, height_m = 0.80 }        # vaporiser/heater, flow controller, filter
+isolation_valve = { fwd_of_shield_m = 0.45, size_m = 0.30 }                        # fail-closed emergency isolation valve
+h2_inner_radius_m = 3.40             # H2 trunks step inside the thrust ring and the cluster's thrust struts (r ~4.3-5.7) to pass them
+h2_step_fwd_of_ring_m = 1.6          # where the trunk steps in: this far forward of the thrust ring's forward chord plane
+header = { aft_of_ring_m = 2.5, radius_m = 3.40, tube_m = 0.09 }                    # H2 header ring aft of the thrust ring, inside the cluster's strut ring, forward of the hub
+inlet_fwd_of_collar_m = 2.0          # the H2 inlet sits on the engine collar this far forward of the cradle plane (clear of the cradle and its trunnions)
+inlet_standoff_m = 0.30              # and this far inboard of the collar's outer surface
+sensor = { length_m = 0.22, extra_m = 0.035 }
+support = { radius_m = 0.035, frame_r_m = 5.10 }
+relief = { size_m = 0.24, vent_radius_m = 0.05, turn_r_m = 5.70, outlet_r_m = 6.30, tee_m = 0.60, exit_offset_deg = -8.0 }   # exit off the casing strap lines
+purge = { radius_m = 0.30, length_m = 1.4, line_radius_m = 0.03, fwd_of_valve_m = 1.35, offset_m = 0.85 }
+refuel = { azimuth_deg = 242.8, r_m = 33.2, panel = [1.2, 1.6, 0.35], coupling_radius_m = 0.14, line_radius_m = 0.10 }
+
+# Owner-independent trade-study constants (established nuclear and isotope data; docs/FUEL_SYSTEM.md "Trade study"). Q values in MeV,
+# neutron share of the released energy, reactants' mass per reaction in atomic mass units.
+[fuel_system.reactions]
+DT = { q_mev = 17.59, neutron_mev = 14.07, mass_u = 5.030, confidence = "ESTABLISHED physics; reactor plausible extrapolation" }
+DD = { q_mev = 3.65, neutron_mev = 1.225, mass_u = 4.028, confidence = "ESTABLISHED physics; a D-D propulsion reactor is a major speculative breakthrough" }
+DD_CATALYSED = { q_mev = 43.25, neutron_mev = 16.52, mass_u = 12.084, confidence = "ESTABLISHED branch data; in-plasma burn of the T and 3He products is speculative" }
+DHE3 = { q_mev = 18.35, neutron_mev = 0.0, mass_u = 5.030, side_neutron_share = 0.01, confidence = "ESTABLISHED physics; D-D side neutrons ~1-5 %; reactor speculative" }
+PB11 = { q_mev = 8.68, neutron_mev = 0.0, mass_u = 12.017, confidence = "ESTABLISHED physics; net burn in a thermal plasma is currently unsupported (bremsstrahlung)" }
+
+[fuel_system.feedstock]
+d_per_h_vsmow = 1.5576e-4            # Earth ocean water (VSMOW)
+d_per_h_comet = 3.0e-4               # Jupiter-family comet water (67P ~5.3e-4; Oort comets ~3e-4): outer-system ice is D-rich
+recovery = 0.8                       # PROTOTYPE fraction of the D a refinery recovers
+electrolysis_kwh_per_kg_h2 = 52.0    # practical PEM/alkaline electrolysis (39.4 kWh/kg HHV is the minimum)
+liquefaction_kwh_per_kg_h2 = 10.0    # terrestrial practice 6-12; radiative pre-cooling in space lowers it
+he3_lunar_ppb = 10.0                 # mass fraction in mature mare regolith (1.4-15 ppb reported)
+he3_uranus_he_mass_fraction = 0.15
+he3_per_he4 = 1.5e-4                 # protosolar 3He/4He (giant-planet atmospheres)
+
+[fuel_system.reaction_masses]
+hydrogen = { density_kg_m3 = 70.8, storage_K = 20.0, z = 1, tank_fraction = 0.15, note = "lowest Z, cryogenic, 14x the volume of water" }
+water = { density_kg_m3 = 1000.0, storage_K = 293.0, z = 8, tank_fraction = 0.03, note = "storable, doubles as shielding; oxygen in the exhaust" }
+ammonia = { density_kg_m3 = 682.0, storage_K = 240.0, z = 7, tank_fraction = 0.05, note = "mild cooling, N in the exhaust" }
+methane = { density_kg_m3 = 422.0, storage_K = 112.0, z = 6, tank_fraction = 0.08, note = "carbon deposits on hot surfaces" }
+
+# Explore Ship Fuel panel (CONCEPTUAL display, not a simulation): the operating states as flow fractions of the operating point.
+# fuel: fraction of the peak fusion-fuel feed (and of the jet power); h2: multiple of the operating point's hydrogen flow (the throttle);
+# purge: helium on the hydrogen lines; refuel: the receptacle's fill lines. Dot speed and spacing are display values (PROTOTYPE).
+[fuel_system.display]
+status = "CONCEPTUAL"
+dot_speed_m_s = 3.0
+dot_spacing_m = 1.6
+dot_radius_m = 0.15
+throttle_h2_factors = [0.0, 0.5, 1.0, 1.5, 2.0, 3.0]
+states = [
+  { id = "STANDBY", label = "Standby", fuel = 0.0, h2 = 0.0, purge = 0.0, refuel = 0.0, text = "Run tanks isolated and held cold by their cryocoolers; every feed valve closed; boil-off handling OPEN." },
+  { id = "PREP", label = "Prep", fuel = 0.0, h2 = 0.0, purge = 1.0, refuel = 0.0, text = "Chill-down and inerting: helium purges the hydrogen lines and branches; outlet valves open, isolation valves still closed; sensors confirm pressure and temperature." },
+  { id = "IGNITION", label = "Ignition", fuel = 0.1, h2 = 0.0, purge = 0.0, refuel = 0.0, text = "The fuel meters send deuterium (and helium-3 at the blend setpoint) to the cluster bay at a PROTOTYPE 10 % ignition rate; hydrogen stays isolated so the burn starts on fuel alone." },
+  { id = "FEED", label = "Propellant feed", fuel = 1.0, h2 = 0.5, purge = 0.0, refuel = 0.0, text = "Boost pumps start; conditioned hydrogen reaches the header ring and the four engine branches at half the operating-point flow." },
+  { id = "ACTIVE", label = "Active", fuel = 1.0, h2 = 1.0, purge = 0.0, refuel = 0.0, text = "The operating point (B01 peak): fuel at full feed, hydrogen injected downstream of the burn at the operating flow." },
+  { id = "THROTTLE", label = "Throttle", fuel = 1.0, h2 = 2.0, purge = 0.0, refuel = 0.0, text = "Same jet power, more or less hydrogen: thrust rises as exhaust velocity falls (F = sqrt(2 P m)). Choose the hydrogen multiple below." },
+  { id = "SHUTDOWN", label = "Shutdown", fuel = 0.0, h2 = 0.0, purge = 1.0, refuel = 0.0, text = "Hydrogen stops first, then the fuel; isolation valves close and helium purges the hydrogen lines of residual propellant." },
+  { id = "REFUEL", label = "Refuel", fuel = 0.0, h2 = 0.0, purge = 0.0, refuel = 1.0, text = "A tanker umbilical on the refuelling receptacle fills the farm through one line per species to its ring main; the aft feed train stays isolated." },
+]

@@ -36,6 +36,7 @@
   <button id="appearance-toggle" aria-expanded="false" aria-controls="appearance" title="Ghost, context and reset">Appearance</button>
   <button id="drive-toggle" aria-expanded="false" aria-controls="drive" title="Vertex drive display states (D)" hidden>Drive</button>
   <button id="engine-toggle" aria-expanded="false" aria-controls="engine" title="Inspect the Vertex engines part by part (I)" hidden>Engine</button>
+  <button id="fuel-toggle" aria-expanded="false" aria-controls="fuel" title="Fuel and propellant feed: species, flows and operating states (P)" hidden>Fuel</button>
 </div>
 <div id="focusbar" class="focusbar" role="group" aria-label="Focus" hidden>
   <span class="label">Focus</span><b id="focus-name"></b>
@@ -88,6 +89,10 @@
 <aside id="engine" class="panel appearance inspect" hidden>
   <div class="panel-head"><span>Vertex engine parts</span><a href="../engineering/vertex/#anatomy">Anatomy</a></div>
   <div class="inspect-body"><p class="note">Loading the part records…</p></div>
+</aside>
+<aside id="fuel" class="panel appearance fuel" hidden>
+  <div class="panel-head"><span>Fuel &amp; propellant</span></div>
+  <div class="fuel-body"><p class="note">Loading the fuel system…</p></div>
 </aside>
 <div id="pick" class="pick" hidden></div>
 <div id="status" class="status" role="status">Loading model…</div>

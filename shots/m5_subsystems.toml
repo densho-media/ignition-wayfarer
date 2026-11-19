@@ -51,8 +51,8 @@ label = { text = "S04 PRESSURIZED SECTORS + STORM REFUGE", select = ["kind:crew_
 id = "S05"
 name = "D-3He fusion-fuel cryostats"
 color = [0.774, 0.584, 0.945]   # functional_colors HELIUM3 in sRGB (WEB-005)
-colors = { "kind:he3_cryostat" = [0.774, 0.584, 0.945], "kind:d2_cryostat" = [0.152, 0.774, 0.748] }
-select = ["kind:he3_cryostat", "kind:d2_cryostat"]
+colors = { "kind:he3_cryostat" = [0.774, 0.584, 0.945], "kind:d2_cryostat" = [0.152, 0.774, 0.748], "name:FPS_*D2*" = [0.152, 0.774, 0.748] }
+select = ["kind:he3_cryostat", "kind:d2_cryostat", "name:FPS_*D2*", "name:FPS_*He3*"]   # FPS fuel feed train (fuel_system.py) by species
 fallback = []
 sources = "S&E 62_FUEL_STORAGE_STUDY (IDEAL MIN), 28 col E; BODY-001 option C; studies/m5_cutaway.py"
 maturity = "STUDY; IDEAL BOUNDS ONLY / INVENTORY HOLD (15!A208, 98!A115); BODY-C reversible L2 study (15!A207)"
@@ -62,7 +62,7 @@ label = { text = "S05 He-3 (3.2 K) + D2 (20 K) CRYOSTATS", select = ["kind:he3_c
 id = "S06"
 name = "Hydrogen reaction-mass storage"
 color = [0.410, 0.601, 0.964]   # functional_colors HYDROGEN in sRGB (WEB-005)
-select = ["kind:h2_tank", "name:Feed_Run_Tank*", "name:Fuel_*", "kind:shortfall_scale"]
+select = ["kind:h2_tank", "name:Feed_Run_Tank*", "name:Fuel_*", "kind:shortfall_scale", "name:FPS_*H2*"]   # FPS: hydrogen feed, header, branches
 fallback = []
 sources = "S&E 62 (H2 HYPOTHESIS), 30/34 PROXY FAIL; BODY-001 option C; schematic feed tanks (WF_STORAGE)"
 maturity = "STUDY; WORKING STUDY CHOICE BODY-C / FUEL QUANTITY OPEN (15!A207); 600 t PROVISIONAL aggregate D+He-3+H2; 5,490 / 8,032 m3 deficits shown"

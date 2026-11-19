@@ -2389,6 +2389,34 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
     plasma scan (Ti 150 keV, Te/Ti 0.1) is still 8× above. engineering/vertex/ section 8 reads `references/evidence/vertex_radiation.json`
     (written by `python3 src/wayfarer/vertex_radiation.py --evidence`, about 30 s).
 
+## Fuel & Propellant System (FPS V0)
+
+`[fuel_system]` (PROTOTYPE, `src/wayfarer/fuel_system.py`, generator `components/fuel_feed.py`, built into `WF_STORAGE` when the
+Vertex cluster is the shown drive; the Fiji representation keeps `drive.cryo_feed`). Technical record, trade study and the model
+inventory: `docs/FUEL_SYSTEM.md`. It joins the existing farm and the four feed run tanks to the four Vertex engines:
+
+- **Fusion fuel.** `Feed_Run_Tank_01` (D2) and `_02` (He-3) each feed an outlet valve, a metering and conditioning unit
+  (`FPS_Fuel_Meter_*`) and a fail-closed isolation valve ahead of the shadow shield, cross it in the canon stepped sleeves and end on
+  the forward face of the cluster's power and conditioning bay (`IF_FPS_FUEL_BAY_D2/HE3`, OPEN: target fabrication is the engine
+  workstream's). D and He-3 are metered separately and meet only in the target; the blend is a setpoint (`he3_per_d_molar`: 1.0 canon,
+  0.0 for the brief's D-D V0, which the trade study flags: catalysed D-D puts about 38 % of the fusion power into neutrons).
+- **Reaction mass.** `_03`/`_04` (H2) feed a boost pump and a conditioning skid (vaporiser, mass-flow controller: the throttle), an
+  isolation valve and their sleeves, run aft in the r 5.4 m corridor, step inside the thrust ring to r 3.4 m and meet the
+  `FPS_H2_Header` ring at X −137.75; four branches run in each engine's azimuth plane, forward of the hub and spokes, to an H2 inlet
+  2.0 m forward of the engine collar (`IF_FPS_H2_ENGINE_01..04`, OPEN). Hydrogen never enters the fuel path.
+- **Safety and service.** Sensor sleeves on every line, supports to the primary frames, a relief valve and non-propulsive tee vent per
+  run tank (`IF_FPS_VENT_0n`), helium purge bottles for the hydrogen lines, and a refuelling receptacle on the farm deck with one fill
+  line per species to its ring main (`IF_FPS_REFUEL`).
+- **Numbers** (from the B01 operating point): peak D 0.296, He-3 0.444, H2 0.385 kg/s (21.8 MN, 19,201 km/s); per-engine bores
+  16/35/29 mm at 2 m/s; H2 conditioning 1.7 MW; at the fixed jet power, H2 off gives 17.7 MN at 23,600 km/s and 2× H2 25.2 MN at
+  16,600 km/s. The cluster's present target rate carries about 38 g/s of fuel per engine against the 185 g/s the operating point needs:
+  reported to the engine workstream, not changed here.
+- **Fit.** `fuel_system.check` (pure) and the BVH screen `work/fuel-propellant/probe.py` on the saved vehicle: no unexpected contact.
+  Every dimension is PROTOTYPE; the inspection checks the built lines and interfaces against the pure module.
+- **Explore Ship.** The Fuel drawer (`web/viewer/fuel.js`, `build.fuel_file` from `fuel_system.web`) isolates the feed train in its
+  species colours, animates flow dots along every pipe and shows the eight operating states (standby, prep, ignition, propellant feed,
+  active, throttle, shutdown, refuel) with the flows, thrust and exhaust velocity the shared numbers give: a CONCEPTUAL display.
+
 ## Limits
 
 - The owner ring comparisons 08!C37 and C41:C45 (1.581 g at ~71.5° from radial if a ring kept

@@ -34,6 +34,7 @@ import web_identity
 import web_play
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src/wayfarer'))
 import representation
+import fuel_system
 import vertex_cluster
 import vertex_inspect
 import vertex_magnet
@@ -241,6 +242,23 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
             engine_text = json.dumps(inspect, separators=(',', ':'))
             engine_file = f'model/engine-{hashlib.sha256(engine_text.encode()).hexdigest()[:12]}.json'
             (viewer / engine_file).write_text(engine_text)
+        # Fuel & Propellant System (owner brief 2026-11-18): the feed train's pipes, operating states and numbers (fuel_system.web), keyed
+        # to the GLB nodes of every FPS object; loaded only when someone opens the Fuel drawer.
+        fuel_file = None
+        if fuel_system.active(spec):
+            fuel = fuel_system.web(spec)
+            fuel['nodes'] = {}
+            for tank, sp in zip(fuel_system.fst.run_tanks(spec), spec['drive_hot_section']['tank_families']):
+                fuel['objects'].setdefault(tank['name'], dict(species=sp, kind='feed_run_tank'))
+            for r in manifest['nodes']:
+                if r['source_name'] in fuel['objects']:
+                    fuel['nodes'].setdefault(r['source_name'], []).append(r['node'])
+            lost = sorted(set(fuel['objects']) - set(fuel['nodes']))
+            if lost:
+                return {'result': 'FAIL', 'step': 'fuel-system', 'reason': f'FPS objects missing from the GLB: {lost[:6]}', 'run_dir': str(run_dir)}
+            fuel_text = json.dumps(fuel, separators=(',', ':'))
+            fuel_file = f'model/fuel-{hashlib.sha256(fuel_text.encode()).hexdigest()[:12]}.json'
+            (viewer / fuel_file).write_text(fuel_text)
         build = {'contract': 'WF_WEB_EXPLORER', 'version': 2, 'vessel': 'G.U. WAYFARER 001', 'project': 'IGNITION',
                  'git_revision': revision, 'git_dirty': dirty, 'built_utc': pipeline.utc_now(),
                  'representation': manifest['representation'], 'preset': manifest['preset'], 'blender': manifest['blender'],
@@ -248,7 +266,7 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
                  'coordinates': manifest['coordinates'], 'bounds_runtime_m': manifest['bounds_runtime_m'], 'triangles': manifest['triangles'],
                  'glb': {k: glb[k] for k in ('bytes', 'nodes', 'mesh_nodes', 'meshes', 'materials', 'extensions_required')},
                  'glb_sha256': glb_sha, 'glb_file': glb_file, 'nodes_file': nodes_file, 'holo_file': holo_file, 'shield_file': shield_file, 'drive_file': drive_file,
-                 'engine_file': engine_file, 'engine_parts_file': geometry_file,
+                 'engine_file': engine_file, 'engine_parts_file': geometry_file, 'fuel_file': fuel_file,
                  'shield': shield, 'pipeline': built}
         (viewer / 'build.json').write_text(json.dumps(build, indent=2) + '\n')
         play = None

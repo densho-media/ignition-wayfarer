@@ -1,0 +1,605 @@
+{
+ "objects": 76,
+ "unexpected": 0,
+ "detail": {
+  "FPS_Supports_A": {
+   "overlaps": [
+    "Assembly_STRUCTURE/Primary_Frame_07",
+    "Assembly_STRUCTURE/Primary_Frame_07",
+    "Assembly_STRUCTURE/Primary_Frame_08",
+    "Assembly_STRUCTURE/Primary_Frame_08",
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.013,
+    "Assembly_STRUCTURE/Primary_Frame_02"
+   ],
+   "where": {}
+  },
+  "FPS_Supports_B": {
+   "overlaps": [
+    "Assembly_STRUCTURE/Primary_Frame_02",
+    "Assembly_STRUCTURE/Primary_Frame_02",
+    "Assembly_STRUCTURE/Primary_Frame_03",
+    "Assembly_STRUCTURE/Primary_Frame_03",
+    "Assembly_STRUCTURE/Primary_Frame_07",
+    "Assembly_STRUCTURE/Primary_Frame_07",
+    "Assembly_STRUCTURE/Primary_Frame_08",
+    "Assembly_STRUCTURE/Primary_Frame_08",
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.013,
+    "Assembly_STRUCTURE/Primary_Frame_05"
+   ],
+   "where": {}
+  },
+  "FPS_Purge_He_A": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.6,
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Purge_He_A_Line": {
+   "overlaps": [
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.421,
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Purge_He_B": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.6,
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Purge_He_B_Line": {
+   "overlaps": [
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.421,
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Refuel_Panel": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    1000000000.0,
+    ""
+   ],
+   "where": {}
+  },
+  "FPS_Feed_D2": {
+   "overlaps": [
+    "Assembly_STRUCTURE/Engineering_Envelope",
+    "Assembly_STORAGE/Feed_Run_Tank_01",
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope",
+    "Assembly_PROPULSION_CLUSTER/CL_ELECTRICAL_power"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.78,
+    "Assembly_STRUCTURE/Primary_XBrace_7_0"
+   ],
+   "where": {}
+  },
+  "FPS_Outlet_Valve_D2": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.13,
+    "Assembly_STORAGE/Feed_Run_Tank_01"
+   ],
+   "where": {}
+  },
+  "FPS_Fuel_Meter_D2": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.685,
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Isolation_Valve_D2": {
+   "overlaps": [
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.3,
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Sensors_D2": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.14,
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Relief_Valve_01": {
+   "overlaps": [
+    "Assembly_STORAGE/Feed_Run_Tank_01"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.57,
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "where": {}
+  },
+  "FPS_Vent_01": {
+   "overlaps": [
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.201,
+    "Assembly_STORAGE/Feed_Run_Tank_01"
+   ],
+   "where": {}
+  },
+  "FPS_Vent_Tee_01": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.233,
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "where": {}
+  },
+  "FPS_Refuel_Line_D2": {
+   "overlaps": [
+    "Assembly_STORAGE/Fuel_Ring_Main_D2_I"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.113,
+    "Assembly_STORAGE/Fuel_Ring_Main_H2_I"
+   ],
+   "where": {}
+  },
+  "FPS_Refuel_Coupling_D2": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    1000000000.0,
+    ""
+   ],
+   "where": {}
+  },
+  "FPS_Refuel_Valve_D2": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    2.17,
+    "Assembly_STORAGE/Fuel_Tank_O7_He3"
+   ],
+   "where": {}
+  },
+  "FPS_Feed_He3": {
+   "overlaps": [
+    "Assembly_STRUCTURE/Engineering_Envelope",
+    "Assembly_STORAGE/Feed_Run_Tank_02",
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope",
+    "Assembly_PROPULSION_CLUSTER/CL_ELECTRICAL_power"
+   ],
+   "unexpected": [],
+   "nearest": [
+    1.155,
+    "Assembly_STRUCTURE/Primary_Frame_06"
+   ],
+   "where": {}
+  },
+  "FPS_Outlet_Valve_He3": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.13,
+    "Assembly_STORAGE/Feed_Run_Tank_02"
+   ],
+   "where": {}
+  },
+  "FPS_Fuel_Meter_He3": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.685,
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Isolation_Valve_He3": {
+   "overlaps": [
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.3,
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Sensors_He3": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.14,
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Relief_Valve_02": {
+   "overlaps": [
+    "Assembly_STORAGE/Feed_Run_Tank_02"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.57,
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "where": {}
+  },
+  "FPS_Vent_02": {
+   "overlaps": [
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.201,
+    "Assembly_STORAGE/Feed_Run_Tank_02"
+   ],
+   "where": {}
+  },
+  "FPS_Vent_Tee_02": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.233,
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "where": {}
+  },
+  "FPS_Refuel_Line_He3": {
+   "overlaps": [
+    "Assembly_STORAGE/Fuel_Ring_Main_He3_O"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.163,
+    "Assembly_STORAGE/Fuel_Ring_Main_H2_O"
+   ],
+   "where": {}
+  },
+  "FPS_Refuel_Coupling_He3": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    1000000000.0,
+    ""
+   ],
+   "where": {}
+  },
+  "FPS_Refuel_Valve_He3": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    2.466,
+    "Assembly_STORAGE/Fuel_Deck_Hoop_Outer_Fwd"
+   ],
+   "where": {}
+  },
+  "FPS_Feed_H2_A": {
+   "overlaps": [
+    "Assembly_STRUCTURE/Engineering_Envelope",
+    "Assembly_STORAGE/Feed_Run_Tank_03",
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.425,
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "where": {}
+  },
+  "FPS_Feed_H2_B": {
+   "overlaps": [
+    "Assembly_STRUCTURE/Engineering_Envelope",
+    "Assembly_STORAGE/Feed_Run_Tank_04",
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.433,
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "where": {}
+  },
+  "FPS_Outlet_Valve_H2_A": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.13,
+    "Assembly_STORAGE/Feed_Run_Tank_03"
+   ],
+   "where": {}
+  },
+  "FPS_Boost_Pump_H2_A": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.3,
+    "Assembly_STORAGE/Feed_Run_Tank_03"
+   ],
+   "where": {}
+  },
+  "FPS_H2_Conditioner_H2_A": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.631,
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Isolation_Valve_H2_A": {
+   "overlaps": [
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.3,
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Outlet_Valve_H2_B": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.13,
+    "Assembly_STORAGE/Feed_Run_Tank_04"
+   ],
+   "where": {}
+  },
+  "FPS_Boost_Pump_H2_B": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.3,
+    "Assembly_STORAGE/Feed_Run_Tank_04"
+   ],
+   "where": {}
+  },
+  "FPS_H2_Conditioner_H2_B": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.631,
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Isolation_Valve_H2_B": {
+   "overlaps": [
+    "Assembly_STRUCTURE/Engineering_Envelope"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.3,
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_H2_Header": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.981,
+    "Assembly_PROPULSION_CLUSTER/CL_STRUCTURE_structure"
+   ],
+   "where": {}
+  },
+  "FPS_H2_Branch_N1": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.381,
+    "Assembly_PROPULSION_CLUSTER/CL_STRUCTURE_structure"
+   ],
+   "where": {}
+  },
+  "FPS_H2_Branch_N2": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.381,
+    "Assembly_PROPULSION_CLUSTER/CL_STRUCTURE_structure"
+   ],
+   "where": {}
+  },
+  "FPS_H2_Branch_N3": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.381,
+    "Assembly_PROPULSION_CLUSTER/CL_STRUCTURE_structure"
+   ],
+   "where": {}
+  },
+  "FPS_H2_Branch_N4": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.381,
+    "Assembly_PROPULSION_CLUSTER/CL_STRUCTURE_structure"
+   ],
+   "where": {}
+  },
+  "FPS_Sensors_H2_A": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.14,
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Sensors_H2_B": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.14,
+    "Assembly_SHIELDING/Reactor_Shadow_Shield_Envelope"
+   ],
+   "where": {}
+  },
+  "FPS_Sensors_N1": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    1.085,
+    "Assembly_PROPULSION_CLUSTER/VTX_ELECTRICAL_power"
+   ],
+   "where": {}
+  },
+  "FPS_Sensors_N2": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    1.085,
+    "Assembly_PROPULSION_CLUSTER/VTX_ELECTRICAL_power"
+   ],
+   "where": {}
+  },
+  "FPS_Sensors_N3": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    1.085,
+    "Assembly_PROPULSION_CLUSTER/VTX_ELECTRICAL_power"
+   ],
+   "where": {}
+  },
+  "FPS_Sensors_N4": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    1.085,
+    "Assembly_PROPULSION_CLUSTER/VTX_ELECTRICAL_power"
+   ],
+   "where": {}
+  },
+  "FPS_Relief_Valve_03": {
+   "overlaps": [
+    "Assembly_STORAGE/Feed_Run_Tank_03"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.57,
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "where": {}
+  },
+  "FPS_Vent_03": {
+   "overlaps": [
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.201,
+    "Assembly_STORAGE/Feed_Run_Tank_03"
+   ],
+   "where": {}
+  },
+  "FPS_Vent_Tee_03": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.233,
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "where": {}
+  },
+  "FPS_Relief_Valve_04": {
+   "overlaps": [
+    "Assembly_STORAGE/Feed_Run_Tank_04"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.02,
+    "Assembly_STRUCTURE/Primary_XBrace_13_2"
+   ],
+   "where": {}
+  },
+  "FPS_Vent_04": {
+   "overlaps": [
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.201,
+    "Assembly_STORAGE/Feed_Run_Tank_04"
+   ],
+   "where": {}
+  },
+  "FPS_Vent_Tee_04": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    0.233,
+    "Assembly_HULL/Hull_Aft_Body"
+   ],
+   "where": {}
+  },
+  "FPS_Refuel_Line_H2": {
+   "overlaps": [
+    "Assembly_STORAGE/Fuel_Ring_Main_H2_O"
+   ],
+   "unexpected": [],
+   "nearest": [
+    0.163,
+    "Assembly_STORAGE/Fuel_Ring_Main_He3_O"
+   ],
+   "where": {}
+  },
+  "FPS_Refuel_Coupling_H2": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    1000000000.0,
+    ""
+   ],
+   "where": {}
+  },
+  "FPS_Refuel_Valve_H2": {
+   "overlaps": [],
+   "unexpected": [],
+   "nearest": [
+    2.462,
+    "Assembly_STORAGE/Fuel_Tank_O6_H2"
+   ],
+   "where": {}
+  }
+ }
+}

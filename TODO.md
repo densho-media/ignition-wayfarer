@@ -393,6 +393,12 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   temperature- and radiation-dependent property tables; creep, fatigue and replacement intervals. **Done when:** each propulsion-chain layer has a screen
   verdict against Drive-sourced operating requirements and the owner has accepted or rejected it in the workbook.
 
+- [ ] **F06 — Fuel & Propellant System after V0 (owner brief 2026-11-18). V0 BUILT (PROTOTYPE), owner review pending.** `docs/FUEL_SYSTEM.md`,
+  `fuel_system.py`, `components/fuel_feed.py`, Explore Ship Fuel drawer. Open: the owner's D-D vs D-3He V0 choice (`he3_per_d_molar`);
+  the engine interfaces `IF_FPS_FUEL_BAY_*` and `IF_FPS_H2_ENGINE_0n` (target fabrication, injection point, energy coupling, a fuel rate
+  of 38 g/s per engine against the 185 g/s needed); hardware sizing for pumps, heaters and valves; vacuum jackets and intercepts; coast
+  transfer (PMDs, pressurisation); boil-off return; vent plume keep-outs; the refuelling approach and its tanker interface.
+
 ## G — Complete habitat, survival and service implementation
 
 Owner scope: S&E 12A, 33–39, 41–42, existing room/recovery reviews. The 42 equipment groups and 32 survival groups overlap; map each

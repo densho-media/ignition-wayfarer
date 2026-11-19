@@ -113,7 +113,7 @@ def subgroup(asset, name, function, bank=''):
     the object where it is."""
     if asset == 'STORAGE':
         if function in ('HYDROGEN', 'DEUTERIUM', 'HELIUM3'):
-            if name.startswith(('Fuel_Transfer', 'CRYO_FEED', 'Feed_Run', 'IF_')):
+            if name.startswith(('Fuel_Transfer', 'CRYO_FEED', 'Feed_Run', 'IF_', 'FPS_')):
                 return 'STORAGE_FEED_' + function
             return f"STORAGE_{(bank or 'aft').upper()}_BANK_{function}"
         return 'STORAGE_' + function
