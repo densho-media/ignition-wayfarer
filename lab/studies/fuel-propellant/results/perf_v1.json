@@ -1,0 +1,57 @@
+{
+ "site": "V1 dd4a64c clean export (web --no-native-check)",
+ "runs": [
+  {
+   "wall_ready_ms": 6281,
+   "load": {
+    "ready_ms": 5951,
+    "transferred": 11607956,
+    "glb": [
+     9887436
+    ]
+   },
+   "ship": {
+    "frames": 5,
+    "median_ms": 2966.6,
+    "p95_ms": 3066.5,
+    "calls": 5353,
+    "triangles": 1433313
+   },
+   "whole": {
+    "frames": 7,
+    "median_ms": 1450.1,
+    "p95_ms": 3233.2,
+    "calls": 5317,
+    "triangles": 1574877
+   },
+   "assembly": null,
+   "heap_MB": 131
+  },
+  {
+   "wall_ready_ms": 6329,
+   "load": {
+    "ready_ms": 6027,
+    "transferred": 11607956,
+    "glb": [
+     9887436
+    ]
+   },
+   "ship": {
+    "frames": 5,
+    "median_ms": 3183.2,
+    "p95_ms": 3216.6,
+    "calls": 5353,
+    "triangles": 1433313
+   },
+   "whole": {
+    "frames": 7,
+    "median_ms": 1449.9,
+    "p95_ms": 3349.9,
+    "calls": 5317,
+    "triangles": 1574877
+   },
+   "assembly": null,
+   "heap_MB": 103
+  }
+ ]
+}

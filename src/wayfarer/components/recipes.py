@@ -57,7 +57,12 @@ def build_subsystem(kind, c, s, asset_dir):
     elif kind in revision.RINGS:return revision.ring_asset(c,s,asset_dir,revision.RINGS.index(kind)+1)
     elif kind=='STORAGE':
         storage.build(c,s)
-        drive.cryo_feed(c,s)
+        import fuel_system
+        if fuel_system.active(s):
+            import fuel_feed
+            fuel_feed.build(c,s)        # FPS V0 aft feed train to the Vertex cluster (owner brief 2026-11-18)
+        else:
+            drive.cryo_feed(c,s)
     elif kind=='SHIELDING':return revision.shielding(c,s)
     elif kind=='EYE':
         front=length/2-p['eye_front_inset_m']; depth=p['eye_module_depth_m']

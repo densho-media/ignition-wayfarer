@@ -4,7 +4,7 @@
 //   style      the global visual language: standard | subsystem | engine | hybrid
 //   overrides  explicit per-target visibility states set by the visitor: 'n:<node>', 'g:<group>', 'a:<assembly>' or 's:<subsystem>' ->
 //              SOLID | HOLOGRAM | GHOST | HIDDEN (a group is the manifest lineage below the assembly: a nozzle, a mechanism)
-//   focus      the subject being examined ({ kind: 'node' | 'group' | 'assembly' | 'subsystem', id }) and how it and its context are drawn
+//   focus      the subject being examined ({ kind: 'node' | 'group' | 'assembly' | 'subsystem', id }, or { kind: 'set', id: label, ids }) and how it and its context are drawn
 //
 // Precedence, first match wins (deterministic for every node):
 //   1. HIDDEN by any override that covers the node (hidden always stays hidden: focus never reveals it)
@@ -66,6 +66,7 @@ function tintOf(s, state) {
 export function inFocus(s, info) {
   const f = s.focus;
   if (!f) return false;
+  if (f.kind === 'set') return f.ids.has(info.id);        // a named set of nodes (the Fuel drawer's feed train); not bookmarked here
   if (f.kind === 'node') return info.id === f.id;
   if (f.kind === 'group') return info.group === f.id;
   if (f.kind === 'assembly') return info.assembly === f.id;
@@ -84,7 +85,7 @@ const enc = x => encodeURIComponent(x).replace(/%3A/g, ':');
 export function encode(s) {
   const parts = [];
   if (s.style !== 'standard') parts.push(`style=${s.style}`);
-  if (s.focus) parts.push(`focus=${KIND[s.focus.kind]}:${enc(s.focus.id)}`);
+  if (s.focus && KIND[s.focus.kind]) parts.push(`focus=${KIND[s.focus.kind]}:${enc(s.focus.id)}`);
   if (s.focusLook) parts.push(`look=${s.focusLook}`);
   if (s.contextLook !== 'ghost') parts.push(`ctx=${s.contextLook}`);
   if (Math.abs(s.ghost - GHOST_DEFAULT) > 1e-6) parts.push(`ghost=${Math.round(s.ghost * 100)}`);

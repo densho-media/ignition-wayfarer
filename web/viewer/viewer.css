@@ -160,3 +160,18 @@ button:disabled { opacity: 0.4; cursor: default; border-color: var(--line); }
   .pick .chips button { min-height: 34px; }
   .legend li button { min-height: 22px; padding: 2px 4px; }
 }
+/* Fuel & Propellant System drawer (fuel.js) */
+.fuel { width: 340px; }
+.fuel .fuel-states { flex-wrap: wrap; gap: 4px; }
+.fuel .fuel-states button { font-size: 12px; padding: 3px 7px; }
+.fuel .fuel-readout { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 6px 0; font-size: 12px; }
+.fuel .fuel-readout dt { color: var(--muted); }
+.fuel .fuel-readout dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.fuel .fuel-legend { list-style: none; padding: 0; margin: 6px 0; font-size: 12px; }
+.fuel .fuel-legend li { display: flex; align-items: center; gap: 6px; padding: 1px 0; }
+.fuel .swatch { display: inline-block; flex: none; width: 11px; height: 11px; border-radius: 2px; }
+.fuel .fuel-components { max-width: 100%; font-size: 12px; }
+.fuel .fuel-ends { font-size: 11px; padding-left: 16px; margin: 4px 0; max-height: 160px; overflow: auto; }
+.fuel details summary { font-size: 12px; cursor: pointer; }
+.fuel .note.warn { color: var(--warn, #d9a441); }
+@media (max-width: 640px) { .fuel { width: auto; } }

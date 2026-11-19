@@ -2299,7 +2299,7 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
     (0.63 m), and every structural member clears every other line (`clearances`). NOMINAL utilisation 0.86–0.98; CONSERVATIVE about
     3.4–3.9 and EXTREME about 13–15: no member of this envelope survives those cases. Windings: hoop stress in the 50 % steel case share
     578 MPa on L4 against 667 MPa (2/3 of 316LN's 4.2 K proof stress), CONDITIONALLY_SIZED for NOMINAL only.
-  - *Cluster frame:* one FE model of every frame member with the hub and engines rigid; members r 0.68 m (spokes, chords; ring ties
+  - *Cluster frame:* one FE model of every frame member with the hub and engines rigid; members r 0.68 m (spokes, chords; flank ties
     ×0.8) and thrust struts 0.60 m (engine struts ×1.2; their feet land on the node's inboard face, `strut_foot`, so they stay below the
     aft RCS pods on the node fittings), sized for thrust, nominal field forces, one engine's coils off and one engine
     firing alone. Engine mount modes 1.8–8.2 Hz, far below the 5.7 kHz pulse; the frame is about 1,600 times stiffer than the field's
@@ -2388,6 +2388,58 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
   - *Gap (SR-1..4, Breakthrough Lab requirement):* photons at most 0.59 % of the yield, against 12.5–85 % (21–144×); the lowest point of the
     plasma scan (Ti 150 keV, Te/Ti 0.1) is still 8× above. engineering/vertex/ section 8 reads `references/evidence/vertex_radiation.json`
     (written by `python3 src/wayfarer/vertex_radiation.py --evidence`, about 30 s).
+
+## Fuel & Propellant System (FPS V0, V1, V1.1)
+
+`[fuel_system]` (PROTOTYPE, `src/wayfarer/fuel_system.py`, generator `components/fuel_feed.py`, built into `WF_STORAGE` when the
+Vertex cluster is the shown drive; the Fiji representation keeps `drive.cryo_feed`). Technical record, trade study and the model
+inventory: `docs/FUEL_SYSTEM.md`. It joins the existing farm and the four feed run tanks to the four Vertex engines:
+
+- **Fusion fuel.** `Feed_Run_Tank_01` (D2) and `_02` (He-3) each feed an outlet valve, a metering and conditioning unit
+  (`FPS_Fuel_Meter_*`) and a fail-closed isolation valve ahead of the shadow shield, cross it in the canon stepped sleeves and end on
+  the forward face of the cluster's power and conditioning bay (`IF_FPS_FUEL_BAY_D2/HE3`, OPEN: target fabrication is the engine
+  workstream's). D and He-3 are metered separately and meet only in the target; the blend is a setpoint (`he3_per_d_molar`: 1.0 canon,
+  0.0 for the brief's D-D V0, which the trade study flags: catalysed D-D puts about 38 % of the fusion power into neutrons).
+- **Reaction mass.** `_03`/`_04` (H2) feed a boost pump and a conditioning skid (vaporiser, mass-flow controller: the throttle), an
+  isolation valve and their sleeves, run aft in the r 5.4 m corridor, step inside the thrust ring to r 3.4 m and meet the
+  `FPS_H2_Header` ring at X −137.75; four branches run in each engine's azimuth plane, forward of the hub and spokes, to an H2 inlet
+  2.0 m forward of the engine collar (`IF_FPS_H2_ENGINE_01..04`, OPEN). Hydrogen never enters the fuel path.
+- **Safety and service.** Sensor sleeves on every line, supports to the primary frames, a relief valve and non-propulsive tee vent per
+  run tank (`IF_FPS_VENT_0n`), helium purge bottles for the hydrogen lines, and a refuelling receptacle on the farm deck with one fill
+  line per species to its ring main (`IF_FPS_REFUEL`).
+- **Numbers** (from the B01 operating point): peak D 0.296, He-3 0.444, H2 0.385 kg/s (21.8 MN, 19,201 km/s); per-engine bores
+  16/35/29 mm at 2 m/s; H2 conditioning 1.7 MW; at the fixed jet power, H2 off gives 17.7 MN at 23,600 km/s and 2× H2 25.2 MN at
+  16,600 km/s. The cluster's present target rate carries about 38 g/s of fuel per engine against the 185 g/s the operating point needs:
+  reported to the engine workstream, not changed here.
+- **Fit.** `fuel_system.check` (pure) and the BVH screen `lab/studies/fuel-propellant/probe.py` on the saved vehicle: no unexpected contact.
+  Every dimension is PROTOTYPE; the inspection checks the built lines and interfaces against the pure module.
+- **Explore Ship.** The Fuel drawer (`web/viewer/fuel.js`, `build.fuel_file` from `fuel_system.web`) isolates the feed train in its
+  species colours, animates flow dots along every pipe and shows the eight operating states (standby, prep, ignition, propellant feed,
+  active, throttle, shutdown, refuel) with the flows, thrust and exhaust velocity the shared numbers give: a CONCEPTUAL display.
+- **V1 (owner brief 2026-11-19; D–³He baseline, H2 reaction mass; `[fuel_system.v1]`).** The chain is closed from the farm to every burn
+  face: an H2 crossover joins the inner H2 ring main to the outer one; jacketed feedthroughs carry the six transfer trunks through the aft
+  hull skin; the trunks end at a tee on each run tank's axis with a fill nozzle into its cap, an inlet valve and a check valve per trunk.
+  On every engine (CANDIDATES for the engine workstream, built from its placement and stations): a target feed from the service panel's
+  `TARGET_FEED` slot to the target magazine, and a hydrogen injection train (control valve, manifold ring forward of the thrust collar,
+  eight fast-valved injector ports through the collar and dog-legged through the shadow shield to the burn face). Target fabrication in
+  the cluster bay stays conceptual (no geometry). Pipe classes with bore and wall, flanges and instrument sleeves; the energy ledger
+  (the engine burn model's NOMINAL charged share, 73.5 %, falls short of the 80 % jet share) and the fuel-rate finding (the engines' own
+  pulse point is 1/7.3 of the ship operating point) are in docs/FUEL_SYSTEM.md section 9. The Fuel drawer adds the whole-chain, fuel,
+  propellant and combined views (the last also sets the drive state), a component list and markers where flows end unresolved.
+- **V1.1 (owner brief 2026-11-19 09:23Z; `[fuel_system.v11]`).** One service pitch, 0.36 m (`vertex_engine.geometry.service_slot_pitch_m`
+  and `vertex_engine.service_panel`), for the engine panel, its interfaces, the cluster's six lines and the target feed. The panel sits
+  forward of the cradle on the collar's forward face (X −9.2 to −8.3, r 5.55–5.80). Symmetric flank thrust ties `CL_Nj_Flank_Tie_A/B`
+  (cradle flanks to the thrust ring) replace the ring tie that ran through the engine. Engine removal aft through the cradle: trunnion
+  lugs 0.30 m, every forward part inside r 5.92, cradle R 6.8 (bore 6.12), least clearance 0.20 m (`vertex_cluster.removal_sweep`). The
+  cluster bay is an annulus round an FPS target-fabrication core (receivers, blend unit, fill and layering, inspection, buffer magazine,
+  transfer to the target trunk; process SPECULATIVE); trunk spider rings; shielding galleries round the injector ports; cryogenic clamps
+  and thermal intercepts; PMDs (vanes and outlet sponges) in all 17 tanks; pump, regulator and conditioning detail. Fuel rate and power
+  are one gap, ×7.31 in fusion power (`fuel_system.rate_reconciliation`; the V1 ×4.9 set reacted fuel against exhaust mass); the NOMINAL
+  73.5 % charged share is the current result and the 80 % jet share is not claimed. Explore Ship adds Target fabrication and Propulsion
+  assembly views. docs/FUEL_SYSTEM.md section 10. Release readiness (section 11): the cold-strap collars on each engine's target feed and
+  H2 line sit on the lines' radial-in legs, inside the removal passage; removal withdraws the trunnion pins 0.42 m and takes out a spool
+  of 0.30 m (cluster lines) or 0.38 m (H2 branch) at each panel and inlet connection before the engine moves aft on a guidance fixture.
+  The drawn cluster (6.4 kt, frame 1,436 t) stays outside the ship's mass budget, whose drive is the 250 t allowance.
 
 ## Limits
 

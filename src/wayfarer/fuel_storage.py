@@ -290,10 +290,17 @@ def transfer_lines(s):
     out = []
     for ln in tl['lines']:
         deg = ln['lane_deg']+ln['offset_deg']; tank = tanks_[ln['tank']]; lane_r = tl['lane_r_m']; rm = mains[ln['species']]
-        x_end = tank['x1']-tl['tank_overlap_m']
-        lane_end = lane_point(x_end, lane_r, deg)
-        ty, tz = lane_end[1]-tank['y'], lane_end[2]-tank['z']; d = math.hypot(ty, tz); k = (tank['radius']+tl['standoff_m'])/d
-        tail = [lane_end, (x_end, tank['y']+ty*k, tank['z']+tz*k)]
+        inlet = s.get('fuel_system', {}).get('v1', {}).get('tank_inlet')
+        if inlet:
+            # FPS V1: the trunk stops tee_fwd_m forward of the run tank's forward cap and jogs to the tee on the tank axis, where the
+            # fill nozzle (fuel_system.tank_inlets) enters the cap; the two trunks of a tank meet at that tee
+            x_end = tank['x1']+inlet['tee_fwd_m']; lane_end = lane_point(x_end, lane_r, deg)
+            tail = [lane_end, (x_end, tank['y'], tank['z'])]
+        else:
+            x_end = tank['x1']-tl['tank_overlap_m']
+            lane_end = lane_point(x_end, lane_r, deg)
+            ty, tz = lane_end[1]-tank['y'], lane_end[2]-tank['z']; d = math.hypot(ty, tz); k = (tank['radius']+tl['standoff_m'])/d
+            tail = [lane_end, (x_end, tank['y']+ty*k, tank['z']+tz*k)]
         base = dict(species=ln['species'], source=rm['name'], tank=ln['tank'], radius=tl['line_radius_m'])
         ext = [lane_point(rm['x'], rm['r'], deg), lane_point(rm['x'], tl['bypass_r_m'], deg), lane_point(x_slot, tl['bypass_r_m'], deg),
                lane_point(x_slot, run_r, deg), lane_point(x_pen, run_r, deg), lane_point(x_pen, hull_r+clr, deg)]

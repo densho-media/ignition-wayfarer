@@ -1,0 +1,825 @@
+{
+ "task": "fuel-propellant",
+ "version": "FPS V1.1",
+ "branch": "claude/project-thread-rx5y4x",
+ "commit": "577bff8",
+ "status": "ENGINEERING_PROTOTYPE; process SPECULATIVE where docs/FUEL_SYSTEM.md says so",
+ "note": "Kept numbers of the FPS V0-V1.1 work (docs/FUEL_SYSTEM.md sections 10-11). The canonical mass account (250 t drive allowance) does not read them; the tools that made them are in lab/studies/fuel-propellant.",
+ "rate_reconciliation": {
+  "power_gap": 7.31,
+  "exhaust_gap": 7.5,
+  "v1_quoted": 4.9,
+  "ship_fusion_TW": 261.3,
+  "engine_point_fusion_TW_per_engine": 8.93,
+  "nominal_charged_share": 0.735,
+  "jet_share_claimed": false,
+  "fusion_needed_at_nominal_TW": 284
+ },
+ "mass": {
+  "frame_t": {
+   "V1": 1353.1,
+   "V1_1": 1435.8
+  },
+  "engine_each_t": {
+   "V1": 1243.7,
+   "V1_1": 1241.7
+  },
+  "cluster_t": {
+   "V1": 6328.0,
+   "V1_1": 6402.6
+  },
+  "drive_allowance_t": 250.0,
+  "canon": {
+   "extra_t": 0.0,
+   "propellant_t": 2796.5862911822533,
+   "departure_t": 4426.074234859591,
+   "end_t": 1629.4879436773379,
+   "added_tank_t": 329.48794367733797,
+   "burn_days": 9.987452580792596,
+   "accel_g": [
+    0.501573150894622,
+    0.6439114774789606
+   ],
+   "dry_cg_x": 35.06059717343276,
+   "departure_cg_x": 89.60542432496989,
+   "burnout_cg_x": 78.16834723082324,
+   "departure_lateral_mm": 7.427316343915673,
+   "vessel_fill": {
+    "helium-3": 0.9209411326668749,
+    "hydrogen": 0.9136805757314266,
+    "deuterium": 0.85345555868925
+   }
+  },
+  "frame_delta_on_ship": {
+   "extra_t": 82.7217551350561,
+   "propellant_t": 2987.7751559700487,
+   "departure_t": 4728.663184500612,
+   "end_t": 1740.8880285305634,
+   "added_tank_t": 358.1662733955073,
+   "burn_days": 10.67024564427302,
+   "accel_g": [
+    0.46947729484067274,
+    0.6027073379515789
+   ],
+   "dry_cg_x": 28.233036051943493,
+   "departure_cg_x": 87.91270607810179,
+   "burnout_cg_x": 77.03338910315944,
+   "departure_lateral_mm": 36.90914101744458,
+   "vessel_fill": {
+    "helium-3": 0.9839013532208174,
+    "hydrogen": 0.9761444276796183,
+    "deuterium": 0.9118021221144934
+   }
+  },
+  "whole_cluster_on_ship": {
+   "extra_t": 6152.643516725207,
+   "propellant_t": 17016.750351847608,
+   "departure_t": 26931.90642134996,
+   "end_t": 9915.156069502347,
+   "added_tank_t": 2462.512552777141,
+   "burn_days": 60.77194462196119,
+   "accel_g": [
+    0.08243010967512307,
+    0.10582243809300834
+   ],
+   "dry_cg_x": -56.68931437875541,
+   "departure_cg_x": -14.862931478340126,
+   "burnout_cg_x": -14.862931478340126,
+   "departure_lateral_mm": 28.174705233994096,
+   "vessel_fill": {
+    "helium-3": 5.603769636128376,
+    "hydrogen": 5.559590386170861,
+    "deuterium": 5.193131434707847
+   }
+  }
+ },
+ "structure": {
+  "V1": {
+   "LC01_THRUST_ALL": {
+    "hub_thrust_strut": {
+     "u": 0.001,
+     "member": "CL_Hub_Thrust_Strut_06A"
+    },
+    "spoke": {
+     "u": 0.014,
+     "member": "CL_N2_Spoke_A"
+    },
+    "engine_thrust_strut": {
+     "u": 0.021,
+     "member": "CL_N3_Thrust_Strut_10"
+    },
+    "ring_tie": {
+     "u": 0.028,
+     "member": "CL_N4_Strut_Ring_Tie"
+    },
+    "chord": {
+     "u": 0.015,
+     "member": "CL_Chord_N2_N4"
+    }
+   },
+   "LC03_FIELD_NOMINAL+THRUST": {
+    "hub_thrust_strut": {
+     "u": 0.011,
+     "member": "CL_Hub_Thrust_Strut_04A"
+    },
+    "spoke": {
+     "u": 0.725,
+     "member": "CL_N3_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 0.815,
+     "member": "CL_N3_Thrust_Strut_10"
+    },
+    "ring_tie": {
+     "u": 0.272,
+     "member": "CL_N4_Strut_Ring_Tie"
+    },
+    "chord": {
+     "u": 0.398,
+     "member": "CL_Chord_N4_N3"
+    }
+   },
+   "LC03_FIELD_CONSERVATIVE+THRUST": {
+    "hub_thrust_strut": {
+     "u": 0.046,
+     "member": "CL_Hub_Thrust_Strut_05A"
+    },
+    "spoke": {
+     "u": 2.927,
+     "member": "CL_N3_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 3.306,
+     "member": "CL_N3_Thrust_Strut_10"
+    },
+    "ring_tie": {
+     "u": 1.108,
+     "member": "CL_N4_Strut_Ring_Tie"
+    },
+    "chord": {
+     "u": 1.631,
+     "member": "CL_Chord_N4_N3"
+    }
+   },
+   "LC06_N2_COILS_OFF": {
+    "hub_thrust_strut": {
+     "u": 0.063,
+     "member": "CL_Hub_Thrust_Strut_08A"
+    },
+    "spoke": {
+     "u": 0.906,
+     "member": "CL_N3_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 0.99,
+     "member": "CL_N3_Thrust_Strut_10"
+    },
+    "ring_tie": {
+     "u": 0.333,
+     "member": "CL_N3_Strut_Ring_Tie"
+    },
+    "chord": {
+     "u": 0.495,
+     "member": "CL_Chord_N4_N3"
+    }
+   },
+   "LC06_SINGLE_ENGINE_N1": {
+    "hub_thrust_strut": {
+     "u": 0.005,
+     "member": "CL_Hub_Thrust_Strut_06A"
+    },
+    "spoke": {
+     "u": 0.015,
+     "member": "CL_N1_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 0.017,
+     "member": "CL_N1_Thrust_Strut_01"
+    },
+    "ring_tie": {
+     "u": 0.015,
+     "member": "CL_N1_Strut_Ring_Tie"
+    },
+    "chord": {
+     "u": 0.006,
+     "member": "CL_Chord_N3_N1"
+    }
+   }
+  },
+  "V1_1": {
+   "LC01_THRUST_ALL": {
+    "hub_thrust_strut": {
+     "u": 0.001,
+     "member": "CL_Hub_Thrust_Strut_01A"
+    },
+    "spoke": {
+     "u": 0.006,
+     "member": "CL_N3_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 0.007,
+     "member": "CL_N3_Thrust_Strut_10"
+    },
+    "flank_tie": {
+     "u": 0.042,
+     "member": "CL_N3_Flank_Tie_A"
+    },
+    "chord": {
+     "u": 0.006,
+     "member": "CL_Chord_N3_N1"
+    }
+   },
+   "LC03_FIELD_NOMINAL+THRUST": {
+    "hub_thrust_strut": {
+     "u": 0.036,
+     "member": "CL_Hub_Thrust_Strut_05B"
+    },
+    "spoke": {
+     "u": 0.411,
+     "member": "CL_N3_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 0.412,
+     "member": "CL_N3_Thrust_Strut_10"
+    },
+    "flank_tie": {
+     "u": 0.343,
+     "member": "CL_N3_Flank_Tie_B"
+    },
+    "chord": {
+     "u": 0.245,
+     "member": "CL_Chord_N1_N2"
+    }
+   },
+   "LC03_FIELD_CONSERVATIVE+THRUST": {
+    "hub_thrust_strut": {
+     "u": 0.145,
+     "member": "CL_Hub_Thrust_Strut_05B"
+    },
+    "spoke": {
+     "u": 1.657,
+     "member": "CL_N3_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 1.652,
+     "member": "CL_N3_Thrust_Strut_10"
+    },
+    "flank_tie": {
+     "u": 1.382,
+     "member": "CL_N3_Flank_Tie_B"
+    },
+    "chord": {
+     "u": 1.003,
+     "member": "CL_Chord_N1_N2"
+    }
+   },
+   "LC06_N2_COILS_OFF": {
+    "hub_thrust_strut": {
+     "u": 0.079,
+     "member": "CL_Hub_Thrust_Strut_02A"
+    },
+    "spoke": {
+     "u": 0.524,
+     "member": "CL_N3_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 0.508,
+     "member": "CL_N3_Thrust_Strut_10"
+    },
+    "flank_tie": {
+     "u": 0.42,
+     "member": "CL_N3_Flank_Tie_B"
+    },
+    "chord": {
+     "u": 0.208,
+     "member": "CL_Chord_N2_N4"
+    }
+   },
+   "LC06_SINGLE_ENGINE_N1": {
+    "hub_thrust_strut": {
+     "u": 0.005,
+     "member": "CL_Hub_Thrust_Strut_06A"
+    },
+    "spoke": {
+     "u": 0.007,
+     "member": "CL_N1_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 0.006,
+     "member": "CL_N1_Thrust_Strut_01"
+    },
+    "flank_tie": {
+     "u": 0.026,
+     "member": "CL_N1_Flank_Tie_B"
+    },
+    "chord": {
+     "u": 0.003,
+     "member": "CL_Chord_N3_N1"
+    }
+   }
+  },
+  "ship_thrust": {
+   "0.106 g": {
+    "thrust_per_engine_MN": 5.442690750176589,
+    "engine_thrust_C10_MN": 0.725525,
+    "accel_g": 0.10582243809300834,
+    "cases": {
+     "SHIP_THRUST": {
+      "hub_thrust_strut": [
+       0.007,
+       "CL_Hub_Thrust_Strut_01A"
+      ],
+      "spoke": [
+       0.045,
+       "CL_N4_Spoke_A"
+      ],
+      "engine_thrust_strut": [
+       0.051,
+       "CL_N4_Thrust_Strut_08"
+      ],
+      "flank_tie": [
+       0.313,
+       "CL_N4_Flank_Tie_B"
+      ],
+      "chord": [
+       0.048,
+       "CL_Chord_N2_N4"
+      ]
+     },
+     "SHIP_THRUST+INERTIA": {
+      "hub_thrust_strut": [
+       0.005,
+       "CL_Hub_Thrust_Strut_05B"
+      ],
+      "spoke": [
+       0.034,
+       "CL_N4_Spoke_A"
+      ],
+      "engine_thrust_strut": [
+       0.039,
+       "CL_N4_Thrust_Strut_08"
+      ],
+      "flank_tie": [
+       0.239,
+       "CL_N4_Flank_Tie_B"
+      ],
+      "chord": [
+       0.036,
+       "CL_Chord_N3_N1"
+      ]
+     },
+     "SHIP_THRUST+INERTIA+FIELD_NOMINAL": {
+      "hub_thrust_strut": [
+       0.032,
+       "CL_Hub_Thrust_Strut_01A"
+      ],
+      "spoke": [
+       0.383,
+       "CL_N4_Spoke_A"
+      ],
+      "engine_thrust_strut": [
+       0.396,
+       "CL_N4_Thrust_Strut_08"
+      ],
+      "flank_tie": [
+       0.317,
+       "CL_N4_Flank_Tie_A"
+      ],
+      "chord": [
+       0.202,
+       "CL_Chord_N1_N2"
+      ]
+     }
+    }
+   },
+   "0.644 g": {
+    "thrust_per_engine_MN": 5.442690750176589,
+    "engine_thrust_C10_MN": 0.725525,
+    "accel_g": 0.6439114774789606,
+    "cases": {
+     "SHIP_THRUST": {
+      "hub_thrust_strut": [
+       0.007,
+       "CL_Hub_Thrust_Strut_01A"
+      ],
+      "spoke": [
+       0.045,
+       "CL_N4_Spoke_A"
+      ],
+      "engine_thrust_strut": [
+       0.051,
+       "CL_N4_Thrust_Strut_08"
+      ],
+      "flank_tie": [
+       0.313,
+       "CL_N4_Flank_Tie_B"
+      ],
+      "chord": [
+       0.048,
+       "CL_Chord_N2_N4"
+      ]
+     },
+     "SHIP_THRUST+INERTIA": {
+      "hub_thrust_strut": [
+       0.003,
+       "CL_Hub_Thrust_Strut_00A"
+      ],
+      "spoke": [
+       0.02,
+       "CL_N4_Spoke_A"
+      ],
+      "engine_thrust_strut": [
+       0.023,
+       "CL_N3_Thrust_Strut_10"
+      ],
+      "flank_tie": [
+       0.023,
+       "CL_N3_Flank_Tie_A"
+      ],
+      "chord": [
+       0.033,
+       "CL_Chord_N2_N4"
+      ]
+     },
+     "SHIP_THRUST+INERTIA+FIELD_NOMINAL": {
+      "hub_thrust_strut": [
+       0.04,
+       "CL_Hub_Thrust_Strut_01A"
+      ],
+      "spoke": [
+       0.438,
+       "CL_N3_Spoke_B"
+      ],
+      "engine_thrust_strut": [
+       0.427,
+       "CL_N4_Thrust_Strut_08"
+      ],
+      "flank_tie": [
+       0.366,
+       "CL_N4_Flank_Tie_A"
+      ],
+      "chord": [
+       0.287,
+       "CL_Chord_N2_N4"
+      ]
+     }
+    }
+   }
+  },
+  "stiffness_N_m": {
+   "V1": {
+    "radial": 3330148228.4155436,
+    "axial": 153154285.30783942,
+    "tangential": 153937587.8009993
+   },
+   "V1_1": {
+    "radial": 3221769770.864124,
+    "axial": 294054503.8082911,
+    "tangential": 265001500.64646003
+   }
+  },
+  "rocking_Hz": {
+   "V1": {
+    "radial": 8.235559617099357,
+    "axial": 1.766143183479817,
+    "tangential": 1.7706538636598328
+   },
+   "V1_1": {
+    "radial": 8.106961131742162,
+    "axial": 2.4492028574293925,
+    "tangential": 2.3250645057506567
+   }
+  },
+  "flank_ties": [
+   {
+    "name": "CL_N1_Flank_Tie_A",
+    "length_m": 21.75,
+    "radius_m": 0.544,
+    "ring_node": 2,
+    "foot_to_node_m": 0.344,
+    "angle_to_axis_deg": 67.7,
+    "lc01_axial_MN": -0.586,
+    "lc01_u": 0.025
+   },
+   {
+    "name": "CL_N1_Flank_Tie_B",
+    "length_m": 21.75,
+    "radius_m": 0.544,
+    "ring_node": 1,
+    "foot_to_node_m": 0.344,
+    "angle_to_axis_deg": 67.7,
+    "lc01_axial_MN": -0.609,
+    "lc01_u": 0.026
+   },
+   {
+    "name": "CL_N2_Flank_Tie_A",
+    "length_m": 21.75,
+    "radius_m": 0.544,
+    "ring_node": 5,
+    "foot_to_node_m": 0.344,
+    "angle_to_axis_deg": 67.7,
+    "lc01_axial_MN": -0.609,
+    "lc01_u": 0.026
+   },
+   {
+    "name": "CL_N2_Flank_Tie_B",
+    "length_m": 21.75,
+    "radius_m": 0.544,
+    "ring_node": 4,
+    "foot_to_node_m": 0.344,
+    "angle_to_axis_deg": 67.7,
+    "lc01_axial_MN": -0.586,
+    "lc01_u": 0.025
+   },
+   {
+    "name": "CL_N3_Flank_Tie_A",
+    "length_m": 24.51,
+    "radius_m": 0.544,
+    "ring_node": 1,
+    "foot_to_node_m": 0.344,
+    "angle_to_axis_deg": 70.3,
+    "lc01_axial_MN": -0.783,
+    "lc01_u": 0.042
+   },
+   {
+    "name": "CL_N3_Flank_Tie_B",
+    "length_m": 21.75,
+    "radius_m": 0.544,
+    "ring_node": 10,
+    "foot_to_node_m": 0.344,
+    "angle_to_axis_deg": 67.7,
+    "lc01_axial_MN": -0.523,
+    "lc01_u": 0.022
+   },
+   {
+    "name": "CL_N4_Flank_Tie_A",
+    "length_m": 21.75,
+    "radius_m": 0.544,
+    "ring_node": 8,
+    "foot_to_node_m": 0.344,
+    "angle_to_axis_deg": 67.7,
+    "lc01_axial_MN": -0.523,
+    "lc01_u": 0.022
+   },
+   {
+    "name": "CL_N4_Flank_Tie_B",
+    "length_m": 24.51,
+    "radius_m": 0.544,
+    "ring_node": 5,
+    "foot_to_node_m": 0.344,
+    "angle_to_axis_deg": 70.3,
+    "lc01_axial_MN": -0.783,
+    "lc01_u": 0.042
+   }
+  ]
+ },
+ "removal": {
+  "analytical_min_m": 0.203,
+  "mesh_min_m": 0.194,
+  "removed_first": {
+   "pins": {
+    "min_clearance_m": -0.217,
+    "vertices_under_0_2": 72
+   },
+   "panel_stubs": {
+    "min_clearance_m": -0.175,
+    "vertices_under_0_2": 120
+   }
+  },
+  "stubs_inside": {
+   "FPS_H2_Branch_N1": {
+    "x": [
+     -7.9,
+     -7.9
+    ],
+    "r": [
+     5.72,
+     5.88
+    ],
+    "worst_m": -0.175
+   },
+   "CL_HOT_THERMAL_hot": {
+    "x": [
+     -8.86,
+     -8.64
+    ],
+    "r": [
+     5.8,
+     5.84
+    ],
+    "worst_m": -0.095
+   },
+   "CL_CRYOGENIC_cryo": {
+    "x": [
+     -8.86,
+     -8.64
+    ],
+    "r": [
+     5.8,
+     5.81
+    ],
+    "worst_m": -0.095
+   },
+   "CL_ELECTRICAL_power": {
+    "x": [
+     -8.86,
+     -8.64
+    ],
+    "r": [
+     5.82,
+     5.84
+    ],
+    "worst_m": -0.08
+   },
+   "CL_FUEL_fuel": {
+    "x": [
+     -8.86,
+     -8.64
+    ],
+    "r": [
+     5.85,
+     5.89
+    ],
+    "worst_m": -0.059
+   },
+   "CL_INSTRUMENTATION_sensor": {
+    "x": [
+     -8.86,
+     -8.64
+    ],
+    "r": [
+     5.85,
+     5.89
+    ],
+    "worst_m": -0.059
+   }
+  },
+  "pin_withdrawal_min_m": 0.42,
+  "spool_min_m": {
+   "cluster_lines": 0.3,
+   "h2_branch": 0.38
+  },
+  "tolerance_stack_mm": {
+   "thermal_100K": 5,
+   "cradle": 15,
+   "fabrication": 10,
+   "guidance": 10,
+   "total": 40
+  },
+  "static_objects": 7447
+ },
+ "browser": {
+  "evidence_class": "SW (SwiftShader, 1400x900); frame times relative only",
+  "download_bytes": {
+   "viewer": {
+    "V1": 11593687,
+    "V1_1": 11698938,
+    "budget": 12000000
+   },
+   "play": {
+    "V1": 66279457,
+    "V1_1": 66552561,
+    "budget": 90000000
+   },
+   "inspection": {
+    "V1": 453869,
+    "V1_1": 453837,
+    "budget": 600000
+   }
+  },
+  "glb": {
+   "V1": {
+    "bytes": 9887436,
+    "nodes": 5383,
+    "triangles": 1174783
+   },
+   "V1_1": {
+    "bytes": 9990196,
+    "nodes": 5404,
+    "triangles": 1191995
+   }
+  },
+  "perf": {
+   "V1": [
+    {
+     "wall_ready_ms": 6281,
+     "load": {
+      "ready_ms": 5951,
+      "transferred": 11607956,
+      "glb": [
+       9887436
+      ]
+     },
+     "ship": {
+      "frames": 5,
+      "median_ms": 2966.6,
+      "p95_ms": 3066.5,
+      "calls": 5353,
+      "triangles": 1433313
+     },
+     "whole": {
+      "frames": 7,
+      "median_ms": 1450.1,
+      "p95_ms": 3233.2,
+      "calls": 5317,
+      "triangles": 1574877
+     },
+     "assembly": null,
+     "heap_MB": 131
+    },
+    {
+     "wall_ready_ms": 6329,
+     "load": {
+      "ready_ms": 6027,
+      "transferred": 11607956,
+      "glb": [
+       9887436
+      ]
+     },
+     "ship": {
+      "frames": 5,
+      "median_ms": 3183.2,
+      "p95_ms": 3216.6,
+      "calls": 5353,
+      "triangles": 1433313
+     },
+     "whole": {
+      "frames": 7,
+      "median_ms": 1449.9,
+      "p95_ms": 3349.9,
+      "calls": 5317,
+      "triangles": 1574877
+     },
+     "assembly": null,
+     "heap_MB": 103
+    }
+   ],
+   "V1_1": [
+    {
+     "wall_ready_ms": 6184,
+     "load": {
+      "ready_ms": 5868,
+      "transferred": 11713207,
+      "glb": [
+       9990852
+      ]
+     },
+     "ship": {
+      "frames": 5,
+      "median_ms": 3166.5,
+      "p95_ms": 3200,
+      "calls": 5374,
+      "triangles": 1450477
+     },
+     "whole": {
+      "frames": 7,
+      "median_ms": 1483.2,
+      "p95_ms": 3133.3,
+      "calls": 5336,
+      "triangles": 1594241
+     },
+     "assembly": {
+      "frames": 10,
+      "median_ms": 1483.3,
+      "p95_ms": 1533.3,
+      "calls": 5385,
+      "triangles": 1613469
+     },
+     "heap_MB": 97.4
+    },
+    {
+     "wall_ready_ms": 6277,
+     "load": {
+      "ready_ms": 6009,
+      "transferred": 11713207,
+      "glb": [
+       9990852
+      ]
+     },
+     "ship": {
+      "frames": 5,
+      "median_ms": 3100,
+      "p95_ms": 3316.5,
+      "calls": 5374,
+      "triangles": 1450477
+     },
+     "whole": {
+      "frames": 7,
+      "median_ms": 1566.6,
+      "p95_ms": 3249.8,
+      "calls": 5336,
+      "triangles": 1594241
+     },
+     "assembly": {
+      "frames": 9,
+      "median_ms": 1550,
+      "p95_ms": 1600,
+      "calls": 5385,
+      "triangles": 1613469
+     },
+     "heap_MB": 97.4
+    }
+   ]
+  }
+ }
+}

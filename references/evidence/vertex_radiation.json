@@ -1,6 +1,6 @@
 {
  "version": "1.5.0",
- "input_hash": "c1d757044ed49d31",
+ "input_hash": "5fc35359ca2c8e73",
  "audit": {
   "yield_J": 1567464833.1328669,
   "pulse_Hz": 5697.064655767655,
@@ -1035,7 +1035,7 @@
   }
  ],
  "geometry": {
-  "triangles": 24726,
+  "triangles": 24710,
   "parts": 263,
   "source": [
    -18.8,
@@ -1176,7 +1176,7 @@
      }
     },
     "stat_error": 0.015152184983415203,
-    "wall_s": 0.43418431282043457
+    "wall_s": 0.4640841484069824
    },
    "4096": {
     "rays": 4096,
@@ -1312,7 +1312,7 @@
      }
     },
     "stat_error": 0.0075722346075218225,
-    "wall_s": 0.7087783813476562
+    "wall_s": 0.5197629928588867
    },
    "16384": {
     "rays": 16384,
@@ -1448,7 +1448,7 @@
      }
     },
     "stat_error": 0.00379790568169117,
-    "wall_s": 1.4046626091003418
+    "wall_s": 1.1799225807189941
    },
    "65536": {
     "rays": 65536,
@@ -1584,7 +1584,7 @@
      }
     },
     "stat_error": 0.0018966626359368164,
-    "wall_s": 3.900007486343384
+    "wall_s": 3.5908219814300537
    }
   },
   "legacy_sky": {
@@ -1647,7 +1647,7 @@
    }
   ],
   "mesh_refinement": {
-   "triangles": 81074,
+   "triangles": 81042,
    "rays": 16384,
    "intercepted": 0.614990234375,
    "base": 0.616943359375,
@@ -1665,15 +1665,15 @@
     "OTHER_ENGINE": 0.00189208984375
    }
   },
-  "cpu_s": 3.5888663580000006,
+  "cpu_s": 3.209553345,
   "closed_parts": 261
  },
  "transport": {
   "nominal": {
-   "low": 0.06793299051107278,
+   "low": 0.06793299050735839,
    "high": 0.616943359375,
-   "scattered": 0.5032103781877273,
-   "transmitted": 0.04579999067619656
+   "scattered": 0.5032103781827483,
+   "transmitted": 0.04579999068489001
   },
   "kn": [
    {
@@ -1809,19 +1809,19 @@
   "OTHER_ENGINE": {
    "photon": {
     "LOW": {
-     "low": 138324182.5566867,
+     "low": 138324182.39455402,
      "high": 1905823598.1518154,
-     "scattered": 1627820104.1933146
+     "scattered": 1627820103.8967037
     },
     "NOMINAL": {
-     "low": 350716764.7419294,
+     "low": 350716757.554518,
      "high": 3306941203.494607,
-     "scattered": 2656221057.322583
+     "scattered": 2656221047.6880198
     },
     "CONSERVATIVE": {
-     "low": 1792896689.4964452,
+     "low": 1792894369.6038404,
      "high": 12935973744.87782,
-     "scattered": 9664010261.52564
+     "scattered": 9664008040.830582
     }
    },
    "neutron_upper": {
@@ -1872,14 +1872,14 @@
      "scattered": 3847622897.3344383
     },
     "NOMINAL": {
-     "low": 867940045.042047,
+     "low": 867940045.0419871,
      "high": 6850092492.953113,
-     "scattered": 6372541890.193579
+     "scattered": 6372541890.1935215
     },
     "CONSERVATIVE": {
-     "low": 4576374546.85713,
+     "low": 4576374546.797885,
      "high": 26795945614.38977,
-     "scattered": 23580054116.426056
+     "scattered": 23580054116.37959
     }
    },
    "neutron_upper": {
@@ -1941,14 +1941,14 @@
      "scattered": 3906076108.9817796
     },
     "NOMINAL": {
-     "low": 810180607.5072944,
+     "low": 810180607.5072869,
      "high": 10393243782.411621,
-     "scattered": 6294960585.269507
+     "scattered": 6294960585.2695
     },
     "CONSERVATIVE": {
-     "low": 4055447066.5302877,
+     "low": 4055447066.5179944,
      "high": 40655917483.9017,
-     "scattered": 22623928106.43159
+     "scattered": 22623928106.422966
     }
    },
    "neutron_upper": {
@@ -2445,7 +2445,7 @@
  },
  "cluster": {
   "rays": 16384,
-  "triangles": 106356,
+  "triangles": 107780,
   "source": [
    -153.388547547959,
    17.43450295910986,
@@ -2453,19 +2453,19 @@
   ],
   "first_hit": {
    "OWN_ENGINE": 0.6190185546875,
-   "SPACE": 0.30889892578125,
-   "CLUSTER_FRAME": 0.06707763671875,
-   "NEIGHBOUR_ENGINES": 0.0032958984375,
+   "SPACE": 0.3087158203125,
+   "CLUSTER_FRAME": 0.067626953125,
+   "NEIGHBOUR_ENGINES": 0.0029296875,
    "RADIATORS": 0.00140380859375,
    "DISTRIBUTION": 0.00030517578125
   },
   "behind_first": {
-   "CLUSTER_FRAME": 0.13140869140625,
-   "RADIATORS": 0.0355224609375,
-   "DISTRIBUTION": 0.00341796875,
-   "NEIGHBOUR_ENGINES": 0.0323486328125
+   "RADIATORS": 0.03546142578125,
+   "CLUSTER_FRAME": 0.12921142578125,
+   "DISTRIBUTION": 0.00506591796875,
+   "NEIGHBOUR_ENGINES": 0.03253173828125
   },
-  "wall_s": 3.989590883255005,
+  "wall_s": 3.464794397354126,
   "note": "First hit from engine N1 (the four engines are symmetric); behind_first: the next owner a ray meets after leaving its first one (what transmitted photons and neutrons can reach). Hull and habitat beyond the radiator roots are not in the scene."
  },
  "thermal": {
@@ -2475,14 +2475,14 @@
   "cases": {
    "LOW": {
     "RADIATION_low": {
-     "hot_W": 40668749389.85379,
+     "hot_W": 40668749389.69165,
      "cold_W": 10198486577.561047,
      "refrigeration_W": 3025551018009.777,
-     "reject_W": 3076418253977.192,
-     "four_W": 12305673015908.768,
+     "reject_W": 3076418253977.03,
+     "four_W": 12305673015908.12,
      "radiator_direct_W": 0.0,
-     "radiator_m2": 22970005.77774436,
-     "ratio": 854.4715831105843
+     "radiator_m2": 22970005.77774315,
+     "ratio": 854.4715831105393
     },
     "RADIATION_high": {
      "hot_W": 604727665436.2251,
@@ -2495,14 +2495,14 @@
      "ratio": 27221.099592661645
     },
     "ALL_low": {
-     "hot_W": 1315312525619.8933,
+     "hot_W": 1315312525619.7312,
      "cold_W": 10299543020.22617,
      "refrigeration_W": 3055531096000.43,
-     "reject_W": 4381143164640.55,
-     "four_W": 17524572658562.2,
+     "reject_W": 4381143164640.3877,
+     "four_W": 17524572658561.55,
      "radiator_direct_W": 0.0,
-     "radiator_m2": 32711704.16272817,
-     "ratio": 1216.857405811076
+     "radiator_m2": 32711704.16272696,
+     "ratio": 1216.857405811031
     },
     "ALL_high": {
      "hot_W": 3213198191209.9277,
@@ -2517,14 +2517,14 @@
    },
    "NOMINAL": {
     "RADIATION_low": {
-     "hot_W": 105591290610.5978,
-     "cold_W": 25861289462.098747,
-     "refrigeration_W": 7672182540422.628,
-     "reject_W": 7803635120495.324,
-     "four_W": 31214540481981.297,
+     "hot_W": 105591290603.41032,
+     "cold_W": 25861289462.09874,
+     "refrigeration_W": 7672182540422.626,
+     "reject_W": 7803635120488.135,
+     "four_W": 31214540481952.54,
      "radiator_direct_W": 0.0,
-     "radiator_m2": 58265661.23557897,
-     "ratio": 2167.450556115583
+     "radiator_m2": 58265661.23552529,
+     "ratio": 2167.450556113586
     },
     "RADIATION_high": {
      "hot_W": 946304288561.6157,
@@ -2537,14 +2537,14 @@
      "ratio": 42596.84076725312
     },
     "ALL_low": {
-     "hot_W": 1380235066840.6372,
-     "cold_W": 25962345904.76387,
-     "refrigeration_W": 7702162618413.281,
-     "reject_W": 9108360031158.682,
-     "four_W": 36433440124634.73,
+     "hot_W": 1380235066833.4497,
+     "cold_W": 25962345904.763863,
+     "refrigeration_W": 7702162618413.279,
+     "reject_W": 9108360031151.492,
+     "four_W": 36433440124605.97,
      "radiator_direct_W": 0.0,
-     "radiator_m2": 68007359.62056278,
-     "ratio": 2529.8363788160746
+     "radiator_m2": 68007359.6205091,
+     "ratio": 2529.8363788140778
     },
     "ALL_high": {
      "hot_W": 3554774814335.3193,
@@ -2559,14 +2559,14 @@
    },
    "CONSERVATIVE": {
     "RADIATION_low": {
-     "hot_W": 558753354652.8713,
-     "cold_W": 132785237876.51662,
-     "refrigeration_W": 39392953903366.59,
-     "reject_W": 40084492495895.984,
-     "four_W": 160337969983583.94,
+     "hot_W": 558753352332.9194,
+     "cold_W": 132785237876.50432,
+     "refrigeration_W": 39392953903362.945,
+     "reject_W": 40084492493572.37,
+     "four_W": 160337969974289.47,
      "radiator_direct_W": 0.0,
-     "radiator_m2": 299289936.61325073,
-     "ratio": 11133.421054459297
+     "radiator_m2": 299289936.5959015,
+     "ratio": 11133.421053813916
     },
     "RADIATION_high": {
      "hot_W": 3132830131248.8564,
@@ -2579,14 +2579,14 @@
      "ratio": 141021.33645683597
     },
     "ALL_low": {
-     "hot_W": 1833397130882.9106,
-     "cold_W": 132886294319.18173,
-     "refrigeration_W": 39422933981357.25,
-     "reject_W": 41389217406559.34,
-     "four_W": 165556869626237.38,
+     "hot_W": 1833397128562.959,
+     "cold_W": 132886294319.16943,
+     "refrigeration_W": 39422933981353.6,
+     "reject_W": 41389217404235.73,
+     "four_W": 165556869616942.9,
      "radiator_direct_W": 0.0,
-     "radiator_m2": 309031634.99823457,
-     "ratio": 11495.80687715979
+     "radiator_m2": 309031634.9808853,
+     "ratio": 11495.806876514407
     },
     "ALL_high": {
      "hot_W": 5741300657022.559,
@@ -2613,29 +2613,29 @@
   "note": "Capacity: radiators.effective_area (both faces, view factor 0.9) at 1800 K and emissivity 0.9, the whole hot radiator, with nothing reserved for the ship's other hot loads (a favourable assumption). The WARM and LOW sections carry the ship's own loads and cannot take engine heat at these powers. Storage is not closure (T3)."
  },
  "treg": {
-  "absorbed_W": 3076418253977.192,
+  "absorbed_W": 3076418253977.03,
   "T0": {
-   "radiator_m2": 5742501.44443609,
+   "radiator_m2": 5742501.444435787,
    "ship_radiator_m2": 26882.117827868853,
-   "ratio": 213.61789577764608,
-   "lithium_flow_kg_s": 2441601.7888707872,
-   "pump_W": 5425781753.046193
+   "ratio": 213.6178957776348,
+   "lithium_flow_kg_s": 2441601.7888706587,
+   "pump_W": 5425781753.045908
   },
   "T1": {
-   "hydrogen_kg_s": 123056.73015908767,
+   "hydrogen_kg_s": 123056.7301590812,
    "exhaust_m_s": 5916.079783099616,
-   "thrust_N": 728013433.4685234,
+   "thrust_N": 728013433.4684851,
    "engine_propellant_kg_s": 0.03778515304568156,
-   "flow_ratio": 3256748.2262229915,
+   "flow_ratio": 3256748.22622282,
    "exhaust_ratio": 0.0003081103465169099,
    "recovered_at_matched_flow_W": 944628.8261420389,
    "verdict": "The heat leaves with the hydrogen, but at a thermal exhaust speed about 1/3000 of the fusion exhaust: carrying the absorbed heat needs a hydrogen flow millions of times the engine propellant flow, which the mission mass cannot pay. At a hydrogen flow equal to the engine flow it recovers kilowatts. Radiator demand is unchanged."
   },
   "T2": {
-   "electric_W": 1076746388892.0171,
-   "rejected_W": 1999671865085.1748,
+   "electric_W": 1076746388891.9603,
+   "rejected_W": 1999671865085.0693,
    "cold_side_K": 900.0,
-   "radiator_m2": 59722015.02213534,
+   "radiator_m2": 59722015.02213219,
    "verdict": "Conversion makes driver power but rejects the rest at a lower temperature: more radiator area, not less."
   },
   "verdict": "WORSENS_OR_UNCHANGED",
@@ -2648,11 +2648,11 @@
    "target-injection survival"
   ],
   "T3": {
-   "mass_kg": 1243705.621561602,
+   "mass_kg": 1241705.4403975375,
    "cp_J_kgK": 500.0,
    "dT_K": 1000.0,
-   "energy_J": 621852810780.8009,
-   "seconds": 0.20213532733296907,
+   "energy_J": 620852720198.7687,
+   "seconds": 0.20181024455831495,
    "note": "ESTIMATE: the engine mass estimate (vertex_engine.mass_estimate), cp 500 J/(kg K), 1000 K swing. Buffering delays the heat; it never removes it."
   }
  },
@@ -2672,24 +2672,24 @@
     "OTHER_ENGINE": 0.002197265625,
     "TARGET_INJECTOR": 0.001708984375
    },
-   "absorbed_low": 0.06833798769333078,
+   "absorbed_low": 0.06833798769022256,
    "absorbed_high": 0.623046875,
    "cold_low": 0.002732266632293961,
    "cold_high": 0.205810546875,
    "photon_heat_four_W": [
-    6801584048992.403,
+    6801584048968.351,
     477321566862907.9
    ],
    "vs_capacity": [
-    472.2830098352846,
+    472.28300983361447,
     33143.877166482096
    ],
    "a4_heat_four_W": [
-    528844072651.8582,
+    528844072627.80475,
     4821544472550.647
    ],
    "a4_vs_capacity": [
-    36.72145614411248,
+    36.72145614244227,
     334.7945888999545
    ],
    "magnetic": "M0-NOMINAL as released (1.3/1.4)",
@@ -2708,24 +2708,24 @@
     "OTHER_ENGINE": 0.002197265625,
     "TARGET_INJECTOR": 0.001708984375
    },
-   "absorbed_low": 0.050853436338336576,
+   "absorbed_low": 0.05085343633455997,
    "absorbed_high": 0.484130859375,
    "cold_low": 0.0027427491909286787,
    "cold_high": 0.2060546875,
    "photon_heat_four_W": [
-    6690343014536.014,
+    6690343014506.789,
     476807042067443.7
    ],
    "vs_capacity": [
-    464.5587429304248,
+    464.55874292839553,
     33108.15000097384
    ],
    "a4_heat_four_W": [
-    393537171480.5776,
+    393537171451.35175,
     3746521429885.554
    ],
    "a4_vs_capacity": [
-    27.326122634101008,
+    27.326122632071648,
     260.1479897290791
    ],
    "magnetic": "unchanged",
@@ -2746,24 +2746,24 @@
     "TARGET_INJECTOR": 0.001708984375,
     "OTHER_ENGINE": 0.001708984375
    },
-   "absorbed_low": 0.06300708330465504,
+   "absorbed_low": 0.0630070833015468,
    "absorbed_high": 0.578857421875,
    "cold_low": 0.002821677388938422,
    "cold_high": 0.197265625,
    "photon_heat_four_W": [
-    6965599310484.837,
+    6965599310460.782,
     457362161302752.75
    ],
    "vs_capacity": [
-    483.6717717470106,
+    483.6717717453403,
     31757.9517607864
    ],
    "a4_heat_four_W": [
-    487590045675.2916,
+    487590045651.2381,
     4479577564426.954
    ],
    "a4_vs_capacity": [
-    33.85689167089903,
+    33.85689166922882,
     311.0493613956866
    ],
    "magnetic": "OPEN: field, capture and forces not recomputed for this geometry",
@@ -2784,24 +2784,24 @@
     "TARGET_INJECTOR": 0.001708984375,
     "OTHER_ENGINE": 0.00146484375
    },
-   "absorbed_low": 0.05877803116579898,
+   "absorbed_low": 0.05877803116269075,
    "absorbed_high": 0.54296875,
    "cold_low": 0.002666854202104791,
    "cold_high": 0.1904296875,
    "photon_heat_four_W": [
-    6577428937955.472,
+    6577428937931.419,
     441390480350773.0
    ],
    "vs_capacity": [
-    456.71830465073754,
+    456.7183046490674,
     30648.92282020493
    ],
    "a4_heat_four_W": [
-    454862872516.4022,
+    454862872492.3487,
     4201847534072.3516
    ],
    "a4_vs_capacity": [
-    31.584408124191913,
+    31.584408122521705,
     291.7645633673585
    ],
    "magnetic": "OPEN: field, capture and forces not recomputed for this geometry",
@@ -2822,24 +2822,24 @@
     "OTHER_ENGINE": 0.001708984375,
     "TARGET_INJECTOR": 0.00048828125
    },
-   "absorbed_low": 0.04205863711291115,
+   "absorbed_low": 0.042058637108384256,
    "absorbed_high": 0.379638671875,
    "cold_low": 0.003235149429941081,
    "cold_high": 0.17578125,
    "photon_heat_four_W": [
-    7752735975118.647,
+    7752735975083.614,
     406496630482615.44
    ],
    "vs_capacity": [
-    538.3283444581917,
+    538.3283444557592,
     28225.99129105396
    ],
    "a4_heat_four_W": [
-    325477259306.96674,
+    325477259271.9347,
     2937892497968.753
    ],
    "a4_vs_capacity": [
-    22.60023232105844,
+    22.600232318625913,
     203.9990539731306
    ],
    "magnetic": "OPEN",
@@ -2860,24 +2860,24 @@
     "OTHER_ENGINE": 0.00244140625,
     "TARGET_INJECTOR": 0.000732421875
    },
-   "absorbed_low": 0.049445920666413144,
+   "absorbed_low": 0.04944592064537894,
    "absorbed_high": 0.443359375,
    "cold_low": 0.0032277403487101348,
    "cold_high": 0.17041015625,
    "photon_heat_four_W": [
-    7792893835103.119,
+    7792893834940.344,
     394658781547070.2
    ],
    "vs_capacity": [
-    541.1167941554089,
+    541.1167941441063,
     27404.004106159442
    ],
    "a4_heat_four_W": [
-    382644894060.8556,
+    382644893898.07916,
     3431005000843.251
    ],
    "a4_vs_capacity": [
-    26.569793295715595,
+    26.569793284412857,
     238.23940965608048
    ],
    "magnetic": "OPEN",
@@ -2898,24 +2898,24 @@
     "OTHER_ENGINE": 0.002197265625,
     "TARGET_INJECTOR": 0.0009765625
    },
-   "absorbed_low": 0.05818404429282948,
+   "absorbed_low": 0.05818404427440762,
    "absorbed_high": 0.526123046875,
    "cold_low": 0.0029059807006092783,
    "cold_high": 0.17431640625,
    "photon_heat_four_W": [
-    7121819090275.222,
+    7121819090132.662,
     404267232960041.06
    ],
    "vs_capacity": [
-    494.51923717032446,
+    494.5192371604255,
     28071.188150418402
    ],
    "a4_heat_four_W": [
-    450266213357.91797,
+    450266213215.35754,
     4071484458599.7827
    ],
    "a4_vs_capacity": [
-    31.26522894373652,
+    31.265228933837523,
     282.71251531324526
    ],
    "magnetic": "1.4 coupled run (M2 field): shield share 0.2%-28.1%",
@@ -2936,24 +2936,24 @@
     "ELECTRICAL": 0.003662109375,
     "OTHER_ENGINE": 0.001708984375
    },
-   "absorbed_low": 0.07647572250520358,
+   "absorbed_low": 0.07647572250518472,
    "absorbed_high": 0.670166015625,
    "cold_low": 0.004582123540582176,
    "cold_high": 0.242919921875,
    "photon_heat_four_W": [
-    11111462174637.523,
+    11111462174637.377,
     562881939184780.75
    ],
    "vs_capacity": [
-    771.5489159155707,
+    771.5489159155604,
     39084.950579930235
    ],
    "a4_heat_four_W": [
-    591819190376.7778,
+    591819190376.632,
     5186183219886.963
    ],
    "a4_vs_capacity": [
-    41.09427252477052,
+    41.09427252476039,
     360.11408563102475
    ],
    "magnetic": "OPEN",
@@ -2963,17 +2963,17 @@
  "combined": {
   "name": "A1+A3+A4 best conventional bound",
   "intercepted": 0.3115234375,
-  "absorbed_low": 0.033458978212361774,
+  "absorbed_low": 0.03345897817043568,
   "absorbed_high": 0.3115234375,
   "heat_four_W": [
-   258927470677.07462,
+   258927470352.62305,
    2410772236275.3237
   ],
   "vs_capacity": [
-   17.979200771402947,
+   17.979200748873936,
    167.39729444997724
   ],
-  "photon_share_needed": 0.012049974478542528,
+  "photon_share_needed": 0.012049974493641863,
   "magnetic": "OPEN (no structure, burn point moved)",
   "structural": "NOT A DESIGN: cage and seats removed"
  },
@@ -2982,29 +2982,29 @@
    "RADIATION": {
     "power_factor": [
      3.673620885871867e-05,
-     0.0011703139340920384
+     0.0011703139340921
     ],
     "thrust_factor": [
      3.673620885871867e-05,
-     0.0011703139340920384
+     0.0011703139340921
     ],
     "burn_time_factor": [
      27221.099592661645,
-     854.4715831105842
+     854.4715831105393
     ]
    },
    "ALL": {
     "power_factor": [
      3.3867676667864618e-06,
-     0.0008217889748005985
+     0.0008217889748006288
     ],
     "thrust_factor": [
      3.3867676667864618e-06,
-     0.0008217889748005985
+     0.0008217889748006288
     ],
     "burn_time_factor": [
      295266.7848482359,
-     1216.857405811076
+     1216.8574058110312
     ]
    }
   },
@@ -3012,29 +3012,29 @@
    "RADIATION": {
     "power_factor": [
      2.3475919387166456e-05,
-     0.0004613715395622032
+     0.00046137153956262827
     ],
     "thrust_factor": [
      2.3475919387166456e-05,
-     0.0004613715395622032
+     0.00046137153956262827
     ],
     "burn_time_factor": [
      42596.84076725312,
-     2167.450556115583
+     2167.450556113586
     ]
    },
    "ALL": {
     "power_factor": [
      3.219134266010043e-06,
-     0.0003952824808646261
+     0.00039528248086493815
     ],
     "thrust_factor": [
      3.219134266010043e-06,
-     0.0003952824808646261
+     0.00039528248086493815
     ],
     "burn_time_factor": [
      310642.52602282737,
-     2529.8363788160746
+     2529.8363788140773
     ]
    }
   },
@@ -3042,29 +3042,29 @@
    "RADIATION": {
     "power_factor": [
      7.091125535504207e-06,
-     8.981965157955357e-05
+     8.981965158476023e-05
     ],
     "thrust_factor": [
      7.091125535504207e-06,
-     8.981965157955357e-05
+     8.981965158476023e-05
     ],
     "burn_time_factor": [
      141021.33645683597,
-     11133.421054459297
+     11133.421053813916
     ]
    },
    "ALL": {
     "power_factor": [
      2.444587187238571e-06,
-     8.698823933679938e-05
+     8.698823934168295e-05
     ],
     "thrust_factor": [
      2.444587187238571e-06,
-     8.698823933679938e-05
+     8.698823934168295e-05
     ],
     "burn_time_factor": [
      409067.02171241003,
-     11495.80687715979
+     11495.806876514407
     ]
    }
   }
@@ -3102,23 +3102,23 @@
    0.8475558413773995
   ],
   "as_drawn": {
-   "radiator_heat_per_photon_W": 0.8789104219405391,
-   "photon_share_needed": 0.00045872687758883603,
-   "factor_low": 272.215289110782,
-   "factor_high": 1847.6262952638167
+   "radiator_heat_per_photon_W": 0.878910421937431,
+   "photon_share_needed": 0.00045872687759045827,
+   "factor_low": 272.21528910981937,
+   "factor_high": 1847.626295257283
   },
   "cold_shielded": {
-   "radiator_heat_per_photon_W": 0.06833798769333078,
-   "photon_share_needed": 0.005899790835901609,
-   "factor_low": 21.165575709201942,
-   "factor_high": 143.65862535665227
+   "radiator_heat_per_photon_W": 0.06833798769022256,
+   "photon_share_needed": 0.0058997908361699495,
+   "factor_low": 21.165575708239267,
+   "factor_high": 143.65862535011823
   },
   "text": "The photons may be at most this share of the fusion yield for four engines to fit the radiators, even with neutrons and charged heat at zero and the most favourable transport bracket.",
   "scan_min": {
    "Ti_keV": 150.0,
    "Te_over_Ti": 0.1,
    "photon_share": 0.046922971799299336,
-   "factor": 7.953328025421183,
+   "factor": 7.953328025059442,
    "text": "The lowest photon share in the R2-A plasma scan (Te/Ti down to 0.1, which no dense burn holds) still exceeds the requirement."
   }
  },
@@ -3188,8 +3188,8 @@
    "required": "<= 0.59% (cold parts shielded); <= 0.046% as drawn",
    "current": "12.5%-84.8%",
    "factor": [
-    21.165575709201942,
-    143.65862535665227
+    21.165575708239267,
+    143.65862535011823
    ],
    "energy": "not produced (stays in the charged products)",
    "momentum": "adds to the jet",
@@ -3203,7 +3203,7 @@
    "required": "<= 0.0032 W/W at the LOW source",
    "current": "0.068 W/W (Compton-only, the most favourable bracket)",
    "factor": [
-    21.165575709201942
+    21.165575708239267
    ],
    "energy": "transmitted to space through the hardware",
    "momentum": "none",
@@ -3217,7 +3217,7 @@
    "required": "18 x the installed 14.4 GW (best conventional bound)",
    "current": "14.4 GW",
    "factor": [
-    17.979200771402947,
+    17.979200748873936,
     167.39729444997724
    ],
    "energy": "rejected as heat",
@@ -3232,7 +3232,7 @@
    "required": "0.05% of design (radiation only, low bracket)",
    "current": "100 %",
    "factor": [
-    2167.450556115583
+    2167.450556113586
    ],
    "energy": "not produced",
    "momentum": "thrust falls in proportion",
@@ -3246,15 +3246,15 @@
    "name": "A0 current engine (1.2 geometry, M0-NOMINAL)",
    "intercepted": 0.623046875,
    "absorbed": [
-    0.06833798769333078,
+    0.06833798769022256,
     0.623046875
    ],
    "vs_capacity": [
-    472.2830098352846,
+    472.28300983361447,
     33143.877166482096
    ],
    "cold_shielded_vs_capacity": [
-    36.72145614411248,
+    36.72145614244227,
     334.7945888999545
    ],
    "magnetic": "M0-NOMINAL as released (1.3/1.4)",
@@ -3265,15 +3265,15 @@
    "name": "A1 open structure bound (cage and coil supports removed)",
    "intercepted": 0.484130859375,
    "absorbed": [
-    0.050853436338336576,
+    0.05085343633455997,
     0.484130859375
    ],
    "vs_capacity": [
-    464.5587429304248,
+    464.55874292839553,
     33108.15000097384
    ],
    "cold_shielded_vs_capacity": [
-    27.326122634101008,
+    27.326122632071648,
     260.1479897290791
    ],
    "magnetic": "unchanged",
@@ -3284,15 +3284,15 @@
    "name": "A2 nozzle loops at 1.25 x radius",
    "intercepted": 0.578857421875,
    "absorbed": [
-    0.06300708330465504,
+    0.0630070833015468,
     0.578857421875
    ],
    "vs_capacity": [
-    483.6717717470106,
+    483.6717717453403,
     31757.9517607864
    ],
    "cold_shielded_vs_capacity": [
-    33.85689167089903,
+    33.85689166922882,
     311.0493613956866
    ],
    "magnetic": "OPEN: field, capture and forces not recomputed for this geometry",
@@ -3303,15 +3303,15 @@
    "name": "A2 nozzle loops at 1.5 x radius",
    "intercepted": 0.54296875,
    "absorbed": [
-    0.05877803116579898,
+    0.05877803116269075,
     0.54296875
    ],
    "vs_capacity": [
-    456.71830465073754,
+    456.7183046490674,
     30648.92282020493
    ],
    "cold_shielded_vs_capacity": [
-    31.584408124191913,
+    31.584408122521705,
     291.7645633673585
    ],
    "magnetic": "OPEN: field, capture and forces not recomputed for this geometry",
@@ -3322,15 +3322,15 @@
    "name": "A3 burn point -6 m",
    "intercepted": 0.379638671875,
    "absorbed": [
-    0.04205863711291115,
+    0.042058637108384256,
     0.379638671875
    ],
    "vs_capacity": [
-    538.3283444581917,
+    538.3283444557592,
     28225.99129105396
    ],
    "cold_shielded_vs_capacity": [
-    22.60023232105844,
+    22.600232318625913,
     203.9990539731306
    ],
    "magnetic": "OPEN",
@@ -3341,15 +3341,15 @@
    "name": "A3 burn point -4 m",
    "intercepted": 0.443359375,
    "absorbed": [
-    0.049445920666413144,
+    0.04944592064537894,
     0.443359375
    ],
    "vs_capacity": [
-    541.1167941554089,
+    541.1167941441063,
     27404.004106159442
    ],
    "cold_shielded_vs_capacity": [
-    26.569793295715595,
+    26.569793284412857,
     238.23940965608048
    ],
    "magnetic": "OPEN",
@@ -3360,15 +3360,15 @@
    "name": "A3 burn point -2 m",
    "intercepted": 0.526123046875,
    "absorbed": [
-    0.05818404429282948,
+    0.05818404427440762,
     0.526123046875
    ],
    "vs_capacity": [
-    494.51923717032446,
+    494.5192371604255,
     28071.188150418402
    ],
    "cold_shielded_vs_capacity": [
-    31.26522894373652,
+    31.265228933837523,
     282.71251531324526
    ],
    "magnetic": "1.4 coupled run (M2 field): shield share 0.2%-28.1%",
@@ -3379,15 +3379,15 @@
    "name": "A3 burn point +2 m",
    "intercepted": 0.670166015625,
    "absorbed": [
-    0.07647572250520358,
+    0.07647572250518472,
     0.670166015625
    ],
    "vs_capacity": [
-    771.5489159155707,
+    771.5489159155604,
     39084.950579930235
    ],
    "cold_shielded_vs_capacity": [
-    41.09427252477052,
+    41.09427252476039,
     360.11408563102475
    ],
    "magnetic": "OPEN",
@@ -3398,15 +3398,15 @@
    "name": "A1+A3+A4 best conventional bound",
    "intercepted": 0.3115234375,
    "absorbed": [
-    0.033458978212361774,
+    0.03345897817043568,
     0.3115234375
    ],
    "vs_capacity": [
-    17.979200771402947,
+    17.979200748873936,
     167.39729444997724
    ],
    "cold_shielded_vs_capacity": [
-    17.979200771402947,
+    17.979200748873936,
     167.39729444997724
    ],
    "magnetic": "OPEN (no structure, burn point moved)",
@@ -3425,7 +3425,7 @@
    "id": "R15-1",
    "name": "3D geometry validity",
    "status": "PASS",
-   "value": "263 real part meshes, 24726 triangles; intercept 0.619 (1.4: 0.869); ray ladder change 0.0024, mesh x2 change -0.0020"
+   "value": "263 real part meshes, 24710 triangles; intercept 0.619 (1.4: 0.869); ray ladder change 0.0024, mesh x2 change -0.0020"
   },
   {
    "id": "R15-2",
@@ -3462,15 +3462,15 @@
  "verdict": "PROPULSION_FEASIBILITY_BLOCKED",
  "thermal_verdict": "THERMAL_CLOSURE_FAILED",
  "cost": {
-  "wall_s": 26.734910249710083,
-  "cpu_s_main": 16.261956662000003,
+  "wall_s": 24.400370597839355,
+  "cpu_s_main": 15.166236910999999,
   "workers": 4,
-  "peak_rss_MB": 121.1875,
+  "peak_rss_MB": 121.1171875,
   "python": "3.13.18",
   "commands": [
    "python3 src/wayfarer/vertex_radiation.py --evidence",
    "python3 -m unittest discover -s tests -k vertex_radiation"
   ]
  },
- "wall_s": 26.734910249710083
+ "wall_s": 24.400370597839355
 }

@@ -987,7 +987,7 @@ def structure_section(spec, vs):
                        for k, key in vs.ENGINE_KEYS.items())
     mem_rows += (f'<tr><td>Coil windings (case)</td><td class="num">—</td>' + ''.join(f'<td class="num">{sz["engine"][c]["winding"]["u"]:.2f}</td>' for c in cases)
                  + f'<td>hoop stress</td><td>{tag("CONDITIONALLY_SIZED")}</td></tr>')
-    cl = sz['cluster']; groups = ('spoke', 'chord', 'ring_tie', 'engine_thrust_strut', 'hub_thrust_strut')
+    cl = sz['cluster']; groups = ('spoke', 'chord', 'flank_tie', 'engine_thrust_strut', 'hub_thrust_strut')
     cl_rows = ''.join(f'<tr><td>{esc(n.replace("_", " "))}</td>' + ''.join(f'<td class="num">{c["groups"][k]["u"]:.2f}</td>' for k in groups) + '</tr>'
                       for n, c in cl['cases'].items())
     ie = vs.inter_engine(spec); dip = R['dipole']; ti = sz['target']; li = sz['lithium']; el = sz['electrical']; dy = sz['dynamics']; th = sz['thermal']

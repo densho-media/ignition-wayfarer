@@ -341,6 +341,18 @@ def hot_section_checks(s,objects,name):
         assert abs(min(xs)-sp[0])<1e-5 and abs(max(xs)-sp[1])<1e-5,'Structural_Spine ends on the terminated hub'
         assert all(by[q['name']]['attach_yoke']==f"Nozzle_Yoke_{q['nozzle']}_{q['yoke']}" and by[q['name']]['geometry_basis']==q['geometry_basis'] for q in drive_manifold.nozzle_pickups(s)),'Pickup attachment'
         report['pickups']=4;report['spine_x']=list(sp)
+    elif name=='WF_STORAGE.blend' and vertex_active(s):
+        import fuel_system
+        lines=fuel_system.feed_lines(s)+fuel_system.branches(s)
+        assert not [o.name for o in objects if o.get('kind')=='cryo_feed_line'],'Fiji cryo feed lines in the Vertex ship'
+        for l in lines:
+            pts=curve_points(by[l['name']])
+            assert len(pts)==len(l['points']) and all((Vector(u)-Vector(v)).length<1e-5 for u,v in zip(pts,l['points'])),l['name']
+            assert by[l['name']]['species']==l['species'] and by[l['name']]['fps_id'],l['name']
+        for i in fuel_system.interfaces(s):
+            assert (by[i['name']].matrix_world.translation-Vector(i['at'])).length<1e-5 and str(by[i['name']]['engineering_status']).startswith('OPEN'),i['name']
+        chk=fuel_system.check(s);assert chk['result']=='PASS',chk['fails']
+        report['feed_lines']=len(lines);report['fps_interfaces']=len(fuel_system.interfaces(s))
     elif name=='WF_STORAGE.blend':
         lines=hs.cryo_feed(s);assert sorted(o.name for o in objects if o.get('kind')=='cryo_feed_line')==[l['name'] for l in lines]
         for l in lines:
@@ -564,6 +576,10 @@ MATES={'rotor_mechanism':{'rotor_mount'},
        'survival_envelope':{'hull_shell','survival_envelope'},
        # M4 slice 2: each casing boot's flange lies on the casing round its member's opening.
        'casing_boot':{'hull_shell'},
+       # FPS: each run-tank vent line penetrates the aft hull skin by design (IF_FPS_VENT_0n, penetration detail OPEN).
+       'fps_vent_line':{'hull_shell'},
+       # FPS V1: the transfer trunks' feedthroughs pass the aft hull skin by design (IF_FPS_HULL_*, flanged both sides)
+       'fps_feedthrough':{'hull_shell'},
        # S02 slice 1: docking aids, floods and aft beacons stand on (or are flush in) the casing.
        'exterior_hardware':{'hull_shell','exterior_hardware','thrust_node','thrust_node_plate'},
        'comms_antenna':{'hull_shell','comms_antenna','thrust_node','thrust_node_plate'},
@@ -1093,8 +1109,10 @@ def inspect(root=ROOT, output=None, scope=None):
             # S02 slice 2: the comms booms and dishes are deployed appendages like the blades, bounded by the shield shadow, not the body.
             elif obj.get('kind')=='comms_antenna':appendage_points.extend(transformed)
             # S01/F01 (TANK-AXIAL): the forward tank farm, its deck, guides, mains, cold boxes and the transfer legs outside the hull sit in the
-            # shield shadow like the comms appendages; the in-lane lines and the dry store are body.
-            elif obj.get('kind') in ('fuel_tank','fuel_support','fuel_transfer_line','fuel_equipment') and max(math.hypot(v.y,v.z) for v in transformed)>s['ship']['body_diameter']['value']/2:appendage_points.extend(transformed)
+            # shield shadow like the comms appendages; the in-lane lines and the dry store are body. FPS: the refuelling receptacle on that deck too.
+            elif (obj.get('kind') in ('fuel_tank','fuel_support','fuel_transfer_line','fuel_equipment') or obj.name.startswith(('FPS_Refuel','FPS_H2_Crossover','FPS_Farm_Flanges','FPS_PMD_Farm'))) and max(math.hypot(v.y,v.z) for v in transformed)>s['ship']['body_diameter']['value']/2:appendage_points.extend(transformed)
+            # FPS: the hydrogen branches and their sensors run out to the engines aft of the hull, inside the cluster (bounded with it).
+            elif obj.name.startswith(('FPS_H2_Branch','FPS_Sensors_N','FPS_N')):propulsion_points.extend(transformed)  # FPS V1 engine-side candidates (target feeds, injection trains) belong to the propulsion envelope
             elif obj.get('kind')=='drone_proxy':(forward_points if obj.get('station') in ('DS-10','DS-15') else fitting_points).extend(transformed)
             else:body.extend(transformed)
         elif library not in {'WF_RADIATOR.blend','WF_THERMAL.blend'}:spinning.extend(transformed)

@@ -1,0 +1,69 @@
+{
+ "site": "V1.1 export runs/fps-v11-web",
+ "runs": [
+  {
+   "wall_ready_ms": 6184,
+   "load": {
+    "ready_ms": 5868,
+    "transferred": 11713207,
+    "glb": [
+     9990852
+    ]
+   },
+   "ship": {
+    "frames": 5,
+    "median_ms": 3166.5,
+    "p95_ms": 3200,
+    "calls": 5374,
+    "triangles": 1450477
+   },
+   "whole": {
+    "frames": 7,
+    "median_ms": 1483.2,
+    "p95_ms": 3133.3,
+    "calls": 5336,
+    "triangles": 1594241
+   },
+   "assembly": {
+    "frames": 10,
+    "median_ms": 1483.3,
+    "p95_ms": 1533.3,
+    "calls": 5385,
+    "triangles": 1613469
+   },
+   "heap_MB": 97.4
+  },
+  {
+   "wall_ready_ms": 6277,
+   "load": {
+    "ready_ms": 6009,
+    "transferred": 11713207,
+    "glb": [
+     9990852
+    ]
+   },
+   "ship": {
+    "frames": 5,
+    "median_ms": 3100,
+    "p95_ms": 3316.5,
+    "calls": 5374,
+    "triangles": 1450477
+   },
+   "whole": {
+    "frames": 7,
+    "median_ms": 1566.6,
+    "p95_ms": 3249.8,
+    "calls": 5336,
+    "triangles": 1594241
+   },
+   "assembly": {
+    "frames": 9,
+    "median_ms": 1550,
+    "p95_ms": 1600,
+    "calls": 5385,
+    "triangles": 1613469
+   },
+   "heap_MB": 97.4
+  }
+ ]
+}

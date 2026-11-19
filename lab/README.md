@@ -26,6 +26,7 @@ Status: ACTIVE, PARKED, SUPERSEDED (by which entry) or PROMOTED (into which `mai
 | [deadship](studies/deadship/NOTES.md) | Study | PROMOTED into main 2026-11-16 | How should Deadship teach the ship's real systems, and what do its gate and sensitivity studies say? | c77026d | Phase 4 PARKED; sourced power values; cabin hull exchange and heaters |
 | [ignition-failures](studies/ignition-failures/NOTES.md) | Study | ACTIVE | What breaks first when the drawn Vertex cluster ignites at the mission point, and what would a visitor have to change? | bbe1d7e (Vertex b87a9c1 imports) | is the training page right; squash order with the engine studies |
 | [dust-impacts](studies/dust-impacts/NOTES.md) | Study | ACTIVE | What does dust do to Wayfarer at speeds up to 0.016 c, and what would a visitor have to change? | c7cca43 (Vertex 2.6 874dca7 imports) | is the training page right; Brow layer and skin thickness; HIGH dust as residual risk or gate |
+| [fuel-propellant](studies/fuel-propellant/NOTES.md) | Study | PROMOTED with the FPS V1.1 squash, kept as check tools | Does the integrated fuel and propellant system fit, connect, come apart for engine removal and stay inside the browser budget? | 3532857 + FPS V1.1 (577bff8) | drawn Vertex mass vs the 250 t drive allowance; CONSERVATIVE frame case; thrust-ring joints |
 
 Each entry's `NOTES.md` opens with the same table: kind, status, question, model base, the branch it came from, open owner
 questions and where its review file is.

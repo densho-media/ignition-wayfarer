@@ -475,7 +475,7 @@ def fe_cluster(s, loads, unit=None):
 
 def _cluster_group(name):
     for key, g in (('Hub_Thrust_Strut', 'hub_thrust_strut'), ('Thrust_Strut', 'engine_thrust_strut'), ('Spoke', 'spoke'), ('Chord', 'chord'),
-                   ('Ring_Tie', 'ring_tie')):
+                   ('Flank_Tie', 'flank_tie')):
         if key in name:
             return g
     return 'other'
@@ -674,7 +674,7 @@ def sizing(s):
 
 ENGINE_KEYS = dict(longeron='cage_longeron_radius_m', seat='loop_seat_radius_m', hoop='cage_hoop_minor_m', strut='coil_strut_radius_m',
                    ring='reaction_ring_minor_m', tie_rod='tie_rod_radius_m')
-CLUSTER_KEYS = dict(spoke=('member_radius_m', 1.0), chord=('member_radius_m', 1.0), ring_tie=('member_radius_m', 0.8),
+CLUSTER_KEYS = dict(spoke=('member_radius_m', 1.0), chord=('member_radius_m', 1.0), flank_tie=('member_radius_m', 0.8),
                     hub_thrust_strut=('thrust_strut_radius_m', 1.0), engine_thrust_strut=('thrust_strut_radius_m', 1.2))
 DESIGN_SETS = ('LC01_THRUST_ALL', 'LC03_FIELD_NOMINAL+THRUST', 'LC06_N2_COILS_OFF', 'LC06_SINGLE_ENGINE_N1')
 BASE_CLEARANCE = (0.45, 0.22)        # 1.1 cage clearance at the 1.1 longeron radius: the gap from cryostat to longeron surface is kept

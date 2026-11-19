@@ -1,0 +1,191 @@
+{
+ "engine": 1,
+ "sector_deg": 3.0,
+ "station_bin_m": 0.05,
+ "moving": [
+  "FPS_N1_Target_Feed",
+  "FPS_N1_Target_Feed",
+  "FPS_N1_Instruments",
+  "FPS_N1_Flanges",
+  "FPS_N1_Supports",
+  "FPS_N1_H2_Injection_Line",
+  "FPS_N1_H2_Injection_Line",
+  "FPS_N1_H2_Control_Valve",
+  "FPS_N1_H2_Manifold",
+  "FPS_N1_H2_Injectors",
+  "VTX_STRUCTURE_structure@N1",
+  "VTX_C1_Winding@N1",
+  "VTX_C1_Cryostat@N1",
+  "VTX_C2_Winding@N1",
+  "VTX_C2_Cryostat@N1",
+  "VTX_FUSION_REACTION_sensor@N1",
+  "VTX_TARGET_INJECTION_structure@N1",
+  "VTX_TARGET_INJECTION_armour@N1",
+  "VTX_TARGET_INJECTION_power@N1",
+  "VTX_TARGET_INJECTION_sensor@N1",
+  "VTX_MAGNETIC_NOZZLE_coil@N1",
+  "VTX_MAGNETIC_NOZZLE_cryostat@N1",
+  "VTX_MAGNETIC_NOZZLE_structure@N1",
+  "VTX_SHIELDING_shield@N1",
+  "VTX_SHIELDING_armour@N1",
+  "VTX_HOT_THERMAL_hot@N1",
+  "VTX_CRYOGENIC_cryo@N1",
+  "VTX_ELECTRICAL_power@N1",
+  "VTX_FUEL_fuel@N1",
+  "VTX_SERVICE_service@N1",
+  "VTX_INSTRUMENTATION_sensor@N1",
+  "VTX_INSTRUMENTATION_lamp@N1"
+ ],
+ "moving_x_range": [
+  -31.87000947445631,
+  0.06000670976936817
+ ],
+ "static_objects": 7447,
+ "min_clearance_m": 0.194,
+ "under_0_2": [
+  {
+   "name": "CL_STRUCTURE_structure",
+   "clearance_m": 0.194,
+   "x": -9.9,
+   "r": 6.11,
+   "az": 168.7,
+   "against": "VTX_SERVICE_service@N1"
+  }
+ ],
+ "worst": [
+  {
+   "name": "CL_STRUCTURE_structure",
+   "clearance_m": 0.194,
+   "x": -9.9,
+   "r": 6.11,
+   "az": 168.7,
+   "against": "VTX_SERVICE_service@N1"
+  },
+  {
+   "name": "CL_SERVICE_service",
+   "clearance_m": 1.563,
+   "x": -10.12,
+   "r": 7.48,
+   "az": 135.0,
+   "against": "VTX_SERVICE_service@N1"
+  },
+  {
+   "name": "CL_HOT_THERMAL_hot",
+   "clearance_m": 1.904,
+   "x": -8.83,
+   "r": 7.8,
+   "az": 180.8,
+   "against": "FPS_N1_Instruments"
+  },
+  {
+   "name": "CL_CRYOGENIC_cryo",
+   "clearance_m": 1.904,
+   "x": -8.83,
+   "r": 7.8,
+   "az": 179.2,
+   "against": "FPS_N1_Instruments"
+  },
+  {
+   "name": "CL_ELECTRICAL_power",
+   "clearance_m": 1.917,
+   "x": -8.83,
+   "r": 7.81,
+   "az": 176.6,
+   "against": "FPS_N1_Instruments"
+  },
+  {
+   "name": "CL_FUEL_fuel",
+   "clearance_m": 1.928,
+   "x": -8.83,
+   "r": 7.84,
+   "az": 186.0,
+   "against": "VTX_SERVICE_service@N1"
+  },
+  {
+   "name": "CL_INSTRUMENTATION_sensor",
+   "clearance_m": 1.928,
+   "x": -8.83,
+   "r": 7.84,
+   "az": 174.0,
+   "against": "VTX_SERVICE_service@N1"
+  }
+ ],
+ "removed_first": {
+  "pins": {
+   "min_clearance_m": -0.217,
+   "vertices_under_0_2": 72
+  },
+  "panel_stubs": {
+   "min_clearance_m": -0.175,
+   "vertices_under_0_2": 120
+  }
+ },
+ "stubs_inside": {
+  "FPS_H2_Branch_N1": {
+   "x": [
+    -7.9,
+    -7.9
+   ],
+   "r": [
+    5.72,
+    5.88
+   ],
+   "worst_m": -0.175
+  },
+  "CL_HOT_THERMAL_hot": {
+   "x": [
+    -8.86,
+    -8.64
+   ],
+   "r": [
+    5.8,
+    5.84
+   ],
+   "worst_m": -0.095
+  },
+  "CL_CRYOGENIC_cryo": {
+   "x": [
+    -8.86,
+    -8.64
+   ],
+   "r": [
+    5.8,
+    5.81
+   ],
+   "worst_m": -0.095
+  },
+  "CL_ELECTRICAL_power": {
+   "x": [
+    -8.86,
+    -8.64
+   ],
+   "r": [
+    5.82,
+    5.84
+   ],
+   "worst_m": -0.08
+  },
+  "CL_FUEL_fuel": {
+   "x": [
+    -8.86,
+    -8.64
+   ],
+   "r": [
+    5.85,
+    5.89
+   ],
+   "worst_m": -0.059
+  },
+  "CL_INSTRUMENTATION_sensor": {
+   "x": [
+    -8.86,
+    -8.64
+   ],
+   "r": [
+    5.85,
+    5.89
+   ],
+   "worst_m": -0.059
+  }
+ }
+}

@@ -95,6 +95,21 @@ LINE_AZ_DEG = 6.0                    # cage lines ride this far round from their
 LINE_GAP_M = 0.19                    # a cage line's centre inside the hoop surface: the largest line (0.11 m lithium feeder) plus 0.08 m (kinks)
 
 
+SERVICE_SLOTS = ('TARGET_FEED', 'LITHIUM_SUPPLY', 'LITHIUM_RETURN', 'CRYOGEN', 'POWER', 'DATA')
+
+
+def service_panel(s, scale=1.0):
+    """The ONE quick-disconnect panel station (engine frame), shared by the engine part, the engine interfaces, the cluster's six service
+    lines and the FPS target feed: axial span, radial faces, tangential width and the slot z of every service at one common pitch.
+    FPS V1.1: forward of the cradle on the collar's forward face (x_aft = collar_fwd), so the cradle tube no longer passes through it."""
+    g = config(s)['geometry']; st = stations(s, scale); k = scale
+    ro = g['collar_outer_radius_m']*k; L = g['service_panel_length_m']*k; d = g['service_panel_depth_m']*k
+    x_aft = st['collar_fwd']; x_fwd = x_aft+L; r_in = ro-0.05*k; r_out = r_in+d; pitch = g['service_slot_pitch_m']*k
+    return dict(azimuth=g['service_panel_azimuth_deg'], x_aft=x_aft, x_fwd=x_fwd, x=(x_aft+x_fwd)/2, r_in=r_in, r_out=r_out, r=(r_in+r_out)/2,
+                length=L, depth=d, width=g['service_panel_width_m']*k, pitch=pitch,
+                slots={svc: (j-(len(SERVICE_SLOTS)-1)/2)*pitch for j, svc in enumerate(SERVICE_SLOTS)})
+
+
 def service_offsets(s, scale=1.0):
     """Radial offsets (inward, from the cage centreline) of the lines that ride the cage: feeders, leads, cryogen and the exchange rails all
     pass inside the hoops at LINE_GAP_M from the hoop surface (1.2). The hoops sit forward of their loops, so the lines clear the cryostats."""
@@ -217,10 +232,10 @@ def parts(s, scale=1.0):
     # --- service: trunnions, panel, handling posts, hatch, rails ---
     for j, az in enumerate(g['trunnion_azimuths_deg']):
         out.append(part(f'VTX_Trunnion_{j+1}', 'SERVICE', 'box', 'service', note='Trunnion lug: pinned to the cluster cradle; released for engine exchange',
-                        center=pol((st['collar_fwd']+st['collar_aft'])/2, R(g['collar_outer_radius_m'])+R(0.35), az), size=(R(1.0), R(0.7), R(0.9)), az=az))
-    paz = g['service_panel_azimuth_deg']
-    out.append(part('VTX_Service_Panel', 'SERVICE', 'box', 'service', note='Quick-disconnect panel: target feed, lithium supply/return, cryogen, power bus, data',
-                    center=pol((st['collar_fwd']+st['collar_aft'])/2, R(g['collar_outer_radius_m'])+R(0.25), paz), size=(R(1.2), R(0.5), R(2.4)), az=paz))
+                        center=pol((st['collar_fwd']+st['collar_aft'])/2, R(g['collar_outer_radius_m'])+R(g['trunnion_lug_depth_m'])/2, az), size=(R(1.0), R(g['trunnion_lug_depth_m']), R(0.9)), az=az))
+    sp = service_panel(s, scale); paz = sp['azimuth']
+    out.append(part('VTX_Service_Panel', 'SERVICE', 'box', 'service', note='Quick-disconnect panel: target feed, lithium supply/return, cryogen, power bus, data; on the collar forward face, clear of the cradle',
+                    center=pol(sp['x'], sp['r'], paz), size=(sp['length'], sp['depth'], sp['width']), az=paz))
     out.append(part('VTX_Nose_Hatch', 'SERVICE', 'disc', 'service', note='Cartridge access hatch', center=(st['front']+R(0.02), 0, 0), radius=cr*0.42, depth=R(0.08)))
     for j in range(4):
         az = 45+90*j
@@ -244,7 +259,7 @@ def parts(s, scale=1.0):
                         points=[pol(hx, hr, az+LINE_AZ_DEG)]+[pol(x, r, az+LINE_AZ_DEG) for x, r in pts], radius=R(0.11)))
     for tag, dz in (('Supply', -0.5), ('Return', 0.5)):
         out.append(part(f'VTX_Lithium_Panel_{tag}', 'HOT_THERMAL', 'tube', 'hot', note=f'Lithium {tag.lower()} between the manifold and the service panel',
-                        points=[(hx, -hr, R(dz)), (hx, -R(g['collar_outer_radius_m'])-R(0.25), R(dz)), (st['collar_fwd']-R(0.1), -R(g['collar_outer_radius_m'])-R(0.25), R(dz))], radius=R(0.12)))
+                        points=[(hx, -hr, R(dz)), (hx, -service_panel(s, scale)['r_in'], R(dz))], radius=R(0.12)))
     # --- cryogenic: header and coil feeds ---
     cx = st['collar_fwd']+R(0.6); crr = cr+R(1.8)
     ring_x, ring_r = ring_station(s, scale); ra = R(g['reaction_ring_minor_m'])
@@ -264,7 +279,8 @@ def parts(s, scale=1.0):
     out.append(part('VTX_Coil_Current_Leads', 'ELECTRICAL', 'tube', 'power', note='Coil current leads (HTS) from the panel along the cage',
                     points=[pol(st['collar_aft'], R(g['collar_outer_radius_m']), az+LINE_AZ_DEG)]+[pol(x, r, az+LINE_AZ_DEG) for x, r in pts], radius=R(0.09)))
     out.append(part('VTX_Power_Bus', 'ELECTRICAL', 'tube', 'power', note='Driver and pulse-pod bus from the service panel',
-                    points=[(st['collar_fwd']+R(0.1), -R(g['collar_outer_radius_m'])-R(0.3), R(1.0)), (st['collar_fwd']+R(0.4), -cr-R(0.5), R(1.0)), (st['cartridge_aft']+R(6.0), -cr-R(0.5), R(1.0))], radius=R(0.12)))
+                    points=[(service_panel(s, scale)['x_fwd'], -service_panel(s, scale)['r'], R(1.0)), (service_panel(s, scale)['x_fwd']+R(0.6), -service_panel(s, scale)['r'], R(1.0)),
+                            (service_panel(s, scale)['x_fwd']+R(0.9), -cr-R(0.5), R(1.0)), (st['cartridge_aft']+R(6.0), -cr-R(0.5), R(1.0))], radius=R(0.12)))
     # --- instrumentation: diagnostics and indicator lamps ---
     l1 = st['loops'][0]
     for j in range(4):
@@ -356,12 +372,12 @@ def interfaces(s, scale=1.0):
     """Named interface points of the engine (engine frame): mounts, the panel's five services, the thrust line and the removal axis."""
     g = config(s)['geometry']; st = stations(s, scale); k = scale
     mid = (st['collar_fwd']+st['collar_aft'])/2; ro = g['collar_outer_radius_m']*k
-    out = [dict(name=f'IF_VTX_TRUNNION_{j+1}', at=pol(mid, ro+0.7*k, az), kind='mount', note='Trunnion pin seat: thrust and magnetic loads to the cradle')
+    out = [dict(name=f'IF_VTX_TRUNNION_{j+1}', at=pol(mid, ro+g['trunnion_lug_depth_m']*k, az), kind='mount', note='Trunnion pin seat: thrust and magnetic loads to the cradle')
            for j, az in enumerate(g['trunnion_azimuths_deg'])]
-    paz = g['service_panel_azimuth_deg']
-    for j, svc in enumerate(('TARGET_FEED', 'LITHIUM_SUPPLY', 'LITHIUM_RETURN', 'CRYOGEN', 'POWER', 'DATA')):
-        p = pol(mid, ro+0.5*k, paz)
-        out.append(dict(name=f'IF_VTX_{svc}', at=(p[0], p[1], p[2]+(j-2.5)*0.36*k), kind='service', note=f'{svc.replace("_", " ").lower()} at the quick-disconnect panel'))
+    sp = service_panel(s, scale)
+    for svc, z in sp['slots'].items():
+        p = pol(sp['x'], sp['r_out'], sp['azimuth'])
+        out.append(dict(name=f'IF_VTX_{svc}', at=(p[0], p[1], p[2]+z), kind='service', note=f'{svc.replace("_", " ").lower()} at the quick-disconnect panel (hub face)'))
     out += [dict(name='IF_VTX_BURN_POINT', at=(st['burn'], 0, 0), kind='reaction', note='Target burn point (open field, no hardware)'),
             dict(name='IF_VTX_THRUST_LINE', at=(st['burn'], 0, 0), kind='thrust', note='Thrust acts along the engine axis (+X on the ship)'),
             dict(name='IF_VTX_REMOVAL_AXIS', at=(st['exit'], 0, 0), kind='service', note='Engine leaves aft along its axis once the trunnions and the panel are released'),

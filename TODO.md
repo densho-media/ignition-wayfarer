@@ -210,7 +210,7 @@ go. Evidence classes: HW (real device), EMU (emulation), SW (software WebGL/llvm
 - [ ] **GFX-6 — Adaptive quality profiles. AFTER GFX-2 and GFX-5.** High/Medium/Low with a manual override, stable automatic choice,
   stored apart from the control profile; generalizes the MOB-001 touch scale (and its P05 tuning) rather than adding a second one.
 - [ ] **GFX-7 — Assets and loading. 7A READY after GFX-1A, the rest AFTER GFX-3.**
-  - 7A The viewer download is 11.38 MB of its 12 MB budget (Vertex 1.2): Draco quantization, meshopt or selective loading of
+  - 7A The viewer download is 11.70 MB of its 12 MB budget (FPS V1.1, measured 2026-11-19; 11.38 MB at Vertex 1.2): Draco quantization, meshopt or selective loading of
     inspection detail, measured, before any further geometry pushes it over (never raise the budget silently).
   - 7B Texture budgets, mipmaps and formats (S3TC desktop today; ETC2/ASTC or KTX2 for phones) once textures exist.
   - 7C Cache and wasm start-up cost; reusable material assets; generated render LODs. Deterministic, content-named outputs kept.
@@ -392,6 +392,19 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   long-life high-temperature structures (Ti-6Al-4V foil vacuum limit and life at 805-870 K); radiator materials and coating aging;
   temperature- and radiation-dependent property tables; creep, fatigue and replacement intervals. **Done when:** each propulsion-chain layer has a screen
   verdict against Drive-sourced operating requirements and the owner has accepted or rejected it in the workbook.
+
+- [ ] **F06 — Fuel & Propellant System after V1.1 (owner briefs 2026-11-18, 2026-11-19). V0, V1 and V1.1 BUILT (PROTOTYPE), owner-approved as the engineering prototype baseline 2026-11-19 (not validated propulsion physics); V2 Engineering Convergence next.**
+  `docs/FUEL_SYSTEM.md` (sections 9 and 10), `fuel_system.py`, `components/fuel_feed.py`, Explore Ship Fuel drawer. V1.1 resolved the
+  panel pitch, the ring tie and the panel/cradle overlap and modeled target fabrication, galleries, supports, intercepts, PMDs and the
+  equipment detail. Open with the engine workstream: adopting or replacing the candidate target feeds and injection trains; the fuel rate
+  (one gap: the engines' fusion power is 1/7.31 of the operating point); the jet share (NOMINAL 73.5 % charged is the current result, the
+  80 % B01 share needs a conversion mechanism or 284 TW of fusion); the target recipe and fill/layering process (SPECULATIVE); the H2
+  coupling (SPECULATIVE); the cradle split or guided-removal fixture behind the 0.20 m removal clearance. FPS side: clamp spacing against
+  the pulse-rate vibration, fast-valve life at 5.7 kHz, hardware sizing for pumps, heaters and valves, PMD sizing, boil-off return, vent
+  plume keep-outs, the refuelling approach and its tanker interface; D-D and water as later alternatives. Release readiness (section 11):
+  canon decision on the drawn Vertex mass against the 250 t drive allowance (the V1.1 frame's +83 t alone would cost +191 t of
+  propellant and fill He-3 to 98.4 %); the CONSERVATIVE frame case (1.66) and the thrust-ring node joints; the removal guidance
+  fixture, spool joints and pin actuators; vessel ullage.
 
 ## G — Complete habitat, survival and service implementation
 

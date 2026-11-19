@@ -1,0 +1,229 @@
+{
+ "root": "dd4a64c (V1, clean worktree)",
+ "frame_t": 1353.128917507148,
+ "frame_centroid_m": [
+  -142.9999458666103,
+  6.02239182272327e-16,
+  -0.18275023143994895
+ ],
+ "engines_t": 4974.822486246408,
+ "engine_each_t": 1243.705621561602,
+ "cluster_t": 6327.951403753556,
+ "drive_allowance_t": 250.0,
+ "canon": {
+  "extra_t": 0.0,
+  "propellant_t": 2796.5862911822533,
+  "departure_t": 4426.074234859591,
+  "end_t": 1629.4879436773379,
+  "added_tank_t": 329.48794367733797,
+  "burn_days": 9.987452580792596,
+  "accel_g": [
+   0.501573150894622,
+   0.6439114774789606
+  ],
+  "thrust_MN": 21.770763000706356,
+  "distance_AU": 13.258797927137461,
+  "fusion_PJ": 225449.8132915613,
+  "peak_fusion_TW": 261.26510418091243,
+  "dry_cg_x": 35.06059717343276,
+  "dry_lateral_mm": 19.867191586569678,
+  "departure_cg_x": 89.60542432496989,
+  "burnout_cg_x": 78.16834723082324,
+  "departure_lateral_mm": 7.427316343915673,
+  "I_pitch_departure": 25496118498.025272,
+  "I_roll_departure": 2224762182.7441354
+ },
+ "whole_cluster": {
+  "extra_t": 6077.951403753556,
+  "propellant_t": 16844.11982358649,
+  "departure_t": 26658.68920087802,
+  "end_t": 9814.569377291531,
+  "added_tank_t": 2436.6179735379737,
+  "burn_days": 60.1554289719913,
+  "accel_g": [
+   0.08327491210629033,
+   0.10690698175460679
+  ],
+  "thrust_MN": 21.770763000706356,
+  "distance_AU": 79.8590702191456,
+  "fusion_PJ": 1357906.8456646372,
+  "peak_fusion_TW": 261.26510418091243,
+  "dry_cg_x": -56.56208567731594,
+  "dry_lateral_mm": 24.724979992166038,
+  "departure_cg_x": -14.438680158664976,
+  "burnout_cg_x": -14.438680158664976,
+  "departure_lateral_mm": 29.937552228247572,
+  "I_pitch_departure": 236563077893.20905,
+  "I_roll_departure": 6536565560.680372
+ },
+ "structure": {
+  "cases": {
+   "LC01_THRUST_ALL": {
+    "hub_thrust_strut": {
+     "u": 0.001,
+     "member": "CL_Hub_Thrust_Strut_06A"
+    },
+    "spoke": {
+     "u": 0.014,
+     "member": "CL_N2_Spoke_A"
+    },
+    "engine_thrust_strut": {
+     "u": 0.021,
+     "member": "CL_N3_Thrust_Strut_10"
+    },
+    "ring_tie": {
+     "u": 0.028,
+     "member": "CL_N4_Strut_Ring_Tie"
+    },
+    "chord": {
+     "u": 0.015,
+     "member": "CL_Chord_N2_N4"
+    }
+   },
+   "LC03_FIELD_NOMINAL+THRUST": {
+    "hub_thrust_strut": {
+     "u": 0.011,
+     "member": "CL_Hub_Thrust_Strut_04A"
+    },
+    "spoke": {
+     "u": 0.725,
+     "member": "CL_N3_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 0.815,
+     "member": "CL_N3_Thrust_Strut_10"
+    },
+    "ring_tie": {
+     "u": 0.272,
+     "member": "CL_N4_Strut_Ring_Tie"
+    },
+    "chord": {
+     "u": 0.398,
+     "member": "CL_Chord_N4_N3"
+    }
+   },
+   "LC03_FIELD_CONSERVATIVE+THRUST": {
+    "hub_thrust_strut": {
+     "u": 0.046,
+     "member": "CL_Hub_Thrust_Strut_05A"
+    },
+    "spoke": {
+     "u": 2.927,
+     "member": "CL_N3_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 3.306,
+     "member": "CL_N3_Thrust_Strut_10"
+    },
+    "ring_tie": {
+     "u": 1.108,
+     "member": "CL_N4_Strut_Ring_Tie"
+    },
+    "chord": {
+     "u": 1.631,
+     "member": "CL_Chord_N4_N3"
+    }
+   },
+   "LC06_N2_COILS_OFF": {
+    "hub_thrust_strut": {
+     "u": 0.063,
+     "member": "CL_Hub_Thrust_Strut_08A"
+    },
+    "spoke": {
+     "u": 0.906,
+     "member": "CL_N3_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 0.99,
+     "member": "CL_N3_Thrust_Strut_10"
+    },
+    "ring_tie": {
+     "u": 0.333,
+     "member": "CL_N3_Strut_Ring_Tie"
+    },
+    "chord": {
+     "u": 0.495,
+     "member": "CL_Chord_N4_N3"
+    }
+   },
+   "LC06_SINGLE_ENGINE_N1": {
+    "hub_thrust_strut": {
+     "u": 0.005,
+     "member": "CL_Hub_Thrust_Strut_06A"
+    },
+    "spoke": {
+     "u": 0.015,
+     "member": "CL_N1_Spoke_B"
+    },
+    "engine_thrust_strut": {
+     "u": 0.017,
+     "member": "CL_N1_Thrust_Strut_01"
+    },
+    "ring_tie": {
+     "u": 0.015,
+     "member": "CL_N1_Strut_Ring_Tie"
+    },
+    "chord": {
+     "u": 0.006,
+     "member": "CL_Chord_N3_N1"
+    }
+   }
+  },
+  "stiffness_N_m": {
+   "radial": 3330148228.4155436,
+   "axial": 153154285.30783942,
+   "tangential": 153937587.8009993
+  },
+  "rocking_Hz": {
+   "radial": 8.235559617099357,
+   "axial": 1.766143183479817,
+   "tangential": 1.7706538636598328
+  },
+  "magnetic_margin": 1597.2890712605808,
+  "thrust_per_engine_MN": 0.725525,
+  "ties": [
+   {
+    "name": "CL_N1_Strut_Ring_Tie",
+    "length_m": 25.37,
+    "radius_m": 0.544,
+    "ring_node": 1,
+    "foot_to_node_m": 6.899,
+    "angle_to_axis_deg": 87.1,
+    "lc01_axial_MN": -0.293,
+    "lc01_u": 0.017
+   },
+   {
+    "name": "CL_N2_Strut_Ring_Tie",
+    "length_m": 25.37,
+    "radius_m": 0.544,
+    "ring_node": 4,
+    "foot_to_node_m": 6.899,
+    "angle_to_axis_deg": 87.1,
+    "lc01_axial_MN": -0.293,
+    "lc01_u": 0.017
+   },
+   {
+    "name": "CL_N3_Strut_Ring_Tie",
+    "length_m": 25.37,
+    "radius_m": 0.544,
+    "ring_node": 11,
+    "foot_to_node_m": 6.899,
+    "angle_to_axis_deg": 87.1,
+    "lc01_axial_MN": -0.494,
+    "lc01_u": 0.028
+   },
+   {
+    "name": "CL_N4_Strut_Ring_Tie",
+    "length_m": 25.37,
+    "radius_m": 0.544,
+    "ring_node": 8,
+    "foot_to_node_m": 6.899,
+    "angle_to_axis_deg": 87.1,
+    "lc01_axial_MN": -0.494,
+    "lc01_u": 0.028
+   }
+  ],
+  "elements": 48
+ },
+ "pulse_Hz": 5697.064655767655
+}
