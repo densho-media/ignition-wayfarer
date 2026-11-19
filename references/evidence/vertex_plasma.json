@@ -1,6 +1,6 @@
 {
  "version": "1.4.0",
- "input_hash": "71d73fdeca7e15dd",
+ "input_hash": "6f23733aa959520c",
  "baseline_1_3": {
   "M0-NOMINAL": {
    "capture_margin": 0.0,
@@ -31,8 +31,8 @@
   }
  },
  "audit": {
-  "cpu_s": 172.763191558,
-  "wall_s": 45.71519899368286,
+  "cpu_s": 183.777947563,
+  "wall_s": 50.177499532699585,
   "candidates": {
    "M0-NOMINAL": {
     "convergence": {
@@ -1633,7 +1633,7 @@
    "n": 48,
    "ds_m": 0.04,
    "steps": 1654,
-   "cpu_s": 11.451726727,
+   "cpu_s": 11.444051581999998,
    "t_end_s": 4.3245822542966854e-06,
    "energy_J": 1222631332.2507732,
    "mass_kg": 6.63238971799771e-06,
@@ -2257,7 +2257,7 @@
    "n": 48,
    "ds_m": 0.04,
    "steps": 1233,
-   "cpu_s": 7.880616625000016,
+   "cpu_s": 8.635132487999982,
    "t_end_s": 3.3409976122100533e-06,
    "energy_J": 1222631332.2507732,
    "mass_kg": 6.63238971799771e-06,
@@ -2876,7 +2876,7 @@
      "hardware_first": 0.24999999999999994,
      "energy_error": 0.003840814702623122,
      "momentum_error": 0.004571462415028177,
-     "cpu_s": 4.254089150999999
+     "cpu_s": 4.583638951999998
     },
     {
      "n": 48,
@@ -2887,7 +2887,7 @@
      "hardware_first": 0.18299623740441678,
      "energy_error": 0.003389276468498944,
      "momentum_error": 0.002743505605858608,
-     "cpu_s": 11.451726727
+     "cpu_s": 11.444051581999998
     },
     {
      "n": 96,
@@ -2898,7 +2898,7 @@
      "hardware_first": 0.17895229982998428,
      "energy_error": 0.0031972404838839035,
      "momentum_error": 0.0034092869402920587,
-     "cpu_s": 36.575263836000005
+     "cpu_s": 37.46769831500001
     },
     {
      "n": 48,
@@ -2909,7 +2909,7 @@
      "hardware_first": 0.146660205657815,
      "energy_error": 0.008098994806813236,
      "momentum_error": 0.002742851774931667,
-     "cpu_s": 6.977466630999999
+     "cpu_s": 7.116569359999993
     },
     {
      "n": 48,
@@ -2920,7 +2920,7 @@
      "hardware_first": 0.146660205657815,
      "energy_error": 0.0010241158381491112,
      "momentum_error": 0.002743937590939964,
-     "cpu_s": 21.524982369
+     "cpu_s": 22.566577091
     }
    ],
    "spread": 0.07945931129894557,
@@ -2938,7 +2938,7 @@
      "hardware_first": 0.017037086855465844,
      "energy_error": 0.006402819714659937,
      "momentum_error": 0.06617992799741364,
-     "cpu_s": 2.4388359880000223
+     "cpu_s": 2.8219902479999917
     },
     {
      "n": 48,
@@ -2949,7 +2949,7 @@
      "hardware_first": 0.009607359798384785,
      "energy_error": 0.010869017144428289,
      "momentum_error": 0.060114095276414835,
-     "cpu_s": 7.880616625000016
+     "cpu_s": 8.635132487999982
     },
     {
      "n": 96,
@@ -2960,7 +2960,7 @@
      "hardware_first": 0.017037086855465844,
      "energy_error": 0.013134519018493012,
      "momentum_error": 0.033516148043622976,
-     "cpu_s": 37.13336416200002
+     "cpu_s": 39.54770021599998
     },
     {
      "n": 48,
@@ -2971,7 +2971,7 @@
      "hardware_first": 0.009607359798384785,
      "energy_error": 0.024508992175488842,
      "momentum_error": 0.05690830267438485,
-     "cpu_s": 5.354318370999977
+     "cpu_s": 5.55175877100001
     },
     {
      "n": 48,
@@ -2982,7 +2982,7 @@
      "hardware_first": 0.009607359798384785,
      "energy_error": 0.007406036863109888,
      "momentum_error": 0.061148873599217675,
-     "cpu_s": 15.416921006999985
+     "cpu_s": 15.610930822
     }
    ],
    "spread": 0.007429727057081059,
@@ -4074,5 +4074,5 @@
   "selected": "M0-NOMINAL",
   "direction": "Keep the fusion products as exhaust (the only family fast enough for the mission); study pole steering (A1) and an anisotropic source without heavy loading (A2) in a 3D cavity or hybrid model; solve the 20 K eddy heat and the X-ray sky fraction before any coil work."
  },
- "wall_s": 333.15603518486023
+ "wall_s": 352.4331192970276
 }

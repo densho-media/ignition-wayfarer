@@ -1,4 +1,4 @@
-"""Build work/fuel-propellant/REVIEW_FUEL-PROPELLANT.blend: the owner review file for FPS V0 and V1 (opens on the aft feed train, nothing to run).
+"""Build work/fuel-propellant/REVIEW_FUEL-PROPELLANT.blend: the owner review file for FPS V0, V1 and V1.1 (opens on the whole rear propulsion assembly, nothing to run).
 
   /snap/bin/blender -b --factory-startup --python work/fuel-propellant/make_review.py -- [--render DIR]
 
@@ -7,7 +7,9 @@ WORK_FUEL_PROPELLANT collection (the generator still owns them). Solid shading w
 The aft hull skin, spine casing and radiator blades are hidden in this file only, and every other part is dark grey, so the train is visible. Scenes: FUEL_PROPELLANT (opens: the feed train alone) and SHIP_CONTEXT (the whole ship). Cameras: CAM_FPS_AFT_TRAIN (opens on it),
 CAM_FPS_BRANCHES (header and engine branches from aft), CAM_FPS_REFUEL (the receptacle on the farm deck); V1: CAM_FPS_ENGINE_N1 (target
 feed and H2 injection on engine N1, with the cluster), CAM_FPS_INJECTORS_N1 (manifold and ports from outboard), CAM_FPS_RUN_TANK_INLETS,
-CAM_FPS_FEEDTHROUGHS and CAM_FPS_CROSSOVER. The farm's vessels, mains and trunks and the propulsion cluster are shown in the opening scene
+CAM_FPS_FEEDTHROUGHS and CAM_FPS_CROSSOVER; V1.1: CAM_V11_ASSEMBLY (opens on it: run tanks to nozzles), CAM_V11_PANEL_N1 (the panel
+forward of the cradle, six lines at one 0.36 m pitch), CAM_V11_FLANK_TIES_N1 (the flank ties outside the engine), CAM_V11_REMOVAL_N1 (the
+cradle bore, lugs and panel in the removal passage) and CAM_V11_FAB_BAY (into the bay core: the target fabrication line). The farm's vessels, mains and trunks and the propulsion cluster are shown in the opening scene
 too (the cluster grey). Study helper; nothing reads it.
 """
 import argparse
@@ -93,16 +95,22 @@ CAMS += [camera('CAM_FPS_ENGINE_N1', vcl.to_ship(_pl, (-2.0, -14.0, -9.0)), vcl.
          camera('CAM_FPS_RUN_TANK_INLETS', (-82.0, -9.0, 12.0), (-93.0, 0.0, 0.0), lens=35),
          camera('CAM_FPS_FEEDTHROUGHS', (99.0, 16.0, 13.0), (92.27, 2.5, 1.5), lens=35),
          camera('CAM_FPS_CROSSOVER', (124.0, 30.0, -34.0), (109.5, 14.6, -14.6), lens=35)]
+# V1.1: the resolved conflicts (panel forward of the cradle, flank ties outside the engine, the removal passage) and the new components
+CAMS += [camera('CAM_V11_PANEL_N1', vcl.to_ship(_pl, (-1.5, -7.6, 6.5)), vcl.to_ship(_pl, (-8.8, -5.7, 0.0)), lens=35),
+         camera('CAM_V11_FLANK_TIES_N1', vcl.to_ship(_pl, (14.0, 4.0, 26.0)), vcl.to_ship(_pl, (-6.0, -3.0, 0.0)), lens=30),
+         camera('CAM_V11_REMOVAL_N1', vcl.to_ship(_pl, (-26.0, 3.0, 4.0)), vcl.to_ship(_pl, (-9.9, 0.0, 0.0)), lens=45),
+         camera('CAM_V11_FAB_BAY', (-109.8, 0.7, 0.9), (-119.5, 0.0, 0.0), lens=22),
+         camera('CAM_V11_ASSEMBLY', (-60.0, -78.0, 52.0), (-136.0, 0.0, 0.0), lens=32)]
 for c in CAMS:
     cams.objects.link(c)
-scene.camera = CAMS[0]
+scene.camera = next(c for c in CAMS if c.name == 'CAM_V11_ASSEMBLY')
 # The opening scene shows the feed train alone (the ship's cage, envelopes and cluster frame hide it from every side); SHIP_CONTEXT has
 # the whole ship with the same cameras.
 ctx = bpy.data.scenes.new('SHIP_CONTEXT'); ctx.collection.children.link(ship); ctx.collection.children.link(work); ctx.camera = CAMS[0]
 scene.view_layers[0].layer_collection.children[ship.name].exclude = True
 txt = bpy.data.texts.new('README_FUEL_PROPELLANT')
 txt.write(__doc__ + f'\nObjects in WORK_FUEL_PROPELLANT: {len(fps)}. Hidden in this file only: {", ".join(sorted(set(n.split(".")[0] for n in hidden)))}.\n'
-          'Record: docs/FUEL_SYSTEM.md (V1: section 9). All dimensions PROTOTYPE; engine-side parts are CANDIDATES; engine interfaces IF_FPS_* OPEN.\n')
+          'Record: docs/FUEL_SYSTEM.md (V1: section 9; V1.1: section 10). All dimensions PROTOTYPE; engine-side parts are CANDIDATES; engine interfaces IF_FPS_* OPEN.\n')
 for sc in (scene, ctx):
     sh = sc.display.shading; sh.light = 'STUDIO'; sh.color_type = 'OBJECT'; sh.show_cavity = True
     sc.render.engine = 'BLENDER_WORKBENCH'; sc.render.resolution_x, sc.render.resolution_y = 1600, 1000

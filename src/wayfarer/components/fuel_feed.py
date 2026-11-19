@@ -121,6 +121,8 @@ def build(c, s):
         stamp(obj, s, sp, f'{tg} fill isolation valve', f'FPS-RF-{tg}-V', 'ESTABLISHED')
     if fs.v1(s):
         build_v1(c, s, mat, equip, bracket)
+    if fs.v11(s):
+        build_v11(c, s, mat, equip, bracket)
     for i in fs.interfaces(s):
         e = empty(c, i['name'], i['at']); e['engineering_status'] = 'OPEN: '+i['note']; e['species'] = i['species']; e['fps_interface'] = True
 
@@ -211,6 +213,9 @@ def build_v1(c, s, mat, equip, bracket):
                   'PLAUSIBLE', 'distribution and plenum volume', owner='ENGINE (candidate)', pipe_class='GH2-INJECT')
         parts = [cylinder_mesh(a, b, h['port_radius'], 10) for p in h['ports'] for a, b in zip(p, p[1:])]
         parts += [ebox(v, (h['port_valve_m']*1.6, h['port_valve_m'], h['port_valve_m'])) for v in h['port_valves']]
+        if fs.v11(s):     # V1.1: the shielding galleries (sleeves where each port crosses the collar and the shadow shield) belong to the ports
+            g = next(g for g in fs.shield_galleries(s) if g['engine'] == j)
+            parts += [cylinder_mesh(a, b, g['radius'], 12) for a, b in g['segments']]
         obj = mesh(c, h['ports_name'], *merge(parts), mat['hydrogen'], kind='fps_injector')
         _stamp_v1(obj, s, 'hydrogen', f"N{j} {len(h['ports'])} injector ports, each with its fast valve (opens for the gas puff ahead of a pulse, kHz class): aft from the manifold through "
                   'drilled galleries in the thrust collar, across to the shadow shield and dog-legged through it to the burn face (no straight line of sight from '
@@ -228,6 +233,73 @@ def build_v1(c, s, mat, equip, bracket):
         obj = mesh(c, f'FPS_N{j}_Flanges', *merge(eng_fl), equip, kind='fps_flange')
         _stamp_v1(obj, s, 'none', f'N{j} flanged joints: the target feed at the panel and the magazine, the H2 line at the inlet and the manifold (engine removal breaks here)',
                   f'FPS-FL-N{j}', 'ESTABLISHED', owner='ENGINE (candidate)')
+
+
+def _stamp_v11(obj, s, species, function, fps_id, confidence='PLAUSIBLE', open_='', owner='FPS', pipe_class=''):
+    _stamp_v1(obj, s, species, function, fps_id, confidence, open_, owner, pipe_class)
+    obj['fps_version'] = s['fuel_system']['v11']['version']; obj['fps_milestone'] = 'V1.1'
+    return obj
+
+
+def _ring_mesh(pts, r):
+    return merge([cylinder_mesh(a, b, r, 6) for a, b in zip(pts, pts[1:])])
+
+
+def build_v11(c, s, mat, equip, bracket):
+    """FPS V1.1 blockouts (fuel_system V1.1 section): target fabrication in the cluster bay core and the transfer to the target trunk,
+    cryogenic supports and thermal intercepts, PMDs in every tank, pump/regulator/conditioning detail. Merged per function so the
+    exported node count stays small (play budget)."""
+    tf = fs.target_fabrication(s)
+    for e in tf['equipment']:
+        sp = e['species']; m = mat.get(sp, equip) if e['name'].startswith('FPS_Fab_Receiver') else equip
+        if e['shape'] == 'cyl':
+            vs, fc = cylinder_mesh(e['a'], e['b'], e['radius'], 24)
+        else:
+            vs, fc = _oriented_box(e['at'], e['size'], (0.0, 1.0, 0.0), (0.0, 0.0, 1.0))
+        obj = mesh(c, e['name'], vs, fc, m, kind='fps_fabrication')
+        _stamp_v11(obj, s, sp, e['function'], 'FPS-FAB-'+e['name'].split('_', 2)[2].upper(), 'SPECULATIVE',
+                   'target recipe, fill and layering process, throughput and power; the bay layout is PROTOTYPE', owner='FPS (cluster bay core)')
+    links = [l for l in tf['lines'] if l['name'].startswith(('FPS_Fab_Link', 'FPS_Fab_Conveyor'))]
+    obj = mesh(c, 'FPS_Fab_Links', *merge([cylinder_mesh(a, b, l['radius'], 10) for l in links for a, b in zip(l['points'], l['points'][1:])]), mat['target'], kind='fps_fabrication')
+    _stamp_v11(obj, s, 'target', 'fabrication-line links: receivers to the blend unit, and the target conveyor blend -> fill -> inspection -> buffer magazine', 'FPS-FAB-LINKS', 'SPECULATIVE')
+    for l in tf['lines']:
+        if l in links:
+            continue
+        sp = l['species']; leg = l['name'].startswith('FPS_Bay_Target')
+        obj = line(c, l['name'], l['points'], l['radius'], mat[sp], kind='fps_fabrication' if leg else 'fps_target_feed')
+        _stamp_v11(obj, s, sp, (f"{fs.TAG[sp]} leg from the bay fore face (end of its feed line) radially in to its receiver dewar" if leg else
+                               'cold-target transfer from the buffer magazine to the cluster target trunk (CL_Trunk_TARGET_FEED) on the bay aft face'),
+                   'FPS-FAB-'+('LEG-'+fs.TAG[sp] if leg else 'XFER'), 'PLAUSIBLE', pipe_class='TARGET-FEED' if not leg else {'deuterium': 'LD2-TRUNK', 'helium-3': 'LHE3-TRUNK'}[sp])
+    cs = fs.cryo_supports(s); ti = fs.thermal_intercepts(s)
+    for pl in fs.vc.placements(s):
+        j = pl['n']; parts = []
+        for k in cs['clamps']:
+            if k['engine'] == j:
+                parts += [_ring_mesh(k['ring'], cs['ring_tube']), cylinder_mesh(k['strut'][0], k['strut'][1], cs['strut_radius'], 8)]
+        rings = [r for r in ti['rings'] if r.get('engine') == j]
+        parts += [_ring_mesh(fs._ring_pts(r['center'], r['axis'], r['R']), ti['tube']) for r in rings]
+        obj = mesh(c, f'FPS_N{j}_Supports', *merge(parts), bracket, kind='fps_support')
+        _stamp_v11(obj, s, 'none', f'N{j} cryogenic clamps (low-conductance G10 standoffs) holding the target feed to the cartridge shell, and thermal intercepts '
+                   'on the target feed and the H2 injection line at the panel side', f'FPS-SS-N{j}', 'PLAUSIBLE', 'clamp spacing against the feed\'s vibration modes at the pulse rate',
+                   owner='ENGINE (candidate)')
+    rings = [r for r in ti['rings'] if r.get('engine') is None]
+    obj = mesh(c, 'FPS_Thermal_Intercepts', *merge([_ring_mesh(fs._ring_pts(r['center'], r['axis'], r['R']), ti['tube']) for r in rings]), equip, kind='fps_intercept')
+    _stamp_v11(obj, s, 'none', f"{len(rings)} thermal intercepts (cold-strap collars to the 20 K loop) where cryogenic lines cross a warm/cold boundary: the four feed lines at the "
+               'shadow-shield sleeve, the hull feedthroughs\' interior ends and the D2/He-3 legs at the bay fore face', 'FPS-TI-V11', 'PLAUSIBLE', 'strap conductance and the heat-leak budget per crossing')
+    pm = fs.pmds(s)
+    for grp, sel in (('Run_Tanks', [p for p in pm if p['species'] is None]), ('Farm', [p for p in pm if p['species'] is not None])):
+        parts = [_oriented_box(b['center'], b['size'], b['ur'], b['ut']) for p in sel for b in p['vanes']+p['sponge']]
+        obj = mesh(c, f'FPS_PMD_{grp}', *merge(parts), bracket, kind='fps_pmd')
+        _stamp_v11(obj, s, 'none', f"propellant management devices in {len(sel)} {'run tanks' if grp == 'Run_Tanks' else 'farm vessels'}: four gallery vanes along the barrel and a radial-plate sponge "
+                   'at the aft outlet keep liquid at the outlet in coast (no settling thrust)', 'FPS-PMD-'+grp.upper(), 'ESTABLISHED',
+                   'vane and sponge sizing against the transfer rate; screen-channel bubble point')
+        obj['tanks'] = ','.join(p['tank'] for p in sel)
+    for d in fs.equipment_detail(s):
+        sp = d['species']; parts = [cylinder_mesh(q['a'], q['b'], q['radius'], 16) for q in d['cyl']]
+        parts += [_oriented_box(q['center'], q['size'], q['ur'], q['ut']) for q in d['box']]
+        obj = mesh(c, d['name'], *merge(parts), equip, kind='fps_conditioner')
+        _stamp_v11(obj, s, sp, f"{d['line']} sub-blockouts: "+', '.join(sorted({q['what'] for q in d['cyl']+d['box']})), 'FPS-EQ-'+d['name'].split('_', 3)[3], 'PLAUSIBLE',
+                   'hardware selection, mass and power')
 
 
 def vc_to(pl, p):

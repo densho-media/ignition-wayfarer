@@ -200,7 +200,7 @@ Status words: **connected** (geometry meets geometry), **interface only** (the p
 | `IF_FPS_H2_ENGINE_0n` → burn | **missing**: no injection hardware | to the burn face | `FPS_Nj_H2_Injection_Line`, control valve, `FPS_Nj_H2_Manifold`, `FPS_Nj_H2_Injectors` (8 ports, fast valves) (CANDIDATE) |
 | Engine magazine → transfer → launcher → bore → burn | connected (engine-owned) | 0 | unchanged |
 
-Findings for the engine workstream: the cluster spaces the six panel services at 0.34 m (`CL_Nj_Line_*` end at z = (i − 2.5)·0.34) and the
+Findings for the engine workstream (all three resolved in V1.1, section 10.1): the cluster spaces the six panel services at 0.34 m (`CL_Nj_Line_*` end at z = (i − 2.5)·0.34) and the
 engine its panel interfaces at 0.36 m (`IF_VTX_*`), so `TARGET_FEED` lands 5 cm apart (z −0.85 against −0.90; the FPS feed follows the
 engine's −0.90). The service panel (r 5.6 to 6.1) reaches into the cradle torus (inner radius 5.92). `CL_Nj_Strut_Ring_Tie` runs from
 the cradle's outer point (engine frame Y +6.6) to the thrust ring (Y −18.7) in the engine's Z = 0 plane, so it passes through the collar
@@ -261,6 +261,7 @@ and armour must reject; the rest leaves the open geometry. The injection hardwar
 Fuel rate: one engine's own pulse point is 6.63 mg at 5,697 Hz, 37.8 g/s, 8.9 TW of fusion. Four engines make 35.7 TW, **1/7.3** of the
 ship operating point's 261 TW, which needs 185 g/s of fuel per engine. The "38 vs 185 g/s" gap is therefore the same factor in power, not
 a feed shortfall. The FPS feeds the operating point and changes neither side; the engine workstream owns pulse rate and target mass.
+V1.1 (section 10.3) reconciles the 4.9× and the 7.3× and stops claiming the 80 % jet share.
 
 ### 9.5 Interface contract with the engine workstream
 
@@ -289,11 +290,11 @@ validated (built, clash-screened by `work/fuel-propellant/probe.py`, whole-ship 
 | FPS-XO-H2 | H2 inner-outer crossover + valve | integrated and geometrically validated | `FPS_H2_Crossover*` |
 | FPS-FT-* | hull feedthroughs (6) | integrated and geometrically validated | `FPS_Feedthrough_*` |
 | FPS-TI-01..04, FPS-VL-CK-* | run-tank nozzles, inlet valves, check valves | integrated and geometrically validated | `FPS_Tank_Inlet_*`, `FPS_Check_Valve_*` |
-| FPS-TF | target fabrication in the bay | conceptual placeholder | dashed viewer leg |
+| FPS-TF | target fabrication in the bay | conceptual placeholder (V1.1: modeled, section 10.2) | dashed viewer leg |
 | FPS-TF-N1..N4 | target feeds, panel → magazine | integrated and geometrically validated; assumptions unresolved (carrier, rate) | `FPS_Nj_Target_Feed` |
 | FPS-IJ-N1..N4 | H2 control valve, line, manifold, 8 ports with fast valves | integrated and geometrically validated; assumptions unresolved (coupling, valve life) | `FPS_Nj_H2_*` |
 | FPS-FL, FPS-IN | flanges, instrument sleeves | integrated | `FPS_*_Flanges`, `FPS_Nj_Instruments` |
-| FPS-PMD, cold-line supports past the corridor, collar galleries | — | missing and required | — |
+| FPS-PMD, cold-line supports past the corridor, collar galleries | — | missing and required (V1.1: modeled, section 10.2) | — |
 
 Physical integration (geometry joins geometry) is separate from conceptual interfaces: the bay leg and the energy coupling are conceptual;
 every other V1 segment is modeled.
@@ -307,6 +308,87 @@ ghosts the rest of the ship, tints its objects by species and frames them. Dots 
 loops, trunks, feedthroughs, inlets, the aft train, the cluster's target-feed lines, each engine's feed, line and ports); the bay leg is
 dashed. Amber markers show where a flow ends unresolved (bay inlets, magazines, injector tips, the refuelling receptacle), listed with
 their notes. A component list frames and selects any object in the view. Bookmark: `#fuel=ACTIVE.combined`.
+
+## 10. Version 1.1: geometry conflicts resolved, missing components modeled
+
+Owner brief 2026-11-19 09:23Z. V1 (dd4a64c) is the accepted baseline; V1.1 changes the engine and cluster interface the three V1 findings
+named, models every V1 "missing" component as an engineering blockout and reconciles the fuel and power numbers. The engine workstream
+agreed that this work owns `vertex_engine.py`, `vertex_cluster.py`, `components/vertex.py`, `[vertex_engine.geometry]` and
+`[propulsion_cluster]` while the V1.1 review is open. Positions and sizes are PROTOTYPE; the target process is SPECULATIVE.
+
+### 10.1 The three conflicts
+
+| Conflict (V1 finding) | Resolution | Shared source |
+| --- | --- | --- |
+| Service spacing: cluster lines at 0.34 m, engine interfaces at 0.36 m | one pitch, 0.36 m, for the engine panel part, its six `IF_VTX_*` slots, the cluster's six `CL_Nj_Line_*` and the FPS target feed; `service_line_spacing_m` deleted | `vertex_engine.geometry.service_slot_pitch_m`, `vertex_engine.service_panel()` (panel station, faces, width and slot z of every service) |
+| `CL_Nj_Strut_Ring_Tie` from the cradle's outboard point through the engine to the hub | replaced by a symmetric pair of **flank thrust ties** `CL_Nj_Flank_Tie_A/B` from the cradle flanks (local 90° and 270°, between the trunnions) to the nearest thrust-ring node that clears the comms sweeps: the cradle now meets the ring at four points (two hub-side struts, two flank ties), all outside the engine. The FE group is `flank_tie` (same r 0.54 m) | `vertex_cluster.frame` |
+| Service panel inside the cradle tube (panel r 5.6–6.1 at the cradle station, cradle bore 5.92) | the panel moves **axially forward** of the cradle onto the collar's forward face (X −9.2 to −8.3, r 5.55–5.80, 2.3 m wide); the cluster lines approach it radially at its station and end on its hub face; the lithium panel lines shorten to the panel's inner face; the power bus leaves its forward face | `service_panel_length_m`, `_depth_m`, `_width_m` |
+
+Engine removal (`vertex_cluster.removal_sweep`, with the FPS engine parts in `fuel_system.removal_check`): the engine leaves aft along its
+axis through the cradle once the four trunnion pins withdraw and the panel lines and the two FPS flanges are released, so every part
+forward of the cradle's aft face must pass the cradle bore. V1 failed this regardless of the panel: the trunnion lugs reached r 6.3
+inside the bore. V1.1 shortens the lugs to 0.30 m proud of the collar (the cluster pins enter their sockets), keeps every forward part
+inside a removal passage of r 5.92 m (`removal_passage_radius_m`: the panel's corners, the FPS H2 inlet line at r 5.80, whose standoff
+drops from 0.30 to 0.20 m, and the target feed), and widens the cradle ring from R 6.6 to 6.8 m so its bore is 6.12 m: **0.20 m radial
+clearance**, least at the trunnion lugs and the panel corners. No part is blocked. The engines did not move.
+
+### 10.2 Components added
+
+| ID | Component | Model | Status |
+| --- | --- | --- | --- |
+| FPS-FAB-* | target fabrication in the cluster bay core: D2 and He-3 legs from the bay fore face to their **receiver dewars**, a purifier and **blend unit**, the **shell fill and cryogenic layering station**, **inspection** with a reject chute, a **buffer magazine**, the target conveyor | `FPS_Bay_Target_Fabrication_D2/He3`, `FPS_Fab_Receiver_*`, `FPS_Fab_Blend_Unit`, `FPS_Fab_Fill_Station`, `FPS_Fab_Inspection`, `FPS_Fab_Buffer_Magazine`, `FPS_Fab_Links` | blockout; process SPECULATIVE (`IF_FPS_FAB_FILL`) |
+| FPS-FAB-XFER | cold-target transfer from the buffer magazine to `CL_Trunk_TARGET_FEED` on the bay's aft face | `FPS_Target_Transfer_Bay` | modeled |
+| (cluster) | the power and conditioning bay is an annulus (r 1.9–4.2) round the fabrication core; the five service trunks leave the annulus at r 2.3 and step in to r 1.0; three **trunk spider rings** tie the six trunks between the bay and the hub | `CL_Power_Conditioning_Bay`, `CL_Trunk_*`, `CL_Trunk_Spider_1..3` | PROTOTYPE |
+| FPS-IJ-Nj-P | **shielding galleries**: a sleeve round each injector port where it crosses the thrust collar and the shadow shield (with the V1 dog-leg, no straight streaming path) | in `FPS_Nj_H2_Injectors` | blockout |
+| FPS-SS-Nj | **cryogenic supports**: two clamps per engine (ring + low-conductance standoff) holding the target feed's inner run to the cartridge shell; **thermal intercepts** on the target feed and the H2 line at the panel side | `FPS_Nj_Supports` | PLAUSIBLE |
+| FPS-TI-V11 | **thermal intercepts** (cold-strap collars) where the four feed lines cross the shadow-shield sleeve, at each hull feedthrough's interior end and on the D2/He-3 bay legs | `FPS_Thermal_Intercepts` | PLAUSIBLE |
+| FPS-PMD-* | **propellant management devices** for coast transfer: four gallery vanes along the barrel and an eight-plate sponge at the aft outlet, in the 4 run tanks and the 13 farm vessels | `FPS_PMD_Run_Tanks`, `FPS_PMD_Farm` | ESTABLISHED principle, sizing OPEN |
+| FPS-EQ-* | **pump, regulator and conditioning detail**: the boost pumps' motors, the conditioners' heat-exchanger shells, a pressure regulator and a flow-meter spool on each feed line | `FPS_Equipment_Detail_*` | PLAUSIBLE |
+
+Objects are merged per function (the play download budget): V1.1 adds 21 exported FPS nodes. The feed lines' V0 supports, sensors, relief
+and purge are unchanged.
+
+### 10.3 Fuel rate and power: one gap, not two
+
+`fuel_system.rate_reconciliation` puts the ship operating point (`flows`) and the engine's pulse point (`vertex_magnet.plasma`) in one
+energy and mass account:
+
+| Quantity | Ship (per engine) | Engine point | Ratio |
+| --- | --- | --- | --- |
+| Fusion power | 65.3 TW | 8.93 TW (1.567 GJ × 5,697 Hz) | **7.31** |
+| Jet power, share of fusion | 52.3 TW, 0.800 (B01) | 6.97 TW, 0.780 | 7.50 |
+| Exhaust mass | 283 g/s | 37.8 g/s (6.63 mg per pulse) | 7.50 |
+| Reacted D+He-3 | 185 g/s | 25.3 g/s (4.44 mg per pulse at 3.53×10¹⁴ J/kg) | 7.31 |
+| Exhaust per reacted fuel | 1.53 | 1.49 | — |
+
+The ship's flows are **reacted** fuel (fed = reacted / burnup 0.8: 0.925 kg/s); the engine's 6.63 mg pulse mass is not a fuel mass but the
+mass that carries the pulse's jet energy at the exhaust speed (m = 2E/vₑ²). V1 set the ship's reacted D+He-3 against the engine's exhaust
+mass: 7.50 / 1.53 = **4.9**. Like for like, the specific fusion energy is the same (full D–³He burn of what reacts, 3.53×10¹⁴ J/kg),
+burnup cancels, and target mass and pulse rate enter only through yield × rate: the one mismatch is the engine's fusion power, ×7.31.
+It would close at 41.7 kHz at today's yield, 11.5 GJ at today's rate, or 29 engines; none is changed here (engine workstream).
+
+Jet share: the **current result is NOMINAL, 73.5 %** of the fusion power in charged debris, the ceiling of any directed jet before
+conversion losses. The 80 % B01 share (and the engine model's 78 %) is not claimed, because no conversion mechanism above the charged share
+is shown. At NOMINAL the jet the ship needs (209 TW) takes 284 TW of fusion, not 261 TW. The viewer shows this.
+
+### 10.4 Validation
+
+- Mesh screen, whole rear cluster (`work/fuel-propellant/probe.py --cluster`): every FPS and CL object against all other geometry, 185
+  objects, no unexpected contact. Designed contacts are listed in the script: cluster lines on the panels, pins in the lugs, struts and
+  ties on the thrust ring, the transfer leg on the trunk, the target feed through the panel and the cartridge, the ports through collar
+  and shield. No cluster member touches an engine part other than its panel and lugs.
+- Pipe ends (`work/fuel-propellant/endpoints.py`, pure): 288 line ends; every one lands on a line, equipment, tank, the bay, a panel or a
+  declared interface; the only open ends are the documented ones (injector tips `IF_FPS_H2_INJECT_Nj`, magazines `IF_FPS_TARGET_Nj`,
+  vents, hull feedthroughs, the refuelling receptacle).
+- Removal sweep: no blocked part, least clearance 0.20 m (section 10.1).
+
+### 10.5 Explore Ship
+
+Two views join the Fuel drawer: **Target fabrication** (the cluster bay core, its legs and transfer; dots on every modeled line) and
+**Propulsion assembly** (the aft feed train, the cluster frame and service lines, the four engines with their FPS parts; the state
+buttons drive the engines, whose materials and animations are kept). Views now select by chain group as well as species. The combined
+and assembly readouts show the NOMINAL charged share as the current result, the B01 share as not claimed, and the one-gap reconciliation.
+Bookmarks: `#fuel=ACTIVE.fab`, `#fuel=ACTIVE.assembly`.
 
 ## 8. Next priorities
 

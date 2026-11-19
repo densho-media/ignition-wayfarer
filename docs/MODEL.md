@@ -2299,7 +2299,7 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
     (0.63 m), and every structural member clears every other line (`clearances`). NOMINAL utilisation 0.86–0.98; CONSERVATIVE about
     3.4–3.9 and EXTREME about 13–15: no member of this envelope survives those cases. Windings: hoop stress in the 50 % steel case share
     578 MPa on L4 against 667 MPa (2/3 of 316LN's 4.2 K proof stress), CONDITIONALLY_SIZED for NOMINAL only.
-  - *Cluster frame:* one FE model of every frame member with the hub and engines rigid; members r 0.68 m (spokes, chords; ring ties
+  - *Cluster frame:* one FE model of every frame member with the hub and engines rigid; members r 0.68 m (spokes, chords; flank ties
     ×0.8) and thrust struts 0.60 m (engine struts ×1.2; their feet land on the node's inboard face, `strut_foot`, so they stay below the
     aft RCS pods on the node fittings), sized for thrust, nominal field forces, one engine's coils off and one engine
     firing alone. Engine mount modes 1.8–8.2 Hz, far below the 5.7 kHz pulse; the frame is about 1,600 times stiffer than the field's
@@ -2389,7 +2389,7 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
     plasma scan (Ti 150 keV, Te/Ti 0.1) is still 8× above. engineering/vertex/ section 8 reads `references/evidence/vertex_radiation.json`
     (written by `python3 src/wayfarer/vertex_radiation.py --evidence`, about 30 s).
 
-## Fuel & Propellant System (FPS V0, V1)
+## Fuel & Propellant System (FPS V0, V1, V1.1)
 
 `[fuel_system]` (PROTOTYPE, `src/wayfarer/fuel_system.py`, generator `components/fuel_feed.py`, built into `WF_STORAGE` when the
 Vertex cluster is the shown drive; the Fiji representation keeps `drive.cryo_feed`). Technical record, trade study and the model
@@ -2426,6 +2426,17 @@ inventory: `docs/FUEL_SYSTEM.md`. It joins the existing farm and the four feed r
   (the engine burn model's NOMINAL charged share, 73.5 %, falls short of the 80 % jet share) and the fuel-rate finding (the engines' own
   pulse point is 1/7.3 of the ship operating point) are in docs/FUEL_SYSTEM.md section 9. The Fuel drawer adds the whole-chain, fuel,
   propellant and combined views (the last also sets the drive state), a component list and markers where flows end unresolved.
+- **V1.1 (owner brief 2026-11-19 09:23Z; `[fuel_system.v11]`).** One service pitch, 0.36 m (`vertex_engine.geometry.service_slot_pitch_m`
+  and `vertex_engine.service_panel`), for the engine panel, its interfaces, the cluster's six lines and the target feed. The panel sits
+  forward of the cradle on the collar's forward face (X −9.2 to −8.3, r 5.55–5.80). Symmetric flank thrust ties `CL_Nj_Flank_Tie_A/B`
+  (cradle flanks to the thrust ring) replace the ring tie that ran through the engine. Engine removal aft through the cradle: trunnion
+  lugs 0.30 m, every forward part inside r 5.92, cradle R 6.8 (bore 6.12), least clearance 0.20 m (`vertex_cluster.removal_sweep`). The
+  cluster bay is an annulus round an FPS target-fabrication core (receivers, blend unit, fill and layering, inspection, buffer magazine,
+  transfer to the target trunk; process SPECULATIVE); trunk spider rings; shielding galleries round the injector ports; cryogenic clamps
+  and thermal intercepts; PMDs (vanes and outlet sponges) in all 17 tanks; pump, regulator and conditioning detail. Fuel rate and power
+  are one gap, ×7.31 in fusion power (`fuel_system.rate_reconciliation`; the V1 ×4.9 set reacted fuel against exhaust mass); the NOMINAL
+  73.5 % charged share is the current result and the 80 % jet share is not claimed. Explore Ship adds Target fabrication and Propulsion
+  assembly views. docs/FUEL_SYSTEM.md section 10.
 
 ## Limits
 

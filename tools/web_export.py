@@ -250,6 +250,15 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
             fuel['nodes'] = {}
             for tank, sp in zip(fuel_system.fst.run_tanks(spec), spec['drive_hot_section']['tank_families']):
                 fuel['objects'].setdefault(tank['name'], dict(species=sp, kind='feed_run_tank'))
+            if fuel.get('assembly'):
+                # FPS V1.1 propulsion-assembly view: the cluster frame and service lines and the four engines join by their merged family nodes
+                # (their own materials and drive animations are kept; the effects nodes stay with the drive)
+                for r in manifest['nodes']:
+                    n = r['source_name']
+                    if n.startswith('CL_') and not n.startswith('CL_Power'):
+                        fuel['objects'].setdefault(n, dict(species='structure', kind=r['kind'], group='cluster', owner='CLUSTER'))
+                    elif n.startswith('VTX_') and r['kind'] != 'vtx_visual_effects':
+                        fuel['objects'].setdefault(n, dict(species='engine', kind=r['kind'], group='engine', owner='ENGINE'))
             for r in manifest['nodes']:
                 if r['source_name'] in fuel['objects']:
                     fuel['nodes'].setdefault(r['source_name'], []).append(r['node'])

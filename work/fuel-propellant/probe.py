@@ -14,7 +14,11 @@ ALLOWED = ('Hull_Aft_Body', 'Feed_Run_Tank', 'Engineering_Envelope', 'Reactor_Sh
 # injector ports pass the thrust collar (VTX_STRUCTURE) and the shadow shield and burn-face armour (VTX_SHIELDING) through galleries.
 ALLOWED_BY = {'FPS_Feedthrough': ('Fuel_Transfer',), 'FPS_Farm_Flanges': ('Fuel_Transfer',), 'FPS_Tank_Inlet': ('Fuel_Transfer',),
               'FPS_Check_Valve': ('Fuel_Transfer',), 'FPS_H2_Crossover': ('Fuel_Ring_Main',),
-              '_Target_Feed': ('VTX_STRUCTURE', 'VTX_FUEL'), '_Flanges': ('VTX_FUEL', 'VTX_SERVICE'), '_H2_Injectors': ('VTX_STRUCTURE', 'VTX_SHIELDING')}
+              '_Target_Feed': ('VTX_STRUCTURE', 'VTX_FUEL', 'VTX_SERVICE'), '_Flanges': ('VTX_FUEL', 'VTX_SERVICE'), '_H2_Injectors': ('VTX_STRUCTURE', 'VTX_SHIELDING'),
+              # V1.1: the transfer leg joins the cluster target trunk; the bay legs' intercepts sit on the bay face; the cluster lines end on the
+              # engine panels and the trunnion pins enter the lugs (VTX_SERVICE); the cluster frame lands on the thrust ring and hub; CL-to-CL joints
+              'FPS_Target_Transfer_Bay': ('CL_FUEL',), 'FPS_Thermal_Intercepts': ('CL_ELECTRICAL',),
+              'CL_': ('VTX_SERVICE', 'CL_', 'Thrust_Ring', 'Thrust_Node', 'Ring_Web', 'Central_Thrust_Hub')}
 def allowed(fname, other):
     return any(a in other for a in ALLOWED) or any(k in fname and any(a in other for a in v) for k, v in ALLOWED_BY.items())
 dg = bpy.context.evaluated_depsgraph_get()
@@ -38,11 +42,16 @@ for inst in dg.object_instances:
     lo = Vector((min(v.x for v in vs), min(v.y for v in vs), min(v.z for v in vs))); hi = Vector((max(v.x for v in vs), max(v.y for v in vs), max(v.z for v in vs)))
     items.append(dict(name=name, base=ob.name, bvh=BVHTree.FromPolygons(vs, fs), lo=lo, hi=hi, vs=vs, polys=fs))
     ob.to_mesh_clear()
-fps = [i for i in items if i['base'].startswith('FPS_')]; other = [i for i in items if not i['base'].startswith('FPS_')]
+CLUSTER = '--cluster' in sys.argv     # V1.1: also screen the cluster frame and lines (CL_*) against the engines and everything else
+SUBJ = ('FPS_', 'CL_') if CLUSTER else ('FPS_',)
+fps = [i for i in items if i['base'].startswith(SUBJ)]
+other = [i for i in items if not i['base'].startswith('FPS_')]
 out = {}
 for f in fps:
     hits = []; near = (1e9, '')
     for o in other:
+        if o is f:
+            continue
         m = 1.0
         if any(f['hi'][k]+m < o['lo'][k] or o['hi'][k]+m < f['lo'][k] for k in range(3)):
             continue
@@ -59,7 +68,8 @@ for f in fps:
     out[f['base']] = dict(overlaps=hits, unexpected=bad, nearest=[round(near[0], 3), near[1]], where={k: v for k, v in f.get('where', {}).items() if k in bad}, designed={k: v for k, v in f.get('where', {}).items() if k not in bad})
 summary = {k: v for k, v in out.items() if v['unexpected']}
 res = dict(objects=len(fps), unexpected=len(summary), detail=out)
-path = sys.argv[sys.argv.index('--')+1] if '--' in sys.argv and len(sys.argv) > sys.argv.index('--')+1 else None
+args = [a for a in sys.argv[sys.argv.index('--')+1:] if not a.startswith('--')] if '--' in sys.argv else []
+path = args[0] if args else None
 if path:
     json.dump(res, open(path, 'w'), indent=1)
 print('FPS_PROBE', json.dumps(dict(objects=len(fps), unexpected={k: v['where'] for k, v in summary.items()})))

@@ -10,7 +10,7 @@
 const fmt = (v, d = 2) => v === null || v === undefined ? '–' : Number(v).toLocaleString('en', { maximumFractionDigits: d, minimumFractionDigits: d });
 const SPECIES_LABEL = { deuterium: 'Deuterium (fusion fuel)', 'helium-3': 'Helium-3 (fusion fuel, D–³He baseline)', target: 'Filled targets (D–³He)',
                         hydrogen: 'Hydrogen (reaction mass)', helium: 'Helium (purge)' };
-const GROUP_LABEL = { farm: 'Farm', transfer: 'Transfer trunks', aft: 'Aft feed train', cluster: 'Cluster', engine: 'Engines' };
+const GROUP_LABEL = { farm: 'Farm', transfer: 'Transfer trunks', aft: 'Aft feed train', cluster: 'Cluster bay, frame and lines', engine: 'Engines' };
 
 export function createFuel({ THREE, scene, byId, records, panel, update, changed, frameIds, pick, drive }) {
   let data = null, dots = null, ends = null, state = 'STANDBY', h2 = null, view = 'ship';
@@ -39,7 +39,7 @@ export function createFuel({ THREE, scene, byId, records, panel, update, changed
         const g = new THREE.BufferGeometry().setFromPoints(l.points.map(p => new THREE.Vector3(...p)));
         const m = new THREE.Line(g, new THREE.LineDashedMaterial({ color: new THREE.Color(...(data.colors[l.species] || data.colors.service)), dashSize: 0.6, gapSize: 0.4, toneMapped: false }));
         m.computeLineDistances(); m.name = 'FPS_Conceptual_' + l.name; m.visible = false; m.renderOrder = 5; scene.add(m);
-        dashed.push({ line: m, species: l.species });
+        dashed.push({ line: m, species: l.species, group: l.group });
       }
     }
     const r = data.display.dot_radius_m;
@@ -59,18 +59,22 @@ export function createFuel({ THREE, scene, byId, records, panel, update, changed
   }
 
   const V = () => data.views.find(v => v.id === view) || null;
-  const inView = species => { const v = V(); return !v || v.species.includes(species); };
-  const names = () => Object.keys(data.nodes).filter(n => inView(data.objects[n]?.species || 'service') || data.objects[n]?.species === 'service');
+  // a view selects by species and (V1.1) optionally by chain group: the fabrication view is the cluster bay, the assembly view adds the frame and engines
+  const inView = (species, group) => { const v = V(); return !v || (v.species.includes(species) && (!v.groups || !group || v.groups.includes(group))); };
+  const names = () => Object.keys(data.nodes).filter(n => { const o = data.objects[n] || {}; const g = groupOf(n);
+    return inView(o.species || 'service', g) || (o.species === 'service' && (!V()?.groups || V().groups.includes(g))); });
   const idsOf = list => new Set(list.flatMap(n => data.nodes[n] || []));
   // the aft feed train only (V0 isolation framing): everything but the farm and the refuelling receptacle
   const aft = () => idsOf(Object.keys(data.nodes).filter(n => !n.startsWith('FPS_Refuel') && !['farm', 'transfer'].includes(groupOf(n))));
-  const groupOf = n => n.startsWith('Fuel_') || n.startsWith('FPS_Refuel') || n.startsWith('FPS_H2_Crossover') || n === 'FPS_Farm_Flanges'
+  const groupOf = n => data.objects[n]?.group || legacyGroup(n);
+  const legacyGroup = n => n.startsWith('Fuel_') || n.startsWith('FPS_Refuel') || n.startsWith('FPS_H2_Crossover') || n === 'FPS_Farm_Flanges'
     ? (n.startsWith('Fuel_Transfer') ? 'transfer' : 'farm')
     : n.startsWith('FPS_Feedthrough') || n.startsWith('FPS_Tank_Inlet') ? 'transfer' : n.startsWith('CL_') ? 'cluster' : n.startsWith('FPS_N') ? 'engine' : 'aft';
   // While a view is on, every object in it takes its species colour (a presentation material; the exported one is put back after).
   const tints = {};
   function tint(on) {
     for (const [name, nodes] of Object.entries(data.nodes)) {
+      if (['structure', 'engine'].includes(data.objects[name]?.species)) continue;   // the frame and engines keep their materials and drive animation
       const rgb = data.colors[data.objects[name]?.species] || data.colors.service;
       const key = rgb.join(',');
       tints[key] ??= new THREE.MeshStandardMaterial({ color: new THREE.Color(...rgb), emissive: new THREE.Color(...rgb).multiplyScalar(0.35),
@@ -90,7 +94,7 @@ export function createFuel({ THREE, scene, byId, records, panel, update, changed
   // One line's dot speed (display m/s) and colour for the current state: the hydrogen lines carry helium while they are purged.
   function flowOf(l, st) {
     const f = st.flow, v = data.display.dot_speed_m_s;
-    if (!inView(l.species) || (view === 'ship' && !['aft', 'engine'].includes(l.group) && l.path !== 'refuel')) return [0, null];
+    if (!inView(l.species, l.group) || (view === 'ship' && !['aft', 'engine'].includes(l.group) && l.path !== 'refuel')) return [0, null];
     if (l.path === 'h2' && f.h2 > 0) return [v * Math.min(f.h2, 3), data.colors.hydrogen];
     if (l.path === 'h2' && f.purge > 0 && l.group !== 'farm' && l.group !== 'transfer') return [v * f.purge, data.colors.helium];
     if (l.path === 'purge') return [v * f.purge, data.colors.helium];
@@ -134,7 +138,7 @@ export function createFuel({ THREE, scene, byId, records, panel, update, changed
     view = data.views.some(v => v.id === id) ? id : 'ship';
     const on = view !== 'ship';
     tint(on);
-    for (const d of dashed) d.line.visible = on && inView(d.species);
+    for (const d of dashed) d.line.visible = on && inView(d.species, d.group);
     if (ends) ends.visible = on;
     update(s => { s.focus = on ? { kind: 'set', id: 'Fuel & Propellant System', ids: idsOf(names()) } : (s.focus?.kind === 'set' ? null : s.focus); })
       .then(() => { if (on) frameIds(idsOf(names())); linkDrive(); render(); changed(); });
@@ -144,7 +148,7 @@ export function createFuel({ THREE, scene, byId, records, panel, update, changed
   function show(on) {
     if (dots) dots.visible = on;
     if (ends) ends.visible = on && view !== 'ship';
-    for (const d of dashed) d.line.visible = on && view !== 'ship' && inView(d.species);
+    for (const d of dashed) d.line.visible = on && view !== 'ship' && inView(d.species, d.group);
   }
 
   function render() {
@@ -187,12 +191,18 @@ export function createFuel({ THREE, scene, byId, records, panel, update, changed
     if (e && V()?.drive) {             // the combined view: where the fusion power goes (shares of it at the operating point)
       item('Fusion power', `${fmt(e.fusion_TW * (st.flow.fuel || 0), 0)} TW`);
       item(`Photons (${e.regime.toLowerCase()})`, `${fmt(100 * e.shares.photon, 1)} %`); item('Neutrons', `${fmt(100 * e.shares.neutron, 1)} %`);
-      item('Charged debris', `${fmt(100 * e.shares.charged, 1)} %`); item('Canon jet share', `${fmt(100 * e.jet_canon, 0)} %`);
+      item('Charged debris', `${fmt(100 * e.shares.charged, 1)} % (current result)`);
+      if (!e.reconciliation) item('Canon jet share', `${fmt(100 * e.jet_canon, 0)} %`); else item('B01 jet share', `${fmt(100 * e.jet_canon, 0)} % (not claimed)`);
     }
     body.append(dl);
     if (e && V()?.drive) {
       const n = document.createElement('p'); n.className = 'note' + (e.closes ? '' : ' warn');
-      n.textContent = `Energy ${e.closes ? 'closes' : 'does not close'} at the ${e.regime.toLowerCase()} burn: charged debris ${fmt(100 * e.shares.charged, 1)} % against the `
+      const r = e.reconciliation;
+      n.textContent = r
+        ? `${r.note} Engine point versus ship: one gap, ×${fmt(r.power_gap, 2)} in fusion power (yield × rate; ${fmt(r.closing_rate_kHz, 1)} kHz at today's yield would close it). `
+          + `The V1 ×${fmt(r.v1_quoted, 1)} fuel gap set reacted fuel against the pulse's exhaust mass (${fmt(r.pulse_exhaust_mg, 2)} mg, of which ${fmt(r.pulse_reacted_mg, 2)} mg reacts): like for like it is the same ×${fmt(r.power_gap, 2)}. `
+          + `OPEN with the engine workstream; hydrogen heating by the debris is SPECULATIVE.`
+        : `Energy ${e.closes ? 'closes' : 'does not close'} at the ${e.regime.toLowerCase()} burn: charged debris ${fmt(100 * e.shares.charged, 1)} % against the `
         + `${fmt(100 * e.jet_canon, 0)} % jet share. The engines' own pulse point (${fmt(e.engine_pulse_mg, 2)} mg at ${fmt(e.engine_pulse_Hz, 0)} Hz, ${fmt(e.engine_kg_s * 1e3, 0)} g/s each) `
         + `carries 1/${fmt(e.ratio, 1)} of the ship operating point (${fmt(e.ship_fuel_per_engine_kg_s * 1e3, 0)} g/s of fuel each): OPEN with the engine workstream. `
         + `Hydrogen heating by the debris is SPECULATIVE.`;
@@ -237,7 +247,7 @@ export function createFuel({ THREE, scene, byId, records, panel, update, changed
     const n = document.createElement('p'); n.className = 'note';
     n.textContent = `${data.status} display of FPS ${data.version} (${data.engineering_status}): flows are fractions of the B01 operating point `
       + `(${fmt(data.numbers.thrust_MN)} MN, ${fmt(data.numbers.ve_km_s, 0)} km/s); dot speed is a display value, not a line velocity. `
-      + `Dots run only on modeled pipes; the dashed leg through the cluster bay is target fabrication, not modeled. `
+      + (dashed.length ? `Dots run only on modeled pipes; the dashed leg through the cluster bay is target fabrication, not modeled. ` : `Dots run only on modeled pipes; target fabrication in the bay core is a V1.1 blockout (its process SPECULATIVE). `)
       + `The engine-side feeds and injection are candidates for the engine workstream.`;
     body.append(n);
   }

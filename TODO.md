@@ -393,14 +393,16 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   temperature- and radiation-dependent property tables; creep, fatigue and replacement intervals. **Done when:** each propulsion-chain layer has a screen
   verdict against Drive-sourced operating requirements and the owner has accepted or rejected it in the workbook.
 
-- [ ] **F06 — Fuel & Propellant System after V1 (owner briefs 2026-11-18, 2026-11-19). V0 and V1 BUILT (PROTOTYPE), owner review pending.**
-  `docs/FUEL_SYSTEM.md` (section 9 for V1), `fuel_system.py`, `components/fuel_feed.py`, Explore Ship Fuel drawer. Open with the engine
-  workstream: target fabrication in the bay (conceptual, no geometry); adopting or replacing the candidate target feeds and injection
-  trains; the 0.34 vs 0.36 m panel service spacing; `CL_Nj_Strut_Ring_Tie` through the engine body; the fuel rate (the engines' pulse
-  point is 1/7.3 of the operating point); the NOMINAL energy ledger (73.5 % charged against the 80 % jet share); the H2 coupling
-  (SPECULATIVE). FPS side: cold-line supports past the corridor, collar galleries, fast-valve life at 5.7 kHz, hardware sizing for pumps,
-  heaters and valves, vacuum jackets and intercepts, coast transfer (PMDs, pressurisation), boil-off return, vent plume keep-outs, the
-  refuelling approach and its tanker interface; D-D and water as later alternatives.
+- [ ] **F06 — Fuel & Propellant System after V1.1 (owner briefs 2026-11-18, 2026-11-19). V0, V1 and V1.1 BUILT (PROTOTYPE), owner review pending.**
+  `docs/FUEL_SYSTEM.md` (sections 9 and 10), `fuel_system.py`, `components/fuel_feed.py`, Explore Ship Fuel drawer. V1.1 resolved the
+  panel pitch, the ring tie and the panel/cradle overlap and modeled target fabrication, galleries, supports, intercepts, PMDs and the
+  equipment detail. Open with the engine workstream: adopting or replacing the candidate target feeds and injection trains; the fuel rate
+  (one gap: the engines' fusion power is 1/7.31 of the operating point); the jet share (NOMINAL 73.5 % charged is the current result, the
+  80 % B01 share needs a conversion mechanism or 284 TW of fusion); the target recipe and fill/layering process (SPECULATIVE); the H2
+  coupling (SPECULATIVE); the cradle split or guided-removal fixture behind the 0.20 m removal clearance. FPS side: clamp spacing against
+  the pulse-rate vibration, fast-valve life at 5.7 kHz, hardware sizing for pumps, heaters and valves, PMD sizing, boil-off return, vent
+  plume keep-outs, the refuelling approach and its tanker interface; D-D and water as later alternatives. Play package: V1.1 adds 21 FPS
+  nodes; check the play download budget in CI before release.
 
 ## G — Complete habitat, survival and service implementation
 

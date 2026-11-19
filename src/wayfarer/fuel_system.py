@@ -365,7 +365,7 @@ def interfaces(s):
     rf = refuel(s); out.append(dict(name='IF_FPS_REFUEL', at=rf['panel']['at'], species='none', note='Refuelling receptacle: tanker umbilical (D2, He-3, H2 dry-break couplings, bonding); standard OPEN'))
     for r in relief(s):
         out.append(dict(name=f"IF_FPS_VENT_{r['tank'][-2:]}", at=r['hull_point'], species=r['species'], note='Hull penetration of the run-tank vent line (OPEN)'))
-    return out+v1_interfaces(s)
+    return out+v1_interfaces(s)+v11_interfaces(s)
 
 
 # ---------- V1: the connections that close the chain (owner brief 2026-11-19) ------------------------------------------------------
@@ -439,9 +439,9 @@ def target_feeds(s):
     """Per engine: the target feed from the service panel's TARGET_FEED slot (the cluster's CL_Nj_Line_TARGET_FEED ends on the panel's hub
     face) forward along the collar clear of the lithium manifold and cryogen header, radially in beside the hub-side pulse pod, forward
     outside the cartridge shell and in through it to the target magazine (engine frame points; CANDIDATE for the engine workstream)."""
-    q = v1_cfg(s)['target_feed']; z = q['z_m']; out = []
+    q = v1_cfg(s)['target_feed']; sp = ve.service_panel(s); z = sp['slots']['TARGET_FEED']; out = []
     r_in = q['inner_r_m']; k = q['magazine_r_m']/math.hypot(r_in, z)
-    local = [(q['panel_x_m'], -q['run_r_m'], z), (q['x_turn_m'], -q['run_r_m'], z), (q['x_turn_m'], -r_in, z), (q['x_magazine_m'], -r_in, z),
+    local = [(sp['x_fwd'], -sp['r'], z), (q['x_turn_m'], -sp['r'], z), (q['x_turn_m'], -r_in, z), (q['x_magazine_m'], -r_in, z),
              (q['x_magazine_m'], -r_in*k, z*k)]
     for pl in vc.placements(s):
         out.append(dict(name=f"FPS_N{pl['n']}_Target_Feed", engine=pl['n'], species='target', local=local, points=_engine_poly(pl, local),
@@ -533,7 +533,19 @@ def v1_polylines(s):
     c = h2_crossover(s); out.append((c['name'], 'hydrogen', c['points'], c['radius']))
     out += [(t['name'], 'target', t['points'], t['radius']) for t in target_feeds(s)]
     out += [(h['line_name'], 'hydrogen', h['line'], h['line_radius']) for h in h2_injection(s)]
+    if v11(s):
+        out += [(l['name'], l['species'], l['points'], l['radius']) for l in target_fabrication(s)['lines']]
     return out
+
+
+def v11_interfaces(s):
+    if not v11(s):
+        return []
+    tf = target_fabrication(s); eq = {e['name']: e for e in tf['equipment']}; f = eq['FPS_Fab_Fill_Station']
+    x = (f['a'][0]+f['b'][0])/2; xf = next(l for l in tf['lines'] if l['name'] == 'FPS_Target_Transfer_Bay')['points'][-1]
+    return [dict(name='IF_FPS_FAB_FILL', at=(x, 0.0, f['radius']), species='target',
+                 note='Target shell fill and cryogenic layering (SPECULATIVE): the D-He-3 target recipe, shell material, layer uniformity and throughput (~5.7 kHz per engine) are not designed'),
+            dict(name='IF_FPS_FAB_TRUNK', at=xf, species='target', note='Cold-target handoff from the fabrication line to the cluster target trunk (CL_Trunk_TARGET_FEED) on the bay aft face')]
 
 
 def v1_interfaces(s):
@@ -548,6 +560,244 @@ def v1_interfaces(s):
                  note=f"N{h['engine']} injector tips on the burn face: H2 gas puff ahead of each pulse; energy coupling SPECULATIVE (docs/FUEL_SYSTEM.md 'Energy')")
             for h in h2_injection(s)]
     return out
+
+
+# ---------- V1.1: the missing components (owner brief 2026-11-19 09:23Z) ------------------------------------------------------------
+
+def v11_cfg(s):
+    return cfg(s).get('v11', {})
+
+
+def v11(s):
+    return v1(s) and bool(v11_cfg(s))
+
+
+def _ring_pts(center, axis, R, n=16):
+    """Closed polyline of a ring of radius R round `axis` (unit) at `center`."""
+    ax = axis; ref = (1.0, 0.0, 0.0) if abs(ax[0]) < 0.9 else (0.0, 1.0, 0.0)
+    u = (ax[1]*ref[2]-ax[2]*ref[1], ax[2]*ref[0]-ax[0]*ref[2], ax[0]*ref[1]-ax[1]*ref[0]); L = math.sqrt(sum(c*c for c in u)); u = tuple(c/L for c in u)
+    v = (ax[1]*u[2]-ax[2]*u[1], ax[2]*u[0]-ax[0]*u[2], ax[0]*u[1]-ax[1]*u[0])
+    return [tuple(center[i]+R*(math.cos(2*math.pi*k/n)*u[i]+math.sin(2*math.pi*k/n)*v[i]) for i in range(3)) for k in range(n+1)]
+
+
+def _at_dist(pts, d):
+    """Point and unit direction at distance d along a polyline (negative d: from the end)."""
+    segs = list(zip(pts, pts[1:])) if d >= 0 else [(b, a) for a, b in reversed(list(zip(pts, pts[1:])))]
+    d = abs(d)
+    for a, b in segs:
+        L = math.dist(a, b)
+        if d <= L or (a, b) == segs[-1]:
+            u = tuple((b[i]-a[i])/L for i in range(3)); t = min(d, L)
+            return tuple(a[i]+u[i]*t for i in range(3)), u
+        d -= L
+
+
+def bay_frame(s):
+    st = vc.stations(s); c = vc.config(s)
+    return dict(x0=st['bay']+st['bay_length']/2, x1=st['bay']-st['bay_length']/2, r_core=c['bay_core_radius_m'], r_out=st['bay_radius'])
+
+
+def target_fabrication(s):
+    """Target fabrication in the cluster bay core (SPECULATIVE process, PROTOTYPE layout), fore to aft on the axis: the D2 and He-3 legs
+    from the bay fore face radially in to their receiver dewars, a purifier/blend unit, the shell fill and cryogenic layering station, an
+    inspection station with its reject chute and a buffer magazine; the transfer leg takes cold targets to CL_Trunk_TARGET_FEED on the bay
+    aft face. Equipment as (name, shape, geometry, function); lines as (name, species, points, radius)."""
+    q = v11_cfg(s); b = bay_frame(s); x0 = b['x0']; eq = []; lines = []
+    feeds = {ln['species']: ln for ln in feed_lines(s) if ln['species'] != 'hydrogen'}
+    rc = q['fab_receiver']
+    for sp in ('deuterium', 'helium-3'):
+        end = feeds[sp]['points'][-1]; a = math.atan2(end[2], end[1]); tg = TAG[sp]
+        xr0, xr1 = x0-rc['x_m'], x0-rc['x_m']-rc['length_m']; xm = (xr0+xr1)/2
+        eq.append(dict(name=f'FPS_Fab_Receiver_{tg}', species=sp, shape='cyl', a=dm.radial(xr0, rc['r_m'], a), b=dm.radial(xr1, rc['r_m'], a), radius=rc['radius_m'],
+                       function=f'{tg} receiver dewar: buffers the metered {tg} feed at the bay inlet (boil-off back to the cryoplant)'))
+        lines.append(dict(name=f'FPS_Bay_Target_Fabrication_{tg}', species=sp, radius=q['fab_leg']['radius_m'],
+                          points=[end, (x0-q['fab_leg']['x_in_m'], end[1], end[2]), dm.radial(x0-q['fab_leg']['x_in_m'], rc['r_m']+rc['radius_m'], a)]))
+        lines.append(dict(name=f'FPS_Fab_Link_{tg}', species=sp, radius=q['fab_link_radius_m'],
+                          points=[dm.radial(xr1, rc['r_m'], a), dm.radial(xr1-0.1, 0.35, a)]))
+    def box(name, x_m, size, fn, sp='target'):
+        eq.append(dict(name=name, species=sp, shape='box', at=(x0-x_m, 0.0, 0.0), size=tuple(size), function=fn))
+    def cyl(name, x_m, r, L, fn, sp='target'):
+        eq.append(dict(name=name, species=sp, shape='cyl', a=(x0-x_m+L/2, 0.0, 0.0), b=(x0-x_m-L/2, 0.0, 0.0), radius=r, function=fn))
+    bl, fi, ins, bu = q['fab_blend'], q['fab_fill'], q['fab_inspect'], q['fab_buffer']
+    box('FPS_Fab_Blend_Unit', bl['x_m'], bl['size_m'], 'purifier and blend unit: removes He-4, H and tritium traces, mixes D and He-3 1:1 by moles (SPECULATIVE target recipe)', 'deuterium')
+    cyl('FPS_Fab_Fill_Station', fi['x_m'], fi['radius_m'], fi['length_m'], 'shell fill and cryogenic layering station: fills the target shells with the D/He-3 blend and freezes a uniform layer (SPECULATIVE)')
+    box('FPS_Fab_Inspection', ins['x_m'], ins['size_m'], 'target inspection (optical and X-ray layer metrology), reject chute back to recovery')
+    cyl('FPS_Fab_Buffer_Magazine', bu['x_m'], bu['radius_m'], bu['length_m'], 'buffer magazine: cold finished targets awaiting transfer to the engines (one burn-minute of stock, PROTOTYPE)')
+    # the conveyor through the line: blend aft face -> fill -> inspection -> buffer (on the axis)
+    ends = [(x0-bl['x_m']-bl['size_m'][0]/2, x0-fi['x_m']+fi['length_m']/2), (x0-fi['x_m']-fi['length_m']/2, x0-ins['x_m']+ins['size_m'][0]/2),
+            (x0-ins['x_m']-ins['size_m'][0]/2, x0-bu['x_m']+bu['length_m']/2)]
+    for k, (xa, xb) in enumerate(ends, 1):
+        lines.append(dict(name=f'FPS_Fab_Conveyor_{k}', species='target', radius=q['fab_link_radius_m'], points=[(xa+0.05, 0.0, 0.0), (xb-0.05, 0.0, 0.0)]))
+    t = q['transfer']; a = math.radians(t['trunk_az_deg']); xbuf = x0-bu['x_m']-bu['length_m']/2
+    lines.append(dict(name='FPS_Target_Transfer_Bay', species='target', radius=t['radius_m'],
+                      points=[dm.radial(xbuf+0.05, 0.4, a), dm.radial(xbuf-0.3, t['trunk_r_m'], a), dm.radial(b['x1'], t['trunk_r_m'], a)]))
+    return dict(equipment=eq, lines=lines, frame=b)
+
+
+def shield_galleries(s):
+    """Per engine: a sleeve round every injector port where it crosses the thrust collar and the shadow shield (engine frame x ranges in
+    v11.gallery); the port's dog-leg inside the shield leaves no straight streaming path. Ship-frame tube segments."""
+    g = v11_cfg(s)['gallery']; q = v1_cfg(s)['h2_injection']; R = q['manifold_r_m']; out = []
+    for pl in vc.placements(s):
+        segs = []
+        for az in q['port_az_deg']:
+            for xa, xb in (g['collar'], g['shield']):
+                segs.append(_engine_poly(pl, [ve.pol(xa, R, az), ve.pol(xb, R, az)]))
+        out.append(dict(name=f"FPS_N{pl['n']}_Shield_Galleries", engine=pl['n'], segments=segs, radius=g['radius_m']))
+    return out
+
+
+def cryo_supports(s):
+    """Clamps (ring + standoff strut) on the engine target feeds' inner run to the cartridge shell. Ship frame."""
+    q = v11_cfg(s); cl = q['clamp']; out = []
+    feeds = target_feeds(s); r_shell = ve.config(s)['geometry']['cartridge_radius_m']
+    for t in feeds:
+        pl = vc.placements(s)[t['engine']-1]; z = t['local'][2][2]; rin = -t['local'][2][1]
+        for x in q['target_feed_clamps_x']:
+            c = (x, -rin, z); rr = math.hypot(rin, z); u = (0.0, -rin/rr, z/rr)
+            a = tuple(c[i]-u[i]*(t['radius']+cl['ring_gap_m']) for i in range(3)); b = tuple(c[i]*r_shell/rr if i else c[i] for i in range(3))
+            ax = vc.to_ship(pl, (1, 0, 0)); o = vc.to_ship(pl, (0, 0, 0)); ax = tuple(ax[i]-o[i] for i in range(3))
+            out.append(dict(name=f"FPS_N{t['engine']}_Target_Clamp", engine=t['engine'], ring=_ring_pts(vc.to_ship(pl, c), ax, t['radius']+cl['ring_gap_m']),
+                            strut=[vc.to_ship(pl, a), vc.to_ship(pl, b)]))
+    return dict(clamps=out, ring_tube=cl['ring_tube_m'], strut_radius=cl['strut_radius_m'])
+
+
+def thermal_intercepts(s):
+    """Cold-strap collars where a cryogenic line crosses a warm/cold boundary: each V0 feed line at its shadow-shield sleeve, each hull
+    feedthrough's interior end, the D2/He-3 legs at the bay fore face, each engine's target feed and H2 injection line where they leave
+    the panel side. Ship frame rings (center, axis, ring radius)."""
+    q = v11_cfg(s)['intercept']; out = []
+    for ln in feed_lines(s):
+        p = ln['shield_point']; seg = min(zip(ln['points'], ln['points'][1:]), key=lambda ab: _seg_d(p, *ab)); u = _dir3(*seg)
+        out.append(dict(where=f"{ln['name']} at the shield sleeve", center=p, axis=u, R=ln['radius']+q['gap_m']))
+    for ft in feedthroughs(s):
+        out.append(dict(where=f"{ft['name']} interior end", center=ft['b'], axis=ft['axis'], R=ft['line_radius']+q['gap_m']))
+    for ln in target_fabrication(s)['lines']:
+        if ln['name'].startswith('FPS_Bay_Target_Fabrication'):
+            p, u = _at_dist(ln['points'], 0.15); out.append(dict(where=f"{ln['name']} at the bay fore face", center=p, axis=u, R=ln['radius']+q['gap_m']))
+    for t in target_feeds(s):
+        p, u = _at_dist(t['points'], 0.25); out.append(dict(where=f"{t['name']} at the panel", center=p, axis=u, R=t['radius']+q['gap_m'], engine=t['engine']))
+    for h in h2_injection(s):
+        p, u = _at_dist(h['line'], 0.05); out.append(dict(where=f"{h['line_name']} at the inlet", center=p, axis=u, R=h['line_radius']+q['gap_m'], engine=h['engine']))
+    return dict(rings=out, tube=q['tube_m'])
+
+
+def _dir3(a, b):
+    L = math.dist(a, b); return tuple((b[i]-a[i])/L for i in range(3))
+
+
+def pmds(s):
+    """Propellant management devices for transfer during coast (no settling thrust): in every run tank and farm vessel, gallery vanes
+    along the barrel (surface tension keeps a liquid path along them to the outlet) and a sponge of radial plates at the aft outlet.
+    Oriented boxes (center, size along X/radial/tangential, radial unit, tangential unit); inset from the inner wall."""
+    q = v11_cfg(s)['pmd']; out = []
+    def plates(name, cx, cy, cz, xa, xb, ra, rb, n, phase):
+        L = []
+        for k in range(n):
+            a = math.radians(phase+360*k/n); ur = (0.0, math.cos(a), math.sin(a)); ut = (0.0, -math.sin(a), math.cos(a)); rm = (ra+rb)/2
+            L.append(dict(center=((xa+xb)/2, cy+ur[1]*rm, cz+ur[2]*rm), size=(abs(xb-xa), rb-ra, q['vane_t_m']), ur=ur, ut=ut))
+        return L
+    for t in fst.run_tanks(s):
+        v = plates('', 0, t['y'], t['z'], t['x0']+0.15, t['x1']-0.15, *q['run_vane'], q['vanes'], q['vane_phase_deg'])
+        sp = plates('', 0, t['y'], t['z'], t['x0']+q['sponge_x0_m'][0], t['x0']+q['sponge_x0_m'][0]+q['run_sponge_l_m'], 0.02, q['run_sponge_r_m'], q['sponge_plates'], 22.5)
+        out.append(dict(name=f"FPS_PMD_{t['name'].split('_')[-1]}", tank=t['name'], species=None, vanes=v, sponge=sp))
+    for t in fst.tanks(s):
+        h = t['head']+(t['a_env']-t['a']); ya, yf = t['x0']+h, t['x1']-h
+        v = plates('', 0, t['y'], t['z'], ya+0.2, yf-0.2, t['a']-q['farm_vane_inset_m'][0], t['a']-q['farm_vane_inset_m'][1], q['vanes'], q['vane_phase_deg'])
+        x0 = t['x0']+q['sponge_x0_m'][1]
+        sp = plates('', 0, t['y'], t['z'], x0, x0+q['farm_sponge_l_m'], 0.02, q['farm_sponge_share']*t['a'], q['sponge_plates'], 22.5)
+        out.append(dict(name=f"FPS_PMD_{t['id']}", tank=t['name'], species=t['species'], vanes=v, sponge=sp))
+    return out
+
+
+def equipment_detail(s):
+    """Pump, regulator and conditioning sub-blockouts on each V0 feed line: the boost pump's motor beside it, the conditioner's heat
+    exchanger shell beside it, a pressure regulator and a flow-meter spool on the line just aft of the conditioning unit. Per line:
+    cylinders (a, b, radius) and boxes (center, size, radial axis, tangential axis)."""
+    q = v11_cfg(s)['detail']; by = {}
+    lines = {l['name']: l for l in feed_lines(s)}
+    for e in equipment(s):
+        L = by.setdefault(e['line'], dict(line=e['line'], species=e['species'], cyl=[], box=[]))
+        x, y, z = e['at']; r = math.hypot(y, z); ur = (0.0, y/r, z/r); ut = (0.0, -z/r, y/r)
+        if e['kind'] == 'fps_pump':
+            off = e['radius']+q['motor_radius_m']+0.05; c = tuple(e['at'][i]+ut[i]*off for i in range(3))
+            L['cyl'].append(dict(what='pump motor', a=(c[0]+q['motor_length_m']/2, c[1], c[2]), b=(c[0]-q['motor_length_m']/2, c[1], c[2]), radius=q['motor_radius_m']))
+        if e['kind'] == 'fps_conditioner':
+            off = e['size'][2]/2+q['hx_radius_m']+0.05; c = tuple(e['at'][i]+ut[i]*off for i in range(3)); Lx = e['size'][0]*0.8
+            L['cyl'].append(dict(what='heat-exchanger shell', a=(c[0]+Lx/2, c[1], c[2]), b=(c[0]-Lx/2, c[1], c[2]), radius=q['hx_radius_m']))
+            xa = x-e['size'][0]/2-0.35
+            p, u = _point_on_line(lines[e['line']]['points'], xa)
+            L['box'].append(dict(what='pressure regulator', center=p, size=(q['regulator_m'],)*3, ur=ur, ut=ut))
+            p2, u2 = _point_on_line(lines[e['line']]['points'], xa-0.45)
+            L['cyl'].append(dict(what='flow-meter spool', a=tuple(p2[i]+u2[i]*0.2 for i in range(3)), b=tuple(p2[i]-u2[i]*0.2 for i in range(3)), radius=q['spool_radius_m']))
+    return [dict(name=f"FPS_Equipment_Detail_{k.split('_', 2)[2]}", **v) for k, v in by.items()]
+
+
+def _point_on_line(pts, x):
+    """The point of a polyline at station x (first segment spanning x) and its direction."""
+    for a, b in zip(pts, pts[1:]):
+        if min(a[0], b[0])-1e-9 <= x <= max(a[0], b[0])+1e-9 and abs(a[0]-b[0]) > 1e-9:
+            t = (x-a[0])/(b[0]-a[0]); return tuple(a[i]+(b[i]-a[i])*t for i in range(3)), _dir3(a, b)
+    raise ValueError(x)
+
+
+def removal_check(s):
+    """Engine removal (V1.1): vertex_cluster.removal_sweep with the FPS parts every engine carries (engine frame)."""
+    ex = []
+    for t in target_feeds(s):
+        if t['engine'] == 1:
+            ex.append((t['name'], t['local'], t['radius']))
+    h = h2_injection(s)[0]; ex.append((h['line_name'], h['line_local'], h['line_radius']))
+    q = v1_cfg(s)['h2_injection']
+    ex.append(('FPS_N1_H2_Manifold', [ve.pol(q['manifold_x_m'], q['manifold_r_m'], 360*k/48) for k in range(49)], q['manifold_tube_m']))
+    for k, pts in enumerate(h['ports_local']):
+        ex.append((f"{h['ports_name']}_{k+1}", pts, h['port_radius']))
+    return vc.removal_sweep(s, ex)
+
+# FPS V1.1 performance reconciliation (one shared energy account; nothing is tuned to agree)
+def rate_reconciliation(s):
+    """Why the V1 fuel-rate gap read ~4.9x while the power gap is ~7.3x, from one energy and mass account of the ship operating point
+    (flows) and the engine's pulse point (vertex_magnet.plasma).
+
+    The ship rates in flows() are REACTED fuel (fed = reacted / burnup); the engine's pulse mass is not a fuel mass but the mass that
+    carries the pulse's jet energy at the exhaust speed (m = 2 E_jet / v_e^2). V1 compared ship reacted D+He-3 per engine with engine
+    exhaust mass per engine, two different quantities. Like for like:
+      power   : ship fusion / (n * yield * rate)
+      exhaust : ship exhaust / (n * pulse mass * rate) = power gap * (ship jet share / engine jet share)
+      fuel    : ship reacted fuel / (n * reacted fuel per pulse * rate), where the engine's reacted fuel per pulse follows from its yield at
+                the same specific fusion energy
+    The fuel and exhaust gaps equal the power gap within the jet-share difference: the only real mismatch is the engine's fusion power
+    (yield x rate). 4.9 = exhaust gap / (ship exhaust per reacted fuel)."""
+    import vertex_magnet as vm
+    f = flows(s); pz = vm.plasma(s); n = vc.config(s)['engine_count']; t = f['total']
+    P = t['fusion_W']; J = t['jet_W']; reacted = f['deuterium']['kg_s']+f['helium-3']['kg_s']; exhaust = t['kg_s']
+    e_spec_ship = P/reacted                                                   # J per kg reacted (D-He3 full burn of what reacts)
+    Y, rate, m_pulse = pz['yield_J'], pz['pulse_Hz'], pz['mass_kg']
+    eng_P = n*Y*rate; eng_J = n*pz['energy_J']['design']*rate; eng_exhaust = n*m_pulse*rate
+    m_react_pulse = Y/e_spec_ship                                             # reacted fuel per pulse at the ship's specific energy
+    import operating_point as op
+    m_fed_pulse = m_react_pulse/op.p(s)['burnup']
+    gaps = dict(power=P/eng_P, jet=J/eng_J, exhaust=exhaust/eng_exhaust, fuel_like_for_like=reacted/(n*m_react_pulse*rate),
+                v1_quoted=(reacted/n)/(m_pulse*rate))
+    reg = v1_cfg(s)['energy']['regime']; ch = energy_ledger(s)['cases'][reg]['shares']['charged']
+    current = dict(regime=reg, charged_share=ch, jet_ceiling_W=ch*P, fusion_needed_W=J/ch,
+                   note=(f'Current result: {reg} puts {ch:.1%} of the fusion power in charged debris, the ceiling of any directed jet before '
+                         f'conversion losses. The 80 % B01 jet share (and the engine model\'s 78 %) is not claimed: no conversion mechanism above '
+                         f'the charged share is shown. At {reg} the jet the ship needs takes {J/ch/1e12:.0f} TW of fusion, not {P/1e12:.0f} TW.'))
+    return dict(
+        current=current,
+        ship=dict(fusion_W=P, jet_W=J, jet_share=J/P, reacted_kg_s=reacted, fed_kg_s=t['fuel_fed_kg_s'], exhaust_kg_s=exhaust,
+                  exhaust_per_reacted=exhaust/reacted, specific_energy_J_kg=e_spec_ship),
+        engine=dict(yield_J=Y, pulse_Hz=rate, jet_share=pz['energy_J']['design']/Y, pulse_exhaust_mg=m_pulse*1e6,
+                    pulse_reacted_mg=m_react_pulse*1e6, pulse_fed_mg=m_fed_pulse*1e6, exhaust_per_reacted=m_pulse/m_react_pulse,
+                    yield_per_exhaust_J_kg=Y/m_pulse),
+        gaps=gaps,
+        closing=dict(rate_Hz_at_yield=rate*gaps['power'], yield_J_at_rate=Y*gaps['power'], engines_at_point=n*gaps['power']),
+        verdict=('One gap, not two: the engine point gives 1/{p:.2f} of the ship fusion power. The V1 4.9x set ship REACTED D+He-3 ({r:.0f} g/s '
+                 'per engine) against the engine pulse EXHAUST mass ({e:.1f} g/s per engine); like for like (the engine reacted fuel per pulse at the same D-He-3 specific energy, {sp:.2e} J/kg) the fuel gap is the power gap, '
+                 '{fl:.2f}x, and the exhaust gap {ex:.2f}x (jet shares {js:.3f} ship vs {je:.3f} engine). OPEN for the engine workstream: yield x rate.').format(
+                     p=gaps['power'], r=reacted/n*1e3, e=m_pulse*rate*1e3, fl=gaps['fuel_like_for_like'], ex=gaps['exhaust'], js=J/P, sp=e_spec_ship,
+                     je=pz['energy_J']['design']/Y))
 
 
 # ---------- fit screen --------------------------------------------------------------------------------------------------------------
@@ -632,6 +882,8 @@ def objects(s):
         out[l['name']] = dict(species=l['species'], kind='fps_refuel')
     if v1(s):
         out.update(v1_objects(s))
+    for n, o in out.items():
+        o.setdefault('group', _group(n))
     return out
 
 
@@ -655,6 +907,20 @@ def v1_objects(s):
             out[n] = dict(species='hydrogen', kind=k, owner='ENGINE (candidate)')
         out[f'FPS_N{j}_Instruments'] = dict(species='service', kind='fps_sensor', owner='ENGINE (candidate)')
         out[f'FPS_N{j}_Flanges'] = dict(species='service', kind='fps_flange', owner='ENGINE (candidate)')
+    if v11(s):
+        tf = target_fabrication(s)
+        for e in tf['equipment']:
+            out[e['name']] = dict(species=e['species'] if e['name'].startswith('FPS_Fab_Receiver') else 'target', kind='fps_fabrication')
+        out['FPS_Fab_Links'] = dict(species='target', kind='fps_fabrication')
+        for l in tf['lines']:
+            if not l['name'].startswith(('FPS_Fab_Link', 'FPS_Fab_Conveyor')):
+                out[l['name']] = dict(species=l['species'], kind='fps_fabrication' if l['name'].startswith('FPS_Bay') else 'fps_target_feed')
+        for j in range(1, vc.config(s)['engine_count']+1):
+            out[f'FPS_N{j}_Supports'] = dict(species='service', kind='fps_support', owner='ENGINE (candidate)')
+        out['FPS_Thermal_Intercepts'] = dict(species='service', kind='fps_intercept')
+        out['FPS_PMD_Run_Tanks'] = dict(species='service', kind='fps_pmd'); out['FPS_PMD_Farm'] = dict(species='service', kind='fps_pmd', owner='STORAGE')
+        for d in equipment_detail(s):
+            out[d['name']] = dict(species=d['species'], kind='fps_conditioner')
     for t in fst.tanks(s):
         out[t['name']] = dict(species=t['species'], kind='farm_vessel', owner='STORAGE')
     for m in fst.ring_mains(s):
@@ -672,11 +938,11 @@ def _cluster_target_lines(s):
 
 
 def _group(name):
-    if name.startswith(('Fuel_Tank', 'Fuel_Ring', 'Fuel_Outlet', 'FPS_H2_Crossover', 'FPS_Refuel')):
+    if name.startswith(('Fuel_Tank', 'Fuel_Ring', 'Fuel_Outlet', 'FPS_H2_Crossover', 'FPS_Refuel', 'FPS_PMD_Farm')):
         return 'farm'
     if name.startswith(('Fuel_Transfer', 'FPS_Feedthrough', 'FPS_Tank_Inlet')):
         return 'transfer'
-    if name.startswith(('CL_', 'FPS_Bay')):
+    if name.startswith(('CL_', 'FPS_Bay', 'FPS_Fab', 'FPS_Target_Transfer')):
         return 'cluster'
     if name.startswith('FPS_N'):
         return 'engine'
@@ -697,10 +963,14 @@ def chain_lines(s):
     for l in fst.transfer_lines(s):
         add(l['name'], l['species'], l['points'], l['radius'])
     tl = _cluster_target_lines(s); trunk = next(p for p in tl if p['name'] == 'CL_Trunk_TARGET_FEED')
-    for ln in feed_lines(s):
-        if ln['species'] != 'hydrogen':
-            a = ln['points'][-1]; b = trunk['points'][0]
-            add(f"FPS_Bay_Target_Fabrication_{TAG[ln['species']]}", ln['species'], [a, ((a[0]+b[0])/2, a[1]/3, a[2]/3), b], 0.05, modeled=False)
+    if v11(s):        # V1.1: the bay is modeled (legs -> receivers -> blend -> fill -> inspection -> buffer -> transfer to the trunk)
+        for l in target_fabrication(s)['lines']:
+            add(l['name'], l['species'], l['points'], l['radius'])
+    else:
+        for ln in feed_lines(s):
+            if ln['species'] != 'hydrogen':
+                a = ln['points'][-1]; b = trunk['points'][0]
+                add(f"FPS_Bay_Target_Fabrication_{TAG[ln['species']]}", ln['species'], [a, ((a[0]+b[0])/2, a[1]/3, a[2]/3), b], 0.05, modeled=False)
     for p in tl:
         add(p['name'], 'target', p['points'], p['radius'])
     for h in h2_injection(s):
@@ -714,7 +984,7 @@ def open_ends(s):
     magazine (engine side) and injector tips (the energy coupling is SPECULATIVE), and the refuelling receptacle (tanker standard OPEN)."""
     I = {i['name']: i for i in interfaces(s)}; out = []
     for n, i in I.items():
-        if n.startswith(('IF_FPS_FUEL_BAY_', 'IF_FPS_TARGET_N', 'IF_FPS_H2_INJECT_N', 'IF_FPS_REFUEL')):
+        if n.startswith(('IF_FPS_FAB_FILL',) if v11(s) else ('IF_FPS_FUEL_BAY_',)) or n.startswith(('IF_FPS_TARGET_N', 'IF_FPS_H2_INJECT_N', 'IF_FPS_REFUEL')):
             out.append(dict(name=n, at=i['at'], species=i['species'], note=i['note']))
     return out
 
@@ -726,7 +996,15 @@ def _energy_web(s):
                 fusion_TW=e['ship_point']['fusion_W']/1e12, jet_TW=e['ship_point']['jet_W']/1e12, cluster_fusion_TW=e['cluster_point']['fusion_W']/1e12,
                 cluster_jet_TW=e['cluster_point']['jet_W']/1e12, engine_pulse_Hz=e['engine_point']['pulse_Hz'], engine_pulse_mg=e['engine_point']['pulse_mass_mg'],
                 engine_kg_s=e['engine_point']['exhaust_kg_s'], ship_fuel_per_engine_kg_s=e['ship_point']['fuel_per_engine_kg_s'], ratio=e['ratio']['fusion'],
-                verdict=e['verdict'])
+                verdict=e['verdict'],
+                reconciliation=_rec_web(s) if v11(s) else None)
+
+
+def _rec_web(s):
+    r = rate_reconciliation(s)
+    return dict(power_gap=r['gaps']['power'], exhaust_gap=r['gaps']['exhaust'], v1_quoted=r['gaps']['v1_quoted'], specific_energy_J_kg=r['ship']['specific_energy_J_kg'],
+                pulse_reacted_mg=r['engine']['pulse_reacted_mg'], pulse_exhaust_mg=r['engine']['pulse_exhaust_mg'], charged_share=r['current']['charged_share'],
+                fusion_needed_TW=r['current']['fusion_needed_W']/1e12, closing_rate_kHz=r['closing']['rate_Hz_at_yield']/1e3, verdict=r['verdict'], note=r['current']['note'])
 
 
 def _path(name):
@@ -745,6 +1023,7 @@ def web(s):
     color = {sp: list(fc.PALETTE[fc.SPECIES[sp]][1][:3]) for sp in SPECIES}
     color['helium'] = list(fc.PALETTE['SERVICE'][1][:3]); color['service'] = color['helium']
     color['target'] = [(a+b)/2 for a, b in zip(color['deuterium'], color['helium-3'])]
+    color['structure'] = list(fc.PALETTE['STRUCTURE'][1][:3]) if 'STRUCTURE' in fc.PALETTE else [0.45, 0.40, 0.34]; color['engine'] = color['structure']
     lines = [dict(name=n, species=sp, path=_path(n), radius=r, points=[_rt(q) for q in pts], group=_group(n), modeled=True) for n, sp, pts, r in polylines(s)]
     h = header(s)
     ring = [_rt(dm.radial(h['x'], h['r'], 2*math.pi*k/64)) for k in range(65)]
@@ -761,7 +1040,7 @@ def web(s):
     throttle = next(st for st in d['states'] if st['id'] == 'THROTTLE')
     regimes_ = [state(throttle, k) for k in d['throttle_h2_factors']]
     rho = fst.cfg(s)['density_kg_m3']
-    return dict(contract='WF_FPS_WEB', id=cfg(s)['id'], version=v1_cfg(s)['version'] if v1(s) else cfg(s)['version'], baseline='V1' if v1(s) else cfg(s)['baseline'], status=d['status'],
+    return dict(contract='WF_FPS_WEB', id=cfg(s)['id'], version=v11_cfg(s)['version'] if v11(s) else v1_cfg(s)['version'] if v1(s) else cfg(s)['version'], baseline='V1.1' if v11(s) else 'V1' if v1(s) else cfg(s)['baseline'], status=d['status'],
                 engineering_status=cfg(s)['status'], colors=color, objects=objects(s), lines=lines, states=states, throttle=regimes_,
                 display=dict(dot_speed_m_s=d['dot_speed_m_s'], dot_spacing_m=d['dot_spacing_m'], dot_radius_m=d['dot_radius_m']),
                 numbers=dict(mission_t={sp: f[sp]['mission_t'] for sp in SPECIES}, peak_kg_s={sp: f[sp]['kg_s'] for sp in SPECIES},
@@ -771,7 +1050,8 @@ def web(s):
                              thrust_MN=f['total']['thrust_N']/1e6, ve_km_s=f['total']['ve_m_s']/1e3, he3_per_d_molar=cfg(s)['he3_per_d_molar']),
                 interfaces=[dict(name=i['name'], species=i['species'], at=_rt(i['at']), note=i.get('note', '')) for i in interfaces(s)],
                 open_ends=[dict(name=e['name'], at=_rt(e['at']), species=e['species'], note=e['note']) for e in open_ends(s)] if v1(s) else [],
-                views=d.get('views', []), energy=_energy_web(s) if v1(s) else None, pipe=pipe_spec(s) if v1(s) else [])
+                views=d.get('views', []), energy=_energy_web(s) if v1(s) else None, pipe=pipe_spec(s) if v1(s) else [],
+                assembly=dict(structure_prefix='CL_', engine_prefix='VTX_') if v11(s) else None)
 
 
 if __name__ == '__main__':

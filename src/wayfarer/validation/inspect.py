@@ -1110,7 +1110,7 @@ def inspect(root=ROOT, output=None, scope=None):
             elif obj.get('kind')=='comms_antenna':appendage_points.extend(transformed)
             # S01/F01 (TANK-AXIAL): the forward tank farm, its deck, guides, mains, cold boxes and the transfer legs outside the hull sit in the
             # shield shadow like the comms appendages; the in-lane lines and the dry store are body. FPS: the refuelling receptacle on that deck too.
-            elif (obj.get('kind') in ('fuel_tank','fuel_support','fuel_transfer_line','fuel_equipment') or obj.name.startswith(('FPS_Refuel','FPS_H2_Crossover','FPS_Farm_Flanges'))) and max(math.hypot(v.y,v.z) for v in transformed)>s['ship']['body_diameter']['value']/2:appendage_points.extend(transformed)
+            elif (obj.get('kind') in ('fuel_tank','fuel_support','fuel_transfer_line','fuel_equipment') or obj.name.startswith(('FPS_Refuel','FPS_H2_Crossover','FPS_Farm_Flanges','FPS_PMD_Farm'))) and max(math.hypot(v.y,v.z) for v in transformed)>s['ship']['body_diameter']['value']/2:appendage_points.extend(transformed)
             # FPS: the hydrogen branches and their sensors run out to the engines aft of the hull, inside the cluster (bounded with it).
             elif obj.name.startswith(('FPS_H2_Branch','FPS_Sensors_N','FPS_N')):propulsion_points.extend(transformed)  # FPS V1 engine-side candidates (target feeds, injection trains) belong to the propulsion envelope
             elif obj.get('kind')=='drone_proxy':(forward_points if obj.get('station') in ('DS-10','DS-15') else fitting_points).extend(transformed)

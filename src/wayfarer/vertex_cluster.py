@@ -157,6 +157,30 @@ def cradle_point(s, pl, az_deg, r=None):
     return to_ship(pl, ve.pol((est['collar_fwd']+est['collar_aft'])/2, c['cradle_radius_m'] if r is None else r, az_deg))
 
 
+def removal_sweep(s, extra=()):
+    """FPS V1.1 engine-removal check (pure): the engine leaves aft along its axis through its cradle once the four trunnion pins are
+    withdrawn and the panel lines are released. Every engine part (and every engine-mounted extra, (name, engine-frame points, radius))
+    with any vertex forward of the cradle's aft face must pass through the cradle bore (cradle radius minus member radius): its largest
+    radius there is compared with the bore and with the engine's removal passage radius. Returns the parts in order of least clearance."""
+    c = config(s); g = ve.config(s)['geometry']; est = ve.stations(s)
+    x_cr = (est['collar_fwd']+est['collar_aft'])/2; bore = c['cradle_radius_m']-c['member_radius_m']; x_plane = x_cr-c['member_radius_m']
+    rows = []
+    def add(name, vs):
+        fwd = [math.hypot(v[1], v[2]) for v in vs if v[0] > x_plane]
+        if fwd:
+            r = max(fwd); rows.append(dict(name=name, r_max=r, clearance=bore-r, in_passage=r <= g['removal_passage_radius_m']+1e-9))
+    for p in ve.parts(s):
+        if p['shape'] in ('plume', 'markers'):
+            continue
+        add(p['name'], ve.mesh_of(p)[0])
+    for name, pts, rad in extra:
+        add(name, ve.tube_mesh(pts, rad, 8)[0])
+    rows.sort(key=lambda r: r['clearance'])
+    return dict(bore_radius=bore, passage_radius=g['removal_passage_radius_m'], cradle_aft_face_x=x_plane, rows=rows,
+                blocked=[r['name'] for r in rows if r['clearance'] < 0], outside_passage=[r['name'] for r in rows if not r['in_passage']],
+                min_clearance=rows[0]['clearance'] if rows else None)
+
+
 def frame(s):
     """Cluster frame members (ship frame): hub, thrust struts, cradles, trunnion pins, spokes, chords, cross-fire baffle. Each carries its
     load-path role; sizes are ENGINEERING_PROTOTYPE (unsized: joint and member design OPEN)."""
@@ -180,7 +204,7 @@ def frame(s):
           x=(est['collar_fwd']+est['collar_aft'])/2, R=c['cradle_radius_m'], a=c['member_radius_m'], nu=48, nv=8, placement=j)
         for k, az in enumerate(ve.config(s)['geometry']['trunnion_azimuths_deg'], 1):
             P(f'CL_N{j}_Trunnion_Pin_{k}', 'SERVICE', 'tube', 'service', f'N{j} trunnion pin {k}: released for engine exchange (load: thrust and field)',
-              points=[ve.pol((est['collar_fwd']+est['collar_aft'])/2, ve.config(s)['geometry']['collar_outer_radius_m']+0.55, az),
+              points=[ve.pol((est['collar_fwd']+est['collar_aft'])/2, ve.config(s)['geometry']['collar_outer_radius_m']+0.1, az),   # into the lug socket
                       ve.pol((est['collar_fwd']+est['collar_aft'])/2, c['cradle_radius_m']+c['member_radius_m'], az)], radius=0.22, placement=j)
         # spokes: hub outer rim to the cradle's hub-facing side
         az_e = math.radians(pl['azimuth_deg'])
@@ -199,8 +223,16 @@ def frame(s):
             used.add(k)
             P(f'CL_N{j}_Thrust_Strut_{k:02}', 'STRUCTURE', 'tube', 'structure', f'N{j} thrust strut: cradle to thrust-ring node {k} (primary thrust path)',
               points=[cradle_point(s, pl, loc), strut_foot(s, nodes[k], c['thrust_strut_radius_m']*1.2)], radius=c['thrust_strut_radius_m']*1.2)
-        P(f'CL_N{j}_Strut_Ring_Tie', 'STRUCTURE', 'tube', 'structure', f'N{j} outboard thrust tie: cradle outer side to the hub rim (closes the triangle)',
-          points=[cradle_point(s, pl, 0), dm.radial(st['hub_fwd'], rh, az_e)], radius=c['member_radius_m']*0.8)
+        # FPS V1.1: the V1 "ring tie" ran from the cradle's outboard point straight through the engine to the hub rim. It is replaced by a
+        # symmetric pair of flank thrust ties, cradle loc 90 and 270 (between the trunnions) forward to the nearest thrust-ring node that
+        # clears the comms sweeps: the cradle now meets the ring at four points, two hub-side struts and two flank ties, all outside the engine
+        for side, loc in (('A', 90), ('B', 270)):
+            a = cradle_point(s, pl, loc); rt = c['member_radius_m']*0.8
+            k = next(k for k in sorted(c['thrust_ring_nodes'], key=lambda k: math.dist(nodes[k], a))
+                     if clear_of_keepouts(s, a, strut_foot(s, nodes[k], rt), rt))
+            used.add(k)
+            P(f'CL_N{j}_Flank_Tie_{side}', 'STRUCTURE', 'tube', 'structure', f'N{j} flank thrust tie {side}: cradle flank (between the trunnions) to thrust-ring node {k}, outside the engine body',
+              points=[a, strut_foot(s, nodes[k], rt)], radius=rt)
     # chords between adjacent cradles
     for a, b in ADJACENT:
         pa, pb = pls[a-1], pls[b-1]
@@ -228,22 +260,27 @@ def distribution(s):
     c = config(s); st = stations(s); pls = placements(s); est = ve.stations(s); g = ve.config(s)['geometry']; out = []
     x0, x1 = st['bay']+st['bay_length']/2, st['bay']-st['bay_length']/2
     out.append(ve.part('CL_Power_Conditioning_Bay', 'ELECTRICAL', 'revolve', 'power',
-                       note='Cluster power and conditioning bay (on the old reactor mount): pulsed-power primary, cryoplant, lithium heat exchanger to the hot radiator loop',
-                       profile=[(x0, 0.0), (x0, st['bay_radius']), (x1, st['bay_radius']), (x1, 0.0)], closed=True, n=32))
-    sp = c['service_line_spacing_m']; rl = c['service_line_radius_m']
+                       note='Cluster power and conditioning bay (on the old reactor mount): pulsed-power primary, cryoplant, lithium heat exchanger to the hot radiator loop; an annulus round the FPS target-fabrication core (V1.1)',
+                       profile=[(x0, c['bay_core_radius_m']), (x0, st['bay_radius']), (x1, st['bay_radius']), (x1, c['bay_core_radius_m'])], closed=True, n=32))
+    sp = ve.service_panel(s); rl = c['service_line_radius_m']    # the engine's panel: one slot pitch for both (FPS V1.1)
     for i, (svc, cat, mat) in enumerate(SERVICES):
         a = math.radians(60*i+30); rr = 1.0
         out.append(ve.part(f'CL_Trunk_{svc}', cat, 'tube', mat, note=f'Axial {svc.replace("_", " ").lower()} trunk from the bay through the thrust ring to the hub',
-                           points=[dm.radial(x1, rr, a), dm.radial(st['hub_aft']+0.4, rr, a)], radius=rl*1.6))
+                           points=([dm.radial(x1, rr, a)] if svc == 'TARGET_FEED' else [dm.radial(x1, c['trunk_entry_r_m'], a), dm.radial(x1-1.5, rr, a)])
+                           +[dm.radial(st['hub_aft']+0.4, rr, a)], radius=rl*1.6))
+    xa, xb = x1-1.5, st['hub_aft']+0.4
+    for k, f in enumerate(c['trunk_spider']['stations'], 1):
+        out.append(ve.part(f'CL_Trunk_Spider_{k}', 'STRUCTURE', 'torus', 'structure', note='Trunk spider ring: ties the six axial trunks between the bay and the hub (line supports)',
+                           x=xa+(xb-xa)*f, R=1.0, a=c['trunk_spider']['radius_m'], nu=36, nv=6))
     for pl in pls:
         j = pl['n']; az_e = math.radians(pl['azimuth_deg']); mid = (est['collar_fwd']+est['collar_aft'])/2
         for i, (svc, cat, mat) in enumerate(SERVICES):
-            off = (i-2.5)*sp
+            off = sp['slots'][svc]
             t = (0.0, -math.sin(az_e), math.cos(az_e))
             start = add(dm.radial(st['collar'], 1.0, az_e), mul(t, off))
             elbow = add(dm.radial(st['collar'], c['hub_radius_m']+0.6, az_e), mul(t, off))
-            panel = to_ship(pl, (mid, -(g['collar_outer_radius_m']+0.5), off))
-            near = to_ship(pl, (mid, -(c['cradle_radius_m']+1.0), off))
+            panel = to_ship(pl, (sp['x'], -sp['r_out'], off))
+            near = to_ship(pl, (sp['x'], -(c['cradle_radius_m']+1.0), off))
             out.append(ve.part(f'CL_N{j}_Line_{svc}', cat, 'tube', mat, note=f'N{j} {svc.replace("_", " ").lower()} line from the hub to the engine panel',
                                points=[start, elbow, near, panel], radius=rl))
     return out
@@ -258,7 +295,7 @@ def interfaces(s):
         out += [dict(name=f'IF_VTX_ENGINE_{j:02}_MOUNT', at=to_ship(pl, (mid, 0, 0)), axis=pl['axes'][0], note=f'N{j} trunnion plane: engine to cradle'),
                 dict(name=f'IF_VTX_ENGINE_{j:02}_THRUST', at=to_ship(pl, (est['burn'], 0, 0)), axis=pl['axes'][0], note=f'N{j} thrust line (force on the ship along the engine +X)'),
                 dict(name=f'IF_NOZZLE_{j:02}', at=to_ship(pl, (est['exit'], 0, 0)), axis=pl['axes'][0], note=f'N{j} exit plane (L4): the simulation nozzle vector anchor'),
-                dict(name=f'IF_VTX_ENGINE_{j:02}_SERVICE', at=to_ship(pl, (mid, -(g['collar_outer_radius_m']+0.5), 0)), axis=pl['axes'][1], note=f'N{j} quick-disconnect panel'),
+                dict(name=f'IF_VTX_ENGINE_{j:02}_SERVICE', at=to_ship(pl, (ve.service_panel(s)['x'], -ve.service_panel(s)['r_out'], 0)), axis=pl['axes'][1], note=f'N{j} quick-disconnect panel'),
                 dict(name=f'IF_VTX_ENGINE_{j:02}_REMOVAL', at=to_ship(pl, (est['exit']-2, 0, 0)), axis=mul(pl['axes'][0], -1), note=f'N{j} removal axis: aft along the engine axis')]
     out += [dict(name='IF_REACTOR_MOUNT', at=(st['bay'], 0.0, 0.0), axis=(1.0, 0.0, 0.0), note='Cluster power and conditioning bay centre (same station as the Fiji reactor mount)'),
             dict(name='IF_CLUSTER_POWER_BAY', at=(st['bay'], 0.0, 0.0), axis=(1.0, 0.0, 0.0), note='Main bus and pulsed-power primary feed into the cluster'),
