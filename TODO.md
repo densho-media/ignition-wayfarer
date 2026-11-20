@@ -405,6 +405,12 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   canon decision on the drawn Vertex mass against the 250 t drive allowance (the V1.1 frame's +83 t alone would cost +191 t of
   propellant and fill He-3 to 98.4 %); the CONSERVATIVE frame case (1.66) and the thrust-ring node joints; the removal guidance
   fixture, spool joints and pin actuators; vessel ullage.
+  V2 Engineering Convergence plan (owner review open; Claude Doc "Wayfarer V2 Engineering Convergence"): phase 1 browser room (byte
+  table by drawer, lazy loading by drawer, instancing; GFX-7), phase 2 ledgers (drawn mass as justified/artifact/reducible, never scaled
+  to fit; conserved fuel inventory with banded P/T), phase 3 power convergence on the 7.31x gap with the engine workstream, phase 4
+  speculative items stay labelled. Open owner decisions: D1 accept the justified/artifact/reducible classes and remove artifacts from
+  the drawing; D2 allow a short wait the first time a drawer opens (lazy loading); D3 which power levers to pursue once the engine
+  workstream has ranked them; D4 keep the target supply and the H2 coupling SPECULATIVE in the viewer.
 
 ## G — Complete habitat, survival and service implementation
 
