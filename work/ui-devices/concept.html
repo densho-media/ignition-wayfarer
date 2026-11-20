@@ -1,0 +1,306 @@
+<title>Wayfarer Crew Interfaces</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: a briefing sheet. Taxonomy first, then one live mock per device family, then where each site surface goes and the phases.
+   Colours are the WEB-005 identity tokens (tools/web_identity.py), copied verbatim; the site is dark-only by design. */
+:root {
+  --wf-charcoal:#1B2633; --wf-ignition:#D8EAFF; --wf-plasma:#D99AC9; --wf-violet:#8C83C5; --wf-radiator:#FF843C;
+  --bg:#0A0F15; --surface-1:#121A24; --surface-2:#1B2633; --surface-3:#243246; --line:#2A3747; --line-strong:#3B4B60;
+  --ink:#DCE5EF; --ink-strong:#D8EAFF; --muted:#9AA9BA; --accent:#D99AC9; --link:#E7B9DA; --action:#FF843C; --action-ink:#1B2633;
+  --good:#7FD39B; --info:#8FC1F0; --warn:#E9B85A; --bad:#FF7F73;
+  --fn-HABITAT:#86DA95; --fn-STRUCTURE:#C5C5C8; --fn-SENSORS:#59E7EF;
+  --casing:#0E141B;           /* device casing: anodised dark, darker than any panel */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--font); margin: 0; }
+.wrap { max-width: 1100px; margin: 0 auto; padding-block: 28px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 36px; }
+.eyebrow { margin: 0; font-size: 12px; letter-spacing: .3em; color: var(--accent); text-transform: uppercase; }
+h1 { margin: 4px 0 8px; font-size: clamp(26px, 5vw, 40px); letter-spacing: .08em; font-weight: 600; color: var(--ink-strong); line-height: 1.15; text-wrap: balance; }
+h2 { margin: 0 0 12px; font-size: 15px; letter-spacing: .12em; color: var(--muted); font-weight: 600; text-transform: uppercase; }
+h3 { margin: 0 0 6px; font-size: 17px; color: var(--ink-strong); font-weight: 600; }
+p { margin: 0 0 10px; max-width: 70ch; }
+.ignite { height: 2px; width: min(320px, 60%); margin: 14px 0 16px; border: 0;
+  background: linear-gradient(90deg, var(--wf-ignition), var(--wf-plasma) 30%, var(--wf-violet) 62%, transparent); }
+.lead { color: var(--muted); }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 13px; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 600; letter-spacing: .06em; font-size: 11px; text-transform: uppercase; background: var(--surface-1); }
+tr:last-child td { border-bottom: 0; }
+td b { color: var(--ink-strong); font-weight: 600; }
+.cls { font: 600 11px var(--mono); letter-spacing: .08em; padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
+.cls.per { color: var(--fn-HABITAT); border: 1px solid color-mix(in srgb, var(--fn-HABITAT) 50%, transparent); }
+.cls.sta { color: var(--info); border: 1px solid color-mix(in srgb, var(--info) 50%, transparent); }
+.src { color: var(--muted); font-size: 12px; }
+.proto { color: var(--warn); font: 600 11px var(--mono); }
+
+/* ---------- device mocks ---------- */
+.mocks { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 860px) { .mocks { grid-template-columns: minmax(0, 1fr); } }
+.cap { font-size: 13px; color: var(--muted); margin-top: 10px; }
+.cap b { color: var(--ink); }
+
+/* Station: a fixed screen in a casing, nameplate, a hard-key row under it (F1-F8 on the keyboard). */
+.station { background: var(--casing); border: 1px solid var(--line-strong); border-radius: 6px; padding: 10px 10px 8px; }
+.plate { display: flex; justify-content: space-between; font: 600 10px var(--mono); letter-spacing: .14em; color: var(--muted); padding: 0 4px 8px; }
+.plate span:last-child { color: var(--fn-STRUCTURE); }
+.screen { background: var(--bg); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+.strip { display: flex; flex-wrap: wrap; gap: 4px 16px; padding: 6px 10px; font: 11px var(--mono); color: var(--muted);
+  border-bottom: 1px solid var(--line); background: var(--surface-1); }
+.strip .ok { color: var(--good); } .strip .w { color: var(--warn); }
+.strip .sp { margin-left: auto; }
+.panes { display: grid; grid-template-columns: 150px minmax(0, 1fr) 170px; min-height: 300px; }
+@media (max-width: 560px) { .panes { grid-template-columns: minmax(0, 1fr); } .panes .side { display: none; } }
+.pane { padding: 12px; border-right: 1px solid var(--line); min-width: 0; }
+.pane:last-child { border-right: 0; }
+.pane h4 { margin: 0 0 8px; font: 600 10px var(--mono); letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
+.menu { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.menu a { color: var(--ink); padding: 5px 8px; border-left: 2px solid transparent; border-radius: 2px; text-decoration: none; }
+.menu a.on { border-left-color: var(--accent); background: var(--surface-3); color: var(--ink-strong); }
+.menu a .k { float: right; font: 10px var(--mono); color: var(--muted); }
+.task { border: 1px solid var(--line-strong); border-top: 2px solid var(--wf-radiator); border-radius: 4px; padding: 12px; background: var(--surface-1); margin-bottom: 10px; }
+.task small { display: block; font: 600 10px var(--mono); letter-spacing: .14em; color: var(--accent); margin-bottom: 4px; }
+.task strong { font-size: 18px; color: var(--ink-strong); display: block; }
+.task p { font-size: 12.5px; color: var(--muted); margin: 4px 0 8px; }
+.btn { display: inline-block; font: 600 12px var(--font); color: var(--action-ink); background: var(--action); border-radius: 3px; padding: 5px 12px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.row2 .task { border-top-color: var(--line-strong); margin: 0; }
+.row2 .task strong { font-size: 14px; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; font: 11.5px var(--mono); }
+.kv dt { color: var(--muted); } .kv dd { margin: 0; color: var(--ink); text-align: right; }
+.kv .ok { color: var(--good); } .kv .w { color: var(--warn); }
+.keys { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; padding: 8px 4px 0; }
+.keys span { font: 600 9.5px var(--mono); color: var(--muted); text-align: center; padding: 6px 2px 5px; border: 1px solid var(--line-strong);
+  border-radius: 3px; background: var(--surface-1); line-height: 1.25; }
+.keys span i { display: block; font-style: normal; color: var(--ink); font-size: 10px; }
+.keys span.hot { border-color: var(--wf-radiator); }
+
+/* Cuff: worn on the left forearm. Narrow, one task at a time, glove-sized targets, three hard keys on the casing edge. */
+.cuffwrap { display: flex; justify-content: center; }
+.cuff { width: 100%; max-width: 300px; background: var(--casing); border: 1px solid var(--line-strong); border-radius: 26px; padding: 14px 12px 12px; }
+.cuff .plate { padding: 0 8px 8px; }
+.cscreen { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.cstrip { display: flex; justify-content: space-between; font: 11px var(--mono); color: var(--muted); padding: 8px 12px 6px; border-bottom: 1px solid var(--line); }
+.cstrip .ok { color: var(--good); }
+.who { padding: 12px 14px 4px; }
+.who small { font: 600 10px var(--mono); letter-spacing: .14em; color: var(--accent); }
+.who strong { display: block; font-size: 19px; color: var(--ink-strong); letter-spacing: .04em; }
+.who span { font-size: 12px; color: var(--muted); }
+.ctasks { display: flex; flex-direction: column; gap: 8px; padding: 10px 12px 12px; }
+.ct { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border: 1px solid var(--line-strong);
+  border-radius: 10px; background: var(--surface-1); }
+.ct.go { border-color: var(--wf-radiator); }
+.ct b { color: var(--ink-strong); font-size: 15px; font-weight: 600; display: block; }
+.ct span { font-size: 11.5px; color: var(--muted); }
+.ct em { margin-left: auto; font-style: normal; color: var(--action); font-weight: 700; font-size: 18px; }
+.hard { display: flex; justify-content: space-around; padding: 10px 6px 0; }
+.hard span { font: 600 9.5px var(--mono); color: var(--muted); letter-spacing: .1em; border: 1px solid var(--line-strong); border-radius: 12px; padding: 5px 12px; }
+.hard span.alert { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 55%, transparent); }
+
+/* Small mocks: slate and suit display */
+.minis { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.slate { background: var(--casing); border: 1px solid var(--line-strong); border-radius: 14px; padding: 10px 14px; }
+.slate .scr { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; display: grid; grid-template-columns: minmax(0,1fr) 120px; min-height: 150px; }
+.slate .view { position: relative; border-right: 1px solid var(--line); background:
+  linear-gradient(180deg, transparent 47%, var(--line-strong) 47% 53%, transparent 53%) center/80% 26px no-repeat,
+  radial-gradient(circle at 18% 50%, var(--fn-STRUCTURE) 0 9px, transparent 10px),
+  radial-gradient(circle at 72% 50%, var(--wf-radiator) 0 6px, transparent 7px); }
+.slate .view small { position: absolute; left: 8px; top: 6px; font: 10px var(--mono); color: var(--muted); }
+.slate .drw { padding: 8px; display: flex; flex-direction: column; gap: 5px; font-size: 11.5px; }
+.slate .drw span { border: 1px solid var(--line-strong); border-radius: 6px; padding: 6px 8px; }
+.slate .drw span.on { border-color: var(--accent); color: var(--ink-strong); }
+.suit { background: #0b0f0c; border: 1px solid var(--line-strong); border-radius: 8px; padding: 12px; font: 12px var(--mono); color: var(--good); }
+.suit .row { display: flex; justify-content: space-between; border-bottom: 1px dashed color-mix(in srgb, var(--good) 30%, transparent); padding: 4px 0; }
+.suit .row .w { color: var(--warn); }
+.suit .mirror { margin-top: 8px; color: var(--muted); font-size: 11px; }
+.suit .mirror span { display: inline-block; transform: scaleX(-1); color: var(--good); }
+
+/* principles + phases */
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.card { background: var(--surface-1); border: 1px solid var(--line); border-radius: 8px; padding: 16px; min-width: 0; }
+.card p, .card li { font-size: 13.5px; color: var(--ink); }
+.card ul { margin: 6px 0 0; padding-left: 18px; }
+.phases { display: flex; flex-direction: column; gap: 10px; }
+.ph { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; padding: 14px 16px; background: var(--surface-1);
+  border: 1px solid var(--line); border-left: 2px solid var(--line-strong); border-radius: 6px; }
+.ph.now { border-left-color: var(--wf-radiator); }
+.ph .n { font: 600 12px var(--mono); color: var(--muted); letter-spacing: .1em; }
+.ph.now .n { color: var(--action); }
+.ph p { font-size: 13.5px; margin: 0; }
+.ph ul { margin: 6px 0 0; padding-left: 18px; font-size: 13px; color: var(--muted); }
+.ask { border: 1px solid var(--wf-radiator); border-radius: 8px; padding: 16px; background: var(--surface-1); }
+.ask ol { margin: 6px 0 0; padding-left: 20px; }
+.ask li { margin-bottom: 6px; font-size: 14px; }
+footer { font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">G.U. WAYFARER 001 · interface families · concept for review</p>
+  <h1>Crew Interfaces</h1>
+  <hr class="ignite">
+  <p class="lead">The public site should look and behave like the hardware the crew actually uses. On a phone you are holding a
+    <b>personal device</b>: the crew cuff on your forearm, or a service slate. On a desktop you are standing or sitting at a
+    <b>ship station</b>: an OPS console or an engineering workstation. What the screen offers follows the activity, the way it would
+    aboard: you check yourself and your route on your wrist, and you run the ship from a station.</p>
+</header>
+
+<section>
+  <h2>Device taxonomy</h2>
+  <div class="scroll" tabindex="0" role="region" aria-label="Device taxonomy">
+  <table>
+    <thead><tr><th>Device</th><th>Class</th><th>Where aboard</th><th>Real activity</th><th>Input and constraints</th><th>Site surface</th></tr></thead>
+    <tbody>
+      <tr><td><b>Crew cuff</b><br><span class="src">CU · wrist unit, left forearm</span></td><td><span class="cls per">PERSONAL</span></td>
+        <td>Every crew member. The instructor already wears one (docs/CHARACTERS.md); the newcomer is issued one at boarding.</td>
+        <td>Who and where am I, my next task, local air and alerts, intercom, route to a compartment.</td>
+        <td>One hand, often gloved: targets ≥ 11 mm, one task per screen, three hard keys (BACK · HOME · ALERT). Low power, dims for the night cycle.</td>
+        <td>Every page at phone portrait; HUD of the interior walk.</td></tr>
+      <tr><td><b>Service slate</b><br><span class="src">SL · handheld, docks at panels</span></td><td><span class="cls per">PERSONAL</span></td>
+        <td>Tool walls and shadow boards in RA2 (docs/MODEL.md ra2_work); carried to the job.</td>
+        <td>Inspection and maintenance: a part's record, its status, a procedure step by step.</td>
+        <td>Two hands, landscape, a main view with a drawer. Works off the ship net, read-mostly.</td>
+        <td>Explore Ship and Engineering pages on a phone or tablet.</td></tr>
+      <tr><td><b>Suit display</b><br><span class="src">EVA chest unit + wrist display</span></td><td><span class="cls per">PERSONAL</span></td>
+        <td>EVA suit (docs/EVA.md eva_suit_check: chest display, wrist display).</td>
+        <td>Consumables, suit pressure, tether and drone state while outside.</td>
+        <td>Glanceable, consumables first, fixed rows, no scrolling. Chest labels are printed mirror-reversed to read in the wrist mirror, as on real EVA suits.</td>
+        <td>HUD of Explore Exterior (every screen size).</td></tr>
+      <tr><td><b>OPS console</b><br><span class="src">RA2 sector 2, OPS 1–3</span></td><td><span class="cls sta">STATIONAL</span></td>
+        <td>Seated stations, 0.65 m wide, display on the wall behind the desk, keyboard on the desk (data/wayfarer_3d.toml; docs/MODEL.md Ops_1–3).</td>
+        <td>Run the ship: buses and breakers, load shedding, air, crew orders. Deadship scenarios already send the player here.</td>
+        <td>Keyboard and pointer, multi-pane, dense text, F-key soft-key row under the screen, a ship status strip that never leaves.</td>
+        <td>Start page, Technical status and Deadship panels on a desktop.</td></tr>
+      <tr><td><b>Engineering workstation</b><br><span class="src">records and design station</span></td><td><span class="cls sta">STATIONAL</span></td>
+        <td><span class="proto">PROTOTYPE</span> placement: an OPS station in engineering mode (no separate room is sourced).</td>
+        <td>Read design records, compare variants, inspect the model with its source status.</td>
+        <td>Wide screen, three panes (index · document · context), keyboard navigation.</td>
+        <td>Engineering pages and Explore Ship on a desktop.</td></tr>
+      <tr><td><b>Burn-go console</b><br><span class="src">armrest of every couch</span></td><td><span class="cls sta">STATIONAL</span></td>
+        <td>Burn station couches (docs/MODEL.md: a burn-go console on each armrest, 0.72–0.86 m).</td>
+        <td>Under thrust, strapped in: acknowledge, hold, go.</td>
+        <td>Few large keys reachable without lifting the arm against the load.</td>
+        <td>Later: the First Ignition / burn scenes only.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="cap">Class follows the activity, not only the screen. Walking the ship is personal even on a desktop (your cuff), and sitting
+    down at an OPS chair in the walk is stational even on a phone. Screen size only picks the default frame for the site pages.</p>
+</section>
+
+<section>
+  <h2>The start page on each device</h2>
+  <div class="mocks">
+    <figure style="margin:0">
+      <div class="station" aria-label="Desktop: OPS console">
+        <div class="plate"><span>OPS 2 · RA2 SECTOR 2 · STATION</span><span>G.U. WAYFARER 001</span></div>
+        <div class="screen">
+          <div class="strip"><span>MET 0001:142:07:31</span><span>RING A <span class="ok">0.50 g</span></span><span>BUS A <span class="ok">OK</span></span>
+            <span>BUS B <span class="ok">OK</span></span><span>AIR <span class="ok">NOMINAL</span></span><span class="sp">REL 2026.11 · <span class="w">SIMULATION ONLY</span></span></div>
+          <div class="panes">
+            <div class="pane side"><h4>Station</h4>
+              <nav class="menu"><a class="on" href="#">Board <span class="k">F1</span></a><a href="#">Go outside <span class="k">F2</span></a>
+                <a href="#">Ship model <span class="k">F3</span></a><a href="#">Records <span class="k">F4</span></a><a href="#">Status <span class="k">F5</span></a></nav></div>
+            <div class="pane"><h4>Board · choose a task</h4>
+              <div class="task"><small>INSIDE · WALK</small><strong>Explore Interior</strong>
+                <p>Walk the rotating rings and the spine as a crew member. Your cuff guides you.</p><span class="btn">Board</span></div>
+              <div class="row2">
+                <div class="task"><small>OUTSIDE · EVA</small><strong>Explore Exterior</strong><p>Suit up, cycle the lock, fly the hull.</p></div>
+                <div class="task"><small>RECORDS</small><strong>0.016 c and back</strong><p>The engineering record and its open problems.</p></div>
+              </div></div>
+            <div class="pane side"><h4>Ship</h4>
+              <dl class="kv"><dt>Length</dt><dd>289.5 m</dd><dt>Crew</dt><dd>12</dd><dt>Cruise</dt><dd>0.016 c</dd><dt>Rings</dt><dd class="ok">SPINNING</dd>
+                <dt>Drive</dt><dd class="w">PROTOTYPE</dd><dt>Spin</dt><dd>±4 rpm</dd></dl></div>
+          </div>
+        </div>
+        <div class="keys" aria-hidden="true"><span class="hot">F1<i>BOARD</i></span><span>F2<i>EVA</i></span><span>F3<i>MODEL</i></span><span>F4<i>RECORDS</i></span>
+          <span>F5<i>STATUS</i></span><span>F6<i>—</i></span><span>F7<i>—</i></span><span>F8<i>HELP</i></span></div>
+      </div>
+      <figcaption class="cap"><b>Desktop = OPS console.</b> Casing and nameplate, a ship status strip that stays on every page, three panes,
+        and F-keys under the screen that are the real keyboard shortcuts.</figcaption>
+    </figure>
+    <figure style="margin:0">
+      <div class="cuffwrap"><div class="cuff" aria-label="Phone: crew cuff">
+        <div class="plate"><span>CU · VISITOR 07</span><span>LEFT</span></div>
+        <div class="cscreen">
+          <div class="cstrip"><span>MET 142:07:31</span><span>AIR <span class="ok">OK</span></span></div>
+          <div class="who"><small>ISSUED AT BOARDING</small><strong>Newcomer</strong><span>Boarding boom → primary port</span></div>
+          <div class="ctasks">
+            <div class="ct go"><div><b>Board Wayfarer</b><span>Walk inside · touch</span></div><em>›</em></div>
+            <div class="ct"><div><b>Go outside</b><span>EVA · best on a desktop</span></div><em>›</em></div>
+            <div class="ct"><div><b>Ship model</b><span>Slate view · 3D</span></div><em>›</em></div>
+            <div class="ct"><div><b>Records</b><span>Engineering · read</span></div><em>›</em></div>
+          </div>
+        </div>
+        <div class="hard" aria-hidden="true"><span>BACK</span><span>HOME</span><span class="alert">ALERT</span></div>
+      </div></div>
+      <figcaption class="cap"><b>Phone = crew cuff.</b> One column, one task at a time, glove-sized rows, the three hard keys.
+        BACK is the browser back, HOME the start page, ALERT the status page.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="minis">
+  <figure style="margin:0">
+    <div class="slate"><div class="plate"><span>SL · SERVICE SLATE</span><span>DOCKED · RA2 TOOL WALL</span></div>
+      <div class="scr"><div class="view"><small>EXPLORE SHIP · SIDE</small></div>
+        <div class="drw"><span class="on">Assemblies</span><span>Fuel</span><span>Shield</span><span>Part record</span></div></div></div>
+    <figcaption class="cap"><b>Service slate</b>: Explore Ship and Engineering on a phone or tablet. Main view, one drawer, held in two hands.</figcaption>
+  </figure>
+  <figure style="margin:0">
+    <div class="suit" aria-label="EVA suit display">
+      <div class="row"><span>O2 PRI</span><span>87 %</span></div><div class="row"><span>SUIT P</span><span>29.6 kPa</span></div>
+      <div class="row"><span>CO2</span><span>0.3 kPa</span></div><div class="row"><span>H2O FEED</span><span class="w">61 %</span></div>
+      <div class="row"><span>TETHER</span><span>LOCKED</span></div><div class="row"><span>DRONE</span><span>LINK 14 m</span></div>
+      <div class="mirror">chest label as printed: <span>PURGE</span></div></div>
+    <figcaption class="cap"><b>Suit display</b>: the Explore Exterior HUD. Fixed rows, consumables first, no scrolling. Values shown are examples.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>Design rules for the hardware look</h2>
+  <div class="grid3">
+    <div class="card"><h3>Function first (HSFP)</h3><ul>
+      <li>A casing, a nameplate and hard keys appear because the device has them. No glow, glass, scan lines or decorative circuitry (docs/WEB_IDENTITY.md).</li>
+      <li>Every on-screen value is real site data or labelled. MET, ring g and bus state come from the model or say SIMULATION ONLY.</li></ul></div>
+    <div class="card"><h3>Same identity</h3><ul>
+      <li>WEB-005 colours stay: tokens from tools/web_identity.py, the four colour layers, the lunar scene behind the casing.</li>
+      <li>One new token pair, casing and nameplate, added in the generator, never in CSS.</li></ul></div>
+    <div class="card"><h3>Usable and light</h3><ul>
+      <li>7:1 text contrast, focus rings, keyboard paths and axe-core clean, as now.</li>
+      <li>Pure CSS and HTML: the start page still loads only index.html, site.css and release.json. No change to the Godot or three.js frame budgets.</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Phased plan</h2>
+  <div class="phases">
+    <div class="ph now"><div class="n">PHASE 0<br>NOW</div><div><p><b>Taxonomy and this concept.</b> Owner confirms the device families, names and the activity rule.</p></div></div>
+    <div class="ph"><div class="n">PHASE 1</div><div><p><b>Site shell.</b> Device frames in site.css (station at desktop, cuff at phone, chosen by width and pointer),
+      casing tokens in the generator, the start page, the Interior and Exterior launchers and Technical status. Preview deployed for review.</p>
+      <ul><li>docs/WEB_IDENTITY.md gains a "Device families" section; web_check and axe pass at desktop and phone.</li></ul></div></div>
+    <div class="ph"><div class="n">PHASE 2</div><div><p><b>Records and model.</b> Engineering pages as the workstation's three panes or the slate reader;
+      Explore Ship chrome as workstation panes or slate drawers. Canvas and 3D untouched.</p></div></div>
+    <div class="ph"><div class="n">PHASE 3</div><div><p><b>In-game devices.</b> Walk HUD as the cuff; Deadship OPS panels as the OPS console, opened when the player sits at OPS k;
+      EVA HUD as the suit display; touch buttons styled as cuff keys. Godot theme only, checked with runtime-export and the browser checks.</p></div></div>
+    <div class="ph"><div class="n">PHASE 4</div><div><p><b>Canon.</b> If you want the devices in the lore, a row per device in the Technology workbook
+      (interfaces), written only with your authorization. Until then every device stays PROTOTYPE.</p></div></div>
+  </div>
+</section>
+
+<section class="ask">
+  <h2 style="color:var(--action)">For ApeDevil</h2>
+  <ol>
+    <li>Are these the right device families (cuff, slate, suit display, OPS console, engineering workstation, burn-go console)?</li>
+    <li>Should the activity decide the frame in the experiences (walking = cuff on every screen, sitting at OPS = console), as proposed?</li>
+    <li>Go for Phase 1 on the branch, with a deployed preview for review?</li>
+  </ol>
+</section>
+
+<footer>Concept only: nothing on the live site has changed. Ship figures (289.5 m body, crew of 12, 0.016 c, 0.50 g ring floor, ±4 rpm) are from docs/MODEL.md; MET, bus and suit values are examples.
+  Device placements cite the repository docs; devices themselves are PROTOTYPE until canon says otherwise.</footer>
+</div>
