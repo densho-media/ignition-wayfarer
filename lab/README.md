@@ -27,6 +27,9 @@ Status: ACTIVE, PARKED, SUPERSEDED (by which entry) or PROMOTED (into which `mai
 | [ignition-failures](studies/ignition-failures/NOTES.md) | Study | ACTIVE | What breaks first when the drawn Vertex cluster ignites at the mission point, and what would a visitor have to change? | bbe1d7e (Vertex b87a9c1 imports) | is the training page right; squash order with the engine studies |
 | [dust-impacts](studies/dust-impacts/NOTES.md) | Study | ACTIVE | What does dust do to Wayfarer at speeds up to 0.016 c, and what would a visitor have to change? | c7cca43 (Vertex 2.6 874dca7 imports) | is the training page right; Brow layer and skin thickness; HIGH dust as residual risk or gate |
 | [fuel-propellant](studies/fuel-propellant/NOTES.md) | Study | PROMOTED with the FPS V1.1 squash, kept as check tools | Does the integrated fuel and propellant system fit, connect, come apart for engine removal and stay inside the browser budget? | 3532857 + FPS V1.1 (577bff8) | drawn Vertex mass vs the 250 t drive allowance; CONSERVATIVE frame case; thrust-ring joints |
+| [external-pulse](studies/external-pulse/NOTES.md) | Study | ACTIVE | EXT-01: is an external pulse drive (plate, magnetic pusher, remote field) worth building for the 0.016 c mission? | eb33a44 | next propulsion milestone; directional pulse and leak-free field stay UNVERIFIED |
+| [halo-vertex](variants/halo-vertex/NOTES.md) | Variant | PARKED (rejected as baseline 2026-11-17) | Vertex 2.0-2.5: four halo rings about 2 km aft with Vertex Burn Channeling; closes at 6.9 kt at best, not 4.6 kt | f1601d4 | none; VBC stays a research hypothesis |
+| [vertex-closure](studies/vertex-closure/NOTES.md) | Study | PARKED (gate failed 2026-11-18) | Vertex 1.8 Phase F and 2.6-2.11: can the Vertex cluster close the mission ledger near 4.6 kt? No; no hold-off-consistent closure below 8.1 kt | eb33a44 | R1 accept the gate; R2 broader fuel-cycle and architecture comparison; R3 keep A1 |
 
 Each entry's `NOTES.md` opens with the same table: kind, status, question, model base, the branch it came from, open owner
 questions and where its review file is.
@@ -39,7 +42,7 @@ questions and where its review file is.
   Lab code may read `data/` and `src/`.
 - Run lab scripts from the repository root (`python3 lab/variants/fdp1/run.py`). Their tests are not part of the pipeline:
   `python3 lab/variants/fdp1/tests/test_fdp1.py`, `python3 lab/studies/four-burn-mission/tests/test_fourburn.py`,
-  `python3 lab/studies/breakthrough-lab/tests/test_breakthrough_lab.py`, `python3 lab/studies/ignition-failures/tests/test_model.py`, `python3 lab/studies/dust-impacts/tests/test_model.py`.
+  `python3 lab/studies/breakthrough-lab/tests/test_breakthrough_lab.py`, `python3 lab/studies/ignition-failures/tests/test_model.py`, `python3 lab/studies/dust-impacts/tests/test_model.py`, `python3 lab/studies/external-pulse/tests/test_ext01.py`.
 - A lab number reaches canon only through its Drive owner workbook and the normal loop (AGENTS.md).
 - `.blend` files and renders stay out of Git; the entry's script rebuilds them, and the review copy sits in the project files
   `review/` folder or on GitHub Pages.

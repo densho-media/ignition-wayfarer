@@ -226,6 +226,37 @@ A geometry-neutral change shows 0 changed/added/removed objects in the pipeline'
   R15-0..6. Standard library only (fork pool for the trace). `python3 src/wayfarer/vertex_radiation.py` prints the summary, `--quick` a
   reduced run, `--evidence` writes `references/evidence/vertex_radiation.json` (about 30 s), which `tools/story.py` reads for
   engineering/vertex/ section 8; the tests fail when its input hash is stale. It never changes the engine.
+- `vertex_fiji.py`: Vertex Engine 1.6 Fiji-assisted advanced fusion and nanomaterials (`[vertex_fiji]`). The Fiji constitutive model
+  M(T, H, S), the dipole-kernel field of magnetized liners (optimal and axial orientation, shell bound), liner forces and energies, the
+  lattice assembly (isolation, struts, hysteresis, survival), REBCO Jc and neutron fluence, fusion levers run inside the 1.5 burn models
+  (`levers()` context), the hot-ion electron-balance floor, PMDS qualification, F0–F6 closure on the 1.5 component map, canon
+  reconciliation, workbook proposals and gates R16-0..7. Standard library only. `python3 src/wayfarer/vertex_fiji.py` prints the summary;
+  `--evidence` writes `references/evidence/vertex_fiji.json` (about 10 s), which `tools/story.py` reads for engineering/vertex/ section 9.
+  The tests fail when its input hash is stale. It never changes the engine.
+- `vertex_fiji_a.py`: Vertex Engine 1.6A Fiji material limits and magnetic architecture (`[vertex_fiji_a]`). An axisymmetric bound-current
+  magnetostatic solver (`cell`, `cell_field`, `magnet_field`, `solve` in SEEDED or ORIENTED mode with recoil and demagnetization) and its
+  closed-form validation, geometries FG-0..FG-5 (`geometries`), unit-M influence matrices (`influence`), the FG x FM x mode matrix (fields,
+  topology, energies, Kelvin forces, stresses, collapse coil response), the ray-screen exposure on the 1.5 hardware, thermal feedback, the
+  REBCO neutron audit, the canon-law reconciliation, gates, Pareto set and the prepared REC workbook changes. Reads `vertex_fiji` and its
+  evidence without changing them. `--evidence` writes `references/evidence/vertex_fiji_a.json` (about 15 s) for engineering/vertex/ section 10.
+- `vertex_source.py`: Vertex Engine 1.6B fusion radiation source and plasma-hardware interface (`[vertex_source]`). Reactivity beyond the
+  Bosch-Hale fit limits (`sv`, `sv_xs`, `t_eff`), the two-temperature power balance with every channel separate (`powers`, `solve`, `useful`),
+  cases S0-S6 in three brackets (`cases`), the 1.6 floor audit, non-equilibrium and Compton trapping, the magnet sky and allowable leakage
+  (`geometry`, `interface`), the combined budget and SR-1 per case (`combined`), the seven-axis feasibility map, neutrons, mission check,
+  sensitivity, a limited fuel comparison, gates R16B-0..9 and the verdict. Reads the 1.4-1.6A evidence without changing it; quotes EXT-01
+  (src never reads lab/). `--evidence` writes `references/evidence/vertex_source.json` (about 1 s) for engineering/vertex/ section 11.
+- `vertex_dynamic.py`: Vertex Engine 1.7 dynamic lattice drive mechanism (`[vertex_dynamic]`). Audit of the engine, loads, field, pulse
+  timing, radiators, ratio ledger, Fiji and animation hooks (`audit`), plasma/mechanical/electronic timescales, the four candidates (`crown`,
+  `dynamo`, `petals`, `tread`), the radiation approaches, the mission-point ledger on the unchanged `vertex_source.budget` with explicit
+  mechanism factors (`heat`, `budget`), mission and mass check, comparison, operating sequence, failure modes, Phase E integration plan and
+  the verdict. Reads the 1.2-1.6B evidence without changing it. `--evidence` writes `references/evidence/vertex_dynamic.json` (about 1 s)
+  for engineering/vertex/ section 12.
+- `vertex_adaptive.py`: Vertex Engine 1.8 adaptive architecture and 3D integration study (`[vertex_adaptive]`). Audit of the built engine
+  (parts, families, triangles, linked instances, effect drivers, controller and states, which families must split), the L4 carriage
+  (`carriages`, re-solved to the canon stop field with `vertex_magnet`), alignment error fields (`alignment`), petals and their
+  superconducting joints (`petals`), Fiji from the 1.6A evidence, four concepts with scores, the nine-state sequence and proposed controller
+  properties, traced field lines (`field_lines`), browser estimates, the per-mechanism consistency table and the roadmap. Reads the 1.6A and
+  1.7 evidence without changing it. `--evidence` writes `references/evidence/vertex_adaptive.json` (about 1 s).
 - `vertex_engine.py` / `vertex_cluster.py`: the Vertex assets (docs/MODEL.md "Vertex propulsion cluster"). `vertex_engine` holds the Compact Vertex Engine stations, parts (category, material, evidence), interfaces, effects, mass estimate and the C-01..C-10 scalings; `vertex_cluster` the placements in the owner nozzle order, the frame and distribution routed clear of the comms sweeps, the cluster interfaces, the shared effect drivers and states, and the gap, magnetic, radiation and layout screens (`check()`). `components/vertex.py` builds VERTEX_ENGINE, VERTEX_RESEARCH and PROPULSION_CLUSTER from them; `propulsion_representation.active` chooses what the vehicle links. `tools/checks.py` maps a change inside `[vertex_engine*]`, `[vertex_research]` or `[propulsion_cluster]` to its own build target (`TABLE_TARGETS`).
 - `drive_manifold.py`: the optically gated drive manifold. It holds the `[drive_manifold]` PROTOTYPE geometry (throat, smooth branch paths, lattice, seed coils, lasers, shield-plug chicane, optics, gate beams, separatrices), the normalized control properties and the single source of driver expressions (`drivers()`), `configuration_state()`, the 12 action key tables (`actions()`, `action_state()`), `couple_arm()` and the clearance screen `check()` with its findings. Shared by spec, `components/drive.py`, inspect, the rig contract and the previews.
 - `drive_hot_section.py` (AFT-002): the PROTOTYPE `[drive_hot_section]` geometry around the plasma: replaceable core and throat liner tiles and the Q40 nozzle strike modules at the throat-side coils (`liner_tiles()`), the four cryogenic feed lines with their stepped shadow-shield sleeves (`cryo_feed()`), and the screen `check()`, called from `drive_manifold.check()`. The screen covers liner-to-plasma, coil, lattice and gate-beam gaps, feed clearances over the whole polyline, and `sleeve_sight_lines()`, a 3D check that no straight line passes a sleeve bore. Every OD-024/025/026 quantity stays `known = false`.

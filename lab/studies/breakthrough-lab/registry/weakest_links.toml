@@ -229,7 +229,7 @@ speculative = "MAY_HELP"
 resolution = "OPEN"
 questions = { blocks_engine = false, non_convergence = false, major_penalty = true, local = false }
 tier_reason = "A dimensional penalty: solving it cannot make the engine work, and the ship closes with it."
-breakthroughs = ["BT-004"]
+breakthroughs = ["BT-004", "BT-008"]
 systems = ["thermal", "P05", "P06", "P07"]
 
 [[link]]
@@ -285,5 +285,5 @@ speculative = "NOT_NEEDED"
 resolution = "PARTIAL"
 questions = { blocks_engine = false, non_convergence = false, major_penalty = false, local = true }
 tier_reason = "Material and placement choices with known engineering answers, once WL-002 and the cone are settled."
-breakthroughs = []
+breakthroughs = ["BT-008"]
 systems = ["forward_shield", "P04", "P11"]

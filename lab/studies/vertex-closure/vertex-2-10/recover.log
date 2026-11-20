@@ -1,0 +1,16 @@
+B1 facet tilt   0 deg: landed 0.0175 of pulse; of it strikes engines 0.548, passes aft 0.452 (aft cos 0.999)
+B1 facet tilt   3 deg: landed 0.0175 of pulse; of it strikes engines 0.223, passes aft 0.777 (aft cos 0.994)
+B1 facet tilt   6 deg: landed 0.0175 of pulse; of it strikes engines 0.496, passes aft 0.504 (aft cos 0.978)
+B1 facet tilt  10 deg: landed 0.0175 of pulse; of it strikes engines 0.051, passes aft 0.949 (aft cos 0.938)
+B2 tail1: forward 131.3 GW/engine, I 15.9 kA avg, J peak 200 A/m2 (5 % duty), CL gap 2.54 m, 3.2 MV/m, Cranberg breakdown 5.0 MV (margin 0.61)
+B2 tail0.3: forward 40.6 GW/engine, I 4.9 kA avg, J peak 62 A/m2 (5 % duty), CL gap 4.57 m, 1.8 MV/m, Cranberg breakdown 6.8 MV (margin 0.82)
+B2 tail0.1: forward 13.2 GW/engine, I 1.6 kA avg, J peak 20 A/m2 (5 % duty), CL gap 8.02 m, 1.0 MV/m, Cranberg breakdown 9.0 MV (margin 1.09)
+B3 electron energy share of the forward stream: {'Te 10 keV': 0.0018, 'Te 100 keV': 0.0182, 'Te 300 keV': 0.0545} -> suppressor at -(3-5) kT_e/e, i.e. -0.05 .. -1.5 MV
+C1 ranges in H: p 0.037, alpha 0.0030 g/cm2; pulse rate 55970 Hz/engine
+   tail0.3_A10      703.5 kJ fwd/pulse -> 4 kg gas/pulse (209 t/s, 8e+06 kt/burn), gas exhaust 0.61 km/s
+   tail0.3_A100     703.5 kJ fwd/pulse -> 37 kg gas/pulse (2088 t/s, 8e+07 kt/burn), gas exhaust 0.19 km/s
+   tail0.1_A10      234.5 kJ fwd/pulse -> 4 kg gas/pulse (209 t/s, 8e+06 kt/burn), gas exhaust 0.35 km/s
+   tail0.1_A100     234.5 kJ fwd/pulse -> 37 kg gas/pulse (2088 t/s, 8e+07 kt/burn), gas exhaust 0.11 km/s
+   tail0.01_A10      23.4 kJ fwd/pulse -> 4 kg gas/pulse (209 t/s, 8e+06 kt/burn), gas exhaust 0.11 km/s
+   tail0.01_A100     23.4 kJ fwd/pulse -> 37 kg gas/pulse (2088 t/s, 8e+07 kt/burn), gas exhaust 0.04 km/s
+C2 tail 0.1: 13.2 GW/engine on 1317 m2 (stern quarter 1590 m2); He dose 5.8e+26 /m2 vs blistering ~1e21 /m2 -> a solid face blisters unless hot (>2000 K) or liquid; W sputtering ~23.3 kg over the mission

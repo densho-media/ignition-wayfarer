@@ -1,0 +1,8 @@
+BM1 p 8.25 MeV vs 10 MV: reflect 1.000012 heat 0.000000 (exp 0.000000) electrical 0.000000 (exp 0.000000) closure -1.2e-05
+BM1 p 14.68 MeV vs 10 MV: reflect 0.000000 heat 0.318787 (exp 0.318801) electrical 0.681199 (exp 0.681199) closure 8.2e-06
+BM2 CL drive 0.5 dx 0.01: J_plate/J_CL 0.503 (exp 0.500 +~1 % injection energy), closure -8.4e-05
+BM2 CL drive 0.5 dx 0.005: J_plate/J_CL 0.499 (exp 0.500 +~1 % injection energy), closure -3.0e-05
+BM2 CL drive 2.0 dx 0.01: J_plate/J_CL 0.948 (exp 1.000 +~1 % injection energy), closure -5.7e-05
+BM2 CL drive 2.0 dx 0.005: J_plate/J_CL 1.049 (exp 1.000 +~1 % injection energy), closure -4.1e-05
+BM3 drift drive 0.9 x 8 J_CL: transmitted 0.998 reflected 0.000 (exp ~1 / partial) closure -8.1e-06
+BM3 drift drive 1.3 x 8 J_CL: transmitted 0.283 reflected 0.695 (exp ~1 / partial) closure -3.2e-05

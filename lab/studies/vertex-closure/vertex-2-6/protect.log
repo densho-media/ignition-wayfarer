@@ -1,0 +1,258 @@
+[vertex_467d LOW HALO] protection 216 t; Brow needs S 6.285384552214667; optics 310: four ring faces, engine-first armour 142 t (S 12/0); four ring faces, bow-first armour 58 t (S 3/0); four boom chords armour 0 t (S 2/0); boom chords bow-first armour 0 t (S 0/0); stern annulus bumper 15 t (S 24/30)
+[vertex_467d LOW APLUS] protection 119 t; Brow needs S 6.285384552214667; optics 310: engine fronts less the bores ( armour 108 t (S 11/0); stern annulus (r 45 m less the bumper 11 t (S 21/30)
+[vertex_467d LOW C_EXT] protection 120 t; Brow needs S 6.285384552214667; optics 310: engine fronts less the bores ( armour 108 t (S 11/0); stern annulus (r 45 m less the bumper 11 t (S 21/150); telescoping spine front armour 2 t (S 3/0)
+[vertex_467d NOMINAL HALO] protection 2716 t; Brow needs S 27.44741835362523; optics 891: four ring faces, engine-first armour 245 t (S 47/0); four ring faces, bow-first armour 125 t (S 17/0); four boom chords armour 1 t (S 13/0); boom chords bow-first armour 1 t (S 11/0); stern annulus armour 2344 t (S 92/30)
+[vertex_467d NOMINAL APLUS] protection 1799 t; Brow needs S 27.44741835362523; optics 891: engine fronts less the bores ( armour 186 t (S 43/0); stern annulus (r 45 m less the armour 1613 t (S 82/30)
+[vertex_467d NOMINAL C_EXT] protection 217 t; Brow needs S 27.44741835362523; optics 891: engine fronts less the bores ( armour 186 t (S 43/0); stern annulus (r 45 m less the bumper 28 t (S 82/150); telescoping spine front armour 3 t (S 15/0)
+[vertex_467d HIGH HALO] protection 15393 t; Brow needs S None; optics 4215: four ring faces, engine-first armour 1849 t (S None/0); four ring faces, bow-first armour 1762 t (S None/0); four boom chords armour 10 t (S 937/0); boom chords bow-first armour 9 t (S 825/0); stern annulus armour 11762 t (S None/30)
+[vertex_467d HIGH APLUS] protection 10149 t; Brow needs S None; optics 4215: engine fronts less the bores ( armour 1473 t (S None/0); stern annulus (r 45 m less the armour 8676 t (S None/30)
+[vertex_467d HIGH C_EXT] protection 10187 t; Brow needs S None; optics 4215: engine fronts less the bores ( armour 1473 t (S None/0); stern annulus (r 45 m less the armour 8676 t (S None/150); telescoping spine front armour 38 t (S None/0)
+[vertex_467d NOMINAL_HILAT HALO] protection 2035 t; Brow needs S 20.652618231899453; optics 205: four ring faces, engine-first armour 182 t (S 30/0); four ring faces, bow-first armour 115 t (S 15/0); four boom chords armour 1 t (S 7/0); boom chords bow-first armour 0 t (S 5/0); stern annulus armour 1736 t (S 59/30)
+[vertex_467d NOMINAL_HILAT APLUS] protection 1335 t; Brow needs S 20.652618231899453; optics 205: engine fronts less the bores ( armour 138 t (S 27/0); stern annulus (r 45 m less the armour 1196 t (S 53/30)
+[vertex_467d NOMINAL_HILAT C_EXT] protection 167 t; Brow needs S 20.652618231899453; optics 205: engine fronts less the bores ( armour 138 t (S 27/0); stern annulus (r 45 m less the bumper 27 t (S 53/150); telescoping spine front armour 2 t (S 10/0)
+
+== vertex_467d: burns 117 d x4, 155.7 AU each, destination 312 AU (min 312)
+  LOW      Brow: 1.9 grains beyond the 2 m disruptor, needs S 6.285384552214667, erosion 0.00 mm | stern annulus S 21.09906776848421 m, 0.3191183090079238 + 2.0 kg/m2, 10.961633584269732 t, erosion 0.00 mm; armour Brow {'t_m': 0.04932419409692695, 'kg_m2': 88.7835493744685, 'mass_t': 564.8165366107753} stern {'t_m': 0.11058110878269048, 'kg_m2': 199.04599580884286, 'mass_t': 939.1639606295859}
+           flip before braking (destination): radiator_faces 0, hull 0, shield_edge 0
+           flip before braking (home): radiator_faces 0, hull 0, shield_edge 0
+           HALO   habitat rings (r 30 m)                       th 15.02 events>7.76e+03 J: 0.00252
+           HALO   thermal blades (r 37 m)                      th 2.03 events>62.1 J: 9.97
+           HALO   body and tank farm (r 7 m)                   th 7.65 events>7.76e+03 J: 0.0066
+           HALO   forward shield, aft face                     th 90.0 events>7.76e+03 J: 0
+           HALO   four halo rings (R 41.6 m at a 208 m)        th -90.0 events>7.76e+03 J: 2.8e+03 -> S 11.92162088790158 m, 2.3 t; armour {'t_m': 0.07557804148891235, 'kg_m2': 136.04047468004222, 'mass_t': 142.23331394544527}
+           HALO   four 2 km compression booms                  th -90.0 events>7.76e+03 J: 25.7 -> S 1.9545347069575685 m, 0.0 t; armour {'t_m': 0.022639544599004188, 'kg_m2': 40.751180278207535, 'mass_t': 0.39121133067079233}
+           APLUS  habitat rings (r 30 m)                       th 15.02 events>7.76e+03 J: 0.00252
+           APLUS  thermal blades (r 37 m)                      th 2.03 events>62.1 J: 9.97
+           APLUS  body and tank farm (r 7 m)                   th 7.65 events>7.76e+03 J: 0.0066
+           APLUS  forward shield, aft face                     th 90.0 events>7.76e+03 J: 0
+           APLUS  engine fronts (4 x r 11.4 m)                 th 1.95 events>7.76e+03 J: 4.15e+03 -> S 14.154120305197472 m, 3.7 t; armour {'t_m': 0.08474108441796666, 'kg_m2': 152.53395195233998, 'mass_t': 250.67411435363303}
+           APLUS  bore-visible block (4 x r 8 m)               th 2.65 events>6.21e+10 J: 2.56e-06
+           APLUS  final optics / injector ports (4 x 0.5 m2)   th 4.28 events>100 J: 310
+           C_EXT  habitat rings (r 30 m)                       th 15.02 events>7.76e+03 J: 0.00252
+           C_EXT  thermal blades (r 37 m)                      th 2.03 events>62.1 J: 9.97
+           C_EXT  body and tank farm (r 7 m)                   th 7.65 events>7.76e+03 J: 0.0066
+           C_EXT  forward shield, aft face                     th 90.0 events>7.76e+03 J: 0
+           C_EXT  engine fronts (4 x r 11.4 m)                 th 1.14 events>7.76e+03 J: 4.18e+03 -> S 14.154120305197472 m, 3.7 t; armour {'t_m': 0.08474108441796666, 'kg_m2': 152.53395195233998, 'mass_t': 250.67411435363303}
+           C_EXT  bore-visible block (4 x r 8 m)               th 1.55 events>6.21e+10 J: 2.57e-06
+           C_EXT  final optics / injector ports (4 x 0.5 m2)   th 2.5 events>100 J: 311
+           C_EXT  telescoping spine (200 m, r 3 m)             th 5.0 events>7.76e+03 J: 71.3 -> S 2.9824309766361576 m, 0.1 t; armour {'t_m': 0.030006754825953403, 'kg_m2': 54.01215868671613, 'mass_t': 1.5271578084124218}
+  NOMINAL  Brow: 2.99e+03 grains beyond the 2 m disruptor, needs S 27.44741835362523, erosion 0.01 mm | stern annulus S 82.22964545940604 m, 0.9498484710792284 + 5.0 kg/m2, 28.297764655580078 t, erosion 0.03 mm; armour Brow {'t_m': 0.09136909961245665, 'kg_m2': 164.46437930242197, 'mass_t': 1046.2771737322305} stern {'t_m': 0.1898820692437244, 'kg_m2': 341.7877246387039, 'mass_t': 1612.6660165248038}
+           flip before braking (destination): radiator_faces 0.329, hull 0.0131, shield_edge 0.00143
+           flip before braking (home): radiator_faces 0.329, hull 0.0131, shield_edge 0.00143
+           HALO   habitat rings (r 30 m)                       th 15.02 events>2.59e+03 J: 0.0271
+           HALO   thermal blades (r 37 m)                      th 2.03 events>20.7 J: 50.3
+           HALO   body and tank farm (r 7 m)                   th 7.65 events>2.59e+03 J: 0.0723
+           HALO   forward shield, aft face                     th 90.0 events>2.59e+03 J: 0.00286
+           HALO   four halo rings (R 41.6 m at a 208 m)        th -90.0 events>2.59e+03 J: 3.69e+04 -> S 46.657947780189396 m, 5.9 t; armour {'t_m': 0.13014138743813833, 'kg_m2': 234.25449738864899, 'mass_t': 244.91823884454752}
+           HALO   four 2 km compression booms                  th -90.0 events>2.59e+03 J: 339 -> S 12.541941159017194 m, 0.1 t; armour {'t_m': 0.05420527057085012, 'kg_m2': 97.56948702753022, 'mass_t': 0.9366670754642901}
+           APLUS  habitat rings (r 30 m)                       th 15.02 events>2.59e+03 J: 0.0271
+           APLUS  thermal blades (r 37 m)                      th 2.03 events>20.7 J: 50.3
+           APLUS  body and tank farm (r 7 m)                   th 7.65 events>2.59e+03 J: 0.0723
+           APLUS  forward shield, aft face                     th 90.0 events>2.59e+03 J: 0.00286
+           APLUS  engine fronts (4 x r 11.4 m)                 th 1.95 events>2.59e+03 J: 4.3e+04 -> S 55.305985533451214 m, 9.4 t; armour {'t_m': 0.14576271013042616, 'kg_m2': 262.3728782347671, 'mass_t': 431.1832745437818}
+           APLUS  bore-visible block (4 x r 8 m)               th 2.65 events>2.07e+10 J: 2.22e-05
+           APLUS  final optics / injector ports (4 x 0.5 m2)   th 4.28 events>100 J: 891
+           C_EXT  habitat rings (r 30 m)                       th 15.02 events>2.59e+03 J: 0.0271
+           C_EXT  thermal blades (r 37 m)                      th 2.03 events>20.7 J: 50.3
+           C_EXT  body and tank farm (r 7 m)                   th 7.65 events>2.59e+03 J: 0.0723
+           C_EXT  forward shield, aft face                     th 90.0 events>2.59e+03 J: 0.00286
+           C_EXT  engine fronts (4 x r 11.4 m)                 th 1.14 events>2.59e+03 J: 4.33e+04 -> S 55.305985533451214 m, 9.4 t; armour {'t_m': 0.14576271013042616, 'kg_m2': 262.3728782347671, 'mass_t': 431.1832745437818}
+           C_EXT  bore-visible block (4 x r 8 m)               th 1.55 events>2.07e+10 J: 2.23e-05
+           C_EXT  final optics / injector ports (4 x 0.5 m2)   th 2.5 events>100 J: 892
+           C_EXT  telescoping spine (200 m, r 3 m)             th 5.0 events>2.59e+03 J: 739 -> S 15.128408914930992 m, 0.2 t; armour {'t_m': 0.061422456370139544, 'kg_m2': 110.56042146625119, 'mass_t': 3.126022270705494}
+  HIGH     Brow: 5.03e+05 grains beyond the 2 m disruptor, needs S None, erosion 5.63 mm | stern annulus S None m, None + None kg/m2, None t, erosion 7.25 mm; armour Brow {'t_m': 0.9857024276042563, 'kg_m2': 1774.2643696876614, 'mass_t': 11287.382216407186} stern {'t_m': 1.0215397793084033, 'kg_m2': 1838.771602755126, 'mass_t': 8675.924447107092}
+           flip before braking (destination): radiator_faces 12, hull 0.48, shield_edge 0.0522
+           flip before braking (home): radiator_faces 12, hull 0.48, shield_edge 0.0522
+           HALO   habitat rings (r 30 m)                       th 15.02 events>776 J: 0.422
+           HALO   thermal blades (r 37 m)                      th 2.03 events>6.21 J: 264
+           HALO   body and tank farm (r 7 m)                   th 7.65 events>776 J: 1.18
+           HALO   forward shield, aft face                     th 90.0 events>776 J: 0.104
+           HALO   four halo rings (R 41.6 m at a 208 m)        th -90.0 events>776 J: 8.13e+05 -> S None m, 0.0 t; armour {'t_m': 0.9826773355141297, 'kg_m2': 1768.8192039254336, 'mass_t': 1849.3394538380533}
+           HALO   four 2 km compression booms                  th -90.0 events>776 J: 7.47e+03 -> S 936.575259246979 m, 0.2 t; armour {'t_m': 0.5761941588329188, 'kg_m2': 1037.149485899254, 'mass_t': 9.956635064632838}
+           APLUS  habitat rings (r 30 m)                       th 15.02 events>776 J: 0.422
+           APLUS  thermal blades (r 37 m)                      th 2.03 events>6.21 J: 264
+           APLUS  body and tank farm (r 7 m)                   th 7.65 events>776 J: 1.18
+           APLUS  forward shield, aft face                     th 90.0 events>776 J: 0.104
+           APLUS  engine fronts (4 x r 11.4 m)                 th 1.95 events>776 J: 7.69e+05 -> S None m, 0.0 t; armour {'t_m': 0.9964551464499737, 'kg_m2': 1793.6192636099527, 'mass_t': 2947.63175436197}
+           APLUS  bore-visible block (4 x r 8 m)               th 2.65 events>6.21e+09 J: 0.043
+           APLUS  final optics / injector ports (4 x 0.5 m2)   th 4.28 events>100 J: 4.22e+03
+           C_EXT  habitat rings (r 30 m)                       th 15.02 events>776 J: 0.422
+           C_EXT  thermal blades (r 37 m)                      th 2.03 events>6.21 J: 264
+           C_EXT  body and tank farm (r 7 m)                   th 7.65 events>776 J: 1.18
+           C_EXT  forward shield, aft face                     th 90.0 events>776 J: 0.104
+           C_EXT  engine fronts (4 x r 11.4 m)                 th 1.14 events>776 J: 7.71e+05 -> S None m, 0.0 t; armour {'t_m': 0.9964551464499737, 'kg_m2': 1793.6192636099527, 'mass_t': 2947.63175436197}
+           C_EXT  bore-visible block (4 x r 8 m)               th 1.55 events>6.21e+09 J: 0.043
+           C_EXT  final optics / injector ports (4 x 0.5 m2)   th 2.5 events>100 J: 4.22e+03
+           C_EXT  telescoping spine (200 m, r 3 m)             th 5.0 events>776 J: 1.32e+04 -> S None m, 0.0 t; armour {'t_m': 0.7387367998800878, 'kg_m2': 1329.726239784158, 'mass_t': 37.59712367572342}
+[vertex_467d_dest1000 LOW HALO] protection 216 t; Brow needs S 6.285384552214667; optics 310: four ring faces, engine-first armour 142 t (S 12/0); four ring faces, bow-first armour 58 t (S 3/0); four boom chords armour 0 t (S 2/0); boom chords bow-first armour 0 t (S 0/0); stern annulus bumper 15 t (S 24/30)
+[vertex_467d_dest1000 LOW APLUS] protection 119 t; Brow needs S 6.285384552214667; optics 310: engine fronts less the bores ( armour 108 t (S 11/0); stern annulus (r 45 m less the bumper 11 t (S 21/30)
+[vertex_467d_dest1000 LOW C_EXT] protection 120 t; Brow needs S 6.285384552214667; optics 310: engine fronts less the bores ( armour 108 t (S 11/0); stern annulus (r 45 m less the bumper 11 t (S 21/150); telescoping spine front armour 2 t (S 3/0)
+[vertex_467d_dest1000 NOMINAL HALO] protection 2741 t; Brow needs S 44.18048439578128; optics 891: four ring faces, engine-first armour 245 t (S 47/0); four ring faces, bow-first armour 151 t (S 23/0); four boom chords armour 1 t (S 13/0); boom chords bow-first armour 1 t (S 11/0); stern annulus armour 2344 t (S 92/30)
+[vertex_467d_dest1000 NOMINAL APLUS] protection 1799 t; Brow needs S 44.18048439578128; optics 891: engine fronts less the bores ( armour 186 t (S 43/0); stern annulus (r 45 m less the armour 1613 t (S 82/30)
+[vertex_467d_dest1000 NOMINAL C_EXT] protection 217 t; Brow needs S 44.18048439578128; optics 891: engine fronts less the bores ( armour 186 t (S 43/0); stern annulus (r 45 m less the bumper 28 t (S 82/150); telescoping spine front armour 3 t (S 15/0)
+[vertex_467d_dest1000 HIGH HALO] protection 15393 t; Brow needs S None; optics 4215: four ring faces, engine-first armour 1849 t (S None/0); four ring faces, bow-first armour 1762 t (S None/0); four boom chords armour 10 t (S 937/0); boom chords bow-first armour 9 t (S 825/0); stern annulus armour 11762 t (S None/30)
+[vertex_467d_dest1000 HIGH APLUS] protection 10149 t; Brow needs S None; optics 4215: engine fronts less the bores ( armour 1473 t (S None/0); stern annulus (r 45 m less the armour 8676 t (S None/30)
+[vertex_467d_dest1000 HIGH C_EXT] protection 10187 t; Brow needs S None; optics 4215: engine fronts less the bores ( armour 1473 t (S None/0); stern annulus (r 45 m less the armour 8676 t (S None/150); telescoping spine front armour 38 t (S None/0)
+[vertex_467d_dest1000 NOMINAL_HILAT HALO] protection 2064 t; Brow needs S 41.971605749079146; optics 205: four ring faces, engine-first armour 182 t (S 30/0); four ring faces, bow-first armour 144 t (S 21/0); four boom chords armour 1 t (S 7/0); boom chords bow-first armour 1 t (S 5/0); stern annulus armour 1736 t (S 59/30)
+[vertex_467d_dest1000 NOMINAL_HILAT APLUS] protection 1335 t; Brow needs S 41.971605749079146; optics 205: engine fronts less the bores ( armour 138 t (S 27/0); stern annulus (r 45 m less the armour 1196 t (S 53/30)
+[vertex_467d_dest1000 NOMINAL_HILAT C_EXT] protection 167 t; Brow needs S 41.971605749079146; optics 205: engine fronts less the bores ( armour 138 t (S 27/0); stern annulus (r 45 m less the bumper 27 t (S 53/150); telescoping spine front armour 2 t (S 10/0)
+
+== vertex_467d_dest1000: burns 117 d x4, 155.7 AU each, destination 1000 AU (min 312)
+  LOW      Brow: 1.9 grains beyond the 2 m disruptor, needs S 6.285384552214667, erosion 0.00 mm | stern annulus S 21.09906776848421 m, 0.3191183090079238 + 2.0 kg/m2, 10.961633584269732 t, erosion 0.00 mm; armour Brow {'t_m': 0.04932419409692695, 'kg_m2': 88.7835493744685, 'mass_t': 564.8165366107753} stern {'t_m': 0.11058110878269048, 'kg_m2': 199.04599580884286, 'mass_t': 939.1639606295859}
+           flip before braking (destination): radiator_faces 0, hull 0, shield_edge 0
+           flip before braking (home): radiator_faces 0, hull 0, shield_edge 0
+           HALO   habitat rings (r 30 m)                       th 15.02 events>7.76e+03 J: 0.00252
+           HALO   thermal blades (r 37 m)                      th 2.03 events>62.1 J: 9.97
+           HALO   body and tank farm (r 7 m)                   th 7.65 events>7.76e+03 J: 0.0066
+           HALO   forward shield, aft face                     th 90.0 events>7.76e+03 J: 0
+           HALO   four halo rings (R 41.6 m at a 208 m)        th -90.0 events>7.76e+03 J: 2.8e+03 -> S 11.92162088790158 m, 2.3 t; armour {'t_m': 0.07557804148891235, 'kg_m2': 136.04047468004222, 'mass_t': 142.23331394544527}
+           HALO   four 2 km compression booms                  th -90.0 events>7.76e+03 J: 25.7 -> S 1.9545347069575685 m, 0.0 t; armour {'t_m': 0.022639544599004188, 'kg_m2': 40.751180278207535, 'mass_t': 0.39121133067079233}
+           APLUS  habitat rings (r 30 m)                       th 15.02 events>7.76e+03 J: 0.00252
+           APLUS  thermal blades (r 37 m)                      th 2.03 events>62.1 J: 9.97
+           APLUS  body and tank farm (r 7 m)                   th 7.65 events>7.76e+03 J: 0.0066
+           APLUS  forward shield, aft face                     th 90.0 events>7.76e+03 J: 0
+           APLUS  engine fronts (4 x r 11.4 m)                 th 1.95 events>7.76e+03 J: 4.15e+03 -> S 14.154120305197472 m, 3.7 t; armour {'t_m': 0.08474108441796666, 'kg_m2': 152.53395195233998, 'mass_t': 250.67411435363303}
+           APLUS  bore-visible block (4 x r 8 m)               th 2.65 events>6.21e+10 J: 2.56e-06
+           APLUS  final optics / injector ports (4 x 0.5 m2)   th 4.28 events>100 J: 310
+           C_EXT  habitat rings (r 30 m)                       th 15.02 events>7.76e+03 J: 0.00252
+           C_EXT  thermal blades (r 37 m)                      th 2.03 events>62.1 J: 9.97
+           C_EXT  body and tank farm (r 7 m)                   th 7.65 events>7.76e+03 J: 0.0066
+           C_EXT  forward shield, aft face                     th 90.0 events>7.76e+03 J: 0
+           C_EXT  engine fronts (4 x r 11.4 m)                 th 1.14 events>7.76e+03 J: 4.18e+03 -> S 14.154120305197472 m, 3.7 t; armour {'t_m': 0.08474108441796666, 'kg_m2': 152.53395195233998, 'mass_t': 250.67411435363303}
+           C_EXT  bore-visible block (4 x r 8 m)               th 1.55 events>6.21e+10 J: 2.57e-06
+           C_EXT  final optics / injector ports (4 x 0.5 m2)   th 2.5 events>100 J: 311
+           C_EXT  telescoping spine (200 m, r 3 m)             th 5.0 events>7.76e+03 J: 71.3 -> S 2.9824309766361576 m, 0.1 t; armour {'t_m': 0.030006754825953403, 'kg_m2': 54.01215868671613, 'mass_t': 1.5271578084124218}
+  NOMINAL  Brow: 3.09e+03 grains beyond the 2 m disruptor, needs S 44.18048439578128, erosion 0.01 mm | stern annulus S 82.22964545940604 m, 0.9498484710792284 + 5.0 kg/m2, 28.297764655580078 t, erosion 0.03 mm; armour Brow {'t_m': 0.12549275665931242, 'kg_m2': 225.88696198676234, 'mass_t': 1437.0307611466421} stern {'t_m': 0.1898820692437244, 'kg_m2': 341.7877246387039, 'mass_t': 1612.6660165248038}
+           flip before braking (destination): radiator_faces 0.329, hull 0.0131, shield_edge 0.00143
+           flip before braking (home): radiator_faces 0.329, hull 0.0131, shield_edge 0.00143
+           HALO   habitat rings (r 30 m)                       th 15.02 events>2.59e+03 J: 0.0271
+           HALO   thermal blades (r 37 m)                      th 2.03 events>20.7 J: 50.3
+           HALO   body and tank farm (r 7 m)                   th 7.65 events>2.59e+03 J: 0.0723
+           HALO   forward shield, aft face                     th 90.0 events>2.59e+03 J: 0.00286
+           HALO   four halo rings (R 41.6 m at a 208 m)        th -90.0 events>2.59e+03 J: 3.75e+04 -> S 46.657947780189396 m, 5.9 t; armour {'t_m': 0.13014138743813833, 'kg_m2': 234.25449738864899, 'mass_t': 244.91823884454752}
+           HALO   four 2 km compression booms                  th -90.0 events>2.59e+03 J: 344 -> S 12.541941159017194 m, 0.1 t; armour {'t_m': 0.05420527057085012, 'kg_m2': 97.56948702753022, 'mass_t': 0.9366670754642901}
+           APLUS  habitat rings (r 30 m)                       th 15.02 events>2.59e+03 J: 0.0271
+           APLUS  thermal blades (r 37 m)                      th 2.03 events>20.7 J: 50.3
+           APLUS  body and tank farm (r 7 m)                   th 7.65 events>2.59e+03 J: 0.0723
+           APLUS  forward shield, aft face                     th 90.0 events>2.59e+03 J: 0.00286
+           APLUS  engine fronts (4 x r 11.4 m)                 th 1.95 events>2.59e+03 J: 4.3e+04 -> S 55.305985533451214 m, 9.4 t; armour {'t_m': 0.14576271013042616, 'kg_m2': 262.3728782347671, 'mass_t': 431.1832745437818}
+           APLUS  bore-visible block (4 x r 8 m)               th 2.65 events>2.07e+10 J: 2.22e-05
+           APLUS  final optics / injector ports (4 x 0.5 m2)   th 4.28 events>100 J: 891
+           C_EXT  habitat rings (r 30 m)                       th 15.02 events>2.59e+03 J: 0.0271
+           C_EXT  thermal blades (r 37 m)                      th 2.03 events>20.7 J: 50.3
+           C_EXT  body and tank farm (r 7 m)                   th 7.65 events>2.59e+03 J: 0.0723
+           C_EXT  forward shield, aft face                     th 90.0 events>2.59e+03 J: 0.00286
+           C_EXT  engine fronts (4 x r 11.4 m)                 th 1.14 events>2.59e+03 J: 4.33e+04 -> S 55.305985533451214 m, 9.4 t; armour {'t_m': 0.14576271013042616, 'kg_m2': 262.3728782347671, 'mass_t': 431.1832745437818}
+           C_EXT  bore-visible block (4 x r 8 m)               th 1.55 events>2.07e+10 J: 2.23e-05
+           C_EXT  final optics / injector ports (4 x 0.5 m2)   th 2.5 events>100 J: 892
+           C_EXT  telescoping spine (200 m, r 3 m)             th 5.0 events>2.59e+03 J: 739 -> S 15.128408914930992 m, 0.2 t; armour {'t_m': 0.061422456370139544, 'kg_m2': 110.56042146625119, 'mass_t': 3.126022270705494}
+  HIGH     Brow: 5.43e+05 grains beyond the 2 m disruptor, needs S None, erosion 5.66 mm | stern annulus S None m, None + None kg/m2, None t, erosion 7.25 mm; armour Brow {'t_m': 0.9857024276042563, 'kg_m2': 1774.2643696876614, 'mass_t': 11287.382216407186} stern {'t_m': 1.0215397793084033, 'kg_m2': 1838.771602755126, 'mass_t': 8675.924447107092}
+           flip before braking (destination): radiator_faces 12, hull 0.48, shield_edge 0.0522
+           flip before braking (home): radiator_faces 12, hull 0.48, shield_edge 0.0522
+           HALO   habitat rings (r 30 m)                       th 15.02 events>776 J: 0.422
+           HALO   thermal blades (r 37 m)                      th 2.03 events>6.21 J: 264
+           HALO   body and tank farm (r 7 m)                   th 7.65 events>776 J: 1.18
+           HALO   forward shield, aft face                     th 90.0 events>776 J: 0.104
+           HALO   four halo rings (R 41.6 m at a 208 m)        th -90.0 events>776 J: 8.36e+05 -> S None m, 0.0 t; armour {'t_m': 0.9826773355141297, 'kg_m2': 1768.8192039254336, 'mass_t': 1849.3394538380533}
+           HALO   four 2 km compression booms                  th -90.0 events>776 J: 7.68e+03 -> S 936.575259246979 m, 0.2 t; armour {'t_m': 0.5761941588329188, 'kg_m2': 1037.149485899254, 'mass_t': 9.956635064632838}
+           APLUS  habitat rings (r 30 m)                       th 15.02 events>776 J: 0.422
+           APLUS  thermal blades (r 37 m)                      th 2.03 events>6.21 J: 264
+           APLUS  body and tank farm (r 7 m)                   th 7.65 events>776 J: 1.18
+           APLUS  forward shield, aft face                     th 90.0 events>776 J: 0.104
+           APLUS  engine fronts (4 x r 11.4 m)                 th 1.95 events>776 J: 7.69e+05 -> S None m, 0.0 t; armour {'t_m': 0.9964551464499737, 'kg_m2': 1793.6192636099527, 'mass_t': 2947.63175436197}
+           APLUS  bore-visible block (4 x r 8 m)               th 2.65 events>6.21e+09 J: 0.043
+           APLUS  final optics / injector ports (4 x 0.5 m2)   th 4.28 events>100 J: 4.22e+03
+           C_EXT  habitat rings (r 30 m)                       th 15.02 events>776 J: 0.422
+           C_EXT  thermal blades (r 37 m)                      th 2.03 events>6.21 J: 264
+           C_EXT  body and tank farm (r 7 m)                   th 7.65 events>776 J: 1.18
+           C_EXT  forward shield, aft face                     th 90.0 events>776 J: 0.104
+           C_EXT  engine fronts (4 x r 11.4 m)                 th 1.14 events>776 J: 7.71e+05 -> S None m, 0.0 t; armour {'t_m': 0.9964551464499737, 'kg_m2': 1793.6192636099527, 'mass_t': 2947.63175436197}
+           C_EXT  bore-visible block (4 x r 8 m)               th 1.55 events>6.21e+09 J: 0.043
+           C_EXT  final optics / injector ports (4 x 0.5 m2)   th 2.5 events>100 J: 4.22e+03
+           C_EXT  telescoping spine (200 m, r 3 m)             th 5.0 events>776 J: 1.32e+04 -> S None m, 0.0 t; armour {'t_m': 0.7387367998800878, 'kg_m2': 1329.726239784158, 'mass_t': 37.59712367572342}
+[canon_28d LOW HALO] protection 284 t; Brow needs S 25.95689734914809; optics 47: four ring faces, engine-first armour 118 t (S 9/0); four ring faces, bow-first armour 150 t (S 13/0); four boom chords armour 0 t (S 1/0); boom chords bow-first armour 0 t (S 2/0); stern annulus bumper 15 t (S 18/30)
+[canon_28d LOW APLUS] protection 100 t; Brow needs S 25.95689734914809; optics 47: engine fronts less the bores ( armour 90 t (S 8/0); stern annulus (r 45 m less the bumper 11 t (S 16/30)
+[canon_28d LOW C_EXT] protection 102 t; Brow needs S 25.95689734914809; optics 47: engine fronts less the bores ( armour 90 t (S 8/0); stern annulus (r 45 m less the bumper 11 t (S 16/150); telescoping spine front armour 1 t (S 2/0)
+[canon_28d NOMINAL HALO] protection 2434 t; Brow needs S 101.47006198507624; optics 149: four ring faces, engine-first armour 204 t (S 35/0); four ring faces, bow-first armour 259 t (S 51/0); four boom chords armour 1 t (S 9/0); boom chords bow-first armour 1 t (S 16/0); stern annulus armour 1969 t (S 71/30)
+[canon_28d NOMINAL APLUS] protection 1508 t; Brow needs S 101.47006198507624; optics 149: engine fronts less the bores ( armour 155 t (S 33/0); stern annulus (r 45 m less the armour 1354 t (S 63/30)
+[canon_28d NOMINAL C_EXT] protection 185 t; Brow needs S 101.47006198507624; optics 149: engine fronts less the bores ( armour 155 t (S 33/0); stern annulus (r 45 m less the bumper 27 t (S 63/150); telescoping spine front armour 3 t (S 13/0)
+[canon_28d HIGH HALO] protection 17401 t; Brow needs S None; optics 773: four ring faces, engine-first armour 1957 t (S None/0); four ring faces, bow-first armour 2271 t (S None/0); four boom chords armour 6 t (S 388/0); boom chords bow-first armour 10 t (S 987/0); stern annulus armour 13158 t (S None/30)
+[canon_28d HIGH APLUS] protection 11192 t; Brow needs S None; optics 773: engine fronts less the bores ( armour 1540 t (S None/0); stern annulus (r 45 m less the armour 9652 t (S None/30)
+[canon_28d HIGH C_EXT] protection 11217 t; Brow needs S None; optics 773: engine fronts less the bores ( armour 1540 t (S None/0); stern annulus (r 45 m less the armour 9652 t (S None/150); telescoping spine front armour 25 t (S 741/0)
+[canon_28d NOMINAL_HILAT HALO] protection 1791 t; Brow needs S 64.14720687684226; optics 32: four ring faces, engine-first armour 150 t (S 22/0); four ring faces, bow-first armour 191 t (S 32/0); four boom chords armour 0 t (S 4/0); boom chords bow-first armour 1 t (S 7/0); stern annulus armour 1450 t (S 45/30)
+[canon_28d NOMINAL_HILAT APLUS] protection 1111 t; Brow needs S 64.14720687684226; optics 32: engine fronts less the bores ( armour 115 t (S 21/0); stern annulus (r 45 m less the armour 996 t (S 40/30)
+[canon_28d NOMINAL_HILAT C_EXT] protection 143 t; Brow needs S 64.14720687684226; optics 32: engine fronts less the bores ( armour 115 t (S 21/0); stern annulus (r 45 m less the bumper 26 t (S 40/150); telescoping spine front armour 2 t (S 6/0)
+
+== canon_28d: burns 7 d x4, 9.5 AU each, destination 45 AU (min 20)
+  LOW      Brow: 64.8 grains beyond the 2 m disruptor, needs S 25.95689734914809, erosion 0.00 mm | stern annulus S 16.162746080068736 m, 0.2671691512133619 + 2.0 kg/m2, 10.702302945598374 t, erosion 0.00 mm; armour Brow {'t_m': 0.12696205656480958, 'kg_m2': 228.53170181665723, 'mass_t': 1453.8558689676565} stern {'t_m': 0.09257964880030696, 'kg_m2': 166.64336784055251, 'mass_t': 786.2777882961728}
+           flip before braking (destination): radiator_faces 44.1, hull 0.147, shield_edge 0.016
+           flip before braking (home): radiator_faces 82, hull 1.46, shield_edge 0.159
+           HALO   habitat rings (r 30 m)                       th 15.02 events>7.76e+03 J: 0.389
+           HALO   thermal blades (r 37 m)                      th 2.03 events>62.1 J: 128
+           HALO   body and tank farm (r 7 m)                   th 7.65 events>7.76e+03 J: 1.22
+           HALO   forward shield, aft face                     th 90.0 events>7.76e+03 J: 0.175
+           HALO   four halo rings (R 41.6 m at a 208 m)        th -90.0 events>7.76e+03 J: 2.31e+03 -> S 9.036676836346002 m, 2.3 t; armour {'t_m': 0.06283157263080623, 'kg_m2': 113.0968307354512, 'mass_t': 118.2452286355498}
+           HALO   four 2 km compression booms                  th -90.0 events>7.76e+03 J: 21.2 -> S 1.3772509437479337 m, 0.0 t; armour {'t_m': 0.017927269528912857, 'kg_m2': 32.26908515204314, 'mass_t': 0.3097832174596141}
+           APLUS  habitat rings (r 30 m)                       th 15.02 events>7.76e+03 J: 0.389
+           APLUS  thermal blades (r 37 m)                      th 2.03 events>62.1 J: 128
+           APLUS  body and tank farm (r 7 m)                   th 7.65 events>7.76e+03 J: 1.22
+           APLUS  forward shield, aft face                     th 90.0 events>7.76e+03 J: 0.175
+           APLUS  engine fronts (4 x r 11.4 m)                 th 1.95 events>7.76e+03 J: 1.17e+03 -> S 10.767275813389206 m, 3.6 t; armour {'t_m': 0.07061700931247937, 'kg_m2': 127.11061676246287, 'mass_t': 208.89343568460288}
+           APLUS  bore-visible block (4 x r 8 m)               th 2.65 events>6.21e+10 J: 1.33e-06
+           APLUS  final optics / injector ports (4 x 0.5 m2)   th 4.28 events>100 J: 46.9
+           C_EXT  habitat rings (r 30 m)                       th 15.02 events>7.76e+03 J: 0.389
+           C_EXT  thermal blades (r 37 m)                      th 2.03 events>62.1 J: 128
+           C_EXT  body and tank farm (r 7 m)                   th 7.65 events>7.76e+03 J: 1.22
+           C_EXT  forward shield, aft face                     th 90.0 events>7.76e+03 J: 0.175
+           C_EXT  engine fronts (4 x r 11.4 m)                 th 1.14 events>7.76e+03 J: 1.19e+03 -> S 10.767275813389206 m, 3.6 t; armour {'t_m': 0.07061700931247937, 'kg_m2': 127.11061676246287, 'mass_t': 208.89343568460288}
+           C_EXT  bore-visible block (4 x r 8 m)               th 1.55 events>6.21e+10 J: 1.33e-06
+           C_EXT  final optics / injector ports (4 x 0.5 m2)   th 2.5 events>100 J: 47
+           C_EXT  telescoping spine (200 m, r 3 m)             th 5.0 events>7.76e+03 J: 20 -> S 2.1547071738039016 m, 0.1 t; armour {'t_m': 0.0241600373083122, 'kg_m2': 43.48806715496196, 'mass_t': 1.2295961306356327}
+  NOMINAL  Brow: 5.18e+03 grains beyond the 2 m disruptor, needs S 101.47006198507624, erosion 0.02 mm | stern annulus S 63.23197532647078 m, 0.7972475908738691 + 5.0 kg/m2, 27.407348718585787 t, erosion 0.01 mm; armour Brow {'t_m': 0.21845247076472896, 'kg_m2': 393.2144473765121, 'mass_t': 2501.522228805927} stern {'t_m': 0.15937597086646246, 'kg_m2': 286.8767475596324, 'mass_t': 1353.5781081945722}
+           flip before braking (destination): radiator_faces 1.2e+03, hull 9.79, shield_edge 1.06
+           flip before braking (home): radiator_faces 405, hull 8.54, shield_edge 0.929
+           HALO   habitat rings (r 30 m)                       th 15.02 events>2.59e+03 J: 4.43
+           HALO   thermal blades (r 37 m)                      th 2.03 events>20.7 J: 1.62e+03
+           HALO   body and tank farm (r 7 m)                   th 7.65 events>2.59e+03 J: 13.9
+           HALO   forward shield, aft face                     th 90.0 events>2.59e+03 J: 1.99
+           HALO   four halo rings (R 41.6 m at a 208 m)        th -90.0 events>2.59e+03 J: 2.42e+04 -> S 35.47049952674773 m, 5.8 t; armour {'t_m': 0.10840347736531408, 'kg_m2': 195.12625925756535, 'mass_t': 204.008803683285}
+           HALO   four 2 km compression booms                  th -90.0 events>2.59e+03 J: 222 -> S 8.722745094469381 m, 0.1 t; armour {'t_m': 0.04255008821377629, 'kg_m2': 76.59015878479732, 'mass_t': 0.7352655243340542}
+           APLUS  habitat rings (r 30 m)                       th 15.02 events>2.59e+03 J: 4.43
+           APLUS  thermal blades (r 37 m)                      th 2.03 events>20.7 J: 1.62e+03
+           APLUS  body and tank farm (r 7 m)                   th 7.65 events>2.59e+03 J: 13.9
+           APLUS  forward shield, aft face                     th 90.0 events>2.59e+03 J: 1.99
+           APLUS  engine fronts (4 x r 11.4 m)                 th 1.95 events>2.59e+03 J: 9.79e+03 -> S 42.218867318040836 m, 9.2 t; armour {'t_m': 0.12175011935698822, 'kg_m2': 219.1502148425788, 'mass_t': 360.1512011780607}
+           APLUS  bore-visible block (4 x r 8 m)               th 2.65 events>2.07e+10 J: 1.15e-05
+           APLUS  final optics / injector ports (4 x 0.5 m2)   th 4.28 events>100 J: 149
+           C_EXT  habitat rings (r 30 m)                       th 15.02 events>2.59e+03 J: 4.43
+           C_EXT  thermal blades (r 37 m)                      th 2.03 events>20.7 J: 1.62e+03
+           C_EXT  body and tank farm (r 7 m)                   th 7.65 events>2.59e+03 J: 13.9
+           C_EXT  forward shield, aft face                     th 90.0 events>2.59e+03 J: 1.99
+           C_EXT  engine fronts (4 x r 11.4 m)                 th 1.14 events>2.59e+03 J: 9.92e+03 -> S 42.218867318040836 m, 9.2 t; armour {'t_m': 0.12175011935698822, 'kg_m2': 219.1502148425788, 'mass_t': 360.1512011780607}
+           C_EXT  bore-visible block (4 x r 8 m)               th 1.55 events>2.07e+10 J: 1.16e-05
+           C_EXT  final optics / injector ports (4 x 0.5 m2)   th 2.5 events>100 J: 149
+           C_EXT  telescoping spine (200 m, r 3 m)             th 5.0 events>2.59e+03 J: 168 -> S 12.891277482262172 m, 0.1 t; armour {'t_m': 0.055207190749222756, 'kg_m2': 99.37294334860096, 'mass_t': 2.809703779106035}
+  HIGH     Brow: 5.7e+05 grains beyond the 2 m disruptor, needs S None, erosion 7.97 mm | stern annulus S None m, None + None kg/m2, None t, erosion 1.59 mm; armour Brow {'t_m': 1.2247587362144963, 'kg_m2': 2204.5657251860935, 'mass_t': 14024.841160365984} stern {'t_m': 1.1364461480093067, 'kg_m2': 2045.603066416752, 'mass_t': 9651.822785608796}
+           flip before braking (destination): radiator_faces 1.96e+04, hull 299, shield_edge 32.5
+           flip before braking (home): radiator_faces 3.49e+03, hull 76.4, shield_edge 8.32
+           HALO   habitat rings (r 30 m)                       th 15.02 events>776 J: 90.8
+           HALO   thermal blades (r 37 m)                      th 2.03 events>6.21 J: 2.32e+04
+           HALO   body and tank farm (r 7 m)                   th 7.65 events>776 J: 285
+           HALO   forward shield, aft face                     th 90.0 events>776 J: 40.8
+           HALO   four halo rings (R 41.6 m at a 208 m)        th -90.0 events>776 J: 4.67e+05 -> S None m, 0.0 t; armour {'t_m': 1.0396679332827685, 'kg_m2': 1871.4022799089832, 'mass_t': 1956.592320208698}
+           HALO   four 2 km compression booms                  th -90.0 events>776 J: 4.29e+03 -> S 388.2099809601119 m, 0.1 t; armour {'t_m': 0.3203205945144944, 'kg_m2': 576.5770701260899, 'mass_t': 5.535139873210462}
+           APLUS  habitat rings (r 30 m)                       th 15.02 events>776 J: 90.8
+           APLUS  thermal blades (r 37 m)                      th 2.03 events>6.21 J: 2.32e+04
+           APLUS  body and tank farm (r 7 m)                   th 7.65 events>776 J: 285
+           APLUS  forward shield, aft face                     th 90.0 events>776 J: 40.8
+           APLUS  engine fronts (4 x r 11.4 m)                 th 1.95 events>776 J: 1.52e+05 -> S None m, 0.0 t; armour {'t_m': 1.0755829737354479, 'kg_m2': 1936.0493527238061, 'mass_t': 3181.7011926013984}
+           APLUS  bore-visible block (4 x r 8 m)               th 2.65 events>6.21e+09 J: 0.117
+           APLUS  final optics / injector ports (4 x 0.5 m2)   th 4.28 events>100 J: 773
+           C_EXT  habitat rings (r 30 m)                       th 15.02 events>776 J: 90.8
+           C_EXT  thermal blades (r 37 m)                      th 2.03 events>6.21 J: 2.32e+04
+           C_EXT  body and tank farm (r 7 m)                   th 7.65 events>776 J: 285
+           C_EXT  forward shield, aft face                     th 90.0 events>776 J: 40.8
+           C_EXT  engine fronts (4 x r 11.4 m)                 th 1.14 events>776 J: 1.53e+05 -> S None m, 0.0 t; armour {'t_m': 1.0755829737354479, 'kg_m2': 1936.0493527238061, 'mass_t': 3181.7011926013984}
+           C_EXT  bore-visible block (4 x r 8 m)               th 1.55 events>6.21e+09 J: 0.117
+           C_EXT  final optics / injector ports (4 x 0.5 m2)   th 2.5 events>100 J: 773
+           C_EXT  telescoping spine (200 m, r 3 m)             th 5.0 events>776 J: 2.62e+03 -> S 741.0752853505912 m, 0.5 t; armour {'t_m': 0.49292625456813693, 'kg_m2': 887.2672582226464, 'mass_t': 25.086890701827215}

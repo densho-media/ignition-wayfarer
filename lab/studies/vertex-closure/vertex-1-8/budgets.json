@@ -1,0 +1,196 @@
+{
+ "mission": {
+  "target_c": 0.016,
+  "exhaust_c": 0.06404821591609218,
+  "mass_ratio_burn": 1.2837837837421309,
+  "burns": 4,
+  "end_t": 1629.4879436773379,
+  "departure_t": 4426.07423485959,
+  "departure_canon_t": 4426.074234859591,
+  "propellant_t": 2796.5862911822524,
+  "propellant_canon_t": 2796.5862911822533,
+  "relativistic_c": 0.015998634806462308,
+  "mdot_kg_s": 1.1338246910136727,
+  "jet_TW": 209.01208334472994,
+  "jet_canon_TW": 209.01208334472994,
+  "fusion_TW": 261.26510418091243,
+  "fusion_canon_TW": 261.26510418091243,
+  "burn_days_each": 7.1368830528257465,
+  "burn_days_total": 28.547532211302986,
+  "fusion_EJ": 644.4121516382039,
+  "fuel_needed_t": 1830.8200203837732,
+  "fuel_canon_t": 1824.8254937274282,
+  "reaction_mass_canon_t": 971.760797454825,
+  "species_canon_t": {
+   "helium_3": 1094.1697195251463,
+   "deuterium": 730.6557742022818,
+   "hydrogen": 971.760797454825
+  },
+  "failures": [],
+  "verdict": "CLOSES on its own assumptions: 0.016 c per burn, four burns, 2.80 kt propellant of which the D-He3 share is exactly what 261 TW for 28.6 days needs at 18.35 MeV per reaction; the relativistic correction is 0.08 %."
+ },
+ "mass": {
+  "canon_drive_package_t": 250.0,
+  "canon_dry_items_t": {
+   "main_structure": 150.0,
+   "forward_impact_shielding": 100.0,
+   "habitat_pressure_structure": 90.0,
+   "eye_sensors": 25.0,
+   "life_support_garden_medical": 55.0,
+   "water_radiation_shielding": 180.0,
+   "workshop_spares_cargo": 60.0,
+   "drive_package": 250.0,
+   "radiators_thermal": 100.0,
+   "power_computers_steering_comms": 50.0,
+   "food_consumables": 10.0,
+   "design_margin": 30.0
+  },
+  "canon_dry_total_t": 1100.0,
+  "mission_end_t": 1629.4879436773379,
+  "drawn_engine_t": 1243.71,
+  "drawn_engine_recomputed_t": 1243.7056215616033,
+  "drawn_cluster_frame_t": 1353.11,
+  "drawn_propulsion_t": 6327.95,
+  "drawn_over_allocation": 25.3118,
+  "drawn_vs_departure": 1.4296981171624523,
+  "aplus_engine_recomputed_t": 11.649193739905023,
+  "aplus_engine_evidence_t": 47.6139,
+  "aplus_four_t": 190.456,
+  "aplus_four_no_flywheel_t": 132.4016,
+  "flywheel_cluster_t": 58.0544,
+  "departure_margin_t": 173.92576514040866,
+  "margin_rule": "upper departure envelope less the mission departure mass (the 1.7/1.8 check)",
+  "aplus_in_margin": false,
+  "aplus_no_flywheel_in_margin": true,
+  "keep_dv": {
+   "aplus": {
+    "added_t": 190.456,
+    "departure_t": 4943.397727644719,
+    "propellant_t": 3123.4537839673817,
+    "in_departure_envelope": false,
+    "in_propellant_envelope": false
+   },
+   "aplus_no_flywheel": {
+    "added_t": 132.4016,
+    "departure_t": 4785.708261418688,
+    "propellant_t": 3023.8187177413506,
+    "in_departure_envelope": false,
+    "in_propellant_envelope": false
+   },
+   "drawn_cluster_over_alloc": {
+    "added_t": 6077.95,
+    "departure_t": 20935.22240017534,
+    "propellant_t": 13227.784456497997,
+    "in_departure_envelope": false,
+    "in_propellant_envelope": false
+   },
+   "max_added_in_envelope_t": 64.03189877816018
+  },
+  "keep_tanks": {
+   "aplus": {
+    "added_t": 190.456,
+    "dv_per_burn_c": [
+     0.015254506885877324,
+     0.015055494879839704,
+     0.014807526563261031,
+     0.014500965091863133
+    ],
+    "last_burn_c": 0.014500965091863133,
+    "shortfall_last_burn": 0.09368968175855408,
+    "accel_factor_first": 0.958744773604674
+   },
+   "aplus_no_flywheel": {
+    "added_t": 132.4016,
+    "dv_per_burn_c": [
+     0.015474243730955769,
+     0.015331308242751801,
+     0.015151653388341407,
+     0.014927123696969821
+    ],
+    "last_burn_c": 0.014927123696969821,
+    "shortfall_last_burn": 0.06705476893938611,
+    "accel_factor_first": 0.9709548531578257
+   }
+  },
+  "verdict": "DOES NOT CLOSE. The mission numbers carry the canon 250 t drive package; the drawn Vertex cluster weighs 6.33 kt (25x that allotment, 1.4x the whole departure mass) and no mission number reads it. Against the 174 t departure margin the A+ additions look small (132 t without the flywheel, 190 t with it), but hardware carried through four burns costs 2.72 kg of departure mass per kg at fixed delta-v, so only 64 t fits the envelope: A+ without the flywheel already needs 360 t."
+ },
+ "power": {
+  "jet_TW": 209.01208334472994,
+  "fusion_canon_TW": 261.26510418091243,
+  "fusion_per_engine_TW": 65.31627604522811,
+  "fusion_realistic_TW": [
+   490.562,
+   510.665,
+   475.923
+  ],
+  "useful_share_realistic": [
+   0.426067,
+   0.409294,
+   0.439172
+  ],
+  "fuel_realistic_t": [
+   4794.9,
+   4991.4,
+   4651.82
+  ],
+  "installed_rejection_GW": 14.4015,
+  "drive_share_GW": 10.8011,
+  "per_engine_GW": 2.70028,
+  "canon_absorbed_GW": 10.450604167236499,
+  "canon_absorbed_fraction": 4e-05,
+  "heat_to_reject_per_engine_TW": 34.2019,
+  "ratio_to_drive_share": 12666.0,
+  "neutron_case": "S0-SC",
+  "neutron_W_TW": 10.0697,
+  "neutron_shield_four_t": 45421.6,
+  "radiation_low_radiator_ratio": 2167.450556115583,
+  "realistic_fuel_over_canon": [
+   1.8776358915921667,
+   1.9545833675974766,
+   1.821607164534458
+  ],
+  "verdict": "DOES NOT CLOSE. Canon assumes 80 % of the fusion power leaves as directed exhaust and 4e-5 is absorbed (10.45 GW of the 10.80 GW drive share). The 1.6B source model finds a useful share of 41-44 %, so 476-511 TW of fusion and 4.7-5.0 kt of D-He3 (1.8-2.0x canon fuel); the heat reaching the engine is 12,700x its 2.70 GW share, neutrons alone 10 TW per engine, and a coil shield against them weighs 45 kt for the cluster. These are 3-4 orders of magnitude, not margins."
+ },
+ "startup": {
+  "field_energy_cluster_GJ": 38.89324,
+  "field_charge_h_at_1V": 30.6549,
+  "field_charge_avg_kW": 352.4290660800648,
+  "main_battery_GJ": 7.2,
+  "pulse_bank_GJ": 0.72,
+  "pulse_bank_MW": 50.0,
+  "bootstrap": [
+   {
+    "bracket": 0,
+    "energy_GJ": 0.313493,
+    "power_MW": 31.3493,
+    "flywheel_t": 3.1349299999999998,
+    "bank_power_ok": true,
+    "battery_energy_ok": true
+   },
+   {
+    "bracket": 1,
+    "energy_GJ": 1.74163,
+    "power_MW": 174.163,
+    "flywheel_t": 58.054300000000005,
+    "bank_power_ok": false,
+    "battery_energy_ok": true
+   },
+   {
+    "bracket": 2,
+    "energy_GJ": 15.6746,
+    "power_MW": 1567.46,
+    "flywheel_t": 1567.46,
+    "bank_power_ok": false,
+    "battery_energy_ok": false
+   }
+  ],
+  "verdict": "OPEN. Charging the four engines' coils takes 38.9 GJ (5.4x the main battery); spread over 31 h it is a 350 kW load the ship bus or the departure station can carry. The first driver pulses need 0.3-15.7 GJ at 31-1,570 MW: the 50 MW pulse bank covers only the lowest bracket, the 58 t flywheel the middle one. Without the flywheel, ignition at the middle bracket has no sourced power path; with it, the mass does not fit. Ignition energy stays OPEN (power.storage.pulse_bank.ignition_energy)."
+ },
+ "summary": {
+  "mission": "closes on its own assumptions",
+  "mass": "does not close (drawn propulsion 25x its allotment; A+ needs 360 t of departure mass at fixed delta-v, 64 t fits)",
+  "power": "does not close (absorbed heat 10^3-10^4 x the drive share; realistic fuel 1.8-2.0x canon)",
+  "startup": "open (ignition power path without the flywheel)",
+  "consequence": "A+ is affordable relative to the engine it modifies (3 % of its drawn mass) but no A+ choice changes whether the Vertex cluster reaches 0.016 c. The blocking problems are the engine mass, the absorbed heat and the useful power share, together."
+ }
+}

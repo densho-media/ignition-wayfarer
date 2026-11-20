@@ -5528,6 +5528,326 @@ outcome = "C"
 verdict = "PROPULSION_FEASIBILITY_BLOCKED"
 thermal = "THERMAL_CLOSURE_FAILED"
 
+# --- Vertex Engine 1.6: Fiji-assisted advanced fusion and nanoengineered materials (research only; nothing here changes the engine) ----
+# Owner brief 2026-11-15 19:59Z. Read by src/wayfarer/vertex_fiji.py, evidence references/evidence/vertex_fiji.json. Every bracket is
+# [optimistic, nominal, pessimistic] unless its note says otherwise. Status words: CANON_WORKING (a WORKING Drive value, cited),
+# LITERATURE_RANGE (published range, not measured here), THEORETICAL (predicted, not demonstrated), PROTOTYPE (this study's choice).
+[vertex_fiji]
+evidence = "RESEARCH_MODEL"
+version = "1.6.0"
+# F-01 Fiji constitutive model M(T, H, S). Fiji's single extraordinary property: its saturation magnetization RISES with temperature over
+# a finite range (owner brief 1.6 section 1). Shape and temperatures are the Fiji workbook's lattice law (05_LATTICE_LAW B9:B14, WORKING,
+# "Seed extension"): smoothstep between activation and saturation, a lower release threshold on cooling (hysteresis), invalid at quench.
+# A_max (30, WORKING) is used here as the ratio of high- to low-temperature magnetization, NOT as a field multiplier.
+T_release_K = 550.0
+T_activation_K = 650.0
+T_operating_K = 1000.0
+T_saturation_K = 1100.0
+T_quench_K = 1400.0
+A_max = 30.0
+# Canon seed field of the lattice law (Fiji 05_LATTICE_LAW, BASELINE, NASA 2019 point design): B_eff = 5 T x A_B.
+canon_seed_T = 5.0
+# Degradation band below quench (PROTOTYPE): saturation magnetization falls linearly to zero between T_degrade_K and T_quench_K.
+T_degrade_K = 1300.0
+# Saturation magnetization at saturation temperature, mu0 Ms (T). No source exists for Fiji. The brackets are the ordinary-matter ceilings
+# (LITERATURE_RANGE): about 2.45 T (Fe-Co, the highest room-temperature value), about 3.5 T (the atomic-moment bound: about 10 Bohr
+# magnetons per atom at metallic atom density, the 4f rare-earth limit at low temperature), and 1.0 T (a hot oxide-class magnet).
+# A Fiji above the atomic bound would be a SECOND extraordinary property, which the brief does not authorize; the model reports the Ms
+# the canon field law would need instead of assuming it.
+mu0_Ms_T = [3.5, 2.45, 1.0]
+# Seed dependence (Fiji 03 SEED-LATTICE-02, BASELINE: no field without a seed): M = Ms(T) tanh(B_seed / B_align). B_align (PROTOTYPE).
+B_align_T = [0.5, 1.0, 3.0]
+# Strain sensitivity d(ln Ms)/d(strain) (PROTOTYPE, magnetoelastic order of FeRh-class materials) and the strain limit of the lattice.
+strain_sensitivity = [-2.0, -5.0, -20.0]
+strain_limit = 0.002
+# Response time of the lattice state (s, PROTOTYPE; a first-order transition moves by nucleation and growth) and the cycling loss of Ms per
+# full thermal cycle (PROTOTYPE, the cracking of first-order magnetocaloric alloys: La(Fe,Si)13, FeRh).
+response_s = [1.0e-3, 0.1, 10.0]
+cycle_loss = [1.0e-6, 1.0e-5, 1.0e-4]
+batch_spread = [0.02, 0.05, 0.15]
+# Hysteresis: energy lost per field cycle as a share of Ms x dB (PROTOTYPE) and the pulse-rate field ripple the Fiji liner sees (T).
+hysteresis_share = [0.01, 0.1, 0.5]
+ripple_T = [0.01, 0.1, 1.0]
+# Electrical resistivity of the lattice (ohm m, PROTOTYPE: oxide-like to metal-like) and the lamination thickness nanofabrication sets (m).
+resistivity_ohm_m = [1.0e2, 1.0e-4, 1.0e-6]
+lamination_m = 1.0e-3
+thermal_conductivity_W_mK = [50.0, 15.0, 5.0]
+density_kg_m3 = 8000.0
+# F-02 lattice assembly (PROTOTYPE): a Fiji liner ring inboard of each coil's cryostat, of square section, with a gap for the thermal
+# isolation stack (refractory foil radiation shields, an intermediate shield, cryogenic MLI).
+liner_section_m = [0.4, 0.2, 0.1]
+liner_gap_m = 0.15
+# Orientation: nanofabrication aligns domains (texture) and builds the optimal-orientation pattern from N discrete segments (Halbach).
+texture = [0.98, 0.9, 0.7]
+orientation_segments = 16
+# Geometry bounds for the field at a point from a magnetized volume (exact for a target outside the material): a spherical shell between
+# an inner radius (the plasma and exhaust must pass) and an outer radius. Not a design; the best any volume of this size can do.
+bound_inner_m = 2.0
+bound_outer_m = [30.0, 10.0]
+# Thermal isolation: refractory foil layers (Mo/W class, emissivity) between the 1000 K liner and an intermediate shield, then cryogenic
+# MLI to 20 K. Support struts carry the liner's magnetic force across the gap at allowable stress (Ti-6Al-4V, PMDS).
+foil_layers = 20
+foil_emissivity = 0.15
+intermediate_K = 300.0
+mli_W_m2 = 1.0
+strut_material = "MAT-TI6AL4V"
+strut_length_m = 0.15
+strut_allowable_share = 0.5
+# F-03 REBCO (PMDS MAT-REBCO A, MAT-REBCO-APC01 B). Jc scaling about the demonstrated point (vertex_engine.magnet: 20 T, 20 K, winding-pack
+# 153 A/mm2, sparc_tfmc): field exponent and B0 (LITERATURE_RANGE for coated conductors at 20 K), temperature exponent, strain and fluence.
+jc_field_exponent = [0.6, 0.75, 0.9]
+jc_B0_T = 1.0
+jc_T_exponent = 1.5
+jc_strain_factor = [1.0, 0.95, 0.8]
+# Fast-neutron fluence (n/m2, E > 0.1 MeV) at which REBCO critical current falls markedly (LITERATURE_RANGE: ARC/SPARC-class design limits
+# about 1e22 to 3e22 n/m2 at cryogenic irradiation).
+fluence_limit_n_m2 = [3.0e22, 1.0e22, 3.0e21]
+# APC in-field gain over the baseline tape at 20 K (LITERATURE_RANGE for BaZrO3 nanorod tapes; PMDS MAT-REBCO-APC01 records no number).
+apc_gain = [3.0, 2.0, 1.3]
+# F-04 fusion levers. Spin polarization (THEORETICAL, Kulsrud et al. 1982): sigma(D-3He) x (1 + P_D P_He / 2) for parallel spins; the
+# polarization each species keeps to burn (survival); D-D suppression by polarization is disputed theory (1 = no suppression).
+polarization = [0.9, 0.7, 0.5]
+polarization_survival = [0.9, 0.5, 0.1]
+dd_factor = [0.5, 1.0, 1.0]
+# Preparation cost of polarized fuel (J per kg of fuel, PROTOTYPE: optical pumping class, small against the yield) and the D-D branch.
+polarization_J_kg = 1.0e9
+# Energy channeling (THEORETICAL, Fisch and Rax 1992): share of the charged products' electron heating sent to ions instead, and the
+# wave drive power per watt channelled (it ends as heat in the launchers).
+channel_share = [0.9, 0.5, 0.2]
+channel_cost = [0.01, 0.05, 0.2]
+# Hot-ion burn screen: ion temperatures (keV) for the electron-balance floor.
+floor_Ti_keV = [50.0, 70.0, 100.0, 150.0, 200.0, 300.0]
+# F-05 materials qualification, radiators, shielding, insulation.
+armour_thickness_m = 0.005
+armour_coolant_K = 800.0
+radiator_emissivity_nano = 0.98
+shield_K = 700.0
+polymer_limit_K = 380.0
+tank_mli_W_m2 = [0.3, 0.6, 1.0]
+tank_aerogel_W_m2 = [0.1, 0.3, 0.6]
+# F-06 hydrogen reaction mass / regenerative cooling: enthalpy hydrogen can carry per kg from 20 K (J/kg; 2500 K sensible to partial and
+# full dissociation) and the share of that enthalpy turned into directed exhaust.
+h2_enthalpy_J_kg = [2.2e8, 1.0e8, 4.0e7]
+h2_nozzle_efficiency = 0.6
+# Four-burn duration (s) of the canon schedule (EXT-01: four power-limited burns, about 28.5 d).
+burn_time_s = 2.46e6
+outcome = "NEGATIVE"
+
+# --- Vertex Engine 1.6A: Fiji magnetic physics, material limits and architecture reconciliation (research only) -----------------------
+# Owner brief 2026-11-15 21:52Z. Read by src/wayfarer/vertex_fiji_a.py, evidence references/evidence/vertex_fiji_a.json. The 1.6 table
+# [vertex_fiji] and its evidence stay as they are (historical record). Status words as in [vertex_fiji]; SPECULATIVE marks Fiji values beyond
+# established magnetic-material physics.
+[vertex_fiji_a]
+evidence = "RESEARCH_MODEL"
+version = "1.6A.0"
+# FM-1..FM-4 saturation polarization mu0 Ms at saturation (T), material values, not fields in the engine. The temperature shape is the
+# 1.6 model (canon lattice-law temperatures); only the magnitude changes.
+material_cases = [
+  { id = "FM-1", mu0_Ms_T = 2.45, status = "MEASURED_REFERENCE", note = "Fe65Co35, the highest room-temperature saturation of a bulk magnet" },
+  { id = "FM-2", mu0_Ms_T = 3.5, status = "SCREENING_BOUND", note = "about 10 Bohr magnetons per atom at metallic density: the 4f rare-earth moments (Dy, Ho about 3.7-3.9 T, measured only near 4 K); 1.6's bound" },
+  { id = "FM-3", mu0_Ms_T = 5.0, status = "SPECULATIVE", note = "about 5 Bohr magnetons per atom at iron atom density: every d-shell spin aligned, twice the Slater-Pauling maximum of itinerant alloys" },
+  { id = "FM-4", mu0_Ms_T = 10.0, status = "EXTREME_SPECULATIVE", note = "about 10 Bohr magnetons per atom at iron atom density: beyond any known ordering; below the formal bound of every electron's spin aligned (about 26 T)" },
+]
+# Atom and electron densities for the bounds (iron-like Fiji, density from [vertex_fiji]); Bohr magneton.
+atom_mass_amu = 55.85
+electrons_per_atom = 26
+# FG-0..FG-5 geometry parameters (PROTOTYPE; engine frame x forward, burn at stations.burn). Cells are rectangles in (x, r), rings about the axis.
+cell_m = 0.25
+quadrature = 4
+orientation_segments = 8
+fg0_section_m = 0.2
+fg1_block_m = 0.5
+fg2_shell_m = [3.5, 4.5]
+fg2_theta_deg = [12.0, 115.0]
+fg3_block_m = [1.0, 1.5]           # square sections replacing C1 and C2 (side, m)
+fg4_blocks = [
+  { x = [-22.4, -20.4], r = [7.6, 8.4] },
+  { x = [-28.6, -26.6], r = [8.7, 9.5] },
+  { x = [-17.6, -15.6], r = [6.9, 7.5] },
+]
+fg5_block = { x = [-10.6, -9.2], r = [3.4, 5.6] }
+# Recoil susceptibility of the ordered lattice along its easy axis (PROTOTYPE, hard-magnet class) and self-consistency iterations.
+recoil_chi = 0.05
+# Fiji stiffness (steel-like, PROTOTYPE) for the magnetic strain against the 1.6 collapse strain; neutron removal length in Fiji (m, as 1.6);
+# support strut length to the thrust structure (m, PROTOTYPE); clearance kept from every cryostat and the shield (m).
+young_Pa = 2.0e11
+fiji_removal_length_m = 0.15
+support_length_m = 1.0
+clearance_m = 0.15
+iterations = 3
+# Anisotropy fields of known hard magnets at room temperature (mu0 H_A, T) and their Curie temperatures (LITERATURE_RANGE): at the 1000 K
+# operating point none of them keeps any coercivity.
+anisotropy_reference = [
+  { name = "Nd2Fe14B", mu0_HA_T = 7.6, curie_K = 585.0 },
+  { name = "SmCo5", mu0_HA_T = 35.0, curie_K = 1020.0 },
+  { name = "FePt (L10)", mu0_HA_T = 11.6, curie_K = 750.0 },
+]
+specific_heat_J_kgK = 450.0
+# Plasma screening: a useful Fiji field is at least this share of the stop field at the burn point (PROTOTYPE threshold).
+useful_share = 0.1
+# Structural screening: titanium allowable share of yield for the virial support mass.
+allowable_share = 0.5
+# Mission screening: four engines' added Fiji and support mass against the departure envelope upper bound (kg, WORKING 4.6 kt).
+departure_kg = 4.6e6
+mission_share = 0.05                # PROTOTYPE screening share of the departure mass for four engines' added hardware
+# Thermal feedback: coolant temperature below the liner operating point (K) that sets the cooling conductance.
+coolant_dT_K = 50.0
+# F-08 neutron audit. Removal attenuation lengths of fast neutrons (m) in steel-like hardware and in a LiH/B4C/W shield (LITERATURE_RANGE,
+# order of the removal cross sections), intervening hardware thickness between the burn and the closure coils (m, PROTOTYPE bracket),
+# displacement cross section for fast neutrons in an oxide conductor (barn, ESTIMATE), and REBCO fluence limits (n/m2, E > 0.1 MeV).
+removal_length_m = [0.20, 0.16, 0.12]
+intervening_m = [0.3, 0.1, 0.0]
+shield_removal_length_m = [0.10, 0.15, 0.20]
+shield_density_kg_m3 = 2000.0
+displacement_barn = [500.0, 1000.0, 3000.0]
+fluence_limit_n_m2 = [3.0e22, 1.0e22, 3.0e21]
+outcome = "BOUNDED"
+
+# Vertex Engine 1.6B (owner brief 2026-11-16 07:16Z): fusion radiation source and plasma-hardware interface feasibility. RESEARCH ONLY:
+# nothing here is canon, the released engine (four independent Compact Vertex engines, M0-NOMINAL, 1.2 geometry) and the 1.5 / 1.6 / 1.6A
+# tables and evidence are read, never changed. Brackets are [optimistic, nominal, pessimistic] as in [vertex_fiji]. Statuses: LITERATURE
+# (published value or range, not re-verified against the paper here), PROTOTYPE (an engineering choice), ANALYTIC, SPECULATIVE.
+[vertex_source]
+evidence = "RESEARCH_MODEL"
+version = "1.6B.0"
+baseline_commit = "198adbb"
+Ti_grid_keV = [50.0, 70.0, 100.0, 150.0, 200.0, 300.0, 400.0]
+Te_fractions = [1.0, 0.8, 0.6, 0.5, 0.4, 0.3, 0.2, 0.15, 0.1]   # electron temperature / radiative balance value (colder = transport loss)
+useful_floor = 0.3                        # least useful energy per fusion energy for a propulsion state to count (PROTOTYPE; canon directs 0.8)
+xs_points = 4000                          # Maxwellian integration of the Bosch-Hale cross sections (D-D, D-T) beyond the reactivity fit limit
+# D-3He reactivity above the 190 keV fit limit relative to the held fit value (LITERATURE: the NRL table gives about 2.2e-22 m3/s at 1 MeV
+# against 2.68e-22 held; the curve is flat between about 200 and 500 keV). The D-3He cross-section fit is not used (not verified here).
+dhe3_hold = [1.0, 1.0, 0.85]
+impurity_dzeff = [0.0, 0.1, 0.3]          # Zeff added by wall or ash impurities (PROTOTYPE bracket)
+# Cyclotron (synchrotron) emission of a magnetized burn: optically thin power 6.21e-17 B^2 ne Te(keV) (1 + Te/204) W/m3 (LITERATURE, NRL /
+# Trubnikov), field from the plasma beta, times the escaping share after wall reflection and self-absorption (LITERATURE range for reactor
+# plasmas with reflecting walls). The inertial target has no confining field (cases with magnetized = false).
+sync_beta = [1.0, 0.5, 0.1]
+sync_escape = [0.01, 0.05, 0.2]
+# Alpha / product channeling (Fisch-Rax): share of the fast products' electron-bound energy moved by waves to fuel ions or extracted
+# (LITERATURE theory 17-66 %, the 60 % TFTR inference called preliminary by its authors; no burning-plasma demonstration).
+channel_share = [0.66, 0.25, 0.0]
+aux_coupling = [0.9, 0.7, 0.5]            # wall plug to plasma heating efficiency (PROTOTYPE; ion cyclotron / neutral beam class)
+conversion = [0.9, 0.7, 0.5]              # charged-stream direct conversion to electricity (PROTOTYPE; only the recirculating power uses it)
+he3_hot_ratio = [3.0, 1.5, 1.0]           # T(He-3) / T(D) held by minority heating (SPECULATIVE; costs the ion-ion exchange)
+capture = [0.817, 0.517, 0.220]           # charged energy leaving aft as exhaust: Engine 1.4 M0-NOMINAL ledger (aft, channelled, isotropic)
+loss_K = 1000.0                           # temperature at which conversion and heating losses are rejected (PROTOTYPE)
+armour_K = 1300.0                         # radiation-facing W armour coolant (1.6 liner temperature)
+warm_K = 440.0                            # warm machinery (ship WARM section temperature)
+densities_m3 = [1.0e21, 1.0e32]           # magnetized steady burn and dense pulsed target (only the Coulomb logarithm depends on density)
+power_specific_kg_W = [0.1e-3, 0.5e-3, 2.0e-3]   # power conditioning and heating plant mass per W of auxiliary power (PROTOTYPE)
+radiator_kg_m2 = [5.0, 10.0, 20.0]        # added 1800 K radiator areal mass (PROTOTYPE; for the mass of closing by area alone)
+capture_gamma_MeV = [2.2, 5.0, 8.0]       # capture gamma per absorbed neutron in the shield (LITERATURE range: H 2.2 MeV, metals 6-9 MeV)
+neutron_shield_K = 700.0                  # shield temperature (1.6 shield_K)
+cases = [
+  { id = "S0", name = "1.5 reference (LOW, prescribed Te/Ti 0.5)", Te = "prescribed", Te_over_Ti = 0.5, Ti_keV = 110.0, reactivity = "legacy", pol = false, dd = false, channel = false, deposition = 1.0, he3_hot = false, magnetized = false, density = 1, aux = false },
+  { id = "S0-SC", name = "1.5 source, self-consistent electrons", Te = "balance", reactivity = "corrected", pol = false, dd = false, channel = false, deposition = 1.0, he3_hot = false, magnetized = false, density = 1, aux = false },
+  { id = "S1", name = "spin-polarized D-3He", Te = "balance", reactivity = "corrected", pol = true, dd = true, channel = false, deposition = 1.0, he3_hot = false, magnetized = false, density = 1, aux = false },
+  { id = "S2", name = "hot ions (auxiliary ion heating)", Te = "balance", reactivity = "corrected", pol = false, dd = false, channel = false, deposition = 1.0, he3_hot = false, magnetized = true, density = 0, aux = true },
+  { id = "S3", name = "selective ion heating (hot He-3 minority)", Te = "balance", reactivity = "corrected", pol = false, dd = false, channel = false, deposition = 1.0, he3_hot = true, magnetized = true, density = 0, aux = true },
+  { id = "S4", name = "charged-product channeling", Te = "balance", reactivity = "corrected", pol = false, dd = false, channel = true, deposition = 1.0, he3_hot = false, magnetized = true, density = 0, aux = true },
+  { id = "S5", name = "combined (S1 + S3 + S4)", Te = "balance", reactivity = "corrected", pol = true, dd = true, channel = true, deposition = 1.0, he3_hot = true, magnetized = true, density = 0, aux = true },
+  { id = "S6", name = "non-Maxwellian: prompt product escape, ions held by auxiliary heating", Te = "balance", reactivity = "corrected", pol = true, dd = true, channel = false, deposition = 0.0, he3_hot = true, magnetized = true, density = 0, aux = true },
+]
+# EXT-01 (lab/studies/external-pulse, commit 5e008ad) values quoted for the comparison ledger only (src never reads lab/).
+ext01_quote = { cases = 734832, verdict = "CONDITIONAL_ON_UNVERIFIED", plate_min_ratio = 132.0, magnetic_closing_cases = 6, tolerable_leak = 5.0e-5, status = "COMPARISON_ONLY" }
+outcome = "C"
+
+# Vertex Engine 1.7 (owner brief 2026-11-16 09:23Z "Dynamic Lattice Drive Mechanism"): moving mechanical and electromagnetic assemblies
+# against the static nozzle (vertex_dynamic.py). A research configuration: it reads the engine, coils, 1.5-1.6B evidence and canon and
+# changes none of them (its own table, so earlier evidence hashes stay valid). Every unsourced physical choice is PROTOTYPE; LITERATURE rows
+# are ranges, not a design. Brackets are [optimistic, nominal, pessimistic]. Nothing here is canon; the candidates are research records.
+[vertex_dynamic]
+evidence = "RESEARCH_MODEL"
+version = "1.7.0"
+baseline_commit = "dab9bb4"
+# Mechanical speed class of a rotating rim (LITERATURE: CFRP flywheel rims 600-1000 m/s; the engine's chopper limit is 700 m/s)
+rim_speed_m_s = [1000.0, 700.0, 300.0]
+switch_time_s = [1.0e-7, 1.0e-6, 1.0e-5]      # power-electronic switching (LITERATURE: SiC / IGBT / thyristor class)
+# C1 Rotary Field Crown: two counter-rotating crowns at L2 (armour or Fiji segments on a CFRP band), PROTOTYPE sizes
+crown_loop = "L2"
+crown_segments = 8
+crown_section_m2 = 0.12                       # loaded cross-section (tiles plus band)
+crown_density_kg_m3 = 8000.0                  # tungsten / Fiji-class segments carried by the band
+crown_band_share = 0.3                        # share of the section that is the CFRP load band
+cfrp_allowable_Pa = 6.0e8                     # MAT-CFRP strength x 0.6 knockdown / 2.0 (vertex_engine.structure rule), screening value
+crown_conductivity_S_m = [1.0e4, 2.5e6, 6.0e7] # CFRP-insulated / tungsten near 1300 K / cold copper class (LITERATURE order)
+slew_rate_deg_s = [0.01, 0.1, 1.0]            # ship attitude rate the gyroscopic load is screened at (PROTOTYPE bracket)
+# C2 Pulsed Lattice Dynamo: storage and conversion (LITERATURE ranges; system level, not rotor or cell level)
+flywheel_J_kg = [2.0e5, 1.0e5, 5.0e4]
+capacitor_J_kg = [4.0e3, 2.0e3, 1.0e3]
+battery_J_kg = [1.0e6, 7.0e5, 4.0e5]
+target_gain = [100.0, 30.0, 10.0]             # fusion yield / driver energy on target (SPECULATIVE for D-3He; IFE high-gain designs 30-150)
+driver_efficiency = [0.5, 0.3, 0.1]           # wall plug to target
+startup_pulses = 10                           # driver pulses buffered for ignition before direct conversion feeds the driver (PROTOTYPE)
+bootstrap_rate_Hz = 1.0                       # pulse rate while the store carries the driver (PROTOTYPE)
+flywheel_W_kg = [1.0e4, 3.0e3, 1.0e3]         # system power density (LITERATURE: composite flywheel systems; JET generators ~0.5 kW/kg rotor)
+battery_W_kg = [5.0e3, 2.0e3, 1.0e3]
+capacitor_W_kg = [1.0e7, 1.0e6, 1.0e5]
+capacitor_J_m3 = [3.0e6, 1.5e6, 0.5e6]        # film pulse capacitors, volumetric (LITERATURE)
+dynamo_voltage_V = [1.0, 0.1, 0.01]           # HTS dynamo (flux pump) output, stacked rotors (LITERATURE: single units mV to tens of mV)
+lead_W_per_kA = [5.0, 20.0, 45.0]             # current-lead heat to the 20 K stage per kA (HTS hybrid to conduction-cooled copper, LITERATURE)
+# integrated enthalpy of 300-series steel from 20 K, kJ/kg (ESTIMATE, NIST cryogenic material data class)
+steel_enthalpy = [[20.0, 0.0], [50.0, 1.2], [77.0, 4.5], [100.0, 9.5], [150.0, 25.0], [200.0, 45.0], [250.0, 68.0], [300.0, 92.0], [400.0, 140.0], [600.0, 240.0]]
+fiji_cycle_thickness_m = 0.005                # Fiji lamina in a thermomagnetic cycle (thermal diffusion sets the cycle rate)
+fiji_diffusivity_m2_s = 1.0e-5                # metal-class thermal diffusivity (ESTIMATE; no Fiji value exists)
+fiji_density_kg_m3 = 8000.0                   # 1.6A Fiji cell density
+fiji_cp_J_kgK = 500.0                         # ESTIMATE
+regeneration = [0.9, 0.5, 0.0]                # share of the sensible heat recycled by a regenerator (AMR class, LITERATURE optimistic)
+recovery_efficiency = [0.95, 0.9, 0.8]        # one switched-coil energy exchange recovered (resonant pulsed power, LITERATURE)
+# C3 Variable Geometry Flux Nozzle: the nozzle loops and cage on hinged petals, deployed by a radial scale factor k for the burn (PROTOTYPE)
+deploy_k = [1.0, 1.1, 1.2, 1.3, 1.4]
+hinge_share = [0.10, 0.20, 0.35]              # hinges, latches and actuators per kg of the deployed cage and loops
+deploy_time_s = 600.0
+behind_hardware_share = "1.5 cluster ray trace"   # where rays freed by a smaller own-engine sky go next (computed, not an input)
+# C4 Armour Tread: tiles circulating poloidally round the burn-facing cryostats (PROTOTYPE)
+tread_coils = ["C2", "L1", "L2"]
+tread_tile_m = 0.05
+tread_tile_density_kg_m3 = 7200.0             # tungsten armour at the 0.6 solid fraction of vertex_engine.materials
+tread_overhead = 0.25                         # rollers, track and drive per kg of tiles
+tread_speed_m_s = 0.5
+tread_T_K = [2000.0, 1600.0, 1300.0]          # tile temperature on the shadow side (1300 K is the 1.6 armour coolant)
+tread_emissivity = [0.9, 0.6, 0.3]            # coated / oxidised / bare tungsten class (LITERATURE)
+tread_space_view = 0.5                        # share of the shadow-side emission that reaches space (PROTOTYPE)
+# Radiation and plasma screens
+photon_keV = [20.0, 50.0, 100.0]              # mean bremsstrahlung photon energy class for the absorption depth screen
+np_barn = 2.5                                 # n-p elastic cross section near 2.45 MeV (LITERATURE ENDF class)
+shielding_precedent = [1000.0, 300.0, 100.0]  # Hall-thruster magnetic shielding: wall erosion reduction factor (LITERATURE, H6MS 2-3 orders)
+outcome = "C"
+
+[vertex_adaptive]
+# Vertex 1.8 Adaptive Engine 3D integration study (owner brief 2026-11-16 11:08Z): research and design only. Nothing here is read by
+# the generators; every physical choice is PROTOTYPE, every literature value is marked.
+evidence = "RESEARCH_DESIGN_STUDY"
+version = "1.8.0"
+baseline_commit = "ff9f233"
+# Ring carriage: L4 slides on the aft longeron segments, straightened into cylindrical rails at the L4 hoop radius (continuous
+# winding, no superconducting joint); L1-L3 stay at their stations and are aligned by actuated loop seats
+carriage_loops = ["L4"]
+stow_gap_m = 0.3                              # hoop-to-hoop gap when the L4 hoop is parked behind the L3 hoop (PROTOTYPE)
+extend_m = [2.0, 4.0]                         # aft strokes beyond the canon positions tested for the field and the sky
+carriage_share = [0.05, 0.10, 0.20]           # carriage, rail shoes, locks and drives per kg moved (PROTOTYPE)
+carriage_speed_m_s = 0.01                     # slow, load-free positioning before the field (PROTOTYPE)
+# Alignment: lateral loop offset produces a transverse field at the burn
+alignment_offset_m = [0.010, 0.002, 0.0005]   # survey states: as stowed, after a coarse scan, after the AI fine alignment (PROTOTYPE)
+rebco_strain_limit = 0.004                    # REBCO irreversible tensile strain class (LITERATURE ~0.4-0.6 %)
+# Petals that split a winding need demountable superconducting joints, one per turn per petal boundary
+joint_ohm = [1.0e-9, 1.0e-8, 1.0e-7]          # demountable REBCO joint resistance at 20 K (LITERATURE: nOhm to 100 nOhm class)
+petal_boundaries = 8
+persistent_decay_max = 0.01                   # allowed field decay over one burn in persistent mode
+inner_loops = ["L1", "L2"]                    # Concept B: only the inner loops open, inside today's envelope
+# Root machinery (masses PROTOTYPE, LITERATURE class for HTS flux pumps and pulsed alternators)
+dynamo_kg = 1500.0                            # one HTS dynamo with its rotor drive and cryostat port, per coil
+switch_kg = 300.0                             # one persistent-current switch with heater and protection, per coil
+trim_coil_kg = 4000.0                         # one normal-conducting trim coil set at L3/L4, per engine
+# Display and export (Phase F planning numbers; measured in Phase F, never claimed here)
+field_lines = 12
+field_line_points = 96
+state_bytes_per_node = 40                     # one rigid pose per animated node per state (position, quaternion, scale)
+viewer_budget_bytes = 12000000
+viewer_used_bytes = 11380000
+recommended = "A_PLUS"
+
 # --- Asset C: Wayfarer propulsion cluster -----------------------------------------------------------------------------------------------
 [propulsion_cluster]
 id = "WF-VTX-CL4"

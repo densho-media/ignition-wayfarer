@@ -1,0 +1,4633 @@
+{
+ "meta": {
+  "title": "Vertex 2.6 compact candidates on the Vertex mission ledger (research, not canon)",
+  "q_max_MW_m2": 10.0,
+  "dep_upper_t": 4600.0,
+  "research_envelope_t": 7000.0,
+  "f_fwd_nominal": 0.0024000000000000002,
+  "dust_t": {
+   "APLUS": {
+    "LOW": 118.93382995376764,
+    "NOMINAL": 1798.6729365577394,
+    "HIGH": 10148.922188827224,
+    "NOMINAL_HILAT": 1334.5581821869903
+   },
+   "C_EXT": {
+    "LOW": 120.46098776218005,
+    "NOMINAL": 217.43070695922108,
+    "HIGH": 10186.519312502947,
+    "NOMINAL_HILAT": 167.4877446743724
+   },
+   "HALO": {
+    "LOW": 215.97800854219233,
+    "NOMINAL": 2715.7289585892686,
+    "HIGH": 15392.98566175009,
+    "NOMINAL_HILAT": 2034.7366068388005
+   }
+  },
+  "notes": "dust protection masses from protect.json (vertex_467d path, NOMINAL); HALO shown for reference"
+ },
+ "candidates": {
+  "A_base": {
+   "title": "A. Optimized Compact Vertex (established source, no VBC)",
+   "levers": "base",
+   "result": {
+    "closes": false
+   },
+   "gates": {
+    "G1_closes": false
+   },
+   "speculative": []
+  },
+  "A_stretch": {
+   "title": "A. Optimized Compact Vertex (established source, no VBC)",
+   "levers": "stretch",
+   "result": {
+    "closes": false
+   },
+   "gates": {
+    "G1_closes": false
+   },
+   "speculative": []
+  },
+  "B_base": {
+   "title": "B. Compact Burn-Channeling Vertex (VBC source in the A+ cluster)",
+   "levers": "base",
+   "result": {
+    "closes": false
+   },
+   "gates": {
+    "G1_closes": false
+   },
+   "speculative": [
+    "VBC"
+   ]
+  },
+  "B_stretch": {
+   "title": "B. Compact Burn-Channeling Vertex (VBC source in the A+ cluster)",
+   "levers": "stretch",
+   "result": {
+    "closes": false
+   },
+   "gates": {
+    "G1_closes": false
+   },
+   "speculative": [
+    "VBC"
+   ]
+  },
+  "C_base": {
+   "title": "C. Protected Adaptive Vertex (VBC, 200 m telescoping spine, stern annulus on the spine)",
+   "levers": "base",
+   "result": {
+    "closes": false
+   },
+   "gates": {
+    "G1_closes": false
+   },
+   "speculative": [
+    "VBC"
+   ]
+  },
+  "C_stretch": {
+   "title": "C. Protected Adaptive Vertex (VBC, 200 m telescoping spine, stern annulus on the spine)",
+   "levers": "stretch",
+   "result": {
+    "closes": false
+   },
+   "gates": {
+    "G1_closes": false
+   },
+   "speculative": [
+    "VBC"
+   ]
+  },
+  "D_base": {
+   "title": "D. Rosette Vertex (VBC, seven sub-nozzles per engine)",
+   "levers": "base",
+   "result": {
+    "closes": false
+   },
+   "gates": {
+    "G1_closes": false
+   },
+   "speculative": [
+    "VBC"
+   ]
+  },
+  "D_stretch": {
+   "title": "D. Rosette Vertex (VBC, seven sub-nozzles per engine)",
+   "levers": "stretch",
+   "result": {
+    "closes": false
+   },
+   "gates": {
+    "G1_closes": false
+   },
+   "speculative": [
+    "VBC"
+   ]
+  }
+ },
+ "requirements": [
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.043248731825296705,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.014416243941765569,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.007208121970882784,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.00432487318252967,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 84729.18740457842,
+   "system_t": 26463.813952071025,
+   "fusion_TW": 341.1826746145469,
+   "he3_t": 29299.009902733254,
+   "coil_MW_m2": 107.396823138143,
+   "plate_MW_m2": 43.54254659642354,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.002883248788353114,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 66502.91348751826,
+   "system_t": 20580.75303949133,
+   "fusion_TW": 267.4029814552608,
+   "he3_t": 22963.1900580219,
+   "coil_MW_m2": 56.115062149328054,
+   "plate_MW_m2": 22.75107062762386,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.001441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 52608.71510233898,
+   "system_t": 16095.995715919711,
+   "fusion_TW": 211.2301078203762,
+   "he3_t": 18139.353142056483,
+   "coil_MW_m2": 22.163534699207258,
+   "plate_MW_m2": 8.985896548730715,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.043248731825296705,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.014416243941765569,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 38126.648258828085,
+   "system_t": 11421.486719748054,
+   "fusion_TW": 155.09817313170032,
+   "he3_t": 13319.03185182362,
+   "coil_MW_m2": 162.73833873252713,
+   "plate_MW_m2": 65.97999354385881,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.007208121970882784,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 23423.270763298675,
+   "system_t": 6675.5432525958195,
+   "fusion_TW": 96.24910372644463,
+   "he3_t": 8265.377034153968,
+   "coil_MW_m2": 50.49517477008112,
+   "plate_MW_m2": 20.472565538485863,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.00432487318252967,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 20133.526143885465,
+   "system_t": 5613.682294781443,
+   "fusion_TW": 82.4915671517893,
+   "he3_t": 7083.950688887678,
+   "coil_MW_m2": 25.96653452381588,
+   "plate_MW_m2": 10.527769876363624,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.002883248788353114,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 16280.060446418982,
+   "system_t": 4369.863990640806,
+   "fusion_TW": 66.60661596590434,
+   "he3_t": 5719.832939868092,
+   "coil_MW_m2": 13.977533264243508,
+   "plate_MW_m2": 5.666996245117299,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.001441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 13489.617461152393,
+   "system_t": 3469.167233988634,
+   "fusion_TW": 55.11039745813374,
+   "he3_t": 4732.596937091312,
+   "coil_MW_m2": 5.782514048752056,
+   "plate_MW_m2": 2.344439807948436,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.043248731825296705,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.014416243941765569,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 33443.55252866721,
+   "system_t": 9909.881107875626,
+   "fusion_TW": 136.04746646013663,
+   "he3_t": 11683.055335563518,
+   "coil_MW_m2": 142.74919069077208,
+   "plate_MW_m2": 57.87567179021277,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.007208121970882784,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 21481.774719256096,
+   "system_t": 6048.868840880628,
+   "fusion_TW": 88.27125742069582,
+   "he3_t": 7580.280705101823,
+   "coil_MW_m2": 46.30975623650101,
+   "plate_MW_m2": 18.775645869926123,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.00432487318252967,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 18468.35906561023,
+   "system_t": 5076.201152460873,
+   "fusion_TW": 75.66900458252931,
+   "he3_t": 6498.064173681133,
+   "coil_MW_m2": 23.8189407378876,
+   "plate_MW_m2": 9.657057877986455,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.002883248788353114,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 14915.888345907342,
+   "system_t": 3929.5376917790168,
+   "fusion_TW": 61.0253782604776,
+   "he3_t": 5240.545007133673,
+   "coil_MW_m2": 12.806299176043103,
+   "plate_MW_m2": 5.192135691791739,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.001441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 12540.971216461943,
+   "system_t": 3162.9639800453174,
+   "fusion_TW": 51.23480411809915,
+   "he3_t": 4399.780952877209,
+   "coil_MW_m2": 5.375863639430612,
+   "plate_MW_m2": 2.179569061505984,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 30.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 100.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 300.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.03913297885185538,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0065221631419758955,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.003913297885185537,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 72919.40179560165,
+   "system_t": 22651.86157682159,
+   "fusion_TW": 293.50637652545754,
+   "he3_t": 21225.10746090403,
+   "coil_MW_m2": 83.59716228022997,
+   "plate_MW_m2": 33.89330547732842,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0026088652567903582,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 59543.66770296687,
+   "system_t": 18334.45371177186,
+   "fusion_TW": 239.3545369090186,
+   "he3_t": 17309.08141516371,
+   "coil_MW_m2": 45.449006695909176,
+   "plate_MW_m2": 18.426666953381627,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 45632.87445844097,
+   "system_t": 13844.339901305564,
+   "fusion_TW": 183.19612725583602,
+   "he3_t": 13247.948932003215,
+   "coil_MW_m2": 17.39278069735384,
+   "plate_MW_m2": 7.051660764506673,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.03913297885185538,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 31479.265232402027,
+   "system_t": 9275.85015512573,
+   "fusion_TW": 127.87879334303145,
+   "he3_t": 9247.639396485682,
+   "coil_MW_m2": 121.40910430351917,
+   "plate_MW_m2": 49.223630894240976,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0065221631419758955,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 21153.404995249726,
+   "system_t": 5942.877948838929,
+   "fusion_TW": 85.36772121216781,
+   "he3_t": 6173.423139458089,
+   "coil_MW_m2": 40.52438194636618,
+   "plate_MW_m2": 16.430046416933752,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.003913297885185537,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 17599.02211286988,
+   "system_t": 4795.597299092625,
+   "fusion_TW": 70.83746003867257,
+   "he3_t": 5122.657706374942,
+   "coil_MW_m2": 20.17608685184033,
+   "plate_MW_m2": 8.180113491343414,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0026088652567903582,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 14702.936953395529,
+   "system_t": 3860.8014377001136,
+   "fusion_TW": 60.13758167162486,
+   "he3_t": 4348.888935666507,
+   "coil_MW_m2": 11.419015152952129,
+   "plate_MW_m2": 4.629680700546669,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 12640.15468572492,
+   "system_t": 3194.978398758615,
+   "fusion_TW": 51.632913787233775,
+   "he3_t": 3733.8682608095733,
+   "coil_MW_m2": 4.9020676975182695,
+   "plate_MW_m2": 1.9874750937786694,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.03913297885185538,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 28016.571558511496,
+   "system_t": 8158.164921149163,
+   "fusion_TW": 113.81222967121221,
+   "he3_t": 8230.40655447921,
+   "coil_MW_m2": 108.05419892848177,
+   "plate_MW_m2": 43.80907045761233,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0065221631419758955,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 19466.016675213636,
+   "system_t": 5398.224195289494,
+   "fusion_TW": 79.9330304805381,
+   "he3_t": 5780.40988992954,
+   "coil_MW_m2": 37.9445135122658,
+   "plate_MW_m2": 15.384074681252482,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.003913297885185537,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 15982.969006915153,
+   "system_t": 4273.969090498153,
+   "fusion_TW": 65.45874644721275,
+   "he3_t": 4733.692480707152,
+   "coil_MW_m2": 18.644108986673793,
+   "plate_MW_m2": 7.558994396480613,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0026088652567903582,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 13540.693227565787,
+   "system_t": 3485.653442455513,
+   "fusion_TW": 55.38380171555437,
+   "he3_t": 4005.1161985711815,
+   "coil_MW_m2": 10.516359837628404,
+   "plate_MW_m2": 4.263711671114237,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 11774.671347621861,
+   "system_t": 2915.6183747388754,
+   "fusion_TW": 48.09755937966233,
+   "he3_t": 3478.2067719472484,
+   "coil_MW_m2": 4.566418694963942,
+   "plate_MW_m2": 1.8513908791183737,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 30.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 100.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "B",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 300.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.043248731825296705,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.014416243941765569,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.007208121970882784,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 37116.27318469603,
+   "system_t": 11095.358722676243,
+   "fusion_TW": 149.8917516028208,
+   "he3_t": 12871.931200816705,
+   "coil_MW_m2": 78.63772394284491,
+   "plate_MW_m2": 1.354659656735654,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.00432487318252967,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 25324.540353271826,
+   "system_t": 7289.233411057736,
+   "fusion_TW": 101.9754192832778,
+   "he3_t": 8757.123505147478,
+   "coil_MW_m2": 32.09962342434941,
+   "plate_MW_m2": 0.5529669816102232,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.002883248788353114,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 21924.115026311985,
+   "system_t": 6191.647062876431,
+   "fusion_TW": 88.15514112632431,
+   "he3_t": 7570.309236115297,
+   "coil_MW_m2": 18.499535286805266,
+   "plate_MW_m2": 0.31868386907544705,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.001441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 19323.902304814714,
+   "system_t": 5352.352661792395,
+   "fusion_TW": 77.58771449590014,
+   "he3_t": 6662.833093485854,
+   "coil_MW_m2": 8.140969521878207,
+   "plate_MW_m2": 0.14024112633293465,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.043248731825296705,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 72630.04648021265,
+   "system_t": 20809.146568443302,
+   "fusion_TW": 286.05848308225785,
+   "he3_t": 24565.228401637538,
+   "coil_MW_m2": 900.4493671864695,
+   "plate_MW_m2": 15.51167009293441,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.014416243941765569,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 10370.906938499664,
+   "system_t": 2462.5125617693056,
+   "fusion_TW": 42.188568713425475,
+   "he3_t": 3622.936873665311,
+   "coil_MW_m2": 44.26677871980488,
+   "plate_MW_m2": 0.762565550713911,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.007208121970882784,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 7642.659689138498,
+   "system_t": 1581.8912851576713,
+   "fusion_TW": 31.40462972055977,
+   "he3_t": 2696.867765087627,
+   "coil_MW_m2": 16.47580981902104,
+   "plate_MW_m2": 0.28382198459989544,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.00432487318252967,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 6961.3840858286285,
+   "system_t": 1361.9896965909243,
+   "fusion_TW": 28.52235016765459,
+   "he3_t": 2449.3524501367133,
+   "coil_MW_m2": 8.97820805899379,
+   "plate_MW_m2": 0.1546638895110652,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.002883248788353114,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 6659.584952203489,
+   "system_t": 1264.5752304760251,
+   "fusion_TW": 27.24636182178936,
+   "he3_t": 2339.777146456613,
+   "coil_MW_m2": 5.7177033001215065,
+   "plate_MW_m2": 0.0984965179751196,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.001441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 6488.164570101817,
+   "system_t": 1209.2443314413724,
+   "fusion_TW": 26.506706306669905,
+   "he3_t": 2276.2593424339466,
+   "coil_MW_m2": 2.7812424238449105,
+   "plate_MW_m2": 0.04791131683723147,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.043248731825296705,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 67151.60456405839,
+   "system_t": 19172.76982410926,
+   "fusion_TW": 264.48125905258155,
+   "he3_t": 22712.28759439051,
+   "coil_MW_m2": 832.5289927948055,
+   "plate_MW_m2": 14.341633799340231,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.014416243941765569,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 9389.473257337913,
+   "system_t": 2145.726221489353,
+   "fusion_TW": 38.19612306321385,
+   "he3_t": 3280.0862152201603,
+   "coil_MW_m2": 40.07766545602547,
+   "plate_MW_m2": 0.6904014232264123,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.007208121970882784,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 7073.9762169444575,
+   "system_t": 1398.3320695865866,
+   "fusion_TW": 29.06783931003854,
+   "he3_t": 2496.196246653042,
+   "coil_MW_m2": 15.249860554241035,
+   "plate_MW_m2": 0.2627030619386895,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.00432487318252967,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 6485.506636507562,
+   "system_t": 1208.3863658310925,
+   "fusion_TW": 26.572573646336547,
+   "he3_t": 2281.9156901348956,
+   "coil_MW_m2": 8.364461443616193,
+   "plate_MW_m2": 0.14409112954773803,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.002883248788353114,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 6221.632717730905,
+   "system_t": 1123.2133818435584,
+   "fusion_TW": 25.454567719492793,
+   "he3_t": 2185.907102480448,
+   "coil_MW_m2": 5.341691687048635,
+   "plate_MW_m2": 0.09201912090467369,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.001441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 6087.064406913282,
+   "system_t": 1079.7775171503333,
+   "fusion_TW": 24.86805424870754,
+   "he3_t": 2135.540348048859,
+   "coil_MW_m2": 2.609305423247146,
+   "plate_MW_m2": 0.04494942899852427,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 30.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 100.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 300.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": 39427.258772788984,
+   "system_t": 9881.061046346169,
+   "fusion_TW": 159.39514061259055,
+   "he3_t": 13688.03327581609,
+   "coil_MW_m2": 1672.469748873282,
+   "plate_MW_m2": 28.8109469897188,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.03913297885185538,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0065221631419758955,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 27782.66851474214,
+   "system_t": 8082.665889983014,
+   "fusion_TW": 112.12110300110955,
+   "he3_t": 8108.111612448143,
+   "coil_MW_m2": 53.22431534629758,
+   "plate_MW_m2": 0.916873341977823,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.003913297885185537,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 21280.731921610528,
+   "system_t": 5983.976431957062,
+   "fusion_TW": 85.65663406879855,
+   "he3_t": 6194.316063494076,
+   "coil_MW_m2": 24.396917897809455,
+   "plate_MW_m2": 0.42027564847725485,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0026088652567903582,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 19100.03780920989,
+   "system_t": 5280.093861327171,
+   "fusion_TW": 76.7786211553842,
+   "he3_t": 5552.296696292462,
+   "coil_MW_m2": 14.578841268949407,
+   "plate_MW_m2": 0.25114368929793457,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 17331.897814696327,
+   "system_t": 4709.375178078758,
+   "fusion_TW": 69.58002526310133,
+   "he3_t": 5031.725480123078,
+   "coil_MW_m2": 6.605980335424292,
+   "plate_MW_m2": 0.11379850032399864,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 108860.35318954986,
+   "system_t": 34252.85074854611,
+   "fusion_TW": 510.715761914582,
+   "he3_t": 36932.74761842956,
+   "coil_MW_m2": 4848.774709799635,
+   "plate_MW_m2": 83.52784331270492,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.03913297885185538,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 58348.87128709144,
+   "system_t": 17948.798332445032,
+   "fusion_TW": 247.72883498099293,
+   "he3_t": 17914.674310934683,
+   "coil_MW_m2": 705.5869720215014,
+   "plate_MW_m2": 12.154855931620155,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 8346.149141017282,
+   "system_t": 1808.9630012853202,
+   "fusion_TW": 34.49815483806363,
+   "he3_t": 2494.7568509718435,
+   "coil_MW_m2": 32.75280488824564,
+   "plate_MW_m2": 0.5642190694543586,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0065221631419758955,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 6758.70692115278,
+   "system_t": 1296.5697210587357,
+   "fusion_TW": 27.753183167947725,
+   "he3_t": 2006.9897700186775,
+   "coil_MW_m2": 13.174539639300479,
+   "plate_MW_m2": 0.22695236396206656,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.003913297885185537,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 6271.16273676971,
+   "system_t": 1139.2006348081907,
+   "fusion_TW": 27.48779864339347,
+   "he3_t": 1987.7983128557821,
+   "coil_MW_m2": 7.82913616421982,
+   "plate_MW_m2": 0.13486930161492444,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0026088652567903582,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 6044.338875286274,
+   "system_t": 1065.9866363822441,
+   "fusion_TW": 26.458933382093022,
+   "he3_t": 1913.395241984172,
+   "coil_MW_m2": 5.024061484115853,
+   "plate_MW_m2": 0.08654743632251904,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 5850.61204155111,
+   "system_t": 1003.4556623284285,
+   "fusion_TW": 27.800763798132984,
+   "he3_t": 2010.4305947145322,
+   "coil_MW_m2": 3.5529921997770035,
+   "plate_MW_m2": 0.04732827312368121,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 95926.20470371869,
+   "system_t": 30077.97749037783,
+   "fusion_TW": 450.03551143665385,
+   "he3_t": 32544.61522963668,
+   "coil_MW_m2": 4272.671738747202,
+   "plate_MW_m2": 73.60355489386025,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.03913297885185538,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 54116.3693297794,
+   "system_t": 16582.63500436588,
+   "fusion_TW": 229.75911670176984,
+   "he3_t": 16615.182265706153,
+   "coil_MW_m2": 654.4052063681833,
+   "plate_MW_m2": 11.273168751286175,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 7620.497732713532,
+   "system_t": 1574.7378468569757,
+   "fusion_TW": 31.49873148495177,
+   "he3_t": 2277.851570261452,
+   "coil_MW_m2": 29.90513017592279,
+   "plate_MW_m2": 0.5151633509661956,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0065221631419758955,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 6254.014014452543,
+   "system_t": 1133.6653771221452,
+   "fusion_TW": 27.484617712197462,
+   "he3_t": 1987.568281715538,
+   "coil_MW_m2": 13.047050451352064,
+   "plate_MW_m2": 0.2247561602709573,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.003913297885185537,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 5819.6746395650525,
+   "system_t": 993.4697343962279,
+   "fusion_TW": 25.508833270180546,
+   "he3_t": 1844.6881249099706,
+   "coil_MW_m2": 7.265482151729651,
+   "plate_MW_m2": 0.1251594662739045,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0026088652567903582,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 5606.288902355408,
+   "system_t": 924.5932622843306,
+   "fusion_TW": 26.6746371495599,
+   "he3_t": 1928.9940023872844,
+   "coil_MW_m2": 6.818141750991433,
+   "plate_MW_m2": 0.0908222863554695,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 5429.0699710801555,
+   "system_t": 867.3906599886838,
+   "fusion_TW": 25.797692760622866,
+   "he3_t": 1865.5771897347968,
+   "coil_MW_m2": 3.296995824884015,
+   "plate_MW_m2": 0.04391822726138856,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 30.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": 108860.35382742464,
+   "system_t": 34252.85092548401,
+   "fusion_TW": 510.71576490715637,
+   "he3_t": 36932.74783483955,
+   "coil_MW_m2": 4848.774752811561,
+   "plate_MW_m2": 83.52784405365364,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 100.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": 41517.410450080526,
+   "system_t": 12515.954003054534,
+   "fusion_TW": 191.4273541932248,
+   "he3_t": 13843.195544187165,
+   "coil_MW_m2": 1817.4259548485302,
+   "plate_MW_m2": 31.308047800658528,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 300.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": 15382.66119178533,
+   "system_t": 4080.202270714542,
+   "fusion_TW": 72.16738969381439,
+   "he3_t": 5218.832447721249,
+   "coil_MW_m2": 685.1626547162698,
+   "plate_MW_m2": 11.803014636087815,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.043248731825296705,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.014416243941765569,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.007208121970882784,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.00432487318252967,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.002883248788353114,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 82657.34385863032,
+   "system_t": 25795.066090419572,
+   "fusion_TW": 332.35867464842505,
+   "he3_t": 28541.25025775362,
+   "coil_MW_m2": 255.37354897742466,
+   "plate_MW_m2": 51.18935548531749,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.001441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 58433.798796050316,
+   "system_t": 17976.211175024335,
+   "fusion_TW": 234.61849611862323,
+   "he3_t": 20147.827403340365,
+   "coil_MW_m2": 90.13659343549314,
+   "plate_MW_m2": 18.06778400535476,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.043248731825296705,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.014416243941765569,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 91786.63662731349,
+   "system_t": 28741.81130018671,
+   "fusion_TW": 373.38555338399715,
+   "he3_t": 32064.427182577787,
+   "coil_MW_m2": 1434.4863172472878,
+   "plate_MW_m2": 287.54125212430154,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.007208121970882784,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 27910.301807451015,
+   "system_t": 8123.863222391585,
+   "fusion_TW": 114.6868667850985,
+   "he3_t": 9848.717111577454,
+   "coil_MW_m2": 220.30409637204,
+   "plate_MW_m2": 44.15972111918655,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.00432487318252967,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 21605.981975620216,
+   "system_t": 6088.96031278692,
+   "fusion_TW": 88.5245485706194,
+   "he3_t": 7602.032043789433,
+   "coil_MW_m2": 102.02905160608486,
+   "plate_MW_m2": 20.451614559953445,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.002883248788353114,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 19334.572111165955,
+   "system_t": 5355.796644965905,
+   "fusion_TW": 79.10354041448208,
+   "he3_t": 6793.00441197243,
+   "coil_MW_m2": 60.78057113449204,
+   "plate_MW_m2": 12.183400649215965,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.001441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 15746.529022706445,
+   "system_t": 4197.65120465088,
+   "fusion_TW": 64.33076961051617,
+   "he3_t": 5524.394982829536,
+   "coil_MW_m2": 24.71482812741245,
+   "plate_MW_m2": 4.954060934809185,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.043248731825296705,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.014416243941765569,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 68603.66739174575,
+   "system_t": 21258.832566748257,
+   "fusion_TW": 279.0778620339604,
+   "he3_t": 23965.768638763126,
+   "coil_MW_m2": 1072.1715591030706,
+   "plate_MW_m2": 214.91564533578992,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.007208121970882784,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 25126.142968081247,
+   "system_t": 7225.194869084521,
+   "fusion_TW": 103.24641529438362,
+   "he3_t": 8866.270092845096,
+   "coil_MW_m2": 198.32792035602924,
+   "plate_MW_m2": 39.75462007878502,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.00432487318252967,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 19877.437353068683,
+   "system_t": 5531.022192144681,
+   "fusion_TW": 81.44231400390498,
+   "he3_t": 6993.846235591309,
+   "coil_MW_m2": 93.86641397365737,
+   "plate_MW_m2": 18.81542255362667,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.002883248788353114,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 17926.425908511777,
+   "system_t": 4901.276389727739,
+   "fusion_TW": 73.34239145236847,
+   "he3_t": 6298.266627638022,
+   "coil_MW_m2": 56.35389387267411,
+   "plate_MW_m2": 11.296077914025398,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.001441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 14587.63234085849,
+   "system_t": 3823.5835441082086,
+   "fusion_TW": 59.59622047052171,
+   "he3_t": 5117.816300912607,
+   "coil_MW_m2": 22.89589149952136,
+   "plate_MW_m2": 4.589457028009845,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 30.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 100.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "base",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 300.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1441624394176557,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.03913297885185538,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0065221631419758955,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.003913297885185537,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 98680.15779215243,
+   "system_t": 30966.896094783955,
+   "fusion_TW": 397.1954628717492,
+   "he3_t": 28723.452220143383,
+   "coil_MW_m2": 414.22276631627284,
+   "plate_MW_m2": 83.03051165627858,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0026088652567903582,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 67327.60628532583,
+   "system_t": 20846.946669985988,
+   "fusion_TW": 270.64453106932024,
+   "he3_t": 19571.838007935236,
+   "coil_MW_m2": 188.16449418581485,
+   "plate_MW_m2": 37.71737214430189,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 0.0024000000000000002,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression"
+   ],
+   "departure_t": 50648.557903356406,
+   "system_t": 15463.297857360261,
+   "fusion_TW": 203.33191299264166,
+   "he3_t": 14704.08157597788,
+   "coil_MW_m2": 70.68283647882515,
+   "plate_MW_m2": 14.168299174731684,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.03913297885185538,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 52815.64589662739,
+   "system_t": 16162.788652755027,
+   "fusion_TW": 214.55396169608045,
+   "he3_t": 15515.611439423035,
+   "coil_MW_m2": 745.8387797385648,
+   "plate_MW_m2": 149.50258781166045,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0065221631419758955,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 23252.3152542406,
+   "system_t": 6620.362377453107,
+   "fusion_TW": 95.48065508065204,
+   "he3_t": 6904.746631113051,
+   "coil_MW_m2": 165.9563195494011,
+   "plate_MW_m2": 33.26576722791374,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.003913297885185537,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 18821.416287428357,
+   "system_t": 5190.160628758293,
+   "fusion_TW": 77.08369552635482,
+   "he3_t": 5574.358350911598,
+   "coil_MW_m2": 80.38817648546069,
+   "plate_MW_m2": 16.113724226366372,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0026088652567903582,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 17029.485948185706,
+   "system_t": 4611.762891846105,
+   "fusion_TW": 69.6535736554522,
+   "he3_t": 5037.04418069001,
+   "coil_MW_m2": 48.426356327756714,
+   "plate_MW_m2": 9.70701146945854,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 13889.137639129722,
+   "system_t": 3598.1240031884395,
+   "fusion_TW": 56.73479986048767,
+   "he3_t": 4102.814521671171,
+   "coil_MW_m2": 19.722315592346604,
+   "plate_MW_m2": 3.9533171226731,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.3,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.03913297885185538,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.1,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 43344.46191094193,
+   "system_t": 13105.68807442078,
+   "fusion_TW": 176.07899823433382,
+   "he3_t": 12733.26904639807,
+   "coil_MW_m2": 612.0909785206392,
+   "plate_MW_m2": 122.6929837264339,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.05,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0065221631419758955,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 21101.630887921954,
+   "system_t": 5926.166324750713,
+   "fusion_TW": 86.64933011698544,
+   "he3_t": 6266.103533831893,
+   "coil_MW_m2": 150.6064645719848,
+   "plate_MW_m2": 30.188905171395525,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.003913297885185537,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 17371.399290322777,
+   "system_t": 4722.1253805986735,
+   "fusion_TW": 71.14510583650326,
+   "he3_t": 5144.90531542573,
+   "coil_MW_m2": 74.19500711609567,
+   "plate_MW_m2": 14.872310032536804,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.02,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0026088652567903582,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 15568.543497120829,
+   "system_t": 4140.201182647238,
+   "fusion_TW": 63.67806371162648,
+   "he3_t": 4604.9212326544975,
+   "coil_MW_m2": 44.271906562104654,
+   "plate_MW_m2": 8.874256445489094,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.01,
+   "f_fwd": 2.4e-05,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.0013044326283951791,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 12850.011972134445,
+   "system_t": 3262.715917323438,
+   "fusion_TW": 56.1771161310913,
+   "he3_t": 4062.485254464913,
+   "coil_MW_m2": 19.528451771673296,
+   "plate_MW_m2": 3.914457326613857,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 30.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 100.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "D",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 300.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1304432628395179,
+   "speculative": [
+    "VBC",
+    "SR-26F forward-stream rejection",
+    "SR-26Q wall heat flux"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "A",
+   "lev": "base",
+   "gain": 50.0,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1505,
+   "speculative": [
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "A",
+   "lev": "base",
+   "gain": 50.0,
+   "iso_scale": 0.03,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.004515,
+   "speculative": [
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "A",
+   "lev": "base",
+   "gain": 500.0,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1505,
+   "speculative": [
+    "driver gain 500",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "A",
+   "lev": "base",
+   "gain": 500.0,
+   "iso_scale": 0.03,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.004515,
+   "speculative": [
+    "SR-26 isotropic suppression",
+    "driver gain 500",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "A",
+   "lev": "base",
+   "gain": 5000.0,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1505,
+   "speculative": [
+    "driver gain 5000",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "A",
+   "lev": "base",
+   "gain": 5000.0,
+   "iso_scale": 0.03,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.004515,
+   "speculative": [
+    "SR-26 isotropic suppression",
+    "driver gain 5000",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "A",
+   "lev": "base",
+   "gain": 50000.0,
+   "iso_scale": 1.0,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.1505,
+   "speculative": [
+    "driver gain 50000",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": null,
+   "system_t": null,
+   "fusion_TW": null,
+   "he3_t": null,
+   "coil_MW_m2": null,
+   "plate_MW_m2": null,
+   "heat_ok": false,
+   "fails": [
+    "G1_closes"
+   ]
+  },
+  {
+   "key": "A",
+   "lev": "base",
+   "gain": 50000.0,
+   "iso_scale": 0.03,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.004515,
+   "speculative": [
+    "SR-26 isotropic suppression",
+    "driver gain 50000",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 58513.84585530734,
+   "system_t": 18002.048698754093,
+   "fusion_TW": 235.67072630601413,
+   "he3_t": 20238.187509448187,
+   "coil_MW_m2": 77.44519512893942,
+   "plate_MW_m2": 31.39907605305416,
+   "heat_ok": false,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G2b_research_7kt",
+    "G3_propellant",
+    "G5_coil_heat_flux",
+    "G5b_stern_heat_flux",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ]
+  }
+ ],
+ "sensitivity": {
+  "C_ext_100": {
+   "departure_t": 6708.611660608968,
+   "coil": 7.825583699278257,
+   "plate": 0.3706710777314821,
+   "gates": {
+    "G1_closes": true,
+    "G2_departure_4p6kt": false,
+    "G2b_research_7kt": true,
+    "G3_propellant": false,
+    "G4_trip_time": true,
+    "G5_coil_heat_flux": true,
+    "G5b_stern_heat_flux": true,
+    "G7_conservation": true,
+    "G8_speculative_count": false,
+    "G10_he3_supply": false,
+    "G13_dust_nominal": true,
+    "G13b_dust_high": false,
+    "G14_protected_geometry": true,
+    "G15_compact_stowed": true
+   }
+  },
+  "C_ext_400": {
+   "departure_t": 5976.5937406619305,
+   "coil": 7.461385301850426,
+   "plate": 0.039942584227921456,
+   "gates": {
+    "G1_closes": true,
+    "G2_departure_4p6kt": false,
+    "G2b_research_7kt": true,
+    "G3_propellant": false,
+    "G4_trip_time": true,
+    "G5_coil_heat_flux": true,
+    "G5b_stern_heat_flux": true,
+    "G7_conservation": true,
+    "G8_speculative_count": false,
+    "G10_he3_supply": false,
+    "G13_dust_nominal": true,
+    "G13b_dust_high": false,
+    "G14_protected_geometry": true,
+    "G15_compact_stowed": true
+   }
+  },
+  "C_dust_LOW": {
+   "departure_t": 5896.633949081602,
+   "coil": 7.36156085841751,
+   "plate": 0.1268145745514022,
+   "gates": {
+    "G1_closes": true,
+    "G2_departure_4p6kt": false,
+    "G2b_research_7kt": true,
+    "G3_propellant": false,
+    "G4_trip_time": true,
+    "G5_coil_heat_flux": true,
+    "G5b_stern_heat_flux": true,
+    "G7_conservation": true,
+    "G8_speculative_count": false,
+    "G10_he3_supply": false,
+    "G13_dust_nominal": true,
+    "G13b_dust_high": false,
+    "G14_protected_geometry": true,
+    "G15_compact_stowed": true
+   }
+  },
+  "C_dust_HIGH": {
+   "departure_t": 44242.841521288065,
+   "coil": 50.721424334577584,
+   "plate": 0.873757070183796,
+   "gates": {
+    "G1_closes": true,
+    "G2_departure_4p6kt": false,
+    "G2b_research_7kt": false,
+    "G3_propellant": false,
+    "G4_trip_time": true,
+    "G5_coil_heat_flux": false,
+    "G5b_stern_heat_flux": true,
+    "G7_conservation": true,
+    "G8_speculative_count": false,
+    "G10_he3_supply": false,
+    "G13_dust_nominal": true,
+    "G13b_dust_high": false,
+    "G14_protected_geometry": true,
+    "G15_compact_stowed": true
+   }
+  },
+  "C_dust_out_of_ecliptic": {
+   "departure_t": 6078.271680992845,
+   "coil": 7.588323488231113,
+   "plate": 0.13072092090607335,
+   "gates": {
+    "G1_closes": true,
+    "G2_departure_4p6kt": false,
+    "G2b_research_7kt": true,
+    "G3_propellant": false,
+    "G4_trip_time": true,
+    "G5_coil_heat_flux": true,
+    "G5b_stern_heat_flux": true,
+    "G7_conservation": true,
+    "G8_speculative_count": false,
+    "G10_he3_supply": false,
+    "G13_dust_nominal": true,
+    "G13b_dust_high": false,
+    "G14_protected_geometry": true,
+    "G15_compact_stowed": true
+   }
+  }
+ },
+ "minimum_sets": {
+  "A_research_7kt": null,
+  "A_canon_4p6kt": null,
+  "B_research_7kt": null,
+  "B_canon_4p6kt": null,
+  "C_research_7kt": {
+   "key": "C",
+   "lev": "stretch",
+   "gain": null,
+   "iso_scale": 0.03,
+   "f_fwd": 0.00024,
+   "q_max_MW_m2": 10.0,
+   "driver_kg_W": 0.001,
+   "iso_share": 0.003913297885185537,
+   "speculative": [
+    "VBC",
+    "SR-26 isotropic suppression",
+    "SR-26F forward-stream rejection"
+   ],
+   "departure_t": 6271.16273676971,
+   "system_t": 1139.2006348081907,
+   "fusion_TW": 27.48779864339347,
+   "he3_t": 1987.7983128557821,
+   "coil_MW_m2": 7.82913616421982,
+   "plate_MW_m2": 0.13486930161492444,
+   "heat_ok": true,
+   "fails": [
+    "G2_departure_4p6kt",
+    "G3_propellant",
+    "G8_speculative_count",
+    "G10_he3_supply",
+    "G13b_dust_high"
+   ],
+   "detail": {
+    "closes": true,
+    "ve_c": 0.072,
+    "Tb_d": 466.847532211303,
+    "trip_extra_yr": 0.6,
+    "end_t": 2578.152076856718,
+    "departure_t": 6271.16273676971,
+    "propellant_t": 3693.010659912992,
+    "fuel_t": 3315.2485984861446,
+    "he3_t": 1987.7983128557821,
+    "jet_TW": 21.328885085922153,
+    "fusion_TW": 27.48779864339347,
+    "thrust_MN": 1.9762639597974951,
+    "system_t": 1139.2006348081907,
+    "engine_t": {
+     "coil_conductor": 5.119999999999999,
+     "coil_structure": 5.160940347445252,
+     "coil_armour": 0.8544686876075,
+     "coil_neutron_fin": 16.315174223589853,
+     "ship_shadow_shield": 34.50171913469854,
+     "stern_plate": 31.808625617596654,
+     "driver": 13.743895427952463,
+     "lighting_driver": 3.3333333333333335,
+     "injector_and_feed": 0.20561880694890505,
+     "burn_station": 10.0,
+     "adaptive_machinery": 47.6,
+     "spine": 0.4743032159778917,
+     "dust_protection": 54.35767673980527
+    },
+    "radiator_t_engine": 46.336524951114086,
+    "radiator_load_engine_GW": 4.964753864314451,
+    "heat_engine_GW": {
+     "isotropic radiation on coil armour": 0.08276606237141834,
+     "charged leakage on coils": 0.2281682445490939,
+     "isotropic radiation on the stern plate": 0.20461631471903663,
+     "forward charged stream on the stern plate": 1.642811360753476,
+     "direct conversion loss": 0.0015270994919947176,
+     "driver loss": 0.006871947713976231,
+     "neutrons through the fin into the coils": 2.8436603051989652e-05
+    },
+    "detail": {
+     "R_m": 10.0,
+     "n_sub": 1,
+     "B0_T": 0.96,
+     "I_MA": 15.278874536821952,
+     "BR_Tm": 9.6,
+     "z0_R": 2.0,
+     "burn_to_coil_m": 22.360679774997898,
+     "coil_sky": 0.003151185525190941,
+     "fin_t_m": 0.921282625923226,
+     "fluence_n_m2": 4.6492875222276635e+25,
+     "Ls_m": 251.93,
+     "ship_shield_at_m": 29.25744794347717,
+     "ship_sky": 0.007790439108568803,
+     "ship_shield_t_m": 2.585796097141043,
+     "ext_m": 200.0,
+     "forward_stream_W": 1642811360.753476,
+     "iso_coil_W_m2": 7829136.16421982,
+     "iso_plate_W_m2": 134869.30161492445
+    },
+    "useful_share": 0.775940094826343,
+    "fuel_share": 0.8977089165955053,
+    "energy_error": 0.0,
+    "impulse_error": 0.0,
+    "iso_coil_MW_m2": 7.82913616421982,
+    "iso_plate_MW_m2": 0.13486930161492444,
+    "nozzle": {
+     "BR": 9.6,
+     "z0": 2.0,
+     "kappa": 0.8826037982863908
+    }
+   }
+  },
+  "C_canon_4p6kt": null,
+  "D_research_7kt": null,
+  "D_canon_4p6kt": null
+ }
+}

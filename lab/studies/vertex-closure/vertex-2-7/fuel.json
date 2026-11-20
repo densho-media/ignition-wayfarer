@@ -1,0 +1,2186 @@
+{
+ "meta": {
+  "title": "Vertex 2.7 exhaust-velocity limits, fuel cycles and isotropic floor (research, not canon)",
+  "iso_today": 0.1304432628395179,
+  "iso_sr26a": 0.003913297885185537
+ },
+ "ladder": {
+  "ideal": {
+   "eps": 0.00391822883232257,
+   "beta_nonrel": 0.08852376892476473,
+   "beta_rel": 0.08843701231646443
+  },
+  "rows": [
+   {
+    "step": "ideal: all fusion energy into all reacting mass at one speed (nonrelativistic)",
+    "beta": 0.08852376892476473
+   },
+   {
+    "step": "ideal, exact relativistic (reacting rest mass less Q/c^2 at one speed)",
+    "beta": 0.08843701231646443
+   }
+  ],
+  "grid": [
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.883,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.6740853778399191,
+    "beta": 0.0650073320529237
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.883,
+    "spread": "charge",
+    "eta_dispersion": 0.9810495237118829,
+    "eta_total": 0.6613111388709972,
+    "beta": 0.06438842593460929
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.883,
+    "spread": "thermal",
+    "eta_dispersion": 0.9183468930488415,
+    "eta_total": 0.6190442123889441,
+    "beta": 0.06229679775352538
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.921,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.7333524712857445,
+    "beta": 0.0678049295818151
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.921,
+    "spread": "charge",
+    "eta_dispersion": 0.9810495237118829,
+    "eta_total": 0.7194550926678119,
+    "beta": 0.0671593887721123
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.921,
+    "spread": "thermal",
+    "eta_dispersion": 0.9183468930488415,
+    "eta_total": 0.6734719635149533,
+    "beta": 0.06497774714722183
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.95,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.7802624552873351,
+    "beta": 0.06993993822228484
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.95,
+    "spread": "charge",
+    "eta_dispersion": 0.9810495237118829,
+    "eta_total": 0.7654761101299045,
+    "beta": 0.06927407093757512
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.95,
+    "spread": "thermal",
+    "eta_dispersion": 0.9183468930488415,
+    "eta_total": 0.7165516015757848,
+    "beta": 0.06702373484241123
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.97,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.8134614339942976,
+    "beta": 0.07141235797433293
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.97,
+    "spread": "charge",
+    "eta_dispersion": 0.9810495237118829,
+    "eta_total": 0.798045952378091,
+    "beta": 0.07073247243099776
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.97,
+    "spread": "thermal",
+    "eta_dispersion": 0.9183468930488415,
+    "eta_total": 0.7470397805237184,
+    "beta": 0.06843476083909357
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 1.0,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.8645567371604821,
+    "beta": 0.0736209876024051
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 1.0,
+    "spread": "charge",
+    "eta_dispersion": 0.9810495237118829,
+    "eta_total": 0.8481729752131905,
+    "beta": 0.07292007467113171
+   },
+   {
+    "burnup": 0.8,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 1.0,
+    "spread": "thermal",
+    "eta_dispersion": 0.9183468930488415,
+    "eta_total": 0.7939629934357727,
+    "beta": 0.07055129983411709
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.883,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.7727393996851976,
+    "beta": 0.06960195164755857
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.883,
+    "spread": "charge",
+    "eta_dispersion": 0.9810495237118829,
+    "eta_total": 0.7580956200145694,
+    "beta": 0.06893930218386074
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.883,
+    "spread": "thermal",
+    "eta_dispersion": 0.9183468930488415,
+    "eta_total": 0.7096428268373282,
+    "beta": 0.06669984089654082
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.921,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.8406803752885723,
+    "beta": 0.07259727912502995
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.921,
+    "spread": "charge",
+    "eta_dispersion": 0.9810495237118829,
+    "eta_total": 0.8247490817707809,
+    "beta": 0.0719061124703689
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.921,
+    "spread": "thermal",
+    "eta_dispersion": 0.9183468930488415,
+    "eta_total": 0.7720362106933945,
+    "beta": 0.06957027572561053
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.95,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.89445574865862,
+    "beta": 0.07488318693678442
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.95,
+    "spread": "charge",
+    "eta_dispersion": 0.9810495237118829,
+    "eta_total": 0.8775053862028948,
+    "beta": 0.07417025716270408
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.95,
+    "spread": "thermal",
+    "eta_dispersion": 0.9183468930488415,
+    "eta_total": 0.8214206577503191,
+    "beta": 0.07176087072674267
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.97,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.9325134780198289,
+    "beta": 0.07645967508282199
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.97,
+    "spread": "charge",
+    "eta_dispersion": 0.9810495237118829,
+    "eta_total": 0.9148419034662645,
+    "beta": 0.07573173626086627
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.97,
+    "spread": "thermal",
+    "eta_dispersion": 0.9183468930488415,
+    "eta_total": 0.856370855265679,
+    "beta": 0.07327162589993726
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 1.0,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.9910867021148144,
+    "beta": 0.07882440730187834
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 1.0,
+    "spread": "charge",
+    "eta_dispersion": 0.9810495237118829,
+    "eta_total": 0.9723051370669195,
+    "beta": 0.07807395490810955
+   },
+   {
+    "burnup": 0.8,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 1.0,
+    "spread": "thermal",
+    "eta_dispersion": 0.9183468930488415,
+    "eta_total": 0.9101613936291626,
+    "beta": 0.07553775865972913
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.883,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.6740853778399191,
+    "beta": 0.07084009775197171
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.883,
+    "spread": "charge",
+    "eta_dispersion": 0.9784119780963358,
+    "eta_total": 0.6595332079381712,
+    "beta": 0.07007127699216936
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.883,
+    "spread": "thermal",
+    "eta_dispersion": 0.9051902531161075,
+    "eta_total": 0.6101755137887833,
+    "beta": 0.06739832232866375
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.921,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.7333524712857445,
+    "beta": 0.07388870898025589
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.921,
+    "spread": "charge",
+    "eta_dispersion": 0.9784119780963358,
+    "eta_total": 0.7175208420725216,
+    "beta": 0.07308680193633973
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.921,
+    "spread": "thermal",
+    "eta_dispersion": 0.9051902531161075,
+    "eta_total": 0.663823509106466,
+    "beta": 0.07029881638131291
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.95,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.7802624552873351,
+    "beta": 0.07621528070710433
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.95,
+    "spread": "charge",
+    "eta_dispersion": 0.9784119780963358,
+    "eta_total": 0.7634181323119853,
+    "beta": 0.07538812360425924
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.95,
+    "spread": "thermal",
+    "eta_dispersion": 0.9051902531161075,
+    "eta_total": 0.7062859693985383,
+    "beta": 0.07251235131622938
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.97,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.8134614339942976,
+    "beta": 0.07781981293251705
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.97,
+    "spread": "charge",
+    "eta_dispersion": 0.9784119780963358,
+    "eta_total": 0.7959004107394426,
+    "beta": 0.07697524199592785
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.97,
+    "spread": "thermal",
+    "eta_dispersion": 0.9051902531161075,
+    "eta_total": 0.73633736133749,
+    "beta": 0.07403892713341316
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 1.0,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.8645567371604821,
+    "beta": 0.08022661127063614
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 1.0,
+    "spread": "charge",
+    "eta_dispersion": 0.9784119780963358,
+    "eta_total": 0.8458926673817012,
+    "beta": 0.07935591958343077
+   },
+   {
+    "burnup": 0.95,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 1.0,
+    "spread": "thermal",
+    "eta_dispersion": 0.9051902531161075,
+    "eta_total": 0.7825883317435328,
+    "beta": 0.07632879085918882
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.883,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.7727393996851976,
+    "beta": 0.07584696837622802
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.883,
+    "spread": "charge",
+    "eta_dispersion": 0.9784119780963358,
+    "eta_total": 0.7560574845989693,
+    "beta": 0.07502380853164561
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.883,
+    "spread": "thermal",
+    "eta_dispersion": 0.9051902531161075,
+    "eta_total": 0.6994761727938329,
+    "beta": 0.0721619334881663
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.921,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.8406803752885723,
+    "beta": 0.07911105082050511
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.921,
+    "spread": "charge",
+    "eta_dispersion": 0.9784119780963358,
+    "eta_total": 0.822531748932862,
+    "beta": 0.07825246620344917
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.921,
+    "spread": "thermal",
+    "eta_dispersion": 0.9051902531161075,
+    "eta_total": 0.760975681697207,
+    "beta": 0.07526743005957096
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.95,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.89445574865862,
+    "beta": 0.08160206110692708
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.95,
+    "spread": "charge",
+    "eta_dispersion": 0.9784119780963358,
+    "eta_total": 0.8751462183647194,
+    "beta": 0.08071644179508872
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.95,
+    "spread": "thermal",
+    "eta_dispersion": 0.9051902531161075,
+    "eta_total": 0.8096526255294536,
+    "beta": 0.07763741428511663
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.97,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.9325134780198289,
+    "beta": 0.08331999923549398
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.97,
+    "spread": "charge",
+    "eta_dispersion": 0.9784119780963358,
+    "eta_total": 0.9123823566308747,
+    "beta": 0.08241573530656426
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.97,
+    "spread": "thermal",
+    "eta_dispersion": 0.9051902531161075,
+    "eta_total": 0.8441021112029506,
+    "beta": 0.0792718861648033
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 1.0,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.9910867021148144,
+    "beta": 0.0858969064283443
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 1.0,
+    "spread": "charge",
+    "eta_dispersion": 0.9784119780963358,
+    "eta_total": 0.9696911006811295,
+    "beta": 0.0849646755737776
+   },
+   {
+    "burnup": 0.95,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 1.0,
+    "spread": "thermal",
+    "eta_dispersion": 0.9051902531161075,
+    "eta_total": 0.897122022747317,
+    "beta": 0.08172359398433329
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.883,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.6740853778399191,
+    "beta": 0.07231609164315271
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.883,
+    "spread": "charge",
+    "eta_dispersion": 0.9777089984329577,
+    "eta_total": 0.6590593396261691,
+    "beta": 0.0715055501855259
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.883,
+    "spread": "thermal",
+    "eta_dispersion": 0.9016965705835287,
+    "eta_total": 0.6078204734787572,
+    "beta": 0.06866970084425618
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.921,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.7333524712857445,
+    "beta": 0.07542822242734275
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.921,
+    "spread": "charge",
+    "eta_dispersion": 0.9777089984329577,
+    "eta_total": 0.7170053101991196,
+    "beta": 0.07458279923088264
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.921,
+    "spread": "thermal",
+    "eta_dispersion": 0.9016965705835287,
+    "eta_total": 0.6612614083873115,
+    "beta": 0.07162490880810865
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.95,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.7802624552873351,
+    "beta": 0.07780326960475094
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.95,
+    "spread": "charge",
+    "eta_dispersion": 0.9777089984329577,
+    "eta_total": 0.7628696236738208,
+    "beta": 0.07693122613391802
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.95,
+    "spread": "thermal",
+    "eta_dispersion": 0.9016965705835287,
+    "eta_total": 0.703559980087674,
+    "beta": 0.07388019909631185
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.97,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.8134614339942976,
+    "beta": 0.07944123317537727
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.97,
+    "spread": "charge",
+    "eta_dispersion": 0.9777089984329577,
+    "eta_total": 0.7953285638944022,
+    "beta": 0.07855083089463208
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.97,
+    "spread": "thermal",
+    "eta_dispersion": 0.9016965705835287,
+    "eta_total": 0.7334953853346177,
+    "beta": 0.07543557170886579
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 1.0,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.8645567371604821,
+    "beta": 0.08189817853131677
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 1.0,
+    "spread": "charge",
+    "eta_dispersion": 0.9777089984329577,
+    "eta_total": 0.8452849015776408,
+    "beta": 0.08098023803570317
+   },
+   {
+    "burnup": 0.99,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 1.0,
+    "spread": "thermal",
+    "eta_dispersion": 0.9016965705835287,
+    "eta_total": 0.7795678449724919,
+    "beta": 0.07776863062769669
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.883,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.7727393996851976,
+    "beta": 0.0774272832761294
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.883,
+    "spread": "charge",
+    "eta_dispersion": 0.9777089984329577,
+    "eta_total": 0.7555142645158994,
+    "beta": 0.07655945397810263
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.883,
+    "spread": "thermal",
+    "eta_dispersion": 0.9016965705835287,
+    "eta_total": 0.6967764666509173,
+    "beta": 0.07352317110819304
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.921,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.8406803752885723,
+    "beta": 0.0807593747421463
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.921,
+    "spread": "charge",
+    "eta_dispersion": 0.9777089984329577,
+    "eta_total": 0.821940767725633,
+    "beta": 0.07985419831691111
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.921,
+    "spread": "thermal",
+    "eta_dispersion": 0.9016965705835287,
+    "eta_total": 0.7580386113545795,
+    "beta": 0.07668724868702806
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.95,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.89445574865862,
+    "beta": 0.08330228665042234
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.95,
+    "spread": "charge",
+    "eta_dispersion": 0.9777089984329577,
+    "eta_total": 0.8745174341636207,
+    "beta": 0.08236860847021234
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.95,
+    "spread": "thermal",
+    "eta_dispersion": 0.9016965705835287,
+    "eta_total": 0.8065276811042004,
+    "beta": 0.07910193947087586
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.97,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.9325134780198289,
+    "beta": 0.08505601900095755
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.97,
+    "spread": "charge",
+    "eta_dispersion": 0.9777089984329577,
+    "eta_total": 0.9117268186200007,
+    "beta": 0.08410268443800627
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.97,
+    "spread": "thermal",
+    "eta_dispersion": 0.9016965705835287,
+    "eta_total": 0.8408442051533984,
+    "beta": 0.0807672434597364
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 1.0,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.9910867021148144,
+    "beta": 0.08768661752676037
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 1.0,
+    "spread": "charge",
+    "eta_dispersion": 0.9777089984329577,
+    "eta_total": 0.9689943868848983,
+    "beta": 0.08670379838969719
+   },
+   {
+    "burnup": 0.99,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 1.0,
+    "spread": "thermal",
+    "eta_dispersion": 0.9016965705835287,
+    "eta_total": 0.8936594804478675,
+    "beta": 0.08326519944302721
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.883,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.6740853778399191,
+    "beta": 0.07268040675311917
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.883,
+    "spread": "charge",
+    "eta_dispersion": 0.9775332776040815,
+    "eta_total": 0.6589408887848418,
+    "beta": 0.07185932353192628
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.883,
+    "spread": "thermal",
+    "eta_dispersion": 0.9008241214234737,
+    "eta_total": 0.6072323682570554,
+    "beta": 0.06898224950267005
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.921,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.7333524712857445,
+    "beta": 0.07580821587726246
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.921,
+    "spread": "charge",
+    "eta_dispersion": 0.9775332776040815,
+    "eta_total": 0.7168764448950069,
+    "beta": 0.07495179725130703
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.921,
+    "spread": "thermal",
+    "eta_dispersion": 0.9008241214234737,
+    "eta_total": 0.660621595639714,
+    "beta": 0.07195090803166379
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.95,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.7802624552873351,
+    "beta": 0.07819522810358234
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.95,
+    "spread": "charge",
+    "eta_dispersion": 0.9775332776040815,
+    "eta_total": 0.7627325153084368,
+    "beta": 0.07731184298451865
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.95,
+    "spread": "thermal",
+    "eta_dispersion": 0.9008241214234737,
+    "eta_total": 0.702879240763936,
+    "beta": 0.0742164632248432
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.97,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.8134614339942976,
+    "beta": 0.07984144343207882
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.97,
+    "spread": "charge",
+    "eta_dispersion": 0.9775332776040815,
+    "eta_total": 0.795185621776962,
+    "beta": 0.07893946073156115
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 0.97,
+    "spread": "thermal",
+    "eta_dispersion": 0.9008241214234737,
+    "eta_total": 0.7327856815897922,
+    "beta": 0.07577891508220833
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 1.0,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.8645567371604821,
+    "beta": 0.08231076642482352
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 1.0,
+    "spread": "charge",
+    "eta_dispersion": 0.9775332776040815,
+    "eta_total": 0.8451329809511765,
+    "beta": 0.0813808873521249
+   },
+   {
+    "burnup": 1.0,
+    "iso": "today",
+    "iso_share": 0.1304432628395179,
+    "kappa": 1.0,
+    "spread": "thermal",
+    "eta_dispersion": 0.9008241214234737,
+    "eta_total": 0.7788135631733364,
+    "beta": 0.078122592868256
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.883,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.7727393996851976,
+    "beta": 0.07781734762529723
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.883,
+    "spread": "charge",
+    "eta_dispersion": 0.9775332776040815,
+    "eta_total": 0.7553784781080815,
+    "beta": 0.07693823148785042
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.883,
+    "spread": "thermal",
+    "eta_dispersion": 0.9008241214234737,
+    "eta_total": 0.6961022908107206,
+    "beta": 0.07385781023155719
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.921,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.8406803752885723,
+    "beta": 0.08116622555254671
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.921,
+    "spread": "charge",
+    "eta_dispersion": 0.9775332776040815,
+    "eta_total": 0.8217930426732674,
+    "beta": 0.08024927655754273
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.921,
+    "spread": "thermal",
+    "eta_dispersion": 0.9008241214234737,
+    "eta_total": 0.7573051604672842,
+    "beta": 0.07703628904106927
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.95,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.89445574865862,
+    "beta": 0.0837219481812371
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.95,
+    "spread": "charge",
+    "eta_dispersion": 0.9775332776040815,
+    "eta_total": 0.8743602596580733,
+    "beta": 0.08277612674230792
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.95,
+    "spread": "thermal",
+    "eta_dispersion": 0.9008241214234737,
+    "eta_total": 0.8057473139375767,
+    "beta": 0.07946197023780217
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.97,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.9325134780198289,
+    "beta": 0.08548451551136842
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.97,
+    "spread": "charge",
+    "eta_dispersion": 0.9775332776040815,
+    "eta_total": 0.9115629565787049,
+    "beta": 0.08451878204214598
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 0.97,
+    "spread": "thermal",
+    "eta_dispersion": 0.9008241214234737,
+    "eta_total": 0.8400306345527601,
+    "beta": 0.0811348538217559
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 1.0,
+    "spread": "common",
+    "eta_dispersion": 1.0,
+    "eta_total": 0.9910867021148144,
+    "beta": 0.08812836650656537
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 1.0,
+    "spread": "charge",
+    "eta_dispersion": 0.9775332776040815,
+    "eta_total": 0.9688202323081145,
+    "beta": 0.08713276499190308
+   },
+   {
+    "burnup": 1.0,
+    "iso": "SR-26A",
+    "iso_share": 0.003913297885185537,
+    "kappa": 1.0,
+    "spread": "thermal",
+    "eta_dispersion": 0.9008241214234737,
+    "eta_total": 0.8927948076870657,
+    "beta": 0.08364417919768649
+   }
+  ]
+ },
+ "dispersion": {
+  "common": {
+   "b0.8": 1.0,
+   "b0.95": 1.0,
+   "b1.0": 1.0
+  },
+  "charge": {
+   "b0.8": 0.9810495237118829,
+   "b0.95": 0.9784119780963358,
+   "b1.0": 0.9775332776040815
+  },
+  "thermal": {
+   "b0.8": 0.9183468930488415,
+   "b0.95": 0.9051902531161075,
+   "b1.0": 0.9008241214234737
+  },
+  "birth": {
+   "b0.8": 0.512758404405641,
+   "b0.95": 0.6091610049991105,
+   "b1.0": 0.6413204878234602
+  }
+ },
+ "cycles": [
+  {
+   "cycle": "D-3He 1:1 (reference)",
+   "Q_MeV": 18.353,
+   "ideal_beta": 0.08852376892476473,
+   "neutron_energy_share": 0.0586219069240614,
+   "he3_mass_share": 0.5995706460295696,
+   "relative_reactivity": 1.0,
+   "note": "side D-D and bred D-T make the neutrons; He-3 is 60 % of the fuel mass"
+  },
+  {
+   "cycle": "D-3He He-3-rich 1:2",
+   "Q_MeV": 18.353,
+   "ideal_beta": 0.08852376892476473,
+   "neutron_energy_share": 0.030699212554001164,
+   "he3_mass_share": 0.7496644771743154,
+   "relative_reactivity": null,
+   "note": "fewer neutrons (~1/r) but more bremsstrahlung per watt and more He-3 per kg; excess He-3 leaves unburned"
+  },
+  {
+   "cycle": "D-3He He-3-rich 1:3",
+   "Q_MeV": 18.353,
+   "ideal_beta": 0.08852376892476473,
+   "neutron_energy_share": 0.020794438406002234,
+   "he3_mass_share": 0.8179155857714384,
+   "relative_reactivity": null,
+   "note": "fewer neutrons (~1/r) but more bremsstrahlung per watt and more He-3 per kg; excess He-3 leaves unburned"
+  },
+  {
+   "cycle": "D-3He D-rich 1:0.5 (bred He-3 burned in situ)",
+   "Q_MeV": 18.353,
+   "ideal_beta": 0.08852376892476473,
+   "neutron_energy_share": 0.09504170216531913,
+   "he3_mass_share": 0.4281334465959996,
+   "relative_reactivity": null,
+   "note": "less He-3 per kg, but neutrons rise ~1/r and the excess deuterium dilutes the exhaust energy"
+  },
+  {
+   "cycle": "D-3He D-rich 1:0.3 (bred He-3 burned in situ)",
+   "Q_MeV": 18.353,
+   "ideal_beta": 0.08852376892476473,
+   "neutron_energy_share": 0.1347969431561676,
+   "he3_mass_share": 0.30996212996386674,
+   "relative_reactivity": null,
+   "note": "less He-3 per kg, but neutrons rise ~1/r and the excess deuterium dilutes the exhaust energy"
+  },
+  {
+   "cycle": "Catalyzed D-D (no He-3 feed)",
+   "Q_MeV": 43.25,
+   "ideal_beta": 0.08767198528492039,
+   "neutron_energy_share": 0.3819653179190751,
+   "he3_mass_share": 0.0,
+   "relative_reactivity": 0.19674576089102083,
+   "note": "He-3 and T bred and burned; about 38 % of the energy leaves as neutrons (2.45 and 14.1 MeV)"
+  },
+  {
+   "cycle": "D-T",
+   "Q_MeV": 17.589,
+   "ideal_beta": 0.08665674419937941,
+   "neutron_energy_share": 0.7998180681107511,
+   "he3_mass_share": 0.0,
+   "relative_reactivity": 3.321280056385348,
+   "note": "80 % neutrons; tritium supply and decay"
+  },
+  {
+   "cycle": "3He-3He",
+   "Q_MeV": 12.86,
+   "ideal_beta": 0.06766929764008155,
+   "neutron_energy_share": 0.0,
+   "he3_mass_share": 1.0,
+   "relative_reactivity": 0.001,
+   "note": "aneutronic, all He-3; reactivity about 1e-3 of D-3He at reachable temperatures (LITERATURE order)"
+  },
+  {
+   "cycle": "p-11B",
+   "Q_MeV": 8.68,
+   "ideal_beta": 0.0393861787539434,
+   "neutron_energy_share": 0.001,
+   "he3_mass_share": 0.0,
+   "relative_reactivity": 0.2,
+   "note": "aneutronic; ideal exhaust 0.039 c is below the mission point; bremsstrahlung exceeds fusion in thermal plasma"
+  },
+  {
+   "cycle": "D-6Li",
+   "Q_MeV": 22.37,
+   "ideal_beta": 0.07735359317310932,
+   "neutron_energy_share": 0.05,
+   "he3_mass_share": 0.0,
+   "relative_reactivity": 0.02,
+   "note": "branching and D-D side reactions; low reactivity (LITERATURE order)"
+  }
+ ],
+ "he3_scan": [
+  {
+   "Ti_keV": 100.0,
+   "r": 0.2,
+   "bred_burn": 0.0,
+   "neutron_share": 0.18518729177111568,
+   "brems_rel": 2.853041006719183e+21,
+   "he3_kg_per_TJ": 0.0012158989544329643,
+   "he3_mass_share_feed": 0.2304518708948163,
+   "DD_power_share": 0.2858518351037086,
+   "he3_vs_ref": 0.7851601288416005,
+   "brems_vs_ref": 1.029339503410618
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 0.2,
+   "bred_burn": 0.8,
+   "neutron_share": 0.15143477518869514,
+   "brems_rel": 2.3330414270037733e+21,
+   "he3_kg_per_TJ": 0.0009942873674307102,
+   "he3_mass_share_feed": 0.2304518708948163,
+   "DD_power_share": 0.23375204622414503,
+   "he3_vs_ref": 0.6420556532853839,
+   "brems_vs_ref": 0.8417305248164055
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 0.3,
+   "bred_burn": 0.0,
+   "neutron_share": 0.1364607092319087,
+   "brems_rel": 2.936612074397883e+21,
+   "he3_kg_per_TJ": 0.0013439564245153407,
+   "he3_mass_share_feed": 0.30996212996386674,
+   "DD_power_share": 0.21063834229892248,
+   "he3_vs_ref": 0.8678525428308022,
+   "brems_vs_ref": 1.0594908405632548
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 0.3,
+   "bred_burn": 0.8,
+   "neutron_share": 0.11721019351153358,
+   "brems_rel": 2.5223441344096224e+21,
+   "he3_kg_per_TJ": 0.0011543644575436342,
+   "he3_mass_share_feed": 0.30996212996386674,
+   "DD_power_share": 0.18092358599608038,
+   "he3_vs_ref": 0.7454245625515867,
+   "brems_vs_ref": 0.9100284407511979
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 0.5,
+   "bred_burn": 0.0,
+   "neutron_share": 0.08940966717045874,
+   "brems_rel": 3.2796841510428077e+21,
+   "he3_kg_per_TJ": 0.0014676104362917803,
+   "he3_mass_share_feed": 0.4281334465959996,
+   "DD_power_share": 0.13801118420305017,
+   "he3_vs_ref": 0.9477014475972737,
+   "brems_vs_ref": 1.1832667134567967
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 0.5,
+   "bred_burn": 0.8,
+   "neutron_share": 0.08072303698876113,
+   "brems_rel": 2.961045191358851e+21,
+   "he3_kg_per_TJ": 0.0013250241867919191,
+   "he3_mass_share_feed": 0.4281334465959996,
+   "DD_power_share": 0.12460265516978082,
+   "he3_vs_ref": 0.8556271534133782,
+   "brems_vs_ref": 1.0683059863743896
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 0.7,
+   "bred_burn": 0.0,
+   "neutron_share": 0.06648569646510294,
+   "brems_rel": 3.706972407345263e+21,
+   "he3_kg_per_TJ": 0.0015278565184053434,
+   "he3_mass_share_feed": 0.5117482144906987,
+   "DD_power_share": 0.1026261476202554,
+   "he3_vs_ref": 0.9866050270616926,
+   "brems_vs_ref": 1.3374266713822975
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 0.7,
+   "bred_burn": 0.8,
+   "neutron_share": 0.06155970017817163,
+   "brems_rel": 3.4323188610155775e+21,
+   "he3_kg_per_TJ": 0.0014146559965370212,
+   "he3_mass_share_feed": 0.5117482144906987,
+   "DD_power_share": 0.09502246669341441,
+   "he3_vs_ref": 0.9135064064805789,
+   "brems_vs_ref": 1.2383353003423614
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 1.0,
+   "bred_burn": 0.0,
+   "neutron_share": 0.04801836961205941,
+   "brems_rel": 4.40346918737945e+21,
+   "he3_kg_per_TJ": 0.0015763901736043763,
+   "he3_mass_share_feed": 0.5995706460295696,
+   "DD_power_share": 0.07412030783008758,
+   "he3_vs_ref": 1.0179453706242032,
+   "brems_vs_ref": 1.588713508129138
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 1.0,
+   "bred_burn": 0.8,
+   "neutron_share": 0.04539485547032754,
+   "brems_rel": 4.162882849711101e+21,
+   "he3_kg_per_TJ": 0.001490263094597937,
+   "he3_mass_share_feed": 0.5995706460295696,
+   "DD_power_share": 0.07007069770478007,
+   "he3_vs_ref": 0.9623292783470428,
+   "brems_vs_ref": 1.5019131359088684
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 1.5,
+   "bred_burn": 0.0,
+   "neutron_share": 0.03282320167884119,
+   "brems_rel": 5.618692505896534e+21,
+   "he3_kg_per_TJ": 0.0016163243257981826,
+   "he3_mass_share_feed": 0.6919265459609474,
+   "DD_power_share": 0.05066531479639748,
+   "he3_vs_ref": 1.0437326319483085,
+   "brems_vs_ref": 2.027150027011777
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 1.5,
+   "bred_burn": 0.8,
+   "neutron_share": 0.0315758045832456,
+   "brems_rel": 5.405162430997774e+21,
+   "he3_kg_per_TJ": 0.0015548983171696324,
+   "he3_mass_share_feed": 0.6919265459609474,
+   "DD_power_share": 0.04873985465564579,
+   "he3_vs_ref": 1.0040671213619379,
+   "brems_vs_ref": 1.950111196955748
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 2.0,
+   "bred_burn": 0.0,
+   "neutron_share": 0.024933213537319417,
+   "brems_rel": 6.859414747373975e+21,
+   "he3_kg_per_TJ": 0.0016370598641374508,
+   "he3_mass_share_feed": 0.7496644771743154,
+   "DD_power_share": 0.038486468355962214,
+   "he3_vs_ref": 1.0571224929188299,
+   "brems_vs_ref": 2.47478622042966
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 2.0,
+   "bred_burn": 0.8,
+   "neutron_share": 0.024206798260597788,
+   "brems_rel": 6.659569522673839e+21,
+   "he3_kg_per_TJ": 0.0015893650376187058,
+   "he3_mass_share_feed": 0.7496644771743154,
+   "DD_power_share": 0.037365186555724586,
+   "he3_vs_ref": 1.0263238184089076,
+   "brems_vs_ref": 2.402684703533352
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 3.0,
+   "bred_burn": 0.0,
+   "neutron_share": 0.016838156078576576,
+   "brems_rel": 9.367683642409745e+21,
+   "he3_kg_per_TJ": 0.0016583343415236696,
+   "he3_mass_share_feed": 0.8179155857714384,
+   "DD_power_share": 0.02599108053684769,
+   "he3_vs_ref": 1.070860370844213,
+   "brems_vs_ref": 3.379736500764184
+  },
+  {
+   "Ti_keV": 100.0,
+   "r": 3.0,
+   "bred_burn": 0.8,
+   "neutron_share": 0.016503695380817144,
+   "brems_rel": 9.181610892352732e+21,
+   "he3_kg_per_TJ": 0.0016253944128048641,
+   "he3_mass_share_feed": 0.8179155857714384,
+   "DD_power_share": 0.025474812906870335,
+   "he3_vs_ref": 1.0495895912431634,
+   "brems_vs_ref": 3.312603910769558
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 0.2,
+   "bred_burn": 0.0,
+   "neutron_share": 0.21524149022172043,
+   "brems_rel": 1.7097188659727916e+21,
+   "he3_kg_per_TJ": 0.001137195916902802,
+   "he3_mass_share_feed": 0.2304518708948163,
+   "DD_power_share": 0.3320774113483571,
+   "he3_vs_ref": 0.7343380709213143,
+   "brems_vs_ref": 0.616843979573904
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 0.2,
+   "bred_burn": 0.8,
+   "neutron_share": 0.17044485397305392,
+   "brems_rel": 1.3538875899136513e+21,
+   "he3_kg_per_TJ": 0.0009005196525799354,
+   "he3_mass_share_feed": 0.2304518708948163,
+   "DD_power_share": 0.26296456982673677,
+   "he3_vs_ref": 0.5815056620176057,
+   "brems_vs_ref": 0.4884647560947888
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 0.3,
+   "bred_burn": 0.0,
+   "neutron_share": 0.16135512412337466,
+   "brems_rel": 1.790290875440496e+21,
+   "he3_kg_per_TJ": 0.001278743155899665,
+   "he3_mass_share_feed": 0.30996212996386674,
+   "DD_power_share": 0.24894081467047935,
+   "he3_vs_ref": 0.8257414297306643,
+   "brems_vs_ref": 0.6459132961448754
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 0.3,
+   "bred_burn": 0.8,
+   "neutron_share": 0.1347969431561676,
+   "brems_rel": 1.4956186776270995e+21,
+   "he3_kg_per_TJ": 0.0010682689467323531,
+   "he3_mass_share_feed": 0.30996212996386674,
+   "DD_power_share": 0.20796650262391955,
+   "he3_vs_ref": 0.6898288552645502,
+   "brems_vs_ref": 0.5395994601180483
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 0.5,
+   "bred_burn": 0.0,
+   "neutron_share": 0.10751946806304521,
+   "brems_rel": 2.0334641980545622e+21,
+   "he3_kg_per_TJ": 0.0014201571911496374,
+   "he3_mass_share_feed": 0.4281334465959996,
+   "DD_power_share": 0.16588245410840113,
+   "he3_vs_ref": 0.9170587729457994,
+   "brems_vs_ref": 0.7336470183566396
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 0.5,
+   "bred_burn": 0.8,
+   "neutron_share": 0.09504170216531913,
+   "brems_rel": 1.79747818843392e+21,
+   "he3_kg_per_TJ": 0.001255346210511723,
+   "he3_mass_share_feed": 0.4281334465959996,
+   "DD_power_share": 0.1466315922301481,
+   "he3_vs_ref": 0.8106329796507286,
+   "brems_vs_ref": 0.6485063837205829
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 0.7,
+   "bred_burn": 0.0,
+   "neutron_share": 0.0806206339332082,
+   "brems_rel": 2.317603937548328e+21,
+   "he3_kg_per_TJ": 0.0014908143161144977,
+   "he3_mass_share_feed": 0.5117482144906987,
+   "DD_power_share": 0.12438257786742295,
+   "he3_vs_ref": 0.9626852266397732,
+   "brems_vs_ref": 0.8361608825671173
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 0.7,
+   "bred_burn": 0.8,
+   "neutron_share": 0.07339542032572693,
+   "brems_rel": 2.1099004913040422e+21,
+   "he3_kg_per_TJ": 0.0013572076777451916,
+   "he3_mass_share_feed": 0.5117482144906987,
+   "DD_power_share": 0.11323542297298438,
+   "he3_vs_ref": 0.876409467446396,
+   "brems_vs_ref": 0.7612242231534412
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 1.0,
+   "bred_burn": 0.0,
+   "neutron_share": 0.0586219069240614,
+   "brems_rel": 2.771720114953234e+21,
+   "he3_kg_per_TJ": 0.0015485999731377875,
+   "he3_mass_share_feed": 0.5995706460295696,
+   "DD_power_share": 0.09044265155195523,
+   "he3_vs_ref": 1.0,
+   "brems_vs_ref": 1.0
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 1.0,
+   "bred_burn": 0.8,
+   "neutron_share": 0.05470601630261755,
+   "brems_rel": 2.586571705887106e+21,
+   "he3_kg_per_TJ": 0.0014451548887082766,
+   "he3_mass_share_feed": 0.5995706460295696,
+   "DD_power_share": 0.08440116382878039,
+   "he3_vs_ref": 0.9332009000233227,
+   "brems_vs_ref": 0.9332009000233229
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 1.5,
+   "bred_burn": 0.0,
+   "neutron_share": 0.04029609999289429,
+   "brems_rel": 3.556470574929513e+21,
+   "he3_kg_per_TJ": 0.001596737703723705,
+   "he3_mass_share_feed": 0.6919265459609474,
+   "DD_power_share": 0.062169354799070896,
+   "he3_vs_ref": 1.0310846773995355,
+   "brems_vs_ref": 1.2831275985416442
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 1.5,
+   "bred_burn": 0.8,
+   "neutron_share": 0.03840636153364325,
+   "brems_rel": 3.389685222852659e+21,
+   "he3_kg_per_TJ": 0.0015218565949167739,
+   "he3_mass_share_feed": 0.6919265459609474,
+   "DD_power_share": 0.05925384136796107,
+   "he3_vs_ref": 0.9827306091405736,
+   "brems_vs_ref": 1.2229536469304918
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 2.0,
+   "bred_burn": 0.0,
+   "neutron_share": 0.030699212554001164,
+   "brems_rel": 4.3544962666964074e+21,
+   "he3_kg_per_TJ": 0.0016219465462992057,
+   "he3_mass_share_feed": 0.7496644771743154,
+   "DD_power_share": 0.047363150221940556,
+   "he3_vs_ref": 1.0473631502219407,
+   "brems_vs_ref": 1.5710447253329107
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 2.0,
+   "bred_burn": 0.8,
+   "neutron_share": 0.029590017367279113,
+   "brems_rel": 4.1971636872003484e+21,
+   "he3_kg_per_TJ": 0.0015633438932470816,
+   "he3_mass_share_feed": 0.7496644771743154,
+   "DD_power_share": 0.04565186925140234,
+   "he3_vs_ref": 1.0095208061249155,
+   "brems_vs_ref": 1.5142812091873734
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 3.0,
+   "bred_burn": 0.0,
+   "neutron_share": 0.020794438406002234,
+   "brems_rel": 5.964674672240225e+21,
+   "he3_kg_per_TJ": 0.0016479641372976045,
+   "he3_mass_share_feed": 0.8179155857714384,
+   "DD_power_share": 0.03208193396726096,
+   "he3_vs_ref": 1.0641638679345218,
+   "brems_vs_ref": 2.1519758218231444
+  },
+  {
+   "Ti_keV": 200.0,
+   "r": 3.0,
+   "bred_burn": 0.8,
+   "neutron_share": 0.020279517720311557,
+   "brems_rel": 5.816974873275459e+21,
+   "he3_kg_per_TJ": 0.001607156551778681,
+   "he3_mass_share_feed": 0.8179155857714384,
+   "DD_power_share": 0.0312875075387051,
+   "he3_vs_ref": 1.037812591796864,
+   "brems_vs_ref": 2.098687685633658
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 0.2,
+   "bred_burn": 0.0,
+   "neutron_share": 0.2652365202248851,
+   "brems_rel": 1.5122138349954786e+21,
+   "he3_kg_per_TJ": 0.0010058281702719147,
+   "he3_mass_share_feed": 0.2304518708948163,
+   "DD_power_share": 0.40923516762487305,
+   "he3_vs_ref": 0.6495080638764938,
+   "brems_vs_ref": 0.5455867736562549
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 0.2,
+   "bred_burn": 0.8,
+   "neutron_share": 0.20043484547083212,
+   "brems_rel": 1.1427549497300924e+21,
+   "he3_kg_per_TJ": 0.0007600876896881647,
+   "he3_mass_share_feed": 0.2304518708948163,
+   "DD_power_share": 0.3092522383967913,
+   "he3_vs_ref": 0.49082248668006107,
+   "brems_vs_ref": 0.4122908888112513
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 0.3,
+   "bred_burn": 0.0,
+   "neutron_share": 0.20475538104454277,
+   "brems_rel": 1.6306371491201147e+21,
+   "he3_kg_per_TJ": 0.0011647079939901045,
+   "he3_mass_share_feed": 0.30996212996386674,
+   "DD_power_share": 0.31591842108625495,
+   "he3_vs_ref": 0.7521038448878199,
+   "brems_vs_ref": 0.588312340890028
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 0.3,
+   "bred_burn": 0.8,
+   "neutron_share": 0.1638589677144747,
+   "brems_rel": 1.304945045197958e+21,
+   "he3_kg_per_TJ": 0.0009320773335011783,
+   "he3_mass_share_feed": 0.30996212996386674,
+   "DD_power_share": 0.2528190765834829,
+   "he3_vs_ref": 0.6018838626301889,
+   "brems_vs_ref": 0.4708069325462812
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 0.5,
+   "bred_burn": 0.0,
+   "neutron_share": 0.14062344306734506,
+   "brems_rel": 1.9089226112570627e+21,
+   "he3_kg_per_TJ": 0.0013331782169159782,
+   "he3_mass_share_feed": 0.4281334465959996,
+   "DD_power_share": 0.2169688331262177,
+   "he3_vs_ref": 0.8608925739645211,
+   "brems_vs_ref": 0.688714059171617
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 0.5,
+   "bred_burn": 0.8,
+   "neutron_share": 0.12004625502414835,
+   "brems_rel": 1.6295932286523768e+21,
+   "he3_kg_per_TJ": 0.0011380965273613001,
+   "he3_mass_share_feed": 0.4281334465959996,
+   "DD_power_share": 0.18522015466004593,
+   "he3_vs_ref": 0.7349196352207591,
+   "brems_vs_ref": 0.5879357081766072
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 0.7,
+   "bred_burn": 0.0,
+   "neutron_share": 0.10708354255531763,
+   "brems_rel": 2.2095147910777416e+21,
+   "he3_kg_per_TJ": 0.00142128524586904,
+   "he3_mass_share_feed": 0.5117482144906987,
+   "DD_power_share": 0.16521990052627425,
+   "he3_vs_ref": 0.9177872081382119,
+   "brems_vs_ref": 0.7971637464971898
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 0.7,
+   "bred_burn": 0.8,
+   "neutron_share": 0.094719970425928,
+   "brems_rel": 1.954410273253902e+21,
+   "he3_kg_per_TJ": 0.0012571875494871553,
+   "he3_mass_share_feed": 0.5117482144906987,
+   "DD_power_share": 0.1461440639539836,
+   "he3_vs_ref": 0.8118220142673969,
+   "brems_vs_ref": 0.7051254066779675
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 1.0,
+   "bred_burn": 0.0,
+   "neutron_share": 0.07886763040373684,
+   "brems_rel": 2.6765132414987566e+21,
+   "he3_kg_per_TJ": 0.001495406520855675,
+   "he3_mass_share_feed": 0.5995706460295696,
+   "DD_power_share": 0.12168538450543898,
+   "he3_vs_ref": 0.9656506178452712,
+   "brems_vs_ref": 0.9656506178452713
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 1.0,
+   "bred_burn": 0.8,
+   "neutron_share": 0.07195069864842542,
+   "brems_rel": 2.441774866085907e+21,
+   "he3_kg_per_TJ": 0.0013642548075576382,
+   "he3_mass_share_feed": 0.5995706460295696,
+   "DD_power_share": 0.11101320510897177,
+   "he3_vs_ref": 0.8809601131487641,
+   "brems_vs_ref": 0.8809601131487643
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 1.5,
+   "bred_burn": 0.0,
+   "neutron_share": 0.054801257638185975,
+   "brems_rel": 3.4715857841963e+21,
+   "he3_kg_per_TJ": 0.0015586272391547398,
+   "he3_mass_share_feed": 0.6919265459609474,
+   "DD_power_share": 0.08455322003396115,
+   "he3_vs_ref": 1.006475052428572,
+   "brems_vs_ref": 1.2525022874666674
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 1.5,
+   "bred_burn": 0.8,
+   "neutron_share": 0.05136980413856261,
+   "brems_rel": 3.2542078315392e+21,
+   "he3_kg_per_TJ": 0.0014610317253853796,
+   "he3_mass_share_feed": 0.6919265459609474,
+   "DD_power_share": 0.07925880791105783,
+   "he3_vs_ref": 0.9434532808527846,
+   "brems_vs_ref": 1.174075193950132
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 2.0,
+   "bred_burn": 0.0,
+   "neutron_share": 0.04198850914172914,
+   "brems_rel": 4.2748641033078943e+21,
+   "he3_kg_per_TJ": 0.001592285454757997,
+   "he3_mass_share_feed": 0.7496644771743154,
+   "DD_power_share": 0.0647843462972784,
+   "he3_vs_ref": 1.02820966187394,
+   "brems_vs_ref": 1.54231449281091
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 2.0,
+   "bred_burn": 0.8,
+   "neutron_share": 0.03994412255368468,
+   "brems_rel": 4.066724423734707e+21,
+   "he3_kg_per_TJ": 0.0015147583623561765,
+   "he3_mass_share_feed": 0.7496644771743154,
+   "DD_power_share": 0.061630048814642666,
+   "he3_vs_ref": 0.9781469641168592,
+   "brems_vs_ref": 1.467220446175289
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 3.0,
+   "bred_burn": 0.0,
+   "neutron_share": 0.028610169810699526,
+   "brems_rel": 5.890350970147036e+21,
+   "he3_kg_per_TJ": 0.0016274294388720887,
+   "he3_mass_share_feed": 0.8179155857714384,
+   "DD_power_share": 0.044142818750338916,
+   "he3_vs_ref": 1.0509036982446645,
+   "brems_vs_ref": 2.1251608120058765
+  },
+  {
+   "Ti_keV": 300.0,
+   "r": 3.0,
+   "bred_burn": 0.8,
+   "neutron_share": 0.02764604527904738,
+   "brems_rel": 5.691854005328745e+21,
+   "he3_kg_per_TJ": 0.0015725872391951516,
+   "he3_mass_share_feed": 0.8179155857714384,
+   "DD_power_share": 0.0426552646835483,
+   "he3_vs_ref": 1.015489646437718,
+   "brems_vs_ref": 2.053545729462941
+  }
+ ],
+ "isotropic_floor": {
+  "rows": [
+   {
+    "channel": 0.9,
+    "Ti_keV": 100.0,
+    "Te_keV": 69.97151292087216,
+    "photon": 0.12777210185088916,
+    "neutron": 0.01895657730511635,
+    "exchange": 0.0515471891331943,
+    "iso": 0.14672867915600551,
+    "sustained": true
+   },
+   {
+    "channel": 0.9,
+    "Ti_keV": 150.0,
+    "Te_keV": 94.44560490528193,
+    "photon": 0.11925601684911584,
+    "neutron": 0.020756642985019523,
+    "exchange": 0.04709361585131195,
+    "iso": 0.14001265983413536,
+    "sustained": true
+   },
+   {
+    "channel": 0.9,
+    "Ti_keV": 200.0,
+    "Te_keV": 112.38587784565763,
+    "photon": 0.1207703080763345,
+    "neutron": 0.023392131341321183,
+    "exchange": 0.05127349691124244,
+    "iso": 0.1441624394176557,
+    "sustained": true
+   },
+   {
+    "channel": 0.9,
+    "Ti_keV": 250.0,
+    "Te_keV": 124.22982444561364,
+    "photon": 0.13158435875380664,
+    "neutron": 0.02800679198289976,
+    "exchange": 0.0639703426245997,
+    "iso": 0.1595911507367064,
+    "sustained": true
+   },
+   {
+    "channel": 0.9,
+    "Ti_keV": 300.0,
+    "Te_keV": 134.57815234784138,
+    "photon": 0.14119342177097532,
+    "neutron": 0.0321342090112971,
+    "exchange": 0.07514899786635007,
+    "iso": 0.17332763078227242,
+    "sustained": true
+   },
+   {
+    "channel": 0.9,
+    "Ti_keV": 400.0,
+    "Te_keV": 152.20921310328418,
+    "photon": 0.1579628580211656,
+    "neutron": 0.039233215932756256,
+    "exchange": 0.09444516016233474,
+    "iso": 0.19719607395392186,
+    "sustained": true
+   },
+   {
+    "channel": 0.95,
+    "Ti_keV": 100.0,
+    "Te_keV": 61.72700874513061,
+    "photon": 0.11626383199624113,
+    "neutron": 0.01895657730511635,
+    "exchange": 0.07738913692656708,
+    "iso": 0.13522040930135748,
+    "sustained": true
+   },
+   {
+    "channel": 0.95,
+    "Ti_keV": 150.0,
+    "Te_keV": 82.12425567550709,
+    "photon": 0.10617238072290634,
+    "neutron": 0.020756642985019523,
+    "exchange": 0.06916529220449669,
+    "iso": 0.12692902370792586,
+    "sustained": true
+   },
+   {
+    "channel": 0.95,
+    "Ti_keV": 200.0,
+    "Te_keV": 98.11277481554606,
+    "photon": 0.10705113149819673,
+    "neutron": 0.023392131341321183,
+    "exchange": 0.07135703764477458,
+    "iso": 0.1304432628395179,
+    "sustained": true
+   },
+   {
+    "channel": 0.95,
+    "Ti_keV": 250.0,
+    "Te_keV": 110.29741075617883,
+    "photon": 0.11785359092378622,
+    "neutron": 0.02800679198289976,
+    "exchange": 0.08319378165044838,
+    "iso": 0.145860382906686,
+    "sustained": true
+   },
+   {
+    "channel": 0.95,
+    "Ti_keV": 300.0,
+    "Te_keV": 120.98449791385163,
+    "photon": 0.12748347538151195,
+    "neutron": 0.0321342090112971,
+    "exchange": 0.09367987791836505,
+    "iso": 0.15961768439280904,
+    "sustained": true
+   },
+   {
+    "channel": 0.95,
+    "Ti_keV": 400.0,
+    "Te_keV": 139.24259740876053,
+    "photon": 0.1443387531327737,
+    "neutron": 0.039233215932756256,
+    "exchange": 0.11190273091193582,
+    "iso": 0.18357196906552994,
+    "sustained": true
+   },
+   {
+    "channel": 0.99,
+    "Ti_keV": 100.0,
+    "Te_keV": 56.09469965040563,
+    "photon": 0.10844250591957495,
+    "neutron": 0.01895657730511635,
+    "exchange": 0.10055517670129846,
+    "iso": 0.1273990832246913,
+    "sustained": true
+   },
+   {
+    "channel": 0.99,
+    "Ti_keV": 150.0,
+    "Te_keV": 73.63294647065237,
+    "photon": 0.09734192704538899,
+    "neutron": 0.020756642985019523,
+    "exchange": 0.08980110118530624,
+    "iso": 0.11809857003040852,
+    "sustained": true
+   },
+   {
+    "channel": 0.99,
+    "Ti_keV": 200.0,
+    "Te_keV": 88.06423051072824,
+    "photon": 0.09768061073657303,
+    "neutron": 0.023392131341321183,
+    "exchange": 0.09039665952092589,
+    "iso": 0.1210727420778942,
+    "sustained": true
+   },
+   {
+    "channel": 0.99,
+    "Ti_keV": 250.0,
+    "Te_keV": 100.24303516531872,
+    "photon": 0.1082612833337922,
+    "neutron": 0.02800679198289976,
+    "exchange": 0.10119664713638027,
+    "iso": 0.13626807531669197,
+    "sustained": true
+   },
+   {
+    "channel": 0.99,
+    "Ti_keV": 300.0,
+    "Te_keV": 111.00157549841887,
+    "photon": 0.11774566268465442,
+    "neutron": 0.0321342090112971,
+    "exchange": 0.11086226758039576,
+    "iso": 0.14987987169595152,
+    "sustained": true
+   },
+   {
+    "channel": 0.99,
+    "Ti_keV": 400.0,
+    "Te_keV": 129.49782781190493,
+    "photon": 0.13443715857957272,
+    "neutron": 0.039233215932756256,
+    "exchange": 0.1278424260401784,
+    "iso": 0.17367037451232897,
+    "sustained": true
+   },
+   {
+    "channel": 1.0,
+    "Ti_keV": 100.0,
+    "Te_keV": 54.88064856994595,
+    "photon": 0.1067580992207222,
+    "neutron": 0.01895657730511635,
+    "exchange": 0.10675809922072227,
+    "iso": 0.12571467652583856,
+    "sustained": true
+   },
+   {
+    "channel": 1.0,
+    "Ti_keV": 150.0,
+    "Te_keV": 71.69744454134917,
+    "photon": 0.09534654170933404,
+    "neutron": 0.020756642985019523,
+    "exchange": 0.0953465417093341,
+    "iso": 0.11610318469435357,
+    "sustained": true
+   },
+   {
+    "channel": 1.0,
+    "Ti_keV": 200.0,
+    "Te_keV": 85.75130313211235,
+    "photon": 0.09555375514589919,
+    "neutron": 0.023392131341321183,
+    "exchange": 0.09555375514589927,
+    "iso": 0.11894588648722038,
+    "sustained": true
+   },
+   {
+    "channel": 1.0,
+    "Ti_keV": 250.0,
+    "Te_keV": 97.89321658812207,
+    "photon": 0.10605485841640533,
+    "neutron": 0.02800679198289976,
+    "exchange": 0.10605485841640533,
+    "iso": 0.1340616503993051,
+    "sustained": true
+   },
+   {
+    "channel": 1.0,
+    "Ti_keV": 300.0,
+    "Te_keV": 108.6426966757959,
+    "photon": 0.11548328323512974,
+    "neutron": 0.0321342090112971,
+    "exchange": 0.1154832832351298,
+    "iso": 0.14761749224642684,
+    "sustained": true
+   },
+   {
+    "channel": 1.0,
+    "Ti_keV": 400.0,
+    "Te_keV": 127.16103216323971,
+    "photon": 0.13210416005544057,
+    "neutron": 0.039233215932756256,
+    "exchange": 0.13210416005544062,
+    "iso": 0.17133737598819682,
+    "sustained": true
+   }
+  ],
+  "best": {
+   "channel": 1.0,
+   "Ti_keV": 150.0,
+   "Te_keV": 71.69744454134917,
+   "photon": 0.09534654170933404,
+   "neutron": 0.020756642985019523,
+   "exchange": 0.0953465417093341,
+   "iso": 0.11610318469435357,
+   "sustained": true
+  },
+  "trapping": {
+   "compton_depth0": 18.437883788033872,
+   "R0_m": 4.0466673008149246e-05,
+   "R_escape_m": 0.00017376129185363258,
+   "diffusion_s": 4.5886825971987205e-11,
+   "burn_s": 1.0858125133724277e-11,
+   "photon_kept_lower": 0.3064830460960014,
+   "photon_share_lower": 0.25976149600180476,
+   "photon_share_released": 0.8475558413773995,
+   "kompaneets_y": 133.05501314326509,
+   "evidence": "REDUCED_MODEL"
+  },
+  "best_with_trapping_lower": 0.04997874152281567,
+  "note": "with all product energy channelled to ions the electrons are still heated by ion-electron exchange, so Te stays at 72 keV and bremsstrahlung balances that exchange: the photon share cannot fall below about 9.5 % in a thermal burn. Compton trapping in the dense pellet lowers it by at most 3.3x (REDUCED_MODEL, sign unresolved)."
+ }
+}

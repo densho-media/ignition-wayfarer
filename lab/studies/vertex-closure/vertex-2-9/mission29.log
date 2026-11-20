@@ -1,0 +1,50 @@
+2.8_reference_reserve              B2d  k 0.906 tail 0      fwd 2.9e-04 dump n iso x0.01  b 0.99 charge  | ve 0.078 c, Tb 467 d (+0.60 yr), dep 6154 t, end 2600 t, prop 3554 t, He-3 2084 t, fusion 30.0 TW, sys 1182 t, coil 5.9 plate 0.05 MW/m2, kappa_eff 0.896 | margin -1554 t, He-3 +990 t
+hyb_B2d_nc3e16                     B2d  k 0.848 tail 0      fwd 1.1e-04 dump n iso x0.01  b 0.99 charge  | ve 0.072 c, Tb 467 d (+0.60 yr), dep 6519 t, end 2564 t, prop 3955 t, He-3 2256 t, fusion 32.5 TW, sys 1085 t, coil 6.4 plate 0.06 MW/m2, kappa_eff 0.839 | margin -1919 t, He-3 +1161 t
+hyb_B2d_nc1e17                     B2d  k 0.731 tail 0      fwd 1.2e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 23927 t coil 25.5 plate 0.23)
+hyb_B2d_nc3e17                     B2d  k 0.789 tail 0      fwd 2.4e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_nc1e18                     B2d  k 0.905 tail 0      fwd 6.5e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_dx0.35                     B2d  k 0.711 tail 0      fwd 1.9e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_np40k                      B2d  k 0.735 tail 0      fwd 1.1e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 20532 t coil 21.6 plate 0.20)
+hyb_B2d_seed2                      B2d  k 0.735 tail 0      fwd 1.3e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 26153 t coil 27.6 plate 0.25)
+hyb_B2d_Ep_x0.5                    B2d  k 0.749 tail 0      fwd 2.5e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_Ep_x2                      B2d  k 0.730 tail 0      fwd 7.0e-04 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 13492 t coil 14.4 plate 0.13)
+hyb_B2d_field_x0.7                 B2d  k 0.742 tail 0      fwd 1.6e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 49232 t coil 53.3 plate 0.49)
+hyb_B2d_plug_z-9                   B2d  k 0.731 tail 0      fwd 1.2e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 24959 t coil 26.6 plate 0.24)
+hyb_B2d_plug_R2                    B2d  k 0.727 tail 0      fwd 9.7e-04 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 18019 t coil 19.4 plate 0.18)
+hyb_B2d_burn_z7                    B2d  k 0.766 tail 0      fwd 9.2e-04 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 13240 t coil 14.1 plate 0.13)
+hyb_B2d_burn_z11                   B2d  k 0.745 tail 0      fwd 8.0e-04 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 13277 t coil 14.3 plate 0.13)
+hyb_B2d_comp_b0.99                 B2d  k 0.731 tail 0      fwd 6.8e-04 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 13123 t coil 14.0 plate 0.13)
+hyb_B2d_r0_2m                      B2d  k 0.756 tail 0      fwd 2.0e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_Te10keV                    B2d  k 0.733 tail 0      fwd 1.2e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 24049 t coil 25.5 plate 0.23)
+hyb_B2d_Ep_x0.5_nc1e18             B2d  k 0.920 tail 0      fwd 8.0e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_Ep_x2_nc1e18               B2d  k 0.874 tail 0      fwd 4.2e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_field_x0.7_nc1e18          B2d  k 0.919 tail 0      fwd 8.6e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_plug_z-9_nc1e18            B2d  k 0.908 tail 0      fwd 7.3e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_plug_R2_nc1e18             B2d  k 0.920 tail 0      fwd 7.3e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_burn_z7_nc1e18             B2d  k 0.899 tail 0      fwd 7.6e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_burn_z11_nc1e18            B2d  k 0.928 tail 0      fwd 6.1e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_comp_b0.99_nc1e18          B2d  k 0.875 tail 0      fwd 4.2e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_r0_2m_nc1e18               B2d  k 0.941 tail 0      fwd 5.8e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+hyb_B2d_Te10keV_nc1e18             B2d  k 0.907 tail 0      fwd 6.5e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+envelope_best                      B2d  k 0.905 tail 0      fwd 1.1e-04 dump n iso x0.01  b 0.99 charge  | ve 0.078 c, Tb 467 d (+0.60 yr), dep 5764 t, end 2435 t, prop 3329 t, He-3 1956 t, fusion 28.2 TW, sys 1051 t, coil 5.5 plate 0.05 MW/m2, kappa_eff 0.895 | margin -1164 t, He-3 +862 t
+envelope_worst                     B2d  k 0.731 tail 0      fwd 6.5e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+best_kappa_noreserve               B2d  k 0.905 tail 0      fwd 1.1e-04 dump n iso x0.01  b 0.99 charge  | ve 0.078 c, Tb 467 d (+0.60 yr), dep 5374 t, end 2365 t, prop 3008 t, He-3 1767 t, fusion 25.5 TW, sys 1029 t, coil 5.0 plate 0.05 MW/m2, kappa_eff 0.895 | margin -774 t, He-3 +673 t
+losscorr_B2d_nc3e16                B2d  k 0.902 tail 0      fwd 1.2e-04 dump n iso x0.01  b 0.99 charge  | ve 0.078 c, Tb 467 d (+0.60 yr), dep 5798 t, end 2450 t, prop 3348 t, He-3 1982 t, fusion 28.6 TW, sys 1062 t, coil 5.6 plate 0.05 MW/m2, kappa_eff 0.892 | margin -1198 t, He-3 +888 t
+losscorr_B2d_nc1e17                B2d  k 0.898 tail 0      fwd 1.8e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 14496 t coil 14.2 plate 0.13)
+losscorr_B2d_nc1e18                B2d  k 0.946 tail 0      fwd 7.1e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+dump_B2d_nc1e17                    B2d  k 0.731 tail 0      fwd 1.2e-03 dump Y iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 10770 t coil 11.5 plate 0.10)
+dump_B2d_nc1e18                    B2d  k 0.905 tail 0      fwd 6.5e-03 dump Y iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 26569 t coil 25.5 plate 0.23)
+dump_B2d_burn_z11_nc1e18           B2d  k 0.928 tail 0      fwd 6.1e-03 dump Y iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 17859 t coil 16.9 plate 0.15)
+dump_B2d_comp_b0.99                B2d  k 0.731 tail 0      fwd 6.8e-04 dump Y iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 9499 t coil 10.1 plate 0.09)
+grid_k0.8_fwd0.0001                B2d  k 0.800 tail 0      fwd 1.0e-04 dump n iso x0.01  b 0.99 charge  | ve 0.068 c, Tb 467 d (+0.60 yr), dep 7205 t, end 2682 t, prop 4523 t, He-3 2587 t, fusion 37.3 TW, sys 1118 t, coil 7.3 plate 0.07 MW/m2, kappa_eff 0.791 | margin -2605 t, He-3 +1493 t
+grid_k0.8_fwd0.00029               B2d  k 0.800 tail 0      fwd 2.9e-04 dump n iso x0.01  b 0.99 charge  | ve 0.068 c, Tb 467 d (+0.60 yr), dep 7899 t, end 2940 t, prop 4959 t, He-3 2837 t, fusion 40.9 TW, sys 1311 t, coil 8.0 plate 0.07 MW/m2, kappa_eff 0.791 | margin -3299 t, He-3 +1742 t
+grid_k0.8_fwd0.001                 B2d  k 0.800 tail 0      fwd 1.0e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure (lightest heat-failing: dep 12329 t coil 12.5 plate 0.11)
+grid_k0.8_fwd0.003                 B2d  k 0.800 tail 0      fwd 3.0e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+grid_k0.85_fwd0.0001               B2d  k 0.850 tail 0      fwd 1.0e-04 dump n iso x0.01  b 0.99 charge  | ve 0.072 c, Tb 467 d (+0.60 yr), dep 6501 t, end 2556 t, prop 3945 t, He-3 2241 t, fusion 32.3 TW, sys 1080 t, coil 6.3 plate 0.06 MW/m2, kappa_eff 0.840 | margin -1901 t, He-3 +1147 t
+grid_k0.85_fwd0.00029              B2d  k 0.850 tail 0      fwd 2.9e-04 dump n iso x0.01  b 0.99 charge  | ve 0.072 c, Tb 467 d (+0.60 yr), dep 7037 t, end 2767 t, prop 4270 t, He-3 2426 t, fusion 35.0 TW, sys 1242 t, coil 6.9 plate 0.06 MW/m2, kappa_eff 0.840 | margin -2437 t, He-3 +1332 t
+grid_k0.85_fwd0.001                B2d  k 0.850 tail 0      fwd 1.0e-03 dump n iso x0.01  b 0.99 charge  | ve 0.072 c, Tb 467 d (+0.60 yr), dep 10165 t, end 3997 t, prop 6168 t, He-3 3504 t, fusion 50.5 TW, sys 2187 t, coil 9.9 plate 0.09 MW/m2, kappa_eff 0.840 | margin -5565 t, He-3 +2410 t
+grid_k0.85_fwd0.003                B2d  k 0.850 tail 0      fwd 3.0e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure
+grid_k0.906_fwd0.0001              B2d  k 0.906 tail 0      fwd 1.0e-04 dump n iso x0.01  b 0.99 charge  | ve 0.078 c, Tb 467 d (+0.60 yr), dep 5752 t, end 2430 t, prop 3322 t, He-3 1949 t, fusion 28.1 TW, sys 1047 t, coil 5.5 plate 0.05 MW/m2, kappa_eff 0.896 | margin -1152 t, He-3 +855 t
+grid_k0.906_fwd0.00029             B2d  k 0.906 tail 0      fwd 2.9e-04 dump n iso x0.01  b 0.99 charge  | ve 0.078 c, Tb 467 d (+0.60 yr), dep 6161 t, end 2603 t, prop 3558 t, He-3 2088 t, fusion 30.1 TW, sys 1184 t, coil 5.9 plate 0.05 MW/m2, kappa_eff 0.896 | margin -1561 t, He-3 +994 t
+grid_k0.906_fwd0.001               B2d  k 0.906 tail 0      fwd 1.0e-03 dump n iso x0.01  b 0.99 charge  | ve 0.078 c, Tb 467 d (+0.60 yr), dep 8384 t, end 3542 t, prop 4842 t, He-3 2841 t, fusion 40.9 TW, sys 1931 t, coil 8.0 plate 0.07 MW/m2, kappa_eff 0.896 | margin -3784 t, He-3 +1747 t
+grid_k0.906_fwd0.003               B2d  k 0.906 tail 0      fwd 3.0e-03 dump n iso x0.01  b 0.99 charge  | no heat-passing closure

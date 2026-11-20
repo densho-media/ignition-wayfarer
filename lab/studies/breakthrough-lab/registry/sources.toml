@@ -63,3 +63,9 @@ title = "Vertex Feasibility Gate 2: T05 report (shielding envelopes, stretched-f
 locator = "work/vertex-blender/GATE2_REPORT.md at f497778 (copy: imports/t05-f497778/GATE2_REPORT.md)"
 url = "https://github.com/densho-media/ignition-wayfarer/blob/f49777844782dd4aade5e1eb3834a8f832a4ba24/work/vertex-blender/GATE2_REPORT.md"
 nature = "PROJECT_MODEL"
+
+[S-VTX-1-5]
+title = "Vertex Engine 1.5: radiation physics, 3D exposure and thermal feasibility (Outcome C)"
+locator = "references/evidence/vertex_radiation.json and src/wayfarer/vertex_radiation.py at eb33a44"
+url = "https://github.com/densho-media/ignition-wayfarer/blob/eb33a44/references/evidence/vertex_radiation.json"
+nature = "PROJECT_MODEL"

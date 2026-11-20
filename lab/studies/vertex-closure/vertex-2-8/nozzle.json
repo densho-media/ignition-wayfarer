@@ -1,0 +1,1323 @@
+{
+ "meta": {
+  "title": "Vertex 2.8 nozzle candidates (research, not canon)",
+  "ve_c": 0.08,
+  "spine_m": 200.0,
+  "ship": {
+   "z_face": -231.93,
+   "offset": 24.0,
+   "R": 45.0
+  },
+  "credit_rule": "kappa_credit = min(collective c=1.0, test-particle); forward = max of the two regimes",
+  "calibration": "single coil, 50 deg, E_B = 5 E_p: collective 0.633 vs hybrid PIC ~0.65 (Nagamine & Nakashima 1999)"
+ },
+ "rows": [
+  {
+   "key": "A",
+   "label": "2.7 reference: one coil 0.96 T, burn 2R, 192 MJ",
+   "cls": "established",
+   "note": "the 2.7 traced cosine 0.883 is the single-ion number",
+   "zb_m": 20.0,
+   "coils": [
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 15.278874536821952,
+     "B_centre_T": 0.96
+    }
+   ],
+   "E_B_GJ": 6.64322524407599,
+   "E_p_MJ": 191.99999999999997,
+   "EB_over_Ep": 34.60013147956245,
+   "d_min_m": 22.360679774997898,
+   "coil_flux_vs_A": 0.9999391999999998,
+   "B_burn_T": 0.08586501033599192,
+   "B_plug_axis_T": 0.96,
+   "mirror_ratio": 11.180339887498949,
+   "loss_cone_forward": 0.022884374365078952,
+   "collective": {
+    "c1": {
+     "kappa": 0.469725652681797,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.46972382297089155,
+     "field_impulse": -0.4697256526817981,
+     "energy_check": 4.1240618972482324e-05
+    },
+    "c15": {
+     "kappa": 0.5335820482062845,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.533588802870697
+    }
+   },
+   "test_particle": {
+    "kappa": 0.8836775580262165,
+    "capture_energy": 0.9675937500000004,
+    "aft_cos": 0.9107918977481042,
+    "fractions": {
+     "AFT": 0.9675937500000004,
+     "FORWARD": 0.02378125,
+     "RADIAL": 0.00862500000000001,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.02035390864472959,
+    "forward_to_space": 0.0034273413552704107,
+    "coil_impulse_share": [
+     0.9771222420148046
+    ],
+    "structure_impulse_share": 0.022877757985195174,
+    "closure": -2.220446049250313e-16,
+    "aft_energy_kept": 0.9675937499999772,
+    "forward_r_at_exit_m": [
+     10.115273393304088,
+     22.059041250707264
+    ]
+   },
+   "kappa_credit": 0.469725652681797,
+   "forward_credit": 0.02035390864472959,
+   "seconds": 1.6928954124450684
+  },
+  {
+   "key": "B1",
+   "label": "near-burn single coil 0.96 T, burn 0.6R, r70",
+   "cls": "future engineering",
+   "note": "",
+   "zb_m": 6.0,
+   "coils": [
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 15.278874536821952,
+     "B_centre_T": 0.96
+    }
+   ],
+   "E_B_GJ": 6.64322524407599,
+   "E_p_MJ": 94.90321777251414,
+   "EB_over_Ep": 70.0,
+   "d_min_m": 11.661903789690601,
+   "coil_flux_vs_A": 3.6762470588235288,
+   "B_burn_T": 0.6052891240323841,
+   "B_plug_axis_T": 0.959996743748251,
+   "mirror_ratio": 1.5860135357345184,
+   "loss_cone_forward": 0.19607223014796205,
+   "collective": {
+    "c1": {
+     "kappa": 0.8960790928457193,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.8961292090114296,
+     "field_impulse": -0.8960790928457177,
+     "energy_check": 5.899031680645095e-05
+    },
+    "c15": {
+     "kappa": 0.9599133344151239,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.960018342755375
+    }
+   },
+   "test_particle": {
+    "kappa": 0.750553303438229,
+    "capture_energy": 0.8025312500000001,
+    "aft_cos": 0.9851534136072271,
+    "fractions": {
+     "AFT": 0.8025312500000001,
+     "FORWARD": 0.19746875000000008,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.15651918259669662,
+    "forward_to_space": 0.040949567403303466,
+    "coil_impulse_share": [
+     0.7920688107222297
+    ],
+    "structure_impulse_share": 0.20793118927777024,
+    "closure": -1.1102230246251565e-16,
+    "aft_energy_kept": 0.8025312499999814,
+    "forward_r_at_exit_m": [
+     13.649571987616616,
+     25.550233560013744
+    ]
+   },
+   "kappa_credit": 0.750553303438229,
+   "forward_credit": 0.15651918259669662,
+   "seconds": 1.726762294769287
+  },
+  {
+   "key": "B2a",
+   "label": "plug 5 T + main 0.96 T, burn 0.6R, r70",
+   "cls": "future engineering",
+   "note": "",
+   "zb_m": 6.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 5.0
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 15.278874536821952,
+     "B_centre_T": 0.96
+    }
+   ],
+   "E_B_GJ": 10.311146612390877,
+   "E_p_MJ": 147.3020944627268,
+   "EB_over_Ep": 70.0,
+   "d_min_m": 11.661903789690601,
+   "coil_flux_vs_A": 3.6762470588235288,
+   "B_burn_T": 0.6766231313960115,
+   "B_plug_axis_T": 5.60292086574581,
+   "mirror_ratio": 8.280711382399597,
+   "loss_cone_forward": 0.03116169403864749,
+   "collective": {
+    "c1": {
+     "kappa": 0.8919418175892391,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.8919779426644168,
+     "field_impulse": -0.8919418175892392,
+     "energy_check": 5.412404473825738e-05
+    },
+    "c15": {
+     "kappa": 0.9018795765396397,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9019506256389761
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9573424758509772,
+    "capture_energy": 0.9687500000000002,
+    "aft_cos": 0.9882244912010087,
+    "fractions": {
+     "AFT": 0.9687500000000002,
+     "FORWARD": 0.03125000000000001,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.03125000000000001,
+    "forward_to_space": 0.0,
+    "coil_impulse_share": [
+     0.3165956598517139,
+     0.6507995771278893
+    ],
+    "structure_impulse_share": 0.03260476302039636,
+    "closure": -5.551115123125783e-16,
+    "aft_energy_kept": 0.9687499999999775,
+    "forward_r_at_exit_m": [
+     5.050715395188628,
+     9.7689322867513
+    ]
+   },
+   "kappa_credit": 0.8919418175892391,
+   "forward_credit": 0.03125000000000001,
+   "seconds": 3.0851500034332275
+  },
+  {
+   "key": "B2b",
+   "label": "plug 5 T + main 1.5 T, burn 0.9R, r70",
+   "cls": "future engineering",
+   "note": "",
+   "zb_m": 9.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 5.0
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 1.5
+    }
+   ],
+   "E_B_GJ": 20.114408556726087,
+   "E_p_MJ": 287.34869366751553,
+   "EB_over_Ep": 70.0,
+   "d_min_m": 13.45362404707371,
+   "coil_flux_vs_A": 2.762262983425414,
+   "B_burn_T": 0.6537042653344678,
+   "B_plug_axis_T": 5.949342234332264,
+   "mirror_ratio": 9.100968969948946,
+   "loss_cone_forward": 0.028268723215610525,
+   "collective": {
+    "c1": {
+     "kappa": 0.891455854796668,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.891500107137168,
+     "field_impulse": -0.8914558547966686,
+     "energy_check": 5.0405282075338675e-05
+    },
+    "c15": {
+     "kappa": 0.9098873963218815,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9099750392720714
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9613427206055171,
+    "capture_energy": 0.9712500000000003,
+    "aft_cos": 0.9897994549348952,
+    "fractions": {
+     "AFT": 0.9712500000000003,
+     "FORWARD": 0.028750000000000008,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.02875,
+    "forward_to_space": 6.938893903907228e-18,
+    "coil_impulse_share": [
+     0.17601735367136395,
+     0.7941043289199515
+    ],
+    "structure_impulse_share": 0.029878317408684452,
+    "closure": 0.0,
+    "aft_energy_kept": 0.9712499999999772,
+    "forward_r_at_exit_m": [
+     4.164265273148377,
+     8.348208351537162
+    ]
+   },
+   "kappa_credit": 0.891455854796668,
+   "forward_credit": 0.02875,
+   "seconds": 3.515500068664551
+  },
+  {
+   "key": "B2c",
+   "label": "plug 12 T + main 0.96 T, burn 0.6R, r70",
+   "cls": "future engineering",
+   "note": "",
+   "zb_m": 6.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 57.295779513082316,
+     "B_centre_T": 12.0
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 15.278874536821952,
+     "B_centre_T": 0.96
+    }
+   ],
+   "E_B_GJ": 26.41047032956836,
+   "E_p_MJ": 377.292433279548,
+   "EB_over_Ep": 70.0,
+   "d_min_m": 11.661903789690601,
+   "coil_flux_vs_A": 3.6762470588235288,
+   "B_burn_T": 0.7764907417050897,
+   "B_plug_axis_T": 12.601072908989629,
+   "mirror_ratio": 16.228233296534913,
+   "loss_cone_forward": 0.015650178646792745,
+   "collective": {
+    "c1": {
+     "kappa": 0.871747005502024,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.8717497193967141,
+     "field_impulse": -0.8717470055020237,
+     "energy_check": 4.9156820878026863e-05
+    },
+    "c15": {
+     "kappa": 0.8933144483618328,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.8933367888082339
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9747359956264909,
+    "capture_energy": 0.9837500000000003,
+    "aft_cos": 0.9908370984767376,
+    "fractions": {
+     "AFT": 0.9837500000000003,
+     "FORWARD": 0.016249999999999994,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.01624999999999999,
+    "forward_to_space": 3.469446951953614e-18,
+    "coil_impulse_share": [
+     0.43576302087997143,
+     0.5475714306647814
+    ],
+    "structure_impulse_share": 0.01666554845524761,
+    "closure": 4.440892098500626e-16,
+    "aft_energy_kept": 0.9837499999999773,
+    "forward_r_at_exit_m": [
+     2.505050328505095,
+     5.356975080473783
+    ]
+   },
+   "kappa_credit": 0.871747005502024,
+   "forward_credit": 0.01624999999999999,
+   "seconds": 4.177469730377197
+  },
+  {
+   "key": "B2d",
+   "label": "plug 5 T + main 1.5 T, burn 0.9R, r150",
+   "cls": "future engineering",
+   "note": "",
+   "zb_m": 9.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 5.0
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 1.5
+    }
+   ],
+   "E_B_GJ": 20.114408556726087,
+   "E_p_MJ": 134.09605704484056,
+   "EB_over_Ep": 150.0,
+   "d_min_m": 13.45362404707371,
+   "coil_flux_vs_A": 2.762262983425414,
+   "B_burn_T": 0.6537042653344678,
+   "B_plug_axis_T": 5.949342234332264,
+   "mirror_ratio": 9.100968969948946,
+   "loss_cone_forward": 0.028268723215610525,
+   "collective": {
+    "c1": {
+     "kappa": 0.9063472383859786,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9064864056430524,
+     "field_impulse": -0.9063472383859781,
+     "energy_check": 5.794102286849068e-05
+    },
+    "c15": {
+     "kappa": 0.922647439119752,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9228788056528789
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9613427206055171,
+    "capture_energy": 0.9712500000000003,
+    "aft_cos": 0.9897994549348952,
+    "fractions": {
+     "AFT": 0.9712500000000003,
+     "FORWARD": 0.028750000000000008,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.02875,
+    "forward_to_space": 6.938893903907228e-18,
+    "coil_impulse_share": [
+     0.17601735367136395,
+     0.7941043289199515
+    ],
+    "structure_impulse_share": 0.029878317408684452,
+    "closure": 0.0,
+    "aft_energy_kept": 0.9712499999999772,
+    "forward_r_at_exit_m": [
+     4.164265273148377,
+     8.348208351537162
+    ]
+   },
+   "kappa_credit": 0.9063472383859786,
+   "forward_credit": 0.02875,
+   "seconds": 3.108553886413574
+  },
+  {
+   "key": "B3a",
+   "label": "B2b + collar R11 z14 0.5 T, r70",
+   "cls": "future engineering",
+   "note": "",
+   "zb_m": 9.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 5.0
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 1.5
+    },
+    {
+     "name": "collar",
+     "R_m": 11.0,
+     "z_m": 14.0,
+     "I_MA": 8.753521870054243,
+     "B_centre_T": 0.5
+    }
+   ],
+   "E_B_GJ": 23.280874964879743,
+   "E_p_MJ": 332.5839280697106,
+   "EB_over_Ep": 70.0,
+   "d_min_m": 12.083045973594572,
+   "coil_flux_vs_A": 3.4244493150684927,
+   "B_burn_T": 1.0309451686665745,
+   "B_plug_axis_T": 6.006036711266316,
+   "mirror_ratio": 5.825757657931051,
+   "loss_cone_forward": 0.04493173397485073,
+   "collective": {
+    "c1": {
+     "kappa": 0.0,
+     "fractions": {
+      "AFT": 0.0,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 1.0000280883547783
+     },
+     "aft_cos": 0.0,
+     "field_impulse": 0.0051729844775340135,
+     "energy_check": -0.00011212986148567694
+    },
+    "c15": {
+     "kappa": 0.0,
+     "fractions": {
+      "AFT": 0.0,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 1.0000280883547783
+     },
+     "aft_cos": 0.0
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9493655012590869,
+    "capture_energy": 0.9550000000000001,
+    "aft_cos": 0.9941000013184156,
+    "fractions": {
+     "AFT": 0.9550000000000001,
+     "FORWARD": 0.04499999999999999,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.04499999999999999,
+    "forward_to_space": 0.0,
+    "coil_impulse_share": [
+     0.239669407656792,
+     0.7332491616765946,
+     -0.02028770067161004
+    ],
+    "structure_impulse_share": 0.04736913133822236,
+    "closure": -9.992007221626409e-16,
+    "aft_energy_kept": 0.9549999999999778,
+    "forward_r_at_exit_m": [
+     3.9489066278462994,
+     7.466219718430113
+    ]
+   },
+   "kappa_credit": 0.0,
+   "forward_credit": 0.04499999999999999,
+   "seconds": 90.65131044387817
+  },
+  {
+   "key": "B3b",
+   "label": "B2b + collar R11 z9 0.5 T, r35",
+   "cls": "future engineering",
+   "note": "",
+   "zb_m": 9.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 5.0
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 1.5
+    },
+    {
+     "name": "collar",
+     "R_m": 11.0,
+     "z_m": 9.0,
+     "I_MA": 8.753521870054243,
+     "B_centre_T": 0.5
+    }
+   ],
+   "E_B_GJ": 23.959354610397128,
+   "E_p_MJ": 684.5529888684894,
+   "EB_over_Ep": 35.0,
+   "d_min_m": 11.0,
+   "coil_flux_vs_A": 4.1319801652892565,
+   "B_burn_T": 1.1537042653344678,
+   "B_plug_axis_T": 6.054275064205148,
+   "mirror_ratio": 5.24768369687007,
+   "loss_cone_forward": 0.050155656304055496,
+   "collective": {
+    "c1": {
+     "kappa": 0.9147081426508882,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9147401904882588,
+     "field_impulse": -0.9147081426508887,
+     "energy_check": 6.26280395519263e-05
+    },
+    "c15": {
+     "kappa": 0.9051442871304196,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9052058648513593
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9452469916720841,
+    "capture_energy": 0.9500000000000002,
+    "aft_cos": 0.9949968333390358,
+    "fractions": {
+     "AFT": 0.9500000000000002,
+     "FORWARD": 0.04999999999999999,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.04999999999999999,
+    "forward_to_space": 0.0,
+    "coil_impulse_share": [
+     0.2385000628286093,
+     0.586999205146017,
+     0.12164088669757855
+    ],
+    "structure_impulse_share": 0.052859845327794086,
+    "closure": -9.992007221626409e-16,
+    "aft_energy_kept": 0.9499999999999776,
+    "forward_r_at_exit_m": [
+     3.725348180545136,
+     7.427291427838957
+    ]
+   },
+   "kappa_credit": 0.9147081426508882,
+   "forward_credit": 0.04999999999999999,
+   "seconds": 13.223186254501343
+  }
+ ],
+ "adaptive": [
+  {
+   "key": "C",
+   "label": "B2b pulse -30 % (r100), fixed currents",
+   "cls": "future engineering (adaptive)",
+   "note": "",
+   "zb_m": 9.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 5.0
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 1.5
+    }
+   ],
+   "E_B_GJ": 20.114408556726087,
+   "E_p_MJ": 201.14408556726087,
+   "EB_over_Ep": 100.0,
+   "d_min_m": 13.45362404707371,
+   "coil_flux_vs_A": 2.762262983425414,
+   "B_burn_T": 0.6537042653344678,
+   "B_plug_axis_T": 5.949342234332264,
+   "mirror_ratio": 9.100968969948946,
+   "loss_cone_forward": 0.028268723215610525,
+   "collective": {
+    "c1": {
+     "kappa": 0.9090447474001113,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.909126215533445,
+     "field_impulse": -0.9090447474001109,
+     "energy_check": 5.3028183110592764e-05
+    },
+    "c15": {
+     "kappa": 0.9063472383859786,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9064864056430524
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9613427206055171,
+    "capture_energy": 0.9712500000000003,
+    "aft_cos": 0.9897994549348952,
+    "fractions": {
+     "AFT": 0.9712500000000003,
+     "FORWARD": 0.028750000000000008,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.02875,
+    "forward_to_space": 6.938893903907228e-18,
+    "coil_impulse_share": [
+     0.17601735367136395,
+     0.7941043289199515
+    ],
+    "structure_impulse_share": 0.029878317408684452,
+    "closure": 0.0,
+    "aft_energy_kept": 0.9712499999999772,
+    "forward_r_at_exit_m": [
+     4.164265273148377,
+     8.348208351537162
+    ]
+   },
+   "kappa_credit": 0.9090447474001113,
+   "forward_credit": 0.02875,
+   "seconds": 2.966778516769409
+  },
+  {
+   "key": "C",
+   "label": "B2b pulse +30 % (r54), fixed currents",
+   "cls": "future engineering (adaptive)",
+   "note": "",
+   "zb_m": 9.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 5.0
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 1.5
+    }
+   ],
+   "E_B_GJ": 20.114408556726087,
+   "E_p_MJ": 373.55330176777017,
+   "EB_over_Ep": 53.84615384615385,
+   "d_min_m": 13.45362404707371,
+   "coil_flux_vs_A": 2.762262983425414,
+   "B_burn_T": 0.6537042653344678,
+   "B_plug_axis_T": 5.949342234332264,
+   "mirror_ratio": 9.100968969948946,
+   "loss_cone_forward": 0.028268723215610525,
+   "collective": {
+    "c1": {
+     "kappa": 0.8673899273791573,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.8674142819776917,
+     "field_impulse": -0.8673899273791565,
+     "energy_check": 4.887476351145281e-05
+    },
+    "c15": {
+     "kappa": 0.9008469752649169,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9009045878271614
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9613427206055171,
+    "capture_energy": 0.9712500000000003,
+    "aft_cos": 0.9897994549348952,
+    "fractions": {
+     "AFT": 0.9712500000000003,
+     "FORWARD": 0.028750000000000008,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.02875,
+    "forward_to_space": 6.938893903907228e-18,
+    "coil_impulse_share": [
+     0.17601735367136395,
+     0.7941043289199515
+    ],
+    "structure_impulse_share": 0.029878317408684452,
+    "closure": 0.0,
+    "aft_energy_kept": 0.9712499999999772,
+    "forward_r_at_exit_m": [
+     4.164265273148377,
+     8.348208351537162
+    ]
+   },
+   "kappa_credit": 0.8673899273791573,
+   "forward_credit": 0.02875,
+   "seconds": 3.279632568359375
+  },
+  {
+   "key": "C",
+   "label": "B2b burn 1 m forward",
+   "cls": "future engineering (adaptive)",
+   "note": "",
+   "zb_m": 8.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 5.0
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 1.5
+    }
+   ],
+   "E_B_GJ": 20.114408556726087,
+   "E_p_MJ": 287.34869366751553,
+   "EB_over_Ep": 70.0,
+   "d_min_m": 12.806248474865697,
+   "coil_flux_vs_A": 3.0485951219512195,
+   "B_burn_T": 0.760203467138817,
+   "B_plug_axis_T": 5.94745890736607,
+   "mirror_ratio": 7.823509316197362,
+   "loss_cone_forward": 0.03304707870897977,
+   "collective": {
+    "c1": {
+     "kappa": 0.9000950408542561,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9001412382588232,
+     "field_impulse": -0.9000950408542553,
+     "energy_check": 5.161007218390523e-05
+    },
+    "c15": {
+     "kappa": 0.9039139727888057,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9040013979573328
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9581927378791727,
+    "capture_energy": 0.9662812500000002,
+    "aft_cos": 0.9916243388329703,
+    "fractions": {
+     "AFT": 0.9662812500000002,
+     "FORWARD": 0.033718750000000006,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.03371875000000001,
+    "forward_to_space": -6.938893903907228e-18,
+    "coil_impulse_share": [
+     0.20018884467603032,
+     0.7646592487031793
+    ],
+    "structure_impulse_share": 0.03515190662079087,
+    "closure": 4.440892098500626e-16,
+    "aft_energy_kept": 0.9662812499999774,
+    "forward_r_at_exit_m": [
+     4.69510525230647,
+     8.553067917013392
+    ]
+   },
+   "kappa_credit": 0.9000950408542561,
+   "forward_credit": 0.03371875000000001,
+   "seconds": 4.1586079597473145
+  },
+  {
+   "key": "C",
+   "label": "B2b burn 1 m aft",
+   "cls": "future engineering (adaptive)",
+   "note": "",
+   "zb_m": 10.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 5.0
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 1.5
+    }
+   ],
+   "E_B_GJ": 20.114408556726087,
+   "E_p_MJ": 287.34869366751553,
+   "EB_over_Ep": 70.0,
+   "d_min_m": 14.142135623730951,
+   "coil_flux_vs_A": 2.4998479999999996,
+   "B_burn_T": 0.5616243654267346,
+   "B_plug_axis_T": 5.950292035627438,
+   "mirror_ratio": 10.594789688489165,
+   "loss_cone_forward": 0.024181236454759503,
+   "collective": {
+    "c1": {
+     "kappa": 0.8731458886633192,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.873187274392342,
+     "field_impulse": -0.8731458886633183,
+     "energy_check": 4.941412147219104e-05
+    },
+    "c15": {
+     "kappa": 0.9066744405476008,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9067600036982938
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9648064534153717,
+    "capture_energy": 0.9762187500000002,
+    "aft_cos": 0.9883078700512298,
+    "fractions": {
+     "AFT": 0.9762187500000002,
+     "FORWARD": 0.02378125,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.02378125,
+    "forward_to_space": 0.0,
+    "coil_impulse_share": [
+     0.15745221549603922,
+     0.8179198338379049
+    ],
+    "structure_impulse_share": 0.02462795066605691,
+    "closure": 1.1102230246251565e-15,
+    "aft_energy_kept": 0.9762187499999773,
+    "forward_r_at_exit_m": [
+     3.621901611332418,
+     7.793213587308671
+    ]
+   },
+   "kappa_credit": 0.8731458886633192,
+   "forward_credit": 0.02378125,
+   "seconds": 4.079187393188477
+  },
+  {
+   "key": "C",
+   "label": "B2b burn 0.5 m off axis",
+   "cls": "future engineering (adaptive)",
+   "note": "",
+   "zb_m": 9.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 5.0
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 1.5
+    }
+   ],
+   "E_B_GJ": 20.114408556726087,
+   "E_p_MJ": 287.34869366751553,
+   "EB_over_Ep": 70.0,
+   "d_min_m": 13.45362404707371,
+   "coil_flux_vs_A": 2.762262983425414,
+   "B_burn_T": 0.6537042653344678,
+   "B_plug_axis_T": 5.949342234332264,
+   "mirror_ratio": 9.100968969948946,
+   "loss_cone_forward": 0.028268723215610525,
+   "collective": {
+    "c1": {
+     "kappa": 0.8805920748104579,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.8806865009930394,
+     "field_impulse": -0.8805920748104575,
+     "energy_check": -6.452614216823083e-05
+    },
+    "c15": {
+     "kappa": 0.902750037396335,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9029317790038018
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9552427667809893,
+    "capture_energy": 0.9729036458333333,
+    "aft_cos": 0.9853852379704421,
+    "fractions": {
+     "AFT": 0.9729036458333333,
+     "FORWARD": 0.027096354166666673,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.02364146851656805,
+    "forward_to_space": 0.003454885650098622,
+    "coil_impulse_share": [
+     0.17979013897145626,
+     0.7955973063478688
+    ],
+    "structure_impulse_share": 0.02461255468067503,
+    "closure": 2.220446049250313e-16,
+    "aft_energy_kept": 0.9729036458333105,
+    "forward_r_at_exit_m": [
+     12.217608946434627,
+     16.36455449255618
+    ]
+   },
+   "kappa_credit": 0.8805920748104579,
+   "forward_credit": 0.02364146851656805,
+   "seconds": 4.708942651748657
+  },
+  {
+   "key": "C",
+   "label": "B2b burn 1.0 m off axis",
+   "cls": "future engineering (adaptive)",
+   "note": "",
+   "zb_m": 9.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 5.0
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 23.8732414637843,
+     "B_centre_T": 1.5
+    }
+   ],
+   "E_B_GJ": 20.114408556726087,
+   "E_p_MJ": 287.34869366751553,
+   "EB_over_Ep": 70.0,
+   "d_min_m": 13.45362404707371,
+   "coil_flux_vs_A": 2.762262983425414,
+   "B_burn_T": 0.6537042653344678,
+   "B_plug_axis_T": 5.949342234332264,
+   "mirror_ratio": 9.100968969948946,
+   "loss_cone_forward": 0.028268723215610525,
+   "collective": {
+    "c1": {
+     "kappa": 0.8685398296490147,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.8686611328695968,
+     "field_impulse": -0.8685398296490139,
+     "energy_check": -0.00012659191883124254
+    },
+    "c15": {
+     "kappa": 0.896471997074104,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.8967543507746976
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9308899495764318,
+    "capture_energy": 0.9723697916666667,
+    "aft_cos": 0.9721960348372672,
+    "fractions": {
+     "AFT": 0.9723697916666667,
+     "FORWARD": 0.02763020833333334,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.012891723922449657,
+    "forward_to_space": 0.014738484410883683,
+    "coil_impulse_share": [
+     0.1817830021001066,
+     0.8045916236233543
+    ],
+    "structure_impulse_share": 0.013625374276540087,
+    "closure": 1.1102230246251565e-15,
+    "aft_energy_kept": 0.9723697916666438,
+    "forward_r_at_exit_m": [
+     24.049695582661382,
+     28.429334241849155
+    ]
+   },
+   "kappa_credit": 0.8685398296490147,
+   "forward_credit": 0.012891723922449657,
+   "seconds": 5.241536378860474
+  },
+  {
+   "key": "C",
+   "label": "B2b pulse +30 %, currents retuned x1.14",
+   "cls": "future engineering (adaptive)",
+   "note": "",
+   "zb_m": 9.0,
+   "coils": [
+    {
+     "name": "plug",
+     "R_m": 3.0,
+     "z_m": -6.0,
+     "I_MA": 27.219683234464632,
+     "B_centre_T": 5.7008771254956905
+    },
+    {
+     "name": "main",
+     "R_m": 10.0,
+     "z_m": 0.0,
+     "I_MA": 27.21968323446463,
+     "B_centre_T": 1.7102631376487067
+    }
+   ],
+   "E_B_GJ": 26.148731123743914,
+   "E_p_MJ": 373.55330176777017,
+   "EB_over_Ep": 70.00000000000001,
+   "d_min_m": 13.45362404707371,
+   "coil_flux_vs_A": 2.762262983425414,
+   "B_burn_T": 0.7453375386168465,
+   "B_plug_axis_T": 6.783293811090047,
+   "mirror_ratio": 9.10096896994895,
+   "loss_cone_forward": 0.028268723215610525,
+   "collective": {
+    "c1": {
+     "kappa": 0.891455854796674,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.8915001071371698,
+     "field_impulse": -0.8914558547966742,
+     "energy_check": 5.0405282087329084e-05
+    },
+    "c15": {
+     "kappa": 0.9098873963218738,
+     "fractions": {
+      "AFT": 1.0000280883547783,
+      "FORWARD": 0.0,
+      "RADIAL": 0.0,
+      "COIL": 0.0,
+      "TRAPPED": 0.0
+     },
+     "aft_cos": 0.9099750392720755
+    }
+   },
+   "test_particle": {
+    "kappa": 0.9634567816072358,
+    "capture_energy": 0.9712500000000003,
+    "aft_cos": 0.991976094318904,
+    "fractions": {
+     "AFT": 0.9712500000000003,
+     "FORWARD": 0.028750000000000008,
+     "RADIAL": 0.0,
+     "COIL": 0.0,
+     "TRAPPED": 0.0
+    },
+    "forward_on_ship": 0.02875,
+    "forward_to_space": 6.938893903907228e-18,
+    "coil_impulse_share": [
+     0.17566712210294766,
+     0.7945161721048734
+    ],
+    "structure_impulse_share": 0.029816705792178287,
+    "closure": -6.661338147750939e-16,
+    "aft_energy_kept": 0.9712499999999772,
+    "forward_r_at_exit_m": [
+     4.042957046832185,
+     7.747308237894747
+    ]
+   },
+   "kappa_credit": 0.891455854796674,
+   "forward_credit": 0.02875,
+   "seconds": 3.269871711730957
+  }
+ ],
+ "speculative_plug": {
+  "B_burn_T": 0.6537042653344678,
+  "need": {
+   "2.4e-04": {
+    "mirror_ratio": 1041.9167266809568,
+    "B_plug_T": 681.1054083546684,
+    "note": "single-ion loss cone; conductor practice ~20-45 T"
+   },
+   "2.4e-05": {
+    "mirror_ratio": 10416.916672655394,
+    "B_plug_T": 6809.582860548563,
+    "note": "single-ion loss cone; conductor practice ~20-45 T"
+   }
+  }
+ }
+}

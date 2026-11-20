@@ -1,0 +1,2090 @@
+{
+ "version": "1.6.0",
+ "input_hash": "b53f2046454dba95",
+ "evidence": "RESEARCH_MODEL",
+ "model": {
+  "curve": [
+   {
+    "T_K": 300,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.08165925168144528,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 325,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.08165925168144528,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 350,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.08165925168144528,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 375,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.08165925168144528,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 400,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.08165925168144528,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 425,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.08165925168144528,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 450,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.08165925168144528,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 475,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.08165925168144528,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 500,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.08165925168144528,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 525,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.08165925168144528,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 550,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.08165925168144528,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 575,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.0958928703066108,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 600,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.13681452385396164,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 625,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.20175540883127932,
+    "state": "LOW",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 650,
+    "heating_mu0M_T": 0.08165925168144528,
+    "cooling_mu0M_T": 0.28804672174634527,
+    "state": "RISING",
+    "canon_A_B": 1.0
+   },
+   {
+    "T_K": 675,
+    "heating_mu0M_T": 0.10277416106683956,
+    "cooling_mu0M_T": 0.39301965910694087,
+    "state": "RISING",
+    "canon_A_B": 1.258573388203018
+   },
+   {
+    "T_K": 700,
+    "heating_mu0M_T": 0.16287044162526945,
+    "cooling_mu0M_T": 0.5140054174208478,
+    "state": "RISING",
+    "canon_A_B": 1.9945130315500688
+   },
+   {
+    "T_K": 725,
+    "heating_mu0M_T": 0.2570754219601055,
+    "cooling_mu0M_T": 0.6483351931958474,
+    "state": "RISING",
+    "canon_A_B": 3.148148148148148
+   },
+   {
+    "T_K": 750,
+    "heating_mu0M_T": 0.38051643067471824,
+    "cooling_mu0M_T": 0.7933401829397211,
+    "state": "RISING",
+    "canon_A_B": 4.6598079561042525
+   },
+   {
+    "T_K": 775,
+    "heating_mu0M_T": 0.5283207963724783,
+    "cooling_mu0M_T": 0.9463515831602505,
+    "state": "RISING",
+    "canon_A_B": 6.469821673525378
+   },
+   {
+    "T_K": 800,
+    "heating_mu0M_T": 0.695615847656756,
+    "cooling_mu0M_T": 1.1047005903652167,
+    "state": "RISING",
+    "canon_A_B": 8.518518518518519
+   },
+   {
+    "T_K": 825,
+    "heating_mu0M_T": 0.8775289131309222,
+    "cooling_mu0M_T": 1.265718401062402,
+    "state": "RISING",
+    "canon_A_B": 10.746227709190672
+   },
+   {
+    "T_K": 850,
+    "heating_mu0M_T": 1.0691873213983474,
+    "cooling_mu0M_T": 1.426736211759587,
+    "state": "RISING",
+    "canon_A_B": 13.093278463648835
+   },
+   {
+    "T_K": 875,
+    "heating_mu0M_T": 1.265718401062402,
+    "cooling_mu0M_T": 1.5850852189645528,
+    "state": "RISING",
+    "canon_A_B": 15.5
+   },
+   {
+    "T_K": 900,
+    "heating_mu0M_T": 1.4622494807264566,
+    "cooling_mu0M_T": 1.7380966191850824,
+    "state": "RISING",
+    "canon_A_B": 17.906721536351167
+   },
+   {
+    "T_K": 925,
+    "heating_mu0M_T": 1.6539078889938812,
+    "cooling_mu0M_T": 1.883101608928956,
+    "state": "RISING",
+    "canon_A_B": 20.253772290809327
+   },
+   {
+    "T_K": 950,
+    "heating_mu0M_T": 1.8358209544680475,
+    "cooling_mu0M_T": 2.017431384703955,
+    "state": "RISING",
+    "canon_A_B": 22.481481481481485
+   },
+   {
+    "T_K": 975,
+    "heating_mu0M_T": 2.0031160057523247,
+    "cooling_mu0M_T": 2.1384171430178633,
+    "state": "RISING",
+    "canon_A_B": 24.53017832647462
+   },
+   {
+    "T_K": 1000,
+    "heating_mu0M_T": 2.1509203714500855,
+    "cooling_mu0M_T": 2.2433900803784583,
+    "state": "RISING",
+    "canon_A_B": 26.340192043895748
+   },
+   {
+    "T_K": 1025,
+    "heating_mu0M_T": 2.274361380164698,
+    "cooling_mu0M_T": 2.329681393293524,
+    "state": "RISING",
+    "canon_A_B": 27.851851851851848
+   },
+   {
+    "T_K": 1050,
+    "heating_mu0M_T": 2.3685663604995346,
+    "cooling_mu0M_T": 2.394622278270842,
+    "state": "RISING",
+    "canon_A_B": 29.005486968449937
+   },
+   {
+    "T_K": 1075,
+    "heating_mu0M_T": 2.4286626410579637,
+    "cooling_mu0M_T": 2.4355439318181924,
+    "state": "RISING",
+    "canon_A_B": 29.741426611796978
+   },
+   {
+    "T_K": 1100,
+    "heating_mu0M_T": 2.4497775504433585,
+    "cooling_mu0M_T": 2.4497775504433585,
+    "state": "SATURATED",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1125,
+    "heating_mu0M_T": 2.4497775504433585,
+    "cooling_mu0M_T": 2.4497775504433585,
+    "state": "SATURATED",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1150,
+    "heating_mu0M_T": 2.4497775504433585,
+    "cooling_mu0M_T": 2.4497775504433585,
+    "state": "SATURATED",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1175,
+    "heating_mu0M_T": 2.4497775504433585,
+    "cooling_mu0M_T": 2.4497775504433585,
+    "state": "SATURATED",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1200,
+    "heating_mu0M_T": 2.4497775504433585,
+    "cooling_mu0M_T": 2.4497775504433585,
+    "state": "SATURATED",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1225,
+    "heating_mu0M_T": 2.4497775504433585,
+    "cooling_mu0M_T": 2.4497775504433585,
+    "state": "SATURATED",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1250,
+    "heating_mu0M_T": 2.4497775504433585,
+    "cooling_mu0M_T": 2.4497775504433585,
+    "state": "SATURATED",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1275,
+    "heating_mu0M_T": 2.4497775504433585,
+    "cooling_mu0M_T": 2.4497775504433585,
+    "state": "SATURATED",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1300,
+    "heating_mu0M_T": 2.4497775504433585,
+    "cooling_mu0M_T": 2.4497775504433585,
+    "state": "DEGRADING",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1325,
+    "heating_mu0M_T": 1.837333162832519,
+    "cooling_mu0M_T": 1.837333162832519,
+    "state": "DEGRADING",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1350,
+    "heating_mu0M_T": 1.2248887752216793,
+    "cooling_mu0M_T": 1.2248887752216793,
+    "state": "DEGRADING",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1375,
+    "heating_mu0M_T": 0.6124443876108396,
+    "cooling_mu0M_T": 0.6124443876108396,
+    "state": "DEGRADING",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1400,
+    "heating_mu0M_T": 0.0,
+    "cooling_mu0M_T": 0.0,
+    "state": "COLLAPSED",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1425,
+    "heating_mu0M_T": 0.0,
+    "cooling_mu0M_T": 0.0,
+    "state": "COLLAPSED",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1450,
+    "heating_mu0M_T": 0.0,
+    "cooling_mu0M_T": 0.0,
+    "state": "COLLAPSED",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1475,
+    "heating_mu0M_T": 0.0,
+    "cooling_mu0M_T": 0.0,
+    "state": "COLLAPSED",
+    "canon_A_B": 30.0
+   },
+   {
+    "T_K": 1500,
+    "heating_mu0M_T": 0.0,
+    "cooling_mu0M_T": 0.0,
+    "state": "COLLAPSED",
+    "canon_A_B": 30.0
+   }
+  ],
+  "thermodynamics": [
+   {
+    "M_A_m": 2445433.5199550674,
+    "mu0M_T": 3.0730223924532276,
+    "dM_dT_A_mK": 6204.582148268586,
+    "entropy_J_m3K": 31022.91074134293,
+    "isothermal_heat_J_m3": 31022910.741342932,
+    "seed_work_J_m3": 12227167.599775337,
+    "self_field_energy_J_m3": 3757435.9830388194,
+    "hysteresis_J_m3_cycle": 244.54335199550675,
+    "note": "inverse magnetocaloric (heat absorbed on magnetizing, like FeRh); the seed circuit supplies M B per m3 when the lattice orders and receives it back on collapse; the lattice is not a heat sink (ROOT-04, LOCKED)"
+   },
+   {
+    "M_A_m": 1711648.0465666836,
+    "mu0M_T": 2.1509203714500855,
+    "dM_dT_A_mK": 4342.813176962431,
+    "entropy_J_m3K": 21714.065884812153,
+    "isothermal_heat_J_m3": 21714065.884812154,
+    "seed_work_J_m3": 8558240.232833417,
+    "self_field_energy_J_m3": 1840809.326056512,
+    "hysteresis_J_m3_cycle": 17116.48046566684,
+    "note": "inverse magnetocaloric (heat absorbed on magnetizing, like FeRh); the seed circuit supplies M B per m3 when the lattice orders and receives it back on collapse; the lattice is not a heat sink (ROOT-04, LOCKED)"
+   },
+   {
+    "M_A_m": 650561.902049799,
+    "mu0M_T": 0.8175201968740204,
+    "dM_dT_A_mK": 1650.6131656672806,
+    "entropy_J_m3K": 8253.065828336403,
+    "isothermal_heat_J_m3": 8253065.828336403,
+    "seed_work_J_m3": 3252809.510248995,
+    "self_field_energy_J_m3": 265923.74712124444,
+    "hysteresis_J_m3_cycle": 325280.9510248995,
+    "note": "inverse magnetocaloric (heat absorbed on magnetizing, like FeRh); the seed circuit supplies M B per m3 when the lattice orders and receives it back on collapse; the lattice is not a heat sink (ROOT-04, LOCKED)"
+   }
+  ],
+  "canon_A_B_1000K": 26.340192043895748
+ },
+ "field": {
+  "efficiency": 0.8770458225639894,
+  "canon_A_B": 26.340192043895748,
+  "atomic_bound_T": 3.5,
+  "liners": {
+   "C1": {
+    "R_m": 1.75,
+    "volume_m3": 0.4398229715025709,
+    "mass_kg": 3518.5837720205673,
+    "force_x_N": -654893.109347712,
+    "force_r_N": -1127733.915762784,
+    "hoop_stress_Pa": 4487110.679650654,
+    "interaction_J": 606483.9788070413,
+    "self_energy_J": 1648992.5973924496
+   },
+   "C2": {
+    "R_m": 3.4000000000000004,
+    "volume_m3": 0.8545132017764238,
+    "mass_kg": 6836.10561421139,
+    "force_x_N": -3292115.6628469103,
+    "force_r_N": -474046.3616844481,
+    "hoop_stress_Pa": 1886170.5429202092,
+    "interaction_J": -1090366.272210692,
+    "self_energy_J": 3203757.046362475
+   },
+   "L1": {
+    "R_m": 5.53,
+    "volume_m3": 1.3898405899481245,
+    "mass_kg": 11118.724719584996,
+    "force_x_N": 5349712.873209682,
+    "force_r_N": -3336779.3046276043,
+    "hoop_stress_Pa": 13276623.008455511,
+    "interaction_J": 2994408.659960674,
+    "self_energy_J": 5210816.6077601435
+   },
+   "L2": {
+    "R_m": 6.6899999999999995,
+    "volume_m3": 1.6813803882012568,
+    "mass_kg": 13451.043105610055,
+    "force_x_N": 270245.8711941942,
+    "force_r_N": -7828642.87090529,
+    "hoop_stress_Pa": 31149180.26514259,
+    "interaction_J": 12715298.176640956,
+    "self_energy_J": 6303863.12946028
+   },
+   "L3": {
+    "R_m": 8.01,
+    "volume_m3": 2.0131325724203397,
+    "mass_kg": 16105.060579362718,
+    "force_x_N": -12788248.228372468,
+    "force_r_N": -315884.6431720301,
+    "hoop_stress_Pa": 1256865.060191203,
+    "interaction_J": 313.72584270279185,
+    "self_energy_J": 7547674.688636302
+   },
+   "L4": {
+    "R_m": 9.05,
+    "volume_m3": 2.274513081199011,
+    "mass_kg": 18196.104649592085,
+    "force_x_N": -14931209.214973094,
+    "force_r_N": 10003209.116179515,
+    "hoop_stress_Pa": 39801504.44054698,
+    "interaction_J": -11997640.652702043,
+    "self_energy_J": 8527647.43222953
+   }
+  },
+  "targets": {
+   "burn": {
+    "x_m": -18.8,
+    "B_coil_T": 1.4637069661996518,
+    "cases": {
+     "0.4": {
+      "G_optimal": 0.012043600083932338,
+      "G_axial": -0.00019681093819063153,
+      "B_fiji_T": [
+       0.036969761997854594,
+       0.025878833398498217,
+       0.010562789142244169
+      ],
+      "B_fiji_axial_T": [
+       -0.0006888382836672104,
+       -0.0004821867985670473,
+       -0.00019681093819063153
+      ],
+      "mu0Ms_for_canon_T": 12329.816632655878,
+      "mu0Ms_for_local_T": 3511.4414497918233
+     },
+     "0.2": {
+      "G_optimal": 0.002953904261031456,
+      "G_axial": -6.661887889702892e-05,
+      "B_fiji_T": [
+       0.009067482873370622,
+       0.006347238011359437,
+       0.0025907093923916067
+      ],
+      "B_fiji_axial_T": [
+       -0.00023316607613960123,
+       -0.00016321625329772087,
+       -6.661887889702892e-05
+      ],
+      "mu0Ms_for_canon_T": 50270.88473750075,
+      "mu0Ms_for_local_T": 14316.779693011838
+     },
+     "0.1": {
+      "G_optimal": 0.0007314805065757249,
+      "G_axial": -1.8856975302001148e-05,
+      "B_fiji_T": [
+       0.002245396729027306,
+       0.0015717777103191144,
+       0.0006415419225792304
+      ],
+      "B_fiji_axial_T": [
+       -6.599941355700402e-05,
+       -4.619958948990282e-05,
+       -1.8856975302001148e-05
+      ],
+      "mu0Ms_for_canon_T": 203006.61370605096,
+      "mu0Ms_for_local_T": 57814.796374287616
+     }
+    },
+    "shell": {
+     "30": {
+      "G": 3.737577765197229,
+      "B_fiji_T": 13.081522178190301,
+      "mu0Ms_for_canon_T": 34.845362808499736,
+      "mu0Ms_for_local_T": 9.923704053694774
+     },
+     "10": {
+      "G": 2.221302748941211,
+      "B_fiji_T": 7.774559621294238,
+      "mu0Ms_for_canon_T": 58.63102331069322,
+      "mu0Ms_for_local_T": 16.697685912992508
+     }
+    }
+   },
+   "throat": {
+    "x_m": -13.8,
+    "B_coil_T": -0.10713542096845635,
+    "cases": {
+     "0.4": {
+      "G_optimal": 0.04044617180613144,
+      "G_axial": -0.030368540763292595,
+      "B_fiji_T": [
+       0.12415601107445548,
+       0.08690920775211883,
+       0.03547314602127299
+      ],
+      "B_fiji_axial_T": [
+       -0.10628989267152408,
+       -0.07440292487006686,
+       -0.030368540763292595
+      ],
+      "mu0Ms_for_canon_T": 3709.6744878391787,
+      "mu0Ms_for_local_T": 76.53203751413066
+     },
+     "0.2": {
+      "G_optimal": 0.009113923410325235,
+      "G_axial": -0.006862016017645221,
+      "B_fiji_T": [
+       0.02797664958967863,
+       0.019583654712775046,
+       0.007993328454193895
+      ],
+      "B_fiji_axial_T": [
+       -0.024017056061758274,
+       -0.01681193924323079,
+       -0.006862016017645221
+      ],
+      "mu0Ms_for_canon_T": 16462.957271506384,
+      "mu0Ms_for_local_T": 339.63725594434896
+     },
+     "0.1": {
+      "G_optimal": 0.002173456113364009,
+      "G_axial": -0.0016326212193290956,
+      "B_fiji_T": [
+       0.006671772116632241,
+       0.004670240481642569,
+       0.0019062206047520687
+      ],
+      "B_fiji_axial_T": [
+       -0.0057141742676518345,
+       -0.0039999219873562844,
+       -0.0016326212193290956
+      ],
+      "mu0Ms_for_canon_T": 69033.89065801539,
+      "mu0Ms_for_local_T": 1424.1962002070595
+     }
+    },
+    "shell": {
+     "30": {
+      "G": 3.737577765197229,
+      "B_fiji_T": 13.081522178190301,
+      "mu0Ms_for_canon_T": 35.208317542943796,
+      "mu0Ms_for_local_T": 0.7263613796410306
+     },
+     "10": {
+      "G": 2.221302748941211,
+      "B_fiji_T": 7.774559621294238,
+      "mu0Ms_for_canon_T": 59.24173319518682,
+      "mu0Ms_for_local_T": 1.2221801568193846
+     }
+    }
+   }
+  },
+  "canon_field": {
+   "B_T": 131.70096021947873,
+   "pressure_Pa": 6901413086.970794,
+   "energy_J": 451696430279.4979,
+   "virial_mass_kg": 2273880.8933388363,
+   "stress_ratio": 7.84251487155772,
+   "note": "the canon lattice law (5 T seed x A_B at 1000 K) applied at the Vertex burn region: field energy in a sphere of the C1 radius; virial bound M >= rho W / sigma at the Ti-6Al-4V room-temperature yield (PMDS)"
+  }
+ },
+ "assembly": {
+  "liner_section_m": 0.2,
+  "volume_m3": 8.653202805047727,
+  "mass_kg": 69225.62244038182,
+  "isolation_area_m2": 86.53202805047727,
+  "inboard_area_m2": 43.26601402523863,
+  "radiative_W_m2": 217.16001491143243,
+  "radiative_W": 18791.296501758134,
+  "mli_W": 86.53202805047727,
+  "struts": {
+   "force_N": 49533007.4589224,
+   "area_m2": 0.11257501695209636,
+   "conduction_W": 3519.8455300355463,
+   "k_integral_W_m": 4690.0,
+   "note": "PMDS single-temperature conductivity (6.7 W/(m K) at 293 K) held constant: no table (MAT-TI6AL4V.thermal_conductivity: no temperature table)"
+  },
+  "hysteresis_W": 1373049552.6865625,
+  "eddy_W": 46198.478628048695,
+  "caught_photon_W": [
+   10198486577.561047,
+   241563141065.7426
+  ],
+  "inboard_flux_W_m2": [
+   235715880.17356765,
+   5583207663.290408
+  ],
+  "skin_m": 0.005,
+  "vs_armour": [
+   20.11227646532147,
+   476.38290642409623
+  ],
+  "temperature_rise_K": [
+   78571.96005785587,
+   1861069.2210968027
+  ],
+  "collapse_margin_K": 400.0,
+  "survives": [
+   false,
+   false
+  ],
+  "neutron_caught_share": 0.7364028618842733,
+  "photon_W": 1115104722646.9958
+ },
+ "rebco": {
+  "rows": [
+   {
+    "coil": "C1",
+    "B_peak_T": 2.3671266007334633,
+    "J_op_A_m2": 12954669.25787199,
+    "Jc_A_m2": [
+     458846412.1763869,
+     573634050.5183253,
+     635689856.9484718
+    ],
+    "margin": [
+     35.41938455106184,
+     44.280100024147885,
+     49.07032702221947
+    ],
+    "margin_with_fiji": [
+     34.747900694940114,
+     43.23326596180826,
+     47.681542226585286
+    ],
+    "fiji_dB_T": 0.10914348014129649,
+    "apc_margin": [
+     106.25815365318553,
+     88.56020004829577,
+     63.79142512888532
+    ],
+    "distance_m": 5.0901699437494745,
+    "fluence_rate_n_m2s": 1.051867394379531e+21,
+    "lifetime_s": [
+     28.52070532873225,
+     9.506901776244083,
+     2.8520705328732254
+    ],
+    "burn_fluence_n_m2": 2.5875937901736463e+27
+   },
+   {
+    "coil": "C2",
+    "B_peak_T": 5.047839815687435,
+    "J_op_A_m2": 18958726.63658706,
+    "Jc_A_m2": [
+     322896129.8881996,
+     369725408.3525472,
+     375265406.50264925
+    ],
+    "margin": [
+     17.031530443878335,
+     19.501594987874405,
+     19.79380860835094
+    ],
+    "margin_with_fiji": [
+     16.871473478269273,
+     19.27277741506261,
+     19.515441203323842
+    ],
+    "fiji_dB_T": 0.09592688684293635,
+    "apc_margin": [
+     51.09459133163501,
+     39.00318997574881,
+     25.731951190856226
+    ],
+    "distance_m": 4.611395160225577,
+    "fluence_rate_n_m2s": 1.2816247294625828e+21,
+    "lifetime_s": [
+     23.407788029012007,
+     7.80259600967067,
+     2.340778802901201
+    ],
+    "burn_fluence_n_m2": 3.1527968344779535e+27
+   },
+   {
+    "coil": "L1",
+    "B_peak_T": 6.032803744540423,
+    "J_op_A_m2": 20570648.223205823,
+    "Jc_A_m2": [
+     294948307.69410104,
+     330166596.94581604,
+     327614514.7232823
+    ],
+    "margin": [
+     14.338308860941424,
+     16.05037397768311,
+     15.92630971899559
+    ],
+    "margin_with_fiji": [
+     14.239994528554838,
+     15.912925149869679,
+     15.76278652437026
+    ],
+    "fiji_dB_T": 0.08111138536065435,
+    "apc_margin": [
+     43.01492658282427,
+     32.10074795536622,
+     20.704202634694266
+    ],
+    "distance_m": 6.180735254367722,
+    "fluence_rate_n_m2s": 7.134199910500022e+20,
+    "lifetime_s": [
+     42.05096629805171,
+     14.016988766017239,
+     4.205096629805172
+    ],
+    "burn_fluence_n_m2": 1.7550131779830054e+27
+   },
+   {
+    "coil": "L2",
+    "B_peak_T": 5.628492252625107,
+    "J_op_A_m2": 21788855.978708178,
+    "Jc_A_m2": [
+     305614640.8701812,
+     345158396.23969746,
+     345545709.87799776
+    ],
+    "margin": [
+     14.026190322650457,
+     15.841051800837194,
+     15.858827568352423
+    ],
+    "margin_with_fiji": [
+     13.932897560012746,
+     15.709456487872043,
+     15.700867614241579
+    ],
+    "fiji_dB_T": 0.07413743216939896,
+    "apc_margin": [
+     42.07857096795137,
+     31.682103601674388,
+     20.61647583885815
+    ],
+    "distance_m": 6.9399999999999995,
+    "fluence_rate_n_m2s": 5.65856900856346e+20,
+    "lifetime_s": [
+     53.01693759429134,
+     17.67231253143045,
+     5.301693759429135
+    ],
+    "burn_fluence_n_m2": 1.3920079761066112e+27
+   },
+   {
+    "coil": "L3",
+    "B_peak_T": 6.650558089977405,
+    "J_op_A_m2": 28606057.685395595,
+    "Jc_A_m2": [
+     280418807.0577386,
+     309962867.08588773,
+     303707122.9641549
+    ],
+    "margin": [
+     9.802777095038241,
+     10.835567434520513,
+     10.616881441835591
+    ],
+    "margin_with_fiji": [
+     9.743669365616716,
+     10.753960160659226,
+     10.52100154543807
+    ],
+    "fiji_dB_T": 0.07750689001322973,
+    "apc_margin": [
+     29.408331285114727,
+     21.671134869041026,
+     13.80194587438627
+    ],
+    "distance_m": 9.875227054134397,
+    "fluence_rate_n_m2s": 2.794675437297129e+20,
+    "lifetime_s": [
+     107.3469913522928,
+     35.78233045076427,
+     10.73469913522928
+    ],
+    "burn_fluence_n_m2": 6.874901575750937e+26
+   },
+   {
+    "coil": "L4",
+    "B_peak_T": 7.9994945577228,
+    "J_op_A_m2": 40871306.688482076,
+    "Jc_A_m2": [
+     254385373.24903724,
+     274420099.9368695,
+     262411265.86204362
+    ],
+    "margin": [
+     6.224057752494746,
+     6.71424826293121,
+     6.420427608594017
+    ],
+    "margin_with_fiji": [
+     6.189061374676979,
+     6.667090726190329,
+     6.366353021932147
+    ],
+    "fiji_dB_T": 0.0849732976878606,
+    "apc_margin": [
+     18.67217325748424,
+     13.42849652586242,
+     8.346555891172223
+    ],
+    "distance_m": 15.267261893597146,
+    "fluence_rate_n_m2s": 1.16923887535204e+20,
+    "lifetime_s": [
+     256.57716855306796,
+     85.52572285102265,
+     25.657716855306795
+    ],
+    "burn_fluence_n_m2": 2.8763276333660187e+26
+   }
+  ],
+  "neutrons_per_s": 3.424801630490174e+23,
+  "worst": "C2",
+  "attenuation_needed": 105093.22781593178,
+  "shield_m": 1.7343904678747668,
+  "stored_J": 9723310189.558317,
+  "dump_s": 10.0,
+  "cold_W": [
+   10198486577.561047,
+   327211234126.11115
+  ],
+  "note": "margins against the demonstrated envelope scaled to the coil field: LITERATURE_RANGE scaling, not a measured critical surface (PMDS MAT-REBCO Jc OPEN, OD-024); fluence from the LOW source with no shielding beyond the drawn cryostat, D-D and bred D-T neutrons, against literature cryogenic-irradiation limits"
+ },
+ "fusion": {
+  "reference": {
+   "photon_share": 0.12487246960573131,
+   "neutron_share": 0.04427745838999864,
+   "released": 0.12487246960573131
+  },
+  "polarization": [
+   {
+    "k": 0,
+    "factor": 1.3280500000000002,
+    "dd": 0.5,
+    "photon_share": 0.09821238984247063,
+    "neutron_share": 0.017412144639897188
+   },
+   {
+    "k": 1,
+    "factor": 1.06125,
+    "dd": 1.0,
+    "photon_share": 0.11813146275839712,
+    "neutron_share": 0.04188722256674687
+   },
+   {
+    "k": 2,
+    "factor": 1.00125,
+    "dd": 1.0,
+    "photon_share": 0.12472721686412766,
+    "neutron_share": 0.04422595446569334
+   }
+  ],
+  "polarization_power_W": 37785153.04568156,
+  "polarization_note": "THEORETICAL: sigma x (1 + P_D P_He / 2) for parallel spins (Kulsrud et al. 1982); depolarization in a dense hot burn (spin-flip collisions, field gradients) is not modelled, it enters as survival; D-D suppression disputed (dd_factor 1 nominal). Fiji does not preserve polarization.",
+  "floor": {
+   "0": [
+    {
+     "Ti_keV": 50.0,
+     "Te_keV": 50.0,
+     "Te_over_Ti": 1.0,
+     "photon_share": 0.5622613724473515,
+     "exchange_share": 0.0,
+     "ion_heating_share": 0.18412147935470746,
+     "sustained": true,
+     "channel": 0.0,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 70.0,
+     "Te_keV": 70.0,
+     "Te_over_Ti": 1.0,
+     "photon_share": 0.374534037347189,
+     "exchange_share": 0.0,
+     "ion_heating_share": 0.22301675518388403,
+     "sustained": true,
+     "channel": 0.0,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 100.0,
+     "Te_keV": 100.0,
+     "Te_over_Ti": 1.0,
+     "photon_share": 0.3204860034407201,
+     "exchange_share": 0.0,
+     "ion_heating_share": 0.2699153295342073,
+     "sustained": true,
+     "channel": 0.0,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 150.0,
+     "Te_keV": 150.0,
+     "Te_over_Ti": 1.0,
+     "photon_share": 0.3524887813770286,
+     "exchange_share": 0.0,
+     "ion_heating_share": 0.32912547676397147,
+     "sustained": true,
+     "channel": 0.0,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 200.0,
+     "Te_keV": 200.0,
+     "Te_over_Ti": 1.0,
+     "photon_share": 0.425486764594575,
+     "exchange_share": 0.0,
+     "ion_heating_share": 0.376817507338904,
+     "sustained": true,
+     "channel": 0.0,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 300.0,
+     "Te_keV": 258.57107997283765,
+     "Te_over_Ti": 0.8619035999094589,
+     "photon_share": 0.586085594535723,
+     "exchange_share": 0.01690035347180835,
+     "ion_heating_share": 0.4240950391893396,
+     "sustained": true,
+     "channel": 0.0,
+     "pol": 1.0
+    }
+   ],
+   "0.9": [
+    {
+     "Ti_keV": 50.0,
+     "Te_keV": 36.46010738598801,
+     "Te_over_Ti": 0.7292021477197602,
+     "photon_share": 0.45182139996535853,
+     "exchange_share": 0.3682074176724915,
+     "ion_heating_share": 0.9030975107536016,
+     "sustained": true,
+     "channel": 0.9,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 70.0,
+     "Te_keV": 48.681765063803205,
+     "Te_over_Ti": 0.6954537866257601,
+     "photon_share": 0.28463800205474027,
+     "exchange_share": 0.20370857598502562,
+     "ion_heating_share": 0.90837910437243,
+     "sustained": true,
+     "channel": 0.9,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 100.0,
+     "Te_keV": 64.79412988695611,
+     "Te_over_Ti": 0.6479412988695611,
+     "photon_share": 0.2226937552951,
+     "exchange_share": 0.1450446973793242,
+     "ion_heating_share": 0.9120560666391786,
+     "sustained": true,
+     "channel": 0.9,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 150.0,
+     "Te_keV": 86.01328878511924,
+     "Te_over_Ti": 0.5734219252341283,
+     "photon_share": 0.20764979482089138,
+     "exchange_share": 0.1332517873333615,
+     "ion_heating_share": 0.9179430549511429,
+     "sustained": true,
+     "channel": 0.9,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 200.0,
+     "Te_keV": 102.53616173257541,
+     "Te_over_Ti": 0.512680808662877,
+     "photon_share": 0.21216842824703264,
+     "exchange_share": 0.1400431228373788,
+     "ion_heating_share": 0.9211549748436006,
+     "sustained": true,
+     "channel": 0.9,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 300.0,
+     "Te_keV": 126.04899961380458,
+     "Te_over_Ti": 0.42016333204601525,
+     "photon_share": 0.25811545995707774,
+     "exchange_share": 0.188984032535415,
+     "ion_heating_share": 0.9241488528315918,
+     "sustained": true,
+     "channel": 0.9,
+     "pol": 1.0
+    }
+   ],
+   "0.5": [
+    {
+     "Ti_keV": 50.0,
+     "Te_keV": 44.64635541393445,
+     "Te_over_Ti": 0.892927108278689,
+     "photon_share": 0.5187876235997495,
+     "exchange_share": 0.11124575145135347,
+     "ion_heating_share": 0.5791696208980727,
+     "sustained": true,
+     "channel": 0.5,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 70.0,
+     "Te_keV": 70.0,
+     "Te_over_Ti": 1.0,
+     "photon_share": 0.374534037347189,
+     "exchange_share": 0.0,
+     "ion_heating_share": 0.6061626428130144,
+     "sustained": true,
+     "channel": 0.5,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 100.0,
+     "Te_keV": 100.0,
+     "Te_over_Ti": 1.0,
+     "photon_share": 0.3204860034407201,
+     "exchange_share": 0.0,
+     "ion_heating_share": 0.6298102270445809,
+     "sustained": true,
+     "channel": 0.5,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 150.0,
+     "Te_keV": 144.81606559400961,
+     "Te_over_Ti": 0.9654404372933975,
+     "photon_share": 0.3397132367915015,
+     "exchange_share": 0.005332827949784218,
+     "ion_heating_share": 0.6579606535969553,
+     "sustained": true,
+     "channel": 0.5,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 200.0,
+     "Te_keV": 167.48813547119659,
+     "Te_over_Ti": 0.8374406773559829,
+     "photon_share": 0.34733092121808723,
+     "exchange_share": 0.024002231418792482,
+     "ion_heating_share": 0.6699515904539599,
+     "sustained": true,
+     "channel": 0.5,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 300.0,
+     "Te_keV": 185.1546381575966,
+     "Te_over_Ti": 0.6171821271919886,
+     "photon_share": 0.38886751952294485,
+     "exchange_share": 0.07395476650146464,
+     "ion_heating_share": 0.6783675272317744,
+     "sustained": true,
+     "channel": 0.5,
+     "pol": 1.0
+    }
+   ],
+   "0.2": [
+    {
+     "Ti_keV": 50.0,
+     "Te_keV": 50.0,
+     "Te_over_Ti": 1.0,
+     "photon_share": 0.5622613724473515,
+     "exchange_share": 0.0,
+     "ion_heating_share": 0.3446394820930598,
+     "sustained": true,
+     "channel": 0.2,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 70.0,
+     "Te_keV": 70.0,
+     "Te_over_Ti": 1.0,
+     "photon_share": 0.374534037347189,
+     "exchange_share": 0.0,
+     "ion_heating_share": 0.37627511023553617,
+     "sustained": true,
+     "channel": 0.2,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 100.0,
+     "Te_keV": 100.0,
+     "Te_over_Ti": 1.0,
+     "photon_share": 0.3204860034407201,
+     "exchange_share": 0.0,
+     "ion_heating_share": 0.41387328853835686,
+     "sustained": true,
+     "channel": 0.2,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 150.0,
+     "Te_keV": 150.0,
+     "Te_over_Ti": 1.0,
+     "photon_share": 0.3524887813770286,
+     "exchange_share": 0.0,
+     "ion_heating_share": 0.4617685938989118,
+     "sustained": true,
+     "channel": 0.2,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 200.0,
+     "Te_keV": 200.0,
+     "Te_over_Ti": 1.0,
+     "photon_share": 0.425486764594575,
+     "exchange_share": 0.0,
+     "ion_heating_share": 0.5001100619217742,
+     "sustained": true,
+     "channel": 0.2,
+     "pol": 1.0
+    },
+    {
+     "Ti_keV": 300.0,
+     "Te_keV": 230.51302066051102,
+     "Te_over_Ti": 0.7683767355350367,
+     "photon_share": 0.5058664142234902,
+     "exchange_share": 0.03317251712425399,
+     "ion_heating_share": 0.5205863831540185,
+     "sustained": true,
+     "channel": 0.2,
+     "pol": 1.0
+    }
+   ]
+  },
+  "floor_polarized": [
+   {
+    "Ti_keV": 50.0,
+    "Te_keV": 37.004837009937575,
+    "Te_over_Ti": 0.7400967401987515,
+    "photon_share": 0.35154488495645847,
+    "exchange_share": 0.266956910918012,
+    "ion_heating_share": 0.9101927682583529,
+    "sustained": true,
+    "channel": 0.9,
+    "pol": 1.3280500000000002
+   },
+   {
+    "Ti_keV": 70.0,
+    "Te_keV": 50.032390058806534,
+    "Te_over_Ti": 0.714748429411522,
+    "photon_share": 0.222586656495118,
+    "exchange_share": 0.14105564032495052,
+    "ion_heating_share": 0.9142692813137034,
+    "sustained": true,
+    "channel": 0.9,
+    "pol": 1.3280500000000002
+   },
+   {
+    "Ti_keV": 100.0,
+    "Te_keV": 67.35320352466711,
+    "Te_over_Ti": 0.673532035246671,
+    "photon_share": 0.17586882931649273,
+    "exchange_share": 0.09782392107802124,
+    "ion_heating_share": 0.9179107686437395,
+    "sustained": true,
+    "channel": 0.9,
+    "pol": 1.3280500000000002
+   },
+   {
+    "Ti_keV": 150.0,
+    "Te_keV": 89.86839934476079,
+    "Te_over_Ti": 0.5991226622984053,
+    "photon_share": 0.1644744069514568,
+    "exchange_share": 0.0900184948147454,
+    "ion_heating_share": 0.9225224249879518,
+    "sustained": true,
+    "channel": 0.9,
+    "pol": 1.3280500000000002
+   },
+   {
+    "Ti_keV": 200.0,
+    "Te_keV": 107.03246098109972,
+    "Te_over_Ti": 0.5351623049054985,
+    "photon_share": 0.16805881199281153,
+    "exchange_share": 0.09597717392341694,
+    "ion_heating_share": 0.9252588588298221,
+    "sustained": true,
+    "channel": 0.9,
+    "pol": 1.3280500000000002
+   },
+   {
+    "Ti_keV": 300.0,
+    "Te_keV": 130.37045380451497,
+    "Te_over_Ti": 0.4345681793483832,
+    "photon_share": 0.2032310122121408,
+    "exchange_share": 0.13404898782825556,
+    "ion_heating_share": 0.9281584725153317,
+    "sustained": true,
+    "channel": 0.9,
+    "pol": 1.3280500000000002
+   }
+  ],
+  "best_floor": {
+   "Ti_keV": 150.0,
+   "Te_keV": 86.01328878511924,
+   "Te_over_Ti": 0.5734219252341283,
+   "photon_share": 0.20764979482089138,
+   "exchange_share": 0.1332517873333615,
+   "ion_heating_share": 0.9179430549511429,
+   "sustained": true,
+   "channel": 0.9,
+   "pol": 1.0
+  },
+  "best_floor_polarized": {
+   "Ti_keV": 150.0,
+   "Te_keV": 89.86839934476079,
+   "Te_over_Ti": 0.5991226622984053,
+   "photon_share": 0.1644744069514568,
+   "exchange_share": 0.0900184948147454,
+   "ion_heating_share": 0.9225224249879518,
+   "sustained": true,
+   "channel": 0.9,
+   "pol": 1.3280500000000002
+  },
+  "coupled": [
+   {
+    "case": "R2B-110-0.5",
+    "rhoR_g_cm2": 95.67743964311504,
+    "photon_share": 0.8467106119388195,
+    "neutron_share": 0.028265542398069294,
+    "burn_fraction": 0.7668820602878993,
+    "Te_peak_keV": 247.9076060961409,
+    "Te_end_keV": 2.3177801899075483,
+    "Ti_peak_keV": 643.6173696764771,
+    "pol": 1.0,
+    "dd": 1.0,
+    "channel": 0.0
+   },
+   {
+    "case": "R2B-110-0.5",
+    "rhoR_g_cm2": 82.0119388447267,
+    "photon_share": 0.7382608148061511,
+    "neutron_share": 0.027812655679939915,
+    "burn_fraction": 0.7658937338435743,
+    "Te_peak_keV": 203.53355317813538,
+    "Te_end_keV": 2.259487110964226,
+    "Ti_peak_keV": 854.5282578283833,
+    "pol": 1.0,
+    "dd": 1.0,
+    "channel": 0.5
+   },
+   {
+    "case": "R2B-150-0.3",
+    "rhoR_g_cm2": 57.24680114917682,
+    "photon_share": 0.5099856517182461,
+    "neutron_share": 0.010773024896119103,
+    "burn_fraction": 0.710872204486142,
+    "Te_peak_keV": 191.43285828839691,
+    "Te_end_keV": 3.055439071728818,
+    "Ti_peak_keV": 1123.5169186188473,
+    "pol": 1.3280500000000002,
+    "dd": 0.5,
+    "channel": 0.9
+   }
+  ],
+  "channel_cost_W": [
+   66774366102.902275,
+   185484350285.83963,
+   296774960457.3435
+  ]
+ },
+ "materials": [
+  {
+   "material": "MAT-W",
+   "use": "plasma-facing armour",
+   "max_service_temperature": [
+    1300.0,
+    1600.0
+   ],
+   "level": "A",
+   "melting_point": 3695.0,
+   "thermal_conductivity": 118.0,
+   "specific_heat": 132.0,
+   "thermal_expansion": 4.5e-06,
+   "yield_strength": "OPEN",
+   "density": 19250.0
+  },
+  {
+   "material": "MAT-W-ADV01",
+   "use": "armour (fibre-reinforced, Level B)",
+   "max_service_temperature": "NOT_INHERITED",
+   "level": "B",
+   "melting_point": "NOT_INHERITED",
+   "thermal_conductivity": "NOT_INHERITED",
+   "specific_heat": "NOT_INHERITED",
+   "thermal_expansion": "NOT_INHERITED",
+   "yield_strength": "OPEN",
+   "density": "NOT_INHERITED"
+  },
+  {
+   "material": "MAT-W-FIJI01",
+   "use": "armour (Fiji-stabilized, Level C)",
+   "max_service_temperature": "SPECULATIVE_BLOCKED",
+   "level": "C",
+   "melting_point": "SPECULATIVE_BLOCKED",
+   "thermal_conductivity": "SPECULATIVE_BLOCKED",
+   "specific_heat": "SPECULATIVE_BLOCKED",
+   "thermal_expansion": "SPECULATIVE_BLOCKED",
+   "yield_strength": "SPECULATIVE_BLOCKED",
+   "density": "SPECULATIVE_BLOCKED"
+  },
+  {
+   "material": "MAT-REBCO",
+   "use": "coil conductor",
+   "max_service_temperature": "OPEN",
+   "level": "A",
+   "melting_point": "OPEN",
+   "thermal_conductivity": "OPEN",
+   "specific_heat": "OPEN",
+   "thermal_expansion": "OPEN",
+   "yield_strength": "OPEN",
+   "density": "OPEN"
+  },
+  {
+   "material": "MAT-REBCO-APC01",
+   "use": "coil conductor (APC, Level B)",
+   "max_service_temperature": "OPEN",
+   "level": "B",
+   "melting_point": "OPEN",
+   "thermal_conductivity": "OPEN",
+   "specific_heat": "OPEN",
+   "thermal_expansion": "OPEN",
+   "yield_strength": "OPEN",
+   "density": "OPEN"
+  },
+  {
+   "material": "MAT-TI6AL4V",
+   "use": "structure, liner struts",
+   "max_service_temperature": 673.0,
+   "level": "A",
+   "melting_point": [
+    1877.0,
+    1933.0
+   ],
+   "thermal_conductivity": 6.7,
+   "specific_heat": 526.0,
+   "thermal_expansion": 8.6e-06,
+   "yield_strength": 880000000.0,
+   "density": 4430.0
+  },
+  {
+   "material": "MAT-NB1ZR",
+   "use": "hot circuit",
+   "max_service_temperature": [
+    1300.0,
+    1400.0
+   ],
+   "level": "A",
+   "melting_point": [
+    2670.0,
+    2750.0
+   ],
+   "thermal_conductivity": "OPEN",
+   "specific_heat": "OPEN",
+   "thermal_expansion": "OPEN",
+   "yield_strength": "OPEN",
+   "density": 8570.0
+  },
+  {
+   "material": "MAT-SS-316LN",
+   "use": "cryostat",
+   "max_service_temperature": "OPEN",
+   "level": "A",
+   "melting_point": "OPEN",
+   "thermal_conductivity": "OPEN",
+   "specific_heat": "OPEN",
+   "thermal_expansion": "OPEN",
+   "yield_strength": "OUT_OF_RANGE",
+   "density": 8000.0
+  },
+  {
+   "material": "MAT-CU-OF",
+   "use": "power",
+   "max_service_temperature": "OPEN",
+   "level": "A",
+   "melting_point": 1357.8,
+   "thermal_conductivity": 352.0,
+   "specific_heat": 385.0,
+   "thermal_expansion": 1.65e-05,
+   "yield_strength": [
+    30000000.0,
+    70000000.0
+   ],
+   "density": 8960.0
+  },
+  {
+   "material": "MAT-LIH",
+   "use": "neutron shield",
+   "max_service_temperature": "OPEN",
+   "level": "A",
+   "melting_point": 961.8,
+   "thermal_conductivity": "OPEN",
+   "specific_heat": "OPEN",
+   "thermal_expansion": 4.2e-05,
+   "yield_strength": "OPEN",
+   "density": 780.0
+  },
+  {
+   "material": "MAT-B4C",
+   "use": "neutron absorber",
+   "max_service_temperature": "OPEN",
+   "level": "A",
+   "melting_point": [
+    2623.0,
+    2723.0
+   ],
+   "thermal_conductivity": "OPEN",
+   "specific_heat": "OPEN",
+   "thermal_expansion": "OPEN",
+   "yield_strength": "OPEN",
+   "density": [
+    2500.0,
+    2520.0
+   ]
+  },
+  {
+   "material": "MAT-HDPE",
+   "use": "polymer shield",
+   "max_service_temperature": "OPEN",
+   "level": "A",
+   "melting_point": [
+    393.0,
+    408.0
+   ],
+   "thermal_conductivity": "OPEN",
+   "specific_heat": "OPEN",
+   "thermal_expansion": "OPEN",
+   "yield_strength": "OPEN",
+   "density": [
+    940.0,
+    970.0
+   ]
+  },
+  {
+   "material": "MAT-RAD-NPE01",
+   "use": "nanophotonic radiator skin (Level B)",
+   "max_service_temperature": "NOT_INHERITED",
+   "level": "B",
+   "melting_point": "NOT_INHERITED",
+   "thermal_conductivity": "NOT_INHERITED",
+   "specific_heat": "NOT_INHERITED",
+   "thermal_expansion": "NOT_INHERITED",
+   "yield_strength": "OPEN",
+   "density": "NOT_INHERITED"
+  }
+ ],
+ "armour": {
+  "T_limit_K": 1300.0,
+  "coolant_K": 800.0,
+  "thickness_m": 0.005,
+  "q_max_W_m2": 11720000.0,
+  "peak_W_m2": 4619412790.767407,
+  "shortfall": 394.1478490415877
+ },
+ "shielding": {
+  "rows": [
+   {
+    "name": "LiH (melts 962 K) at the shield temperature",
+    "T_K": 700.0,
+    "cop": 0.19090909090909092,
+    "heat_W": 99574001931.86815,
+    "reject_W": 621152107289.2727
+   },
+   {
+    "name": "polymer / nanocomposite (B4C-HDPE class)",
+    "T_K": 380.0,
+    "cop": 0.08028169014084507,
+    "heat_W": 99574001931.86815,
+    "reject_W": 1339881745293.7344
+   }
+  ],
+  "neutron_W": 395395423133.5809
+ },
+ "insulation": {
+  "mli_W_m2": [
+   0.3,
+   0.6,
+   1.0
+  ],
+  "aerogel_mli_W_m2": [
+   0.1,
+   0.3,
+   0.6
+  ],
+  "lift_W_per_W": 296.6666666666667,
+  "lift_W_m2": [
+   29.666666666666668,
+   89.0,
+   178.0
+  ],
+  "note": "He-3 stored below its 3.2 K boiling point needs a sub-4 K stage (COP far below the 20 K value); kept separate from engine closure: tank leaks are watts per m2, the engines are terawatts"
+ },
+ "radiator": {
+  "emissivity": [
+   0.9,
+   0.98
+  ],
+  "capacity_gain": 0.0888888888888888
+ },
+ "hydrogen": {
+  "excess_W": 651767212243.717,
+  "cases": [
+   {
+    "enthalpy_J_kg": 220000000.0,
+    "mdot_kg_s": 2962.5782374714413,
+    "mass_kg": 7287942464.179746,
+    "v_exhaust_m_s": 16248.07680927192
+   },
+   {
+    "enthalpy_J_kg": 100000000.0,
+    "mdot_kg_s": 6517.67212243717,
+    "mass_kg": 16033473421.195438,
+    "v_exhaust_m_s": 10954.451150103323
+   },
+   {
+    "enthalpy_J_kg": 40000000.0,
+    "mdot_kg_s": 16294.180306092927,
+    "mass_kg": 40083683552.9886,
+    "v_exhaust_m_s": 6928.203230275509
+   }
+  ]
+ },
+ "variants": [
+  {
+   "id": "F0",
+   "name": "1.5 baseline (LOW source, as drawn)",
+   "note": "reproduces 1.5 T-01: 854x",
+   "deliverables": [],
+   "photon_share": 0.12487246960573131,
+   "neutron_share": 0.04427745838999864,
+   "charged_share": 0.8308500720042701,
+   "per_engine": {
+    "fusion_W": 8929948500000.0,
+    "charged_W": 7419448354219.424,
+    "photon_W": 1115104722646.9958,
+    "neutron_W": 395395423133.5808,
+    "exhaust_W": 6965479544023.663,
+    "hardware_W": 50867235967.2527,
+    "cryogenic_W": 10198486577.561047,
+    "refrigeration_W": 3025551018009.777,
+    "hot_radiator_W": 3076418253977.03,
+    "warm_W": 0.0,
+    "reaction_mass_W": 0.0,
+    "thrust_N": 725526.495466277,
+    "escaping_W": 1913601720009.0842
+   },
+   "ratio": [
+    854.4715831105393,
+    27221.09959266165
+   ],
+   "heat_per_photon_W": 2.7588603935550893,
+   "sr1_photon_share_needed": 0.0001461399911640796,
+   "sr1_factor": 854.4715831105393,
+   "fixed_heat_W": 0.0,
+   "fixed_exceeds_radiator": false,
+   "ratio_without_overheads": 854.4715831105393,
+   "power_to_close": 0.0011703139340921,
+   "closes": false
+  },
+  {
+   "id": "F1",
+   "name": "Fiji lattice liner at 1000 K (field + hot shield)",
+   "note": "the liner shields the cold parts but its heat is pumped from 1000 K",
+   "deliverables": [
+    "B",
+    "C"
+   ],
+   "photon_share": 0.12487246960573131,
+   "neutron_share": 0.04427745838999864,
+   "charged_share": 0.8308500720042701,
+   "per_engine": {
+    "fusion_W": 8929948500000.0,
+    "charged_W": 7419448354219.424,
+    "photon_W": 1115104722646.9958,
+    "neutron_W": 395395423133.5808,
+    "exhaust_W": 6965479544023.663,
+    "hardware_W": 52240354116.09195,
+    "cryogenic_W": 86.53202819824219,
+    "refrigeration_W": 30857950400.138863,
+    "hot_radiator_W": 83098304516.2308,
+    "warm_W": 11571604639.86827,
+    "reaction_mass_W": 0.0,
+    "thrust_N": 725526.495466277,
+    "escaping_W": 1912228601860.2449
+   },
+   "ratio": [
+    23.08045719140879,
+    2346.5946055508675
+   ],
+   "heat_per_photon_W": 0.07000526371081862,
+   "sr1_photon_share_needed": null,
+   "sr1_factor": null,
+   "fixed_heat_W": 5035104342.148611,
+   "fixed_exceeds_radiator": true,
+   "ratio_without_overheads": 21.681962831026986,
+   "power_to_close": 0.043326698067845414,
+   "closes": false
+  },
+  {
+   "id": "F1-REF",
+   "name": "conventional W liner at its 1300 K service limit (comparator, no Fiji)",
+   "note": "what the same liner does without Fiji",
+   "deliverables": [
+    "C"
+   ],
+   "photon_share": 0.12487246960573131,
+   "neutron_share": 0.04427745838999864,
+   "charged_share": 0.8308500720042701,
+   "per_engine": {
+    "fusion_W": 8929948500000.0,
+    "charged_W": 7419448354219.424,
+    "photon_W": 1115104722646.9958,
+    "neutron_W": 395395423133.5808,
+    "exhaust_W": 6965479544023.663,
+    "hardware_W": 50867235967.2527,
+    "cryogenic_W": 0.0,
+    "refrigeration_W": 13074982791.74493,
+    "hot_radiator_W": 63942218758.997635,
+    "warm_W": 10198486577.561047,
+    "reaction_mass_W": 0.0,
+    "thrust_N": 725526.495466277,
+    "escaping_W": 1913601720009.0842
+   },
+   "ratio": [
+    17.759876707261625,
+    2228.041149739286
+   ],
+   "heat_per_photon_W": 0.05734189575236833,
+   "sr1_photon_share_needed": 0.007031156334248293,
+   "sr1_factor": 17.759876707261625,
+   "fixed_heat_W": 0.0,
+   "fixed_exceeds_radiator": false,
+   "ratio_without_overheads": 17.759876707261625,
+   "power_to_close": 0.05630669719633368,
+   "closes": false
+  },
+  {
+   "id": "F2",
+   "name": "advanced REBCO (APC) and nanofabricated coils",
+   "note": "thinner cryostats intercept less (optimistic: neutron shielding wants thicker)",
+   "deliverables": [
+    "D"
+   ],
+   "photon_share": 0.12487246960573131,
+   "neutron_share": 0.04427745838999864,
+   "charged_share": 0.8308500720042701,
+   "per_engine": {
+    "fusion_W": 8929948500000.0,
+    "charged_W": 7419448354219.424,
+    "photon_W": 1115104722646.9958,
+    "neutron_W": 395395423133.5808,
+    "exhaust_W": 6965479544023.663,
+    "hardware_W": 49258926013.80918,
+    "cryogenic_W": 8590176624.117529,
+    "refrigeration_W": 2548419065154.8667,
+    "hot_radiator_W": 2597677991168.676,
+    "warm_W": 0.0,
+    "reaction_mass_W": 0.0,
+    "thrust_N": 725526.495466277,
+    "escaping_W": 1915210029962.5278
+   },
+   "ratio": [
+    721.5020332998834,
+    22954.865562362687
+   ],
+   "heat_per_photon_W": 2.3295372518936164,
+   "sr1_photon_share_needed": 0.00017307292820036946,
+   "sr1_factor": 721.5020332998835,
+   "fixed_heat_W": 0.0,
+   "fixed_exceeds_radiator": false,
+   "ratio_without_overheads": 721.5020332998834,
+   "power_to_close": 0.0013859974800436389,
+   "closes": false
+  },
+  {
+   "id": "F3",
+   "name": "spin-polarized D-3He (nominal polarization)",
+   "note": "THEORETICAL cross-section gain",
+   "deliverables": [
+    "E"
+   ],
+   "photon_share": 0.11813146275839712,
+   "neutron_share": 0.04188722256674687,
+   "charged_share": 0.839981314674856,
+   "per_engine": {
+    "fusion_W": 8929948500000.0,
+    "charged_W": 7500989881008.759,
+    "photon_W": 1054907878662.1542,
+    "neutron_W": 374050740329.0874,
+    "exhaust_W": 7042031844103.569,
+    "hardware_W": 48121263319.77591,
+    "cryogenic_W": 9647940343.72065,
+    "refrigeration_W": 2862222301970.4595,
+    "hot_radiator_W": 2910343565290.2354,
+    "warm_W": 0.0,
+    "reaction_mass_W": 0.0,
+    "thrust_N": 733500.2066294246,
+    "escaping_W": 1839795392576.6548
+   },
+   "ratio": [
+    808.3445319615785,
+    25751.619415602054
+   ],
+   "heat_per_photon_W": 2.7588603935550897,
+   "sr1_photon_share_needed": 0.00014613999116407957,
+   "sr1_factor": 808.3445319615785,
+   "fixed_heat_W": 0.0,
+   "fixed_exceeds_radiator": false,
+   "ratio_without_overheads": 808.3445319615785,
+   "power_to_close": 0.0012370962633635172,
+   "closes": false
+  },
+  {
+   "id": "F4",
+   "name": "hot-ion burn with energy channeling (coupled R2-B, nominal channeling)",
+   "note": "the coupled burn, not a held Te",
+   "deliverables": [
+    "E"
+   ],
+   "photon_share": 0.7382608148061511,
+   "neutron_share": 0.02781265567993992,
+   "charged_share": 0.23392652951390894,
+   "per_engine": {
+    "fusion_W": 8929948500000.0,
+    "charged_W": 2088951861342.9368,
+    "photon_W": 6592631055786.967,
+    "neutron_W": 248365582870.09595,
+    "exhaust_W": 1961136564871.365,
+    "hardware_W": 486217467767.14185,
+    "cryogenic_W": 60294659297.69876,
+    "refrigeration_W": 17887415591650.633,
+    "hot_radiator_W": 18373633059417.773,
+    "warm_W": 0.0,
+    "reaction_mass_W": 0.0,
+    "thrust_N": 204272.58885035364,
+    "escaping_W": 6482594467361.493
+   },
+   "ratio": [
+    5103.255159625011,
+    123337.27786661018
+   ],
+   "heat_per_photon_W": 2.7588603935550893,
+   "sr1_photon_share_needed": null,
+   "sr1_factor": null,
+   "fixed_heat_W": 185484350285.83963,
+   "fixed_exceeds_radiator": true,
+   "ratio_without_overheads": 5051.737097597495,
+   "power_to_close": 0.0001959533608884805,
+   "closes": false
+  },
+  {
+   "id": "F4-FLOOR",
+   "name": "hot-ion electron-balance floor (best sustained Ti and channeling)",
+   "note": "a lower bound on any sustained burn",
+   "deliverables": [
+    "E"
+   ],
+   "photon_share": 0.20764979482089138,
+   "neutron_share": 0.04427745838999864,
+   "charged_share": 0.74807274678911,
+   "per_engine": {
+    "fusion_W": 8929948500000.0,
+    "charged_W": 6680251103080.292,
+    "photon_W": 1854301973786.1267,
+    "neutron_W": 395395423133.5808,
+    "exhaust_W": 6271511059307.411,
+    "hardware_W": 151361234169.62543,
+    "cryogenic_W": 16959011477.874773,
+    "refrigeration_W": 5031173405102.85,
+    "hot_radiator_W": 5182534639272.475,
+    "warm_W": 0.0,
+    "reaction_mass_W": 0.0,
+    "thrust_N": 653242.5242769254,
+    "escaping_W": 2507076206522.9634
+   },
+   "ratio": [
+    1439.442953512466,
+    40561.2119013091
+   ],
+   "heat_per_photon_W": 2.7588603935550893,
+   "sr1_photon_share_needed": null,
+   "sr1_factor": null,
+   "fixed_heat_W": 66774366102.902275,
+   "fixed_exceeds_radiator": true,
+   "ratio_without_overheads": 1420.89645118256,
+   "power_to_close": 0.0006947131857916589,
+   "closes": false
+  },
+  {
+   "id": "F5",
+   "name": "refractory, shielding, insulation, nanophotonic radiator (emissivity 0.98)",
+   "note": "capacity +8.9 %",
+   "deliverables": [
+    "F"
+   ],
+   "photon_share": 0.12487246960573131,
+   "neutron_share": 0.04427745838999864,
+   "charged_share": 0.8308500720042701,
+   "per_engine": {
+    "fusion_W": 8929948500000.0,
+    "charged_W": 7419448354219.424,
+    "photon_W": 1115104722646.9958,
+    "neutron_W": 395395423133.5808,
+    "exhaust_W": 6965479544023.663,
+    "hardware_W": 50867235967.2527,
+    "cryogenic_W": 10198486577.561047,
+    "refrigeration_W": 3025551018009.777,
+    "hot_radiator_W": 3076418253977.03,
+    "warm_W": 0.0,
+    "reaction_mass_W": 0.0,
+    "thrust_N": 725526.495466277,
+    "escaping_W": 1913601720009.0842
+   },
+   "ratio": [
+    784.7188008158014,
+    24998.969013668862
+   ],
+   "heat_per_photon_W": 2.7588603935550893,
+   "sr1_photon_share_needed": 0.00015913021260088666,
+   "sr1_factor": 784.7188008158014,
+   "fixed_heat_W": 0.0,
+   "fixed_exceeds_radiator": false,
+   "ratio_without_overheads": 784.7188008158014,
+   "power_to_close": 0.001274341839344731,
+   "closes": false
+  },
+  {
+   "id": "F6",
+   "name": "integrated: F1 + F2 + polarized, channelled floor + F5 (one calculation, no double counting)",
+   "note": "best case of every lever together",
+   "deliverables": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "photon_share": 0.1644744069514568,
+   "neutron_share": 0.017412144639897188,
+   "charged_share": 0.8181134484086461,
+   "per_engine": {
+    "fusion_W": 8929948500000.0,
+    "charged_W": 7305710961446.616,
+    "photon_W": 1468747983644.5513,
+    "neutron_W": 155489554908.83295,
+    "exhaust_W": 6858701324818.319,
+    "hardware_W": 133028339645.78828,
+    "cryogenic_W": 86.53202819824219,
+    "refrigeration_W": 33833871911.50779,
+    "hot_radiator_W": 166862211557.29605,
+    "warm_W": 12687575206.631618,
+    "reaction_mass_W": 0.0,
+    "thrust_N": 714404.4432539993,
+    "escaping_W": 1938218835535.8923
+   },
+   "ratio": [
+    42.562455344113815,
+    1022.697683453741
+   ],
+   "heat_per_photon_W": 0.06471684875194265,
+   "sr1_photon_share_needed": null,
+   "sr1_factor": null,
+   "fixed_heat_W": 71809470445.05089,
+   "fixed_exceeds_radiator": true,
+   "ratio_without_overheads": 24.245621648951758,
+   "power_to_close": 0.023494885149719053,
+   "closes": false
+  },
+  {
+   "id": "F6-COUPLED",
+   "name": "integrated with the coupled burn (polarized, channelled R2-B) instead of the floor",
+   "note": "the integrated case as a burn",
+   "deliverables": [
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+   ],
+   "photon_share": 0.5099856517182461,
+   "neutron_share": 0.010773024896119103,
+   "charged_share": 0.47924132338563485,
+   "per_engine": {
+    "fusion_W": 8929948500000.0,
+    "charged_W": 4279600336905.565,
+    "photon_W": 4554145605582.874,
+    "neutron_W": 96202557511.56145,
+    "exhaust_W": 4017747301436.4893,
+    "hardware_W": 269323496589.8553,
+    "cryogenic_W": 86.53202819824219,
+    "refrigeration_W": 97215926206.02673,
+    "hot_radiator_W": 366539422795.882,
+    "warm_W": 36455845567.07622,
+    "reaction_mass_W": 0.0,
+    "thrust_N": 418489.79684124456,
+    "escaping_W": 4642877701973.655
+   },
+   "ratio": [
+    93.49521182182147,
+    1635.4271488645563
+   ],
+   "heat_per_photon_W": 0.06471684875194265,
+   "sr1_photon_share_needed": null,
+   "sr1_factor": null,
+   "fixed_heat_W": 71809470445.05089,
+   "fixed_exceeds_radiator": true,
+   "ratio_without_overheads": 75.17837812665941,
+   "power_to_close": 0.010695734899298912,
+   "closes": false
+  }
+ ],
+ "reconciliation": [
+  {
+   "id": "REC-1",
+   "canon": "Fiji 04_ROOT_TRUTHS drive topology (LOCKED): 1 core -> common plasma -> 1 manifold -> 4 channels -> 4 magnetic nozzles; fusion_core_count 1 (LOCKED)",
+   "direction": "four independent Compact Vertex engines, each with one fusion region and one magnetic nozzle",
+   "proposal": "Record the four-engine Vertex cluster as a separate research architecture beside the LOCKED single-core Fiji drive, not as a replacement: add a row \"VERTEX_CLUSTER research architecture (fusion_core_count 4, nozzle_count 4), status RESEARCH\" to the Fiji workbook interface table and leave the LOCKED rows as they are",
+   "destination": "Fiji / Lattice Drive Science Model, 04_ROOT_TRUTHS interface rows; Wayfarer S&E 15_MODEL_INTERFACES (propulsion_representation)"
+  },
+  {
+   "id": "REC-2",
+   "canon": "Fiji 05_LATTICE_LAW (LOCKED law, WORKING calibration): B_eff = B_seed x A_B(T), A_max 30, 150 T derived",
+   "direction": "the 1.6 brief: M = M(T, H, S), no constant amplification factor",
+   "proposal": "Keep the law's temperature shape (activation, saturation, release, quench) and reinterpret A_B as the ratio of high- to low-temperature magnetization of the lattice; state that the field a structure reaches is mu0 Ms times a geometry factor, so 150 T is not a material property. Mark B_sat 150 T as \"SINGLE_CORE_CALIBRATION only\"",
+   "destination": "Fiji 05_LATTICE_LAW rows B_sat and A_max notes; 35_SCALING_LIMITS"
+  },
+  {
+   "id": "REC-3",
+   "canon": "Fiji 04_ROOT_TRUTHS: no free field or energy (LOCKED); lattice is not a bulk heat sink (LOCKED)",
+   "direction": "unchanged",
+   "proposal": "No change: the 1.6 model obeys both (seed-circuit work M B, collapse returns it; inverse magnetocaloric heat)",
+   "destination": "none"
+  },
+  {
+   "id": "REC-4",
+   "canon": "Technology 41_MATERIALS_MANUFACTURING: Fiji harvested, not synthesized; nanotech orients and engineers it",
+   "direction": "unchanged",
+   "proposal": "Add the orientation pattern (segmented optimal orientation, texture) as the nanofabrication step that sets the geometry factor",
+   "destination": "IGNITION Technology 41_MATERIALS_MANUFACTURING, Fiji lattice processing row"
+  },
+  {
+   "id": "REC-5",
+   "canon": "S&E OD-024 (5 T seed separate from amplification; conductor OPEN)",
+   "direction": "REBCO Jc margins and the neutron fluence finding",
+   "proposal": "Append to OD-024: coil Jc margin is not limiting at <= 8 T; REBCO fast-neutron fluence at the closure coils is limiting (see R16-4)",
+   "destination": "Wayfarer S&E open decisions OD-024 (request Doc queue item)"
+  }
+ ],
+ "gates": [
+  {
+   "id": "R16-0",
+   "name": "Engine 1.5 reproduced",
+   "status": "PASS",
+   "value": "intercept 0.619; photons 0.125-0.848; F0 854x (1.5: 854x); best conventional 18x; SR-1 0.59%"
+  },
+  {
+   "id": "R16-1",
+   "name": "Fiji constitutive model",
+   "status": "PASS_BOUNDED",
+   "value": "M(T, H, S) bounded by mu0 Ms_max, zero without seed, hysteretic, collapses at quench and beyond the strain limit; inverse magnetocaloric; no energy created"
+  },
+  {
+   "id": "R16-2",
+   "name": "Fiji field",
+   "status": "CANON_CONFLICT",
+   "value": "liners add 9 mT at the burn point (coils 1.46 T) at the atomic-moment bound (mu0 Ms 3.5 T); the canon law (5 T x 26.3 = 132 T) needs mu0 Ms 5e+04 T in these liners, and 35 T (10x the bound) even in a solid 2-30 m shell around the burn"
+  },
+  {
+   "id": "R16-3",
+   "name": "Lattice survival",
+   "status": "FAIL",
+   "value": "inboard photon flux 2.4e+08-5.6e+09 W/m2, 20-476x what a cooled 5 mm W face passes; a cooled 5 mm Fiji skin would rise 7.9e+04-1.9e+06 K against a 400 K margin to quench: the lattice collapses in line of sight of the burn"
+  },
+  {
+   "id": "R16-4",
+   "name": "REBCO margin and fluence",
+   "status": "FAIL",
+   "value": "Jc margin 6.2x or more at <= 8.0 T (not limiting); fast-neutron fluence at C2 reaches the limit in 2-23 s against a 28.5 d burn: attenuation 1e+05 (about 1.7 m of shield) needed"
+  },
+  {
+   "id": "R16-5",
+   "name": "Advanced fusion photon share",
+   "status": "FAIL",
+   "value": "floor 16.4% at Ti 150 keV (polarized, channelled, Te/Ti 0.60); coupled burn 51.0%; the most any configuration allows is 0.70% (F1-REF); with channeling or a Fiji liner the fixed loads alone exceed the radiator"
+  },
+  {
+   "id": "R16-6",
+   "name": "Radiation and thermal closure",
+   "status": "FAIL",
+   "value": "F6 needs 43x the radiator (24x without the channeling drive and liner losses; coupled burn 93x); F0 854x; no candidate closes"
+  },
+  {
+   "id": "R16-7",
+   "name": "Architecture",
+   "status": "KEPT",
+   "value": "four independent engines, one reusable engine asset; no canon, geometry or deployed-engine change"
+  }
+ ],
+ "proposals": [
+  {
+   "workbook": "Fiji / Lattice Drive Science Model",
+   "tab": "05_LATTICE_LAW",
+   "anchor": "after the B_sat row",
+   "change": "add row \"Ms_ceiling: mu0 Ms <= about 3.5 T (atomic-moment bound) unless the owner authorizes a second extraordinary property; status RESEARCH (Vertex 1.6)\""
+  },
+  {
+   "workbook": "Fiji / Lattice Drive Science Model",
+   "tab": "04_ROOT_TRUTHS",
+   "anchor": "interface rows (fusion_core_count)",
+   "change": "add the VERTEX_CLUSTER research row (REC-1)"
+  },
+  {
+   "workbook": "Fiji / Lattice Drive Science Model",
+   "tab": "35_SCALING_LIMITS",
+   "anchor": "150 T / 9 GPa row",
+   "change": "note \"single-core calibration; not a material constant (Vertex 1.6 REC-2)\""
+  },
+  {
+   "workbook": "IGNITION Technology",
+   "tab": "41_MATERIALS_MANUFACTURING",
+   "anchor": "Fiji lattice processing",
+   "change": "add \"orientation pattern sets the geometry factor; texture <= 0.98, N-segment efficiency\" (REC-4)"
+  },
+  {
+   "workbook": "IGNITION Technology",
+   "tab": "41_MATERIALS_MANUFACTURING",
+   "anchor": "Nanophotonic radiator surfaces",
+   "change": "add \"emissivity 0.98 vs 0.90 is +8.9 % capacity; not a remedy for a hundredfold thermal gap (Vertex 1.6 F5)\""
+  },
+  {
+   "workbook": "Wayfarer S&E",
+   "tab": "open decisions OD-024..027 (request Doc)",
+   "anchor": "OD-024",
+   "change": "REBCO neutron fluence: Jc margin 6.2x or more at <= 8.0 T (not limiting); fast-neutron fluence at C2 reaches the limit in 2-23 s against a 28.5 d burn: attenuation 1e+05 (about 1.7 m of shield) needed"
+  },
+  {
+   "workbook": "Wayfarer S&E",
+   "tab": "open decisions OD-025",
+   "anchor": "plasma-facing heat flux",
+   "change": "W armour carries about 1e7 W/m2 at 5 mm; the 1.5 peak flux is several hundred times that"
+  }
+ ],
+ "outcome": "NEGATIVE",
+ "cost": {
+  "wall_s": 6.891885280609131
+ }
+}

@@ -2388,6 +2388,109 @@ Three assets, one source each (`src/wayfarer/vertex_engine.py`, `vertex_cluster.
   - *Gap (SR-1..4, Breakthrough Lab requirement):* photons at most 0.59 % of the yield, against 12.5–85 % (21–144×); the lowest point of the
     plasma scan (Ti 150 keV, Te/Ti 0.1) is still 8× above. engineering/vertex/ section 8 reads `references/evidence/vertex_radiation.json`
     (written by `python3 src/wayfarer/vertex_radiation.py --evidence`, about 30 s).
+- **Fiji-assisted advanced fusion and nanomaterials (Engine 1.6, `vertex_fiji.py`, `[vertex_fiji]`).** Research only; outcome
+  **NEGATIVE**: no configuration closes. Four independent engines, M0-NOMINAL and the 1.2 geometry are unchanged; nothing is canon.
+  - *Fiji model:* M = Ms(T, S) tanh(B_seed/B_align). The temperature shape is the Fiji workbook's lattice law (WORKING: activation 650 K,
+    saturation 1100 K, release 550 K, quench 1400 K, A_max 30 as the hot/cold magnetization ratio). Bounded, seed-dependent, hysteretic,
+    collapsing at quench or beyond 0.2 % strain, inversely magnetocaloric. μ0Ms is held at or below the atomic-moment bound (about 3.5 T),
+    because more would be a second extraordinary property.
+  - *Field:* the exact dipole-kernel integral with optimal orientation. Fiji liners add millitesla at the burn point; even a solid 2–30 m shell
+    adds at most 13 T. The canon law (5 T × 26.3 = 132 T) would need μ0Ms of about 35 T in that shell and about 5×10⁴ T in liners
+    (CANON_CONFLICT, reconciliation REC-1..5 for the owner).
+  - *Assembly:* thermal isolation from REBCO works (foils, a 300 K shield, MLI). The liner fails: hysteresis from the pulse-rate ripple costs
+    GW, and the burn's photon flux on its face is 20–480× what a cooled tungsten face carries, so it collapses.
+  - *REBCO:* Jc margin of 6× or more at ≤ 8 T. The fast-neutron fluence at the closure coils reaches a typical limit within seconds; about
+    10⁵ attenuation (about 1.7 m of shield) is needed.
+  - *Fusion:* spin polarization gives at most ×1.5 (THEORETICAL). The hot-ion electron-balance floor is ≥ 16 % photons even with
+    polarization and 90 % channeling, above 1.5's held LOW case (12.5 %); coupled R2-B burns give 51–85 %. The channeling drive costs
+    67–300 GW per engine.
+  - *Closure (F0–F6):* 854× (F0), 23× (Fiji liner), 18× (an ordinary W liner at 1300 K, which beats Fiji), 43× integrated (24× without
+    the channeling and liner overheads). An emissivity of 0.98 adds 8.9 %. Regenerative hydrogen for F6's excess needs 7–40 Mt.
+    engineering/vertex/ section 9 reads `references/evidence/vertex_fiji.json` (written by `python3 src/wayfarer/vertex_fiji.py --evidence`,
+    about 10 s).
+- **Fiji material limits and magnetic architecture (Engine 1.6A, `vertex_fiji_a.py`, `[vertex_fiji_a]`).** Research only; outcome
+  **BOUNDED**. Engine 1.6 and its evidence are kept as the record; the engine, its geometry and the four independent engines are unchanged.
+  - *Solver:* an axisymmetric bound-current integral solver (uniform-M ring cells, surface currents as Gauss-Legendre loops, exact loop
+    fields), validated against 14 closed-form cases (sphere, cylinder, thick ring, radial annulus, Biot-Savart loop, solenoid, Halbach and
+    optimal shells, Lorentz vs Kelvin vs virtual-work force, Newton's third law, the interaction-energy identity); open-source FEM tools could
+    not be installed. Two modes: SEEDED (M along the local H, the one Fiji property) and ORIENTED (a fixed easy axis).
+  - *Materials:* FM-1 2.45 T (measured), FM-2 3.5 T (screening bound), FM-3 5 T (speculative, a full d shell per atom), FM-4 10 T (extreme);
+    same canon temperature shape for each, none canon.
+  - *Geometry decides:* an open shell 3.5–4.5 m from the burn (FG-2) gives 76× the liner's field; at 3.5 T it adds 44 % of the stop field
+    (oriented), and 0.8 T of μ0Ms would already give 10 %. Seeded Fiji beside the axis lowers the burn field (−12 % for FG-2), because a dipole
+    seen beyond 54.7° opposes it. Oriented cells see 0.5–7.5 T reverse fields; holding them at 1000 K needs coercivity no known magnet keeps
+    (a second property, SPECULATIVE). Fiji replacing C1 and C2 (FG-3) needs 18.7 T. Nozzle rings (FG-4) do nothing at the burn.
+  - *Heat:* every geometry in sight of the burn takes 1,700–7,400× the face flux a cooled face carries; tungsten in front still beats Fiji.
+    Only FG-5 (shield shadow) survives, adding 2.6 % at 3.5 T. The radiator ratio stays 676–1,112× (1.5: 854×). REBCO neutron damage
+    stays OPEN (limit in 2 s–19 min; about 10⁵ attenuation, 1.2–2.4 m and 0.5–1.4 kt of shield per closure coil).
+  - *Canon:* B_eff = B_seed·A_B is kept as the single-core calibration; read as a field gain it needs 230–700 T in the best open geometry.
+    Successor: B_total = B_coils + B_Fiji(M(T)). REC-1/REC-4 workbook rows prepared cell by cell, not applied.
+    engineering/vertex/ section 10 reads `references/evidence/vertex_fiji_a.json` (`python3 src/wayfarer/vertex_fiji_a.py --evidence`, about 15 s).
+- **Fusion radiation source and plasma-hardware interface (Engine 1.6B, `vertex_source.py`, `[vertex_source]`).** Research only; outcome
+  **C** (SOURCE_AND_INTERFACE_BLOCKED). Engines 1.5, 1.6 and 1.6A and their evidence are kept as the record; the engine, its geometry and the
+  four independent engines are unchanged.
+  - *Ledger:* 1.5 F0 854× (recomputed exactly), 1.6 F6 43× and W liner 18×, 1.6A 769–1,112×, EXT-01 ≥132× answer different questions (source,
+    geometry, thermal convention, capacity) and are not a sequence of improvements.
+  - *Source:* a two-temperature, three-species balance with every channel separate; D-D and D-T reactivity beyond the fit limits from the
+    Bosch-Hale cross sections (validated to ~1 % in range; D-D is about 2× the held value at 200 keV), D-3He held above 190 keV with a bracket,
+    cyclotron emission, impurities, ion-ion exchange. Best defensible photon share 10.1 % (S1, nominal, with electron
+    transport), optimistic 8.3 %; radiative-only states stay at about 48 %.
+    1.6's 16.4 % floor counted four electrons per D-3He pair (quasineutrality gives three): with the same levers it is 12.6 %.
+    Hot-ion, channeling and prompt-escape states need auxiliary heating that leaves no valid nominal state (Rider's limit).
+  - *Non-equilibrium:* in the dense target electrons and ions equilibrate in about 1 % of the burn; Compton trapping (depth 18) is an
+    unresolved two-sided bound (at most 3.3× lower).
+  - *Interface:* canon gives the drive 75 % of the 14.4 GW radiator (2.7 GW per engine). Allowed charged leakage at the mission point:
+    5e-05 (hot) to 2e-07 (20 K) of the stream, against 18.3 % computed by Engine 1.4. The coils
+    alone take 43 % of the burn's sky.
+  - *Budget:* at the mission point neutrons alone put ≥424× the drive share into the hardware; with neutrons, leakage and losses at zero,
+    photons could be at most 6.6e-04 of fusion power (SR-1). No case closes; the feasibility map closes only with UNSUPPORTED values.
+  - *Neutrons:* the nearest REBCO lasts about 1 s unshielded at mission power; a credible life needs ~10⁶ attenuation and ~45 kt
+    of wrap shields against a 174 t departure margin (FAIL).
+    engineering/vertex/ section 11 reads `references/evidence/vertex_source.json` (`python3 src/wayfarer/vertex_source.py --evidence`, about 1 s).
+- **Dynamic lattice drive mechanism (Engine 1.7, `vertex_dynamic.py`, `[vertex_dynamic]`).** Research only; outcome **C**
+  (DYNAMIC_HELPS_LOCALLY). Four moving-machinery candidates costed on the unchanged 1.6B mission budget; the engine, its geometry, the four
+  independent engines and the 1.5-1.6B evidence are unchanged.
+  - *Timescales:* the exhaust reaches L2 in about 400 ns and mission pulses repeat every 24 µs; a 1 km/s rim moves 0.4 mm in the transit and a
+    segmented crown modulates the field at 0.4 % of the pulse rate, so motion only sets geometry between burns. Rotating-field current drive
+    would need ~1e5 times faster rotation. Static superconducting flux compression is already the lossless dynamic coupling.
+  - *Candidates:* C1 Rotary Field Crown REJECTED (an axisymmetric crown makes the same field turning; a loaded CFRP band is limited to
+    150 m/s; gyroscopic and burst loads); C2 Pulsed Lattice Dynamo: flywheel storage for sustained or kHz power rejected
+    (one second of mission power needs 327 kt), switched pulse coils rejected (need 99.995 % recovery),
+    Fiji thermomagnetic cycle rejected (≤1.8 %, below radiator temperature); kept: an ignition bootstrap flywheel and
+    leadless persistent coils (HTS dynamo or retractable leads); C3 deployable petals KEPT (k 1.40: coil sky ×0.79, coil fluence
+    ×0.51, field energy unchanged, inter-engine pull ×2.7, +193 t per engine); C4 armour treads (added)
+    KEPT (peak flux ÷π, VTX-S3 29× → 9.3×, +151 t per engine).
+  - *Budget:* the recommended hybrid (C3 + C4 + leadless coils, electronic trim) moves the best ratio from 6,720× to
+    6,619× (charged leakage dominates). Audit finding: the driver's recirculating power is outside the 1.6B ledger; at
+    gain 100 and a 50 % driver it alone is 1,084× the drive share. Closing would need near-perfect capture (SP-17A), a
+    180× quieter source (SP-17B) and a target gain near 108,401 (SP-17D), proposed for the
+    author's decision and not applied; SP-17C (Fiji coercivity) helps magnetics only.
+  - *Mass:* every kept part adds mass; the 1.2 engine and frame estimate (6.3 kt) is outside the 1.1 kt ship mass budget.
+  - *Sequence and integration:* nine states (dormant to failure) with bloom, tread, dynamo, field, Fiji temperature and burn values; ten
+    failure modes; a Phase E plan (WORK_VTX17 assemblies, axes, drivers, render cost). Phase F needs a separate go.
+    engineering/vertex/ section 12 reads `references/evidence/vertex_dynamic.json` (`python3 src/wayfarer/vertex_dynamic.py --evidence`, about 1 s).
+- **Adaptive engine architecture (Engine 1.8, `vertex_adaptive.py`, `[vertex_adaptive]`).** Research and 3D integration design only;
+  nothing in the generators reads it. Recommended concept **A+** (Adaptive Vertex: A with B's visible startup machinery).
+  - *Audit:* the engine is 264 parts in 22 objects (24,950 triangles), placed four times as linked collection instances, so per-engine motion
+    needs per-engine objects in the cluster (the effect-object pattern); 8 merged families hold parts that would move and must be split.
+    Each nozzle loop is one continuous winding inside eight cryostat segments; the cage longerons are conical, so no ring can slide on them as built.
+  - *L4 carriage:* the aft longeron segments become cylindrical rails at the L4 hoop radius (11.13 m; envelope unchanged) and the L3 hoop
+    grows to it; L4 parks 4.8 m forward when cold (engine 27.1 m instead of 31.9 m, L4 cantilever arm ×0.77). Moving L4 aft of its canon
+    station only costs current (+2 m: ×1.34, stored energy ×1.78), so the carriage has two stations. L1-L3 get actuated seats.
+  - *Alignment:* a 10 mm sideways offset of C2 tilts the burn field by 0.50 mrad (2.7 kN on 5.44 MN); 0.5 mm: 0.025 mrad. L2 sits in the
+    burn plane and has no first-order error. The plume's response to field tilt is OPEN.
+  - *Petals:* a petal that moves a winding cuts it (a closed REBCO ring can change radius by centimetres); every turn needs a demountable
+    joint at each boundary. Inner-loop petals inside today's envelope (coil sky ×0.86) need 1,923 joints: at 10 nΩ 26 MW at the radiators
+    and a 61 h decay; persistent mode through a 10-day burn needs < 2.6e-11 Ω per joint (SP-18A, proposed, not applied). 1.7 C3 did
+    not count the joints. Fiji (1.6A) adds 0.3 % of the stop field in the shield shadow for ~700 t; its display stays a thermal-state indicator.
+  - *Concepts:* A Minimal (L4 carriage, seat actuators, 6 HTS dynamos and switches, shared flywheel, trim coils; +48 t per engine, fits the
+    174 t margin only without the flywheel), B Bloom compact (A + inner-loop petals with joints + treads; +259 t), C Integrated (all-loop
+    petals, Fiji carriers, treads; +514 t; SP-18A and SP-17C), A+ (A + service petals that open the L1/L2 shells only cold).
+  - *Sequence:* nine states (dormant, mechanical preparation, digital alignment, field formation, plasma calibration, first ignition, Vertex
+    lock, sustained/modulation, shutdown or failure) mapped onto the five existing STATES, eight subsystem-specific faults, nine proposed
+    controller properties beside the existing ones; view modes for field lines (traced from the coil currents), plasma flow, energy, thermal,
+    control and synchronization. Browser: rigid transforms and a per-state pose table, estimates only until Phase F measures them.
+    engineering/vertex/ section 13 reads `references/evidence/vertex_adaptive.json` (`python3 src/wayfarer/vertex_adaptive.py --evidence`, about 1 s).
 
 ## Fuel & Propellant System (FPS V0, V1, V1.1)
 

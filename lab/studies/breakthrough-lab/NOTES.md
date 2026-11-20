@@ -22,7 +22,7 @@ The engineering record behind the website's Engineering 2.0 section (tools/story
 
 - `registry/weakest_links.toml`: the Weakest Links register (WL-001..WL-009). Its numbers are JSON pointers into the imported results,
   so the register restates no result. Ranking by four yes/no questions (lab.py `tier`, `ranked`), no weighted score.
-- `registry/breakthroughs.toml`: the breakthrough registry (BT-001..BT-007). Level A/B/C is the PMDS and Atlas scale; evidence,
+- `registry/breakthroughs.toml`: the breakthrough registry (BT-001..BT-008; BT-008 is the Vertex 1.5 research requirement SR-1, a gap with no lever). Level A/B/C is the PMDS and Atlas scale; evidence,
   development status and canon status are separate fields. Each computed breakthrough is a bounded parameter table (`levels`) over
   calculator inputs it declares (`modifies`), with a validity `limit`.
 - `registry/scenarios.toml`: Layer A, the scientific reference (Vertex V3/V4 layout with every research target at its present-evidence
@@ -70,3 +70,9 @@ the best analytical target gain is 440 against 703, so no closing case is a defe
 - 2026-11-10: grid of five levers solved as a full product at the unconstrained launcher; launcher levels only on closing cases; named
   scenarios always solved; coupled check on every closing case, a finite launcher entering as its uncoupled rate cap held fixed.
 - 2026-11-10: tests stay in the lab (not CI, as the other lab entries); the site build validates the registries and fails on error.
+- 2026-11-15 (owner brief "Post-Vertex 1.5 Architecture Decision"): SR-1, the Vertex 1.5 photon-production / thermal closure gap, is
+  registered as BT-008: Level C, CALCULATED, PROPOSED, NON_CANON, with no lever (`modifies = []`) and no capability assigned to any
+  technology (Fiji included). Threshold: photons at most 0.59 % of the yield with cold parts shielded (0.046 % as drawn); modelled
+  12.5-84.8 %; gap 21-144x. SR-2, SR-3 and SR-4 stay engineering alternatives inside BT-008's text, not separate breakthroughs. The
+  attenuation evidence stays bracketed (Compton-only to full absorption); Geant4/OpenMC transport is deferred by the owner. The scenario
+  grid was recomputed only because the registry hash changed: every result is identical (timings aside).

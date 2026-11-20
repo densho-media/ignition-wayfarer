@@ -1,0 +1,90 @@
+{
+ "meta": {
+  "note": "Vertex 2.8 (D3): can the He-3 beyond the canon 1,094 t load be supplied inside IGNITION's established industry? (research, not canon)",
+  "canon_t": 1094.0
+ },
+ "cases": {
+  "canon load": {
+   "he3_t": 1094.0,
+   "over_canon_t": 0.0,
+   "lunar_5ppb": {
+    "regolith_t": 273499999999.99997,
+    "area_km2": 60777.777777777774,
+    "heating_J": 1.5316e+20
+   },
+   "lunar_15ppb": {
+    "regolith_t": 91166666666.66666,
+    "area_km2": 20259.259259259255,
+    "heating_J": 5.105333333333333e+19
+   },
+   "fusion_J": 6.422192950405292e+20,
+   "dd": {
+    "dd_energy_J": 1.2774389247400172e+20,
+    "TW_years": 4.0479596824220385,
+    "tritium_t": 546.9999999999999,
+    "years_to_90pct_T_decay": 40.925807999999996
+   },
+   "heat_over_fusion_15ppb": 0.07949517201925776
+  },
+  "2.7 levers (+338 t)": {
+   "he3_t": 1432.0,
+   "over_canon_t": 338.0,
+   "lunar_5ppb": {
+    "regolith_t": 358000000000.0,
+    "area_km2": 79555.55555555556,
+    "heating_J": 2.0048e+20
+   },
+   "lunar_15ppb": {
+    "regolith_t": 119333333333.33331,
+    "area_km2": 26518.518518518515,
+    "heating_J": 6.6826666666666656e+19
+   },
+   "fusion_J": 8.406380534716983e+20,
+   "dd": {
+    "dd_energy_J": 1.672113839330626e+20,
+    "TW_years": 5.298609017576197,
+    "tritium_t": 716.0,
+    "years_to_90pct_T_decay": 40.925807999999996
+   },
+   "heat_over_fusion_15ppb": 0.07949517201925775
+  },
+  "2.7 point in JUSTIFIED": {
+   "he3_t": 2113.0,
+   "over_canon_t": 1019.0,
+   "lunar_5ppb": {
+    "regolith_t": 528249999999.99994,
+    "area_km2": 117388.88888888888,
+    "heating_J": 2.9582e+20
+   },
+   "lunar_15ppb": {
+    "regolith_t": 176083333333.3333,
+    "area_km2": 39129.62962962963,
+    "heating_J": 9.860666666666666e+19
+   },
+   "fusion_J": 1.240410759068225e+21,
+   "dd": {
+    "dd_energy_J": 2.467302054822355e+20,
+    "TW_years": 7.818408417694485,
+    "tritium_t": 1056.4999999999998,
+    "years_to_90pct_T_decay": 40.925807999999996
+   },
+   "heat_over_fusion_15ppb": 0.07949517201925776
+  }
+ },
+ "increment": {
+  "he3_t": 338.0,
+  "lunar_15ppb": {
+   "regolith_t": 28166666666.666664,
+   "area_km2": 6259.259259259259,
+   "heating_J": 1.5773333333333332e+19
+  },
+  "dd": {
+   "dd_energy_J": 3.946749145906086e+19,
+   "TW_years": 1.2506493351541579,
+   "tritium_t": 168.99999999999997,
+   "years_to_90pct_T_decay": 40.925807999999996
+  },
+  "share_of_canon": 0.30895795246800734,
+  "reading": "The increment is +31 % of a supply chain that already has to exist for the canon 1,094 t: the base, not the increment, is the logistics problem. Lunar strip-mining of order 10^10-10^11 t regolith (thousands to tens of thousands of km^2) over decades, or a ~1-2 TW-year D-D fusion economy with decades of tritium decay, or gas-giant atmosphere extraction (outside the Y155 canon read here). None is canon; all are OWNER/Economy decisions. Engineering does not depend on the answer: the ship carries the fuel."
+ }
+}

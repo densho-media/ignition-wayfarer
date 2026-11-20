@@ -1,0 +1,178 @@
+[
+ {
+  "case": "B2d main-coil edge, R 5 m, B 1.5 T",
+  "ion": "p 14.7 MeV",
+  "R_m": 5.0,
+  "B_T": 1.5,
+  "rho_m": 0.3707835914658401,
+  "l_max": 13.484954876868235,
+  "efolds": 3.672186661495877,
+  "amplification": 39.33783040119432,
+  "seed_for_order_unity": 0.02542082239415114
+ },
+ {
+  "case": "B2d main-coil edge, R 5 m, B 1.5 T",
+  "ion": "p 8 MeV (thermal set)",
+  "R_m": 5.0,
+  "B_T": 1.5,
+  "rho_m": 0.27729815334518676,
+  "l_max": 18.031133419687407,
+  "efolds": 4.246308210632785,
+  "amplification": 69.84707508758841,
+  "seed_for_order_unity": 0.01431699178163148
+ },
+ {
+  "case": "B2d main-coil edge, R 5 m, B 1.5 T",
+  "ion": "alpha 3.6 MeV",
+  "R_m": 5.0,
+  "B_T": 1.5,
+  "rho_m": 0.18281962097827884,
+  "l_max": 27.349362028236893,
+  "efolds": 5.229661750843633,
+  "amplification": 186.72963169647227,
+  "seed_for_order_unity": 0.005355336434366738
+ },
+ {
+  "case": "B2d main-coil edge, R 5 m, B 1.5 T",
+  "ion": "alpha 8 MeV",
+  "R_m": 5.0,
+  "B_T": 1.5,
+  "rho_m": 0.27684261479617595,
+  "l_max": 18.060803260658503,
+  "efolds": 4.249800378918815,
+  "amplification": 70.09141922518579,
+  "seed_for_order_unity": 0.014267081635018062
+ },
+ {
+  "case": "B2d near plug, R 3 m, B 5 T",
+  "ion": "p 14.7 MeV",
+  "R_m": 3.0,
+  "B_T": 5.0,
+  "rho_m": 0.11123507743975201,
+  "l_max": 26.969909753736474,
+  "efolds": 5.193256180253048,
+  "amplification": 180.05388734994148,
+  "seed_for_order_unity": 0.005553892863509592
+ },
+ {
+  "case": "B2d near plug, R 3 m, B 5 T",
+  "ion": "p 8 MeV (thermal set)",
+  "R_m": 3.0,
+  "B_T": 5.0,
+  "rho_m": 0.08318944600355602,
+  "l_max": 36.062266839374814,
+  "efolds": 6.005186661493114,
+  "amplification": 405.52667788624746,
+  "seed_for_order_unity": 0.002465929011655568
+ },
+ {
+  "case": "B2d near plug, R 3 m, B 5 T",
+  "ion": "alpha 3.6 MeV",
+  "R_m": 3.0,
+  "B_T": 5.0,
+  "rho_m": 0.054845886293483644,
+  "l_max": 54.69872405647379,
+  "efolds": 7.395858574666892,
+  "amplification": 1629.2231330001118,
+  "seed_for_order_unity": 0.000613789467964749
+ },
+ {
+  "case": "B2d near plug, R 3 m, B 5 T",
+  "ion": "alpha 8 MeV",
+  "R_m": 3.0,
+  "B_T": 5.0,
+  "rho_m": 0.08305278443885278,
+  "l_max": 36.121606521317005,
+  "efolds": 6.010125333245306,
+  "amplification": 407.53439468143335,
+  "seed_for_order_unity": 0.002453780620852119
+ },
+ {
+  "case": "B2d compressed edge, R 5 m, B 3 T",
+  "ion": "p 14.7 MeV",
+  "R_m": 5.0,
+  "B_T": 3.0,
+  "rho_m": 0.18539179573292006,
+  "l_max": 26.96990975373647,
+  "efolds": 5.193256180253047,
+  "amplification": 180.0538873499413,
+  "seed_for_order_unity": 0.0055538928635095975
+ },
+ {
+  "case": "B2d compressed edge, R 5 m, B 3 T",
+  "ion": "p 8 MeV (thermal set)",
+  "R_m": 5.0,
+  "B_T": 3.0,
+  "rho_m": 0.13864907667259338,
+  "l_max": 36.062266839374814,
+  "efolds": 6.005186661493114,
+  "amplification": 405.52667788624746,
+  "seed_for_order_unity": 0.002465929011655568
+ },
+ {
+  "case": "B2d compressed edge, R 5 m, B 3 T",
+  "ion": "alpha 3.6 MeV",
+  "R_m": 5.0,
+  "B_T": 3.0,
+  "rho_m": 0.09140981048913942,
+  "l_max": 54.698724056473786,
+  "efolds": 7.3958585746668914,
+  "amplification": 1629.2231330001102,
+  "seed_for_order_unity": 0.0006137894679647495
+ },
+ {
+  "case": "B2d compressed edge, R 5 m, B 3 T",
+  "ion": "alpha 8 MeV",
+  "R_m": 5.0,
+  "B_T": 3.0,
+  "rho_m": 0.13842130739808797,
+  "l_max": 36.121606521317005,
+  "efolds": 6.010125333245306,
+  "amplification": 407.53439468143335,
+  "seed_for_order_unity": 0.002453780620852119
+ },
+ {
+  "case": "cavity at 14 m (hybrid max), B 1.5 T",
+  "ion": "p 14.7 MeV",
+  "R_m": 14.0,
+  "B_T": 1.5,
+  "rho_m": 0.3707835914658401,
+  "l_max": 37.75787365523106,
+  "efolds": 6.144743579290438,
+  "amplification": 466.2600749938389,
+  "seed_for_order_unity": 0.0021447257735143074
+ },
+ {
+  "case": "cavity at 14 m (hybrid max), B 1.5 T",
+  "ion": "p 8 MeV (thermal set)",
+  "R_m": 14.0,
+  "B_T": 1.5,
+  "rho_m": 0.27729815334518676,
+  "l_max": 50.487173575124736,
+  "efolds": 7.105432680359778,
+  "amplification": 1218.5692216544976,
+  "seed_for_order_unity": 0.0008206345460147615
+ },
+ {
+  "case": "cavity at 14 m (hybrid max), B 1.5 T",
+  "ion": "alpha 3.6 MeV",
+  "R_m": 14.0,
+  "B_T": 1.5,
+  "rho_m": 0.18281962097827884,
+  "l_max": 76.5782136790633,
+  "efolds": 8.750897878450148,
+  "amplification": 6316.356883501685,
+  "seed_for_order_unity": 0.00015831910996226298
+ },
+ {
+  "case": "cavity at 14 m (hybrid max), B 1.5 T",
+  "ion": "alpha 8 MeV",
+  "R_m": 14.0,
+  "B_T": 1.5,
+  "rho_m": 0.27684261479617595,
+  "l_max": 50.5702491298438,
+  "efolds": 7.111276195581479,
+  "amplification": 1225.710795074692,
+  "seed_for_order_unity": 0.0008158531392709667
+ }
+]

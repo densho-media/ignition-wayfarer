@@ -97,3 +97,15 @@ table.meta th { width: 170px; }
 .figure-svg.cavity .c-hw { fill: var(--bad); }
 /* Vertex page photographs: keep them inside the column at phone width */
 .figs img { max-width: 100%; height: auto; display: block; }
+.figure-svg.field .fiji { fill: var(--wf-violet); opacity: 0.85; }
+.figure-svg.field .fiji.g2 { fill: var(--good); } .figure-svg.field .fiji.g3 { fill: var(--accent); } .figure-svg.field .fiji.g4 { fill: var(--info); } .figure-svg.field .fiji.g5 { fill: var(--wf-radiator); }
+.figure-svg.field .lbl { font: 10px var(--mono); fill: var(--ink); }
+
+.figure-svg .sv-bad { fill: var(--bad); } .figure-svg .sv-warn { fill: var(--warn); } .figure-svg .sv-good { fill: var(--good); } .figure-svg .sv-info { fill: var(--info); opacity: 0.55; }
+.figure-svg .sl { fill: none; stroke-width: 1.8; }
+.figure-svg .sv-l-info { stroke: var(--info); } .figure-svg .sv-l-good { stroke: var(--good); } .figure-svg .sv-l-accent { stroke: var(--accent); } .figure-svg .sv-l-warn { stroke: var(--warn); }
+.figure-svg .sv-l-bad { stroke: var(--bad); } .figure-svg .sv-l-violet { stroke: var(--wf-violet); } .figure-svg .sv-l-radiator { stroke: var(--wf-radiator); } .figure-svg .sv-l-muted { stroke: var(--muted); }
+.figure-svg .sv-t-info { fill: var(--info); } .figure-svg .sv-t-good { fill: var(--good); } .figure-svg .sv-t-accent { fill: var(--accent); } .figure-svg .sv-t-warn { fill: var(--warn); }
+.figure-svg .sv-t-bad { fill: var(--bad); } .figure-svg .sv-t-violet { fill: var(--wf-violet); } .figure-svg .sv-t-radiator { fill: var(--wf-radiator); } .figure-svg .sv-t-muted { fill: var(--muted); }
+#src-map select { margin: 0 0.8em 0.4em 0.3em; }
+.srcmap td.ok { background: color-mix(in srgb, var(--good) 30%, transparent); } .srcmap td.no { color: var(--muted); }

@@ -1,0 +1,128 @@
+single ring B0 0.0075 T, burn 0 R aft            p 14.7 MeV (D-3He product)     rL/R   1.158  aft 0.18478 (cos 0.158)  ring 0.00e+00  fwd 0.1848  rad 0.6304  trap 0.0000
+single ring B0 0.0075 T, burn 0 R aft            alpha 3.6 MeV (D-3He product)  rL/R   0.575  aft 0.47976 (cos 0.415)  ring 0.00e+00  fwd 0.4798  rad 0.0405  trap 0.0000
+single ring B0 0.0075 T, burn 0 R aft            D exhaust 0.0677 c             rL/R   0.884  aft 0.24129 (cos 0.206)  ring 0.00e+00  fwd 0.2413  rad 0.5174  trap 0.0000
+single ring B0 0.0075 T, burn 0 R aft            He-3 exhaust 0.0677 c          rL/R   0.662  aft 0.42708 (cos 0.358)  ring 0.00e+00  fwd 0.4271  rad 0.1458  trap 0.0000
+single ring B0 0.0075 T, burn 0.5 R aft          p 14.7 MeV (D-3He product)     rL/R   1.158  aft 0.16580 (cos 0.140)  ring 0.00e+00  fwd 0.2734  rad 0.5608  trap 0.0000
+single ring B0 0.0075 T, burn 0.5 R aft          alpha 3.6 MeV (D-3He product)  rL/R   0.575  aft 0.23751 (cos 0.204)  ring 0.00e+00  fwd 0.2559  rad 0.5066  trap 0.0000
+single ring B0 0.0075 T, burn 0.5 R aft          D exhaust 0.0677 c             rL/R   0.884  aft 0.18068 (cos 0.154)  ring 0.00e+00  fwd 0.2682  rad 0.5511  trap 0.0000
+single ring B0 0.0075 T, burn 0.5 R aft          He-3 exhaust 0.0677 c          rL/R   0.662  aft 0.21251 (cos 0.181)  ring 0.00e+00  fwd 0.2570  rad 0.5304  trap 0.0000
+single ring B0 0.0075 T, burn 1 R aft            p 14.7 MeV (D-3He product)     rL/R   1.158  aft 0.16351 (cos 0.137)  ring 0.00e+00  fwd 0.1437  rad 0.6928  trap 0.0000
+single ring B0 0.0075 T, burn 1 R aft            alpha 3.6 MeV (D-3He product)  rL/R   0.575  aft 0.19521 (cos 0.165)  ring 0.00e+00  fwd 0.1223  rad 0.6824  trap 0.0000
+single ring B0 0.0075 T, burn 1 R aft            D exhaust 0.0677 c             rL/R   0.884  aft 0.17274 (cos 0.146)  ring 0.00e+00  fwd 0.1390  rad 0.6882  trap 0.0000
+single ring B0 0.0075 T, burn 1 R aft            He-3 exhaust 0.0677 c          rL/R   0.662  aft 0.18563 (cos 0.157)  ring 0.00e+00  fwd 0.1292  rad 0.6852  trap 0.0000
+single ring B0 0.0075 T, burn 2 R aft            p 14.7 MeV (D-3He product)     rL/R   1.158  aft 0.18012 (cos 0.148)  ring 0.00e+00  fwd 0.0511  rad 0.7688  trap 0.0000
+single ring B0 0.0075 T, burn 2 R aft            alpha 3.6 MeV (D-3He product)  rL/R   0.575  aft 0.18971 (cos 0.156)  ring 0.00e+00  fwd 0.0394  rad 0.7708  trap 0.0000
+single ring B0 0.0075 T, burn 2 R aft            D exhaust 0.0677 c             rL/R   0.884  aft 0.18026 (cos 0.148)  ring 0.00e+00  fwd 0.0483  rad 0.7714  trap 0.0000
+single ring B0 0.0075 T, burn 2 R aft            He-3 exhaust 0.0677 c          rL/R   0.662  aft 0.18052 (cos 0.148)  ring 0.00e+00  fwd 0.0429  rad 0.7766  trap 0.0000
+single ring B0 0.05 T, burn 1 R aft              p 14.7 MeV (D-3He product)     rL/R   0.174  aft 0.63847 (cos 0.546)  ring 0.00e+00  fwd 0.1100  rad 0.2515  trap 0.0000
+single ring B0 0.05 T, burn 1 R aft              alpha 3.6 MeV (D-3He product)  rL/R   0.086  aft 0.89792 (cos 0.856)  ring 0.00e+00  fwd 0.1021  rad 0.0000  trap 0.0000
+single ring B0 0.05 T, burn 1 R aft              D exhaust 0.0677 c             rL/R   0.133  aft 0.89387 (cos 0.791)  ring 0.00e+00  fwd 0.1061  rad 0.0000  trap 0.0000
+single ring B0 0.05 T, burn 1 R aft              He-3 exhaust 0.0677 c          rL/R   0.099  aft 0.89684 (cos 0.844)  ring 0.00e+00  fwd 0.1032  rad 0.0000  trap 0.0000
+single ring B0 0.05 T, burn 1.5 R aft            p 14.7 MeV (D-3He product)     rL/R   0.174  aft 0.36511 (cos 0.311)  ring 0.00e+00  fwd 0.0552  rad 0.5797  trap 0.0000
+single ring B0 0.05 T, burn 1.5 R aft            alpha 3.6 MeV (D-3He product)  rL/R   0.086  aft 0.95134 (cos 0.807)  ring 0.00e+00  fwd 0.0487  rad 0.0000  trap 0.0000
+single ring B0 0.05 T, burn 1.5 R aft            D exhaust 0.0677 c             rL/R   0.133  aft 0.46852 (cos 0.404)  ring 0.00e+00  fwd 0.0521  rad 0.4794  trap 0.0000
+single ring B0 0.05 T, burn 1.5 R aft            He-3 exhaust 0.0677 c          rL/R   0.099  aft 0.68423 (cos 0.589)  ring 0.00e+00  fwd 0.0496  rad 0.2662  trap 0.0000
+single ring B0 0.05 T, burn 2 R aft              p 14.7 MeV (D-3He product)     rL/R   0.174  aft 0.28827 (cos 0.242)  ring 0.00e+00  fwd 0.0313  rad 0.6804  trap 0.0000
+single ring B0 0.05 T, burn 2 R aft              alpha 3.6 MeV (D-3He product)  rL/R   0.086  aft 0.47600 (cos 0.409)  ring 0.00e+00  fwd 0.0264  rad 0.4976  trap 0.0000
+single ring B0 0.05 T, burn 2 R aft              D exhaust 0.0677 c             rL/R   0.133  aft 0.33759 (cos 0.287)  ring 0.00e+00  fwd 0.0290  rad 0.6334  trap 0.0000
+single ring B0 0.05 T, burn 2 R aft              He-3 exhaust 0.0677 c          rL/R   0.099  aft 0.41879 (cos 0.358)  ring 0.00e+00  fwd 0.0271  rad 0.5541  trap 0.0000
+single ring B0 0.05 T, burn 2.5 R aft            p 14.7 MeV (D-3He product)     rL/R   0.174  aft 0.25812 (cos 0.212)  ring 0.00e+00  fwd 0.0197  rad 0.7222  trap 0.0000
+single ring B0 0.05 T, burn 2.5 R aft            alpha 3.6 MeV (D-3He product)  rL/R   0.086  aft 0.36243 (cos 0.307)  ring 0.00e+00  fwd 0.0160  rad 0.6216  trap 0.0000
+single ring B0 0.05 T, burn 2.5 R aft            D exhaust 0.0677 c             rL/R   0.133  aft 0.28709 (cos 0.240)  ring 0.00e+00  fwd 0.0180  rad 0.6949  trap 0.0000
+single ring B0 0.05 T, burn 2.5 R aft            He-3 exhaust 0.0677 c          rL/R   0.099  aft 0.33239 (cos 0.280)  ring 0.00e+00  fwd 0.0165  rad 0.6511  trap 0.0000
+single ring B0 0.05 T, burn 3 R aft              p 14.7 MeV (D-3He product)     rL/R   0.174  aft 0.24685 (cos 0.201)  ring 0.00e+00  fwd 0.0133  rad 0.7398  trap 0.0000
+single ring B0 0.05 T, burn 3 R aft              alpha 3.6 MeV (D-3He product)  rL/R   0.086  aft 0.31330 (cos 0.260)  ring 0.00e+00  fwd 0.0105  rad 0.6762  trap 0.0000
+single ring B0 0.05 T, burn 3 R aft              D exhaust 0.0677 c             rL/R   0.133  aft 0.26577 (cos 0.219)  ring 0.00e+00  fwd 0.0120  rad 0.7222  trap 0.0000
+single ring B0 0.05 T, burn 3 R aft              He-3 exhaust 0.0677 c          rL/R   0.099  aft 0.29460 (cos 0.243)  ring 0.00e+00  fwd 0.0109  rad 0.6945  trap 0.0000
+single ring B0 0.1 T, burn 1 R aft               p 14.7 MeV (D-3He product)     rL/R   0.087  aft 0.89787 (cos 0.856)  ring 0.00e+00  fwd 0.1021  rad 0.0000  trap 0.0000
+single ring B0 0.1 T, burn 1 R aft               alpha 3.6 MeV (D-3He product)  rL/R   0.043  aft 0.90082 (cos 0.876)  ring 0.00e+00  fwd 0.0992  rad 0.0000  trap 0.0000
+single ring B0 0.1 T, burn 1 R aft               D exhaust 0.0677 c             rL/R   0.066  aft 0.89941 (cos 0.865)  ring 0.00e+00  fwd 0.1006  rad 0.0000  trap 0.0000
+single ring B0 0.1 T, burn 1 R aft               He-3 exhaust 0.0677 c          rL/R   0.050  aft 0.90047 (cos 0.870)  ring 0.00e+00  fwd 0.0995  rad 0.0000  trap 0.0000
+single ring B0 0.1 T, burn 1.5 R aft             p 14.7 MeV (D-3He product)     rL/R   0.087  aft 0.95130 (cos 0.805)  ring 0.00e+00  fwd 0.0487  rad 0.0000  trap 0.0000
+single ring B0 0.1 T, burn 1.5 R aft             alpha 3.6 MeV (D-3He product)  rL/R   0.043  aft 0.95404 (cos 0.919)  ring 0.00e+00  fwd 0.0460  rad 0.0000  trap 0.0000
+single ring B0 0.1 T, burn 1.5 R aft             D exhaust 0.0677 c             rL/R   0.066  aft 0.95268 (cos 0.874)  ring 0.00e+00  fwd 0.0473  rad 0.0000  trap 0.0000
+single ring B0 0.1 T, burn 1.5 R aft             He-3 exhaust 0.0677 c          rL/R   0.050  aft 0.95368 (cos 0.912)  ring 0.00e+00  fwd 0.0463  rad 0.0000  trap 0.0000
+single ring B0 0.1 T, burn 2 R aft               p 14.7 MeV (D-3He product)     rL/R   0.087  aft 0.47272 (cos 0.406)  ring 0.00e+00  fwd 0.0264  rad 0.5008  trap 0.0000
+single ring B0 0.1 T, burn 2 R aft               alpha 3.6 MeV (D-3He product)  rL/R   0.043  aft 0.97584 (cos 0.888)  ring 0.00e+00  fwd 0.0242  rad 0.0000  trap 0.0000
+single ring B0 0.1 T, burn 2 R aft               D exhaust 0.0677 c             rL/R   0.066  aft 0.64645 (cos 0.557)  ring 0.00e+00  fwd 0.0253  rad 0.3282  trap 0.0000
+single ring B0 0.1 T, burn 2 R aft               He-3 exhaust 0.0677 c          rL/R   0.050  aft 0.97552 (cos 0.853)  ring 0.00e+00  fwd 0.0245  rad 0.0000  trap 0.0000
+single ring B0 0.1 T, burn 2.5 R aft             p 14.7 MeV (D-3He product)     rL/R   0.087  aft 0.36073 (cos 0.305)  ring 0.00e+00  fwd 0.0160  rad 0.6233  trap 0.0000
+single ring B0 0.1 T, burn 2.5 R aft             alpha 3.6 MeV (D-3He product)  rL/R   0.043  aft 0.71172 (cos 0.609)  ring 0.00e+00  fwd 0.0142  rad 0.2741  trap 0.0000
+single ring B0 0.1 T, burn 2.5 R aft             D exhaust 0.0677 c             rL/R   0.066  aft 0.43978 (cos 0.375)  ring 0.00e+00  fwd 0.0151  rad 0.5451  trap 0.0000
+single ring B0 0.1 T, burn 2.5 R aft             He-3 exhaust 0.0677 c          rL/R   0.050  aft 0.58517 (cos 0.502)  ring 0.00e+00  fwd 0.0144  rad 0.4004  trap 0.0000
+single ring B0 0.1 T, burn 3 R aft               p 14.7 MeV (D-3He product)     rL/R   0.087  aft 0.31227 (cos 0.259)  ring 0.00e+00  fwd 0.0105  rad 0.6772  trap 0.0000
+single ring B0 0.1 T, burn 3 R aft               alpha 3.6 MeV (D-3He product)  rL/R   0.043  aft 0.49398 (cos 0.421)  ring 0.00e+00  fwd 0.0090  rad 0.4970  trap 0.0000
+single ring B0 0.1 T, burn 3 R aft               D exhaust 0.0677 c             rL/R   0.066  aft 0.35969 (cos 0.302)  ring 0.00e+00  fwd 0.0098  rad 0.6305  trap 0.0000
+single ring B0 0.1 T, burn 3 R aft               He-3 exhaust 0.0677 c          rL/R   0.050  aft 0.43833 (cos 0.371)  ring 0.00e+00  fwd 0.0093  rad 0.5524  trap 0.0000
+single ring B0 0.15 T, burn 1 R aft              p 14.7 MeV (D-3He product)     rL/R   0.058  aft 0.89997 (cos 0.866)  ring 0.00e+00  fwd 0.1000  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 1 R aft              alpha 3.6 MeV (D-3He product)  rL/R   0.029  aft 0.90146 (cos 0.890)  ring 0.00e+00  fwd 0.0985  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 1 R aft              D exhaust 0.0677 c             rL/R   0.044  aft 0.90076 (cos 0.875)  ring 0.00e+00  fwd 0.0992  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 1 R aft              He-3 exhaust 0.0677 c          rL/R   0.033  aft 0.90129 (cos 0.887)  ring 0.00e+00  fwd 0.0987  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 1.5 R aft            p 14.7 MeV (D-3He product)     rL/R   0.058  aft 0.95320 (cos 0.897)  ring 0.00e+00  fwd 0.0468  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 1.5 R aft            alpha 3.6 MeV (D-3He product)  rL/R   0.029  aft 0.95470 (cos 0.925)  ring 0.00e+00  fwd 0.0453  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 1.5 R aft            D exhaust 0.0677 c             rL/R   0.044  aft 0.95398 (cos 0.918)  ring 0.00e+00  fwd 0.0460  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 1.5 R aft            He-3 exhaust 0.0677 c          rL/R   0.033  aft 0.95452 (cos 0.922)  ring 0.00e+00  fwd 0.0455  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 2 R aft              p 14.7 MeV (D-3He product)     rL/R   0.058  aft 0.84363 (cos 0.717)  ring 0.00e+00  fwd 0.0249  rad 0.1315  trap 0.0000
+single ring B0 0.15 T, burn 2 R aft              alpha 3.6 MeV (D-3He product)  rL/R   0.029  aft 0.97646 (cos 0.939)  ring 0.00e+00  fwd 0.0235  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 2 R aft              D exhaust 0.0677 c             rL/R   0.044  aft 0.97579 (cos 0.883)  ring 0.00e+00  fwd 0.0242  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 2 R aft              He-3 exhaust 0.0677 c          rL/R   0.033  aft 0.97628 (cos 0.930)  ring 0.00e+00  fwd 0.0237  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 2.5 R aft            p 14.7 MeV (D-3He product)     rL/R   0.058  aft 0.49682 (cos 0.426)  ring 0.00e+00  fwd 0.0148  rad 0.4884  trap 0.0000
+single ring B0 0.15 T, burn 2.5 R aft            alpha 3.6 MeV (D-3He product)  rL/R   0.029  aft 0.98637 (cos 0.901)  ring 0.00e+00  fwd 0.0136  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 2.5 R aft            D exhaust 0.0677 c             rL/R   0.044  aft 0.68344 (cos 0.586)  ring 0.00e+00  fwd 0.0142  rad 0.3023  trap 0.0000
+single ring B0 0.15 T, burn 2.5 R aft            He-3 exhaust 0.0677 c          rL/R   0.033  aft 0.98622 (cos 0.866)  ring 0.00e+00  fwd 0.0138  rad 0.0000  trap 0.0000
+single ring B0 0.15 T, burn 3 R aft              p 14.7 MeV (D-3He product)     rL/R   0.058  aft 0.39201 (cos 0.330)  ring 0.00e+00  fwd 0.0095  rad 0.5984  trap 0.0000
+single ring B0 0.15 T, burn 3 R aft              alpha 3.6 MeV (D-3He product)  rL/R   0.029  aft 0.86383 (cos 0.726)  ring 0.00e+00  fwd 0.0086  rad 0.1276  trap 0.0000
+single ring B0 0.15 T, burn 3 R aft              D exhaust 0.0677 c             rL/R   0.044  aft 0.48284 (cos 0.411)  ring 0.00e+00  fwd 0.0091  rad 0.5081  trap 0.0000
+single ring B0 0.15 T, burn 3 R aft              He-3 exhaust 0.0677 c          rL/R   0.033  aft 0.66126 (cos 0.564)  ring 0.00e+00  fwd 0.0087  rad 0.3300  trap 0.0000
+single ring B0 0.2 T, burn 1 R aft               p 14.7 MeV (D-3He product)     rL/R   0.043  aft 0.90081 (cos 0.876)  ring 0.00e+00  fwd 0.0992  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 1 R aft               alpha 3.6 MeV (D-3He product)  rL/R   0.022  aft 0.90169 (cos 0.893)  ring 0.00e+00  fwd 0.0983  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 1 R aft               D exhaust 0.0677 c             rL/R   0.033  aft 0.90129 (cos 0.887)  ring 0.00e+00  fwd 0.0987  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 1 R aft               He-3 exhaust 0.0677 c          rL/R   0.025  aft 0.90160 (cos 0.891)  ring 0.00e+00  fwd 0.0984  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 1.5 R aft             p 14.7 MeV (D-3He product)     rL/R   0.043  aft 0.95402 (cos 0.918)  ring 0.00e+00  fwd 0.0460  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 1.5 R aft             alpha 3.6 MeV (D-3He product)  rL/R   0.022  aft 0.95497 (cos 0.937)  ring 0.00e+00  fwd 0.0450  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 1.5 R aft             D exhaust 0.0677 c             rL/R   0.033  aft 0.95452 (cos 0.922)  ring 0.00e+00  fwd 0.0455  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 1.5 R aft             He-3 exhaust 0.0677 c          rL/R   0.025  aft 0.95485 (cos 0.931)  ring 0.00e+00  fwd 0.0451  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 2 R aft               p 14.7 MeV (D-3He product)     rL/R   0.043  aft 0.97582 (cos 0.887)  ring 0.00e+00  fwd 0.0242  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 2 R aft               alpha 3.6 MeV (D-3He product)  rL/R   0.022  aft 0.97672 (cos 0.945)  ring 0.00e+00  fwd 0.0233  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 2 R aft               D exhaust 0.0677 c             rL/R   0.033  aft 0.97628 (cos 0.929)  ring 0.00e+00  fwd 0.0237  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 2 R aft               He-3 exhaust 0.0677 c          rL/R   0.025  aft 0.97660 (cos 0.943)  ring 0.00e+00  fwd 0.0234  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 2.5 R aft             p 14.7 MeV (D-3He product)     rL/R   0.043  aft 0.70349 (cos 0.603)  ring 0.00e+00  fwd 0.0142  rad 0.2823  trap 0.0000
+single ring B0 0.2 T, burn 2.5 R aft             alpha 3.6 MeV (D-3He product)  rL/R   0.022  aft 0.98661 (cos 0.943)  ring 0.00e+00  fwd 0.0134  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 2.5 R aft             D exhaust 0.0677 c             rL/R   0.033  aft 0.98621 (cos 0.866)  ring 0.00e+00  fwd 0.0138  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 2.5 R aft             He-3 exhaust 0.0677 c          rL/R   0.025  aft 0.98651 (cos 0.927)  ring 0.00e+00  fwd 0.0135  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 3 R aft               p 14.7 MeV (D-3He product)     rL/R   0.043  aft 0.49082 (cos 0.418)  ring 0.00e+00  fwd 0.0091  rad 0.5001  trap 0.0000
+single ring B0 0.2 T, burn 3 R aft               alpha 3.6 MeV (D-3He product)  rL/R   0.022  aft 0.99163 (cos 0.895)  ring 0.00e+00  fwd 0.0084  rad 0.0000  trap 0.0000
+single ring B0 0.2 T, burn 3 R aft               D exhaust 0.0677 c             rL/R   0.033  aft 0.65957 (cos 0.563)  ring 0.00e+00  fwd 0.0087  rad 0.3317  trap 0.0000
+single ring B0 0.2 T, burn 3 R aft               He-3 exhaust 0.0677 c          rL/R   0.025  aft 0.99153 (cos 0.857)  ring 0.00e+00  fwd 0.0085  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 1 R aft              p 14.7 MeV (D-3He product)     rL/R   0.035  aft 0.90122 (cos 0.886)  ring 0.00e+00  fwd 0.0988  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 1 R aft              alpha 3.6 MeV (D-3He product)  rL/R   0.017  aft 0.90181 (cos 0.895)  ring 0.00e+00  fwd 0.0982  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 1 R aft              D exhaust 0.0677 c             rL/R   0.027  aft 0.90154 (cos 0.890)  ring 0.00e+00  fwd 0.0985  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 1 R aft              He-3 exhaust 0.0677 c          rL/R   0.020  aft 0.90174 (cos 0.894)  ring 0.00e+00  fwd 0.0983  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 1.5 R aft            p 14.7 MeV (D-3He product)     rL/R   0.035  aft 0.95445 (cos 0.922)  ring 0.00e+00  fwd 0.0456  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 1.5 R aft            alpha 3.6 MeV (D-3He product)  rL/R   0.017  aft 0.95509 (cos 0.943)  ring 0.00e+00  fwd 0.0449  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 1.5 R aft            D exhaust 0.0677 c             rL/R   0.027  aft 0.95479 (cos 0.928)  ring 0.00e+00  fwd 0.0452  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 1.5 R aft            He-3 exhaust 0.0677 c          rL/R   0.020  aft 0.95502 (cos 0.940)  ring 0.00e+00  fwd 0.0450  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 2 R aft              p 14.7 MeV (D-3He product)     rL/R   0.035  aft 0.97621 (cos 0.925)  ring 0.00e+00  fwd 0.0238  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 2 R aft              alpha 3.6 MeV (D-3He product)  rL/R   0.017  aft 0.97685 (cos 0.949)  ring 0.00e+00  fwd 0.0231  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 2 R aft              D exhaust 0.0677 c             rL/R   0.027  aft 0.97654 (cos 0.943)  ring 0.00e+00  fwd 0.0235  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 2 R aft              He-3 exhaust 0.0677 c          rL/R   0.020  aft 0.97677 (cos 0.946)  ring 0.00e+00  fwd 0.0232  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 2.5 R aft            p 14.7 MeV (D-3He product)     rL/R   0.035  aft 0.98616 (cos 0.852)  ring 0.00e+00  fwd 0.0138  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 2.5 R aft            alpha 3.6 MeV (D-3He product)  rL/R   0.017  aft 0.98674 (cos 0.953)  ring 0.00e+00  fwd 0.0133  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 2.5 R aft            D exhaust 0.0677 c             rL/R   0.027  aft 0.98645 (cos 0.917)  ring 0.00e+00  fwd 0.0135  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 2.5 R aft            He-3 exhaust 0.0677 c          rL/R   0.020  aft 0.98667 (cos 0.949)  ring 0.00e+00  fwd 0.0133  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 3 R aft              p 14.7 MeV (D-3He product)     rL/R   0.035  aft 0.62076 (cos 0.531)  ring 0.00e+00  fwd 0.0088  rad 0.3705  trap 0.0000
+single ring B0 0.25 T, burn 3 R aft              alpha 3.6 MeV (D-3He product)  rL/R   0.017  aft 0.99175 (cos 0.936)  ring 0.00e+00  fwd 0.0083  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 3 R aft              D exhaust 0.0677 c             rL/R   0.027  aft 0.99148 (cos 0.837)  ring 0.00e+00  fwd 0.0085  rad 0.0000  trap 0.0000
+single ring B0 0.25 T, burn 3 R aft              He-3 exhaust 0.0677 c          rL/R   0.020  aft 0.99167 (cos 0.913)  ring 0.00e+00  fwd 0.0083  rad 0.0000  trap 0.0000
+plug coil + halo ring, B0 0.075 T, burn 0.5 R aft p 14.7 MeV (D-3He product)     rL/R   0.116  aft 0.95637 (cos 0.917)  ring 0.00e+00  fwd 0.0436  rad 0.0000  trap 0.0000
+plug coil + halo ring, B0 0.075 T, burn 0.5 R aft alpha 3.6 MeV (D-3He product)  rL/R   0.057  aft 0.95693 (cos 0.942)  ring 0.00e+00  fwd 0.0431  rad 0.0000  trap 0.0000
+plug coil + halo ring, B0 0.075 T, burn 0.5 R aft D exhaust 0.0677 c             rL/R   0.088  aft 0.95663 (cos 0.926)  ring 0.00e+00  fwd 0.0434  rad 0.0000  trap 0.0000
+plug coil + halo ring, B0 0.075 T, burn 0.5 R aft He-3 exhaust 0.0677 c          rL/R   0.066  aft 0.95682 (cos 0.940)  ring 0.00e+00  fwd 0.0432  rad 0.0000  trap 0.0000
+plug coil + halo ring, B0 0.25 T, burn 0.5 R aft p 14.7 MeV (D-3He product)     rL/R   0.035  aft 0.95711 (cos 0.950)  ring 0.00e+00  fwd 0.0429  rad 0.0000  trap 0.0000
+plug coil + halo ring, B0 0.25 T, burn 0.5 R aft alpha 3.6 MeV (D-3He product)  rL/R   0.017  aft 0.95720 (cos 0.954)  ring 0.00e+00  fwd 0.0428  rad 0.0000  trap 0.0000
+plug coil + halo ring, B0 0.25 T, burn 0.5 R aft D exhaust 0.0677 c             rL/R   0.027  aft 0.95716 (cos 0.952)  ring 0.00e+00  fwd 0.0428  rad 0.0000  trap 0.0000
+plug coil + halo ring, B0 0.25 T, burn 0.5 R aft He-3 exhaust 0.0677 c          rL/R   0.020  aft 0.95719 (cos 0.954)  ring 0.00e+00  fwd 0.0428  rad 0.0000  trap 0.0000
+finite single ring B0 0.15 T, burn 2 R aft 0.05 {'AFT': 0.9738333333333333, 'FORWARD': 0.026166666666666668}
+finite single ring B0 0.15 T, burn 2 R aft 0.1 {'AFT': 0.9738333333333333, 'FORWARD': 0.026166666666666668}
+finite single ring B0 0.25 T, burn 2 R aft 0.05 {'AFT': 0.9741666666666666, 'FORWARD': 0.025833333333333333}
+finite single ring B0 0.25 T, burn 2 R aft 0.1 {'AFT': 0.9741666666666666, 'FORWARD': 0.025833333333333333}

@@ -1,0 +1,102 @@
+ideal D-3He: eps 0.00392, beta 0.0885 (nonrel), 0.0884 (rel)
+dispersion eta (b 0.8 / 0.95 / 1): {'common': [1.0, 1.0, 1.0], 'charge': [0.981, 0.978, 0.978], 'thermal': [0.918, 0.905, 0.901], 'birth': [0.513, 0.609, 0.641]}
+  b 0.8  iso today  kappa 0.883 spread common  eta 0.674 -> ve 0.0650 c
+  b 0.8  iso today  kappa 0.883 spread charge  eta 0.661 -> ve 0.0644 c
+  b 0.8  iso today  kappa 0.883 spread thermal eta 0.619 -> ve 0.0623 c
+  b 0.8  iso SR-26A kappa 0.883 spread common  eta 0.773 -> ve 0.0696 c
+  b 0.8  iso SR-26A kappa 0.883 spread charge  eta 0.758 -> ve 0.0689 c
+  b 0.8  iso SR-26A kappa 0.883 spread thermal eta 0.710 -> ve 0.0667 c
+  b 0.8  iso SR-26A kappa 0.921 spread common  eta 0.841 -> ve 0.0726 c
+  b 0.8  iso SR-26A kappa 0.921 spread charge  eta 0.825 -> ve 0.0719 c
+  b 0.8  iso SR-26A kappa 0.921 spread thermal eta 0.772 -> ve 0.0696 c
+  b 0.8  iso SR-26A kappa 0.95  spread common  eta 0.894 -> ve 0.0749 c
+  b 0.8  iso SR-26A kappa 0.95  spread charge  eta 0.878 -> ve 0.0742 c
+  b 0.8  iso SR-26A kappa 0.95  spread thermal eta 0.821 -> ve 0.0718 c
+  b 0.8  iso SR-26A kappa 0.97  spread common  eta 0.933 -> ve 0.0765 c
+  b 0.8  iso SR-26A kappa 0.97  spread charge  eta 0.915 -> ve 0.0757 c
+  b 0.8  iso SR-26A kappa 0.97  spread thermal eta 0.856 -> ve 0.0733 c
+  b 0.8  iso SR-26A kappa 1.0   spread common  eta 0.991 -> ve 0.0788 c
+  b 0.8  iso SR-26A kappa 1.0   spread charge  eta 0.972 -> ve 0.0781 c
+  b 0.8  iso SR-26A kappa 1.0   spread thermal eta 0.910 -> ve 0.0755 c
+  b 0.95 iso today  kappa 0.883 spread common  eta 0.674 -> ve 0.0708 c
+  b 0.95 iso today  kappa 0.883 spread charge  eta 0.660 -> ve 0.0701 c
+  b 0.95 iso today  kappa 0.883 spread thermal eta 0.610 -> ve 0.0674 c
+  b 0.95 iso SR-26A kappa 0.883 spread common  eta 0.773 -> ve 0.0758 c
+  b 0.95 iso SR-26A kappa 0.883 spread charge  eta 0.756 -> ve 0.0750 c
+  b 0.95 iso SR-26A kappa 0.883 spread thermal eta 0.699 -> ve 0.0722 c
+  b 0.95 iso SR-26A kappa 0.921 spread common  eta 0.841 -> ve 0.0791 c
+  b 0.95 iso SR-26A kappa 0.921 spread charge  eta 0.823 -> ve 0.0783 c
+  b 0.95 iso SR-26A kappa 0.921 spread thermal eta 0.761 -> ve 0.0753 c
+  b 0.95 iso SR-26A kappa 0.95  spread common  eta 0.894 -> ve 0.0816 c
+  b 0.95 iso SR-26A kappa 0.95  spread charge  eta 0.875 -> ve 0.0807 c
+  b 0.95 iso SR-26A kappa 0.95  spread thermal eta 0.810 -> ve 0.0776 c
+  b 0.95 iso SR-26A kappa 0.97  spread common  eta 0.933 -> ve 0.0833 c
+  b 0.95 iso SR-26A kappa 0.97  spread charge  eta 0.912 -> ve 0.0824 c
+  b 0.95 iso SR-26A kappa 0.97  spread thermal eta 0.844 -> ve 0.0793 c
+  b 0.95 iso SR-26A kappa 1.0   spread common  eta 0.991 -> ve 0.0859 c
+  b 0.95 iso SR-26A kappa 1.0   spread charge  eta 0.970 -> ve 0.0850 c
+  b 0.95 iso SR-26A kappa 1.0   spread thermal eta 0.897 -> ve 0.0817 c
+  b 0.99 iso today  kappa 0.883 spread common  eta 0.674 -> ve 0.0723 c
+  b 0.99 iso today  kappa 0.883 spread charge  eta 0.659 -> ve 0.0715 c
+  b 0.99 iso today  kappa 0.883 spread thermal eta 0.608 -> ve 0.0687 c
+  b 0.99 iso SR-26A kappa 0.883 spread common  eta 0.773 -> ve 0.0774 c
+  b 0.99 iso SR-26A kappa 0.883 spread charge  eta 0.756 -> ve 0.0766 c
+  b 0.99 iso SR-26A kappa 0.883 spread thermal eta 0.697 -> ve 0.0735 c
+  b 0.99 iso SR-26A kappa 0.921 spread common  eta 0.841 -> ve 0.0808 c
+  b 0.99 iso SR-26A kappa 0.921 spread charge  eta 0.822 -> ve 0.0799 c
+  b 0.99 iso SR-26A kappa 0.921 spread thermal eta 0.758 -> ve 0.0767 c
+  b 0.99 iso SR-26A kappa 0.95  spread common  eta 0.894 -> ve 0.0833 c
+  b 0.99 iso SR-26A kappa 0.95  spread charge  eta 0.875 -> ve 0.0824 c
+  b 0.99 iso SR-26A kappa 0.95  spread thermal eta 0.807 -> ve 0.0791 c
+  b 0.99 iso SR-26A kappa 0.97  spread common  eta 0.933 -> ve 0.0851 c
+  b 0.99 iso SR-26A kappa 0.97  spread charge  eta 0.912 -> ve 0.0841 c
+  b 0.99 iso SR-26A kappa 0.97  spread thermal eta 0.841 -> ve 0.0808 c
+  b 0.99 iso SR-26A kappa 1.0   spread common  eta 0.991 -> ve 0.0877 c
+  b 0.99 iso SR-26A kappa 1.0   spread charge  eta 0.969 -> ve 0.0867 c
+  b 0.99 iso SR-26A kappa 1.0   spread thermal eta 0.894 -> ve 0.0833 c
+  b 1.0  iso today  kappa 0.883 spread common  eta 0.674 -> ve 0.0727 c
+  b 1.0  iso today  kappa 0.883 spread charge  eta 0.659 -> ve 0.0719 c
+  b 1.0  iso today  kappa 0.883 spread thermal eta 0.607 -> ve 0.0690 c
+  b 1.0  iso SR-26A kappa 0.883 spread common  eta 0.773 -> ve 0.0778 c
+  b 1.0  iso SR-26A kappa 0.883 spread charge  eta 0.755 -> ve 0.0769 c
+  b 1.0  iso SR-26A kappa 0.883 spread thermal eta 0.696 -> ve 0.0739 c
+  b 1.0  iso SR-26A kappa 0.921 spread common  eta 0.841 -> ve 0.0812 c
+  b 1.0  iso SR-26A kappa 0.921 spread charge  eta 0.822 -> ve 0.0802 c
+  b 1.0  iso SR-26A kappa 0.921 spread thermal eta 0.757 -> ve 0.0770 c
+  b 1.0  iso SR-26A kappa 0.95  spread common  eta 0.894 -> ve 0.0837 c
+  b 1.0  iso SR-26A kappa 0.95  spread charge  eta 0.874 -> ve 0.0828 c
+  b 1.0  iso SR-26A kappa 0.95  spread thermal eta 0.806 -> ve 0.0795 c
+  b 1.0  iso SR-26A kappa 0.97  spread common  eta 0.933 -> ve 0.0855 c
+  b 1.0  iso SR-26A kappa 0.97  spread charge  eta 0.912 -> ve 0.0845 c
+  b 1.0  iso SR-26A kappa 0.97  spread thermal eta 0.840 -> ve 0.0811 c
+  b 1.0  iso SR-26A kappa 1.0   spread common  eta 0.991 -> ve 0.0881 c
+  b 1.0  iso SR-26A kappa 1.0   spread charge  eta 0.969 -> ve 0.0871 c
+  b 1.0  iso SR-26A kappa 1.0   spread thermal eta 0.893 -> ve 0.0836 c
+D-3He 1:1 (reference)                    Q  18.35 ideal 0.0885 c  neutrons   5.9 %  He-3   60 %  react 1.0
+D-3He He-3-rich 1:2                      Q  18.35 ideal 0.0885 c  neutrons   3.1 %  He-3   75 %  react None
+D-3He He-3-rich 1:3                      Q  18.35 ideal 0.0885 c  neutrons   2.1 %  He-3   82 %  react None
+D-3He D-rich 1:0.5 (bred He-3 burned in situ) Q  18.35 ideal 0.0885 c  neutrons   9.5 %  He-3   43 %  react None
+D-3He D-rich 1:0.3 (bred He-3 burned in situ) Q  18.35 ideal 0.0885 c  neutrons  13.5 %  He-3   31 %  react None
+Catalyzed D-D (no He-3 feed)             Q  43.25 ideal 0.0877 c  neutrons  38.2 %  He-3    0 %  react 0.19674576089102083
+D-T                                      Q  17.59 ideal 0.0867 c  neutrons  80.0 %  He-3    0 %  react 3.321280056385348
+3He-3He                                  Q  12.86 ideal 0.0677 c  neutrons   0.0 %  He-3  100 %  react 0.001
+p-11B                                    Q   8.68 ideal 0.0394 c  neutrons   0.1 %  He-3    0 %  react 0.2
+D-6Li                                    Q  22.37 ideal 0.0774 c  neutrons   5.0 %  He-3    0 %  react 0.02
+  Ti 200 r 0.2  bred 0.0: neutrons 21.52 %  He-3 x0.73  brems x0.62  DD power 33.2 %
+  Ti 200 r 0.2  bred 0.8: neutrons 17.04 %  He-3 x0.58  brems x0.49  DD power 26.3 %
+  Ti 200 r 0.3  bred 0.0: neutrons 16.14 %  He-3 x0.83  brems x0.65  DD power 24.9 %
+  Ti 200 r 0.3  bred 0.8: neutrons 13.48 %  He-3 x0.69  brems x0.54  DD power 20.8 %
+  Ti 200 r 0.5  bred 0.0: neutrons 10.75 %  He-3 x0.92  brems x0.73  DD power 16.6 %
+  Ti 200 r 0.5  bred 0.8: neutrons  9.50 %  He-3 x0.81  brems x0.65  DD power 14.7 %
+  Ti 200 r 0.7  bred 0.0: neutrons  8.06 %  He-3 x0.96  brems x0.84  DD power 12.4 %
+  Ti 200 r 0.7  bred 0.8: neutrons  7.34 %  He-3 x0.88  brems x0.76  DD power 11.3 %
+  Ti 200 r 1.0  bred 0.0: neutrons  5.86 %  He-3 x1.00  brems x1.00  DD power 9.0 %
+  Ti 200 r 1.0  bred 0.8: neutrons  5.47 %  He-3 x0.93  brems x0.93  DD power 8.4 %
+  Ti 200 r 1.5  bred 0.0: neutrons  4.03 %  He-3 x1.03  brems x1.28  DD power 6.2 %
+  Ti 200 r 1.5  bred 0.8: neutrons  3.84 %  He-3 x0.98  brems x1.22  DD power 5.9 %
+  Ti 200 r 2.0  bred 0.0: neutrons  3.07 %  He-3 x1.05  brems x1.57  DD power 4.7 %
+  Ti 200 r 2.0  bred 0.8: neutrons  2.96 %  He-3 x1.01  brems x1.51  DD power 4.6 %
+  Ti 200 r 3.0  bred 0.0: neutrons  2.08 %  He-3 x1.06  brems x2.15  DD power 3.2 %
+  Ti 200 r 3.0  bred 0.8: neutrons  2.03 %  He-3 x1.04  brems x2.10  DD power 3.1 %
+floor {'channel': 1.0, 'Ti_keV': 150.0, 'Te_keV': 71.6974, 'photon': 0.0953, 'neutron': 0.0208, 'exchange': 0.0953, 'iso': 0.1161, 'sustained': True} with trapping 0.05
+with all product energy channelled to ions the electrons are still heated by ion-electron exchange, so Te stays at 72 keV and bremsstrahlung balances that exchange: the photon share cannot fall below about 9.5 % in a thermal burn. Compton trapping in the dense pellet lowers it by at most 3.3x (REDUCED_MODEL, sign unresolved).

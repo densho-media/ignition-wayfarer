@@ -1,0 +1,11 @@
+base                 dep 13783 t, sys 2502 t, He-3 5203 t, ve 0.060 c, fusion 60.6 TW, trip +0.60, R 73 m, I 10.2 MA, fin 216 t, ship sh 107 t  fails: G2_departure,G3_propellant,G10_he3_supply
+burnup_095           dep 11965 t, sys 2689 t, He-3 4180 t, ve 0.068 c, fusion 57.8 TW, trip +0.60, R 58 m, I 15.3 MA, fin 200 t, ship sh 58 t  fails: G2_departure,G3_propellant,G10_he3_supply
+fluence_1e23         dep 11707 t, sys 1992 t, He-3 4419 t, ve 0.060 c, fusion 51.5 TW, trip +0.60, R 67 m, I 10.2 MA, fin 146 t, ship sh 95 t  fails: G2_departure,G3_propellant,G10_he3_supply
+Je_x2                dep 10950 t, sys 2105 t, He-3 3897 t, ve 0.064 c, fusion 45.4 TW, trip +0.60, R 51 m, I 20.4 MA, fin 151 t, ship sh 87 t  fails: G2_departure,G3_propellant,G10_he3_supply
+Je_x3                dep 9901 t, sys 1819 t, He-3 3524 t, ve 0.064 c, fusion 41.0 TW, trip +0.60, R 49 m, I 20.4 MA, fin 123 t, ship sh 81 t  fails: G2_departure,G3_propellant,G10_he3_supply
+channel_095          dep 11665 t, sys 2300 t, He-3 4373 t, ve 0.064 c, fusion 50.9 TW, trip +0.60, R 51 m, I 15.3 MA, fin 181 t, ship sh 88 t  fails: G2_departure,G3_propellant,G10_he3_supply
+ship_credit_e2       dep 13485 t, sys 2429 t, He-3 5091 t, ve 0.060 c, fusion 59.3 TW, trip +0.60, R 72 m, I 10.2 MA, fin 214 t, ship sh 95 t  fails: G2_departure,G3_propellant,G10_he3_supply
+all_but_burnup       dep 8236 t, sys 1364 t, He-3 3087 t, ve 0.064 c, fusion 36.0 TW, trip +0.60, R 43 m, I 15.3 MA, fin 85 t, ship sh 62 t  fails: G2_departure,G3_propellant,G10_he3_supply
+all_advanced         dep 7482 t, sys 1350 t, He-3 2572 t, ve 0.068 c, fusion 35.6 TW, trip +0.60, R 43 m, I 15.3 MA, fin 85 t, ship sh 61 t  fails: G2_departure,G3_propellant,G10_he3_supply
+all_stretch          dep 6930 t, sys 1352 t, He-3 2410 t, ve 0.072 c, fusion 33.3 TW, trip +0.60, R 42 m, I 20.4 MA, fin 78 t, ship sh 59 t  fails: G2_departure,G3_propellant,G10_he3_supply
+all_stretch_trip03   dep 10075 t, sys 2124 t, He-3 3464 t, ve 0.068 c, fusion 90.3 TW, trip +0.30, R 68 m, I 15.3 MA, fin 105 t, ship sh 116 t  fails: G2_departure,G3_propellant,G10_he3_supply

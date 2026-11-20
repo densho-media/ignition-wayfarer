@@ -1,0 +1,182 @@
+{
+ "design": {
+  "P_engine": 5640000000000.0,
+  "f_c": 0.88,
+  "E_B_max": 3400000000.0,
+  "B_burn": 0.022
+ },
+ "channel": [
+  {
+   "channel": 0.0,
+   "Te_keV": 359.610855758604,
+   "photon_share": 0.4729033600609756,
+   "neutron_share": 0.023392131341321183,
+   "exhaust_share": 0.5036958938169498,
+   "ntau_m3s": 1.9484270784005163e+21,
+   "fusion_W_m3_at_1e21": 1.2071099706980576e+30
+  },
+  {
+   "channel": 0.25,
+   "Te_keV": 307.22514723948683,
+   "photon_share": 0.3773280481467653,
+   "neutron_share": 0.023392131341321183,
+   "exhaust_share": 0.59927120573116,
+   "ntau_m3s": 1.463642360845769e+21,
+   "fusion_W_m3_at_1e21": 1.2071099706980576e+30
+  },
+  {
+   "channel": 0.5,
+   "Te_keV": 242.7283510615769,
+   "photon_share": 0.2761898462353257,
+   "neutron_share": 0.023392131341321183,
+   "exhaust_share": 0.7004094076425996,
+   "ntau_m3s": 1.0689611750174614e+21,
+   "fusion_W_m3_at_1e21": 1.2071099706980576e+30
+  },
+  {
+   "channel": 0.66,
+   "Te_keV": 192.97959374944818,
+   "photon_share": 0.20972688527297295,
+   "neutron_share": 0.023392131341321183,
+   "exhaust_share": 0.7668723686049523,
+   "ntau_m3s": 8.471610982419431e+20,
+   "fusion_W_m3_at_1e21": 1.2071099706980576e+30
+  },
+  {
+   "channel": 0.8,
+   "Te_keV": 145.0843901261269,
+   "photon_share": 0.15432784105592715,
+   "neutron_share": 0.023392131341321183,
+   "exhaust_share": 0.8222714128219982,
+   "ntau_m3s": 6.741188975163652e+20,
+   "fusion_W_m3_at_1e21": 1.2071099706980576e+30
+  },
+  {
+   "channel": 0.9,
+   "Te_keV": 112.38587784565763,
+   "photon_share": 0.1207703080763345,
+   "neutron_share": 0.023392131341321183,
+   "exhaust_share": 0.8558289458015909,
+   "ntau_m3s": 5.7161939634090246e+20,
+   "fusion_W_m3_at_1e21": 1.2071099706980576e+30
+  },
+  {
+   "channel": 0.95,
+   "Te_keV": 98.11277481554606,
+   "photon_share": 0.10705113149819673,
+   "neutron_share": 0.023392131341321183,
+   "exhaust_share": 0.8695481223797287,
+   "ntau_m3s": 5.2992093408890834e+20,
+   "fusion_W_m3_at_1e21": 1.2071099706980576e+30
+  }
+ ],
+ "steady_inertial": {
+  "sound_speed_m_s": 3929077.9001013106,
+  "radius_m": 2.2113040667874263e-31,
+  "density_m3": 1.0156618310276887e+58
+ },
+ "chain": {
+  "rate_Hz": 1658.8235294117646,
+  "yield_J": 3400000000.0,
+  "pellet_fuel_kg": 1.2014134275618375e-05,
+  "spacing_m": 6.028368794326242,
+  "pellet_speed_m_s": 10000.0,
+  "rows": [
+   {
+    "gain": 30.0,
+    "drive_J": 113333333.33333333,
+    "transfer_share_of_charged": 0.03787878787878788,
+    "geometric_share": 6.879238754325257e-09,
+    "focusing_gain_needed": 5506247.0182433985,
+    "drive_pulse_W_at_10ns": 1.1333333333333332e+16
+   },
+   {
+    "gain": 100.0,
+    "drive_J": 34000000.0,
+    "transfer_share_of_charged": 0.011363636363636364,
+    "geometric_share": 6.879238754325257e-09,
+    "focusing_gain_needed": 1651874.1054730196,
+    "drive_pulse_W_at_10ns": 3400000000000000.0
+   },
+   {
+    "gain": 300.0,
+    "drive_J": 11333333.333333334,
+    "transfer_share_of_charged": 0.003787878787878788,
+    "geometric_share": 6.879238754325257e-09,
+    "focusing_gain_needed": 550624.7018243399,
+    "drive_pulse_W_at_10ns": 1133333333333333.2
+   }
+  ],
+  "arrival_spread_ns_100keV": 4.247593674266152,
+  "proton_line_sigma_MeV_100keV": 1.0843846821841217,
+  "arrival_spread_ns_200keV": 6.007004581597358,
+  "proton_line_sigma_MeV_200keV": 1.533551524374423,
+  "transit_ns": 115.00471403309565
+ },
+ "stability": {
+  "error_growth_per_pulse": [
+   1.3,
+   1.5
+  ],
+  "pulses_to_double": [
+   2.6419267958111403,
+   1.7095112913514547
+  ],
+  "overyield_cap": 1.25,
+  "dhe3_reactivity_log_slope_100_190keV": 0.6935197101295755,
+  "note": "Error grows 1.3-1.5x per pulse: each pulse must be corrected before the next (0.6 ms at 1.6 kHz) by hardware loops (pellet mass, injection timing, wave phase); the AI tunes their gains and predicts drift. The pellet fuel caps an overshoot at 1.25x; a missed correction quenches the chain within a few pulses (restart by the startup driver)."
+ },
+ "phase": {
+  "B_burn_T": 0.022,
+  "f_ci_D_Hz": 167780.3296307994,
+  "f_ci_He3_Hz": 224107.59915585822,
+  "pulse_period_s": 0.0006028368794326241,
+  "hardware_loop_needed_s": 0.00012056737588652484,
+  "ai_setpoint_s": 0.060283687943262415,
+  "note": "Wave phase must be set per pulse within the pulse period; the AI updates set-points over about a hundred pulses (tens of ms) from predicted versus measured yield, plume and leakage."
+ },
+ "failures": [
+  {
+   "mode": "Chain break (misfire, missed transfer)",
+   "timescale": "1-3 pulses (ms)",
+   "consequence": "burn quenches; thrust steps to zero on one engine",
+   "response": "other engines throttle to balance within ms; startup driver relights (1.74 GJ store = dozens of restarts)"
+  },
+  {
+   "mode": "Overyield (gain above set-point)",
+   "timescale": "per pulse",
+   "consequence": "pulse up to 1.25x (fuel-capped); field overpressure, leakage spike",
+   "response": "next pellet lighter or delayed; ring current headroom sized for 1.25x"
+  },
+  {
+   "mode": "Phase drift of the transfer wave",
+   "timescale": "tens of pulses",
+   "consequence": "transfer share falls -> electrons heat -> photon share rises toward 47 %",
+   "response": "AI re-phases from the plume and photon diagnostics; below the threshold the chain quenches safely"
+  },
+  {
+   "mode": "Pellet trajectory error",
+   "timescale": "per pellet",
+   "consequence": "off-centre burn: asymmetric plume, more forward loss and leakage",
+   "response": "in-flight correction at the burn station (electromagnetic steering), metrology tracks each pellet"
+  },
+  {
+   "mode": "Ring quench (superconductor)",
+   "timescale": "seconds",
+   "consequence": "nozzle field decays: plume loses collimation, leakage rises",
+   "response": "stop the chain within one pulse; ring energy dumped into its armour heat sink; dynamos recharge"
+  },
+  {
+   "mode": "Tether or boom fault",
+   "timescale": "seconds to minutes",
+   "consequence": "burn station off its line; thrust misaligned",
+   "response": "stop the chain; reel in; the other three engines carry a reduced, balanced burn"
+  },
+  {
+   "mode": "Four-engine asymmetry",
+   "timescale": "ms",
+   "consequence": "torque on the ship from differential thrust",
+   "response": "pulse-rate trim per engine (0.3 % differential today) and canted tethers"
+  }
+ ]
+}

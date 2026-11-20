@@ -1,0 +1,55 @@
+{
+ "BM1_p8.25": {
+  "reflect": 1.0000116288236836,
+  "heat": 0.0,
+  "electrical": 0.0,
+  "closure": -1.1628823672893635e-05,
+  "expected": {
+   "reflect": 1.0,
+   "heat": 0.0,
+   "electrical": 0.0
+  }
+ },
+ "BM1_p14.68": {
+  "reflect": 0.0,
+  "heat": 0.31878726222937737,
+  "electrical": 0.681198910081735,
+  "closure": 8.224897610426184e-06,
+  "expected": {
+   "reflect": 0.0,
+   "heat": 0.3188010899182561,
+   "electrical": 0.6811989100817439
+  }
+ },
+ "BM2_drive0.5_dx0.01": {
+  "J_plate_over_JCL": 0.5033124999998972,
+  "closure": -8.402460150500273e-05,
+  "charge_closure": -0.0011188463451018817
+ },
+ "BM2_drive0.5_dx0.005": {
+  "J_plate_over_JCL": 0.4990624999998854,
+  "closure": -3.006652464247646e-05,
+  "charge_closure": 0.0025918870811603486
+ },
+ "BM2_drive2.0_dx0.01": {
+  "J_plate_over_JCL": 0.9482499999998609,
+  "closure": -5.73197257406202e-05,
+  "charge_closure": -0.0013053207360035428
+ },
+ "BM2_drive2.0_dx0.005": {
+  "J_plate_over_JCL": 1.0485624999997836,
+  "closure": -4.123649508199109e-05,
+  "charge_closure": 0.0029041626330815824
+ },
+ "BM3_drive0.9": {
+  "transmitted": 0.9980312499997721,
+  "reflect": 0.0,
+  "closure": -8.099028123374694e-06
+ },
+ "BM3_drive1.3": {
+  "transmitted": 0.2826874999999763,
+  "reflect": 0.6953983321808502,
+  "closure": -3.1616974388184115e-05
+ },
+ "seconds": 12.76912808418274
+}

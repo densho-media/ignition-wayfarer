@@ -1,0 +1,173 @@
+A_base     no closure  fails: G1_closes
+A_stretch  no closure  fails: G1_closes
+B_base     no closure  fails: G1_closes
+B_stretch  no closure  fails: G1_closes
+C_base     no closure  fails: G1_closes
+C_stretch  no closure  fails: G1_closes
+D_base     no closure  fails: G1_closes
+D_stretch  no closure  fails: G1_closes
+MIN A research_7kt none
+MIN A canon_4p6kt  none
+MIN B research_7kt none
+MIN B canon_4p6kt  none
+MIN C research_7kt stretch iso x0.03 (0.39 %), fwd 2.4e-04, q 10, drv 0.001: dep 6271 t, fusion 27.5 TW, He-3 1988 t; spec ['VBC', 'SR-26 isotropic suppression', 'SR-26F forward-stream rejection']; fails ['G2_departure_4p6kt', 'G3_propellant', 'G8_speculative_count', 'G10_he3_supply', 'G13b_dust_high']
+MIN C canon_4p6kt  none
+MIN D research_7kt none
+MIN D canon_4p6kt  none
+  B base    gain None iso x1     fwd 2.4e-03 q 10   drv 0.001  no closure
+  B base    gain None iso x0.3   fwd 2.4e-03 q 10   drv 0.001  no closure
+  B base    gain None iso x0.1   fwd 2.4e-03 q 10   drv 0.001  no closure
+  B base    gain None iso x0.05  fwd 2.4e-03 q 10   drv 0.001  no closure
+  B base    gain None iso x0.03  fwd 2.4e-03 q 10   drv 0.001  dep    84729 coil   107.4 plate   43.5 heat_ok False
+  B base    gain None iso x0.02  fwd 2.4e-03 q 10   drv 0.001  dep    66503 coil    56.1 plate   22.8 heat_ok False
+  B base    gain None iso x0.01  fwd 2.4e-03 q 10   drv 0.001  dep    52609 coil    22.2 plate    9.0 heat_ok False
+  B base    gain None iso x1     fwd 2.4e-04 q 10   drv 0.001  no closure
+  B base    gain None iso x0.3   fwd 2.4e-04 q 10   drv 0.001  no closure
+  B base    gain None iso x0.1   fwd 2.4e-04 q 10   drv 0.001  dep    38127 coil   162.7 plate   66.0 heat_ok False
+  B base    gain None iso x0.05  fwd 2.4e-04 q 10   drv 0.001  dep    23423 coil    50.5 plate   20.5 heat_ok False
+  B base    gain None iso x0.03  fwd 2.4e-04 q 10   drv 0.001  dep    20134 coil    26.0 plate   10.5 heat_ok False
+  B base    gain None iso x0.02  fwd 2.4e-04 q 10   drv 0.001  dep    16280 coil    14.0 plate    5.7 heat_ok False
+  B base    gain None iso x0.01  fwd 2.4e-04 q 10   drv 0.001  dep    13490 coil     5.8 plate    2.3 heat_ok True
+  B base    gain None iso x1     fwd 2.4e-05 q 10   drv 0.001  no closure
+  B base    gain None iso x0.3   fwd 2.4e-05 q 10   drv 0.001  no closure
+  B base    gain None iso x0.1   fwd 2.4e-05 q 10   drv 0.001  dep    33444 coil   142.7 plate   57.9 heat_ok False
+  B base    gain None iso x0.05  fwd 2.4e-05 q 10   drv 0.001  dep    21482 coil    46.3 plate   18.8 heat_ok False
+  B base    gain None iso x0.03  fwd 2.4e-05 q 10   drv 0.001  dep    18468 coil    23.8 plate    9.7 heat_ok False
+  B base    gain None iso x0.02  fwd 2.4e-05 q 10   drv 0.001  dep    14916 coil    12.8 plate    5.2 heat_ok False
+  B base    gain None iso x0.01  fwd 2.4e-05 q 10   drv 0.001  dep    12541 coil     5.4 plate    2.2 heat_ok True
+  B base    gain None iso x1     fwd 2.4e-04 q 30   drv 0.001  no closure
+  B base    gain None iso x1     fwd 2.4e-04 q 100  drv 0.001  no closure
+  B base    gain None iso x1     fwd 2.4e-04 q 300  drv 0.001  no closure
+  B stretch gain None iso x1     fwd 2.4e-03 q 10   drv 0.001  no closure
+  B stretch gain None iso x0.3   fwd 2.4e-03 q 10   drv 0.001  no closure
+  B stretch gain None iso x0.1   fwd 2.4e-03 q 10   drv 0.001  no closure
+  B stretch gain None iso x0.05  fwd 2.4e-03 q 10   drv 0.001  no closure
+  B stretch gain None iso x0.03  fwd 2.4e-03 q 10   drv 0.001  dep    72919 coil    83.6 plate   33.9 heat_ok False
+  B stretch gain None iso x0.02  fwd 2.4e-03 q 10   drv 0.001  dep    59544 coil    45.4 plate   18.4 heat_ok False
+  B stretch gain None iso x0.01  fwd 2.4e-03 q 10   drv 0.001  dep    45633 coil    17.4 plate    7.1 heat_ok False
+  B stretch gain None iso x1     fwd 2.4e-04 q 10   drv 0.001  no closure
+  B stretch gain None iso x0.3   fwd 2.4e-04 q 10   drv 0.001  no closure
+  B stretch gain None iso x0.1   fwd 2.4e-04 q 10   drv 0.001  dep    31479 coil   121.4 plate   49.2 heat_ok False
+  B stretch gain None iso x0.05  fwd 2.4e-04 q 10   drv 0.001  dep    21153 coil    40.5 plate   16.4 heat_ok False
+  B stretch gain None iso x0.03  fwd 2.4e-04 q 10   drv 0.001  dep    17599 coil    20.2 plate    8.2 heat_ok False
+  B stretch gain None iso x0.02  fwd 2.4e-04 q 10   drv 0.001  dep    14703 coil    11.4 plate    4.6 heat_ok False
+  B stretch gain None iso x0.01  fwd 2.4e-04 q 10   drv 0.001  dep    12640 coil     4.9 plate    2.0 heat_ok True
+  B stretch gain None iso x1     fwd 2.4e-05 q 10   drv 0.001  no closure
+  B stretch gain None iso x0.3   fwd 2.4e-05 q 10   drv 0.001  no closure
+  B stretch gain None iso x0.1   fwd 2.4e-05 q 10   drv 0.001  dep    28017 coil   108.1 plate   43.8 heat_ok False
+  B stretch gain None iso x0.05  fwd 2.4e-05 q 10   drv 0.001  dep    19466 coil    37.9 plate   15.4 heat_ok False
+  B stretch gain None iso x0.03  fwd 2.4e-05 q 10   drv 0.001  dep    15983 coil    18.6 plate    7.6 heat_ok False
+  B stretch gain None iso x0.02  fwd 2.4e-05 q 10   drv 0.001  dep    13541 coil    10.5 plate    4.3 heat_ok False
+  B stretch gain None iso x0.01  fwd 2.4e-05 q 10   drv 0.001  dep    11775 coil     4.6 plate    1.9 heat_ok True
+  B stretch gain None iso x1     fwd 2.4e-04 q 30   drv 0.001  no closure
+  B stretch gain None iso x1     fwd 2.4e-04 q 100  drv 0.001  no closure
+  B stretch gain None iso x1     fwd 2.4e-04 q 300  drv 0.001  no closure
+  C base    gain None iso x1     fwd 2.4e-03 q 10   drv 0.001  no closure
+  C base    gain None iso x0.3   fwd 2.4e-03 q 10   drv 0.001  no closure
+  C base    gain None iso x0.1   fwd 2.4e-03 q 10   drv 0.001  no closure
+  C base    gain None iso x0.05  fwd 2.4e-03 q 10   drv 0.001  dep    37116 coil    78.6 plate    1.4 heat_ok False
+  C base    gain None iso x0.03  fwd 2.4e-03 q 10   drv 0.001  dep    25325 coil    32.1 plate    0.6 heat_ok False
+  C base    gain None iso x0.02  fwd 2.4e-03 q 10   drv 0.001  dep    21924 coil    18.5 plate    0.3 heat_ok False
+  C base    gain None iso x0.01  fwd 2.4e-03 q 10   drv 0.001  dep    19324 coil     8.1 plate    0.1 heat_ok True
+  C base    gain None iso x1     fwd 2.4e-04 q 10   drv 0.001  no closure
+  C base    gain None iso x0.3   fwd 2.4e-04 q 10   drv 0.001  dep    72630 coil   900.4 plate   15.5 heat_ok False
+  C base    gain None iso x0.1   fwd 2.4e-04 q 10   drv 0.001  dep    10371 coil    44.3 plate    0.8 heat_ok False
+  C base    gain None iso x0.05  fwd 2.4e-04 q 10   drv 0.001  dep     7643 coil    16.5 plate    0.3 heat_ok False
+  C base    gain None iso x0.03  fwd 2.4e-04 q 10   drv 0.001  dep     6961 coil     9.0 plate    0.2 heat_ok True
+  C base    gain None iso x0.02  fwd 2.4e-04 q 10   drv 0.001  dep     6660 coil     5.7 plate    0.1 heat_ok True
+  C base    gain None iso x0.01  fwd 2.4e-04 q 10   drv 0.001  dep     6488 coil     2.8 plate    0.0 heat_ok True
+  C base    gain None iso x1     fwd 2.4e-05 q 10   drv 0.001  no closure
+  C base    gain None iso x0.3   fwd 2.4e-05 q 10   drv 0.001  dep    67152 coil   832.5 plate   14.3 heat_ok False
+  C base    gain None iso x0.1   fwd 2.4e-05 q 10   drv 0.001  dep     9389 coil    40.1 plate    0.7 heat_ok False
+  C base    gain None iso x0.05  fwd 2.4e-05 q 10   drv 0.001  dep     7074 coil    15.2 plate    0.3 heat_ok False
+  C base    gain None iso x0.03  fwd 2.4e-05 q 10   drv 0.001  dep     6486 coil     8.4 plate    0.1 heat_ok True
+  C base    gain None iso x0.02  fwd 2.4e-05 q 10   drv 0.001  dep     6222 coil     5.3 plate    0.1 heat_ok True
+  C base    gain None iso x0.01  fwd 2.4e-05 q 10   drv 0.001  dep     6087 coil     2.6 plate    0.0 heat_ok True
+  C base    gain None iso x1     fwd 2.4e-04 q 30   drv 0.001  no closure
+  C base    gain None iso x1     fwd 2.4e-04 q 100  drv 0.001  no closure
+  C base    gain None iso x1     fwd 2.4e-04 q 300  drv 0.001  dep    39427 coil  1672.5 plate   28.8 heat_ok False
+  C stretch gain None iso x1     fwd 2.4e-03 q 10   drv 0.001  no closure
+  C stretch gain None iso x0.3   fwd 2.4e-03 q 10   drv 0.001  no closure
+  C stretch gain None iso x0.1   fwd 2.4e-03 q 10   drv 0.001  no closure
+  C stretch gain None iso x0.05  fwd 2.4e-03 q 10   drv 0.001  dep    27783 coil    53.2 plate    0.9 heat_ok False
+  C stretch gain None iso x0.03  fwd 2.4e-03 q 10   drv 0.001  dep    21281 coil    24.4 plate    0.4 heat_ok False
+  C stretch gain None iso x0.02  fwd 2.4e-03 q 10   drv 0.001  dep    19100 coil    14.6 plate    0.3 heat_ok False
+  C stretch gain None iso x0.01  fwd 2.4e-03 q 10   drv 0.001  dep    17332 coil     6.6 plate    0.1 heat_ok True
+  C stretch gain None iso x1     fwd 2.4e-04 q 10   drv 0.001  dep   108860 coil  4848.8 plate   83.5 heat_ok False
+  C stretch gain None iso x0.3   fwd 2.4e-04 q 10   drv 0.001  dep    58349 coil   705.6 plate   12.2 heat_ok False
+  C stretch gain None iso x0.1   fwd 2.4e-04 q 10   drv 0.001  dep     8346 coil    32.8 plate    0.6 heat_ok False
+  C stretch gain None iso x0.05  fwd 2.4e-04 q 10   drv 0.001  dep     6759 coil    13.2 plate    0.2 heat_ok False
+  C stretch gain None iso x0.03  fwd 2.4e-04 q 10   drv 0.001  dep     6271 coil     7.8 plate    0.1 heat_ok True
+  C stretch gain None iso x0.02  fwd 2.4e-04 q 10   drv 0.001  dep     6044 coil     5.0 plate    0.1 heat_ok True
+  C stretch gain None iso x0.01  fwd 2.4e-04 q 10   drv 0.001  dep     5851 coil     3.6 plate    0.0 heat_ok True
+  C stretch gain None iso x1     fwd 2.4e-05 q 10   drv 0.001  dep    95926 coil  4272.7 plate   73.6 heat_ok False
+  C stretch gain None iso x0.3   fwd 2.4e-05 q 10   drv 0.001  dep    54116 coil   654.4 plate   11.3 heat_ok False
+  C stretch gain None iso x0.1   fwd 2.4e-05 q 10   drv 0.001  dep     7620 coil    29.9 plate    0.5 heat_ok False
+  C stretch gain None iso x0.05  fwd 2.4e-05 q 10   drv 0.001  dep     6254 coil    13.0 plate    0.2 heat_ok False
+  C stretch gain None iso x0.03  fwd 2.4e-05 q 10   drv 0.001  dep     5820 coil     7.3 plate    0.1 heat_ok True
+  C stretch gain None iso x0.02  fwd 2.4e-05 q 10   drv 0.001  dep     5606 coil     6.8 plate    0.1 heat_ok True
+  C stretch gain None iso x0.01  fwd 2.4e-05 q 10   drv 0.001  dep     5429 coil     3.3 plate    0.0 heat_ok True
+  C stretch gain None iso x1     fwd 2.4e-04 q 30   drv 0.001  dep   108860 coil  4848.8 plate   83.5 heat_ok False
+  C stretch gain None iso x1     fwd 2.4e-04 q 100  drv 0.001  dep    41517 coil  1817.4 plate   31.3 heat_ok False
+  C stretch gain None iso x1     fwd 2.4e-04 q 300  drv 0.001  dep    15383 coil   685.2 plate   11.8 heat_ok False
+  D base    gain None iso x1     fwd 2.4e-03 q 10   drv 0.001  no closure
+  D base    gain None iso x0.3   fwd 2.4e-03 q 10   drv 0.001  no closure
+  D base    gain None iso x0.1   fwd 2.4e-03 q 10   drv 0.001  no closure
+  D base    gain None iso x0.05  fwd 2.4e-03 q 10   drv 0.001  no closure
+  D base    gain None iso x0.03  fwd 2.4e-03 q 10   drv 0.001  no closure
+  D base    gain None iso x0.02  fwd 2.4e-03 q 10   drv 0.001  dep    82657 coil   255.4 plate   51.2 heat_ok False
+  D base    gain None iso x0.01  fwd 2.4e-03 q 10   drv 0.001  dep    58434 coil    90.1 plate   18.1 heat_ok False
+  D base    gain None iso x1     fwd 2.4e-04 q 10   drv 0.001  no closure
+  D base    gain None iso x0.3   fwd 2.4e-04 q 10   drv 0.001  no closure
+  D base    gain None iso x0.1   fwd 2.4e-04 q 10   drv 0.001  dep    91787 coil  1434.5 plate  287.5 heat_ok False
+  D base    gain None iso x0.05  fwd 2.4e-04 q 10   drv 0.001  dep    27910 coil   220.3 plate   44.2 heat_ok False
+  D base    gain None iso x0.03  fwd 2.4e-04 q 10   drv 0.001  dep    21606 coil   102.0 plate   20.5 heat_ok False
+  D base    gain None iso x0.02  fwd 2.4e-04 q 10   drv 0.001  dep    19335 coil    60.8 plate   12.2 heat_ok False
+  D base    gain None iso x0.01  fwd 2.4e-04 q 10   drv 0.001  dep    15747 coil    24.7 plate    5.0 heat_ok False
+  D base    gain None iso x1     fwd 2.4e-05 q 10   drv 0.001  no closure
+  D base    gain None iso x0.3   fwd 2.4e-05 q 10   drv 0.001  no closure
+  D base    gain None iso x0.1   fwd 2.4e-05 q 10   drv 0.001  dep    68604 coil  1072.2 plate  214.9 heat_ok False
+  D base    gain None iso x0.05  fwd 2.4e-05 q 10   drv 0.001  dep    25126 coil   198.3 plate   39.8 heat_ok False
+  D base    gain None iso x0.03  fwd 2.4e-05 q 10   drv 0.001  dep    19877 coil    93.9 plate   18.8 heat_ok False
+  D base    gain None iso x0.02  fwd 2.4e-05 q 10   drv 0.001  dep    17926 coil    56.4 plate   11.3 heat_ok False
+  D base    gain None iso x0.01  fwd 2.4e-05 q 10   drv 0.001  dep    14588 coil    22.9 plate    4.6 heat_ok False
+  D base    gain None iso x1     fwd 2.4e-04 q 30   drv 0.001  no closure
+  D base    gain None iso x1     fwd 2.4e-04 q 100  drv 0.001  no closure
+  D base    gain None iso x1     fwd 2.4e-04 q 300  drv 0.001  no closure
+  D stretch gain None iso x1     fwd 2.4e-03 q 10   drv 0.001  no closure
+  D stretch gain None iso x0.3   fwd 2.4e-03 q 10   drv 0.001  no closure
+  D stretch gain None iso x0.1   fwd 2.4e-03 q 10   drv 0.001  no closure
+  D stretch gain None iso x0.05  fwd 2.4e-03 q 10   drv 0.001  no closure
+  D stretch gain None iso x0.03  fwd 2.4e-03 q 10   drv 0.001  dep    98680 coil   414.2 plate   83.0 heat_ok False
+  D stretch gain None iso x0.02  fwd 2.4e-03 q 10   drv 0.001  dep    67328 coil   188.2 plate   37.7 heat_ok False
+  D stretch gain None iso x0.01  fwd 2.4e-03 q 10   drv 0.001  dep    50649 coil    70.7 plate   14.2 heat_ok False
+  D stretch gain None iso x1     fwd 2.4e-04 q 10   drv 0.001  no closure
+  D stretch gain None iso x0.3   fwd 2.4e-04 q 10   drv 0.001  no closure
+  D stretch gain None iso x0.1   fwd 2.4e-04 q 10   drv 0.001  dep    52816 coil   745.8 plate  149.5 heat_ok False
+  D stretch gain None iso x0.05  fwd 2.4e-04 q 10   drv 0.001  dep    23252 coil   166.0 plate   33.3 heat_ok False
+  D stretch gain None iso x0.03  fwd 2.4e-04 q 10   drv 0.001  dep    18821 coil    80.4 plate   16.1 heat_ok False
+  D stretch gain None iso x0.02  fwd 2.4e-04 q 10   drv 0.001  dep    17029 coil    48.4 plate    9.7 heat_ok False
+  D stretch gain None iso x0.01  fwd 2.4e-04 q 10   drv 0.001  dep    13889 coil    19.7 plate    4.0 heat_ok False
+  D stretch gain None iso x1     fwd 2.4e-05 q 10   drv 0.001  no closure
+  D stretch gain None iso x0.3   fwd 2.4e-05 q 10   drv 0.001  no closure
+  D stretch gain None iso x0.1   fwd 2.4e-05 q 10   drv 0.001  dep    43344 coil   612.1 plate  122.7 heat_ok False
+  D stretch gain None iso x0.05  fwd 2.4e-05 q 10   drv 0.001  dep    21102 coil   150.6 plate   30.2 heat_ok False
+  D stretch gain None iso x0.03  fwd 2.4e-05 q 10   drv 0.001  dep    17371 coil    74.2 plate   14.9 heat_ok False
+  D stretch gain None iso x0.02  fwd 2.4e-05 q 10   drv 0.001  dep    15569 coil    44.3 plate    8.9 heat_ok False
+  D stretch gain None iso x0.01  fwd 2.4e-05 q 10   drv 0.001  dep    12850 coil    19.5 plate    3.9 heat_ok False
+  D stretch gain None iso x1     fwd 2.4e-04 q 30   drv 0.001  no closure
+  D stretch gain None iso x1     fwd 2.4e-04 q 100  drv 0.001  no closure
+  D stretch gain None iso x1     fwd 2.4e-04 q 300  drv 0.001  no closure
+  A base    gain 50.0 iso x1     fwd 2.4e-04 q 10   drv 0.001  no closure
+  A base    gain 50.0 iso x0.03  fwd 2.4e-04 q 10   drv 0.001  no closure
+  A base    gain 500.0 iso x1     fwd 2.4e-04 q 10   drv 0.001  no closure
+  A base    gain 500.0 iso x0.03  fwd 2.4e-04 q 10   drv 0.001  no closure
+  A base    gain 5000.0 iso x1     fwd 2.4e-04 q 10   drv 0.001  no closure
+  A base    gain 5000.0 iso x0.03  fwd 2.4e-04 q 10   drv 0.001  no closure
+  A base    gain 50000.0 iso x1     fwd 2.4e-04 q 10   drv 0.001  no closure
+  A base    gain 50000.0 iso x0.03  fwd 2.4e-04 q 10   drv 0.001  dep    58514 coil    77.4 plate   31.4 heat_ok False
+SENS C_ext_100    dep 6709 t, coil 7.8, plate 0.4
+SENS C_ext_400    dep 5977 t, coil 7.5, plate 0.0
+SENS C_dust_LOW   dep 5897 t, coil 7.4, plate 0.1
+SENS C_dust_HIGH  dep 44243 t, coil 50.7, plate 0.9
+SENS C_dust_out_of_ecliptic dep 6078 t, coil 7.6, plate 0.1
