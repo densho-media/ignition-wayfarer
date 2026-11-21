@@ -116,6 +116,7 @@
   .ign .ign-side .design, .ign[data-mode="grain"] .ign-side .grain-ctl { grid-template-columns: minmax(0, 1fr); }
   .ign .ign-side .readouts { position: static; }
   .ign .ign-side .phases li { grid-template-columns: 1fr; gap: 2px; }
+  .ign .ign-side table tr > :first-child { white-space: nowrap; }
 }
 @media (max-width: 699px) {
   .ign .stage { position: sticky; top: var(--bar-h); z-index: 5; height: 46dvh; min-height: 280px; }

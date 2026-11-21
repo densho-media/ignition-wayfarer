@@ -279,9 +279,6 @@ body.wos[data-kind="app"] > .wos-work { flex: 1; min-height: 0; }
 .st-HOLD, .st-CAUTION { color: var(--accent); border-color: var(--accent); }
 html.wos-focus .wos-bar, html.wos-focus .wos-nav { display: none; }
 html.wos-focus body.wos { --bar-h: 0px; --nav-h: 0px; --rail-w: 0px; }
-@view-transition { navigation: auto; }
-.wos-bar { view-transition-name: wos-bar; }
-@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
 
 /* Overview: the workstation's home screen; on a wide screen it fits the viewport with no page scroll, panels scroll inside. */
 .wos-ov { display: grid; gap: 14px; align-content: start; padding: 16px max(16px, env(safe-area-inset-right, 0px)) 20px max(16px, env(safe-area-inset-left, 0px));
@@ -369,3 +366,5 @@ html.wos-focus body.wos { --bar-h: 0px; --nav-h: 0px; --rail-w: 0px; }
   .wos-sheet li a, .wos-sheet p a { display: flex; }
 }
 
+/* A running simulation's chip takes the station label's place on a narrower workstation. */
+@media (max-width: 1599px) { .wos-bar:has(.wos-scn:not([hidden])) .wos-station { display: none; } }

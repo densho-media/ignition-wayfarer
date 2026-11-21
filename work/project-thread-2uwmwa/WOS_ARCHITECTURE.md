@@ -280,8 +280,8 @@ centre moves down by half the bar height (18 px), inside the tolerance of the ch
   browser): `g` then `o s m r a y` = Overview, Ship, siMulations, Records, Aboard, sYstem; `[` and `]` toggle the left and right
   panel; `\` focus mode (hide bar and nav; Esc or `\` returns); `?` shortcut sheet. Ignored while typing in a field and inside the
   Godot page. Focus mode and fullscreen are the same class plus `requestFullscreen()` where available.
-- **Page changes** use CSS cross-document view transitions (`@view-transition { navigation: auto; }`, bar named so it holds still),
-  off under `prefers-reduced-motion`. No JavaScript, ignored by browsers without support.
+- **Page changes** have no transition. (Phase 1 tried CSS cross-document view transitions; Chrome logged an aborted transition as a
+  script error when the viewer was left, which fails the viewer check, so they were removed. The baked bar already holds still.)
 
 ---
 
