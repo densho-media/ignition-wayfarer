@@ -2,7 +2,7 @@
 
 Serves the site under /ignition-wayfarer/ (the GitHub Pages project path) with software WebGL (SwiftShader) and the cache off,
 and walks it as a visitor does, recording every request:
-  start      the start page loads only index.html, site.css and release.json: no model, engine or library, no canvas
+  start      the start page loads only index.html, site.css, wos.js and release.json: no model, engine or library, no canvas
   viewer     Explore Ship from its link: whole-ship framing, orbit, zoom, pan, reset, presets, picking, the four styles, assembly states,
              Hybrid focus, the picking policy, exported colours, Reset appearance, the #cam and appearance bookmarks, no Enter Wayfarer file
   play       Explore Interior and Explore Exterior, each from its start-page choice: the launcher requests no engine before Start; Start
@@ -224,12 +224,12 @@ GHOST_PICK = ('(async () => { const w = window.wayfarer, T = w.THREE; '
               'await w.update(s => { s.focus = {kind: "assembly", id: prop}; }); w.frameSelection(); '
               'const subject = w.records.filter(r => r.assembly === prop); const box = new T.Box3(); '
               'for (const r of subject) for (const m of r.meshes) box.expandByObject(m); '
-              'const sx = [], sy = []; for (let i = 0; i < 8; i++) { const v = new T.Vector3(i & 1 ? box.max.x : box.min.x, i & 2 ? box.max.y : box.min.y, '
-              'i & 4 ? box.max.z : box.min.z).project(w.camera); sx.push((v.x + 1) / 2 * innerWidth); sy.push((1 - v.y) / 2 * innerHeight); } '
+              'const R = w.renderer.domElement.getBoundingClientRect(); const sx = [], sy = []; for (let i = 0; i < 8; i++) { const v = new T.Vector3(i & 1 ? box.max.x : box.min.x, i & 2 ? box.max.y : box.min.y, '
+              'i & 4 ? box.max.z : box.min.z).project(w.camera); sx.push(R.left + (v.x + 1) / 2 * R.width); sy.push(R.top + (1 - v.y) / 2 * R.height); } '
               'const rc = new T.Raycaster(); let tested = 0, bad = 0; '
               'for (let i = 1; i < 14; i++) for (let j = 1; j < 14; j++) { '
               'const x = Math.min(...sx) + (Math.max(...sx) - Math.min(...sx)) * i / 14, y = Math.min(...sy) + (Math.max(...sy) - Math.min(...sy)) * j / 14; '
-              'rc.setFromCamera(new T.Vector2(x / innerWidth * 2 - 1, -(y / innerHeight) * 2 + 1), w.camera); '
+              'rc.setFromCamera(new T.Vector2((x - R.left) / R.width * 2 - 1, -((y - R.top) / R.height) * 2 + 1), w.camera); '
               'const hits = rc.intersectObject(w.model, true).filter(h => h.object.isMesh && h.object.visible); const rec = h => w.recordOf(h.object); '
               'if (!hits.length || rec(hits[0])?.res.state !== "GHOST" || !hits.some(h => rec(h)?.res.state !== "GHOST")) continue; '
               'tested++; const p = w.pickAt(x, y); if (!p || p.res.state === "GHOST") bad++; } '
@@ -352,7 +352,8 @@ INSPECT = r'''(async () => {
     let found = null, tried = 0;
     for (let gy = 1; gy < 8 && !found; gy++) for (let gx = 1; gx < 8 && !found; gx++) {
       const sx = x0 + (x1 - x0) * gx / 8, sy = y0 + (y1 - y0) * gy / 8;
-      const x = (sx + 1) / 2 * innerWidth, y = (1 - sy) / 2 * innerHeight;
+      const R = w.renderer.domElement.getBoundingClientRect();
+      const x = R.left + (sx + 1) / 2 * R.width, y = R.top + (1 - sy) / 2 * R.height;
       const hit = w.pickPart(x, y); tried++;
       if (hit && hit.engine === e.name && hit.name === TARGET) found = { engine: hit.engine, part: hit.name, x: Math.round(x), y: Math.round(y) };
     }
@@ -924,7 +925,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
         reqs, lines = traffic.since(mark)
         heavy = [u for u, *_ in reqs if any(h in u for h in HEAVY)]
         names = sorted({u[len(url):] or 'index.html' for u, *_ in reqs if not u.startswith(('data:', 'blob:'))})     # inline images are no request
-        record_check('start: loads only the page, its stylesheet and release.json', not heavy and names == ['index.html', 'release.json', 'site.css'],
+        record_check('start: loads only the page, its stylesheet, the shell script and release.json', not heavy and names == ['index.html', 'release.json', 'site.css', 'wos.js'],
                      requests=names, heavy=heavy)
         canvases = page.js("document.querySelectorAll('canvas').length")
         record_check('start: no canvas or engine initialized', canvases == 0 and not page.js('!!(window.Engine || window.wayfarer)'), canvases=canvases)
@@ -1116,7 +1117,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
                                      'transferred_bytes': sum(b for u, _, b, _ in reqs_i if '/model/engine' in u or 'inspect.js' in u)}
 
         # Back to the start page: the viewer's context is released (pagehide) and nothing of it stays loaded.
-        page.click(*page.centre_of('a.back'))
+        page.click(*page.centre_of('.wos-bar .mark'))
         page.wait("document.readyState === 'complete' && !!document.getElementById('go-interior')", 30)
         heaps.append(('start after viewer', heap(settled)))
 
@@ -1193,7 +1194,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
                 back = page.wait("document.readyState === 'complete' && !!document.getElementById('start')", 30)
                 record_check(f'play: Exit from {name} returns to its launcher', back and page.js('location.pathname').endswith(f'/{name}/'),
                              path=page.js('location.pathname'))
-                page.click(*page.centre_of('.sitebar .mark'))      # the site mark returns to the start page
+                page.click(*page.centre_of('.wos-bar .mark'))      # the site mark returns to the start page
                 page.wait("document.readyState === 'complete' && !!document.getElementById('go-viewer')", 30)
                 heaps.append((f'start after {name}', heap(settled)))
 
@@ -1351,7 +1352,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
             page.click(*page.centre_of('#go-viewer'))
             again = page.wait('!!(window.wayfarer && window.wayfarer.model)', 240)
             record_check('switching: Explore Ship starts again after the experiences', again)
-            page.click(*page.centre_of('a.back'))
+            page.click(*page.centre_of('.wos-bar .mark'))
             page.wait("document.readyState === 'complete' && !!document.getElementById('go-viewer')", 30)
             heaps.append(('start after second viewer', heap(settled)))
             record_check('switching: renderer memory returns to the start-page level after each experience',

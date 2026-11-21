@@ -19,7 +19,7 @@ Each purpose and development stage has one place. Add no top-level folder withou
 | `src/wayfarer/` | pure modules, Blender generators (`components/`, `build/`), validation, presentation, shots, export |
 | `assets/` | the built `.blend` libraries of the approved ship (generated, not in Git) |
 | `tests/`, `tools/` | owner-number and invariant tests; the workflow commands |
-| `godot/`, `web/` | the walk and its runtime checks; the website (start page, Explore Ship, Enter Wayfarer, status page) |
+| `godot/`, `web/` | the walk and its runtime checks; the website (the WOS modules: Overview, Ship, Simulations, Records, Aboard, System) |
 | `references/` | the geometry baseline, `p1_*.json` reports the code writes, `evidence/` (kept study results); local-only captures and notes |
 | `runs/` | every run directory and `runs/renders/`; disposable, pruned per step 6 |
 | `lab/` | kept work that is not approved: `variants/` (alternative forms), `studies/` (numbers), `problems/` (engineering-problem maps); index in `lab/README.md` |
@@ -108,6 +108,7 @@ the selected tests. The quick pipeline uses the same selection.
 | `spec.py` or a formula many modules share | `pipeline --quick` (the selection widens to all tests) |
 | `tools/` | `checks --run` (the tools tests) or a dry run of the changed command |
 | Godot scripts or scenes | `runtime-check auto` against the published package; `runtime-export` when it reports STALE |
+| Web pages, `web/wos.js`, `tools/wos.py` | `python3 tools/wos.py --out runs/wos-preview` (no Blender), then `web_check.py --part main` on a built site |
 | Cameras or preview code only | `preview.py` on the saved assets; no build |
 
 Don't rerun a check that already passed on unchanged files, and don't run the
@@ -308,6 +309,28 @@ viewer, materials, lighting, textures or shaders, browser delivery, or graphics 
 - **Incremental and reversible.** One controlled change per task with a working baseline; no new frameworks, custom
   renderers or CI services without need. A change without measured benefit is reverted or moved to `lab/` with its findings.
   An ordinary modeling or gameplay task applies these rules only to what it touches and adds no graphics work of its own.
+
+## Wayfarer Operating System
+
+The website is the ship's interface, not a site about the ship: one ship, one operating system, multiple devices.
+`docs/WOS.md` is the standard (modules, profiles, workspace patterns, data classes, checks); TODO section O is its tracker.
+
+- **One shell.** Every page is a module workspace under the generated ship line (`tools/wos.py`). A new simulation, visualization,
+  subsystem view or experience joins a module in the registry; it is never an isolated page with its own navigation.
+- **Functional parity.** Width, height, orientation and pointer choose the layout profile (workstation, compact, terminal), never the
+  feature set and never by user agent. A control hidden at one size is reachable through a visible toggle at that size. One
+  implementation of each simulation and calculation serves every profile.
+- **The viewport is the workstation.** `app` workspaces fill it: no hero, bezel, casing or max-width; the canvas, stage or diagram
+  takes the space and panels dock, collapse or become drawers. Long records keep a reading width and scroll.
+- **Five data classes stay apart**: specification, nominal operating condition, simulation state, scenario state, illustrative. Shell
+  values come only from `wos.json` (generated from `data/wayfarer_3d.toml` with status and source); a simulation or scenario never
+  writes to it or to another module; an example is labelled where it is shown; an unknown is shown as OPEN, never as a number.
+- **Function makes the look.** Colour carries state and hierarchy through the generated tokens (`docs/WEB_IDENTITY.md`); no decorative
+  hardware, glow, scan lines or controls without a function. Fictional devices are profile labels on the web and HUD configurations in
+  Godot, PROTOTYPE until canon names them.
+- **Light and accessible.** Vanilla CSS and JavaScript, no framework without a measured need; heavy modules load on demand; the
+  budgets of `tools/web_export.py` and `docs/WEB_GRAPHICS.md`, the viewport matrix and a WCAG 2.1 AA axe-core pass hold
+  (`docs/WOS.md` section 5).
 
 ## Incremental optimization
 

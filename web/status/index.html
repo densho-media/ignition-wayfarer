@@ -8,19 +8,39 @@
 <meta name="theme-color" content="#0A0F15">
 <link rel="stylesheet" href="../site.css">
 </head>
-<body class="scene-quiet">
-<main class="wrap">
-  <div class="sitebar"><a class="mark" href="../">Wayfarer</a>
-    <nav aria-label="Site"><a href="../engineering/">Engineering</a><a href="../viewer/">Explore Ship</a><a href="../status/" aria-current="true">Technical status</a></nav></div>
-  <header>
-    <p class="eyebrow">Technical status</p>
-    <h1>RELEASE REVIEW</h1>
-    <hr class="ignite">
-    <p class="lead">What version is this, what was it built from, which checks passed, and what is known to be limited. Read from
-      <a href="../release.json">release.json</a>; nothing on this page loads the 3D engines.</p>
+<body class="scene-quiet wos" data-kind="record">
+<!--wos:bar-->
+<main class="wrap" id="wos-work">
+  <header class="wos-head">
+    <p class="eyebrow">System · OPS Console</p>
+    <h1>SYSTEM STATUS</h1>
+    <p class="lead">The ship state this release was built from, the standing advisories, the interface profiles and the release review:
+      version, inputs, checks and known limits. Every value is generated from the model (<a href="../wos.json">wos.json</a>,
+      <a href="../release.json">release.json</a>); nothing on this page loads the 3D engines.</p>
   </header>
+  <div class="wos-cols">
+    <section id="ship-state" class="panel"><h2>Ship state</h2><!--wos:state--></section>
+    <section id="advisories" class="panel"><h2>Advisories</h2>
+      <p class="note">Standing advisories: the open engineering problems of the design and the HOLD items. Each opens its record.</p>
+      <!--wos:advisories--></section>
+  </div>
+  <section id="profiles" class="panel"><h2>Interface profiles</h2>
+    <p class="note">One ship, one operating system, multiple devices. The space on your screen picks the layout; every function is on every
+      layout. Station names are fictional ship devices and stay <span class="st st-PROTOTYPE">PROTOTYPE</span> until canon names them.</p>
+    <div class="scroll" tabindex="0"><table>
+      <thead><tr><th scope="col">Layout</th><th scope="col">When</th><th scope="col">Station shown</th><th scope="col">Arrangement</th></tr></thead>
+      <tbody>
+        <tr><td>Workstation</td><td>1100 px wide or more</td><td>OPS Console, Engineering or Simulation Workstation (by module)</td><td>modules in the ship line, panels beside the workspace</td></tr>
+        <tr><td>Compact</td><td>700 to 1099 px wide</td><td>as Workstation</td><td>shorter ship line, one panel at a time</td></tr>
+        <tr><td>Personal Terminal</td><td>under 700 px wide or under 500 px high</td><td>Personal Terminal</td><td>module bar at the bottom (a side rail in landscape), panels as sheets</td></tr>
+      </tbody></table></div>
+    <p class="note" id="profile-now"></p>
+  </section>
+  <section id="release-review"><h2>Release review</h2>
   <div id="out"><p class="note">Loading release.json…</p></div>
+  </section>
 </main>
 <script src="status.js"></script>
+<script src="../wos.js" defer></script>
 </body>
 </html>

@@ -23,15 +23,6 @@ table.register td:first-child code, .problem h3 code { white-space: nowrap; }
 td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
 table.meta th { width: 170px; }
 .panel h3 { margin-top: 0; }
-.st { font: 11px var(--mono); padding: 1px 6px; border-radius: 3px; border: 1px solid var(--line-strong); white-space: nowrap; color: var(--muted); }
-.st-LOCKED, .st-BASELINE, .st-PROMOTED { color: var(--good); border-color: var(--good); }
-.st-WORKING, .st-ACTIVE, .st-CALCULATED, .st-KNOWN { color: var(--info); border-color: var(--info); }
-.st-DERIVED { color: var(--ink); }
-.st-PROTOTYPE, .st-ASSUMED, .st-PARKED { color: var(--warn); border-color: var(--warn); }
-.st-OPEN, .st-UNRESOLVED, .st-SPECULATIVE { color: var(--bad); border-color: var(--bad); }
-.st-OPEN::before, .st-UNRESOLVED::before { content: "○ "; }
-.st-LOCKED::before, .st-BASELINE::before { content: "● "; }
-.st-SUPERSEDED { color: var(--muted); border-style: dashed; }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; margin: 6px 0 14px; }
 .card { display: flex; flex-direction: column; gap: 8px; padding: 16px; color: var(--ink); background: var(--surface-1); border: 1px solid var(--line-strong); border-radius: var(--r-2); font-size: 13px;
   transition: border-color var(--dur), background-color var(--dur); }

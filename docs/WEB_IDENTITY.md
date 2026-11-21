@@ -8,6 +8,9 @@ calculation, a research record or lore.
 **Principle.** Dark, restrained foundations; precise luminous accents; materially believable engineering colours. Light and colour
 mark state, energy and function. No neon, glowing borders, glass or decorative circuitry.
 
+The shell (ship line, modules, layout profiles, the class and status marks) is specified in `docs/WOS.md`; this document keeps
+colour, components and the scene.
+
 ## One source
 
 `tools/web_identity.py` owns every colour value. It writes the generated block between the `<wf-identity>` markers of
@@ -133,7 +136,7 @@ behind the page (`body::before`), never scrolling, never taking input, absent in
   hint at lunar infrastructure. Stars are sparse and dim, as an exposure for a sunlit scene allows.
 - **Layers.** Horizon (3200 × 360 SVG, sized by height so any width sees an unbroken horizon), Earth (SVG), two star tiles of
   prime sizes (397 and 653 px, so the repeat is not visible), a CSS radial gradient for the Sun, then `--bg`. All are data URIs in
-  `site.css` (about 28 kB, 9.6 kB gzipped); the start page still loads only `index.html`, `site.css` and `release.json`.
+  `site.css` (about 28 kB, 9.6 kB gzipped); the scene adds no request to the start page.
 - **Responsive.** Desktop: Earth just above the horizon at the right. Phone (≤ 640 px): a lower horizon and a small Earth in the
   upper right beside the title. Engineering and status pages use `body.scene-quiet`: a lower, dimmer scene, and the content sits on a
   reading sheet (`.story`, `--surface-0`) so long text never lies on the terrain. Explore Ship has no scene: its canvas is the scene.
@@ -142,7 +145,8 @@ behind the page (`body::before`), never scrolling, never taking input, absent in
 
 ## Components
 
-`.sitebar` (mark and site links on every page), `.ignite` (the title rule), `.choice` and `.card` (navigation cards; `.topic`
+`.wos-bar` (the WOS ship line on every page: vessel mark, module bar, state chips, station label; `docs/WOS.md`), `.wos-cls`
+(data class mark: SPEC, NOM, SIM, SCENARIO, EXAMPLE), `.wos-adv` (advisories), `.ignite` (the title rule), `.choice` and `.card` (navigation cards; `.topic`
 adds the function edge), `.fnchip` (function mark + name), `.mat` (material swatch + code + level), `.st-*` / `.bt-*` / `.tag`
 (status), `.toc` and `.subnav` (pill navigation), `.panel`, `.figure`, `.scroll` (focusable, for wide tables), the compare
 `.pairs` (each problem button carries its function dot), and the button family (`button` = action, `.secondary`).
@@ -152,4 +156,5 @@ adds the function edge), `.fnchip` (function mark + name), `.mat` (material swat
 Text contrast is at least 7:1 for body and secondary text and 4.5:1 for every small label; focus is a 2 px ignition ring on every
 focusable element; links in running text are underlined; status and function never rely on colour alone; wide tables scroll in
 focusable regions; the compare problem buttons are tabs. axe-core 4.10 (WCAG 2 A and AA rules) reports no violations on the start,
-Engineering, Engineering 2.0, compare, problem map, status and launcher pages.
+Engineering, Engineering 2.0, compare, problem map, status and launcher pages; with the WOS shell (2026-11-21) it reports none on
+the Overview, System, Records, Dust and Interior pages at 1366 × 768 and 390 × 844.

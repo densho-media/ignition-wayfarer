@@ -1,11 +1,13 @@
 # Wayfarer website (WEB-001, WEB-002)
 
 The public site of G.U. WAYFARER 001 (IGNITION). GitHub Actions builds it from a clean checkout and publishes it on GitHub Pages
-at <https://densho-media.github.io/ignition-wayfarer/>. Its entry points each load their own files only when chosen:
+at <https://densho-media.github.io/ignition-wayfarer/>. Its entry points each load their own files only when chosen. Every page except `play/` sits under the generated WOS ship line
+(`tools/wos.py`, `web/wos.js`; modules, layout profiles and data classes in `docs/WOS.md`). Preview without Blender:
+`python3 tools/wos.py --out runs/wos-preview`.
 
 | Path | Page | Loads |
 | --- | --- | --- |
-| `/` | start page: Explore Interior, Explore Exterior; Explore Ship and Engineering as secondary tools | `index.html`, `site.css`, `release.json` (about 8 kB plus the manifest); no engine, model or library |
+| `/` | **Overview** (WOS): entry to every module, the ship state and advisories from `wos.json`, the release line | `index.html`, `site.css`, `wos.js`, `release.json` (76 kB budget raw, about 19 kB gzipped); no engine, model or library |
 | `/interior/` | **Explore Interior**: launcher; Start opens the shared Godot page `play/walk-<hash>.html#interior`, the walk (EXC-001) | Godot 4.7.2 `engine-<hash>.{js,wasm}` and the ship pack `walk-<hash>.pck` (shared with Explore Exterior) |
 | `/exterior/` | **Explore Exterior**: launcher; Start opens the same Godot page with `#exterior`, EVA Operations (EVA-OPS-001), free exploration first | the same engine and pack: both scenes are in one package, nothing is downloaded twice |
 | `/viewer/` | **Explore Ship**: three.js 0.170.0 engineering viewer | the viewer, three.js with the Draco decoder, `model/wayfarer-<hash>.glb` (5.9 MB) and its labels |
@@ -15,7 +17,7 @@ at <https://densho-media.github.io/ignition-wayfarer/>. Its entry points each lo
 
 **Visual identity (WEB-005).** One token source, `tools/web_identity.py`, writes the generated block of `site.css` and
 `viewer/viewer.css`: the First Ignition identity colours, the engineering function colours (sRGB of `functional_colors.py`), the M5
-subsystem colours and the original lunar background (inline SVG, so the start page still loads three files). Rules and the colour
+subsystem colours and the original lunar background (inline SVG, so the scene adds no request). Rules and the colour
 layers: `docs/WEB_IDENTITY.md`.
 
 **Hologram styles (WEB-003).** Explore Ship can show the ship as the two hologram looks of the Blender shots, as presentation

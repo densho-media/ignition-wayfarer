@@ -32,6 +32,7 @@ import pipeline
 import story
 import web_identity
 import web_play
+import wos
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src/wayfarer'))
 import representation
 import fuel_system
@@ -54,7 +55,7 @@ GLB_LIMIT = 95_000_000          # GitHub Pages refuses files over 100 MB
 SITE_LIMIT = 900_000_000        # GitHub Pages: a published site may be at most 1 GB
 # Download budgets per experience (bytes before compression), set from the 2026-10-22 measurement with headroom: start page 6.6 kB,
 # viewer 7.35 MB, play 62.9 MB (engine 39.5 MB, pack 23.1 MB). A larger build fails here instead of silently slowing the site.
-START_BUDGET = 60_000
+START_BUDGET = 76_000            # index.html + site.css + wos.js raw (WOS shell and Overview state, owner brief 2026-11-21; ~19 kB gzip)
 VIEWER_BUDGET = 12_000_000
 PLAY_BUDGET = 90_000_000
 # Explore Ship's engine part inspection (Vertex Engine 1.1), fetched only when someone opens it: the part records and their meshes.
@@ -64,7 +65,7 @@ LIMITATIONS = [
     'viewer positions to about 1.5 cm).',
     'Explore Interior is the walk (EXC-001): from the development station into Wayfarer and round either habitat ring. Explore '
     'Exterior is EVA Operations (EVA-OPS-001), a TRAINING SIMULATION on finite nitrogen; flight EVA stays HOLD (S&E 45 O-07).',
-    'Explore Exterior is keyboard-and-mouse only (no touch controls); the suit and drone are proxies in the browser package.',
+    'Explore Exterior has touch controls (MOB-002), not yet tested on a real phone; the suit and drone are proxies in the browser package.',
     'The MPFB characters are not in the browser package: a proxy body stands in (presentation only).',
     'The browser build is single-threaded WebGL 2 (Godot Compatibility); the native Godot build stays the gameplay and physics reference.',
     'Key labels in the browser show US key positions (the Web display server cannot map physical keys to the layout).',
@@ -188,6 +189,10 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
             engineering = story.build(root, site, revision=revision, built=pipeline.utc_now()[:10], play=with_play)
         except (RuntimeError, ValueError, OSError, KeyError) as error:
             return {'result': 'FAIL', 'step': 'engineering', 'reason': str(error)[-2000:], 'run_dir': str(run_dir)}
+        # The Wayfarer Operating System: wos.json and the ship line baked into every page (tools/wos.py, docs/WOS.md).
+        shell = wos.build(site, engineering.pop('register', None))
+        if shell['problems']:
+            return {'result': 'FAIL', 'step': 'wos', 'problems': shell['problems'][:20], 'run_dir': str(run_dir)}
         viewer = site / 'viewer'
         vendor_three(viewer)
         (viewer / 'model').mkdir()
@@ -290,7 +295,7 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
                 'scene': play['scene'], 'git_revision': revision}, indent=1) + '\n')
         else:
             shutil.rmtree(site / 'play')
-        release = release_record(root, site, build, play, revision, dirty, built, engineering)
+        release = release_record(root, site, build, play, revision, dirty, built, engineering, shell)
         problems = verify_site(site, release)
         if problems:
             return {'result': 'FAIL', 'step': 'verify-site', 'problems': problems[:20], 'run_dir': str(run_dir)}
@@ -319,12 +324,12 @@ def tool_versions():
     return out
 
 
-def release_record(root, site, build, play, revision, dirty, built, engineering=None):
+def release_record(root, site, build, play, revision, dirty, built, engineering=None, shell=None):
     """release.json: what this site is, what it was built from and what each experience downloads (the checks add `tests`)."""
     files = {p.relative_to(site).as_posix(): {'bytes': p.stat().st_size, 'sha256': pipeline.sha256(p)}
              for p in sorted(site.rglob('*')) if p.is_file()}
     size = lambda names: sum(files[n]['bytes'] for n in names)
-    viewer_files = ['viewer/index.html', 'viewer/viewer.css', 'viewer/viewer.js', 'viewer/appearance.js', 'viewer/shield.js', 'viewer/build.json',
+    viewer_files = ['site.css', 'wos.js', 'viewer/index.html', 'viewer/viewer.css', 'viewer/viewer.js', 'viewer/appearance.js', 'viewer/shield.js', 'viewer/build.json',
                     f"viewer/{build['nodes_file']}", f"viewer/{build['shield_file']}",
                     f"viewer/{build['glb_file']}", *[n for n in files if n.startswith('viewer/vendor/') and n.endswith(('.js', '.wasm'))]]
     inspect_files = [f"viewer/{build['engine_file']}", f"viewer/{build['engine_parts_file']}", 'viewer/inspect.js'] if build.get('engine_file') else []
@@ -341,8 +346,9 @@ def release_record(root, site, build, play, revision, dirty, built, engineering=
         'pipeline': built and {k: built[k] for k in ('run', 'result', 'verification', 'steps')},
         'experiences': {
             # The start page fetches release.json too; counted at a 4 kB allowance (it lists every file, but only once per visit).
-            'start': {'entry': 'index.html', 'download_bytes': size(['index.html', 'site.css']),
-                      'loads': ['index.html', 'site.css', 'release.json']},
+            'start': {'entry': 'index.html', 'download_bytes': size(['index.html', 'site.css', 'wos.js']),
+                      'loads': ['index.html', 'site.css', 'wos.js', 'release.json']},
+            **({'wos': {k: shell[k] for k in ('entry', 'bytes', 'pages')}} if shell else {}),
             'viewer': {'entry': 'viewer/', 'download_bytes': size(viewer_files), 'three': THREE['version'],
                        'glb_file': f"viewer/{build['glb_file']}", 'glb_sha256': build['glb_sha256'],
                        'mesh_nodes': build['glb']['mesh_nodes'], 'assemblies': 14, 'triangles': build['triangles'],
@@ -403,8 +409,17 @@ def verify_site(site, release):
     inspection = ex.get('viewer', {}).get('inspection')
     if inspection and inspection['download_bytes'] > INSPECT_BUDGET:
         problems.append(f'engine inspection downloads {inspection["download_bytes"]} bytes, over its {INSPECT_BUDGET} budget')
-    start = (site / 'index.html').read_text().replace('three.js', '')
+    start = (site / 'index.html').read_text().replace('three.js', '').replace('<script src="wos.js" defer>', '')
     for heavy in ('.glb', '.wasm', '.pck', 'vendor/', 'engine-', '<script src', 'type="module"'):
         if heavy in start:
             problems.append(f'start page names {heavy!r}: it must load no engine, model or library')
+    for page in sorted(site.rglob('*.html')):
+        rel = page.relative_to(site).as_posix()
+        if rel.startswith('play/') or 'vendor' in page.parts:
+            continue
+        text = page.read_text(errors='replace')
+        if '<!--wos:' in text:
+            problems.append(f'{rel}: an unreplaced WOS marker')
+        if text.count('class="wos-bar"') != 1:
+            problems.append(f'{rel}: {text.count(chr(34) + "wos-bar" + chr(34))} WOS ship lines (one expected)')
     return problems

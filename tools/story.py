@@ -325,7 +325,7 @@ def tag(status):
     return f'<span class="st st-{s or "NONE"}">{esc(status)}</span>'
 
 
-def page(title, description, body, depth, revision, built, head=''):
+def page(title, description, body, depth, revision, built, head='', kind='record'):
     up = '../' * depth
     return f'''<!doctype html>
 <html lang="en">
@@ -339,10 +339,9 @@ def page(title, description, body, depth, revision, built, head=''):
 <link rel="stylesheet" href="{up}site.css">
 <link rel="stylesheet" href="{up}engineering/story.css">{head}
 </head>
-<body class="scene-quiet">
-<main class="wrap story">
-<div class="sitebar"><a class="mark" href="{up}">Wayfarer</a>
-  <nav aria-label="Site"><a href="{up}engineering/" aria-current="true">Engineering</a><a href="{up}viewer/">Explore Ship</a><a href="{up}status/">Technical status</a></nav></div>
+<body class="scene-quiet wos" data-kind="{kind}">
+<!--wos:bar-->
+<main class="wrap story" id="wos-work">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="{up}">Wayfarer</a> / <a href="{up}engineering/">Engineering</a></nav>
 {body}
 <footer>
@@ -352,6 +351,7 @@ def page(title, description, body, depth, revision, built, head=''):
   <a href="{REPO}" rel="noopener">Source</a>
 </footer>
 </main>
+<script src="{up}wos.js" defer></script>
 </body>
 </html>
 '''
@@ -681,12 +681,14 @@ try to solve it.</p>
     <span class="clock" id="clock">t = 0 s</span>
     <span class="views" role="toolbar" aria-label="View"><button data-split="split" aria-pressed="true">Side by side</button><button data-split="b" aria-pressed="false">Failure only</button></span>
   </div>
+  <div class="ign-side" role="region" aria-label="Simulation events, controls and results">
   <ol class="events" id="events">{events}</ol>
   <div class="design" id="design">
     <div class="levers">{levers}
       <p class="presets"><button data-preset="drawn">As drawn</button><button data-preset="best">Best the studies found</button>
         <button data-preset="breakthrough">What holding takes</button><button id="share">Copy a link to this design</button></p></div>
     <div class="readouts" id="readouts" aria-live="polite"></div>
+  </div>
   </div>
 </section>
 <section><h2>The question for you</h2>
@@ -712,7 +714,7 @@ try to solve it.</p>
   still. The engine geometry is Explore Ship's inspection file, so this page adds no model download.</p></section>'''
     (out_dir / 'index.html').write_text(page('Ignition: what breaks · Wayfarer engineering',
                                              'A training simulation of the open problem: the Vertex cluster at ignition, as budgeted and as measured.',
-                                             body, 2, revision, built, IGNITION_HEAD))
+                                             body, 2, revision, built, IGNITION_HEAD, kind='sim'))
     return True
 
 
@@ -795,6 +797,7 @@ try to solve it.</p>
     <span class="clock" id="clock"></span>
     <span class="views" role="toolbar" aria-label="View"><button data-split="split" aria-pressed="true">Side by side</button><button data-split="b" aria-pressed="false">Your speed only</button></span>
   </div>
+  <div class="ign-side" role="region" aria-label="Simulation controls and results">
   <div class="grain-ctl">
     <div class="lever"><label for="g-speed">Impact speed <output id="g-speed-o"></output></label>
       <input type="range" id="g-speed" min="0" max="1000" step="1"><p class="presets">{speeds}</p></div>
@@ -817,6 +820,7 @@ try to solve it.</p>
       <p class="presets"><button data-preset="drawn">As drawn</button><button data-preset="wide">A 30 m layer</button>
         <button data-preset="all">Everything at its limit</button><button id="share">Copy a link to this design</button></p></div>
     <div class="readouts" id="s-read" aria-live="polite"></div>
+  </div>
   </div>
 </section>
 <section><h2>The question for you</h2>
@@ -855,7 +859,7 @@ try to solve it.</p>
 <details><summary>Display choices (PROTOTYPE)</summary><ul class="plain meta">{proto}</ul></details></section>'''
     (out_dir / 'index.html').write_text(page('Dust: what hits at speed · Wayfarer engineering',
                                              'A training simulation of the open problem: what dust does to Wayfarer at speeds up to 0.016 c.',
-                                             body, 2, revision, built, DUST_HEAD))
+                                             body, 2, revision, built, DUST_HEAD, kind='sim'))
     return True
 
 
@@ -2382,12 +2386,14 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True,
   <a href="#tried">4 What we tried</a><a href="#problems">5 Open problems</a><a href="#follow">6 Follow along</a>
   {'<a href="compare/"><b>Compare in 3D</b></a>' if prob.get("compare") else ''}
   {'<a href="build/"><b>Build sequence</b></a>' if seq else ''}</nav>
+<div id="simulations" class="wos-sims">
 {story_lab.teaser(lab2) if lab2 else ''}
 {build_teaser(seq) if seq else ''}
 {vertex_teaser() if vertex else ''}
 {ignition_teaser() if ignition else ''}
 {dust_teaser() if dust else ''}
 {compare_teaser(prob) if prob.get("compare") else ''}
+</div>
 
 <section id="goal"><h2>1 · The goal</h2>
   <p>A ship built for a crew of {spec["crew"]["rated_occupancy"]["value"]} cruises at <strong>{spec["mission"]["target_speed"]["value"]} c</strong> ({spec["mission"]["target_speed"]["value"] * C / 1e3:,.0f} km/s)
@@ -2522,7 +2528,7 @@ def build(root, site, revision=None, built=None, play=True):
     files = sorted(p.relative_to(site).as_posix() for p in out.rglob('*') if p.is_file())
     return {'entry': 'engineering/', 'pages': pages, 'files': len(files),
             'bytes': sum((Path(site) / f).stat().st_size for f in files), 'lab_entries': len(entries),
-            'problems': len(problem['data']['register'])}
+            'problems': len(problem['data']['register']), 'register': problem['data']['register']}
 
 
 def main():

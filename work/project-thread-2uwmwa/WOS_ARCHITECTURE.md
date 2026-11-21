@@ -104,7 +104,7 @@ Engineering pages alone in about 22 s without Blender (measured here: 25 pages, 
 | F1 to F8 soft-key row "that are the real keyboard shortcuts" | **Drop** | F1, F3, F5, F6, F11 are browser keys; a permanent key row is the wasted space the brief names |
 | "EVA · best on a desktop" accepted as a property of the cuff | **Change** | it is a parity gap to close (touch EVA), not a feature of a device |
 | Strip values `MET 0001:142:07:31`, `BUS A OK`, `AIR NOMINAL`, suit `O2 PRI 87 %` with a footnote "values are examples" | **Drop** | brief §8: fabricated telemetry must be identifiable where it is shown. A footnote is not a label, and a persistent strip reads as authoritative |
-| Start-page figures typed into the mock: "Crew 12", "Drive PROTOTYPE", "Rings SPINNING" | **Drop, and a warning** | `crew.count = 6` (LOCKED); 12 is `crew.rated_occupancy`. One hand-typed panel already carried a wrong number |
+| Start-page figures typed into the mock: "Crew 12", "Drive PROTOTYPE", "Rings SPINNING" | **Drop** | the figures are right (the ship is designed for 12, `crew.rated_occupancy`; 6 is the story manifest) but typed by hand, with no status or source. The shell shows them from the generated record |
 | Three panes (index, document, context) as the workstation layout | **Change** | brief §5: the module decides the composition; a canvas module and a record do not share a layout |
 | Deliverable = a detached `concept.html` mockup | **Change** | brief Phase 1: prove it on the real pages, not on a mockup |
 | Phases 0 to 4 | **Change** | renumbered to the brief's 0 to 5; Phase 1 now includes a real simulation and Explore Ship, not only launchers |
@@ -308,7 +308,7 @@ Written by `tools/wos.py status(spec)` during `web_export.run()` (and by `story.
 ```json
 { "contract": "WF_WOS_STATUS", "version": 1, "spec_hash": "...", "vessel": "G.U. WAYFARER 001",
   "reference_configuration": "COAST",
-  "spec": { "crew": {"value": 6, "unit": "persons", "canon_status": "LOCKED", "source_ref": "crew"},
+  "spec": { "crew_rated": {"value": 12, "unit": "persons", "canon_status": "LOCKED", "source_ref": "crew"},
             "ring_rpm": {...}, "ring_floor_radius": {...}, "spin_gravity": {"value": 0.50, "unit": "g", "canon_status": "DERIVED", "formula": "..."},
             "cabin_pressure": {...}, "cabin_o2_partial": {...}, "target_speed": {...}, "mission_duration": {...}, "length": {...},
             "power_rating": {"known": false, "canon_status": "OPEN", "reason": "..."} },
@@ -529,7 +529,7 @@ and must work on every layout profile; never add a page with its own navigation,
 | --- | --- |
 | `docs/WEB_IDENTITY.md` | scope line: the Godot scenes follow in WOS Phase 4; "Components": `.sitebar` → the shell components and the value/unit/class marks, the advisory levels on the status layer; "Accessibility": axe is automated in `web_check`; token table gains the aliases; link to `docs/WOS.md`. No layout rules here |
 | `web/README.md` | path table: `wos.js`, `wos.json`, the baked bar, the Loads column for `/`; "Sources here": `tools/wos.py`; "What the browser check covers": the layout part and axe; local preview: `tools/wos.py --out` |
-| `docs/WEB_GRAPHICS.md` | §2 delivery: start budget 68 kB; §9.4 unchanged; one line that shell work obeys the same budgets |
+| `docs/WEB_GRAPHICS.md` | §2 delivery: start budget 76 kB; §9.4 unchanged; one line that shell work obeys the same budgets |
 | `docs/IMPLEMENTATION.md` | web section: `tools/wos.py` and the bake pass |
 | `TODO.md` | new section **O — Wayfarer Operating System track** with WOS-1 to WOS-5 (phases), the sub-44 px control list, touch EVA parity; P05 keeps the unrelated follow-ups and loses nothing |
 | `README.md` | one sentence on the site if it describes the old start page |
@@ -545,7 +545,7 @@ and must work on every layout profile; never add a page with its own navigation,
 | D1 | Multi-page site with a shared baked shell | keeps click-to-load isolation, memory release, every URL and the whole check suite | single-page app with a router: reloads nothing, leaks engines, needs a framework |
 | D2 | Vanilla CSS + one classic script | the need is a grid, queries and 6 kB of behaviour | a UI framework or web components library: dependency and build step with no function gained |
 | D3 | The bar is baked at build time from one registry | no layout shift, works without JavaScript, values generated, one nav source for 31 pages | bar built by script at runtime (flash, no-JS failure); hand-copied nav (today's inconsistency) |
-| D4 | Ship state as generated `wos.json`, reusing `sim_rig` and `story` functions | one source, statuses and sources travel with values | values typed into HTML (v1 put "Crew 12" on a crew of 6); a client-side state store |
+| D4 | Ship state as generated `wos.json`, reusing `sim_rig` and `story` functions | one source, statuses and sources travel with values | values typed into HTML without status or source (v1's mock); a client-side state store |
 | D5 | Screen picks a layout profile; devices are labels (web) and HUDs (Godot) | functional parity; a slate is an activity, not a width | v1: phone = cuff, tablet = slate |
 | D6 | Two workspace kinds, three patterns chosen by the module | a canvas and a record need different compositions (brief §5) | one three-pane layout for everything |
 | D7 | Container queries inside workspaces, media queries only for the shell | a docked panel changes the workspace width, not the viewport | viewport breakpoints everywhere (today: 560, 640, 760) |
@@ -553,7 +553,7 @@ and must work on every layout profile; never add a page with its own navigation,
 | D9 | Simulations keep `/engineering/...` URLs; module membership is registry data | generated beside their studies, linked from records, covered by checks | moving them under `/simulations/` with redirects (GitHub Pages has no server redirects; meta-refresh stubs for nothing) |
 | D10 | The viewer loads `site.css`; its own token block and base rules go | one design system, one button family; 9.5 kB gzipped on a 7 MB page | generator copies shell CSS into `viewer.css` (two copies to keep in step) |
 | D11 | Preferences in one wrapped `localStorage` key, presentation only; simulation state stays in the hash | isolation by construction; links stay shareable | a global state object in storage |
-| D12 | Start page loads `wos.js`; budget 60 → 68 kB | uniform shell behaviour (shortcuts, panels) on every page for about 2.5 kB on the wire | a script-free start page with a different shell from the rest |
+| D12 | Start page loads `wos.js`; budget 60 → 76 kB raw (measured in Phase 1; about 19 kB gzipped) | uniform shell behaviour (shortcuts, panels) on every page for about 2.5 kB on the wire | a script-free start page with a different shell from the rest |
 | D13 | axe-core runs in `web_check`, injected, never shipped | the standard claims it; today nothing enforces it | keep it manual |
 | D14 | Leader-key shortcuts (`g` + letter), `[ ] \ ?` | collide with no existing key and no browser key | F-keys (v1) |
 | D15 | Phase 1 simulation is Dust | procedural, checked on a phone, richest controls, shares CSS with Ignition | Build or Ignition (need the GLB or engine parts) |
@@ -580,5 +580,5 @@ and must work on every layout profile; never add a page with its own navigation,
    which is a new publication target and needs your go)?
 2. **Mission clock.** Is there a canonical epoch (a First Ignition date, a mission day) the ship line may count from? Until then it
    shows none.
-3. **Start-page budget.** Accept 60 → 68 kB raw (about +2.5 kB gzipped for `wos.js` and the shell CSS), or hold 60 kB and trim the lunar scene?
+3. **Start-page budget.** Accept 60 → 76 kB raw (measured: the shell CSS, the baked ship line and state table, and `wos.js`; about 19 kB gzipped), or hold 60 kB and trim the lunar scene?
 4. **Module names.** Overview, Ship, Simulations, Records, Aboard, System: keep, or do you prefer ship-style designations?

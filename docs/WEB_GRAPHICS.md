@@ -47,7 +47,7 @@ Drive workbooks → data/wayfarer_3d.toml → shared formulas (src/wayfarer/*.py
 | Existing optimizations | Draco; content-named files; click-to-load isolation; context release on `pagehide`; one ghost layer and ≤ 2 hologram layers per pixel by stencil; engine edges made once per geometry and disposed; always-on `stats` and `?diag` | RT-005 shared meshes (2,740 meshes for 3,989 nodes, Phase 4 S11); production-layer visibility ranges (28 m interior, per-tier exterior, `production_layer.gd`); nearest-16 lamp culling; touch-first 3-D resolution `RENDER_DENSITY` 1.25 with an adaptive 0.35–1.0 scale in a 24–45 fps band (`wf_touch.gd`); S3TC/BPTC desktop texture compression in the web export | same pack and touch scale |
 
 Delivery (WEB-002): GitHub Pages from Actions, every file content-named, gzip by Pages, `Cache-Control: max-age=600`, no custom
-headers. Budgets in `tools/web_export.py` (raw bytes): start page 60 kB, viewer 12 MB, play 90 MB, engine inspection 600 kB. CI
+headers. Budgets in `tools/web_export.py` (raw bytes): start page 76 kB (`index.html`, `site.css`, `wos.js`; docs/WOS.md), viewer 12 MB, play 90 MB, engine inspection 600 kB. CI
 (`web-explorer.yml`) builds every branch, checks it in headless Chrome under SwiftShader (begin-frame control for the equivalence run)
 and deploys only `main`.
 
@@ -264,7 +264,7 @@ Kept results go to `references/evidence/gfx_<task>.json` with the evidence class
 - GitHub Pages: static files, relative paths, no headers, ≤ 100 MB per file, ≤ 1 GB site, content-named assets.
 - Godot: 4.7.2 standard build, Compatibility renderer, single-threaded web export, official templates (no custom engine build).
 - three.js 0.170.0 pinned in `web_export.py`; an upgrade is its own task with the browser check.
-- Every experience loads only its own files (the start page loads three); the Godot experiences share one engine and one pack.
+- Every experience loads only its own files (the start page loads four: page, stylesheet, `wos.js`, release record); the Godot experiences share one engine and one pack.
 - Deterministic, reproducible exports; `godot/generated/` and `.godot/` are never edited; CI gates unchanged.
 
 ## 11. Proven, experimental, incompatible

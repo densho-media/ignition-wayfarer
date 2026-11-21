@@ -196,13 +196,176 @@ ul.plain { margin: 0; padding-left: 18px; }
 .mat .sw.none { background: repeating-linear-gradient(45deg, transparent 0 3px, var(--line-strong) 3px 4px); }
 .mat .lvl { font: 10px var(--mono); color: var(--muted); border: 1px solid var(--line-strong); border-radius: 3px; padding: 0 4px; }
 
-/* Start page: the hero sits in open sky; the cards carry the content; the horizon shows under them. */
-.home { gap: 30px; }
-.home .hero { padding: clamp(20px, 7vh, 72px) 0 4px; }
-.home .hero h1 { font-size: clamp(30px, 6.4vw, 56px); letter-spacing: 0.14em; }
-.home footer { background: var(--surface-0); border: 1px solid var(--line); border-radius: var(--r-2); padding: 10px 14px; }
-.home > .note { background: var(--surface-0); border-radius: var(--r-2); padding: 10px 14px; border: 1px solid var(--line); }
 /* Links inside running text are underlined, so they never depend on colour alone (WCAG 1.4.1). */
 p a, li a, dd a, td a, .note a, .lead a { text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent); }
 p a:hover, li a:hover, dd a:hover, td a:hover, .note a:hover, .lead a:hover { text-decoration-color: currentColor; }
 .scroll:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* ===== Wayfarer Operating System shell (docs/WOS.md). The ship line is baked by tools/wos.py; the space on the screen picks the
+   layout (workstation >= 1100 px, compact 700-1099 px, personal terminal < 700 px wide or < 500 px high), never the functions. ===== */
+:root { --bar-h: 44px; --nav-h: 0px; --rail-w: 0px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+.num { font-variant-numeric: tabular-nums; }
+body.wos { padding-bottom: var(--nav-h); padding-left: var(--rail-w); }
+body.wos[data-kind="app"] { height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+body.wos[data-kind="app"] > .wos-work { flex: 1; min-height: 0; }
+.wos-skip { position: absolute; left: 8px; top: -80px; z-index: 40; padding: 8px 12px; border-radius: var(--r-1); background: var(--surface-3); color: var(--ink-strong); }
+.wos-skip:focus { top: 8px; }
+.wos-bar { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 4px 14px; min-height: var(--bar-h);
+  padding: env(safe-area-inset-top, 0px) max(12px, env(safe-area-inset-right, 0px)) 0 max(12px, env(safe-area-inset-left, 0px));
+  background: var(--surface-1); border-bottom: 1px solid var(--line-strong); font-size: var(--fs-s); }
+.wos-bar .mark { display: inline-flex; align-items: center; gap: 9px; color: var(--ink-strong); font-weight: 600; font-size: 12px;
+  letter-spacing: 0.16em; white-space: nowrap; min-height: 32px; }
+.wos-bar .mark:hover { text-decoration: none; }
+.wos-logo { width: 18px; height: 18px; flex: none; border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, var(--wf-ignition) 0 18%, var(--wf-plasma) 30%, var(--wf-violet) 52%, transparent 54%),
+    radial-gradient(circle, transparent 0 62%, var(--line-strong) 64% 70%, transparent 72%); }
+.wos-nav { display: flex; align-self: stretch; gap: 2px; }
+.wos-nav a { display: flex; align-items: center; gap: 7px; padding: 0 10px; color: var(--muted); font-size: 12px; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase; border-bottom: 2px solid transparent; white-space: nowrap; }
+.wos-nav a:hover { color: var(--ink-strong); background: var(--surface-2); text-decoration: none; }
+.wos-nav a[aria-current] { color: var(--ink-strong); border-bottom-color: var(--accent); }
+.wos-nav svg { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.wos-state { position: relative; margin-left: auto; }
+.wos-state > summary { display: flex; align-items: center; gap: 6px; min-height: 32px; list-style: none; cursor: pointer; border-radius: var(--r-1); padding: 0 2px; }
+.wos-state > summary::-webkit-details-marker { display: none; }
+.wos-state > summary::after { content: "▾"; color: var(--muted); font-size: 11px; }
+.wos-state[open] > summary::after { content: "▴"; }
+.wos-chip, .wos-scn { font: 600 11px/1 var(--mono); letter-spacing: 0.05em; padding: 5px 7px; border: 1px solid var(--line-strong); border-radius: 3px;
+  color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.wos-chip b { color: var(--info); font-weight: 600; }
+.wos-chip.adv { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, transparent); }
+.wos-scn { color: var(--info); border-style: dashed; border-color: var(--info); }
+.wos-scn.scn { color: var(--warn); border-style: solid; border-color: var(--warn); }
+.wos-station { font: 600 10px var(--mono); letter-spacing: 0.14em; color: var(--muted); white-space: nowrap; }
+.wos-station .tm { display: none; }
+.wos-sheet { position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; width: min(680px, calc(100vw - 24px)); max-height: calc(100dvh - var(--bar-h) - var(--nav-h) - 24px);
+  overflow: auto; overscroll-behavior: contain; padding: 12px 14px; background: var(--surface-1); border: 1px solid var(--line-strong);
+  border-radius: var(--r-2); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55); }
+.wos-sheet-h { margin: 4px 0 6px; font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+.wos-sheet kbd, .wos-help kbd { font: 11px var(--mono); border: 1px solid var(--line-strong); border-radius: 3px; padding: 0 4px; }
+.wos-cls { font: 600 10px/1 var(--mono); letter-spacing: 0.06em; padding: 2px 5px; border-radius: 3px; border: 1px solid var(--line-strong); white-space: nowrap; }
+.wos-cls.cls-SPEC { color: var(--ink); }
+.wos-cls.cls-NOM { color: var(--info); border-color: color-mix(in srgb, var(--info) 50%, transparent); }
+.wos-cls.cls-SIM { color: var(--info); border-style: dashed; }
+.wos-cls.cls-SCENARIO { color: var(--warn); border-color: var(--warn); }
+.wos-cls.cls-EXAMPLE { color: var(--muted); border-style: dotted; }
+.wos-open { font: 600 11px var(--mono); color: var(--bad); }
+.wos-table table { font-size: 12.5px; }
+.wos-table th[scope="row"] { color: var(--ink); font-weight: 500; white-space: normal; }
+.wos-table td small, .wos-table th small { color: var(--muted); }
+.wos-table td.v, .wos-table td:last-child { white-space: nowrap; overflow-wrap: normal; }
+.wos-table code.src { font-size: 11px; color: var(--muted); }
+.wos-table caption { caption-side: bottom; text-align: left; padding-top: 6px; font-size: 12px; color: var(--muted); }
+.wos-adv { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-size: 13px; }
+.wos-adv li { display: flex; align-items: baseline; gap: 8px; padding: 5px 8px; border-left: 3px solid var(--line-strong); background: color-mix(in srgb, var(--surface-2) 45%, transparent); }
+.wos-adv li a { flex: 1; color: var(--ink); text-decoration: none; }
+.wos-adv li a:hover { color: var(--ink-strong); text-decoration: underline; }
+.wos-adv .adv-warning { border-left-color: var(--bad); }
+.wos-adv .adv-caution { border-left-color: var(--warn); }
+.wos-adv .adv-hold { border-left-color: var(--accent); }
+/* Canon status chips (shared by every module; moved from engineering/story.css). */
+.st { font: 11px var(--mono); padding: 1px 6px; border-radius: 3px; border: 1px solid var(--line-strong); white-space: nowrap; color: var(--muted); }
+.st-LOCKED, .st-BASELINE, .st-PROMOTED { color: var(--good); border-color: var(--good); }
+.st-WORKING, .st-ACTIVE, .st-CALCULATED, .st-KNOWN { color: var(--info); border-color: var(--info); }
+.st-DERIVED { color: var(--ink); }
+.st-PROTOTYPE, .st-ASSUMED, .st-PARKED { color: var(--warn); border-color: var(--warn); }
+.st-OPEN, .st-UNRESOLVED, .st-SPECULATIVE { color: var(--bad); border-color: var(--bad); }
+.st-OPEN::before, .st-UNRESOLVED::before { content: "○ "; }
+.st-LOCKED::before, .st-BASELINE::before { content: "● "; }
+.st-SUPERSEDED { color: var(--muted); border-style: dashed; }
+.st-HOLD, .st-CAUTION { color: var(--accent); border-color: var(--accent); }
+html.wos-focus .wos-bar, html.wos-focus .wos-nav { display: none; }
+html.wos-focus body.wos { --bar-h: 0px; --nav-h: 0px; --rail-w: 0px; }
+@view-transition { navigation: auto; }
+.wos-bar { view-transition-name: wos-bar; }
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+
+/* Overview: the workstation's home screen; on a wide screen it fits the viewport with no page scroll, panels scroll inside. */
+.wos-ov { display: grid; gap: 14px; align-content: start; padding: 16px max(16px, env(safe-area-inset-right, 0px)) 20px max(16px, env(safe-area-inset-left, 0px));
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "id" "aboard" "ship" "records" "state" "adv" "note" "foot"; }
+.wos-ov > section { display: flex; flex-direction: column; gap: 10px; min-width: 0; min-height: 0; }
+.wos-ov h1 { font-size: clamp(22px, 3vw, 32px); margin: 2px 0 6px; }
+.wos-ov h2 { margin: 0; }
+.wos-ov .lead { max-width: 74ch; }
+.wos-ov-id { grid-area: id; } .wos-ov-aboard { grid-area: aboard; } .wos-ov-ship { grid-area: ship; } .wos-ov-records { grid-area: records; }
+.wos-ov-state { grid-area: state; } .wos-ov-adv { grid-area: adv; } .wos-ov-note { grid-area: note; } .wos-ov-foot { grid-area: foot; }
+.wos-ov .choice { min-height: 0; padding: 14px 16px; gap: 6px; flex: none; }
+.wos-ov .choice strong { font-size: 19px; }
+.wos-ov .go-tile { border-top: 2px solid var(--wf-radiator); }
+.wos-ov .choice > span:not(.kicker):not(.meta) { font-size: 13.5px; color: var(--muted); }
+.wos-ov-sims { display: grid; gap: 4px; }
+.wos-ov-sims a { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; padding: 8px 12px; min-height: 40px;
+  background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--wf-violet); border-radius: var(--r-1); color: var(--ink); }
+.wos-ov-sims a:hover { border-color: var(--accent); text-decoration: none; }
+.wos-ov-sims span { color: var(--muted); font-size: 12.5px; text-align: right; }
+.wos-ov .panel { padding: 12px 14px; background: var(--surface-0); }
+.wos-ov-state .wos-table, .wos-ov-adv .wos-adv { overflow: auto; min-height: 0; }
+.wos-ov-note { font-size: 12px; background: var(--surface-0); border-radius: var(--r-2); padding: 8px 12px; border: 1px solid var(--line); max-width: none; }
+.wos-ov-foot { margin: 0; padding: 0; border: 0; }
+@media (min-width: 700px) {
+  .wos-ov { grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "id id" "aboard ship" "records records" "state state" "adv adv" "note note" "foot foot"; }
+  .wos-ov-records { flex-direction: row !important; flex-wrap: wrap; }
+  .wos-ov-records h2 { flex-basis: 100%; }
+}
+@media (min-width: 1100px) and (min-height: 640px) {
+  body.wos[data-kind="overview"] { height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+  body.wos[data-kind="overview"] > .wos-ov { flex: 1; min-height: 0; }
+  .wos-ov { grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(400px, 1.2fr);
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    grid-template-areas: "id id id state" "aboard ship records state" "aboard ship records adv" "note note foot adv"; }
+  .wos-ov-aboard, .wos-ov-ship, .wos-ov-records { grid-row: 2 / span 2; overflow: auto; }
+  .wos-ov-foot { align-self: end; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--muted); }
+  .wos-ov-records { flex-direction: column !important; flex-wrap: nowrap; }
+  .wos-ov-records h2 { flex-basis: auto; }
+  .wos-ov-state, .wos-ov-adv { overflow: hidden; }
+}
+
+/* Workstation and compact: chips drop from the right as the ship line narrows; nothing leaves, the sheet holds all of it. */
+@media (max-width: 1399px) { .wos-chip.w2 { display: none; } }
+@media (max-width: 1239px) { .wos-station { display: none; } }
+@media (max-width: 1099px) { .wos-chip.w1 { display: none; } .wos-nav a { padding: 0 8px; } }
+@media (max-width: 899px) { .wos-nav a span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } .wos-nav a { padding: 0 11px; } }
+
+/* Personal terminal: the module bar moves to the bottom (a side rail on a short landscape screen); the ship line keeps the vessel,
+   the reference state and the advisories. */
+@media (max-width: 699px), (max-height: 499px) {
+  :root { --bar-h: 48px; }
+  .wos-bar { gap: 8px; }
+  .wos-vessel { font-size: 11px; letter-spacing: 0.12em; }
+  .wos-station { display: inline; } .wos-station .ws { display: none; } .wos-station .tm { display: inline; }
+  .wos-nav { position: fixed; z-index: 20; background: var(--surface-1); }
+  .wos-nav a span { position: static; width: auto; height: auto; overflow: visible; clip-path: none; }
+  .wos-nav a { flex-direction: column; justify-content: center; gap: 3px; padding: 4px 2px; font-size: 10px; letter-spacing: 0.04em;
+    border-bottom: 0; border-top: 2px solid transparent; min-height: 44px; min-width: 44px; }
+  .wos-nav a[aria-current] { border-top-color: var(--accent); background: var(--surface-2); }
+  .wos-nav svg { width: 20px; height: 20px; }
+  .wos-sheet { position: fixed; left: 8px; right: 8px; width: auto; top: calc(var(--bar-h) + 6px); }
+}
+@media (max-width: 699px) and (min-height: 500px) {
+  body.wos { --nav-h: calc(60px + env(safe-area-inset-bottom, 0px)); }
+  .wos-nav { left: 0; right: 0; bottom: 0; height: var(--nav-h); padding: 0 max(4px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(4px, env(safe-area-inset-left, 0px));
+    border-top: 1px solid var(--line-strong); display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .wos-station { display: none; }
+}
+@media (max-height: 499px) {
+  body.wos { --rail-w: calc(72px + env(safe-area-inset-left, 0px)); }
+  .wos-nav { top: 0; bottom: 0; left: 0; width: var(--rail-w); padding: env(safe-area-inset-top, 0px) 2px env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+    flex-direction: column; justify-content: space-evenly; border-right: 1px solid var(--line-strong); }
+  .wos-nav a { border-top: 0; border-left: 2px solid transparent; }
+  .wos-nav a[aria-current] { border-left-color: var(--accent); }
+}
+@media (max-width: 420px) { .wos-vessel { display: none; } }
+/* Coarse pointers get 44 px targets in the shell on every layout. */
+@media (pointer: coarse) {
+  .wos-bar .mark, .wos-state > summary, .wos-nav a { min-height: 44px; }
+  .wos-nav a { min-width: 44px; }
+  .wos-bar a { min-height: 44px; display: inline-flex; align-items: center; }
+  .wos-bar .mark { min-width: 44px; justify-content: center; }
+  .wos-sheet li a, .wos-sheet p a { display: flex; }
+}
+

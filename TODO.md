@@ -166,6 +166,23 @@ close-up, regression check, MODEL/TODO and Model Status update.
   flange per unit. Left: the ECLSS units' masses, volumes and powers beyond electrolysis; repair stations beyond the benches wait for G03's
   equipment release (no machine list is selected, so a station would be a guess).
 
+## O — Wayfarer Operating System track (owner brief 2026-11-21)
+
+The website as the ship's interface: one ship, one operating system, multiple devices. Rules: AGENTS.md "Wayfarer Operating
+System"; standard: [docs/WOS.md](docs/WOS.md). Phases start on the owner's go; WOS-0 (architecture) and WOS-1 (foundation) are on
+branch `claude/project-thread-2uwmwa`, awaiting review.
+
+- [ ] **WOS-1 review.** Owner questions: a live branch preview or the artifact and screenshot matrix; a canonical mission epoch for a
+  clock (none shown until then); start budget 60 → 76 kB raw; the module names.
+- [ ] **WOS-2 — Checks.** Make the viewport matrix (7 viewports, overflow, ship line, modules reachable, control parity, 44 px shell
+  targets) and the axe-core WCAG 2.1 A/AA pass a `web_check.py` part (axe injected, never shipped).
+- [ ] **WOS-3 — Workspaces.** Ship (docked panels, Engine drawer as a side panel on a workstation), Build, Compare and Breakthrough
+  Lab in the Simulation pattern; Records with a section rail on a workstation. Viewer: drop its duplicated token block and base
+  rules now that it loads `site.css`.
+- [ ] **WOS-4 — Godot.** HUD configurations as in-world devices (Crew Cuff, slate) and the launch page under the shell; package
+  becomes STALE, so a `runtime-export`.
+- [ ] **WOS-5 — Touch parity.** Controls under 44 px on coarse pointers outside the shell (viewer panels, sim levers, record tables).
+
 ## W — Web Graphics Engineering track (owner brief 2026-11-15, persistent)
 
 The best practical combination of visual fidelity, physical plausibility, browser compatibility and rendering performance for the

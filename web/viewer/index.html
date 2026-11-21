@@ -7,18 +7,17 @@
 <meta name="description" content="Interactive 3D engineering explorer of the G.U. Wayfarer 001 spacecraft from IGNITION, generated from the procedural Blender model.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231B2633'/%3E%3Ccircle cx='8' cy='8' r='4.6' fill='%238C83C5'/%3E%3Ccircle cx='8' cy='8' r='3' fill='%23D99AC9'/%3E%3Ccircle cx='8' cy='8' r='1.3' fill='%23D8EAFF'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0A0F15">
+<link rel="stylesheet" href="../site.css">
 <link rel="stylesheet" href="viewer.css">
 <script type="importmap">
 { "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }
 </script>
 </head>
-<body>
+<body class="wos" data-kind="app">
+<!--wos:bar-->
+<main class="wos-work viewer-work" id="wos-work" aria-label="Explore Ship · Engineering Workstation">
 <canvas id="view" aria-label="3D view of the Wayfarer spacecraft"></canvas>
-<header class="title">
-  <p class="eyebrow"><a href="../" class="back" title="Back to the Wayfarer start page">← Wayfarer</a> · IGNITION</p>
-  <h1>G.U. WAYFARER 001</h1>
-  <p class="sub">Engineering explorer · REP_PROXY geometry</p>
-</header>
+<h1 class="sr-only">Explore Ship: G.U. WAYFARER 001, REP_PROXY geometry</h1>
 <div class="views" role="toolbar" aria-label="Camera">
   <button data-view="threequarter" title="Three-quarter view (3)">3/4</button>
   <button data-view="side" title="Side view (1)">Side</button>
@@ -103,6 +102,8 @@
   <a href="https://densho.media" target="_blank" rel="noopener">Densho</a>
   <a href="https://github.com/densho-media/ignition-wayfarer" target="_blank" rel="noopener">Source</a>
 </footer>
+</main>
 <script type="module" src="viewer.js"></script>
+<script src="../wos.js" defer></script>
 </body>
 </html>
