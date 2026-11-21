@@ -536,8 +536,9 @@ function openBookmark(hash = location.hash) {
 }
 controls.addEventListener('end', bookmark);
 
+// WOS: the canvas fills its workspace cell under the ship line, so sizes and picks come from the canvas, not the window.
 function resize() {
-  const w = window.innerWidth, h = window.innerHeight;
+  const r = canvas.getBoundingClientRect(), w = Math.max(1, Math.round(r.width)), h = Math.max(1, Math.round(r.height));
   renderer.setSize(w, h, false);
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
@@ -559,7 +560,8 @@ function assemblyOf(object) {
 const raycaster = new THREE.Raycaster();
 const visibleChain = o => { for (; o; o = o.parent) if (!o.visible) return false; return true; };
 function pickHit(x, y) {
-  const ndc = new THREE.Vector2((x / window.innerWidth) * 2 - 1, -(y / window.innerHeight) * 2 + 1);
+  const r = canvas.getBoundingClientRect();
+  const ndc = new THREE.Vector2(((x - r.left) / r.width) * 2 - 1, -((y - r.top) / r.height) * 2 + 1);
   raycaster.setFromCamera(ndc, camera);
   const hits = raycaster.intersectObject(model, true).filter(h => h.object.isMesh && visibleChain(h.object));
   const recordOf = h => byId.get(nodeOf(h.object)?.name);
@@ -662,6 +664,7 @@ window.addEventListener('keydown', e => {
   if (k === 'p' && buildInfo?.fuel_file) openFuel();
 });
 window.addEventListener('resize', () => { resize(); });
+if (window.ResizeObserver) new ResizeObserver(() => resize()).observe(canvas);
 
 function showBuild(build) {
   const el = document.getElementById('build');

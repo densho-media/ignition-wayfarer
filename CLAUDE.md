@@ -35,6 +35,14 @@ never start the next phase without the owner's go. Record measurements with thei
 cloud container renders in software, so its frame times are relative only. When an ordinary task touches graphics,
 apply the rules to what it touches and note any later opportunity in TODO W rather than widening the task.
 
+## Wayfarer Operating System
+
+Apply AGENTS.md "Wayfarer Operating System". Before changing a web page, its navigation, layout or any value shown in the shell,
+read the relevant section of `docs/WOS.md` and TODO section O. New web functionality joins a module of the registry in `tools/wos.py`
+and must work on every layout profile; never add a page with its own navigation, a device-specific copy of a feature, or a typed ship value.
+Keep pages picture-first and short (WOS section 6): one primary action, one-sentence cards, detail behind disclosures, thumbnails from
+`tools/thumbs.py` with their class chip, icons from `wos.ICONS` only.
+
 ## Drive delegation
 
 Use `wayfarer-drive-reader` (Sonnet) for substantial Drive retrieval and owner-row

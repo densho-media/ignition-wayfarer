@@ -325,8 +325,19 @@ def tag(status):
     return f'<span class="st st-{s or "NONE"}">{esc(status)}</span>'
 
 
-def page(title, description, body, depth, revision, built, head=''):
+def guide_strip(key, what, tryit, more=None):
+    """The WOS guidance strip (docs/WOS.md section 7): what this shows, what to try, a link to the detail; dismissed per browser."""
+    link = f' <a href="{more[1]}">{esc(more[0])}</a>' if more else ''
+    return (f'<aside class="wos-guide" data-guide="{key}" aria-label="What this shows">'
+            '<svg class="wos-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.8v.1"/></svg>'
+            f'<p><b>What this shows:</b> {esc(what)}<br><b>Try this:</b> {esc(tryit)}{link}</p>'
+            '<button type="button" class="secondary" data-wos-dismiss>Got it</button></aside>')
+
+
+def page(title, description, body, depth, revision, built, head='', kind='record', crumb=('Engineering', 'engineering/'), guide=None):
     up = '../' * depth
+    if guide:                       # the guidance strip sits right under the page's own header (Level 1 of the page)
+        body = body.replace('</header>', '</header>\n' + guide_strip(*guide), 1) if '</header>' in body else guide_strip(*guide) + body
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -339,19 +350,20 @@ def page(title, description, body, depth, revision, built, head=''):
 <link rel="stylesheet" href="{up}site.css">
 <link rel="stylesheet" href="{up}engineering/story.css">{head}
 </head>
-<body class="scene-quiet">
-<main class="wrap story">
-<div class="sitebar"><a class="mark" href="{up}">Wayfarer</a>
-  <nav aria-label="Site"><a href="{up}engineering/" aria-current="true">Engineering</a><a href="{up}viewer/">Explore Ship</a><a href="{up}status/">Technical status</a></nav></div>
-<nav class="crumbs" aria-label="Breadcrumb"><a href="{up}">Wayfarer</a> / <a href="{up}engineering/">Engineering</a></nav>
+<body class="scene-quiet wos" data-kind="{kind}">
+<!--wos:bar-->
+<main class="wrap story" id="wos-work">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="{up}{crumb[1]}">{crumb[0]}</a> › <span aria-current="page">{esc(title.split(' · ')[0])}</span></nav>
 {body}
 <footer>
   <span>Generated from <a href="{REPO}/tree/{revision}" rel="noopener"><code>{revision[:7]}</code></a> · {built}</span>
-  <a href="{up}viewer/">Explore Ship</a>
-  <a href="{up}status/">Technical status</a>
+  <a href="{up}viewer/">Ship 3D</a>
+  <a href="{up}simulations/">Simulations</a>
+  <a href="{up}status/">Status</a>
   <a href="{REPO}" rel="noopener">Source</a>
 </footer>
 </main>
+<script src="{up}wos.js" defer></script>
 </body>
 </html>
 '''
@@ -535,7 +547,8 @@ one camera and one scale, so a size difference is a real size difference.</p></h
 </section>'''
     (out_dir / 'index.html').write_text(page('What we have, what we need · Wayfarer engineering',
                                              'Per open problem, the ship as built beside what the problem needs, in 3D at one scale.',
-                                             body, 2, revision, built, COMPARE_HEAD))
+                                             body, 2, revision, built, COMPARE_HEAD, crumb=('Simulations', 'simulations/'),
+                                             guide=('compare', 'What the design has, next to what each open problem needs, at one scale.', 'Pick a problem in the list, then load the 3D view.')))
     return True
 
 
@@ -602,7 +615,8 @@ the propellant and the first burn. {n} steps in {len(seq["phases"])} phases, eac
 </section>'''
     (out_dir / 'index.html').write_text(page('How Wayfarer is built · Wayfarer engineering',
                                              'The assembly sequence of G.U. Wayfarer 001, step by step from the spine to first ignition.',
-                                             body, 2, revision, built, BUILD_HEAD))
+                                             body, 2, revision, built, BUILD_HEAD, crumb=('Simulations', 'simulations/'),
+                                             guide=('build', 'How the ship would be assembled in orbit, step by step.', 'Load the 3D view, then step through with Next or the slider.')))
     return True
 
 IGNITION_HEAD = '''
@@ -681,12 +695,14 @@ try to solve it.</p>
     <span class="clock" id="clock">t = 0 s</span>
     <span class="views" role="toolbar" aria-label="View"><button data-split="split" aria-pressed="true">Side by side</button><button data-split="b" aria-pressed="false">Failure only</button></span>
   </div>
+  <div class="ign-side" role="region" aria-label="Simulation events, controls and results">
   <ol class="events" id="events">{events}</ol>
   <div class="design" id="design">
     <div class="levers">{levers}
       <p class="presets"><button data-preset="drawn">As drawn</button><button data-preset="best">Best the studies found</button>
         <button data-preset="breakthrough">What holding takes</button><button id="share">Copy a link to this design</button></p></div>
     <div class="readouts" id="readouts" aria-live="polite"></div>
+  </div>
   </div>
 </section>
 <section><h2>The question for you</h2>
@@ -712,7 +728,8 @@ try to solve it.</p>
   still. The engine geometry is Explore Ship's inspection file, so this page adds no model download.</p></section>'''
     (out_dir / 'index.html').write_text(page('Ignition: what breaks · Wayfarer engineering',
                                              'A training simulation of the open problem: the Vertex cluster at ignition, as budgeted and as measured.',
-                                             body, 2, revision, built, IGNITION_HEAD))
+                                             body, 2, revision, built, IGNITION_HEAD, kind='sim', crumb=('Simulations', 'simulations/'),
+                                             guide=('ignition', 'The drive switched on as budgeted, next to what measured physics allows.', 'Start, let it run to Overload, then open Your design and pull one lever.', ('Open problems', '../#problems'))))
     return True
 
 
@@ -795,12 +812,13 @@ try to solve it.</p>
     <span class="clock" id="clock"></span>
     <span class="views" role="toolbar" aria-label="View"><button data-split="split" aria-pressed="true">Side by side</button><button data-split="b" aria-pressed="false">Your speed only</button></span>
   </div>
+  <div class="ign-side" role="region" aria-label="Simulation controls and results">
   <div class="grain-ctl">
     <div class="lever"><label for="g-speed">Impact speed <output id="g-speed-o"></output></label>
       <input type="range" id="g-speed" min="0" max="1000" step="1"><p class="presets">{speeds}</p></div>
     <div class="lever"><label for="g-mass">Grain mass <output id="g-mass-o"></output></label>
       <input type="range" id="g-mass" min="0" max="1000" step="1"><p class="presets">{masses}</p></div>
-    <div class="readouts" id="g-read" aria-live="polite"></div>
+    <div class="readouts" id="g-read" aria-live="polite" tabindex="0"></div>
   </div>
   <ol class="phases" id="phases">{phases}</ol>
   <div class="design" id="design">
@@ -817,6 +835,7 @@ try to solve it.</p>
       <p class="presets"><button data-preset="drawn">As drawn</button><button data-preset="wide">A 30 m layer</button>
         <button data-preset="all">Everything at its limit</button><button id="share">Copy a link to this design</button></p></div>
     <div class="readouts" id="s-read" aria-live="polite"></div>
+  </div>
   </div>
 </section>
 <section><h2>The question for you</h2>
@@ -855,7 +874,8 @@ try to solve it.</p>
 <details><summary>Display choices (PROTOTYPE)</summary><ul class="plain meta">{proto}</ul></details></section>'''
     (out_dir / 'index.html').write_text(page('Dust: what hits at speed · Wayfarer engineering',
                                              'A training simulation of the open problem: what dust does to Wayfarer at speeds up to 0.016 c.',
-                                             body, 2, revision, built, DUST_HEAD))
+                                             body, 2, revision, built, DUST_HEAD, kind='sim', crumb=('Simulations', 'simulations/'),
+                                             guide=('dust', 'One grain of dust hitting the shield at test speed (left) and at cruise speed (right).', 'Start, then move Impact speed and watch the right side.', ('Open problems', '../#problems'))))
     return True
 
 
@@ -2382,12 +2402,15 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True,
   <a href="#tried">4 What we tried</a><a href="#problems">5 Open problems</a><a href="#follow">6 Follow along</a>
   {'<a href="compare/"><b>Compare in 3D</b></a>' if prob.get("compare") else ''}
   {'<a href="build/"><b>Build sequence</b></a>' if seq else ''}</nav>
+<div id="simulations" class="wos-sims">
+<p class="wos-sims-all"><a href="../simulations/">All simulations, with pictures →</a></p>
 {story_lab.teaser(lab2) if lab2 else ''}
 {build_teaser(seq) if seq else ''}
 {vertex_teaser() if vertex else ''}
 {ignition_teaser() if ignition else ''}
 {dust_teaser() if dust else ''}
 {compare_teaser(prob) if prob.get("compare") else ''}
+</div>
 
 <section id="goal"><h2>1 · The goal</h2>
   <p>A ship built for a crew of {spec["crew"]["rated_occupancy"]["value"]} cruises at <strong>{spec["mission"]["target_speed"]["value"]} c</strong> ({spec["mission"]["target_speed"]["value"] * C / 1e3:,.0f} km/s)
@@ -2468,7 +2491,8 @@ def main_page(site, spec, entries, dropped, problem, revision, built, play=True,
 </section>'''
     (site / 'engineering/index.html').write_text(page('Wayfarer engineering', 'The engineering story of G.U. Wayfarer 001: a 0.016 c full-return '
                                                       'fusion ship, its constraints, the lab work and the open problems.', body, 1, revision, built,
-                                                      '\n<link rel="stylesheet" href="lab.css">' if lab2 else ''))
+                                                      '\n<link rel="stylesheet" href="lab.css">' if lab2 else '',
+                                                      guide=('engineering', 'The goal, the constraints, the ship today and where the design still fails.', 'Start with the open problems.', ('Open problems', '#problems'))))
 
 
 def build(root, site, revision=None, built=None, play=True):
@@ -2522,7 +2546,7 @@ def build(root, site, revision=None, built=None, play=True):
     files = sorted(p.relative_to(site).as_posix() for p in out.rglob('*') if p.is_file())
     return {'entry': 'engineering/', 'pages': pages, 'files': len(files),
             'bytes': sum((Path(site) / f).stat().st_size for f in files), 'lab_entries': len(entries),
-            'problems': len(problem['data']['register'])}
+            'problems': len(problem['data']['register']), 'register': problem['data']['register']}
 
 
 def main():

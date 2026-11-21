@@ -14,7 +14,7 @@ function wayfarerLaunch(opts) {
     size.textContent = `Pressing Start downloads the Godot ${p.godot_short} engine and the ship package: ${mb.toFixed(0)} MB, `
       + `less over the wire when the server compresses it, and cached for later visits (both experiences share it).`;
     if (!start.dataset.blocked) start.disabled = false;
-  }).catch(err => { size.textContent = `This release has no interactive build (${err.message}).`; start.disabled = true; });
+  }).catch(err => { if (window.wosNoPlay) { console.info('play package:', err.message); wosNoPlay('the interactive build is not part of this release'); } else { size.textContent = `This release has no interactive build (${err.message}).`; start.disabled = true; } });
   // Capability probe without starting anything heavy: a throwaway WebGL 2 context, released at once.
   (() => {
     const gl = document.createElement('canvas').getContext('webgl2');

@@ -3,88 +3,98 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>G.U. Wayfarer 001 — IGNITION</title>
-<meta name="description" content="The G.U. Wayfarer 001 spacecraft from IGNITION: explore it from inside as a crew member or from outside as an EVA astronaut, or inspect the generated engineering model.">
+<title>G.U. Wayfarer 001 · IGNITION</title>
+<meta name="description" content="G.U. Wayfarer 001, a fictional fusion spacecraft from IGNITION designed with real physics: explore it in 3D, walk inside, go outside on a spacewalk, run its simulations and read the engineering.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231B2633'/%3E%3Ccircle cx='8' cy='8' r='4.6' fill='%238C83C5'/%3E%3Ccircle cx='8' cy='8' r='3' fill='%23D99AC9'/%3E%3Ccircle cx='8' cy='8' r='1.3' fill='%23D8EAFF'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0A0F15">
+<link rel="preload" as="image" href="thumbs/ship-side-960.webp" imagesrcset="thumbs/ship-side-960.webp 960w, thumbs/ship-side-1920.webp 1920w" imagesizes="(min-width: 1100px) 58vw, 100vw">
 <link rel="stylesheet" href="site.css">
 </head>
-<body>
-<main class="wrap home">
-  <div class="sitebar"><a class="mark" href="./">Wayfarer</a>
-    <nav aria-label="Site"><a href="engineering/">Engineering</a><a href="viewer/">Explore Ship</a><a href="status/">Technical status</a></nav></div>
-  <header class="hero">
-    <p class="eyebrow">IGNITION · Densho</p>
-    <h1>G.U. WAYFARER 001</h1>
-    <hr class="ignite">
-    <p class="lead">A fusion-drive spacecraft built from its engineering workbooks: every shape here is generated from sourced or
-      labelled parameters. Step inside it, step outside it, or inspect how it is engineered. Nothing heavy loads until you choose.</p>
-  </header>
-  <section class="choices primary" aria-label="Experiences">
-    <a class="choice" href="interior/" id="go-interior">
-      <span class="kicker">Experience · inside</span>
-      <strong>Explore Interior</strong>
-      <span>Enter the spacecraft. Walk through Wayfarer, explore its rotating habitats and discover life aboard the ship.</span>
-      <span class="go">Enter</span>
-      <span class="meta" id="interior-meta">Godot · WebGL 2 · keyboard and mouse or touch</span>
-    </a>
-    <a class="choice" href="exterior/" id="go-exterior">
-      <span class="kicker">Experience · outside</span>
-      <strong>Explore Exterior</strong>
-      <span>Step outside Wayfarer. Navigate in microgravity, inspect the spacecraft and operate your EVA equipment and companion
-        drone.</span>
-      <span class="go">Step outside</span>
-      <span class="meta" id="exterior-meta">Godot · WebGL 2 · keyboard and mouse · desktop browser</span>
-    </a>
+<body class="wos" data-kind="overview">
+<!--wos:bar-->
+<main class="wos-ov" id="wos-work">
+  <section class="wos-band" aria-labelledby="ov-title">
+    <div class="wos-band-t">
+      <p class="eyebrow">IGNITION · fictional spacecraft</p>
+      <h1 id="ov-title">G.U. WAYFARER 001</h1>
+      <p class="lead">A crewed fusion ship, designed as if it had to fly.</p>
+      <p class="wos-actions"><a class="button" href="viewer/" id="go-viewer">Explore the ship</a>
+        <a href="#about">What is this?</a></p>
+      <p class="meta" id="viewer-meta">Interactive 3D model, loads when you open it</p>
+    </div>
+    <a class="wos-band-img" href="viewer/" tabindex="-1" aria-hidden="true"><!--wos:thumb ship-side band--></a>
   </section>
-  <section class="choices secondary" aria-label="Tools and background">
-    <a class="choice" href="viewer/" id="go-viewer">
-      <span class="kicker">Engineering explorer</span>
-      <strong>Explore Ship</strong>
-      <span>The whole vehicle in a 3D engineering viewer: orbit, zoom, camera presets, assemblies, holograms and each part's source
-        status. Works on phones.</span>
-      <span class="meta" id="viewer-meta">three.js · WebGL</span>
-    </a>
-    <a class="choice" href="engineering/" id="go-engineering">
-      <span class="kicker">Engineering</span>
-      <strong>0.016 c and back</strong>
-      <span>The engineering story: the full-return goal, the constraints, what we tried in the lab and the open problems where
-        the design still fails.</span>
-      <span class="meta">static pages · figures</span>
-    </a>
-    <a class="choice" href="status/" id="go-status">
-      <span class="kicker">Release</span>
-      <strong>Technical status</strong>
-      <span>The published release: its model, the checks it passed, known limitations and what this browser supports.</span>
-      <span class="meta">one small record</span>
-    </a>
+
+  <aside class="wos-guide wos-orient" data-guide="orient" aria-label="Orientation">
+    <svg class="wos-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.8v.1"/></svg>
+    <p><b>New here?</b> Start with the ship in 3D, then walk inside. Everything is a simulation of a fictional design.</p>
+    <button type="button" class="secondary" data-wos-dismiss>Got it</button>
+  </aside>
+
+  <section aria-labelledby="ov-exp">
+    <h2 id="ov-exp">Experience the ship</h2>
+    <ul class="wos-cards">
+      <li><a class="wos-card" href="interior/" id="go-interior" data-av="live"><!--wos:thumb interior--><span class="wos-card-b">
+        <strong><svg class="wos-i" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3.5" width="12" height="17" rx="5"/><circle cx="12" cy="12" r="2.2"/><path d="M3.5 20.5h17"/></svg>Walk inside</strong>
+        <span class="l">Walk the rotating habitat ring in half Earth gravity.</span>
+        <span class="act">Enter the ship <svg class="wos-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="meta" id="interior-meta"><span class="wos-av-d" aria-hidden="true"></span><span>Interactive · keyboard and mouse or touch</span></span></span></a></li>
+      <li><a class="wos-card" href="exterior/" id="go-exterior" data-av="live"><!--wos:thumb exterior--><span class="wos-card-b">
+        <strong><svg class="wos-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9.5" r="6"/><rect x="8.5" y="7.5" width="7" height="4.5" rx="2"/><path d="M5 20.5c.6-3 2.2-4.6 4-5.2M19 20.5c-.6-3-2.2-4.6-4-5.2"/></svg>Go outside</strong>
+        <span class="l">Fly along the hull on a training spacewalk.</span>
+        <span class="act">Start spacewalk <svg class="wos-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="meta" id="exterior-meta"><span class="wos-av-d" aria-hidden="true"></span><span>Interactive · training simulation</span></span></span></a></li>
+      <li><a class="wos-card" href="simulations/" id="go-sims" data-av="live"><!--wos:thumb sim-dust--><span class="wos-card-b">
+        <strong><svg class="wos-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4v16.5H20.5"/><path d="M7 16c2.5 0 3-8 6-8s3 5 6.5 5"/></svg>Run simulations</strong>
+        <span class="l">See what breaks at ignition and at speed.</span>
+        <span class="act">Open simulations <svg class="wos-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="meta"><span class="wos-av-d" aria-hidden="true"></span><span>Interactive · 5 simulations, in the browser</span></span></span></a></li>
+      <li><a class="wos-card" href="engineering/" id="go-engineering" data-av="read"><!--wos:thumb engineering--><span class="wos-card-b">
+        <strong><svg class="wos-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1.8"/><path d="M11.2 6.6L6 20.5M12.8 6.6l5.2 13.9M8.2 15.5h7.6"/></svg>Understand the engineering</strong>
+        <span class="l">The goal, the numbers and the open problems.</span>
+        <span class="act">Read the engineering <svg class="wos-i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="meta"><span class="wos-av-d" aria-hidden="true"></span><span>Reading · records with sources</span></span></span></a></li>
+    </ul>
   </section>
-  <p class="note">The experiences and Explore Ship are SIMULATION_ONLY representations (REP_PROXY geometry). Labels on screen keep CANON, DERIVED,
-    WORKING, PROTOTYPE, DIAGNOSTIC and HOLD values apart; nothing here is flight data or a certified procedure. EVA outside the hull is
-    a training simulation: flight EVA stays HOLD.</p>
-  <footer>
-    <span id="release">Release —</span>
-    <a href="status/">Technical status</a>
-    <a href="https://github.com/densho-media/ignition-wayfarer" rel="noopener">Source</a>
-    <a href="https://densho.media" rel="noopener">Densho</a>
-  </footer>
+
+  <section aria-labelledby="ov-facts">
+    <h2 id="ov-facts">The ship in numbers <a class="more" href="status/" id="go-status">Ship status</a></h2>
+    <!--wos:facts-->
+  </section>
+
+  <section class="wos-about" id="about" aria-labelledby="ov-about">
+    <h2 id="ov-about">About this project</h2>
+    <p>Wayfarer is a fictional spacecraft from the IGNITION world, worked out with real physics and engineering methods. It is an
+      evolving design, not a real or operating ship: some problems are solved, others are still open.</p>
+    <details><summary>What the labels mean</summary>
+      <p class="note">The 3D ship and the experiences are simulation-only representations of a proxy model (REP_PROXY). Every value
+        carries a status: CANON and DERIVED come from the design workbooks, WORKING and PROTOTYPE are choices still under review,
+        DIAGNOSTIC values come from simulations and HOLD marks what is not cleared. Nothing here is flight data or a certified procedure.</p>
+    </details>
+    <p class="wos-foot"><span id="release">Release —</span> · <a href="engineering/#goal">How we work</a> ·
+      <a href="https://github.com/densho-media/ignition-wayfarer" rel="noopener">Source</a> · <a href="https://densho.media" rel="noopener">Densho</a></p>
+  </section>
 </main>
 <script>
-// The release record only (a few kB, past the browser cache): version line and the download each choice costs.
+// The release record only (a few kB, past the browser cache): version line and what each experience downloads.
 fetch('release.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).then(rel => {
   if (!rel) return;
   const mb = b => (b / 1e6).toFixed(b < 1e7 ? 1 : 0) + ' MB';
   document.getElementById('release').textContent = `Release ${rel.release} · ${rel.git_revision.slice(0, 7)} · ${rel.built_utc.slice(0, 10)}`;
   const v = rel.experiences?.viewer, p = rel.experiences?.play;
-  if (v?.download_bytes) document.getElementById('viewer-meta').textContent = `three.js · WebGL · about ${mb(v.download_bytes)}`;
-  if (p?.download_bytes) {
-    document.getElementById('interior-meta').textContent =
-      `Godot ${p.godot_short} · WebGL 2 · about ${mb(p.download_bytes)} · keyboard and mouse or touch`;
-    document.getElementById('exterior-meta').textContent =
-      `Godot ${p.godot_short} · WebGL 2 · about ${mb(p.download_bytes)} · keyboard and mouse · desktop browser`;
+  if (v?.download_bytes) document.getElementById('viewer-meta').textContent = `Interactive 3D model · about ${mb(v.download_bytes)}, loads when you open it`;
+  // Each card says what it is: interactive (with its download), reading, or not in this release. A card never promises an action it
+  // cannot give: without the play package the Interior and Exterior cards say so and offer the description instead of a start.
+  // (No WebGL probe here: the Overview creates no graphics context; the launch page checks the device before Start.)
+  for (const [id, what] of [['interior', 'keyboard and mouse or touch'], ['exterior', 'training simulation']]) {
+    const card = document.getElementById('go-' + id), line = card.querySelector('.meta > span:last-child'), act = card.querySelector('.act');
+    if (!p?.download_bytes) {
+      card.dataset.av = 'none'; line.textContent = 'Not in this release · the page describes it';
+      act.firstChild.textContent = 'What it is ';
+    } else line.textContent = `Interactive · ${what} · about ${mb(p.download_bytes)}`;
   }
-  if (!p) for (const id of ['go-interior', 'go-exterior']) document.getElementById(id).classList.add('off');
 }).catch(() => {});
 </script>
+<script src="wos.js" defer></script>
 </body>
 </html>

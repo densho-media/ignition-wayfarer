@@ -3,35 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Explore Exterior — G.U. Wayfarer 001</title>
+<title>Exterior · Explore · G.U. Wayfarer 001</title>
 <meta name="description" content="Step outside the G.U. Wayfarer 001 as a suited astronaut with a companion drone: cold-gas flight in microgravity along the hull, in the interactive Godot experience.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231B2633'/%3E%3Ccircle cx='8' cy='8' r='4.6' fill='%238C83C5'/%3E%3Ccircle cx='8' cy='8' r='3' fill='%23D99AC9'/%3E%3Ccircle cx='8' cy='8' r='1.3' fill='%23D8EAFF'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0A0F15">
 <link rel="stylesheet" href="../site.css">
 </head>
-<body>
-<main class="wrap">
-  <div class="sitebar"><a class="mark" href="../">Wayfarer</a>
-    <nav aria-label="Site"><a href="../engineering/">Engineering</a><a href="../viewer/">Explore Ship</a><a href="../status/">Technical status</a></nav></div>
-  <header>
-    <p class="eyebrow">Experience · outside</p>
-    <h1>EXPLORE EXTERIOR</h1>
-    <hr class="ignite">
-    <p class="lead">Step outside Wayfarer. You start standing on a magnetic training walkway on the forward hull collar, beside the EVA
-      rail, in a Y155 suit with the companion drone docked on your back and your tether clipped to a rail anchor. The ship is drifting,
-      so nothing pulls you down: only your boot magnets hold you to the plate. Walk on them, then switch them off or push off and fly
-      with the suit's cold-gas thrusters along the hull and the Brow. The hatch start and the guided training flight are one click away.</p>
-  </header>
+<body class="wos" data-kind="launch">
+<!--wos:bar-->
+<main class="wrap" id="wos-work">
+  <div class="wos-launch">
+  <!--wos:thumb exterior-->
+  <div class="wos-launch-t">
+    <h1>Go outside</h1>
+    <p class="lead">A training spacewalk on the hull: magnetic boots, cold-gas thrusters and a companion drone.</p>
+    <aside class="wos-guide" data-guide="exterior" aria-label="Try this">
+      <svg class="wos-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.8v.1"/></svg>
+      <p><b>Try this:</b> Press Start, walk on the boots, then push off and fly. Your gas is finite.</p>
+      <button type="button" class="secondary" data-wos-dismiss>Got it</button>
+    </aside>
   <section class="panel">
     <p id="size">The engine and the ship package download when you press Start.</p>
-    <p><button id="start" type="button" disabled>Start · Explore Exterior</button> <a class="button secondary" href="../interior/">Explore Interior instead</a></p>
+    <p><button id="start" type="button" disabled>Start · Explore Exterior</button></p>
     <p>Other starts: <button class="secondary" type="button" data-start-hash="#exterior-hatch" disabled>At the EVA hatch</button>
       <button class="secondary" type="button" data-start-hash="#exterior-first-flight" disabled>EVA First Flight (guided)</button></p>
     <p id="cap" class="note"></p>
+    <p class="wos-alt">Not your device, or not in this build? <a href="../interior/">Walk inside instead</a> · <a href="../viewer/">The ship in 3D</a> · <a href="../simulations/">Simulations</a></p>
   </section>
+  </div>
+  </div>
   <section class="grid2">
-    <div class="panel">
-      <h2>Controls</h2>
+    <details class="panel">
+      <summary>Controls</summary>
       <ul class="plain">
         <li><b>Your keys:</b> the moves you chose in Explore Interior work here too (forward, back, left, right; flying, they thrust).
           The first time, Wayfarer asks only what is new outside: turn left, turn right and the magnetic boots. Or click
@@ -46,9 +49,9 @@
         <li><b>Back and exit:</b> fly back to the hatch and grip its hold to end where you began. <b>← Exit</b> (bottom left) leaves
           and unloads the engine; your browser's Back button does the same. The “Back to the walk” key goes inside, to Explore Interior, in the same session.</li>
       </ul>
-    </div>
-    <div class="panel">
-      <h2>About this experience</h2>
+    </details>
+    <details class="panel">
+      <summary>About this experience</summary>
       <ul class="plain">
         <li>EVA Operations (EVA-OPS-001): the suited astronaut and the companion drone, both live in one fixed-step simulation. Cold-gas
           thrusters with their real nozzle layout and allocation, finite nitrogen in four inventories, momentum that only gas can
@@ -65,10 +68,19 @@
         <li>Built with the Godot Engine, MIT licence: <a href="../play/GODOT_LICENSE.txt">licence</a>,
           <a href="../play/GODOT_COPYRIGHT.txt">third-party notices</a>.</li>
       </ul>
-    </div>
+    </details>
   </section>
 </main>
+<script>
+// Without the play package (a build made without Godot) the page says so plainly instead of offering a Start that cannot work.
+function wosNoPlay(why) {
+  const w = document.querySelector('.wos-launch'); w.dataset.av = 'none';
+  document.getElementById('size').textContent = `Not available in this release: ${why}. The description and controls below still apply; the ship in 3D and the simulations work here.`;
+  for (const b of document.querySelectorAll('#start, [data-start-hash]')) { b.disabled = true; b.dataset.blocked = '1'; b.closest('p').hidden = true; }
+}
+</script>
 <script src="../play/launch.js"></script>
-<script>wayfarerLaunch({ hash: '#exterior', touch: true });</script>
+<script>if (window.wayfarerLaunch) wayfarerLaunch({ hash: '#exterior', touch: true }); else wosNoPlay('the interactive build is not part of this release');</script>
+<script src="../wos.js" defer></script>
 </body>
 </html>

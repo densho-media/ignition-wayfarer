@@ -284,6 +284,7 @@ async function load() {
     }
     init(M, bin);
     gate.hidden = true; cstatus.hidden = true; stage.classList.add('live'); hud.hidden = false;
+    window.wos?.scenario({ label: 'IGNITION', class: 'SIM' });
     setMode(mode, true);
     window.__ign.ready = true;
   } catch (err) {

@@ -87,17 +87,38 @@
 @media (max-width: 760px) {
   .ign-modes { grid-template-columns: 1fr 1fr 1fr; }
   .ign-modes button { padding: 6px 8px; }
-  .ign-modes button span { display: none; }
+  .ign-modes button span { font-size: 11px; }
   .ign .stage { height: 72vh; min-height: 420px; }
   .ign .stage.live::after { top: 50%; bottom: auto; left: 0; right: 0; width: auto; height: 1px; }
   .ign .side-b { left: 10px; top: calc(50% + 8px); }
   .ign .stage[data-split="b"] .side-b { top: 10px; }
-  .ign .hud { top: auto; bottom: 10px; right: 10px; width: 48%; font-size: 11px; }
-  .ign .hrow i { display: none; }
-  .ign .hrow:nth-of-type(n+4) { display: none; }
-  .ign .evcap { display: none !important; }
-  .ign .evcap { left: 10px; bottom: 10px; max-width: 50%; font-size: 11px; }
+  .ign .hud { top: auto; bottom: 10px; right: 10px; width: 52%; max-height: 46%; overflow: auto; font-size: 11px; pointer-events: auto; }
+  .ign .evcap { left: 10px; bottom: 10px; max-width: 44%; font-size: 11px; }
   .ign .stage[data-split="b"] .evcap { max-width: 50%; }
   .ign .design { grid-template-columns: 1fr; }
   .ign .events .ev { grid-template-columns: 62px 1fr; }
+}
+
+/* WOS Simulation workspace (docs/WOS.md): on a wide screen the stage takes the height of the screen and the controls, events and
+   readouts sit in a side panel beside it; on a phone the stage stays in view while the controls scroll under it. Same controls
+   on every size. */
+.ign-side { display: contents; }
+@media (min-width: 1100px) {
+  body.wos[data-kind="sim"] .wrap.story { max-width: none; padding-left: 20px; padding-right: 20px; }
+  body.wos[data-kind="sim"] .wrap.story > section:not(.ign), body.wos[data-kind="sim"] .wrap.story > header,
+  body.wos[data-kind="sim"] .wrap.story > .crumbs, body.wos[data-kind="sim"] .wrap.story > footer { max-width: 1080px; }
+  .story section.ign { display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, 420px); column-gap: 16px; row-gap: 10px; align-items: start; }
+  .ign > * { grid-column: 1; min-width: 0; }
+  .ign > .ign-side { display: flex; flex-direction: column; gap: 12px; grid-column: 2; grid-row: 1 / span 6; position: sticky;
+    top: calc(var(--bar-h) + 12px); max-height: calc(100dvh - var(--bar-h) - 24px); overflow: auto; overscroll-behavior: contain;
+    padding: 12px; background: var(--surface-1); border: 1px solid var(--line); border-radius: 6px; }
+  .ign .stage { height: max(420px, calc(100dvh - var(--bar-h) - 190px)); }
+  .ign .ign-side .design, .ign[data-mode="grain"] .ign-side .grain-ctl { grid-template-columns: minmax(0, 1fr); }
+  .ign .ign-side .readouts { position: static; }
+  .ign .ign-side .phases li { grid-template-columns: 1fr; gap: 2px; }
+  .ign .ign-side table tr > :first-child { white-space: nowrap; }
+}
+@media (max-width: 699px) {
+  .ign .stage { position: sticky; top: var(--bar-h); z-index: 5; height: 46dvh; min-height: 280px; }
+  .itools button, .presets button, .ign .cases button, .ign .grain-ctl .presets button { min-height: 44px; }
 }

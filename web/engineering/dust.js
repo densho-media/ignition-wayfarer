@@ -601,6 +601,7 @@ async function load() {
     placeCamera();
     new ResizeObserver(() => { dirty = true; }).observe(stage);
     gate.hidden = true; stage.classList.add('live'); hud.hidden = false;
+    window.wos?.scenario({ label: 'DUST', class: 'SIM' });
     setMode(mode);
     renderer.setAnimationLoop(frame);
     window.__dust.ready = true;

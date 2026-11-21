@@ -1,0 +1,18 @@
+{
+ "task": "Wayfarer Operating System: shell, navigation, Overview first visit, thumbnails, icons, guidance (branch claude/project-thread-2uwmwa)",
+ "date": "2026-11-21",
+ "approved": "owner 2026-11-21 18:05Z, squash of 290333a; deployment is a separate approval",
+ "branch_notes": "git show 290333a:work/project-thread-2uwmwa/<file> for BRIEF_WOS.md, BRIEF_UX.md, WOS_ARCHITECTURE.md, UX_PLAN.md, UX_REVIEW.md",
+ "machine": "cloud container, headless Chromium with SwiftShader software WebGL 2",
+ "evidence_class": "SW (timings are relative only); bytes and counts are renderer independent",
+ "build": "workflow.py web --characters (play-characters PASS); native walk, locomotion and EVA operations checks PASS (EVA 44/44)",
+ "start_page": {"code_bytes_raw": 93091, "code_bytes_gzip": 22541, "budget_raw": 96000, "picture_bytes_widest": 137874, "picture_budget": 160000,
+                "requests": ["index.html", "site.css", "wos.js", "release.json", "thumbs/*.webp"], "graphics_context": false},
+ "downloads": {"viewer_bytes": 11780815, "play_bytes_with_characters": 79722949, "thumbnails_committed_bytes": 393862},
+ "checks": {"web_check_main": "76/76", "device_pass_desktop_tablet_phone": "62/62", "occlusion_bars_12_pages_x_4_viewports": "48/48",
+            "viewport_matrix_7_pages_x_7_viewports": "49/49", "axe_wcag21_aa_10_pages_x_2_sizes": "20/20 no violations",
+            "unit_tests": "503 OK (1 skipped)"},
+ "owner_decisions": ["five intention modules: Overview, Explore, Simulations, Engineering, Status (Status stays primary)",
+                     "start budget 96 kB raw accepted; further increases need investigation and justification",
+                     "viewer styles Hologram (was Engine holo) and Transparent (was Hybrid)"]
+}

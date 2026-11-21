@@ -34,27 +34,24 @@
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); overflow: hidden; }
-canvas#view { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
-button {
-  font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line);
+html, body { margin: 0; background: var(--bg); color: var(--ink); }
+/* WOS: the workspace cell under the ship line holds the canvas; every overlay is placed inside it, not on the window. */
+.viewer-work { position: relative; overflow: hidden; }
+canvas#view { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
+.viewer-work button {
+  font: inherit; font-weight: 400; letter-spacing: normal; color: var(--ink); background: var(--panel); border: 1px solid var(--line);
   border-radius: 4px; padding: 6px 10px; cursor: pointer; min-height: 32px;
 }
-button:hover { border-color: var(--accent); }
-button:focus-visible { border-color: var(--accent); outline: 2px solid var(--focus); outline-offset: 1px; }
-button[aria-pressed="true"], button[aria-expanded="true"] { border-color: var(--selected); color: var(--selected); background: rgba(36, 50, 70, 0.92); }
+.viewer-work button:hover:not(:disabled) { border-color: var(--accent); background: var(--panel); }
+.viewer-work button:focus-visible { border-color: var(--accent); outline: 2px solid var(--focus); outline-offset: 1px; }
+.viewer-work button[aria-pressed="true"], .viewer-work button[aria-expanded="true"] { border-color: var(--selected); color: var(--selected); background: rgba(36, 50, 70, 0.92); }
 a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-.title { position: fixed; top: 16px; left: 16px; pointer-events: none; }
-.title a.back { pointer-events: auto; }
-.title h1 { margin: 0; font-size: 20px; letter-spacing: 0.12em; font-weight: 600; }
-.title .eyebrow { margin: 0; font-size: 11px; letter-spacing: 0.3em; color: var(--accent); }
-.title .sub { margin: 2px 0 0; font-size: 12px; color: var(--muted); }
 
-.views { position: fixed; top: 16px; right: 16px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: calc(100% - 32px); }
+.views { position: absolute; top: 16px; right: 16px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; max-width: calc(100% - 32px); }
 .panel {
-  position: fixed; top: 140px; right: 16px; width: 280px; max-height: calc(100% - 200px); overflow: auto;
+  position: absolute; top: 140px; right: 16px; width: 280px; max-height: calc(100% - 200px); overflow: auto;
   background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 8px;
 }
 .panel-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; color: var(--muted); }
@@ -64,24 +61,28 @@ a:hover { text-decoration: underline; }
 .panel li .count { margin-left: auto; color: var(--muted); font-size: 12px; }
 
 .pick {
-  position: fixed; left: 16px; bottom: 48px; max-width: min(420px, calc(100% - 32px));
+  position: absolute; left: 16px; bottom: 48px; max-width: min(420px, calc(100% - 32px));
   background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--sel); border-radius: 4px; padding: 8px 10px;
 }
 .pick b { display: block; color: var(--sel); font-weight: 600; }
 .pick span { color: var(--muted); font-size: 12px; word-break: break-word; }
-.status { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--muted); pointer-events: none; text-align: center; }
+.status { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--muted); pointer-events: none; text-align: center; }
+.hint { position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); margin: 0; padding: 5px 12px; font-size: 13px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 999px; color: var(--muted); pointer-events: none; white-space: nowrap; }
+.hint .coarse { display: none; }
+@media (pointer: coarse) { .hint .fine { display: none; } .hint .coarse { display: inline; } }
 .status.error { color: var(--bad); pointer-events: auto; }
 .foot {
-  position: fixed; left: 16px; right: 16px; bottom: 12px; display: flex; gap: 14px; align-items: center;
+  position: absolute; left: 16px; right: 16px; bottom: 12px; display: flex; gap: 14px; align-items: center;
   font-size: 12px; color: var(--muted); pointer-events: none;
 }
 .foot a { pointer-events: auto; }
 .diag {
-  position: fixed; left: 16px; top: 96px; margin: 0; padding: 6px 8px; font: 11px/1.35 ui-monospace, Menlo, monospace;
+  position: absolute; left: 16px; top: 16px; margin: 0; padding: 6px 8px; font: 11px/1.35 ui-monospace, Menlo, monospace;
   background: var(--panel); border: 1px solid var(--line); border-radius: 4px; color: var(--ink); pointer-events: none;
 }
-.styles { position: fixed; top: 56px; right: 16px; display: flex; gap: 6px; }
-.legend { top: 96px; left: 16px; right: auto; width: 290px; max-height: calc(100% - 170px); }
+.styles { position: absolute; top: 56px; right: 16px; display: flex; gap: 6px; }
+.legend { top: 16px; left: 16px; right: auto; width: 290px; max-height: calc(100% - 170px); }
 .legend li button {
   display: flex; gap: 8px; align-items: center; width: 100%; text-align: left; background: transparent; border-color: transparent;
   padding: 3px 4px; min-height: 26px; font-size: 12px;
@@ -106,7 +107,7 @@ button:disabled { opacity: 0.4; cursor: default; border-color: var(--line); }
 .appearance .row input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--accent); }
 .appearance .buttons { justify-content: flex-start; }
 .focusbar {
-  position: fixed; top: 96px; right: 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; max-width: min(560px, calc(100% - 340px));
+  position: absolute; top: 96px; right: 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; max-width: min(560px, calc(100% - 340px));
   background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 4px; padding: 6px 8px; font-size: 13px;
 }
 .focusbar .label { color: var(--accent); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
@@ -140,16 +141,16 @@ button:disabled { opacity: 0.4; cursor: default; border-color: var(--line); }
 .inspect .actions { margin-top: 6px; }
 
 @media (max-width: 640px) {
-  .title { top: 12px; left: 16px; }
-  .title h1 { font-size: 16px; }
   .views { top: auto; bottom: 40px; right: 16px; left: 16px; justify-content: center; }
   .views button { padding: 6px 8px; }
-  .panel { top: 76px; left: 16px; right: 16px; width: auto; max-height: calc(100% - 200px); }
+  .hint { top: 96px; bottom: auto; font-size: 12px; }
+  .foot #build { display: none; }   /* the build line is on Status; the camera row needs the room */
+  .panel { top: 64px; left: 16px; right: 16px; width: auto; max-height: calc(100% - 200px); }
   .pick { bottom: 132px; }
-  .styles { top: 72px; left: 16px; right: 16px; justify-content: flex-start; flex-wrap: wrap; }
+  .styles { top: 12px; left: 16px; right: 16px; justify-content: flex-start; flex-wrap: wrap; }
   .styles button { padding: 4px 8px; min-height: 32px; font-size: 13px; }
-  .legend { top: 152px; left: 16px; right: 16px; width: auto; max-height: calc(100% - 380px); }
-  .panel { top: 152px; max-height: calc(100% - 380px); }
+  .legend { top: 92px; left: 16px; right: 16px; width: auto; max-height: calc(100% - 300px); }
+  .panel { top: 92px; max-height: calc(100% - 300px); }
   .appearance { width: auto; }
   .focusbar { top: auto; bottom: 128px; left: 16px; right: 16px; max-width: none; padding: 4px 6px; }
   .focusbar b { max-width: 40vw; }
