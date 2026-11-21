@@ -172,8 +172,6 @@ The website as the ship's interface: one ship, one operating system, multiple de
 System"; standard: [docs/WOS.md](docs/WOS.md). The shell, the five modules and the first-visit Overview are on `main` and
 owner-approved (2026-11-21); extend them, do not reopen the Overview redesign. Phases start on the owner's go.
 
-- [ ] **Deploy.** The squash on `main` was pushed without a CI run (`[skip ci]`), so the live site still shows the old shell; the
-  next CI run on `main` (any push or a manual run) builds and deploys it. Deployment needs its own owner approval.
 - [ ] **Mission clock.** A canonical mission epoch before any clock is shown (none until then).
 - [ ] **WOS-UX follow-ups.** Simulation pages: a short "what this shows" intro and labelled presets on Ignition and Dust beyond the
   current guide strip; result-to-record links where a result names an open problem; Explore Ship part panel linking the part's
