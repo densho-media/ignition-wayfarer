@@ -55,7 +55,10 @@ GLB_LIMIT = 95_000_000          # GitHub Pages refuses files over 100 MB
 SITE_LIMIT = 900_000_000        # GitHub Pages: a published site may be at most 1 GB
 # Download budgets per experience (bytes before compression), set from the 2026-10-22 measurement with headroom: start page 6.6 kB,
 # viewer 7.35 MB, play 62.9 MB (engine 39.5 MB, pack 23.1 MB). A larger build fails here instead of silently slowing the site.
-START_BUDGET = 76_000            # index.html + site.css + wos.js raw (WOS shell and Overview state, owner brief 2026-11-21; ~19 kB gzip)
+START_BUDGET = 96_000            # index.html + site.css + wos.js raw (WOS shell, Overview cards and fact tiles, owner briefs 2026-11-21; 88.8 kB = 21.4 kB gzip)
+# The Overview's pictures (committed WebP thumbnails, tools/thumbs.py), counted apart from the code at the largest size each
+# srcset can pick (band 1920 + four 960 cards = 122 kB on 2026-11-21); lazy cards below the fold load only when scrolled to.
+START_IMAGE_BUDGET = 160_000
 VIEWER_BUDGET = 12_000_000
 PLAY_BUDGET = 90_000_000
 # Explore Ship's engine part inspection (Vertex Engine 1.1), fetched only when someone opens it: the part records and their meshes.
@@ -347,7 +350,8 @@ def release_record(root, site, build, play, revision, dirty, built, engineering=
         'experiences': {
             # The start page fetches release.json too; counted at a 4 kB allowance (it lists every file, but only once per visit).
             'start': {'entry': 'index.html', 'download_bytes': size(['index.html', 'site.css', 'wos.js']),
-                      'loads': ['index.html', 'site.css', 'wos.js', 'release.json']},
+                      'loads': ['index.html', 'site.css', 'wos.js', 'release.json'],
+                      'images': start_images(site), 'image_bytes': size(start_images(site))},
             **({'wos': {k: shell[k] for k in ('entry', 'bytes', 'pages')}} if shell else {}),
             'viewer': {'entry': 'viewer/', 'download_bytes': size(viewer_files), 'three': THREE['version'],
                        'glb_file': f"viewer/{build['glb_file']}", 'glb_sha256': build['glb_sha256'],
@@ -375,6 +379,16 @@ def release_record(root, site, build, play, revision, dirty, built, engineering=
     }
     (site / 'release.json').write_text(json.dumps(release, indent=1) + '\n')
     return release
+
+
+THUMB_REF = re.compile(r'thumbs/([a-z0-9-]+?)-(\d+)\.webp')
+
+def start_images(site):
+    """The thumbnails the Overview can load: for each picture, the largest width its srcset offers."""
+    widest = {}
+    for name, width in THUMB_REF.findall((site / 'index.html').read_text()):
+        widest[name] = max(widest.get(name, 0), int(width))
+    return [f'thumbs/{n}-{w}.webp' for n, w in sorted(widest.items())]
 
 
 # Local references in the site's pages, scripts and styles: attributes, module imports, import-map targets, fetches and url().
@@ -406,6 +420,12 @@ def verify_site(site, release):
     for name, budget in (('start', START_BUDGET), ('viewer', VIEWER_BUDGET), ('play', PLAY_BUDGET)):
         if name in ex and ex[name]['download_bytes'] > budget:
             problems.append(f'{name} downloads {ex[name]["download_bytes"]} bytes, over its {budget} budget')
+    if ex.get('start', {}).get('image_bytes', 0) > START_IMAGE_BUDGET:
+        problems.append(f'start page pictures {ex["start"]["image_bytes"]} bytes, over their {START_IMAGE_BUDGET} budget')
+    for page in sorted(site.rglob('*.html')):            # srcset candidates are not attributes REFERENCE reads
+        for name, width in THUMB_REF.findall(page.read_text(errors='replace')):
+            if not (site / f'thumbs/{name}-{width}.webp').exists():
+                problems.append(f'{page.relative_to(site)}: thumbs/{name}-{width}.webp is missing')
     inspection = ex.get('viewer', {}).get('inspection')
     if inspection and inspection['download_bytes'] > INSPECT_BUDGET:
         problems.append(f'engine inspection downloads {inspection["download_bytes"]} bytes, over its {INSPECT_BUDGET} budget')

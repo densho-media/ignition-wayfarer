@@ -30,8 +30,8 @@
 <div class="styles" role="toolbar" aria-label="Display style">
   <button data-style="standard" aria-pressed="true" title="Exported materials (S)">Standard</button>
   <button data-style="subsystem" aria-pressed="false" title="Subsystem hologram: overlay colour per functional subsystem (H)">Subsystems</button>
-  <button data-style="engine" aria-pressed="false" title="Engine exposition hologram: one colour, rim glow and wire edges (E)">Engine holo</button>
-  <button data-style="hybrid" aria-pressed="false" title="Hybrid / X-ray: a click focuses the part, the rest becomes a faint ghost (X)">Hybrid</button>
+  <button data-style="engine" aria-pressed="false" title="Engine exposition hologram: one colour, rim glow and wire edges (E). Formerly Engine holo">Hologram</button>
+  <button data-style="hybrid" aria-pressed="false" title="Hybrid / X-ray: a click focuses the part, the rest becomes a faint ghost (X). Formerly Hybrid">X-ray</button>
   <button id="appearance-toggle" aria-expanded="false" aria-controls="appearance" title="Ghost, context and reset">Appearance</button>
   <button id="drive-toggle" aria-expanded="false" aria-controls="drive" title="Vertex drive display states (D)" hidden>Drive</button>
   <button id="engine-toggle" aria-expanded="false" aria-controls="engine" title="Inspect the Vertex engines part by part (I)" hidden>Engine</button>
@@ -95,6 +95,8 @@
 </aside>
 <div id="pick" class="pick" hidden></div>
 <div id="status" class="status" role="status">Loading model…</div>
+<p id="hint" class="hint" aria-live="off"><span class="fine">Drag to orbit · scroll to zoom · click a part</span><span class="coarse">Drag to orbit · pinch to zoom · tap a part</span></p>
+<script>(() => { const h = document.getElementById('hint'), off = () => { h.hidden = true; removeEventListener('pointerdown', off, true); }; addEventListener('pointerdown', off, true); addEventListener('wheel', off, {capture: true, passive: true}); })();</script>
 <pre id="diag" class="diag" hidden></pre>
 <footer class="foot">
   <span id="build"></span>

@@ -67,6 +67,10 @@ a:hover { text-decoration: underline; }
 .pick b { display: block; color: var(--sel); font-weight: 600; }
 .pick span { color: var(--muted); font-size: 12px; word-break: break-word; }
 .status { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: var(--muted); pointer-events: none; text-align: center; }
+.hint { position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); margin: 0; padding: 5px 12px; font-size: 13px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 999px; color: var(--muted); pointer-events: none; white-space: nowrap; }
+.hint .coarse { display: none; }
+@media (pointer: coarse) { .hint .fine { display: none; } .hint .coarse { display: inline; } }
 .status.error { color: var(--bad); pointer-events: auto; }
 .foot {
   position: absolute; left: 16px; right: 16px; bottom: 12px; display: flex; gap: 14px; align-items: center;
@@ -139,6 +143,8 @@ button:disabled { opacity: 0.4; cursor: default; border-color: var(--line); }
 @media (max-width: 640px) {
   .views { top: auto; bottom: 40px; right: 16px; left: 16px; justify-content: center; }
   .views button { padding: 6px 8px; }
+  .hint { top: 96px; bottom: auto; font-size: 12px; }
+  .foot #build { display: none; }   /* the build line is on Status; the camera row needs the room */
   .panel { top: 64px; left: 16px; right: 16px; width: auto; max-height: calc(100% - 200px); }
   .pick { bottom: 132px; }
   .styles { top: 12px; left: 16px; right: 16px; justify-content: flex-start; flex-wrap: wrap; }

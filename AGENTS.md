@@ -19,7 +19,7 @@ Each purpose and development stage has one place. Add no top-level folder withou
 | `src/wayfarer/` | pure modules, Blender generators (`components/`, `build/`), validation, presentation, shots, export |
 | `assets/` | the built `.blend` libraries of the approved ship (generated, not in Git) |
 | `tests/`, `tools/` | owner-number and invariant tests; the workflow commands |
-| `godot/`, `web/` | the walk and its runtime checks; the website (the WOS modules: Overview, Ship, Simulations, Records, Aboard, System) |
+| `godot/`, `web/` | the walk and its runtime checks; the website (the WOS modules: Overview, Explore, Simulations, Engineering, Status) |
 | `references/` | the geometry baseline, `p1_*.json` reports the code writes, `evidence/` (kept study results); local-only captures and notes |
 | `runs/` | every run directory and `runs/renders/`; disposable, pruned per step 6 |
 | `lab/` | kept work that is not approved: `variants/` (alternative forms), `studies/` (numbers), `problems/` (engineering-problem maps); index in `lab/README.md` |
@@ -328,6 +328,11 @@ The website is the ship's interface, not a site about the ship: one ship, one op
 - **Function makes the look.** Colour carries state and hierarchy through the generated tokens (`docs/WEB_IDENTITY.md`); no decorative
   hardware, glow, scan lines or controls without a function. Fictional devices are profile labels on the web and HUD configurations in
   Godot, PROTOTYPE until canon names them.
+- **Show first, explain progressively, let people explore.** One interface for first-time and technical visitors: primary navigation
+  by intention (Overview, Explore, Simulations, Engineering, Status), sections in the tab row, actions in the workspace, utilities in the
+  `?` sheet. Real project pictures with their class chip (MODEL, SIM, SCHEMATIC, ILLUSTRATIVE), one icon family, one sentence per card,
+  one primary action per page; detail and sources behind disclosures but always one click away; optional dismissible guidance, never a
+  wizard or modal tour (`docs/WOS.md` sections 6 and 7).
 - **Light and accessible.** Vanilla CSS and JavaScript, no framework without a measured need; heavy modules load on demand; the
   budgets of `tools/web_export.py` and `docs/WEB_GRAPHICS.md`, the viewport matrix and a WCAG 2.1 AA axe-core pass hold
   (`docs/WOS.md` section 5).

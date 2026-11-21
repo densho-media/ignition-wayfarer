@@ -1,0 +1,276 @@
+{
+ "contract": "WF_WOS_THUMBS",
+ "git_revision": "b87153f",
+ "thumbs": {
+  "ship-side": {
+   "class": "MODEL",
+   "alt": "Wayfarer from the side: engines on the left, radiators, the two habitat rings, the bow shield on the right",
+   "method": "Chrome: viewer/, side view, Standard style, interface hidden",
+   "source_size": [
+    1920,
+    640
+   ],
+   "files": {
+    "ship-side-960.webp": {
+     "bytes": 22486,
+     "quality": 78,
+     "size": [
+      960,
+      320
+     ]
+    },
+    "ship-side-1920.webp": {
+     "bytes": 63630,
+     "quality": 78,
+     "size": [
+      1920,
+      640
+     ]
+    }
+   }
+  },
+  "ship-3d": {
+   "class": "MODEL",
+   "alt": "Wayfarer in the 3D viewer, seen from three-quarter view",
+   "method": "Chrome: viewer/, three-quarter view, Standard style, interface hidden",
+   "source_size": [
+    1600,
+    900
+   ],
+   "files": {
+    "ship-3d-480.webp": {
+     "bytes": 8102,
+     "quality": 78,
+     "size": [
+      480,
+      270
+     ]
+    },
+    "ship-3d-960.webp": {
+     "bytes": 27586,
+     "quality": 78,
+     "size": [
+      960,
+      540
+     ]
+    }
+   }
+  },
+  "interior": {
+   "class": "MODEL",
+   "alt": "A habitat ring room cut open, showing the deck, rooms and a person for scale",
+   "method": "Blender: entry_preview.py landing_aisle --look (ring A aisle, ladder well)",
+   "source_size": [
+    960,
+    720
+   ],
+   "files": {
+    "interior-480.webp": {
+     "bytes": 5598,
+     "quality": 78,
+     "size": [
+      480,
+      270
+     ]
+    },
+    "interior-960.webp": {
+     "bytes": 12688,
+     "quality": 78,
+     "size": [
+      960,
+      540
+     ]
+    }
+   }
+  },
+  "exterior": {
+   "class": "MODEL",
+   "alt": "The bow of Wayfarer at close range: the shield and the forward structure",
+   "method": "Blender: hero_preview.py brow, COAST (bow shield and forward structure)",
+   "source_size": [
+    960,
+    540
+   ],
+   "files": {
+    "exterior-480.webp": {
+     "bytes": 4932,
+     "quality": 78,
+     "size": [
+      480,
+      270
+     ]
+    },
+    "exterior-960.webp": {
+     "bytes": 11152,
+     "quality": 78,
+     "size": [
+      960,
+      540
+     ]
+    }
+   }
+  },
+  "sim-dust": {
+   "class": "SIM",
+   "alt": "The Dust simulation: one grain hitting the shield layer at test speed and at cruise speed",
+   "method": "Chrome: engineering/dust/#autostart, stage",
+   "source_size": [
+    1107,
+    666
+   ],
+   "files": {
+    "sim-dust-480.webp": {
+     "bytes": 7550,
+     "quality": 78,
+     "size": [
+      480,
+      270
+     ]
+    },
+    "sim-dust-960.webp": {
+     "bytes": 23142,
+     "quality": 78,
+     "size": [
+      960,
+      540
+     ]
+    }
+   }
+  },
+  "sim-ignition": {
+   "class": "SIM",
+   "alt": "The Ignition simulation: the engine cluster at the moment of overload",
+   "method": "Chrome: engineering/ignition/#autostart, overload, stage",
+   "source_size": [
+    1107,
+    666
+   ],
+   "files": {
+    "sim-ignition-480.webp": {
+     "bytes": 23264,
+     "quality": 78,
+     "size": [
+      480,
+      270
+     ]
+    },
+    "sim-ignition-960.webp": {
+     "bytes": 57836,
+     "quality": 66,
+     "size": [
+      960,
+      540
+     ]
+    }
+   }
+  },
+  "sim-build": {
+   "class": "MODEL",
+   "alt": "The Build sequence: the ship partly assembled",
+   "method": "existing build_preview.jpg, left panel (Build sequence page)",
+   "source_size": [
+    886,
+    383
+   ],
+   "files": {
+    "sim-build-480.webp": {
+     "bytes": 4618,
+     "quality": 78,
+     "size": [
+      480,
+      270
+     ]
+    },
+    "sim-build-960.webp": {
+     "bytes": 10962,
+     "quality": 78,
+     "size": [
+      960,
+      540
+     ]
+    }
+   }
+  },
+  "sim-compare": {
+   "class": "MODEL",
+   "alt": "The Compare view: the ship next to what one problem needs, at one scale",
+   "method": "existing compare_preview.jpg (Compare page)",
+   "source_size": [
+    672,
+    408
+   ],
+   "files": {
+    "sim-compare-480.webp": {
+     "bytes": 7234,
+     "quality": 78,
+     "size": [
+      480,
+      270
+     ]
+    },
+    "sim-compare-960.webp": {
+     "bytes": 16590,
+     "quality": 78,
+     "size": [
+      960,
+      540
+     ]
+    }
+   }
+  },
+  "sim-lab": {
+   "class": "ILLUSTRATIVE",
+   "alt": "The Breakthrough Lab: assumed breakthroughs switched on against the design gaps",
+   "method": "Chrome: engineering/breakthrough-lab/, the builder",
+   "source_size": [
+    1280,
+    720
+   ],
+   "files": {
+    "sim-lab-480.webp": {
+     "bytes": 12330,
+     "quality": 78,
+     "size": [
+      480,
+      270
+     ]
+    },
+    "sim-lab-960.webp": {
+     "bytes": 38836,
+     "quality": 78,
+     "size": [
+      960,
+      540
+     ]
+    }
+   }
+  },
+  "engineering": {
+   "class": "MODEL",
+   "alt": "One engine of the Vertex drive cluster, rendered from the model",
+   "method": "existing vertex_engine.jpg (Vertex engine render, Engineering pages)",
+   "source_size": [
+    960,
+    600
+   ],
+   "files": {
+    "engineering-480.webp": {
+     "bytes": 5132,
+     "quality": 78,
+     "size": [
+      480,
+      270
+     ]
+    },
+    "engineering-960.webp": {
+     "bytes": 11820,
+     "quality": 78,
+     "size": [
+      960,
+      540
+     ]
+    }
+   }
+  }
+ }
+}

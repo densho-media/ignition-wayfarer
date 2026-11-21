@@ -170,14 +170,19 @@ close-up, regression check, MODEL/TODO and Model Status update.
 
 The website as the ship's interface: one ship, one operating system, multiple devices. Rules: AGENTS.md "Wayfarer Operating
 System"; standard: [docs/WOS.md](docs/WOS.md). Phases start on the owner's go; WOS-0 (architecture) and WOS-1 (foundation) are on
-branch `claude/project-thread-2uwmwa`, awaiting review.
+branch `claude/project-thread-2uwmwa` with the navigation and first-visit pass (owner brief 2026-11-21 09:30Z: five intention
+modules, Overview, thumbnails, icons, guidance), awaiting review.
 
-- [ ] **WOS-1 review.** Owner questions: a live branch preview or the artifact and screenshot matrix; a canonical mission epoch for a
-  clock (none shown until then); start budget 60 → 76 kB raw; the module names.
+- [ ] **WOS-1 / UX review.** Owner questions: a live branch preview or the artifact and screenshot matrix; a canonical mission epoch
+  for a clock (none shown until then); start budget 60 → 96 kB raw (88.8 kB, 21.4 kB gzipped) plus 160 kB of Overview pictures (122 kB); Status as a primary module or
+  only in the `?` sheet; the viewer style renames (Engine holo → Hologram, Hybrid → X-ray).
+- [ ] **WOS-UX follow-ups.** Simulation pages: a short "what this shows" intro and labelled presets on Ignition and Dust beyond the
+  current guide strip; result-to-record links where a result names an open problem; Explore Ship part panel linking the part's
+  Engineering record. Thumbnails: rerun `tools/thumbs.py` when the ship or a simulation changes visibly.
 - [ ] **WOS-2 — Checks.** Make the viewport matrix (7 viewports, overflow, ship line, modules reachable, control parity, 44 px shell
   targets) and the axe-core WCAG 2.1 A/AA pass a `web_check.py` part (axe injected, never shipped).
 - [ ] **WOS-3 — Workspaces.** Ship (docked panels, Engine drawer as a side panel on a workstation), Build, Compare and Breakthrough
-  Lab in the Simulation pattern; Records with a section rail on a workstation. Viewer: drop its duplicated token block and base
+  Lab in the Simulation pattern; Engineering records with a section rail on a workstation. Viewer: drop its duplicated token block and base
   rules now that it loads `site.css`.
 - [ ] **WOS-4 — Godot.** HUD configurations as in-world devices (Crew Cuff, slate) and the launch page under the shell; package
   becomes STALE, so a `runtime-export`.

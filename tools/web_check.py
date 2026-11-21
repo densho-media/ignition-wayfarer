@@ -2,7 +2,7 @@
 
 Serves the site under /ignition-wayfarer/ (the GitHub Pages project path) with software WebGL (SwiftShader) and the cache off,
 and walks it as a visitor does, recording every request:
-  start      the start page loads only index.html, site.css, wos.js and release.json: no model, engine or library, no canvas
+  start      the start page loads only index.html, site.css, wos.js, release.json and thumbs/*.webp: no model, engine or library, no canvas
   viewer     Explore Ship from its link: whole-ship framing, orbit, zoom, pan, reset, presets, picking, the four styles, assembly states,
              Hybrid focus, the picking policy, exported colours, Reset appearance, the #cam and appearance bookmarks, no Enter Wayfarer file
   play       Explore Interior and Explore Exterior, each from its start-page choice: the launcher requests no engine before Start; Start
@@ -38,6 +38,7 @@ import math
 import os
 from pathlib import Path
 import queue
+import re
 import shutil
 import subprocess
 import sys
@@ -925,14 +926,17 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
         reqs, lines = traffic.since(mark)
         heavy = [u for u, *_ in reqs if any(h in u for h in HEAVY)]
         names = sorted({u[len(url):] or 'index.html' for u, *_ in reqs if not u.startswith(('data:', 'blob:'))})     # inline images are no request
-        record_check('start: loads only the page, its stylesheet, the shell script and release.json', not heavy and names == ['index.html', 'release.json', 'site.css', 'wos.js'],
-                     requests=names, heavy=heavy)
+        pictures = [n for n in names if re.fullmatch(r'thumbs/[a-z0-9-]+\.webp', n)]      # the Overview's committed thumbnails
+        code = [n for n in names if n not in pictures]
+        record_check('start: loads only the page, its stylesheet, the shell script, release.json and its thumbnails',
+                     not heavy and code == ['index.html', 'release.json', 'site.css', 'wos.js'] and bool(pictures),
+                     requests=code, pictures=pictures, heavy=heavy)
         canvases = page.js("document.querySelectorAll('canvas').length")
         record_check('start: no canvas or engine initialized', canvases == 0 and not page.js('!!(window.Engine || window.wayfarer)'), canvases=canvases)
         start_bytes = sum(b for _, _, b, _ in reqs)
         timing = page.js("(() => { const n = performance.getEntriesByType('navigation')[0]; return {dcl: Math.round(n.domContentLoadedEventEnd), "
                          "load: Math.round(n.loadEventEnd)}; })()")
-        record_check('start: under its transfer budget', start_bytes < 150_000, transferred=start_bytes, load_ms=timing)
+        record_check('start: under its transfer budget (code and above-the-fold pictures)', start_bytes < 300_000, transferred=start_bytes, load_ms=timing)
         metrics['start'] = {'transferred_bytes': start_bytes, 'navigation_ms': timing, 'ready_s': start_s, 'requests': len(reqs)}
         requests_ok('start: every request served from the project subpath', reqs)
         page.screenshot(out / 'start.png')

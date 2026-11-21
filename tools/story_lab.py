@@ -412,7 +412,9 @@ def lab_page(d, page, revision, built, out):
 <script type="application/json" id="bt-data">{data}</script>'''
     out.mkdir(parents=True, exist_ok=True)
     (out / 'index.html').write_text(page('Breakthrough Lab · Wayfarer engineering', 'Explore provisional breakthroughs for the Wayfarer drive '
-                                         'against the hard-science reference.', body, 2, revision, built, head=LAB_HEAD))
+                                         'against the hard-science reference.', body, 2, revision, built, head=LAB_HEAD,
+                                         crumb=('Simulations', 'simulations/'),
+                                         guide=('lab', 'Which assumed breakthroughs would let the design close. The scenarios are illustrative.', 'Switch one breakthrough on and watch the gaps.')))
 
 
 def lab_data(d):

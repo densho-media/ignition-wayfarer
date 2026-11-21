@@ -3,41 +3,41 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Technical status — G.U. Wayfarer 001</title>
+<title>Status · G.U. Wayfarer 001</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%231B2633'/%3E%3Ccircle cx='8' cy='8' r='4.6' fill='%238C83C5'/%3E%3Ccircle cx='8' cy='8' r='3' fill='%23D99AC9'/%3E%3Ccircle cx='8' cy='8' r='1.3' fill='%23D8EAFF'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0A0F15">
 <link rel="stylesheet" href="../site.css">
 </head>
 <body class="scene-quiet wos" data-kind="record">
 <!--wos:bar-->
-<main class="wrap" id="wos-work">
+<main clas<main class="wrap wos-page" id="wos-work">
   <header class="wos-head">
-    <p class="eyebrow">System · OPS Console</p>
-    <h1>SYSTEM STATUS</h1>
-    <p class="lead">The ship state this release was built from, the standing advisories, the interface profiles and the release review:
-      version, inputs, checks and known limits. Every value is generated from the model (<a href="../wos.json">wos.json</a>,
-      <a href="../release.json">release.json</a>); nothing on this page loads the 3D engines.</p>
+    <h1>Status</h1>
+    <p class="lead">The state the ship's model is built in, and what still holds the design back. Design values, not live telemetry.</p>
   </header>
   <div class="wos-cols">
     <section id="ship-state" class="panel"><h2>Ship state</h2><!--wos:state--></section>
     <section id="advisories" class="panel"><h2>Advisories</h2>
-      <p class="note">Standing advisories: the open engineering problems of the design and the HOLD items. Each opens its record.</p>
+      <p class="note">The open engineering problems of the design and the HOLD items. Each opens its record.</p>
       <!--wos:advisories--></section>
   </div>
-  <section id="profiles" class="panel"><h2>Interface profiles</h2>
-    <p class="note">One ship, one operating system, multiple devices. The space on your screen picks the layout; every function is on every
+  <section id="system"><h2>System</h2>
+    <p class="note">About this website: the release, its checks and limits, and how the layout follows your screen.</p>
+    <details class="panel" id="profiles"><summary>Layouts and devices</summary>
+    <p class="note">One ship, one operating system, many screens. The space on your screen picks the layout; every function is on every
       layout. Station names are fictional ship devices and stay <span class="st st-PROTOTYPE">PROTOTYPE</span> until canon names them.</p>
     <div class="scroll" tabindex="0"><table>
       <thead><tr><th scope="col">Layout</th><th scope="col">When</th><th scope="col">Station shown</th><th scope="col">Arrangement</th></tr></thead>
       <tbody>
-        <tr><td>Workstation</td><td>1100 px wide or more</td><td>OPS Console, Engineering or Simulation Workstation (by module)</td><td>modules in the ship line, panels beside the workspace</td></tr>
+        <tr><td>Workstation</td><td>1100 px wide or more</td><td>OPS Console, Engineering or Simulation Workstation (by module)</td><td>modules and sections on top, panels beside the workspace</td></tr>
         <tr><td>Compact</td><td>700 to 1099 px wide</td><td>as Workstation</td><td>shorter ship line, one panel at a time</td></tr>
-        <tr><td>Personal Terminal</td><td>under 700 px wide or under 500 px high</td><td>Personal Terminal</td><td>module bar at the bottom (a side rail in landscape), panels as sheets</td></tr>
+        <tr><td>Personal Terminal</td><td>under 700 px wide or under 500 px high</td><td>Personal Terminal</td><td>modules at the bottom (a side rail in landscape), panels as sheets</td></tr>
       </tbody></table></div>
     <p class="note" id="profile-now"></p>
-  </section>
-  <section id="release-review"><h2>Release review</h2>
-  <div id="out"><p class="note">Loading release.json…</p></div>
+    </details>
+    <div id="release-review"><h3>Release review</h3>
+    <div id="out"><p class="note">Loading release.json…</p></div>
+    </div>
   </section>
 </main>
 <script src="status.js"></script>

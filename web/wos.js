@@ -7,7 +7,6 @@
   const prefs = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } })();
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch { /* storage blocked: defaults stay */ } };
   const bar = document.getElementById('wos-bar');
-  const sheet = bar?.querySelector('.wos-state');
   const page = location.pathname.replace(/index\.html$/, '');
 
   // Panel toggles: <button data-wos-toggle="id"> opens and closes #id (hidden), remembered per page.
@@ -32,16 +31,36 @@
   document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && root.classList.contains('wos-focus')) focus(false); });
   for (const b of document.querySelectorAll('[data-wos-focus]')) b.addEventListener('click', () => focus(!root.classList.contains('wos-focus')));
 
-  // The ship-state sheet closes on Escape or a click elsewhere.
-  document.addEventListener('click', e => { if (sheet?.open && !sheet.contains(e.target)) sheet.open = false; });
+  // The sheets close on Escape or a click elsewhere.
+  document.addEventListener('click', e => { for (const d of document.querySelectorAll('.wos-bar details[open]')) if (!d.contains(e.target)) d.open = false; });
 
-  // Shortcuts: g then a module letter; \ focus mode; Esc closes the sheet or leaves focus mode. Never while typing.
-  const keys = new Map([...(bar?.querySelectorAll('[data-wos-key]') || [])].map(a => [a.dataset.wosKey, a.href]));
+  // Guidance strips (docs/WOS.md section 7): dismissed ones stay closed in this browser; the help sheet shows them again.
+  const guides = prefs.guides ||= {};
+  for (const g of document.querySelectorAll('[data-guide]')) {
+    if (guides[g.dataset.guide]) g.hidden = true;
+    g.querySelector('[data-wos-dismiss]')?.addEventListener('click', () => { g.hidden = true; guides[g.dataset.guide] = 1; save(); });
+  }
+  document.querySelector('[data-wos-reset-guides]')?.addEventListener('click', () => {
+    prefs.guides = {}; save();
+    for (const g of document.querySelectorAll('[data-guide]')) g.hidden = false;
+  });
+  // The current section tab stays in view on a narrow screen; a link to a section inside a closed disclosure opens it.
+  document.querySelector('.wos-sub [aria-current]')?.scrollIntoView({ block: 'nearest', inline: 'center' });
+  const reveal = () => { const t = location.hash && document.getElementById(location.hash.slice(1)); const d = t?.closest?.('details'); if (d) d.open = true; };
+  addEventListener('hashchange', reveal); reveal();
+  for (const d of document.querySelectorAll('.wos-bar details')) d.addEventListener('toggle', () => {
+    if (d.open) for (const o of document.querySelectorAll('.wos-bar details')) if (o !== d) o.open = false;
+  });
+
+  // Shortcuts: g then a module letter (or an earlier module's letter); \ focus mode; Esc closes a sheet or leaves focus mode.
+  const keys = new Map();
+  for (const a of bar?.querySelectorAll('[data-wos-key]') || []) for (const k of a.dataset.wosKey + (a.dataset.wosAlias || '')) keys.set(k, a.href);
   let lead = 0;
   document.addEventListener('keydown', e => {
     if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey || e.target.closest?.('input, textarea, select, [contenteditable]')) return;
     if (e.key === 'Escape') {
-      if (sheet?.open) { sheet.open = false; sheet.querySelector('summary').focus(); return; }
+      const open = document.querySelector('.wos-bar details[open]');
+      if (open) { open.open = false; open.querySelector('summary').focus(); return; }
       if (root.classList.contains('wos-focus')) focus(false);
       return;
     }
@@ -65,7 +84,7 @@
     },
     prefs, save,
   };
-  const now = document.getElementById('profile-now');
-  if (now) now.textContent = `This screen: ${window.wos.profile()} layout, ${innerWidth} × ${innerHeight} px, `
+  const line = `This screen: ${window.wos.profile()} layout, ${innerWidth} × ${innerHeight} px, `
     + `${matchMedia('(pointer: coarse)').matches ? 'touch' : 'pointer'} input.`;
+  for (const e of document.querySelectorAll('#profile-now, [data-wos-profile]')) e.textContent = line;
 })();
