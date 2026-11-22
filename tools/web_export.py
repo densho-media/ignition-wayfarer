@@ -25,6 +25,7 @@ import struct
 import subprocess
 import sys
 import tarfile
+import threading
 import time
 import urllib.request
 
@@ -171,151 +172,176 @@ def run(root, out=None, pipeline_run=None, draco=True, with_play=True, native=Fa
         identity = {'git_revision': revision, 'git_dirty': dirty, 'build': 'saved assets, browser copy (WEB-001)',
                     'inputs': pipeline.input_hashes(root)}
         (work / 'build_identity.json').write_text(json.dumps(identity, indent=2) + '\n')
-        log = run_dir / 'export.log'
-        t0 = time.monotonic()
-        code = pipeline.subprocess_runner(pipeline.blender(root / 'src/wayfarer/export/godot.py', '--root', root, '--out', work,
-                                                           '--identity', work / 'build_identity.json', *(['--draco'] if draco else [])),
-                                          log, root, pipeline.STEP_TIMEOUT)
-        export_s = round(time.monotonic() - t0, 1)
-        if code:
-            return {'result': 'FAIL', 'step': 'export', 'log': str(log), 'tail': pipeline.failure_tail(log)}
-        manifest = json.loads((work / 'manifest.json').read_text())
-        glb = check_glb(work / 'wayfarer.glb', manifest)
-        if not glb['ok']:
-            return {'result': 'FAIL', 'step': 'check-glb', 'problems': glb['problems'], 'run_dir': str(run_dir)}
-        for src in sorted((root / 'web').rglob('*')):
-            rel = src.relative_to(root / 'web').as_posix()
-            if src.is_file() and rel not in SKIP:
-                (site / rel).parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(src, site / rel)
-        try:
-            engineering = story.build(root, site, revision=revision, built=pipeline.utc_now()[:10], play=with_play)
-        except (RuntimeError, ValueError, OSError, KeyError) as error:
-            return {'result': 'FAIL', 'step': 'engineering', 'reason': str(error)[-2000:], 'run_dir': str(run_dir)}
-        # The Wayfarer Operating System: wos.json and the ship line baked into every page (tools/wos.py, docs/WOS.md).
-        shell = wos.build(site, engineering.pop('register', None))
-        if shell['problems']:
-            return {'result': 'FAIL', 'step': 'wos', 'problems': shell['problems'][:20], 'run_dir': str(run_dir)}
-        viewer = site / 'viewer'
-        vendor_three(viewer)
-        (viewer / 'model').mkdir()
-        glb_sha = pipeline.sha256(work / 'wayfarer.glb')
-        glb_file = f'model/wayfarer-{glb_sha[:12]}.glb'
-        shutil.copy2(work / 'wayfarer.glb', viewer / glb_file)
-        # The pick labels: node -> component, kind and statuses (the manifest's records without placements and lights).
-        nodes = {r['node']: [r['component_id'], r['kind'], r['canon_status'], r['geometry_status']] for r in manifest['nodes']}
-        nodes_text = json.dumps(nodes, separators=(',', ':'))
-        nodes_file = f'model/nodes-{hashlib.sha256(nodes_text.encode()).hexdigest()[:12]}.json'
-        (viewer / nodes_file).write_text(nodes_text)
-        # WEB-003: the hologram styles' overlay colours per node (the M5 subsystem table and the engine hologram colour).
-        holo_text = json.dumps(representation.holo_style(root, manifest['nodes']), separators=(',', ':'))
-        holo_file = f'model/holo-{hashlib.sha256(holo_text.encode()).hexdigest()[:12]}.json'
-        (viewer / holo_file).write_text(holo_text)
-        # The fractal shielding: the shared GLSL (the Godot runtime's include) and its uniforms from the runtime manifest.
-        shield_text = (root / 'godot/shaders/fractal_shield.gdshaderinc').read_text()
-        shield_file = f'model/shield-{hashlib.sha256(shield_text.encode()).hexdigest()[:12]}.glsl'
-        (viewer / shield_file).write_text(shield_text)
-        shield = manifest['look']['exterior']['grammar'].get('fractal_shield')
-        # Vertex drive states (owner brief 2026-11-14): the one shared effect definition's opacities per named state and engine, keyed by
-        # the GLB nodes that carry each effect object (vertex_cluster.effect_states); none when the Fiji representation is active.
-        drive_file = engine_file = geometry_file = None
-        spec = load_spec(root)[0]
-        if vertex_cluster.active(spec) == vertex_cluster.VERTEX:
-            effects = vertex_cluster.effect_states(spec)
-            effects['nodes'] = {}
-            for r in manifest['nodes']:
-                if r['source_name'] in effects['layers'] or r['source_name'][3:] in effects['layers']:
-                    effects['nodes'].setdefault(r['source_name'], []).append(r['node'])
-            missing = sorted({o for e in effects['engines'].values() for o in e} - set(effects['nodes']))
-            if missing:
-                return {'result': 'FAIL', 'step': 'drive-states', 'reason': f'effect objects missing from the GLB: {missing[:6]}', 'run_dir': str(run_dir)}
-            drive_text = json.dumps(effects, separators=(',', ':'))
-            drive_file = f'model/drive-{hashlib.sha256(drive_text.encode()).hexdigest()[:12]}.json'
-            (viewer / drive_file).write_text(drive_text)
-            # Vertex Engine 1.1 part inspection: the logical parts' records and their own meshes, loaded only when someone inspects an
-            # engine (vertex_inspect). Every record's render object must be in the GLB, or a part would point at nothing.
-            inspect, geometry = vertex_inspect.manifest(spec)
-            sources = {r['source_name'] for r in manifest['nodes']}
-            lost = sorted({r['render_object'] for r in inspect['parts']} - sources)
-            if lost:
-                return {'result': 'FAIL', 'step': 'engine-inspection', 'reason': f'render objects missing from the GLB: {lost[:6]}', 'run_dir': str(run_dir)}
-            geometry_file = f'model/engine-parts-{hashlib.sha256(geometry).hexdigest()[:12]}.bin'
-            (viewer / geometry_file).write_bytes(geometry)
-            inspect['geometry']['file'] = geometry_file
-            # Vertex Engine 1.3: the vacuum field lines for the optional field overlay, fetched only when someone switches it on
-            field_text = json.dumps(vertex_magnet.overlay(spec), separators=(',', ':'))
-            field_file = f'model/field-{hashlib.sha256(field_text.encode()).hexdigest()[:12]}.json'
-            (viewer / field_file).write_text(field_text)
-            inspect['magnet']['field_file'] = field_file
-            engine_text = json.dumps(inspect, separators=(',', ':'))
-            engine_file = f'model/engine-{hashlib.sha256(engine_text.encode()).hexdigest()[:12]}.json'
-            (viewer / engine_file).write_text(engine_text)
-        # Fuel & Propellant System (owner brief 2026-11-18): the feed train's pipes, operating states and numbers (fuel_system.web), keyed
-        # to the GLB nodes of every FPS object; loaded only when someone opens the Fuel drawer.
-        fuel_file = None
-        if fuel_system.active(spec):
-            fuel = fuel_system.web(spec)
-            fuel['nodes'] = {}
-            for tank, sp in zip(fuel_system.fst.run_tanks(spec), spec['drive_hot_section']['tank_families']):
-                fuel['objects'].setdefault(tank['name'], dict(species=sp, kind='feed_run_tank'))
-            if fuel.get('assembly'):
-                # FPS V1.1 propulsion-assembly view: the cluster frame and service lines and the four engines join by their merged family nodes
-                # (their own materials and drive animations are kept; the effects nodes stay with the drive)
-                for r in manifest['nodes']:
-                    n = r['source_name']
-                    if n.startswith('CL_') and not n.startswith('CL_Power'):
-                        fuel['objects'].setdefault(n, dict(species='structure', kind=r['kind'], group='cluster', owner='CLUSTER'))
-                    elif n.startswith('VTX_') and r['kind'] != 'vtx_visual_effects':
-                        fuel['objects'].setdefault(n, dict(species='engine', kind=r['kind'], group='engine', owner='ENGINE'))
-            for r in manifest['nodes']:
-                if r['source_name'] in fuel['objects']:
-                    fuel['nodes'].setdefault(r['source_name'], []).append(r['node'])
-            lost = sorted(set(fuel['objects']) - set(fuel['nodes']))
-            if lost:
-                return {'result': 'FAIL', 'step': 'fuel-system', 'reason': f'FPS objects missing from the GLB: {lost[:6]}', 'run_dir': str(run_dir)}
-            fuel_text = json.dumps(fuel, separators=(',', ':'))
-            fuel_file = f'model/fuel-{hashlib.sha256(fuel_text.encode()).hexdigest()[:12]}.json'
-            (viewer / fuel_file).write_text(fuel_text)
-        build = {'contract': 'WF_WEB_EXPLORER', 'version': 2, 'vessel': 'G.U. WAYFARER 001', 'project': 'IGNITION',
-                 'git_revision': revision, 'git_dirty': dirty, 'built_utc': pipeline.utc_now(),
-                 'representation': manifest['representation'], 'preset': manifest['preset'], 'blender': manifest['blender'],
-                 'three': THREE['version'], 'draco': draco, 'spec_hash': manifest['spec_hash'], 'source_map_hash': manifest['source_map_hash'],
-                 'coordinates': manifest['coordinates'], 'bounds_runtime_m': manifest['bounds_runtime_m'], 'triangles': manifest['triangles'],
-                 'glb': {k: glb[k] for k in ('bytes', 'nodes', 'mesh_nodes', 'meshes', 'materials', 'extensions_required')},
-                 'glb_sha256': glb_sha, 'glb_file': glb_file, 'nodes_file': nodes_file, 'holo_file': holo_file, 'shield_file': shield_file, 'drive_file': drive_file,
-                 'engine_file': engine_file, 'engine_parts_file': geometry_file, 'fuel_file': fuel_file,
-                 'shield': shield, 'pipeline': built}
-        (viewer / 'build.json').write_text(json.dumps(build, indent=2) + '\n')
-        play = None
+        # The Godot package (its own Blender export, import, native checks, Web export) needs only the saved assets and the identity,
+        # so it builds alongside the viewer export into a staging folder; its files join site/play after the pages are assembled,
+        # exactly where the sequential build put them.
+        staged, play_box, play_job = run_dir / 'play-out', {}, None
         if with_play:
-            try:
-                play = web_play.build(root, run_dir, site / 'play', work / 'build_identity.json',
-                                      native=native, native_check=native_check, characters=characters)
-            except (RuntimeError, ValueError, OSError) as error:
-                return {'result': 'FAIL', 'step': 'play', 'reason': str(error)[-2000:], 'run_dir': str(run_dir)}
-            (site / 'play/play.json').write_text(json.dumps({
-                'entry': play['entry'], 'bytes': play['bytes'], 'godot': play['godot'], 'godot_short': web_play.GODOT['version'],
-                'scene': play['scene'], 'git_revision': revision}, indent=1) + '\n')
-        else:
-            shutil.rmtree(site / 'play')
-        release = release_record(root, site, build, play, revision, dirty, built, engineering, shell)
-        problems = verify_site(site, release)
-        if problems:
-            return {'result': 'FAIL', 'step': 'verify-site', 'problems': problems[:20], 'run_dir': str(run_dir)}
-        files = release['files']
-        result = {'result': 'PASS', 'run_dir': str(run_dir), 'site': str(site), 'release': release['release'],
-                  'git_revision': revision, 'git_dirty': dirty, 'export_seconds': export_s, 'seconds': round(time.monotonic() - started, 1),
-                  'glb_mb': round(glb['bytes'] / 1e6, 2), 'site_mb': round(release['site_bytes'] / 1e6, 2),
-                  'start_page_bytes': release['experiences']['start']['download_bytes'],
-                  'viewer_mb': round(release['experiences']['viewer']['download_bytes'] / 1e6, 2),
-                  'play': play and {'mb': round(release['experiences']['play']['download_bytes'] / 1e6, 2), 'entry': play['entry'],
-                                    'native_reference': play['native_reference'], 'native_zip': play['native_zip'],
-                                    'input_key': play['input_key'],
-                                    'seconds': play['seconds'], 'step_seconds': play['step_seconds']},
-                  'mesh_nodes': glb['mesh_nodes'], 'assemblies': len(glb['assemblies']), 'triangles': manifest['triangles'],
-                  'pipeline': built and {'run': built['run'], 'geometry_diff': built['geometry_diff']}}
-        (run_dir / 'web.json').write_text(json.dumps({**result, 'files': {k: v['bytes'] for k, v in files.items()}}, indent=2) + '\n')
-        return result
+            def build_play():
+                try:
+                    play_box['play'] = web_play.build(root, run_dir, staged, work / 'build_identity.json',
+                                                      native=native, native_check=native_check, characters=characters)
+                except (RuntimeError, ValueError, OSError) as error:
+                    play_box['error'] = error
+            staged.mkdir()
+            play_job = threading.Thread(target=build_play, name='play-build')
+            play_job.start()
+        try:
+            return _assemble(root, run_dir, work, site, built, revision, dirty, draco, with_play, play_job, play_box, staged, started)
+        finally:
+            if play_job:
+                play_job.join()
+
+
+def _assemble(root, run_dir, work, site, built, revision, dirty, draco, with_play, play_job, play_box, staged, started):
+    """The viewer export and the site around it (run holds the write lock); the play build runs meanwhile in play_job."""
+    log = run_dir / 'export.log'
+    t0 = time.monotonic()
+    code = pipeline.subprocess_runner(pipeline.blender(root / 'src/wayfarer/export/godot.py', '--root', root, '--out', work,
+                                                       '--identity', work / 'build_identity.json', *(['--draco'] if draco else [])),
+                                      log, root, pipeline.STEP_TIMEOUT)
+    export_s = round(time.monotonic() - t0, 1)
+    if code:
+        return {'result': 'FAIL', 'step': 'export', 'log': str(log), 'tail': pipeline.failure_tail(log)}
+    manifest = json.loads((work / 'manifest.json').read_text())
+    glb = check_glb(work / 'wayfarer.glb', manifest)
+    if not glb['ok']:
+        return {'result': 'FAIL', 'step': 'check-glb', 'problems': glb['problems'], 'run_dir': str(run_dir)}
+    for src in sorted((root / 'web').rglob('*')):
+        rel = src.relative_to(root / 'web').as_posix()
+        if src.is_file() and rel not in SKIP:
+            (site / rel).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, site / rel)
+    try:
+        engineering = story.build(root, site, revision=revision, built=pipeline.utc_now()[:10], play=with_play)
+    except (RuntimeError, ValueError, OSError, KeyError) as error:
+        return {'result': 'FAIL', 'step': 'engineering', 'reason': str(error)[-2000:], 'run_dir': str(run_dir)}
+    # The Wayfarer Operating System: wos.json and the ship line baked into every page (tools/wos.py, docs/WOS.md).
+    shell = wos.build(site, engineering.pop('register', None))
+    if shell['problems']:
+        return {'result': 'FAIL', 'step': 'wos', 'problems': shell['problems'][:20], 'run_dir': str(run_dir)}
+    viewer = site / 'viewer'
+    vendor_three(viewer)
+    (viewer / 'model').mkdir()
+    glb_sha = pipeline.sha256(work / 'wayfarer.glb')
+    glb_file = f'model/wayfarer-{glb_sha[:12]}.glb'
+    shutil.copy2(work / 'wayfarer.glb', viewer / glb_file)
+    # The pick labels: node -> component, kind and statuses (the manifest's records without placements and lights).
+    nodes = {r['node']: [r['component_id'], r['kind'], r['canon_status'], r['geometry_status']] for r in manifest['nodes']}
+    nodes_text = json.dumps(nodes, separators=(',', ':'))
+    nodes_file = f'model/nodes-{hashlib.sha256(nodes_text.encode()).hexdigest()[:12]}.json'
+    (viewer / nodes_file).write_text(nodes_text)
+    # WEB-003: the hologram styles' overlay colours per node (the M5 subsystem table and the engine hologram colour).
+    holo_text = json.dumps(representation.holo_style(root, manifest['nodes']), separators=(',', ':'))
+    holo_file = f'model/holo-{hashlib.sha256(holo_text.encode()).hexdigest()[:12]}.json'
+    (viewer / holo_file).write_text(holo_text)
+    # The fractal shielding: the shared GLSL (the Godot runtime's include) and its uniforms from the runtime manifest.
+    shield_text = (root / 'godot/shaders/fractal_shield.gdshaderinc').read_text()
+    shield_file = f'model/shield-{hashlib.sha256(shield_text.encode()).hexdigest()[:12]}.glsl'
+    (viewer / shield_file).write_text(shield_text)
+    shield = manifest['look']['exterior']['grammar'].get('fractal_shield')
+    # Vertex drive states (owner brief 2026-11-14): the one shared effect definition's opacities per named state and engine, keyed by
+    # the GLB nodes that carry each effect object (vertex_cluster.effect_states); none when the Fiji representation is active.
+    drive_file = engine_file = geometry_file = None
+    spec = load_spec(root)[0]
+    if vertex_cluster.active(spec) == vertex_cluster.VERTEX:
+        effects = vertex_cluster.effect_states(spec)
+        effects['nodes'] = {}
+        for r in manifest['nodes']:
+            if r['source_name'] in effects['layers'] or r['source_name'][3:] in effects['layers']:
+                effects['nodes'].setdefault(r['source_name'], []).append(r['node'])
+        missing = sorted({o for e in effects['engines'].values() for o in e} - set(effects['nodes']))
+        if missing:
+            return {'result': 'FAIL', 'step': 'drive-states', 'reason': f'effect objects missing from the GLB: {missing[:6]}', 'run_dir': str(run_dir)}
+        drive_text = json.dumps(effects, separators=(',', ':'))
+        drive_file = f'model/drive-{hashlib.sha256(drive_text.encode()).hexdigest()[:12]}.json'
+        (viewer / drive_file).write_text(drive_text)
+        # Vertex Engine 1.1 part inspection: the logical parts' records and their own meshes, loaded only when someone inspects an
+        # engine (vertex_inspect). Every record's render object must be in the GLB, or a part would point at nothing.
+        inspect, geometry = vertex_inspect.manifest(spec)
+        sources = {r['source_name'] for r in manifest['nodes']}
+        lost = sorted({r['render_object'] for r in inspect['parts']} - sources)
+        if lost:
+            return {'result': 'FAIL', 'step': 'engine-inspection', 'reason': f'render objects missing from the GLB: {lost[:6]}', 'run_dir': str(run_dir)}
+        geometry_file = f'model/engine-parts-{hashlib.sha256(geometry).hexdigest()[:12]}.bin'
+        (viewer / geometry_file).write_bytes(geometry)
+        inspect['geometry']['file'] = geometry_file
+        # Vertex Engine 1.3: the vacuum field lines for the optional field overlay, fetched only when someone switches it on
+        field_text = json.dumps(vertex_magnet.overlay(spec), separators=(',', ':'))
+        field_file = f'model/field-{hashlib.sha256(field_text.encode()).hexdigest()[:12]}.json'
+        (viewer / field_file).write_text(field_text)
+        inspect['magnet']['field_file'] = field_file
+        engine_text = json.dumps(inspect, separators=(',', ':'))
+        engine_file = f'model/engine-{hashlib.sha256(engine_text.encode()).hexdigest()[:12]}.json'
+        (viewer / engine_file).write_text(engine_text)
+    # Fuel & Propellant System (owner brief 2026-11-18): the feed train's pipes, operating states and numbers (fuel_system.web), keyed
+    # to the GLB nodes of every FPS object; loaded only when someone opens the Fuel drawer.
+    fuel_file = None
+    if fuel_system.active(spec):
+        fuel = fuel_system.web(spec)
+        fuel['nodes'] = {}
+        for tank, sp in zip(fuel_system.fst.run_tanks(spec), spec['drive_hot_section']['tank_families']):
+            fuel['objects'].setdefault(tank['name'], dict(species=sp, kind='feed_run_tank'))
+        if fuel.get('assembly'):
+            # FPS V1.1 propulsion-assembly view: the cluster frame and service lines and the four engines join by their merged family nodes
+            # (their own materials and drive animations are kept; the effects nodes stay with the drive)
+            for r in manifest['nodes']:
+                n = r['source_name']
+                if n.startswith('CL_') and not n.startswith('CL_Power'):
+                    fuel['objects'].setdefault(n, dict(species='structure', kind=r['kind'], group='cluster', owner='CLUSTER'))
+                elif n.startswith('VTX_') and r['kind'] != 'vtx_visual_effects':
+                    fuel['objects'].setdefault(n, dict(species='engine', kind=r['kind'], group='engine', owner='ENGINE'))
+        for r in manifest['nodes']:
+            if r['source_name'] in fuel['objects']:
+                fuel['nodes'].setdefault(r['source_name'], []).append(r['node'])
+        lost = sorted(set(fuel['objects']) - set(fuel['nodes']))
+        if lost:
+            return {'result': 'FAIL', 'step': 'fuel-system', 'reason': f'FPS objects missing from the GLB: {lost[:6]}', 'run_dir': str(run_dir)}
+        fuel_text = json.dumps(fuel, separators=(',', ':'))
+        fuel_file = f'model/fuel-{hashlib.sha256(fuel_text.encode()).hexdigest()[:12]}.json'
+        (viewer / fuel_file).write_text(fuel_text)
+    build = {'contract': 'WF_WEB_EXPLORER', 'version': 2, 'vessel': 'G.U. WAYFARER 001', 'project': 'IGNITION',
+             'git_revision': revision, 'git_dirty': dirty, 'built_utc': pipeline.utc_now(),
+             'representation': manifest['representation'], 'preset': manifest['preset'], 'blender': manifest['blender'],
+             'three': THREE['version'], 'draco': draco, 'spec_hash': manifest['spec_hash'], 'source_map_hash': manifest['source_map_hash'],
+             'coordinates': manifest['coordinates'], 'bounds_runtime_m': manifest['bounds_runtime_m'], 'triangles': manifest['triangles'],
+             'glb': {k: glb[k] for k in ('bytes', 'nodes', 'mesh_nodes', 'meshes', 'materials', 'extensions_required')},
+             'glb_sha256': glb_sha, 'glb_file': glb_file, 'nodes_file': nodes_file, 'holo_file': holo_file, 'shield_file': shield_file, 'drive_file': drive_file,
+             'engine_file': engine_file, 'engine_parts_file': geometry_file, 'fuel_file': fuel_file,
+             'shield': shield, 'pipeline': built}
+    (viewer / 'build.json').write_text(json.dumps(build, indent=2) + '\n')
+    play = None
+    if with_play:
+        play_job.join()
+        if 'error' in play_box:
+            return {'result': 'FAIL', 'step': 'play', 'reason': str(play_box['error'])[-2000:], 'run_dir': str(run_dir)}
+        play = play_box['play']
+        (site / 'play').mkdir(parents=True, exist_ok=True)
+        for src in sorted(staged.iterdir()):
+            shutil.copy2(src, site / 'play' / src.name)
+        (site / 'play/play.json').write_text(json.dumps({
+            'entry': play['entry'], 'bytes': play['bytes'], 'godot': play['godot'], 'godot_short': web_play.GODOT['version'],
+            'scene': play['scene'], 'git_revision': revision}, indent=1) + '\n')
+    else:
+        shutil.rmtree(site / 'play')
+    release = release_record(root, site, build, play, revision, dirty, built, engineering, shell)
+    problems = verify_site(site, release)
+    if problems:
+        return {'result': 'FAIL', 'step': 'verify-site', 'problems': problems[:20], 'run_dir': str(run_dir)}
+    files = release['files']
+    result = {'result': 'PASS', 'run_dir': str(run_dir), 'site': str(site), 'release': release['release'],
+              'git_revision': revision, 'git_dirty': dirty, 'export_seconds': export_s, 'seconds': round(time.monotonic() - started, 1),
+              'glb_mb': round(glb['bytes'] / 1e6, 2), 'site_mb': round(release['site_bytes'] / 1e6, 2),
+              'start_page_bytes': release['experiences']['start']['download_bytes'],
+              'viewer_mb': round(release['experiences']['viewer']['download_bytes'] / 1e6, 2),
+              'play': play and {'mb': round(release['experiences']['play']['download_bytes'] / 1e6, 2), 'entry': play['entry'],
+                                'native_reference': play['native_reference'], 'native_zip': play['native_zip'],
+                                'input_key': play['input_key'],
+                                'seconds': play['seconds'], 'step_seconds': play['step_seconds']},
+              'mesh_nodes': glb['mesh_nodes'], 'assemblies': len(glb['assemblies']), 'triangles': manifest['triangles'],
+              'pipeline': built and {'run': built['run'], 'geometry_diff': built['geometry_diff']}}
+    (run_dir / 'web.json').write_text(json.dumps({**result, 'files': {k: v['bytes'] for k, v in files.items()}}, indent=2) + '\n')
+    return result
 
 
 def tool_versions():

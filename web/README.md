@@ -175,7 +175,8 @@ mkdir -p runs/preview && ln -sfn ../web-site runs/preview/ignition-wayfarer && p
 
 `--record` writes the summary and metrics into the site's `release.json`. `--live <url>` repeats the checks against a deployed
 site, `--no-recording` skips the equivalence and `--no-touch` the touch walk. `--part main|equivalence|walk` (repeatable) runs
-only those parts, and `--merge <part dirs> --out <dir> [--record]` combines their `check.json`; a missing part fails.
+only those parts (`main-viewer` and `main-play` are the two halves of `main`: start, viewer, phone and review pages; start, both
+experiences and the switching chain), and `--merge <part dirs> --out <dir> [--record]` combines their `check.json`; a missing part fails.
 
 ## GitHub Actions
 
@@ -184,7 +185,8 @@ only those parts, and `--merge <part dirs> --out <dir> [--record]` combines thei
   that changes only `docs/`, `work/`, `TODO.md`, `README.md`, `AGENTS.md` or `CLAUDE.md` runs nothing (none of it is in the site or
   read by a test); the live site stays at the last built commit.
 - **Every branch.** Unit tests, the Blender build with geometry diff 0 and `web --native` (job `build`), then the browser check in
-  three parallel jobs on their own runners (`browser-check`: main, equivalence, walk; software WebGL is CPU-bound), then
+  four parallel jobs on their own runners (`browser-check`: main-viewer, main-play, equivalence, walk; software WebGL is CPU-bound,
+  so the main walk is split in two), then
   `site` merges their results into the site's `release.json` (`web_check --merge --record`; a missing part fails). Artifacts:
   - the site (`wayfarer-web-site`, the preview build, with the recorded results)
   - each part's screenshots and results (`wayfarer-web-check-<part>`), the merged result (`wayfarer-web-check`) and the build logs
