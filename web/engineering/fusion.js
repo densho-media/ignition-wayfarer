@@ -14,6 +14,7 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let D = null;
 const S = { d: 8, t: 3, mode: 'thermal', pol: 'none', x: 0.62, view: 'reaction' };
 let playing = !reduced, visible = true, last = 0, raf = 0;
+const DATA = 'fusion.json';                         // written by tools/story.py next to the page (engineering/fusion/)
 const stats = { frames: 0 };
 
 // ---- colours: the site's tokens (web/site.css) ---------------------------------------------------------------------------------
@@ -453,7 +454,7 @@ function loop() {
 
 // ---- start ---------------------------------------------------------------------------------------------------------------------
 async function start() {
-  D = window.FUSION_INLINE || await (await fetch('fusion.json')).json();
+  D = window.FUSION_INLINE || await (await fetch(DATA)).json();
   S.d = D.axes.d_share.indexOf(D.reference.d_share); S.t = D.axes.Ti.indexOf(D.reference.Ti);
   S.x = D.constants.photon_exposure_ref;
   readHash();
