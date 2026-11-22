@@ -206,9 +206,15 @@ class Website(unittest.TestCase):
         if lab.load()['results'] is None:
             raise unittest.SkipTest('results/scenarios.json not computed')
         cls.tmp = Path(tempfile.mkdtemp(prefix='btlab-site-'))
-        shutil.copy2(ROOT / 'web/site.css', cls.tmp / 'site.css')
+        # The shell the published pages load: site.css and wos.js beside them, then the WOS ship line baked in (as web_export does).
+        for name in ('site.css', 'wos.js'):
+            shutil.copy2(ROOT / 'web' / name, cls.tmp / name)
         import story
+        import wos
         cls.record = story.build(ROOT, cls.tmp)
+        shell = wos.build(cls.tmp, cls.record.get('register'))
+        if shell['problems']:
+            raise AssertionError(shell['problems'][:10])
 
     @classmethod
     def tearDownClass(cls):
