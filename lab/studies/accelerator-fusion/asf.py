@@ -3,7 +3,7 @@
 Research only (owner brief 2026-11-21). Reads the canon numbers it compares against from data/wayfarer_3d.toml and the shared physics in
 src/wayfarer/vertex_radiation.py; writes results/asf.json. Changes no canon. Standard library only:
 
-    python3 work/accelerator-fusion/asf.py
+    python3 lab/studies/accelerator-fusion/asf.py
 
 Every efficiency below is a declared HYPOTHESIS per maturity level, never a result. The physics (cross sections, Coulomb logarithm,
 slowing down, bremsstrahlung) is textbook; the outputs are screening numbers, not a design.
@@ -15,7 +15,7 @@ import sys
 import tomllib
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT/'src'/'wayfarer'))
 import vertex_radiation as vr  # noqa: E402
 import vertex_source as vs  # noqa: E402

@@ -1,14 +1,17 @@
-| Work entry | |
+<!-- lab entry -->
+| Lab entry | |
 | --- | --- |
 | Kind | Study (research only) |
-| Status | ACTIVE (awaiting owner Q1-Q4) |
+| Status | PARKED (negative result accepted by the owner 2026-11-22; selective fuelling continues in selective-fusion) |
 | Question | Could the Wayfarer use its structure as an accelerator-driven, selective D-3He fusion system that beats the Vertex Drive on energy, radiation and thrust? |
 | Model base | main 3866ebf (Vertex 1.6-2.11 and EXT-01 in lab/studies/vertex-closure; FPS V1.1) |
 | Branch | claude/project-thread-ae02qr, owner brief 2026-11-21 |
-| Open owner questions | Q1 accept the negative result for A-C and keep Vertex; Q2 carry selective fuelling into the R2 fuel-cycle comparison (settles FPS `he3_per_d_molar`); Q3 register polarised D with quintet suppression as a Breakthrough Lab item; Q4 briefs use the canon length (289.5 m body, 301.5 m overall), not 80-90 m |
+| Open owner questions | none (Q1-Q4 answered 2026-11-22: keep Vertex, carry selective fuelling and spin polarisation forward, canon numbers by default) |
 | Review | Claude Doc https://claude.ai/artifact/RycBWQ7mB16DmvnJAX9uYy |
 
 # accelerator-fusion: notes
+
+Moved from `work/accelerator-fusion/` on 2026-11-22 when the owner accepted the result. Run `python3 lab/studies/accelerator-fusion/asf.py`.
 
 **Function.** Screen accelerator-driven, non-thermal D-3He architectures against the Vertex baseline and the ship's own budgets.
 

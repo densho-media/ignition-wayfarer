@@ -44,7 +44,7 @@ Primary navigation follows what a visitor wants to do, not how the files are org
 | --- | --- | --- | --- |
 | Overview | discover: what is this, what can I do | — | `/` |
 | Explore | explore the spacecraft | Ship 3D, Interior, Exterior | `viewer/`, `interior/`, `exterior/`, `play/` |
-| Simulations | run something and see what breaks | All, Ignition, Dust, Build sequence, Compare, Breakthrough Lab | `simulations/`, `engineering/ignition/`, `dust/`, `build/`, `compare/`, `breakthrough-lab/` |
+| Simulations | run something and see what breaks | All, Fusion engine, Ignition, Dust, Build sequence, Compare, Breakthrough Lab | `simulations/`, `engineering/fusion/`, `ignition/`, `dust/`, `build/`, `compare/`, `breakthrough-lab/` |
 | Engineering | understand the design and its sources | Summary, Baseline, Weakest links, Ship evolution, Vertex drive, Open problems, Lab records | `engineering/` and its study pages, `studies/`, `variants/` |
 | Status | check the ship state, advisories and this release | Ship state, Advisories, System | `status/` |
 

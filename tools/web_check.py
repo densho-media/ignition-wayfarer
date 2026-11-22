@@ -1450,6 +1450,22 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
                 page.screenshot(out / 'phone_dust.png')
             else:
                 record_check('dust: the 3D view starts', False)
+        # Engineering · Fusion engine, on the phone: the page ledger reproduces the study's check points
+        # (lab/studies/selective-fusion, written into fusion.json), nothing overflows in the narrow budget view
+        if 'engineering/fusion/index.html' in release.get('files', {}):
+            page.send('Page.navigate', {'url': url + 'engineering/fusion/#budget'})
+            if page.wait('!!(window.__fusion && window.__fusion.ready)', 120):
+                mirror = page.js("(() => window.__fusion.data.checks.map(c => { const o = window.__fusion.evaluate(c.key, c.exposure); "
+                                 "return [c.key, o.sustains === c.ledger.sustains && Math.abs(o.thrust - c.ledger.thrust) < 1e-4 "
+                                 "&& Math.abs(o.heat - c.ledger.heat) < 1e-4]; }))()")
+                record_check('fusion: the page ledger reproduces the study check points', bool(mirror) and all(ok for _, ok in mirror),
+                             points=mirror)
+                st = page.js("({ready: window.__fusion.ready, overflow: document.documentElement.scrollWidth > innerWidth, "
+                             "verdict: document.getElementById('verdict').textContent})")
+                record_check('fusion: the budget view reports a verdict, no horizontal overflow', bool(st['verdict']) and not st['overflow'], **st)
+                page.screenshot(out / 'phone_fusion.png')
+            else:
+                record_check('fusion: the page starts', False)
     except SystemExit:
         pass
     except Exception as error:      # a browser session failure is a failed check with Chrome's own last words
