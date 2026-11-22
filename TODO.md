@@ -713,6 +713,12 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   fatigue at 5.7 kHz; the collar's local design; the +1.3 kt engine and frame mass against the ship's mass budget (owner); 1.7 %
   radiator line of sight to the burn points; the design-point heat flux (29× research, VTX-S3) and pulse rate (VTX-S1/S2); whether
   canon adopts a Vertex drive (owner, Drive, not authorized here); six-engine layouts (`propulsion_cluster.engine_count` stays 4).
+- [ ] **P07 — Selective Fusion Engineering (SFE, owner brief 2026-11-22). RESEARCH, lab only; Vertex stays the baseline.** The
+  accelerator-driven engine is a grounded negative result (lab/studies/accelerator-fusion, PARKED). lab/studies/selective-fusion holds the
+  energy-channel model behind the public Fusion engine explainer (engineering/fusion/): prevention alone (D-lean fuel, hot-ion mode,
+  polarisation) cannot meet B01; the reference burn heats the ship 5,386x the drive's hot radiators, every lever with 5 % X-ray exposure
+  ~348x, and neutrons alone ~37x. Open: owner S1-S4 (NOTES.md); SFE-1 Fokker-Planck hybrid with polarisation and synchrotron, then a
+  burn-geometry X-ray avoidance study; the D-D suppression of polarised fuel is unmeasured (PolFusion) and stays SPECULATIVE.
 
 ## Owner routing and question continuity
 

@@ -1,0 +1,46 @@
+/* Engineering · Fusion engine: where the energy goes (web/engineering/fusion.js). Builds on ignition.css's .ign layout. */
+.fus .stage canvas { visibility: visible; }
+.fus .stage.live::after { display: none; }
+.fus .evcap { left: 10px; top: 52px; bottom: auto; max-width: min(460px, calc(100% - 20px)); border-left-color: var(--accent); }
+.fus:not([data-mode="reaction"]) .evcap { display: none; }
+.fus .evcap span { color: var(--muted); font-size: 12px; }
+.fus .presets button { display: inline-flex; align-items: center; gap: 6px; text-align: left; }
+.fus .presets button[aria-pressed="true"] { border-color: var(--selected); color: var(--ink-strong); background: var(--surface-3); }
+.fus .presets .st { font-size: 10px; }
+.fus .readouts table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.fus.ign .ign-side .readouts table tr > th, .fus.ign .ign-side .readouts table tr > td { white-space: normal; }
+.fus .fled td.num { width: 5em; white-space: nowrap; }
+.fus .fsum td.num { width: 45%; white-space: normal; }
+.fus .fled th, .fus .fsum th { overflow-wrap: anywhere; }
+.fus .readouts caption { text-align: left; font-size: 12px; color: var(--muted); padding-bottom: 4px; }
+.fus .fled th, .fus .fsum th { text-align: left; font-weight: 500; color: var(--ink); padding: 4px 6px 4px 0; vertical-align: top; }
+.fus .fled th small { display: block; font-size: 11px; color: var(--muted); font-weight: 400; }
+.fus .fled td, .fus .fsum td { padding: 4px 0; vertical-align: top; }
+.fus .fled td.num, .fus .fsum td.num { font-family: var(--mono); color: var(--ink-strong); text-align: right; white-space: nowrap; padding-right: 8px; }
+.fus .fled tr.zero td.num { color: var(--muted); }
+.fus .fled td:last-child { width: 28%; }
+.fus .fsum { margin-top: 8px; border-top: 1px solid var(--line); }
+.fus .fbar { display: block; height: 8px; margin-top: 5px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+.fus .fbar i { display: block; height: 100%; }
+.fus .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.fus .sw-thrust, .fus tr[data-k="thrust"] .fbar i { background: var(--good); }
+.fus .sw-spread, .fus tr[data-k="spread"] .fbar i { background: var(--muted); }
+.fus .sw-photon, .fus tr[data-k="photon"] .fbar i, .fus .sw-escape { background: var(--warn); }
+.fus .sw-neutron, .fus tr[data-k="neutron"] .fbar i { background: #A9B4BF; }
+.fus .sw-loss, .fus tr[data-k="loss"] .fbar i, .fus .sw-heat { background: var(--bad); }
+.fus .readouts .first.bad b { color: var(--bad); }
+.fus .scale { margin: 10px 0 0; font-size: 13px; }
+.fus .scale b.bad { color: var(--bad); }
+.fcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin: 8px 0; }
+.fcard { background: var(--surface-1); border: 1px solid var(--line); border-left: 3px solid var(--line-strong); border-radius: 6px; padding: 10px 12px; }
+.fcard p { margin: 0 0 6px; }
+.fcard p:last-child { margin: 0; }
+.fcard .eq { font-family: var(--mono); font-size: 15px; color: var(--ink-strong); }
+.fcard.good { border-left-color: var(--good); }
+.fcard.warn { border-left-color: var(--warn); }
+.fcard.bad { border-left-color: var(--bad); }
+@media (max-width: 699px) {
+  .fus .presets button { min-height: 44px; }
+  .fus .evcap { top: 46px; font-size: 11px; }
+}
+.fus.ign .ign-side .readouts table.fled tr > td.num { white-space: nowrap; }

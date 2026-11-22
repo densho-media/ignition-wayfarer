@@ -8,6 +8,8 @@ Writes <site>/engineering/:
                               problem map's `site.py --compare`, drawn by web/engineering/compare.js over the Explore Ship model
   build/                      the assembly sequence: the approved ship put together step by step, from the spine to first ignition,
                               from the assembly-sequence study's `site.py --json`, drawn by web/engineering/build.js over the Explore Ship model
+  fusion/                     the Fusion engine explainer: where a D-3He burn's energy goes (thrust, neutrons, X-rays, heat), from the
+                              selective-fusion study's `site.py --json`, drawn by web/engineering/fusion.js (2D canvas, no model file)
   dust/                       the dust-impacts training simulation: one grain on the Brow stack at any speed, the Vertex research trip
                               through the T02 dust and the visitor's stand-offs, from the dust-impacts study's `site.py --json`, drawn
                               by web/engineering/dust.js (procedural, no model file)
@@ -876,6 +878,159 @@ try to solve it.</p>
                                              'A training simulation of the open problem: what dust does to Wayfarer at speeds up to 0.016 c.',
                                              body, 2, revision, built, DUST_HEAD, kind='sim', crumb=('Simulations', 'simulations/'),
                                              guide=('dust', 'One grain of dust hitting the shield at test speed (left) and at cruise speed (right).', 'Start, then move Impact speed and watch the right side.', ('Open problems', '../#problems'))))
+    return True
+
+
+FUSION_HEAD = '''
+<link rel="stylesheet" href="../ignition.css">
+<link rel="stylesheet" href="../fusion.css">
+<script type="module" src="../fusion.js"></script>'''
+
+CLASS_CHIP = {'ESTABLISHED': ('KNOWN', 'established'), 'MODEL-BASED': ('CALCULATED', 'model-based'), 'SPECULATIVE': ('SPECULATIVE', 'speculative'),
+              'ASSUMED': ('ASSUMED', 'assumed'), 'ENGINEERING': ('WORKING', 'engineering')}
+
+
+def chip(cls):
+    c, w = CLASS_CHIP[cls]
+    return f'<span class="st st-{c}">{esc(w)}</span>'
+
+
+def fusion_page(e, d, out_dir, revision, built):
+    """engineering/fusion/: the Fusion engine explainer (web/engineering/fusion.js), from the selective-fusion study. Where a D-3He
+    burn's energy goes: charged products for thrust, neutrons, X-rays, heat in hardware, over fuel mix, temperature, hot-ion mode,
+    spin polarisation and how much radiation the hardware sees. The page reads values from fusion.json (model.py) and does the same
+    linear ledger; the numbers below are written in from the study so the page reads without JavaScript."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    keep = ('contract', 'canon', 'axes', 'fields', 'grid', 'reference', 'reference_ledger', 'constants', 'checks')
+    (out_dir / 'fusion.json').write_text(json.dumps({k: d[k] for k in keep if k in d}, separators=(',', ':')))
+    K, L, C = d['canon'], d['reference_ledger'], d['constants']
+    E = C['energies_MeV']
+    pc = lambda v: f'{100 * v:.1f} %' if v >= 0.001 else f'{100 * v:.2f} %'
+    budget = K['hot_radiator_W'] * K['hot_share']
+    pol_btns = ''.join(f'<button data-pol="{k}" aria-pressed="{str(k == "none").lower()}">{esc(v["label"])} {chip(v["cls"])}</button>'
+                       for k, v in d['axes']['pol'].items())
+    rows = [('thrust', 'Useful for thrust', 'Charged products the magnetic nozzle aims backwards', L['thrust']),
+            ('spread', 'Leaves the nozzle sideways', 'Charged exhaust that is not aimed: no thrust, but no heat in the ship', L['spread']),
+            ('photon', 'X-rays (bremsstrahlung)', 'Hot electrons radiate; fields cannot hold light', L['photon']),
+            ('neutron', 'Neutrons', 'No charge: they cross every field and stop only in matter', L['neutron']),
+            ('loss', 'Injector losses', 'Hot-ion mode only: heat in the injectors that keep the ions hotter', L['injector_loss'])]
+    ledger_rows = ''.join(f'<tr data-k="{k}"><th scope="row"><i class="sw sw-{k}"></i>{esc(a)}<small>{esc(b)}</small></th><td class="num">{pc(v)}</td>'
+                          f'<td><span class="fbar"><i style="width:{min(100, 100 * v):.1f}%"></i></span></td></tr>' for k, a, b, v in rows)
+    lever_rows = ''.join(f'<tr><td><b>{esc(a)}</b></td><td>{esc(b)}</td><td>{chip(c)}</td></tr>' for a, b, c in (
+        ('Selective fuelling (D-lean)', 'Less deuterium, more helium-3: fewer D-D collisions, so fewer neutrons. It costs reaction rate, so the X-ray share grows.', 'ESTABLISHED'),
+        ('Hot-ion mode', 'Heat the ions and keep the electrons cooler: fewer X-rays per fusion. It costs injector power to hold the gap.', 'MODEL-BASED'),
+        ('Spin-polarised D and ³He', 'Aligned nuclear spins raise the D-³He rate up to 1.5 times. Never shown inside a burning plasma.', 'MODEL-BASED'),
+        ('D-D suppression by polarisation', 'Aligned deuterons might fuse with each other less often. Theory disagrees and nothing is measured yet.', 'SPECULATIVE'),
+        ('Less radiation on hardware', 'Keep coils and structure out of the burn\'s view, so X-rays escape to space instead of heating the ship.', 'ENGINEERING'),
+        ('AI-assisted control', 'Fast control of the plasma\'s collective modes, injectors and fields. It steers populations of particles, never single nuclei.', 'ENGINEERING')))
+    checks = len(d['checks'])
+    body = f'''<header><p class="eyebrow">Simulations · concept explainer</p><h1>Fusion engine: where the energy goes</h1>
+<p class="lead">This interactive shows the main energy pathways and reaction trade-offs in a D–³He fusion engine concept. Some values are
+simplified for explanation. Making D and ³He fuse is only half the job; the other half is making sure the energy ends up in charged exhaust
+the nozzle can aim, and not in neutrons, X-rays and heat inside the ship. The Wayfarer's drive is not solved: at the reference point below,
+about {pc(L["thrust"])} of the fusion power becomes thrust, and the heat left in the hardware is about {L["radiator_multiple"]:,.0f} times
+what the drive's radiators can reject.</p>
+<p><span class="st st-OPEN">open problem</span> <span class="st st-ASSUMED">concept, simplified</span> · model: the
+  <a href="../{e["kind_dir"]}/{e["folder"].name}/">selective-fusion study</a> · <a href="../ignition/">Ignition: what breaks</a></p></header>
+<section class="ign fus" data-mode="reaction">
+  <div class="ign-modes" role="tablist" aria-label="View">
+    <button role="tab" data-mode="reaction" aria-selected="true"><b>Reactions</b><span>Which nuclei fuse, and what comes out</span></button>
+    <button role="tab" data-mode="engine" aria-selected="false"><b>Engine</b><span>Where each product goes in the engine</span></button>
+    <button role="tab" data-mode="budget" aria-selected="false"><b>Energy budget</b><span>Every watt, from fusion to thrust or heat</span></button></div>
+  <div class="stage live" id="stage">
+    <canvas id="fusion-view" role="img" aria-label="Animated diagram of the fusion engine; the same numbers are in the readouts beside it"></canvas>
+    <div class="evcap" id="evcap"></div>
+  </div>
+  <div class="itools">
+    <span class="nav" role="toolbar" aria-label="Playback"><button id="play" aria-label="Pause">❚❚</button></span>
+    <span class="meta">Moving dots are a picture of the shares, not individual nuclei.</span>
+  </div>
+  <div class="ign-side" role="region" aria-label="Controls and results">
+    <div class="levers">
+      <div class="lever"><label for="c-d">Fuel mix: deuterium share <output id="o-d">50 %</output></label>
+        <input type="range" id="c-d" min="0" max="{len(d["axes"]["d_share"]) - 1}" step="1" value="{d["axes"]["d_share"].index(d["reference"]["d_share"])}">
+        <span class="meta">Share of the fuel nuclei that are deuterium; the rest is helium-3. 50 % is the usual 1:1 mix.</span></div>
+      <div class="lever"><label for="c-t">Ion temperature <output id="o-t">100 keV</output></label>
+        <input type="range" id="c-t" min="0" max="{len(d["axes"]["Ti"]) - 1}" step="1" value="{d["axes"]["Ti"].index(d["reference"]["Ti"])}">
+        <span class="meta">How hot the fuel nuclei are. 100 keV is about 1.2 billion degrees.</span></div>
+      <p class="presets" role="group" aria-label="Operating mode"><button data-modeop="thermal" aria-pressed="true">Thermal: electrons as hot as ions</button>
+        <button data-modeop="hot-ion" aria-pressed="false">Hot-ion: electrons at 70 % {chip("MODEL-BASED")}</button></p>
+      <p class="presets" role="group" aria-label="Spin polarisation">{pol_btns}</p>
+      <div class="lever"><label for="c-x">X-rays that hit the ship <output id="o-x">{round(100 * C["photon_exposure_ref"])} %</output></label>
+        <input type="range" id="c-x" min="0" max="100" step="1" value="{round(100 * C["photon_exposure_ref"])}"><span class="meta">Share of the
+        X-rays that strike coils, shield and structure. {round(100 * C["photon_exposure_ref"])} % is what the Vertex engine's own parts intercept.
+        Neutrons: {round(100 * C["neutron_absorbed"])} % are absorbed by the engine and shield.</span></div>
+      <p class="presets"><button id="ref">Reset to the reference point</button><button id="share">Copy a link to this setting</button></p>
+    </div>
+    <div class="readouts" id="read">
+      <p class="first" id="verdict" aria-live="polite"><b>Reference point</b>: 1:1 fuel, 100 keV, thermal, no polarisation.</p>
+      <table class="fled"><caption>Where 100 % of the fusion power goes</caption><tbody id="ledger">{ledger_rows}</tbody></table>
+      <table class="fsum"><tbody>
+        <tr><th scope="row"><i class="sw sw-heat"></i>Becomes heat in the ship</th><td class="num" id="r-heat">{pc(L["heat"])}</td></tr>
+        <tr><th scope="row"><i class="sw sw-escape"></i>Radiation that escapes to space</th><td class="num" id="r-escape">{pc(L["escape"])}</td></tr>
+        <tr><th scope="row">Reactions by count: D–³He / D–D / T–D</th><td class="num" id="r-mix">–</td></tr>
+        <tr><th scope="row">Fusion power at the same plasma pressure</th><td class="num" id="r-rel">–</td></tr>
+      </tbody></table>
+      <p class="scale" id="r-scale">At the Wayfarer's operating point ({K["jet_W"] / 1e12:.0f} TW of jet): heat in the ship about
+        {L["heat_W"] / 1e9:,.0f} GW, against {budget / 1e9:.1f} GW of radiator for the drive: <b class="bad">{L["radiator_multiple"]:,.0f}×</b> too much.</p>
+    </div>
+  </div>
+</section>
+<section><h2>The reaction we want</h2>
+<div class="fcards">
+  <div class="fcard good"><p class="eq">D + ³He → ⁴He + p</p><p>{E["dhe3"]} MeV, all of it in two charged particles: an alpha particle
+    ({E["alpha"]} MeV) and a proton ({E["proton"]} MeV). Magnetic fields can hold, steer and aim charged particles, so this energy can become
+    exhaust. That is why D–³He is the fuel of the Vertex drive.</p></div>
+  <div class="fcard"><p class="eq">Why it is hard</p><p>D and ³He repel each other. They fuse well only at around a billion degrees, and even
+    then most close encounters just bounce. At those temperatures the electrons radiate X-rays, and some deuterons meet other deuterons.</p></div>
+</div></section>
+<section><h2>What causes problems</h2>
+<div class="fcards">
+  <div class="fcard bad"><p class="eq">D + D → ³He + n</p><p>Half of all D–D reactions. The {E["ddn_n"]} MeV neutron has no charge: it passes
+    every field, then heats and damages the structure it stops in, and it makes the shield heavy.</p></div>
+  <div class="fcard warn"><p class="eq">D + D → T + p</p><p>The other half: both products are charged and useful, but the tritium (T) can later
+    meet a deuteron.</p></div>
+  <div class="fcard bad"><p class="eq">T + D → ⁴He + n</p><p>A follow-up reaction: its {E["dt_n"]} MeV neutron is the most damaging of all. The
+    model assumes {round(100 * C["t_burn"])} % of the tritium burns before it leaves.</p></div>
+  <div class="fcard warn"><p class="eq">X-rays (bremsstrahlung)</p><p>Hot electrons swerving past nuclei give off X-rays. Light ignores magnetic
+    fields, so whatever share of the sky the hardware fills, it absorbs that share as heat.</p></div>
+  <div class="fcard bad"><p class="eq">Waste heat</p><p>A spacecraft can only lose heat by radiating it. Every watt that lands in the hardware
+    needs radiator area, and the Wayfarer's drive budget allows about {K["absorbed_fraction"] * 1e5:g} watts per 100,000 watts of fusion.</p></div>
+</div></section>
+<section><h2>What Wayfarer is trying to improve</h2>
+<p>Selective Fusion Engineering is the name for the set of methods that could make the burn cleaner without breaking physics. Each one has a
+  cost. None of them closes the heat budget alone. Future technology can improve control within physics, but not the physics itself.</p>
+<div class="scroll" tabindex="0"><table><thead><tr><th>Lever</th><th>What it does</th><th>How sure</th></tr></thead><tbody>{lever_rows}</tbody></table></div>
+<p class="meta"><b>established</b>: textbook physics · <b>model-based</b>: expected from theory, not shown in a burning plasma ·
+  <b>speculative</b>: physically motivated, unmeasured · <b>engineering</b>: depends on the design, not on new physics.</p></section>
+<section><h2>How the simulation works</h2>
+<p>The page does not run a plasma code. A small model (the study's <code>model.py</code>) splits one watt of fusion power at each setting:
+  Bosch–Hale reaction rates for D–³He and both D–D branches, the relativistic bremsstrahlung formula and the standard electron–ion heat
+  exchange, the same code as the Vertex engine studies. The page reads those splits from <code>fusion.json</code> and adds the linear part:
+  how much radiation hits the ship, the canon nozzle efficiency of {K["directed_efficiency"]:g}, and the Wayfarer's operating point. The site
+  check compares the page with the model at {checks} points.</p>
+<details><summary>Assumptions and simplifications</summary><ul class="plain">
+  <li>A uniform plasma with electrons as hot as the ions (thermal), or at {round(100 * C["te_over_ti_hot"])} % of them (hot-ion). Hot-ion mode
+    costs the power that flows from hot ions to cooler electrons; the injectors that replace it are assumed to be {round(100 * C["injector_eff"])} %
+    efficient (advanced technology), and their losses are heat.</li>
+  <li>Polarised fuel: full polarisation, D–³He rate ×1.5 (nuclear theory, supported by low-energy measurements, never shown in a plasma). The
+    D–D suppression option assumes ×0.25: one 1999 analysis predicts about 0.22 at 90 keV, fits to D–D data predict no suppression, and the
+    experiment designed to measure it has not reported a value.</li>
+  <li>{round(100 * C["t_burn"])} % of the D–D tritium burns (assumed). Not modelled: synchrotron radiation, energy transport, burn dynamics,
+    helium-3 made by D–D, loss of polarisation. Each of these would change the numbers, mostly for the worse.</li>
+  <li>"Fusion power at the same plasma pressure" compares how hard each setting is to run: magnets hold a pressure, not a reaction rate.</li>
+  <li>The Wayfarer numbers ({K["jet_W"] / 1e12:.0f} TW of jet, a {K["hot_radiator_W"] / 1e9:.1f} GW hot radiator of which the drive may use
+    {round(100 * K["hot_share"])} %, the absorbed-fraction target {K["absorbed_fraction"]:g}) come from the ship's parameters. The reference point
+    is a simple thermal burn, not the Vertex engine's own pulsed model, whose studies found at least 854× too much heat.</li>
+</ul></details>
+<p class="meta">Data classes: the ship numbers are specification (SPEC); everything the controls change is simulation state (SIM) and never
+  changes the ship. Why not an accelerator engine instead? See the <a href="../studies/accelerator-fusion/">accelerator-fusion study</a>:
+  a grounded negative result.</p></section>'''
+    (out_dir / 'index.html').write_text(page('Fusion engine: where the energy goes · Wayfarer engineering',
+                                             'An interactive explainer of a D-3He fusion engine concept: which reactions help, which hurt, and where the energy goes.',
+                                             body, 2, revision, built, FUSION_HEAD, kind='sim', crumb=('Simulations', 'simulations/'),
+                                             guide=('fusion', 'Where the energy of a D-3He fusion burn goes: thrust, neutrons, X-rays or heat in the ship.',
+                                                    'Open Energy budget, then move the fuel mix and switch on polarisation.', ('Open problems', '../#problems'))))
     return True
 
 
@@ -2509,7 +2664,7 @@ def build(root, site, revision=None, built=None, play=True):
             shutil.copy2(src, out / src.name)
     entries, dropped = lab_entries()
     problem = lab2 = seq = None
-    ignition = dust = False
+    ignition = dust = fusion = False
     pages = ['engineering/index.html']
     for e in entries:
         d = out / e['kind_dir'] / e['folder'].name
@@ -2534,6 +2689,9 @@ def build(root, site, revision=None, built=None, play=True):
         if data and data.get('contract') == 'WF_DUST_IMPACTS' and not dust:
             dust = dust_page(e, data, out / 'dust', revision, built)
             pages.append('engineering/dust/index.html')
+        if data and data.get('contract') == 'WF_SELECTIVE_FUSION' and not fusion:
+            fusion = fusion_page(e, data, out / 'fusion', revision, built)
+            pages.append('engineering/fusion/index.html')
     if problem is None:
         raise RuntimeError('no lab problem map with a site.py: the Engineering page needs one')
     if lab2 is not None:

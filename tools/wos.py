@@ -30,9 +30,10 @@ MODULES = [
              {'label': 'Interior', 'icon': 'interior', 'href': 'interior/', 'paths': ['interior/']},
              {'label': 'Exterior', 'icon': 'eva', 'href': 'exterior/', 'paths': ['exterior/']}]},
     {'id': 'sims', 'label': 'Simulations', 'icon': 'sim', 'key': 'm', 'href': 'simulations/', 'station': 'Simulation Workstation',
-     'paths': ['simulations/', 'engineering/ignition/', 'engineering/dust/', 'engineering/build/', 'engineering/compare/',
+     'paths': ['simulations/', 'engineering/fusion/', 'engineering/ignition/', 'engineering/dust/', 'engineering/build/', 'engineering/compare/',
                'engineering/breakthrough-lab/'],
      'sub': [{'label': 'All', 'href': 'simulations/', 'paths': ['simulations/']},
+             {'label': 'Fusion engine', 'href': 'engineering/fusion/', 'paths': ['engineering/fusion/']},
              {'label': 'Ignition', 'href': 'engineering/ignition/', 'paths': ['engineering/ignition/']},
              {'label': 'Dust', 'href': 'engineering/dust/', 'paths': ['engineering/dust/']},
              {'label': 'Build sequence', 'href': 'engineering/build/', 'paths': ['engineering/build/']},
@@ -56,6 +57,8 @@ MODULES = [
 ]
 # The simulations, as the Simulations module and the Overview present them (thumbnail names in web/thumbs/, tools/thumbs.py).
 SIMS = [
+    {'href': 'engineering/fusion/', 'thumb': 'sim-fusion', 'title': 'Fusion engine', 'icon': 'propulsion',
+     'line': 'Where the energy of a fusion burn goes: thrust, neutrons, X-rays or heat.', 'meta': 'Drawn live · no model download'},
     {'href': 'engineering/ignition/', 'thumb': 'sim-ignition', 'title': 'Ignition', 'icon': 'propulsion',
      'line': 'Switch the drive on and see what breaks first.', 'meta': 'Engine parts in 3D · about 0.4 MB'},
     {'href': 'engineering/dust/', 'thumb': 'sim-dust', 'title': 'Dust', 'icon': 'alert',
@@ -248,6 +251,7 @@ THUMBS = {
     'ship-3d': ('MODEL', 'Wayfarer in the 3D viewer, seen from three-quarter view'),
     'interior': ('MODEL', 'A habitat ring room cut open, showing the deck, rooms and a person for scale'),
     'exterior': ('MODEL', 'The bow of Wayfarer at close range: the shield and the forward structure'),
+    'sim-fusion': ('SIM', 'The Fusion engine explainer: the energy budget of a D-3He burn, from fusion power to thrust and heat'),
     'sim-ignition': ('SIM', 'The Ignition simulation: the engine cluster at the moment of overload'),
     'sim-dust': ('SIM', 'The Dust simulation: one grain hitting the shield layer at test speed and at cruise speed'),
     'sim-build': ('MODEL', 'The Build sequence: the ship partly assembled'),

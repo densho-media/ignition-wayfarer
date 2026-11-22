@@ -41,6 +41,7 @@ PACK = {
     'interior': ('entry/entry_landing_aisle.png', (0, 150, 960, 690), CARD, 'Blender: entry_preview.py landing_aisle --look (ring A aisle, ladder well)'),
     'exterior': ('hero/hero_brow.png', (100, 30, 900, 460), CARD, 'Blender: hero_preview.py brow, COAST (bow shield and forward structure)'),
     'sim-dust': ('capture/sim-dust.png', None, CARD, 'Chrome: engineering/dust/#autostart, stage'),
+    'sim-fusion': ('capture/sim-fusion.png', None, CARD, 'Chrome: engineering/fusion/#budget, stage'),
     'sim-ignition': ('capture/sim-ignition.png', None, CARD, 'Chrome: engineering/ignition/#autostart, overload, stage'),
     'sim-build': ('../../web/engineering/build_preview.jpg', (0, 40, 443, 290), CARD, 'existing build_preview.jpg, left panel (Build sequence page)'),
     'sim-compare': ('../../web/engineering/compare_preview.jpg', None, CARD, 'existing compare_preview.jpg (Compare page)'),
@@ -100,6 +101,7 @@ def capture(site, chrome_bin, only=()):
         shot('eng-subsystems', 'viewer/', 1600, 900, viewer, "dispatchEvent(new Event('resize')); window.wayfarer.setStyle('subsystem'); "
              "window.wayfarer.frame('threequarter');", settle=12)
         shot('sim-dust', 'engineering/dust/#autostart', 1600, 900, '!!(window.__dust && window.__dust.ready)', '', '#stage', 8)
+        shot('sim-fusion', 'engineering/fusion/#budget', 1600, 900, '!!(window.__fusion && window.__fusion.ready)', '', '#stage', 4)
         shot('sim-ignition', 'engineering/ignition/#autostart', 1600, 900, '!!(window.__ign && window.__ign.ready)',
              'window.__ign.mode("overload"); window.__ign.seek(window.__ign.run.V + 3)', '#stage', 8)
         shot('sim-lab', 'engineering/breakthrough-lab/', 1280, 720, 'document.readyState === "complete"', top='#builder')

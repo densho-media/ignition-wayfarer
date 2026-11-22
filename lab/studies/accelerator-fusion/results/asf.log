@@ -1,0 +1,92 @@
+validation
+   {'case': 'D-3He cross-section integral vs Bosch-Hale reactivity, 10 keV', 'ratio': 0.9684006653239394, 'passes': False}
+   {'case': 'D-3He cross-section integral vs Bosch-Hale reactivity, 30 keV', 'ratio': 1.0124400933800044, 'passes': True}
+   {'case': 'D-3He cross-section integral vs Bosch-Hale reactivity, 50 keV', 'ratio': 0.9885967755091525, 'passes': True}
+   {'case': 'D-3He cross-section integral vs Bosch-Hale reactivity, 100 keV', 'ratio': 1.0027683868717425, 'passes': True}
+   {'case': 'D-3He peak (textbook ~0.7-0.9 b near 250-450 keV c.m.)', 'E_keV': 260, 'barn': 0.8184836710246165}
+kinematics @400 keV cm
+   head-on, zero net momentum (lab = c.m.)                        400 keV x1.00
+   D beam into resting 3He (beam-target)                          667 keV x1.67
+   crossing at 90 deg, equal speeds                               833 keV x2.08
+   crossing at 30 deg, equal speeds                              6218 keV x15.54
+   crossing at 10 deg, equal speeds                             54834 keV x137.08
+   co-propagating, 3He at 1 Mm/s, D faster by v_rel               860 keV x2.15
+   co-propagating, 3He at 5 Mm/s, D faster by v_rel              2153 keV x5.38
+   co-propagating, 3He at 20 Mm/s, D faster by v_rel            14432 keV x36.08
+coulomb
+      50 keV  sig_f 0.009 b  sig_C 2084.5 b  ratio 239937  restored/fusion 653.67
+     100 keV  sig_f 0.102 b  sig_C 521.1 b  ratio 5104  restored/fusion 27.81
+     200 keV  sig_f 0.638 b  sig_C 130.3 b  ratio 204  restored/fusion 2.23
+     300 keV  sig_f 0.773 b  sig_C 57.9 b  ratio 75  restored/fusion 1.22
+     400 keV  sig_f 0.530 b  sig_C 32.6 b  ratio 61  restored/fusion 1.34
+     600 keV  sig_f 0.272 b  sig_C 14.5 b  ratio 53  restored/fusion 1.74
+     900 keV  sig_f 0.148 b  sig_C 6.4 b  ratio 44  restored/fusion 2.14
+non-neutral
+   {'B_T': '10', 'n_D_m3': '6.62e+16', 'n_He3_m3': '1.1e+16', 'power_density_W_m3': '0.912', 'volume_per_engine_m3': '7.16e+13', 'engine_volumes': '5.46e+09'}
+   {'B_T': '20', 'n_D_m3': '2.65e+17', 'n_He3_m3': '4.42e+16', 'power_density_W_m3': '14.6', 'volume_per_engine_m3': '4.48e+12', 'engine_volumes': '3.41e+08'}
+   {'B_T': '40', 'n_D_m3': '1.06e+18', 'n_He3_m3': '1.77e+17', 'power_density_W_m3': '233', 'volume_per_engine_m3': '2.8e+11', 'engine_volumes': '2.13e+07'}
+beam-target best F by Te
+   Te    2.0: E0 700 P 0.0009 F 0.02
+   Te    5.0: E0 700 P 0.0030 F 0.08
+   Te   10.0: E0 700 P 0.0065 F 0.17
+   Te   20.0: E0 700 P 0.0118 F 0.31
+   Te   30.0: E0 700 P 0.0150 F 0.39
+   Te   50.0: E0 1000 P 0.0270 F 0.50
+   Te   80.0: E0 1000 P 0.0307 F 0.56
+   Te  120.0: E0 1000 P 0.0324 F 0.60
+   Te  200.0: E0 5000 P 0.1828 F 0.67
+C_cold P 0.0075 F 0.14 brems 0.070 sel {'collimated': {'dd_per_dhe3': 0.007662854890527999, 'neutron_power_share': 0.0005986758649062015}, 'isotropic': {'dd_per_dhe3': 0.0701641091686333, 'neutron_power_share': 0.005414510878787003}} fuel 54.1
+     present {'F': 0.1374, 'recirc_heat_frac': 16.983, 'brems': 0.0704, 'neutron': 0.0054, 'heat_frac': 17.0314, 'tap_frac': 24.2615, 'jet_frac': -12.0441, 'P_fus_TW': inf, 'heat_GW': inf, 'radiator_multiple': inf, 'self_sustaining': False}
+     advanced {'F': 0.1374, 'recirc_heat_frac': 2.2359, 'brems': 0.0704, 'neutron': 0.0054, 'heat_frac': 2.2532, 'tap_frac': 9.5143, 'jet_frac': -1.1149, 'P_fus_TW': inf, 'heat_GW': inf, 'radiator_multiple': inf, 'self_sustaining': False}
+     speculative {'F': 0.1374, 'recirc_heat_frac': 0.5394, 'brems': 0.0704, 'neutron': 0.0054, 'heat_frac': 0.5451, 'tap_frac': 7.8179, 'jet_frac': 0.3463, 'P_fus_TW': 603.5427, 'heat_GW': 329002.2368, 'radiator_multiple': 30463.1701, 'self_sustaining': False}
+C_warm P 0.0382 F 0.35 brems 0.191 sel {'collimated': {'dd_per_dhe3': 0.017057782223407102, 'neutron_power_share': 0.0013301917517290923}, 'isotropic': {'dd_per_dhe3': 0.13285952824681047, 'neutron_power_share': 0.010128121923445905}} fuel 11.1
+     present {'F': 0.3503, 'recirc_heat_frac': 6.6616, 'brems': 0.1911, 'neutron': 0.0101, 'heat_frac': 6.7889, 'tap_frac': 9.5166, 'jet_frac': -4.3971, 'P_fus_TW': inf, 'heat_GW': inf, 'radiator_multiple': inf, 'self_sustaining': False}
+     advanced {'F': 0.3503, 'recirc_heat_frac': 0.877, 'brems': 0.1911, 'neutron': 0.0101, 'heat_frac': 0.9213, 'tap_frac': 3.732, 'jet_frac': -0.0665, 'P_fus_TW': inf, 'heat_GW': inf, 'radiator_multiple': inf, 'self_sustaining': False}
+     speculative {'F': 0.3503, 'recirc_heat_frac': 0.2116, 'brems': 0.1911, 'neutron': 0.0101, 'heat_frac': 0.2252, 'tap_frac': 3.0666, 'jet_frac': 0.5284, 'P_fus_TW': 395.5115, 'heat_GW': 89069.3737, 'radiator_multiple': 8247.1642, 'self_sustaining': False}
+C_hot P 0.0778 F 0.48 brems 0.426 sel {'collimated': {'dd_per_dhe3': 0.02669017288573, 'neutron_power_share': 0.00207737409650958}, 'isotropic': {'dd_per_dhe3': 0.18853718671506509, 'neutron_power_share': 0.014219134579024087}} fuel 5.7
+     present {'F': 0.4758, 'recirc_heat_frac': 4.9041, 'brems': 0.426, 'neutron': 0.0142, 'heat_frac': 5.1806, 'tap_frac': 7.0058, 'jet_frac': -3.2582, 'P_fus_TW': inf, 'heat_GW': inf, 'radiator_multiple': inf, 'self_sustaining': False}
+     advanced {'F': 0.4758, 'recirc_heat_frac': 0.6456, 'brems': 0.426, 'neutron': 0.0142, 'heat_frac': 0.7394, 'tap_frac': 2.7474, 'jet_frac': -0.073, 'P_fus_TW': inf, 'heat_GW': inf, 'radiator_multiple': inf, 'self_sustaining': False}
+     speculative {'F': 0.4758, 'recirc_heat_frac': 0.1558, 'brems': 0.426, 'neutron': 0.0142, 'heat_frac': 0.1828, 'tap_frac': 2.2575, 'jet_frac': 0.3636, 'P_fus_TW': 574.8454, 'heat_GW': 105057.4009, 'radiator_multiple': 9727.5371, 'self_sustaining': False}
+C_hot_lean P 0.0836 F 0.51 brems 1.109 sel {'collimated': {'dd_per_dhe3': 0.008417975027141113, 'neutron_power_share': 0.0006575725342586213}, 'isotropic': {'dd_per_dhe3': 0.06278822514666514, 'neutron_power_share': 0.004852339454960453}} fuel 5.4
+     present {'F': 0.5116, 'recirc_heat_frac': 4.5607, 'brems': 1.1087, 'neutron': 0.0049, 'heat_frac': 5.2523, 'tap_frac': 6.5153, 'jet_frac': -3.5057, 'P_fus_TW': inf, 'heat_GW': inf, 'radiator_multiple': inf, 'self_sustaining': False}
+     advanced {'F': 0.5116, 'recirc_heat_frac': 0.6004, 'brems': 1.1087, 'neutron': 0.0049, 'heat_frac': 0.8251, 'tap_frac': 2.555, 'jet_frac': -0.6069, 'P_fus_TW': inf, 'heat_GW': inf, 'radiator_multiple': inf, 'self_sustaining': False}
+     speculative {'F': 0.5116, 'recirc_heat_frac': 0.1449, 'brems': 1.1087, 'neutron': 0.0049, 'heat_frac': 0.2022, 'tap_frac': 2.0994, 'jet_frac': -0.2325, 'P_fus_TW': inf, 'heat_GW': inf, 'radiator_multiple': inf, 'self_sustaining': False}
+recirc {'Ecm_keV': 400.0, 'coulomb_events_per_fusion': 61.407025657459386, 'restored_energy_per_fusion': 1.3383539619126983, 'eta_required_for_absorbed_budget': 0.9999701125403755, 'budget': 4e-05, 'entropy_floor_fraction': 1.5569606851894003e-06, 'note': 'Even with no electrons in the burn, every fusion costs ~ratio Coulomb events that each degrade beam energy and emittance. The heat left in hardware is (1 - eta) x restored power. The thermodynamic floor (k T ln growth per event at 1800 K) is ~1e-6 of the fusion energy: the bound is engineering, not the second law, but it needs near-reversible beam cooling.'}
+   collider present {'restored_per_fusion': 1.33835, 'recirc_heat_frac': 0.00268, 'heat_frac': 0.00285, 'P_fus_TW': 278.72241, 'heat_GW': 794.55619, 'radiator_multiple': 73.57002}
+   collider advanced {'restored_per_fusion': 1.33835, 'recirc_heat_frac': 0.00015, 'heat_frac': 0.00027, 'P_fus_TW': 245.93154, 'heat_GW': 66.08328, 'radiator_multiple': 6.11882}
+   collider speculative {'restored_per_fusion': 1.33835, 'recirc_heat_frac': 1e-05, 'heat_frac': 9e-05, 'P_fus_TW': 232.26868, 'heat_GW': 21.75351, 'radiator_multiple': 2.01421}
+control {'ne_m3': 1e+22, 'Te_keV': 30.0, 'debye_length_m': 1.2875965235341128e-05, 'particles_per_debye_sphere': 89418626.69211265, 'interparticle_spacing_m': 4.6415888336127834e-08, 'rutherford_event_time_s': 7.497760086889203e-15, 'events_per_s_per_engine': 1.3636841259928647e+27, 'note': 'Beyond a Debye length a single ion is screened: sensors and fields act on collective modes of ~N_D ions, never on one ion. Rutherford outcomes are random (impact parameter below the inter-particle spacing, femtometre-scale b0), so control can only correct after the fact, at the rate the scattering happens.'}
+thermal 60keV_50D {'T_keV': 60.0, 'D_fraction': 0.5, 'brems_share': 0.3155, 'neutron_share': 0.041} {'present': 9272.3, 'advanced': 3102.2, 'speculative': 1074.8}
+thermal 60keV_25D {'T_keV': 60.0, 'D_fraction': 0.25, 'brems_share': 0.6438, 'neutron_share': 0.014} {'present': 31010.4, 'advanced': 9123.0, 'speculative': 2373.2}
+thermal 60keV_10D {'T_keV': 60.0, 'D_fraction': 0.1, 'brems_share': 1.6616, 'neutron_share': 0.0047} {'present': -40054.4, 'advanced': -11451.8, 'speculative': -2741.7}
+thermal 100keV_50D {'T_keV': 100.0, 'D_fraction': 0.5, 'brems_share': 0.2275, 'neutron_share': 0.036} {'present': 6039.3, 'advanced': 2074.4, 'speculative': 752.6}
+thermal 100keV_25D {'T_keV': 100.0, 'D_fraction': 0.25, 'brems_share': 0.4606, 'neutron_share': 0.0122} {'present': 14499.2, 'advanced': 4295.6, 'speculative': 1138.9}
+thermal 100keV_10D {'T_keV': 100.0, 'D_fraction': 0.1, 'brems_share': 1.1851, 'neutron_share': 0.0041} {'present': -100688.0, 'advanced': -28816.4, 'speculative': -6920.4}
+hot-ion Ti100_Te100_D50 br 0.228 n 0.0360 ei 0.000 {'present': (6039.0, 0.552), 'advanced': (2074.0, 0.626), 'speculative': (753.0, 0.663)}
+hot-ion Ti100_Te100_D30 br 0.381 n 0.0157 ei 0.000 {'present': (10692.0, 0.452), 'advanced': (3232.0, 0.513), 'speculative': (903.0, 0.543)}
+hot-ion Ti100_Te100_D20 br 0.581 n 0.0092 ei 0.000 {'present': (23155.0, 0.308), 'advanced': (6754.0, 0.349), 'speculative': (1715.0, 0.369)}
+hot-ion Ti100_Te70_D50 br 0.170 n 0.0360 ei 0.115 {'present': (19970.0, 0.393), 'advanced': (2733.0, 0.645), 'speculative': (861.0, 0.707)}
+hot-ion Ti100_Te70_D30 br 0.286 n 0.0157 ei 0.186 {'present': (61225.0, 0.198), 'advanced': (4395.0, 0.545), 'speculative': (1079.0, 0.616)}
+hot-ion Ti100_Te70_D20 br 0.436 n 0.0092 ei 0.280 {'present': (inf, -0.074), 'advanced': (8673.0, 0.399), 'speculative': (1860.0, 0.481)}
+hot-ion Ti100_Te50_D50 br 0.133 n 0.0360 ei 0.313 {'present': (213941.0, 0.076), 'advanced': (4467.0, 0.625), 'speculative': (1177.0, 0.727)}
+hot-ion Ti100_Te50_D30 br 0.224 n 0.0157 ei 0.505 {'present': (inf, -0.313), 'advanced': (7872.0, 0.514), 'speculative': (1633.0, 0.651)}
+hot-ion Ti100_Te50_D20 br 0.342 n 0.0092 ei 0.758 {'present': (inf, -0.84), 'advanced': (16797.0, 0.353), 'speculative': (2793.0, 0.533)}
+hot-ion Ti100_Te35_D50 br 0.105 n 0.0360 ei 0.679 {'present': (inf, -0.545), 'advanced': (8796.0, 0.553), 'speculative': (1861.0, 0.728)}
+hot-ion Ti100_Te35_D30 br 0.177 n 0.0157 ei 1.097 {'present': (inf, -1.314), 'advanced': (18487.0, 0.4), 'speculative': (2856.0, 0.653)}
+hot-ion Ti100_Te35_D20 br 0.271 n 0.0092 ei 1.647 {'present': (inf, -2.343), 'advanced': (60176.0, 0.182), 'speculative': (5009.0, 0.538)}
+hot-ion Ti150_Te150_D50 br 0.247 n 0.0266 ei 0.000 {'present': (6261.0, 0.545), 'advanced': (2049.0, 0.617), 'speculative': (681.0, 0.654)}
+hot-ion Ti150_Te150_D30 br 0.410 n 0.0116 ei 0.000 {'present': (11807.0, 0.434), 'advanced': (3506.0, 0.491), 'speculative': (935.0, 0.52)}
+hot-ion Ti150_Te150_D20 br 0.624 n 0.0068 ei 0.000 {'present': (27399.0, 0.277), 'advanced': (7932.0, 0.314), 'speculative': (1971.0, 0.333)}
+hot-ion Ti150_Te105_D50 br 0.176 n 0.0266 ei 0.071 {'present': (12204.0, 0.473), 'advanced': (2144.0, 0.659), 'speculative': (671.0, 0.713)}
+hot-ion Ti150_Te105_D30 br 0.293 n 0.0116 ei 0.115 {'present': (27709.0, 0.321), 'advanced': (3475.0, 0.561), 'speculative': (869.0, 0.618)}
+hot-ion Ti150_Te105_D20 br 0.446 n 0.0068 ei 0.172 {'present': (120844.0, 0.109), 'advanced': (6723.0, 0.42), 'speculative': (1518.0, 0.481)}
+hot-ion Ti150_Te75_D50 br 0.133 n 0.0266 ei 0.193 {'present': (36829.0, 0.292), 'advanced': (2969.0, 0.664), 'speculative': (823.0, 0.744)}
+hot-ion Ti150_Te75_D30 br 0.222 n 0.0116 ei 0.311 {'present': (543972.0, 0.031), 'advanced': (4980.0, 0.57), 'speculative': (1121.0, 0.669)}
+hot-ion Ti150_Te75_D20 br 0.338 n 0.0068 ei 0.466 {'present': (inf, -0.324), 'advanced': (9553.0, 0.435), 'speculative': (1876.0, 0.559)}
+hot-ion Ti150_Te52.5_D50 br 0.102 n 0.0266 ei 0.420 {'present': (inf, -0.082), 'advanced': (5073.0, 0.631), 'speculative': (1200.0, 0.756)}
+hot-ion Ti150_Te52.5_D30 br 0.171 n 0.0116 ei 0.676 {'present': (inf, -0.569), 'advanced': (9279.0, 0.519), 'speculative': (1771.0, 0.691)}
+hot-ion Ti150_Te52.5_D20 br 0.260 n 0.0068 ei 1.013 {'present': (inf, -1.224), 'advanced': (19846.0, 0.358), 'speculative': (2969.0, 0.592)}
+hot-ion best {'present': 'Ti100_Te100_D50', 'advanced': 'Ti150_Te150_D50', 'speculative': 'Ti150_Te105_D50'}
+scale {'case': 'beam-target C_hot (P from the model)', 'reactions_per_s': '2.22e+25', 'beam_current_A': '4.57e+07', 'processed_power_W': '1.37e+14', 'mass_t_present_1kW_kg': '1.37e+08', 'mass_t_advanced_100kW_kg': '1.37e+06', 'mass_t_speculative_10MW_kg': '1.37e+04'}
+scale {'case': 'collider, ion-only (restored energy per fusion)', 'reactions_per_s': '2.22e+25', 'beam_current_A': '2.18e+08', 'processed_power_W': '8.74e+13', 'mass_t_present_1kW_kg': '8.74e+07', 'mass_t_advanced_100kW_kg': '8.74e+05', 'mass_t_speculative_10MW_kg': '8.74e+03'}
+intercept {'thermal 100 keV 1:1': {'brems_share': 0.22750813025107597, 'intercept_needed': 0.0001758178925555599}, 'hybrid Ti150 Te105 D50': {'brems_share': 0.17570617760332694, 'intercept_needed': 0.00022765278116916146}, 'beam-target C_warm': {'brems_share': 0.1911353184123046, 'intercept_needed': 0.0002092758174274972}}

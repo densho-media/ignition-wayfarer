@@ -1,0 +1,2275 @@
+{
+ "meta": {
+  "study": "Accelerator-driven selective D-3He fusion (ASF)",
+  "status": "RESEARCH, not canon",
+  "brief": "owner 2026-11-21"
+ },
+ "canon": {
+  "ship_body_m": 289.5,
+  "ship_overall_m": 301.5,
+  "cluster_hardware_length_m": 323.2,
+  "ship_max_m": 360.0,
+  "engine_envelope": {
+   "length_m": 31.9,
+   "radius_m": 11.44,
+   "volume_m3": 13115.734135852284
+  },
+  "engines": 4,
+  "fusion_per_engine_W": 65300000000000.0,
+  "fusion_total_W": 261200000000000.0,
+  "jet_total_W": 209000000000000.0,
+  "thrust_total_N": 87200000.0,
+  "exhaust_velocity_m_s": 19201172.08,
+  "directed_efficiency": 0.8,
+  "absorbed_fraction": 4e-05,
+  "hot_share": 0.75,
+  "burnup": 0.8,
+  "recovery": 0.95,
+  "hot_radiator_W": 14400000000.0,
+  "exhaust_per_reacted": 1.53,
+  "fuel_t": {
+   "D": 731,
+   "He3": 1094,
+   "H2": 972
+  },
+  "vertex_reference": {
+   "photon_share_best": 0.1,
+   "photon_share_floor_1_6": 0.126,
+   "real_mesh_intercept": 0.62,
+   "coil_sky_share": 0.37,
+   "neutron_share_canon": 0.01,
+   "note": "Vertex 1.5/1.6B (lab and references/evidence): best defensible photon share 10 %, 62 % intercepted; B01 absorbed 4e-5 is a requirement, not a property"
+  }
+ },
+ "validation": [
+  {
+   "case": "D-3He cross-section integral vs Bosch-Hale reactivity, 10 keV",
+   "ratio": 0.9684006653239394,
+   "passes": false
+  },
+  {
+   "case": "D-3He cross-section integral vs Bosch-Hale reactivity, 30 keV",
+   "ratio": 1.0124400933800044,
+   "passes": true
+  },
+  {
+   "case": "D-3He cross-section integral vs Bosch-Hale reactivity, 50 keV",
+   "ratio": 0.9885967755091525,
+   "passes": true
+  },
+  {
+   "case": "D-3He cross-section integral vs Bosch-Hale reactivity, 100 keV",
+   "ratio": 1.0027683868717425,
+   "passes": true
+  },
+  {
+   "case": "D-3He peak (textbook ~0.7-0.9 b near 250-450 keV c.m.)",
+   "E_keV": 260,
+   "barn": 0.8184836710246165
+  }
+ ],
+ "kinematics": {
+  "Ecm_keV": 400.0,
+  "v_rel_m_s": 7994787.098762508,
+  "rows": [
+   {
+    "arrangement": "head-on, zero net momentum (lab = c.m.)",
+    "E_lab_keV": 400.0,
+    "cm_drift_m_s": 0.0,
+    "ratio_to_min": 1.0
+   },
+   {
+    "arrangement": "D beam into resting 3He (beam-target)",
+    "E_lab_keV": 667.1193588923186,
+    "cm_drift_m_s": 3201169.889370169,
+    "ratio_to_min": 1.6677983972307964
+   },
+   {
+    "arrangement": "crossing at 90 deg, equal speeds",
+    "E_lab_keV": 833.0512637766293,
+    "cm_drift_m_s": 3997393.5493812542,
+    "ratio_to_min": 2.0826281594415734
+   },
+   {
+    "arrangement": "crossing at 30 deg, equal speeds",
+    "E_lab_keV": 6217.9792834476875,
+    "cm_drift_m_s": 14918475.82413893,
+    "ratio_to_min": 15.54494820861922
+   },
+   {
+    "arrangement": "crossing at 10 deg, equal speeds",
+    "E_lab_keV": 54833.97317368826,
+    "cm_drift_m_s": 45690417.34414855,
+    "ratio_to_min": 137.08493293422066
+   },
+   {
+    "arrangement": "co-propagating, 3He at 1 Mm/s, D faster by v_rel",
+    "E_lab_keV": 860.0747571842629,
+    "cm_drift_m_s": 4201169.8893701695,
+    "ratio_to_min": 2.150186892960657
+   },
+   {
+    "arrangement": "co-propagating, 3He at 5 Mm/s, D faster by v_rel",
+    "E_lab_keV": 2153.232587432418,
+    "cm_drift_m_s": 8201169.8893701695,
+    "ratio_to_min": 5.383081468581045
+   },
+   {
+    "arrangement": "co-propagating, 3He at 20 Mm/s, D faster by v_rel",
+    "E_lab_keV": 14431.615829258386,
+    "cm_drift_m_s": 23201169.88937017,
+    "ratio_to_min": 36.07903957314596
+   }
+  ],
+  "note": "Only the relative velocity fuses; a common drift is kinetic energy carried by both beams that the collision cannot use (it must be recovered). Co-propagating beams pay the drift twice: in the accelerator and in the recovery."
+ },
+ "coulomb": [
+  {
+   "Ecm_keV": 50,
+   "b0_fm": 28.799280000000003,
+   "sigma_coulomb_b": 2084.505859273272,
+   "sigma_fusion_b": 0.008687706615003996,
+   "ratio": 239937.41405508012,
+   "recirc_per_fusion": 653.6735521579035
+  },
+  {
+   "Ecm_keV": 100,
+   "b0_fm": 14.399640000000002,
+   "sigma_coulomb_b": 521.126464818318,
+   "sigma_fusion_b": 0.10209909496900117,
+   "ratio": 5104.124233192664,
+   "recirc_per_fusion": 27.810844184561994
+  },
+  {
+   "Ecm_keV": 200,
+   "b0_fm": 7.199820000000001,
+   "sigma_coulomb_b": 130.2816162045795,
+   "sigma_fusion_b": 0.6377793382622907,
+   "ratio": 204.2738113146594,
+   "recirc_per_fusion": 2.226053629539142
+  },
+  {
+   "Ecm_keV": 300,
+   "b0_fm": 4.79988,
+   "sigma_coulomb_b": 57.902940535368664,
+   "sigma_fusion_b": 0.7731344000501347,
+   "ratio": 74.89375784031068,
+   "recirc_per_fusion": 1.224220963989168
+  },
+  {
+   "Ecm_keV": 400,
+   "b0_fm": 3.5999100000000004,
+   "sigma_coulomb_b": 32.57040405114488,
+   "sigma_fusion_b": 0.5304019157812507,
+   "ratio": 61.407025657459386,
+   "recirc_per_fusion": 1.3383539619126983
+  },
+  {
+   "Ecm_keV": 600,
+   "b0_fm": 2.39994,
+   "sigma_coulomb_b": 14.475735133842166,
+   "sigma_fusion_b": 0.2723499091586287,
+   "ratio": 53.15123907535748,
+   "recirc_per_fusion": 1.7376310927485688
+  },
+  {
+   "Ecm_keV": 900,
+   "b0_fm": 1.5999600000000003,
+   "sigma_coulomb_b": 6.43366005948541,
+   "sigma_fusion_b": 0.14750717121136775,
+   "ratio": 43.6159137664325,
+   "recirc_per_fusion": 2.1388504544101368
+  }
+ ],
+ "non_neutral": {
+  "Ecm_keV": 400.0,
+  "rows": [
+   {
+    "B_T": 10.0,
+    "n_D_m3": 6.618485346132861e+16,
+    "n_He3_m3": 1.10495347656076e+16,
+    "power_density_W_m3": 0.9118681560228661,
+    "volume_per_engine_m3": 71611229725147.39,
+    "engine_volumes": 5459948256.300482
+   },
+   {
+    "B_T": 20.0,
+    "n_D_m3": 2.6473941384531443e+17,
+    "n_He3_m3": 4.41981390624304e+16,
+    "power_density_W_m3": 14.589890496365857,
+    "volume_per_engine_m3": 4475701857821.712,
+    "engine_volumes": 341246766.0187801
+   },
+   {
+    "B_T": 40.0,
+    "n_D_m3": 1.0589576553812577e+18,
+    "n_He3_m3": 1.767925562497216e+17,
+    "power_density_W_m3": 233.43824794185372,
+    "volume_per_engine_m3": 279731366113.857,
+    "engine_volumes": 21327922.876173757
+   }
+  ],
+  "note": "Pure-ion beams are limited by their own space charge (Brillouin density). Neutralising them admits electrons, which bring bremsstrahlung and electron drag: the burn becomes a beam-plasma system (section 4)."
+ },
+ "beam_target_sweep": [
+  {
+   "Te_keV": 2.0,
+   "E0_keV": 200.0,
+   "P": 3.5083988325190774e-05,
+   "F": 0.003219482188661132,
+   "ion_share": 0.3378290483870354,
+   "Ec_keV": 45.01813291019011
+  },
+  {
+   "Te_keV": 2.0,
+   "E0_keV": 400.0,
+   "P": 0.000362440255119556,
+   "F": 0.016629665005523032,
+   "ion_share": 0.1984899993099062,
+   "Ec_keV": 45.01813291019011
+  },
+  {
+   "Te_keV": 2.0,
+   "E0_keV": 700.0,
+   "P": 0.0008923467624338821,
+   "F": 0.0233960573299272,
+   "ion_share": 0.12379281997208284,
+   "Ec_keV": 45.01813291019011
+  },
+  {
+   "Te_keV": 2.0,
+   "E0_keV": 1000.0,
+   "P": 0.001118870258290272,
+   "F": 0.020534625850401368,
+   "ion_share": 0.09037588372251623,
+   "Ec_keV": 45.01813291019011
+  },
+  {
+   "Te_keV": 2.0,
+   "E0_keV": 1500.0,
+   "P": 0.001290150073342211,
+   "F": 0.0157854161973664,
+   "ion_share": 0.06259507607112341,
+   "Ec_keV": 45.01813291019011
+  },
+  {
+   "Te_keV": 2.0,
+   "E0_keV": 2000.0,
+   "P": 0.0013966063893836589,
+   "F": 0.012815958532179149,
+   "ion_share": 0.047997647922997246,
+   "Ec_keV": 45.01813291019011
+  },
+  {
+   "Te_keV": 2.0,
+   "E0_keV": 3000.0,
+   "P": 0.0015754651462787095,
+   "F": 0.009638170609884386,
+   "ion_share": 0.03283123658037502,
+   "Ec_keV": 45.01813291019011
+  },
+  {
+   "Te_keV": 2.0,
+   "E0_keV": 5000.0,
+   "P": 0.0018593808545058765,
+   "F": 0.006825043364549271,
+   "ion_share": 0.02020052141173184,
+   "Ec_keV": 45.01813291019011
+  },
+  {
+   "Te_keV": 5.0,
+   "E0_keV": 200.0,
+   "P": 9.354739663591793e-05,
+   "F": 0.00858437685229501,
+   "ion_share": 0.591091975637674,
+   "Ec_keV": 112.54533227547527
+  },
+  {
+   "Te_keV": 5.0,
+   "E0_keV": 400.0,
+   "P": 0.0011453215456946886,
+   "F": 0.05255021582033656,
+   "ion_share": 0.3940666547823846,
+   "Ec_keV": 112.54533227547527
+  },
+  {
+   "Te_keV": 5.0,
+   "E0_keV": 700.0,
+   "P": 0.0029754765506792014,
+   "F": 0.07801274447802199,
+   "ion_share": 0.26330396051301247,
+   "Ec_keV": 112.54533227547527
+  },
+  {
+   "Te_keV": 5.0,
+   "E0_keV": 1000.0,
+   "P": 0.003784777920364246,
+   "F": 0.06946202917244503,
+   "ion_share": 0.1984899993099062,
+   "Ec_keV": 112.54533227547527
+  },
+  {
+   "Te_keV": 5.0,
+   "E0_keV": 1500.0,
+   "P": 0.004406004596765212,
+   "F": 0.053908934909621294,
+   "ion_share": 0.14139996084545453,
+   "Ec_keV": 112.54533227547527
+  },
+  {
+   "Te_keV": 5.0,
+   "E0_keV": 2000.0,
+   "P": 0.004795424084479971,
+   "F": 0.044005209111230466,
+   "ion_share": 0.11015401874286966,
+   "Ec_keV": 112.54533227547527
+  },
+  {
+   "Te_keV": 5.0,
+   "E0_keV": 3000.0,
+   "P": 0.0054526719270209245,
+   "F": 0.03335762929220502,
+   "ion_share": 0.07670311784009852,
+   "Ec_keV": 112.54533227547527
+  },
+  {
+   "Te_keV": 5.0,
+   "E0_keV": 5000.0,
+   "P": 0.006499106941350696,
+   "F": 0.02385562193892187,
+   "ion_share": 0.047997647922997246,
+   "Ec_keV": 112.54533227547527
+  },
+  {
+   "Te_keV": 10.0,
+   "E0_keV": 200.0,
+   "P": 0.00015153479307683515,
+   "F": 0.01390559028669578,
+   "ion_share": 0.7769885359577701,
+   "Ec_keV": 225.09066455095055
+  },
+  {
+   "Te_keV": 10.0,
+   "E0_keV": 400.0,
+   "P": 0.0023004466611415975,
+   "F": 0.10555024392982937,
+   "ion_share": 0.591091975637674,
+   "Ec_keV": 225.09066455095055
+  },
+  {
+   "Te_keV": 10.0,
+   "E0_keV": 700.0,
+   "P": 0.006531789829686274,
+   "F": 0.171254198206046,
+   "ion_share": 0.42996817313537816,
+   "Ec_keV": 225.09066455095055
+  },
+  {
+   "Te_keV": 10.0,
+   "E0_keV": 1000.0,
+   "P": 0.008535604600070745,
+   "F": 0.15665395122509843,
+   "ion_share": 0.3378290483870354,
+   "Ec_keV": 225.09066455095055
+  },
+  {
+   "Te_keV": 10.0,
+   "E0_keV": 1500.0,
+   "P": 0.010126091442782092,
+   "F": 0.12389610416625317,
+   "ion_share": 0.2496334310442652,
+   "Ec_keV": 225.09066455095055
+  },
+  {
+   "Te_keV": 10.0,
+   "E0_keV": 2000.0,
+   "P": 0.01114291518403987,
+   "F": 0.10225296118634189,
+   "ion_share": 0.1984899993099062,
+   "Ec_keV": 225.09066455095055
+  },
+  {
+   "Te_keV": 10.0,
+   "E0_keV": 3000.0,
+   "P": 0.012877700267375225,
+   "F": 0.07878147766904585,
+   "ion_share": 0.14139996084545453,
+   "Ec_keV": 225.09066455095055
+  },
+  {
+   "Te_keV": 10.0,
+   "E0_keV": 5000.0,
+   "P": 0.015659892310113,
+   "F": 0.05748120071350078,
+   "ion_share": 0.09037588372251623,
+   "Ec_keV": 225.09066455095055
+  },
+  {
+   "Te_keV": 20.0,
+   "E0_keV": 200.0,
+   "P": 0.00019369223400544922,
+   "F": 0.01777416785351005,
+   "ion_share": 0.9005279760919548,
+   "Ec_keV": 450.1813291019011
+  },
+  {
+   "Te_keV": 20.0,
+   "E0_keV": 400.0,
+   "P": 0.0036627947775864644,
+   "F": 0.168058181382611,
+   "ion_share": 0.7769885359577701,
+   "Ec_keV": 450.1813291019011
+  },
+  {
+   "Te_keV": 20.0,
+   "E0_keV": 700.0,
+   "P": 0.011830741972396641,
+   "F": 0.3101851534562794,
+   "ion_share": 0.6298096348405207,
+   "Ec_keV": 450.1813291019011
+  },
+  {
+   "Te_keV": 20.0,
+   "E0_keV": 1000.0,
+   "P": 0.016225025985806885,
+   "F": 0.2977779019175138,
+   "ion_share": 0.5257481141310201,
+   "Ec_keV": 450.1813291019011
+  },
+  {
+   "Te_keV": 20.0,
+   "E0_keV": 1500.0,
+   "P": 0.01998291933708385,
+   "F": 0.24449767906233327,
+   "ion_share": 0.41122882681858514,
+   "Ec_keV": 450.1813291019011
+  },
+  {
+   "Te_keV": 20.0,
+   "E0_keV": 2000.0,
+   "P": 0.022503277520398934,
+   "F": 0.20650132616594088,
+   "ion_share": 0.3378290483870354,
+   "Ec_keV": 450.1813291019011
+  },
+  {
+   "Te_keV": 20.0,
+   "E0_keV": 3000.0,
+   "P": 0.026925491700858895,
+   "F": 0.16472118306195446,
+   "ion_share": 0.2496334310442652,
+   "Ec_keV": 450.1813291019011
+  },
+  {
+   "Te_keV": 20.0,
+   "E0_keV": 5000.0,
+   "P": 0.034158554353870385,
+   "F": 0.12538238961131665,
+   "ion_share": 0.16503381095126346,
+   "Ec_keV": 450.1813291019011
+  },
+  {
+   "Te_keV": 30.0,
+   "E0_keV": 200.0,
+   "P": 0.0002064974214111004,
+   "F": 0.018949235875789634,
+   "ion_share": 0.9419013722042656,
+   "Ec_keV": 675.2719936528516
+  },
+  {
+   "Te_keV": 30.0,
+   "E0_keV": 400.0,
+   "P": 0.004302117902541092,
+   "F": 0.19739192466334168,
+   "ion_share": 0.858052645084032,
+   "Ec_keV": 675.2719936528516
+  },
+  {
+   "Te_keV": 30.0,
+   "E0_keV": 700.0,
+   "P": 0.01500969089994586,
+   "F": 0.3935326529810092,
+   "ion_share": 0.7398849794001464,
+   "Ec_keV": 675.2719936528516
+  },
+  {
+   "Te_keV": 30.0,
+   "E0_keV": 1000.0,
+   "P": 0.021342565478079,
+   "F": 0.391700104219184,
+   "ion_share": 0.6437577844069929,
+   "Ec_keV": 675.2719936528516
+  },
+  {
+   "Te_keV": 30.0,
+   "E0_keV": 1500.0,
+   "P": 0.027139841990148628,
+   "F": 0.3320650133634652,
+   "ion_share": 0.5257481141310201,
+   "Ec_keV": 675.2719936528516
+  },
+  {
+   "Te_keV": 30.0,
+   "E0_keV": 2000.0,
+   "P": 0.031223971030710507,
+   "F": 0.286526770163315,
+   "ion_share": 0.4434445659634979,
+   "Ec_keV": 675.2719936528516
+  },
+  {
+   "Te_keV": 30.0,
+   "E0_keV": 3000.0,
+   "P": 0.038620002229392214,
+   "F": 0.23626430030534512,
+   "ion_share": 0.3378290483870354,
+   "Ec_keV": 675.2719936528516
+  },
+  {
+   "Te_keV": 30.0,
+   "E0_keV": 5000.0,
+   "P": 0.05100444648972602,
+   "F": 0.18721692128518835,
+   "ion_share": 0.2298162464661578,
+   "Ec_keV": 675.2719936528516
+  },
+  {
+   "Te_keV": 50.0,
+   "E0_keV": 200.0,
+   "P": 0.0002131163985041873,
+   "F": 0.01955662630873675,
+   "ion_share": 0.9716508432738288,
+   "Ec_keV": 1125.453322754753
+  },
+  {
+   "Te_keV": 50.0,
+   "E0_keV": 400.0,
+   "P": 0.004811625934137309,
+   "F": 0.22076942692305512,
+   "ion_share": 0.9256793149080103,
+   "Ec_keV": 1125.453322754753
+  },
+  {
+   "Te_keV": 50.0,
+   "E0_keV": 700.0,
+   "P": 0.018168963053355025,
+   "F": 0.47636425559746404,
+   "ion_share": 0.849627749405712,
+   "Ec_keV": 1125.453322754753
+  },
+  {
+   "Te_keV": 50.0,
+   "E0_keV": 1000.0,
+   "P": 0.02703368434900233,
+   "F": 0.49614920885723984,
+   "ion_share": 0.7769885359577701,
+   "Ec_keV": 1125.453322754753
+  },
+  {
+   "Te_keV": 50.0,
+   "E0_keV": 1500.0,
+   "P": 0.03602039501385823,
+   "F": 0.44072153979289347,
+   "ion_share": 0.6733533472977865,
+   "Ec_keV": 1125.453322754753
+  },
+  {
+   "Te_keV": 50.0,
+   "E0_keV": 2000.0,
+   "P": 0.042914647644270554,
+   "F": 0.3938062641076488,
+   "ion_share": 0.591091975637674,
+   "Ec_keV": 1125.453322754753
+  },
+  {
+   "Te_keV": 50.0,
+   "E0_keV": 3000.0,
+   "P": 0.05620553549642393,
+   "F": 0.34384673098862284,
+   "ion_share": 0.47309971707775905,
+   "Ec_keV": 1125.453322754753
+  },
+  {
+   "Te_keV": 50.0,
+   "E0_keV": 5000.0,
+   "P": 0.07962331873587924,
+   "F": 0.2922653537519184,
+   "ion_share": 0.3378290483870354,
+   "Ec_keV": 1125.453322754753
+  },
+  {
+   "Te_keV": 80.0,
+   "E0_keV": 200.0,
+   "P": 0.00021348982875857292,
+   "F": 0.01959089413603045,
+   "ion_share": 0.9856749894046963,
+   "Ec_keV": 1800.7253164076044
+  },
+  {
+   "Te_keV": 80.0,
+   "E0_keV": 400.0,
+   "P": 0.005025649272065613,
+   "F": 0.23058935272555053,
+   "ion_share": 0.9610549864022848,
+   "Ec_keV": 1800.7253164076044
+  },
+  {
+   "Te_keV": 80.0,
+   "E0_keV": 700.0,
+   "P": 0.01992261012422758,
+   "F": 0.5223423765856413,
+   "ion_share": 0.916329779414893,
+   "Ec_keV": 1800.7253164076044
+  },
+  {
+   "Te_keV": 80.0,
+   "E0_keV": 1000.0,
+   "P": 0.030656463091608188,
+   "F": 0.5626380671202852,
+   "ion_share": 0.868640348081546,
+   "Ec_keV": 1800.7253164076044
+  },
+  {
+   "Te_keV": 80.0,
+   "E0_keV": 1500.0,
+   "P": 0.042561948749349154,
+   "F": 0.5207596302645368,
+   "ion_share": 0.7915461676106733,
+   "Ec_keV": 1800.7253164076044
+  },
+  {
+   "Te_keV": 80.0,
+   "E0_keV": 2000.0,
+   "P": 0.05254700449291971,
+   "F": 0.48219758672927787,
+   "ion_share": 0.7222971667896106,
+   "Ec_keV": 1800.7253164076044
+  },
+  {
+   "Te_keV": 80.0,
+   "E0_keV": 3000.0,
+   "P": 0.0733662356512288,
+   "F": 0.4488301743023341,
+   "ion_share": 0.6098859732604481,
+   "Ec_keV": 1800.7253164076044
+  },
+  {
+   "Te_keV": 80.0,
+   "E0_keV": 5000.0,
+   "P": 0.11284618706727256,
+   "F": 0.4142132142491307,
+   "ion_share": 0.4615271827194895,
+   "Ec_keV": 1800.7253164076044
+  },
+  {
+   "Te_keV": 120.0,
+   "E0_keV": 200.0,
+   "P": 0.00021148735155029907,
+   "F": 0.0194071368150132,
+   "ion_share": 0.9921225632115116,
+   "Ec_keV": 2701.0879746114065
+  },
+  {
+   "Te_keV": 120.0,
+   "E0_keV": 400.0,
+   "P": 0.005079999883590314,
+   "F": 0.23308309465883262,
+   "ion_share": 0.9782060106331095,
+   "Ec_keV": 2701.0879746114065
+  },
+  {
+   "Te_keV": 120.0,
+   "E0_keV": 700.0,
+   "P": 0.020665814823367157,
+   "F": 0.5418281420760822,
+   "ion_share": 0.9516719157927124,
+   "Ec_keV": 2701.0879746114065
+  },
+  {
+   "Te_keV": 120.0,
+   "E0_keV": 1000.0,
+   "P": 0.032449285327804334,
+   "F": 0.5955417336211931,
+   "ion_share": 0.9215397246544641,
+   "Ec_keV": 2701.0879746114065
+  },
+  {
+   "Te_keV": 120.0,
+   "E0_keV": 1500.0,
+   "P": 0.0463446835461917,
+   "F": 0.5670426514155043,
+   "ion_share": 0.868640348081546,
+   "Ec_keV": 2701.0879746114065
+  },
+  {
+   "Te_keV": 120.0,
+   "E0_keV": 2000.0,
+   "P": 0.05884547264491036,
+   "F": 0.53999547972602,
+   "ion_share": 0.81652943290372,
+   "Ec_keV": 2701.0879746114065
+  },
+  {
+   "Te_keV": 120.0,
+   "E0_keV": 3000.0,
+   "P": 0.08690182858259521,
+   "F": 0.5316364199921233,
+   "ion_share": 0.7222971667896106,
+   "Ec_keV": 2701.0879746114065
+  },
+  {
+   "Te_keV": 120.0,
+   "E0_keV": 5000.0,
+   "P": 0.14460981251616967,
+   "F": 0.5308047778218525,
+   "ion_share": 0.5791527213170062,
+   "Ec_keV": 2701.0879746114065
+  },
+  {
+   "Te_keV": 200.0,
+   "E0_keV": 200.0,
+   "P": 0.0002074971271137649,
+   "F": 0.01904097386959464,
+   "ion_share": 0.9963146909892135,
+   "Ec_keV": 4501.813291019012
+  },
+  {
+   "Te_keV": 200.0,
+   "E0_keV": 400.0,
+   "P": 0.005051894063350271,
+   "F": 0.23179352936166886,
+   "ion_share": 0.9896845907770476,
+   "Ec_keV": 4501.813291019012
+  },
+  {
+   "Te_keV": 200.0,
+   "E0_keV": 700.0,
+   "P": 0.020931975199029673,
+   "F": 0.5488064868968453,
+   "ion_share": 0.9766109797475532,
+   "Ec_keV": 4501.813291019012
+  },
+  {
+   "Te_keV": 200.0,
+   "E0_keV": 1000.0,
+   "P": 0.03338042074065062,
+   "F": 0.6126308618531608,
+   "ion_share": 0.9610549864022848,
+   "Ec_keV": 4501.813291019012
+  },
+  {
+   "Te_keV": 200.0,
+   "E0_keV": 1500.0,
+   "P": 0.048832717854071284,
+   "F": 0.5974845805171803,
+   "ion_share": 0.9318323487242341,
+   "Ec_keV": 4501.813291019012
+  },
+  {
+   "Te_keV": 200.0,
+   "E0_keV": 2000.0,
+   "P": 0.06368141887882717,
+   "F": 0.5843725403415576,
+   "ion_share": 0.9005279760919548,
+   "Ec_keV": 4501.813291019012
+  },
+  {
+   "Te_keV": 200.0,
+   "E0_keV": 3000.0,
+   "P": 0.09984627368572041,
+   "F": 0.610826220318009,
+   "ion_share": 0.8370901538018618,
+   "Ec_keV": 4501.813291019012
+  },
+  {
+   "Te_keV": 200.0,
+   "E0_keV": 5000.0,
+   "P": 0.18277672572335213,
+   "F": 0.6709002494401364,
+   "ion_share": 0.7222971667896106,
+   "Ec_keV": 4501.813291019012
+  }
+ ],
+ "beam_target_best_by_Te": {
+  "2.0": {
+   "Te_keV": 2.0,
+   "E0_keV": 700.0,
+   "P": 0.0008923467624338821,
+   "F": 0.0233960573299272,
+   "ion_share": 0.12379281997208284,
+   "Ec_keV": 45.01813291019011
+  },
+  "5.0": {
+   "Te_keV": 5.0,
+   "E0_keV": 700.0,
+   "P": 0.0029754765506792014,
+   "F": 0.07801274447802199,
+   "ion_share": 0.26330396051301247,
+   "Ec_keV": 112.54533227547527
+  },
+  "10.0": {
+   "Te_keV": 10.0,
+   "E0_keV": 700.0,
+   "P": 0.006531789829686274,
+   "F": 0.171254198206046,
+   "ion_share": 0.42996817313537816,
+   "Ec_keV": 225.09066455095055
+  },
+  "20.0": {
+   "Te_keV": 20.0,
+   "E0_keV": 700.0,
+   "P": 0.011830741972396641,
+   "F": 0.3101851534562794,
+   "ion_share": 0.6298096348405207,
+   "Ec_keV": 450.1813291019011
+  },
+  "30.0": {
+   "Te_keV": 30.0,
+   "E0_keV": 700.0,
+   "P": 0.01500969089994586,
+   "F": 0.3935326529810092,
+   "ion_share": 0.7398849794001464,
+   "Ec_keV": 675.2719936528516
+  },
+  "50.0": {
+   "Te_keV": 50.0,
+   "E0_keV": 1000.0,
+   "P": 0.02703368434900233,
+   "F": 0.49614920885723984,
+   "ion_share": 0.7769885359577701,
+   "Ec_keV": 1125.453322754753
+  },
+  "80.0": {
+   "Te_keV": 80.0,
+   "E0_keV": 1000.0,
+   "P": 0.030656463091608188,
+   "F": 0.5626380671202852,
+   "ion_share": 0.868640348081546,
+   "Ec_keV": 1800.7253164076044
+  },
+  "120.0": {
+   "Te_keV": 120.0,
+   "E0_keV": 1000.0,
+   "P": 0.032449285327804334,
+   "F": 0.5955417336211931,
+   "ion_share": 0.9215397246544641,
+   "Ec_keV": 2701.0879746114065
+  },
+  "200.0": {
+   "Te_keV": 200.0,
+   "E0_keV": 5000.0,
+   "P": 0.18277672572335213,
+   "F": 0.6709002494401364,
+   "ion_share": 0.7222971667896106,
+   "Ec_keV": 4501.813291019012
+  }
+ },
+ "beam_target_candidates": {
+  "C_cold": {
+   "E0_keV": 1000.0,
+   "Te_keV": 10.0,
+   "Ti_keV": 10.0,
+   "beam_fraction": 0.3,
+   "thermal_residence": 0.3,
+   "P": 0.007486083320811132,
+   "F": 0.13739208718684673,
+   "brems_share": 0.0703870986539336,
+   "selectivity": {
+    "collimated": {
+     "dd_per_dhe3": 0.007662854890527999,
+     "neutron_power_share": 0.0005986758649062015
+    },
+    "isotropic": {
+     "dd_per_dhe3": 0.0701641091686333,
+     "neutron_power_share": 0.005414510878787003
+    }
+   },
+   "fuel": {
+    "burnup": 0.007486083320811132,
+    "exhaust_per_reacted_if_D_vented": 54.0851965415804,
+    "mission_value": 1.53,
+    "ve_if_vented_m_s": 3229492.2676445376
+   },
+   "ledger": {
+    "present": {
+     "F": 0.13739208718684673,
+     "recirc_heat_frac": 16.983025595645188,
+     "brems": 0.0703870986539336,
+     "neutron": 0.005414510878787003,
+     "heat_frac": 17.03137622127517,
+     "tap_frac": 24.261465136635984,
+     "jet_frac": -12.044120403883433,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity,
+     "self_sustaining": false
+    },
+    "advanced": {
+     "F": 0.13739208718684673,
+     "recirc_heat_frac": 2.2358605125919437,
+     "brems": 0.0703870986539336,
+     "neutron": 0.005414510878787003,
+     "heat_frac": 2.253186638850003,
+     "tap_frac": 9.514300053582739,
+     "jet_frac": -1.1149128038059646,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity,
+     "self_sustaining": false
+    },
+    "speculative": {
+     "F": 0.13739208718684673,
+     "recirc_heat_frac": 0.5394332205460423,
+     "brems": 0.0703870986539336,
+     "neutron": 0.005414510878787003,
+     "heat_frac": 0.5451183798302538,
+     "tap_frac": 7.8178727615368375,
+     "jet_frac": 0.3462886529291132,
+     "P_fus_TW": 603.5427330123439,
+     "heat_GW": 329002.2367780123,
+     "radiator_multiple": 30463.170072038178,
+     "self_sustaining": false
+    }
+   }
+  },
+  "C_warm": {
+   "E0_keV": 2000.0,
+   "Te_keV": 50.0,
+   "Ti_keV": 20.0,
+   "beam_fraction": 0.3,
+   "thermal_residence": 0.3,
+   "P": 0.03816999797858356,
+   "F": 0.3502669864504721,
+   "brems_share": 0.1911353184123046,
+   "selectivity": {
+    "collimated": {
+     "dd_per_dhe3": 0.017057782223407102,
+     "neutron_power_share": 0.0013301917517290923
+    },
+    "isotropic": {
+     "dd_per_dhe3": 0.13285952824681047,
+     "neutron_power_share": 0.010128121923445905
+    }
+   },
+   "fuel": {
+    "burnup": 0.03816999797858356,
+    "exhaust_per_reacted_if_D_vented": 11.089453984283573,
+    "mission_value": 1.53,
+    "ve_if_vented_m_s": 7132115.597180751
+   },
+   "ledger": {
+    "present": {
+     "F": 0.3502669864504721,
+     "recirc_heat_frac": 6.661585086789981,
+     "brems": 0.1911353184123046,
+     "neutron": 0.010128121923445905,
+     "heat_frac": 6.788900450279008,
+     "tap_frac": 9.516550123985688,
+     "jet_frac": -4.397136395344299,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity,
+     "self_sustaining": false
+    },
+    "advanced": {
+     "F": 0.3502669864504721,
+     "recirc_heat_frac": 0.8770154035829947,
+     "brems": 0.1911353184123046,
+     "neutron": 0.010128121923445905,
+     "heat_frac": 0.9213193404195231,
+     "tap_frac": 3.731980440778701,
+     "jet_frac": -0.06653701733093377,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity,
+     "self_sustaining": false
+    },
+    "speculative": {
+     "F": 0.3502669864504721,
+     "recirc_heat_frac": 0.2115924678480171,
+     "brems": 0.1911353184123046,
+     "neutron": 0.010128121923445905,
+     "heat_frac": 0.2252004825380107,
+     "tap_frac": 3.0665575050437237,
+     "jet_frac": 0.5284296826346087,
+     "P_fus_TW": 395.5114689204854,
+     "heat_GW": 89069.37365021073,
+     "radiator_multiple": 8247.164226871364,
+     "self_sustaining": false
+    }
+   }
+  },
+  "C_hot": {
+   "E0_keV": 3000.0,
+   "Te_keV": 120.0,
+   "Ti_keV": 20.0,
+   "beam_fraction": 0.3,
+   "thermal_residence": 0.3,
+   "P": 0.07777414184038811,
+   "F": 0.47579627506554767,
+   "brems_share": 0.4260394449369966,
+   "selectivity": {
+    "collimated": {
+     "dd_per_dhe3": 0.02669017288573,
+     "neutron_power_share": 0.00207737409650958
+    },
+    "isotropic": {
+     "dd_per_dhe3": 0.18853718671506509,
+     "neutron_power_share": 0.014219134579024087
+    }
+   },
+   "fuel": {
+    "burnup": 0.07777414184038811,
+    "exhaust_per_reacted_if_D_vented": 5.747812379900039,
+    "mission_value": 1.53,
+    "ve_if_vented_m_s": 9906543.78662669
+   },
+   "ledger": {
+    "present": {
+     "F": 0.47579627506554767,
+     "recirc_heat_frac": 4.9040596902779106,
+     "brems": 0.4260394449369966,
+     "neutron": 0.014219134579024087,
+     "heat_frac": 5.1805747932226,
+     "tap_frac": 7.005799557539873,
+     "jet_frac": -3.258238702345449,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity,
+     "self_sustaining": false
+    },
+    "advanced": {
+     "F": 0.47579627506554767,
+     "recirc_heat_frac": 0.6456325082438706,
+     "brems": 0.4260394449369966,
+     "neutron": 0.014219134579024087,
+     "heat_frac": 0.7393718779786844,
+     "tap_frac": 2.747372375505832,
+     "jet_frac": -0.07300742459590741,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity,
+     "self_sustaining": false
+    },
+    "speculative": {
+     "F": 0.47579627506554767,
+     "recirc_heat_frac": 0.15576804601619282,
+     "brems": 0.4260394449369966,
+     "neutron": 0.014219134579024087,
+     "heat_frac": 0.18275767209465227,
+     "tap_frac": 2.257507913278155,
+     "jet_frac": 0.36357603702100766,
+     "P_fus_TW": 574.8453658069986,
+     "heat_GW": 105057.40086928589,
+     "radiator_multiple": 9727.537117526472,
+     "self_sustaining": false
+    }
+   }
+  },
+  "C_hot_lean": {
+   "E0_keV": 3000.0,
+   "Te_keV": 120.0,
+   "Ti_keV": 20.0,
+   "beam_fraction": 0.1,
+   "thermal_residence": 0.1,
+   "P": 0.08362978502832441,
+   "F": 0.5116191482082794,
+   "brems_share": 1.1086675544163216,
+   "selectivity": {
+    "collimated": {
+     "dd_per_dhe3": 0.008417975027141113,
+     "neutron_power_share": 0.0006575725342586213
+    },
+    "isotropic": {
+     "dd_per_dhe3": 0.06278822514666514,
+     "neutron_power_share": 0.004852339454960453
+    }
+   },
+   "fuel": {
+    "burnup": 0.08362978502832441,
+    "exhaust_per_reacted_if_D_vented": 5.387341756037075,
+    "mission_value": 1.53,
+    "ve_if_vented_m_s": 10232604.577063112
+   },
+   "ledger": {
+    "present": {
+     "F": 0.5116191482082794,
+     "recirc_heat_frac": 4.560684136832652,
+     "brems": 1.1086675544163216,
+     "neutron": 0.004852339454960453,
+     "heat_frac": 5.252279555896587,
+     "tap_frac": 6.515263052618074,
+     "jet_frac": -3.505653023027951,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity,
+     "self_sustaining": false
+    },
+    "advanced": {
+     "F": 0.5116191482082794,
+     "recirc_heat_frac": 0.6004262028883324,
+     "brems": 1.1086675544163216,
+     "neutron": 0.004852339454960453,
+     "heat_frac": 0.825071117444573,
+     "tap_frac": 2.555005118673755,
+     "jet_frac": -0.6068541822456723,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity,
+     "self_sustaining": false
+    },
+    "speculative": {
+     "F": 0.5116191482082794,
+     "recirc_heat_frac": 0.14486138043952124,
+     "brems": 1.1086675544163216,
+     "neutron": 0.004852339454960453,
+     "heat_frac": 0.2022356939423215,
+     "tap_frac": 2.0994402962249437,
+     "jet_frac": -0.23254314687972305,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity,
+     "self_sustaining": false
+    }
+   }
+  }
+ },
+ "recirculation": {
+  "Ecm_keV": 400.0,
+  "coulomb_events_per_fusion": 61.407025657459386,
+  "restored_energy_per_fusion": 1.3383539619126983,
+  "eta_required_for_absorbed_budget": 0.9999701125403755,
+  "budget": 4e-05,
+  "entropy_floor_fraction": 1.5569606851894003e-06,
+  "note": "Even with no electrons in the burn, every fusion costs ~ratio Coulomb events that each degrade beam energy and emittance. The heat left in hardware is (1 - eta) x restored power. The thermodynamic floor (k T ln growth per event at 1800 K) is ~1e-6 of the fusion energy: the bound is engineering, not the second law, but it needs near-reversible beam cooling."
+ },
+ "collider_ledger": {
+  "present": {
+   "restored_per_fusion": 1.3383539619126983,
+   "recirc_heat_frac": 0.002676707923825399,
+   "heat_frac": 0.002850707923825399,
+   "P_fus_TW": 278.7224111488964,
+   "heat_GW": 794.5561860098799,
+   "radiator_multiple": 73.57001722313703
+  },
+  "advanced": {
+   "restored_per_fusion": 1.3383539619126983,
+   "recirc_heat_frac": 0.0001487059957680612,
+   "heat_frac": 0.0002687059957680612,
+   "P_fus_TW": 245.9315392490263,
+   "heat_GW": 66.08327914468163,
+   "radiator_multiple": 6.118822143026077
+  },
+  "speculative": {
+   "restored_per_fusion": 1.3383539619126983,
+   "recirc_heat_frac": 1.3656673080679668e-05,
+   "heat_frac": 9.365667308067968e-05,
+   "P_fus_TW": 232.26867595741368,
+   "heat_GW": 21.75351145102582,
+   "radiator_multiple": 2.0142140232431314
+  }
+ },
+ "control": {
+  "ne_m3": 1e+22,
+  "Te_keV": 30.0,
+  "debye_length_m": 1.2875965235341128e-05,
+  "particles_per_debye_sphere": 89418626.69211265,
+  "interparticle_spacing_m": 4.6415888336127834e-08,
+  "rutherford_event_time_s": 7.497760086889203e-15,
+  "events_per_s_per_engine": 1.3636841259928647e+27,
+  "note": "Beyond a Debye length a single ion is screened: sensors and fields act on collective modes of ~N_D ions, never on one ion. Rutherford outcomes are random (impact parameter below the inter-particle spacing, femtometre-scale b0), so control can only correct after the fact, at the rate the scattering happens."
+ },
+ "thermal_reference": {
+  "60keV_50D": {
+   "T_keV": 60.0,
+   "D_fraction": 0.5,
+   "brems_share": 0.3154886097371345,
+   "neutron_share": 0.04098100131446315
+  },
+  "60keV_25D": {
+   "T_keV": 60.0,
+   "D_fraction": 0.25,
+   "brems_share": 0.6438162353073966,
+   "neutron_share": 0.013953738708819287
+  },
+  "60keV_10D": {
+   "T_keV": 60.0,
+   "D_fraction": 0.1,
+   "brems_share": 1.6615606779702121,
+   "neutron_share": 0.004684787136497776
+  },
+  "100keV_50D": {
+   "T_keV": 100.0,
+   "D_fraction": 0.5,
+   "brems_share": 0.22750813025107597,
+   "neutron_share": 0.03600648862139467
+  },
+  "100keV_25D": {
+   "T_keV": 100.0,
+   "D_fraction": 0.25,
+   "brems_share": 0.46061965362132695,
+   "neutron_share": 0.012228071601484557
+  },
+  "100keV_10D": {
+   "T_keV": 100.0,
+   "D_fraction": 0.1,
+   "brems_share": 1.1851047262009633,
+   "neutron_share": 0.004101758759345632
+  }
+ },
+ "thermal_ledger": {
+  "60keV_50D": {
+   "present": {
+    "heat_frac": 0.23125640918060633,
+    "P_fus_TW": 433.02798353009854,
+    "heat_GW": 100140.49654588933,
+    "radiator_multiple": 9272.268198693457
+   },
+   "advanced": {
+    "heat_frac": 0.08768632273610479,
+    "P_fus_TW": 382.08351487949875,
+    "heat_GW": 33503.49839786902,
+    "radiator_multiple": 3102.175777580465
+   },
+   "speculative": {
+    "heat_frac": 0.032166831012641985,
+    "P_fus_TW": 360.8566529417488,
+    "heat_GW": 11607.614974964832,
+    "radiator_multiple": 1074.7791643485955
+   }
+  },
+  "60keV_25D": {
+   "present": {
+    "heat_frac": 0.4113058185672587,
+    "P_fus_TW": 814.2671463896354,
+    "heat_GW": 334912.8151782148,
+    "radiator_multiple": 31010.445849834705
+   },
+   "advanced": {
+    "heat_frac": 0.13713549028677088,
+    "P_fus_TW": 718.4710115202665,
+    "heat_GW": 98527.87442166395,
+    "radiator_multiple": 9122.951335339256
+   },
+   "speculative": {
+    "heat_frac": 0.037772307248897546,
+    "P_fus_TW": 678.5559553246961,
+    "heat_GW": 25630.62403009362,
+    "radiator_multiple": 2373.205928712372
+   }
+  },
+  "60keV_10D": {
+   "present": {
+    "heat_frac": 1.0342433851502846,
+    "P_fus_TW": -418.26426033839306,
+    "heat_GW": -432587.04449975956,
+    "radiator_multiple": -40054.35597219996
+   },
+   "advanced": {
+    "heat_frac": 0.3351230078759411,
+    "P_fus_TW": -369.05670029858214,
+    "heat_GW": -123679.39148083059,
+    "radiator_multiple": -11451.795507484312
+   },
+   "speculative": {
+    "heat_frac": 0.08495194875310971,
+    "P_fus_TW": -348.5535502819942,
+    "heat_GW": -29610.303341270417,
+    "radiator_multiple": -2741.694753821335
+   }
+  },
+  "100keV_50D": {
+   "present": {
+    "heat_frac": 0.17238068585628047,
+    "P_fus_TW": 378.3736565687689,
+    "heat_GW": 65224.31042927311,
+    "radiator_multiple": 6039.288002710473
+   },
+   "advanced": {
+    "heat_frac": 0.067105519223052,
+    "P_fus_TW": 333.8591087371491,
+    "heat_GW": 22403.788839151763,
+    "radiator_multiple": 2074.424892514052
+   },
+   "speculative": {
+    "heat_frac": 0.025778001961111668,
+    "P_fus_TW": 315.31138047397405,
+    "heat_GW": 8128.0973842189305,
+    "radiator_multiple": 752.601609649901
+   }
+  },
+  "100keV_25D": {
+   "present": {
+    "heat_frac": 0.29622260753851426,
+    "P_fus_TW": 528.6265088857878,
+    "heat_GW": 156591.12287612967,
+    "radiator_multiple": 14499.178044086078
+   },
+   "advanced": {
+    "heat_frac": 0.09946077368515613,
+    "P_fus_TW": 466.4351548992245,
+    "heat_GW": 46392.001380232505,
+    "radiator_multiple": 4295.555683354862
+   },
+   "speculative": {
+    "heat_frac": 0.02792221132166017,
+    "P_fus_TW": 440.52209073815646,
+    "heat_GW": 12300.350909450359,
+    "radiator_multiple": 1138.921380504663
+   }
+  },
+  "100keV_10D": {
+   "present": {
+    "heat_frac": 0.738333460365228,
+    "P_fus_TW": -1472.817735212006,
+    "heat_GW": -1087430.6149263585,
+    "radiator_multiple": -100688.01990058874
+   },
+   "advanced": {
+    "heat_frac": 0.23948200049580007,
+    "P_fus_TW": -1299.545060481182,
+    "heat_GW": -311217.65081846894,
+    "radiator_multiple": -28816.449149858236
+   },
+   "speculative": {
+    "heat_frac": 0.06089593981378642,
+    "P_fus_TW": -1227.3481126766717,
+    "heat_GW": -74740.51680012295,
+    "radiator_multiple": -6920.418222233607
+   }
+  }
+ },
+ "scale": {
+  "rows": [
+   {
+    "case": "beam-target C_hot (P from the model)",
+    "reactions_per_s": 2.2207298129040906e+25,
+    "beam_current_A": 45747871.11073536,
+    "processed_power_W": 137243613332206.06,
+    "mass_t_present_1kW_kg": 137243613.33220607,
+    "mass_t_advanced_100kW_kg": 1372436.1333220606,
+    "mass_t_speculative_10MW_kg": 13724.361333220606
+   },
+   {
+    "case": "collider, ion-only (restored energy per fusion)",
+    "reactions_per_s": 2.2207298129040906e+25,
+    "beam_current_A": 218486284.28224802,
+    "processed_power_W": 87394513712899.2,
+    "mass_t_present_1kW_kg": 87394513.7128992,
+    "mass_t_advanced_100kW_kg": 873945.1371289921,
+    "mass_t_speculative_10MW_kg": 8739.45137128992
+   }
+  ],
+  "drive_allowance_t": 250.0,
+  "vertex_engine_drawn_t": 1244.0,
+  "note": "Specific powers are declared HYPOTHESES (kW of processed power per kg of converter, supply, RF and cooling)."
+ },
+ "hot_ion_hybrid": {
+  "Ti100_Te100_D50": {
+   "Ti_keV": 100.0,
+   "Te_keV": 100.0,
+   "D_fraction": 0.5,
+   "brems_share": 0.22750813025107597,
+   "neutron_share": 0.03600648862139467,
+   "ei_share": 0.0,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.17238068585628047,
+     "tap_frac": 0.0,
+     "jet_frac": 0.552364035845647,
+     "P_fus_TW": 378.3736565687689,
+     "heat_GW": 65224.31042927311,
+     "radiator_multiple": 6039.288002710473
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.067105519223052,
+     "tap_frac": 0.0,
+     "jet_frac": 0.6260125739583999,
+     "P_fus_TW": 333.8591087371491,
+     "heat_GW": 22403.788839151763,
+     "radiator_multiple": 2074.424892514052
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.025778001961111668,
+     "tap_frac": 0.0,
+     "jet_frac": 0.6628368430147764,
+     "P_fus_TW": 315.31138047397405,
+     "heat_GW": 8128.0973842189305,
+     "radiator_multiple": 752.601609649901
+    }
+   }
+  },
+  "Ti100_Te100_D30": {
+   "Ti_keV": 100.0,
+   "Te_keV": 100.0,
+   "D_fraction": 0.3,
+   "brems_share": 0.38113540659662887,
+   "neutron_share": 0.015679645268698986,
+   "ei_share": 0.0,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.24994524347367802,
+     "tap_frac": 0.0,
+     "jet_frac": 0.4523887111010041,
+     "P_fus_TW": 461.9920764409546,
+     "heat_GW": 115472.72202894445,
+     "radiator_multiple": 10691.918706383745
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.08563486848054516,
+     "tap_frac": 0.0,
+     "jet_frac": 0.5127072059144713,
+     "P_fus_TW": 407.6400674479011,
+     "heat_GW": 34908.20356330157,
+     "radiator_multiple": 3232.241070676071
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.02532862843731104,
+     "tap_frac": 0.0,
+     "jet_frac": 0.542866453321205,
+     "P_fus_TW": 384.99339703412875,
+     "heat_GW": 9751.354704295612,
+     "radiator_multiple": 902.903213360705
+    }
+   }
+  },
+  "Ti100_Te100_D20": {
+   "Ti_keV": 100.0,
+   "Te_keV": 100.0,
+   "D_fraction": 0.2,
+   "brems_share": 0.5806983031264437,
+   "neutron_share": 0.009192682168775973,
+   "ei_share": 0.0,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.36803058142523015,
+     "tap_frac": 0.0,
+     "jet_frac": 0.30758176102858525,
+     "P_fus_TW": 679.4941263782429,
+     "heat_GW": 250074.61840601353,
+     "radiator_multiple": 23155.05725981607
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.12165526992655433,
+     "tap_frac": 0.0,
+     "jet_frac": 0.3485926624990633,
+     "P_fus_TW": 599.553640921979,
+     "heat_GW": 72938.86002181178,
+     "radiator_multiple": 6753.598150167758
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.03271198802383257,
+     "tap_frac": 0.0,
+     "jet_frac": 0.3690981132343023,
+     "P_fus_TW": 566.2451053152024,
+     "heat_GW": 18523.003103624716,
+     "radiator_multiple": 1715.0928799652513
+    }
+   }
+  },
+  "Ti100_Te70_D50": {
+   "Ti_keV": 100.0,
+   "Te_keV": 70.0,
+   "D_fraction": 0.5,
+   "brems_share": 0.1699839197821463,
+   "neutron_share": 0.03600648862139467,
+   "ei_share": 0.11543339385116265,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.26934458565271285,
+     "heat_frac": 0.40606026101825693,
+     "tap_frac": 0.3847779795038755,
+     "jet_frac": 0.3934987544578097,
+     "P_fus_TW": 531.1325579364918,
+     "heat_GW": 215671.82511098636,
+     "radiator_multiple": 19969.613436202442
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.0354599314444748,
+     "heat_frac": 0.09106060857374086,
+     "tap_frac": 0.15089332529563745,
+     "jet_frac": 0.6447672111291866,
+     "P_fus_TW": 324.1479969708392,
+     "heat_GW": 29517.113872123726,
+     "radiator_multiple": 2733.0660992707153
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.008555213937411632,
+     "heat_frac": 0.03145700537507681,
+     "tap_frac": 0.12398860778857428,
+     "jet_frac": 0.7069089398931427,
+     "P_fus_TW": 295.65335534106094,
+     "heat_GW": 9300.369188123248,
+     "radiator_multiple": 861.1452951965971
+    }
+   }
+  },
+  "Ti100_Te70_D30": {
+   "Ti_keV": 100.0,
+   "Te_keV": 70.0,
+   "D_fraction": 0.3,
+   "brems_share": 0.2856739257253092,
+   "neutron_share": 0.015679645268698986,
+   "ei_share": 0.18640745183851115,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.43495072095652604,
+     "heat_frac": 0.6257098462899858,
+     "tap_frac": 0.6213581727950372,
+     "jet_frac": 0.1977717810370993,
+     "P_fus_TW": 1056.7736150426558,
+     "heat_GW": 661233.6562316528,
+     "radiator_multiple": 61225.33853996786
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.05726241984581714,
+     "heat_frac": 0.12380499215209838,
+     "tap_frac": 0.2436698716843283,
+     "jet_frac": 0.5451764077861485,
+     "P_fus_TW": 383.3621503335166,
+     "heat_GW": 47462.14801345258,
+     "radiator_multiple": 4394.643334578943
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.013815375055700626,
+     "heat_frac": 0.034370929449445684,
+     "tap_frac": 0.20022282689421178,
+     "jet_frac": 0.6163479485552621,
+     "P_fus_TW": 339.09417641431634,
+     "heat_GW": 11654.982014254354,
+     "radiator_multiple": 1079.1650013198475
+    }
+   }
+  },
+  "Ti100_Te70_D20": {
+   "Ti_keV": 100.0,
+   "Te_keV": 70.0,
+   "D_fraction": 0.2,
+   "brems_share": 0.43577118470303255,
+   "neutron_share": 0.009192682168775973,
+   "ei_share": 0.27996156048937315,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.6532436411418706,
+     "heat_frac": 0.9314194091445859,
+     "tap_frac": 0.9332052016312439,
+     "jet_frac": -0.07365563101025946,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.08600126367974208,
+     "heat_frac": 0.17867110992161417,
+     "tap_frac": 0.36596282416911524,
+     "jet_frac": 0.3986796390311819,
+     "P_fus_TW": 524.2304335076753,
+     "heat_GW": 93664.8334095053,
+     "radiator_multiple": 8672.669760139379
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.02074903079889019,
+     "heat_frac": 0.046214662901552205,
+     "tap_frac": 0.30071059128826333,
+     "jet_frac": 0.4808583920963711,
+     "P_fus_TW": 434.6393937076455,
+     "heat_GW": 20086.71306393387,
+     "radiator_multiple": 1859.880839253136
+    }
+   }
+  },
+  "Ti100_Te50_D50": {
+   "Ti_keV": 100.0,
+   "Te_keV": 50.0,
+   "D_fraction": 0.5,
+   "brems_share": 0.1329714939755648,
+   "neutron_share": 0.03600648862139467,
+   "ei_share": 0.3125737918906665,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.7293388477448884,
+     "heat_frac": 0.8431068191103519,
+     "tap_frac": 1.041912639635555,
+     "jet_frac": 0.07626237724361404,
+     "P_fus_TW": 2740.538749957483,
+     "heat_GW": 2310566.9081253135,
+     "radiator_multiple": 213941.38038197346
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.09601940012327662,
+     "heat_frac": 0.14421759209122637,
+     "tap_frac": 0.4085931920139431,
+     "jet_frac": 0.6247522246877993,
+     "P_fus_TW": 334.53262227988273,
+     "heat_GW": 48245.48926116844,
+     "radiator_multiple": 4467.17493158967
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.023166049023046194,
+     "heat_frac": 0.04421721917038231,
+     "tap_frac": 0.3357398409137127,
+     "jet_frac": 0.7270703715419948,
+     "P_fus_TW": 287.4549812238201,
+     "heat_GW": 12710.459906391783,
+     "radiator_multiple": 1176.894435777017
+    }
+   }
+  },
+  "Ti100_Te50_D30": {
+   "Ti_keV": 100.0,
+   "Te_keV": 50.0,
+   "D_fraction": 0.3,
+   "brems_share": 0.22405817847036677,
+   "neutron_share": 0.015679645268698986,
+   "ei_share": 0.5047298196202372,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 1.1777029124472203,
+     "heat_frac": 1.3302602744826157,
+     "tap_frac": 1.6824327320674575,
+     "jet_frac": -0.31308055213971453,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.15504772236700096,
+     "heat_frac": 0.2092671452222937,
+     "tap_frac": 0.6597775419872381,
+     "jet_frac": 0.5144322858098432,
+     "P_fus_TW": 406.27310097962163,
+     "heat_GW": 85019.61202261408,
+     "radiator_multiple": 7872.186298390193
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.03740747320493706,
+     "heat_frac": 0.054882240235934986,
+     "tap_frac": 0.5421372928251743,
+     "jet_frac": 0.6505692327503974,
+     "P_fus_TW": 321.2571229604807,
+     "heat_GW": 17631.310599822405,
+     "radiator_multiple": 1632.5287592428153
+    }
+   }
+  },
+  "Ti100_Te50_D20": {
+   "Ti_keV": 100.0,
+   "Te_keV": 50.0,
+   "D_fraction": 0.2,
+   "brems_share": 0.3421160849457657,
+   "neutron_share": 0.009192682168775973,
+   "ei_share": 0.7580225732288302,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 1.768719337533937,
+     "heat_frac": 1.9888289436871467,
+     "tap_frac": 2.5267419107627673,
+     "jet_frac": -0.8400210784863591,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.2328566074624511,
+     "heat_frac": 0.30679543375286983,
+     "tap_frac": 0.9908791806912812,
+     "jet_frac": 0.35345943160955623,
+     "P_fus_TW": 591.2984102539631,
+     "heat_GW": 181407.652251247,
+     "radiator_multiple": 16797.004838078425
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.05617997588913999,
+     "heat_frac": 0.07696285300393867,
+     "tap_frac": 0.8142025491179702,
+     "jet_frac": 0.5332601312966865,
+     "P_fus_TW": 391.92879372360204,
+     "heat_GW": 30163.958139360588,
+     "radiator_multiple": 2792.959086977832
+    }
+   }
+  },
+  "Ti100_Te35_D50": {
+   "Ti_keV": 100.0,
+   "Te_keV": 35.0,
+   "D_fraction": 0.5,
+   "brems_share": 0.10488684651031267,
+   "neutron_share": 0.03600648862139467,
+   "ei_share": 0.6793776372840158,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 1.585214486996037,
+     "heat_frac": 1.6815699769330443,
+     "tap_frac": 2.264592124280053,
+     "jet_frac": -0.5445808665958084,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.2086977055709068,
+     "heat_frac": 0.25127896804580613,
+     "tap_frac": 0.8880753428549226,
+     "jet_frac": 0.5528476154027779,
+     "P_fus_TW": 378.0426905662472,
+     "heat_GW": 94994.1771627466,
+     "radiator_multiple": 8795.757144698759
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.050351296425990476,
+     "heat_frac": 0.06999823420006399,
+     "tap_frac": 0.7297289337100062,
+     "jet_frac": 0.727879831598072,
+     "P_fus_TW": 287.13530850434074,
+     "heat_GW": 20098.96457179447,
+     "radiator_multiple": 1861.0152381291175
+    }
+   }
+  },
+  "Ti100_Te35_D30": {
+   "Ti_keV": 100.0,
+   "Te_keV": 35.0,
+   "D_fraction": 0.3,
+   "brems_share": 0.17713844669479165,
+   "neutron_share": 0.015679645268698986,
+   "ei_share": 1.096961559353197,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 2.5595769718241264,
+     "heat_frac": 2.683044100158665,
+     "tap_frac": 3.6565385311773233,
+     "jet_frac": -1.3142962978407127,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.33697511953987097,
+     "heat_frac": 0.3818105960400487,
+     "tap_frac": 1.4339366788930679,
+     "jet_frac": 0.3996757702221427,
+     "P_fus_TW": 522.9238687244821,
+     "heat_GW": 199657.87400126265,
+     "radiator_multiple": 18486.8401853021
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.08130005112284712,
+     "heat_frac": 0.0964288315650663,
+     "tap_frac": 1.1782616104760442,
+     "jet_frac": 0.653293671222296,
+     "P_fus_TW": 319.91738050816605,
+     "heat_GW": 30849.259199759173,
+     "radiator_multiple": 2856.41288886659
+    }
+   }
+  },
+  "Ti100_Te35_D20": {
+   "Ti_keV": 100.0,
+   "Te_keV": 35.0,
+   "D_fraction": 0.2,
+   "brems_share": 0.2707030675115081,
+   "neutron_share": 0.009192682168775973,
+   "ei_share": 1.6474114762799668,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 3.8439601113199227,
+     "heat_frac": 4.019793646663893,
+     "tap_frac": 5.49137158759989,
+     "jet_frac": -2.342891895750155,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.506067577680774,
+     "heat_frac": 0.5657238004843412,
+     "tap_frac": 2.1534790539607407,
+     "jet_frac": 0.1819311717431007,
+     "P_fus_TW": 1148.7860931007597,
+     "heat_GW": 649895.63453252,
+     "radiator_multiple": 60175.52171597407
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.12209601703900946,
+     "heat_frac": 0.13930824328209526,
+     "tap_frac": 1.7695074933189763,
+     "jet_frac": 0.5382074099526358,
+     "P_fus_TW": 388.3261288030069,
+     "heat_GW": 54097.03082408354,
+     "radiator_multiple": 5008.984335563291
+    }
+   }
+  },
+  "Ti150_Te150_D50": {
+   "Ti_keV": 150.0,
+   "Te_keV": 150.0,
+   "D_fraction": 0.5,
+   "brems_share": 0.24692456308090582,
+   "neutron_share": 0.026640244507460185,
+   "ei_share": 0.0,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.17627024183165196,
+     "tap_frac": 0.0,
+     "jet_frac": 0.5448263943087255,
+     "P_fus_TW": 383.60843414199627,
+     "heat_GW": 67618.75145487102,
+     "radiator_multiple": 6260.995505080649
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.06536905932065727,
+     "tap_frac": 0.0,
+     "jet_frac": 0.6174699135498889,
+     "P_fus_TW": 338.4780301252908,
+     "heat_GW": 22125.990429999354,
+     "radiator_multiple": 2048.702817592533
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.023002325957029366,
+     "tap_frac": 0.0,
+     "jet_frac": 0.6537916731704706,
+     "P_fus_TW": 319.6736951183302,
+     "heat_GW": 7353.2385349998585,
+     "radiator_multiple": 680.8554199073943
+    }
+   }
+  },
+  "Ti150_Te150_D30": {
+   "Ti_keV": 150.0,
+   "Te_keV": 150.0,
+   "D_fraction": 0.3,
+   "brems_share": 0.41040772164824246,
+   "neutron_share": 0.011552599875790446,
+   "ei_share": 0.0,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.264503549313848,
+     "tap_frac": 0.0,
+     "jet_frac": 0.4335297588569753,
+     "P_fus_TW": 482.0891662686313,
+     "heat_GW": 127514.2955638068,
+     "radiator_multiple": 11806.879218871
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.08901310425512277,
+     "tap_frac": 0.0,
+     "jet_frac": 0.491333726704572,
+     "P_fus_TW": 425.37279376643943,
+     "heat_GW": 37863.752838824905,
+     "radiator_multiple": 3505.9030406319357
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.0251414260327283,
+     "tap_frac": 0.0,
+     "jet_frac": 0.5202357106283704,
+     "P_fus_TW": 401.74097189052605,
+     "heat_GW": 10100.340929102042,
+     "radiator_multiple": 935.2167526946334
+    }
+   }
+  },
+  "Ti150_Te150_D20": {
+   "Ti_keV": 150.0,
+   "Te_keV": 150.0,
+   "D_fraction": 0.2,
+   "brems_share": 0.623593139767192,
+   "neutron_share": 0.006764075520742089,
+   "ei_share": 0.0,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.3925124923587046,
+     "tap_frac": 0.0,
+     "jet_frac": 0.27723208853404946,
+     "P_fus_TW": 753.8809850805952,
+     "heat_GW": 295907.70439581986,
+     "radiator_multiple": 27398.86151813147
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.12877707326588367,
+     "tap_frac": 0.0,
+     "jet_frac": 0.314196367005256,
+     "P_fus_TW": 665.1891044828783,
+     "heat_GW": 85661.10604365915,
+     "radiator_multiple": 7931.583892931403
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.0,
+     "heat_frac": 0.03388528719665644,
+     "tap_frac": 0.0,
+     "jet_frac": 0.3326785062408593,
+     "P_fus_TW": 628.2341542338294,
+     "heat_GW": 21287.894742961867,
+     "radiator_multiple": 1971.1013650890618
+    }
+   }
+  },
+  "Ti150_Te105_D50": {
+   "Ti_keV": 150.0,
+   "Te_keV": 105.0,
+   "D_fraction": 0.5,
+   "brems_share": 0.17570617760332694,
+   "neutron_share": 0.026640244507460185,
+   "ei_share": 0.07133265987059673,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.16644287303139235,
+     "heat_frac": 0.2985577158669454,
+     "tap_frac": 0.2377755329019891,
+     "jet_frac": 0.47340802864336545,
+     "P_fus_TW": 441.47962720219704,
+     "heat_GW": 131807.14909927853,
+     "radiator_multiple": 12204.365657340604
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.021912647149791152,
+     "heat_frac": 0.07303802937493264,
+     "tap_frac": 0.09324530702038787,
+     "jet_frac": 0.6593797911285084,
+     "P_fus_TW": 316.964521527575,
+     "heat_GW": 23150.464034142493,
+     "radiator_multiple": 2143.5614846428234
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.00528673848665003,
+     "heat_frac": 0.02472814516980045,
+     "tap_frac": 0.07661939835724675,
+     "jet_frac": 0.7131301554623066,
+     "P_fus_TW": 293.07413015581966,
+     "heat_GW": 7247.179636006102,
+     "radiator_multiple": 671.0351514820464
+    }
+   }
+  },
+  "Ti150_Te105_D30": {
+   "Ti_keV": 150.0,
+   "Te_keV": 105.0,
+   "D_fraction": 0.3,
+   "brems_share": 0.29299402245894157,
+   "neutron_share": 0.011552599875790446,
+   "ei_share": 0.11472045376183529,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.26768105877761567,
+     "heat_frac": 0.4593881145940972,
+     "tap_frac": 0.382401512539451,
+     "jet_frac": 0.32082923916573913,
+     "P_fus_TW": 651.4368844419178,
+     "heat_GW": 299262.3621208254,
+     "radiator_multiple": 27709.477974150497
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.03524092370461607,
+     "heat_frac": 0.10077128812187865,
+     "tap_frac": 0.14996137746645136,
+     "jet_frac": 0.5611805858665541,
+     "P_fus_TW": 372.4291346915896,
+     "heat_GW": 37530.16363698812,
+     "radiator_multiple": 3475.0151515729744
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.008502375198245588,
+     "heat_frac": 0.027773116271508844,
+     "tap_frac": 0.12322282896008088,
+     "jet_frac": 0.6182559022203201,
+     "P_fus_TW": 338.04772303737957,
+     "heat_GW": 9388.638717235961,
+     "radiator_multiple": 869.3183997440705
+    }
+   }
+  },
+  "Ti150_Te105_D20": {
+   "Ti_keV": 150.0,
+   "Te_keV": 105.0,
+   "D_fraction": 0.2,
+   "brems_share": 0.4457372393038415,
+   "neutron_share": 0.006764075520742089,
+   "ei_share": 0.17207372646853508,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.4015053617599152,
+     "heat_frac": 0.6837471958313426,
+     "tap_frac": 0.5735790882284503,
+     "jet_frac": 0.10949499256162594,
+     "P_fus_TW": 1908.7630868815365,
+     "heat_GW": 1305111.408161628,
+     "radiator_multiple": 120843.64890385444
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.052859249307327764,
+     "heat_frac": 0.14606514248054134,
+     "tap_frac": 0.22493297577586285,
+     "jet_frac": 0.42044352048787537,
+     "P_fus_TW": 497.0941156554869,
+     "heat_GW": 72608.1228294574,
+     "radiator_multiple": 6722.974336060869
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.012753047396701323,
+     "heat_frac": 0.03774553957019024,
+     "tap_frac": 0.1848267738652364,
+     "jet_frac": 0.4812710740008437,
+     "P_fus_TW": 434.2666976898629,
+     "heat_GW": 16391.63082166856,
+     "radiator_multiple": 1517.7435945989407
+    }
+   }
+  },
+  "Ti150_Te75_D50": {
+   "Ti_keV": 150.0,
+   "Te_keV": 75.0,
+   "D_fraction": 0.5,
+   "brems_share": 0.13269133770776373,
+   "neutron_share": 0.026640244507460185,
+   "ei_share": 0.19324055708696253,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.45089463320291256,
+     "heat_frac": 0.5563402753032164,
+     "tap_frac": 0.6441351902898751,
+     "jet_frac": 0.29233033843639766,
+     "P_fus_TW": 714.944610668496,
+     "heat_GW": 397752.48152586195,
+     "radiator_multiple": 36828.933474616846
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.05936147832083162,
+     "heat_frac": 0.10188389256686048,
+     "tap_frac": 0.25260203540779413,
+     "jet_frac": 0.6641108985443528,
+     "P_fus_TW": 314.70647516567124,
+     "heat_GW": 32063.520705874595,
+     "radiator_multiple": 2968.844509803203
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.014321802834586925,
+     "heat_frac": 0.03161246752295919,
+     "tap_frac": 0.20756235992154945,
+     "jet_frac": 0.7437119534551703,
+     "P_fus_TW": 281.0227790867398,
+     "heat_GW": 8883.823477091295,
+     "radiator_multiple": 822.5762478788236
+    }
+   }
+  },
+  "Ti150_Te75_D30": {
+   "Ti_keV": 150.0,
+   "Te_keV": 75.0,
+   "D_fraction": 0.3,
+   "brems_share": 0.22194002804599905,
+   "neutron_share": 0.011552599875790446,
+   "ei_share": 0.31076110469306417,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.7251092442838164,
+     "heat_frac": 0.8727628235642735,
+     "tap_frac": 1.0358703489768806,
+     "jet_frac": 0.0310485958457955,
+     "P_fus_TW": 6731.383314015538,
+     "heat_GW": 5874901.107633638,
+     "radiator_multiple": 543972.3247808925
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.09546256157237919,
+     "heat_frac": 0.14678212710705327,
+     "tap_frac": 0.4062236662654434,
+     "jet_frac": 0.5703880889299565,
+     "P_fus_TW": 366.4171886760159,
+     "heat_GW": 53783.494362452075,
+     "radiator_multiple": 4979.953181708525
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.023031703784985442,
+     "heat_frac": 0.03874974513760157,
+     "tap_frac": 0.3337928084780496,
+     "jet_frac": 0.6691281014639024,
+     "P_fus_TW": 312.3467681939449,
+     "heat_GW": 12103.357662068884,
+     "radiator_multiple": 1120.681265006378
+    }
+   }
+  },
+  "Ti150_Te75_D20": {
+   "Ti_keV": 150.0,
+   "Te_keV": 75.0,
+   "D_fraction": 0.2,
+   "brems_share": 0.3380264559749707,
+   "neutron_share": 0.006764075520742089,
+   "ei_share": 0.46611064419179626,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 1.0875915031141912,
+     "heat_frac": 1.3030526515217185,
+     "tap_frac": 1.5537021473059875,
+     "jet_frac": -0.3242865259574281,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.143184315536042,
+     "heat_frac": 0.2148480520434814,
+     "tap_frac": 0.6092949597278382,
+     "jet_frac": 0.4352213800230084,
+     "P_fus_TW": 480.2153790995999,
+     "heat_GW": 103173.33876087099,
+     "radiator_multiple": 9553.08692230287
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.03454525719574004,
+     "heat_frac": 0.05415221020278541,
+     "tap_frac": 0.5006559013875364,
+     "jet_frac": 0.5585977901776924,
+     "P_fus_TW": 374.1511400063294,
+     "heat_GW": 20261.111181234544,
+     "radiator_multiple": 1876.0288130772724
+    }
+   }
+  },
+  "Ti150_Te52.5_D50": {
+   "Ti_keV": 150.0,
+   "Te_keV": 52.5,
+   "D_fraction": 0.5,
+   "brems_share": 0.10179886555617672,
+   "neutron_share": 0.026640244507460185,
+   "ei_share": 0.4202087915688654,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 0.9804871803273526,
+     "heat_frac": 1.0667794896936724,
+     "tap_frac": 1.4006959718962182,
+     "jet_frac": -0.08169471779324221,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.12908374642965145,
+     "heat_frac": 0.16542766624536293,
+     "tap_frac": 0.5492925379985168,
+     "jet_frac": 0.6311055719807049,
+     "P_fus_TW": 331.1648783959554,
+     "heat_GW": 54783.8329754723,
+     "radiator_multiple": 5072.577127358547
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.03114329389715547,
+     "heat_frac": 0.04688933497794838,
+     "tap_frac": 0.4513520854660209,
+     "jet_frac": 0.7563758364352869,
+     "P_fus_TW": 276.3176584077476,
+     "heat_GW": 12956.351245403193,
+     "radiator_multiple": 1199.6621523521476
+    }
+   }
+  },
+  "Ti150_Te52.5_D30": {
+   "Ti_keV": 150.0,
+   "Te_keV": 52.5,
+   "D_fraction": 0.3,
+   "brems_share": 0.17075681685295918,
+   "neutron_share": 0.011552599875790446,
+   "ei_share": 0.6757231184671634,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 1.5766872764233812,
+     "heat_frac": 1.6926072647641537,
+     "tap_frac": 2.2524103948905445,
+     "jet_frac": -0.5692475198640982,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.20757507560755997,
+     "heat_frac": 0.24865799890362608,
+     "tap_frac": 0.8832981940747233,
+     "jet_frac": 0.5185981815141368,
+     "P_fus_TW": 403.00951189182433,
+     "heat_GW": 100211.53876614812,
+     "radiator_multiple": 9278.846182050753
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.05008044594439776,
+     "heat_frac": 0.0632393267373619,
+     "tap_frac": 0.7258035644115611,
+     "jet_frac": 0.6908491235941673,
+     "P_fus_TW": 302.52625770540175,
+     "heat_GW": 19131.55685766325,
+     "radiator_multiple": 1771.4404497836342
+    }
+   }
+  },
+  "Ti150_Te52.5_D20": {
+   "Ti_keV": 150.0,
+   "Te_keV": 52.5,
+   "D_fraction": 0.2,
+   "brems_share": 0.26034930571832254,
+   "neutron_share": 0.006764075520742089,
+   "ei_share": 1.0134896995846023,
+   "ledger": {
+    "present": {
+     "recirc_heat_frac": 2.3648092990307386,
+     "heat_frac": 2.532110614279144,
+     "tap_frac": 3.378298998615341,
+     "jet_frac": -1.2239420102023528,
+     "P_fus_TW": Infinity,
+     "heat_GW": Infinity,
+     "radiator_multiple": Infinity
+    },
+    "advanced": {
+     "recirc_heat_frac": 0.3113334371272961,
+     "heat_frac": 0.3674617435834059,
+     "tap_frac": 1.3248231367118986,
+     "jet_frac": 0.3583202043885932,
+     "P_fus_TW": 583.2771845969994,
+     "heat_GW": 214332.0512444335,
+     "radiator_multiple": 19845.56030041051
+    },
+    "speculative": {
+     "recirc_heat_frac": 0.07511362972216716,
+     "heat_frac": 0.09083672521638013,
+     "tap_frac": 1.0886033293067694,
+     "jet_frac": 0.5919956901348914,
+     "P_fus_TW": 353.0431107570691,
+     "heat_GW": 32069.280041375936,
+     "radiator_multiple": 2969.377781608883
+    }
+   }
+  }
+ },
+ "required_intercept": {
+  "thermal 100 keV 1:1": {
+   "brems_share": 0.22750813025107597,
+   "intercept_needed": 0.0001758178925555599
+  },
+  "hybrid Ti150 Te105 D50": {
+   "brems_share": 0.17570617760332694,
+   "intercept_needed": 0.00022765278116916146
+  },
+  "beam-target C_warm": {
+   "brems_share": 0.1911353184123046,
+   "intercept_needed": 0.0002092758174274972
+  }
+ },
+ "hot_ion_best": {
+  "present": "Ti100_Te100_D50",
+  "advanced": "Ti150_Te150_D50",
+  "speculative": "Ti150_Te105_D50"
+ }
+}

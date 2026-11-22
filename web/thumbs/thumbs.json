@@ -271,6 +271,33 @@
      ]
     }
    }
+  },
+  "sim-fusion": {
+   "class": "SIM",
+   "alt": "The Fusion engine explainer: the energy budget of a D-3He burn, from fusion power to thrust and heat",
+   "method": "Chrome: engineering/fusion/#budget, stage",
+   "source_size": [
+    1107,
+    666
+   ],
+   "files": {
+    "sim-fusion-480.webp": {
+     "bytes": 3860,
+     "quality": 78,
+     "size": [
+      480,
+      270
+     ]
+    },
+    "sim-fusion-960.webp": {
+     "bytes": 9644,
+     "quality": 78,
+     "size": [
+      960,
+      540
+     ]
+    }
+   }
   }
  }
 }
