@@ -18,7 +18,8 @@ and walks it as a visitor does, recording every request:
              hatch, Use opens it, a look drag, Map and View (a side browser; emulation, not a phone's frame rate)
 Screenshots, metrics and check.json go to --out; --record writes the summary into the site's release.json. It checks behaviour,
 loading isolation and transfer sizes, not frame rates on real hardware. The viewer's camera damping is switched off before input.
---part runs one part (main: start, viewer, play, switching, phone, review; equivalence; walk); CI runs each on its own runner and --merge combines their check.json (a missing part fails), recording into
+--part runs one part (main: start, viewer, play, switching, phone, review; equivalence; walk); CI splits main into main-viewer (start,
+viewer, phone, review) and main-play (start, play, switching) and runs each part on its own runner and --merge combines their check.json (a missing part fails), recording into
 release.json with --record. On request only (not in CI): --part training plays the SYS-001 systems proof (#interior-systems) and the
 DS-1 Deadship tutorial (#interior-deadship) with every action answered by the player's own key, then on an emulated phone by its
 touch button, and saves their stills; --part training-scripted runs their scripted checks in the browser. --frame-shell runs the equivalence part in a Chrome headless shell with frames on demand (FramePump):
@@ -889,8 +890,10 @@ def run_training(url, play_release, binary, sandbox, out, record_check, metrics,
         log.close()
 
 
-def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
-    """The visitor's walk in one browser: start page, Explore Ship, Explore Interior and Explore Exterior, switching and memory, phone, review."""
+def run_main(url, release, build, binary, sandbox, out, record_check, metrics, sections=('viewer', 'play')):
+    """The visitor's walk in one browser: start page, Explore Ship, Explore Interior and Explore Exterior, switching and memory, phone, review.
+    sections: 'viewer' (Explore Ship's interaction checks, phone, review pages) and 'play' (the experiences and the switching chain);
+    both start on the start page. CI runs them on two runners (parts main-viewer and main-play), `main` runs both in one browser."""
     play_release = release['experiences'].get('play')
     profile = tempfile.mkdtemp(prefix='wf-web-check-')
     log = open(out / 'chrome.log', 'w')
@@ -943,182 +946,190 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
         heaps = [('start', heap())]
         settled = heaps[0][1] + 200          # back on the start page, the renderers return to within 200 MB of the first visit
 
-        # B: Explore Ship opens from its link and loads the viewer only.
-        mark = traffic.mark()
-        t0 = time.monotonic()
-        page.click(*page.centre_of('#go-viewer'))
-        ready = page.wait('!!(window.wayfarer && window.wayfarer.model)', 240)
-        viewer_s = round(time.monotonic() - t0, 1)
-        if ready:
-            page.js('window.wayfarer.controls.enableDamping = false')
-        page.frames()
-        record_check('viewer: model loaded from the start page link', ready, seconds=viewer_s,
-                     status=page.js("document.getElementById('status').textContent"))
-        if not ready:
-            raise SystemExit
-        counts = page.js('(() => { let n = 0; window.wayfarer.model.traverse(o => { if (o.name.startsWith("WF_")) n++; }); '
-                         'return [n, window.wayfarer.groups.size]; })()')
-        record_check('viewer: every exported mesh node is in the scene', counts[0] == build['glb']['mesh_nodes'], nodes=counts[0],
-                     expected=build['glb']['mesh_nodes'])
-        record_check('viewer: assembly groups present', counts[1] == 14, groups=counts[1])
-        x, y = page.js(FRAMING)
-        record_check('viewer: whole ship framed on load', max(x, y) <= 1.0 and max(x, y) >= 0.6, ndc_extent=[round(x, 3), round(y, 3)])
-        page.screenshot(out / 'desktop_threequarter.png')
-        home = page.js(CAMERA)
-
-        page.drag((640, 400), (900, 330))
-        page.frames()
-        orbit = page.js(CAMERA)
-        record_check('viewer: left drag orbits', moved(home, orbit, 'p') > 1 and moved(home, orbit, 't') < 1e-3
-                     and moved(home, orbit, 'd') < 0.01 * home['d'], moved_m=round(moved(home, orbit, 'p'), 2))
-        page.mouse('mouseWheel', 640, 400, deltaX=0, deltaY=-600)
-        page.frames()
-        zoom = page.js(CAMERA)
-        record_check('viewer: wheel zooms in', zoom['d'] < 0.9 * orbit['d'], distance=[round(orbit['d'], 1), round(zoom['d'], 1)])
-        page.drag((640, 400), (520, 470), button='right')
-        page.frames()
-        pan = page.js(CAMERA)
-        record_check('viewer: right drag pans', moved(zoom, pan, 't') > 0.5, target_moved_m=round(moved(zoom, pan, 't'), 2))
-        bookmark = page.js('location.hash')
-        page.click(*page.centre_of('[data-view=reset]'))
-        page.frames()
-        reset = page.js(CAMERA)
-        record_check('viewer: Reset restores the whole-ship view', moved(home, reset, 'p') < 0.05 and moved(home, reset, 't') < 0.05)
-        for view in ('side', 'top', 'front'):
-            page.click(*page.centre_of(f'[data-view={view}]'))
+        # B: Explore Ship opens from its link and loads the viewer only (section 'viewer'). The experiences section alone (CI shard
+        # main-play) opens it too, without its interaction checks, so the switching chain viewer -> interior -> exterior -> viewer stays whole.
+        if 'viewer' in sections:
+            mark = traffic.mark()
+            t0 = time.monotonic()
+            page.click(*page.centre_of('#go-viewer'))
+            ready = page.wait('!!(window.wayfarer && window.wayfarer.model)', 240)
+            viewer_s = round(time.monotonic() - t0, 1)
+            if ready:
+                page.js('window.wayfarer.controls.enableDamping = false')
             page.frames()
+            record_check('viewer: model loaded from the start page link', ready, seconds=viewer_s,
+                         status=page.js("document.getElementById('status').textContent"))
+            if not ready:
+                raise SystemExit
+            counts = page.js('(() => { let n = 0; window.wayfarer.model.traverse(o => { if (o.name.startsWith("WF_")) n++; }); '
+                             'return [n, window.wayfarer.groups.size]; })()')
+            record_check('viewer: every exported mesh node is in the scene', counts[0] == build['glb']['mesh_nodes'], nodes=counts[0],
+                         expected=build['glb']['mesh_nodes'])
+            record_check('viewer: assembly groups present', counts[1] == 14, groups=counts[1])
             x, y = page.js(FRAMING)
-            record_check(f'viewer: {view} preset frames the ship', max(x, y) <= 1.0 and max(x, y) >= 0.6, ndc_extent=[round(x, 3), round(y, 3)])
-            page.screenshot(out / f'desktop_{view}.png')
-        page.click(*page.centre_of('[data-view=reset]'))
-        page.frames()
-        picked = None
-        for px, py in ((640, 400), (600, 400), (700, 410), (560, 380), (740, 380)):
-            page.click(px, py)
-            page.frames()
-            if page.js("!document.getElementById('pick').hidden"):
-                picked = page.js("document.getElementById('pick').innerText")
-                break
-        record_check('viewer: click picks a part and names it', picked, label=picked)
-        page.screenshot(out / 'desktop_pick.png')
-        page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'Escape', 'code': 'Escape', 'windowsVirtualKeyCode': 27})
-        page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'Escape', 'code': 'Escape', 'windowsVirtualKeyCode': 27})
-        # WEB-004 appearance: styles, per-assembly states, Hybrid focus, picking policy, colours from the export, reset (web/README.md).
-        snap0 = page.js(SNAPSHOT)
-        for name in ('subsystem', 'engine', 'hybrid', 'standard'):
-            page.click(*page.centre_of(f'[data-style={name}]'))
-            ok = page.wait(f"window.wayfarer.style() === '{name}' && window.wayfarer.records.every(r => r.res)", 120)
-            page.frames()
-            styled = page.js(STYLED.replace('{style}', name))
-            record_check(f'viewer: {name} style draws every mesh in its look', ok and styled['wrong'] == 0, **styled)
-            if name in ('subsystem', 'engine'):
-                page.screenshot(out / f'desktop_holo_{name}.png')
-            if name == 'subsystem':
-                tints = page.js(TINTS)
-                record_check('viewer: subsystem colours are the exported classification', tints['checked'] > 0 and tints['wrong'] == 0, **tints)
-        page.click(*page.centre_of('#panel-toggle'))
-        first = page.js("document.querySelector('#assemblies li select').dataset.assembly")
-        states = {}
-        for st in ('SOLID', 'HOLOGRAM', 'GHOST', 'HIDDEN'):
-            page.js(f"(() => {{ const s = document.querySelector('#assemblies li select'); s.value = '{st}'; s.dispatchEvent(new Event('change')); }})()")
-            states[st] = page.wait(f"window.wayfarer.records.filter(r => r.assembly === '{first}').every(r => r.res.state === '{st}' "
-                                   f"&& r.meshes.every(m => m.visible === ('{st}' !== 'HIDDEN')))", 60)
-        page.frames()
-        page.screenshot(out / 'desktop_assembly_hidden.png')
-        page.click(*page.centre_of('#show-all'))
-        shown = page.wait(f"window.wayfarer.records.filter(r => r.assembly === '{first}').every(r => r.res.state !== 'HIDDEN')", 60)
-        record_check('viewer: an assembly takes Solid, Hologram, Ghost and Hidden; Show all lifts Hidden', all(states.values()) and shown,
-                     assembly=first, states=states)
-        page.js("document.querySelector('#assemblies li select').value = ''; document.querySelector('#assemblies li select').dispatchEvent(new Event('change'))")
-        page.click(*page.centre_of('#panel-toggle'))
-        page.click(*page.centre_of('[data-style=hybrid]'))
-        page.wait("window.wayfarer.style() === 'hybrid'", 60)
-        hybrid = None
-        for px, py in ((640, 400), (600, 400), (700, 410), (560, 380), (740, 380)):
-            page.click(px, py)
-            page.frames()
-            hybrid = page.js(HYBRID_FOCUS)
-            if hybrid['selected']:
-                hit = (px, py)
-                break
-        record_check('viewer: Hybrid click focuses the picked part solid, the rest ghost', hybrid['ok'], **details(hybrid))
-        page.screenshot(out / 'desktop_hybrid_focus.png')
-        kept = page.js(KEEPS_OVERRIDES)
-        record_check('viewer: changing the selection keeps unrelated assembly states', kept['ok'], **details(kept))
-        hidden_pick = page.js(HIDDEN_PICK.replace('{x}', str(hit[0])).replace('{y}', str(hit[1]))) if hybrid['selected'] else {'ok': False}
-        record_check('viewer: hidden parts never take a pick', hidden_pick['ok'], **details(hidden_pick))
-        ghost_pick = page.js(GHOST_PICK, timeout=180)
-        record_check('viewer: ghosts never take a pick from a visible subject behind them', ghost_pick['ok'], **details(ghost_pick))
-        page.click(*page.centre_of('#appearance-toggle'))
-        page.click(*page.centre_of('#reset-appearance'))
-        page.click(*page.centre_of('#appearance-toggle'))
-        page.frames()
-        snap1 = page.js(SNAPSHOT)
-        record_check('viewer: Reset appearance restores materials, visibility and transforms', snap1 == {**snap0, 'style': 'standard'} and
-                     snap1['original_materials'] == snap1['meshes'] == snap1['original_visibility'] and not snap1['added_lines'],
-                     before=snap0, after=snap1)
-        fps = page.js(RAF_FPS.replace('{ms}', '4000'), timeout=120)
-        stats = page.js('(() => { const s = window.wayfarer.stats; return {calls: s.calls, triangles: s.triangles, ready_ms: s.ready_ms}; })()')
-        reqs, lines = traffic.since(mark)
-        engine = [u for u, *_ in reqs if '/play/' in u]
-        record_check('viewer: no Enter Wayfarer file requested', not engine, play_requests=engine[:3])
-        requests_ok('viewer: every request served from the project subpath', reqs)
-        errors = [text for kind, text in lines if kind in ('error', 'assert', 'exception')
-                  or (kind == 'warning' and any(w in text for w in ('WebGL', 'THREE', 'shader', 'Shader')))]
-        record_check('viewer: no script errors or WebGL warnings', not errors, errors=errors[:5])
-        metrics['viewer'] = {'ready_s': viewer_s, 'transferred_bytes': sum(b for _, _, b, _ in reqs), 'requests': len(reqs),
-                             'raf': fps, **stats, 'renderer_rss_mb': rss(chrome.process.pid, 'renderer'),
-                             'renderer': 'SwiftShader software WebGL, 1280x800'}
+            record_check('viewer: whole ship framed on load', max(x, y) <= 1.0 and max(x, y) >= 0.6, ndc_extent=[round(x, 3), round(y, 3)])
+            page.screenshot(out / 'desktop_threequarter.png')
+            home = page.js(CAMERA)
 
-        # The camera bookmark the drags wrote reopens the same view after a reload.
-        page.send('Page.navigate', {'url': url + 'viewer/?reopen' + bookmark})     # a new URL, so the page really reloads
-        page.wait('!!(window.wayfarer && window.wayfarer.model)', 240)
-        page.frames()
-        again = page.js(CAMERA)
-        record_check('viewer: #cam bookmark reopens the camera', bookmark.startswith('#cam=') and moved(pan, again, 'p') < 0.05
-                     and moved(pan, again, 't') < 0.05, bookmark=bookmark)
-        # WEB-004: style, focus, focus look, ghost strength and an assembly state come back from the link; a missing target is dropped.
-        mark_state = ('#view=side&style=hybrid&focus=a:{a}&look=cyan&ghost=12&ov=a:{b}.x,n:WF_NO_SUCH_NODE.g'
-                      .format(a=first, b=page.js("[...window.wayfarer.groups.keys()].sort().at(-1)")))
-        page.send('Page.navigate', {'url': url + 'viewer/?appearance' + mark_state})
-        page.wait("!!(window.wayfarer && window.wayfarer.model && window.wayfarer.records.every(r => r.res))", 240)
-        restored_state = page.js("(() => { const s = window.wayfarer.state; return {style: s.style, focus: s.focus, look: s.focusLook, ghost: s.ghost, "
-                                 "overrides: [...s.overrides]}; })()")
-        record_check('viewer: the bookmark restores style, focus and states', restored_state['style'] == 'hybrid' and restored_state['look'] == 'cyan'
-                     and restored_state['focus'] == {'kind': 'assembly', 'id': first} and abs(restored_state['ghost'] - 0.12) < 1e-9
-                     and len(restored_state['overrides']) == 1 and restored_state['overrides'][0][1] == 'HIDDEN', bookmark=mark_state, state=restored_state)
+            page.drag((640, 400), (900, 330))
+            page.frames()
+            orbit = page.js(CAMERA)
+            record_check('viewer: left drag orbits', moved(home, orbit, 'p') > 1 and moved(home, orbit, 't') < 1e-3
+                         and moved(home, orbit, 'd') < 0.01 * home['d'], moved_m=round(moved(home, orbit, 'p'), 2))
+            page.mouse('mouseWheel', 640, 400, deltaX=0, deltaY=-600)
+            page.frames()
+            zoom = page.js(CAMERA)
+            record_check('viewer: wheel zooms in', zoom['d'] < 0.9 * orbit['d'], distance=[round(orbit['d'], 1), round(zoom['d'], 1)])
+            page.drag((640, 400), (520, 470), button='right')
+            page.frames()
+            pan = page.js(CAMERA)
+            record_check('viewer: right drag pans', moved(zoom, pan, 't') > 0.5, target_moved_m=round(moved(zoom, pan, 't'), 2))
+            bookmark = page.js('location.hash')
+            page.click(*page.centre_of('[data-view=reset]'))
+            page.frames()
+            reset = page.js(CAMERA)
+            record_check('viewer: Reset restores the whole-ship view', moved(home, reset, 'p') < 0.05 and moved(home, reset, 't') < 0.05)
+            for view in ('side', 'top', 'front'):
+                page.click(*page.centre_of(f'[data-view={view}]'))
+                page.frames()
+                x, y = page.js(FRAMING)
+                record_check(f'viewer: {view} preset frames the ship', max(x, y) <= 1.0 and max(x, y) >= 0.6, ndc_extent=[round(x, 3), round(y, 3)])
+                page.screenshot(out / f'desktop_{view}.png')
+            page.click(*page.centre_of('[data-view=reset]'))
+            page.frames()
+            picked = None
+            for px, py in ((640, 400), (600, 400), (700, 410), (560, 380), (740, 380)):
+                page.click(px, py)
+                page.frames()
+                if page.js("!document.getElementById('pick').hidden"):
+                    picked = page.js("document.getElementById('pick').innerText")
+                    break
+            record_check('viewer: click picks a part and names it', picked, label=picked)
+            page.screenshot(out / 'desktop_pick.png')
+            page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': 'Escape', 'code': 'Escape', 'windowsVirtualKeyCode': 27})
+            page.send('Input.dispatchKeyEvent', {'type': 'keyUp', 'key': 'Escape', 'code': 'Escape', 'windowsVirtualKeyCode': 27})
+            # WEB-004 appearance: styles, per-assembly states, Hybrid focus, picking policy, colours from the export, reset (web/README.md).
+            snap0 = page.js(SNAPSHOT)
+            for name in ('subsystem', 'engine', 'hybrid', 'standard'):
+                page.click(*page.centre_of(f'[data-style={name}]'))
+                ok = page.wait(f"window.wayfarer.style() === '{name}' && window.wayfarer.records.every(r => r.res)", 120)
+                page.frames()
+                styled = page.js(STYLED.replace('{style}', name))
+                record_check(f'viewer: {name} style draws every mesh in its look', ok and styled['wrong'] == 0, **styled)
+                if name in ('subsystem', 'engine'):
+                    page.screenshot(out / f'desktop_holo_{name}.png')
+                if name == 'subsystem':
+                    tints = page.js(TINTS)
+                    record_check('viewer: subsystem colours are the exported classification', tints['checked'] > 0 and tints['wrong'] == 0, **tints)
+            page.click(*page.centre_of('#panel-toggle'))
+            first = page.js("document.querySelector('#assemblies li select').dataset.assembly")
+            states = {}
+            for st in ('SOLID', 'HOLOGRAM', 'GHOST', 'HIDDEN'):
+                page.js(f"(() => {{ const s = document.querySelector('#assemblies li select'); s.value = '{st}'; s.dispatchEvent(new Event('change')); }})()")
+                states[st] = page.wait(f"window.wayfarer.records.filter(r => r.assembly === '{first}').every(r => r.res.state === '{st}' "
+                                       f"&& r.meshes.every(m => m.visible === ('{st}' !== 'HIDDEN')))", 60)
+            page.frames()
+            page.screenshot(out / 'desktop_assembly_hidden.png')
+            page.click(*page.centre_of('#show-all'))
+            shown = page.wait(f"window.wayfarer.records.filter(r => r.assembly === '{first}').every(r => r.res.state !== 'HIDDEN')", 60)
+            record_check('viewer: an assembly takes Solid, Hologram, Ghost and Hidden; Show all lifts Hidden', all(states.values()) and shown,
+                         assembly=first, states=states)
+            page.js("document.querySelector('#assemblies li select').value = ''; document.querySelector('#assemblies li select').dispatchEvent(new Event('change'))")
+            page.click(*page.centre_of('#panel-toggle'))
+            page.click(*page.centre_of('[data-style=hybrid]'))
+            page.wait("window.wayfarer.style() === 'hybrid'", 60)
+            hybrid = None
+            for px, py in ((640, 400), (600, 400), (700, 410), (560, 380), (740, 380)):
+                page.click(px, py)
+                page.frames()
+                hybrid = page.js(HYBRID_FOCUS)
+                if hybrid['selected']:
+                    hit = (px, py)
+                    break
+            record_check('viewer: Hybrid click focuses the picked part solid, the rest ghost', hybrid['ok'], **details(hybrid))
+            page.screenshot(out / 'desktop_hybrid_focus.png')
+            kept = page.js(KEEPS_OVERRIDES)
+            record_check('viewer: changing the selection keeps unrelated assembly states', kept['ok'], **details(kept))
+            hidden_pick = page.js(HIDDEN_PICK.replace('{x}', str(hit[0])).replace('{y}', str(hit[1]))) if hybrid['selected'] else {'ok': False}
+            record_check('viewer: hidden parts never take a pick', hidden_pick['ok'], **details(hidden_pick))
+            ghost_pick = page.js(GHOST_PICK, timeout=180)
+            record_check('viewer: ghosts never take a pick from a visible subject behind them', ghost_pick['ok'], **details(ghost_pick))
+            page.click(*page.centre_of('#appearance-toggle'))
+            page.click(*page.centre_of('#reset-appearance'))
+            page.click(*page.centre_of('#appearance-toggle'))
+            page.frames()
+            snap1 = page.js(SNAPSHOT)
+            record_check('viewer: Reset appearance restores materials, visibility and transforms', snap1 == {**snap0, 'style': 'standard'} and
+                         snap1['original_materials'] == snap1['meshes'] == snap1['original_visibility'] and not snap1['added_lines'],
+                         before=snap0, after=snap1)
+            fps = page.js(RAF_FPS.replace('{ms}', '4000'), timeout=120)
+            stats = page.js('(() => { const s = window.wayfarer.stats; return {calls: s.calls, triangles: s.triangles, ready_ms: s.ready_ms}; })()')
+            reqs, lines = traffic.since(mark)
+            engine = [u for u, *_ in reqs if '/play/' in u]
+            record_check('viewer: no Enter Wayfarer file requested', not engine, play_requests=engine[:3])
+            requests_ok('viewer: every request served from the project subpath', reqs)
+            errors = [text for kind, text in lines if kind in ('error', 'assert', 'exception')
+                      or (kind == 'warning' and any(w in text for w in ('WebGL', 'THREE', 'shader', 'Shader')))]
+            record_check('viewer: no script errors or WebGL warnings', not errors, errors=errors[:5])
+            metrics['viewer'] = {'ready_s': viewer_s, 'transferred_bytes': sum(b for _, _, b, _ in reqs), 'requests': len(reqs),
+                                 'raf': fps, **stats, 'renderer_rss_mb': rss(chrome.process.pid, 'renderer'),
+                                 'renderer': 'SwiftShader software WebGL, 1280x800'}
 
-        # Vertex Engine 1.1: part inspection and per-engine drive control, then a bookmark that names both.
-        if build.get('engine_file'):
-            page.send('Page.navigate', {'url': url + 'viewer/?inspect#view=aft'})
+            # The camera bookmark the drags wrote reopens the same view after a reload.
+            page.send('Page.navigate', {'url': url + 'viewer/?reopen' + bookmark})     # a new URL, so the page really reloads
+            page.wait('!!(window.wayfarer && window.wayfarer.model)', 240)
+            page.frames()
+            again = page.js(CAMERA)
+            record_check('viewer: #cam bookmark reopens the camera', bookmark.startswith('#cam=') and moved(pan, again, 'p') < 0.05
+                         and moved(pan, again, 't') < 0.05, bookmark=bookmark)
+            # WEB-004: style, focus, focus look, ghost strength and an assembly state come back from the link; a missing target is dropped.
+            mark_state = ('#view=side&style=hybrid&focus=a:{a}&look=cyan&ghost=12&ov=a:{b}.x,n:WF_NO_SUCH_NODE.g'
+                          .format(a=first, b=page.js("[...window.wayfarer.groups.keys()].sort().at(-1)")))
+            page.send('Page.navigate', {'url': url + 'viewer/?appearance' + mark_state})
             page.wait("!!(window.wayfarer && window.wayfarer.model && window.wayfarer.records.every(r => r.res))", 240)
-            page.js('window.wayfarer.controls.enableDamping = false')
-            mark_i = traffic.mark()
-            insp = page.js(INSPECT, timeout=300)
-            record_check('viewer: engine part inspection (lazy records, placements, picks per engine, hidden, filter, search, keyboard, link, engineering overlay, coil data, lazy field overlay)',
-                         insp.get('ok'), **details(insp))
-            page.frames()
-            page.screenshot(out / 'desktop_engine_inspect.png')
-            drv = page.js(DRIVE, timeout=180)
-            record_check('viewer: per-engine drive control (single engine, sequence, shutdown, thermal ramp, bookmark)', drv.get('ok'), **details(drv))
-            link = '#view=aft&drive=N1.SUSTAINED,N2.OFF,N3.OFF,N4.OFF&part=N3.VTX_C1_Winding'
-            page.send('Page.navigate', {'url': url + 'viewer/?partlink' + link})
-            page.wait("!!(window.wayfarer && window.wayfarer.inspect() && window.wayfarer.inspect().data() && window.wayfarer.inspect().hasPart())", 240)
-            opened = page.js("(() => { const w = window.wayfarer, i = w.inspect(), s = i.state(), o = i.overlay(); const T = w.THREE; "
-                             "const id = i.renderOf(s.engine, 'VTX_C1_Winding'); const r = w.byId.get(id); const b = new T.Box3(); "
-                             "for (const m of r.meshes) b.expandByObject(m); const c = new T.Box3().setFromObject(o.children[0]); "
-                             "return {engine: s.engine, part: s.part, drive: w.drive().engines, offset_m: b.getCenter(new T.Vector3())"
-                             ".distanceTo(c.getCenter(new T.Vector3())), drawer: !document.getElementById('engine').hidden}; })()")
-            record_check('viewer: a part link opens that part on that engine, with the drive states', opened['engine'] == 'N3'
-                         and opened['part'] == 'VTX_C1_Winding' and opened['offset_m'] < 0.1 and opened['drawer']
-                         and opened['drive'] == {'N1': 'SUSTAINED', 'N2': 'OFF', 'N3': 'OFF', 'N4': 'OFF'}, link=link, **opened)
-            page.screenshot(out / 'desktop_engine_link.png')
-            reqs_i, lines_i = traffic.since(mark_i)
-            errors_i = [text for kind, text in lines_i if kind in ('error', 'assert', 'exception')]
-            record_check('viewer: inspection and drive run without script errors', not errors_i, errors=errors_i[:5])
-            inspected = release['experiences']['viewer'].get('inspection', {})
-            metrics['inspection'] = {'download_bytes': inspected.get('download_bytes'), 'loads': inspected.get('loads'),
-                                     'transferred_bytes': sum(b for u, _, b, _ in reqs_i if '/model/engine' in u or 'inspect.js' in u)}
+            restored_state = page.js("(() => { const s = window.wayfarer.state; return {style: s.style, focus: s.focus, look: s.focusLook, ghost: s.ghost, "
+                                     "overrides: [...s.overrides]}; })()")
+            record_check('viewer: the bookmark restores style, focus and states', restored_state['style'] == 'hybrid' and restored_state['look'] == 'cyan'
+                         and restored_state['focus'] == {'kind': 'assembly', 'id': first} and abs(restored_state['ghost'] - 0.12) < 1e-9
+                         and len(restored_state['overrides']) == 1 and restored_state['overrides'][0][1] == 'HIDDEN', bookmark=mark_state, state=restored_state)
+
+            # Vertex Engine 1.1: part inspection and per-engine drive control, then a bookmark that names both.
+            if build.get('engine_file'):
+                page.send('Page.navigate', {'url': url + 'viewer/?inspect#view=aft'})
+                page.wait("!!(window.wayfarer && window.wayfarer.model && window.wayfarer.records.every(r => r.res))", 240)
+                page.js('window.wayfarer.controls.enableDamping = false')
+                mark_i = traffic.mark()
+                insp = page.js(INSPECT, timeout=300)
+                record_check('viewer: engine part inspection (lazy records, placements, picks per engine, hidden, filter, search, keyboard, link, engineering overlay, coil data, lazy field overlay)',
+                             insp.get('ok'), **details(insp))
+                page.frames()
+                page.screenshot(out / 'desktop_engine_inspect.png')
+                drv = page.js(DRIVE, timeout=180)
+                record_check('viewer: per-engine drive control (single engine, sequence, shutdown, thermal ramp, bookmark)', drv.get('ok'), **details(drv))
+                link = '#view=aft&drive=N1.SUSTAINED,N2.OFF,N3.OFF,N4.OFF&part=N3.VTX_C1_Winding'
+                page.send('Page.navigate', {'url': url + 'viewer/?partlink' + link})
+                page.wait("!!(window.wayfarer && window.wayfarer.inspect() && window.wayfarer.inspect().data() && window.wayfarer.inspect().hasPart())", 240)
+                opened = page.js("(() => { const w = window.wayfarer, i = w.inspect(), s = i.state(), o = i.overlay(); const T = w.THREE; "
+                                 "const id = i.renderOf(s.engine, 'VTX_C1_Winding'); const r = w.byId.get(id); const b = new T.Box3(); "
+                                 "for (const m of r.meshes) b.expandByObject(m); const c = new T.Box3().setFromObject(o.children[0]); "
+                                 "return {engine: s.engine, part: s.part, drive: w.drive().engines, offset_m: b.getCenter(new T.Vector3())"
+                                 ".distanceTo(c.getCenter(new T.Vector3())), drawer: !document.getElementById('engine').hidden}; })()")
+                record_check('viewer: a part link opens that part on that engine, with the drive states', opened['engine'] == 'N3'
+                             and opened['part'] == 'VTX_C1_Winding' and opened['offset_m'] < 0.1 and opened['drawer']
+                             and opened['drive'] == {'N1': 'SUSTAINED', 'N2': 'OFF', 'N3': 'OFF', 'N4': 'OFF'}, link=link, **opened)
+                page.screenshot(out / 'desktop_engine_link.png')
+                reqs_i, lines_i = traffic.since(mark_i)
+                errors_i = [text for kind, text in lines_i if kind in ('error', 'assert', 'exception')]
+                record_check('viewer: inspection and drive run without script errors', not errors_i, errors=errors_i[:5])
+                inspected = release['experiences']['viewer'].get('inspection', {})
+                metrics['inspection'] = {'download_bytes': inspected.get('download_bytes'), 'loads': inspected.get('loads'),
+                                         'transferred_bytes': sum(b for u, _, b, _ in reqs_i if '/model/engine' in u or 'inspect.js' in u)}
+        else:
+            page.click(*page.centre_of('#go-viewer'))
+            ready = page.wait('!!(window.wayfarer && window.wayfarer.model)', 240)
+            record_check('switching: Explore Ship opens before the experiences', ready)
+            if not ready:
+                raise SystemExit
 
         # Back to the start page: the viewer's context is released (pagehide) and nothing of it stays loaded.
         page.click(*page.centre_of('.wos-bar .mark'))
@@ -1127,7 +1138,7 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
 
         # C: the two experiences, each from its start-page choice: the launcher loads no engine; Start loads the engine and the pack
         # and starts the right scene (the hash picks it; one package holds both); the player can act; Exit returns to that launcher.
-        if play_release:
+        if play_release and 'play' in sections:
             def key(k, code, vk, hold=0.0):
                 page.send('Input.dispatchKeyEvent', {'type': 'keyDown', 'key': k, 'code': code, 'windowsVirtualKeyCode': vk})
                 time.sleep(hold)
@@ -1361,111 +1372,112 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
             heaps.append(('start after second viewer', heap(settled)))
             record_check('switching: renderer memory returns to the start-page level after each experience',
                          all(h <= settled for _, h in heaps) and not traffic.crashed, renderer_rss_mb=heaps, crashed=traffic.crashed)
-            metrics['memory'] = {'renderer_rss_mb': heaps, 'in_viewer_mb': metrics['viewer'].get('renderer_rss_mb'),
+            metrics['memory'] = {'renderer_rss_mb': heaps, 'in_viewer_mb': metrics.get('viewer', {}).get('renderer_rss_mb'),
                                  'in_play_mb': metrics.get('play', {}).get('renderer_rss_mb'), 'in_exterior_mb': metrics.get('exterior', {}).get('renderer_rss_mb'),
                                  'note': 'page-renderer RSS on the start page after each experience, settled up to 30 s; Chrome runs with '
                                          'the back-forward cache off (with it on, Chrome keeps left pages until it evicts them)'}
 
-        # Phone: the start page and the viewer at 390 x 844 with touch.
-        page.send('Emulation.setDeviceMetricsOverride', {'width': 390, 'height': 844, 'deviceScaleFactor': 2, 'mobile': True})
-        page.send('Emulation.setTouchEmulationEnabled', {'enabled': True, 'maxTouchPoints': 5})
-        page.send('Page.navigate', {'url': url})
-        page.wait("document.readyState === 'complete'", 30)
-        record_check('phone: start page has no horizontal overflow', not page.js('document.documentElement.scrollWidth > window.innerWidth'))
-        page.screenshot(out / 'phone_start.png')
-        page.send('Page.navigate', {'url': url + 'viewer/'})
-        if page.wait('!!(window.wayfarer && window.wayfarer.model)', 240):
-            page.js('window.wayfarer.controls.enableDamping = false')
-            page.frames()
-            x, y = page.js(FRAMING)
-            record_check('phone: whole ship framed', max(x, y) <= 1.0 and max(x, y) >= 0.6, ndc_extent=[round(x, 3), round(y, 3)])
-            page.screenshot(out / 'phone_threequarter.png')
-            start = page.js(CAMERA)
-            page.touch('touchStart', [(195, 420)])
-            for i in range(1, 4):
-                page.touch('touchMove', [(195 + 40 * i, 420)])
-            page.touch('touchEnd', [])
-            page.frames()
-            spun = page.js(CAMERA)
-            record_check('phone: one-finger drag orbits', moved(start, spun, 'p') > 1 and moved(start, spun, 't') < 1e-3,
-                         moved_m=round(moved(start, spun, 'p'), 2))
-            page.touch('touchStart', [(165, 420), (225, 420)])
-            for i in range(1, 4):
-                page.touch('touchMove', [(165 - 27 * i, 420), (225 + 27 * i, 420)])
-            page.touch('touchEnd', [])
-            page.frames()
-            pinch = page.js(CAMERA)
-            record_check('phone: pinch zooms in', pinch['d'] < 0.9 * spun['d'], distance=[round(spun['d'], 1), round(pinch['d'], 1)])
-            record_check('phone: no horizontal overflow', not page.js('document.documentElement.scrollWidth > window.innerWidth'))
-            page.screenshot(out / 'phone_zoomed.png')
-            if build.get('engine_file'):
-                page.click(*page.centre_of('#engine-toggle'))
-                page.wait("!!(window.wayfarer.inspect().data())", 120)
-                page.js("window.wayfarer.inspect().selectPart('N1', 'VTX_C1_Winding', {frame: true})")
+        if 'viewer' in sections:
+            # Phone: the start page and the viewer at 390 x 844 with touch.
+            page.send('Emulation.setDeviceMetricsOverride', {'width': 390, 'height': 844, 'deviceScaleFactor': 2, 'mobile': True})
+            page.send('Emulation.setTouchEmulationEnabled', {'enabled': True, 'maxTouchPoints': 5})
+            page.send('Page.navigate', {'url': url})
+            page.wait("document.readyState === 'complete'", 30)
+            record_check('phone: start page has no horizontal overflow', not page.js('document.documentElement.scrollWidth > window.innerWidth'))
+            page.screenshot(out / 'phone_start.png')
+            page.send('Page.navigate', {'url': url + 'viewer/'})
+            if page.wait('!!(window.wayfarer && window.wayfarer.model)', 240):
+                page.js('window.wayfarer.controls.enableDamping = false')
                 page.frames()
-                fit = page.js("(() => { const r = document.getElementById('engine').getBoundingClientRect(); "
-                              "return {left: r.left, right: r.right, top: r.top, bottom: r.bottom, w: innerWidth, h: innerHeight, "
-                              "overflow: document.documentElement.scrollWidth > innerWidth}; })()")
-                record_check('phone: the Engine drawer fits the screen', fit['left'] >= 0 and fit['right'] <= fit['w'] and fit['bottom'] <= fit['h']
-                             and not fit['overflow'], **fit)
-                page.screenshot(out / 'phone_engine_inspect.png')
-        else:
-            record_check('phone: model loaded', False)
-        page.send('Page.navigate', {'url': url + 'status/'})
-        rendered = page.wait("document.querySelectorAll('section.panel').length >= 6", 30)
-        record_check('status page renders release.json', rendered and release['release'] in page.js('document.body.innerText'))
-        page.screenshot(out / 'status.png')
-        # Engineering · Ignition: what breaks, on the phone: the 3D view starts from the engine inspection parts, the page's lever model
-        # gives the study's own check points (lab/studies/ignition-failures, written into ignition.json), Overload reaches its quench
-        if 'engineering/ignition/index.html' in release.get('files', {}):
-            page.send('Page.navigate', {'url': url + 'engineering/ignition/#autostart'})
-            if page.wait('!!(window.__ign && window.__ign.ready)', 120):
-                mirror = page.js("(() => window.__ign.data.checks.map(c => { const o = window.__ign.evaluate(c.levers); "
-                                 "return [c.label, Math.abs(o.ratio / c.ratio - 1) < 1e-9 && o.fails.map(f => f.id).join() === c.fails.join()]; }))()")
-                record_check('ignition: the page model reproduces the study check points', all(ok for _, ok in mirror), points=mirror)
-                page.js('window.__ign.mode("overload"); window.__ign.seek(window.__ign.run.V + 3)')
-                page.frames(4)
-                st = page.js('({stats: window.__ign.stats, run: window.__ign.run, overflow: document.documentElement.scrollWidth > innerWidth})')
-                record_check('ignition: draws both sides with few calls, Overload quenches, no horizontal overflow',
-                             bool(st['stats']) and 0 < st['stats']['calls'] <= 12 and any(e[0] == 'QUENCH' for e in st['run']['events'])
-                             and not st['overflow'], stats=st['stats'], events=st['run']['events'])
-                page.screenshot(out / 'phone_ignition.png')
+                x, y = page.js(FRAMING)
+                record_check('phone: whole ship framed', max(x, y) <= 1.0 and max(x, y) >= 0.6, ndc_extent=[round(x, 3), round(y, 3)])
+                page.screenshot(out / 'phone_threequarter.png')
+                start = page.js(CAMERA)
+                page.touch('touchStart', [(195, 420)])
+                for i in range(1, 4):
+                    page.touch('touchMove', [(195 + 40 * i, 420)])
+                page.touch('touchEnd', [])
+                page.frames()
+                spun = page.js(CAMERA)
+                record_check('phone: one-finger drag orbits', moved(start, spun, 'p') > 1 and moved(start, spun, 't') < 1e-3,
+                             moved_m=round(moved(start, spun, 'p'), 2))
+                page.touch('touchStart', [(165, 420), (225, 420)])
+                for i in range(1, 4):
+                    page.touch('touchMove', [(165 - 27 * i, 420), (225 + 27 * i, 420)])
+                page.touch('touchEnd', [])
+                page.frames()
+                pinch = page.js(CAMERA)
+                record_check('phone: pinch zooms in', pinch['d'] < 0.9 * spun['d'], distance=[round(spun['d'], 1), round(pinch['d'], 1)])
+                record_check('phone: no horizontal overflow', not page.js('document.documentElement.scrollWidth > window.innerWidth'))
+                page.screenshot(out / 'phone_zoomed.png')
+                if build.get('engine_file'):
+                    page.click(*page.centre_of('#engine-toggle'))
+                    page.wait("!!(window.wayfarer.inspect().data())", 120)
+                    page.js("window.wayfarer.inspect().selectPart('N1', 'VTX_C1_Winding', {frame: true})")
+                    page.frames()
+                    fit = page.js("(() => { const r = document.getElementById('engine').getBoundingClientRect(); "
+                                  "return {left: r.left, right: r.right, top: r.top, bottom: r.bottom, w: innerWidth, h: innerHeight, "
+                                  "overflow: document.documentElement.scrollWidth > innerWidth}; })()")
+                    record_check('phone: the Engine drawer fits the screen', fit['left'] >= 0 and fit['right'] <= fit['w'] and fit['bottom'] <= fit['h']
+                                 and not fit['overflow'], **fit)
+                    page.screenshot(out / 'phone_engine_inspect.png')
             else:
-                record_check('ignition: the 3D view starts', False)
-        # Engineering · Dust: what hits at speed, on the phone: the page's impact rule reproduces the study's check points
-        # (lab/studies/dust-impacts, written into dust.json), a cruise-speed 1 mg grain breaches the skin, nothing overflows
-        if 'engineering/dust/index.html' in release.get('files', {}):
-            page.send('Page.navigate', {'url': url + 'engineering/dust/#autostart'})
-            if page.wait('!!(window.__dust && window.__dust.ready)', 120):
-                mirror = page.js("(() => window.__dust.data.checks.map(c => { const o = window.__dust.impact(c.m, c.v); "
-                                 "return [c.m + ' kg @ ' + c.v + ' m/s', o.outcome === c.r.outcome && Math.abs(o.E_J / c.r.E_J - 1) < 1e-3]; }))()")
-                record_check('dust: the page impact rule reproduces the study check points', bool(mirror) and all(ok for _, ok in mirror),
-                             points=mirror)
-                page.js("document.querySelectorAll('[data-speed]')[5].click(); document.querySelectorAll('[data-mass]')[4].click()")
-                page.frames(4)
-                st = page.js('({stats: window.__dust.stats, outcome: window.__dust.grain && window.__dust.grain.r.outcome, '
-                             'overflow: document.documentElement.scrollWidth > innerWidth})')
-                record_check('dust: draws the split view with few calls, 1 mg at cruise breaches, no horizontal overflow',
-                             bool(st['stats']) and 0 < st['stats']['calls'] <= 16 and st['outcome'] == 'breach' and not st['overflow'], **st)
-                page.screenshot(out / 'phone_dust.png')
-            else:
-                record_check('dust: the 3D view starts', False)
-        # Engineering · Fusion engine, on the phone: the page ledger reproduces the study's check points
-        # (lab/studies/selective-fusion, written into fusion.json), nothing overflows in the narrow budget view
-        if 'engineering/fusion/index.html' in release.get('files', {}):
-            page.send('Page.navigate', {'url': url + 'engineering/fusion/#budget'})
-            if page.wait('!!(window.__fusion && window.__fusion.ready)', 120):
-                mirror = page.js("(() => window.__fusion.data.checks.map(c => { const o = window.__fusion.evaluate(c.key, c.exposure); "
-                                 "return [c.key, o.sustains === c.ledger.sustains && Math.abs(o.thrust - c.ledger.thrust) < 1e-4 "
-                                 "&& Math.abs(o.heat - c.ledger.heat) < 1e-4]; }))()")
-                record_check('fusion: the page ledger reproduces the study check points', bool(mirror) and all(ok for _, ok in mirror),
-                             points=mirror)
-                st = page.js("({ready: window.__fusion.ready, overflow: document.documentElement.scrollWidth > innerWidth, "
-                             "verdict: document.getElementById('verdict').textContent})")
-                record_check('fusion: the budget view reports a verdict, no horizontal overflow', bool(st['verdict']) and not st['overflow'], **st)
-                page.screenshot(out / 'phone_fusion.png')
-            else:
-                record_check('fusion: the page starts', False)
+                record_check('phone: model loaded', False)
+            page.send('Page.navigate', {'url': url + 'status/'})
+            rendered = page.wait("document.querySelectorAll('section.panel').length >= 6", 30)
+            record_check('status page renders release.json', rendered and release['release'] in page.js('document.body.innerText'))
+            page.screenshot(out / 'status.png')
+            # Engineering · Ignition: what breaks, on the phone: the 3D view starts from the engine inspection parts, the page's lever model
+            # gives the study's own check points (lab/studies/ignition-failures, written into ignition.json), Overload reaches its quench
+            if 'engineering/ignition/index.html' in release.get('files', {}):
+                page.send('Page.navigate', {'url': url + 'engineering/ignition/#autostart'})
+                if page.wait('!!(window.__ign && window.__ign.ready)', 120):
+                    mirror = page.js("(() => window.__ign.data.checks.map(c => { const o = window.__ign.evaluate(c.levers); "
+                                     "return [c.label, Math.abs(o.ratio / c.ratio - 1) < 1e-9 && o.fails.map(f => f.id).join() === c.fails.join()]; }))()")
+                    record_check('ignition: the page model reproduces the study check points', all(ok for _, ok in mirror), points=mirror)
+                    page.js('window.__ign.mode("overload"); window.__ign.seek(window.__ign.run.V + 3)')
+                    page.frames(4)
+                    st = page.js('({stats: window.__ign.stats, run: window.__ign.run, overflow: document.documentElement.scrollWidth > innerWidth})')
+                    record_check('ignition: draws both sides with few calls, Overload quenches, no horizontal overflow',
+                                 bool(st['stats']) and 0 < st['stats']['calls'] <= 12 and any(e[0] == 'QUENCH' for e in st['run']['events'])
+                                 and not st['overflow'], stats=st['stats'], events=st['run']['events'])
+                    page.screenshot(out / 'phone_ignition.png')
+                else:
+                    record_check('ignition: the 3D view starts', False)
+            # Engineering · Dust: what hits at speed, on the phone: the page's impact rule reproduces the study's check points
+            # (lab/studies/dust-impacts, written into dust.json), a cruise-speed 1 mg grain breaches the skin, nothing overflows
+            if 'engineering/dust/index.html' in release.get('files', {}):
+                page.send('Page.navigate', {'url': url + 'engineering/dust/#autostart'})
+                if page.wait('!!(window.__dust && window.__dust.ready)', 120):
+                    mirror = page.js("(() => window.__dust.data.checks.map(c => { const o = window.__dust.impact(c.m, c.v); "
+                                     "return [c.m + ' kg @ ' + c.v + ' m/s', o.outcome === c.r.outcome && Math.abs(o.E_J / c.r.E_J - 1) < 1e-3]; }))()")
+                    record_check('dust: the page impact rule reproduces the study check points', bool(mirror) and all(ok for _, ok in mirror),
+                                 points=mirror)
+                    page.js("document.querySelectorAll('[data-speed]')[5].click(); document.querySelectorAll('[data-mass]')[4].click()")
+                    page.frames(4)
+                    st = page.js('({stats: window.__dust.stats, outcome: window.__dust.grain && window.__dust.grain.r.outcome, '
+                                 'overflow: document.documentElement.scrollWidth > innerWidth})')
+                    record_check('dust: draws the split view with few calls, 1 mg at cruise breaches, no horizontal overflow',
+                                 bool(st['stats']) and 0 < st['stats']['calls'] <= 16 and st['outcome'] == 'breach' and not st['overflow'], **st)
+                    page.screenshot(out / 'phone_dust.png')
+                else:
+                    record_check('dust: the 3D view starts', False)
+            # Engineering · Fusion engine, on the phone: the page ledger reproduces the study's check points
+            # (lab/studies/selective-fusion, written into fusion.json), nothing overflows in the narrow budget view
+            if 'engineering/fusion/index.html' in release.get('files', {}):
+                page.send('Page.navigate', {'url': url + 'engineering/fusion/#budget'})
+                if page.wait('!!(window.__fusion && window.__fusion.ready)', 120):
+                    mirror = page.js("(() => window.__fusion.data.checks.map(c => { const o = window.__fusion.evaluate(c.key, c.exposure); "
+                                     "return [c.key, o.sustains === c.ledger.sustains && Math.abs(o.thrust - c.ledger.thrust) < 1e-4 "
+                                     "&& Math.abs(o.heat - c.ledger.heat) < 1e-4]; }))()")
+                    record_check('fusion: the page ledger reproduces the study check points', bool(mirror) and all(ok for _, ok in mirror),
+                                 points=mirror)
+                    st = page.js("({ready: window.__fusion.ready, overflow: document.documentElement.scrollWidth > innerWidth, "
+                                 "verdict: document.getElementById('verdict').textContent})")
+                    record_check('fusion: the budget view reports a verdict, no horizontal overflow', bool(st['verdict']) and not st['overflow'], **st)
+                    page.screenshot(out / 'phone_fusion.png')
+                else:
+                    record_check('fusion: the page starts', False)
     except SystemExit:
         pass
     except Exception as error:      # a browser session failure is a failed check with Chrome's own last words
@@ -1478,6 +1490,8 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics):
 
 
 PARTS = ('main', 'equivalence', 'walk')     # the main visitor walk, browser-vs-native, the touch walk
+# CI splits the main walk across two runners (software WebGL is CPU-bound): its viewer and its experiences sections
+MAIN_SHARDS = {'main-viewer': ('viewer',), 'main-play': ('play',)}
 OPTIONAL_PARTS = ('training', 'training-scripted')   # on request only (not in CI): the SYS-001 / DS-1 trainings, see run_training
 
 
@@ -1564,8 +1578,9 @@ def check(site, out, binary, sandbox=True, record=False, play_seconds=900, live=
     if side:
         side.start()
     try:
-        if 'main' in parts:
-            run_main(url, release, build, binary, sandbox, out, record_check, metrics)
+        sections = tuple(dict.fromkeys(x for k in parts for x in ({'main': ('viewer', 'play')} | MAIN_SHARDS).get(k, ())))
+        if sections:
+            run_main(url, release, build, binary, sandbox, out, record_check, metrics, sections)
         if 'training' in parts and play_release:
             run_training(url, play_release, binary, sandbox, out, record_check, metrics, names=training_names, desktop=desktop)
             if touch:
@@ -1600,8 +1615,8 @@ if __name__ == '__main__':
     parser.add_argument('--no-sandbox', action='store_true', help="disposable CI VMs whose AppArmor blocks Chrome's namespace sandbox")
     parser.add_argument('--record', action='store_true', help="write the results into the site's release.json (tests)")
     parser.add_argument('--play-seconds', type=int, default=900, help='time allowed for the browser walk check')
-    parser.add_argument('--part', action='append', choices=PARTS + OPTIONAL_PARTS,
-                        help='run only this part (repeatable; default the CI parts main, equivalence, walk); training: the systems proof and the '
+    parser.add_argument('--part', action='append', choices=PARTS + tuple(MAIN_SHARDS) + OPTIONAL_PARTS,
+                        help='run only this part (repeatable; default main, equivalence, walk; CI splits main into main-viewer and main-play); training: the systems proof and the '
                              'Deadship tutorial answered by real keys and touch; training-scripted: their scripted checks in the browser')
     parser.add_argument('--rotate', action='store_true', help='with training: also a phone that turns from landscape to portrait mid-run')
     parser.add_argument('--desktop', default='1280x720', help='with training: the desktop viewport of the keyboard run, WxH (default 1280x720)')

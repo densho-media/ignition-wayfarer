@@ -78,15 +78,6 @@ jobs:
           path: ~/.cache/wayfarer/web
           key: three-${{ hashFiles('tools/web_export.py') }}
 
-      - name: Build the vehicle and diff its geometry against the baseline
-        run: |
-          set -euo pipefail
-          "$WAYFARER_BLENDER" --version | head -1
-          SECONDS=0
-          python3 tools/workflow.py pipeline --quick --previews none --tests none | tee pipeline.json
-          echo "PIPELINE_SECONDS=$SECONDS" >> "$GITHUB_ENV"
-          echo "PIPELINE_RUN=$(python3 -c 'import json; print(json.load(open("pipeline.json"))["run_dir"])')" >> "$GITHUB_ENV"
-
       - name: MPFB and its CC0 assets (cached; SHA-256 checked by tools/external.py)
         id: external
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
@@ -110,25 +101,46 @@ jobs:
           path: ~/.cache/wayfarer/external/downloads
           key: external-${{ hashFiles('assets/external/manifest.toml') }}
 
-      - name: Build the player and the Y155 suit for the browser experiences (LOCO-001/002)
-        timeout-minutes: 25
+      # The vehicle (Blender pipeline, assets/*.blend) and the characters (MPFB, assets/characters, the Godot project import) share no
+      # file or lock, so they build at once on the runner's four cores; each keeps its own log and JSON, and either failing fails the step.
+      - name: Build the vehicle (geometry diff against the baseline) and the experiences' characters, in parallel
+        timeout-minutes: 30
         run: |
           set -euo pipefail
+          "$WAYFARER_BLENDER" --version | head -1
+          vehicle() {
+            SECONDS=0
+            python3 tools/workflow.py pipeline --quick --previews none --tests none > pipeline.json
+            echo "PIPELINE_SECONDS=$SECONDS" >> vehicle.env
+          }
+          characters() {
+            SECONDS=0
+            python3 tools/workflow.py deps fetch && python3 tools/workflow.py deps install
+            echo "MPFB installed after ${SECONDS} s"
+            # the pinned Godot (web_play.toolchain: downloaded and SHA-512 checked once) runs the character check; import the project first
+            WAYFARER_GODOT=$(python3 -c "import sys; sys.path.insert(0, 'tools'); import web_play; print(web_play.toolchain(True)['editor'])")
+            export WAYFARER_GODOT
+            "$WAYFARER_GODOT" --headless --path godot --editor --import > godot-import.log 2>&1 || { tail -20 godot-import.log; return 1; }
+            echo "Godot import done after ${SECONDS} s"
+            # CTRL-001: the controls check (registry, first-visit setup, Controls menu, conflicts, persistence, migration); no package needed
+            "$WAYFARER_GODOT" --headless --path godot --script res://scripts/check_controls.gd > controls-check.log 2>&1 || true
+            grep '^WF_GODOT_CONTROLS' controls-check.log | cut -c1-400
+            grep -q '^WF_GODOT_CONTROLS {"fails":\[\]' controls-check.log || { tail -30 controls-check.log; return 1; }
+            python3 tools/workflow.py play-characters --out _characters > characters.json
+            python3 -c "import json, sys; sys.exit(json.load(open('characters.json'))['result'] != 'PASS')"
+            echo "CHARACTER_SECONDS=$SECONDS" >> characters.env
+          }
           SECONDS=0
-          python3 tools/workflow.py deps fetch && python3 tools/workflow.py deps install
-          echo "MPFB installed after ${SECONDS} s"
-          # the pinned Godot (web_play.toolchain: downloaded and SHA-512 checked once) runs the character check; import the project first
-          WAYFARER_GODOT=$(python3 -c "import sys; sys.path.insert(0, 'tools'); import web_play; print(web_play.toolchain(True)['editor'])")
-          export WAYFARER_GODOT
-          "$WAYFARER_GODOT" --headless --path godot --editor --import > godot-import.log 2>&1 || { tail -20 godot-import.log; exit 1; }
-          echo "Godot import done after ${SECONDS} s"
-          # CTRL-001: the controls check (registry, first-visit setup, Controls menu, conflicts, persistence, migration); no package needed
-          "$WAYFARER_GODOT" --headless --path godot --script res://scripts/check_controls.gd > controls-check.log 2>&1 || true
-          grep '^WF_GODOT_CONTROLS' controls-check.log | cut -c1-400
-          grep -q '^WF_GODOT_CONTROLS {"fails":\[\]' controls-check.log || { tail -30 controls-check.log; exit 1; }
-          python3 tools/workflow.py play-characters --out _characters | tee characters.json
-          python3 -c "import json, sys; sys.exit(json.load(open('characters.json'))['result'] != 'PASS')"
-          echo "CHARACTER_SECONDS=$SECONDS" >> "$GITHUB_ENV"
+          ( vehicle ) > vehicle.log 2>&1 & v=$!
+          ( characters ) > characters.log 2>&1 & c=$!
+          vs=0; wait $v || vs=$?
+          cs=0; wait $c || cs=$?
+          echo "::group::vehicle (exit $vs)"; cat vehicle.log pipeline.json 2>/dev/null || true; echo "::endgroup::"
+          echo "::group::characters (exit $cs)"; cat characters.log characters.json 2>/dev/null || true; echo "::endgroup::"
+          echo "vehicle and characters built in ${SECONDS} s"
+          [ "$vs" = 0 ] && [ "$cs" = 0 ]
+          cat vehicle.env characters.env >> "$GITHUB_ENV"
+          echo "PIPELINE_RUN=$(python3 -c 'import json; print(json.load(open("pipeline.json"))["run_dir"])')" >> "$GITHUB_ENV"
 
       - name: Export the viewer GLB and the Godot Web build, assemble the site
         run: |
@@ -198,8 +210,9 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-  # The browser check in three parts, each on its own runner against the same site (software WebGL is CPU-bound, so the parts no
-  # longer share one runner): the main visitor walk, browser-vs-native equivalence, the touch walk. Equivalence runs in the pinned
+  # The browser check in four parts, each on its own runner against the same site (software WebGL is CPU-bound, so the parts no
+  # longer share one runner): the main visitor walk in two halves (main-viewer: start, viewer, phone, review pages; main-play: start,
+  # both experiences and the switching chain, 22 min on one runner), browser-vs-native equivalence, the touch walk. Equivalence runs in the pinned
   # headless shell with frames on demand (web_check.py --frame-shell): the walk and EVA Operations checks on the same 1/60 s frames
   # in about 5 min instead of 46 min in real time.
   browser-check:
@@ -210,7 +223,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        part: [main, equivalence, walk]
+        part: [main-viewer, main-play, equivalence, walk]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
@@ -269,7 +282,8 @@ jobs:
           path: parts
       - name: Merge the parts into release.json (a missing part fails)
         run: |
-          python3 tools/web_check.py _site --merge parts/wayfarer-web-check-main parts/wayfarer-web-check-equivalence \
+          python3 tools/web_check.py _site --merge parts/wayfarer-web-check-main-viewer parts/wayfarer-web-check-main-play \
+            parts/wayfarer-web-check-equivalence \
             parts/wayfarer-web-check-walk --out web-check --record
 
       - name: Report
@@ -382,7 +396,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        part: [main, walk]
+        part: [main-viewer, main-play, walk]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
       - name: Browser check against the live site, ${{ matrix.part }}
