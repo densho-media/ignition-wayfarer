@@ -40,6 +40,7 @@ PACK = {
     'ship-3d': ('capture/ship-3d.png', (360, 170, 1360, 732), CARD, 'Chrome: viewer/, three-quarter view, Standard style, interface hidden'),
     'interior': ('entry/entry_landing_aisle.png', (0, 150, 960, 690), CARD, 'Blender: entry_preview.py landing_aisle --look (ring A aisle, ladder well)'),
     'exterior': ('hero/hero_brow.png', (100, 30, 900, 460), CARD, 'Blender: hero_preview.py brow, COAST (bow shield and forward structure)'),
+    'sim-fusion-ignition': ('capture/sim-fusion-ignition.png', None, CARD, 'Chrome: engineering/fusion-ignition/?autostart, Thrust stage, stage'),
     'sim-dust': ('capture/sim-dust.png', None, CARD, 'Chrome: engineering/dust/#autostart, stage'),
     'sim-fusion': ('capture/sim-fusion.png', None, CARD, 'Chrome: engineering/fusion/#budget, stage'),
     'sim-ignition': ('capture/sim-ignition.png', None, CARD, 'Chrome: engineering/ignition/#autostart, overload, stage'),
@@ -100,6 +101,8 @@ def capture(site, chrome_bin, only=()):
         shot('ship-3d', 'viewer/', 1600, 900, viewer, "dispatchEvent(new Event('resize')); window.wayfarer.frame('threequarter');")
         shot('eng-subsystems', 'viewer/', 1600, 900, viewer, "dispatchEvent(new Event('resize')); window.wayfarer.setStyle('subsystem'); "
              "window.wayfarer.frame('threequarter');", settle=12)
+        shot('sim-fusion-ignition', 'engineering/fusion-ignition/?autostart', 1600, 900, '!!(window.__fi && window.__fi.ready)',
+             "document.getElementById('t-nozzle').click(); document.querySelectorAll('.fi-scale, .fi .hud').forEach(e => e.style.display = 'none')", '#fi .stage', 12)
         shot('sim-dust', 'engineering/dust/#autostart', 1600, 900, '!!(window.__dust && window.__dust.ready)', '', '#stage', 8)
         shot('sim-fusion', 'engineering/fusion/#budget', 1600, 900, '!!(window.__fusion && window.__fusion.ready)', '', '#stage', 4)
         shot('sim-ignition', 'engineering/ignition/#autostart', 1600, 900, '!!(window.__ign && window.__ign.ready)',

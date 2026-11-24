@@ -44,7 +44,7 @@ Primary navigation follows what a visitor wants to do, not how the files are org
 | --- | --- | --- | --- |
 | Overview | discover: what is this, what can I do | — | `/` |
 | Explore | explore the spacecraft | Ship 3D, Interior, Exterior | `viewer/`, `interior/`, `exterior/`, `play/` |
-| Simulations | run something and see what breaks | All, Fusion engine, Ignition, Dust, Build sequence, Compare, Breakthrough Lab | `simulations/`, `engineering/fusion/`, `ignition/`, `dust/`, `build/`, `compare/`, `breakthrough-lab/` |
+| Simulations | run something and see what breaks | All, Fusion Ignition, Fusion engine, Ignition, Dust, Build sequence, Compare, Breakthrough Lab | `simulations/`, `engineering/fusion-ignition/`, `fusion/`, `ignition/`, `dust/`, `build/`, `compare/`, `breakthrough-lab/` |
 | Engineering | understand the design and its sources | Summary, Baseline, Weakest links, Ship evolution, Vertex drive, Open problems, Lab records | `engineering/` and its study pages, `studies/`, `variants/` |
 | Status | check the ship state, advisories and this release | Ship state, Advisories, System | `status/` |
 
@@ -69,7 +69,7 @@ Coarse pointers get 44 px targets in the shell on every profile. `body.wos[data-
 - `overview` (Overview, Simulations, Status): an identity band and card grids that use the width; the page scrolls; one column of
   horizontal cards on a terminal.
 - `launch` (Interior, Exterior): the picture, one line, a "Try this" strip, the start panel; Controls and About behind disclosures.
-- `sim` (Ignition, Dust): on a workstation the width limit goes, the stage takes the remaining height and the side panel docks right;
+- `sim` (Fusion Ignition, Ignition, Dust): on a workstation the width limit goes, the stage takes the remaining height and the side panel docks right;
   on a terminal the stage is sticky (about 46 % of the height) and every control scrolls beneath it. No control is hidden at any size.
 - `record`: long reading pages keep a reading width and scroll.
 

@@ -1,0 +1,167 @@
+/* Simulations · Fusion Ignition (web/engineering/fusion-ignition.js). Builds on ignition.css's .ign layout and fusion.css's ledger. */
+.fi [hidden] { display: none !important; }
+.fi-stages { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 2px; }
+.fi-stages button { font: inherit; flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; color: var(--ink); background: var(--surface-1);
+  border: 1px solid var(--line-strong); border-radius: 6px; padding: 6px 10px; cursor: pointer; min-height: 40px; }
+.fi-stages button i { font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.fi-stages button b { font-size: 13px; font-weight: 600; color: var(--ink-strong); }
+.fi-stages button:hover { border-color: var(--accent); background: var(--surface-2); }
+.fi-stages button[aria-selected="true"] { border-color: var(--selected); background: var(--surface-3); }
+.fi-stages button[aria-selected="true"] i { color: var(--accent); }
+.fi .stage canvas.fi-2d { pointer-events: none; visibility: hidden; opacity: 0; transition: opacity 0.6s; }
+.fi .stage.live canvas.fi-2d.on { visibility: visible; opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .fi .stage canvas.fi-2d { transition: none; } }
+.fi .stage.live::after { display: none; }
+.fi-scale { position: absolute; left: 10px; top: 10px; font: 11px var(--mono); letter-spacing: 0.03em; color: var(--muted); padding: 3px 8px;
+  border-radius: 4px; background: rgba(10, 15, 21, 0.72); border: 1px solid var(--line); pointer-events: none; z-index: 2; }
+.fi-scale b { color: var(--ink-strong); font-weight: 600; text-transform: uppercase; margin-right: 6px; }
+.fi .hud { width: auto; min-width: 120px; }
+.fi .hud:empty { display: none; }
+.fi-tip { position: absolute; left: 0; top: 0; font-size: 12px; color: var(--ink-strong); background: rgba(10, 15, 21, 0.88); border: 1px solid var(--line-strong);
+  border-radius: 4px; padding: 3px 7px; pointer-events: none; z-index: 3; }
+.fi-tip[hidden] { display: none; }
+.fi-mark { position: absolute; left: 0; top: 0; z-index: 2; font: 600 11px var(--mono); color: var(--action-ink); background: var(--bad); border: 0; border-radius: 10px;
+  padding: 3px 7px; cursor: pointer; box-shadow: 0 0 0 2px rgba(10, 15, 21, 0.8); min-height: 22px; }
+.fi-mark.mit { background: var(--warn); }
+.fi-mark:hover, .fi-mark:focus-visible { outline: 2px solid var(--focus); }
+.fi-mark[hidden] { display: none; }
+.fi-text h3 { margin: 0 0 4px; font-size: 16px; color: var(--ink-strong); }
+.fi-text p { margin: 0 0 8px; font-size: 14px; line-height: 1.5; }
+.fi-text .chips { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin-bottom: 6px; }
+.fi-text .scale-tag { font: 11px var(--mono); color: var(--muted); }
+.fi-text .eq { font: 600 15px var(--mono); color: var(--good); }
+.fi-text .bad { color: var(--bad); }
+.fi-tools { display: flex; flex-direction: column; gap: 10px; }
+.fi-layers summary { cursor: pointer; font-size: 13px; color: var(--ink-strong); min-height: 32px; display: flex; align-items: center; }
+.fi-toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; font-size: 13px; padding-top: 4px; }
+.fi-toggles label { display: flex; gap: 6px; align-items: center; min-height: 30px; }
+.fi-cats { list-style: none; margin: 6px 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.fi-cats button { width: 100%; font: 12px inherit; text-align: left; display: flex; align-items: center; gap: 6px; color: var(--ink); background: var(--surface-1);
+  border: 1px solid var(--line); border-radius: 4px; padding: 5px 7px; cursor: pointer; min-height: 34px; }
+.fi-cats button i { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+.fi-cats button small { margin-left: auto; color: var(--muted); font-family: var(--mono); }
+.fi-cats button[aria-pressed="true"] { border-color: var(--selected); background: var(--surface-3); }
+.fi-lab .lever { margin: 6px 0; }
+.fi-lab .presets button[aria-pressed="true"], .fi-parts .presets button[aria-pressed="true"] { border-color: var(--selected); color: var(--ink-strong); background: var(--surface-3); }
+.fi .readouts table { width: 100%; border-collapse: collapse; }
+.fi .readouts th { text-align: left; font-weight: 500; color: var(--ink); padding: 3px 6px 3px 0; vertical-align: top; font-size: 13px; overflow-wrap: anywhere; }
+.fi .readouts td { padding: 3px 0; vertical-align: top; font-size: 13px; }
+.fi .readouts td.num { font-family: var(--mono); color: var(--ink-strong); text-align: right; white-space: nowrap; }
+.fi .readouts tr.bad td.num, .fi .readouts td.num.bad { color: var(--bad); }
+.fi .readouts .first { margin: 0 0 8px; font-size: 14px; }
+.fi .readouts .first.bad b { color: var(--bad); }
+.fi .readouts .first.ok b { color: var(--good); }
+.fi-view-tag { margin: 0 0 6px; font-size: 12px; padding: 3px 8px; border-radius: 4px; border-left: 3px solid var(--good); background: var(--surface-2); }
+.fi-view-tag.model { border-left-color: var(--bad); }
+.fi-view-tag.exp { border-left-color: var(--selected); }
+.fi .itools .views button[data-view="model"][aria-pressed="true"] { border-color: var(--bad); }
+.fi-prob small { display: block; color: var(--muted); font-size: 12px; }
+@media (min-width: 1100px) {
+  .fi .ign-side .readouts { order: -1; }
+}
+@media (max-width: 699px) {
+  .fi-toggles, .fi-cats { grid-template-columns: 1fr; }
+  .fi-stages button { min-height: 44px; }
+  .fi .hud { display: none; }
+}
+.fi .readouts .fled th .chip { margin-left: 4px; }
+.fi .readouts .fi-dl { margin: 0 0 8px; }
+.fi .readouts .fi-dl div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 8px; padding: 4px 0; border-bottom: 1px solid var(--line); }
+.fi .readouts .fi-dl dt { flex: 1 1 14em; font-size: 13px; color: var(--ink); }
+.fi .readouts .fi-dl dt .chip { margin-left: 4px; }
+.fi .readouts .fi-dl dd { margin: 0 0 0 auto; font: 13px var(--mono); color: var(--ink-strong); text-align: right; }
+.fi .readouts .fi-dl dd.bad { color: var(--bad); }
+@media (max-width: 699px) {
+  .fi-led thead { display: none; }
+  .fi-led, .fi-led tbody, .fi-led tr, .fi-led td { display: block; width: auto; }
+  .fi-led tr { padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .fi-led td { border: 0; padding: 1px 0; }
+  .fi-led td:first-child { color: var(--ink-strong); }
+}
+.fi .stage.flat canvas.fi-2d.on { visibility: visible; opacity: 1; }
+/* Visual continuity pass: the scene leads, text and graphs follow */
+.fi .stage { height: min(76vh, 780px); }
+.fi .stage canvas.fi-2d { transition: opacity 1.1s ease, visibility 0s linear 1.1s; }
+.fi .stage.live canvas.fi-2d.on, .fi .stage.flat canvas.fi-2d.on { transition: opacity 1.1s ease 0.5s, visibility 0s; }
+.fi-ladder { position: absolute; right: 10px; top: 54px; margin: 0; padding: 0 0 0 10px; list-style: none; z-index: 2; pointer-events: none;
+  display: grid; grid-auto-rows: 22px; font: 10px var(--mono); color: var(--muted); border-left: 1px solid var(--line-strong); --k: 0; }
+.fi-ladder li { line-height: 22px; white-space: nowrap; }
+.fi-ladder i { position: absolute; left: -5px; top: calc(var(--k) * 22px + 6px); width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(10, 15, 21, 0.85); transition: top 1.6s cubic-bezier(0.6, 0, 0.3, 1); }
+.fi .stage .hud { top: auto; bottom: 10px; right: 10px; }
+.fi-ctl { position: absolute; left: 10px; bottom: 10px; z-index: 2; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; font-size: 12px; color: var(--muted);
+  background: rgba(10, 15, 21, 0.82); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; }
+.fi-ctl button { font: 12px var(--mono); color: var(--ink); background: var(--surface-1); border: 1px solid var(--line-strong); border-radius: 4px; padding: 4px 8px; min-height: 32px; cursor: pointer; }
+.fi-ctl button[aria-pressed="true"] { border-color: var(--selected); background: var(--surface-3); color: var(--ink-strong); }
+.fi .evcap { left: 10px; right: auto; max-width: min(560px, calc(100% - 120px)); border-left-color: var(--accent); bottom: 54px; }
+.fi .evcap .step { font: 600 11px var(--mono); color: var(--accent); }
+.fi .itools #graphs[aria-pressed="true"] { border-color: var(--selected); background: var(--surface-3); }
+@media (max-width: 699px) {
+  .fi .stage { height: min(62vh, 560px); }
+  .fi-ladder { display: none; }
+  .fi .evcap { max-width: calc(100% - 20px); bottom: 50px; }
+}
+.fi .hrow.warn b { color: var(--warn); }
+/* 2-D scenes name their scale in the chip and their view in the verdict; the HUD would cover the scene */
+.fi .stage.twod .hud { display: none; }
+/* the energy and pulse accounting disclosure in the Fuel stage */
+.fi-acct { margin: 6px 0 8px; border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; }
+.fi-acct summary { cursor: pointer; font-size: 13px; color: var(--ink-strong); }
+.fi-acct p { font-size: 13px; margin-top: 6px; }
+.fi-acct-t { width: 100%; border-collapse: collapse; font-size: 12px; }
+.fi-acct-t th, .fi-acct-t td { text-align: left; padding: 3px 4px; border-top: 1px solid var(--line); vertical-align: top; }
+.fi-acct-t td:nth-child(n+2) { font-family: var(--mono); }
+.fi-acct-t th { font-size: 11px; text-transform: none; letter-spacing: 0; }
+.fi-acct { overflow-x: auto; }
+.fi-ladder li.note { font-size: 10px; line-height: 14px; color: var(--muted); white-space: normal; width: 64px; margin-top: 4px; }
+/* the three 2-D scenes need more height on a phone than the 3-D stages */
+@media (max-width: 699px) { .fi .stage.twod { height: min(70vh, 600px); } .fi-ctl > span { display: none; } .fi-ctl { gap: 3px; } .fi-ctl button { padding: 4px 4px; font-size: 11px; } }
+
+/* the pulse energy ledger strip (one pulse, active model state) */
+.fi-ledger { margin: 4px 0 10px; padding: 8px; border: 1px solid var(--line); border-radius: 6px; }
+.fi-ledger .fl-h { margin: 0; font-size: 12px; font-weight: 600; color: var(--ink-strong); }
+.fi-ledger .fl-s { margin: 2px 0 6px; font-size: 12px; color: var(--muted); }
+.fl-bar { display: flex; gap: 2px; height: 12px; }
+.fl-bar i { display: block; min-width: 2px; border-radius: 2px; opacity: .75; }
+.fl-bar i.on { opacity: 1; outline: 2px solid var(--ink-strong); outline-offset: 1px; }
+.fl-leg { display: flex; flex-wrap: wrap; gap: 4px 10px; margin: 6px 0 2px; font-size: 11px; }
+.fl-leg span { display: inline-flex; align-items: center; gap: 4px; color: var(--ink); }
+.fl-leg span.on { color: var(--ink-strong); font-weight: 600; }
+.fl-leg i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+.s-x { background: var(--warn); } .s-n { background: #A9B4BF; } .s-hit { background: var(--bad); } .s-side { background: #5A6472; } .s-jet { background: var(--good); }
+.fi-ledger .meta { margin: 4px 0 0; font-size: 11px; }
+.fi-steady { margin: 8px 0; border: 1px dashed var(--line); border-radius: 6px; padding: 6px 8px; }
+.fi-steady summary { cursor: pointer; font-size: 13px; color: var(--ink-strong); }
+/* the ledger section below the simulation */
+.fi-led2 td.num, .fi-led2 th { white-space: nowrap; }
+.fi-rec { border-top: 1px solid var(--line); padding: 8px 0; }
+.fi-rec summary { cursor: pointer; }
+.fi-rec .vd { font-family: var(--mono); font-size: 12px; }
+.fi-flow { list-style: none; padding: 0; margin: 8px 0; display: grid; gap: 4px; }
+.fi-flow li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; padding: 4px 8px; border-left: 3px solid var(--line); font-size: 14px; }
+.fi-flow li b { font-family: var(--mono); font-weight: 600; }
+.fi-flow li.in { border-color: var(--info); } .fi-flow li.loss { border-color: var(--bad); } .fi-flow li.out { border-color: var(--good); }
+/* Heat stage: energy flow bars, inspector chips and cards (thermal study) */
+.fi .fi-flow2 { display: grid; gap: 3px; margin: 8px 0 4px; font-size: 12px; }
+.fi .fi-flow2 > div { display: grid; grid-template-columns: minmax(8em, 1.3fr) 1fr auto; align-items: center; gap: 6px; }
+.fi .fi-flow2 > div.d1 span { padding-left: 0.6em; } .fi .fi-flow2 > div.d2 span { padding-left: 1.2em; } .fi .fi-flow2 > div.d3 span { padding-left: 1.8em; }
+.fi .fi-flow2 span { color: var(--ink); line-height: 1.25; }
+.fi .fi-flow2 i { display: block; height: 8px; border-radius: 0 4px 4px 0; background: var(--info); min-width: 2px; }
+.fi .fi-flow2 .bad i { background: var(--bad); } .fi .fi-flow2 .good i { background: var(--good); }
+.fi .fi-flow2 b { font: 12px var(--mono); color: var(--ink-strong); text-align: right; white-space: nowrap; }
+.fi .fi-chips { display: flex; flex-wrap: wrap; gap: 4px; margin: 10px 0 6px; }
+.fi .fi-chips button { font-size: 12px; padding: 3px 8px; min-height: 28px; }
+.fi .fi-chips button[aria-pressed="true"] { border-color: var(--accent); color: var(--ink-strong); background: color-mix(in srgb, var(--accent) 18%, transparent); }
+.fi .fi-insp h4 { margin: 6px 0 4px; font-size: 14px; }
+.fi .fi-insp p { font-size: 13px; }
+.fi .fi-chart { width: 100%; max-width: 360px; height: auto; display: block; margin: 4px 0; }
+.fi .fi-key { display: flex; flex-wrap: wrap; gap: 4px 10px; }
+.fi .fi-key i, .fi .fi-stack i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+.fi .fi-stack { font-size: 12px; border-collapse: collapse; margin: 4px 0; }
+.fi .fi-stack td { padding: 2px 6px 2px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.fi .fi-split { display: flex; height: 12px; margin: 8px 0 2px; border-radius: 4px; overflow: hidden; background: var(--line); gap: 2px; }
+.fi .fi-split i { display: block; height: 100%; min-width: 2px; } .fi .fi-split .x { background: var(--warn); } .fi .fi-split .n { background: var(--muted); } .fi .fi-split .p { background: var(--good); }
+.fi .fi-sel { display: grid; gap: 4px; margin: 8px 0; font-size: 12px; color: var(--muted); }
+.fi .fi-sel select { width: 100%; max-width: 100%; min-height: 32px; font: inherit; font-size: 13px; color: var(--ink-strong); background: var(--panel, transparent); border: 1px solid var(--line-strong); border-radius: 4px; padding: 4px 6px; }
+.fi .fi-ul { margin: 6px 0; padding-left: 1.2em; font-size: 12px; line-height: 1.4; } .fi .fi-ul li { margin: 3px 0; }
+.fi .fi-pick { border-left: 2px solid var(--accent); padding-left: 6px; }

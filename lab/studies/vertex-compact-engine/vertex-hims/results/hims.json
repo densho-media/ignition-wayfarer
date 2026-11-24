@@ -1,0 +1,371 @@
+{
+ "meta": {
+  "title": "HIMS stage model, AMPN B today stern, braking (research, not canon)",
+  "V": 4796679.328,
+  "burns": {
+   "Tb_d": 78.0,
+   "ve": 17500000.0
+  },
+  "mix": [
+   [
+    "O",
+    16,
+    8,
+    0.44
+   ],
+   [
+    "Mg",
+    24,
+    12,
+    0.2
+   ],
+   [
+    "Si",
+    28,
+    14,
+    0.21
+   ],
+   [
+    "Fe",
+    56,
+    26,
+    0.15
+   ]
+  ],
+  "cases": {
+   "NOMINAL": {
+    "f_ion": 0.9,
+    "pass_screen": 0.5
+   },
+   "JUSTIFIED": {
+    "f_ion": 0.7,
+    "pass_screen": 0.7
+   }
+  }
+ },
+ "cases": {
+  "NOMINAL": {
+   "design_E_J": 86665795.1739739,
+   "laser": {
+    "grain_a_m": 0.0008960300557313047,
+    "intensity_W_m2": 186245316642.3649,
+    "power_W": 1184841510021545.8,
+    "per_grain_J": 97.9354003247887
+   },
+   "alpha_deg": 30.0,
+   "options": [
+    {
+     "name": "PASSIVE stern screen (AMPN)",
+     "closes": true,
+     "standoff_m": 64.32718639640896,
+     "defeat_E_J": 86665795.17397475,
+     "screens": 1,
+     "screen_kg_m2": 0.8064270501581768,
+     "wall_kg_m2": 5.0,
+     "magnet_t": 0.0,
+     "mass_t": 40.77722597182158,
+     "screen_holed_fraction": 0.005518494635992091,
+     "screen_eroded_m": 1.277821858690561e-05,
+     "t_transit_ms": 0.013410774829350644
+    },
+    {
+     "name": "A screen + Vertex ring field",
+     "closes": true,
+     "standoff_m": 64.32718639640896,
+     "defeat_E_J": 86665795.17397475,
+     "screens": 1,
+     "screen_kg_m2": 0.8064270501581768,
+     "wall_kg_m2": 5.0,
+     "magnet_t": 0.0,
+     "mass_t": 40.77722597182158,
+     "screen_holed_fraction": 0.005518494635992091,
+     "screen_eroded_m": 1.277821858690561e-05,
+     "t_transit_ms": 0.013410774829350644,
+     "B": 3.276981363055197e-06
+    },
+    {
+     "name": "B two screens",
+     "closes": true,
+     "standoff_m": 45.48618971555173,
+     "defeat_E_J": 86665795.17397444,
+     "screens": 2,
+     "screen_kg_m2": 0.8064270501581758,
+     "wall_kg_m2": 5.0,
+     "magnet_t": 0.0,
+     "mass_t": 47.250780833728506,
+     "screen_holed_fraction": 0.0055184946359920954,
+     "screen_eroded_m": 1.277821858690561e-05,
+     "t_transit_ms": 0.00948284982279969
+    },
+    {
+     "name": "B three screens",
+     "closes": true,
+     "standoff_m": 32.163593198204396,
+     "defeat_E_J": 86665795.17397428,
+     "screens": 3,
+     "screen_kg_m2": 0.8064270501581754,
+     "wall_kg_m2": 5.0,
+     "magnet_t": 0.0,
+     "mass_t": 53.889887700540726,
+     "screen_holed_fraction": 0.005518494635992099,
+     "screen_eroded_m": 1.277821858690561e-05,
+     "t_transit_ms": 0.006705387414675305
+    },
+    {
+     "name": "C screen + deflector 0.1 T",
+     "closes": true,
+     "standoff_m": 57.80683176423943,
+     "defeat_E_J": 86665795.17397393,
+     "screens": 1,
+     "screen_kg_m2": 0.8064270501581743,
+     "wall_kg_m2": 5.0,
+     "magnet_t": 178.05749194609217,
+     "mass_t": 218.63910727894864,
+     "screen_holed_fraction": 0.005518494635992103,
+     "screen_eroded_m": 1.277821858690561e-05,
+     "t_transit_ms": 0.012051427208568952,
+     "B": 0.1,
+     "magnet": {
+      "I_tot_A": 31830988.618379068,
+      "conductor_t": 123.00469695559143,
+      "structure_t": 1.7333333333333338,
+      "cryostat_t": 17.707963267948966,
+      "W_J": 812500000.0000002,
+      "total_t": 178.05749194609217
+     }
+    },
+    {
+     "name": "C screen + deflector 0.3 T",
+     "closes": true,
+     "standoff_m": 38.17562895555305,
+     "defeat_E_J": 86665795.17397562,
+     "screens": 1,
+     "screen_kg_m2": 0.8064270501581795,
+     "wall_kg_m2": 5.0,
+     "magnet_t": 502.902567668404,
+     "mass_t": 542.8952469169999,
+     "screen_holed_fraction": 0.005518494635992083,
+     "screen_eroded_m": 1.277821858690561e-05,
+     "t_transit_ms": 0.007958761956987144,
+     "B": 0.3,
+     "magnet": {
+      "I_tot_A": 95492965.8551372,
+      "conductor_t": 369.01409086677427,
+      "structure_t": 15.599999999999998,
+      "cryostat_t": 17.707963267948966,
+      "W_J": 7312499999.999999,
+      "total_t": 502.902567668404
+     }
+    },
+    {
+     "name": "C screen + deflector 1.0 T",
+     "closes": true,
+     "standoff_m": 28.14523498730783,
+     "defeat_E_J": 86665795.17397887,
+     "screens": 1,
+     "screen_kg_m2": 0.8064270501581896,
+     "wall_kg_m2": 5.0,
+     "magnet_t": 1776.3603326964958,
+     "mass_t": 1816.0521001260445,
+     "screen_holed_fraction": 0.005518494635992052,
+     "screen_eroded_m": 1.277821858690561e-05,
+     "t_transit_ms": 0.0058676499016754435,
+     "B": 1.0,
+     "magnet": {
+      "I_tot_A": 318309886.1837907,
+      "conductor_t": 1230.0469695559143,
+      "structure_t": 173.33333333333334,
+      "cryostat_t": 17.707963267948966,
+      "W_J": 81250000000.0,
+      "total_t": 1776.3603326964958
+     }
+    }
+   ]
+  },
+  "JUSTIFIED": {
+   "design_E_J": 147026383.9397154,
+   "laser": {
+    "grain_a_m": 0.001068657228032956,
+    "intensity_W_m2": 222126928158.35,
+    "power_W": 1413110459475148.8,
+    "per_grain_J": 166.1449911183209
+   },
+   "alpha_deg": 15.0,
+   "options": [
+    {
+     "name": "PASSIVE stern screen (AMPN)",
+     "closes": true,
+     "standoff_m": 329.6056320783041,
+     "defeat_E_J": 147026383.9397154,
+     "screens": 1,
+     "screen_kg_m2": 3.8471660209186416,
+     "wall_kg_m2": 10.0,
+     "magnet_t": 0.0,
+     "mass_t": 99.88855046422626,
+     "screen_holed_fraction": 0.01954681271968901,
+     "screen_eroded_m": 0.00011976219184465753,
+     "t_transit_ms": 0.06871537777275907
+    },
+    {
+     "name": "A screen + Vertex ring field",
+     "closes": true,
+     "standoff_m": 329.6056320783041,
+     "defeat_E_J": 147026383.9397154,
+     "screens": 1,
+     "screen_kg_m2": 3.8471660209186416,
+     "wall_kg_m2": 10.0,
+     "magnet_t": 0.0,
+     "mass_t": 99.88855046422626,
+     "screen_holed_fraction": 0.01954681271968901,
+     "screen_eroded_m": 0.00011976219184465753,
+     "t_transit_ms": 0.06871537777275907,
+     "B": 3.276981363055197e-06
+    },
+    {
+     "name": "B two screens",
+     "closes": true,
+     "standoff_m": 275.7678568804154,
+     "defeat_E_J": 147026383.93971622,
+     "screens": 2,
+     "screen_kg_m2": 3.8471660209186487,
+     "wall_kg_m2": 10.0,
+     "magnet_t": 0.0,
+     "mass_t": 124.65654747497348,
+     "screen_holed_fraction": 0.019546812719688993,
+     "screen_eroded_m": 0.00011976219184465753,
+     "t_transit_ms": 0.05749140979065579
+    },
+    {
+     "name": "B three screens",
+     "closes": true,
+     "standoff_m": 230.7239424548142,
+     "defeat_E_J": 147026383.93971708,
+     "screens": 3,
+     "screen_kg_m2": 3.847166020918656,
+     "wall_kg_m2": 10.0,
+     "magnet_t": 0.0,
+     "mass_t": 149.68836030888946,
+     "screen_holed_fraction": 0.019546812719688975,
+     "screen_eroded_m": 0.00011976219184465753,
+     "t_transit_ms": 0.04810076444093163
+    },
+    {
+     "name": "C screen + deflector 0.1 T",
+     "closes": true,
+     "standoff_m": 180.53243977003635,
+     "defeat_E_J": 147026383.9397167,
+     "screens": 1,
+     "screen_kg_m2": 3.8471660209186527,
+     "wall_kg_m2": 10.0,
+     "magnet_t": 178.05749194609217,
+     "mass_t": 273.47384664107045,
+     "screen_holed_fraction": 0.019546812719688986,
+     "screen_eroded_m": 0.00011976219184465753,
+     "t_transit_ms": 0.037636962453629415,
+     "B": 0.1,
+     "magnet": {
+      "I_tot_A": 31830988.618379068,
+      "conductor_t": 123.00469695559143,
+      "structure_t": 1.7333333333333338,
+      "cryostat_t": 17.707963267948966,
+      "W_J": 812500000.0000002,
+      "total_t": 178.05749194609217
+     }
+    },
+    {
+     "name": "C screen + deflector 0.3 T",
+     "closes": true,
+     "standoff_m": 180.53243977003635,
+     "defeat_E_J": 147026383.9397167,
+     "screens": 1,
+     "screen_kg_m2": 3.8471660209186527,
+     "wall_kg_m2": 10.0,
+     "magnet_t": 502.902567668404,
+     "mass_t": 598.3189223633823,
+     "screen_holed_fraction": 0.019546812719688986,
+     "screen_eroded_m": 0.00011976219184465753,
+     "t_transit_ms": 0.037636962453629415,
+     "B": 0.3,
+     "magnet": {
+      "I_tot_A": 95492965.8551372,
+      "conductor_t": 369.01409086677427,
+      "structure_t": 15.599999999999998,
+      "cryostat_t": 17.707963267948966,
+      "W_J": 7312499999.999999,
+      "total_t": 502.902567668404
+     }
+    },
+    {
+     "name": "C screen + deflector 1.0 T",
+     "closes": true,
+     "standoff_m": 180.53243977003635,
+     "defeat_E_J": 147026383.9397167,
+     "screens": 1,
+     "screen_kg_m2": 3.8471660209186527,
+     "wall_kg_m2": 10.0,
+     "magnet_t": 1776.3603326964958,
+     "mass_t": 1871.776687391474,
+     "screen_holed_fraction": 0.019546812719688986,
+     "screen_eroded_m": 0.00011976219184465753,
+     "t_transit_ms": 0.037636962453629415,
+     "B": 1.0,
+     "magnet": {
+      "I_tot_A": 318309886.1837907,
+      "conductor_t": 1230.0469695559143,
+      "structure_t": 173.33333333333334,
+      "cryostat_t": 17.707963267948966,
+      "W_J": 81250000000.0,
+      "total_t": 1776.3603326964958
+     }
+    }
+   ]
+  }
+ },
+ "slab_scan": [
+  {
+   "B_T": 0.0,
+   "full": 0.7887270561481402,
+   "single": 0.7887270561481402
+  },
+  {
+   "B_T": 0.0001,
+   "full": 0.7912177161730467,
+   "single": 0.7902972548594943
+  },
+  {
+   "B_T": 0.001,
+   "full": 0.7638204558990745,
+   "single": 0.7947371270778061
+  },
+  {
+   "B_T": 0.01,
+   "full": 0.0,
+   "single": 0.7498511018463375
+  },
+  {
+   "B_T": 0.03,
+   "full": 0.0,
+   "single": 0.4950998971249129
+  },
+  {
+   "B_T": 0.1,
+   "full": 0.0,
+   "single": 0.01949212193405169
+  },
+  {
+   "B_T": 0.3,
+   "full": 0.0,
+   "single": 0.0
+  },
+  {
+   "B_T": 1.0,
+   "full": 0.0,
+   "single": 0.0
+  }
+ ],
+ "boom_bus": {
+  "I_A": 3000000.0,
+  "kg_per_m": 235.2941176470588,
+  "four_booms_t": 1858.8235294117646
+ }
+}

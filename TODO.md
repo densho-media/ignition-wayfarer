@@ -236,6 +236,8 @@ go. Evidence classes: HW (real device), EMU (emulation), SW (software WebGL/llvm
 - [ ] **GFX-8 — Cross-browser and devices. AFTER GFX-1D, continuous.** Chromium, Firefox, Safari where accessible, desktop discrete and
   integrated GPUs, Android, iOS; record unsupported, untested and failing separately (absorbs the Firefox/Safari item of P05).
   8D WebGPU and other renderers as separate research only, never a production requirement.
+- [ ] **Fusion Ignition page (P08) follow-ups.** Render on demand while paused (it draws every frame today) and the Dust page's
+  pixel-ratio policy; SW numbers in `references/evidence/gfx_fusion_ignition.json`, HW PENDING.
 
 ## How to work through this plan
 
@@ -719,6 +721,17 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   polarisation) cannot meet B01; the reference burn heats the ship 5,386x the drive's hot radiators, every lever with 5 % X-ray exposure
   ~348x, and neutrons alone ~37x. Open: owner S1-S4 (NOTES.md); SFE-1 Fokker-Planck hybrid with polarisation and synchrotron, then a
   burn-geometry X-ray avoidance study; the D-D suppression of polarised fuel is unmeasured (PolFusion) and stays SPECULATIVE.
+- [ ] **P08 — Fusion Ignition flagship simulation: open follow-ups (deployed 2026-11-24, owner brief 06:43Z; RESEARCH, not canon).**
+  Simulations · Fusion Ignition (`engineering/fusion-ignition/`, lab/studies/fusion-ignition, tools/story_ignite.py,
+  web/engineering/fusion-ignition.js); the engine research behind it is lab/studies/vertex-compact-engine (MPN, RON, AMPN, HIMS, compact
+  C1-C4, thermal, source). Eleven stages; the Heat stage runs in six steps (source, supermirrors, edge-on blades, blankets, hot and warm
+  circuits, cryogenic circuit and the path to space) over a drawn cooling network of 395 parts with an inspector per component.
+  Owner decisions 2026-11-24: B edge-on blades adopted as direction; thin 248 t blanket kept as an option; full 2,147 t blanket archived;
+  focus on the source. Still open, nothing closes: B + thin blanket leave the engine 1,575x its radiator share; the best source case
+  with a tungsten tamper 2,011x (heat moves to charged strikes, ENG-062); coupled exhaust 4,914 km/s against 19,201 (ENG-063).
+  Next: the nozzle hit share (ENG-062), a structural-dynamics model for the blades and roots (ENG-058), edge-strip life (ENG-057);
+  R1 engine sized for the 42.9 kt V4 ship, R3 jet share, R4 `operating_point.species` (canon not changed); render on demand while paused;
+  portrait-phone camera framing per stage; Q-CMP-2 blade aft ends.
 
 ## Owner routing and question continuity
 

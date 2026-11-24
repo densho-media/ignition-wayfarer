@@ -1478,6 +1478,25 @@ def run_main(url, release, build, binary, sandbox, out, record_check, metrics, s
                     page.screenshot(out / 'phone_fusion.png')
                 else:
                     record_check('fusion: the page starts', False)
+            # Simulations · Fusion Ignition, on the phone: every stage opens without horizontal overflow, the 3D engine loads, and the
+            # Experiment readout computes the same coupled pulse as the study's ledger (lab/studies/fusion-ignition/ledger.py): thrust and heat
+            # ratio agree, and the heat stays above the radiator share (no hidden closure)
+            if 'engineering/fusion-ignition/index.html' in release.get('files', {}):
+                page.send('Page.navigate', {'url': url + 'engineering/fusion-ignition/?autostart'})
+                if page.wait('!!(window.__fi && window.__fi.ready)', 180):
+                    stages = page.js("(() => [...document.querySelectorAll('.fi-stages [role=tab]')].map(t => { t.click(); "
+                                     "return [window.__fi.stage, document.documentElement.scrollWidth > innerWidth]; }))()")
+                    page.frames(4)
+                    st = page.js("({over: window.__fi.lab && window.__fi.lab.heat_over, want: window.__fi.data.heat_over, "
+                                 "thrust: window.__fi.lab && window.__fi.lab.thrust_N, thrust_want: window.__fi.data.thrust_N})")
+                    record_check('fusion ignition: eleven stages open on the phone without horizontal overflow',
+                                 len(stages or []) == 11 and not any(o for _, o in stages), stages=stages)
+                    record_check('fusion ignition: the Experiment readout matches the study and stays above the radiator share',
+                                 bool(st['over']) and st['over'] > 1 and abs(st['over'] / st['want'] - 1) < 1e-6
+                                 and bool(st['thrust']) and abs(st['thrust'] / st['thrust_want'] - 1) < 1e-6, **st)
+                    page.screenshot(out / 'phone_fusion_ignition.png')
+                else:
+                    record_check('fusion ignition: the page starts', False)
     except SystemExit:
         pass
     except Exception as error:      # a browser session failure is a failed check with Chrome's own last words

@@ -1,0 +1,760 @@
+[
+ {
+  "id": "ENG-040",
+  "title": "Supermirrors meet the burn at the wrong angle",
+  "categories": [
+   "SUPERMIRRORS",
+   "SHIELDING"
+  ],
+  "components": [
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4",
+   "SHIELD"
+  ],
+  "mechanism": "X-ray mirrors reflect only at grazing angles of a few mrad; the burn-facing faces of the compact engine meet its rays at a median 54 deg",
+  "required": "Reflected share of the X-rays on hardware that matters for heat (at least 0.5)",
+  "achieved": "1.5e-05 of the X-rays that strike (46 MW of 3.05 TW)",
+  "solutions": "Edge-on structure (B) instead of coated faces; mirrors only where a surface can be made to contain the burn point",
+  "advances": "None for hard X-rays: the critical angle is a property of matter (about 1/E)",
+  "severity": "CRITICAL: no benefit",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-041",
+  "title": "No grazing deflector can steer the spectrum clear of a coil",
+  "categories": [
+   "SUPERMIRRORS",
+   "MAGNETIC_NOZZLE"
+  ],
+  "components": [
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4"
+  ],
+  "mechanism": "Clearing a coil needs a turn of about its angular width (0.09-0.26 rad); a grazing mirror turns a ray by at most twice the critical angle (Pt 68 mrad at 1 keV)",
+  "required": "A deflection of 0.1-0.26 rad inside the 11.5 m engine envelope",
+  "achieved": "Only photons below about 0.1 keV; none in the R2-B spectrum (1-1000 keV)",
+  "solutions": "Remote geometry (MPN candidate F, RON B) where coils subtend milliradians",
+  "advances": "Not reachable with reflection; geometry only",
+  "severity": "CRITICAL: no benefit",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-042",
+  "title": "Mirror coatings do not survive the pulse",
+  "categories": [
+   "SUPERMIRRORS",
+   "HOT_THERMAL"
+  ],
+  "components": [
+   "SHIELD",
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4"
+  ],
+  "mechanism": "Each pulse puts up to 3.4 MJ/m2 of X-rays on the armour in about 10 ps; a 0.5 nm mirror finish ablates on the first pulse; neutron and helium damage roughen it further",
+  "required": "Roughness below 1 nm for 10^7 pulses per hour",
+  "achieved": "Ablation every pulse (tungsten surface jump about 10^5 K)",
+  "solutions": "None for a mirror face; sacrificial low-Z faces renewed in service",
+  "advances": "Self-healing or flowing-liquid mirror surfaces (SPECULATIVE)",
+  "severity": "CRITICAL",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-043",
+  "title": "Armour shoes cover only part of each coil",
+  "categories": [
+   "SHIELDING",
+   "MAGNETIC_COILS"
+  ],
+  "components": [
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4"
+  ],
+  "mechanism": "The drawn shoes (0.22 m section) shadow 37% of the cryostat silhouette the burn sees; the rest strikes the bare vessel",
+  "required": "Full silhouette armour",
+  "achieved": "1.80 TW on bare cryostat vessels and joints (no coolant drawn there)",
+  "solutions": "Strategy C layered blankets (2,147 t per engine with neutron layers, 248 t without)",
+  "advances": "Lighter neutron shielding (hydrides, boron carbide composites)",
+  "severity": "CRITICAL",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-044",
+  "title": "No face material survives the X-ray pulse at 1800 K",
+  "categories": [
+   "SHIELDING",
+   "HOT_THERMAL"
+  ],
+  "components": [
+   "SHIELD",
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4"
+  ],
+  "mechanism": "The pulse is far shorter than conduction: the surface layer takes the X-rays at once",
+  "required": "Surface below melting or sublimation",
+  "achieved": "Best is carbon: jump 2,866 K, margin -766 K; tungsten jumps 1.7e+05 K; Be and LiH survive the pulse but melt below the 1800 K loop",
+  "solutions": "Low-Z sacrificial faces (carbon) at a colder loop; larger standoff (fluence falls as 1/d^2)",
+  "advances": "Flowing liquid-lithium walls (SPECULATIVE)",
+  "severity": "CRITICAL",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-045",
+  "title": "Heat flux far above any coolant channel",
+  "categories": [
+   "HOT_THERMAL"
+  ],
+  "components": [
+   "SHIELD",
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4"
+  ],
+  "mechanism": "Lithium-cooled tungsten carries about 20 MW/m2 steady",
+  "required": "Below 20 MW/m2 on every hot face",
+  "achieved": "96-1,250 times the limit; the armour channels would need lithium at 7-28 km/s",
+  "solutions": "Spread the heat (standoff, larger faces); reduce the engine's sky share",
+  "advances": "None in the channel: the flux is set by geometry",
+  "severity": "CRITICAL",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-046",
+  "title": "Drawn lithium lines are far too small",
+  "categories": [
+   "HOT_THERMAL"
+  ],
+  "components": [
+   "HOT"
+  ],
+  "mechanism": "The supply feeder (r 0.11 m) and panel lines (r 0.12 m) carry lithium at most 10 m/s with a 300 K rise",
+  "required": "5.82 TW (all engine heat); 2.7 GW even at the canon radiator share",
+  "achieved": "216 MW: 27,013 times short; the budget alone needs 0.48 m2 of flow area",
+  "solutions": "Lines sized for the budget (several 0.2-0.3 m mains); the full heat would need a 18 m pipe",
+  "advances": "-",
+  "severity": "HIGH",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-047",
+  "title": "Liquid-metal MHD pressure loss in the coil field",
+  "categories": [
+   "HOT_THERMAL",
+   "MAGNETIC_COILS"
+  ],
+  "components": [
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4"
+  ],
+  "mechanism": "Lithium crossing 1-2.4 T near the windings induces currents that drag the flow (dp ~ sigma v B^2 L c)",
+  "required": "Below the 1 MPa design pressure",
+  "achieved": "2.2-48 MPa per armour run at 10 m/s with bare walls; 0.09-2.0 MPa with SiC inserts",
+  "solutions": "SiC flow-channel inserts; runs along the field; helium or molten salt in the strongest field",
+  "advances": "Insulating coatings qualified in lithium",
+  "severity": "HIGH",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-048",
+  "title": "Cryogenic refrigeration demand",
+  "categories": [
+   "CRYOGENIC",
+   "MAGNETIC_COILS"
+  ],
+  "components": [
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4",
+   "CRYO"
+  ],
+  "mechanism": "Neutrons reach the 20 K windings through the bare vessels; each watt there costs 297 W of refrigerator input",
+  "required": "Refrigeration within the engine's power budget (MW class)",
+  "achieved": "25.2 GW at 20 K -> 7.46 TW of input; with blankets C 1.3 GW -> 394.4 GW",
+  "solutions": "Thick neutron shields on every coil; warmer superconductors (40-77 K REBCO)",
+  "advances": "High-temperature operation of the windings",
+  "severity": "CRITICAL",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-049",
+  "title": "Hot radiator area and mass",
+  "categories": [
+   "HOT_THERMAL"
+  ],
+  "components": [
+   "HOT"
+  ],
+  "mechanism": "Everything absorbed leaves by radiation at 1800 K",
+  "required": "2.7 GW per engine (canon share)",
+  "achieved": "1.09e+07 m2 per engine (404 times the ship's radiators, about 109 kt); Brayton recovery raises it 10-fold",
+  "solutions": "Cut absorbed heat first; recovery runs the driver but enlarges the radiator",
+  "advances": "-",
+  "severity": "CRITICAL",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-050",
+  "title": "Thermal fatigue at the pulse rate",
+  "categories": [
+   "HOT_THERMAL",
+   "SHIELDING",
+   "STRUCTURE"
+  ],
+  "components": [
+   "SHIELD",
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4"
+  ],
+  "mechanism": "Every face is heated and relaxed at the pulse rate",
+  "required": "Fatigue life of a renewable face over one service interval",
+  "achieved": "2.1e+07 cycles per hour; one burn of days is 10^9-10^10 cycles",
+  "solutions": "Faces renewed between burns (exchange units)",
+  "advances": "OPEN: no fatigue data at these cycle counts",
+  "severity": "HIGH",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-051",
+  "title": "Hot and cryogenic circuits share a narrow gap",
+  "categories": [
+   "CRYOGENIC",
+   "HOT_THERMAL"
+  ],
+  "components": [
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4"
+  ],
+  "mechanism": "The 1800 K armour shoe sits 0.16 m from the cryostat; radiation across the gap and the vessels' own heat need a warm stage",
+  "required": "Separate hot, warm and cold circuits with no shared wall",
+  "achieved": "3.55 TW lands on warm parts drawn without a coolant; gap radiation about 4.1 MW per engine",
+  "solutions": "A third (warm, about 300-600 K) circuit for vessels, cage and optics; polished screens in the gap",
+  "advances": "-",
+  "severity": "HIGH",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-052",
+  "title": "Edge-on structure needs sub-milliradian alignment",
+  "categories": [
+   "SUPERMIRRORS",
+   "STRUCTURE"
+  ],
+  "components": [
+   "CAGE"
+  ],
+  "mechanism": "A blade works only while its plane contains the burn point to about 0.11 mrad (source wander over distance); thermal growth and coil forces move the cage by millimetres",
+  "required": "Alignment held to 0.1-1 mrad through each burn",
+  "achieved": "Budget 0.13 mrad (target miss, mount, 1 K thermal bow, vibration); a 3.3 K face-to-face difference alone uses the whole allowance; first mode 35 Hz against 5,697 Hz pulses",
+  "solutions": "Both faces cooled together, active root trim from the edge temperature map, constrained-layer dampers, cones instead of flat hoops",
+  "advances": "-",
+  "severity": "MEDIUM",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-053",
+  "title": "Driver final optics see the burn",
+  "categories": [
+   "TARGET_INJECTION"
+  ],
+  "components": [
+   "OPTICS"
+  ],
+  "mechanism": "The six final-focus optics sit in the shield face with a direct view of the burn",
+  "required": "Optics behind a shutter or a grazing turning mirror",
+  "achieved": "31.4 GW on 1.9 m2 of optics",
+  "solutions": "Grazing metal turning mirrors (the one place a grazing mirror fits), fast shutters",
+  "advances": "-",
+  "severity": "HIGH",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "hardware",
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-054",
+  "title": "Protection mass exceeds the engine",
+  "categories": [
+   "SHIELDING",
+   "STRUCTURE"
+  ],
+  "components": [
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4"
+  ],
+  "mechanism": "Full-silhouette blankets with neutron layers weigh about 3 t/m2",
+  "required": "Protection mass a small share of the 1,242 t drawn engine",
+  "achieved": "2,147 t per engine (B+C 2,208 t)",
+  "solutions": "Thin blankets (no neutron layers, about 250 t) with warmer windings",
+  "advances": "Lighter shields",
+  "severity": "HIGH",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-055",
+  "title": "Lithium leak or loss of flow in a magnet",
+  "categories": [
+   "HOT_THERMAL",
+   "MAGNETIC_COILS"
+  ],
+  "components": [
+   "HOT",
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4"
+  ],
+  "mechanism": "Lithium runs beside the cryostats; a leak shorts or attacks the vessel, a loss of flow lets the faces melt within milliseconds",
+  "required": "Detection and isolation faster than the face heats",
+  "achieved": "OPEN: no failure analysis",
+  "solutions": "Double-walled runs, segment isolation valves, burn abort",
+  "advances": "-",
+  "severity": "HIGH",
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-056",
+  "title": "Engine pickup undercounted in the ledger",
+  "categories": [
+   "SHIELDING",
+   "STRUCTURE"
+  ],
+  "components": [
+   "CAGE",
+   "LINES"
+  ],
+  "mechanism": "The compact sky ledger counted coils, shield and loops; the cage hoops, seats, struts and lines also see the burn",
+  "required": "One sky trace for every drawn part",
+  "achieved": "Trace 63.1% vs the compact study's piped share 54.6% (x1.16)",
+  "solutions": "Audited 2026-11-24: the 54.6 % was a piped-heat residual from the steady source, not a geometric share; the coupled ledger now uses the trace",
+  "advances": "-",
+  "severity": "RESOLVED IN THE MODEL",
+  "status": "RESOLVED",
+  "subsystem": "Vertex engine thermal",
+  "stages": [
+   "losses",
+   "thermal"
+  ],
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-057",
+  "title": "Edge-on blades concentrate the heat on their edges",
+  "categories": [
+   "STRUCTURE",
+   "HOT_THERMAL"
+  ],
+  "components": [
+   "EDGE",
+   "CAGE",
+   "SEAT",
+   "STRUT"
+  ],
+  "mechanism": "A blade aligned with the burn shows it only its edge, so the edge takes the full X-ray flux at its distance",
+  "required": "Edge flux below the 20 MW/m2 a lithium-cooled face can take",
+  "achieved": "7.4 GW/m2 steady (372x), 1,102 K per pulse, 63% of CFC strength each pulse",
+  "solutions": "Sacrificial replaceable edge strips on lithium-cooled roots (drawn), exchange ports at the aft hoop (drawn)",
+  "advances": "Self-renewing edges (SPECULATIVE)",
+  "severity": "HIGH",
+  "stages": [
+   "thermal"
+  ],
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-058",
+  "title": "Blade alignment needs active trim",
+  "categories": [
+   "STRUCTURE"
+  ],
+  "components": [
+   "ROOT",
+   "CAGE"
+  ],
+  "mechanism": "Thermal bow of a 1 m blade by a few kelvin across its faces swings its plane off the burn point by more than the allowance",
+  "required": "Plane held within 0.11 mrad",
+  "achieved": "3.3 K face difference allowed; actuators 6 t per engine (PROTOTYPE)",
+  "solutions": "Root actuators with an AI controller reading the edge temperature map between pulses (drawn)",
+  "advances": "Fast learned alignment control",
+  "severity": "MEDIUM",
+  "stages": [
+   "thermal"
+  ],
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-059",
+  "title": "The thin blanket does not cut the cryogenic load",
+  "categories": [
+   "CRYOGENIC",
+   "SHIELDING"
+  ],
+  "components": [
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4"
+  ],
+  "mechanism": "Without the W/B4C and LiH layers the neutrons reach the windings",
+  "required": "20 K load near the refrigeration a ship can carry",
+  "achieved": "25.2 GW at 20 K with the thin blanket (248 t); the archived full blanket reached 1.3 GW for 2,147 t",
+  "solutions": "Warmer superconductors (fewer watts per watt), shadow shields at the source",
+  "advances": "High-temperature superconductors at 40-77 K",
+  "severity": "HIGH",
+  "stages": [
+   "thermal"
+  ],
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-060",
+  "title": "The warm circuit needs a large radiator of its own",
+  "categories": [
+   "HOT_THERMAL",
+   "RADIATORS"
+  ],
+  "components": [
+   "WARM_RING",
+   "WARM_HOOP",
+   "WARM_RISER"
+  ],
+  "mechanism": "An 850 K radiator rejects about a twentieth of the heat per square metre of the hot radiator",
+  "required": "Warm load small enough for the ship WARM zone",
+  "achieved": "62.1 GW needs 2,468,460 m2 (24,685 t)",
+  "solutions": "Move blade-root heat into the hot loop; keep the warm loop for housings only",
+  "advances": "-",
+  "severity": "HIGH",
+  "stages": [
+   "thermal"
+  ],
+  "status": "OPEN",
+  "subsystem": "Vertex engine thermal",
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-thermal/results/thermal.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-061",
+  "title": "The target is its own X-ray lamp",
+  "categories": [
+   "FUSION_SOURCE"
+  ],
+  "components": [
+   "TARGET"
+  ],
+  "mechanism": "At the design density the 14.7 MeV protons stop within microns and give about 90 % of their energy to electrons, which radiate",
+  "required": "X-ray share low enough that cooling can follow",
+  "achieved": "85% of the fusion energy as X-rays; hot ions, polarisation and 3He-rich fuel barely change it",
+  "solutions": "Lower areal density, earlier extraction of the protons, an X-ray trapping tamper",
+  "advances": "Polarised fuel (yield), precision targets",
+  "severity": "CRITICAL",
+  "stages": [
+   "ignition",
+   "losses",
+   "thermal"
+  ],
+  "subsystem": "Vertex target",
+  "status": "OPEN",
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-source/results/source.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-062",
+  "title": "Energy taken from the X-rays strikes the nozzle instead",
+  "categories": [
+   "FUSION_SOURCE",
+   "MAGNETIC_NOZZLE"
+  ],
+  "components": [
+   "CAGE",
+   "C1",
+   "C2",
+   "L1",
+   "L2",
+   "L3",
+   "L4"
+  ],
+  "mechanism": "Every lever that keeps energy in the plasma feeds the nozzle, and the compact nozzle puts about two thirds of the plasma on hardware",
+  "required": "Hit share well below 0.1",
+  "achieved": "Best source case: X-rays 23%, thrust x2.1, engine heat still x2,011 its radiator share (78% from strikes)",
+  "solutions": "A nozzle with a small hit share (C3/C4 field, remote geometry)",
+  "advances": "Stronger, lighter coils",
+  "severity": "CRITICAL",
+  "stages": [
+   "nozzle",
+   "losses"
+  ],
+  "subsystem": "Vertex target and nozzle",
+  "status": "OPEN",
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-source/results/source.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ },
+ {
+  "id": "ENG-063",
+  "title": "Exhaust too slow for the mission",
+  "categories": [
+   "FUSION_SOURCE",
+   "PROPULSION"
+  ],
+  "components": [
+   "TARGET"
+  ],
+  "mechanism": "The coupled pulse leaves too little directed energy per kilogram",
+  "required": "19,201 km/s (the mission exhaust speed)",
+  "achieved": "4,914 km/s coupled; 9,928 km/s with every source lever and a tamper",
+  "solutions": "More directed energy per kilogram: early proton extraction, smaller hit share; never more cold propellant",
+  "advances": "-",
+  "severity": "CRITICAL",
+  "stages": [
+   "need",
+   "nozzle"
+  ],
+  "subsystem": "Vertex target",
+  "status": "OPEN",
+  "variants": [
+   "C1"
+  ],
+  "evidence": "lab/studies/vertex-compact-engine/vertex-source/results/source.json",
+  "assumptions": "Coupled pulse, R2-B spectrum, drawn C1 engine, PROTOTYPE limits in thermal.py and source.py",
+  "next": "Continue under the owner's 2026-11-24 direction (B adopted, thin blanket optional, source first)"
+ }
+]

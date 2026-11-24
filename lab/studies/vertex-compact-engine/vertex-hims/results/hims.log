@@ -1,0 +1,32 @@
+Test ions through a transverse slab (L 20 m, gap 20 m, cloud 30 deg): energy share reaching the 45 m wall disc
+  B  0.0000 T: fully stripped 0.789, singly charged 0.789  (Si14+ gyroradius inf m)
+  B  0.0001 T: fully stripped 0.791, singly charged 0.790  (Si14+ gyroradius 994.28 m)
+  B  0.0010 T: fully stripped 0.764, singly charged 0.795  (Si14+ gyroradius 99.43 m)
+  B  0.0100 T: fully stripped 0.000, singly charged 0.750  (Si14+ gyroradius 9.94 m)
+  B  0.0300 T: fully stripped 0.000, singly charged 0.495  (Si14+ gyroradius 3.31 m)
+  B  0.1000 T: fully stripped 0.000, singly charged 0.019  (Si14+ gyroradius 0.99 m)
+  B  0.3000 T: fully stripped 0.000, singly charged 0.000  (Si14+ gyroradius 0.33 m)
+  B  1.0000 T: fully stripped 0.000, singly charged 0.000  (Si14+ gyroradius 0.10 m)
+Vertex ring far field on the stern path: 3.28e-06 T (Si14+ gyroradius 30 km)
+
+== NOMINAL (ionised share 0.9, multi-screen pass-through 0.5)
+  stern design grain (0.1 events): 8.67e+07 J, a 896 um; laser pre-ionisation over 1 km: 1.9e+11 W/m2, 1184.8 TW (REJECTED)
+  PASSIVE stern screen (AMPN)      stand-off    64.3 m ( 13.4 us)  screen  0.81 kg/m2 x1  magnet    0.0 t  TOTAL    40.8 t  screen holed 0.5518 %, eroded 12.8 um
+  A screen + Vertex ring field     stand-off    64.3 m ( 13.4 us)  screen  0.81 kg/m2 x1  magnet    0.0 t  TOTAL    40.8 t  screen holed 0.5518 %, eroded 12.8 um
+  B two screens                    stand-off    45.5 m (  9.5 us)  screen  0.81 kg/m2 x2  magnet    0.0 t  TOTAL    47.3 t  screen holed 0.5518 %, eroded 12.8 um
+  B three screens                  stand-off    32.2 m (  6.7 us)  screen  0.81 kg/m2 x3  magnet    0.0 t  TOTAL    53.9 t  screen holed 0.5518 %, eroded 12.8 um
+  C screen + deflector 0.1 T       stand-off    57.8 m ( 12.1 us)  screen  0.81 kg/m2 x1  magnet  178.1 t  TOTAL   218.6 t  screen holed 0.5518 %, eroded 12.8 um
+  C screen + deflector 0.3 T       stand-off    38.2 m (  8.0 us)  screen  0.81 kg/m2 x1  magnet  502.9 t  TOTAL   542.9 t  screen holed 0.5518 %, eroded 12.8 um
+  C screen + deflector 1.0 T       stand-off    28.1 m (  5.9 us)  screen  0.81 kg/m2 x1  magnet 1776.4 t  TOTAL  1816.1 t  screen holed 0.5518 %, eroded 12.8 um
+
+== JUSTIFIED (ionised share 0.7, multi-screen pass-through 0.7)
+  stern design grain (0.1 events): 1.47e+08 J, a 1069 um; laser pre-ionisation over 1 km: 2.2e+11 W/m2, 1413.1 TW (REJECTED)
+  PASSIVE stern screen (AMPN)      stand-off   329.6 m ( 68.7 us)  screen  3.85 kg/m2 x1  magnet    0.0 t  TOTAL    99.9 t  screen holed 1.9547 %, eroded 119.8 um
+  A screen + Vertex ring field     stand-off   329.6 m ( 68.7 us)  screen  3.85 kg/m2 x1  magnet    0.0 t  TOTAL    99.9 t  screen holed 1.9547 %, eroded 119.8 um
+  B two screens                    stand-off   275.8 m ( 57.5 us)  screen  3.85 kg/m2 x2  magnet    0.0 t  TOTAL   124.7 t  screen holed 1.9547 %, eroded 119.8 um
+  B three screens                  stand-off   230.7 m ( 48.1 us)  screen  3.85 kg/m2 x3  magnet    0.0 t  TOTAL   149.7 t  screen holed 1.9547 %, eroded 119.8 um
+  C screen + deflector 0.1 T       stand-off   180.5 m ( 37.6 us)  screen  3.85 kg/m2 x1  magnet  178.1 t  TOTAL   273.5 t  screen holed 1.9547 %, eroded 119.8 um
+  C screen + deflector 0.3 T       stand-off   180.5 m ( 37.6 us)  screen  3.85 kg/m2 x1  magnet  502.9 t  TOTAL   598.3 t  screen holed 1.9547 %, eroded 119.8 um
+  C screen + deflector 1.0 T       stand-off   180.5 m ( 37.6 us)  screen  3.85 kg/m2 x1  magnet 1776.4 t  TOTAL  1871.8 t  screen holed 1.9547 %, eroded 119.8 um
+
+C2 boom bus deflector: 3.0 MA go and return, 235 kg/m, 1,859 t over four 1.98 km booms (vs boom-duct armour 1,580 t JUSTIFIED, 23 t fences NOMINAL)

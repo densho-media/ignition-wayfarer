@@ -1,0 +1,69 @@
+=== B_D800 at 1.6x capture current ===
+  n   160/species: hit 0.00000 fwd 0.02500 eta 0.8088 | p14.7 fwd 0.0250 [0.0098, 0.0625] hit<1.9e-02 a3.6 fwd 0.0250 [0.0098, 0.0625] hit<1.9e-02 D_debris fwd 0.0250 [0.0098, 0.0625] hit<1.9e-02 He3_debris fwd 0.0250 [0.0098, 0.0625] hit<1.9e-02
+  n   640/species: hit 0.00000 fwd 0.02425 eta 0.8102 | p14.7 fwd 0.0250 [0.0154, 0.0402] hit<4.7e-03 a3.6 fwd 0.0234 [0.0143, 0.0383] hit<4.7e-03 D_debris fwd 0.0250 [0.0154, 0.0402] hit<4.7e-03 He3_debris fwd 0.0234 [0.0143, 0.0383] hit<4.7e-03
+  n  2560/species: hit 0.00000 fwd 0.02468 eta 0.8094 | p14.7 fwd 0.0258 [0.0203, 0.0327] hit<1.2e-03 a3.6 fwd 0.0238 [0.0186, 0.0305] hit<1.2e-03 D_debris fwd 0.0246 [0.0193, 0.0314] hit<1.2e-03 He3_debris fwd 0.0242 [0.0189, 0.0309] hit<1.2e-03
+  n 10240/species: hit 0.00000 fwd 0.02467 eta 0.8094 | p14.7 fwd 0.0257 [0.0228, 0.0289] hit<2.9e-04 a3.6 fwd 0.0238 [0.0210, 0.0270] hit<2.9e-04 D_debris fwd 0.0248 [0.0220, 0.0280] hit<2.9e-04 He3_debris fwd 0.0241 [0.0213, 0.0273] hit<2.9e-04
+PLUG x 169 m r 10.5 m graze 5 deg | sky 9.635e-04 (disc 9.544e-04) | face 3,942 m2 one-sided, fins 796 m2 two-sided (398 m2 plate)
+     absorbed photons 5.35 GW + neutrons RON 0.72 GW (audit 0.004 GW) | emitted face 5.16 GW + fins 0.75 GW = 5.91 GW (ledger 6.07 GW per engine)
+     audit: no fins needed? T without fins 2322 K, fins needed 211 m2; four plugs 21.4 GW (RON 24.3 GW)
+SHIP neutrons: sky 7.891e-04, 648 MW per engine, 2.59 GW for four engines: NOT in the RON ledger
+     slug for <=    1000 MW at the ship (four engines):  1.0 e-folds, LiH 0.07 m,     23 t per engine, 0.40 GW deposited in it
+     slug for <=     100 MW at the ship (four engines):  3.3 e-folds, LiH 0.25 m,     77 t per engine, 0.62 GW deposited in it
+     slug for <=      10 MW at the ship (four engines):  5.6 e-folds, LiH 0.43 m,    132 t per engine, 0.65 GW deposited in it
+     slug for <=       1 MW at the ship (four engines):  7.9 e-folds, LiH 0.60 m,    186 t per engine, 0.65 GW deposited in it
+RING_1 nose 0.57 m, flanks 355 m2 | absorbed RON 0.581 GW, audit 0.646 GW (neutron deposition 0.90 vs 0.30) | bare 2479 K, fins 690 m2 (RON 569)
+CRYO per engine: neutrons 31.3 kW + static 1.3 kW = 32.6 kW at 20 K -> refrigerator 9.7 MW electric, 9.7 MW rejected warm (four: 39 MW)
+PULSE plug surface: 1.35 MW/m2 mean, 67 J/m2 per pulse, surface swing 0.52 K (negligible)
+AC   coupling 0.1: dB/B 0.0058 (0.022 T at 3.8 T) | Mo eddy shield 3 skin depths (7.7 mm, 99 t):   31.5 kW/m2 ->  0.04 GW per engine at  899 K | winding at 20 K: unshielded      0.4 MW, behind the shield   0.05 kW
+AC   coupling 0.3: dB/B 0.0174 (0.066 T at 3.8 T) | Mo eddy shield 3 skin depths (7.7 mm, 99 t):  283.5 kW/m2 ->  0.36 GW per engine at 1557 K | winding at 20 K: unshielded     10.3 MW, behind the shield   1.27 kW
+AC   coupling 1.0: dB/B 0.0579 (0.221 T at 3.8 T) | Mo eddy shield 3 skin depths (7.7 mm, 99 t): 3149.9 kW/m2 ->  3.96 GW per engine at 2843 K | winding at 20 K: unshielded    381.3 MW, behind the shield  47.05 kW
+     fatigue: 6.91e+10 load cycles over four burns (giga-cycle regime: stress amplitude must stay below the endurance limit)
+  INTERCEPT at cant 0: ship 39.975 GW, own plug 0.000 GW, booms 0.873 GW (ship offset 19.5 deg; RON cant 11.7 deg)
+  minimum cant for ship <= 0.1 GW, plug and booms <= 0.3 GW: 14.5 deg
+  departure: RON rule 11,487 t (cant 11.7) -> interception rule 11,645 t (cant 14.5) before the audit's added masses
+=== E_hybrid_4_S250 at 2.5x capture current ===
+  n   160/species: hit 0.00000 fwd 0.00776 eta 0.9291 | p14.7 fwd 0.0125 [0.0034, 0.0444] hit<1.9e-02 a3.6 fwd 0.0063 [0.0011, 0.0345] hit<1.9e-02 D_debris fwd 0.0063 [0.0011, 0.0345] hit<1.9e-02 He3_debris fwd 0.0063 [0.0011, 0.0345] hit<1.9e-02
+  n   640/species: hit 0.00000 fwd 0.00625 eta 0.9320 | p14.7 fwd 0.0063 [0.0024, 0.0160] hit<4.7e-03 a3.6 fwd 0.0063 [0.0024, 0.0160] hit<4.7e-03 D_debris fwd 0.0063 [0.0024, 0.0160] hit<4.7e-03 He3_debris fwd 0.0063 [0.0024, 0.0160] hit<4.7e-03
+  n  2560/species: hit 0.00000 fwd 0.00637 eta 0.9317 | p14.7 fwd 0.0066 [0.0042, 0.0106] hit<1.2e-03 a3.6 fwd 0.0066 [0.0042, 0.0106] hit<1.2e-03 D_debris fwd 0.0063 [0.0039, 0.0101] hit<1.2e-03 He3_debris fwd 0.0063 [0.0039, 0.0101] hit<1.2e-03
+  n 10240/species: hit 0.00000 fwd 0.00643 eta 0.9315 | p14.7 fwd 0.0065 [0.0052, 0.0083] hit<2.9e-04 a3.6 fwd 0.0067 [0.0053, 0.0085] hit<2.9e-04 D_debris fwd 0.0065 [0.0052, 0.0083] hit<2.9e-04 He3_debris fwd 0.0063 [0.0049, 0.0080] hit<2.9e-04
+PLUG x 169 m r 10.5 m graze 5 deg | sky 9.635e-04 (disc 9.544e-04) | face 3,942 m2 one-sided, fins 796 m2 two-sided (398 m2 plate)
+     absorbed photons 5.35 GW + neutrons RON 0.72 GW (audit 0.004 GW) | emitted face 5.16 GW + fins 0.75 GW = 5.91 GW (ledger 6.07 GW per engine)
+     audit: no fins needed? T without fins 2322 K, fins needed 211 m2; four plugs 21.4 GW (RON 24.3 GW)
+SHIP neutrons: sky 7.891e-04, 648 MW per engine, 2.59 GW for four engines: NOT in the RON ledger
+     slug for <=    1000 MW at the ship (four engines):  1.0 e-folds, LiH 0.07 m,     23 t per engine, 0.40 GW deposited in it
+     slug for <=     100 MW at the ship (four engines):  3.3 e-folds, LiH 0.25 m,     77 t per engine, 0.62 GW deposited in it
+     slug for <=      10 MW at the ship (four engines):  5.6 e-folds, LiH 0.43 m,    132 t per engine, 0.65 GW deposited in it
+     slug for <=       1 MW at the ship (four engines):  7.9 e-folds, LiH 0.60 m,    186 t per engine, 0.65 GW deposited in it
+RING_1 nose 0.57 m, flanks 355 m2 | absorbed RON 0.783 GW, audit 0.870 GW (neutron deposition 0.90 vs 0.30) | bare 2670 K, fins 1105 m2 (RON 943)
+CRYO per engine: neutrons 42.2 kW + static 1.5 kW = 43.6 kW at 20 K -> refrigerator 12.9 MW electric, 13.0 MW rejected warm (four: 52 MW)
+PULSE plug surface: 1.35 MW/m2 mean, 67 J/m2 per pulse, surface swing 0.52 K (negligible)
+AC   coupling 0.1: dB/B 0.0023 (0.014 T at 6.0 T) | Mo eddy shield 3 skin depths (7.7 mm, 99 t):   12.4 kW/m2 ->  0.02 GW per engine at  712 K | winding at 20 K: unshielded      0.1 MW, behind the shield   0.01 kW
+AC   coupling 0.3: dB/B 0.0069 (0.042 T at 6.0 T) | Mo eddy shield 3 skin depths (7.7 mm, 99 t):  111.5 kW/m2 ->  0.14 GW per engine at 1233 K | winding at 20 K: unshielded      2.5 MW, behind the shield   0.31 kW
+AC   coupling 1.0: dB/B 0.0231 (0.139 T at 6.0 T) | Mo eddy shield 3 skin depths (7.7 mm, 99 t): 1239.0 kW/m2 ->  1.56 GW per engine at 2252 K | winding at 20 K: unshielded     94.1 MW, behind the shield  11.61 kW
+     fatigue: 6.91e+10 load cycles over four burns (giga-cycle regime: stress amplitude must stay below the endurance limit)
+  INTERCEPT at cant 0: ship 6.594 GW, own plug 0.000 GW, booms 5.635 GW (ship offset 12.5 deg; RON cant 30.0 deg)
+  minimum cant for ship <= 0.1 GW, plug and booms <= 0.3 GW: 30.0 deg
+  departure: RON rule 14,202 t (cant 30.0) -> interception rule 14,202 t (cant 30.0) before the audit's added masses
+=== B_D500 at 1.6x capture current ===
+  n   160/species: hit 0.00000 fwd 0.02500 eta 0.8256 | p14.7 fwd 0.0250 [0.0098, 0.0625] hit<1.9e-02 a3.6 fwd 0.0250 [0.0098, 0.0625] hit<1.9e-02 D_debris fwd 0.0250 [0.0098, 0.0625] hit<1.9e-02 He3_debris fwd 0.0250 [0.0098, 0.0625] hit<1.9e-02
+  n   640/species: hit 0.00000 fwd 0.02425 eta 0.8271 | p14.7 fwd 0.0250 [0.0154, 0.0402] hit<4.7e-03 a3.6 fwd 0.0234 [0.0143, 0.0383] hit<4.7e-03 D_debris fwd 0.0250 [0.0154, 0.0402] hit<4.7e-03 He3_debris fwd 0.0234 [0.0143, 0.0383] hit<4.7e-03
+  n  2560/species: hit 0.00000 fwd 0.02442 eta 0.8268 | p14.7 fwd 0.0254 [0.0200, 0.0322] hit<1.2e-03 a3.6 fwd 0.0238 [0.0186, 0.0305] hit<1.2e-03 D_debris fwd 0.0246 [0.0193, 0.0314] hit<1.2e-03 He3_debris fwd 0.0238 [0.0186, 0.0305] hit<1.2e-03
+  n 10240/species: hit 0.00000 fwd 0.02450 eta 0.8266 | p14.7 fwd 0.0254 [0.0225, 0.0286] hit<2.9e-04 a3.6 fwd 0.0237 [0.0210, 0.0269] hit<2.9e-04 D_debris fwd 0.0246 [0.0218, 0.0278] hit<2.9e-04 He3_debris fwd 0.0240 [0.0212, 0.0272] hit<2.9e-04
+PLUG x 169 m r 16.7 m graze 5 deg | sky 2.447e-03 (disc 2.432e-03) | face 10,092 m2 one-sided, fins 1,906 m2 two-sided (953 m2 plate)
+     absorbed photons 13.59 GW + neutrons RON 1.82 GW (audit 0.010 GW) | emitted face 13.20 GW + fins 1.80 GW = 15.00 GW (ledger 15.41 GW per engine)
+     audit: no fins needed? T without fins 2317 K, fins needed 424 m2; four plugs 54.4 GW (RON 24.3 GW)
+SHIP neutrons: sky 2.013e-03, 1653 MW per engine, 6.61 GW for four engines: NOT in the RON ledger
+     slug for <=    1000 MW at the ship (four engines):  1.9 e-folds, LiH 0.15 m,    115 t per engine, 1.40 GW deposited in it
+     slug for <=     100 MW at the ship (four engines):  4.2 e-folds, LiH 0.32 m,    254 t per engine, 1.63 GW deposited in it
+     slug for <=      10 MW at the ship (four engines):  6.5 e-folds, LiH 0.50 m,    394 t per engine, 1.65 GW deposited in it
+     slug for <=       1 MW at the ship (four engines):  8.8 e-folds, LiH 0.68 m,    534 t per engine, 1.65 GW deposited in it
+RING_1 nose 0.58 m, flanks 330 m2 | absorbed RON 0.673 GW, audit 0.749 GW (neutron deposition 0.90 vs 0.30) | bare 2619 K, fins 916 m2 (RON 774)
+CRYO per engine: neutrons 29.4 kW + static 1.2 kW = 30.5 kW at 20 K -> refrigerator 9.1 MW electric, 9.1 MW rejected warm (four: 36 MW)
+PULSE plug surface: 1.35 MW/m2 mean, 67 J/m2 per pulse, surface swing 0.52 K (negligible)
+AC   coupling 0.1: dB/B 0.0058 (0.023 T at 4.1 T) | Mo eddy shield 3 skin depths (7.7 mm, 89 t):   35.5 kW/m2 ->  0.04 GW per engine at  926 K | winding at 20 K: unshielded      0.4 MW, behind the shield   0.05 kW
+AC   coupling 0.3: dB/B 0.0173 (0.070 T at 4.1 T) | Mo eddy shield 3 skin depths (7.7 mm, 89 t):  319.5 kW/m2 ->  0.36 GW per engine at 1605 K | winding at 20 K: unshielded     11.1 MW, behind the shield   1.37 kW
+AC   coupling 1.0: dB/B 0.0576 (0.235 T at 4.1 T) | Mo eddy shield 3 skin depths (7.7 mm, 89 t): 3549.7 kW/m2 ->  4.01 GW per engine at 2929 K | winding at 20 K: unshielded    410.5 MW, behind the shield  50.66 kW
+     fatigue: 6.91e+10 load cycles over four burns (giga-cycle regime: stress amplitude must stay below the endurance limit)
+  INTERCEPT at cant 0: ship 63.793 GW, own plug 0.000 GW, booms 0.000 GW (ship offset 19.5 deg; RON cant 9.1 deg)
+  minimum cant for ship <= 0.1 GW, plug and booms <= 0.3 GW: 11.5 deg
+  departure: RON rule 12,075 t (cant 9.1) -> interception rule 12,183 t (cant 11.5) before the audit's added masses

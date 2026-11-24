@@ -1,0 +1,127 @@
+damaging grain (perforates a bare 5 mm face, NOMINAL): 2,586 J, 2.25e-10 kg, a 27.8 um
+
+1. One grain against exhaust and fields (column 1e-8 kg/m2 = a dense plume near the engine; field integral 0.2 T m)
+  a      0.01 um  m 1.05e-20 kg  KE 1.20e-07 J  KE/E_vap 8.8e+05  vaporised 0.81  dv/V 2.2e-07  max q/m 3.19e+04 C/kg  deflection 1.3e-03 rad
+  a      0.10 um  m 1.05e-17 kg  KE 1.20e-04 J  KE/E_vap 8.8e+05  vaporised 0.81  dv/V 2.2e-07  max q/m 3.19e+03 C/kg  deflection 1.3e-04 rad
+  a      1.00 um  m 1.05e-14 kg  KE 1.20e-01 J  KE/E_vap 8.8e+05  vaporised 0.81  dv/V 2.2e-07  max q/m 3.19e+02 C/kg  deflection 1.3e-05 rad
+  a     10.00 um  m 1.05e-11 kg  KE 1.20e+02 J  KE/E_vap 8.8e+05  vaporised 0.81  dv/V 2.2e-07  max q/m 3.19e+01 C/kg  deflection 1.3e-06 rad
+  a     28.00 um  m 2.30e-10 kg  KE 2.64e+03 J  KE/E_vap 8.8e+05  vaporised 0.81  dv/V 2.2e-07  max q/m 1.14e+01 C/kg  deflection 4.7e-07 rad
+  a    100.00 um  m 1.05e-08 kg  KE 1.20e+05 J  KE/E_vap 8.8e+05  vaporised 0.55  dv/V 1.5e-07  max q/m 3.19e+00 C/kg  deflection 1.3e-07 rad
+  a   1000.00 um  m 1.05e-05 kg  KE 1.20e+08 J  KE/E_vap 8.8e+05  vaporised 0.05  dv/V 1.5e-08  max q/m 3.19e-01 C/kg  deflection 1.3e-08 rad
+  ions after a screen: Si+ rigidity 1.39 T m, Si14+ 0.099 T m; C+ 0.60 T m
+
+== B_D800: R 50.0 m, D 800.0 m, S 400.0 m; burns 82 d total, braking 30 AU each
+  ring far-field integral along the ship path: 0.238 T m
+  Mode B (plumes widened to cover the ship):
+    theta    5  covers from     3747 m  column 3.3e-09  needed 4.5e-02 (x1.4e+07)  mdot needed 1.6e+07 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 7.3e-08  axial thrust share 0.99
+    theta   10  covers from     1859 m  column 1.6e-09  needed 4.5e-02 (x2.8e+07)  mdot needed 3.1e+07 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 3.6e-08  axial thrust share 0.98
+    theta   20  covers from      901 m  column 7.9e-10  needed 4.5e-02 (x5.7e+07)  mdot needed 6.5e+07 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 1.8e-08  axial thrust share 0.91
+    theta   30  covers from      568 m  column 5.0e-10  needed 4.5e-02 (x9.1e+07)  mdot needed 1.0e+08 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 1.1e-08  axial thrust share 0.81
+    theta   45  covers from      328 m  column 2.9e-10  needed 4.5e-02 (x1.6e+08)  mdot needed 1.8e+08 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 6.4e-09  axial thrust share 0.60
+    theta   60  covers from      189 m  column 1.7e-10  needed 4.5e-02 (x2.7e+08)  mdot needed 3.1e+08 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 3.7e-09  axial thrust share 0.38
+    theta   75  covers from       88 m  column 7.7e-11  needed 4.5e-02 (x5.9e+08)  mdot needed 6.6e+08 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 1.7e-09  axial thrust share 0.16
+  NOMINAL: passive protection 1,028.8 t; Brow (reference) needs stand-off 58.45699882445316, 2.78e+03 events beyond its 2 m layer
+    ship stern disc (stern screen on a mast)   ENGINE_FIRST     6362 m2  bare breaches 6.80e+04  S needed 62.74  bumper   37.01 t  armour 0.15854309085819107
+    ring aft faces (nose, in the exhaust)      ENGINE_FIRST     1257 m2  bare breaches 1.34e+04  S needed 33.69  armour   236.98 t  armour 0.1047529922461093
+    plug aft faces (lit cone)                  ENGINE_FIRST     1375 m2  bare breaches 1.47e+04  S needed 34.88  armour   265.35 t  armour 0.10720606506453599
+    boom services ducts, braking               ENGINE_FIRST      951 m2  bare breaches 1.02e+04  S needed 30.26  bumper   5.24 t  armour 0.09750015114599021
+    ring forward faces                         BOW_FIRST        1257 m2  bare breaches 1.14e+04  S needed 31.37  armour   225.97 t  armour 0.0998895409073461
+    plug forward faces (slug)                  BOW_FIRST        1375 m2  bare breaches 1.25e+04  S needed 32.48  armour   253.03 t  armour 0.10223132705745844
+    boom services ducts, bow-first             BOW_FIRST         951 m2  bare breaches 8.64e+03  S needed 28.17  bumper   5.22 t  armour 0.0929661115613323
+  JUSTIFIED: passive protection 2,422.9 t; Brow (reference) needs stand-off 299.4692873230329, 8.51e+04 events beyond its 2 m layer
+    ship stern disc (stern screen on a mast)   ENGINE_FIRST     6362 m2  bare breaches 5.08e+05  S needed 321.42  bumper   89.19 t  armour 0.28243807506833224
+    ring aft faces (nose, in the exhaust)      ENGINE_FIRST     1257 m2  bare breaches 1.00e+05  S needed 172.93  armour   422.91 t  armour 0.18683499801332862
+    plug aft faces (lit cone)                  ENGINE_FIRST     1375 m2  bare breaches 1.10e+05  S needed 179.01  armour   473.48 t  armour 0.1911866795382684
+    boom services ducts, braking               ENGINE_FIRST      951 m2  bare breaches 7.59e+04  S needed 155.38  armour   298.14 t  armour 0.1739694679680107
+    ring forward faces                         BOW_FIRST        1257 m2  bare breaches 8.52e+04  S needed 161.07  armour   403.31 t  armour 0.1781894273993083
+    plug forward faces (slug)                  BOW_FIRST        1375 m2  bare breaches 9.33e+04  S needed 166.73  armour   451.54 t  armour 0.1823436669368116
+    boom services ducts, bow-first             BOW_FIRST         951 m2  bare breaches 6.45e+04  S needed 144.71  armour   284.3 t  armour 0.16590802237399252
+  HIGH: passive protection 28,326.4 t; Brow (reference) needs stand-off None, 3.83e+05 events beyond its 2 m layer
+    ship stern disc (stern screen on a mast)   ENGINE_FIRST     6362 m2  bare breaches 1.77e+06  S needed None  armour   13672.94 t  armour 1.1881849624918919
+    ring aft faces (nose, in the exhaust)      ENGINE_FIRST     1257 m2  bare breaches 3.50e+05  S needed None  armour   2589.63 t  armour 1.1390230426576495
+    plug aft faces (lit cone)                  ENGINE_FIRST     1375 m2  bare breaches 3.83e+05  S needed None  armour   2842.85 t  armour 1.1428615875938704
+    boom services ducts, braking               ENGINE_FIRST      951 m2  bare breaches 2.65e+05  S needed None  armour   1938.38 t  armour 1.1260801379530505
+    ring forward faces                         BOW_FIRST        1257 m2  bare breaches 2.99e+05  S needed None  armour   2559.2 t  armour 1.126504938848235
+    plug forward faces (slug)                  BOW_FIRST        1375 m2  bare breaches 3.27e+05  S needed None  armour   2810.69 t  armour 1.1308003681173455
+    boom services ducts, bow-first             BOW_FIRST         951 m2  bare breaches 2.26e+05  S needed None  armour   1912.75 t  armour 1.1120493642756402
+
+== B_opt_today: R 30.0 m, D 1500.0 m, S 800.0 m; burns 78 d total, braking 28 AU each
+  ring far-field integral along the ship path: 0.013 T m
+  Mode B (plumes widened to cover the ship):
+    theta    5  covers from     6980 m  column 1.8e-09  needed 4.5e-02 (x2.6e+07)  mdot needed 2.9e+07 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 3.9e-08  axial thrust share 0.99
+    theta   10  covers from     3463 m  column 8.7e-10  needed 4.5e-02 (x5.2e+07)  mdot needed 5.8e+07 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 1.9e-08  axial thrust share 0.98
+    theta   20  covers from     1678 m  column 4.2e-10  needed 4.5e-02 (x1.1e+08)  mdot needed 1.2e+08 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 9.4e-09  axial thrust share 0.91
+    theta   30  covers from     1058 m  column 2.7e-10  needed 4.5e-02 (x1.7e+08)  mdot needed 1.9e+08 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 5.9e-09  axial thrust share 0.81
+    theta   45  covers from      611 m  column 1.5e-10  needed 4.5e-02 (x2.9e+08)  mdot needed 3.3e+08 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 3.4e-09  axial thrust share 0.60
+    theta   60  covers from      353 m  column 8.9e-11  needed 4.5e-02 (x5.1e+08)  mdot needed 5.7e+08 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 2.0e-09  axial thrust share 0.38
+    theta   75  covers from      164 m  column 4.1e-11  needed 4.5e-02 (x1.1e+09)  mdot needed 1.2e+09 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 9.2e-10  axial thrust share 0.16
+  NOMINAL: passive protection 455.1 t; Brow (reference) needs stand-off 59.31683502598363, 2.56e+03 events beyond its 2 m layer
+    ship stern disc (stern screen on a mast)   ENGINE_FIRST     6362 m2  bare breaches 6.34e+04  S needed 64.4  bumper   37.09 t  armour 0.1613318349430535
+    ring aft faces (nose, in the exhaust)      ENGINE_FIRST      754 m2  bare breaches 7.52e+03  S needed 28.38  armour   126.81 t  armour 0.0934214253328905
+    plug aft faces (lit cone)                  ENGINE_FIRST      499 m2  bare breaches 4.97e+03  S needed 24.16  armour   75.36 t  armour 0.08392663332512248
+    boom services ducts, braking               ENGINE_FIRST     2083 m2  bare breaches 2.08e+04  S needed 42.01  bumper   11.73 t  armour 0.12135578429346464
+    ring forward faces                         BOW_FIRST         754 m2  bare breaches 6.39e+03  S needed 26.12  armour   119.97 t  armour 0.08838917204070995
+    plug forward faces (slug)                  BOW_FIRST         499 m2  bare breaches 4.22e+03  S needed 22.79  armour   72.48 t  armour 0.08072237953043476
+    boom services ducts, bow-first             BOW_FIRST        2083 m2  bare breaches 1.76e+04  S needed 38.68  bumper   11.65 t  armour 0.11485328247830721
+  JUSTIFIED: passive protection 2,371.9 t; Brow (reference) needs stand-off 303.90231462533234, 7.86e+04 events beyond its 2 m layer
+    ship stern disc (stern screen on a mast)   ENGINE_FIRST     6362 m2  bare breaches 4.68e+05  S needed 329.98  bumper   89.49 t  armour 0.28742776776922535
+    ring aft faces (nose, in the exhaust)      ENGINE_FIRST      754 m2  bare breaches 5.54e+04  S needed 145.83  armour   226.49 t  armour 0.1667655726231289
+    plug aft faces (lit cone)                  ENGINE_FIRST      499 m2  bare breaches 3.67e+04  S needed 124.3  armour   134.7 t  armour 0.14992105891272475
+    boom services ducts, braking               ENGINE_FIRST     2083 m2  bare breaches 1.53e+05  S needed 215.46  armour   811.46 t  armour 0.21633052615447276
+    ring forward faces                         BOW_FIRST         754 m2  bare breaches 4.72e+04  S needed 134.24  armour   214.31 t  armour 0.15780804122855238
+    plug forward faces (slug)                  BOW_FIRST         499 m2  bare breaches 3.12e+04  S needed 114.41  armour   127.44 t  armour 0.14185271716279815
+    boom services ducts, bow-first             BOW_FIRST        2083 m2  bare breaches 1.30e+05  S needed 198.41  armour   768.02 t  armour 0.20476077426690842
+  HIGH: passive protection 27,210.6 t; Brow (reference) needs stand-off None, 3.47e+05 events beyond its 2 m layer
+    ship stern disc (stern screen on a mast)   ENGINE_FIRST     6362 m2  bare breaches 1.60e+06  S needed None  armour   13634.84 t  armour 1.1854803890890933
+    ring aft faces (nose, in the exhaust)      ENGINE_FIRST      754 m2  bare breaches 1.90e+05  S needed None  armour   1508.67 t  armour 1.1064095581139264
+    plug aft faces (lit cone)                  ENGINE_FIRST      499 m2  bare breaches 1.26e+05  S needed None  armour   974.1 t  armour 1.0798079779455965
+    boom services ducts, braking               ENGINE_FIRST     2083 m2  bare breaches 5.24e+05  S needed None  armour   4345.54 t  armour 1.153919951962137
+    ring forward faces                         BOW_FIRST         754 m2  bare breaches 1.63e+05  S needed None  armour   1486.38 t  armour 1.0907875143402033
+    plug forward faces (slug)                  BOW_FIRST         499 m2  bare breaches 1.08e+05  S needed None  armour   957.0 t  armour 1.0615582186357573
+    boom services ducts, bow-first             BOW_FIRST        2083 m2  bare breaches 4.50e+05  S needed None  armour   4304.04 t  armour 1.1436507977522437
+
+== E_S250: R 50.0 m, D 800.0 m, S 250.0 m; burns 88 d total, braking 32 AU each
+  ring far-field integral along the ship path: 0.610 T m
+  Mode B (plumes widened to cover the ship):
+    theta    5  covers from     2535 m  column 4.8e-09  needed 4.5e-02 (x9.3e+06)  mdot needed 1.1e+07 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 1.1e-07  axial thrust share 0.99
+    theta   10  covers from     1258 m  column 2.4e-09  needed 4.5e-02 (x1.9e+07)  mdot needed 2.1e+07 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 5.3e-08  axial thrust share 0.98
+    theta   20  covers from      609 m  column 1.2e-09  needed 4.5e-02 (x3.9e+07)  mdot needed 4.4e+07 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 2.6e-08  axial thrust share 0.91
+    theta   30  covers from      384 m  column 7.3e-10  needed 4.5e-02 (x6.1e+07)  mdot needed 6.9e+07 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 1.6e-08  axial thrust share 0.81
+    theta   45  covers from      222 m  column 4.2e-10  needed 4.5e-02 (x1.1e+08)  mdot needed 1.2e+08 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 9.4e-09  axial thrust share 0.60
+    theta   60  covers from      128 m  column 2.4e-10  needed 4.5e-02 (x1.8e+08)  mdot needed 2.1e+08 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 5.4e-09  axial thrust share 0.38
+    theta   75  covers from       59 m  column 1.1e-10  needed 4.5e-02 (x4.0e+08)  mdot needed 4.5e+08 kg/s  vaporises a <= 0.000 um  damaging grain dv/V 2.5e-09  axial thrust share 0.16
+  NOMINAL: passive protection 1,002.0 t; Brow (reference) needs stand-off 58.11129300045524, 3.12e+03 events beyond its 2 m layer
+    ship stern disc (stern screen on a mast)   ENGINE_FIRST     6362 m2  bare breaches 7.46e+04  S needed 59.0  bumper   36.83 t  armour 0.15218439947460166
+    ring aft faces (nose, in the exhaust)      ENGINE_FIRST     1257 m2  bare breaches 1.47e+04  S needed 31.7  armour   227.52 t  armour 0.10056883266328565
+    plug aft faces (lit cone)                  ENGINE_FIRST     1375 m2  bare breaches 1.61e+04  S needed 32.82  armour   254.76 t  armour 0.10292394403874007
+    boom services ducts, braking               ENGINE_FIRST      527 m2  bare breaches 6.18e+03  S needed 23.04  bumper   2.86 t  armour 0.08129978318940784
+    ring forward faces                         BOW_FIRST        1257 m2  bare breaches 1.26e+04  S needed 31.19  armour   225.09 t  armour 0.09950054876492048
+    plug forward faces (slug)                  BOW_FIRST        1375 m2  bare breaches 1.38e+04  S needed 32.3  armour   252.05 t  armour 0.10183323272551059
+    boom services ducts, bow-first             BOW_FIRST         527 m2  bare breaches 5.30e+03  S needed 22.87  bumper   2.86 t  armour 0.0809099057102802
+  JUSTIFIED: passive protection 2,071.5 t; Brow (reference) needs stand-off 297.67947929534915, 9.53e+04 events beyond its 2 m layer
+    ship stern disc (stern screen on a mast)   ENGINE_FIRST     6362 m2  bare breaches 5.67e+05  S needed 302.16  bumper   88.42 t  armour 0.2710372120437922
+    ring aft faces (nose, in the exhaust)      ENGINE_FIRST     1257 m2  bare breaches 1.12e+05  S needed 162.62  armour   405.98 t  armour 0.17933158582425254
+    plug aft faces (lit cone)                  ENGINE_FIRST     1375 m2  bare breaches 1.23e+05  S needed 168.33  armour   454.52 t  armour 0.18350794754845168
+    boom services ducts, braking               ENGINE_FIRST      527 m2  bare breaches 4.70e+04  S needed 116.33  armour   136.24 t  armour 0.14344200208217353
+    ring forward faces                         BOW_FIRST        1257 m2  bare breaches 9.54e+04  S needed 160.11  armour   401.74 t  armour 0.1774845149972338
+    plug forward faces (slug)                  BOW_FIRST        1375 m2  bare breaches 1.04e+05  S needed 165.75  armour   449.8 t  armour 0.18162222880402343
+    boom services ducts, bow-first             BOW_FIRST         527 m2  bare breaches 4.00e+04  S needed 114.5  armour   134.78 t  armour 0.14193221572938106
+  HIGH: passive protection 26,698.9 t; Brow (reference) needs stand-off None, 4.36e+05 events beyond its 2 m layer
+    ship stern disc (stern screen on a mast)   ENGINE_FIRST     6362 m2  bare breaches 2.03e+06  S needed None  armour   13724.34 t  armour 1.19171473435401
+    ring aft faces (nose, in the exhaust)      ENGINE_FIRST     1257 m2  bare breaches 4.01e+05  S needed None  armour   2609.26 t  armour 1.1467428031796576
+    plug aft faces (lit cone)                  ENGINE_FIRST     1375 m2  bare breaches 4.38e+05  S needed None  armour   2863.52 t  armour 1.150255828437162
+    boom services ducts, braking               ENGINE_FIRST      527 m2  bare breaches 1.68e+05  S needed None  armour   1053.9 t  armour 1.1039773018729093
+    ring forward faces                         BOW_FIRST        1257 m2  bare breaches 3.39e+05  S needed None  armour   2579.4 t  armour 1.1346953822871897
+    plug forward faces (slug)                  BOW_FIRST        1375 m2  bare breaches 3.71e+05  S needed None  armour   2831.98 t  armour 1.1386628982081513
+    boom services ducts, bow-first             BOW_FIRST         527 m2  bare breaches 1.42e+05  S needed None  armour   1036.53 t  armour 1.0868253458337789
+
+Hybrid (NOMINAL, B_D800): screen + stern magnet
+  S    10 m  B  0.01 T  passive defeats 2.1e+06 J  magnet 3.2e+04 J  gain x1.0  field 2.5e+06 J  structure 0.0 t  Si+ deflection 0.07 rad
+  S    10 m  B  0.10 T  passive defeats 2.1e+06 J  magnet 3.2e+06 J  gain x1.5  field 2.5e+08 J  structure 4.1 t  Si+ deflection 0.72 rad
+  S    10 m  B  1.00 T  passive defeats 2.1e+06 J  magnet 3.2e+08 J  gain x153.1  field 2.5e+10 J  structure 405.0 t  Si+ deflection 7.18 rad
+  S    30 m  B  0.01 T  passive defeats 1.9e+07 J  magnet 8.7e+05 J  gain x1.0  field 7.6e+06 J  structure 0.1 t  Si+ deflection 0.22 rad
+  S    30 m  B  0.10 T  passive defeats 1.9e+07 J  magnet 8.7e+07 J  gain x4.6  field 7.6e+08 J  structure 12.2 t  Si+ deflection 2.16 rad
+  S    30 m  B  1.00 T  passive defeats 1.9e+07 J  magnet 8.7e+09 J  gain x459.4  field 7.6e+10 J  structure 1215.0 t  Si+ deflection 21.55 rad
+  S   100 m  B  0.01 T  passive defeats 2.1e+08 J  magnet 3.2e+07 J  gain x1.0  field 2.5e+07 J  structure 0.4 t  Si+ deflection 0.72 rad
+  S   100 m  B  0.10 T  passive defeats 2.1e+08 J  magnet 3.2e+09 J  gain x15.3  field 2.5e+09 J  structure 40.5 t  Si+ deflection 7.18 rad
+  S   100 m  B  1.00 T  passive defeats 2.1e+08 J  magnet 3.2e+11 J  gain x1531.5  field 2.5e+11 J  structure 4050.0 t  Si+ deflection 71.84 rad

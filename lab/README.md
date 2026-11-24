@@ -32,6 +32,8 @@ Status: ACTIVE, PARKED, SUPERSEDED (by which entry) or PROMOTED (into which `mai
 | [vertex-closure](studies/vertex-closure/NOTES.md) | Study | PARKED (gate failed 2026-11-18) | Vertex 1.8 Phase F and 2.6-2.11: can the Vertex cluster close the mission ledger near 4.6 kt? No; no hold-off-consistent closure below 8.1 kt | eb33a44 | R1 accept the gate; R2 broader fuel-cycle and architecture comparison; R3 keep A1 |
 | [accelerator-fusion](studies/accelerator-fusion/NOTES.md) | Study | PARKED (negative result accepted 2026-11-22) | Could an accelerator-driven, selective D-3He system replace or beat the Vertex drive? No: Coulomb scattering, space charge and the heat budget block it | 3866ebf | none |
 | [selective-fusion](studies/selective-fusion/NOTES.md) | Study | ACTIVE | Selective Fusion Engineering: how much cleaner can selective fuelling, spin polarisation, hot-ion operation and burn geometry make the Vertex burn, and the public Fusion engine explainer | 3866ebf + accelerator-fusion | is the explainer right; SFE-1 next; quintet suppression as a Breakthrough Lab entry; burn-geometry study |
+| [fusion-ignition](studies/fusion-ignition/NOTES.md) | Study | ACTIVE | Fusion Ignition, From Nucleus to Nozzle: how is the Vertex drive built, started and ignited, what do the models predict at each step, and where does it fail? | d016d5d (compact C1-C4, thermal and source imports) | is the flagship simulation right; C4 as compact working direction; blade aft ends; ENG-030 or ENG-036 next |
+| [vertex-compact-engine](studies/vertex-compact-engine/NOTES.md) | Study | ACTIVE, behind the Fusion Ignition page | Can the compact Vertex engine reject its heat and reach the mission exhaust speed? Not yet: 1,575x the radiator share with edge-on blades, 4,914 of 19,201 km/s | d016d5d | ENG-062 hit share next; blade dynamics; R1 engine sizing |
 
 Each entry's `NOTES.md` opens with the same table: kind, status, question, model base, the branch it came from, open owner
 questions and where its review file is.
@@ -44,7 +46,7 @@ questions and where its review file is.
   Lab code may read `data/` and `src/`.
 - Run lab scripts from the repository root (`python3 lab/variants/fdp1/run.py`). Their tests are not part of the pipeline:
   `python3 lab/variants/fdp1/tests/test_fdp1.py`, `python3 lab/studies/four-burn-mission/tests/test_fourburn.py`,
-  `python3 lab/studies/breakthrough-lab/tests/test_breakthrough_lab.py`, `python3 lab/studies/ignition-failures/tests/test_model.py`, `python3 lab/studies/dust-impacts/tests/test_model.py`, `python3 lab/studies/external-pulse/tests/test_ext01.py`.
+  `python3 lab/studies/breakthrough-lab/tests/test_breakthrough_lab.py`, `python3 lab/studies/ignition-failures/tests/test_model.py`, `python3 lab/studies/dust-impacts/tests/test_model.py`, `python3 lab/studies/external-pulse/tests/test_ext01.py`, `python3 lab/studies/fusion-ignition/tests/test_model.py`.
 - A lab number reaches canon only through its Drive owner workbook and the normal loop (AGENTS.md).
 - `.blend` files and renders stay out of Git; the entry's script rebuilds them, and the review copy sits in the project files
   `review/` folder or on GitHub Pages.

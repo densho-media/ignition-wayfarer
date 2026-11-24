@@ -1,0 +1,1645 @@
+{
+ "cls": "WORK",
+ "source": "lab/studies/vertex-compact-engine/vertex-source/source.py (owner brief 2026-11-24 06:43Z)",
+ "params": {
+  "pol_gain": 1.5,
+  "pol_DD": 1.0,
+  "refire": 0.3,
+  "tamper_mats": [
+   "LiH",
+   "C_diamond",
+   "W"
+  ],
+  "tamper_sigma": [
+   0.01,
+   0.1,
+   0.3,
+   1.0,
+   3.0
+  ]
+ },
+ "design": {
+  "rhoR_g_cm2": 96.7,
+  "mass_kg": 6.63238971799771e-06,
+  "R0_um": 40.464807340313925,
+  "rho_g_cc": 23897.308885407838,
+  "ne_m3": 8.583055981228593e+33
+ },
+ "slowing": [
+  {
+   "Te_keV": 5,
+   "p": {
+    "E_MeV": 14.68,
+    "Ec_keV": 53.47103601082081,
+    "to_ions": 0.008369238859850855,
+    "tau_s": 5.203083658195754e-15,
+    "range_m": 1.3796355653238446e-07
+   },
+   "alpha": {
+    "E_MeV": 3.67,
+    "Ec_keV": 212.4763409746162,
+    "to_ions": 0.11224959341515287,
+    "tau_s": 5.168836532616136e-15,
+    "range_m": 3.437719079340346e-08
+   }
+  },
+  {
+   "Te_keV": 10,
+   "p": {
+    "E_MeV": 14.68,
+    "Ec_keV": 106.94207202164162,
+    "to_ions": 0.01637439480882861,
+    "tau_s": 1.4716542951164506e-14,
+    "range_m": 3.9021986552265066e-07
+   },
+   "alpha": {
+    "E_MeV": 3.67,
+    "Ec_keV": 424.9526819492324,
+    "to_ions": 0.20198507252627002,
+    "tau_s": 1.4619677452230525e-14,
+    "range_m": 9.723337891263733e-08
+   }
+  },
+  {
+   "Te_keV": 20,
+   "p": {
+    "E_MeV": 14.68,
+    "Ec_keV": 213.88414404328324,
+    "to_ions": 0.03171975615777574,
+    "tau_s": 4.162466926556603e-14,
+    "range_m": 1.1037084522590757e-06
+   },
+   "alpha": {
+    "E_MeV": 3.67,
+    "Ec_keV": 849.9053638984648,
+    "to_ions": 0.3430121475680831,
+    "tau_s": 4.135069226092909e-14,
+    "range_m": 2.7501752634722767e-07
+   }
+  },
+  {
+   "Te_keV": 30,
+   "p": {
+    "E_MeV": 14.68,
+    "Ec_keV": 320.82621606492484,
+    "to_ions": 0.046396785463565536,
+    "tau_s": 7.646940030955966e-14,
+    "range_m": 2.0276418996237774e-06
+   },
+   "alpha": {
+    "E_MeV": 3.67,
+    "Ec_keV": 1274.8580458476972,
+    "to_ions": 0.4494248534062235,
+    "tau_s": 7.596607241259717e-14,
+    "range_m": 5.052394574048525e-07
+   }
+  },
+  {
+   "Te_keV": 50,
+   "p": {
+    "E_MeV": 14.68,
+    "Ec_keV": 534.7103601082081,
+    "to_ions": 0.0742095037400366,
+    "tau_s": 1.6453595216299603e-13,
+    "range_m": 4.362790727397368e-06
+   },
+   "alpha": {
+    "E_MeV": 3.67,
+    "Ec_keV": 2124.763409746162,
+    "to_ions": 0.5973527747854639,
+    "tau_s": 1.6345296296154196e-13,
+    "range_m": 1.0871022246532584e-06
+   }
+  },
+  {
+   "Te_keV": 70,
+   "p": {
+    "E_MeV": 14.68,
+    "Ec_keV": 748.5945041514913,
+    "to_ions": 0.10035924449183785,
+    "tau_s": 2.72554189651673e-13,
+    "range_m": 7.226973045670011e-06
+   },
+   "alpha": {
+    "E_MeV": 3.67,
+    "Ec_keV": 2974.6687736446265,
+    "to_ions": 0.6925940730527043,
+    "tau_s": 2.7076021550606247e-13,
+    "range_m": 1.8007873781614529e-06
+   }
+  },
+  {
+   "Te_keV": 100,
+   "p": {
+    "E_MeV": 14.68,
+    "Ec_keV": 1069.4207202164162,
+    "to_ions": 0.13704413787469627,
+    "tau_s": 4.653779500937595e-13,
+    "range_m": 1.2339835632961874e-05
+   },
+   "alpha": {
+    "E_MeV": 3.67,
+    "Ec_keV": 4249.526819492324,
+    "to_ions": 0.7818944289553325,
+    "tau_s": 4.623147940605596e-13,
+    "range_m": 3.0747894195812023e-06
+   }
+  },
+  {
+   "Te_keV": 150,
+   "p": {
+    "E_MeV": 14.68,
+    "Ec_keV": 1604.1310803246242,
+    "to_ions": 0.1926617402024649,
+    "tau_s": 8.549538864540943e-13,
+    "range_m": 2.2669725607927858e-05
+   },
+   "alpha": {
+    "E_MeV": 3.67,
+    "Ec_keV": 6374.290229238486,
+    "to_ions": 0.8616422922104566,
+    "tau_s": 8.493265094911936e-13,
+    "range_m": 5.648748858361798e-06
+   }
+  },
+  {
+   "Te_keV": 200,
+   "p": {
+    "E_MeV": 14.68,
+    "Ec_keV": 2138.8414404328323,
+    "to_ions": 0.24262753999610834,
+    "tau_s": 1.3162876173039682e-12,
+    "range_m": 3.490232581917894e-05
+   },
+   "alpha": {
+    "E_MeV": 3.67,
+    "Ec_keV": 8499.053638984647,
+    "to_ions": 0.9032248812268084,
+    "tau_s": 1.3076237036923357e-12,
+    "range_m": 8.696817797226068e-06
+   }
+  },
+  {
+   "Te_keV": 300,
+   "p": {
+    "E_MeV": 14.68,
+    "Ec_keV": 3208.2621606492485,
+    "to_ions": 0.3291308937880241,
+    "tau_s": 2.4181747628539347e-12,
+    "range_m": 6.411966682001648e-05
+   },
+   "alpha": {
+    "E_MeV": 3.67,
+    "Ec_keV": 12748.580458476972,
+    "to_ions": 0.9435837743402344,
+    "tau_s": 2.4022581372108944e-12,
+    "range_m": 1.5977074491869585e-05
+   }
+  },
+  {
+   "Te_keV": 500,
+   "p": {
+    "E_MeV": 14.68,
+    "Ec_keV": 5347.103601082081,
+    "to_ions": 0.4627533258064241,
+    "tau_s": 5.203083658195755e-12,
+    "range_m": 0.0001379635565323845
+   },
+   "alpha": {
+    "E_MeV": 3.67,
+    "Ec_keV": 21247.634097461618,
+    "to_ions": 0.9725106253928487,
+    "tau_s": 5.168836532616137e-12,
+    "range_m": 3.437719079340346e-05
+   }
+  }
+ ],
+ "brems": [
+  {
+   "Ti_keV": 30,
+   "equal": 1.1512325204937817,
+   "hot_ion": 0.7667641627246283,
+   "he3_rich": 2.4410135096700643,
+   "dd_neutron": 0.0240687486297036
+  },
+  {
+   "Ti_keV": 50,
+   "equal": 0.40782054841769055,
+   "hot_ion": 0.2612988173275653,
+   "he3_rich": 0.8429343287787977,
+   "dd_neutron": 0.013122377179308687
+  },
+  {
+   "Ti_keV": 70,
+   "equal": 0.26903909669604764,
+   "hot_ion": 0.16600783460339624,
+   "he3_rich": 0.5515134018428711,
+   "dd_neutron": 0.01052602438868736
+  },
+  {
+   "Ti_keV": 100,
+   "equal": 0.22756505759651932,
+   "hot_ion": 0.13300476625538754,
+   "he3_rich": 0.4642858510105982,
+   "dd_neutron": 0.01012966009534731
+  },
+  {
+   "Ti_keV": 150,
+   "equal": 0.2469702737390624,
+   "hot_ion": 0.1327159015190858,
+   "he3_rich": 0.49918947765924504,
+   "dd_neutron": 0.007494178645280666
+  },
+  {
+   "Ti_keV": 200,
+   "equal": 0.2956877790720369,
+   "hot_ion": 0.14726230046607244,
+   "he3_rich": 0.5949686189290697,
+   "dd_neutron": 0.006555123463748487
+  },
+  {
+   "Ti_keV": 300,
+   "equal": 0.4940200749242671,
+   "hot_ion": 0.21602375828801507,
+   "he3_rich": 0.9915552465432109,
+   "dd_neutron": 0.006555123463748487
+  }
+ ],
+ "levers": [
+  {
+   "label": "Design target (R2-B, 70 keV, D:3He 1:1)",
+   "lever": "base",
+   "cls": "CALCULATED",
+   "tech": "",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 1.0
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 40.46480734031393,
+   "duration_ps": 10.855194726080535,
+   "fusion_J": 1567477038.185267,
+   "gain": 23.468739252672002,
+   "burn_up": 0.6748961998795857,
+   "xray_share": 0.8475716255937504,
+   "neutron_share": 0.02869384687594719,
+   "plasma_share": 0.1637594585624225,
+   "escaped_share": 0.0,
+   "extract_share": 0.1637594585624225,
+   "extract_J": 256689191.082249,
+   "self_heat_share": 0.9998371819368307,
+   "to_ions_share": 0.3715399829366226,
+   "residual_share": 0.00015168299350102178,
+   "number_change_share": 0.00232761638414753,
+   "engine": {
+    "jet_share": 0.05095722633770496,
+    "exhaust_m_s": 4914227.137877975,
+    "thrust_N": 185196.5476314838,
+    "heat_W": 5939748922769.569,
+    "heat_over": 2199.67778384572,
+    "xray_heat_share": 0.803533516591753,
+    "hit_heat_share": 0.16926351083513455
+   }
+  },
+  {
+   "label": "Areal density x0.3",
+   "lever": "density",
+   "cls": "CALCULATED",
+   "tech": "",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 29.009999999999998,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 1.0
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 73.87829255130188,
+   "duration_ps": 802.2602105125618,
+   "fusion_J": 1133830161.879008,
+   "gain": 16.976047353625237,
+   "burn_up": 0.4901621993793145,
+   "xray_share": 0.5326040396151587,
+   "neutron_share": 0.02623440112004445,
+   "plasma_share": 0.4981595774876375,
+   "escaped_share": 0.0,
+   "extract_share": 0.4981595774876375,
+   "extract_J": 564828354.3843863,
+   "self_heat_share": 0.9998366647890025,
+   "to_ions_share": 0.3614986449975211,
+   "residual_share": 0.00015020231288243678,
+   "number_change_share": 0.001652137375532575,
+   "engine": {
+    "jet_share": 0.1550129107971905,
+    "exhaust_m_s": 7287043.296398787,
+    "thrust_N": 274818.3142193331,
+    "heat_W": 4488577419091.416,
+    "heat_over": 1662.2628596299649,
+    "xray_heat_share": 0.4833238526960645,
+    "hit_heat_share": 0.49286913331343746
+   }
+  },
+  {
+   "label": "Areal density x3",
+   "lever": "density",
+   "cls": "CALCULATED",
+   "tech": "x3: precision shells and pulse shaping (advanced manufacturing, AI-controlled drivers)",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 290.1,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 1.0
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 23.36236741063659,
+   "duration_ps": 1.0305434214639386,
+   "fusion_J": 1633613586.7520993,
+   "gain": 24.458955616660113,
+   "burn_up": 0.7030823821138309,
+   "xray_share": 0.9571387772460662,
+   "neutron_share": 0.028621218579694404,
+   "plasma_share": 0.05224675241082456,
+   "escaped_share": 0.0,
+   "extract_share": 0.05224675241082456,
+   "extract_J": 85351004.601996,
+   "self_heat_share": 0.9998372214066559,
+   "to_ions_share": 0.37781517289983413,
+   "residual_share": 0.0001519089034533614,
+   "number_change_share": 0.002613115428563,
+   "engine": {
+    "jet_share": 0.016257684358388213,
+    "exhaust_m_s": 2833869.919431661,
+    "thrust_N": 106784.75532210883,
+    "heat_W": 6119452194984.603,
+    "heat_over": 2266.227616290738,
+    "xray_heat_share": 0.9179228668447912,
+    "hit_heat_share": 0.05462858375377718
+   }
+  },
+  {
+   "label": "Target mass x0.25 at the design areal density",
+   "lever": "geometry",
+   "cls": "CALCULATED",
+   "tech": "",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 1.0
+   },
+   "mass_kg": 1.6580974294994275e-06,
+   "R0_um": 20.232403670156966,
+   "duration_ps": 5.427597363040268,
+   "fusion_J": 391869259.54631674,
+   "gain": 23.468739252672002,
+   "burn_up": 0.6748961998795857,
+   "xray_share": 0.8475716255937504,
+   "neutron_share": 0.02869384687594719,
+   "plasma_share": 0.1637594585624225,
+   "escaped_share": 0.0,
+   "extract_share": 0.1637594585624225,
+   "extract_J": 64172297.77056225,
+   "self_heat_share": 0.9998371819368307,
+   "to_ions_share": 0.3715399829366226,
+   "residual_share": 0.0001516829935010363,
+   "number_change_share": 0.0023276163841475157,
+   "engine": {
+    "jet_share": 0.05095722633770496,
+    "exhaust_m_s": 4914227.137877975,
+    "thrust_N": 46299.13690787095,
+    "heat_W": 1484937230692.3923,
+    "heat_over": 549.91944596143,
+    "xray_heat_share": 0.803533516591753,
+    "hit_heat_share": 0.16926351083513455
+   }
+  },
+  {
+   "label": "Target mass x4 at the design areal density",
+   "lever": "geometry",
+   "cls": "CALCULATED",
+   "tech": "",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 1.0
+   },
+   "mass_kg": 2.652955887199084e-05,
+   "R0_um": 80.92961468062786,
+   "duration_ps": 21.71038945216107,
+   "fusion_J": 6269908152.741068,
+   "gain": 23.468739252672002,
+   "burn_up": 0.6748961998795857,
+   "xray_share": 0.8475716255937504,
+   "neutron_share": 0.02869384687594719,
+   "plasma_share": 0.1637594585624225,
+   "escaped_share": 0.0,
+   "extract_share": 0.1637594585624225,
+   "extract_J": 1026756764.328996,
+   "self_heat_share": 0.9998371819368307,
+   "to_ions_share": 0.3715399829366226,
+   "residual_share": 0.0001516829935010158,
+   "number_change_share": 0.002327616384147536,
+   "engine": {
+    "jet_share": 0.05095722633770496,
+    "exhaust_m_s": 4914227.137877975,
+    "thrust_N": 740786.1905259351,
+    "heat_W": 23758995691078.277,
+    "heat_over": 8798.71113538288,
+    "xray_heat_share": 0.803533516591753,
+    "hit_heat_share": 0.16926351083513455
+   }
+  },
+  {
+   "label": "Disassembly 2x slower (tamped)",
+   "lever": "duration",
+   "cls": "CALCULATED",
+   "tech": "a heavy tamper or a magnetised liner holds the fuel longer",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 1.0
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 40.46480734031393,
+   "duration_ps": 6.215493109277094,
+   "fusion_J": 1620544132.0302079,
+   "gain": 24.263275796432712,
+   "burn_up": 0.6975117082168996,
+   "xray_share": 0.9309597390756392,
+   "neutron_share": 0.028645395219725665,
+   "plasma_share": 0.07880873716904854,
+   "escaped_share": 0.0,
+   "extract_share": 0.07880873716904854,
+   "extract_J": 127713036.57201256,
+   "self_heat_share": 0.9998372143948128,
+   "to_ions_share": 0.37616808909467503,
+   "residual_share": 0.00015186355890854091,
+   "number_change_share": 0.0025379555602659176,
+   "engine": {
+    "jet_share": 0.02452300888489516,
+    "exhaust_m_s": 3466477.8874036726,
+    "thrust_N": 130625.30811048018,
+    "heat_W": 6086822048475.498,
+    "heat_over": 2254.143636093433,
+    "xray_heat_share": 0.8904215129736398,
+    "hit_heat_share": 0.08218044274938457
+   }
+  },
+  {
+   "label": "Disassembly 4x slower (tamped)",
+   "lever": "duration",
+   "cls": "CALCULATED",
+   "tech": "a heavy tamper or a magnetised liner holds the fuel longer",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 1.0
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 40.46480734031393,
+   "duration_ps": 4.998261349799774,
+   "fusion_J": 1639524212.467735,
+   "gain": 24.547451288597347,
+   "burn_up": 0.7056017255813987,
+   "xray_share": 0.969975499194685,
+   "neutron_share": 0.028609125187100112,
+   "plasma_share": 0.03923523865226929,
+   "escaped_share": 0.0,
+   "extract_share": 0.03923523865226929,
+   "extract_J": 64327123.75234545,
+   "self_heat_share": 0.9998372244841904,
+   "to_ions_share": 0.37864385149397906,
+   "residual_share": 0.00015192943640558062,
+   "number_change_share": 0.0026514325749779767,
+   "engine": {
+    "jet_share": 0.01220887607939573,
+    "exhaust_m_s": 2460224.94969961,
+    "thrust_N": 92704.29293197647,
+    "heat_W": 6133575275613.894,
+    "heat_over": 2271.457841861489,
+    "xray_heat_share": 0.9314496560576804,
+    "hit_heat_share": 0.041077526497178225
+   }
+  },
+  {
+   "label": "Disassembly 0.5x faster",
+   "lever": "duration",
+   "cls": "CALCULATED",
+   "tech": "",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 1.0
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 40.46480734031393,
+   "duration_ps": 52.453873398651375,
+   "fusion_J": 1382439195.6062102,
+   "gain": 20.698296832416542,
+   "burn_up": 0.5961215886773735,
+   "xray_share": 0.6738803210001237,
+   "neutron_share": 0.02806413827947023,
+   "plasma_share": 0.3441185277136301,
+   "escaped_share": 0.0,
+   "extract_share": 0.3441185277136301,
+   "extract_J": 475722940.64562416,
+   "self_heat_share": 0.9998370011451858,
+   "to_ions_share": 0.3659339710430811,
+   "residual_share": 0.00015112319427301957,
+   "number_change_share": 0.001995341230387588,
+   "engine": {
+    "jet_share": 0.1070797733311817,
+    "exhaust_m_s": 6688995.574950155,
+    "thrust_N": 252158.560831445,
+    "heat_W": 5349406816311.714,
+    "heat_over": 1981.055341495322,
+    "xray_heat_share": 0.6256301546750542,
+    "hit_heat_share": 0.348315113311776
+   }
+  },
+  {
+   "label": "Selective fuelling D:3He 0.33:1",
+   "lever": "fuelling",
+   "cls": "CALCULATED",
+   "tech": "",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 0.33,
+    "Te_over_Ti": 1.0,
+    "deposition": 1.0
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 40.46480734031393,
+   "duration_ps": 3.6770539354374336,
+   "fusion_J": 805572984.2556243,
+   "gain": 12.056787053287255,
+   "burn_up": 0.3462391854958786,
+   "xray_share": 0.9927936942679871,
+   "neutron_share": 0.0052806466332433865,
+   "plasma_share": 0.08441464442418109,
+   "escaped_share": 0.0,
+   "extract_share": 0.08441464442418109,
+   "extract_J": 68002157.02366495,
+   "self_heat_share": 0.9998364001429345,
+   "to_ions_share": 0.3100652520758558,
+   "residual_share": 0.00015027223887994996,
+   "number_change_share": 0.00026697203932885515,
+   "engine": {
+    "jet_share": 0.026267405741941932,
+    "exhaust_m_s": 2527753.23424567,
+    "thrust_N": 95382.46568471112,
+    "heat_W": 3154779040811.892,
+    "heat_over": 1168.3149337195048,
+    "xray_heat_share": 0.9107295823604213,
+    "hit_heat_share": 0.08442626811420048
+   }
+  },
+  {
+   "label": "Selective fuelling D:3He 3:1",
+   "lever": "fuelling",
+   "cls": "CALCULATED",
+   "tech": "",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 3.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 1.0
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 40.46480734031393,
+   "duration_ps": 16.600884691927142,
+   "fusion_J": 1621177750.5075438,
+   "gain": 24.28374315810787,
+   "burn_up": 0.7025335537347391,
+   "xray_share": 0.7159736229198259,
+   "neutron_share": 0.12268023450929569,
+   "plasma_share": 0.19266104832238104,
+   "escaped_share": 0.0,
+   "extract_share": 0.19266104832238104,
+   "extract_J": 312337804.9297029,
+   "self_heat_share": 0.9998408008093034,
+   "to_ions_share": 0.39832494353657905,
+   "residual_share": 0.00013414454920603386,
+   "number_change_share": 0.009340594622605823,
+   "engine": {
+    "jet_share": 0.059950568547347864,
+    "exhaust_m_s": 5421048.927666838,
+    "thrust_N": 204278.07552756093,
+    "heat_W": 6107705762754.794,
+    "heat_over": 2261.877539149209,
+    "xray_heat_share": 0.6827222201569446,
+    "hit_heat_share": 0.20029508747515512
+   }
+  },
+  {
+   "label": "Spin-polarised D and 3He (sigma-v x1.5)",
+   "lever": "polarisation",
+   "cls": "SPECULATIVE",
+   "tech": "polarised fuel made, stored and compressed without depolarising (cryogenic handling, nanoscale target shells)",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 1.0
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 40.46480734031393,
+   "duration_ps": 11.891900359369886,
+   "fusion_J": 1741435074.5728533,
+   "gain": 26.073291470938408,
+   "burn_up": 0.748936324148717,
+   "xray_share": 0.8258421393019795,
+   "neutron_share": 0.018962223859122582,
+   "plasma_share": 0.1912691133424917,
+   "escaped_share": 0.0,
+   "extract_share": 0.1912691133424917,
+   "extract_J": 333082742.6570656,
+   "self_heat_share": 0.9998368950712616,
+   "to_ions_share": 0.3973547755737642,
+   "residual_share": 0.00015410176620437774,
+   "number_change_share": 0.0020416317232224506,
+   "engine": {
+    "jet_share": 0.05951743847693698,
+    "exhaust_m_s": 5598749.648114957,
+    "thrust_N": 210931.5844229602,
+    "heat_W": 6589753183200.293,
+    "heat_over": 2440.395017800425,
+    "xray_heat_share": 0.7840245562297962,
+    "hit_heat_share": 0.19797339660069946
+   }
+  },
+  {
+   "label": "Hot ions at the start (Te = 0.5 Ti)",
+   "lever": "hot-ion",
+   "cls": "CALCULATED",
+   "tech": "",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 0.5,
+    "deposition": 1.0
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 40.46480734031393,
+   "duration_ps": 10.71486680389445,
+   "fusion_J": 1566711825.3838272,
+   "gain": 33.51040322240157,
+   "burn_up": 0.6745794416223065,
+   "xray_share": 0.8389305103374526,
+   "neutron_share": 0.02895830135464321,
+   "plasma_share": 0.15943590703574906,
+   "escaped_share": 0.0,
+   "extract_share": 0.15943590703574906,
+   "extract_J": 249790120.9437046,
+   "self_heat_share": 0.9998371898875007,
+   "to_ions_share": 0.3665170954659049,
+   "residual_share": 0.00015351431399109795,
+   "number_change_share": 0.002290318548456128,
+   "engine": {
+    "jet_share": 0.04961186164450498,
+    "exhaust_m_s": 4847734.036040033,
+    "thrust_N": 182690.93748901875,
+    "heat_W": 5863171198174.088,
+    "heat_over": 2171.3186188843174,
+    "xray_heat_share": 0.8053358315157195,
+    "hit_heat_share": 0.16686549217753402
+   }
+  },
+  {
+   "label": "Early extraction: 20% of the product energy leaves the target",
+   "lever": "extraction",
+   "cls": "MODEL-BASED",
+   "tech": "a lower-density burn edge or a strong field that lets the fast protons out",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 0.8
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 40.46480734031393,
+   "duration_ps": 7.372945195290138,
+   "fusion_J": 1513489763.7878835,
+   "gain": 22.66042548798584,
+   "burn_up": 0.6518711676068467,
+   "xray_share": 0.7116846821188713,
+   "neutron_share": 0.02905566514458188,
+   "plasma_share": 0.107185864108832,
+   "escaped_share": 0.19415724560750242,
+   "extract_share": 0.30134310971633443,
+   "extract_J": 456079711.94368124,
+   "self_heat_share": 0.7998697294481435,
+   "to_ions_share": 0.34912108095653804,
+   "residual_share": 0.00015142448592686756,
+   "number_change_share": 0.0018084286391241487,
+   "engine": {
+    "jet_share": 0.09376929541611666,
+    "exhaust_m_s": 6550162.8008609405,
+    "thrust_N": 246870.4964552101,
+    "heat_W": 5813883033300.943,
+    "heat_over": 2153.0656451159534,
+    "xray_heat_share": 0.6655723986264166,
+    "hit_heat_share": 0.3072545439369821
+   }
+  },
+  {
+   "label": "Early extraction: 50% of the product energy leaves the target",
+   "lever": "extraction",
+   "cls": "MODEL-BASED",
+   "tech": "a lower-density burn edge or a strong field that lets the fast protons out",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 0.5
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 40.46480734031393,
+   "duration_ps": 4.085705860879753,
+   "fusion_J": 1344393594.3157368,
+   "gain": 20.1286666084032,
+   "burn_up": 0.579697898368662,
+   "xray_share": 0.4872482639434223,
+   "neutron_share": 0.03068788267951342,
+   "plasma_share": 0.04586458571722146,
+   "escaped_share": 0.48457711332795367,
+   "extract_share": 0.5304416990451751,
+   "extract_J": 713122422.3542893,
+   "self_heat_share": 0.499918555302384,
+   "to_ions_share": 0.30036908727865697,
+   "residual_share": 0.00015041784731852995,
+   "number_change_share": 0.0010904779365823822,
+   "engine": {
+    "jet_share": 0.16505817712445853,
+    "exhaust_m_s": 8189398.714513724,
+    "thrust_N": 308739.79182355065,
+    "heat_W": 5294589998839.222,
+    "heat_over": 1960.754931975799,
+    "xray_heat_share": 0.4444663504241427,
+    "hit_heat_share": 0.5275402584728951
+   }
+  },
+  {
+   "label": "Early extraction: 80% of the product energy leaves the target",
+   "lever": "extraction",
+   "cls": "MODEL-BASED",
+   "tech": "a lower-density burn edge or a strong field that lets the fast protons out",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 96.7,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 0.2
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 40.46480734031393,
+   "duration_ps": 1.064191560959608,
+   "fusion_J": 285286225.5681171,
+   "gain": 4.271391463563986,
+   "burn_up": 0.12475926362879086,
+   "xray_share": 0.4054366264636562,
+   "neutron_share": 0.04283569529441088,
+   "plasma_share": 0.01950632274841477,
+   "escaped_share": 0.7656058637794393,
+   "extract_share": 0.7851121865278541,
+   "extract_J": 223981692.34206298,
+   "self_heat_share": 0.19996719999262022,
+   "to_ions_share": 0.1951682630589371,
+   "residual_share": 0.00012719631992990556,
+   "number_change_share": 0.0004653234352480787,
+   "engine": {
+    "jet_share": 0.24430429692792494,
+    "exhaust_m_s": 4585533.644940475,
+    "thrust_N": 173182.16653450363,
+    "heat_W": 1336703991521.1948,
+    "heat_over": 495.02396683058225,
+    "xray_heat_share": 0.3108586989211933,
+    "hit_heat_share": 0.6562980707501849
+   }
+  },
+  {
+   "label": "Fuel-side levers together: polarised, 3He-rich, tamped, x3 areal density",
+   "lever": "fuel-combined",
+   "cls": "SPECULATIVE",
+   "tech": "every fuel-side lever at once",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 290.1,
+    "Ti_keV": 70.0,
+    "D_per_He3": 0.33,
+    "Te_over_Ti": 1.0,
+    "deposition": 1.0
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 23.36236741063659,
+   "duration_ps": 0.5120060039945666,
+   "fusion_J": 935313544.232874,
+   "gain": 13.99857797030189,
+   "burn_up": 0.40153030702108694,
+   "xray_share": 1.0497078729232614,
+   "neutron_share": 0.0028008019447953274,
+   "plasma_share": 0.018525042093910135,
+   "escaped_share": 0.0,
+   "extract_share": 0.018525042093910135,
+   "extract_J": 17326722.77791827,
+   "self_heat_share": 0.9998364181732804,
+   "to_ions_share": 0.34522230926749575,
+   "residual_share": 0.0001522477242649412,
+   "number_change_share": 0.00022305282747389854,
+   "engine": {
+    "jet_share": 0.005764459477221944,
+    "exhaust_m_s": 1276082.8607808405,
+    "thrust_N": 48141.32976408536,
+    "heat_W": 3604394519636.919,
+    "heat_over": 1334.8218337423789,
+    "xray_heat_share": 0.9785608672310709,
+    "hit_heat_share": 0.018828163326155646
+   }
+  },
+  {
+   "label": "Source-side levers together: polarised, x0.3 areal density, 20% early extraction",
+   "lever": "combined",
+   "cls": "SPECULATIVE",
+   "tech": "polarised fuel, a lower-density burn and a strong extraction field",
+   "note": "",
+   "case": {
+    "rhoR_g_cm2": 29.009999999999998,
+    "Ti_keV": 70.0,
+    "D_per_He3": 1.0,
+    "Te_over_Ti": 1.0,
+    "deposition": 0.8
+   },
+   "mass_kg": 6.63238971799771e-06,
+   "R0_um": 73.87829255130188,
+   "duration_ps": 536.8939361595131,
+   "fusion_J": 1349168177.728234,
+   "gain": 20.20015311214029,
+   "burn_up": 0.5817498779631933,
+   "xray_share": 0.44536591234331907,
+   "neutron_share": 0.017398406331723033,
+   "plasma_share": 0.3888804728913349,
+   "escaped_share": 0.1964882006263753,
+   "extract_share": 0.5853686735177102,
+   "extract_J": 789760786.5490826,
+   "self_heat_share": 0.7998692527775775,
+   "to_ions_share": 0.36488176359378555,
+   "residual_share": 0.00015301556580651587,
+   "number_change_share": 0.0011538706540426891,
+   "engine": {
+    "jet_share": 0.18214986938341532,
+    "exhaust_m_s": 8618258.102667134,
+    "thrust_N": 324905.154150276,
+    "heat_W": 5336235692277.834,
+    "heat_over": 1976.1776557038336,
+    "xray_heat_share": 0.40452237331332347,
+    "hit_heat_share": 0.5796747903534083
+   }
+  }
+ ],
+ "best": {
+  "label": "Source-side levers + 1 g/cm2 tungsten tamper",
+  "engine": {
+   "jet_share": 0.2492484218986783,
+   "exhaust_m_s": 9928236.384989994,
+   "thrust_N": 385929.11312814977,
+   "heat_W": 5430568124446.863,
+   "heat_over": 2011.111953101979,
+   "xray_heat_share": 0.20504061666504889,
+   "hit_heat_share": 0.7794310523485131
+  },
+  "xray_left_share": 0.22973363759191007,
+  "cls": "SPECULATIVE"
+ },
+ "pickup": 0.6305845688364754,
+ "trade": [
+  {
+   "label": "Areal density x0.3",
+   "lever": "density",
+   "cls": "CALCULATED",
+   "yield_x": 0.7233472224841585,
+   "burn_up": 0.4901621993793145,
+   "xray_share": 0.5326040396151587,
+   "extract_share": 0.4981595774876375,
+   "extract_x": 2.200436847391064,
+   "neutron_share": 0.02623440112004445,
+   "self_heat": 0.9998366647890025,
+   "thrust_x": 1.4839278471118402,
+   "heat_over": 1662.2628596299649,
+   "exhaust_m_s": 7287043.296398787
+  },
+  {
+   "label": "Areal density x3",
+   "lever": "density",
+   "cls": "CALCULATED",
+   "yield_x": 1.0421929935531313,
+   "burn_up": 0.7030823821138309,
+   "xray_share": 0.9571387772460662,
+   "extract_share": 0.05224675241082456,
+   "extract_x": 0.3325072015776762,
+   "neutron_share": 0.028621218579694404,
+   "self_heat": 0.9998372214066559,
+   "thrust_x": 0.576602300030971,
+   "heat_over": 2266.227616290738,
+   "exhaust_m_s": 2833869.919431661
+  },
+  {
+   "label": "Target mass x0.25 at the design areal density",
+   "lever": "geometry",
+   "cls": "CALCULATED",
+   "yield_x": 0.25,
+   "burn_up": 0.6748961998795857,
+   "xray_share": 0.8475716255937504,
+   "extract_share": 0.1637594585624225,
+   "extract_x": 0.25,
+   "neutron_share": 0.02869384687594719,
+   "self_heat": 0.9998371819368307,
+   "thrust_x": 0.25,
+   "heat_over": 549.91944596143,
+   "exhaust_m_s": 4914227.137877975
+  },
+  {
+   "label": "Target mass x4 at the design areal density",
+   "lever": "geometry",
+   "cls": "CALCULATED",
+   "yield_x": 4.0,
+   "burn_up": 0.6748961998795857,
+   "xray_share": 0.8475716255937504,
+   "extract_share": 0.1637594585624225,
+   "extract_x": 4.0,
+   "neutron_share": 0.02869384687594719,
+   "self_heat": 0.9998371819368307,
+   "thrust_x": 4.0,
+   "heat_over": 8798.71113538288,
+   "exhaust_m_s": 4914227.137877975
+  },
+  {
+   "label": "Disassembly 2x slower (tamped)",
+   "lever": "duration",
+   "cls": "CALCULATED",
+   "yield_x": 1.0338551012564616,
+   "burn_up": 0.6975117082168996,
+   "xray_share": 0.9309597390756392,
+   "extract_share": 0.07880873716904854,
+   "extract_x": 0.49753959655858837,
+   "neutron_share": 0.028645395219725665,
+   "self_heat": 0.9998372143948128,
+   "thrust_x": 0.7053333865078683,
+   "heat_over": 2254.143636093433,
+   "exhaust_m_s": 3466477.8874036726
+  },
+  {
+   "label": "Disassembly 4x slower (tamped)",
+   "lever": "duration",
+   "cls": "CALCULATED",
+   "yield_x": 1.0459637828990975,
+   "burn_up": 0.7056017255813987,
+   "xray_share": 0.969975499194685,
+   "extract_share": 0.03923523865226929,
+   "extract_x": 0.2506031651785976,
+   "neutron_share": 0.028609125187100112,
+   "self_heat": 0.9998372244841904,
+   "thrust_x": 0.5005724681026211,
+   "heat_over": 2271.457841861489,
+   "exhaust_m_s": 2460224.94969961
+  },
+  {
+   "label": "Disassembly 0.5x faster",
+   "lever": "duration",
+   "cls": "CALCULATED",
+   "yield_x": 0.8819518002041786,
+   "burn_up": 0.5961215886773735,
+   "xray_share": 0.6738803210001237,
+   "extract_share": 0.3441185277136301,
+   "extract_x": 1.8533033613136902,
+   "neutron_share": 0.02806413827947023,
+   "self_heat": 0.9998370011451858,
+   "thrust_x": 1.3615726861885493,
+   "heat_over": 1981.055341495322,
+   "exhaust_m_s": 6688995.574950155
+  },
+  {
+   "label": "Selective fuelling D:3He 0.33:1",
+   "lever": "fuelling",
+   "cls": "CALCULATED",
+   "yield_x": 0.5139296874091818,
+   "burn_up": 0.3462391854958786,
+   "xray_share": 0.9927936942679871,
+   "extract_share": 0.08441464442418109,
+   "extract_x": 0.26492022019686656,
+   "neutron_share": 0.0052806466332433865,
+   "self_heat": 0.9998364001429345,
+   "thrust_x": 0.5150337136657072,
+   "heat_over": 1168.3149337195048,
+   "exhaust_m_s": 2527753.23424567
+  },
+  {
+   "label": "Selective fuelling D:3He 3:1",
+   "lever": "fuelling",
+   "cls": "CALCULATED",
+   "yield_x": 1.034259329491964,
+   "burn_up": 0.7025335537347391,
+   "xray_share": 0.7159736229198259,
+   "extract_share": 0.19266104832238104,
+   "extract_x": 1.216793755953763,
+   "neutron_share": 0.12268023450929569,
+   "self_heat": 0.9998408008093034,
+   "thrust_x": 1.1030339287644109,
+   "heat_over": 2261.877539149209,
+   "exhaust_m_s": 5421048.927666838
+  },
+  {
+   "label": "Spin-polarised D and 3He (sigma-v x1.5)",
+   "lever": "polarisation",
+   "cls": "SPECULATIVE",
+   "yield_x": 1.110979639350242,
+   "burn_up": 0.748936324148717,
+   "xray_share": 0.8258421393019795,
+   "extract_share": 0.1912691133424917,
+   "extract_x": 1.2976110963329903,
+   "neutron_share": 0.018962223859122582,
+   "self_heat": 0.9998368950712616,
+   "thrust_x": 1.1389606724348107,
+   "heat_over": 2440.395017800425,
+   "exhaust_m_s": 5598749.648114957
+  },
+  {
+   "label": "Hot ions at the start (Te = 0.5 Ti)",
+   "lever": "hot-ion",
+   "cls": "CALCULATED",
+   "yield_x": 0.9995118188127811,
+   "burn_up": 0.6745794416223065,
+   "xray_share": 0.8389305103374526,
+   "extract_share": 0.15943590703574906,
+   "extract_x": 0.9731228646229448,
+   "neutron_share": 0.02895830135464321,
+   "self_heat": 0.9998371898875007,
+   "thrust_x": 0.986470535360892,
+   "heat_over": 2171.3186188843174,
+   "exhaust_m_s": 4847734.036040033
+  },
+  {
+   "label": "Early extraction: 20% of the product energy leaves the target",
+   "lever": "extraction",
+   "cls": "MODEL-BASED",
+   "yield_x": 0.9655578531090403,
+   "burn_up": 0.6518711676068467,
+   "xray_share": 0.7116846821188713,
+   "extract_share": 0.30134310971633443,
+   "extract_x": 1.776778017106077,
+   "neutron_share": 0.02905566514458188,
+   "self_heat": 0.7998697294481435,
+   "thrust_x": 1.333018890538117,
+   "heat_over": 2153.0656451159534,
+   "exhaust_m_s": 6550162.8008609405
+  },
+  {
+   "label": "Early extraction: 50% of the product energy leaves the target",
+   "lever": "extraction",
+   "cls": "MODEL-BASED",
+   "yield_x": 0.8576799286783792,
+   "burn_up": 0.579697898368662,
+   "xray_share": 0.4872482639434223,
+   "extract_share": 0.5304416990451751,
+   "extract_x": 2.778155244276682,
+   "neutron_share": 0.03068788267951342,
+   "self_heat": 0.499918555302384,
+   "thrust_x": 1.66709258769716,
+   "heat_over": 1960.754931975799,
+   "exhaust_m_s": 8189398.714513724
+  },
+  {
+   "label": "Early extraction: 80% of the product energy leaves the target",
+   "lever": "extraction",
+   "cls": "MODEL-BASED",
+   "yield_x": 0.18200344797293155,
+   "burn_up": 0.12475926362879086,
+   "xray_share": 0.4054366264636562,
+   "extract_share": 0.7851121865278541,
+   "extract_x": 0.8725793688379119,
+   "neutron_share": 0.04283569529441088,
+   "self_heat": 0.19996719999262022,
+   "thrust_x": 0.9351263225441591,
+   "heat_over": 495.02396683058225,
+   "exhaust_m_s": 4585533.644940475
+  },
+  {
+   "label": "Fuel-side levers together: polarised, 3He-rich, tamped, x3 areal density",
+   "lever": "fuel-combined",
+   "cls": "SPECULATIVE",
+   "yield_x": 0.5966999971595918,
+   "burn_up": 0.40153030702108694,
+   "xray_share": 1.0497078729232614,
+   "extract_share": 0.018525042093910135,
+   "extract_x": 0.06750078842379616,
+   "neutron_share": 0.0028008019447953274,
+   "self_heat": 0.9998364181732804,
+   "thrust_x": 0.25994723108921086,
+   "heat_over": 1334.8218337423789,
+   "exhaust_m_s": 1276082.8607808405
+  },
+  {
+   "label": "Source-side levers together: polarised, x0.3 areal density, 20% early extraction",
+   "lever": "combined",
+   "cls": "SPECULATIVE",
+   "yield_x": 0.860725959526796,
+   "burn_up": 0.5817498779631933,
+   "xray_share": 0.44536591234331907,
+   "extract_share": 0.5853686735177102,
+   "extract_x": 3.076720072315104,
+   "neutron_share": 0.017398406331723033,
+   "self_heat": 0.7998692527775775,
+   "thrust_x": 1.7543801885378205,
+   "heat_over": 1976.1776557038336,
+   "exhaust_m_s": 8618258.102667134
+  }
+ ],
+ "tamper": [
+  {
+   "material": "LiH",
+   "sigma_g_cm2": 0.01,
+   "absorbed": 0.0055816213173626224,
+   "tamper_kg": 2.0576183199579248e-09,
+   "tamper_over_fuel": 0.0003102378490175802,
+   "xray_left_share": 0.8442600488963664,
+   "jet_J": 81489516.00883447,
+   "exhaust_m_s": 4962894.880751358,
+   "impulse_ratio": 1.0102175741391815,
+   "ve_over_need": 0.25846832995787405,
+   "refire_band": [
+    0.005023459185626361,
+    0.002232648526945049
+   ],
+   "engine": {
+    "jet_share": 0.05198769361443294,
+    "exhaust_m_s": 4962894.880751357,
+    "thrust_N": 187088.80708722887,
+    "heat_W": 5941432050921.396,
+    "heat_over": 2200.3010996880357,
+    "xray_heat_share": 0.8001672618232385,
+    "hit_heat_share": 0.17263747184156572
+   }
+  },
+  {
+   "material": "LiH",
+   "sigma_g_cm2": 0.1,
+   "absorbed": 0.021948029169321783,
+   "tamper_kg": 2.0576183199579247e-08,
+   "tamper_over_fuel": 0.0031023784901758017,
+   "xray_left_share": 0.8345498568606157,
+   "jet_J": 86225698.12511617,
+   "exhaust_m_s": 5097951.513599276,
+   "impulse_ratio": 1.040613069778826,
+   "ve_over_need": 0.26550210020300363,
+   "refire_band": [
+    0.019753226252389604,
+    0.008779211667728713
+   ],
+   "engine": {
+    "jet_share": 0.055009225669387304,
+    "exhaust_m_s": 5097951.513599276,
+    "thrust_N": 192717.94794323895,
+    "heat_W": 5946367312601.405,
+    "heat_over": 2202.128783924547,
+    "xray_heat_share": 0.7903077289898309,
+    "hit_heat_share": 0.18251957572529143
+   }
+  },
+  {
+   "material": "LiH",
+   "sigma_g_cm2": 0.3,
+   "absorbed": 0.0340341172835798,
+   "tamper_kg": 6.172854959873773e-08,
+   "tamper_over_fuel": 0.009307135470527405,
+   "xray_left_share": 0.8273791791155659,
+   "jet_J": 89723222.74385537,
+   "exhaust_m_s": 5184265.357460344,
+   "impulse_ratio": 1.0647947449558146,
+   "ve_over_need": 0.2699973384885338,
+   "refire_band": [
+    0.03063070555522182,
+    0.01361364691343192
+   ],
+   "engine": {
+    "jet_share": 0.05724053402895883,
+    "exhaust_m_s": 5184265.357460344,
+    "thrust_N": 197196.3107019631,
+    "heat_W": 5950011851346.317,
+    "heat_over": 2203.478472440642,
+    "xray_heat_share": 0.7830372666688681,
+    "hit_heat_share": 0.18980668203676118
+   }
+  },
+  {
+   "material": "LiH",
+   "sigma_g_cm2": 1.0,
+   "absorbed": 0.06650010629299487,
+   "tamper_kg": 2.0576183199579246e-07,
+   "tamper_over_fuel": 0.031023784901758014,
+   "xray_left_share": 0.8081171033587128,
+   "jet_J": 99118371.50983115,
+   "exhaust_m_s": 5391098.31759063,
+   "impulse_ratio": 1.131162928049002,
+   "ve_over_need": 0.2807692309161697,
+   "refire_band": [
+    0.05985009566369538,
+    0.02660004251719795
+   ],
+   "engine": {
+    "jet_share": 0.0632343371514932,
+    "exhaust_m_s": 5391098.31759063,
+    "thrust_N": 209487.46908339564,
+    "heat_W": 5959801913583.009,
+    "heat_over": 2207.1040436027433,
+    "xray_heat_share": 0.7635511716314594,
+    "hit_heat_share": 0.20933738584408038
+   }
+  },
+  {
+   "material": "LiH",
+   "sigma_g_cm2": 3.0,
+   "absorbed": 0.12444034907088382,
+   "tamper_kg": 6.172854959873774e-07,
+   "tamper_over_fuel": 0.09307135470527406,
+   "xray_left_share": 0.7737411493277265,
+   "jet_J": 115885370.36137259,
+   "exhaust_m_s": 5660998.623461533,
+   "impulse_ratio": 1.2594583825623833,
+   "ve_over_need": 0.29482568042593854,
+   "refire_band": [
+    0.11199631416379544,
+    0.04977613962835353
+   ],
+   "engine": {
+    "jet_share": 0.07393114383068596,
+    "exhaust_m_s": 5660998.623461533,
+    "thrust_N": 233247.34433608592,
+    "heat_W": 5977273692515.7295,
+    "heat_over": 2213.5743985726717,
+    "xray_heat_share": 0.7289340321215846,
+    "hit_heat_share": 0.24403377304357096
+   }
+  },
+  {
+   "material": "C_diamond",
+   "sigma_g_cm2": 0.01,
+   "absorbed": 0.022979998696642353,
+   "tamper_kg": 2.0576183199579248e-09,
+   "tamper_over_fuel": 0.0003102378490175802,
+   "xray_left_share": 0.8339375891977315,
+   "jet_J": 86524333.94453688,
+   "exhaust_m_s": 5113913.051134111,
+   "impulse_ratio": 1.040957941082417,
+   "ve_over_need": 0.26633337953680336,
+   "refire_band": [
+    0.020681998826978118,
+    0.009191999478656942
+   ],
+   "engine": {
+    "jet_share": 0.055199745729423676,
+    "exhaust_m_s": 5113913.05113411,
+    "thrust_N": 192781.8169180411,
+    "heat_W": 5946678501208.531,
+    "heat_over": 2202.244026954948,
+    "xray_heat_share": 0.789686593253803,
+    "hit_heat_share": 0.1831421334035339
+   }
+  },
+  {
+   "material": "C_diamond",
+   "sigma_g_cm2": 0.1,
+   "absorbed": 0.05983832043748499,
+   "tamper_kg": 2.0576183199579247e-08,
+   "tamper_over_fuel": 0.0031023784901758017,
+   "xray_left_share": 0.8120695418255511,
+   "jet_J": 97190555.01419203,
+   "exhaust_m_s": 5412393.602645285,
+   "impulse_ratio": 1.1047981736733932,
+   "ve_over_need": 0.28187829264250236,
+   "refire_band": [
+    0.053854488393736494,
+    0.023935328174993997
+   ],
+   "engine": {
+    "jet_share": 0.0620044521524306,
+    "exhaust_m_s": 5412393.602645285,
+    "thrust_N": 204604.80759388086,
+    "heat_W": 5957793063702.784,
+    "heat_over": 2206.3601026533756,
+    "xray_heat_share": 0.7675443550902408,
+    "hit_heat_share": 0.20533506094357953
+   }
+  },
+  {
+   "material": "C_diamond",
+   "sigma_g_cm2": 0.3,
+   "absorbed": 0.0832538360510579,
+   "tamper_kg": 6.172854959873773e-08,
+   "tamper_over_fuel": 0.009307135470527405,
+   "xray_left_share": 0.7981771131826529,
+   "jet_J": 103966638.51984924,
+   "exhaust_m_s": 5580611.5274326885,
+   "impulse_ratio": 1.1462001688434256,
+   "ve_over_need": 0.2906391080805672,
+   "refire_band": [
+    0.07492845244595212,
+    0.03330153442042316
+   ],
+   "engine": {
+    "jet_share": 0.06632737576827008,
+    "exhaust_m_s": 5580611.5274326885,
+    "thrust_N": 212272.3141644262,
+    "heat_W": 5964853971506.783,
+    "heat_over": 2208.9749811999586,
+    "xray_heat_share": 0.753520599629407,
+    "hit_heat_share": 0.2193909204498586
+   }
+  },
+  {
+   "material": "C_diamond",
+   "sigma_g_cm2": 1.0,
+   "absorbed": 0.12138310307694418,
+   "tamper_kg": 2.0576183199579246e-07,
+   "tamper_over_fuel": 0.031023784901758014,
+   "xray_left_share": 0.7755550137975729,
+   "jet_J": 115000651.2505851,
+   "exhaust_m_s": 5806979.902679262,
+   "impulse_ratio": 1.2184234089004735,
+   "ve_over_need": 0.3024284079370254,
+   "refire_band": [
+    0.10924479276924977,
+    0.04855324123077767
+   ],
+   "engine": {
+    "jet_share": 0.07336672145687449,
+    "exhaust_m_s": 5806979.902679262,
+    "thrust_N": 225647.80888175138,
+    "heat_W": 5976351785330.186,
+    "heat_over": 2213.2329870448148,
+    "xray_heat_share": 0.7307555646207979,
+    "hit_heat_share": 0.24220807057987861
+   }
+  },
+  {
+   "material": "C_diamond",
+   "sigma_g_cm2": 3.0,
+   "absorbed": 0.20232313030849147,
+   "tamper_kg": 6.172854959873774e-07,
+   "tamper_over_fuel": 0.09307135470527406,
+   "xray_left_share": 0.7275332844782013,
+   "jet_J": 138423427.5209149,
+   "exhaust_m_s": 6187048.808052692,
+   "impulse_ratio": 1.3764939726941294,
+   "ve_over_need": 0.3222224550811219,
+   "refire_band": [
+    0.18209081727764234,
+    0.08092925212339659
+   ],
+   "engine": {
+    "jet_share": 0.08830970033294616,
+    "exhaust_m_s": 6187048.808052693,
+    "thrust_N": 254921.9315784987,
+    "heat_W": 6000759109062.31,
+    "heat_over": 2222.271794656846,
+    "xray_heat_share": 0.6827195647645604,
+    "hit_heat_share": 0.29035403740799487
+   }
+  },
+  {
+   "material": "W",
+   "sigma_g_cm2": 0.01,
+   "absorbed": 0.15180754263972746,
+   "tamper_kg": 2.0576183199579248e-09,
+   "tamper_over_fuel": 0.0003102378490175802,
+   "xray_left_share": 0.7575041896089679,
+   "jet_J": 123805007.57963128,
+   "exhaust_m_s": 6117208.915647344,
+   "impulse_ratio": 1.2451829224181055,
+   "ve_over_need": 0.31858518272533204,
+   "refire_band": [
+    0.1366267883757547,
+    0.060723017055890983
+   ],
+   "engine": {
+    "jet_share": 0.07898361798203148,
+    "exhaust_m_s": 6117208.915647344,
+    "thrust_N": 230603.57840151485,
+    "heat_W": 5985526221899.783,
+    "heat_over": 2216.6305724585827,
+    "xray_heat_share": 0.7126534241355523,
+    "hit_heat_share": 0.2603516516009648
+   }
+  },
+  {
+   "material": "W",
+   "sigma_g_cm2": 0.1,
+   "absorbed": 0.3130552085384864,
+   "tamper_kg": 2.0576183199579247e-08,
+   "tamper_over_fuel": 0.0031023784901758017,
+   "xray_left_share": 0.6618359271926616,
+   "jet_J": 170467556.7736776,
+   "exhaust_m_s": 7168003.509316737,
+   "impulse_ratio": 1.4631598821835736,
+   "ve_over_need": 0.37331072704582197,
+   "refire_band": [
+    0.28174968768463776,
+    0.12522208341539456
+   ],
+   "engine": {
+    "jet_share": 0.10875282547745323,
+    "exhaust_m_s": 7168003.509316738,
+    "thrust_N": 270972.15881328646,
+    "heat_W": 6034150173697.844,
+    "heat_over": 2234.6375670173875,
+    "xray_heat_share": 0.6176321565044242,
+    "hit_heat_share": 0.35559044777520127
+   }
+  },
+  {
+   "material": "W",
+   "sigma_g_cm2": 0.3,
+   "absorbed": 0.47647385511114454,
+   "tamper_kg": 6.172854959873773e-08,
+   "tamper_over_fuel": 0.009307135470527405,
+   "xray_left_share": 0.5648796216431187,
+   "jet_J": 217758353.77478832,
+   "exhaust_m_s": 8076481.506196386,
+   "impulse_ratio": 1.6588261735397705,
+   "ve_over_need": 0.4206244010806442,
+   "refire_band": [
+    0.42882646960003007,
+    0.19058954204445783
+   ],
+   "engine": {
+    "jet_share": 0.13892283489326018,
+    "exhaust_m_s": 8076481.506196386,
+    "thrust_N": 307208.88046031015,
+    "heat_W": 6083428780923.341,
+    "heat_over": 2252.887001285098,
+    "xray_heat_share": 0.5228813529037263,
+    "hit_heat_share": 0.4505581607560769
+   }
+  },
+  {
+   "material": "W",
+   "sigma_g_cm2": 1.0,
+   "absorbed": 0.6916696995666425,
+   "tamper_kg": 2.0576183199579246e-07,
+   "tamper_over_fuel": 0.031023784901758014,
+   "xray_left_share": 0.43720389744880234,
+   "jet_J": 280032660.9549228,
+   "exhaust_m_s": 9061592.263393909,
+   "impulse_ratio": 1.9013077917725292,
+   "ve_over_need": 0.47192912107862894,
+   "refire_band": [
+    0.6225027296099782,
+    0.276667879826657
+   ],
+   "engine": {
+    "jet_share": 0.17865184250426294,
+    "exhaust_m_s": 9061592.26339391,
+    "thrust_N": 352115.6390211125,
+    "heat_W": 6148320711666.184,
+    "heat_over": 2276.918545423049,
+    "xray_heat_share": 0.40042684585845384,
+    "hit_heat_share": 0.5732929982071483
+   }
+  },
+  {
+   "material": "W",
+   "sigma_g_cm2": 3.0,
+   "absorbed": 0.8330234589347423,
+   "tamper_kg": 6.172854959873774e-07,
+   "tamper_over_fuel": 0.09307135470527406,
+   "xray_left_share": 0.35333869252081657,
+   "jet_J": 320938225.15960824,
+   "exhaust_m_s": 9420836.487192411,
+   "impulse_ratio": 2.095946717840544,
+   "ve_over_need": 0.4906386155981167,
+   "refire_band": [
+    0.7497211130412681,
+    0.33320938357389696
+   ],
+   "engine": {
+    "jet_share": 0.2047482785018476,
+    "exhaust_m_s": 9420836.487192411,
+    "thrust_N": 388162.09616360837,
+    "heat_W": 6190945690723.581,
+    "heat_over": 2292.703929736184,
+    "xray_heat_share": 0.32138816363704276,
+    "hit_heat_share": 0.6525126206519581
+   }
+  }
+ ],
+ "audit": {
+  "geometry_sky": 0.6305845688364754,
+  "ledger_pickup": 0.6305845688364754,
+  "pickup_terms": {
+   "piped_W": 44001050739483.44,
+   "charged_hits_W": 40518077423011.69,
+   "neutral_W": 6380890702665.633,
+   "sky_total_compact": 0.9790915824543969,
+   "per_point_hit_share": 0.09236231756475953
+  },
+  "geometry_terms": {
+   "shield": 0.07209202003949478,
+   "coils_and_loops": 0.37218854171564913,
+   "cage_lines_optics": 0.18630400708133152
+  },
+  "findings": [
+   "The 54.6 % is not a geometric quantity. The ledger derives it as (piped heat - hit share x charged power) / neutral power from the compact study: (44.0 TW - 40.5 TW) / 6.38 TW. It is the small difference of two large numbers: one point of hit share moves it by 0.09.",
+   "It also comes from a different source state: the steady-plasma spectrum (STEADY, with synchrotron), not the target burn (COUPLED).",
+   "The compact study's own sky ledger covered 97.9% of the burn (with the radiator blades and the neighbour engines), and its piped heat leaves out what edge-on fins and the plug re-radiate themselves.",
+   "The geometric trace of every drawn part gives 63.1%: shield 7.2%, coils and loops 37.2%, cage, lines and optics 18.6%. The coils, loops and shield alone give 44.4%, close to the ledger figure, which is why the two looked related.",
+   "Decision: the COUPLED ledger now uses the geometric trace (63.1 %) for the X-ray and neutron pickup of the compact engine; the old figure is kept and labelled as the compact study's piped share."
+  ],
+  "residual": {
+   "share": 0.00015168299350102178,
+   "finding": "The 0.25 % energy residual of the burn was the thermal energy of ions created or lost at fixed temperature (D-D-n and D-T turn two ions into one). The ledger now books it as its own term (number change); about 0.02 % remains, the time-step error of the integration."
+  }
+ },
+ "tech": [
+  {
+   "lever": "Spin-polarised fuel",
+   "physics": "x1.5 D-3He reactivity (established); survival through compression is unknown",
+   "enabler": "cryogenic polarised fuel, nanoscale shells that keep spins aligned, AI-shaped compression",
+   "status": "SPECULATIVE"
+  },
+  {
+   "lever": "Higher areal density",
+   "physics": "more burn-up, but the burning electrons radiate more: the X-ray share grows",
+   "enabler": "precision target manufacture, pulse shaping by learned controllers",
+   "status": "ESTABLISHED physics, ADVANCED manufacture"
+  },
+  {
+   "lever": "Tamped, longer burn",
+   "physics": "more burn-up at the same yield; a heavy tamper mixes and raises Zeff",
+   "enabler": "graded nanostructured tampers, magnetised liners (superconducting drivers)",
+   "status": "ESTABLISHED"
+  },
+  {
+   "lever": "X-ray trapping tamper",
+   "physics": "an opaque shell turns X-rays into plasma the nozzle can direct; adds exhaust mass",
+   "enabler": "graded high-Z/low-Z shells made atom by atom",
+   "status": "ESTABLISHED (cold opacity upper bound)"
+  },
+  {
+   "lever": "Early extraction of protons",
+   "physics": "directed 14.7 MeV protons, but the burn loses its self-heating",
+   "enabler": "stronger fields from advanced superconductors at the target",
+   "status": "MODEL-BASED"
+  },
+  {
+   "lever": "Hot-ion burn",
+   "physics": "the products heat electrons first above Ec; Te follows Ti within picoseconds at target density",
+   "enabler": "none known: the coupling is collisional, not a technology limit",
+   "status": "LIMITED BY PHYSICS"
+  }
+ ],
+ "findings": [
+  "At 70 keV the 14.7 MeV protons give 10% of their energy to ions and the 3.6 MeV alphas 69% (critical energies 0.7 and 3.0 MeV); the rest heats electrons, which radiate. At the design density the products stop within 7.2 um (protons) of a 40 um target, so they all deposit: the target is its own X-ray lamp.",
+  "The design burn sends 85% of its fusion energy out as X-rays and leaves 16% as plasma the nozzle can use.",
+  "Hot ions at the start change almost nothing (X-ray share 84%): ions and electrons equilibrate in picoseconds at this density. This is a physics limit, not a technology one.",
+  "Spin polarisation raises the yield x1.11 and burn-up to 75%, but the X-ray share stays 83%: it helps the fuel, not the radiation.",
+  "3He-rich fuel (D:3He 1:3) cuts the neutron share to 0.5% (from 2.9%) at X-ray share 99%.",
+  "Early extraction is the only lever that lowers the X-ray share at the source: 20% out gives X-rays 71%, extractable 30%, yield x0.97; 50% out gives X-rays 49%, extractable 53%, yield x0.86; 80% out gives X-rays 41%, extractable 79%, yield x0.18. The burn loses its self-heating, so the yield falls.",
+  "A tungsten tamper of 1 g/cm2 round the fuel (3.1% of its mass) would absorb 69% of the X-rays (cold opacity, an upper bound) and leave 44% of the fusion energy as X-rays. The absorbed energy becomes plasma the nozzle can direct, so the exhaust speeds up to 9,062 km/s (0.47 of the mission's) and the impulse per pulse grows x1.90. Light tampers (LiH, carbon) absorb too little.",
+  "Density and burn time decide the split: x0.3 areal density gives X-rays 53% and extractable 50% (yield x0.72); a faster disassembly gives 67% and 34%. A denser or longer burn raises burn-up a little and sends almost everything out as X-rays.",
+  "The fuel-side levers together (polarised, 3He-rich, tamped, x3 areal density) are the worst case: yield x0.60, X-rays 105% of the fusion energy (the driver heat radiates too).",
+  "The source-side levers together (polarised, x0.3 areal density, 20 % early extraction): yield x0.86, burn-up 58%, X-rays 45%, extractable 59%. With a tungsten tamper on top, the X-rays leaving the target fall to 23% of the fusion energy and the thrust grows x2.1, but the engine heat stays x2,011 its radiator share (design x2,200): the plasma that no longer radiates strikes the hardware instead (78% of the heat). The next lever is the nozzle's hit share, not the fuel.",
+  "Adding cold propellant lowers the exhaust speed: the design is short of energy per kilogram (coupled exhaust 4,914 km/s against the mission's 19,201 km/s), not short of mass."
+ ]
+}

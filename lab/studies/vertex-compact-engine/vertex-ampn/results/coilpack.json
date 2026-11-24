@@ -1,0 +1,2070 @@
+{
+ "B_start": {
+  "x": [
+   50.0,
+   2.0,
+   800.0,
+   400.0,
+   1.6
+  ],
+  "layers": [
+   {
+    "layer": "dust and plasma armour, C/C tiles (replaceable)",
+    "t_m": 0.1047529922461093,
+    "T_K": 2000,
+    "mass_t": 115.73714727276865,
+    "life": "replace on erosion; tiles 0.6 m",
+    "why": "grains up to the 0.1-event design grain (dust.py NOMINAL), both faces"
+   },
+   {
+    "layer": "W-B4C nose wedge, fluence-sized (replaceable cassettes)",
+    "t_m": null,
+    "T_K": 2000,
+    "mass_t": 127.09099942529726,
+    "life": "cassettes, 20-50 dpa per mission at the tip",
+    "why": "keeps the 20 K winding under 3e22 n/m2 (RON rule)"
+   },
+   {
+    "layer": "edge-on C/C fins in the ray planes",
+    "t_m": 0.0028,
+    "T_K": 2000,
+    "mass_t": 2.3521576324294236,
+    "life": "permanent",
+    "why": "radiate the nose heat without adding sky"
+   },
+   {
+    "layer": "Mo eddy shield, 3 skin depths, both faces",
+    "t_m": 0.0077,
+    "T_K": null,
+    "mass_t": 99.27950973202668,
+    "life": "permanent",
+    "why": "20 kHz field ripple; radiates its heat outward edge-on"
+   },
+   {
+    "layer": "Mo foil stack (30 foils) + 500 K intercept",
+    "t_m": 0.05,
+    "T_K": 500,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "MLI 40 layers + 80 K shield",
+    "t_m": 0.03,
+    "T_K": 80,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "cryostat vacuum vessel (Ti)",
+    "t_m": 0.01,
+    "T_K": null,
+    "mass_t": 32.03895676431457,
+    "life": "permanent",
+    "why": "vacuum boundary"
+   },
+   {
+    "layer": "REBCO winding, Cu stabiliser in Je",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 149.52725481999434,
+    "life": "permanent",
+    "why": "the field"
+   },
+   {
+    "layer": "winding support (CFRP, virial x2)",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 60.53922267347305,
+    "life": "permanent",
+    "why": "hoop load"
+   }
+  ],
+  "leaks": {
+   "eddy_shield_T_K": 1557.3160103389525,
+   "eddy_shield_T_bare_K": 1557.3160103389525,
+   "q_to_500K_W_m2": 272.93099367196925,
+   "q_to_80K_W_m2": 4.903084215241717,
+   "q_to_20K_W_m2": 0.5,
+   "P_500K_W": 342975.2018627284,
+   "P_80K_W": 6161.397340214182,
+   "P_20K_static_W": 628.3185307179587
+  },
+  "cold_total_W": 34531.49917905327,
+  "he_loop": {
+   "mdot": 1.6601682297621765,
+   "dp_Pa": 389432.04665697797,
+   "pump_W": 29387.395977780747
+  },
+  "quench": {
+   "W_J": 25458872994.23641,
+   "tau_max_s": 34.17488999957281,
+   "V_total_V": 74495.84474026,
+   "sections": 15
+  },
+  "structure": {
+   "f_breath_Hz": 30.820222203074987,
+   "ripple_dB_B": 0.017380973623623355,
+   "sigma_a_Pa": 26071460.435435034,
+   "goodman": 0.2644841446863528,
+   "cycles": 909446986842.8948,
+   "contraction_m": 0.15,
+   "w_growth_m": 2.403318379996192
+  },
+  "damage": {
+   "tip_fluence": 2.072719522804617e+26,
+   "dpa": 20.72719522804617,
+   "erosion_m": 1.3943542382877941e-05
+  },
+  "dust_t": 1028.5371689399306,
+  "dust_rows": [
+   {
+    "face": "ship stern disc (stern screen on a mast)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 6361.725123519331,
+    "bare_5mm_breaches": 68013.12633370313,
+    "standoff_needed_m": 62.736959205139954,
+    "standoff_available_m": 400.0,
+    "armour_t_m": 0.15854309085819107,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 37.01365962311982,
+    "remote_screen_t": 37.01365962311982
+   },
+   {
+    "face": "ring aft faces (nose, in the exhaust)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 1256.6370614359173,
+    "bare_5mm_breaches": 13434.691621472219,
+    "standoff_needed_m": 33.69396652606531,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.1047529922461093,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 236.97722578481324,
+    "remote_screen_t": 6.973211050557051
+   },
+   {
+    "face": "plug aft faces (lit cone)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 1374.3263126620034,
+    "bare_5mm_breaches": 14692.905982568444,
+    "standoff_needed_m": 34.8787380909229,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.10719442190971672,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 265.2106996409482,
+    "remote_screen_t": 7.643065414687344
+   },
+   {
+    "face": "boom services ducts, braking",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 951.3708498984759,
+    "bare_5mm_breaches": 10171.094246925291,
+    "standoff_needed_m": 30.255923782831676,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.09750015114599021,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 5.24474014862931,
+    "remote_screen_t": 5.24474014862931
+   },
+   {
+    "face": "ring forward faces",
+    "leads": "BOW_FIRST",
+    "area_m2": 1256.6370614359173,
+    "bare_5mm_breaches": 11409.17265553712,
+    "standoff_needed_m": 31.374911519047995,
+    "standoff_available_m": 2.0,
+    "armour_t_m": 0.0998895409073461,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 225.97136330626134,
+    "remote_screen_t": 6.937644262215621
+   },
+   {
+    "face": "plug forward faces (slug)",
+    "leads": "BOW_FIRST",
+    "area_m2": 1374.3263126620034,
+    "bare_5mm_breaches": 12477.688799255666,
+    "standoff_needed_m": 32.47937396536499,
+    "standoff_available_m": 5.0,
+    "armour_t_m": 0.10222021194501507,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 252.9000993934209,
+    "remote_screen_t": 7.603406206017053
+   },
+   {
+    "face": "boom services ducts, bow-first",
+    "leads": "BOW_FIRST",
+    "area_m2": 951.3708498984759,
+    "bare_5mm_breaches": 8637.62069338771,
+    "standoff_needed_m": 28.170171021062128,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.0929661115613323,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "bumper",
+    "mass_t": 5.219381042737749,
+    "remote_screen_t": 5.219381042737749
+   }
+  ],
+  "engine_optimiser_t": 1059.4259956381409,
+  "extra_t": {
+   "thermal_break_stack_t": 14.011503235010476,
+   "500K_intercept_radiator_t": 0.5692749543300852,
+   "80K_stage_t": 1.3295494856974361,
+   "quench_sections_t": 2.25,
+   "carriage_locks_actuators_t": 38.535714694646344,
+   "power_supply_ramp_t": 10.0,
+   "he_loop_t": 3.7699111843077517,
+   "eddy_shield_fins_t": 0.0,
+   "spares_replaceables_t": 38.763888458302006
+  },
+  "engine_full_t": 1168.655837650435,
+  "ship": {
+   "dry_t": 6054.111294279078,
+   "extra_radiator_t": 0.0,
+   "ve_eff_m_s": 16086137.812400987,
+   "mass_ratio": 3.2961282930512352,
+   "departure_t": 19955.127526354303,
+   "propellant_t": 13901.016232075224,
+   "thrust_N": 18238860.234748907,
+   "accel_g_departure": 0.09320141634298905,
+   "burn1_days": 52.521973019843095,
+   "delta_departure_t": 15529.05329149471
+  },
+  "parts_t": {
+   "conductor_t": 149.52725481999434,
+   "coil_structure_t": 60.53922267347305,
+   "cryostat_t": 32.03895676431457,
+   "nose_t": 127.09099942529726,
+   "plug_t": 59.1323475654849,
+   "fins_t": 3.413592922740176,
+   "boom_t": 16.83911819278999,
+   "blades_t": 77.83825393829814
+  },
+  "additions_t": {
+   "neutron_slug_t": 77.17703708962229,
+   "nose_fins_extra_t": 0.3040018787853184,
+   "eddy_shield_t": 99.27950973202668,
+   "quench_dump_t": 33.90798848141649,
+   "refrigerator_t": 33.903180648335315,
+   "warm_radiator_t": 19.31152084745088,
+   "boom_services_t": 11.98871842312878,
+   "dust_protection_t": 257.13429223498264
+  }
+ },
+ "B_today": {
+  "x": [
+   15,
+   2.2803962989743116,
+   1909.992236913821,
+   766.7027244618996,
+   1.1925756990220076
+  ],
+  "layers": [
+   {
+    "layer": "dust and plasma armour, C/C tiles (replaceable)",
+    "t_m": 0.08002872161213727,
+    "T_K": 2000,
+    "mass_t": 26.973474122458896,
+    "life": "replace on erosion; tiles 0.6 m",
+    "why": "grains up to the 0.1-event design grain (dust.py NOMINAL), both faces"
+   },
+   {
+    "layer": "W-B4C nose wedge, fluence-sized (replaceable cassettes)",
+    "t_m": null,
+    "T_K": 2000,
+    "mass_t": 83.21903944514582,
+    "life": "cassettes, 20-50 dpa per mission at the tip",
+    "why": "keeps the 20 K winding under 3e22 n/m2 (RON rule)"
+   },
+   {
+    "layer": "edge-on C/C fins in the ray planes",
+    "t_m": 0.0028,
+    "T_K": 2000,
+    "mass_t": 6.633446272928592,
+    "life": "permanent",
+    "why": "radiate the nose heat without adding sky"
+   },
+   {
+    "layer": "Mo eddy shield, 3 skin depths, both faces",
+    "t_m": 0.0077,
+    "T_K": null,
+    "mass_t": 29.783852919608,
+    "life": "permanent",
+    "why": "20 kHz field ripple; radiates its heat outward edge-on"
+   },
+   {
+    "layer": "Mo foil stack (30 foils) + 500 K intercept",
+    "t_m": 0.05,
+    "T_K": 500,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "MLI 40 layers + 80 K shield",
+    "t_m": 0.03,
+    "T_K": 80,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "cryostat vacuum vessel (Ti)",
+    "t_m": 0.01,
+    "T_K": null,
+    "mass_t": 9.70179773262687,
+    "life": "permanent",
+    "why": "vacuum boundary"
+   },
+   {
+    "layer": "REBCO winding, Cu stabiliser in Je",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 66.48474524579795,
+    "life": "permanent",
+    "why": "the field"
+   },
+   {
+    "layer": "winding support (CFRP, virial x2)",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 34.217450528040224,
+    "life": "permanent",
+    "why": "hoop load"
+   }
+  ],
+  "leaks": {
+   "eddy_shield_T_K": 2300.0,
+   "eddy_shield_T_bare_K": 2642.3152705869165,
+   "q_to_500K_W_m2": 1309.5609154540944,
+   "q_to_80K_W_m2": 4.903084215241717,
+   "q_to_20K_W_m2": 0.5,
+   "P_500K_W": 493692.8341702688,
+   "P_80K_W": 1848.4192020642543,
+   "P_20K_static_W": 188.49555921538757
+  },
+  "cold_total_W": 14231.714154113597,
+  "he_loop": {
+   "mdot": 0.6842170266400768,
+   "dp_Pa": 19844.332684159803,
+   "pump_W": 617.1741047641962
+  },
+  "quench": {
+   "W_J": 13107014994.736723,
+   "tau_max_s": 34.17488999957281,
+   "V_total_V": 38352.764251474,
+   "sections": 8
+  },
+  "structure": {
+   "f_breath_Hz": 102.73407401024997,
+   "ripple_dB_B": 0.033760547323527984,
+   "sigma_a_Pa": 50640820.98529197,
+   "goodman": 0.2781337894362733,
+   "cycles": 482692611042.27545,
+   "contraction_m": 0.045,
+   "w_growth_m": 0.7209955139988575
+  },
+  "damage": {
+   "tip_fluence": 9.85723445868156e+26,
+   "dpa": 98.5723445868156,
+   "erosion_m": 1.3943542382877941e-05
+  },
+  "dust_t": 234.26603686537734,
+  "dust_rows": [
+   {
+    "face": "ship stern disc (stern screen on a mast)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 6361.725123519331,
+    "bare_5mm_breaches": 68013.12633370313,
+    "standoff_needed_m": 62.736959205139954,
+    "standoff_available_m": 954.9961184569105,
+    "armour_t_m": 0.15854309085819107,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 37.01365962311982,
+    "remote_screen_t": 37.01365962311982
+   },
+   {
+    "face": "ring aft faces (nose, in the exhaust)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 376.99111843077515,
+    "bare_5mm_breaches": 4030.4074864416652,
+    "standoff_needed_m": 22.499418987173403,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.08002872161213727,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 54.31567294580866,
+    "remote_screen_t": 2.0453376565308976
+   },
+   {
+    "face": "plug aft faces (lit cone)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 241.10523013682428,
+    "bare_5mm_breaches": 2577.653098589204,
+    "standoff_needed_m": 21.57389221235771,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.07781870757207301,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 33.77854666639807,
+    "remote_screen_t": 1.3054332791603254
+   },
+   {
+    "face": "boom services ducts, braking",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 1988.5627824848411,
+    "bare_5mm_breaches": 21259.700650634524,
+    "standoff_needed_m": 40.21212724784936,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.11786088814457395,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 11.165133270697252,
+    "remote_screen_t": 11.165133270697252
+   },
+   {
+    "face": "ring forward faces",
+    "leads": "BOW_FIRST",
+    "area_m2": 376.99111843077515,
+    "bare_5mm_breaches": 3422.7517966611363,
+    "standoff_needed_m": 22.043608068757177,
+    "standoff_available_m": 2.0,
+    "armour_t_m": 0.0789441823785743,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 53.578223544026926,
+    "remote_screen_t": 2.041793988626684
+   },
+   {
+    "face": "plug forward faces (slug)",
+    "leads": "BOW_FIRST",
+    "area_m2": 241.10523013682428,
+    "bare_5mm_breaches": 2189.0259989951114,
+    "standoff_needed_m": 21.129170561266104,
+    "standoff_available_m": 5.0,
+    "armour_t_m": 0.0767455689190711,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 33.31185753665322,
+    "remote_screen_t": 1.3031806711246527
+   },
+   {
+    "face": "boom services ducts, bow-first",
+    "leads": "BOW_FIRST",
+    "area_m2": 1988.5627824848411,
+    "bare_5mm_breaches": 18054.422249667066,
+    "standoff_needed_m": 37.45179696192111,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.1124035732585235,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "bumper",
+    "mass_t": 11.102943278673408,
+    "remote_screen_t": 11.102943278673408
+   }
+  ],
+  "engine_optimiser_t": 540.2932939891482,
+  "extra_t": {
+   "thermal_break_stack_t": 4.203450970503142,
+   "500K_intercept_radiator_t": 0.8194381520849886,
+   "80K_stage_t": 0.39886484570923086,
+   "quench_sections_t": 1.2,
+   "carriage_locks_actuators_t": 24.48984263612887,
+   "power_supply_ramp_t": 10.0,
+   "he_loop_t": 1.1309733552923253,
+   "eddy_shield_fins_t": 0.9989132925164637,
+   "spares_replaceables_t": 15.10504805974734
+  },
+  "engine_full_t": 598.6398253011306,
+  "ship": {
+   "dry_t": 3774.04724488186,
+   "extra_radiator_t": 0.0,
+   "ve_eff_m_s": 17524977.750551324,
+   "mass_ratio": 2.9886482893822857,
+   "departure_t": 11279.2998424641,
+   "propellant_t": 7505.252597582239,
+   "thrust_N": 19870252.483040344,
+   "accel_g_departure": 0.17963897490018932,
+   "burn1_days": 27.569324658011606,
+   "delta_departure_t": 6853.225607604508
+  },
+  "parts_t": {
+   "conductor_t": 66.48474524579795,
+   "coil_structure_t": 34.217450528040224,
+   "cryostat_t": 9.70179773262687,
+   "nose_t": 83.21903944514582,
+   "plug_t": 10.37389602232935,
+   "fins_t": 9.26493193598321,
+   "boom_t": 47.40910775285424,
+   "blades_t": 111.31077509491998
+  },
+  "additions_t": {
+   "neutron_slug_t": 6.308901776461626,
+   "nose_fins_extra_t": 1.0744871113386658,
+   "eddy_shield_t": 29.783852919608,
+   "quench_dump_t": 17.456880890520978,
+   "refrigerator_t": 14.04321859489821,
+   "warm_radiator_t": 7.999128797787375,
+   "boom_services_t": 33.07857092449138,
+   "dust_protection_t": 58.566509216344336
+  }
+ },
+ "B_advanced": {
+  "x": [
+   15,
+   2.2934768313150444,
+   1921.06755915884,
+   693.7880986182748,
+   1.3220846511203332
+  ],
+  "layers": [
+   {
+    "layer": "dust and plasma armour, C/C tiles (replaceable)",
+    "t_m": 0.08002872161213727,
+    "T_K": 2000,
+    "mass_t": 26.973474122458896,
+    "life": "replace on erosion; tiles 0.6 m",
+    "why": "grains up to the 0.1-event design grain (dust.py NOMINAL), both faces"
+   },
+   {
+    "layer": "W-B4C nose wedge, fluence-sized (replaceable cassettes)",
+    "t_m": null,
+    "T_K": 2000,
+    "mass_t": 57.10425176552695,
+    "life": "cassettes, 20-50 dpa per mission at the tip",
+    "why": "keeps the 20 K winding under 3e22 n/m2 (RON rule)"
+   },
+   {
+    "layer": "edge-on C/C fins in the ray planes",
+    "t_m": 0.0028,
+    "T_K": 2000,
+    "mass_t": 4.519240418658934,
+    "life": "permanent",
+    "why": "radiate the nose heat without adding sky"
+   },
+   {
+    "layer": "Mo eddy shield, 3 skin depths, both faces",
+    "t_m": 0.0077,
+    "T_K": null,
+    "mass_t": 29.783852919608,
+    "life": "permanent",
+    "why": "20 kHz field ripple; radiates its heat outward edge-on"
+   },
+   {
+    "layer": "Mo foil stack (30 foils) + 500 K intercept",
+    "t_m": 0.05,
+    "T_K": 500,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "MLI 40 layers + 80 K shield",
+    "t_m": 0.03,
+    "T_K": 80,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "cryostat vacuum vessel (Ti)",
+    "t_m": 0.01,
+    "T_K": null,
+    "mass_t": 9.579827722452281,
+    "life": "permanent",
+    "why": "vacuum boundary"
+   },
+   {
+    "layer": "REBCO winding, Cu stabiliser in Je",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 37.21194280389645,
+    "life": "permanent",
+    "why": "the field"
+   },
+   {
+    "layer": "winding support (CFRP, virial x2)",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 39.9273011859596,
+    "life": "permanent",
+    "why": "hoop load"
+   }
+  ],
+  "leaks": {
+   "eddy_shield_T_K": 2300.0,
+   "eddy_shield_T_bare_K": 2522.2578643750103,
+   "q_to_500K_W_m2": 1309.5609154540944,
+   "q_to_80K_W_m2": 4.903084215241717,
+   "q_to_20K_W_m2": 0.5,
+   "P_500K_W": 493692.8341702688,
+   "P_80K_W": 1848.4192020642543,
+   "P_20K_static_W": 188.49555921538757
+  },
+  "cold_total_W": 10453.991303479443,
+  "he_loop": {
+   "mdot": 0.502595735744204,
+   "dp_Pa": 10707.457113497288,
+   "pump_W": 244.61464935944005
+  },
+  "quench": {
+   "W_J": 15786441901.682554,
+   "tau_max_s": 8.88888888888889,
+   "V_total_V": 177597.47139392875,
+   "sections": 36
+  },
+  "structure": {
+   "f_breath_Hz": 102.73407401024997,
+   "ripple_dB_B": 0.0280303821947894,
+   "sigma_a_Pa": 42045573.2921841,
+   "goodman": 0.27335865182899116,
+   "cycles": 435485410400.4024,
+   "contraction_m": 0.045,
+   "w_growth_m": 0.7209955139988575
+  },
+  "damage": {
+   "tip_fluence": 8.808205235046701e+26,
+   "dpa": 88.08205235046702,
+   "erosion_m": 1.3943542382877941e-05
+  },
+  "dust_t": 231.08115338294928,
+  "dust_rows": [
+   {
+    "face": "ship stern disc (stern screen on a mast)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 6361.725123519331,
+    "bare_5mm_breaches": 68013.12633370313,
+    "standoff_needed_m": 62.736959205139954,
+    "standoff_available_m": 960.53377957942,
+    "armour_t_m": 0.15854309085819107,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 37.01365962311982,
+    "remote_screen_t": 37.01365962311982
+   },
+   {
+    "face": "ring aft faces (nose, in the exhaust)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 376.99111843077515,
+    "bare_5mm_breaches": 4030.4074864416652,
+    "standoff_needed_m": 22.499418987173403,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.08002872161213727,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 54.31567294580866,
+    "remote_screen_t": 2.0453376565308976
+   },
+   {
+    "face": "plug aft faces (lit cone)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 238.33320823842476,
+    "bare_5mm_breaches": 2548.017446008331,
+    "standoff_needed_m": 21.5513699069195,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.07776453833867168,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 33.36695121352666,
+    "remote_screen_t": 1.290359941457056
+   },
+   {
+    "face": "boom services ducts, braking",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 1782.329076958013,
+    "bare_5mm_breaches": 19054.858599787705,
+    "standoff_needed_m": 38.5537237020806,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.1145976990461397,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 9.978104285062104,
+    "remote_screen_t": 9.978104285062104
+   },
+   {
+    "face": "ring forward faces",
+    "leads": "BOW_FIRST",
+    "area_m2": 376.99111843077515,
+    "bare_5mm_breaches": 3422.7517966611363,
+    "standoff_needed_m": 22.043608068757177,
+    "standoff_available_m": 2.0,
+    "armour_t_m": 0.0789441823785743,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 53.578223544026926,
+    "remote_screen_t": 2.041793988626684
+   },
+   {
+    "face": "plug forward faces (slug)",
+    "leads": "BOW_FIRST",
+    "area_m2": 238.33320823842476,
+    "bare_5mm_breaches": 2163.8584487020853,
+    "standoff_needed_m": 21.10606664649788,
+    "standoff_available_m": 5.0,
+    "armour_t_m": 0.07668961321595374,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 32.90486128147811,
+    "remote_screen_t": 1.2881311021259587
+   },
+   {
+    "face": "boom services ducts, bow-first",
+    "leads": "BOW_FIRST",
+    "area_m2": 1782.329076958013,
+    "bare_5mm_breaches": 16181.999395085537,
+    "standoff_needed_m": 35.90553887059343,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.10928804151553957,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "bumper",
+    "mass_t": 9.923680489926996,
+    "remote_screen_t": 9.923680489926996
+   }
+  ],
+  "engine_optimiser_t": 484.00394630163225,
+  "extra_t": {
+   "thermal_break_stack_t": 4.203450970503142,
+   "500K_intercept_radiator_t": 0.8194381520849886,
+   "80K_stage_t": 0.39886484570923086,
+   "quench_sections_t": 5.3999999999999995,
+   "carriage_locks_actuators_t": 20.50586587822682,
+   "power_supply_ramp_t": 10.0,
+   "he_loop_t": 1.1309733552923253,
+   "eddy_shield_fins_t": 0.6008440472486251,
+   "spares_replaceables_t": 12.117453782825862
+  },
+  "engine_full_t": 539.1808373335233,
+  "ship": {
+   "dry_t": 3536.211293011431,
+   "extra_radiator_t": 0.0,
+   "ve_eff_m_s": 17861769.185734008,
+   "mass_ratio": 2.92758507729022,
+   "departure_t": 10352.559411565418,
+   "propellant_t": 6816.348118553988,
+   "thrust_N": 20252114.927972402,
+   "accel_g_departure": 0.19948120187627177,
+   "burn1_days": 24.888275315415537,
+   "delta_departure_t": 5926.485176705827
+  },
+  "parts_t": {
+   "conductor_t": 37.21194280389645,
+   "coil_structure_t": 39.9273011859596,
+   "cryostat_t": 9.579827722452281,
+   "nose_t": 57.10425176552695,
+   "plug_t": 10.254625830930774,
+   "fins_t": 6.299997716994334,
+   "boom_t": 47.56652879614226,
+   "blades_t": 111.14989856433556
+  },
+  "additions_t": {
+   "neutron_slug_t": 6.188845646929184,
+   "nose_fins_extra_t": 0.7392417884623335,
+   "eddy_shield_t": 29.783852919608,
+   "quench_dump_t": 21.025537551720586,
+   "refrigerator_t": 10.265495744264053,
+   "warm_radiator_t": 5.84730787152584,
+   "boom_services_t": 33.289002047146745,
+   "dust_protection_t": 57.77028834573732
+  }
+ },
+ "B_speculative": {
+  "x": [
+   15,
+   2.2724908014868856,
+   1850.0403208944062,
+   700.7867364481541,
+   1.4110204850639634
+  ],
+  "layers": [
+   {
+    "layer": "dust and plasma armour, C/C tiles (replaceable)",
+    "t_m": 0.08002872161213727,
+    "T_K": 2000,
+    "mass_t": 26.973474122458896,
+    "life": "replace on erosion; tiles 0.6 m",
+    "why": "grains up to the 0.1-event design grain (dust.py NOMINAL), both faces"
+   },
+   {
+    "layer": "W-B4C nose wedge, fluence-sized (replaceable cassettes)",
+    "t_m": null,
+    "T_K": 2000,
+    "mass_t": 43.24536594721096,
+    "life": "cassettes, 20-50 dpa per mission at the tip",
+    "why": "keeps the 20 K winding under 3e22 n/m2 (RON rule)"
+   },
+   {
+    "layer": "edge-on C/C fins in the ray planes",
+    "t_m": 0.0028,
+    "T_K": 2000,
+    "mass_t": 3.377483586101376,
+    "life": "permanent",
+    "why": "radiate the nose heat without adding sky"
+   },
+   {
+    "layer": "Mo eddy shield, 3 skin depths, both faces",
+    "t_m": 0.0077,
+    "T_K": null,
+    "mass_t": 29.783852919608,
+    "life": "permanent",
+    "why": "20 kHz field ripple; radiates its heat outward edge-on"
+   },
+   {
+    "layer": "Mo foil stack (30 foils) + 500 K intercept",
+    "t_m": 0.05,
+    "T_K": 500,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "MLI 40 layers + 80 K shield",
+    "t_m": 0.03,
+    "T_K": 80,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "cryostat vacuum vessel (Ti)",
+    "t_m": 0.01,
+    "T_K": null,
+    "mass_t": 9.508158687853111,
+    "life": "permanent",
+    "why": "vacuum boundary"
+   },
+   {
+    "layer": "REBCO winding, Cu stabiliser in Je",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 20.011374500095712,
+    "life": "permanent",
+    "why": "the field"
+   },
+   {
+    "layer": "winding support (CFRP, virial x2)",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 45.20134893532724,
+    "life": "permanent",
+    "why": "hoop load"
+   }
+  ],
+  "leaks": {
+   "eddy_shield_T_K": 2300.0,
+   "eddy_shield_T_bare_K": 2432.076953410497,
+   "q_to_500K_W_m2": 1309.5609154540944,
+   "q_to_80K_W_m2": 4.903084215241717,
+   "q_to_20K_W_m2": 0.5,
+   "P_500K_W": 493692.8341702688,
+   "P_80K_W": 1848.4192020642543,
+   "P_20K_static_W": 188.49555921538757
+  },
+  "cold_total_W": 8236.524343654395,
+  "he_loop": {
+   "mdot": 0.3959867472910767,
+   "dp_Pa": 6646.760760942081,
+   "pump_W": 119.63768971579165
+  },
+  "quench": {
+   "W_J": 18261362227.063206,
+   "tau_max_s": 2.2222222222222223,
+   "V_total_V": 821761.3002178442,
+   "sections": 165
+  },
+  "structure": {
+   "f_breath_Hz": 102.73407401024997,
+   "ripple_dB_B": 0.024231489113348742,
+   "sigma_a_Pa": 36347233.67002311,
+   "goodman": 0.2701929075944573,
+   "cycles": 407630894930.9672,
+   "contraction_m": 0.045,
+   "w_growth_m": 0.7209955139988575
+  },
+  "damage": {
+   "tip_fluence": 8.372978927278108e+26,
+   "dpa": 83.72978927278108,
+   "erosion_m": 1.3943542382877941e-05
+  },
+  "dust_t": 236.82773787325596,
+  "dust_rows": [
+   {
+    "face": "ship stern disc (stern screen on a mast)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 6361.725123519331,
+    "bare_5mm_breaches": 68013.12633370313,
+    "standoff_needed_m": 62.736959205139954,
+    "standoff_available_m": 925.0201604472031,
+    "armour_t_m": 0.15854309085819107,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 37.01365962311982,
+    "remote_screen_t": 37.01365962311982
+   },
+   {
+    "face": "ring aft faces (nose, in the exhaust)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 376.99111843077515,
+    "bare_5mm_breaches": 4030.4074864416652,
+    "standoff_needed_m": 22.499418987173403,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.08002872161213727,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 54.31567294580866,
+    "remote_screen_t": 2.0453376565308976
+   },
+   {
+    "face": "plug aft faces (lit cone)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 256.9848066659005,
+    "bare_5mm_breaches": 2747.421459156203,
+    "standoff_needed_m": 21.698603318589978,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.0781183144885932,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 36.141845804029145,
+    "remote_screen_t": 1.3917963550453802
+   },
+   {
+    "face": "boom services ducts, braking",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 1802.1242140323184,
+    "bare_5mm_breaches": 19266.488170774686,
+    "standoff_needed_m": 38.71794714782515,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.11492289536640488,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 10.091855989230524,
+    "remote_screen_t": 10.091855989230524
+   },
+   {
+    "face": "ring forward faces",
+    "leads": "BOW_FIRST",
+    "area_m2": 376.99111843077515,
+    "bare_5mm_breaches": 3422.7517966611363,
+    "standoff_needed_m": 22.043608068757177,
+    "standoff_available_m": 2.0,
+    "armour_t_m": 0.0789441823785743,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 53.578223544026926,
+    "remote_screen_t": 2.041793988626684
+   },
+   {
+    "face": "plug forward faces (slug)",
+    "leads": "BOW_FIRST",
+    "area_m2": 256.9848066659005,
+    "bare_5mm_breaches": 2333.1987564896476,
+    "standoff_needed_m": 21.257819811067638,
+    "standoff_available_m": 5.0,
+    "armour_t_m": 0.0770567743097845,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 35.64978491787516,
+    "remote_screen_t": 1.3894102966726016
+   },
+   {
+    "face": "boom services ducts, bow-first",
+    "leads": "BOW_FIRST",
+    "area_m2": 1802.1242140323184,
+    "bare_5mm_breaches": 16361.72204019254,
+    "standoff_needed_m": 36.058653589553536,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.10959851798026202,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "bumper",
+    "mass_t": 10.036695049165736,
+    "remote_screen_t": 10.036695049165736
+   }
+  ],
+  "engine_optimiser_t": 456.2060635298356,
+  "extra_t": {
+   "thermal_break_stack_t": 4.203450970503142,
+   "500K_intercept_radiator_t": 0.8194381520849886,
+   "80K_stage_t": 0.39886484570923086,
+   "quench_sections_t": 24.75,
+   "carriage_locks_actuators_t": 18.43729984563896,
+   "power_supply_ramp_t": 10.0,
+   "he_loop_t": 1.1309733552923253,
+   "eddy_shield_fins_t": 0.3369398512007786,
+   "spares_replaceables_t": 10.715308642732385
+  },
+  "engine_full_t": 526.9983391929974,
+  "ship": {
+   "dry_t": 3487.481300449327,
+   "extra_radiator_t": 0.0,
+   "ve_eff_m_s": 18159012.933941834,
+   "mass_ratio": 2.8765588238604924,
+   "departure_t": 10031.945107855978,
+   "propellant_t": 6544.463807406651,
+   "thrust_N": 20589137.228939883,
+   "accel_g_departure": 0.20928221613908443,
+   "burn1_days": 23.77259892941173,
+   "delta_departure_t": 5605.870872996386
+  },
+  "parts_t": {
+   "conductor_t": 20.011374500095712,
+   "coil_structure_t": 45.20134893532724,
+   "cryostat_t": 9.508158687853111,
+   "nose_t": 43.24536594721096,
+   "plug_t": 11.057137425669186,
+   "fins_t": 4.700786011798895,
+   "boom_t": 45.62548265550673,
+   "blades_t": 111.40801211961612
+  },
+  "additions_t": {
+   "neutron_slug_t": 7.007046092967018,
+   "nose_fins_extra_t": 0.557011979022039,
+   "eddy_shield_t": 29.783852919608,
+   "quench_dump_t": 24.32181739507536,
+   "refrigerator_t": 8.048028784439008,
+   "warm_radiator_t": 4.584221087209702,
+   "boom_services_t": 31.9394845201225,
+   "dust_protection_t": 59.20693446831399
+  }
+ },
+ "E_start": {
+  "x": [
+   50.0,
+   2.0,
+   800.0,
+   400.0,
+   1.6,
+   4.0
+  ],
+  "layers": [
+   {
+    "layer": "dust and plasma armour, C/C tiles (replaceable)",
+    "t_m": 0.1047529922461093,
+    "T_K": 2000,
+    "mass_t": 115.73714727276865,
+    "life": "replace on erosion; tiles 0.6 m",
+    "why": "grains up to the 0.1-event design grain (dust.py NOMINAL), both faces"
+   },
+   {
+    "layer": "W-B4C nose wedge, fluence-sized (replaceable cassettes)",
+    "t_m": null,
+    "T_K": 2000,
+    "mass_t": 127.64164162703669,
+    "life": "cassettes, 20-50 dpa per mission at the tip",
+    "why": "keeps the 20 K winding under 3e22 n/m2 (RON rule)"
+   },
+   {
+    "layer": "edge-on C/C fins in the ray planes",
+    "t_m": 0.0028,
+    "T_K": 2000,
+    "mass_t": 2.360472961959392,
+    "life": "permanent",
+    "why": "radiate the nose heat without adding sky"
+   },
+   {
+    "layer": "Mo eddy shield, 3 skin depths, both faces",
+    "t_m": 0.0077,
+    "T_K": null,
+    "mass_t": 99.27950973202668,
+    "life": "permanent",
+    "why": "20 kHz field ripple; radiates its heat outward edge-on"
+   },
+   {
+    "layer": "Mo foil stack (30 foils) + 500 K intercept",
+    "t_m": 0.05,
+    "T_K": 500,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "MLI 40 layers + 80 K shield",
+    "t_m": 0.03,
+    "T_K": 80,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "cryostat vacuum vessel (Ti)",
+    "t_m": 0.01,
+    "T_K": null,
+    "mass_t": 36.0174191501591,
+    "life": "permanent",
+    "why": "vacuum boundary"
+   },
+   {
+    "layer": "REBCO winding, Cu stabiliser in Je",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 158.15950090040369,
+    "life": "permanent",
+    "why": "the field"
+   },
+   {
+    "layer": "winding support (CFRP, virial x2)",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 62.04653207850552,
+    "life": "permanent",
+    "why": "hoop load"
+   }
+  ],
+  "leaks": {
+   "eddy_shield_T_K": 1541.6223913016586,
+   "eddy_shield_T_bare_K": 1541.6223913016586,
+   "q_to_500K_W_m2": 261.9781098036109,
+   "q_to_80K_W_m2": 4.903084215241717,
+   "q_to_20K_W_m2": 0.5,
+   "P_500K_W": 329211.40206414566,
+   "P_80K_W": 6161.397340214182,
+   "P_20K_static_W": 628.3185307179587
+  },
+  "cold_total_W": 34826.343642543274,
+  "he_loop": {
+   "mdot": 1.674343444353042,
+   "dp_Pa": 396110.70726355666,
+   "pump_W": 30146.60754294468
+  },
+  "quench": {
+   "W_J": 26166198915.508083,
+   "tau_max_s": 34.17488999957281,
+   "V_total_V": 76565.5688016411,
+   "sections": 16
+  },
+  "structure": {
+   "f_breath_Hz": 30.820222203074987,
+   "ripple_dB_B": 0.016911130326145336,
+   "sigma_a_Pa": 25366695.489218004,
+   "goodman": 0.2640926086051211,
+   "cycles": 1099139106063.0151,
+   "contraction_m": 0.15,
+   "w_growth_m": 2.403318379996192
+  },
+  "damage": {
+   "tip_fluence": 2.5050466012576743e+26,
+   "dpa": 25.050466012576745,
+   "erosion_m": 1.3943542382877941e-05
+  },
+  "dust_t": 1028.5371689399306,
+  "dust_rows": [
+   {
+    "face": "ship stern disc (stern screen on a mast)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 6361.725123519331,
+    "bare_5mm_breaches": 68013.12633370313,
+    "standoff_needed_m": 62.736959205139954,
+    "standoff_available_m": 400.0,
+    "armour_t_m": 0.15854309085819107,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 37.01365962311982,
+    "remote_screen_t": 37.01365962311982
+   },
+   {
+    "face": "ring aft faces (nose, in the exhaust)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 1256.6370614359173,
+    "bare_5mm_breaches": 13434.691621472219,
+    "standoff_needed_m": 33.69396652606531,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.1047529922461093,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 236.97722578481324,
+    "remote_screen_t": 6.973211050557051
+   },
+   {
+    "face": "plug aft faces (lit cone)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 1374.3263126620034,
+    "bare_5mm_breaches": 14692.905982568444,
+    "standoff_needed_m": 34.8787380909229,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.10719442190971672,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 265.2106996409482,
+    "remote_screen_t": 7.643065414687344
+   },
+   {
+    "face": "boom services ducts, braking",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 951.3708498984759,
+    "bare_5mm_breaches": 10171.094246925291,
+    "standoff_needed_m": 30.255923782831676,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.09750015114599021,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 5.24474014862931,
+    "remote_screen_t": 5.24474014862931
+   },
+   {
+    "face": "ring forward faces",
+    "leads": "BOW_FIRST",
+    "area_m2": 1256.6370614359173,
+    "bare_5mm_breaches": 11409.17265553712,
+    "standoff_needed_m": 31.374911519047995,
+    "standoff_available_m": 2.0,
+    "armour_t_m": 0.0998895409073461,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 225.97136330626134,
+    "remote_screen_t": 6.937644262215621
+   },
+   {
+    "face": "plug forward faces (slug)",
+    "leads": "BOW_FIRST",
+    "area_m2": 1374.3263126620034,
+    "bare_5mm_breaches": 12477.688799255666,
+    "standoff_needed_m": 32.47937396536499,
+    "standoff_available_m": 5.0,
+    "armour_t_m": 0.10222021194501507,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 252.9000993934209,
+    "remote_screen_t": 7.603406206017053
+   },
+   {
+    "face": "boom services ducts, bow-first",
+    "leads": "BOW_FIRST",
+    "area_m2": 951.3708498984759,
+    "bare_5mm_breaches": 8637.62069338771,
+    "standoff_needed_m": 28.170171021062128,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.0929661115613323,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "bumper",
+    "mass_t": 5.219381042737749,
+    "remote_screen_t": 5.219381042737749
+   }
+  ],
+  "engine_optimiser_t": 1075.5124950910977,
+  "extra_t": {
+   "thermal_break_stack_t": 14.011503235010476,
+   "500K_intercept_radiator_t": 0.5464296102375912,
+   "80K_stage_t": 1.3295494856974361,
+   "quench_sections_t": 2.4,
+   "carriage_locks_actuators_t": 39.7092075004884,
+   "power_supply_ramp_t": 10.0,
+   "he_loop_t": 3.7699111843077517,
+   "eddy_shield_fins_t": 0.0,
+   "spares_replaceables_t": 38.82011904388954
+  },
+  "engine_full_t": 1186.099215150729,
+  "ship": {
+   "dry_t": 6123.884804280254,
+   "extra_radiator_t": 0.0,
+   "ve_eff_m_s": 14776828.517215766,
+   "mass_ratio": 3.6635502740979593,
+   "departure_t": 22435.159853265253,
+   "propellant_t": 16311.275048985,
+   "thrust_N": 16754333.027694194,
+   "accel_g_departure": 0.0761512961695471,
+   "burn1_days": 63.48136680723916,
+   "delta_departure_t": 18009.08561840566
+  },
+  "parts_t": {
+   "conductor_t": 158.15950090040369,
+   "coil_structure_t": 62.04653207850552,
+   "cryostat_t": 36.0174191501591,
+   "nose_t": 127.64164162703669,
+   "plug_t": 59.1323475654849,
+   "fins_t": 3.4252565768760306,
+   "boom_t": 16.83911819278999,
+   "blades_t": 77.83825393829814
+  },
+  "additions_t": {
+   "neutron_slug_t": 77.17703708962229,
+   "nose_fins_extra_t": 0.3053190158337736,
+   "eddy_shield_t": 99.27950973202668,
+   "quench_dump_t": 34.85005685956178,
+   "refrigerator_t": 34.19802511182532,
+   "warm_radiator_t": 19.47946659456243,
+   "boom_services_t": 11.98871842312878,
+   "dust_protection_t": 257.13429223498264
+  }
+ },
+ "E_today": {
+  "x": [
+   15,
+   2.5038729109944806,
+   1893.8270631155199,
+   452.4711176080692,
+   1.6919008311135197,
+   4.048012893625194
+  ],
+  "layers": [
+   {
+    "layer": "dust and plasma armour, C/C tiles (replaceable)",
+    "t_m": 0.08002872161213727,
+    "T_K": 2000,
+    "mass_t": 26.973474122458896,
+    "life": "replace on erosion; tiles 0.6 m",
+    "why": "grains up to the 0.1-event design grain (dust.py NOMINAL), both faces"
+   },
+   {
+    "layer": "W-B4C nose wedge, fluence-sized (replaceable cassettes)",
+    "t_m": null,
+    "T_K": 2000,
+    "mass_t": 95.05733822528589,
+    "life": "cassettes, 20-50 dpa per mission at the tip",
+    "why": "keeps the 20 K winding under 3e22 n/m2 (RON rule)"
+   },
+   {
+    "layer": "edge-on C/C fins in the ray planes",
+    "t_m": 0.0028,
+    "T_K": 2000,
+    "mass_t": 7.326239967265788,
+    "life": "permanent",
+    "why": "radiate the nose heat without adding sky"
+   },
+   {
+    "layer": "Mo eddy shield, 3 skin depths, both faces",
+    "t_m": 0.0077,
+    "T_K": null,
+    "mass_t": 29.783852919608,
+    "life": "permanent",
+    "why": "20 kHz field ripple; radiates its heat outward edge-on"
+   },
+   {
+    "layer": "Mo foil stack (30 foils) + 500 K intercept",
+    "t_m": 0.05,
+    "T_K": 500,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "MLI 40 layers + 80 K shield",
+    "t_m": 0.03,
+    "T_K": 80,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "cryostat vacuum vessel (Ti)",
+    "t_m": 0.01,
+    "T_K": null,
+    "mass_t": 11.509787464389387,
+    "life": "permanent",
+    "why": "vacuum boundary"
+   },
+   {
+    "layer": "REBCO winding, Cu stabiliser in Je",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 100.70423242474041,
+    "life": "permanent",
+    "why": "the field"
+   },
+   {
+    "layer": "winding support (CFRP, virial x2)",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 63.0781576431131,
+    "life": "permanent",
+    "why": "hoop load"
+   }
+  ],
+  "leaks": {
+   "eddy_shield_T_K": 2203.1599679670517,
+   "eddy_shield_T_bare_K": 2203.1599679670517,
+   "q_to_500K_W_m2": 1102.0871185235144,
+   "q_to_80K_W_m2": 4.903084215241717,
+   "q_to_20K_W_m2": 0.5,
+   "P_500K_W": 415477.0554203299,
+   "P_80K_W": 1848.4192020642543,
+   "P_20K_static_W": 188.49555921538757
+  },
+  "cold_total_W": 17813.559324393394,
+  "he_loop": {
+   "mdot": 0.8564211213650671,
+   "dp_Pa": 31090.197687866585,
+   "pump_W": 1210.2864530592872
+  },
+  "quench": {
+   "W_J": 26650303572.75843,
+   "tau_max_s": 34.17488999957281,
+   "V_total_V": 77982.11954183776,
+   "sections": 16
+  },
+  "structure": {
+   "f_breath_Hz": 102.73407401024997,
+   "ripple_dB_B": 0.016603938442649388,
+   "sigma_a_Pa": 24905907.66397408,
+   "goodman": 0.2638366153688745,
+   "cycles": 641683486231.269,
+   "contraction_m": 0.045,
+   "w_growth_m": 0.7209955139988575
+  },
+  "damage": {
+   "tip_fluence": 1.1176714623658591e+27,
+   "dpa": 111.76714623658592,
+   "erosion_m": 1.3943542382877941e-05
+  },
+  "dust_t": 225.35654700080693,
+  "dust_rows": [
+   {
+    "face": "ship stern disc (stern screen on a mast)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 6361.725123519331,
+    "bare_5mm_breaches": 68013.12633370313,
+    "standoff_needed_m": 62.736959205139954,
+    "standoff_available_m": 946.9135315577599,
+    "armour_t_m": 0.15854309085819107,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 37.01365962311982,
+    "remote_screen_t": 37.01365962311982
+   },
+   {
+    "face": "ring aft faces (nose, in the exhaust)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 376.99111843077515,
+    "bare_5mm_breaches": 4030.4074864416652,
+    "standoff_needed_m": 22.499418987173403,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.08002872161213727,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 54.31567294580866,
+    "remote_screen_t": 2.0453376565308976
+   },
+   {
+    "face": "plug aft faces (lit cone)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 245.23880921539885,
+    "bare_5mm_breaches": 2621.8451425117064,
+    "standoff_needed_m": 21.6068990848319,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.07789805958473539,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 34.39268436686565,
+    "remote_screen_t": 1.3279113576563129
+   },
+   {
+    "face": "boom services ducts, braking",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 1099.7815822068865,
+    "bare_5mm_breaches": 11757.751590615318,
+    "standoff_needed_m": 32.00183738373747,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.10121579407277202,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 6.083343817323923,
+    "remote_screen_t": 6.083343817323923
+   },
+   {
+    "face": "ring forward faces",
+    "leads": "BOW_FIRST",
+    "area_m2": 376.99111843077515,
+    "bare_5mm_breaches": 3422.7517966611363,
+    "standoff_needed_m": 22.043608068757177,
+    "standoff_available_m": 2.0,
+    "armour_t_m": 0.0789441823785743,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 53.578223544026926,
+    "remote_screen_t": 2.041793988626684
+   },
+   {
+    "face": "plug forward faces (slug)",
+    "leads": "BOW_FIRST",
+    "area_m2": 245.23880921539885,
+    "bare_5mm_breaches": 2226.5553054592115,
+    "standoff_needed_m": 21.163698180761088,
+    "standoff_available_m": 5.0,
+    "armour_t_m": 0.07682915385742844,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 33.919862721008236,
+    "remote_screen_t": 1.325625323028915
+   },
+   {
+    "face": "boom services ducts, bow-first",
+    "leads": "BOW_FIRST",
+    "area_m2": 1099.7815822068865,
+    "bare_5mm_breaches": 9985.061192163503,
+    "standoff_needed_m": 29.797561106650313,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.09651292768949774,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "bumper",
+    "mass_t": 6.053099982653709,
+    "remote_screen_t": 6.053099982653709
+   }
+  ],
+  "engine_optimiser_t": 635.6314655547227,
+  "extra_t": {
+   "thermal_break_stack_t": 4.203450970503142,
+   "500K_intercept_radiator_t": 0.689614527420764,
+   "80K_stage_t": 0.39886484570923086,
+   "quench_sections_t": 2.4,
+   "carriage_locks_actuators_t": 30.6279612606023,
+   "power_supply_ramp_t": 10.0,
+   "he_loop_t": 1.1309733552923253,
+   "eddy_shield_fins_t": 0.0,
+   "spares_replaceables_t": 16.164558397916704
+  },
+  "engine_full_t": 701.2468889121672,
+  "ship": {
+   "dry_t": 4184.475499326007,
+   "extra_radiator_t": 0.0,
+   "ve_eff_m_s": 16004222.26427006,
+   "mass_ratio": 3.316312473004185,
+   "departure_t": 13877.02829139525,
+   "propellant_t": 9692.552792069244,
+   "thrust_N": 18145982.363700144,
+   "accel_g_departure": 0.13334088558535429,
+   "burn1_days": 36.684726067823725,
+   "delta_departure_t": 9450.954056535658
+  },
+  "parts_t": {
+   "conductor_t": 100.70423242474041,
+   "coil_structure_t": 63.0781576431131,
+   "cryostat_t": 11.509787464389387,
+   "nose_t": 95.05733822528589,
+   "plug_t": 10.551749151176342,
+   "fins_t": 10.249109003679427,
+   "boom_t": 46.197336600974616,
+   "blades_t": 108.56435006497026
+  },
+  "additions_t": {
+   "neutron_slug_t": 6.488945274294456,
+   "nose_fins_extra_t": 1.1767745650581318,
+   "eddy_shield_t": 29.783852919608,
+   "quench_dump_t": 35.494822837441525,
+   "refrigerator_t": 17.625063765178005,
+   "warm_radiator_t": 10.039376242287716,
+   "boom_services_t": 32.771432622323665,
+   "dust_protection_t": 56.33913675020173
+  }
+ },
+ "E_advanced": {
+  "x": [
+   15,
+   2.7170867475424303,
+   2052.7499210681976,
+   490.36621731788824,
+   1.8400794555312516,
+   4.420949992618849
+  ],
+  "layers": [
+   {
+    "layer": "dust and plasma armour, C/C tiles (replaceable)",
+    "t_m": 0.08002872161213727,
+    "T_K": 2000,
+    "mass_t": 26.973474122458896,
+    "life": "replace on erosion; tiles 0.6 m",
+    "why": "grains up to the 0.1-event design grain (dust.py NOMINAL), both faces"
+   },
+   {
+    "layer": "W-B4C nose wedge, fluence-sized (replaceable cassettes)",
+    "t_m": null,
+    "T_K": 2000,
+    "mass_t": 59.39202237958285,
+    "life": "cassettes, 20-50 dpa per mission at the tip",
+    "why": "keeps the 20 K winding under 3e22 n/m2 (RON rule)"
+   },
+   {
+    "layer": "edge-on C/C fins in the ray planes",
+    "t_m": 0.0028,
+    "T_K": 2000,
+    "mass_t": 4.129532252185382,
+    "life": "permanent",
+    "why": "radiate the nose heat without adding sky"
+   },
+   {
+    "layer": "Mo eddy shield, 3 skin depths, both faces",
+    "t_m": 0.0077,
+    "T_K": null,
+    "mass_t": 29.783852919608,
+    "life": "permanent",
+    "why": "20 kHz field ripple; radiates its heat outward edge-on"
+   },
+   {
+    "layer": "Mo foil stack (30 foils) + 500 K intercept",
+    "t_m": 0.05,
+    "T_K": 500,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "MLI 40 layers + 80 K shield",
+    "t_m": 0.03,
+    "T_K": 80,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "cryostat vacuum vessel (Ti)",
+    "t_m": 0.01,
+    "T_K": null,
+    "mass_t": 11.193847247921967,
+    "life": "permanent",
+    "why": "vacuum boundary"
+   },
+   {
+    "layer": "REBCO winding, Cu stabiliser in Je",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 55.823000698762456,
+    "life": "permanent",
+    "why": "the field"
+   },
+   {
+    "layer": "winding support (CFRP, virial x2)",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 73.39098771693301,
+    "life": "permanent",
+    "why": "hoop load"
+   }
+  ],
+  "leaks": {
+   "eddy_shield_T_K": 2112.51789842163,
+   "eddy_shield_T_bare_K": 2112.51789842163,
+   "q_to_500K_W_m2": 931.154943953194,
+   "q_to_80K_W_m2": 4.903084215241717,
+   "q_to_20K_W_m2": 0.5,
+   "P_500K_W": 351037.1437532604,
+   "P_80K_W": 1848.4192020642543,
+   "P_20K_static_W": 188.49555921538757
+  },
+  "cold_total_W": 12393.854417799437,
+  "he_loop": {
+   "mdot": 0.5958583854711268,
+   "dp_Pa": 15049.943017651549,
+   "pump_W": 407.61976126955955
+  },
+  "quench": {
+   "W_J": 31489742647.794113,
+   "tau_max_s": 8.88888888888889,
+   "V_total_V": 354259.60478768375,
+   "sections": 71
+  },
+  "structure": {
+   "f_breath_Hz": 102.73407401024997,
+   "ripple_dB_B": 0.014052194867048161,
+   "sigma_a_Pa": 21078292.300572243,
+   "goodman": 0.2617101623892068,
+   "cycles": 600493906329.4653,
+   "contraction_m": 0.045,
+   "w_growth_m": 0.7209955139988575
+  },
+  "damage": {
+   "tip_fluence": 9.070318932588424e+26,
+   "dpa": 90.70318932588425,
+   "erosion_m": 1.3943542382877941e-05
+  },
+  "dust_t": 215.81753036904342,
+  "dust_rows": [
+   {
+    "face": "ship stern disc (stern screen on a mast)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 6361.725123519331,
+    "bare_5mm_breaches": 68013.12633370313,
+    "standoff_needed_m": 62.736959205139954,
+    "standoff_available_m": 1026.3749605340988,
+    "armour_t_m": 0.15854309085819107,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 37.01365962311982,
+    "remote_screen_t": 37.01365962311982
+   },
+   {
+    "face": "ring aft faces (nose, in the exhaust)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 376.99111843077515,
+    "bare_5mm_breaches": 4030.4074864416652,
+    "standoff_needed_m": 22.499418987173403,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.08002872161213727,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 54.31567294580866,
+    "remote_screen_t": 2.0453376565308976
+   },
+   {
+    "face": "plug aft faces (lit cone)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 208.73618766501903,
+    "bare_5mm_breaches": 2231.5960571120627,
+    "standoff_needed_m": 21.29264830054729,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.07714091711007229,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 28.98902065035469,
+    "remote_screen_t": 1.1294675356833603
+   },
+   {
+    "face": "boom services ducts, braking",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 1206.9651101211,
+    "bare_5mm_breaches": 12903.649390878752,
+    "standoff_needed_m": 33.17313023220296,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.10367068777479276,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 6.691041642408068,
+    "remote_screen_t": 6.691041642408068
+   },
+   {
+    "face": "ring forward faces",
+    "leads": "BOW_FIRST",
+    "area_m2": 376.99111843077515,
+    "bare_5mm_breaches": 3422.7517966611363,
+    "standoff_needed_m": 22.043608068757177,
+    "standoff_available_m": 2.0,
+    "armour_t_m": 0.0789441823785743,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 53.578223544026926,
+    "remote_screen_t": 2.041793988626684
+   },
+   {
+    "face": "plug forward faces (slug)",
+    "leads": "BOW_FIRST",
+    "area_m2": 208.73618766501903,
+    "bare_5mm_breaches": 1895.1432180486006,
+    "standoff_needed_m": 20.836476514718086,
+    "standoff_available_m": 5.0,
+    "armour_t_m": 0.07603517173783253,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 28.572734660020362,
+    "remote_screen_t": 1.1274832997770112
+   },
+   {
+    "face": "boom services ducts, bow-first",
+    "leads": "BOW_FIRST",
+    "area_m2": 1206.9651101211,
+    "bare_5mm_breaches": 10958.194496385418,
+    "standoff_needed_m": 30.88939436131918,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.0988563579402935,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "bumper",
+    "mass_t": 6.657177303304895,
+    "remote_screen_t": 6.657177303304895
+   }
+  ],
+  "engine_optimiser_t": 557.2862199840536,
+  "extra_t": {
+   "thermal_break_stack_t": 4.203450970503142,
+   "500K_intercept_radiator_t": 0.5826562762933601,
+   "80K_stage_t": 0.39886484570923086,
+   "quench_sections_t": 10.65,
+   "carriage_locks_actuators_t": 24.983988643456023,
+   "power_supply_ramp_t": 10.0,
+   "he_loop_t": 1.1309733552923253,
+   "eddy_shield_fins_t": 0.0,
+   "spares_replaceables_t": 11.91078085110542
+  },
+  "engine_full_t": 621.1469349264131,
+  "ship": {
+   "dry_t": 3864.07568338299,
+   "extra_radiator_t": 0.0,
+   "ve_eff_m_s": 15873257.860105975,
+   "mass_ratio": 3.349277875727769,
+   "departure_t": 12941.863196492308,
+   "propellant_t": 9077.787513109317,
+   "thrust_N": 17997491.688615005,
+   "accel_g_departure": 0.14180596556445094,
+   "burn1_days": 34.454348325999405,
+   "delta_departure_t": 8515.788961632716
+  },
+  "parts_t": {
+   "conductor_t": 55.823000698762456,
+   "coil_structure_t": 73.39098771693301,
+   "cryostat_t": 11.193847247921967,
+   "nose_t": 59.39202237958285,
+   "plug_t": 8.981171854735342,
+   "fins_t": 5.7614035392104945,
+   "boom_t": 50.55309135246255,
+   "blades_t": 105.94780240259006
+  },
+  "additions_t": {
+   "neutron_slug_t": 4.943030434135112,
+   "nose_fins_extra_t": 0.6726901286590853,
+   "eddy_shield_t": 29.783852919608,
+   "quench_dump_t": 41.94034163357897,
+   "refrigerator_t": 12.20535885858405,
+   "warm_radiator_t": 6.952269301604257,
+   "boom_services_t": 35.790966923424534,
+   "dust_protection_t": 53.954382592260856
+  }
+ },
+ "E_speculative": {
+  "x": [
+   15.097292249896833,
+   2.53050306941224,
+   1887.382137225478,
+   460.15787436240873,
+   1.6861430849696408,
+   4.6933574905279265
+  ],
+  "layers": [
+   {
+    "layer": "dust and plasma armour, C/C tiles (replaceable)",
+    "t_m": 0.08006481131283436,
+    "T_K": 2000,
+    "mass_t": 27.16035717708825,
+    "life": "replace on erosion; tiles 0.6 m",
+    "why": "grains up to the 0.1-event design grain (dust.py NOMINAL), both faces"
+   },
+   {
+    "layer": "W-B4C nose wedge, fluence-sized (replaceable cassettes)",
+    "t_m": null,
+    "T_K": 2000,
+    "mass_t": 40.63786192701601,
+    "life": "cassettes, 20-50 dpa per mission at the tip",
+    "why": "keeps the 20 K winding under 3e22 n/m2 (RON rule)"
+   },
+   {
+    "layer": "edge-on C/C fins in the ray planes",
+    "t_m": 0.0028,
+    "T_K": 2000,
+    "mass_t": 3.0218581506948676,
+    "life": "permanent",
+    "why": "radiate the nose heat without adding sky"
+   },
+   {
+    "layer": "Mo eddy shield, 3 skin depths, both faces",
+    "t_m": 0.0077,
+    "T_K": null,
+    "mass_t": 29.977035457017674,
+    "life": "permanent",
+    "why": "20 kHz field ripple; radiates its heat outward edge-on"
+   },
+   {
+    "layer": "Mo foil stack (30 foils) + 500 K intercept",
+    "t_m": 0.05,
+    "T_K": 500,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "MLI 40 layers + 80 K shield",
+    "t_m": 0.03,
+    "T_K": 80,
+    "mass_t": null,
+    "life": "permanent",
+    "why": "thermal break"
+   },
+   {
+    "layer": "cryostat vacuum vessel (Ti)",
+    "t_m": 0.01,
+    "T_K": null,
+    "mass_t": 11.264935176422222,
+    "life": "permanent",
+    "why": "vacuum boundary"
+   },
+   {
+    "layer": "REBCO winding, Cu stabiliser in Je",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 25.874103068395737,
+    "life": "permanent",
+    "why": "the field"
+   },
+   {
+    "layer": "winding support (CFRP, virial x2)",
+    "t_m": null,
+    "T_K": 20,
+    "mass_t": 62.80976789359909,
+    "life": "permanent",
+    "why": "hoop load"
+   }
+  ],
+  "leaks": {
+   "eddy_shield_T_K": 2198.1710366150987,
+   "eddy_shield_T_bare_K": 2198.1710366150987,
+   "q_to_500K_W_m2": 1092.1120568957056,
+   "q_to_80K_W_m2": 4.903084215241717,
+   "q_to_20K_W_m2": 0.5,
+   "P_500K_W": 414387.0010514311,
+   "P_80K_W": 1860.4083262590104,
+   "P_20K_static_W": 189.71816968549604
+  },
+  "cold_total_W": 8815.718149804694,
+  "he_loop": {
+   "mdot": 0.4238326033559949,
+   "dp_Pa": 7663.8195637744075,
+   "pump_W": 147.6443907893233
+  },
+  "quench": {
+   "W_J": 26524357946.59763,
+   "tau_max_s": 2.2222222222222223,
+   "V_total_V": 1193596.107596893,
+   "sections": 239
+  },
+  "structure": {
+   "f_breath_Hz": 102.07201958114575,
+   "ripple_dB_B": 0.016682778934400597,
+   "sigma_a_Pa": 25024168.401600897,
+   "goodman": 0.2639023157786672,
+   "cycles": 547432887661.72144,
+   "contraction_m": 0.0452918767496905,
+   "w_growth_m": 0.7256719990470224
+  },
+  "damage": {
+   "tip_fluence": 9.242128927770221e+26,
+   "dpa": 92.42128927770221,
+   "erosion_m": 1.3943542382877941e-05
+  },
+  "dust_t": 226.84628708725552,
+  "dust_rows": [
+   {
+    "face": "ship stern disc (stern screen on a mast)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 6361.725123519331,
+    "bare_5mm_breaches": 68013.12633370313,
+    "standoff_needed_m": 62.736959205139954,
+    "standoff_available_m": 943.691068612739,
+    "armour_t_m": 0.15854309085819107,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 37.01365962311982,
+    "remote_screen_t": 37.01365962311982
+   },
+   {
+    "face": "ring aft faces (nose, in the exhaust)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 379.4363393709921,
+    "bare_5mm_breaches": 4056.5493139321293,
+    "standoff_needed_m": 22.51464018853392,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.08006481131283436,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 54.69262128657123,
+    "remote_screen_t": 2.0586725236755665
+   },
+   {
+    "face": "plug aft faces (lit cone)",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 246.91652407667297,
+    "bare_5mm_breaches": 2639.7815717971994,
+    "standoff_needed_m": 21.620395670992647,
+    "standoff_available_m": 0.0,
+    "armour_t_m": 0.077930495164455,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "armour",
+    "mass_t": 34.64238577787945,
+    "remote_screen_t": 1.33703585797473
+   },
+   {
+    "face": "boom services ducts, braking",
+    "leads": "ENGINE_FIRST",
+    "area_m2": 1121.5230135121863,
+    "bare_5mm_breaches": 11990.188969680341,
+    "standoff_needed_m": 32.244999191667766,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.10172786367038675,
+    "erosion_m": 1.3943542382877941e-05,
+    "kind": "bumper",
+    "mass_t": 6.206477421447587,
+    "remote_screen_t": 6.206477421447587
+   },
+   {
+    "face": "ring forward faces",
+    "leads": "BOW_FIRST",
+    "area_m2": 379.4363393709921,
+    "bare_5mm_breaches": 3444.9522782035087,
+    "standoff_needed_m": 22.057755872836722,
+    "standoff_available_m": 2.0,
+    "armour_t_m": 0.07897795686792093,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 53.94880742178178,
+    "remote_screen_t": 2.0551014766031326
+   },
+   {
+    "face": "plug forward faces (slug)",
+    "leads": "BOW_FIRST",
+    "area_m2": 246.91652407667297,
+    "bare_5mm_breaches": 2241.78749867271,
+    "standoff_needed_m": 21.17756758302556,
+    "standoff_available_m": 5.0,
+    "armour_t_m": 0.07686271630007567,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "armour",
+    "mass_t": 34.166830323350695,
+    "remote_screen_t": 1.3347355760937771
+   },
+   {
+    "face": "boom services ducts, bow-first",
+    "leads": "BOW_FIRST",
+    "area_m2": 1121.5230135121863,
+    "bare_5mm_breaches": 10182.454497798795,
+    "standoff_needed_m": 30.0242234618293,
+    "standoff_available_m": 50.0,
+    "armour_t_m": 0.09700174189719017,
+    "erosion_m": 1.1735391003966291e-05,
+    "kind": "bumper",
+    "mass_t": 6.175505233104965,
+    "remote_screen_t": 6.175505233104965
+   }
+  ],
+  "engine_optimiser_t": 484.7832427554745,
+  "extra_t": {
+   "thermal_break_stack_t": 4.230715183986561,
+   "500K_intercept_radiator_t": 0.687805240196201,
+   "80K_stage_t": 0.4014519429254845,
+   "quench_sections_t": 35.85,
+   "carriage_locks_actuators_t": 20.246933445234646,
+   "power_supply_ramp_t": 10.0,
+   "he_loop_t": 1.1383090181129762,
+   "eddy_shield_fins_t": 0.0,
+   "spares_replaceables_t": 10.156199736506515
+  },
+  "engine_full_t": 567.4946573224369,
+  "ship": {
+   "dry_t": 3649.466572967085,
+   "extra_radiator_t": 0.0,
+   "ve_eff_m_s": 15940594.423369655,
+   "mass_ratio": 3.3322200395802746,
+   "departure_t": 12160.82564821927,
+   "propellant_t": 8511.359075252185,
+   "thrust_N": 18073839.546651375,
+   "accel_g_departure": 0.15155374930632953,
+   "burn1_days": 32.257828987442096,
+   "delta_departure_t": 7734.751413359679
+  },
+  "parts_t": {
+   "conductor_t": 25.874103068395737,
+   "coil_structure_t": 62.80976789359909,
+   "cryostat_t": 11.264935176422222,
+   "nose_t": 40.63786192701601,
+   "plug_t": 10.62393522327481,
+   "fins_t": 4.212563666235254,
+   "boom_t": 46.048275220011895,
+   "blades_t": 108.05101295429832
+  },
+  "additions_t": {
+   "neutron_slug_t": 6.562364123248742,
+   "nose_fins_extra_t": 0.4943199509537152,
+   "eddy_shield_t": 29.977035457017674,
+   "quench_dump_t": 35.32707924399526,
+   "refrigerator_t": 8.625999980119198,
+   "warm_radiator_t": 4.913438068659853,
+   "boom_services_t": 32.64897903041286,
+   "dust_protection_t": 56.71157177181388
+  }
+ }
+}

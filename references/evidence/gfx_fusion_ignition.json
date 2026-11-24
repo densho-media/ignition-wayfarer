@@ -1,0 +1,118 @@
+{
+ "task": "Fusion Ignition flagship simulation (engineering/fusion-ignition/), branch claude/project-thread-1p6mtu",
+ "date": "2026-11-23",
+ "experience": "engineering viewer (Simulations 3-D pages); no change to Explore Ship, the walk or EVA",
+ "classification": "visual-quality addition (a new page) with one performance change inside it (merged line geometry, lazy three.js)",
+ "machine": "cloud container, headless Chromium (Playwright) with SwiftShader software WebGL 2, 1366x768 dpr1",
+ "evidence_class": "SW (frame rates, relative only); draw calls, triangles and bytes are renderer independent. HW PENDING.",
+ "method": "frames counted over one second while the stage plays, 6 s after the stage opens, one page load; renderer.info.render per frame; bytes are uncompressed response bodies from python http.server (Pages serves gzip)",
+ "before": {
+  "note": "one THREE.Line per field line (20 azimuths x the field file's lines) and per particle path, one sphere mesh per path head; three.js imported statically",
+  "first_load_bytes": 954388,
+  "stages": {
+   "need": {
+    "calls": 43,
+    "triangles": 202268,
+    "fps_sw": 6.89
+   },
+   "fuel": {
+    "calls": 527,
+    "triangles": 200924,
+    "fps_sw": 3.2
+   },
+   "nozzle": {
+    "calls": 681,
+    "triangles": 204788,
+    "fps_sw": 4.62
+   },
+   "losses": {
+    "calls": 759,
+    "triangles": 210108,
+    "fps_sw": 4.62
+   },
+   "lab": {
+    "calls": 760,
+    "triangles": 210108,
+    "fps_sw": 3.24
+   }
+  }
+ },
+ "after": {
+  "note": "every field line of the cluster in one LineSegments, the paths in two (aft, struck), heads in one InstancedMesh; segments ordered by their fraction along the line so one draw range reveals all lines together; three.js and the engine files load only with the 3D view",
+  "first_load_bytes": 392239,
+  "three_d_bytes": 1181282,
+  "stages": {
+   "need": {
+    "calls": 43,
+    "triangles": 202268,
+    "fps_sw": 7.06
+   },
+   "fuel": {
+    "calls": 42,
+    "triangles": 200924,
+    "fps_sw": 2.95
+   },
+   "nozzle": {
+    "calls": 48,
+    "triangles": 210108,
+    "fps_sw": 4.55
+   },
+   "losses": {
+    "calls": 51,
+    "triangles": 210108,
+    "fps_sw": 4.76
+   },
+   "lab": {
+    "calls": 52,
+    "triangles": 210108,
+    "fps_sw": 3.58
+   }
+  }
+ },
+ "result": {
+  "performance": "draw calls 527-760 -> 42-52 on the 3D stages; first load 954 kB -> 392 kB (the 2-D stages, text and numbers need no 3D download). SwiftShader frame rate unchanged within noise (fill-bound in software); the draw-call saving is expected to matter on real GPUs and phones but is not measured there (HW PENDING).",
+  "visual": "unchanged: the same lines and heads; the early dimming of most paths in the Thrust stage is now one opacity for all lines."
+ },
+ "visual_continuity_pass": {
+  "date": "2026-11-23",
+  "change": "2-D scenes for the reaction, plasma and ignition stages; step-by-step Thrust and Losses with photon and neutron packets (2 Points) and one representative proton path (1 Line, 1 mesh)",
+  "first_load_bytes": 426693,
+  "three_d_bytes": 1181282,
+  "stages": {
+   "need": {
+    "calls": 43,
+    "fps_sw": 6.78
+   },
+   "fuel": {
+    "calls": 42,
+    "fps_sw": 3.38
+   },
+   "nozzle": {
+    "calls": 41,
+    "fps_sw": 3.08
+   },
+   "losses": {
+    "calls": 45,
+    "fps_sw": 3.12
+   },
+   "lab": {
+    "calls": 54,
+    "fps_sw": 3.64
+   }
+  },
+  "note": "same method and machine as above (SW, relative only); draw calls stay at 41-54; the page script grew from 67 kB to 98 kB raw"
+ },
+ "final_refinement_pass": {
+  "date": "2026-11-23",
+  "change": "2-D scenes rewritten: Coulomb-repelling plasma crowd (130 ions, 110 electrons desktop; 70/60 touch) with product tracks; ignition as a 300-point particle target (170 touch) instead of a filled disc; no change to the 3-D scene",
+  "evidence_class": "SW",
+  "machine": "cloud container, headless Chromium, SwiftShader / CPU canvas",
+  "first_load_bytes": 315130,
+  "raf_fps_2d": {
+   "nucleus": 60.3,
+   "many": 60.3,
+   "ignition": 60.3
+  },
+  "note": "first_load_bytes counted by response bodies before Start (a different counting script from the 426,693 above; not comparable). The 2-D stages hold the 60 Hz frame rate in software; relative only, HW PENDING. Draw calls unchanged (the 3-D view stops rendering 3 s into a 2-D stage)."
+ }
+}

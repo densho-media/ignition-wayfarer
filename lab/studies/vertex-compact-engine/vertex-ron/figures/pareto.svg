@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" font-family="system-ui, sans-serif" font-size="12">
+<rect width="760" height="460" fill="#ffffff"/>
+<text x="70" y="18" font-size="14" fill="#1b1e23">Departure mass vs engine-to-ship distance (four engines, V2, today's tape)</text>
+<line x1="70" x2="590" y1="410.0" y2="410.0" stroke="#e3e5e8"/><text x="62" y="414.0" text-anchor="end" fill="#5b616b">0 kt</text>
+<line x1="70" x2="590" y1="315.0" y2="315.0" stroke="#e3e5e8"/><text x="62" y="319.0" text-anchor="end" fill="#5b616b">8 kt</text>
+<line x1="70" x2="590" y1="220.0" y2="220.0" stroke="#e3e5e8"/><text x="62" y="224.0" text-anchor="end" fill="#5b616b">16 kt</text>
+<line x1="70" x2="590" y1="125.0" y2="125.0" stroke="#e3e5e8"/><text x="62" y="129.0" text-anchor="end" fill="#5b616b">24 kt</text>
+<line x1="70" x2="590" y1="30.0" y2="30.0" stroke="#e3e5e8"/><text x="62" y="34.0" text-anchor="end" fill="#5b616b">32 kt</text>
+<text x="70.0" y="428" text-anchor="middle" fill="#5b616b">0 m</text>
+<text x="188.2" y="428" text-anchor="middle" fill="#5b616b">500 m</text>
+<text x="306.4" y="428" text-anchor="middle" fill="#5b616b">1000 m</text>
+<text x="424.5" y="428" text-anchor="middle" fill="#5b616b">1500 m</text>
+<text x="542.7" y="428" text-anchor="middle" fill="#5b616b">2000 m</text>
+<line x1="70" x2="590" y1="357.4" y2="357.4" stroke="#1b1e23" stroke-dasharray="4 3"/><text x="596" y="361.4" fill="#1b1e23">canon 4,426 t</text>
+<polyline fill="none" stroke="#1b1e23" stroke-width="2" points="140.9,224.0 188.2,267.1 259.1,273.7"/>
+<circle cx="140.9" cy="224.0" r="5" fill="#2a7de1" stroke="#ffffff" stroke-width="2"><title>B_D300: 15,665 t, engine 874 t, eta 0.83</title></circle>
+<circle cx="188.2" cy="267.1" r="5" fill="#2a7de1" stroke="#ffffff" stroke-width="2"><title>B_D500: 12,036 t, engine 603 t, eta 0.83</title></circle>
+<circle cx="259.1" cy="273.7" r="5" fill="#2a7de1" stroke="#ffffff" stroke-width="2"><title>B_D800: 11,478 t, engine 526 t, eta 0.81</title></circle>
+<circle cx="353.6" cy="258.9" r="5" fill="#2a7de1" stroke="#ffffff" stroke-width="2"><title>B_D1200: 12,722 t, engine 543 t, eta 0.78</title></circle>
+<circle cx="259.1" cy="246.5" r="5" fill="#2a7de1" stroke="#ffffff" stroke-width="2"><title>B_D800_R65: 13,772 t, engine 598 t, eta 0.77</title></circle>
+<circle cx="259.1" cy="216.5" r="5" fill="#2a7de1" stroke="#ffffff" stroke-width="2"><title>B_D800_R80: 16,294 t, engine 700 t, eta 0.73</title></circle>
+<circle cx="259.1" cy="262.0" r="5" fill="#2a7de1" stroke="#ffffff" stroke-width="2"><title>B_D800_k3: 12,462 t, engine 642 t, eta 0.82</title></circle>
+<circle cx="259.1" cy="233.5" r="5" fill="#2a7de1" stroke="#ffffff" stroke-width="2"><title>B_D800_k4: 14,863 t, engine 608 t, eta 0.69</title></circle>
+<circle cx="259.1" cy="253.1" r="5" fill="#b03fbf" stroke="#ffffff" stroke-width="2"><title>E_hybrid_2_S250: 13,214 t, engine 537 t, eta 0.83</title></circle>
+<circle cx="259.1" cy="250.9" r="5" fill="#b03fbf" stroke="#ffffff" stroke-width="2"><title>E_hybrid_4_S250: 13,396 t, engine 755 t, eta 0.93</title></circle>
+<circle cx="259.1" cy="266.5" r="5" fill="#b03fbf" stroke="#ffffff" stroke-width="2"><title>E_hybrid_4_S400: 12,088 t, engine 541 t, eta 0.84</title></circle>
+<circle cx="542.7" cy="174.3" r="5" fill="#d6611a" stroke="#ffffff" stroke-width="2"><title>C_remote_F: 19,848 t, engine 737 t, eta 0.72</title></circle>
+<circle cx="259.1" cy="241.9" r="5" fill="#1f9e6e" stroke="#ffffff" stroke-width="2"><title>D_distributed: 14,159 t, engine 851 t, eta 0.89</title></circle>
+<text x="148.9" y="216.0" fill="#1b1e23">B_D300</text>
+<text x="196.2" y="259.1" fill="#1b1e23">B_D500</text>
+<text x="267.1" y="265.7" fill="#1b1e23">B_D800</text>
+<circle cx="604" cy="70" r="5" fill="#2a7de1"/><text x="614" y="74" fill="#1b1e23">B intermediate</text>
+<circle cx="604" cy="90" r="5" fill="#d6611a"/><text x="614" y="94" fill="#1b1e23">C remote F</text>
+<circle cx="604" cy="110" r="5" fill="#1f9e6e"/><text x="614" y="114" fill="#1b1e23">D distributed</text>
+<circle cx="604" cy="130" r="5" fill="#b03fbf"/><text x="614" y="134" fill="#1b1e23">E hybrid</text>
+<text x="596" y="180" fill="#5b616b">A compact: fails</text><text x="596" y="194" fill="#5b616b">(heat, not plotted)</text>
+<text x="330.0" y="448" text-anchor="middle" fill="#5b616b">burn-to-ship distance D (deployment, dynamics and dust exposure grow to the right)</text>
+</svg>

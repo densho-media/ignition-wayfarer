@@ -58,6 +58,12 @@ shock shells; both halves of the split view with one camera through scissor view
 touch, 2 on desktop, with a 0.25-step adaptive drop after a slow second. 5–9 draw calls and about 107 k triangles per half; SW frame times
 in `references/evidence/gfx_ignition.json`, HW PENDING.
 
+Simulations · Fusion Ignition (`web/engineering/fusion-ignition.js`, the fusion-ignition study, on the research branch): the
+engine inspection parts as one `InstancedMesh` per category, the cluster's field lines in one `LineSegments` and the particle paths in
+two, ordered by their fraction along the line so one draw range reveals them together, path heads in one `InstancedMesh`; the nuclear and
+plasma scales as 2-D scenes (graphs on request) that work before three.js loads; Thrust and Losses disclose one mechanism at a time. 41-54 draw calls and about 210 k triangles on the 3D stages (527-760
+before the merge); SW numbers in `references/evidence/gfx_fusion_ignition.json`, HW PENDING.
+
 Engineering · Dust: what hits at speed (`web/engineering/dust.js`, the dust-impacts study): fully procedural, no model download.
 One grain: section-cut bumper and skin plates whose shader (`onBeforeCompile`) draws the hit spot, heat, scorch, cracks and a
 discarded hole; the debris cloud is an additive point cloud computed from the timeline uniform, so scrubbing runs both ways; sprite

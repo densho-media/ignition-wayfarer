@@ -69,3 +69,9 @@ title = "Vertex Engine 1.5: radiation physics, 3D exposure and thermal feasibili
 locator = "references/evidence/vertex_radiation.json and src/wayfarer/vertex_radiation.py at eb33a44"
 url = "https://github.com/densho-media/ignition-wayfarer/blob/eb33a44/references/evidence/vertex_radiation.json"
 nature = "PROJECT_MODEL"
+
+[S-MPN-1]
+title = "Magneto-Photonic Nozzle study: X-ray, gamma and neutron optics and edge-on remote geometry for the Vertex drive (research branch)"
+locator = "work/magneto-photonic-nozzle/ on claude/project-thread-1p6mtu (mpn.py, results/mpn.json, REPORT.md)"
+url = "https://github.com/densho-media/ignition-wayfarer/tree/claude/project-thread-1p6mtu/work/magneto-photonic-nozzle"
+nature = "PROJECT_MODEL"

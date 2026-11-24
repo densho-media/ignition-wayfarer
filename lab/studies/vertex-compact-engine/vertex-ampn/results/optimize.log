@@ -1,0 +1,40 @@
+B start (RON point, audited): departure 18,515 t, engine 1059 t (RON parts 526 + additions 533), cant 11.5
+  B it   0 best    17237 t engine   951 t eta 0.811 cant 14.0 | 50.00 2.00 1027.22 400.00 1.60
+  B it   5 best    14820 t engine   942 t eta 0.894 cant  0.0 | 32.20 1.72 986.94 493.47 1.97
+  B it  10 best    11566 t engine   657 t eta 0.892 cant  1.0 | 22.03 1.98 1550.91 541.02 1.53
+  B it  15 best    11384 t engine   647 t eta 0.897 cant  0.0 | 19.39 1.80 1503.24 686.88 1.48
+  B it  20 best    10811 t engine   569 t eta 0.872 cant  0.0 | 15.98 2.35 1513.68 702.25 1.35
+  B it  25 best    10600 t engine   560 t eta 0.880 cant  0.0 | 15.00 2.32 1909.70 748.50 1.31
+  B it  30 best    10600 t engine   560 t eta 0.880 cant  0.0 | 15.00 2.32 1909.70 748.50 1.31
+  B it  35 best    10583 t engine   533 t eta 0.857 cant  0.0 | 15.00 2.31 1814.91 731.68 1.17
+B today       OPT: departure 10,582 t | engine 540 t (parts 372, slug 6, eddy 30, dump 17, fridge+rad 22, dust 59) | eta 0.864 cant 0.5 | R 15 kappa 2.28 D 1910 S 767 x1.19
+  B it   0 best     9735 t engine   468 t eta 0.862 cant  0.0 | 15.00 2.28 1909.99 766.70 1.19
+  B it   5 best     9735 t engine   468 t eta 0.862 cant  0.0 | 15.00 2.28 1909.99 766.70 1.19
+  B it  10 best     9726 t engine   497 t eta 0.891 cant  0.0 | 15.00 2.30 1895.00 812.58 1.40
+  B it  15 best     9700 t engine   479 t eta 0.876 cant  0.0 | 15.00 2.30 1873.44 789.72 1.28
+B advanced    OPT: departure 9,706 t | engine 484 t (parts 319, slug 6, eddy 30, dump 21, fridge+rad 16, dust 58) | eta 0.880 cant 0.5 | R 15 kappa 2.29 D 1921 S 694 x1.32
+  B it   0 best     9281 t engine   472 t eta 0.905 cant  0.0 | 15.00 2.28 1909.99 766.70 1.53
+  B it   5 best     9281 t engine   472 t eta 0.905 cant  0.0 | 15.00 2.28 1909.99 766.70 1.53
+  B it  10 best     9258 t engine   456 t eta 0.890 cant  0.0 | 15.00 2.24 2136.12 693.28 1.37
+  B it  15 best     9228 t engine   448 t eta 0.885 cant  0.0 | 15.00 2.22 1784.33 726.64 1.29
+B speculative OPT: departure 9,217 t | engine 456 t (parts 291, slug 7, eddy 30, dump 24, fridge+rad 13, dust 59) | eta 0.895 cant 0.0 | R 15 kappa 2.27 D 1850 S 701 x1.41
+E start (RON point, audited): departure 20,815 t, engine 1076 t (RON parts 541 + additions 534), cant 30.0
+  E it   0 best    18589 t engine  1210 t eta 0.903 cant 17.0 | 50.00 2.00 800.00 400.00 2.05 4.00
+  E it   5 best    16969 t engine   945 t eta 0.917 cant 30.0 | 31.62 1.76 945.09 472.54 1.89 4.73
+  E it  10 best    15128 t engine   779 t eta 0.900 cant 30.0 | 23.74 1.50 1529.04 396.42 1.77 5.78
+  E it  15 best    13370 t engine   689 t eta 0.930 cant 30.0 | 16.29 2.03 1512.33 463.58 1.69 4.51
+  E it  20 best    13370 t engine   689 t eta 0.930 cant 30.0 | 16.29 2.03 1512.33 463.58 1.69 4.51
+  E it  25 best    13370 t engine   689 t eta 0.930 cant 30.0 | 16.29 2.03 1512.33 463.58 1.69 4.51
+  E it  30 best    11289 t engine   636 t eta 0.914 cant 12.0 | 15.00 2.50 1893.83 452.47 1.69 4.05
+  E it  35 best    11289 t engine   636 t eta 0.914 cant 12.0 | 15.00 2.50 1893.83 452.47 1.69 4.05
+E today       OPT: departure 13,007 t | engine 636 t (parts 446, slug 6, eddy 30, dump 35, fridge+rad 28, dust 56) | eta 0.911 cant 30.0 | R 15 kappa 2.50 D 1894 S 452 x1.69 mirror 4.05
+  E it   0 best    10557 t engine   538 t eta 0.913 cant 19.0 | 15.00 2.50 1893.83 452.47 1.69 5.20
+  E it   5 best    10555 t engine   557 t eta 0.904 cant 13.0 | 15.00 2.72 2058.41 491.79 1.84 4.40
+  E it  10 best    10555 t engine   557 t eta 0.904 cant 13.0 | 15.00 2.72 2058.41 491.79 1.84 4.40
+  E it  15 best    10555 t engine   557 t eta 0.904 cant 13.0 | 15.00 2.72 2058.41 491.79 1.84 4.40
+E advanced    OPT: departure 12,086 t | engine 557 t (parts 371, slug 5, eddy 30, dump 42, fridge+rad 19, dust 54) | eta 0.903 cant 30.0 | R 15 kappa 2.72 D 2053 S 490 x1.84 mirror 4.42
+  E it   0 best     9883 t engine   487 t eta 0.913 cant 18.0 | 15.00 2.50 1893.83 452.47 1.69 5.20
+  E it   5 best     9654 t engine   491 t eta 0.908 cant 11.0 | 15.50 2.52 1926.16 460.20 1.72 4.67
+  E it  10 best     9594 t engine   485 t eta 0.909 cant 11.5 | 15.10 2.53 1887.38 460.16 1.69 4.69
+  E it  15 best     9594 t engine   485 t eta 0.909 cant 11.5 | 15.10 2.53 1887.38 460.16 1.69 4.69
+E speculative OPT: departure 11,058 t | engine 485 t (parts 310, slug 7, eddy 30, dump 35, fridge+rad 14, dust 57) | eta 0.907 cant 30.0 | R 15 kappa 2.53 D 1887 S 460 x1.69 mirror 4.69

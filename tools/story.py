@@ -2689,6 +2689,10 @@ def build(root, site, revision=None, built=None, play=True):
         if data and data.get('contract') == 'WF_DUST_IMPACTS' and not dust:
             dust = dust_page(e, data, out / 'dust', revision, built)
             pages.append('engineering/dust/index.html')
+        if data and data.get('contract') == 'WF_FUSION_IGNITION':
+            import story_ignite
+            story_ignite.build(e, data, out / 'fusion-ignition', revision, built, page)
+            pages.append('engineering/fusion-ignition/index.html')
         if data and data.get('contract') == 'WF_SELECTIVE_FUSION' and not fusion:
             fusion = fusion_page(e, data, out / 'fusion', revision, built)
             pages.append('engineering/fusion/index.html')

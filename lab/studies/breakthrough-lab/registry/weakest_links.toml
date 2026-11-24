@@ -81,7 +81,7 @@ speculative = "MAY_HELP"
 resolution = "OPEN"
 questions = { blocks_engine = true, non_convergence = false, major_penalty = false, local = false }
 tier_reason = "A destroyed shield stops the drive; no other subsystem change removes the field zero."
-breakthroughs = ["BT-003"]
+breakthroughs = ["BT-003", "BT-010"]
 systems = ["drive", "forward_shield", "P04", "P11"]
 
 [[link]]
@@ -229,7 +229,7 @@ speculative = "MAY_HELP"
 resolution = "OPEN"
 questions = { blocks_engine = false, non_convergence = false, major_penalty = true, local = false }
 tier_reason = "A dimensional penalty: solving it cannot make the engine work, and the ship closes with it."
-breakthroughs = ["BT-004", "BT-008"]
+breakthroughs = ["BT-004", "BT-008", "BT-009", "BT-010"]
 systems = ["thermal", "P05", "P06", "P07"]
 
 [[link]]
@@ -285,5 +285,5 @@ speculative = "NOT_NEEDED"
 resolution = "PARTIAL"
 questions = { blocks_engine = false, non_convergence = false, major_penalty = false, local = true }
 tier_reason = "Material and placement choices with known engineering answers, once WL-002 and the cone are settled."
-breakthroughs = ["BT-008"]
+breakthroughs = ["BT-008", "BT-009", "BT-010"]
 systems = ["forward_shield", "P04", "P11"]

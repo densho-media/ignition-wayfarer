@@ -1,0 +1,2374 @@
+{
+ "meta": {
+  "title": "AMPN Phase 3 braking dust protection (research, not canon)",
+  "V_m_s": 4796679.328,
+  "mdot_per_engine": 0.2833333333333333,
+  "K_DEP": 1050000000000000.0,
+  "E_VAP": 13000000.0,
+  "ion_range_m": 9e-05,
+  "E_field_limit": 30000000000.0
+ },
+ "grains": [
+  {
+   "a_m": 1e-08,
+   "m_kg": 1.0471975511965979e-20,
+   "KE_J": 1.2047030045420236e-07,
+   "KE_over_Evap": 884928.1759870203,
+   "e_dep_J_kg": 10500000.0,
+   "vaporised_share": 0.8076923076923077,
+   "dv_m_s": 1.0665190812444445,
+   "dv_over_V": 2.2234529521679221e-07,
+   "KE_removed_share": 4.4469054094609106e-07,
+   "charge": {
+    "q_over_m_C_kg": 31875.076126080003,
+    "rigidity_Tm": 150.4836979534422,
+    "deflection_rad": 0.0013290476159210118
+   }
+  },
+  {
+   "a_m": 1e-07,
+   "m_kg": 1.0471975511965977e-17,
+   "KE_J": 0.00012047030045420235,
+   "KE_over_Evap": 884928.1759870205,
+   "e_dep_J_kg": 10500000.0,
+   "vaporised_share": 0.8076923076923077,
+   "dv_m_s": 1.0665190812444447,
+   "dv_over_V": 2.2234529521679227e-07,
+   "KE_removed_share": 4.4469054094609106e-07,
+   "charge": {
+    "q_over_m_C_kg": 3187.5076126080003,
+    "rigidity_Tm": 1504.836979534422,
+    "deflection_rad": 0.0001329047615921012
+   }
+  },
+  {
+   "a_m": 1e-06,
+   "m_kg": 1.0471975511965977e-14,
+   "KE_J": 0.12047030045420234,
+   "KE_over_Evap": 884928.1759870205,
+   "e_dep_J_kg": 10500000.0,
+   "vaporised_share": 0.8076923076923077,
+   "dv_m_s": 1.0665190812444445,
+   "dv_over_V": 2.2234529521679221e-07,
+   "KE_removed_share": 4.4469054094609106e-07,
+   "charge": {
+    "q_over_m_C_kg": 318.75076126080006,
+    "rigidity_Tm": 15048.369795344219,
+    "deflection_rad": 1.329047615921012e-05
+   }
+  },
+  {
+   "a_m": 1e-05,
+   "m_kg": 1.0471975511965979e-11,
+   "KE_J": 120.47030045420236,
+   "KE_over_Evap": 884928.1759870204,
+   "e_dep_J_kg": 10500000.0,
+   "vaporised_share": 0.8076923076923077,
+   "dv_m_s": 1.0665190812444445,
+   "dv_over_V": 2.2234529521679221e-07,
+   "KE_removed_share": 4.4469054094609106e-07,
+   "charge": {
+    "q_over_m_C_kg": 31.875076126080003,
+    "rigidity_Tm": 150483.6979534422,
+    "deflection_rad": 1.3290476159210119e-06
+   }
+  },
+  {
+   "a_m": 2.8e-05,
+   "m_kg": 2.2988080643867712e-10,
+   "KE_J": 2644.56403557065,
+   "KE_over_Evap": 884928.1759870205,
+   "e_dep_J_kg": 10500000.0,
+   "vaporised_share": 0.8076923076923077,
+   "dv_m_s": 1.0665190812444445,
+   "dv_over_V": 2.2234529521679221e-07,
+   "KE_removed_share": 4.4469054094609106e-07,
+   "charge": {
+    "q_over_m_C_kg": 11.383955759314288,
+    "rigidity_Tm": 421354.35426963813,
+    "deflection_rad": 4.746598628289328e-07
+   }
+  },
+  {
+   "a_m": 0.0001,
+   "m_kg": 1.0471975511965978e-08,
+   "KE_J": 120470.30045420236,
+   "KE_over_Evap": 884928.1759870203,
+   "e_dep_J_kg": 7087500.000000001,
+   "vaporised_share": 0.5451923076923078,
+   "dv_m_s": 0.71990037984,
+   "dv_over_V": 1.5008307427133473e-07,
+   "KE_removed_share": 3.001661260659816e-07,
+   "charge": {
+    "q_over_m_C_kg": 3.1875076126080004,
+    "rigidity_Tm": 1504836.979534422,
+    "deflection_rad": 1.329047615921012e-07
+   }
+  },
+  {
+   "a_m": 0.001,
+   "m_kg": 1.0471975511965977e-05,
+   "KE_J": 120470300.45420234,
+   "KE_over_Evap": 884928.1759870203,
+   "e_dep_J_kg": 708750.0000000001,
+   "vaporised_share": 0.05451923076923078,
+   "dv_m_s": 0.07199003798400001,
+   "dv_over_V": 1.5008307427133476e-08,
+   "KE_removed_share": 3.001661452728399e-08,
+   "charge": {
+    "q_over_m_C_kg": 0.31875076126080004,
+    "rigidity_Tm": 15048369.79534422,
+    "deflection_rad": 1.3290476159210119e-08
+   }
+  }
+ ],
+ "designs": {
+  "B_D800": {
+   "meta": {
+    "Tb_total_d": 82.0,
+    "burn_d": 20.5,
+    "ve_c": 0.05370381932690248,
+    "mass_ratio_per_burn": 1.3470680193110676,
+    "burn_AU": 26.987797611315745,
+    "brake_AU": 29.80364190583508,
+    "destination_AU": 57.79143951715083,
+    "t_flip_s": 300.0,
+    "path_AU": 113.60211732682102,
+    "min_r_AU": 1.0002132196604554
+   },
+   "ring_field_integral_at_ship_Tm": 0.23836834259112563,
+   "mode_b": [
+    {
+     "theta_deg": 5,
+     "x_cover_m": 3747.2593506640433,
+     "column_kg_m2": 3.277175554979851e-09,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 13723735.808198147,
+     "mdot_needed_kg_s": 15553567.249291232,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 3441034.3327288437,
+      "vaporised_share": 0.2646949486714495,
+      "dv_m_s": 0.34951702619738617,
+      "dv_over_V": 7.286645662492496e-08,
+      "KE_removed_share": 1.457329079634917e-07
+     },
+     "puff_radius_at_ship_m": 4.740007659173712,
+     "thrust_axial_share": 0.9942992872989248
+    },
+    {
+     "theta_deg": 10,
+     "x_cover_m": 1859.2884149514625,
+     "column_kg_m2": 1.6260455903743098e-09,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 27659182.362331863,
+     "mdot_needed_kg_s": 31347073.34397611,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 1707347.8698930251,
+      "vaporised_share": 0.1313344515302327,
+      "dv_m_s": 0.1734208649107589,
+      "dv_over_V": 3.6154358682773905e-08,
+      "KE_removed_share": 7.230871612584622e-08
+     },
+     "puff_radius_at_ship_m": 2.7720097937631643,
+     "thrust_axial_share": 0.9773270317025812
+    },
+    {
+     "theta_deg": 20,
+     "x_cover_m": 900.7404496567699,
+     "column_kg_m2": 7.877449375030923e-10,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 57093469.43718322,
+     "mdot_needed_kg_s": 64705932.028807655,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 827132.184378247,
+      "vaporised_share": 0.06362555264448054,
+      "dv_m_s": 0.08401450070007603,
+      "dv_over_V": 1.7515138068465858e-08,
+      "KE_removed_share": 3.503027590223695e-08
+     },
+     "puff_radius_at_ship_m": 1.7728310914270586,
+     "thrust_axial_share": 0.9113574211726988
+    },
+    {
+     "theta_deg": 30,
+     "x_cover_m": 567.8402348972351,
+     "column_kg_m2": 4.966061760869226e-10,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 90564905.71264356,
+     "mdot_needed_kg_s": 102640226.47432937,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 521436.4848912687,
+      "vaporised_share": 0.0401104988377899,
+      "dv_m_s": 0.05296399626605414,
+      "dv_over_V": 1.104180468285291e-08,
+      "KE_removed_share": 2.2083609274581306e-08
+     },
+     "puff_radius_at_ship_m": 1.4258199697785123,
+     "thrust_axial_share": 0.8080127018922194
+    },
+    {
+     "theta_deg": 45,
+     "x_cover_m": 327.842712474619,
+     "column_kg_m2": 2.8671570944501546e-10,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 156863018.0769835,
+     "mdot_needed_kg_s": 177778087.15391463,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 301051.49491726625,
+      "vaporised_share": 0.023157807301328173,
+      "dv_m_s": 0.030578777501564694,
+      "dv_over_V": 6.3749889059843976e-09,
+      "KE_removed_share": 1.2749977740256213e-08
+     },
+     "puff_radius_at_ship_m": 1.1756494809763307,
+     "thrust_axial_share": 0.6035533905932737
+    },
+    {
+     "theta_deg": 60,
+     "x_cover_m": 189.2800782990784,
+     "column_kg_m2": 1.6553539202897426e-10,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 271694717.13793063,
+     "mdot_needed_kg_s": 307920679.42298806,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 173812.16163042298,
+      "vaporised_share": 0.013370166279263306,
+      "dv_m_s": 0.017654665422018052,
+      "dv_over_V": 3.680601560950971e-09,
+      "KE_removed_share": 7.3612032025494045e-09
+     },
+     "puff_radius_at_ship_m": 1.0312134819230911,
+     "thrust_axial_share": 0.3750000000000001
+    },
+    {
+     "theta_deg": 75,
+     "x_cover_m": 87.8451900520029,
+     "column_kg_m2": 7.68252428031083e-11,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 585420753.2918978,
+     "mdot_needed_kg_s": 663476853.7308174,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 80666.50494326372,
+      "vaporised_share": 0.00620511576486644,
+      "dv_m_s": 0.008193558737075243,
+      "dv_over_V": 1.7081731291158856e-09,
+      "KE_removed_share": 3.4163463169534225e-09
+     },
+     "puff_radius_at_ship_m": 0.9254789921741491,
+     "thrust_axial_share": 0.1629031716051507
+    }
+   ],
+   "cases": {
+    "NOMINAL": {
+     "faces": [
+      {
+       "face": "ship stern disc (stern screen on a mast)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 6361.725123519331,
+       "bare_5mm_breaches": 68013.12633370313,
+       "standoff_needed_m": 62.736959205139954,
+       "standoff_available_m": 400.0,
+       "armour_t_m": 0.15854309085819107,
+       "erosion_m": 1.3943542382877941e-05,
+       "kind": "bumper",
+       "mass_t": 37.01365962311982,
+       "remote_screen_t": 37.01365962311982
+      },
+      {
+       "face": "ring aft faces (nose, in the exhaust)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 1256.6370614359173,
+       "bare_5mm_breaches": 13434.691621472219,
+       "standoff_needed_m": 33.69396652606531,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 0.1047529922461093,
+       "erosion_m": 1.3943542382877941e-05,
+       "kind": "armour",
+       "mass_t": 236.97722578481324,
+       "remote_screen_t": 6.973211050557051
+      },
+      {
+       "face": "plug aft faces (lit cone)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 1374.9067151100203,
+       "bare_5mm_breaches": 14699.1110581187,
+       "standoff_needed_m": 34.88442088965049,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 0.10720606506453599,
+       "erosion_m": 1.3943542382877941e-05,
+       "kind": "armour",
+       "mass_t": 265.35151769005245,
+       "remote_screen_t": 7.646373295355424
+      },
+      {
+       "face": "boom services ducts, braking",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 951.3708498984759,
+       "bare_5mm_breaches": 10171.094246925291,
+       "standoff_needed_m": 30.255923782831676,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 0.09750015114599021,
+       "erosion_m": 1.3943542382877941e-05,
+       "kind": "bumper",
+       "mass_t": 5.24474014862931,
+       "remote_screen_t": 5.24474014862931
+      },
+      {
+       "face": "ring forward faces",
+       "leads": "BOW_FIRST",
+       "area_m2": 1256.6370614359173,
+       "bare_5mm_breaches": 11409.17265553712,
+       "standoff_needed_m": 31.374911519047995,
+       "standoff_available_m": 2.0,
+       "armour_t_m": 0.0998895409073461,
+       "erosion_m": 1.1735391003966291e-05,
+       "kind": "armour",
+       "mass_t": 225.97136330626134,
+       "remote_screen_t": 6.937644262215621
+      },
+      {
+       "face": "plug forward faces (slug)",
+       "leads": "BOW_FIRST",
+       "area_m2": 1374.9067151100203,
+       "bare_5mm_breaches": 12482.958349185656,
+       "standoff_needed_m": 32.48467167109323,
+       "standoff_available_m": 5.0,
+       "armour_t_m": 0.10223132705745844,
+       "erosion_m": 1.1735391003966291e-05,
+       "kind": "armour",
+       "mass_t": 253.0344116408474,
+       "remote_screen_t": 7.606693706186421
+      },
+      {
+       "face": "boom services ducts, bow-first",
+       "leads": "BOW_FIRST",
+       "area_m2": 951.3708498984759,
+       "bare_5mm_breaches": 8637.62069338771,
+       "standoff_needed_m": 28.170171021062128,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 0.0929661115613323,
+       "erosion_m": 1.1735391003966291e-05,
+       "kind": "bumper",
+       "mass_t": 5.219381042737749,
+       "remote_screen_t": 5.219381042737749
+      }
+     ],
+     "total_t": 1028.8122992364613,
+     "brow": {
+      "standoff_needed_m": 58.45699882445316,
+      "events_beyond_2m": 2780.5571577161018
+     },
+     "hybrid": [
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 2094395.1023931953,
+       "defeat_magnet_J": 32075.014954979208,
+       "gain": 1.0,
+       "field_energy_J": 2531250.0,
+       "magnet_structure_t": 0.0405,
+       "si1_deflection_rad": 0.07183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 2094395.1023931953,
+       "defeat_magnet_J": 3207501.4954979215,
+       "gain": 1.5314691539494227,
+       "field_energy_J": 253125000.00000003,
+       "magnet_structure_t": 4.050000000000001,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 2094395.1023931953,
+       "defeat_magnet_J": 320750149.54979205,
+       "gain": 153.14691539494223,
+       "field_energy_J": 25312500000.0,
+       "magnet_structure_t": 405.0,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 18849555.921538755,
+       "defeat_magnet_J": 866025.4037844385,
+       "gain": 1.0,
+       "field_energy_J": 7593750.0,
+       "magnet_structure_t": 0.1215,
+       "si1_deflection_rad": 0.21551814143859035
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 18849555.921538755,
+       "defeat_magnet_J": 86602540.37844387,
+       "gain": 4.594407461848268,
+       "field_energy_J": 759375000.0000001,
+       "magnet_structure_t": 12.150000000000002,
+       "si1_deflection_rad": 2.1551814143859036
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 18849555.921538755,
+       "defeat_magnet_J": 8660254037.844383,
+       "gain": 459.44074618482665,
+       "field_energy_J": 75937500000.0,
+       "magnet_structure_t": 1215.0,
+       "si1_deflection_rad": 21.551814143859037
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 209439510.23931953,
+       "defeat_magnet_J": 32075014.95497921,
+       "gain": 1.0,
+       "field_energy_J": 25312500.0,
+       "magnet_structure_t": 0.405,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 209439510.23931953,
+       "defeat_magnet_J": 3207501495.4979215,
+       "gain": 15.314691539494227,
+       "field_energy_J": 2531250000.0000005,
+       "magnet_structure_t": 40.50000000000001,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 209439510.23931953,
+       "defeat_magnet_J": 320750149549.79205,
+       "gain": 1531.4691539494222,
+       "field_energy_J": 253125000000.0,
+       "magnet_structure_t": 4050.0,
+       "si1_deflection_rad": 71.83938047953012
+      }
+     ]
+    },
+    "JUSTIFIED": {
+     "faces": [
+      {
+       "face": "ship stern disc (stern screen on a mast)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 6361.725123519331,
+       "bare_5mm_breaches": 507637.6684547726,
+       "standoff_needed_m": 321.4210153225734,
+       "standoff_available_m": 400.0,
+       "armour_t_m": 0.28243807506833224,
+       "erosion_m": 0.00013180877529889127,
+       "kind": "bumper",
+       "mass_t": 89.19436292853592,
+       "remote_screen_t": 89.19436292853592
+      },
+      {
+       "face": "ring aft faces (nose, in the exhaust)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 1256.6370614359173,
+       "bare_5mm_breaches": 100274.10734909076,
+       "standoff_needed_m": 172.93255254097838,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 0.18683499801332862,
+       "erosion_m": 0.00013180877529889127,
+       "kind": "armour",
+       "mass_t": 422.908953604052,
+       "remote_screen_t": 16.009405652957167
+      },
+      {
+       "face": "plug aft faces (lit cone)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 1374.9067151100203,
+       "bare_5mm_breaches": 109711.50523635786,
+       "standoff_needed_m": 179.0094054451813,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 0.1911866795382684,
+       "erosion_m": 0.00013180877529889127,
+       "kind": "armour",
+       "mass_t": 473.4811337526389,
+       "remote_screen_t": 17.596290279566972
+      },
+      {
+       "face": "boom services ducts, braking",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 951.3708498984759,
+       "bare_5mm_breaches": 75915.20707061396,
+       "standoff_needed_m": 155.3813738943303,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 0.1739694679680107,
+       "erosion_m": 0.00013180877529889127,
+       "kind": "armour",
+       "mass_t": 298.1427833226459,
+       "remote_screen_t": 11.9563993396036
+      },
+      {
+       "face": "ring forward faces",
+       "leads": "BOW_FIRST",
+       "area_m2": 1256.6370614359173,
+       "bare_5mm_breaches": 85229.83800095809,
+       "standoff_needed_m": 161.06912618849552,
+       "standoff_available_m": 2.0,
+       "armour_t_m": 0.1781894273993083,
+       "erosion_m": 0.00011087052052651474,
+       "kind": "armour",
+       "mass_t": 403.30577237603364,
+       "remote_screen_t": 15.816518308240447
+      },
+      {
+       "face": "plug forward faces (slug)",
+       "leads": "BOW_FIRST",
+       "area_m2": 1374.9067151100203,
+       "bare_5mm_breaches": 93251.3294342563,
+       "standoff_needed_m": 166.73448428223384,
+       "standoff_available_m": 5.0,
+       "armour_t_m": 0.1823436669368116,
+       "erosion_m": 0.00011087052052651474,
+       "kind": "armour",
+       "mass_t": 451.5443437542964,
+       "remote_screen_t": 17.38161292920731
+      },
+      {
+       "face": "boom services ducts, bow-first",
+       "leads": "BOW_FIRST",
+       "area_m2": 951.3708498984759,
+       "bare_5mm_breaches": 64525.53876059297,
+       "standoff_needed_m": 144.70731455676912,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 0.16590802237399252,
+       "erosion_m": 0.00011087052052651474,
+       "kind": "armour",
+       "mass_t": 284.3019634180727,
+       "remote_screen_t": 11.817812565564482
+      }
+     ],
+     "total_t": 2422.8793131562757,
+     "brow": {
+      "standoff_needed_m": 299.4692873230329,
+      "events_beyond_2m": 85085.47896824696
+     },
+     "hybrid": [
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 3206.3144111401,
+       "gain": 1.0,
+       "field_energy_J": 2531250.0,
+       "magnet_structure_t": 0.0405,
+       "si1_deflection_rad": 0.07183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 320631.4411140101,
+       "gain": 2.369191026271926,
+       "field_energy_J": 253125000.00000003,
+       "magnet_structure_t": 4.050000000000001,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 32063144.111401,
+       "gain": 236.91910262719247,
+       "field_energy_J": 25312500000.0,
+       "magnet_structure_t": 405.0,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 86570.4891007827,
+       "gain": 1.0,
+       "field_energy_J": 7593750.0,
+       "magnet_structure_t": 0.1215,
+       "si1_deflection_rad": 0.21551814143859035
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 8657048.910078272,
+       "gain": 7.107573078815777,
+       "field_energy_J": 759375000.0000001,
+       "magnet_structure_t": 12.150000000000002,
+       "si1_deflection_rad": 2.1551814143859036
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 865704891.0078269,
+       "gain": 710.7573078815775,
+       "field_energy_J": 75937500000.0,
+       "magnet_structure_t": 1215.0,
+       "si1_deflection_rad": 21.551814143859037
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 3206314.4111400987,
+       "gain": 1.0,
+       "field_energy_J": 25312500.0,
+       "magnet_structure_t": 0.405,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 320631441.11401,
+       "gain": 23.691910262719254,
+       "field_energy_J": 2531250000.0000005,
+       "magnet_structure_t": 40.50000000000001,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 32063144111.400986,
+       "gain": 2369.191026271925,
+       "field_energy_J": 253125000000.0,
+       "magnet_structure_t": 4050.0,
+       "si1_deflection_rad": 71.83938047953012
+      }
+     ]
+    },
+    "HIGH": {
+     "faces": [
+      {
+       "face": "ship stern disc (stern screen on a mast)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 6361.725123519331,
+       "bare_5mm_breaches": 1770928.9807854607,
+       "standoff_needed_m": null,
+       "standoff_available_m": 400.0,
+       "armour_t_m": 1.1881849624918919,
+       "erosion_m": 0.00584299076981082,
+       "kind": "armour",
+       "mass_t": 13672.939731208811
+      },
+      {
+       "face": "ring aft faces (nose, in the exhaust)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 1256.6370614359173,
+       "bare_5mm_breaches": 349813.13200700347,
+       "standoff_needed_m": null,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 1.1390230426576495,
+       "erosion_m": 0.00584299076981082,
+       "kind": "armour",
+       "mass_t": 2589.625958371341
+      },
+      {
+       "face": "plug aft faces (lit cone)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 1374.9067151100203,
+       "bare_5mm_breaches": 382736.1447389754,
+       "standoff_needed_m": null,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 1.1428615875938704,
+       "erosion_m": 0.00584299076981082,
+       "kind": "armour",
+       "mass_t": 2842.8509492457297
+      },
+      {
+       "face": "boom services ducts, braking",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 951.3708498984759,
+       "bare_5mm_breaches": 264835.43014628964,
+       "standoff_needed_m": null,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 1.1260801379530505,
+       "erosion_m": 0.00584299076981082,
+       "kind": "armour",
+       "mass_t": 1938.381604187059
+      },
+      {
+       "face": "ring forward faces",
+       "leads": "BOW_FIRST",
+       "area_m2": 1256.6370614359173,
+       "bare_5mm_breaches": 298516.5957325689,
+       "standoff_needed_m": null,
+       "standoff_available_m": 2.0,
+       "armour_t_m": 1.126504938848235,
+       "erosion_m": 0.004908109780246999,
+       "kind": "armour",
+       "mass_t": 2559.1960236577465
+      },
+      {
+       "face": "plug forward faces (slug)",
+       "leads": "BOW_FIRST",
+       "area_m2": 1374.9067151100203,
+       "bare_5mm_breaches": 326611.78365653555,
+       "standoff_needed_m": null,
+       "standoff_available_m": 5.0,
+       "armour_t_m": 1.1308003681173455,
+       "erosion_m": 0.004908109780246999,
+       "kind": "armour",
+       "mass_t": 2810.687782803804
+      },
+      {
+       "face": "boom services ducts, bow-first",
+       "leads": "BOW_FIRST",
+       "area_m2": 951.3708498984759,
+       "bare_5mm_breaches": 226000.00915648355,
+       "standoff_needed_m": null,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 1.1120493642756402,
+       "erosion_m": 0.004908109780246999,
+       "kind": "armour",
+       "mass_t": 1912.7534065074076
+      }
+     ],
+     "total_t": 28326.4354559819,
+     "brow": {
+      "standoff_needed_m": null,
+      "events_beyond_2m": 382537.90668813384
+     },
+     "hybrid": [
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 3206.3144111401,
+       "gain": 1.0,
+       "field_energy_J": 2531250.0,
+       "magnet_structure_t": 0.0405,
+       "si1_deflection_rad": 0.07183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 320631.4411140101,
+       "gain": 2.369191026271926,
+       "field_energy_J": 253125000.00000003,
+       "magnet_structure_t": 4.050000000000001,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 32063144.111401,
+       "gain": 236.91910262719247,
+       "field_energy_J": 25312500000.0,
+       "magnet_structure_t": 405.0,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 86570.4891007827,
+       "gain": 1.0,
+       "field_energy_J": 7593750.0,
+       "magnet_structure_t": 0.1215,
+       "si1_deflection_rad": 0.21551814143859035
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 8657048.910078272,
+       "gain": 7.107573078815777,
+       "field_energy_J": 759375000.0000001,
+       "magnet_structure_t": 12.150000000000002,
+       "si1_deflection_rad": 2.1551814143859036
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 865704891.0078269,
+       "gain": 710.7573078815775,
+       "field_energy_J": 75937500000.0,
+       "magnet_structure_t": 1215.0,
+       "si1_deflection_rad": 21.551814143859037
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 3206314.4111400987,
+       "gain": 1.0,
+       "field_energy_J": 25312500.0,
+       "magnet_structure_t": 0.405,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 320631441.11401,
+       "gain": 23.691910262719254,
+       "field_energy_J": 2531250000.0000005,
+       "magnet_structure_t": 40.50000000000001,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 32063144111.400986,
+       "gain": 2369.191026271925,
+       "field_energy_J": 253125000000.0,
+       "magnet_structure_t": 4050.0,
+       "si1_deflection_rad": 71.83938047953012
+      }
+     ]
+    }
+   }
+  },
+  "B_opt_today": {
+   "meta": {
+    "Tb_total_d": 78.0,
+    "burn_d": 19.5,
+    "ve_c": 0.055705203898091395,
+    "mass_ratio_per_burn": 1.3327257846124718,
+    "burn_AU": 25.719301766827073,
+    "brake_AU": 28.301823627535907,
+    "destination_AU": 55.021125394362976,
+    "t_flip_s": 300.0,
+    "path_AU": 108.06148908124533,
+    "min_r_AU": 1.0002038522752856
+   },
+   "ring_field_integral_at_ship_Tm": 0.012900164833803091,
+   "mode_b": [
+    {
+     "theta_deg": 5,
+     "x_cover_m": 6980.166347703826,
+     "column_kg_m2": 1.7593315302873265e-09,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 25563738.692435913,
+     "mdot_needed_kg_s": 28972237.1847607,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 1847298.1068016929,
+      "vaporised_share": 0.14209985436936098,
+      "dv_m_s": 0.18763606472864217,
+      "dv_over_V": 3.9117908848594635e-08,
+      "KE_removed_share": 7.823581604782248e-08
+     },
+     "puff_radius_at_ship_m": 8.839621921567641,
+     "thrust_axial_share": 0.9942992872989248
+    },
+    {
+     "theta_deg": 10,
+     "x_cover_m": 3463.3691480201283,
+     "column_kg_m2": 8.729325691701563e-10,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 51521839.26002863,
+     "mdot_needed_kg_s": 58391417.82803245,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 916579.1976286641,
+      "vaporised_share": 0.07050609212528185,
+      "dv_m_s": 0.09309992416597074,
+      "dv_over_V": 1.9409244979649127e-08,
+      "KE_removed_share": 3.881848964493173e-08
+     },
+     "puff_radius_at_ship_m": 5.173755434355491,
+     "thrust_axial_share": 0.9773270317025812
+    },
+    {
+     "theta_deg": 20,
+     "x_cover_m": 1677.8444154380818,
+     "column_kg_m2": 4.2289602223702995e-10,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 106350235.39762789,
+     "mdot_needed_kg_s": 120530266.78397827,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 444040.82334888144,
+      "vaporised_share": 0.03415698641145242,
+      "dv_m_s": 0.04510266770981672,
+      "dv_over_V": 9.402894091029952e-09,
+      "KE_removed_share": 1.8805788148945624e-08
+     },
+     "puff_radius_at_ship_m": 3.312546240987826,
+     "thrust_axial_share": 0.9113574211726988
+    },
+    {
+     "theta_deg": 30,
+     "x_cover_m": 1057.7381834538705,
+     "column_kg_m2": 2.665999697201192e-10,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 168698787.0285363,
+     "mdot_needed_kg_s": 191191958.63234112,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 279929.9682061252,
+      "vaporised_share": 0.021533074477394245,
+      "dv_m_s": 0.02843339547656982,
+      "dv_over_V": 5.927724897220776e-09,
+      "KE_removed_share": 1.1855449733033652e-08
+     },
+     "puff_radius_at_ship_m": 2.6661550716173603,
+     "thrust_axial_share": 0.8080127018922194
+    },
+    {
+     "theta_deg": 45,
+     "x_cover_m": 610.685424949238,
+     "column_kg_m2": 1.539215642838569e-10,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 292194870.30866635,
+     "mdot_needed_kg_s": 331154186.34982187,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 161617.64249804974,
+      "vaporised_share": 0.012432126346003826,
+      "dv_m_s": 0.016416028532372673,
+      "dv_over_V": 3.422373565092462e-09,
+      "KE_removed_share": 6.84474721346362e-09
+     },
+     "puff_radius_at_ship_m": 2.200152731315999,
+     "thrust_axial_share": 0.6035533905932737
+    },
+    {
+     "theta_deg": 60,
+     "x_cover_m": 352.5793944846236,
+     "column_kg_m2": 8.886665657337311e-11,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 506096361.08560866,
+     "mdot_needed_kg_s": 573575875.8970231,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 93309.98940204177,
+      "vaporised_share": 0.007177691492464751,
+      "dv_m_s": 0.009477798492189944,
+      "dv_over_V": 1.975908299073593e-09,
+      "KE_removed_share": 3.951816651692752e-09
+     },
+     "puff_radius_at_ship_m": 1.9311061547000121,
+     "thrust_axial_share": 0.3750000000000001
+    },
+    {
+     "theta_deg": 75,
+     "x_cover_m": 163.6326664446053,
+     "column_kg_m2": 4.124315884759459e-11,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 1090486101.7029417,
+     "mdot_needed_kg_s": 1235884248.5966673,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 43305.31678997432,
+      "vaporised_share": 0.0033311782146134093,
+      "dv_m_s": 0.0043986615881755255,
+      "dv_over_V": 9.170222329641473e-10,
+      "KE_removed_share": 1.8340444718489834e-09
+     },
+     "puff_radius_at_ship_m": 1.7341503910146372,
+     "thrust_axial_share": 0.1629031716051507
+    }
+   ],
+   "cases": {
+    "NOMINAL": {
+     "faces": [
+      {
+       "face": "ship stern disc (stern screen on a mast)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 6361.725123519331,
+       "bare_5mm_breaches": 63433.27131664179,
+       "standoff_needed_m": 64.39951462519834,
+       "standoff_available_m": 750.0,
+       "armour_t_m": 0.1613318349430535,
+       "erosion_m": 1.2819402283715585e-05,
+       "kind": "bumper",
+       "mass_t": 37.08953402836361,
+       "remote_screen_t": 37.08953402836361
+      },
+      {
+       "face": "ring aft faces (nose, in the exhaust)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 753.9822368615503,
+       "bare_5mm_breaches": 7518.017341231606,
+       "standoff_needed_m": 28.377374889013822,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 0.0934214253328905,
+       "erosion_m": 1.2819402283715585e-05,
+       "kind": "armour",
+       "mass_t": 126.80596952081312,
+       "remote_screen_t": 4.139662268933432
+      },
+      {
+       "face": "plug aft faces (lit cone)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 498.7592496839155,
+       "bare_5mm_breaches": 4973.1684712247115,
+       "standoff_needed_m": 24.163074169876126,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 0.08392663332512248,
+       "erosion_m": 1.2819402283715585e-05,
+       "kind": "armour",
+       "mass_t": 75.35804123015929,
+       "remote_screen_t": 2.714697587476581
+      },
+      {
+       "face": "boom services ducts, braking",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 2082.7416997969517,
+       "bare_5mm_breaches": 20767.184491714892,
+       "standoff_needed_m": 42.01392018536613,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 0.12135578429346464,
+       "erosion_m": 1.2819402283715585e-05,
+       "kind": "bumper",
+       "mass_t": 11.726114557628682,
+       "remote_screen_t": 11.726114557628682
+      },
+      {
+       "face": "ring forward faces",
+       "leads": "BOW_FIRST",
+       "area_m2": 753.9822368615503,
+       "bare_5mm_breaches": 6385.041752214918,
+       "standoff_needed_m": 26.11566462187833,
+       "standoff_available_m": 2.0,
+       "armour_t_m": 0.08838917204070995,
+       "erosion_m": 1.0814467758149656e-05,
+       "kind": "armour",
+       "mass_t": 119.97363521913417,
+       "remote_screen_t": 4.1179613333068
+      },
+      {
+       "face": "plug forward faces (slug)",
+       "leads": "BOW_FIRST",
+       "area_m2": 498.7592496839155,
+       "bare_5mm_breaches": 4223.705119090166,
+       "standoff_needed_m": 22.79257630218025,
+       "standoff_available_m": 5.0,
+       "armour_t_m": 0.08072237953043476,
+       "erosion_m": 1.0814467758149656e-05,
+       "kind": "armour",
+       "mass_t": 72.47956907362443,
+       "remote_screen_t": 2.7049031805361086
+      },
+      {
+       "face": "boom services ducts, bow-first",
+       "leads": "BOW_FIRST",
+       "area_m2": 2082.7416997969517,
+       "bare_5mm_breaches": 17637.541127808454,
+       "standoff_needed_m": 38.682773217800445,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 0.11485328247830721,
+       "erosion_m": 1.0814467758149656e-05,
+       "kind": "bumper",
+       "mass_t": 11.650851781328093,
+       "remote_screen_t": 11.650851781328093
+      }
+     ],
+     "total_t": 455.0837154110514,
+     "brow": {
+      "standoff_needed_m": 59.31683502598363,
+      "events_beyond_2m": 2563.0721823734843
+     },
+     "hybrid": [
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 2094395.1023931953,
+       "defeat_magnet_J": 32075.014954979208,
+       "gain": 1.0,
+       "field_energy_J": 2531250.0,
+       "magnet_structure_t": 0.0405,
+       "si1_deflection_rad": 0.07183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 2094395.1023931953,
+       "defeat_magnet_J": 3207501.4954979215,
+       "gain": 1.5314691539494227,
+       "field_energy_J": 253125000.00000003,
+       "magnet_structure_t": 4.050000000000001,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 2094395.1023931953,
+       "defeat_magnet_J": 320750149.54979205,
+       "gain": 153.14691539494223,
+       "field_energy_J": 25312500000.0,
+       "magnet_structure_t": 405.0,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 18849555.921538755,
+       "defeat_magnet_J": 866025.4037844385,
+       "gain": 1.0,
+       "field_energy_J": 7593750.0,
+       "magnet_structure_t": 0.1215,
+       "si1_deflection_rad": 0.21551814143859035
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 18849555.921538755,
+       "defeat_magnet_J": 86602540.37844387,
+       "gain": 4.594407461848268,
+       "field_energy_J": 759375000.0000001,
+       "magnet_structure_t": 12.150000000000002,
+       "si1_deflection_rad": 2.1551814143859036
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 18849555.921538755,
+       "defeat_magnet_J": 8660254037.844383,
+       "gain": 459.44074618482665,
+       "field_energy_J": 75937500000.0,
+       "magnet_structure_t": 1215.0,
+       "si1_deflection_rad": 21.551814143859037
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 209439510.23931953,
+       "defeat_magnet_J": 32075014.95497921,
+       "gain": 1.0,
+       "field_energy_J": 25312500.0,
+       "magnet_structure_t": 0.405,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 209439510.23931953,
+       "defeat_magnet_J": 3207501495.4979215,
+       "gain": 15.314691539494227,
+       "field_energy_J": 2531250000.0000005,
+       "magnet_structure_t": 40.50000000000001,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 209439510.23931953,
+       "defeat_magnet_J": 320750149549.79205,
+       "gain": 1531.4691539494222,
+       "field_energy_J": 253125000000.0,
+       "magnet_structure_t": 4050.0,
+       "si1_deflection_rad": 71.83938047953012
+      }
+     ]
+    },
+    "JUSTIFIED": {
+     "faces": [
+      {
+       "face": "ship stern disc (stern screen on a mast)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 6361.725123519331,
+       "bare_5mm_breaches": 467530.22706857475,
+       "standoff_needed_m": 329.97610154675885,
+       "standoff_available_m": 750.0,
+       "armour_t_m": 0.28742776776922535,
+       "erosion_m": 0.00012015526892312382,
+       "kind": "bumper",
+       "mass_t": 89.4861104421504,
+       "remote_screen_t": 89.4861104421504
+      },
+      {
+       "face": "ring aft faces (nose, in the exhaust)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 753.9822368615503,
+       "bare_5mm_breaches": 55410.989874794046,
+       "standoff_needed_m": 145.83071421725336,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 0.1667655726231289,
+       "erosion_m": 0.00012015526892312382,
+       "kind": "armour",
+       "mass_t": 226.49197394937133,
+       "remote_screen_t": 9.387137075498705
+      },
+      {
+       "face": "plug aft faces (lit cone)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 498.7592496839155,
+       "bare_5mm_breaches": 36654.369802176254,
+       "standoff_needed_m": 124.30350245737903,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 0.14992105891272475,
+       "erosion_m": 0.00012015526892312382,
+       "kind": "armour",
+       "mass_t": 134.70199813242425,
+       "remote_screen_t": 6.097056363616843
+      },
+      {
+       "face": "boom services ducts, braking",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 2082.7416997969517,
+       "bare_5mm_breaches": 153062.99485202835,
+       "standoff_needed_m": 215.45973138629847,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 0.21633052615447276,
+       "erosion_m": 0.00012015526892312382,
+       "kind": "armour",
+       "mass_t": 811.4595482699496,
+       "remote_screen_t": 27.31305741080658
+      },
+      {
+       "face": "ring forward faces",
+       "leads": "BOW_FIRST",
+       "area_m2": 753.9822368615503,
+       "bare_5mm_breaches": 47229.93971670039,
+       "standoff_needed_m": 134.24035688812742,
+       "standoff_available_m": 2.0,
+       "armour_t_m": 0.15780804122855238,
+       "erosion_m": 0.00010147137027774704,
+       "kind": "armour",
+       "mass_t": 214.3097415557696,
+       "remote_screen_t": 9.271313570353083
+      },
+      {
+       "face": "plug forward faces (slug)",
+       "leads": "BOW_FIRST",
+       "area_m2": 498.7592496839155,
+       "bare_5mm_breaches": 31242.6051225973,
+       "standoff_needed_m": 114.40523375219146,
+       "standoff_available_m": 5.0,
+       "armour_t_m": 0.14185271716279815,
+       "erosion_m": 0.00010147137027774704,
+       "kind": "armour",
+       "mass_t": 127.44173621204284,
+       "remote_screen_t": 6.026379612332084
+      },
+      {
+       "face": "boom services ducts, bow-first",
+       "leads": "BOW_FIRST",
+       "area_m2": 2082.7416997969517,
+       "bare_5mm_breaches": 130464.30024177188,
+       "standoff_needed_m": 198.40816881697828,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 0.20476077426690842,
+       "erosion_m": 0.00010147137027774704,
+       "kind": "armour",
+       "mass_t": 768.0152550647048,
+       "remote_screen_t": 26.920239905370188
+      }
+     ],
+     "total_t": 2371.9063636264127,
+     "brow": {
+      "standoff_needed_m": 303.90231462533234,
+      "events_beyond_2m": 78578.36809464557
+     },
+     "hybrid": [
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 3206.3144111401,
+       "gain": 1.0,
+       "field_energy_J": 2531250.0,
+       "magnet_structure_t": 0.0405,
+       "si1_deflection_rad": 0.07183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 320631.4411140101,
+       "gain": 2.369191026271926,
+       "field_energy_J": 253125000.00000003,
+       "magnet_structure_t": 4.050000000000001,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 32063144.111401,
+       "gain": 236.91910262719247,
+       "field_energy_J": 25312500000.0,
+       "magnet_structure_t": 405.0,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 86570.4891007827,
+       "gain": 1.0,
+       "field_energy_J": 7593750.0,
+       "magnet_structure_t": 0.1215,
+       "si1_deflection_rad": 0.21551814143859035
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 8657048.910078272,
+       "gain": 7.107573078815777,
+       "field_energy_J": 759375000.0000001,
+       "magnet_structure_t": 12.150000000000002,
+       "si1_deflection_rad": 2.1551814143859036
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 865704891.0078269,
+       "gain": 710.7573078815775,
+       "field_energy_J": 75937500000.0,
+       "magnet_structure_t": 1215.0,
+       "si1_deflection_rad": 21.551814143859037
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 3206314.4111400987,
+       "gain": 1.0,
+       "field_energy_J": 25312500.0,
+       "magnet_structure_t": 0.405,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 320631441.11401,
+       "gain": 23.691910262719254,
+       "field_energy_J": 2531250000.0000005,
+       "magnet_structure_t": 40.50000000000001,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 32063144111.400986,
+       "gain": 2369.191026271925,
+       "field_energy_J": 253125000000.0,
+       "magnet_structure_t": 4050.0,
+       "si1_deflection_rad": 71.83938047953012
+      }
+     ]
+    },
+    "HIGH": {
+     "faces": [
+      {
+       "face": "ship stern disc (stern screen on a mast)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 6361.725123519331,
+       "bare_5mm_breaches": 1601096.0720067953,
+       "standoff_needed_m": null,
+       "standoff_available_m": 750.0,
+       "armour_t_m": 1.1854803890890933,
+       "erosion_m": 0.005220141263058342,
+       "kind": "armour",
+       "mass_t": 13634.837061352333
+      },
+      {
+       "face": "ring aft faces (nose, in the exhaust)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 753.9822368615503,
+       "bare_5mm_breaches": 189759.53446006466,
+       "standoff_needed_m": null,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 1.1064095581139264,
+       "erosion_m": 0.005220141263058342,
+       "kind": "armour",
+       "mass_t": 1508.668285136385
+      },
+      {
+       "face": "plug aft faces (lit cone)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 498.7592496839155,
+       "bare_5mm_breaches": 125525.93204533297,
+       "standoff_needed_m": null,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 1.0798079779455965,
+       "erosion_m": 0.005220141263058342,
+       "kind": "armour",
+       "mass_t": 974.1020591204257
+      },
+      {
+       "face": "boom services ducts, braking",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 2082.7416997969517,
+       "bare_5mm_breaches": 524176.93154037255,
+       "standoff_needed_m": null,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 1.153919951962137,
+       "erosion_m": 0.005220141263058342,
+       "kind": "armour",
+       "mass_t": 4345.540934519953
+      },
+      {
+       "face": "ring forward faces",
+       "leads": "BOW_FIRST",
+       "area_m2": 753.9822368615503,
+       "bare_5mm_breaches": 162918.80668510427,
+       "standoff_needed_m": null,
+       "standoff_available_m": 2.0,
+       "armour_t_m": 1.0907875143402033,
+       "erosion_m": 0.004419715339736521,
+       "kind": "armour",
+       "mass_t": 1486.3802343498407
+      },
+      {
+       "face": "plug forward faces (slug)",
+       "leads": "BOW_FIRST",
+       "area_m2": 498.7592496839155,
+       "bare_5mm_breaches": 107770.79062219651,
+       "standoff_needed_m": null,
+       "standoff_available_m": 5.0,
+       "armour_t_m": 1.0615582186357573,
+       "erosion_m": 0.004419715339736521,
+       "kind": "armour",
+       "mass_t": 956.9994381526099
+      },
+      {
+       "face": "boom services ducts, bow-first",
+       "leads": "BOW_FIRST",
+       "area_m2": 2082.7416997969517,
+       "bare_5mm_breaches": 450034.1994482984,
+       "standoff_needed_m": null,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 1.1436507977522437,
+       "erosion_m": 0.004419715339736521,
+       "kind": "armour",
+       "mass_t": 4304.041797463109
+      }
+     ],
+     "total_t": 27210.569810094657,
+     "brow": {
+      "standoff_needed_m": null,
+      "events_beyond_2m": 347429.25370075187
+     },
+     "hybrid": [
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 3206.3144111401,
+       "gain": 1.0,
+       "field_energy_J": 2531250.0,
+       "magnet_structure_t": 0.0405,
+       "si1_deflection_rad": 0.07183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 320631.4411140101,
+       "gain": 2.369191026271926,
+       "field_energy_J": 253125000.00000003,
+       "magnet_structure_t": 4.050000000000001,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 32063144.111401,
+       "gain": 236.91910262719247,
+       "field_energy_J": 25312500000.0,
+       "magnet_structure_t": 405.0,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 86570.4891007827,
+       "gain": 1.0,
+       "field_energy_J": 7593750.0,
+       "magnet_structure_t": 0.1215,
+       "si1_deflection_rad": 0.21551814143859035
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 8657048.910078272,
+       "gain": 7.107573078815777,
+       "field_energy_J": 759375000.0000001,
+       "magnet_structure_t": 12.150000000000002,
+       "si1_deflection_rad": 2.1551814143859036
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 865704891.0078269,
+       "gain": 710.7573078815775,
+       "field_energy_J": 75937500000.0,
+       "magnet_structure_t": 1215.0,
+       "si1_deflection_rad": 21.551814143859037
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 3206314.4111400987,
+       "gain": 1.0,
+       "field_energy_J": 25312500.0,
+       "magnet_structure_t": 0.405,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 320631441.11401,
+       "gain": 23.691910262719254,
+       "field_energy_J": 2531250000.0000005,
+       "magnet_structure_t": 40.50000000000001,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 32063144111.400986,
+       "gain": 2369.191026271925,
+       "field_energy_J": 253125000000.0,
+       "magnet_structure_t": 4050.0,
+       "si1_deflection_rad": 71.83938047953012
+      }
+     ]
+    }
+   }
+  },
+  "E_S250": {
+   "meta": {
+    "Tb_total_d": 88.0,
+    "burn_d": 22.0,
+    "ve_c": 0.05170243475571357,
+    "mass_ratio_per_burn": 1.3626934000210593,
+    "burn_AU": 28.90420916430136,
+    "brake_AU": 32.042701537031235,
+    "destination_AU": 61.9469107013326,
+    "t_flip_s": 300.0,
+    "path_AU": 121.91305969518453,
+    "min_r_AU": 1.000227573752405
+   },
+   "ring_field_integral_at_ship_Tm": 0.6102229570332816,
+   "mode_b": [
+    {
+     "theta_deg": 5,
+     "x_cover_m": 2534.9192267741246,
+     "column_kg_m2": 4.8445041611024575e-09,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 9283734.726608984,
+     "mdot_needed_kg_s": 10521566.023490181,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 5086729.369157581,
+      "vaporised_share": 0.39128687455058314,
+      "dv_m_s": 0.516675612698388,
+      "dv_over_V": 1.0771527078793041e-07,
+      "KE_removed_share": 2.1543052997063938e-07
+     },
+     "puff_radius_at_ship_m": 3.4762791076182245,
+     "thrust_axial_share": 0.9942992872989248
+    },
+    {
+     "theta_deg": 10,
+     "x_cover_m": 1257.758140050713,
+     "column_kg_m2": 2.403711518212847e-09,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 18710686.025695577,
+     "mdot_needed_kg_s": 21205444.16245499,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 2523897.094123489,
+      "vaporised_share": 0.1941459303171915,
+      "dv_m_s": 0.2563604199981054,
+      "dv_over_V": 5.344539471330392e-08,
+      "KE_removed_share": 1.068907864443247e-07
+     },
+     "puff_radius_at_ship_m": 2.1449819753832764,
+     "thrust_axial_share": 0.9773270317025812
+    },
+    {
+     "theta_deg": 20,
+     "x_cover_m": 609.3264624887779,
+     "column_kg_m2": 1.1644886163703214e-09,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 38622182.20201647,
+     "mdot_needed_kg_s": 43771806.49561867,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 1222713.0471888375,
+      "vaporised_share": 0.09405484978375674,
+      "dv_m_s": 0.12419493292508893,
+      "dv_over_V": 2.5891856518345298e-08,
+      "KE_removed_share": 5.178371242919866e-08
+     },
+     "puff_radius_at_ship_m": 1.4690647071840048,
+     "thrust_axial_share": 0.9113574211726988
+    },
+    {
+     "theta_deg": 30,
+     "x_cover_m": 384.1285041884967,
+     "column_kg_m2": 7.341110191141615e-10,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 61264700.2191838,
+     "mdot_needed_kg_s": 69433326.91507497,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 770816.5700698695,
+      "vaporised_share": 0.05929358231306688,
+      "dv_m_s": 0.07829434096370583,
+      "dv_over_V": 1.632261312668384e-08,
+      "KE_removed_share": 3.2645226077931966e-08
+     },
+     "puff_radius_at_ship_m": 1.2343211034311785,
+     "thrust_axial_share": 0.8080127018922194
+    },
+    {
+     "theta_deg": 45,
+     "x_cover_m": 221.7766952966369,
+     "column_kg_m2": 4.238391945006317e-10,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 106113573.49010246,
+     "mdot_needed_kg_s": 120262049.95544945,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 445031.1542256633,
+      "vaporised_share": 0.034233165709666405,
+      "dv_m_s": 0.04520325883141991,
+      "dv_over_V": 9.423865082569037e-09,
+      "KE_removed_share": 1.8847730154369913e-08
+     },
+     "puff_radius_at_ship_m": 1.0650875589411894,
+     "thrust_axial_share": 0.6035533905932737
+    },
+    {
+     "theta_deg": 60,
+     "x_cover_m": 128.04283472949894,
+     "column_kg_m2": 2.4470367303805397e-10,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 183794100.65755132,
+     "mdot_needed_kg_s": 208299980.74522483,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 256938.85668995665,
+      "vaporised_share": 0.019764527437688972,
+      "dv_m_s": 0.02609811365456862,
+      "dv_over_V": 5.44087104222795e-09,
+      "KE_removed_share": 1.0881742174007059e-08
+     },
+     "puff_radius_at_ship_m": 0.9673805264739797,
+     "thrust_axial_share": 0.3750000000000001
+    },
+    {
+     "theta_deg": 75,
+     "x_cover_m": 59.42488640477701,
+     "column_kg_m2": 1.1356736988710177e-10,
+     "column_needed_kg_m2": 0.044975091513628614,
+     "shortfall": 396021247.6377564,
+     "mdot_needed_kg_s": 448824080.65612394,
+     "mdot_available_kg_s": 1.1333333333333333,
+     "a_vaporised_max_m": null,
+     "damaging_grain": {
+      "a_m": 2.779059640263827e-05,
+      "m_kg": 2.2476165394253645e-10,
+      "KE_J": 2585.6729659175303,
+      "KE_over_Evap": 884928.1759870203,
+      "e_dep_J_kg": 119245.73838145686,
+      "vaporised_share": 0.009172749106265912,
+      "dv_m_s": 0.012112176699133973,
+      "dv_over_V": 2.5251170384542274e-09,
+      "KE_removed_share": 5.050234008763255e-09
+     },
+     "puff_radius_at_ship_m": 0.8958540144512002,
+     "thrust_axial_share": 0.1629031716051507
+    }
+   ],
+   "cases": {
+    "NOMINAL": {
+     "faces": [
+      {
+       "face": "ship stern disc (stern screen on a mast)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 6361.725123519331,
+       "bare_5mm_breaches": 74588.47570615551,
+       "standoff_needed_m": 59.00077093535194,
+       "standoff_available_m": 400.0,
+       "armour_t_m": 0.15218439947460166,
+       "erosion_m": 1.561568985337615e-05,
+       "kind": "bumper",
+       "mass_t": 36.83045298852387,
+       "remote_screen_t": 36.83045298852387
+      },
+      {
+       "face": "ring aft faces (nose, in the exhaust)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 1256.6370614359173,
+       "bare_5mm_breaches": 14733.526065413436,
+       "standoff_needed_m": 31.69549931258344,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 0.10056883266328565,
+       "erosion_m": 1.561568985337615e-05,
+       "kind": "armour",
+       "mass_t": 227.51666208835454,
+       "remote_screen_t": 6.950691377022725
+      },
+      {
+       "face": "plug aft faces (lit cone)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 1374.9067151100203,
+       "bare_5mm_breaches": 16120.186604585895,
+       "standoff_needed_m": 32.815355542695926,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 0.10292394403874007,
+       "erosion_m": 1.561568985337615e-05,
+       "kind": "armour",
+       "mass_t": 254.75812545836186,
+       "remote_screen_t": 7.621060410228418
+      },
+      {
+       "face": "boom services ducts, braking",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 527.1067811865474,
+       "bare_5mm_breaches": 6180.09904227562,
+       "standoff_needed_m": 23.037564554380403,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 0.08129978318940784,
+       "erosion_m": 1.561568985337615e-05,
+       "kind": "bumper",
+       "mass_t": 2.864717164413816,
+       "remote_screen_t": 2.864717164413816
+      },
+      {
+       "face": "ring forward faces",
+       "leads": "BOW_FIRST",
+       "area_m2": 1256.6370614359173,
+       "bare_5mm_breaches": 12646.589961969208,
+       "standoff_needed_m": 31.191818708974573,
+       "standoff_available_m": 2.0,
+       "armour_t_m": 0.09950054876492048,
+       "erosion_m": 1.3195173767005625e-05,
+       "kind": "armour",
+       "mass_t": 225.0947857600774,
+       "remote_screen_t": 6.9385009754322455
+      },
+      {
+       "face": "plug forward faces (slug)",
+       "leads": "BOW_FIRST",
+       "area_m2": 1374.9067151100203,
+       "bare_5mm_breaches": 13836.836422829901,
+       "standoff_needed_m": 32.29511090047347,
+       "standoff_available_m": 5.0,
+       "armour_t_m": 0.10183323272551059,
+       "erosion_m": 1.3195173767005625e-05,
+       "kind": "armour",
+       "mass_t": 252.05280773163352,
+       "remote_screen_t": 7.607568447634776
+      },
+      {
+       "face": "boom services ducts, bow-first",
+       "leads": "BOW_FIRST",
+       "area_m2": 527.1067811865474,
+       "bare_5mm_breaches": 5304.716478935097,
+       "standoff_needed_m": 22.872046571145113,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 0.0809099057102802,
+       "erosion_m": 1.3195173767005625e-05,
+       "kind": "bumper",
+       "mass_t": 2.8613925881230466,
+       "remote_screen_t": 2.8613925881230466
+      }
+     ],
+     "total_t": 1001.9789437794881,
+     "brow": {
+      "standoff_needed_m": 58.11129300045524,
+      "events_beyond_2m": 3124.5594640938116
+     },
+     "hybrid": [
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 2094395.1023931953,
+       "defeat_magnet_J": 32075.014954979208,
+       "gain": 1.0,
+       "field_energy_J": 2531250.0,
+       "magnet_structure_t": 0.0405,
+       "si1_deflection_rad": 0.07183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 2094395.1023931953,
+       "defeat_magnet_J": 3207501.4954979215,
+       "gain": 1.5314691539494227,
+       "field_energy_J": 253125000.00000003,
+       "magnet_structure_t": 4.050000000000001,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 2094395.1023931953,
+       "defeat_magnet_J": 320750149.54979205,
+       "gain": 153.14691539494223,
+       "field_energy_J": 25312500000.0,
+       "magnet_structure_t": 405.0,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 18849555.921538755,
+       "defeat_magnet_J": 866025.4037844385,
+       "gain": 1.0,
+       "field_energy_J": 7593750.0,
+       "magnet_structure_t": 0.1215,
+       "si1_deflection_rad": 0.21551814143859035
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 18849555.921538755,
+       "defeat_magnet_J": 86602540.37844387,
+       "gain": 4.594407461848268,
+       "field_energy_J": 759375000.0000001,
+       "magnet_structure_t": 12.150000000000002,
+       "si1_deflection_rad": 2.1551814143859036
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 18849555.921538755,
+       "defeat_magnet_J": 8660254037.844383,
+       "gain": 459.44074618482665,
+       "field_energy_J": 75937500000.0,
+       "magnet_structure_t": 1215.0,
+       "si1_deflection_rad": 21.551814143859037
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 209439510.23931953,
+       "defeat_magnet_J": 32075014.95497921,
+       "gain": 1.0,
+       "field_energy_J": 25312500.0,
+       "magnet_structure_t": 0.405,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 209439510.23931953,
+       "defeat_magnet_J": 3207501495.4979215,
+       "gain": 15.314691539494227,
+       "field_energy_J": 2531250000.0000005,
+       "magnet_structure_t": 40.50000000000001,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 209439510.23931953,
+       "defeat_magnet_J": 320750149549.79205,
+       "gain": 1531.4691539494222,
+       "field_energy_J": 253125000000.0,
+       "magnet_structure_t": 4050.0,
+       "si1_deflection_rad": 71.83938047953012
+      }
+     ]
+    },
+    "JUSTIFIED": {
+     "faces": [
+      {
+       "face": "ship stern disc (stern screen on a mast)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 6361.725123519331,
+       "bare_5mm_breaches": 567017.4549070782,
+       "standoff_needed_m": 302.1570879769448,
+       "standoff_available_m": 400.0,
+       "armour_t_m": 0.2710372120437922,
+       "erosion_m": 0.00014936275067818395,
+       "kind": "bumper",
+       "mass_t": 88.42385908136147,
+       "remote_screen_t": 88.42385908136147
+      },
+      {
+       "face": "ring aft faces (nose, in the exhaust)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 1256.6370614359173,
+       "bare_5mm_breaches": 112003.44788287976,
+       "standoff_needed_m": 162.62023624960793,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 0.17933158582425254,
+       "erosion_m": 0.00014936275067818395,
+       "kind": "armour",
+       "mass_t": 405.9763412416775,
+       "remote_screen_t": 15.922811005292534
+      },
+      {
+       "face": "plug aft faces (lit cone)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 1374.9067151100203,
+       "bare_5mm_breaches": 122544.76438382472,
+       "standoff_needed_m": 168.33395257715352,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 0.18350794754845168,
+       "erosion_m": 0.00014936275067818395,
+       "kind": "armour",
+       "mass_t": 454.521004576773,
+       "remote_screen_t": 17.498316886351738
+      },
+      {
+       "face": "boom services ducts, braking",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 527.1067811865474,
+       "bare_5mm_breaches": 46980.77011024915,
+       "standoff_needed_m": 116.33326351011691,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 0.14344200208217353,
+       "erosion_m": 0.00014936275067818395,
+       "kind": "armour",
+       "mass_t": 136.2383678218098,
+       "remote_screen_t": 6.425555667626645
+      },
+      {
+       "face": "ring forward faces",
+       "leads": "BOW_FIRST",
+       "area_m2": 1256.6370614359173,
+       "bare_5mm_breaches": 95431.49457012558,
+       "standoff_needed_m": 160.114294619749,
+       "standoff_available_m": 2.0,
+       "armour_t_m": 0.1774845149972338,
+       "erosion_m": 0.00012555079968352815,
+       "kind": "armour",
+       "mass_t": 401.7445040960606,
+       "remote_screen_t": 15.837858915219721
+      },
+      {
+       "face": "plug forward faces (slug)",
+       "leads": "BOW_FIRST",
+       "area_m2": 1374.9067151100203,
+       "bare_5mm_breaches": 104413.12511308753,
+       "standoff_needed_m": 165.74594249084646,
+       "standoff_available_m": 5.0,
+       "armour_t_m": 0.18162222880402343,
+       "erosion_m": 0.00012555079968352815,
+       "kind": "armour",
+       "mass_t": 449.7952367402508,
+       "remote_screen_t": 17.404657680084714
+      },
+      {
+       "face": "boom services ducts, bow-first",
+       "leads": "BOW_FIRST",
+       "area_m2": 527.1067811865474,
+       "bare_5mm_breaches": 40029.52759422937,
+       "standoff_needed_m": 114.50142147184356,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 0.14193221572938106,
+       "erosion_m": 0.00012555079968352815,
+       "kind": "armour",
+       "mass_t": 134.78330170383356,
+       "remote_screen_t": 6.392303212978178
+      }
+     ],
+     "total_t": 2071.4826152617666,
+     "brow": {
+      "standoff_needed_m": 297.67947929534915,
+      "events_beyond_2m": 95343.22443403731
+     },
+     "hybrid": [
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 3206.3144111401,
+       "gain": 1.0,
+       "field_energy_J": 2531250.0,
+       "magnet_structure_t": 0.0405,
+       "si1_deflection_rad": 0.07183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 320631.4411140101,
+       "gain": 2.369191026271926,
+       "field_energy_J": 253125000.00000003,
+       "magnet_structure_t": 4.050000000000001,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 32063144.111401,
+       "gain": 236.91910262719247,
+       "field_energy_J": 25312500000.0,
+       "magnet_structure_t": 405.0,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 86570.4891007827,
+       "gain": 1.0,
+       "field_energy_J": 7593750.0,
+       "magnet_structure_t": 0.1215,
+       "si1_deflection_rad": 0.21551814143859035
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 8657048.910078272,
+       "gain": 7.107573078815777,
+       "field_energy_J": 759375000.0000001,
+       "magnet_structure_t": 12.150000000000002,
+       "si1_deflection_rad": 2.1551814143859036
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 865704891.0078269,
+       "gain": 710.7573078815775,
+       "field_energy_J": 75937500000.0,
+       "magnet_structure_t": 1215.0,
+       "si1_deflection_rad": 21.551814143859037
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 3206314.4111400987,
+       "gain": 1.0,
+       "field_energy_J": 25312500.0,
+       "magnet_structure_t": 0.405,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 320631441.11401,
+       "gain": 23.691910262719254,
+       "field_energy_J": 2531250000.0000005,
+       "magnet_structure_t": 40.50000000000001,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 32063144111.400986,
+       "gain": 2369.191026271925,
+       "field_energy_J": 253125000000.0,
+       "magnet_structure_t": 4050.0,
+       "si1_deflection_rad": 71.83938047953012
+      }
+     ]
+    },
+    "HIGH": {
+     "faces": [
+      {
+       "face": "ship stern disc (stern screen on a mast)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 6361.725123519331,
+       "bare_5mm_breaches": 2028570.6136667512,
+       "standoff_needed_m": null,
+       "standoff_available_m": 400.0,
+       "armour_t_m": 1.19171473435401,
+       "erosion_m": 0.006801936979475981,
+       "kind": "armour",
+       "mass_t": 13724.340514162195
+      },
+      {
+       "face": "ring aft faces (nose, in the exhaust)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 1256.6370614359173,
+       "bare_5mm_breaches": 400705.30640330835,
+       "standoff_needed_m": null,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 1.1467428031796576,
+       "erosion_m": 0.006801936979475981,
+       "kind": "armour",
+       "mass_t": 2609.2567305151783
+      },
+      {
+       "face": "plug aft faces (lit cone)",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 1374.9067151100203,
+       "bare_5mm_breaches": 438418.08702076226,
+       "standoff_needed_m": null,
+       "standoff_available_m": 0.0,
+       "armour_t_m": 1.150255828437162,
+       "erosion_m": 0.006801936979475981,
+       "kind": "armour",
+       "mass_t": 2863.523684594754
+      },
+      {
+       "face": "boom services ducts, braking",
+       "leads": "ENGINE_FIRST",
+       "area_m2": 527.1067811865474,
+       "bare_5mm_breaches": 168079.14611500455,
+       "standoff_needed_m": null,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 1.1039773018729093,
+       "erosion_m": 0.006801936979475981,
+       "kind": "armour",
+       "mass_t": 1053.898684560583
+      },
+      {
+       "face": "ring forward faces",
+       "leads": "BOW_FIRST",
+       "area_m2": 1256.6370614359173,
+       "bare_5mm_breaches": 339439.0073230021,
+       "standoff_needed_m": null,
+       "standoff_available_m": 2.0,
+       "armour_t_m": 1.1346953822871897,
+       "erosion_m": 0.005649938552291285,
+       "kind": "armour",
+       "mass_t": 2579.400347403462
+      },
+      {
+       "face": "plug forward faces (slug)",
+       "leads": "BOW_FIRST",
+       "area_m2": 1374.9067151100203,
+       "bare_5mm_breaches": 371385.64893621363,
+       "standoff_needed_m": null,
+       "standoff_available_m": 5.0,
+       "armour_t_m": 1.1386628982081513,
+       "erosion_m": 0.005649938552291285,
+       "kind": "armour",
+       "mass_t": 2831.982126207352
+      },
+      {
+       "face": "boom services ducts, bow-first",
+       "leads": "BOW_FIRST",
+       "area_m2": 527.1067811865474,
+       "bare_5mm_breaches": 142380.49159137323,
+       "standoff_needed_m": null,
+       "standoff_available_m": 50.0,
+       "armour_t_m": 1.0868253458337789,
+       "erosion_m": 0.005649938552291285,
+       "kind": "armour",
+       "mass_t": 1036.532035221479
+      }
+     ],
+     "total_t": 26698.934122665003,
+     "brow": {
+      "standoff_needed_m": null,
+      "events_beyond_2m": 435729.59883610654
+     },
+     "hybrid": [
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 3206.3144111401,
+       "gain": 1.0,
+       "field_energy_J": 2531250.0,
+       "magnet_structure_t": 0.0405,
+       "si1_deflection_rad": 0.07183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 320631.4411140101,
+       "gain": 2.369191026271926,
+       "field_energy_J": 253125000.00000003,
+       "magnet_structure_t": 4.050000000000001,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 10.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 135333.7225907631,
+       "defeat_magnet_J": 32063144.111401,
+       "gain": 236.91910262719247,
+       "field_energy_J": 25312500000.0,
+       "magnet_structure_t": 405.0,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 86570.4891007827,
+       "gain": 1.0,
+       "field_energy_J": 7593750.0,
+       "magnet_structure_t": 0.1215,
+       "si1_deflection_rad": 0.21551814143859035
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 8657048.910078272,
+       "gain": 7.107573078815777,
+       "field_energy_J": 759375000.0000001,
+       "magnet_structure_t": 12.150000000000002,
+       "si1_deflection_rad": 2.1551814143859036
+      },
+      {
+       "standoff_m": 30.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 1218003.5033168676,
+       "defeat_magnet_J": 865704891.0078269,
+       "gain": 710.7573078815775,
+       "field_energy_J": 75937500000.0,
+       "magnet_structure_t": 1215.0,
+       "si1_deflection_rad": 21.551814143859037
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.01,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 3206314.4111400987,
+       "gain": 1.0,
+       "field_energy_J": 25312500.0,
+       "magnet_structure_t": 0.405,
+       "si1_deflection_rad": 0.7183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 0.1,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 320631441.11401,
+       "gain": 23.691910262719254,
+       "field_energy_J": 2531250000.0000005,
+       "magnet_structure_t": 40.50000000000001,
+       "si1_deflection_rad": 7.183938047953012
+      },
+      {
+       "standoff_m": 100.0,
+       "B_T": 1.0,
+       "defeat_passive_J": 13533372.259076305,
+       "defeat_magnet_J": 32063144111.400986,
+       "gain": 2369.191026271925,
+       "field_energy_J": 253125000000.0,
+       "magnet_structure_t": 4050.0,
+       "si1_deflection_rad": 71.83938047953012
+      }
+     ]
+    }
+   }
+  }
+ }
+}

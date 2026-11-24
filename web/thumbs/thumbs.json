@@ -298,6 +298,33 @@
      ]
     }
    }
+  },
+  "sim-fusion-ignition": {
+   "class": "SIM",
+   "alt": "The Fusion Ignition simulation: the Vertex engine cluster with its field lines and particle paths",
+   "method": "Chrome: engineering/fusion-ignition/?autostart, Thrust stage, stage",
+   "source_size": [
+    1122,
+    667
+   ],
+   "files": {
+    "sim-fusion-ignition-480.webp": {
+     "bytes": 13020,
+     "quality": 78,
+     "size": [
+      480,
+      270
+     ]
+    },
+    "sim-fusion-ignition-960.webp": {
+     "bytes": 40518,
+     "quality": 78,
+     "size": [
+      960,
+      540
+     ]
+    }
+   }
   }
  }
 }

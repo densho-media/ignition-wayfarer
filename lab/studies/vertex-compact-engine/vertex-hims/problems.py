@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+"""Engineering Problems Register for the Vertex drive and its protection (research, not canon).
+
+One record per unresolved problem; the source of truth is this file (data below). `python3 lab/studies/vertex-compact-engine/vertex-hims/problems.py` writes
+results/problems.json (read by blender_hims.py for the overlays) and PROBLEMS.md. Numbers are copied from the result files named in
+`evidence`; rerun those scripts to refresh them. Status: OPEN (unresolved), MITIGATED (a design answer exists, not validated),
+REJECTED (the mechanism is unsuitable under the stated assumptions), WATCH (likely fine, needs a test).
+On approval the register moves to lab/problems/vertex-engineering-register/ (problem-map kind), per AGENTS.md "Where things go".
+"""
+import json
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+
+P = [
+    dict(id='ENG-001', title='Whole-ship mass does not reach the 4,426 t benchmark', subsystem='Vertex drive, whole ship', variant='AMPN B today',
+         mechanism='Magnet, protection and radiator mass raise dry mass; eta 0.86 and canon delta-v set the mass ratio',
+         evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/trade.json; tables.md', required='4,426 t departure', achieved='10,987 t (NOMINAL dust), 15,805 t (JUSTIFIED)',
+         assumptions='Canon jet power and four 4,797 km/s burns; REBCO 1.53e8 A/m2', severity='HIGH: mission mass x2.5',
+         solutions='Higher Je tape (9,820 t at 6e8), lighter supports, eta toward 0.95, mission-level trade (owner)',
+         advances='Conductor Je >= 6e8 A/m2 at 20 K with 3e22 n/m2 tolerance', next='Mission-level trade study; tape sensitivity', status='OPEN',
+         components=['ENGINE', 'SHIP']),
+    dict(id='ENG-002', title='Field-ripple heating of the winding and eddy shield', subsystem='Magnetic nozzle', variant='AMPN B today',
+         mechanism='20 kHz pulses couple a field ripple dB/B ~ eps_c E/(2W) into the winding; Bean AC loss and eddy heating',
+         evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/audit.json (ripple rows), coilpack.json', required='<15 kW at 20 K per engine',
+         achieved='W eddy shield 2.35 MW/m2 at 2,642 K bare (held at 2,300 K with fins); unshielded winding 10 MW at 20 K',
+         assumptions='Coupling eps_c 0.3 (range 0.1-1): not measured', severity='HIGH: at eps_c 1 the shield does not close',
+         solutions='Pulse shaping, flux-conserving inner shell, larger W/E ratio, segmented eddy shield', advances='Measured coupling',
+         next='Plasma-coupled pulse simulation (resistive MHD) for eps_c', status='OPEN', components=['RING', 'EDDY_SHIELD']),
+    dict(id='ENG-003', title='Plasma-coupled detachment not modelled', subsystem='Magnetic nozzle', variant='all RON/AMPN',
+         mechanism='Exhaust must detach from closed field lines; only vacuum test particles were pushed', evidence='lab/studies/vertex-compact-engine/vertex-ron/ron.py particles()',
+         required='eta and forward leakage from a coupled model', achieved='eta 0.86 (test particles); forward 2.5 %', assumptions='No collective effects',
+         severity='HIGH: eta and the cant could move either way', solutions='Hybrid PIC or two-fluid detachment model', advances='None (simulation effort)',
+         next='2D hybrid detachment run for B today', status='OPEN', components=['RING', 'PLUME']),
+    dict(id='ENG-004', title='Rare high-energy strikes on hardware unbounded', subsystem='Magnetic nozzle', variant='AMPN B today',
+         mechanism='Zero hits in 40,960 test particles bounds the hit share only at 2.9e-4 (about 17 GW)', evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/audit.json',
+         required='<1e-6 hit share', achieved='<2.9e-4 (95 %)', assumptions='Vacuum field', severity='MEDIUM', solutions='1e6-particle run with importance sampling',
+         advances='None', next='Importance-sampled run', status='OPEN', components=['RING', 'PLUG']),
+    dict(id='ENG-005', title='Winding neutron fluence sets a 15 m ring floor', subsystem='Coil protection', variant='AMPN B today',
+         mechanism='REBCO limit 3e22 n/m2; below R about 15 m no nose length closes; the nose tip takes about 100 dpa per mission',
+         evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/rscan.json, coilpack.json', required='Winding < 3e22 n/m2', achieved='Closes at R >= 15 m; tip 9.9e26 n/m2',
+         assumptions='W-B4C attenuation length 0.08 m; scattered floor 1e-4', severity='MEDIUM: limits compaction; cassettes needed',
+         solutions='Replaceable nose cassettes; radiation-tolerant conductor', advances='Conductor tolerance 3e23 n/m2 would allow R ~ 10 m',
+         next='Neutron transport (MCNP-class) for the nose', status='MITIGATED', components=['NOSE', 'RING']),
+    dict(id='ENG-006', title='Neutrons reach the ship through the plug', subsystem='Radiation protection', variant='RON B, AMPN',
+         mechanism='The plug skin removes 10 % of neutrons; 2.59 GW for four engines at the RON point', evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/audit.json',
+         required='<= 100 MW at the ship', achieved='Met with a LiH shadow slug (6 t/engine at B today, 77 t at the RON point)',
+         assumptions='Removal cross-sections only (no transport)', severity='MEDIUM', solutions='Slug sized; check with transport', advances='None',
+         next='Coupled n-gamma transport of plug and slug', status='MITIGATED', components=['PLUG', 'SLUG']),
+    dict(id='ENG-007', title='Forward escape needs cant; E cannot clear its forward stream', subsystem='Magnetic nozzle', variant='E (mirror coil)',
+         mechanism='Loss-cone escapers intercept ship, plug and booms; E needs > 30 deg', evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/audit.json, optimize.json',
+         required='Ship <= 0.1 GW, plug and booms <= 0.3 GW', achieved='B: 0-0.5 deg at S 770 m; E: not cleared at 30 deg', assumptions='Straight-line escape',
+         severity='MEDIUM (E rejected for now)', solutions='Wider spacing; forward-stream dump', advances='None', next='Re-run E with S > 1 km', status='OPEN',
+         components=['ENGINE']),
+    dict(id='ENG-010', title='Exhaust plume cannot stop dust (Mode B)', subsystem='Dust protection', variant='AMPN Mode B',
+         mechanism='Plume column at the ship 1e-9 to 4e-11 kg/m2 against 0.045 kg/m2 to stop a 2.6 kJ grain', evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/dust.json',
+         required='0.045 kg/m2', achieved='1e7-1e9 short', assumptions='Canon jet', severity='n/a', solutions='Passive screens', advances='None',
+         next='None', status='REJECTED', components=['PLUME']),
+    dict(id='ENG-011', title='HIMS: deflection limited by plasma beta and the ionised share, not by the field integral',
+         subsystem='Dust protection (HIMS)', variant='HIMS C',
+         mechanism='Isolated ions turn in 0.01 T over 20 m (Si14+ gyroradius 0.3 m at 0.3 T); the dense debris cloud is super-Alfvenic until it fills '
+                   '4 mu0 E / B^2; neutrals (10-30 %) pass', evidence='lab/studies/vertex-compact-engine/vertex-hims/results/hims.json',
+         required='Lower stern protection mass than passive', achieved='C 0.3 T: 543 t vs 41 t passive (NOMINAL); 598 t vs 100 t (JUSTIFIED)',
+         assumptions='Full ionisation at ~120 keV/u (EXTRAPOLATED); cone 30 deg (NOMINAL), 15 deg (JUSTIFIED)', severity='MEDIUM: HIMS costs more than it saves',
+         solutions='Field only where stand-off is constrained; high-Je magnets (mass /4); superconducting field from existing bus', advances='Je 6e8; measured ionisation above 100 km/s',
+         next='Hybrid PIC of a debris plasmoid entering a 0.3 T field', status='OPEN', components=['HIMS_MAGNET', 'STERN_SCREEN']),
+    dict(id='ENG-012', title='Vertex ring fields cannot reach the dust path at the ship', subsystem='Dust protection (HIMS)', variant='HIMS A',
+         mechanism='Ring far field at the stern path 3.3e-6 T; Si14+ gyroradius 30 km', evidence='lab/studies/vertex-compact-engine/vertex-hims/results/hims.json',
+         required='>= 0.01 T over 20 m', achieved='3.3e-6 T', assumptions='B today geometry', severity='n/a', solutions='Dedicated deflector (C)',
+         advances='None', next='None', status='REJECTED', components=['HIMS_A']),
+    dict(id='ENG-013', title='Laser pre-ionisation of dust', subsystem='Dust protection (HIMS)', variant='HIMS stage A',
+         mechanism='Illuminating the stern path to vaporise the design grain in its 0.2 ms transit needs 1.9e11 W/m2', evidence='lab/studies/vertex-compact-engine/vertex-hims/results/hims.json',
+         required='< 1 GW', achieved='1,185 TW', assumptions='Absorptivity 1, 1 km depth', severity='n/a', solutions='Screens', advances='None', next='None',
+         status='REJECTED', components=['STERN_SCREEN']),
+    dict(id='ENG-014', title='Engine faces cannot have a screen ahead of them', subsystem='Dust protection', variant='AMPN B today',
+         mechanism='Any screen ahead of a ring or plug face sits in the burn view (5e8 W/m2 face-on) or in the exhaust', evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/dust.json',
+         required='Stand-off >= 25-180 m', achieved='0 m: monolithic C/C armour 8-19 cm (195 t NOMINAL, 700 t JUSTIFIED)', assumptions='Burn always on in braking',
+         severity='MEDIUM', solutions='Edge-on armour shapes; replaceable tiles', advances='Armour areal density /2', next='Armour shape study at the nose', status='MITIGATED',
+         components=['RING', 'PLUG']),
+    dict(id='ENG-015', title='Boom service ducts dominate JUSTIFIED dust mass', subsystem='Dust protection, structure', variant='AMPN B today',
+         mechanism='Lateral booms present 2 x 2,083 m2 of duct; fences need 155-215 m stand-off in JUSTIFIED, so armour (1,580 t)',
+         evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/dust.json, trade.json', required='Duct loss < 0.1 events', achieved='Fences 23 t (NOMINAL); armour 1,580 t (JUSTIFIED)',
+         assumptions='1 m sensitive duct width', severity='HIGH under JUSTIFIED', solutions='Redundant cables (relax the critical criterion), cryoplant at the engine (power only)',
+         advances='None', next='Redundancy criterion; C2 bus deflector rejected (1,860 t)', status='OPEN', components=['BOOM']),
+    dict(id='ENG-016', title='Stern screen erosion and replacement', subsystem='Dust protection', variant='AMPN B today, HIMS',
+         mechanism='Perforating grains hole 0.55 % (NOMINAL) to 2 % (JUSTIFIED) of the screen; erosion 13-120 um', evidence='lab/studies/vertex-compact-engine/vertex-hims/results/hims.json',
+         required='Screen holds through each braking burn', achieved='Holed < 2 %, eroded < 0.12 mm of 0.45-2.1 mm', assumptions='Hole ~ one crater depth radius',
+         severity='LOW', solutions='Roll-fed replaceable screen', advances='None', next='Hole growth under repeated hits', status='WATCH', components=['STERN_SCREEN']),
+    dict(id='ENG-017', title='Impact physics above 100 km/s is extrapolated', subsystem='Dust protection', variant='all',
+         mechanism='No laboratory data for grains at 4,800 km/s; cone angle, ionised share and wall rules are extrapolated', evidence='lab/studies/dust-impacts',
+         required='Measured rules', achieved='Extrapolation (NOMINAL vs JUSTIFIED bands)', assumptions='Dust study rules', severity='HIGH (uncertainty)',
+         solutions='Design to JUSTIFIED', advances='Accelerator or laser-driven microparticle tests at 100-1,000 km/s', next='Literature bound on cluster-ion impacts',
+         status='OPEN', components=['STERN_SCREEN', 'HIMS_MAGNET']),
+    dict(id='ENG-018', title='Engine-to-engine magnetic forces on the boom frame', subsystem='Structure', variant='RON B, E',
+         mechanism='Ring dipoles repel: 106 kN per pair at S 400 m (RON), 1.7 MN at E 250 m; asymmetric on a quench', evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/adaptive.json',
+         required='Carried by the frame', achieved='Small at B today (R 15 m, S 770 m)', assumptions='Dipole approximation', severity='LOW at B today',
+         solutions='Cross-bracing', advances='None', next='Quench transient load case', status='WATCH', components=['BOOM']),
+    dict(id='ENG-019', title='Giga-cycle fatigue from the 20 kHz ripple', subsystem='Structure', variant='AMPN B today',
+         mechanism='Ripple stress 51 MPa at 4.8e11 cycles; Goodman 0.28 on extrapolated CFRP data', evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/coilpack.json',
+         required='Goodman < 1 with data', achieved='0.28 (extrapolated)', assumptions='CFRP endurance 60 % UTS at 1e10', severity='MEDIUM (no data)',
+         solutions='Damping, pulse spread spectrum', advances='Fatigue data at 1e11-1e12 cycles', next='Ultrasonic fatigue literature', status='WATCH', components=['RING']),
+    dict(id='ENG-020', title='Quench protection of thin tapes', subsystem='Cryogenics', variant='AMPN advanced, speculative tape',
+         mechanism='Copper hot-spot limit shortens the dump: 8 sections at 5 kV (today), 36 (advanced), 165-239 (speculative)', evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/coilpack.json',
+         required='Safe dump', achieved='Sectioned dumps sized', assumptions='Cu half the cable', severity='MEDIUM for future tape', solutions='No-insulation winding, quench heaters',
+         advances='High-MIITs stabiliser', next='Quench propagation model', status='MITIGATED', components=['QUENCH']),
+    dict(id='ENG-021', title='Adaptive geometry adds mass without protection', subsystem='Mechanisms', variant='AMPN adaptive',
+         mechanism='Carriage and locks 25 t/engine, +292 t departure; braking needs no field change', evidence='lab/studies/vertex-compact-engine/vertex-ampn/results/trade.json',
+         required='Benefit > cost', achieved='Service only', assumptions='Fixed field in braking', severity='LOW', solutions='Keep as service option', advances='None',
+         next='None', status='REJECTED', components=['CARRIAGE']),
+]
+
+
+def main():
+    (HERE / 'results').mkdir(exist_ok=True)
+    (HERE / 'results' / 'problems.json').write_text(json.dumps(P, indent=1))
+    L = ['# Engineering Problems Register: Vertex drive and protection', '',
+         'Research, not canon. Generated by `problems.py` from its data; numbers come from the evidence files. An open problem blocks a claim of',
+         'validation, not the development of a labelled prototype.', '',
+         '| ID | Problem | Subsystem | Required | Achieved | Severity | Status |', '| --- | --- | --- | --- | --- | --- | --- |']
+    for p in P:
+        L.append(f"| {p['id']} | {p['title']} | {p['subsystem']} | {p['required']} | {p['achieved']} | {p['severity']} | {p['status']} |")
+    for p in P:
+        L += ['', f"## {p['id']}: {p['title']}", '',
+              f"- Variant: {p['variant']}", f"- Mechanism: {p['mechanism']}", f"- Evidence: `{p['evidence']}`",
+              f"- Assumptions and uncertainty: {p['assumptions']}", f"- Possible solutions: {p['solutions']}",
+              f"- Required advances: {p['advances']}", f"- Next experiment or simulation: {p['next']}", f"- Model components: {', '.join(p['components'])}"]
+    (HERE / 'PROBLEMS.md').write_text('\n'.join(L) + '\n')
+    print(f'{len(P)} problems written')
+
+
+if __name__ == '__main__':
+    main()

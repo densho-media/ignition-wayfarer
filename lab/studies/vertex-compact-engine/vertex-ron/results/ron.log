@@ -1,0 +1,35 @@
+A_compact        V2  5.7 kHz Je 1.5e+08 | pulse 10.34 GJ | x1.0 capture, W/E 298.7 | hit 0.681 fwd 0.000 eta 0.317 cant 0.0 | x4 B01 170791.0 self   4131.3 GW | engine     inf t | dep     inf t (+inf)
+B_D300           V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x1.6 capture, W/E   8.7 | hit 0.000 fwd 0.025 eta 0.826 cant 11.2 | x4 B01      0.0 self    571.1 GW | engine     874 t | dep   15665 t (+11239)
+B_D500           V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x1.6 capture, W/E   8.7 | hit 0.000 fwd 0.025 eta 0.826 cant 7.5 | x4 B01      0.0 self    137.5 GW | engine     603 t | dep   12036 t (+7610)
+B_D800           V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x1.6 capture, W/E   8.6 | hit 0.000 fwd 0.025 eta 0.809 cant 11.3 | x4 B01      0.0 self     47.5 GW | engine     526 t | dep   11478 t (+7052)
+B_D1200          V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x1.6 capture, W/E   9.0 | hit 0.000 fwd 0.025 eta 0.784 cant 19.0 | x4 B01      0.0 self     22.2 GW | engine     543 t | dep   12722 t (+8296)
+B_D800_R65       V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x1.6 capture, W/E   8.9 | hit 0.000 fwd 0.025 eta 0.768 cant 18.1 | x4 B01      0.0 self     52.8 GW | engine     598 t | dep   13772 t (+9346)
+B_D800_R80       V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x1.6 capture, W/E   9.3 | hit 0.000 fwd 0.025 eta 0.733 cant 18.6 | x4 B01      0.1 self     60.7 GW | engine     700 t | dep   16294 t (+11868)
+B_D800_k3        V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x2.5 capture, W/E  20.7 | hit 0.000 fwd 0.006 eta 0.822 cant 0.0 | x4 B01      0.0 self     43.3 GW | engine     642 t | dep   12462 t (+8036)
+B_D800_k4        V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x2.5 capture, W/E  22.0 | hit 0.000 fwd 0.006 eta 0.695 cant 0.0 | x4 B01      0.0 self     40.6 GW | engine     608 t | dep   14863 t (+10437)
+E_hybrid_2_S250  V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x1.6 capture, W/E   8.8 | hit 0.000 fwd 0.018 eta 0.826 cant 30.0 | x4 B01      0.0 self     83.4 GW | engine     537 t | dep   13214 t (+8788)
+E_hybrid_4_S250  V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x2.5 capture, W/E  21.7 | hit 0.000 fwd 0.008 eta 0.929 cant 24.0 | x4 B01      0.1 self     84.1 GW | engine     755 t | dep   13396 t (+8970)
+E_hybrid_4_S400  V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x1.6 capture, W/E   8.9 | hit 0.000 fwd 0.010 eta 0.842 cant 23.8 | x4 B01      0.0 self     49.2 GW | engine     541 t | dep   12088 t (+7662)
+C_remote_F       V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x1.6 capture, W/E   9.4 | hit 0.000 fwd 0.025 eta 0.717 cant 30.0 | x4 B01      0.1 self      6.6 GW | engine     737 t | dep   19848 t (+15422)
+D_distributed    V2 20.0 kHz Je 1.5e+08 | pulse  2.95 GJ | x1.0 capture, W/E   8.2 | hit 0.000 fwd 0.031 eta 0.888 cant 11.3 | x4 B01      0.0 self     73.6 GW | engine     851 t | dep   14159 t (+9733)
+  sens B_D800       ref V2 20 kHz Je 1.5e8                 engine     526 t  dep    11910 t  eta 0.778 cant  8.5
+  sens B_D800       V3 fuel (credited to fuel, not nozzle) engine     503 t  dep    11486 t  eta 0.781 cant  7.3
+  sens B_D800       10 kHz pulses                          engine     497 t  dep    12242 t  eta 0.744 cant 10.4
+  sens B_D800       40 kHz pulses                          engine     562 t  dep    11954 t  eta 0.806 cant 10.5
+  sens B_D800       Je 3e8 (better tape)                   engine     416 t  dep    10318 t  eta 0.780 cant  6.7
+  sens B_D800       Je 6e8 (future tape, SENSITIVITY)      engine     357 t  dep     9520 t  eta 0.780 cant  6.6
+  sens B_D800       V3 + 40 kHz + Je 6e8 (all levers)      engine     357 t  dep     9273 t  eta 0.807 cant 11.4
+  sens E_hybrid_4_S250 ref V2 20 kHz Je 1.5e8                 engine     755 t  dep    11981 t  eta 0.944 cant  0.0
+  sens E_hybrid_4_S250 V3 fuel (credited to fuel, not nozzle) engine     721 t  dep    11610 t  eta 0.944 cant  0.0
+  sens E_hybrid_4_S250 10 kHz pulses                          engine     702 t  dep    11545 t  eta 0.932 cant  0.0
+  sens E_hybrid_4_S250 40 kHz pulses                          engine     575 t  dep    10700 t  eta 0.886 cant  0.0
+  sens E_hybrid_4_S250 Je 3e8 (better tape)                   engine     573 t  dep     9999 t  eta 0.944 cant  0.0
+  sens E_hybrid_4_S250 Je 6e8 (future tape, SENSITIVITY)      engine     478 t  dep     8965 t  eta 0.944 cant  0.0
+  sens E_hybrid_4_S250 V3 + 40 kHz + Je 6e8 (all levers)      engine     509 t  dep     9198 t  eta 0.954 cant  0.0
+  sens C_remote_F   ref V2 20 kHz Je 1.5e8                 engine     982 t  dep    19671 t  eta 0.833 cant 30.0
+  sens C_remote_F   V3 fuel (credited to fuel, not nozzle) engine     936 t  dep    18954 t  eta 0.834 cant 30.0
+  sens C_remote_F   10 kHz pulses                          engine     915 t  dep    19523 t  eta 0.806 cant 30.0
+  sens C_remote_F   40 kHz pulses                          engine     773 t  dep    19986 t  eta 0.729 cant 30.0
+  sens C_remote_F   Je 3e8 (better tape)                   engine     764 t  dep    16450 t  eta 0.833 cant 30.0
+  sens C_remote_F   Je 6e8 (future tape, SENSITIVITY)      engine     651 t  dep    14774 t  eta 0.833 cant 30.0
+  sens C_remote_F   V3 + 40 kHz + Je 6e8 (all levers)      engine     679 t  dep    14631 t  eta 0.857 cant 30.0

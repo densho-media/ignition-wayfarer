@@ -327,3 +327,53 @@ references = ["S-VTX-1-5"]
 atlas = []
 materials = []
 penalties = { power = "None.", heat = "None.", mass = "Not computed.", maintenance = "None.", booked = [], unbooked = ["Photon heat into hardware above the 14.4 GW radiator (>=854x as modeled)"] }
+
+[[breakthrough]]
+id = "BT-009"
+name = "Grazing knife-edge photon skimmer"
+summary = "A long, polished heavy-metal or diamond wedge laid along the rays from the burn, so that X-rays reaching a leading edge strike it at a grazing angle below the critical angle and glance off instead of being absorbed."
+limitation = "Edge-on members still absorb the photons that hit their leading edge. In the MPN study's recommended edge-on ring the hot nose takes 0.47 GW per engine of photons and runs at about 1,700 K; that heat is radiated by the nose itself and sets the nose length and material."
+weakest_links = ["WL-008", "WL-005"]
+basis = "Fresnel total external reflection with xraylib optical constants (critical angle 0.4-2.9 mrad at 30-100 keV), the steering-cost law: a beam turned by phi keeps exp(-g phi) whatever the number of bounces, g = 2 beta / theta_c^3. MPN study wedge rule: absorbed share x (L/a) is about 2 g a."
+level = "B"
+evidence = "CALCULATED"
+development = "PROPOSED"
+canon = "NON_CANON"
+assumption = "None for the calculator: no lever exists in the scenario grid. The record holds the MPN study's skimmer law: hiding a half-width a from a 46-55 keV bremsstrahlung spectrum to 10 % absorbed needs L/a of about 1,000 (Pt, Os) to 3,000 (diamond); a 2 cm edge needs a 20-60 m wedge."
+modifies = []
+unchanged = "Everything: the Wayfarer model, the Vertex engines, the fuel cycle, Fiji technology and lore."
+allowed = "Citing the skimmer law when sizing leading-edge protection for edge-on members; cooling a nose that is temperature- or fluence-limited (MPN F sensitivity: 1,702 K to 1,217 K with a 20 m Pt skimmer)."
+forbidden = "Treating a skimmer as a thermal-budget saving: the reflected photons land on neighbouring members (MPN F: 9.3 GW to 16.6 GW on four engines). Reflecting MeV neutrons or gammas with it (their critical angles are 1e-7 to 1e-4 rad)."
+energy = "None: passive reflection. Absorbed photons heat the wedge, which radiates them."
+depends_on = []
+risks = "Net negative in both cases the MPN study computed: on the Halo 2.5 ring a 20-69 m skimmer saves 7-20 t of radiator but weighs 41-140 t and adds 3,200-11,000 m2 of broadside; on the edge-on ring the reflected share overheats the neighbouring members. Figure error, roughness growth under ablation and eddy heating (a tiled film is needed: 50 nm Pt tiled at 1 mm gives 3e-5 GW per engine) are not tested."
+validation = "Photon transport through the whole four-engine cluster with the reflected rays followed to their next hit; ablation and figure-error measurement at grazing incidence under pulsed 30-100 keV flux."
+references = ["S-MPN-1", "S-VTX-1-5"]
+atlas = []
+materials = []
+penalties = { power = "None.", heat = "Moves photon heat from the edge to its neighbours.", mass = "Not computed in the calculator; MPN: 49 t per engine for 20 m.", maintenance = "Not modelled: surface figure and roughness life.", booked = [], unbooked = ["Cross-irradiation of neighbouring members by reflected photons", "Broadside area exposed to dust"] }
+
+[[breakthrough]]
+id = "BT-010"
+name = "Edge-on remote ribbon ring"
+summary = "Lay every member of a remote magnetic nozzle ring in planes that contain its burn, so the burn sees only edges: a 4.4 cm REBCO ribbon ring, edge-on tension tapes, a self-radiating shadow plug and a spine in the plug's shadow."
+limitation = "Any hardware the burn sees absorbs its photons and neutrons: a compact drawn engine sees 62 % of the sky and puts about 10 TW into hardware on the V2 source against a 10.8 GW drive share. Coatings, fairings and collimators cannot change that (MPN A, B, C)."
+weakest_links = ["WL-005", "WL-008", "WL-002"]
+basis = "Geometry and radiative balance: ring sky = a R / rho^2; planar members containing the line of sight present only their thickness; hot leading edges radiate their own heat. Superconductor and structure sizing from field energy (50 x pulse energy) and the virial theorem. MPN study candidate F, optimiser over 600 points per source."
+level = "B"
+evidence = "CALCULATED"
+development = "PROPOSED"
+canon = "NON_CANON"
+assumption = "None for the calculator: no lever exists in the scenario grid. The MPN point: ring R 90 m, burn 180 m aft of it, engines and ship 2 km away, 21 MA, V2 (1.6B S5) source; heat 3.31 GW to the hot loop plus 6.03 GW radiated by the hot parts themselves, 9.34 GW in all for four engines."
+modifies = []
+unchanged = "Everything: the Wayfarer model, the deployed Vertex engines (M0-NOMINAL prototype), mission physics, the fuel cycle, Fiji technology and lore."
+allowed = "Comparing remote-ring nozzle architectures by their exposure; citing that the thermal closure comes from geometry and fuel, not photonics."
+forbidden = "Counting it as closed: the mass is about 779 t per engine (conductor 206-239, structure 348) against the Halo 2.5 yardsticks; charged leakage is the Halo 2.2 95 % bound and still OPEN; it needs the V2 or V3 fuel route (on V0 it reaches 13.9 GW)."
+energy = "None beyond the field energy stored in the ring per pulse."
+depends_on = []
+risks = "The structure is 2 km long, like the Halo Vertex the owner rejected as a baseline on 2026-11-17 (dust exposure, compression booms, deployment, silhouette). Edge alignment must hold to a few mrad; at 1 km spacing the heat reaches 14.7-18.9 GW. The nose must be dielectric or laminated: a bulk tungsten nose takes 535 GW per engine of eddy heating."
+validation = "Charged-particle Monte Carlo of the ring's leakage; alignment tolerance analysis; structural dynamics of the deployed ring and tapes; owner decision on remote geometry."
+references = ["S-MPN-1", "S-VTX-1-5"]
+atlas = []
+materials = []
+penalties = { power = "None.", heat = "Computed in the MPN study, not in the calculator.", mass = "Not computed in the calculator; MPN: about 779 t per engine.", maintenance = "Not modelled: deployment and alignment.", booked = [], unbooked = ["Ring and structure mass", "Charged leakage (OPEN)", "Dust exposure of the 2 km structure"] }

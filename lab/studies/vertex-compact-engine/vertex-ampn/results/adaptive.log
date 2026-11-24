@@ -1,0 +1,28 @@
+== B_D800: stored field energy 2.543e+10 J per engine (8.6 x the 2.95 GJ pulse), ring 12.1 MA-turns at R 50.0 m, 607 turns of 20 kA, L 127.2 H
+  ramp 0 to full at       1 V:   706.42 h, peak power 0.02 MW
+  ramp 0 to full at     100 V:     7.06 h, peak power 2.00 MW
+  ramp 0 to full at    1000 V:     0.71 h, peak power 20.00 MW
+  ramp 0 to full at   10000 V:     0.07 h, peak power 200.00 MW
+  winding field 3.81 T; a 1 h ramp is 1.1e-03 T/s, 1.3e-07 of the 20 kHz ripple dB/dt (negligible)
+  field forces between engines at S 400 m: neighbour 106 kN, diagonal 27 kN (4.40 % of one engine's thrust, pushing the four apart; static, carried by the boom frame)
+  EM scan (current multiple):
+    x1.0: eta 0.649, forward 2.50 %, cant 14.0, field/pulse 3.4, engine 909 t, departure 22,523 t
+    x1.3: eta 0.744, forward 2.50 %, cant 13.5, field/pulse 5.7, engine 981 t, departure 19,578 t
+    x1.6: eta 0.809, forward 2.50 %, cant 11.5, field/pulse 8.6, engine 1059 t, departure 18,516 t
+    x2.0: eta 0.861, forward 2.50 %, cant 8.0, field/pulse 13.5, engine 1174 t, departure 18,407 t
+    x2.5: eta 0.894, forward 2.50 %, cant 11.5, field/pulse 21.1, engine 1332 t, departure 19,729 t
+    x3.2: eta 0.912, forward 2.50 %, cant 9.5, field/pulse 34.5, engine 1582 t, departure 22,044 t
+  stow stroke ring to plug node 70 m, 1.9 h at 1 cm/s; moved mass 369 t, carriage ~39 t
+== E_S250: stored field energy 6.381e+10 J per engine (21.7 x the 2.95 GJ pulse), ring 19.1 MA-turns at R 50.0 m, 955 turns of 20 kA, L 319.1 H
+  ramp 0 to full at       1 V:  1772.57 h, peak power 0.02 MW
+  ramp 0 to full at     100 V:    17.73 h, peak power 2.00 MW
+  ramp 0 to full at    1000 V:     1.77 h, peak power 20.00 MW
+  ramp 0 to full at   10000 V:     0.18 h, peak power 200.00 MW
+  winding field 6.00 T; a 1 h ramp is 1.7e-03 T/s, 3.2e-07 of the 20 kHz ripple dB/dt (negligible)
+  field forces between engines at S 250 m: neighbour 1728 kN, diagonal 432 kN (71.48 % of one engine's thrust, pushing the four apart; static, carried by the boom frame)
+  EM scan (current multiple):
+    x1.6: eta 0.842, forward 0.95 %, cant 30.0, field/pulse 8.9, engine 1074 t, departure 20,742 t
+    x2.0: eta 0.900, forward 0.62 %, cant 23.0, field/pulse 13.9, engine 1192 t, departure 19,249 t
+    x2.5: eta 0.929, forward 0.78 %, cant 23.5, field/pulse 21.7, engine 1356 t, departure 20,627 t
+    x3.2: eta 0.950, forward 0.62 %, cant 17.0, field/pulse 35.5, engine 1614 t, departure 22,189 t
+  stow stroke ring to plug node 70 m, 1.9 h at 1 cm/s; moved mass 597 t, carriage ~57 t

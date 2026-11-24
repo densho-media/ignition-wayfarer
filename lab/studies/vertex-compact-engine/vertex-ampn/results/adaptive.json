@@ -1,0 +1,319 @@
+{
+ "designs": {
+  "B_D800": {
+   "W_J": 25430991361.06237,
+   "ring_current_A": 12136980.8830974,
+   "ring_R_m": 50.0,
+   "dipole_A_m2": 95323624947.74637,
+   "turns": 606.8490441548701,
+   "L_H": 127.15495680531185,
+   "ramps": [
+    {
+     "V": 1.0,
+     "t_s": 2543099.1361062373,
+     "P_peak_W": 20000.0
+    },
+    {
+     "V": 100.0,
+     "t_s": 25430.991361062373,
+     "P_peak_W": 2000000.0
+    },
+    {
+     "V": 1000.0,
+     "t_s": 2543.0991361062374,
+     "P_peak_W": 20000000.0
+    },
+    {
+     "V": 10000.0,
+     "t_s": 254.30991361062374,
+     "P_peak_W": 200000000.0
+    }
+   ],
+   "ramp_dBdt_over_ripple_1h": 1.271784520584271e-07,
+   "engine_pair_force_N": 106483.5172638119,
+   "diagonal_force_N": 26620.879315952967,
+   "asymmetric_force_N": 125307.32154927094,
+   "em_scan": [
+    {
+     "mult": 1.0,
+     "departure_t": 22523.451783216577,
+     "engine_t": 908.7791993955469,
+     "eta": 0.6485727781459927,
+     "forward_share": 0.024999999999999998,
+     "cant_deg": 14.0,
+     "field_ratio": 3.3711431401266427,
+     "self_W": 11738292770.285555
+    },
+    {
+     "mult": 1.3,
+     "departure_t": 19578.335331161263,
+     "engine_t": 981.0031954447219,
+     "eta": 0.7443853636462565,
+     "forward_share": 0.024999999999999998,
+     "cant_deg": 13.5,
+     "field_ratio": 5.697231906814026,
+     "self_W": 11804127670.261448
+    },
+    {
+     "mult": 1.6,
+     "departure_t": 18515.983365755143,
+     "engine_t": 1059.4259956381409,
+     "eta": 0.8087793956004491,
+     "forward_share": 0.024999999999999998,
+     "cant_deg": 11.5,
+     "field_ratio": 8.630126438724206,
+     "self_W": 11869962570.237171
+    },
+    {
+     "mult": 2.0,
+     "departure_t": 18406.673079852586,
+     "engine_t": 1173.6323134537809,
+     "eta": 0.8610476734389221,
+     "forward_share": 0.024999999999999998,
+     "cant_deg": 8.0,
+     "field_ratio": 13.484572560506571,
+     "self_W": 11957742436.871605
+    },
+    {
+     "mult": 2.5,
+     "departure_t": 19728.65317691612,
+     "engine_t": 1331.887221083983,
+     "eta": 0.8941521913928441,
+     "forward_share": 0.024999999999999998,
+     "cant_deg": 11.5,
+     "field_ratio": 21.069644625791515,
+     "self_W": 12067467270.164698
+    },
+    {
+     "mult": 3.2,
+     "departure_t": 22044.016926959088,
+     "engine_t": 1582.3718444394658,
+     "eta": 0.9122798634456364,
+     "forward_share": 0.024999999999999998,
+     "cant_deg": 9.5,
+     "field_ratio": 34.520505754896824,
+     "self_W": 12221082036.774933
+    }
+   ],
+   "mode_b": [
+    {
+     "theta_deg": 5,
+     "shortfall": 13723735.808198147,
+     "axial_share": 0.9942992872989248
+    },
+    {
+     "theta_deg": 10,
+     "shortfall": 27659182.362331863,
+     "axial_share": 0.9773270317025812
+    },
+    {
+     "theta_deg": 20,
+     "shortfall": 57093469.43718322,
+     "axial_share": 0.9113574211726988
+    },
+    {
+     "theta_deg": 30,
+     "shortfall": 90564905.71264356,
+     "axial_share": 0.8080127018922194
+    },
+    {
+     "theta_deg": 45,
+     "shortfall": 156863018.0769835,
+     "axial_share": 0.6035533905932737
+    },
+    {
+     "theta_deg": 60,
+     "shortfall": 271694717.13793063,
+     "axial_share": 0.3750000000000001
+    },
+    {
+     "theta_deg": 75,
+     "shortfall": 585420753.2918978,
+     "axial_share": 0.1629031716051507
+    }
+   ],
+   "stow_stroke_m": 69.90924702632722,
+   "stow_time_s": 6990.924702632722,
+   "moved_mass_t": 369.1964336830792,
+   "carriage_t": 38.53571469464634
+  },
+  "E_S250": {
+   "W_J": 63812359972.34211,
+   "ring_current_A": 19100057.742787894,
+   "ring_R_m": 50.0,
+   "dipole_A_m2": 150011502719.70822,
+   "turns": 955.0028871393947,
+   "L_H": 319.06179986171054,
+   "ramps": [
+    {
+     "V": 1.0,
+     "t_s": 6381235.99723421,
+     "P_peak_W": 20000.0
+    },
+    {
+     "V": 100.0,
+     "t_s": 63812.35997234211,
+     "P_peak_W": 2000000.0
+    },
+    {
+     "V": 1000.0,
+     "t_s": 6381.23599723421,
+     "P_peak_W": 20000000.0
+    },
+    {
+     "V": 10000.0,
+     "t_s": 638.1235997234211,
+     "P_peak_W": 200000000.0
+    }
+   ],
+   "ramp_dBdt_over_ripple_1h": 3.1912075499751883e-07,
+   "engine_pair_force_N": 1728265.0328236823,
+   "diagonal_force_N": 432066.2582059205,
+   "asymmetric_force_N": 2033782.0139229866,
+   "em_scan": [
+    {
+     "mult": 1.6,
+     "departure_t": 20741.925351996208,
+     "engine_t": 1074.1958244141945,
+     "eta": 0.8423677975431603,
+     "forward_share": 0.009506147540983605,
+     "cant_deg": 30.0,
+     "field_ratio": 8.869897937460367,
+     "self_W": 20837555157.67471
+    },
+    {
+     "mult": 2.0,
+     "departure_t": 19249.489322873542,
+     "engine_t": 1192.1416922671613,
+     "eta": 0.8998017499729136,
+     "forward_share": 0.0062499999999999995,
+     "cant_deg": 23.0,
+     "field_ratio": 13.859215527281819,
+     "self_W": 20925964651.27235
+    },
+    {
+     "mult": 2.5,
+     "departure_t": 20627.342712659356,
+     "engine_t": 1355.501592132452,
+     "eta": 0.9291288195326692,
+     "forward_share": 0.007756147540983606,
+     "cant_deg": 23.5,
+     "field_ratio": 21.65502426137784,
+     "self_W": 21036476518.26924
+    },
+    {
+     "mult": 3.2,
+     "departure_t": 22189.444569613195,
+     "engine_t": 1613.9369067021837,
+     "eta": 0.949620757598455,
+     "forward_share": 0.0062499999999999995,
+     "cant_deg": 17.0,
+     "field_ratio": 35.47959174984147,
+     "self_W": 21191193132.065006
+    }
+   ],
+   "mode_b": [
+    {
+     "theta_deg": 5,
+     "shortfall": 9283734.726608984,
+     "axial_share": 0.9942992872989248
+    },
+    {
+     "theta_deg": 10,
+     "shortfall": 18710686.025695577,
+     "axial_share": 0.9773270317025812
+    },
+    {
+     "theta_deg": 20,
+     "shortfall": 38622182.20201647,
+     "axial_share": 0.9113574211726988
+    },
+    {
+     "theta_deg": 30,
+     "shortfall": 61264700.2191838,
+     "axial_share": 0.8080127018922194
+    },
+    {
+     "theta_deg": 45,
+     "shortfall": 106113573.49010246,
+     "axial_share": 0.6035533905932737
+    },
+    {
+     "theta_deg": 60,
+     "shortfall": 183794100.65755132,
+     "axial_share": 0.3750000000000001
+    },
+    {
+     "theta_deg": 75,
+     "shortfall": 396021247.6377564,
+     "axial_share": 0.1629031716051507
+    }
+   ],
+   "stow_stroke_m": 69.90924702632722,
+   "stow_time_s": 6990.924702632722,
+   "moved_mass_t": 597.0652652699699,
+   "carriage_t": 56.76522122159759
+  }
+ },
+ "states": [
+  {
+   "state": "PROPULSION (concentrated)",
+   "field": "full current, persistent",
+   "geometry": "ring at kappa R, plug at (kappa+1) R, cant set",
+   "dust": "bow-first faces armoured; stern screen idle",
+   "ship_orientation": "bow first",
+   "change_from_prev": "none"
+  },
+  {
+   "state": "BRAKING (ship flipped)",
+   "field": "same field: in the ship frame the engines still push toward the ship",
+   "geometry": "unchanged",
+   "dust": "ring and plug aft faces armoured; stern screen in the plug shadow takes the stern",
+   "ship_orientation": "engines first",
+   "change_from_prev": "300 s flip at cruise (field stays persistent; no ramp)"
+  },
+  {
+   "state": "EXPANDED PLUME (Mode B as briefed)",
+   "field": "reduced current (wider detachment) or mirror share changed",
+   "geometry": "unchanged",
+   "dust": "no protection: column 10^7 to 10^9 short (dust.py)",
+   "ship_orientation": "engines first",
+   "change_from_prev": "REJECTED: costs thrust, protects nothing"
+  },
+  {
+   "state": "SAFE / STOWED",
+   "field": "ramped down (or quenched into the dump)",
+   "geometry": "ring carriage locked, petals closed",
+   "dust": "armour stays",
+   "ship_orientation": "any",
+   "change_from_prev": "ramp 0.5-6 h at 1-10 kV; emergency dump 10 kV"
+  }
+ ],
+ "failures": [
+  {
+   "case": "one engine out (shutdown, field up)",
+   "effect": "thrust 3/4, ship torque from the offset engine (balance by throttling the opposite engine or by cant)",
+   "dust": "unchanged: passive protection does not depend on the exhaust"
+  },
+  {
+   "case": "one engine quench",
+   "effect": "stored energy into the dump in seconds; the three remaining rings feel an unbalanced mutual force (tens of kN, see log) on the boom frame; the dump heats to 1,500 K",
+   "dust": "unchanged"
+  },
+  {
+   "case": "low plasma / reduced thrust",
+   "effect": "burn lengthens; eta falls with the field-to-pulse ratio only if the field is reduced",
+   "dust": "unchanged"
+  },
+  {
+   "case": "carriage stuck part-way",
+   "effect": "ring off its kappa R: eta and forward leakage change; the cant criterion must be re-run; locks hold the ring at any position (brake-type locks every metre)",
+   "dust": "unchanged"
+  },
+  {
+   "case": "stern screen torn",
+   "effect": "a replacement roll on the mast (screen is 37-90 t; spares 10 %)",
+   "dust": "stern exposed for the rest of the braking burn: expected breaches 6.8e4 x remaining share (NOMINAL)"
+  }
+ ]
+}

@@ -1,0 +1,436 @@
+{
+ "provenance": {
+  "branch": "claude/project-thread-1p6mtu",
+  "commit": "aebbb0d",
+  "files": [
+   "work/vertex-compact/results/compact.json",
+   "work/vertex-compact/results/field_scan.json",
+   "work/vertex-compact/results/problems_compact.json",
+   "work/vertex-ron/ron.py source()"
+  ]
+ },
+ "meta": {
+  "base": {
+   "D_tank_m": 53.400000000000006,
+   "source": "measured on the built approved ship (2026-11-23)"
+  },
+  "pitch_m": 24.0,
+  "cant_deg": 2.0,
+  "quick": true,
+  "n": 48
+ },
+ "variants": {
+  "C1": {
+   "label": "C1 production cluster as drawn",
+   "D_m": 53.400000000000006,
+   "standoff_m": 6.0,
+   "shield": {
+    "r_aft": 5.4,
+    "r_fwd": 4.4,
+    "t": 2.2,
+    "x0": 6.0,
+    "mult": 1.0
+   },
+   "shield_t": 184.851814392048,
+   "mult": 1.0,
+   "eta": 0.3111711945376326,
+   "hit_share": 0.6874999999999999,
+   "piped_four_W": 176004202957933.75,
+   "piped_over_budget": 16294.987386837205,
+   "sky": 0.9790915824543969,
+   "ship_lit_W": 1254698581944.6973,
+   "ship_lit_over_limit": 12546.985819446973,
+   "ship_lit_parts": {
+    "BLADES": 877450161737.317,
+    "SPINE": 206447935124.86798,
+    "TANK_AFT": 170800485082.5123
+   },
+   "x_burn": -153.4,
+   "ripple": {
+    "dB_over_B": 0.0005021625015876882,
+    "eddy_W": 41042068.47139226
+   },
+   "winding_fluence": 2.1779793074031237e+26,
+   "winding_over_limit": 7259.931024677079,
+   "engine_t": 1243.7,
+   "dust_nominal_t": 444.04524297603643,
+   "dust_justified_t": 780.1777971595576,
+   "departure_if_heat_closed_t": 142103.87400362125,
+   "extra_radiator_t": 2608777.05840589
+  },
+  "C2": {
+   "label": "C2 cluster 30 m aft on a longer thrust truss",
+   "D_m": 83.4,
+   "standoff_m": 6.0,
+   "shield": {
+    "r_aft": 5.4,
+    "r_fwd": 4.4,
+    "t": 2.2,
+    "x0": 6.0,
+    "mult": 1.0
+   },
+   "shield_t": 184.851814392048,
+   "mult": 1.0,
+   "eta": 0.3111711945376326,
+   "hit_share": 0.6874999999999999,
+   "piped_four_W": 177063445932340.66,
+   "piped_over_budget": 16393.05522054503,
+   "sky": 0.9790411145067859,
+   "ship_lit_W": 76020112078.21773,
+   "ship_lit_over_limit": 760.2011207821773,
+   "ship_lit_parts": {
+    "BLADES": 76020112078.21773
+   },
+   "x_burn": -183.4,
+   "ripple": {
+    "dB_over_B": 0.0005021625015876882,
+    "eddy_W": 41042068.47139226
+   },
+   "winding_fluence": 2.1779793074031237e+26,
+   "winding_over_limit": 7259.931024677079,
+   "engine_t": 1273.7,
+   "dust_nominal_t": 444.04524297603643,
+   "dust_justified_t": 780.1777971595576,
+   "departure_if_heat_closed_t": 144612.20426815026,
+   "extra_radiator_t": 2624478.378694821
+  },
+  "C3": {
+   "label": "C3 C2 + 6 m spool (burn 12 m aft of the shield), ribbon loops, tank-shadowing shields",
+   "D_m": 89.4,
+   "standoff_m": 12.0,
+   "shield": {
+    "r_aft": 6.71366279217812,
+    "r_fwd": 7.944500970744108,
+    "t": 2.2,
+    "x0": 12.0,
+    "mult": 1.0
+   },
+   "shield_t": 375.22019526776836,
+   "mult": 4.0,
+   "eta": 0.5131497471871641,
+   "hit_share": 0.4562909836065573,
+   "piped_four_W": 116626662340174.22,
+   "piped_over_budget": 10797.639828273173,
+   "sky": 0.5355724960251933,
+   "ship_lit_W": 36145238619.87216,
+   "ship_lit_over_limit": 361.4523861987216,
+   "ship_lit_parts": {
+    "BLADES": 36145238619.87216
+   },
+   "x_burn": -189.4,
+   "ripple": {
+    "dB_over_B": 0.0005253233525034149,
+    "eddy_W": 41285592.99575095
+   },
+   "winding_fluence": 2.1779793074031237e+26,
+   "winding_over_limit": 7259.931024677079,
+   "engine_t": 1464.0683808757203,
+   "dust_nominal_t": 479.6064065435662,
+   "dust_justified_t": 846.8097955284495,
+   "departure_if_heat_closed_t": 48743.957773648006,
+   "extra_radiator_t": 1728614.7106400593
+  },
+  "C4": {
+   "label": "C4 C3 + braking protection package (15 m screen zone)",
+   "D_m": 89.4,
+   "standoff_m": 12.0,
+   "shield": {
+    "r_aft": 8.005000787040956,
+    "r_fwd": 9.472584264665132,
+    "t": 2.2,
+    "x0": 12.0,
+    "mult": 1.0
+   },
+   "shield_t": 533.4453267241385,
+   "mult": 4.0,
+   "eta": 0.5131497471871641,
+   "hit_share": 0.4562909836065573,
+   "piped_four_W": 117125459848893.58,
+   "piped_over_budget": 10843.81997043211,
+   "sky": 0.5553712994488842,
+   "ship_lit_W": 13947128871.988638,
+   "ship_lit_over_limit": 139.4712887198864,
+   "ship_lit_parts": {
+    "BLADES": 13947128871.988638
+   },
+   "x_burn": -189.4,
+   "ripple": {
+    "dB_over_B": 0.0005253233525034149,
+    "eddy_W": 41285592.99575095
+   },
+   "winding_fluence": 2.1779793074031237e+26,
+   "winding_over_limit": 7259.931024677079,
+   "engine_t": 1622.2935123320904,
+   "dust_nominal_t": 408.6411733125323,
+   "dust_justified_t": 934.6893878358326,
+   "departure_if_heat_closed_t": 52294.13848078338,
+   "extra_radiator_t": 1736008.462246586
+  }
+ },
+ "field_scan": {
+  "C1|1": {
+   "eta": 0.3111711945376326,
+   "hit": 0.6874999999999999,
+   "sky": 0.9790915824543969,
+   "piped_four_W": 176004202957933.75,
+   "over": 16294.987386837205
+  },
+  "C1|2": {
+   "eta": 0.31117203097664237,
+   "hit": 0.6874999999999999,
+   "sky": 1.0991918553370257,
+   "piped_four_W": 177852640156253.72,
+   "over": 16466.12114572354
+  },
+  "C1|4": {
+   "eta": 0.3111805004215348,
+   "hit": 0.6874999999999999,
+   "sky": 1.2081765544212233,
+   "piped_four_W": 179356351941406.28,
+   "over": 16605.339210750975
+  },
+  "C3|1": {
+   "eta": 0.5300733673875401,
+   "hit": 0.46749999999999997,
+   "sky": 0.38926053795560406,
+   "piped_four_W": 117402427006664.06,
+   "over": 10869.462405479624
+  },
+  "C3|2": {
+   "eta": 0.5019607955779611,
+   "hit": 0.49585382513661197,
+   "sky": 0.43804477165866645,
+   "piped_four_W": 124708823493206.72,
+   "over": 11545.910107242178
+  },
+  "C3|4": {
+   "eta": 0.5131497471871641,
+   "hit": 0.4562909836065573,
+   "sky": 0.5355724960251933,
+   "piped_four_W": 116626662340174.22,
+   "over": 10797.639828273173
+  }
+ },
+ "source": {
+  "fuel": "V2",
+  "P_brems_W": 4117524978635.97,
+  "P_sync_W": 1437748399935.1655,
+  "P_n_W": 825617324094.4968,
+  "P_charged_W": 58935385342562.47,
+  "fusion_per_engine_W": 65316276045228.1,
+  "drive_W": 10801125449.17382
+ },
+ "problems": [
+  {
+   "id": "ENG-030",
+   "title": "Compact engine hardware absorbs most of the burn",
+   "subsystem": "Vertex engine",
+   "variants": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+   ],
+   "mechanism": "Loops, shield and closure coils within 2-12 m of a 65 TW burn see most of its sky and take 46-69 % of the charged products",
+   "evidence": "work/vertex-compact/results/compact.json",
+   "required": "Piped heat <= 10.8 GW (four engines, the canon drive radiators)",
+   "achieved": "C1 176,004 GW (16,295 x); C3/C4 116,627 GW (10,798 x)",
+   "assumptions": "V2 optimistic fuel (1.6B S5), vacuum test particles, ron.py sky ledger",
+   "severity": "CRITICAL: 4 orders of magnitude",
+   "solutions": "Stronger closure field (x4 already used in C3), ribbon loops, larger loop radii within the cluster envelope, lower-loss fuel cycle",
+   "advances": "Absorbed fraction 4e-5 of fusion power (today about 0.45); a field that keeps charged products off hardware at 2-10 m",
+   "next": "Hybrid PIC of the compact burn with C1-C2 closure coils at x4 field",
+   "status": "OPEN",
+   "components": [
+    "RING"
+   ]
+  },
+  {
+   "id": "ENG-031",
+   "title": "Compact axial efficiency 0.31-0.51 inflates the mass ratio",
+   "subsystem": "Magnetic nozzle",
+   "variants": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+   ],
+   "mechanism": "Products hitting the shield and leaving radially do not make thrust; ve falls with eta",
+   "evidence": "work/vertex-compact/results/compact.json",
+   "required": "eta about 0.95 (canon ve)",
+   "achieved": "C1 0.31, C3 0.51; departure 48,744 t even if the heat closed",
+   "assumptions": "Test particles, 48 directions x 4 species (quick run)",
+   "severity": "HIGH",
+   "solutions": "Field x4 and burn 12 m aft of the shield (C3) raise eta 0.31 to 0.51",
+   "advances": "Plasma detachment model; collective effects",
+   "next": "Full 160-direction run; scan field x2-x8",
+   "status": "OPEN",
+   "components": [
+    "RING"
+   ]
+  },
+  {
+   "id": "ENG-032",
+   "title": "Burns light the radiator blades and the aft ship",
+   "subsystem": "Ship integration",
+   "variants": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+   ],
+   "mechanism": "Shadow cones of the drawn shields (28 deg) do not cover the spine, the tank dome or the blade roots beside the cluster",
+   "evidence": "work/vertex-compact/results/compact.json (ship_lit)",
+   "required": "<= 0.1 GW direct burn on the ship",
+   "achieved": "C1 1,255 GW; C2 76 GW (cluster 30 m aft); C4 13.9 GW, all on the blade aft ends",
+   "assumptions": "No ship self-occlusion; photons + neutrons; four canted burns",
+   "severity": "HIGH (C1), MEDIUM (C4)",
+   "solutions": "Cluster 30 m aft (16x less), tank-shadowing shields (C3/C4), move the blade aft station forward or cant the blade aft ends edge-on",
+   "advances": "None for C4: a geometry change of the blade aft station (PROTOTYPE) closes most of the remainder",
+   "next": "Blade aft-station trade (area kept)",
+   "status": "MITIGATED",
+   "components": [
+    "BLADES"
+   ]
+  },
+  {
+   "id": "ENG-033",
+   "title": "Loop windings take 7,000 x their neutron fluence limit",
+   "subsystem": "Coil protection",
+   "variants": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+   ],
+   "mechanism": "Windings 7.6 m from the burn behind 0.22 m of armour (drawn)",
+   "evidence": "work/vertex-compact/results/compact.json",
+   "required": "3e22 n/m2",
+   "achieved": "2.2e+26 n/m2 (7,260 x)",
+   "assumptions": "W-B4C attenuation 0.08 m, scattered floor 1e-4 (MPN rule)",
+   "severity": "HIGH",
+   "solutions": "No armour thickness closes: the scattered floor alone is 11 x the limit. Replaceable loop cassettes (one set per burn, about 11 exchanges per mission), or a winding farther from the burn",
+   "advances": "Radiation-tolerant conductor at 34e22 n/m2 with thicker armour; or neutron-lean fuel",
+   "next": "Neutron transport for the compact loop armour",
+   "status": "OPEN",
+   "components": [
+    "RING"
+   ]
+  },
+  {
+   "id": "ENG-034",
+   "title": "Engine faces lead in braking: armour only",
+   "subsystem": "Dust protection",
+   "variants": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+   ],
+   "mechanism": "Loops, shield faces and the hub lead into the dust in braking; nothing can stand ahead of them in the burn view",
+   "evidence": "work/vertex-compact/results/compact.json (dust)",
+   "required": "0.1 breaches per face",
+   "achieved": "Armour 8-10 cm W/C: 444 t NOMINAL, 780 t JUSTIFIED (whole aft end)",
+   "assumptions": "Dust-impacts rules, extrapolated above 100 km/s",
+   "severity": "MEDIUM",
+   "solutions": "Replaceable armour tiles on the loop aft faces and the hub cap (C4)",
+   "advances": "Armour areal density /2",
+   "next": "Tile layout on the loop cryostats",
+   "status": "MITIGATED",
+   "components": [
+    "RING",
+    "HUB"
+   ]
+  },
+  {
+   "id": "ENG-035",
+   "title": "Compact stern screens close for the tank dome (NOMINAL)",
+   "subsystem": "Dust protection",
+   "variants": [
+    "C4"
+   ],
+   "mechanism": "Three screens in a 15 m zone ahead of the tank dome, inside the enlarged shields' shadow",
+   "evidence": "work/vertex-compact/results/compact.json",
+   "required": "0.1 events",
+   "achieved": "0.086 events NOMINAL with 5.5 t; JUSTIFIED needs more stand-off",
+   "assumptions": "HIMS-B pass-through 0.5 per screen (NOMINAL)",
+   "severity": "LOW (NOMINAL), MEDIUM (JUSTIFIED)",
+   "solutions": "Screens become roll-fed spares; armour remains the JUSTIFIED answer",
+   "advances": "None",
+   "next": "JUSTIFIED screen count vs shield size",
+   "status": "MITIGATED",
+   "components": [
+    "SCREEN"
+   ]
+  },
+  {
+   "id": "ENG-036",
+   "title": "Hull-shadowing shields grow and add engine heat",
+   "subsystem": "Radiation protection",
+   "variants": [
+    "C3",
+    "C4"
+   ],
+   "mechanism": "Shadowing the tank dome from a burn 24 m off axis needs a 40-46 deg shield; it adds sky (heat) and mass",
+   "evidence": "work/vertex-compact/results/compact.json",
+   "required": "Shadow the ship without extra heat",
+   "achieved": "C3 shield r 7.9 m (375 t/engine); C4 r 9.5 m (533 t/engine)",
+   "assumptions": "LiH body, 5 cm W/B4C face",
+   "severity": "MEDIUM",
+   "solutions": "One cluster-wide shadow disc on the hub instead of four large cones (to study)",
+   "advances": "None",
+   "next": "Cluster shadow-disc variant",
+   "status": "OPEN",
+   "components": [
+    "SHIELD"
+   ]
+  },
+  {
+   "id": "ENG-037",
+   "title": "Longer thrust truss and feeds (30-36 m)",
+   "subsystem": "Structure",
+   "variants": [
+    "C2",
+    "C3",
+    "C4"
+   ],
+   "mechanism": "Cluster moved aft on twelve truss members; feeds, trunks and the Li/cold loops lengthen",
+   "evidence": "work/vertex-compact/blender_compact.py",
+   "required": "Carries 21.8 MN and the field loads",
+   "achieved": "Drawn, not sized (30 t per engine allotted)",
+   "assumptions": "PROTOTYPE",
+   "severity": "LOW",
+   "solutions": "Size with vertex_structure loads",
+   "advances": "None",
+   "next": "Truss FE with the cluster load cases",
+   "status": "OPEN",
+   "components": [
+    "TRUSS"
+   ]
+  },
+  {
+   "id": "ENG-038",
+   "title": "Ripple heating of the compact eddy shields",
+   "subsystem": "Magnetic nozzle",
+   "variants": [
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+   ],
+   "mechanism": "5.7 kHz pulses (AMPN rule, eps_c 0.3)",
+   "evidence": "work/vertex-compact/results/compact.json",
+   "required": "Radiated by the shield at <= 2,300 K",
+   "achieved": "41 MW per engine, dB/B 0.001",
+   "assumptions": "Coupling 0.3 (0.1-1) not measured",
+   "severity": "LOW next to ENG-030",
+   "solutions": "Booked in the piped heat",
+   "advances": "Measured coupling",
+   "next": "With ENG-002",
+   "status": "WATCH",
+   "components": [
+    "RING"
+   ]
+  }
+ ]
+}

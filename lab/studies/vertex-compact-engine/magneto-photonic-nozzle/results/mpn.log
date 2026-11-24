@@ -1,0 +1,249 @@
+== canon
+{
+ "fusion_TW": 261.26510418091243,
+ "jet_TW": 209.01208334472994,
+ "drive_GW": 10.80112544917382,
+ "allowed_fraction": 4.134163068977864e-05,
+ "managed_TW": 32.39687291843314,
+ "required_reflectivity": 0.9996665997525018,
+ "photon_thrust_kN_52TW": 174.12045769343536,
+ "verdict": "The brief figures hold: 261.3 TW fusion, 209.0 TW jet, 10.80 GW drive share (75 % of 14.40 GW), 4.13e-5 allowed; 32.4 TW managed and 99.967 % reflectivity for a single bounce; 52.2 TW of collimated photons give 174 kN."
+}
+== validation
+  PASS  critical angle Si at 8.05 keV vs 0.22 deg: 0.223
+  PASS  critical angle Ni at 8.05 keV vs 0.4 deg: 0.4003
+  PASS  critical angle Au at 8.05 keV vs 0.55 deg: 0.5539
+  PASS  critical angle Pt at 8.05 keV vs 0.58 deg: 0.5826
+  PASS  grazing-limit loss 2 beta/theta_c^3 vs Fresnel at 0.02 theta_c, C_diamond 30 keV: 1
+  PASS  grazing-limit loss 2 beta/theta_c^3 vs Fresnel at 0.02 theta_c, C_diamond 100 keV: 1
+  PASS  grazing-limit loss 2 beta/theta_c^3 vs Fresnel at 0.02 theta_c, W 30 keV: 0.9985
+  PASS  grazing-limit loss 2 beta/theta_c^3 vs Fresnel at 0.02 theta_c, W 100 keV: 0.9993
+  PASS  grazing-limit loss 2 beta/theta_c^3 vs Fresnel at 0.02 theta_c, Pt 30 keV: 0.998
+  PASS  grazing-limit loss 2 beta/theta_c^3 vs Fresnel at 0.02 theta_c, Pt 100 keV: 0.9991
+  PASS  beta vs xraylib Refractive_Index_Im, C_diamond 100 keV: 0.9754
+  PASS  beta vs xraylib Refractive_Index_Im, W 100 keV: 0.9591
+  PASS  Si(111) intrinsic bandwidth vs 1.33e-4 (literature): 0.0001311
+  PASS  Klein-Nishina at 511 keV vs 0.432 sigma_T: 0.4307
+  PASS  Parratt one thick W layer vs Fresnel W (30 keV, 1.5 mrad): 1
+  PASS  ring sky a R / rho^2 vs Monte Carlo (a 0.5, R 62, z 124): 0.9719
+  PASS  skimmer absorptance analytic vs 2D Monte Carlo (Pt, a 2 cm, L 40 m, Te 55 keV, distant point source): 0.9588
+== optics: theta_c (mrad), steering cost g (per rad) and beta/delta
+  C_diamond  10keV tc 3.82 g 0.275  30keV tc 1.27 g 0.249  100keV tc 0.382 g 1.84  300keV tc 0.127 g 11.9  1000keV tc 0.0382 g 79.2
+  Be         10keV tc 2.61 g 0.113  30keV tc 0.87 g 0.298  100keV tc 0.261 g 2.69  300keV tc 0.087 g 17.4  1000keV tc 0.0261 g 116
+  SiC        10keV tc 3.67 g 3.08  30keV tc 1.22 g 1.16  100keV tc 0.364 g 2.12  300keV tc 0.121 g 12.5  1000keV tc 0.0365 g 82.9
+  Ni         10keV tc 5.87 g 18  30keV tc 1.99 g 7.46  100keV tc 0.594 g 3.36  300keV tc 0.198 g 8.32  1000keV tc 0.0594 g 51.4
+  Mo         10keV tc 6.07 g 7.53  30keV tc 2.03 g 22.1  100keV tc 0.609 g 9.07  300keV tc 0.203 g 10.3  1000keV tc 0.0609 g 51.8
+  W          10keV tc 7.43 g 8.57  30keV tc 2.66 g 14.4  100keV tc 0.798 g 31.8  300keV tc 0.266 g 20  1000keV tc 0.0802 g 49.7
+  Pt         10keV tc 8.09 g 8.67  30keV tc 2.8 g 16.1  100keV tc 0.838 g 34.5  300keV tc 0.28 g 21.5  1000keV tc 0.0844 g 49.5
+  Ir         10keV tc 8.27 g 8.22  30keV tc 2.88 g 15.1  100keV tc 0.861 g 32.5  300keV tc 0.287 g 20.3  1000keV tc 0.0866 g 47.7
+  Au         10keV tc 7.7 g 9.43  30keV tc 2.66 g 17.6  100keV tc 0.795 g 37.5  300keV tc 0.266 g 23.4  1000keV tc 0.0801 g 52.9
+  Os         10keV tc 8.22 g 8.01  30keV tc 2.88 g 14.5  100keV tc 0.861 g 31.5  300keV tc 0.287 g 19.7  1000keV tc 0.0866 g 47.1
+  Compton floor at diamond electron density: 10keV 0.024  30keV 0.202  100keV 1.85  300keV 11.9  1000keV 79.2
+  Compton floor at osmium electron density: 10keV 0.0106  30keV 0.0889  100keV 0.815  300keV 5.26  1000keV 34.9
+== multilayers (first Bragg peak)
+  W/Si d 2.5 nm N 150 s 0.3 nm @ 30 keV: R 0.875 at 8.43 mrad, g 7.42 /rad (TER best 0.249), bw 0.020
+  W/Si d 2.5 nm N 150 s 0.3 nm @ 60 keV: R 0.958 at 4.22 mrad, g 4.98 /rad (TER best 0.743), bw 0.021
+  W/Si d 2.5 nm N 150 s 0.3 nm @ 100 keV: R 0.916 at 2.53 mrad, g 16.7 /rad (TER best 1.84), bw 0.020
+  Pt/C_diamond d 2.0 nm N 300 s 0.3 nm @ 60 keV: R 0.942 at 5.24 mrad, g 5.51 /rad (TER best 0.743), bw 0.012
+  Pt/C_diamond d 2.0 nm N 300 s 0.3 nm @ 100 keV: R 0.886 at 3.14 mrad, g 18.1 /rad (TER best 1.84), bw 0.012
+  W/C_diamond d 1.0 nm N 800 s 0.08 nm @ 100 keV: R 0.924 at 6.22 mrad, g 6.11 /rad (TER best 1.84), bw 0.003
+  W/C_diamond d 1.0 nm N 800 s 0.08 nm @ 300 keV: R 0.981 at 2.07 mrad, g 4.66 /rad (TER best 11.9), bw 0.003
+== depth-graded supermirrors on the 55 keV continuum
+  Pt/C_diamond d 2.5-10.0 nm N 200 sigma 0.3 nm at 2.0 mrad (band 31-124 keV): absorbed 0.504 vs best plain coating 0.462
+  W/C_diamond d 1.0-8.0 nm N 600 sigma 0.08 nm at 2.0 mrad (band 39-310 keV): absorbed 0.518 vs best plain coating 0.462
+  W/C_diamond d 0.7-8.0 nm N 1000 sigma 0.05 nm at 1.0 mrad (band 77-886 keV): absorbed 0.298 vs best plain coating 0.218
+== a 10 mrad turn split into N bounces (kept share): N 1 (5.000 mrad) diamond@100 0.000 Pt@30 0.009; N 3 (1.667 mrad) diamond@100 0.000 Pt@30 0.819; N 10 (0.500 mrad) diamond@100 0.000 Pt@30 0.849; N 30 (0.167 mrad) diamond@100 0.980 Pt@30 0.851; N 100 (0.050 mrad) diamond@100 0.982 Pt@30 0.852; N 300 (0.017 mrad) diamond@100 0.982 Pt@30 0.852
+== crystals on a 55 keV continuum
+  Si(1, 1, 1) 100 keV: perfect band 1.31e-04 eff 4.82e-05; mosaic band 0.015 eff 2.697e-03; turn 39.5 mrad
+  Si(1, 1, 1) 300 keV: perfect band 1.31e-04 eff 4.82e-05; mosaic band 0.044 eff 8.094e-03; turn 13.2 mrad
+  Ge(1, 1, 1) 100 keV: perfect band 3.27e-04 eff 1.20e-04; mosaic band 0.015 eff 2.810e-03; turn 38.0 mrad
+  Ge(1, 1, 1) 300 keV: perfect band 3.26e-04 eff 1.20e-04; mosaic band 0.046 eff 8.431e-03; turn 12.7 mrad
+  Copper(1, 1, 1) 100 keV: perfect band 2.92e-04 eff 1.07e-04; mosaic band 0.010 eff 1.795e-03; turn 59.4 mrad
+  Copper(1, 1, 1) 300 keV: perfect band 2.91e-04 eff 1.07e-04; mosaic band 0.029 eff 5.387e-03; turn 19.8 mrad
+  Si(2, 2, 0) 100 keV: perfect band 5.75e-05 eff 2.11e-05; mosaic band 0.009 eff 1.651e-03; turn 64.6 mrad
+  Si(2, 2, 0) 300 keV: perfect band 5.74e-05 eff 2.11e-05; mosaic band 0.027 eff 4.956e-03; turn 21.5 mrad
+  Diamond(1, 1, 1) 100 keV: perfect band 5.76e-05 eff 2.12e-05; mosaic band 0.010 eff 1.771e-03; turn 60.2 mrad
+  Diamond(1, 1, 1) 300 keV: perfect band 5.76e-05 eff 2.12e-05; mosaic band 0.029 eff 5.316e-03; turn 20.1 mrad
+  {'case': 'graded or bent crystal (advanced): dE/E 0.10, peak 0.3', 'broadband_eff': 0.01103638323514327}
+== neutron optics
+  cold 3 meV       lambda 5.22e-10 m  tc(Ni) 0.00904  m10 0.0904  lattice 2.61 rad  hide 3 cm: 0.332 m (m10), 0.0115 m (lattice)
+  thermal 25 meV   lambda 1.8e-10 m  tc(Ni) 0.00311  m10 0.0311  lattice 0.899 rad  hide 3 cm: 0.964 m (m10), 0.0334 m (lattice)
+  epithermal 1 eV  lambda 2.86e-11 m  tc(Ni) 0.000495  m10 0.00495  lattice 0.143 rad  hide 3 cm: 6.06 m (m10), 0.21 m (lattice)
+  D-D 2.45 MeV     lambda 1.83e-14 m  tc(Ni) 3.16e-07  m10 3.16e-06  lattice 9.14e-05 rad  hide 3 cm: 9.49e+03 m (m10), 328 m (lattice)
+  D-T 14.1 MeV     lambda 7.63e-15 m  tc(Ni) 1.32e-07  m10 1.32e-06  lattice 3.81e-05 rad  hide 3 cm: 2.27e+04 m (m10), 787 m (lattice)
+== far-IR (cyclotron/synchrotron) wall reflectivity
+  {"Cu 300 K 0.3 THz": 0.9985, "Cu 300 K 1 THz": 0.99727, "Cu 300 K 3 THz": 0.99527, "W 1800 K 0.3 THz": 0.99183, "W 1800 K 1 THz": 0.98508, "W 1800 K 3 THz": 0.97416, "W 300 K 0.3 THz": 0.99728, "W 300 K 1 THz": 0.99503, "W 300 K 3 THz": 0.99139}
+== sources (per engine)
+  V0 Vertex 1.5 LOW reference (hot-ion R2-A, Te 55 keV): Te 55.0 keV, brems 0.1249 sync 0.0000 neutrons 0.0443 | brems 8.16 TW, n 2.892 TW | <30 0.39 30-100 0.46 >100 0.15
+  V1 1.6B S1 spin-polarized D-3He, nominal: Te 56.9 keV, brems 0.1009 sync 0.0000 neutrons 0.0496 | brems 6.59 TW, n 3.237 TW | <30 0.38 30-100 0.47 >100 0.16
+  V2 1.6B S5 combined (polarization + selective He-3 heating + channeling): Te 46.1 keV, brems 0.0630 sync 0.0220 neutrons 0.0126 | brems 4.12 TW, n 0.826 TW | <30 0.44 30-100 0.45 >100 0.10
+  V3 declared low-neutron burn (V2 with neutrons x0.25: quintet suppression and He-3-rich feed): Te 46.1 keV, brems 0.0630 sync 0.0220 neutrons 0.0032 | brems 4.12 TW, n 0.206 TW | <30 0.44 30-100 0.45 >100 0.10
+  spectrum check (1.5 LOW vs exp model): 1-3: 0.036/0.035, 3-10: 0.115/0.113, 10-30: 0.259/0.254, 30-100: 0.425/0.417, 100-300: 0.161/0.158, 300-1000: 0.004/0.004
+== A/C: drawn compact engine (1.5 ray trace)
+  intercepted 0.617; graze quantiles {0.0: 0.5270899722634804, 0.01: 11.131718129971219, 0.05: 14.070093500270579, 0.25: 41.3473993115654, 0.5: 52.726366430121715}; share below 1 deg 0.0002
+  V0: A reflects 0.0000, C reflects 0.0178; photon heat four engines bare 20131 GW, A 20130 GW, C 19773 GW; neutrons <= 7138 GW (budget 10.8)
+  V1: A reflects 0.0000, C reflects 0.0172; photon heat four engines bare 16268 GW, A 16267 GW, C 15988 GW; neutrons <= 7989 GW (budget 10.8)
+  V2: A reflects 0.0000, C reflects 0.0211; photon heat four engines bare 10161 GW, A 10161 GW, C 9947 GW; neutrons <= 2037 GW (budget 10.8)
+  V3: A reflects 0.0000, C reflects 0.0211; photon heat four engines bare 10161 GW, A 10161 GW, C 9947 GW; neutrons <= 509 GW (budget 10.8)
+== B: nested grazing collimator (aft cone 25 deg)
+  V0: absorbed 0.165 of the photons -> 5390 GW added (four), thrust gain 2.06 kN per engine = 0.0095 % of thrust; all photons ideally aft: 109 kN
+  V1: absorbed 0.168 of the photons -> 4441 GW added (four), thrust gain 1.60 kN per engine = 0.0073 % of thrust; all photons ideally aft: 88 kN
+  V2: absorbed 0.150 of the photons -> 2468 GW added (four), thrust gain 1.25 kN per engine = 0.0057 % of thrust; all photons ideally aft: 74 kN
+  V3: absorbed 0.150 of the photons -> 2468 GW added (four), thrust gain 1.25 kN per engine = 0.0057 % of thrust; all photons ideally aft: 74 kN
+  jet thrust per watt / photon thrust per watt = 31.2
+== skimmer absorbed share of intercepted photons (V0 spectrum)
+  a 0.02 m: L 10 C_ 0.699  L 10 Pt 0.503  L 10 Os 0.481  L 30 C_ 0.351  L 30 Pt 0.124  L 30 Os 0.118  L 100 C_ 0.029  L 100 Pt 0.011  L 100 Os 0.010  L 300 C_ 0.003  L 300 Pt 0.005  L 300 Os 0.005  L 1000 C_ 0.003  L 1000 Pt 0.003  L 1000 Os 0.003
+  a 0.12 m: L 10 C_ 0.960  L 10 Pt 0.924  L 10 Os 0.922  L 30 C_ 0.841  L 30 Pt 0.734  L 30 Os 0.723  L 100 C_ 0.546  L 100 Pt 0.305  L 100 Os 0.279  L 300 C_ 0.174  L 300 Pt 0.037  L 300 Os 0.035  L 1000 C_ 0.003  L 1000 Pt 0.005  L 1000 Os 0.005
+  a 0.5 m: L 10 C_ 1.000  L 10 Pt 0.996  L 10 Os 0.996  L 30 C_ 0.976  L 30 Pt 0.954  L 30 Os 0.955  L 100 C_ 0.882  L 100 Pt 0.788  L 100 Os 0.780  L 300 C_ 0.651  L 300 Pt 0.425  L 300 Os 0.407  L 1000 C_ 0.240  L 1000 Pt 0.060  L 1000 Os 0.057
+  finite source (Pt, a 2 cm, L 40 m, 100 m away): r_src 0.0 m -> 0.042 (analytic 0.060), r_src 0.01 m -> 0.043 (analytic 0.060), r_src 0.05 m -> 0.053 (analytic 0.060)
+== D: Halo Vertex 2.5 case (per engine) and its ring with skimmers
+  Halo: R 51.0 m, burn-ring 114.1 m, sky 8.01e-04, face 0.183 m, fin 1.29 m; heat {"isotropic radiation on ring armour": 1.282, "charged leakage": 0.817, "isotropic radiation on the shadow shields and strips": 0.081, "direct conversion loss": 0.003, "driver loss": 0.011, "neutrons through the fin into the coils": 0.0}
+  Ls     0 Pt       : ring absorbs 1.000 -> 1.28 GW; engine 2.19 GW; radiator saved 0.0 t vs skimmer 0.0 t; +0 m2 broadside
+  Ls    20 Pt       : ring absorbs 0.730 -> 0.94 GW; engine 1.85 GW; radiator saved 7.4 t vs skimmer 40.6 t; +3206 m2 broadside
+  Ls    20 C_diamond: ring absorbs 0.841 -> 1.08 GW; engine 1.99 GW; radiator saved 4.4 t vs skimmer 40.6 t; +3206 m2 broadside
+  Ls    20 Os       : ring absorbs 0.719 -> 0.92 GW; engine 1.83 GW; radiator saved 7.7 t vs skimmer 40.6 t; +3206 m2 broadside
+  Ls    40 Pt       : ring absorbs 0.486 -> 0.62 GW; engine 1.54 GW; radiator saved 14.1 t vs skimmer 81.1 t; +6411 m2 broadside
+  Ls    40 C_diamond: ring absorbs 0.696 -> 0.89 GW; engine 1.80 GW; radiator saved 8.4 t vs skimmer 81.1 t; +6411 m2 broadside
+  Ls    40 Os       : ring absorbs 0.475 -> 0.61 GW; engine 1.52 GW; radiator saved 14.4 t vs skimmer 81.1 t; +6411 m2 broadside
+  Ls    69 Pt       : ring absorbs 0.276 -> 0.35 GW; engine 1.27 GW; radiator saved 19.9 t vs skimmer 139.9 t; +11060 m2 broadside
+  Ls    69 C_diamond: ring absorbs 0.535 -> 0.69 GW; engine 1.60 GW; radiator saved 12.8 t vs skimmer 139.9 t; +11060 m2 broadside
+  Ls    69 Os       : ring absorbs 0.269 -> 0.35 GW; engine 1.26 GW; radiator saved 20.1 t vs skimmer 139.9 t; +11060 m2 broadside
+== F: edge-on remote ring hybrid (per engine, then x4)
+  V0 Halo-like thick face (0.24 m), round cables: thick 26.4 cm, nose 0.64 m at 3551 K, ring sky 4.26e-04; B01 x4 3.45 GW (budget 10.8); self-radiated x4 30.11 GW; total x4 33.56; mass 1355 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 722.2, "skimmer_t": 0.0, "tethers_t": 1.5, "plug_t": 12.1, "strips_t": 10.5, "spine_t": 54.1}
+      ring nose (edge-on)                              sky 4.26e-04  ph   3.475 GW  n   0.370 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.046 GW  ch  0.00  -> B01
+      6 tension cables (48.1 mm projected)             sky 1.26e-04  ph   1.032 GW  n   0.110 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   1.032 GW  n   0.329 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 1.23e-04  ph   1.003 GW  n   0.178 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V0 edge-on ribbon + round cables: thick 7.0 cm, nose 0.64 m at 2548 K, ring sky 1.13e-04; B01 x4 3.32 GW (budget 10.8); self-radiated x4 18.82 GW; total x4 22.13; mass 824 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 191.6, "skimmer_t": 0.0, "tethers_t": 1.5, "plug_t": 12.1, "strips_t": 10.5, "spine_t": 54.1}
+      ring nose (edge-on)                              sky 1.13e-04  ph   0.922 GW  n   0.098 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.012 GW  ch  0.00  -> B01
+      6 tension cables (48.1 mm projected)             sky 1.26e-04  ph   1.032 GW  n   0.110 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   1.032 GW  n   0.329 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 1.23e-04  ph   1.003 GW  n   0.178 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V0 edge-on ribbon + edge-on tapes: thick 7.0 cm, nose 0.64 m at 2548 K, ring sky 1.13e-04; B01 x4 3.32 GW (budget 10.8); self-radiated x4 14.83 GW; total x4 18.14; mass 824 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 191.6, "skimmer_t": 0.0, "tethers_t": 1.5, "plug_t": 12.1, "strips_t": 10.5, "spine_t": 54.1}
+      ring nose (edge-on)                              sky 1.13e-04  ph   0.922 GW  n   0.098 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.012 GW  ch  0.00  -> B01
+      6 tension tapes, edge-on (6.0 mm projected)      sky 1.59e-05  ph   0.130 GW  n   0.014 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   1.032 GW  n   0.329 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 1.23e-04  ph   1.003 GW  n   0.178 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V0 edge-on + Pt knife-edge skimmers 20 m: thick 7.0 cm, nose 0.64 m at 2150 K, ring sky 1.13e-04; B01 x4 3.32 GW (budget 10.8); self-radiated x4 48.15 GW; total x4 51.47; mass 955 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 191.6, "skimmer_t": 49.3, "tethers_t": 3.1, "plug_t": 12.1, "strips_t": 90.0, "spine_t": 54.1}
+      ring nose (edge-on, knife-edge skimmer)          sky 1.13e-04  ph   0.418 GW  n   0.098 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.012 GW  ch  0.00  -> B01
+      6 tension tapes, edge-on (6.0 mm projected), knife edges sky 1.59e-05  ph   0.033 GW  n   0.014 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   1.032 GW  n   0.329 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 1.05e-03  ph   8.589 GW  n   1.523 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V0 edge-on + Pt skimmers 60 m: thick 7.0 cm, nose 0.64 m at 1654 K, ring sky 1.13e-04; B01 x4 3.32 GW (budget 10.8); self-radiated x4 118.26 GW; total x4 121.58; mass 1212 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 191.6, "skimmer_t": 147.9, "tethers_t": 3.1, "plug_t": 12.1, "strips_t": 248.9, "spine_t": 54.1}
+      ring nose (edge-on, knife-edge skimmer)          sky 1.13e-04  ph   0.083 GW  n   0.098 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.012 GW  ch  0.00  -> B01
+      6 tension tapes, edge-on (6.0 mm projected), knife edges sky 1.59e-05  ph   0.033 GW  n   0.014 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   1.032 GW  n   0.329 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 2.91e-03  ph  23.762 GW  n   4.213 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V2 Halo-like thick face (0.24 m), round cables: thick 26.4 cm, nose 0.53 m at 3116 K, ring sky 4.26e-04; B01 x4 3.45 GW (budget 10.8); self-radiated x4 15.69 GW; total x4 19.14; mass 1215 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 591.6, "skimmer_t": 0.0, "tethers_t": 1.5, "plug_t": 7.1, "strips_t": 6.2, "spine_t": 54.1}
+      ring nose (edge-on)                              sky 4.26e-04  ph   1.763 GW  n   0.105 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.046 GW  ch  0.00  -> B01
+      6 tension cables (48.1 mm projected)             sky 1.26e-04  ph   0.523 GW  n   0.031 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   0.703 GW  n   0.094 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 1.18e-04  ph   0.653 GW  n   0.049 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V2 edge-on ribbon + round cables: thick 7.0 cm, nose 0.53 m at 2237 K, ring sky 1.13e-04; B01 x4 3.32 GW (budget 10.8); self-radiated x4 10.20 GW; total x4 13.51; mass 780 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 157.0, "skimmer_t": 0.0, "tethers_t": 1.5, "plug_t": 7.1, "strips_t": 6.2, "spine_t": 54.1}
+      ring nose (edge-on)                              sky 1.13e-04  ph   0.468 GW  n   0.028 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.012 GW  ch  0.00  -> B01
+      6 tension cables (48.1 mm projected)             sky 1.26e-04  ph   0.523 GW  n   0.031 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   0.703 GW  n   0.094 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 1.18e-04  ph   0.653 GW  n   0.049 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V2 edge-on ribbon + edge-on tapes: thick 7.0 cm, nose 0.53 m at 2237 K, ring sky 1.13e-04; B01 x4 3.32 GW (budget 10.8); self-radiated x4 8.26 GW; total x4 11.57; mass 780 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 157.0, "skimmer_t": 0.0, "tethers_t": 1.5, "plug_t": 7.1, "strips_t": 6.2, "spine_t": 54.1}
+      ring nose (edge-on)                              sky 1.13e-04  ph   0.468 GW  n   0.028 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.012 GW  ch  0.00  -> B01
+      6 tension tapes, edge-on (6.0 mm projected)      sky 1.59e-05  ph   0.066 GW  n   0.004 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   0.703 GW  n   0.094 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 1.18e-04  ph   0.653 GW  n   0.049 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V2 edge-on + Pt knife-edge skimmers 20 m: thick 7.0 cm, nose 0.53 m at 1812 K, ring sky 1.13e-04; B01 x4 3.32 GW (budget 10.8); self-radiated x4 29.12 GW; total x4 32.44; mass 881 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 157.0, "skimmer_t": 49.3, "tethers_t": 3.1, "plug_t": 7.1, "strips_t": 55.6, "spine_t": 54.1}
+      ring nose (edge-on, knife-edge skimmer)          sky 1.13e-04  ph   0.185 GW  n   0.028 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.012 GW  ch  0.00  -> B01
+      6 tension tapes, edge-on (6.0 mm projected), knife edges sky 1.59e-05  ph   0.014 GW  n   0.004 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   0.703 GW  n   0.094 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 1.05e-03  ph   5.819 GW  n   0.432 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V2 edge-on + Pt skimmers 60 m: thick 7.0 cm, nose 0.53 m at 1317 K, ring sky 1.13e-04; B01 x4 3.32 GW (budget 10.8); self-radiated x4 72.91 GW; total x4 76.22; mass 1078 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 157.0, "skimmer_t": 147.9, "tethers_t": 3.1, "plug_t": 7.1, "strips_t": 154.4, "spine_t": 54.1}
+      ring nose (edge-on, knife-edge skimmer)          sky 1.13e-04  ph   0.032 GW  n   0.028 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.012 GW  ch  0.00  -> B01
+      6 tension tapes, edge-on (6.0 mm projected), knife edges sky 1.59e-05  ph   0.014 GW  n   0.004 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   0.703 GW  n   0.094 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 2.91e-03  ph  16.152 GW  n   1.200 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V3 Halo-like thick face (0.24 m), round cables: thick 26.4 cm, nose 0.41 m at 3279 K, ring sky 4.26e-04; B01 x4 3.45 GW (budget 10.8); self-radiated x4 14.73 GW; total x4 18.18; mass 1085 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 462.4, "skimmer_t": 0.0, "tethers_t": 1.5, "plug_t": 6.5, "strips_t": 5.6, "spine_t": 54.1}
+      ring nose (edge-on)                              sky 4.26e-04  ph   1.763 GW  n   0.026 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.046 GW  ch  0.00  -> B01
+      6 tension cables (48.1 mm projected)             sky 1.26e-04  ph   0.523 GW  n   0.008 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   0.703 GW  n   0.024 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 1.12e-04  ph   0.623 GW  n   0.012 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V3 edge-on ribbon + round cables: thick 7.0 cm, nose 0.41 m at 2353 K, ring sky 1.13e-04; B01 x4 3.32 GW (budget 10.8); self-radiated x4 9.47 GW; total x4 12.79; mass 745 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 122.7, "skimmer_t": 0.0, "tethers_t": 1.5, "plug_t": 6.5, "strips_t": 5.6, "spine_t": 54.1}
+      ring nose (edge-on)                              sky 1.13e-04  ph   0.468 GW  n   0.007 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.012 GW  ch  0.00  -> B01
+      6 tension cables (48.1 mm projected)             sky 1.26e-04  ph   0.523 GW  n   0.008 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   0.703 GW  n   0.024 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 1.12e-04  ph   0.623 GW  n   0.012 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V3 edge-on ribbon + edge-on tapes: thick 7.0 cm, nose 0.41 m at 2353 K, ring sky 1.13e-04; B01 x4 3.32 GW (budget 10.8); self-radiated x4 7.61 GW; total x4 10.93; mass 745 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 122.7, "skimmer_t": 0.0, "tethers_t": 1.5, "plug_t": 6.5, "strips_t": 5.6, "spine_t": 54.1}
+      ring nose (edge-on)                              sky 1.13e-04  ph   0.468 GW  n   0.007 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.012 GW  ch  0.00  -> B01
+      6 tension tapes, edge-on (6.0 mm projected)      sky 1.59e-05  ph   0.066 GW  n   0.001 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   0.703 GW  n   0.024 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 1.12e-04  ph   0.623 GW  n   0.012 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V3 edge-on + Pt knife-edge skimmers 20 m: thick 7.0 cm, nose 0.41 m at 1878 K, ring sky 1.13e-04; B01 x4 3.32 GW (budget 10.8); self-radiated x4 27.32 GW; total x4 30.64; mass 842 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 122.7, "skimmer_t": 49.3, "tethers_t": 3.1, "plug_t": 6.5, "strips_t": 52.5, "spine_t": 54.1}
+      ring nose (edge-on, knife-edge skimmer)          sky 1.13e-04  ph   0.185 GW  n   0.007 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.012 GW  ch  0.00  -> B01
+      6 tension tapes, edge-on (6.0 mm projected), knife edges sky 1.59e-05  ph   0.014 GW  n   0.001 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   0.703 GW  n   0.024 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 1.04e-03  ph   5.790 GW  n   0.108 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  V3 edge-on + Pt skimmers 60 m: thick 7.0 cm, nose 0.41 m at 1256 K, ring sky 1.13e-04; B01 x4 3.32 GW (budget 10.8); self-radiated x4 68.81 GW; total x4 72.12; mass 1035 t/engine {"conductor_t": 206.0, "structure_t": 348.4, "nose_t": 122.7, "skimmer_t": 147.9, "tethers_t": 3.1, "plug_t": 6.5, "strips_t": 146.1, "spine_t": 54.1}
+      ring nose (edge-on, knife-edge skimmer)          sky 1.13e-04  ph   0.032 GW  n   0.007 GW  ch  0.00  -> SELF
+      cold ribbon behind the nose (x refrigeration)    sky 0.00e+00  ph   0.000 GW  n   0.012 GW  ch  0.00  -> B01
+      6 tension tapes, edge-on (6.0 mm projected), knife edges sky 1.59e-05  ph   0.014 GW  n   0.001 GW  ch  0.00  -> SELF
+      ship shadow plug (self-radiating)                sky 1.27e-04  ph   0.703 GW  n   0.024 GW  ch  0.00  -> SELF
+      neighbour shadow strips (self-radiating)         sky 2.90e-03  ph  16.122 GW  n   0.300 GW  ch  0.00  -> SELF
+      charged leakage (Halo 2.2 95 % bound, OPEN)      sky 0.00e+00  ph   0.000 GW  n   0.000 GW  ch  0.82  -> B01
+  optimiser V0: 300/600 feasible (B01), 0 strict (all heat); lightest: R90 D1500 S2000 Ls0 Pt h4 21 MA 3.3+14.8 GW 812 t; R90 D2000 S2000 Ls0 Pt h4 21 MA 3.3+10.6 GW 816 t; R62 D1500 S2000 Ls20 Pt h4 26 MA 3.3+21.9 GW 825 t
+      lightest strict: 
+      skimmers among the feasible: 264 of 300; among the 8 lightest: 3
+  optimiser V2: 384/600 feasible (B01), 4 strict (all heat); lightest: R30 D1500 S2000 Ls34 Pt h4 41 MA 3.3+11.7 GW 693 t; R30 D1000 S2000 Ls34 Pt h4 41 MA 3.3+18.8 GW 696 t; R30 D2000 S2000 Ls34 Pt h4 41 MA 3.3+9.2 GW 701 t
+      lightest strict: R90 D2000 S2000 Ls0 Pt h4 21 MA 3.3+6.0 GW 779 t; R90 D2000 S2000 Ls0 Pt h2 21 MA 3.3+5.6 GW 828 t; R130 D2000 S2000 Ls0 Pt h4 17 MA 3.3+6.4 GW 840 t
+      skimmers among the feasible: 336 of 384; among the 8 lightest: 8
+  optimiser V3: 384/600 feasible (B01), 6 strict (all heat); lightest: R30 D1500 S2000 Ls34 Pt h4 41 MA 3.3+10.7 GW 675 t; R30 D1000 S2000 Ls34 Pt h4 41 MA 3.3+17.2 GW 676 t; R30 D2000 S2000 Ls34 Pt h4 41 MA 3.3+8.5 GW 684 t
+      lightest strict: R90 D2000 S2000 Ls0 Pt h4 21 MA 3.3+5.6 GW 748 t; R90 D1500 S2000 Ls0 Pt h2 21 MA 3.3+7.4 GW 776 t; R90 D2000 S2000 Ls0 Pt h2 21 MA 3.3+5.1 GW 785 t
+      skimmers among the feasible: 336 of 384; among the 8 lightest: 8
+== F magnetic compatibility: eddy screen (swing 0.1, dB 0.33 T, transit 10.1 us, duty 0.20)
+  nose, bulk tungsten (1700 K)                   535 GW per engine
+  nose, tungsten laminated 1 mm                  0.282 GW per engine
+  nose, B4C ceramic (semiconducting, ~1e4 S/m)   2.97 GW per engine
+  nose, BN or diamond (insulator)                2.97e-10 GW per engine
+  skimmer Pt film 50 nm, tiled 1 mm              3.09e-05 GW per engine
+  skimmer Pt film 50 nm, untiled 0.1 m           0.309 GW per engine
+== F recommended point and sensitivities (four engines)
+  recommended (V2)                           B01 3.31 + self 6.03 = 9.34 GW; 779 t/engine; nose 1702 K; 21.1 MA; strict True
+  field ratio 10 instead of 50               B01 3.30 + self 5.85 = 9.15 GW; 367 t/engine; nose 1605 K; 10.2 MA; strict True
+  REBCO J_e x2 (6e8 A/m2, advanced)          B01 3.30 + self 5.85 = 9.16 GW; 631 t/engine; nose 1606 K; 20.5 MA; strict True
+  pulse rate 6.8 kHz (Halo 2.5)              B01 3.33 + self 6.29 = 9.61 GW; 1674 t/engine; nose 1818 K; 37.0 MA; strict True
+  scattered-in neutron floor 1e-3            B01 3.31 + self 6.04 = 9.35 GW; 787 t/engine; nose 1676 K; 21.1 MA; strict True
+  charged leakage x0.1                       B01 0.37 + self 6.03 = 6.40 GW; 779 t/engine; nose 1702 K; 21.1 MA; strict True
+  V3 source                                  B01 3.31 + self 5.57 = 8.88 GW; 748 t/engine; nose 1804 K; 21.1 MA; strict True
+  V0 source                                  B01 3.31 + self 10.56 = 13.87 GW; 816 t/engine; nose 1935 K; 21.1 MA; strict False
+  D 1000 m                                   B01 3.31 + self 15.60 = 18.91 GW; 774 t/engine; nose 1702 K; 21.1 MA; strict False
+  S 1000 m                                   B01 3.31 + self 11.43 = 14.74 GW; 791 t/engine; nose 1702 K; 21.1 MA; strict False
+  Pt knife-edge skimmer 20 m                 B01 3.31 + self 13.32 = 16.63 GW; 871 t/engine; nose 1217 K; 21.1 MA; strict False
+  round cables instead of edge-on tapes      B01 3.31 + self 7.37 = 10.68 GW; 779 t/engine; nose 1702 K; 21.1 MA; strict True
+  V0: hardware sky needed (photons only) {"1.0": 0.000331, "0.1": 0.0033102, "0.01": 0.0331019, "0.001": 0.331019}; neutrons only 1.87e-03
+  V1: hardware sky needed (photons only) {"1.0": 0.0004096, "0.1": 0.0040962, "0.01": 0.0409619, "0.001": 0.4096191}; neutrons only 1.67e-03
+  V2: hardware sky needed (photons only) {"1.0": 0.0006558, "0.1": 0.006558, "0.01": 0.0655802, "0.001": 0.6558021}; neutrons only 6.54e-03
+  V3: hardware sky needed (photons only) {"1.0": 0.0006558, "0.1": 0.006558, "0.01": 0.0655802, "0.001": 0.6558021}; neutrons only 2.62e-02

@@ -1,0 +1,53 @@
+Compact cluster base: burn at x -153.4 m, tank aft dome 53.4 m forward of the burn (measured on the built approved ship (2026-11-23)); pitch 24.0 m, cant 2.0 deg
+
+== C1: C1 production cluster as drawn
+  D 53 m, burn 6 m aft of the shield, shield r 5.4/4.4 m (185 t), field x1
+  axial efficiency 0.311, charged hit share 0.687, hardware sky 0.979
+  piped heat (4 engines) 176,004 GW = 16,295 x the 10.8 GW drive radiators (173.9 km2 extra at 1,800 K)
+  direct burn on the ship 1,254.7 GW (12,547 x the 0.1 GW limit): BLADES 877.5 GW, SPINE 206.4 GW, TANK_AFT 170.8 GW
+  ripple dB/B 0.001, eddy heat 41.0 MW per engine; winding fluence 2.18e+26 n/m2 = 7,260 x limit behind 0.22 m armour
+  dust NOMINAL 444 t, JUSTIFIED 780 t; engine 1,244 t; departure if heat closed 142,104 t (with radiators for the piped heat 54,672,724 t)
+    loop aft faces (in the exhaust)           989 m2  armour       178.3 t  armour 0.100 m
+    shield aft faces (burn view)              366 m2  armour        52.8 t  armour 0.080 m
+    hub and cradles                           338 m2  armour        48.4 t  armour 0.080 m
+    radiator blade aft edges                  274 m2  armour        38.8 t  armour 0.078 m
+    tank aft dome not behind an engine        749 m2  armour       125.7 t  armour 0.093 m
+
+== C2: C2 cluster 30 m aft on a longer thrust truss
+  D 83 m, burn 6 m aft of the shield, shield r 5.4/4.4 m (185 t), field x1
+  axial efficiency 0.311, charged hit share 0.687, hardware sky 0.979
+  piped heat (4 engines) 177,063 GW = 16,393 x the 10.8 GW drive radiators (175.0 km2 extra at 1,800 K)
+  direct burn on the ship 76.0 GW (760 x the 0.1 GW limit): BLADES 76.0 GW
+  ripple dB/B 0.001, eddy heat 41.0 MW per engine; winding fluence 2.18e+26 n/m2 = 7,260 x limit behind 0.22 m armour
+  dust NOMINAL 444 t, JUSTIFIED 780 t; engine 1,274 t; departure if heat closed 144,612 t (with radiators for the piped heat 55,003,433 t)
+    loop aft faces (in the exhaust)           989 m2  armour       178.3 t  armour 0.100 m
+    shield aft faces (burn view)              366 m2  armour        52.8 t  armour 0.080 m
+    hub and cradles                           338 m2  armour        48.4 t  armour 0.080 m
+    radiator blade aft edges                  274 m2  armour        38.8 t  armour 0.078 m
+    tank aft dome not behind an engine        749 m2  armour       125.7 t  armour 0.093 m
+
+== C3: C3 C2 + 6 m spool (burn 12 m aft of the shield), ribbon loops, tank-shadowing shields
+  D 89 m, burn 12 m aft of the shield, shield r 6.7/7.9 m (375 t), field x4
+  axial efficiency 0.513, charged hit share 0.456, hardware sky 0.536
+  piped heat (4 engines) 116,627 GW = 10,798 x the 10.8 GW drive radiators (115.2 km2 extra at 1,800 K)
+  direct burn on the ship 36.1 GW (361 x the 0.1 GW limit): BLADES 36.1 GW
+  ripple dB/B 0.001, eddy heat 41.3 MW per engine; winding fluence 2.18e+26 n/m2 = 7,260 x limit behind 0.22 m armour
+  dust NOMINAL 480 t, JUSTIFIED 847 t; engine 1,464 t; departure if heat closed 48,744 t (with radiators for the piped heat 10,969,743 t)
+    loop aft faces (in the exhaust)           989 m2  armour       178.3 t  armour 0.100 m
+    shield aft faces (burn view)              566 m2  armour        88.4 t  armour 0.087 m
+    hub and cradles                           338 m2  armour        48.4 t  armour 0.080 m
+    radiator blade aft edges                  274 m2  armour        38.8 t  armour 0.078 m
+    tank aft dome not behind an engine        749 m2  armour       125.7 t  armour 0.093 m
+
+== C4: C4 C3 + braking protection package (15 m screen zone)
+  D 89 m, burn 12 m aft of the shield, shield r 8.0/9.5 m (533 t), field x4
+  axial efficiency 0.513, charged hit share 0.456, hardware sky 0.555
+  piped heat (4 engines) 117,125 GW = 10,844 x the 10.8 GW drive radiators (115.7 km2 extra at 1,800 K)
+  direct burn on the ship 13.9 GW (139 x the 0.1 GW limit): BLADES 13.9 GW
+  ripple dB/B 0.001, eddy heat 41.3 MW per engine; winding fluence 2.18e+26 n/m2 = 7,260 x limit behind 0.22 m armour
+  dust NOMINAL 409 t, JUSTIFIED 935 t; engine 1,622 t; departure if heat closed 52,294 t (with radiators for the piped heat 11,020,005 t)
+    loop aft faces (in the exhaust)           989 m2  armour       178.3 t  armour 0.100 m
+    shield aft faces (burn view)              805 m2  armour       137.6 t  armour 0.095 m
+    hub and cradles                           338 m2  armour        48.4 t  armour 0.080 m
+    radiator blade aft edges                  274 m2  armour        38.8 t  armour 0.078 m
+    tank aft dome not behind an engine        749 m2  3 screens      5.5 t  armour 0.093 m  screens: 0.086 events, needs 32 m
