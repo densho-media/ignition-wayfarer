@@ -740,7 +740,7 @@
   ],
   "mechanism": "The coupled pulse leaves too little directed energy per kilogram",
   "required": "19,201 km/s (the mission exhaust speed)",
-  "achieved": "4,914 km/s coupled; 9,928 km/s with every source lever and a tamper",
+  "achieved": "8,772 km/s coupled; 15,971 km/s with every source lever and a tamper",
   "solutions": "More directed energy per kilogram: early proton extraction, smaller hit share; never more cold propellant",
   "advances": "-",
   "severity": "CRITICAL",

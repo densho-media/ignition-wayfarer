@@ -178,15 +178,20 @@ def pulse(cell, mass_kg, Hz, noz, budget_W, mirror=0.0, h2_kg=0.0):
     absorbed by the engine). mirror: share of the absorbed X-rays a grazing mirror sends back out. h2_kg: hydrogen added per pulse; how it
     takes energy from the plasma is not modelled anywhere, so a nonzero value returns no thrust and says so."""
     F, Q, X, N_, P = cell['fusion_J'], cell['heat_J'], cell['xray_J'], cell['neutron_J'], cell['plasma_J']
-    jet = noz['eta'] * P; hit = noz['hit'] * P; side = max(P - jet - hit, 0.0)
+    # Momentum-consistent nozzle (vertex-extraction, 2026-11-24): eta is the mean axial cosine of the launched debris (hits count zero),
+    # so the impulse is eta sqrt(2 m P) for equal-speed debris; the struck share stays in the engine (its mass deposited, its energy heat).
+    # Until 2026-11-24 the ledger used jet = eta P carried by every ion, which overstated the impulse by 1 / sqrt(eta).
+    m_deb = mass_kg - F / C_LIGHT ** 2                  # fuel left after the mass defect, all of it in the expanding plasma
+    hit = noz['hit'] * P; m_exh = (1.0 - noz['hit']) * m_deb; dep = noz['hit'] * m_deb
     x_abs = noz['pickup'] * X * (1.0 - mirror); n_abs = noz['pickup'] * N_
-    m_exh = mass_kg - F / C_LIGHT ** 2                  # every ion leaves; the mass defect left as energy
     coupled = h2_kg == 0.0
-    I = math.sqrt(2.0 * m_exh * jet) if coupled else None
-    v = math.sqrt(2.0 * jet / m_exh) if coupled else None
+    I = noz['eta'] * math.sqrt(2.0 * m_deb * P) if coupled else None
+    jet = I * I / (2.0 * m_exh) if coupled and m_exh > 0 else noz['eta'] * P
+    side = max(P - jet - hit, 0.0)
+    v = I / m_exh if coupled and m_exh > 0 else None
     heat = x_abs + n_abs + hit
     return dict(fusion_J=F, heat_in_J=Q, xray_J=X, neutron_J=N_, plasma_J=P, jet_J=jet, side_J=side, hit_J=hit, x_abs_J=x_abs, n_abs_J=n_abs,
-                residual_J=cell.get('residual_J', 0.0), number_change_J=cell.get('number_change_J', 0.0), engine_heat_J=heat, impulse_Ns=I, exhaust_m_s=v, mass_kg=mass_kg, exhaust_mass_kg=m_exh,
+                residual_J=cell.get('residual_J', 0.0), number_change_J=cell.get('number_change_J', 0.0), engine_heat_J=heat, impulse_Ns=I, exhaust_m_s=v, mass_kg=mass_kg, exhaust_mass_kg=m_exh, debris_kg=m_deb, deposited_kg=dep, deposited_kg_s=dep * Hz,
                 reacted_kg=cell['reacted_kg'], burn_fraction=cell['burn_fraction'], Hz=Hz, fusion_W=F * Hz, jet_W=jet * Hz,
                 thrust_N=I * Hz if coupled else None, engine_heat_W=heat * Hz, heat_over=heat * Hz / budget_W,
                 driver_abs_W=Q * Hz, driver_elec_W=Q * Hz / DRIVER_WALLPLUG, fuel_kg_s=mass_kg * Hz, reacted_kg_s=cell['reacted_kg'] * Hz,
@@ -369,7 +374,7 @@ def build(s, nd, imp, geo_sky=None):
     pd = pulse(design_cell, p['mass_kg'], p['pulse_Hz'], dict(noz, eta=1.0, hit=0.0), noz['budget_W'])
     L = dict(pulse=pl, noz=noz, design_burn=design)
     st = states(s, nd, imp, L)
-    v_plasma = math.sqrt(2 * pl['plasma_J'] / pl['exhaust_mass_kg'])
+    v_plasma = math.sqrt(2 * pl['plasma_J'] / pl['debris_kg'])
     timeline = [
         dict(id='inject', title='Target flight to the burn point', t0=-1.0 / p['pulse_Hz'], t1=0.0, cls='SPECULATIVE',
              note='One target in flight per period (vertex_engine C-08); launcher and tracking are VTX-S2.'),

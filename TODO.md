@@ -721,17 +721,15 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   polarisation) cannot meet B01; the reference burn heats the ship 5,386x the drive's hot radiators, every lever with 5 % X-ray exposure
   ~348x, and neutrons alone ~37x. Open: owner S1-S4 (NOTES.md); SFE-1 Fokker-Planck hybrid with polarisation and synchrotron, then a
   burn-geometry X-ray avoidance study; the D-D suppression of polarised fuel is unmeasured (PolFusion) and stays SPECULATIVE.
-- [ ] **P08 — Fusion Ignition flagship simulation: open follow-ups (deployed 2026-11-24, owner brief 06:43Z; RESEARCH, not canon).**
-  Simulations · Fusion Ignition (`engineering/fusion-ignition/`, lab/studies/fusion-ignition, tools/story_ignite.py,
+- [ ] **P08 — Fusion Engineering flagship simulation: open follow-ups (six chapters, 24 stages, owner brief 2026-11-24 09:49Z; RESEARCH, not canon).**
+  Simulations · Fusion Engineering (`engineering/fusion-ignition/`, lab/studies/fusion-ignition with chapters.py, tools/story_ignite.py,
   web/engineering/fusion-ignition.js); the engine research behind it is lab/studies/vertex-compact-engine (MPN, RON, AMPN, HIMS, compact
-  C1-C4, thermal, source). Eleven stages; the Heat stage runs in six steps (source, supermirrors, edge-on blades, blankets, hot and warm
-  circuits, cryogenic circuit and the path to space) over a drawn cooling network of 395 parts with an inspector per component.
-  Owner decisions 2026-11-24: B edge-on blades adopted as direction; thin 248 t blanket kept as an option; full 2,147 t blanket archived;
-  focus on the source. Still open, nothing closes: B + thin blanket leave the engine 1,575x its radiator share; the best source case
-  with a tungsten tamper 2,011x (heat moves to charged strikes, ENG-062); coupled exhaust 4,914 km/s against 19,201 (ENG-063).
-  Next: the nozzle hit share (ENG-062), a structural-dynamics model for the blades and roots (ENG-058), edge-strip life (ENG-057);
-  R1 engine sized for the 42.9 kt V4 ship, R3 jet share, R4 `operating_point.species` (canon not changed); render on demand while paused;
-  portrait-phone camera framing per stage; Q-CMP-2 blade aft ends.
+  C1-C4, thermal, source, extraction). Owner decisions 2026-11-24: B edge-on blades, thin blanket optional, full blanket archived, source first.
+  Still open, nothing closes: coupled C1 0.41 MN and 8,772 km/s against 21.8 MN and 19,201 km/s, heat 2,200x (B + thin blanket 1,575x);
+  ENG-062 scan: burn 4 m aft with closure x4 gives 0.94 MN at 1,967x (a drawn-geometry change, needs the owner); early extraction is a heat
+  lever (about 300x at 0.34 MN). Next: X-ray pickup for a moved burn, blade and root structural dynamics (ENG-058), edge-strip life (ENG-057),
+  compression and H2 coupling models (start-up), R1 engine sized for the V4 ship, R4 `operating_point.species`; render on demand while paused;
+  portrait-phone camera framing per stage.
 
 ## Owner routing and question continuity
 

@@ -6,7 +6,7 @@
 | Question | Can the compact Vertex engine reject its heat and reach the mission exhaust speed, and which nozzle, protection, cooling and source choices move it closest? |
 | Model base | main d016d5d; Vertex engine as built (`vertex_engine`), R2-B target burn of lab/studies/fusion-ignition |
 | Branch | claude/project-thread-1p6mtu, 2026-11-22 to 2026-11-24 |
-| Open owner questions | ENG-062 nozzle hit share next; blade structural dynamics (ENG-058); Q-CMP-2 blade aft ends; R1 engine sized for the V4 ship |
+| Open owner questions | ENG-062 scanned (vertex-extraction): burn 4 m aft with closure x4 is the best interception; blade structural dynamics (ENG-058); Q-CMP-2 blade aft ends; R1 engine sized for the V4 ship |
 | Review | `vertex-*/REVIEW_*.blend` (local) and the renders in the project files; the public view is `engineering/fusion-ignition/` |
 
 # vertex-compact-engine: notes
@@ -23,6 +23,7 @@ Each subfolder keeps its own `NOTES.md` (except `vertex-source`, described below
 | `vertex-hims` | Hybrid impact and magnetic shielding | Passive screen lightest; ENG-001..021 |
 | `vertex-compact` | Compact engine C1-C4 on the approved ship | C4 best, not closed (heat 10,800x); ENG-030..038 |
 | `vertex-thermal` | Supermirrors, cooling mesh, per-part heat; owner decisions 2026-11-24 | B edge-on blades adopted, thin blanket optional, full blanket archived; 1,575x the radiator share remains; ENG-040..060 |
+| `vertex-extraction` | ENG-062: early extraction, closure topology, burn position and field strength against nozzle interception | Topology and burn position set the struck share, field strength alone does not; best 0.94 MN at 1,967x; extraction is a heat lever (300x at 0.34 MN); nothing closes |
 | `vertex-source` | Where the burn puts its energy and which levers move it | 85 % X-rays at the design point; early extraction and a tungsten tamper move energy to plasma, heat moves to strikes; ENG-061..063 |
 
 **vertex-source.** `source.py` (about 15 s) writes `results/source.json`: product slowing-down (Sivukhin ion share, Spitzer times and

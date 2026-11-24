@@ -37,6 +37,7 @@ import vertex_magnet as vm  # noqa: E402
 import vertex_radiation as vr  # noqa: E402
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ledger as LG  # noqa: E402
+import chapters as CH  # noqa: E402
 
 IMPORT = sorted((HERE / 'imports').glob('compact_*.json'))[-1]
 THERMAL = sorted((HERE / 'imports').glob('thermal_*.json'))[-1]
@@ -443,7 +444,7 @@ def problems(imp, th=None):
 
 def inputs_hash():
     h = hashlib.sha256()
-    for p in [HERE / 'model.py', HERE / 'ledger.py', ROOT / 'references/evidence/vertex_source.json', IMPORT, THERMAL, SOURCE, IGNITION, FUSION, ROOT / 'data/wayfarer_3d.toml', ROOT / 'src/wayfarer/vertex_radiation.py',
+    for p in [HERE / 'model.py', HERE / 'ledger.py', HERE / 'chapters.py', *CH.EXTRACT, CH.ASF, ROOT / 'references/evidence/vertex_source.json', IMPORT, THERMAL, SOURCE, IGNITION, FUSION, ROOT / 'data/wayfarer_3d.toml', ROOT / 'src/wayfarer/vertex_radiation.py',
               ROOT / 'src/wayfarer/vertex_magnet.py', ROOT / 'src/wayfarer/vertex_engine.py', ROOT / 'src/wayfarer/operating_point.py']:
         h.update(p.read_bytes())
     return h.hexdigest()[:16]
@@ -465,6 +466,7 @@ def build():
                           IMPORTED='copied once from another study', **{'MODEL-BASED': 'expected from theory, not demonstrated'},
                           ILLUSTRATIVE='picture or display choice, no physics claim', OPEN='not modelled or not budgeted', SPECULATIVE='beyond '
                           'established physics or engineering'))
+    d['chapters'] = CH.build(s, d)          # the 24-stage journey reads the same blocks (one engine model, one ledger)
     A = d['thermal']['strategies']['A']
     d['lab']['mirrors']['drawn'] = dict(median_psi_deg=A['median_psi_deg'], reflected_share=A['coupled_reflected_share'])
     d['lab']['mirrors']['note'] += (f' On the drawn engine the faces meet the rays at a median {A["median_psi_deg"]:.0f} deg, where a coating returns '

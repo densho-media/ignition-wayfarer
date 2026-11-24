@@ -61,18 +61,40 @@ def T(s):
     return f'{s * 1e3:.3g} ms' if s < 1 else f'{s:,.3g} s'
 
 
+CHAPTERS = [
+    ('I', 'Fundamentals', 'From the ship\'s need to one reaction'),
+    ('II', 'Selective fusion', 'Choosing which reactions happen'),
+    ('III', 'Magnetic propulsion', 'Turning charged products into thrust'),
+    ('IV', 'Magneto-photonic', 'Radiation a field cannot steer'),
+    ('V', 'Thermal and mechanical', 'Where the heat goes and what holds it'),
+    ('VI', 'Assembly and operation', 'Building, starting and running the engine'),
+]
+# (id, chapter, label, heading, scale). Twenty-four stages; each draws one scene of the shared engine model (web/engineering/fusion-ignition.js SEGS)
 STAGES = [
-    ('need', '0', 'The need', 'Why the ship needs this engine', 'ship'),
-    ('hardware', '1', 'Hardware', 'What the engine is made of', 'engine'),
-    ('magnets', '2', 'Magnets', 'Powering the coils', 'engine'),
-    ('fuel', '3', 'Fuel', 'Target, plasma and reaction mass', 'engine'),
-    ('nucleus', '4', 'One reaction', 'Inside the burn: two nuclei', 'nucleus'),
-    ('many', '5', 'Many', 'From one reaction to many', 'plasma'),
-    ('ignition', '6', 'Ignition', 'What it takes to burn', 'plasma'),
-    ('nozzle', '7', 'Thrust', 'From products to thrust', 'engine'),
-    ('losses', '8', 'Losses', 'Radiation, heat and the problems', 'engine'),
-    ('thermal', '9', 'Heat', 'Mirrors, cooling and where the heat goes', 'engine'),
-    ('lab', '10', 'Experiment', 'Change the design', 'engine'),
+    ('need', 'I', 'The need', 'Why the ship needs this engine', 'ship'),
+    ('matter', 'I', 'Matter', 'Nuclei, electrons and plasma', 'nucleus'),
+    ('nucleus', 'I', 'First fusion', 'Inside the burn: two nuclei', 'nucleus'),
+    ('unwanted', 'I', 'Unwanted', 'The reactions the engine does not want', 'nucleus'),
+    ('mix', 'II', 'Fuel mix', 'How much deuterium, how much helium-3', 'plasma'),
+    ('accel', 'II', 'Beams', 'Selective fuelling with beams, and why it was rejected', 'plasma'),
+    ('spin', 'II', 'Spin', 'Spin polarisation of the fuel', 'nucleus'),
+    ('optimize', 'II', 'Optimizer', 'Every target lever through one ledger', 'plasma'),
+    ('products', 'III', 'Products', 'What the charged products do', 'plasma'),
+    ('magnets', 'III', 'Fields', 'Coils, field lines and one proton', 'engine'),
+    ('nozzle', 'III', 'Nozzle', 'From products to thrust, and what strikes', 'engine'),
+    ('radiation', 'IV', 'Radiation', 'What a field can and cannot steer', 'engine'),
+    ('mirrors', 'IV', 'Supermirrors', 'Reflecting X-rays at grazing angles', 'engine'),
+    ('geometry', 'IV', 'Geometry', 'Members that show the burn only their edge', 'engine'),
+    ('protection', 'IV', 'Protection', 'Shielding the superconducting coils', 'engine'),
+    ('heating', 'V', 'Heating', 'Where the hardware heats, by mechanism', 'engine'),
+    ('cooling', 'V', 'Cooling', 'The cooling mesh, built up', 'engine'),
+    ('cryo', 'V', 'Cryogenics', 'Keeping the windings at 20 K', 'engine'),
+    ('structure', 'V', 'Structure', 'Members that carry load, heat and coolant', 'engine'),
+    ('assembly', 'VI', 'Assembly', 'The engine, part by part', 'engine'),
+    ('startup', 'VI', 'Startup', 'From cold and dark to exhaust', 'engine'),
+    ('operate', 'VI', 'Operating', 'The running engine, layer by layer', 'engine'),
+    ('ship', 'VI', 'In the ship', 'Four engines in the Wayfarer', 'ship'),
+    ('lab', 'VI', 'Laboratory', 'Compare the configurations', 'engine'),
 ]
 SCALE = {'ship': 'Spacecraft scale · metres', 'engine': 'Engine scale · metres', 'plasma': 'Plasma scale · statistical, not to scale',
          'nucleus': 'Nuclear scale · femtometres, illustrative'}
@@ -181,6 +203,119 @@ def stage_texts(d):
       model; the pulse rate turns it into power; the variant and field decide what the nozzle directs and what strikes hardware; mirrors and
       armour change the heat and the windings. Hydrogen reaction mass has no coupled model, so the result says so instead of guessing. The
       steady-plasma levers (hot-ion mode, polarisation) belong to another regime and are kept apart. Nothing here changes the ship.</p>''', ['CALCULATED', 'IMPORTED', 'MODEL-BASED'])
+    return out
+
+
+def chapter_texts(d):
+    """The 24 stage texts. Existing scenes keep their text (stage_texts); the new stages read d['chapters'] (lab/studies/fusion-ignition/chapters.py)."""
+    old = stage_texts(d); ch = d['chapters']; lg = d['ledger']; lp = lg['pulse']; nz = lg['nozzle']['C1|1']; n = d['need']
+    mt, uw, mx, ac, sp, ra, op, sh, cp = (ch[k] for k in ('matter', 'unwanted', 'mix', 'accel', 'spin', 'radiation', 'optics', 'shapes', 'compare'))
+    tm = d['thermal']; ts = tm['strategies']; th_ = tm['hot']; tc = tm['cryo']; sr = d['source']; x = ch['extraction']
+    g = {r['particle']: r for r in mt['gyro']}
+    gp = mt['gyro'][0]; ge = mt['gyro'][-1]
+    i100 = uw['T_keV'].index(100); i70 = uw['T_keV'].index(70)
+    stp = uw['steady']; pu = uw['pulse']
+    out = {}
+    out['need'] = old['need']
+    out['matter'] = (f'''<p>Everything in the engine is made of three particles. A deuterium nucleus (D) is one proton and one neutron; helium-3 (³He) is two
+      protons and one neutron. Around each, electrons are held by only {mt["ionise_eV"]["D"]:g} eV (deuterium) and {sum(mt["ionise_eV"]["He3"]):.0f} eV (helium):
+      the drivers' heat strips them in an instant, and the fuel becomes a <b>plasma</b> of bare nuclei and free electrons.</p>
+      <p>Charged particles cannot cross a magnetic field: they circle its lines. In the engine's {mt["B_T"]:.2f} T at the burn point a 14.7 MeV proton circles in
+      {gp["r_m"]:.2f} m, an electron in {ge["r_m"] * 1e3:.1f} mm. A neutron has no charge and ignores the field: it flies straight until it hits a nucleus.
+      That one fact decides the whole engine: the field can steer what is charged, never what is not.</p>''', ['CALCULATED', 'ILLUSTRATIVE'])
+    out['nucleus'] = old['nucleus']
+    out['unwanted'] = (f'''<p>Deuterium also fuses with itself. Half the time D + D gives tritium and a proton, half the time helium-3 and a 2.45 MeV
+      <b>neutron</b>; the tritium then burns with deuterium and gives a 14.1 MeV neutron. These are the reactions that make neutrons in a "neutron-free" fuel.</p>
+      <p>At 100 keV and equal numbers of nuclei, D–D runs at {uw["dd_per_dhe3"][i100] * 100:.0f} % of the D–³He rate ({uw["dd_per_dhe3"][i70] * 100:.0f} % at 70 keV) {chip("CALCULATED")}.
+      In a steady plasma that puts {stp["neutron"] * 100:.1f} % of the fusion energy into neutrons; in the target, which burns for picoseconds and has no time to
+      burn its tritium, {pu["neutron_share"] * 100:.1f} %. The two regimes are shown side by side and never added.</p>''', ['CALCULATED'])
+    v2, v3 = mx['sources']['V2'], mx['sources']['V3']
+    out['mix'] = (f'''<p>The fuel mix is a dial. More helium-3 means fewer D–D reactions and fewer neutrons, but also fewer D–³He reactions per cubic metre
+      and more electrons per nucleus to radiate. {esc(mx["lesson"])}</p>
+      <p>The earlier fuel studies bracket it: V2 (polarised, selective helium heating, channelling) gives {v2["neutron"] * 100:.1f} % neutrons and {v2["photon"] * 100:.1f} %
+      radiation in a steady plasma; V3 declares the neutrons four times lower {chip("SPECULATIVE")}. The pulsed target burns differently: its X-ray share is set by
+      its density, not its mix (the chart shows both).</p>''', ['CALCULATED', 'IMPORTED'])
+    out['accel'] = (f'''<p>If fusion only needs the right nuclei to meet at the right energy, why not fire them at each other in beams? Every D–D collision avoided,
+      every neutron saved. The accelerator study tried it: separate D and ³He beams, a recirculating ring, energy recovered from every particle that misses.</p>
+      <p>It fails on Coulomb scattering. {esc(ac["why"])} At the best design the heat is still {ac["collider"]["radiator_multiple"]:.0f}× the drive's radiator budget
+      {chip("IMPORTED")}. The study is parked; its insight stays: <b>selectivity</b>, choosing which reactions happen, now lives in the fuel mix, the spin and the hot-ion start.</p>''', ['IMPORTED'])
+    out['spin'] = (f'''<p>Nuclei spin. Deuterium has spin 1, helium-3 spin ½; when both point the same way, D–³He fusion goes through one quantum channel and the
+      cross section rises by up to 1.5× (Kulsrud 1982) {chip("MODEL-BASED")}. Partial polarisation gives less: 0.5 × 0.5 gives ×{sp["states"][1]["dhe3_x"]:.3f}.</p>
+      <p>Whether aligned deuterons also suppress D–D fusion is disputed; the page shows it as a range, not a result {chip("SPECULATIVE")}. {esc(sp["angular"])}</p>
+      <p class="meta">{esc(sp["survival"])} Steady plasma and pulsed target are reported apart: in the pulsed burn polarisation raises the yield ×{(sp["pulsed"]["yield_x"] or 0):.2f}
+      but the X-ray share stays {(sp["pulsed"]["xray"] or 0) * 100:.0f} %.</p>''', ['MODEL-BASED', 'SPECULATIVE'])
+    out['optimize'] = (f'''<p>The target is where the energy split is decided. Every lever the studies modelled (density, mass, burn time, fuel mix, spin, hot ions,
+      early extraction, a tamper) is run through the same burn model and the same momentum-consistent nozzle ledger. Pick levers on the right: a modelled
+      case shows its numbers; a combination nobody has run says so.</p>
+      <p>{esc(sr["findings"][0])} The scene replays the design burn: X-rays escape while the burn runs away and the target flies apart.</p>''' + old['ignition'][0].split('</p>', 1)[1], ['CALCULATED', 'SPECULATIVE'])
+    xr = next((r for r in sr['levers'] if r['lever'] == 'extraction' and '50%' in r['label']), sr['levers'][0])
+    out['products'] = (old['many'][0] + f'''<p><b>Extraction trade-off.</b> Products that stay heat the fuel and keep it burning, then their energy leaks out as X-rays; products
+      that escape early carry their energy out directly. Letting half escape cuts the X-rays from {sr["levers"][0]["xray_share"] * 100:.0f} % to {xr["xray_share"] * 100:.0f} %,
+      but an escaped 14.7 MeV proton carries energy, not momentum: {xr["engine"]["fast_impulse_share"] * 100:.1f} % of the impulse {chip("CALCULATED")}. Early extraction is a heat lever, not a thrust lever.</p>''', ['CALCULATED', 'ILLUSTRATIVE'])
+    out['magnets'] = (old['magnets'][0] + f'''<p>Then one proton: it spirals round a field line ({g[mt["gyro"][0]["particle"]]["r_m"]:.2f} m circle at the burn) and follows it. The field's
+      shape, its <b>topology</b>, decides where each line, and so each particle, ends: aft through the exit, or on a coil or the shield.</p>''', ['CALCULATED', 'SAMPLED', 'ILLUSTRATIVE'])
+    eng62 = ''
+    if x.get('geometries'):
+        G = x['geometries']; dr = G.get('drawn|0|1'); d4 = G.get('drawn|0|4')
+        best = min(G.values(), key=lambda q: 0.4 * q['species']['D']['hit'] + 0.6 * q['species']['He3']['hit'])
+        eng62 = (f'''<p><b>ENG-062 research.</b> A test-particle scan of {len(G)} compact configurations (burn position, closure topology, field ×1 and ×4;
+          protons, alphas and debris) {chip("SAMPLED")}: the drawn nozzle puts {dr["species"]["D"]["hit"] * 100:.0f} % of the plasma on hardware, field ×4 alone
+          {d4["species"]["D"]["hit"] * 100:.0f} %; the best topology ({esc(x["topologies"][best["topo"]])}, burn {best["dz"]:+g} m) {best["species"]["D"]["hit"] * 100:.0f} %.
+          Magnetised products follow the field lines out of the burn, so the line map, not the field strength, sets the interception (ENG-065).</p>''') if dr and d4 else ''
+    out['nozzle'] = (old['nozzle'][0] + f'''<p class="meta">Momentum-consistent ledger (corrected 2026-11-24): the {nz["hit"] * 100:.0f} % of the plasma that strikes stays in the engine,
+      {lp["deposited_kg_s"] * 1e3:.0f} g/s per engine (ENG-064); the rest leaves almost straight aft. Before the correction the page booked the axial efficiency as an
+      energy share carried by every ion and showed 0.74 MN.</p>''' + eng62, ['SAMPLED', 'CALCULATED'])
+    out['radiation'] = (f'''<p>The burn sends out four kinds of energy, and only one can be steered. Charged products and plasma ({ra["rows"][0]["share"] * 100:.0f} % of the
+      fusion energy in the coupled pulse) follow the field. X-rays ({ra["rows"][1]["share"] * 100:.0f} %) and neutrons ({ra["rows"][2]["share"] * 100:.1f} %) carry no charge and
+      fly straight to whatever they meet; gamma rays are made later inside the hardware by captured neutrons. {esc(ra["note"])}</p>
+      <p>Made in the target, absorbed in the hardware: of the X-rays and neutrons leaving the burn, {nz["pickup"] * 100:.0f} % strike this engine's own parts.</p>''', ['CALCULATED'])
+    out['mirrors'] = (f'''<p>A mirror can turn an X-ray only if the X-ray barely touches it. {esc(op["note"])} Try it on the left: change the photon energy and the
+      angle, and watch reflection, transmission and absorption. A bathroom mirror's visible light says nothing about a 100 keV X-ray, and no mirror reflects an MeV neutron.</p>
+      <p>Then the mirrors go into the engine. On the drawn faces, which meet the burn at about {ts["A"]["median_psi_deg"]:.0f}°, a coating returns
+      {ts["A"]["coupled_reflected_share"]:.1e} of what strikes (ENG-040); liners deep inside the engine cannot turn the spectrum clear of a coil. Mirrors only work where the
+      surface can contain the burn point.</p>''', ['CALCULATED', 'IMPORTED'])
+    out['geometry'] = (f'''<p>So change the shape, not the coating. A member whose plane contains the burn point shows the burn only its edge; its faces meet the rays at
+      the {ts["B"]["detail"]["alignment"]["psi_total_mrad"]:.2f} mrad left by alignment errors, where a polished face reflects nearly everything. Round, broad, edge-on, cone,
+      skeletal and corridor members compare in the chart: per metre at 6 m, an edge-on plate takes {sh["rows"][2]["rel"]:.2f}× a round tube, a cone with its apex at the burn
+      {sh["rows"][3]["rel"]:.0e}×.</p>
+      <p>This is strategy B, the adopted direction: the members keep {ts["B"]["keep_share"] * 100:.0f} % of their heat ({W(ts["B"]["removed_W"])} removed per engine).
+      Its price is precision: alignment, deformation, vibration ({ts["B"]["detail"]["vibration"]["f1_Hz"]:.0f} Hz first mode against {d["ledger"]["pulse"]["Hz"]:,.0f} Hz pulses)
+      and thermal expansion, and the edge strip that takes {X(ts["B"]["detail"]["edge"]["over_limit"])} its flux limit (ENG-057).</p>''', ['IMPORTED', 'CALCULATED'])
+    out['protection'] = (f'''<p>The coils are superconducting at 20 K, inches from a burn that heats everything it sees. Layers protect them, from the burn inward: a
+      sacrificial carbon face, a tungsten heat sink with lithium channels, a tungsten-boron shield, a lithium-hydride moderator, a vacuum gap, an 80 K screen and
+      insulation. Open the layers on the right.</p>
+      <p>The <b>thin blanket</b> (primary option, {ts["C"]["thin"]["mass_t"]:.0f} t per engine) moves {W(ts["C"]["thin"]["moved_to_hot_W"])} into lithium but lets
+      {ts["C"]["thin"]["transmission"] * 100:.0f} % of the neutrons through: the windings still take {W(ts["C"]["thin"]["cryo_after_W"])} (ENG-059). The full blanket
+      ({ts["C"]["mass_t"]:,.0f} t) is the archived comparison.</p>''', ['IMPORTED'])
+    out['heating'] = (f'''<p>Each mechanism heats different parts. X-rays heat whatever surface they meet first; neutrons heat deep inside, in shields and windings;
+      charged strikes heat the coil noses and the shield face where field lines end. The coupled pulse puts {W(lp["engine_heat_W"])} into one engine:
+      X-rays {W(lp["x_abs_J"] * lp["Hz"])}, neutrons {W(lp["n_abs_J"] * lp["Hz"])}, strikes {W(lp["hit_J"] * lp["Hz"])}, {X(lp["heat_over"])} its radiator share.</p>''', ['CALCULATED', 'IMPORTED'])
+    out['cooling'] = (f'''<p>The cooling mesh grows from the hottest face outward: channels under the faces, heat sinks, collector manifolds, the hot lithium circuit
+      ({th_["inlet_K"]:.0f} → {th_["outlet_K"]:.0f} K), the warm NaK circuit for blade roots and optics, heat exchangers and the ship's radiators, with the coolant
+      circulating. The cooling is part of the structure: the blades carry their own lithium.</p>
+      <p>As drawn the lines carry {W(th_["drawn_line_cap_W"])} of the {W(th_["heat_W"] + th_["warm_uncooled_W"])} they would have to (ENG-046); a radiator for all of it would be
+      {th_["radiator_m2"] / 1e6:.0f} km² ({X(th_["radiator_over_ship"])} the ship's).</p>''', ['IMPORTED', 'CALCULATED'])
+    out['cryo'] = (f'''<p>The windings live at {tc["T_winding_K"]:.0f} K behind {tc["T_screen_K"]:.0f} K screens, multilayer insulation and vacuum, with heat intercepts on
+      every support and lead. Each watt that reaches 20 K costs about {tc["cop20_W_per_W"]:.0f} W of refrigeration, and the refrigerators must reject that heat too.
+      {esc(tc["separation"])} A quench dumps {tc["quench"]["stored_J"] / 1e9:.1f} GJ into warm resistors over {tc["quench"]["dump_s"]} s.</p>
+      <p>Neutrons put {W(tc["stage20_W"])} into the windings; the refrigeration for it would be {W(tc["refrig_W"])} (ENG-048).</p>''', ['IMPORTED'])
+    bi = ts['B']['detail']['integration']
+    out['structure'] = (f'''<p>In a compact engine no member does one job. The edge-on blades carry the nozzle's load, shade the coils, and carry lithium; the cones
+      that replace the hoops are structure and radiation shield at once; the service rail is the load path for the exchange carriage. Forms follow the burn's rays
+      (parametric about the burn point) and the load paths (organic where the two meet), inside the compact envelope.</p>
+      <p class="meta">Mass of the edge-on members {ts["B"]["mass_t"]:.0f} t plus {bi.get("actuator_t", 0):.0f} t of actuators. Their strength under the pulse loads is not
+      yet proven: a credible-looking load path is not a stress analysis (OPEN).</p>''', ['IMPORTED', 'OPEN'])
+    out['assembly'] = (old['hardware'][0] + '''<p>Watch the engine assemble in dependency order: frame, injection and target, drivers, coils, edge-on members, mirrors,
+      shields, the hot and warm mesh, cryogenics, services and the nozzle. Pause, step back, reverse, pick a part to read its card, or isolate the step.</p>''', ['SPEC', 'IMPORTED'])
+    out['startup'] = (old['fuel'][0] + '''<p>The start sequence runs power, cryogenics, field, injection, target, compression, fusion, expansion, guidance,
+      propellant, exhaust, heat and radiation. Compression and hydrogen coupling are marked unresolved where they appear.</p>''', ['CALCULATED', 'OPEN', 'SPECULATIVE'])
+    out['operate'] = (old['losses'][0] + '''<p>Every layer can be switched on its own: field, fusion, charged particles, photons, neutrons, mirrors, heating,
+      coolant, cryogenics, exhaust and thrust. Intended shows what the engine is meant to do; Modeled shows what today's models predict.</p>''', ['CALCULATED', 'IMPORTED'])
+    ig = ch['integration']
+    out['ship'] = ('<p>Four Vertex engines at the stern of the Wayfarer, close behind the shadow shield, inside the compact silhouette. What the cluster needs from the ship:</p><ul class="plain">'
+                   + ''.join(f'<li><b>{esc(r["label"])}.</b> {esc(r["value"])}</li>' for r in ig['rows']) + f'</ul><p class="meta">{esc(ig["rejected"])}</p>', ['SPEC', 'IMPORTED'])
+    out['lab'] = (old['lab'][0] + f'''<p>The comparison table below the levers ranks every supported configuration on thrust, exhaust speed, heat, deposited mass and
+      X-rays, with its maturity and its problems. None closes; the best heat found is {min(r["heat_over"] for r in cp["rows"] if r["id"] != "DESIGN"):,.0f}× the radiator share.</p>''', ['CALCULATED', 'IMPORTED', 'MODEL-BASED'])
     return out
 
 
@@ -353,32 +488,49 @@ def thermal_section(d):
 
 
 def problems_table(d):
-    return ''.join(f'<tr id="p-{p["id"]}"><td><b>{esc(p["id"])}</b></td><td>{esc(p["title"])}<small>{esc(p["mechanism"])}</small></td>'
-                   f'<td>{esc(p["required"])}</td><td>{esc(p["achieved"])}</td><td>{esc(", ".join(p.get("components") or []) or "–")}'
-                   f'<small>{esc(", ".join(p.get("stages") or []))}</small></td><td>{esc(p.get("solutions", ""))}</td><td><span class="st st-{"OPEN" if p["status"] == "OPEN" else "WORKING"}">'
-                   f'{esc(p["status"].lower())}</span></td></tr>' for p in d['problems']['items'])
+    def cell(p):
+        st = 'OPEN' if p['status'] == 'OPEN' else 'WORKING'
+        return (f'<tr id="p-{p["id"]}"><td><b>{esc(p["id"])}</b></td><td>{esc(p["title"])}<small>{esc(p.get("cause") or p["mechanism"])}</small></td>'
+                f'<td>{esc(p["required"])}</td><td>{esc(p["achieved"])}<small class="bad">{esc(p.get("deficit", ""))}</small></td>'
+                f'<td>{esc(", ".join(p.get("components") or []) or "–")}<small>{esc(", ".join(p.get("stages") or []))}</small></td>'
+                f'<td>{esc(p.get("intended") or p.get("solutions", ""))}</td><td>{esc(p.get("future", ""))}</td><td>{esc(p.get("maturity", ""))}</td>'
+                f'<td><span class="st st-{st}">{esc(p["status"].lower())}</span></td></tr>')
+    return ''.join(cell(p) for p in d['problems']['items'])
+
+
+def concepts_list(d):
+    return ''.join(f'<li><b>{esc(c["title"])}</b> <span class="st st-OPEN">{esc(c["status"].lower())}</span> {esc(c["why"])}'
+                   f'{f" Kept: {esc(c["kept"])}." if c.get("kept") else ""}</li>' for c in d['problems'].get('concepts', []))
 
 
 def build(e, d, out_dir, revision, built, page):
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / 'fusion_ignition.json').write_text(json.dumps(d, separators=(',', ':')))
-    texts = stage_texts(d)
-    tabs = ''.join(f'<button role="tab" id="t-{k}" data-stage="{k}" aria-controls="s-{k}" aria-selected="{str(i == 0).lower()}"><i>{n}</i><b>{esc(t)}</b></button>'
-                   for i, (k, n, t, _, _) in enumerate(STAGES))
+    texts = chapter_texts(d)
+    num = {k: i + 1 for i, (k, *_r) in enumerate(STAGES)}
+    chap_of = {k: c for k, c, *_r in STAGES}
+    ctabs = ''.join(f'<button role="tab" id="c-{c}" data-ch="{c}" aria-selected="{str(i == 0).lower()}" title="{esc(sub)}"><i>{c}</i><b>{esc(t)}</b></button>'
+                    for i, (c, t, sub) in enumerate(CHAPTERS))
+    tabs = ''.join(f'<button role="tab" id="t-{k}" data-stage="{k}" data-ch="{c}" aria-controls="s-{k}" aria-selected="{str(i == 0).lower()}"'
+                   f'{"" if c == "I" else " hidden"}><i>{num[k]}</i><b>{esc(t)}</b></button>' for i, (k, c, t, _, _) in enumerate(STAGES))
     panels = ''.join(f'<article class="fi-text" id="s-{k}" role="tabpanel" aria-labelledby="t-{k}" data-stage="{k}" data-scale="{sc}"{"" if i == 0 else " hidden"}>'
-                     f'<h3>{n} · {esc(h)}</h3><p class="chips">{" ".join(chip(c) for c in texts[k][1])} <span class="scale-tag">{esc(SCALE[sc])}</span></p>'
-                     f'{texts[k][0]}</article>' for i, (k, n, _, h, sc) in enumerate(STAGES))
+                     f'<p class="fi-chap">Chapter {c} · {esc(next(t for cc, t, _ in CHAPTERS if cc == c))}</p>'
+                     f'<h3>{num[k]} · {esc(h)}</h3><p class="chips">{" ".join(chip(x) for x in texts[k][1])} <span class="scale-tag">{esc(SCALE[sc])}</span></p>'
+                     f'{texts[k][0]}</article>' for i, (k, c, _, h, sc) in enumerate(STAGES))
     b = d['plasma']['burn']
     nf = d['need']; c1 = d['channels']['variants']['C1']
-    body = f'''<header><p class="eyebrow">Simulations · flagship · open problem</p><h1>Fusion Ignition: from nucleus to nozzle</h1>
-<p class="lead">How the Wayfarer's Vertex drive is built, switched on and ignited, from one D–³He reaction to {nf["thrust_N"] / 1e6:.1f} MN of
-thrust, and where the design fails. The sequence shows what the engine is meant to do; each step also shows what today's models predict.
-The drive does not work yet: at its coupled design pulse the engine takes up {X(d["ledger"]["pulse"]["heat_over"])} the heat its radiators can reject
-({X(c1["over"])} at full mission power in the steady-plasma study), and its exhaust is {d["ledger"]["pulse"]["exhaust_m_s"] / 1e3:,.0f} of the {d["ledger"]["need"]["exhaust_m_s"] / 1e3:,.0f} km/s needed. Nothing on this page is canon.</p>
+    lp = d['ledger']['pulse']
+    body = f'''<header><p class="eyebrow">Simulations · flagship · Fusion Ignition · open problem</p><h1>Fusion Engineering: from nucleus to engine</h1>
+<p class="lead">One connected journey through the Wayfarer's Vertex drive in six chapters: the physics of one D–³He reaction, choosing which reactions
+happen, turning charged products into thrust, the radiation a field cannot steer, the heat and the structure, and the engine assembled, started and running.
+Every stage reads the same engine and the same energy, mass and momentum ledger. The drive does not work yet: at its coupled design pulse the hardware takes
+{X(lp["heat_over"])} the heat its radiators can reject, and four engines give {4 * lp["thrust_N"] / 1e6:.2f} of the {nf["thrust_N"] / 1e6:.1f} MN needed
+(exhaust {lp["exhaust_m_s"] / 1e3:,.0f} of {d["ledger"]["need"]["exhaust_m_s"] / 1e3:,.0f} km/s). Nothing on this page is canon.</p>
 <p>{chip("OPEN")} {chip("CALCULATED")} {chip("ILLUSTRATIVE")} · <a href="../fusion/">Fusion engine</a> · <a href="../ignition/">Ignition: what breaks</a> ·
   <a href="../{e["kind_dir"]}/{e["folder"].name}/">the study behind this page</a></p></header>
 <section class="ign fi" id="fi" data-stage="need" data-view="concept">
-  <div class="fi-stages" role="tablist" aria-label="Stages">{tabs}</div>
+  <div class="fi-chapters" role="tablist" aria-label="Chapters">{ctabs}</div>
+  <div class="fi-stages" role="tablist" aria-label="Stages in this chapter">{tabs}</div>
   <div class="stage" id="stage">
     <canvas id="fi-view" aria-label="The Vertex drive in 3D, stage by stage; the same numbers are in the text beside it"></canvas>
     <canvas id="fi-2d" class="fi-2d" aria-hidden="true"></canvas>
@@ -407,7 +559,9 @@ The drive does not work yet: at its coupled design pulse the engine takes up {X(
         <label><input type="checkbox" data-layer="field" checked> Magnetic field</label>
         <label><input type="checkbox" data-layer="fuel" checked> Fuel and propellant</label>
         <label><input type="checkbox" data-layer="paths" checked> Charged-particle paths</label>
-        <label><input type="checkbox" data-layer="rad" checked> Photons and neutrons</label>
+        <label><input type="checkbox" data-layer="rad" checked> Photons</label>
+        <label><input type="checkbox" data-layer="neut" checked> Neutrons</label>
+        <label><input type="checkbox" data-layer="thrust" checked> Exhaust and thrust</label>
         <label><input type="checkbox" data-layer="heat" checked> Heat in the hardware</label>
         <label><input type="checkbox" data-layer="problems" checked> Engineering problems</label>
         <label><input type="checkbox" data-layer="cut"> Cutaway</label>
@@ -426,10 +580,13 @@ The drive does not work yet: at its coupled design pulse the engine takes up {X(
 {ledger_section(d)}
 {thermal_section(d)}
 <section id="problems"><h2>Engineering problems on this page</h2>
-<p>From the compact-engine register (ENG-030 to 038, C1–C4), the thermal study (ENG-040 to 060) and the source study (ENG-061 to 063). An open problem
+<p>From the compact-engine register (ENG-030 to 038, C1–C4), the thermal study (ENG-040 to 060), the source study (ENG-061 to 063) and this page's accounting and nozzle scan (ENG-064, 065). An open problem
   stays visible in the simulation: the markers sit on the parts they concern, and each component card lists the problems that name it.</p>
-<div class="scroll" tabindex="0"><table class="fi-prob"><thead><tr><th>ID</th><th>Problem</th><th>Required</th><th>Achieved</th><th>Components · stages</th><th>Directions</th><th>Status</th></tr></thead>
-<tbody>{problems_table(d)}</tbody></table></div></section>
+<div class="scroll" tabindex="0"><table class="fi-prob"><thead><tr><th>ID</th><th>Problem and cause</th><th>Required</th><th>Achieved and deficit</th><th>Component · stages</th><th>Intended solution</th><th>Future improvements</th><th>Maturity</th><th>Status</th></tr></thead>
+<tbody>{problems_table(d)}</tbody></table></div>
+<h3>Concepts that failed or were set aside</h3>
+<p>They stay on the page so the reasons are not lost.</p>
+<ul class="fi-concepts">{concepts_list(d)}</ul></section>
 <section><h2>How the simulation works</h2>
 <p>The page runs no physics code. The study's <code>model.py</code> writes every number from the project's own modules: the operating point,
   the engine stations and coils, the vacuum field, the Bosch–Hale reactivities and cross section, the Vertex target-burn model over
@@ -446,9 +603,9 @@ The drive does not work yet: at its coupled design pulse the engine takes up {X(
 </ul></details>
 <p class="meta">Data classes: the ship numbers are specification; everything the controls change is simulation state and never changes the
   ship. Compact variants C2–C4 move the cluster 30–36 m aft and are research, not approved geometry.</p></section>'''
-    (out_dir / 'index.html').write_text(page('Fusion Ignition · Wayfarer engineering',
-                                             'The flagship simulation of the Vertex fusion drive: from the need for an engine to one D-3He reaction and back to thrust, with the modeled failures shown.',
+    (out_dir / 'index.html').write_text(page('Fusion Engineering · Wayfarer engineering',
+                                             'The flagship simulation of the Vertex fusion drive in six chapters and 24 stages: from one D-3He reaction to the assembled, running engine, with the modeled failures shown.',
                                              body, 2, revision, built, HEAD, kind='sim', crumb=('Simulations', 'simulations/'),
-                                             guide=('fusion-ignition', 'The Vertex drive from the ship down to one nuclear reaction and back to thrust, with what the models predict.',
-                                                    'Start, press Play, then switch between Intended and Modeled at Ignition and Losses.', ('Open problems', '#problems'))))
+                                             guide=('fusion-ignition', 'The Vertex drive in six chapters, from one nuclear reaction to the running engine, with what the models predict.',
+                                                    'Pick a chapter, press Play to be guided, or jump to any stage; switch between Intended and Modeled.', ('Open problems', '#problems'))))
     return True

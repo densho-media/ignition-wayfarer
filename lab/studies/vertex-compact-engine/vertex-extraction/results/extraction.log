@@ -1,0 +1,33 @@
+drawn    dz -1.0 x1: p14.7 hit 0.75 cos +0.25 a3.6 hit 0.75 cos +0.25 D hit 0.75 cos +0.25 He3 hit 0.75 cos +0.25  coils 26743 t
+drawn    dz -1.0 x4: p14.7 hit 0.75 cos +0.25 a3.6 hit 0.75 cos +0.25 D hit 0.75 cos +0.25 He3 hit 0.75 cos +0.25  coils 393795 t
+drawn    dz +0.0 x1: p14.7 hit 0.67 cos +0.33 a3.6 hit 0.67 cos +0.33 D hit 0.67 cos +0.33 He3 hit 0.67 cos +0.33 D_ref hit 0.67 cos +0.33  coils 8096 t
+drawn    dz +0.0 x4: p14.7 hit 0.67 cos +0.33 a3.6 hit 0.67 cos +0.33 D hit 0.67 cos +0.33 He3 hit 0.67 cos +0.33  coils 111389 t
+drawn    dz +2.0 x1: p14.7 hit 0.54 cos +0.46 a3.6 hit 0.54 cos +0.46 D hit 0.54 cos +0.46 He3 hit 0.54 cos +0.46  coils 1715 t
+drawn    dz +2.0 x4: p14.7 hit 0.54 cos +0.46 a3.6 hit 0.54 cos +0.46 D hit 0.54 cos +0.46 He3 hit 0.54 cos +0.46  coils 19770 t
+drawn    dz +4.0 x1: p14.7 hit 0.46 cos +0.54 a3.6 hit 0.46 cos +0.54 D hit 0.46 cos +0.54 He3 hit 0.46 cos +0.54  coils 678 t
+drawn    dz +4.0 x4: p14.7 hit 0.46 cos +0.54 a3.6 hit 0.46 cos +0.54 D hit 0.46 cos +0.54 He3 hit 0.46 cos +0.54  coils 6449 t
+mirror2  dz -1.0 x1: p14.7 hit 0.79 cos +0.21 a3.6 hit 0.79 cos +0.21 D hit 0.75 cos +0.25 He3 hit 0.71 cos +0.29  coils 96930 t
+mirror2  dz -1.0 x4: p14.7 hit 1.00 cos +0.00 a3.6 hit 1.00 cos +0.00 D hit 1.00 cos +0.00 He3 hit 1.00 cos +0.00  coils 1480552 t
+mirror2  dz +0.0 x1: p14.7 hit 0.71 cos +0.29 a3.6 hit 0.71 cos +0.29 D hit 0.67 cos +0.33 He3 hit 0.62 cos +0.33  coils 14927 t
+mirror2  dz +0.0 x4: p14.7 hit 0.71 cos +0.29 a3.6 hit 0.67 cos +0.33 D hit 0.71 cos +0.29 He3 hit 0.71 cos +0.29  coils 212236 t
+mirror2  dz +2.0 x1: p14.7 hit 0.46 cos +0.54 a3.6 hit 0.50 cos +0.50 D hit 0.54 cos +0.46 He3 hit 0.50 cos +0.50  coils 2280 t
+mirror2  dz +2.0 x4: p14.7 hit 0.50 cos +0.50 a3.6 hit 0.54 cos +0.46 D hit 0.50 cos +0.50 He3 hit 0.54 cos +0.46  coils 27015 t
+mirror2  dz +4.0 x1: p14.7 hit 0.38 cos +0.62 a3.6 hit 0.42 cos +0.58 D hit 0.38 cos +0.62 He3 hit 0.38 cos +0.62  coils 886 t
+mirror2  dz +4.0 x4: p14.7 hit 0.42 cos +0.58 a3.6 hit 0.38 cos +0.62 D hit 0.42 cos +0.58 He3 hit 0.42 cos +0.58  coils 8782 t
+mirror4  dz -1.0 x1: p14.7 hit 1.00 cos +0.00 a3.6 hit 1.00 cos +0.00 D hit 1.00 cos +0.00 He3 hit 1.00 cos +0.00  coils 456825 t
+mirror4  dz -1.0 x4: p14.7 hit 1.00 cos +0.00 a3.6 hit 1.00 cos +0.00 D hit 1.00 cos +0.00 He3 hit 1.00 cos +0.00  coils 7154871 t
+mirror4  dz +0.0 x1: p14.7 hit 0.62 cos +0.37 a3.6 hit 0.67 cos +0.33 D hit 0.67 cos +0.33 He3 hit 0.71 cos +0.29  coils 25938 t
+mirror4  dz +0.0 x4: p14.7 hit 1.00 cos +0.00 a3.6 hit 1.00 cos +0.00 D hit 1.00 cos +0.00 He3 hit 1.00 cos +0.00  coils 379507 t
+mirror4  dz +2.0 x1: p14.7 hit 0.29 cos +0.66 a3.6 hit 0.29 cos +0.70 D hit 0.38 cos +0.54 He3 hit 0.42 cos +0.54  coils 3429 t
+mirror4  dz +2.0 x4: p14.7 hit 0.42 cos +0.58 a3.6 hit 0.46 cos +0.54 D hit 0.50 cos +0.50 He3 hit 0.46 cos +0.54  coils 42949 t
+mirror4  dz +4.0 x1: p14.7 hit 0.29 cos +0.70 a3.6 hit 0.25 cos +0.74 D hit 0.21 cos +0.79 He3 hit 0.29 cos +0.66  coils 1120 t
+mirror4  dz +4.0 x4: p14.7 hit 0.25 cos +0.74 a3.6 hit 0.38 cos +0.62 D hit 0.33 cos +0.62 He3 hit 0.21 cos +0.70  coils 11706 t
+throat   dz -1.0 x1: p14.7 hit 0.75 cos +0.25 a3.6 hit 0.75 cos +0.25 D hit 0.71 cos +0.29 He3 hit 0.79 cos +0.21  coils 166149 t
+throat   dz -1.0 x4: p14.7 hit 1.00 cos +0.00 a3.6 hit 1.00 cos +0.00 D hit 1.00 cos +0.00 He3 hit 1.00 cos +0.00  coils 2561979 t
+throat   dz +0.0 x1: p14.7 hit 0.67 cos +0.29 a3.6 hit 0.71 cos +0.29 D hit 0.62 cos +0.37 He3 hit 0.71 cos +0.29  coils 22688 t
+throat   dz +0.0 x4: p14.7 hit 0.71 cos +0.29 a3.6 hit 0.71 cos +0.29 D hit 0.71 cos +0.29 He3 hit 0.71 cos +0.29  coils 328518 t
+throat   dz +2.0 x1: p14.7 hit 0.46 cos +0.54 a3.6 hit 0.54 cos +0.46 D hit 0.54 cos +0.46 He3 hit 0.46 cos +0.54  coils 3278 t
+throat   dz +2.0 x4: p14.7 hit 0.46 cos +0.54 a3.6 hit 0.46 cos +0.54 D hit 0.50 cos +0.50 He3 hit 0.54 cos +0.46  coils 40385 t
+throat   dz +4.0 x1: p14.7 hit 0.42 cos +0.58 a3.6 hit 0.33 cos +0.65 D hit 0.38 cos +0.62 He3 hit 0.42 cos +0.58  coils 1221 t
+throat   dz +4.0 x4: p14.7 hit 0.38 cos +0.62 a3.6 hit 0.42 cos +0.58 D hit 0.33 cos +0.66 He3 hit 0.33 cos +0.62  coils 12764 t
+done in 971 s; best heat mirror4|4|4 Early extraction: 80% of the product energy leaves the target: heat x300, thrust 0.34 MN

@@ -1,0 +1,73 @@
+slowing (design density, ne 8.58e+33 m^-3):
+  Te    5 keV  p: Ec      53 keV ions 0.01 range   0.14 um  alpha: Ec     212 ions 0.11 range   0.03 um
+  Te   10 keV  p: Ec     107 keV ions 0.02 range   0.39 um  alpha: Ec     425 ions 0.20 range   0.10 um
+  Te   20 keV  p: Ec     214 keV ions 0.03 range   1.10 um  alpha: Ec     850 ions 0.34 range   0.28 um
+  Te   30 keV  p: Ec     321 keV ions 0.05 range   2.03 um  alpha: Ec    1275 ions 0.45 range   0.51 um
+  Te   50 keV  p: Ec     535 keV ions 0.07 range   4.36 um  alpha: Ec    2125 ions 0.60 range   1.09 um
+  Te   70 keV  p: Ec     749 keV ions 0.10 range   7.23 um  alpha: Ec    2975 ions 0.69 range   1.80 um
+  Te  100 keV  p: Ec    1069 keV ions 0.14 range  12.34 um  alpha: Ec    4250 ions 0.78 range   3.07 um
+  Te  150 keV  p: Ec    1604 keV ions 0.19 range  22.67 um  alpha: Ec    6374 ions 0.86 range   5.65 um
+  Te  200 keV  p: Ec    2139 keV ions 0.24 range  34.90 um  alpha: Ec    8499 ions 0.90 range   8.70 um
+  Te  300 keV  p: Ec    3208 keV ions 0.33 range  64.12 um  alpha: Ec   12749 ions 0.94 range  15.98 um
+  Te  500 keV  p: Ec    5347 keV ions 0.46 range 137.96 um  alpha: Ec   21248 ions 0.97 range  34.38 um
+  Design target (R2-B, 70 keV, D:3He 1:1)                    Y   1.57 GJ burn-up 0.67 X 0.85 n 0.029 extract 0.16 ions 0.37 10.9 ps
+  Areal density x0.3                                         Y   1.13 GJ burn-up 0.49 X 0.53 n 0.026 extract 0.50 ions 0.36 802.3 ps
+  Areal density x3                                           Y   1.63 GJ burn-up 0.70 X 0.96 n 0.029 extract 0.05 ions 0.38 1.0 ps
+  Target mass x0.25 at the design areal density              Y   0.39 GJ burn-up 0.67 X 0.85 n 0.029 extract 0.16 ions 0.37 5.4 ps
+  Target mass x4 at the design areal density                 Y   6.27 GJ burn-up 0.67 X 0.85 n 0.029 extract 0.16 ions 0.37 21.7 ps
+  Disassembly 2x slower (tamped)                             Y   1.62 GJ burn-up 0.70 X 0.93 n 0.029 extract 0.08 ions 0.38 6.2 ps
+  Disassembly 4x slower (tamped)                             Y   1.64 GJ burn-up 0.71 X 0.97 n 0.029 extract 0.04 ions 0.38 5.0 ps
+  Disassembly 0.5x faster                                    Y   1.38 GJ burn-up 0.60 X 0.67 n 0.028 extract 0.34 ions 0.37 52.5 ps
+  Selective fuelling D:3He 0.33:1                            Y   0.81 GJ burn-up 0.35 X 0.99 n 0.005 extract 0.08 ions 0.31 3.7 ps
+  Selective fuelling D:3He 3:1                               Y   1.62 GJ burn-up 0.70 X 0.72 n 0.123 extract 0.19 ions 0.40 16.6 ps
+  Spin-polarised D and 3He (sigma-v x1.5)                    Y   1.74 GJ burn-up 0.75 X 0.83 n 0.019 extract 0.19 ions 0.40 11.9 ps
+  Hot ions at the start (Te = 0.5 Ti)                        Y   1.57 GJ burn-up 0.67 X 0.84 n 0.029 extract 0.16 ions 0.37 10.7 ps
+  Early extraction: 20% of the product energy leaves the tar Y   1.51 GJ burn-up 0.65 X 0.71 n 0.029 extract 0.30 ions 0.35 7.4 ps
+  Early extraction: 50% of the product energy leaves the tar Y   1.34 GJ burn-up 0.58 X 0.49 n 0.031 extract 0.53 ions 0.30 4.1 ps
+  Early extraction: 80% of the product energy leaves the tar Y   0.29 GJ burn-up 0.12 X 0.41 n 0.043 extract 0.79 ions 0.20 1.1 ps
+  Fuel-side levers together: polarised, 3He-rich, tamped, x3 Y   0.94 GJ burn-up 0.40 X 1.05 n 0.003 extract 0.02 ions 0.35 0.5 ps
+  Source-side levers together: polarised, x0.3 areal density Y   1.35 GJ burn-up 0.58 X 0.45 n 0.017 extract 0.59 ions 0.36 536.9 ps
+  Design target (R2-B, 70 keV, D:3He 1:1)                    jet 0.051 ve   8772 km/s F    103 kN heat x  2200
+  Areal density x0.3                                         jet 0.154 ve  13008 km/s F    153 kN heat x  1662
+  Areal density x3                                           jet 0.016 ve   5059 km/s F     60 kN heat x  2266
+  Target mass x0.25 at the design areal density              jet 0.051 ve   8772 km/s F     26 kN heat x   550
+  Target mass x4 at the design areal density                 jet 0.051 ve   8772 km/s F    413 kN heat x  8799
+  Disassembly 2x slower (tamped)                             jet 0.024 ve   6188 km/s F     73 kN heat x  2254
+  Disassembly 4x slower (tamped)                             jet 0.012 ve   4392 km/s F     52 kN heat x  2271
+  Disassembly 0.5x faster                                    jet 0.107 ve  11940 km/s F    141 kN heat x  1981
+  Selective fuelling D:3He 0.33:1                            jet 0.026 ve   4512 km/s F     53 kN heat x  1168
+  Selective fuelling D:3He 3:1                               jet 0.060 ve   9677 km/s F    114 kN heat x  2262
+  Spin-polarised D and 3He (sigma-v x1.5)                    jet 0.059 ve   9994 km/s F    118 kN heat x  2440
+  Hot ions at the start (Te = 0.5 Ti)                        jet 0.049 ve   8653 km/s F    102 kN heat x  2171
+  Early extraction: 20% of the product energy leaves the tar jet 0.056 ve   8562 km/s F    114 kN heat x  2153
+  Early extraction: 50% of the product energy leaves the tar jet 0.063 ve   7981 km/s F    120 kN heat x  1961
+  Early extraction: 80% of the product energy leaves the tar jet 0.035 ve   2988 km/s F     39 kN heat x   495
+  Fuel-side levers together: polarised, 3He-rich, tamped, x3 jet 0.006 ve   2278 km/s F     27 kN heat x  1335
+  Source-side levers together: polarised, x0.3 areal density jet 0.154 ve  13421 km/s F    176 kN heat x  1976
+  Source-side levers + 1 g/cm2 tungsten tamper               jet 0.224 ve  15971 km/s F    215 kN heat x  2011
+  tamper LiH        0.01 g/cm2 absorbs 0.01 mass/fuel 0.000 X left 0.84 ve   8859 km/s impulse x1.01
+  tamper LiH        0.10 g/cm2 absorbs 0.02 mass/fuel 0.003 X left 0.83 ve   9100 km/s impulse x1.04
+  tamper LiH        0.30 g/cm2 absorbs 0.03 mass/fuel 0.009 X left 0.83 ve   9254 km/s impulse x1.06
+  tamper LiH        1.00 g/cm2 absorbs 0.07 mass/fuel 0.031 X left 0.81 ve   9623 km/s impulse x1.13
+  tamper LiH        3.00 g/cm2 absorbs 0.12 mass/fuel 0.093 X left 0.77 ve  10105 km/s impulse x1.26
+  tamper C_diamond  0.01 g/cm2 absorbs 0.02 mass/fuel 0.000 X left 0.83 ve   9129 km/s impulse x1.04
+  tamper C_diamond  0.10 g/cm2 absorbs 0.06 mass/fuel 0.003 X left 0.81 ve   9661 km/s impulse x1.10
+  tamper C_diamond  0.30 g/cm2 absorbs 0.08 mass/fuel 0.009 X left 0.80 ve   9962 km/s impulse x1.15
+  tamper C_diamond  1.00 g/cm2 absorbs 0.12 mass/fuel 0.031 X left 0.78 ve  10366 km/s impulse x1.22
+  tamper C_diamond  3.00 g/cm2 absorbs 0.20 mass/fuel 0.093 X left 0.73 ve  11044 km/s impulse x1.38
+  tamper W          0.01 g/cm2 absorbs 0.15 mass/fuel 0.000 X left 0.76 ve  10920 km/s impulse x1.25
+  tamper W          0.10 g/cm2 absorbs 0.31 mass/fuel 0.003 X left 0.66 ve  12795 km/s impulse x1.46
+  tamper W          0.30 g/cm2 absorbs 0.48 mass/fuel 0.009 X left 0.56 ve  14417 km/s impulse x1.66
+  tamper W          1.00 g/cm2 absorbs 0.69 mass/fuel 0.031 X left 0.44 ve  16175 km/s impulse x1.90
+  tamper W          3.00 g/cm2 absorbs 0.83 mass/fuel 0.093 X left 0.35 ve  16817 km/s impulse x2.10
+- At 70 keV the 14.7 MeV protons give 10% of their energy to ions and the 3.6 MeV alphas 69% (critical energies 0.7 and 3.0 MeV); the rest heats electrons, which radiate. At the design density the products stop within 7.2 um (protons) of a 40 um target, so they all deposit: the target is its own X-ray lamp.
+- The design burn sends 85% of its fusion energy out as X-rays and leaves 16% as plasma the nozzle can use.
+- Hot ions at the start change almost nothing (X-ray share 84%): ions and electrons equilibrate in picoseconds at this density. This is a physics limit, not a technology one.
+- Spin polarisation raises the yield x1.11 and burn-up to 75%, but the X-ray share stays 83%: it helps the fuel, not the radiation.
+- 3He-rich fuel (D:3He 1:3) cuts the neutron share to 0.5% (from 2.9%) at X-ray share 99%.
+- Early extraction is the only lever that lowers the X-ray share at the source: 20% out gives X-rays 71%, extractable 30%, yield x0.97; 50% out gives X-rays 49%, extractable 53%, yield x0.86; 80% out gives X-rays 41%, extractable 79%, yield x0.18. The burn loses its self-heating, so the yield falls.
+- A tungsten tamper of 1 g/cm2 round the fuel (3.1% of its mass) would absorb 69% of the X-rays (cold opacity, an upper bound) and leave 44% of the fusion energy as X-rays. The absorbed energy becomes plasma the nozzle can direct, so the exhaust speeds up to 16,175 km/s (0.84 of the mission's) and the impulse per pulse grows x1.90. Light tampers (LiH, carbon) absorb too little.
+- Density and burn time decide the split: x0.3 areal density gives X-rays 53% and extractable 50% (yield x0.72); a faster disassembly gives 67% and 34%. A denser or longer burn raises burn-up a little and sends almost everything out as X-rays.
+- The fuel-side levers together (polarised, 3He-rich, tamped, x3 areal density) are the worst case: yield x0.60, X-rays 105% of the fusion energy (the driver heat radiates too).
+- The source-side levers together (polarised, x0.3 areal density, 20 % early extraction): yield x0.86, burn-up 58%, X-rays 45%, extractable 59%. With a tungsten tamper on top, the X-rays leaving the target fall to 23% of the fusion energy and the thrust grows x2.1, but the engine heat stays x2,011 its radiator share (design x2,200): the plasma that no longer radiates strikes the hardware instead (78% of the heat). The next lever is the nozzle's hit share, not the fuel.
+- Adding cold propellant lowers the exhaust speed: the design is short of energy per kilogram (coupled exhaust 8,772 km/s against the mission's 19,201 km/s), not short of mass.

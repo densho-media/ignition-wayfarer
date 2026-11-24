@@ -137,6 +137,23 @@ class Ledger(unittest.TestCase):
         self.assertLess(row['over_budget_after'], row['over_budget_before'])
         self.assertGreaterEqual(D['source']['best']['engine']['heat_over'], 1.0)
 
+    def test_pulse_momentum_and_mass_close(self):
+        r = D['ledger']['pulse']                                                     # struck plasma stays in the engine (ENG-064)
+        self.assertAlmostEqual(r['exhaust_mass_kg'] + r['deposited_kg'], r['debris_kg'], delta=1e-6 * r['debris_kg'])
+        self.assertAlmostEqual(r['impulse_Ns'] / r['exhaust_mass_kg'], r['exhaust_m_s'], delta=1.0)
+        self.assertAlmostEqual(r['impulse_Ns'] ** 2 / (2 * r['exhaust_mass_kg']), r['jet_J'], delta=1e-6 * r['jet_J'])
+        self.assertLessEqual(r['jet_J'] + r['hit_J'] + r['side_J'], r['plasma_J'] * (1 + 1e-9))
+        self.assertAlmostEqual(r['thrust_N'], r['impulse_Ns'] * r['Hz'], delta=1e-6 * r['thrust_N'])
+
+    def test_chapters_cover_the_register(self):
+        ids = {i['id'] for i in D['problems']['items']}
+        self.assertTrue({'ENG-064', 'ENG-065'} <= ids)
+        for i in D['problems']['items']:
+            for k in ('cause', 'component', 'intended', 'deficit', 'future', 'maturity'):
+                self.assertIn(k, i)
+        self.assertTrue(all(c['status'] for c in D['problems']['concepts']))
+        self.assertFalse(any(r['heat_over'] <= 1.0 for r in D['chapters']['compare']['rows']))      # nothing closes; the page must not say so
+
 
 if __name__ == '__main__':
     unittest.main()

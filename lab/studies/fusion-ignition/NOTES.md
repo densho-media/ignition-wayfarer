@@ -2,14 +2,25 @@
 | Lab entry | |
 | --- | --- |
 | Kind | Study |
-| Status | ACTIVE (deployed 2026-11-24 as a RESEARCH page; owner brief 06:43Z) |
-| Question | Fusion Ignition, From Nucleus to Nozzle: how is the Vertex drive built, started and ignited, what do the models predict at each step, and where does it fail? |
-| Model base | main d016d5d with the compact C1-C4, thermal and source imports of lab/studies/vertex-compact-engine; Vertex modules vertex_engine, vertex_magnet, vertex_radiation; ignition-failures and selective-fusion results |
+| Status | ACTIVE (deployed as a RESEARCH page; expanded to six chapters by the owner brief 2026-11-24 09:49Z) |
+| Question | Fusion Engineering, From Nucleus to Engine: how is the Vertex drive built, started and ignited, what do the models predict at each step, and where does it fail? |
+| Model base | main c169a9f with the compact C1-C4, thermal, source and extraction imports of lab/studies/vertex-compact-engine; Vertex modules vertex_engine, vertex_magnet, vertex_radiation; ignition-failures and selective-fusion results |
 | Branch | claude/project-thread-1p6mtu, owner brief 2026-11-23 10:08Z |
-| Open owner questions | Review of the live page; Q-CMP-2 blade aft ends; ENG-062 nozzle hit share next; R1 engine sized for the V4 ship. Q-TH-1..3 answered 2026-11-24 (B adopted, thin blanket optional, source first) |
+| Open owner questions | Review of the live page; Q-CMP-2 blade aft ends; ENG-062 scanned (burn aft + closure x4 best, a geometry change); R1 engine sized for the V4 ship. Q-TH-1..3 answered 2026-11-24 (B adopted, thin blanket optional, source first) |
 | Review | engineering/fusion-ignition/ on the live site |
 
 # fusion-ignition: notes
+
+**2026-11-24 09:49Z brief (Fusion Engineering: From Nucleus to Engine).** The page became one journey of six chapters and 24 stages
+(`chapters.py` adds the data of the new stages; `tools/story_ignite.py` STAGES; the viewer's SEGS map each stage onto the page's
+existing 3-D and 2-D scenes, so there is still one engine model and one ledger). New: matter and gyroradii, unwanted reactions,
+fuel mix (steady and pulsed kept apart), the rejected accelerator, spin polarisation, an optimizer that labels unmodelled lever
+combinations, the ENG-062 extraction scan, radiation types, an interactive supermirror (energy and angle against R and absorption,
+visible light and neutrons for contrast), member shapes with alignment, vibration and edge loads, assembly in dependency order (reverse,
+isolate), start-up, the operating engine with independent layers, the engine in the ship, and a concept comparison with maturity levels.
+The register gained cause, component, intended solution, deficit, future improvements and maturity, ENG-064 (struck plasma stays in the
+engine) and ENG-065 (topology, not field strength), and a list of failed or rejected concepts. The pulse ledger is now momentum-consistent
+(coupled C1: 0.41 MN, 8,772 km/s, heat 2,200x).
 
 Owner brief 2026-11-23 10:08Z ("Fusion Ignition: Interactive Engineering Simulation"). The flagship simulation of the Vertex drive, from
 the need for an engine to a single D-3He reaction and back out to thrust, with the modeled failures kept visible. Not canon. No

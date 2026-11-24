@@ -165,3 +165,32 @@
 .fi .fi-sel select { width: 100%; max-width: 100%; min-height: 32px; font: inherit; font-size: 13px; color: var(--ink-strong); background: var(--panel, transparent); border: 1px solid var(--line-strong); border-radius: 4px; padding: 4px 6px; }
 .fi .fi-ul { margin: 6px 0; padding-left: 1.2em; font-size: 12px; line-height: 1.4; } .fi .fi-ul li { margin: 3px 0; }
 .fi .fi-pick { border-left: 2px solid var(--accent); padding-left: 6px; }
+
+/* chapters above stages: six chapter tabs, then the stages of the selected chapter */
+.fi-chapters { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 4px; }
+.fi-chapters button { font: inherit; flex: 0 0 auto; display: inline-flex; align-items: baseline; gap: 6px; color: var(--ink); background: transparent;
+  border: 0; border-bottom: 2px solid transparent; padding: 6px 8px; min-height: 36px; cursor: pointer; }
+.fi-chapters button i { font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.fi-chapters button b { font-size: 13px; font-weight: 600; }
+.fi-chapters button:hover { color: var(--ink-strong); border-bottom-color: var(--line-strong); }
+.fi-chapters button[aria-selected="true"] { color: var(--ink-strong); border-bottom-color: var(--accent); }
+.fi-chapters button[aria-selected="true"] i { color: var(--accent); }
+.fi-chap { margin: 0 0 4px; font: 11px var(--mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+@media (pointer: coarse) { .fi-chapters button { min-height: 44px; } }
+.fi-ctl select, .fi-ctl input[type="range"] { font: 12px var(--mono); min-height: 32px; accent-color: var(--accent); }
+.fi-ctl label { display: inline-flex; align-items: center; gap: 6px; }
+.fi-ctl input[type="range"] { width: min(220px, 40vw); }
+.fi .fi-tw { overflow-x: auto; margin: 6px 0 8px; }
+.fi .fi-tbl { border-collapse: collapse; width: 100%; font-size: 12px; }
+.fi .fi-tbl th { text-align: left; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--line-strong); padding: 3px 6px 3px 0; }
+.fi .fi-tbl td { border-bottom: 1px solid var(--line); padding: 3px 6px 3px 0; vertical-align: top; color: var(--ink); }
+.fi .fi-tbl td.num { font-family: var(--mono); color: var(--ink-strong); }
+.fi .fi-asm { margin: 6px 0; padding-left: 1.4em; font-size: 12px; color: var(--muted); }
+.fi .fi-asm li { padding: 2px 0; }
+.fi .fi-asm li.done { color: var(--ink); }
+.fi .fi-asm li.on { color: var(--ink-strong); }
+.fi .fi-asm li.on b { color: var(--accent); }
+.fi .fi-h { font-size: 14px; margin: 14px 0 4px; }
+.fi .fi-concepts { font-size: 13px; padding-left: 1.2em; }
+.fi .fi-concepts li { margin: 4px 0; }
+.fi .bad { color: var(--bad); }

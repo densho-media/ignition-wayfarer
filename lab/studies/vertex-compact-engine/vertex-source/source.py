@@ -88,17 +88,24 @@ def run(s, label, lever, case, mass=None, pol=1.0, cls='CALCULATED', tech='', no
 
 
 def engine(row, fi, pickup, extra_plasma_J=0.0, xray_J=None, extra_mass=0.0):
-    """One pulse of this burn through the compact engine at the design rate (ledger.pulse arithmetic): the extractable plasma (thermal,
-    expansion and escaped products) is directed with the nozzle's eta, the hit share strikes hardware, X-rays and neutrons are picked up
-    at the geometric share of the drawn engine."""
+    """One pulse of this burn through the compact engine at the design rate, momentum-consistent (ledger.pulse arithmetic, corrected
+    2026-11-24 by vertex-extraction): the nozzle's eta is the mean axial cosine of the launched charged particles (hits count zero), its hit
+    share strikes hardware and stays there. Thermal debris (the plasma, equal speeds over its mass) gives eta sqrt(2 m P); products that
+    escaped the target early are booked per particle (14.68 MeV protons, 3.67 MeV alphas): much energy, almost no momentum. X-rays and
+    neutrons are picked up at the geometric share of the drawn engine."""
     L = fi['ledger']; nz = L['nozzle']['C1|1']; Hz = L['pulse']['Hz']; budget = nz['budget_W']
-    Pp = row['extract_J'] + extra_plasma_J; X = row['fusion_J'] * row['xray_share'] if xray_J is None else xray_J
-    N_ = row['fusion_J'] * row['neutron_share']
-    jet = nz['eta'] * Pp; hit = nz['hit'] * Pp; heat = pickup * (X + N_) + hit
-    m = row['mass_kg'] - row['fusion_J'] / lg.C_LIGHT ** 2 + extra_mass
-    I = math.sqrt(2 * m * jet); v = math.sqrt(2 * jet / m)
-    return dict(jet_share=jet / row['fusion_J'], exhaust_m_s=v, thrust_N=I * Hz, heat_W=heat * Hz, heat_over=heat * Hz / budget,
-                xray_heat_share=pickup * X / heat, hit_heat_share=hit / heat)
+    F = row['fusion_J']; X = F * row['xray_share'] if xray_J is None else xray_J; N_ = F * row['neutron_share']
+    Pd = F * row['plasma_share'] + extra_plasma_J; Pf = F * row.get('escaped_share', 0.0)
+    md = row['mass_kg'] - F / lg.C_LIGHT ** 2 + extra_mass
+    eta, hit = nz['eta'], nz['hit']
+    I_d = eta * math.sqrt(2 * md * Pd); I_f = 0.0; mf = 0.0
+    for Ep, mp, share in ((14.68 * MEV, 1.00728 * AMU, 14.68 / 18.35), (3.67 * MEV, 4.00151 * AMU, 3.67 / 18.35)):
+        Pi = Pf * share; mi = Pi / Ep * mp; I_f += eta * math.sqrt(2 * mi * Pi); mf += mi
+    I = I_d + I_f; mx = (1 - hit) * (md + mf)
+    jet = I * I / (2 * mx); v = I / mx
+    hitJ = hit * (Pd + Pf); heat = pickup * (X + N_) + hitJ
+    return dict(jet_share=jet / F, exhaust_m_s=v, thrust_N=I * Hz, heat_W=heat * Hz, heat_over=heat * Hz / budget,
+                xray_heat_share=pickup * X / heat, hit_heat_share=hitJ / heat, fast_impulse_share=I_f / I, deposited_kg_s=hit * md * Hz)
 
 
 def levers(s):
@@ -141,15 +148,18 @@ def mu_abs(mat, E):
 def tamper(base_row, spec, pulse, need_ve):
     """A shell of areal density sigma round the fuel absorbs the burn's X-rays; a share P['refire'] is re-radiated, the rest becomes
     plasma the nozzle can direct. The shell joins the exhaust mass (ANALYTIC; cold opacities, so the absorption is an upper bound)."""
-    R0 = base_row['R0_um'] * 1e-6; X = pulse['xray_J']; eta = pulse['jet_J'] / pulse['plasma_J']
+    R0 = base_row['R0_um'] * 1e-6; X = pulse['xray_J']; eta_c = pulse['impulse_Ns'] / math.sqrt(2 * pulse['debris_kg'] * pulse['plasma_J'])
     rows = []
     for mat in P['tamper_mats']:
         for sg in P['tamper_sigma']:
             f = sum(w * (1 - math.exp(-mu_abs(mat, E) * sg)) for E, w in spec)
             m = 4 * math.pi * R0 * R0 * sg * 10.0
             gain_J = f * (1 - P['refire']) * X
-            jet = pulse['jet_J'] + eta * gain_J; mex = pulse['exhaust_mass_kg'] + m
-            ve = math.sqrt(2 * jet / mex); I = mex * ve
+            # the shell becomes plasma with the fuel debris and shares its energy (equal speeds: the most impulse that energy can give);
+            # the nozzle's mean axial cosine and hit share apply to all of it (momentum-consistent, 2026-11-24)
+            hit = pulse['hit_J'] / pulse['plasma_J']; md = pulse['debris_kg'] + m
+            I = eta_c * math.sqrt(2 * md * (pulse['plasma_J'] + gain_J)); mex = (1 - hit) * md
+            ve = I / mex; jet = I * I / (2 * mex)
             rows.append(dict(material=mat, sigma_g_cm2=sg, absorbed=f, tamper_kg=m, tamper_over_fuel=m / pulse['mass_kg'],
                              xray_left_share=(X - f * X + P['refire'] * f * X) / pulse['fusion_J'], jet_J=jet, exhaust_m_s=ve,
                              impulse_ratio=I / pulse['impulse_Ns'], ve_over_need=ve / need_ve,

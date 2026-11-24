@@ -31,19 +31,53 @@ const CHIP = { SPEC: ['SPEC', 'spec'], CALCULATED: ['CALCULATED', 'calculated'],
   'MODEL-BASED': ['ASSUMED', 'model-based'], ILLUSTRATIVE: ['ASSUMED', 'illustrative'], OPEN: ['OPEN', 'open'], SPECULATIVE: ['SPECULATIVE', 'speculative'] };
 const chip = c => `<span class="st st-${CHIP[c][0]}">${CHIP[c][1]}</span>`;
 
-// ---- stages -----------------------------------------------------------------------------------------------------------------------------
-const LADDER = { need: 0, hardware: 1, magnets: 1, fuel: 2, nucleus: 7, many: 5, ignition: 4, nozzle: 1, losses: 0, thermal: 1, lab: 1 };   // the scale ruler's tick per stage
+// ---- chapters, stages and scenes ---------------------------------------------------------------------------------------------------------
+// Twenty-four stages in six chapters (tools/story_ignite.py STAGES). Each stage plays one or more segments of a scene: [scene, from, to, u0, u1]
+// maps the stage's progress su in [from, to) onto the scene's own progress u in [u0, u1). The scenes are the page's one engine model drawn
+// at different scales (the 3-D engine, field, particles, thermal hardware; the 2-D nuclear, plasma and optics drawings), so nothing is
+// rebuilt between stages and no parameter changes with the stage.
 const ladderEl = $('ladder'), ctlEl = $('fictl');
-const STAGES = ['need', 'hardware', 'magnets', 'fuel', 'nucleus', 'many', 'ignition', 'nozzle', 'losses', 'thermal', 'lab'];
-const DUR = { need: 11, hardware: 14, magnets: 14, fuel: 12, nucleus: 22, many: 16, ignition: 18, nozzle: 22, losses: 20, thermal: 36, lab: 1e9 };
-const TWO_D = new Set(['nucleus', 'many', 'ignition']);
-const SCALE = { need: ['Spacecraft scale', '100 m'], hardware: ['Engine scale', '10 m'], magnets: ['Engine scale', '10 m'], fuel: ['Burn point', '1 m · target mm'],
-  nucleus: ['Nuclear scale', '~10 fm · illustrative'], many: ['Plasma scale', 'statistical · not to scale'], ignition: ['Plasma scale', 'energy balance'],
-  nozzle: ['Engine scale', '10 m'], losses: ['Engine and ship', '10–100 m'], thermal: ['Engine scale', '1–10 m'], lab: ['Engine scale', '10 m'] };
+const CHAP = { I: ['need', 'matter', 'nucleus', 'unwanted'], II: ['mix', 'accel', 'spin', 'optimize'], III: ['products', 'magnets', 'nozzle'],
+  IV: ['radiation', 'mirrors', 'geometry', 'protection'], V: ['heating', 'cooling', 'cryo', 'structure'], VI: ['assembly', 'startup', 'operate', 'ship', 'lab'] };
+const STAGES = Object.values(CHAP).flat();
+const CH_OF = Object.fromEntries(Object.entries(CHAP).flatMap(([c, L]) => L.map(k => [k, c])));
+const H6 = 1 / 6, E6 = 1e-4;                // the six thermal steps share the thermal scene's progress (stepOf)
+const SEGS = {
+  magnets: [['magnets', 0, 0.62, 0, 1], ['nozzle', 0.62, 1, 0.16, 0.36]],
+  nozzle: [['nozzle', 0, 1, 0.36, 1]],
+  radiation: [['losses', 0, 1, 0, 0.44 - E6]],
+  mirrors: [['mirror', 0, 0.58, 0, 1], ['thermal', 0.58, 1, H6, 2 * H6 - E6]],
+  geometry: [['thermal', 0, 1, 2 * H6, 3 * H6 - E6]],
+  protection: [['thermal', 0, 1, 3 * H6, 4 * H6 - E6]],
+  heating: [['thermal', 0, 0.5, 0, H6 - E6], ['losses', 0.5, 1, 0.44, 0.66 - E6]],
+  cooling: [['thermal', 0, 1, 4 * H6, 5 * H6 - E6]],
+  cryo: [['thermal', 0, 1, 5 * H6, 1]],
+  structure: [['thermal', 0, 1, 5 * H6, 1]],
+  products: [['many', 0, 1, 0, 1]],
+  optimize: [['ignition', 0, 1, 0, 1]],
+  assembly: [['hardware', 0, 1, 0, 1]],
+  startup: [['magnets', 0, 0.22, 0, 0.75], ['fuel', 0.22, 0.5, 0, 1], ['nozzle', 0.5, 0.82, 0.58, 1], ['losses', 0.82, 1, 0.66, 1]],
+};
+const DURS = { need: 11, matter: 20, nucleus: 22, unwanted: 18, mix: 16, accel: 18, spin: 18, optimize: 18, products: 16, magnets: 22, nozzle: 18,
+  radiation: 14, mirrors: 26, geometry: 16, protection: 16, heating: 20, cooling: 20, cryo: 16, structure: 16, assembly: 48, startup: 40, operate: 24, ship: 16, lab: 1e9 };
+const DUR = { need: 11, matter: 20, nucleus: 22, unwanted: 18, mix: 16, accel: 18, spin: 18, mirror: 15, hardware: 14, magnets: 14, fuel: 12, many: 16, ignition: 18,
+  nozzle: 22, losses: 20, thermal: 36, operate: 24, ship: 16, lab: 1e9 };         // each scene's own clock (the 2-D scenes play their story in DUR seconds)
+const TWO_D = new Set(['matter', 'nucleus', 'unwanted', 'mix', 'accel', 'spin', 'mirror', 'many', 'ignition']);
+const GRAPHS = new Set(['nucleus', 'many', 'ignition']);
+const LADDER = { need: 0, matter: 6, nucleus: 7, unwanted: 7, mix: 5, accel: 5, spin: 7, optimize: 4, products: 5, magnets: 1, nozzle: 1, radiation: 0, mirrors: 2,
+  geometry: 1, protection: 1, heating: 1, cooling: 1, cryo: 1, structure: 1, assembly: 1, startup: 1, operate: 1, ship: 0, lab: 1 };   // the scale ruler's tick per stage
+const SCALE = { need: ['Spacecraft scale', '100 m'], matter: ['Atomic scale', 'pm to fm · illustrative'], nucleus: ['Nuclear scale', '~10 fm · illustrative'],
+  unwanted: ['Nuclear scale', 'reactions · rates calculated'], mix: ['Plasma scale', 'fuel ratio'], accel: ['Beam scale', 'illustrative'],
+  spin: ['Nuclear scale', 'spin · illustrative'], optimize: ['Plasma scale', 'target burn'], products: ['Plasma scale', 'statistical · not to scale'],
+  magnets: ['Engine scale', '10 m'], nozzle: ['Engine scale', '10 m'], radiation: ['Engine and ship', '10–100 m'], mirrors: ['Optics, then engine', 'mrad · 1–10 m'],
+  geometry: ['Engine scale', '1–10 m'], protection: ['Engine scale', '1–10 m'], heating: ['Engine scale', '1–10 m'], cooling: ['Engine scale', '1–10 m'],
+  cryo: ['Engine scale', '1–10 m'], structure: ['Engine scale', '1–10 m'], assembly: ['Engine scale', '10 m'], startup: ['Engine scale', '10 m'],
+  operate: ['Engine scale', '10 m'], ship: ['Spacecraft scale', '100 m'], lab: ['Engine scale', '10 m'] };
+const LABEL = {};                            // tab labels, read from the page
 
 let D = null, M = null;
-let si = 0, u = 0, playing = false, view = 'concept', last = 0, dirty = true, ready = false;
-const layers = { field: true, fuel: true, paths: true, rad: true, heat: true, problems: true, cut: false, ship: true, mirrors: true, cooling: true, flow: true };
+let si = 0, u = 0, su = 0, segK = '', playing = false, view = 'concept', last = 0, dirty = true, ready = false;
+const layers = { field: true, fuel: true, paths: true, rad: true, neut: true, thrust: true, heat: true, problems: true, cut: false, ship: true, mirrors: true, cooling: true, flow: true };
 const lab = { variant: 'C1', field: '1', d: 0.5, Ti: 100, mode: 'thermal', pol: 'none', armour: 0.22, mirror: 0, rhoR: null, Ti0: null, mix: 1, rate: 1, h2: 0 };
 let focusCat = null, catMode = 'highlight';
 window.__fi = { ready: false };
@@ -70,16 +104,29 @@ async function boot() {
 function frame2d(now) {
   if (ready) return;
   const t = now / 1000, dt = last ? Math.min(0.1, t - last) : 0; last = t;
-  const id = STAGES[si]; sdt = playing && !reduced ? dt : 0;
-  if (playing && TWO_D.has(id)) {
-    u += dt / DUR[id];
-    if (u >= 1) { if (TWO_D.has(STAGES[si + 1])) setStage(si + 1); else { u = 1; playing = false; syncPlay(); } }
-    $('scrub').value = Math.round(u * 1000);
-  }
+  sdt = playing && !reduced ? dt : 0;
+  advance(dt, true);
   sizeC2(); draw2d(t);
   requestAnimationFrame(frame2d);
 }
 
+// the stage clock: su runs from 0 to 1 over DURS[stage]; the scene's own progress u follows the stage's segments (syncU)
+function advance(dt, twoOnly) {
+  const id = STAGES[si];
+  if (!playing || id === 'lab') return;
+  if (twoOnly && !TWO_D.has(SC())) { playing = false; syncPlay(); return; }
+  su += dt / DURS[id];
+  if (su >= 1) {
+    const nx = STAGES[si + 1];
+    if (si < STAGES.length - 2 && (!twoOnly || TWO_D.has(segs(nx)[0][0]))) { setStage(si + 1); return; }
+    su = 1; playing = false; syncPlay();
+  }
+  syncU(); applyScene(false);
+  $('scrub').value = Math.round(su * 1000);
+  if (['magnets', 'ignition', 'nozzle'].includes(SC()) || ['startup', 'assembly'].includes(id)) stageReadoutT();
+}
+let roT = 0;
+function stageReadoutT() { const t = performance.now(); if (t - roT > 250) { roT = t; stageReadout(); } }
 async function load() {
   $('load').disabled = true; cstatus.hidden = false; cstatus.textContent = 'Loading the engine parts…';
   try {
@@ -372,11 +419,13 @@ function applyCats() {
 const C2 = 299792458 ** 2;
 function pulseLedger(cell, m, Hz, noz, budget, mirror = 0, h2 = 0) {
   const F = cell.fusion_J, Q = cell.heat_J, Xr = cell.xray_J, Nn = cell.neutron_J, P = cell.plasma_J;
-  const jet = noz.eta * P, hit = noz.hit * P, side = Math.max(P - jet - hit, 0);
-  const x_abs = noz.pickup * Xr * (1 - mirror), n_abs = noz.pickup * Nn, mx = m - F / C2, coupled = h2 === 0;
-  const I = coupled ? Math.sqrt(2 * mx * jet) : null, v = coupled ? Math.sqrt(2 * jet / mx) : null, heat = x_abs + n_abs + hit;
+  // momentum-consistent nozzle (ledger.py pulse): eta is the mean axial cosine of the debris, the struck share stays in the engine
+  const md = m - F / C2, hit = noz.hit * P, mx = (1 - noz.hit) * md, coupled = h2 === 0;
+  const x_abs = noz.pickup * Xr * (1 - mirror), n_abs = noz.pickup * Nn;
+  const I = coupled ? noz.eta * Math.sqrt(2 * md * P) : null, jet = coupled && mx > 0 ? I * I / (2 * mx) : noz.eta * P, side = Math.max(P - jet - hit, 0);
+  const v = coupled && mx > 0 ? I / mx : null, heat = x_abs + n_abs + hit;
   return { fusion_J: F, heat_in_J: Q, xray_J: Xr, neutron_J: Nn, plasma_J: P, jet_J: jet, side_J: side, hit_J: hit, x_abs_J: x_abs, n_abs_J: n_abs,
-    residual_J: cell.residual_J || 0, number_change_J: cell.number_change_J || 0, engine_heat_J: heat, impulse_Ns: I, exhaust_m_s: v, mass_kg: m, exhaust_mass_kg: mx, reacted_kg: cell.reacted_kg,
+    residual_J: cell.residual_J || 0, number_change_J: cell.number_change_J || 0, engine_heat_J: heat, impulse_Ns: I, exhaust_m_s: v, mass_kg: m, exhaust_mass_kg: mx, debris_kg: md, deposited_kg: noz.hit * md, deposited_kg_s: noz.hit * md * Hz, reacted_kg: cell.reacted_kg,
     burn_fraction: cell.burn_fraction, Hz, fusion_W: F * Hz, jet_W: jet * Hz, thrust_N: coupled ? I * Hz : null, engine_heat_W: heat * Hz,
     heat_over: heat * Hz / budget, driver_abs_W: Q * Hz, driver_elec_W: Q * Hz / D.ledger.wallplug, fuel_kg_s: m * Hz, reacted_kg_s: cell.reacted_kg * Hz,
     jet_share: jet / F, coupled, budget_W: budget };
@@ -501,39 +550,53 @@ function labUpdate() {
     ${lab.mix !== 1 ? `<p class="meta">The ignition animation plays the 1 : 1 burn history; these numbers use the ${lab.mix === 0.5 ? '1 : 2' : '2 : 1'} burn.</p>` : ''}
     <p class="meta">How this is combined: one pulse of the chosen target burns in the R2-B model (precomputed for every lever setting), the nozzle
       shares of the chosen variant split the plasma energy, and the rate turns joules into watts and impulse into thrust. The nozzle and pickup
-      shares are ${chip('IMPORTED')} from the compact study's test particles. Nothing here changes the ship.</p>`;
+      shares are ${chip('IMPORTED')} from the compact study's test particles. Nothing here changes the ship.</p>${compareTable()}${conceptList()}`;
   window.__fi.lab = { thrust_N: r.thrust_N, heat_over: r.heat_over, jet_share: r.jet_share, flu: r.flu, exhaust_m_s: r.exhaust_m_s };
   dirty = true; draw2d();
 }
 
 // ---- stage control -------------------------------------------------------------------------------------------------------------------------
+function segs(k = STAGES[si]) { return SEGS[k] || [[k === 'operate' || k === 'ship' ? k : k, 0, 1, 0, 1]]; }
+function seg() { const L = segs(); return L.find(x => su < x[2]) || L[L.length - 1]; }
+function SC() { return seg()[0]; }                                   // the scene the current stage shows now
+function syncU() { const [, a, b, u0, u1] = seg(); u = u0 + (u1 - u0) * Math.min(1, Math.max(0, (su - a) / (b - a))); }
 function setStage(i, quiet) {
-  si = Math.max(0, Math.min(STAGES.length - 1, i)); u = 0;
-  enterT = performance.now() / 1000; PLX.prods = []; PLX.phot = []; IGN.fl = []; IGN.ph = []; IGN.nn = [];
-  const id = STAGES[si];
-  root.dataset.stage = id; tip.hidden = true;
-  document.querySelectorAll('.fi-stages [role="tab"]').forEach((t, k) => { t.setAttribute('aria-selected', String(k === si)); t.tabIndex = k === si ? 0 : -1; });
+  si = Math.max(0, Math.min(STAGES.length - 1, i)); su = 0; syncU(); segK = '';
+  enterT = performance.now() / 1000; PLX.prods = []; PLX.phot = []; IGN.fl = []; IGN.ph = []; IGN.nn = []; ASM.dir = 1;
+  const id = STAGES[si], ch = CH_OF[id];
+  root.dataset.stage = id; root.dataset.chapter = ch; tip.hidden = true;
+  document.querySelectorAll('.fi-chapters [role="tab"]').forEach(t => { const on = t.dataset.ch === ch; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
+  document.querySelectorAll('.fi-stages [role="tab"]').forEach((t, k) => { t.hidden = t.dataset.ch !== ch; t.setAttribute('aria-selected', String(k === si)); t.tabIndex = k === si ? 0 : -1; });
   document.querySelectorAll('.fi-text').forEach(a => { a.hidden = a.dataset.stage !== id; });
-  partsEl.hidden = !(id === 'hardware' && ready); labEl.hidden = id !== 'lab';
-  $('replay').hidden = id !== 'nucleus';
-  $('graphs').hidden = !TWO_D.has(id);
+  partsEl.hidden = !(id === 'assembly' && ready); labEl.hidden = id !== 'lab';
+  if (id === 'operate') { const l = $('layers'); if (l) l.open = true; }
   ladderEl.style.setProperty('--k', LADDER[id]);
-  ctlUpdate();
-  if (!ready && TWO_D.has(id) && !reduced && !quiet) { playing = true; syncPlay(); }
   const [a, b] = SCALE[id]; scaleEl.innerHTML = `<b>${a}</b> ${b}`;
-  c2.classList.toggle('on', TWO_D.has(id));
-  stage.classList.toggle('twod', TWO_D.has(id));
-  stage.classList.toggle('flat', !ready && TWO_D.has(id)); gate.hidden = ready || TWO_D.has(id);
+  if (!ready && TWO_D.has(SC()) && !reduced && !quiet) { playing = true; syncPlay(); }
   if (!quiet) { const t = document.getElementById(`t-${id}`), row = t?.parentElement; if (t && row) row.scrollLeft = Math.max(0, t.offsetLeft - row.clientWidth / 2 + t.offsetWidth / 2); }
-  if (id !== 'hardware') focusCat = null;
-  if (id === 'lab') labUpdate(); else stageReadout();
-  userCam = false; camGo(id);
+  if (id !== 'assembly') focusCat = null;
+  userCam = false; applyScene(true);
+  window.__fi.stage = id; window.__fi.chapter = ch;
+}
+// everything that depends on the scene, not the stage: called on a stage change and when a stage passes into its next segment
+function applyScene(first) {
+  const sc = SC(), k = `${si}:${sc}`; if (!first && k === segK) return; segK = k;
+  const flat = TWO_D.has(sc);
+  $('replay').hidden = sc !== 'nucleus';
+  $('graphs').hidden = !GRAPHS.has(sc);
+  c2.classList.toggle('on', flat);
+  stage.classList.toggle('twod', flat);
+  stage.classList.toggle('flat', !ready && flat); gate.hidden = ready || flat;
+  ctlUpdate();
+  if (STAGES[si] === 'lab') labUpdate(); else stageReadout();
+  if (!first) enterT = performance.now() / 1000;
+  if (!userCam) camGo(sc);
   if (ready) applyCats();
-  window.__fi.stage = id; dirty = true; draw2d();
+  window.__fi.scene = sc; dirty = true; draw2d();
 }
 function stageReadout() {
-  if (STAGES[si] === 'lab') { labUpdate(); return; }
-  const id = STAGES[si], n = D.need, e = D.engine, ch = D.channels.variants[view === 'exp' ? lab.variant : 'C1'], md = D.modeled;
+  const st = STAGES[si]; if (st === 'lab') { labUpdate(); return; }
+  const sc = SC(), id = ({ operate: 'losses', ship: 'need', hardware: st === 'assembly' ? 'hardware' : 'hardware' })[sc] || sc, xt = extraFor(st), n = D.need, e = D.engine, ch = D.channels.variants[view === 'exp' ? lab.variant : 'C1'], md = D.modeled;
   const row = (a, b, c = '') => `<div><dt>${a}</dt><dd class="num ${c}">${b}</dd></div>`;
   let h = '';
   if (id === 'need') h = row('Departure mass', `${Math.round(n.departure_t).toLocaleString('en')} t`) + row('Cruise speed', `${n.cruise_c.toFixed(3)} c`) + row('Exhaust speed', `${n.exhaust_c.toFixed(3)} c`) +
@@ -571,14 +634,14 @@ function stageReadout() {
       row('Plasma on hardware', W(r.hit_J * r.Hz), 'bad') + row('Plasma not directed', W(r.side_J * r.Hz)) + row('Heat into the engine (per engine)', W(r.engine_heat_W), 'bad') +
       row('Radiator share', W(r.budget_W)) + row('Heat over radiator', X(r.heat_over), 'bad') + row('Winding fluence (steady-source study)', `${X(ch.winding_over)} limit`, 'bad') +
       row('Steady-plasma study (different regime)', `X-rays ${pct(st.xray_share + st.sync_share)}, heat ${X(ch.over)}`); }
-  if (id === 'thermal') { readEl.innerHTML = `<p class="fi-view-tag model">Thermal study at the coupled pulse (one engine). ${chip('IMPORTED')}</p>${thReadout(Math.max(0, stepOf(id)))}`;
+  if (id === 'thermal') { readEl.innerHTML = `<p class="fi-view-tag model">Thermal study at the coupled pulse (one engine). ${chip('IMPORTED')}</p>${xt}${thReadout(Math.max(0, stepOf(id)))}`;
     hud.innerHTML = `<div class="hrow"><span>Engine scale</span><b>thermal study</b></div><div class="hrow warn"><span>Hardware</span><b>WORK, not canon</b></div>`; return; }
   const tag = view === 'concept' ? (['need', 'hardware'].includes(id) ? '' : '<p class="fi-view-tag concept">Intended operation: what the engine is meant to do.</p>')
     : view === 'model' ? '<p class="fi-view-tag model">Current engineering model: what the calculations predict.</p>' : `<p class="fi-view-tag exp">Experiment: variant ${lab.variant}, field ×${lab.field}.</p>`;
-  const bar = ['need', 'hardware', 'magnets'].includes(id) ? '' : ledgerBar(LED());
-  readEl.innerHTML = `${tag}${bar}<dl class="fi-dl">${h}</dl>`;
+  const bar = ['need', 'hardware', 'magnets'].includes(id) || TWO_D.has(id) && !['many', 'ignition'].includes(id) ? '' : ledgerBar(LED());
+  readEl.innerHTML = `${tag}${bar}${h ? `<dl class="fi-dl">${h}</dl>` : ''}${xt}`;
   const cfg = view === 'exp' ? (lab.variant === 'C1' ? 'C1 approved cluster' : `${lab.variant} experimental, not canon`) : 'C1 approved cluster';
-  hud.innerHTML = h ? `<div class="hrow"><span>${esc(SCALE[id][0])}</span><b>${esc(view === 'concept' ? 'intended' : view === 'model' ? 'modeled' : 'experiment')}</b></div>`
+  hud.innerHTML = h || xt ? `<div class="hrow"><span>${esc(SCALE[st][0])}</span><b>${esc(view === 'concept' ? 'intended' : view === 'model' ? 'modeled' : 'experiment')}</b></div>`
     + `<div class="hrow ${view === 'exp' && lab.variant !== 'C1' ? 'warn' : ''}"><span>Engine</span><b>${esc(cfg)}</b></div>` : '';
 }
 
@@ -591,7 +654,8 @@ function camKey(id) {
     case 'need': return { t: new THREE.Vector3(-20, 0, 0), p: new THREE.Vector3(-330, 170, 330) };
     case 'hardware': return { t: c, p: c.clone().add(new THREE.Vector3(-95, 55, 85)) };
     case 'magnets': return near(34, 0.45, 0.35);
-    case 'lab': return { t: c, p: c.clone().add(new THREE.Vector3(-75, 45, 70)) };
+    case 'lab': case 'operate': return { t: c, p: c.clone().add(new THREE.Vector3(-75, 45, 70)) };
+    case 'ship': return { t: new THREE.Vector3(-80, 0, 0), p: new THREE.Vector3(-300, 110, 230) };
     case 'fuel': return near(20, 0.3, 0.2);
     case 'nucleus': return near(1.4, 0.15, 0.05);           // into the burn point; the 2-D scene fades in over it
     case 'many': case 'ignition': return near(3, 0.2, 0.1);
@@ -622,13 +686,16 @@ let lastStep = '';
 const ease = x => x < 0.5 ? 2 * x * x : 1 - (-2 * x + 2) ** 2 / 2;
 let LEDc = null, LEDk = '';
 function update(t) {
-  const id = STAGES[si];
+  const stg = STAGES[si], sc0 = SC(), OP = sc0 === 'operate', SHIP = sc0 === 'ship';
+  const id = OP ? 'lab' : SHIP ? 'need' : sc0;              // Operating draws the full engine like the lab; In the ship draws the cluster in the ship
+  applyScene(false);
   const lk = view + JSON.stringify(lab); if (lk !== LEDk || !LEDc) { LEDk = lk; LEDc = LED(); }
   // progressive disclosure: one mechanism at a time in Thrust (field, one product, many, exhaust, thrust) and Losses (photons, neutrons, charged, all)
   const NZ = id === 'nozzle' ? stepOf(id) : -1, LS = id === 'losses' ? stepOf(id) : -1, TS = id === 'thermal' ? stepOf(id) : -1;
-  const sk = `${id}:${stepOf(id)}`; if (sk !== lastStep) { const first = !lastStep.startsWith(id + ':'); lastStep = sk; if (!first && !userCam && stepOf(id) >= 0) camGo(id); if (!first && id === 'thermal') stageReadout(); }
+  const sk = `${stg}:${id}:${stepOf(id)}`; if (sk !== lastStep) { const first = !lastStep.startsWith(`${stg}:${id}:`); lastStep = sk; if (!first && !userCam && stepOf(id) >= 0) camGo(id); if (!first && id === 'thermal') stageReadout(); }
   caption(id, NZ, LS, TS);
-  thUpdate(t, id, TS);
+  thUpdate(t, OP ? 'operate' : id, TS);
+  const A = stg === 'assembly' ? asmState() : null;
   // categories
   const charge = id === 'magnets' ? Math.min(1, u * 1.4) : ['need', 'hardware'].includes(id) ? 0 : 1;
   const heatOn = layers.heat && ((id === 'losses' && LS >= 2) || (id === 'lab') || (view !== 'concept' && NZ >= 2) || TS === 4);
@@ -644,21 +711,25 @@ function update(t) {
     if (TS === 4 && cat === 'CRYOGENIC') op = Math.min(op, 0.22);      // the physics leads: hardware turns to glass while one mechanism is shown
     if (heatOn && ['MAGNETIC_NOZZLE', 'SHIELDING', 'MAGNETIC_COILS', 'HOT_THERMAL'].includes(cat)) em = Math.max(em, Math.min(1, over / 4) * (0.6 + 0.4 * Math.sin(t * 3)));
     if (id === 'magnets' && cat === 'MAGNETIC_COILS' || id === 'magnets' && cat === 'MAGNETIC_NOZZLE') em = Math.max(em, 0.25 * charge);
+    if (stg === 'structure' && cat === 'STRUCTURE') { op = 1; em = Math.max(em, 0.3); }
+    if (stg === 'cryo' && cat === 'CRYOGENIC') { op = 1; em = Math.max(em, 0.35); }
+    const msh = catMeshes[cat]; msh.position.set(0, 0, 0);
+    if (A) { const k = ASM_CAT[cat] ?? 0, f = A.f(k); op = Math.min(op, A.iso && k !== A.k ? 0.07 : f); msh.position.set(-(1 - ease(f)) * 26, (1 - ease(f)) * 9, 0); if (k === A.k && f > 0) em = Math.max(em, 0.3 * (1 - f) + 0.1); }
     mat.opacity = op; mat.visible = op > 0.01; mat.depthWrite = op > 0.9;
     mat.emissive.copy(heatOn && em > 0.36 ? new THREE.Color(COL.bad) : base).multiplyScalar(em);
-    mat.clippingPlanes = layers.cut && ['hardware', 'magnets', 'fuel', 'nozzle', 'losses', 'lab'].includes(id) ? [cutPlane] : [];
+    mat.clippingPlanes = layers.cut && ['hardware', 'magnets', 'fuel', 'nozzle', 'losses', 'lab', 'thermal'].includes(id) ? [cutPlane] : [];
   });
   shipGroup.visible = layers.ship;
   // field lines grow with the coil current
   if (fieldGroup.userData.mat) {
-    const show = layers.field && !['need', 'hardware'].includes(id);
+    const show = layers.field && !['need', 'hardware'].includes(id) && !(A && A.k < 3);
     fieldGroup.visible = show;
     fieldGroup.userData.mat.opacity = show ? (NZ === 0 ? 0.85 : NZ > 0 ? 0.2 : LS >= 0 && LS < 3 ? 0 : LS === 3 ? 0.15 : 0.55) * charge : 0;
     const fk = id === 'magnets' ? Math.min(1, u * 1.6) : 1;
     fieldLines.forEach(l => l.geometry.setDrawRange(0, 2 * upTo(l.userData.frac, fk)));
   }
   // target and plasma
-  const fuelOn = layers.fuel && ['fuel', 'nucleus', 'many', 'ignition'].includes(id);
+  const fuelOn = layers.fuel && ['fuel', 'nucleus', 'many', 'ignition'].includes(id) || (OP && layers.fuel);
   const mag = M.parts.find(p => p.name === 'VTX_Target_Magazine')?.centroid || new THREE.Vector3(-6, 0, 0);
   const tu = id === 'fuel' ? Math.min(1, u * 2) : 1;
   targetMesh.visible = fuelOn && tu < 1;
@@ -684,7 +755,7 @@ function update(t) {
     a.needsUpdate = true;
   }
   // plume
-  const plumeOn = NZ >= 3 || LS === 3 || id === 'lab';
+  const plumeOn = (NZ >= 3 || LS === 3 || id === 'lab' || SHIP) && layers.thrust;
   plume.visible = plumeOn;
   if (plumeOn) {
     const a = plume.geometry.attributes.position, s = plume.userData.seed, n4 = a.count / 4;
@@ -718,11 +789,11 @@ function update(t) {
     hm.instanceMatrix.needsUpdate = true;
   }
   // radiation
-  const radOn = layers.rad && (id === 'losses' || id === 'lab' || TS === 0 || TS === 1);
+  const radOn = (layers.rad || layers.neut) && (id === 'losses' || id === 'lab' || TS === 0 || TS === 1) && !SHIP;
   radGroup.visible = radOn;
   if (radOn) {
     const fl = 0.35 + 0.25 * Math.sin(t * 9);
-    const phOn = LS < 0 || LS === 0 || LS === 3, nOn = LS < 0 || LS === 1 || LS === 3;
+    const phOn = (LS < 0 || LS === 0 || LS === 3) && (!OP || layers.rad), nOn = (LS < 0 || LS === 1 || LS === 3) && layers.neut;
     radGroup.userData.ph.material.opacity = phOn ? (LS === 0 ? 0.22 : 0.12) : 0; radGroup.userData.n.material.opacity = nOn ? (LS === 1 ? 0.2 : 0.1) : 0;
     const pk = radGroup.userData.packets;                 // photons as fast packets along straight rays; neutrons as slower dots that ignore the field
     pk.ph.visible = phOn; pk.n.visible = nOn;
@@ -731,11 +802,11 @@ function update(t) {
       a.needsUpdate = true; });
     radGroup.userData.ship.material.opacity = LS >= 0 && LS < 3 ? 0 : (view === 'exp' || id === 'lab') && lab.variant === 'C4' ? 0.15 : 0.55;
   }
-  thrustArrow.visible = (id === 'need' && u > 0.5) || NZ === 4;
+  thrustArrow.visible = ((id === 'need' && u > 0.5) || NZ === 4 || SHIP || OP) && layers.thrust;
   // markers
   markerEls.forEach(m => {
     const thp = /^ENG-0[456]/.test(m.p.id);
-    const on = layers.problems && (thp ? id === 'thermal' && (TH_MARK[TS] || []).includes(m.p.id) : (LS === 3 || id === 'lab' || (view === 'model' && (NZ === 4 || id === 'magnets'))));
+    const on = layers.problems && !A && (thp ? id === 'thermal' && (TH_MARK[TS] || []).includes(m.p.id) : SHIP ? ['ENG-032', 'ENG-035'].includes(m.p.id) : (LS === 3 || id === 'lab' || (view === 'model' && (NZ === 4 || id === 'magnets'))));
     const appl = m.p.variants.includes(id === 'lab' || view === 'exp' ? lab.variant : 'C1');
     m.el.hidden = !(on && appl && !TWO_D.has(id));
   });
@@ -1310,9 +1381,227 @@ function ignitionGraphs() {
 
 function draw2d() {
   if (!PC.D) pcol();
-  if (!ctx) sizeC2(); if (!TWO_D.has(STAGES[si]) || !D) { if (ctx) ctx.clearRect(0, 0, c2w, c2h); return; }
-  const id = STAGES[si];
-  if (id === 'nucleus') drawNucleus(); else if (id === 'many') drawMany(); else drawIgnition();
+  if (!ctx) sizeC2(); const id = SC(); if (!TWO_D.has(id) || !D) { if (ctx) ctx.clearRect(0, 0, c2w, c2h); return; }
+  ({ nucleus: drawNucleus, many: drawMany, ignition: drawIgnition, matter: drawMatter, unwanted: drawUnwanted, mix: drawMix, accel: drawAccel, spin: drawSpin, mirror: drawMirror })[id]();
+}
+
+// ---- chapter scenes in 2-D (lab/studies/fusion-ignition/chapters.py; every number is the study's, motion is ILLUSTRATIVE) ------------------
+const UNW = { T: 70, fl: [] }, MIXS = { d: 0.5, T: 100 }, SPN = { s: 'none' }, MIR = { E: 2, psi: 1 }, ACC = { k: null };
+const MIR_E = ['3 keV X-ray', '10 keV X-ray', '30 keV X-ray', '100 keV X-ray', '300 keV X-ray', 'visible light', 'thermal neutron', '2.45 MeV neutron'];
+function bg2d(a = 1) { ctx.clearRect(0, 0, c2w, c2h); ctx.fillStyle = `rgba(5,7,11,${a})`; ctx.fillRect(0, 0, c2w, c2h); }
+function now2d() { return performance.now() / 1000; }
+function foot(s, col = COL.ink) { wrap(s, Math.floor((c2w - 40) / 6.6)).slice(0, 3).reverse().forEach((l, i) => txt(l, c2w / 2, c2h - 66 - i * 15, col, 12, 'center', i === 0 ? 600 : 400)); }
+function bars(x, y, w, rows, max, title, fmt = pct) {        // horizontal bars: [label, value, colour, class]
+  txt(title, x, y, COL['ink-strong'], 12, 'left', 600); const bh = 13, gap = 7;
+  rows.forEach(([l, v, col, cls], i) => { const yy = y + 12 + i * (bh + gap), bw = v == null ? 0 : Math.max(2, Math.min(1, v / max) * (w * 0.5));
+    txt(l, x, yy + 10, COL.ink, 11); ctx.fillStyle = v == null ? 'transparent' : col; ctx.fillRect(x + w * 0.46, yy, bw, bh);
+    txt(v == null ? 'not modelled' : fmt(v) + (cls ? `  ${cls}` : ''), x + w * 0.46 + bw + 6, yy + 10, v == null ? COL.bad : COL.muted, 11); });
+  return y + 12 + rows.length * (bh + gap);
+}
+function drawMatter() {
+  const m = D.chapters.matter, st = u * DUR.matter, t = now2d(), cx = c2w / 2, cy = c2h * 0.5, narrow = c2w < 600; bg2d(sm(0, 1.2, st));
+  if (st < 6) {
+    banner('Matter: atoms are nuclei with electrons bound to them', `Deuterium loses its electron at ${m.ionise_eV.D} eV; helium-3 loses two at ${m.ionise_eV.He3[0]} and ${m.ionise_eV.He3[1]} eV. The burning fuel is at 70 keV, thousands of times more.`);
+    [[cx - Math.min(160, c2w * 0.22), 'D', COL['fn-DEUTERIUM'], 1, 1], [cx + Math.min(160, c2w * 0.22), '³He', COL['fn-HELIUM3'], 2, 1]].forEach(([x, l, col, pr, nn], j) => {
+      const R = narrow ? 46 : 64; ctx.strokeStyle = hexA(COL.info, 0.25); ctx.beginPath(); ctx.arc(x, cy, R, 0, 7); ctx.stroke();
+      nucleus(x, cy, pr, nn, 10, l, col);
+      for (let e = 0; e < pr; e++) { const a = t * (1.6 + e) + e * 3.1 + j; const k = 1 - sm(4.2, 5.8, st); const rr = R + (1 - k) * 220; glow(x + rr * Math.cos(a), cy + rr * Math.sin(a), 6, '#6E7B8C', 0.9 * k + 0.2); }
+    });
+    txt('not to scale: an atom is about 100,000 times wider than its nucleus', cx, cy + (narrow ? 90 : 110), COL.muted, 11, 'center');
+    return;
+  }
+  if (st < 11) {
+    banner('Heated past ionisation, the gas becomes a plasma', 'Free nuclei and free electrons move separately. They are still neutral as a crowd, but every particle carries its own charge and answers to fields.');
+    for (let i = 0; i < 60; i++) { const s = (i * 97.3) % 1, ph = i * 2.39; const x = cx + Math.sin(t * (0.5 + s) + ph) * c2w * 0.38, y = cy + Math.cos(t * (0.7 + s * 0.6) + ph * 1.3) * c2h * 0.25;
+      glow(x, y, i % 3 === 2 ? 3 : 6, i % 3 === 2 ? '#6E7B8C' : i % 3 ? COL['fn-HELIUM3'] : COL['fn-DEUTERIUM'], 0.9); }
+    return;
+  }
+  banner(`In the ${m.B_T} T field at the burn point, every charge circles a field line`, 'The radius depends on mass, speed and charge (shown on a log scale). A neutron has no charge: the field cannot turn it.');
+  const top = c2h * 0.32, bot = c2h * 0.86; ctx.strokeStyle = hexA(COL.info, 0.35); ctx.lineWidth = 1;
+  for (let y = top; y <= bot; y += (bot - top) / 6) { ctx.beginPath(); ctx.moveTo(30, y); ctx.lineTo(c2w - 30, y); ctx.stroke(); }
+  txt('field B →', 34, top - 6, COL.info, 11, 'left');
+  const G = m.gyro, rmax = Math.log10(G[0].r_m / G[4].r_m), cols = ['#FF8A4C', '#F2F2F2', COL['fn-DEUTERIUM'], COL['fn-DEUTERIUM'], '#6E7B8C'];
+  G.forEach((g, i) => { const x0 = 70 + (i + 0.5) * (c2w - 140) / (G.length + 1), y0 = top + (i + 0.5) * (bot - top) / (G.length + 1);
+    const R = 6 + 40 * Math.log10(g.r_m / G[4].r_m) / rmax, a = t * (2.4 - i * 0.25);
+    ctx.strokeStyle = hexA(cols[i], 0.5); ctx.beginPath(); for (let s = 0; s < 60; s++) { const aa = a - s * 0.1, x = x0 + R * Math.cos(aa) + (s * -0.6), y = y0 + R * Math.sin(aa); s ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke();
+    glow(x0 + R * Math.cos(a), y0 + R * Math.sin(a), 6, cols[i], 1);
+    txt(`${g.particle}: ${g.r_m >= 0.01 ? `${(g.r_m * 100).toFixed(1)} cm` : `${(g.r_m * 1000).toFixed(2)} mm`}`, x0 + R + 10, y0 + 4, COL.ink, narrow ? 10 : 11); });
+  const nx = 30 + ((t * 140) % (c2w - 60)); glow(nx, bot + 10, 6, COL.neutron, 1); txt('neutron: straight through', Math.min(nx + 10, c2w - 150), bot + 26, COL.neutron, 11);
+  chipC(20, c2h - 40, 'CALCULATED radii · motion illustrative', COL.muted);
+}
+function drawUnwanted() {
+  const U = D.chapters.unwanted, st = u * DUR.unwanted, t = now2d(), narrow = c2w < 600; bg2d(sm(0, 1, st));
+  banner('Not every collision makes the reaction we want', `At ${UNW.T} keV, for every 1,000 D–³He fusions the deuterium also fuses with itself about ${Math.round(1000 * lerpT(U.T_keV, U.dd_per_dhe3, UNW.T))} times. Half of those make a neutron, half make tritium, which later burns into a 14 MeV neutron.`);
+  const ch = { x: 34, y: narrow ? c2h * 0.38 : c2h * 0.34, w: narrow ? c2w - 68 : c2w * 0.44, h: narrow ? c2h * 0.24 : c2h * 0.4 };
+  const cols = { DHe3: COL.good, DDn: COL.neutron, DDp: COL.warn, DT: COL.bad }, ylo = -26, yhi = -21;
+  const px = T => ch.x + (Math.log10(T) - 1) / (Math.log10(200) - 1) * ch.w, py = v => ch.y + ch.h - (Math.log10(v) - ylo) / (yhi - ylo) * ch.h;
+  axes(ch.x, ch.y, ch.w, ch.h, 'Reaction rate ⟨σv⟩ against temperature (log–log)', 'ion temperature, keV (10 to 200)', 'm³/s');
+  Object.entries(U.sigma_v).forEach(([k, arr]) => { ctx.strokeStyle = cols[k]; ctx.lineWidth = 2; ctx.beginPath(); U.T_keV.forEach((T, i) => { const X1 = px(T), Y1 = py(arr[i]); i ? ctx.lineTo(X1, Y1) : ctx.moveTo(X1, Y1); }); ctx.stroke();
+    const last = arr.length - 1; txt(k === 'DHe3' ? 'D–³He' : k === 'DDn' ? 'D–D → n' : k === 'DDp' ? 'D–D → T' : 'D–T', px(U.T_keV[last]) + 4, py(arr[last]) + (k === 'DDn' ? -4 : k === 'DDp' ? 10 : 4), cols[k], 11); });
+  txt('Bosch–Hale fits, held flat above their validity range', ch.x + 6, ch.y + 14, COL.muted, 10);
+  ctx.strokeStyle = COL.accent; ctx.setLineDash([4, 3]); ctx.beginPath(); ctx.moveTo(px(UNW.T), ch.y); ctx.lineTo(px(UNW.T), ch.y + ch.h); ctx.stroke(); ctx.setLineDash([]);
+  // the burn: one flash per fusion, coloured by reaction, at the stage temperature's ratios
+  const bx = narrow ? c2w / 2 : c2w * 0.76, by = narrow ? c2h * 0.78 : c2h * 0.56, R = narrow ? 50 : Math.min(120, c2h * 0.22), r = lerpT(U.T_keV, U.dd_per_dhe3, UNW.T);
+  ctx.strokeStyle = hexA(COL.accent, 0.3); ctx.beginPath(); ctx.arc(bx, by, R, 0, 7); ctx.stroke();
+  if (sdt > 0 || UNW.fl.length < 6) { const n = Math.random() < 0.6 ? 1 : 0; for (let i = 0; i < n; i++) { const q = Math.random() * (1 + r), k = q < 1 ? 'DHe3' : q < 1 + r / 2 ? 'DDn' : 'DDp'; const a = Math.random() * 6.28, rr = Math.sqrt(Math.random()) * R; UNW.fl.push({ x: bx + rr * Math.cos(a), y: by + rr * Math.sin(a), k, t0: t, a: Math.random() * 6.28 }); } }
+  UNW.fl = UNW.fl.filter(f => t - f.t0 < 1.4).slice(-60);
+  UNW.fl.forEach(f => { const age = t - f.t0; glow(f.x, f.y, 10 * (1 - age / 1.4) + 2, cols[f.k], 0.9 * (1 - age / 1.4));
+    if (f.k === 'DDn') { const L = age * 160; ctx.strokeStyle = hexA(COL.neutron, 1 - age / 1.4); ctx.beginPath(); ctx.moveTo(f.x, f.y); ctx.lineTo(f.x + L * Math.cos(f.a), f.y + L * Math.sin(f.a)); ctx.stroke(); } });
+  txt('one flash per fusion at the true D–D ratio; neutron tracks grey', bx, by + R + 16, COL.muted, 11, 'center');
+  if (!narrow) { let y = c2h * 0.82; U.reactions.slice(0, 4).forEach((rr, i) => { txt(`${rr.eq}`, ch.x, y + i * 15, cols[rr.id] || COL.ink, 11); txt(rr.role, ch.x + ch.w * 0.95, y + i * 15, COL.muted, 11); }); }
+  foot(`Steady plasma: neutrons ${pct(U.steady.neutron)} of fusion energy · pulsed target: ${pct(U.pulse.neutron_share)}. Two regimes, never added.`);
+}
+function lerpT(Ts, ys, T) { for (let i = 1; i < Ts.length; i++) if (T <= Ts[i]) { const k = (T - Ts[i - 1]) / (Ts[i] - Ts[i - 1]); return ys[i - 1] + k * (ys[i] - ys[i - 1]); } return ys[ys.length - 1]; }
+function drawMix() {
+  const M_ = D.chapters.mix, st = u * DUR.mix, narrow = c2w < 600; bg2d(sm(0, 1, st));
+  banner('Choosing the fuel mix: fewer deuterons, fewer neutrons, less power', M_.lesson);
+  const rows = M_.steady.filter(r => r.T === MIXS.T), cur = rows.reduce((a, b) => Math.abs(b.d - MIXS.d) < Math.abs(a.d - MIXS.d) ? b : a);
+  const n = narrow ? 1 : 3, w = narrow ? c2w - 70 : (c2w - 230) / 3, h = narrow ? c2h * 0.14 : c2h * 0.26, y0 = narrow ? c2h * 0.3 : c2h * 0.36;
+  const sets = [['Neutron energy / fusion', 'neutron', COL.neutron], ['Radiation (X-rays) / fusion', 'photon', COL.warn], ['Fusion power (relative)', 'power', COL.good]];
+  sets.forEach(([title, k, col], i) => { const x = 40 + (narrow ? 0 : i * (w + 20)), y = narrow ? y0 + i * (h + 38) : y0, mx = Math.max(...rows.map(r => r[k]));
+    axes(x, y, w, h, title, 'D fraction 0.1 → 0.7', '');
+    ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.beginPath(); rows.forEach((r, j) => { const X1 = x + (r.d - 0.1) / 0.6 * w, Y1 = y + h - r[k] / mx * h; j ? ctx.lineTo(X1, Y1) : ctx.moveTo(X1, Y1); }); ctx.stroke();
+    if (k === 'photon' && mx > 1) { const Y1 = y + h - 1 / mx * h; ctx.setLineDash([3, 3]); ctx.strokeStyle = COL.bad; ctx.beginPath(); ctx.moveTo(x, Y1); ctx.lineTo(x + w, Y1); ctx.stroke(); ctx.setLineDash([]); txt('above: radiates more than it makes', x + w, Y1 - 4, COL.bad, 10, 'right'); }
+    const cx_ = x + (cur.d - 0.1) / 0.6 * w, cy_ = y + h - cur[k] / mx * h; glow(cx_, cy_, 8, col, 1); txt(k === 'power' ? cur[k].toFixed(2) : pct(cur[k]), cx_ + 8, cy_ - 8, COL['ink-strong'], 11); void n; });
+  if (!narrow) { const S = M_.sources, yb = c2h * 0.74; txt('Steady-source cases (Vertex studies), share of fusion energy', 40, yb, COL['ink-strong'], 12, 'left', 600);
+    Object.entries(S).forEach(([k, s], i) => { const y = yb + 12 + i * 20, w2 = c2w * 0.5; let x = 200; txt(`${k} ${s.evidence.split(' ')[0]}`, 40, y + 10, COL.ink, 11);
+      [['charged', COL.good], ['photon', COL.warn], ['neutron', COL.neutron]].forEach(([kk, col]) => { ctx.fillStyle = col; const ww = Math.max(1, s[kk] * w2); ctx.fillRect(x, y, ww, 12); x += ww + 2; }); });
+    txt('green charged (steerable) · amber radiation · grey neutrons', 200, yb + 80, COL.muted, 11); }
+  foot(`Steady plasma at ${MIXS.T} keV (selective-fusion grid, CALCULATED). The pulsed target's own mix rows are in the readout; the two regimes are not combined.`);
+}
+function drawAccel() {
+  const A_ = D.chapters.accel, st = u * DUR.accel, t = now2d(), narrow = c2w < 600; bg2d(sm(0, 1, st));
+  const k = Math.min(3, Math.floor(st / (DUR.accel / 4))), row = A_.coulomb[ACC.k ?? k] || A_.coulomb[k];
+  banner('Why not simply fire deuterons at helium-3? (rejected)', A_.why);
+  const y = c2h * 0.5, x0 = 50, x1 = c2w - 60, tx = narrow ? c2w * 0.65 : c2w * 0.6;
+  ctx.fillStyle = hexA(COL['fn-HELIUM3'], 0.25); ctx.fillRect(tx, y - 50, 60, 100); txt('³He target', tx + 30, y + 66, COL['fn-HELIUM3'], 11, 'center');
+  for (let i = 0; i < 14; i++) { const ph = (t * 0.7 + i / 14) % 1, x = x0 + ph * (tx + 30 - x0), yy = y + (i % 7 - 3) * 8;
+    if (x < tx) glow(x, yy, 5, COL['fn-DEUTERIUM'], 1); else { const s = (x - tx) / 30, a = (i * 1.7) % 6.28; glow(tx + 30 * s * Math.cos(a) + 0, yy + 40 * s * Math.sin(a), 4, COL['fn-DEUTERIUM'], 1 - s); } }
+  txt(`at ${row.E_keV} keV: about ${Math.round(row.ratio).toLocaleString('en')} scatterings per fusion`, c2w / 2, y - 70, COL['ink-strong'], narrow ? 12 : 14, 'center', 600);
+  txt(`energy that must be recovered and re-accelerated: ${row.recirc.toFixed(row.recirc < 10 ? 2 : 0)}× the fusion energy`, c2w / 2, y - 52, COL.bad, 12, 'center');
+  const yb = c2h * 0.72; txt('Scatterings per fusion (log)', 40, yb, COL['ink-strong'], 12, 'left', 600);
+  A_.coulomb.forEach((r, i) => { const w = (Math.log10(r.ratio) / 6) * (c2w * 0.5); ctx.fillStyle = i === (ACC.k ?? k) ? COL.bad : hexA(COL.bad, 0.4); ctx.fillRect(140, yb + 10 + i * 18, w, 12); txt(`${r.E_keV} keV`, 40, yb + 20 + i * 18, COL.ink, 11); txt(Math.round(r.ratio).toLocaleString('en'), 146 + w, yb + 20 + i * 18, COL.muted, 11); });
+  chipC(20, c2h * 0.62, 'IMPORTED · accelerator study PARKED, negative result accepted', COL.bad);
+  foot(`Kept: ${A_.kept}`, COL.good);
+}
+function drawSpin() {
+  const S = D.chapters.spin, st = u * DUR.spin, t = now2d(), narrow = c2w < 600; bg2d(sm(0, 1, st));
+  const s = S.states.find(x => x.id === SPN.s) || S.states[0], P = s.PD;
+  banner(`Spin polarisation: ${s.label}, D–³He rate ×${s.dhe3_x.toFixed(2)}`, S.angular);
+  const cx = narrow ? c2w / 2 : c2w * 0.3, cy = c2h * 0.52, R = Math.min(110, c2h * 0.2);
+  for (let i = 0; i < 16; i++) { const a = i * 2.4, rr = R * Math.sqrt((i + 0.5) / 16), x = cx + rr * Math.cos(a), y = cy + rr * Math.sin(a);
+    nucleus(x, y, i % 2 ? 2 : 1, 1, 6, '', i % 2 ? COL['fn-HELIUM3'] : COL['fn-DEUTERIUM']);
+    const rnd_ = Math.sin(i * 12.9898) * 43758.5453 % 1, ang = (1 - P) * (rnd_ * 6.28 + t * 0.6 * (i % 3 - 1)) - Math.PI / 2 * P;
+    arrow(x, y, x + 16 * Math.cos(ang), y + 16 * Math.sin(ang), COL.accent, 1.5); }
+  txt('spin axis ↑ when aligned', cx, cy + R + 22, COL.muted, 11, 'center');
+  if (!narrow) { const lx = c2w * 0.66, ly = c2h * 0.46, L = Math.min(90, c2h * 0.16);       // product directions: isotropic vs 1 + P·(sin²θ-weighted) lobe
+    ctx.strokeStyle = COL.good; ctx.lineWidth = 2; ctx.beginPath();
+    for (let a = 0; a <= 6.3; a += 0.05) { const w = (1 - P) + P * 1.5 * Math.sin(a) ** 2, x = lx + L * w * Math.cos(a), y = ly + L * w * Math.sin(a) * 0.9; a ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke();
+    txt('where the products go (side view)', lx, ly + L * 1.6 + 6, COL.muted, 11, 'center'); txt('ILLUSTRATIVE shape', lx, ly + L * 1.6 + 20, COL.muted, 10, 'center');
+    const st0 = S.steady; let y = c2h * 0.72;
+    y = bars(c2w * 0.5, y, c2w * 0.46, [['neutrons, unpolarised', st0.none.neutron, COL.neutron], ['neutrons, polarised', st0.polarised.neutron, COL.neutron], ['neutrons, polarised + D–D suppressed', st0['polarised-dd'].neutron, COL.neutron, 'SPECULATIVE']], 0.04, 'Steady plasma: neutron share of fusion');
+  }
+  foot(`${S.dd.note} Pulsed target, fully polarised (SPECULATIVE): yield ×${S.pulsed.yield_x.toFixed(2)}, thrust ×${S.pulsed.thrust_x.toFixed(2)}, heat still ${X(S.pulsed.heat_over)} the radiator share.`);
+}
+function mirrorR() {                                           // R at the chosen energy and grazing angle (CALCULATED tables)
+  const O = D.thermal.optics, ps = O.psi_mrad, psi = MIR.psi, e = MIR.E;
+  const li = arr => { if (psi <= ps[0]) return arr[0]; for (let i = 1; i < ps.length; i++) if (psi <= ps[i]) { const k = (Math.log(psi) - Math.log(ps[i - 1])) / (Math.log(ps[i]) - Math.log(ps[i - 1])); return arr[i - 1] + k * (arr[i] - arr[i - 1]); } return arr[arr.length - 1]; };
+  if (e <= 4) return { R: Math.max(0, Math.min(1, li(O.R[e]))), crit: O.theta_c_mrad[String(O.E_keV[e].toFixed(1))], cls: 'CALCULATED' };
+  if (e === 5) { const V = D.chapters.optics.visible, deg = psi * 180 / Math.PI / 1000; let R = V[V.length - 1].R; for (let i = 1; i < V.length; i++) if (deg <= V[i].psi_deg) { const k = (deg - V[i - 1].psi_deg) / (V[i].psi_deg - V[i - 1].psi_deg); R = V[i - 1].R + Math.max(0, k) * (V[i].R - V[i - 1].R); break; } return { R, crit: null, cls: 'CALCULATED' }; }
+  const N = D.chapters.optics.neutrons[e === 6 ? 1 : 2]; return { R: psi < N.theta_c_m6_mrad ? 0.99 : 0, crit: N.theta_c_m6_mrad, cls: 'CALCULATED' };
+}
+function drawMirror() {
+  const st = u * DUR.mirror, narrow = c2w < 600; bg2d(sm(0, 1, st));
+  const r = mirrorR(), R = r.R, A = 1 - R;
+  banner(`Supermirror: ${MIR_E[MIR.E]} at ${MIR.psi >= 1 ? MIR.psi.toFixed(MIR.psi < 10 ? 1 : 0) : MIR.psi.toPrecision(2)} mrad grazing`,
+    MIR.E === 5 ? 'Visible light reflects from metal at any angle. That does not carry over to X-rays: there the reflection only exists below a critical angle that shrinks as the energy rises.'
+      : MIR.E >= 6 ? 'Neutron supermirrors work for slow neutrons at a few mrad. A 2.45 MeV fusion neutron has a critical angle about a ten-millionth of a radian: no mirror can be placed to use it.'
+        : `Below about ${r.crit.toFixed(r.crit < 1 ? 2 : 1)} mrad this X-ray reflects; above it the mirror absorbs it. Move the sliders.`);
+  const y = narrow ? c2h * 0.5 : c2h * 0.55, x0 = narrow ? 20 : c2w * 0.12, x1 = narrow ? c2w - 20 : c2w * 0.62, xm = (x0 + x1) / 2;
+  ctx.fillStyle = '#3A4150'; ctx.fillRect(x0, y, x1 - x0, 12); ctx.fillStyle = '#9AA4B5'; ctx.fillRect(x0, y, x1 - x0, 2);
+  txt('multilayer mirror (W/B₄C, 0.5 nm roughness)', xm, y + 28, COL.muted, 11, 'center');
+  const ang = Math.max(0.06, Math.min(0.7, Math.log10(MIR.psi * 10 + 1) * 0.25)), L = (x1 - x0) * 0.45;    // drawn angle exaggerated so it stays visible
+  const col = MIR.E === 5 ? '#B8E0FF' : MIR.E >= 6 ? COL.neutron : COL.warn;
+  ctx.globalAlpha = 1; arrow(xm - L * Math.cos(ang), y - L * Math.sin(ang), xm, y, col, 3);
+  if (R > 0.005) { ctx.globalAlpha = Math.max(0.15, R); arrow(xm, y, xm + L * Math.cos(ang), y - L * Math.sin(ang), col, 1 + 4 * R); ctx.globalAlpha = 1; }
+  if (A > 0.005) glow(xm, y + 6, 10 + 26 * A, COL.bad, 0.7 * A);
+  txt(`reflected R = ${pct(R)}`, xm + L * Math.cos(ang) + 10, y - L * Math.sin(ang) + 4, COL.good, 12, 'left', 600);
+  txt(`absorbed (enters the mirror and stops) = ${pct(A)}`, xm, y + 46, COL.bad, 12, 'center', 600);
+  txt('angle drawn exaggerated', xm - L * 0.9, y - 8, COL.muted, 10);
+  if (!narrow) { const O = D.thermal.optics, cx = c2w * 0.67, cw = c2w * 0.28, ch = c2h * 0.28, cy = c2h * 0.38; axes(cx, cy, cw, ch, 'Reflectivity against grazing angle', 'mrad, 0.01 → 1000 (log)', 'R');
+    const lx = v => cx + (Math.log10(v) + 2) / 5 * cw, cl = ['#7CC4FF', '#9F8CFF', '#E58BD0', '#FFB060', '#FF6B5B'];
+    O.R.forEach((arr, i) => { ctx.strokeStyle = cl[i]; ctx.lineWidth = i === MIR.E ? 3 : 1.2; ctx.beginPath(); O.psi_mrad.forEach((p, j) => { const X1 = lx(p), Y1 = cy + ch - arr[j] * ch; j ? ctx.lineTo(X1, Y1) : ctx.moveTo(X1, Y1); }); ctx.stroke(); txt(`${O.E_keV[i]} keV`, cx + cw + 4, cy + 12 + i * 13, cl[i], 10); });
+    ctx.strokeStyle = COL.accent; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(lx(MIR.psi), cy); ctx.lineTo(lx(MIR.psi), cy + ch); ctx.stroke(); ctx.setLineDash([]);
+    txt('Engine faces meet the burn at hundreds of mrad: R ≈ 0', cx, cy + ch + 30, COL.bad, 11); }
+  foot('Next: where such mirrors could sit round the burn, in 3-D (the stage continues).');
+}
+
+// ---- assembly: the engine's categories in dependency order (PROTOTYPE order; parts are Explore Ship's inspection parts) ----------------------
+const ASM_ORDER = [['STRUCTURE', 'the thrust frame everything else hangs from'], ['SHIELDING', 'the shadow shield, before anything it must protect'],
+  ['CRYOGENIC', 'cold lines and screens, so the windings can be cooled before they carry current'], ['MAGNETIC_COILS', 'closure coils on the cold mass'],
+  ['MAGNETIC_NOZZLE', 'nozzle coils and their hoops, aligned to the closure coils'], ['HOT_THERMAL', 'the hot lithium circuit behind the burn-facing parts'],
+  ['ELECTRICAL', 'busbars and the pulse bank feed'], ['FUEL', 'fuel delivery from the tanks'], ['TARGET_INJECTION', 'target injector and driver optics, aligned to the burn point'],
+  ['INSTRUMENTATION', 'diagnostics that see the burn'], ['SERVICE', 'service rails and ports'], ['FUSION_REACTION', 'the reaction region: a place, not a part']];
+const ASM_CAT = Object.fromEntries(ASM_ORDER.map(([c], i) => [c, i]));
+const ASM = { dir: 1, iso: false };
+function asmState() { const N = ASM_ORDER.length, p = (ASM.dir > 0 ? u : 1 - u) * (N + 0.5), k = Math.max(0, Math.min(N - 1, Math.floor(p)));
+  return { k, iso: ASM.iso, p, f: j => Math.min(1, Math.max(0, p - j)) }; }
+
+// ---- per-stage readouts for the chapters (added under the scene's own numbers) -------------------------------------------------------------
+const P_ = ids => `<p class="meta">Problems: ${ids.map(i => `<a href="#p-${i}">${i}</a>`).join(' ')}</p>`;
+function tbl(head, rows) { return `<div class="fi-tw"><table class="fi-tbl"><thead><tr>${head.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map((c, i) => `<td${i ? ' class="num"' : ''}>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`; }
+function extraFor(st) {
+  const C = D.chapters, row = (a, b, c = '') => `<div><dt>${a}</dt><dd class="num ${c}">${b}</dd></div>`, dl = h => `<dl class="fi-dl">${h}</dl>`;
+  switch (st) {
+    case 'matter': { const m = C.matter; return `<p class="meta">${esc(m.note)} ${chip('CALCULATED')}</p>` + tbl(['Particle', 'Charge', 'Gyroradius at ' + m.B_T + ' T'], m.gyro.map(g => [esc(g.particle), g.particle.includes('electron') ? '−1' : g.particle.includes('alpha') || g.particle.includes('He') ? '+2' : '+1', g.r_m >= 0.01 ? `${(g.r_m * 100).toFixed(1)} cm` : `${(g.r_m * 1e3).toFixed(2)} mm`])) + `<p class="meta">${esc(m.neutron)}</p>`; }
+    case 'unwanted': { const U = C.unwanted; return dl(row('D–D fusions per D–³He', `${lerpT(U.T_keV, U.dd_per_dhe3, UNW.T).toFixed(3)} at ${UNW.T} keV`) + row('Pulsed target: reactions', `D–³He ${E(U.pulse.reactions.reactions.DHe3)}, D–D ${E(U.pulse.reactions.reactions.DDn + U.pulse.reactions.reactions.DDp)}, D–T ${E(U.pulse.reactions.reactions.DT)}`)
+      + row('Pulsed target: neutrons per pulse', E(U.pulse.neutrons)) + row('Pulsed target: neutron energy', pct(U.pulse.neutron_share), 'bad') + row('Steady plasma: neutron energy', pct(U.steady.neutron)))
+      + `<p class="meta">${esc(U.note)} ${chip('CALCULATED')}</p>` + P_(['ENG-033']); }
+    case 'mix': { const M_ = C.mix; return tbl(['D:³He (pulsed target)', 'Fusion / pulse', 'X-rays', 'Neutrons', 'Steerable plasma', 'Burn-up'], M_.pulse.map(r => [`${r.mix}:1`, `${(r.fusion_J / 1e9).toFixed(2)} GJ`, pct(r.xray), pct(r.neutron), pct(r.plasma), pct(r.burn)]))
+      + tbl(['Steady source', 'Charged', 'Radiation', 'Neutrons', 'Evidence'], Object.entries(M_.sources).map(([k, s]) => [`${k}: ${esc(s.name)}`, pct(s.charged), pct(s.photon), pct(s.neutron), esc(s.evidence)]))
+      + `<p class="meta">The steady sources (V0–V3) and the pulsed target are different regimes; their shares are never added or swapped. ${chip('CALCULATED')}</p>`; }
+    case 'accel': { const A_ = C.accel; return tbl(['Beam energy', 'Scatterings per fusion', 'Recirculated energy'], A_.coulomb.map(r => [`${r.E_keV} keV`, Math.round(r.ratio).toLocaleString('en'), `${r.recirc.toFixed(2)}×`]))
+      + dl(row('Colliding beams: heat share', pct(A_.collider.heat_frac)) + row('… over the radiator share', X(A_.collider.radiator_multiple), 'bad') + row(`Beam current for the mission (${esc(A_.scale.case)})`, `${(A_.scale.current_A / 1e6).toFixed(1)} MA`, 'bad') + row('Beam power', W(A_.scale.power_W), 'bad'))
+      + `<p class="meta">Rejected: ${esc(A_.why)} Kept: ${esc(A_.kept)} ${chip('IMPORTED')}</p>`; }
+    case 'spin': { const S = C.spin; return tbl(['State', 'P(D)', 'P(³He)', 'D–³He rate'], S.states.map(s => [esc(s.label), s.PD, s.PHe, `×${s.dhe3_x}`]))
+      + dl(row('Steady: neutron share, unpolarised → polarised', `${pct(S.steady.none.neutron)} → ${pct(S.steady.polarised.neutron)}`) + row('… with D–D suppressed (disputed)', pct(S.steady['polarised-dd'].neutron), 'bad')
+      + row('Pulsed target, polarised: yield · thrust', `×${S.pulsed.yield_x.toFixed(2)} · ×${S.pulsed.thrust_x.toFixed(2)}`) + row('Heat over radiator share', X(S.pulsed.heat_over), 'bad'))
+      + `<p class="meta">${esc(S.survival)} ${chip('SPECULATIVE')}</p>`; }
+    case 'optimize': { const L = D.source.levers, grp = [...new Set(L.map(l => l.lever))];
+      return `<p class="meta">Each lever was run alone against the design target; only the combination listed last (every source lever and a tamper) was run together. Any other combination is <b>not modelled</b>.</p>`
+        + tbl(['Lever', 'Cases run', 'Best steerable plasma', 'Combined with others'], grp.map(g => { const ls = L.filter(l => l.lever === g); return [esc(g), ls.length, pct(Math.max(...ls.map(l => l.extract_share))), g === 'base' ? '—' : '<span class="bad">not modelled</span>']; }))
+        + srcReadout(); }
+    case 'products': { const x = C.extraction; return `<p class="meta">Early extraction (letting fast products out before they heat the fuel) trades burn-up for steerable energy. Fast products carry energy but little momentum, so extraction is a heat lever, not a thrust lever.</p>`
+      + (x.rows ? tbl(['Source case', 'Geometry', 'Thrust (4)', 'Exhaust', 'Heat over'], x.frontier.slice(0, 6).map(r => [esc(r.case), esc(r.geo), MN(4 * r.thrust_N), `${Math.round(r.exhaust_m_s / 1e3).toLocaleString('en')} km/s`, X(r.heat_over)])) : `<p class="meta">${esc(x.note)}</p>`) + P_(['ENG-061', 'ENG-064']); }
+    case 'magnets': case 'nozzle': { const x = C.extraction; if (!x.rows) return '';
+      return `<p class="meta">${esc(x.finding || '')} ${chip(x.cls)}</p>` + tbl(['Topology', 'Burn shift', 'Field', 'Products struck', 'Axial cosine'], x.geos.map(g => [esc(g.label), `${g.dz} m`, `×${g.mult}`, pct(g.hit), g.eta.toFixed(2)])) + P_(['ENG-062', 'ENG-065']); }
+    case 'radiation': { const R = C.radiation; return tbl(['Radiation', 'Share of fusion', 'Steered by a field', 'Mirror'], R.rows.map(r => [esc(r.label), r.share == null ? 'not computed' : pct(r.share), esc(r.field), esc(r.mirror)])) + `<p class="meta">${esc(R.note)}</p>`; }
+    case 'mirrors': { const r = mirrorR(); return dl(row('Selected', MIR_E[MIR.E]) + row('Reflected', pct(r.R), r.R > 0.5 ? 'good' : 'bad') + row('Absorbed', pct(1 - r.R)) + (r.crit ? row('Critical angle', `${r.crit.toPrecision(3)} mrad`) : ''))
+      + tbl(['Neutron', 'Critical angle (Ni)', 'Supermirror m = 6'], C.optics.neutrons.map(n => [esc(n.label), `${n.theta_c_mrad.toPrecision(3)} mrad`, `${n.theta_c_m6_mrad.toPrecision(3)} mrad`])) + `<p class="meta">${esc(C.optics.note)}</p>`; }
+    case 'geometry': { const G = C.shapes; return tbl(['Member at 6 m from the burn', 'Width seen', 'Heat per metre', 'vs round tube'], G.rows.map(r => [esc(r.label), `${(r.width_m * 1000).toPrecision(3)} mm`, W(r.W_per_m), r.rel < 0.01 ? r.rel.toExponential(1) : r.rel.toFixed(2)]))
+      + dl(row('Alignment budget (edge-on)', `${G.alignment.psi_total_mrad.toFixed(3)} mrad`) + row('Heat kept at that budget', pct(G.alignment.keep_share_at_budget), 'bad') + row('Face ΔT allowed before bow eats it', `${G.alignment.face_dT_allowed_K.toFixed(1)} K`, 'bad')
+      + row('First bending mode vs pulse rate', `${G.vibration.f1_Hz.toFixed(0)} Hz vs ${Math.round(G.blade.pulse_Hz).toLocaleString('en')} Hz`) + row('Edge load', `${(G.edge.steady_W_m2 / 1e9).toFixed(1)} GW/m², ${X(G.edge.over_limit)} the limit`, 'bad')
+      + row('Edge ΔT per pulse · stress / strength', `${Math.round(G.edge.dT_per_pulse_K)} K · ${G.edge.stress_over_strength.toFixed(2)}`, 'bad')) + `<p class="meta">${esc(G.alignment.note)} ${esc(G.vibration.note)}</p>` + P_(['ENG-057', 'ENG-058']); }
+    case 'protection': return `<p class="meta">Adopted: the thin blanket (primary). The full 2,147 t blanket stays only as a comparison, archived.</p>` + P_(['ENG-059', 'ENG-033']);
+    case 'cryo': return P_(['ENG-048', 'ENG-033']);
+    case 'structure': { const G = C.shapes; return dl(row('Blade', esc(G.blade.material)) + row('Blade first mode', `${G.blade.f1_Hz.toFixed(1)} Hz (${(G.blade.f1_over_pulse * 100).toFixed(2)} % of the pulse rate)`) + row('Target miss tolerance', `${G.alignment.budget[0].mrad.toFixed(3)} mrad`)) + P_(['ENG-036', 'ENG-058']); }
+    case 'assembly': { const A = asmState(); return `<p class="meta">Built in dependency order: each group goes in only when what it hangs from, or depends on, is in place. ${ASM.dir < 0 ? 'Disassembly runs the order backwards.' : ''} Order PROTOTYPE.</p>`
+      + `<ol class="fi-asm">${ASM_ORDER.map(([c, why], i) => { const cat = M?.categories.find(x => x.id === c); return `<li class="${i === A.k ? 'on' : A.f(i) >= 1 ? 'done' : ''}"><b>${esc(cat ? cat.title : c)}</b> ${esc(why)}</li>`; }).join('')}</ol>`; }
+    case 'startup': { const L = C.startup, k = Math.min(L.length - 1, Math.floor(su * L.length));
+      return `<ol class="fi-asm">${L.map((s, i) => `<li class="${i === k ? 'on' : i < k ? 'done' : ''}"><b>${esc(s.label)}</b> ${chip(s.cls)} ${esc(s.text)}</li>`).join('')}</ol>`; }
+    case 'operate': return `<p class="meta">Every layer of the running engine can be switched on its own (Layers). The Intended view shows what the engine is meant to do; Modeled shows what the calculations give.</p>`;
+    case 'ship': { const I = C.integration; return tbl(['Interface', 'Value', ''], I.rows.map(r => [esc(r.label), esc(r.value), chip(r.cls)])) + dl(row('Radiation reaching the ship (four engines)', W(I.ship_lit_W), 'bad')) + `<p class="meta">${esc(I.rejected)}</p>` + P_(['ENG-032', 'ENG-035']); }
+  }
+  return '';
+}
+function conceptList() {                     // failed and rejected concepts stay visible, each with why
+  const L = D.problems.concepts || []; if (!L.length) return '';
+  return `<h3 class="fi-h">Concepts that failed or were set aside</h3><ul class="fi-concepts">${L.map(c => `<li><b>${esc(c.title)}</b> <span class="bad">${esc(c.status)}</span> ${esc(c.why)}${c.kept ? ` Kept: ${esc(c.kept)}.` : ''}</li>`).join('')}</ul>`;
+}
+function compareTable() {
+  const K = D.chapters.compare, nd = K.need;
+  return `<h3 class="fi-h">Concepts side by side</h3>` + tbl(['Case', 'Maturity', 'Thrust (4)', 'Exhaust', 'Heat over', 'Struck plasma', 'Problems'], K.rows.map(r => [`${esc(r.label)} ${chip(r.cls)}`, r.maturity, MN(r.thrust_N), `${Math.round(r.exhaust_m_s / 1e3).toLocaleString('en')} km/s`, X(r.heat_over), `${r.deposited_g_s.toFixed(1)} g/s`, r.problems.map(i => `<a href="#p-${i}">${i}</a>`).join(' ')]))
+    + `<p class="meta">Need: ${MN(nd.thrust_N)}, ${Math.round(nd.exhaust_m_s / 1e3).toLocaleString('en')} km/s, heat over 1. ${esc(K.note)} Maturity: ${Object.entries(K.maturity).map(([k, v]) => `${k} ${esc(v)}`).join('; ')}.</p>`;
 }
 
 // ---- heat and cooling (lab/studies/vertex-compact-engine/vertex-thermal via the study, IMPORTED): supermirror strategies, blankets, cooling circuits, energy flow, inspector ----
@@ -1394,7 +1683,7 @@ function thAt(seg, f) {
 // Heat steps: 0 source, 1 supermirrors, 2 edge-on blades (adopted), 3 blankets, 4 hot and warm circuits, 5 cryogenic circuit, service and the path to space.
 function thUpdate(t, id, TS) {
   if (!thGroup) return;
-  const on = id === 'thermal' || (id === 'lab' && view === 'exp'), all = TS < 0 || TS === 5, M = layers.mirrors && on, Cl = layers.cooling && on;
+  const on = id === 'thermal' || id === 'operate' || (id === 'lab' && view === 'exp'), all = TS < 0 || TS === 5, M = layers.mirrors && on, Cl = layers.cooling && on;
   const show = { A: M && (TS === 1 || TS < 0), D: M && TS === 1, blades: M && (TS === 2 || all), Ct: M && (TS === 3 || all), C: M && TS === 3 && thArch,
     hot: Cl && (TS === 4 || all), warm: Cl && (TS === 4 || all), cryo: Cl && all, service: Cl && all };
   Object.entries(thMeshes).forEach(([k, m]) => { m.visible = !!show[k]; });
@@ -1602,13 +1891,13 @@ function hit(ev) {
   return h ? { cat: h.object.userData.cat, x: ev.clientX - r.left, y: ev.clientY - r.top } : null;
 }
 function hover(ev) {
-  if (!ready || TWO_D.has(STAGES[si])) { tip.hidden = true; return; }
+  if (!ready || TWO_D.has(SC())) { tip.hidden = true; return; }
   const h = hit(ev); if (!h) { tip.hidden = true; return; }
   const c = M.categories.find(x => x.id === h.cat); tip.hidden = false; tip.textContent = c.title; tip.style.transform = `translate(${h.x + 12}px, ${h.y + 12}px)`;
 }
 function pick(ev) {
-  if (!ready || TWO_D.has(STAGES[si])) return;
-  if (STAGES[si] === 'thermal') {
+  if (!ready || TWO_D.has(SC())) return;
+  if (SC() === 'thermal') {
     const r = canvas.getBoundingClientRect(); mouse.set((ev.clientX - r.left) / r.width * 2 - 1, -(ev.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(mouse, camera);
     const hm = ray.intersectObjects(Object.values(thMeshes).filter(m => m.visible), false)[0];
     if (hm) { const rg = hm.object.userData.ranges.find(([a, b]) => hm.faceIndex >= a && hm.faceIndex < b), g = rg && rg[2];
@@ -1618,21 +1907,16 @@ function pick(ev) {
     return;
   }
   const h = hit(ev); if (!h) return;
-  if (STAGES[si] !== 'hardware') setStage(1);
-  focusCat = h.cat; applyCats();
+  if (!['assembly', 'operate', 'lab'].includes(STAGES[si])) return;          // parts are picked where the parts are the subject
+  focusCat = h.cat; applyCats(); if (STAGES[si] === 'assembly') partsEl.hidden = false;
 }
 
 // ---- loop --------------------------------------------------------------------------------------------------------------------------------
 let fpsN = 0, fpsT = 0;
 function frame(now) {
   const t = now / 1000, dt = last ? Math.min(0.1, t - last) : 0; last = t;
-  const id = STAGES[si]; sdt = playing && !reduced ? dt : 0;
-  if (playing && id !== 'lab') {
-    u += dt / DUR[id];
-    if (u >= 1) { if (si < STAGES.length - 2) { setStage(si + 1); } else { u = 1; playing = false; syncPlay(); } }
-    $('scrub').value = Math.round(u * 1000);
-    if (['magnets', 'ignition', 'nozzle'].includes(id)) stageReadout();
-  }
+  sdt = playing && !reduced ? dt : 0;
+  advance(dt, false); const id = SC();
   if (camT < 1 && camTo && !userCam) {
     camT = Math.min(1, camT + dt / 2.2); const k = ease(camT);
     camera.position.lerpVectors(camFrom.p, camTo.p, k); controls.target.lerpVectors(camFrom.t, camTo.t, k);
@@ -1651,30 +1935,48 @@ function frame(now) {
 // ---- controls ----------------------------------------------------------------------------------------------------------------------------
 function syncPlay() { const b = $('play'); b.textContent = playing ? '❚❚' : '▶'; b.setAttribute('aria-label', playing ? 'Pause' : 'Play'); }
 const memU = {};                             // a stage you return to resumes where you left it (autoplay into the next stage starts at 0)
-document.querySelector('.fi-stages').addEventListener('click', ev => { const b = ev.target.closest('[data-stage]'); if (!b) return;
-  memU[STAGES[si]] = u; setStage(STAGES.indexOf(b.dataset.stage)); const m = memU[STAGES[si]];
-  if (m > 0.02 && m < 0.98) { u = m; $('scrub').value = Math.round(u * 1000); stageReadout(); dirty = true; draw2d(); } });
+function goStage(i) { memU[STAGES[si]] = su; setStage(i); const m = memU[STAGES[si]];
+  if (m > 0.02 && m < 0.98) { su = m; syncU(); applyScene(false); $('scrub').value = Math.round(su * 1000); stageReadout(); dirty = true; draw2d(); } }
+document.querySelector('.fi-stages').addEventListener('click', ev => { const b = ev.target.closest('[data-stage]'); if (b) goStage(STAGES.indexOf(b.dataset.stage)); });
 document.querySelector('.fi-stages').addEventListener('keydown', ev => {
   if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') { ev.preventDefault(); setStage(si + (ev.key === 'ArrowRight' ? 1 : -1)); document.querySelector('.fi-stages [aria-selected="true"]')?.focus(); }
 });
+document.querySelector('.fi-chapters').addEventListener('click', ev => { const b = ev.target.closest('[data-ch]'); if (b) goStage(STAGES.indexOf(CHAP[b.dataset.ch][0])); });
+document.querySelector('.fi-chapters').addEventListener('keydown', ev => {
+  if (ev.key !== 'ArrowRight' && ev.key !== 'ArrowLeft') return; ev.preventDefault();
+  const ks = Object.keys(CHAP), k = ks.indexOf(CH_OF[STAGES[si]]) + (ev.key === 'ArrowRight' ? 1 : -1);
+  if (k >= 0 && k < ks.length) { goStage(STAGES.indexOf(CHAP[ks[k]][0])); document.querySelector('.fi-chapters [aria-selected="true"]')?.focus(); }
+});
 $('prev').addEventListener('click', () => setStage(si - 1));
 $('next').addEventListener('click', () => setStage(si + 1));
-$('play').addEventListener('click', () => { playing = !playing; if (playing && u >= 1) u = 0; syncPlay(); });
-$('scrub').addEventListener('input', ev => { u = +ev.target.value / 1000; playing = false; syncPlay(); stageReadout(); dirty = true; draw2d(); });
+$('play').addEventListener('click', () => { playing = !playing; if (playing && su >= 1) { su = 0; syncU(); } syncPlay(); });
+$('scrub').addEventListener('input', ev => { su = +ev.target.value / 1000; syncU(); applyScene(false); playing = false; syncPlay(); stageReadout(); dirty = true; draw2d(); });
 $('graphs').addEventListener('click', () => { graphs = !graphs; $('graphs').setAttribute('aria-pressed', String(graphs)); draw2d(); });
-function ctlUpdate() {                       // in-scene controls: the plasma temperature in the Many stage
-  const id = STAGES[si], on = id === 'many' && view !== 'exp';
-  ctlEl.hidden = !on && !(id === 'many' && view === 'exp');
-  if (id !== 'many') { ctlEl.hidden = true; return; }
-  ctlEl.innerHTML = view === 'exp' ? `<span>Plasma from your Experiment levers: ${lab.Ti} keV, ${pct(lab.d)} D</span>`
-    : `<span>Plasma temperature</span>${[40, 60, 100, 160, 200].map(T => `<button data-T="${T}" aria-pressed="${PLX.T === T}">${T} keV</button>`).join('')}`;
+function ctlUpdate() {                       // in-scene controls: one small row per scene that has a choice to make
+  const sc = SC(), st = STAGES[si], B = (k, v, cur, l) => `<button data-${k}="${v}" aria-pressed="${cur === v}">${l}</button>`;
+  let h = '';
+  if (sc === 'many') h = view === 'exp' ? `<span>Plasma from your Experiment levers: ${lab.Ti} keV, ${pct(lab.d)} D</span>`
+    : `<span>Plasma temperature</span>${[40, 60, 100, 160, 200].map(T => B('T', T, PLX.T, `${T} keV`)).join('')}`;
+  else if (sc === 'unwanted') h = `<span>Temperature</span>${[30, 50, 70, 100, 150].map(T => B('ut', T, UNW.T, `${T} keV`)).join('')}`;
+  else if (sc === 'mix') h = `<span>D fraction</span>${[0.1, 0.3, 0.5, 0.7].map(d => B('md', d, MIXS.d, pct(d))).join('')}${[60, 100].map(T => B('mt', T, MIXS.T, `${T} keV`)).join('')}`;
+  else if (sc === 'accel') h = `<span>Beam energy</span>${D.chapters.accel.coulomb.map((r, i) => B('ak', i, ACC.k, `${r.E_keV} keV`)).join('')}`;
+  else if (sc === 'spin') h = `<span>Fuel</span>${D.chapters.spin.states.map(s => B('sp', s.id, SPN.s, esc(s.label))).join('')}`;
+  else if (sc === 'mirror') h = `<label><span>Radiation</span><select id="mir-e">${MIR_E.map((l, i) => `<option value="${i}"${i === MIR.E ? ' selected' : ''}>${l}</option>`).join('')}</select></label>
+    <label><span>Grazing angle</span><input id="mir-a" type="range" min="-2" max="3" step="0.02" value="${Math.log10(MIR.psi)}" aria-label="Grazing angle, log scale from 0.01 to 1000 mrad"></label>`;
+  else if (st === 'assembly') h = `${B('asm', 'dir', ASM.dir < 0 ? 'dir' : '', ASM.dir < 0 ? 'Disassembling' : 'Disassemble')}${B('asm', 'iso', ASM.iso ? 'iso' : '', 'Isolate the current group')}`;
+  ctlEl.hidden = !h; ctlEl.innerHTML = h;
 }
-ctlEl.addEventListener('click', ev => { const b = ev.target.closest('[data-T]'); if (!b) return; PLX.T = +b.dataset.T; ctlUpdate(); draw2d(); });
-$('replay').addEventListener('click', () => { u = 0.07; playing = true; syncPlay(); });
+ctlEl.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; const d = b.dataset;
+  if (d.T) PLX.T = +d.T; if (d.ut) { UNW.T = +d.ut; UNW.fl = []; } if (d.md) MIXS.d = +d.md; if (d.mt) MIXS.T = +d.mt; if (d.ak) ACC.k = +d.ak; if (d.sp) SPN.s = d.sp;
+  if (d.asm === 'dir') { ASM.dir = -ASM.dir; su = 1 - su; syncU(); } if (d.asm === 'iso') ASM.iso = !ASM.iso;
+  ctlUpdate(); stageReadout(); dirty = true; draw2d(); });
+ctlEl.addEventListener('input', ev => { if (ev.target.id === 'mir-a') { MIR.psi = 10 ** +ev.target.value; stageReadoutT(); draw2d(); } });
+ctlEl.addEventListener('change', ev => { if (ev.target.id === 'mir-e') { MIR.E = +ev.target.value; stageReadout(); draw2d(); } if (ev.target.id === 'mir-a') stageReadout(); });
+$('replay').addEventListener('click', () => { su = 0.07; syncU(); playing = true; syncPlay(); });
 document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => {
   view = b.dataset.view; root.dataset.view = view;
   document.querySelectorAll('[data-view]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-  if (STAGES[si] === 'lab') labUpdate(); else stageReadout(); ctlUpdate(); draw2d();
+  stageReadout(); ctlUpdate(); draw2d();
 }));
 document.querySelectorAll('[data-layer]').forEach(b => b.addEventListener('change', () => { layers[b.dataset.layer] = b.checked; dirty = true; }));
 addEventListener('keydown', ev => {

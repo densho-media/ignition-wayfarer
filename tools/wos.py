@@ -58,8 +58,8 @@ MODULES = [
 ]
 # The simulations, as the Simulations module and the Overview present them (thumbnail names in web/thumbs/, tools/thumbs.py).
 SIMS = [
-    {'href': 'engineering/fusion-ignition/', 'thumb': 'sim-fusion-ignition', 'title': 'Fusion Ignition', 'icon': 'propulsion', 'flagship': True,
-     'line': 'From one nuclear reaction to the ship\'s thrust, and where the drive still fails.', 'meta': '2-D stages at once · 3D engine on request, about 1.2 MB'},
+    {'href': 'engineering/fusion-ignition/', 'thumb': 'sim-fusion-ignition', 'title': 'Fusion Engineering', 'icon': 'propulsion', 'flagship': True,
+     'line': 'Six chapters from one nuclear reaction to the running engine, and where the drive still fails.', 'meta': '2-D stages at once · 3D engine on request, about 1.2 MB'},
     {'href': 'engineering/fusion/', 'thumb': 'sim-fusion', 'title': 'Fusion engine', 'icon': 'propulsion',
      'line': 'Where the energy of a fusion burn goes: thrust, neutrons, X-rays or heat.', 'meta': 'Drawn live · no model download'},
     {'href': 'engineering/ignition/', 'thumb': 'sim-ignition', 'title': 'Ignition', 'icon': 'propulsion',
