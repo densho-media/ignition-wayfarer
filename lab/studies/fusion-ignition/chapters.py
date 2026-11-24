@@ -37,6 +37,7 @@ MEV = 1e6 * QE
 ASF = ROOT / 'lab/studies/accelerator-fusion/results/asf.json'
 COMPACT = ROOT / 'lab/studies/vertex-compact-engine/vertex-compact/results/compact.json'
 EXTRACT = sorted((HERE / 'imports').glob('extraction_*.json'))
+OPTIM = HERE / 'imports' / 'optimize.json'          # vertex-optimize: burn moved aft, stronger closure coils (research geometry)
 
 
 def r3(x):
@@ -258,7 +259,19 @@ def integration(d, compact):
     ], ship_lit_W=c1['ship_lit_W'], rejected='The broad plasma shield (AMPN) was rejected; HIMS stays a later option for the forward stream.')
 
 
-def compare(d, x):
+def optimize(d):
+    """The research geometry (vertex-optimize, IMPORTED): its nozzle joins the shared ledger as 'R|1' so every stage reads it through the
+    same pulse arithmetic; the original C1 stays the default and the comparison."""
+    if not OPTIM.exists():
+        return dict(cls='OPEN', note='vertex-optimize has not been imported yet')
+    o = json.loads(OPTIM.read_text())
+    nz = o['research']['nozzle']
+    d['ledger']['nozzle']['R|1'] = dict(eta=nz['eta'], hit=nz['hit'], pickup=nz['pickup'], budget_W=nz['budget_W'], source=nz['source'], cls='SAMPLED')
+    o['source'] = f'{OPTIM.relative_to(ROOT)} ({o["source"]}, {o["n_dir"]} directions per species)'
+    return o
+
+
+def compare(d, x, o=None):
     """Supported configurations against every metric. Every row comes from one model state; regimes are not mixed."""
     L = d['ledger']; S_ = d['source']; T = d['thermal']; cmpB = {r['id']: r for r in T['comparison']}
     cell = L['grid']['cells'][L['grid']['design']]
@@ -283,6 +296,13 @@ def compare(d, x):
         rows.append(dict(id='FRONT', label=f'Lowest heat found: {allb["lever"]} ({allb["geo"].replace("|", ", ")})', cls=allb['cls'], maturity='L1', thrust_N=4 * allb['thrust_N'],
                          exhaust_m_s=allb['exhaust_m_s'], heat_over=allb['heat_over'], deposited_g_s=1e3 * allb['deposited_kg_s'], xray=allb['xray'], added_t=None,
                          problems=['ENG-062', 'ENG-065']))
+    if o and o.get('research'):
+        rr = pulse_row('R', '1'); K = o['combination']
+        rows.append(dict(id='RESEARCH', label=f'Research geometry: {o["research"]["label"]} (not canon)', cls='SAMPLED', maturity='L2', **rr, added_t=None,
+                         problems=['ENG-066', 'ENG-067']))
+        rows.append(dict(id='RES+EXT', label='Research geometry + 80 % early extraction, computed together', cls='MODEL-BASED', maturity='L1',
+                         thrust_N=4 * K['computed']['thrust_N'], exhaust_m_s=K['computed']['exhaust_m_s'], heat_over=K['computed']['heat_over'],
+                         deposited_g_s=1e3 * K['best']['ext80']['deposited_kg_s'], xray=K['best']['ext80']['xray_share'], added_t=None, problems=['ENG-072']))
     pd = L['pulse_design']
     rows.append(dict(id='DESIGN', label='Intended design point (78 % jet assumed)', cls='SPECULATIVE', maturity='L0', thrust_N=4 * pd['thrust_N'], exhaust_m_s=pd['exhaust_m_s'],
                      heat_over=pd['heat_over'], deposited_g_s=0.0, xray=pd['xray_J'] / pd['fusion_J'], added_t=0, problems=['ENG-063']))
@@ -304,10 +324,51 @@ CONCEPTS = [
 ]
 
 MATURITY = {'compact': 'L2 vacuum test particles + sky ledger', 'thermal': 'L2 parametric geometry, radiative ledger', 'source': 'L2 0-D burn (R2-B)',
-            'extraction': 'L2 vacuum test particles, species-resolved'}
+            'extraction': 'L2 vacuum test particles, species-resolved', 'optimize': 'L2 test particles, vacuum and cavity pictures; coil engineering by formula'}
+
+OPT_CONCEPTS = [
+    dict(id='X-MULT', title='Multiplying the topology and extraction gains', status='CORRECTED 2026-11-24', why='Computed together, extraction removes the momentum the topology won: 0.36 MN, not 0.94 MN, at about 230x.', kept='both levers, chosen per goal'),
+    dict(id='X-FIELD', title='More field instead of a better topology', status='REJECTED', why='Hit shares do not move with field strength; only the capture energy and the coil problems grow.', kept='the capture current as the minimum field'),
+]
 
 
-def problems(d, x):
+def opt_problems(o):
+    """ENG-066..072 from vertex-optimize: results, including the failed parts, never claimed fixes."""
+    F = o['findings']; R = o['research']; cc = {c['id']: c for c in o['coils']}; ev = 'lab/studies/vertex-compact-engine/vertex-optimize/results/optimize.json'
+    b0, bb = o['base']['drawn|0']['vacuum'], o['base'][R['key']]['vacuum']; K = o['combination']
+    gap = next(c for c in R['clearances'] if c['pair'] == 'C2-L1')
+    P = lambda **k: dict(status='OPEN', subsystem='Vertex nozzle', variants=['RESEARCH'], evidence=ev, **k)
+    return [
+        P(id='ENG-066', title='Burn position sets most of the interception', severity='HIGH', mechanism=F['burn'], required='Hit share well below 0.1 and thrust 21.8 MN',
+          achieved=f'hit {bb["hit_share_plasma"]:.2f} (drawn {b0["hit_share_plasma"]:.2f}); {4 * bb["thrust_N"] / 1e6:.2f} MN; heat {bb["heat_over"]:,.0f}x', solutions='Burn moved 4 m aft, closure x4 (research geometry)',
+          advances='A coupled plasma model; a closed forward mirror', next='Coupled MHD/hybrid expansion in the research geometry', assumptions='Vacuum and cavity pictures, on-axis point source',
+          components=['C1', 'C2', 'L1', 'SHIELD'], categories=['MAGNETIC_COILS', 'MAGNETIC_NOZZLE'], stages=['products', 'nozzle', 'operate']),
+        P(id='ENG-067', title='Capture field beyond today\'s conductors', severity='CRITICAL', mechanism=F['closure'], required='Peak at the windings within 20-25 T REBCO practice',
+          achieved=f'{cc["opt_capture"]["B_peak_max_T"]:.0f} T, {cc["opt_capture"]["stored_J"] / 1e9:.0f} GJ per engine at capture', solutions='Burn aft (cuts capture energy about 11x)',
+          advances='Higher-field superconductors (scenario, not assumed)', next='Coil optimisation for capture at lower peak field', assumptions='Round windings at the drawn current density',
+          components=['C1', 'C2', 'L1'], categories=['MAGNETIC_COILS'], stages=['magnets', 'startup']),
+        P(id='ENG-068', title='Closure-coil forces and clearances', severity='HIGH', mechanism='Axial forces between the rewound coils and the larger cryostats crowd the closure stack',
+          required='Forces carried by the cage; cryostat gaps above 0.15 m', achieved=f'{cc["opt_capture"]["Fx_max_MN"] / 1e3:.1f} GN at capture ({cc["opt_built"]["Fx_max_MN"] / 1e3:.1f} GN drawn); C2-L1 gap {gap["gap_m"]:.2f} m',
+          solutions='Hoop bands with embedded 20 K channels (multifunctional)', advances='Force-balanced coil sets', next='Cage load path for GN axial loads',
+          assumptions='Filament field, 1.5 GPa allowable', components=['C1', 'C2', 'L1', 'CAGE'], categories=['MAGNETIC_COILS', 'STRUCTURE'], stages=['structure', 'geometry']),
+        P(id='ENG-069', title='Quench energy at capture', severity='HIGH', mechanism='The stored field energy must leave safely when a winding quenches',
+          achieved=f'{cc["opt_capture"]["quench_dump_s"] / 60:.0f} min dump at 50 kA, 10 kV, or {cc["opt_capture"]["quench_copper_t"]:,.0f} t of copper', required='Dump in seconds without damage',
+          solutions='Dump busbars and resistor drawn at the cage root', advances='Higher-current, higher-voltage dump; subdivided coils', next='Quench protection design',
+          assumptions='Copper 20-300 K enthalpy 80 kJ/kg', components=['C1', 'C2', 'L1'], categories=['MAGNETIC_COILS', 'ELECTRICAL'], stages=['cryo', 'startup']),
+        P(id='ENG-070', title='Thermal blades aimed at the old burn', severity='MEDIUM', mechanism='Edge-on blades only shed heat when they point at the burn',
+          achieved=f're-aimed up to {R["blades"]["max_turn_deg"]:.0f} deg (mean {R["blades"]["mean_turn_deg"]:.0f} deg)', required='Alignment within a fraction of a milliradian',
+          solutions='Blades re-aimed in the research geometry', advances='Adjustable blade roots', next='Re-run the thermal study for the moved burn',
+          assumptions='Thermal study geometry', components=['BLADE'], categories=['HOT_THERMAL', 'STRUCTURE'], stages=['geometry', 'cooling']),
+        P(id='ENG-071', title='Target flight 4 m longer', severity='MEDIUM', mechanism='The target must reach a burn point 4 m farther from the injector at the same pointing accuracy',
+          achieved='pointing error grows with flight length (about x1.7)', required='Same miss distance at the burn', solutions='Injector unchanged; longer free flight', advances='Guided targets',
+          next='Injection timing and pointing budget', assumptions='Straight free flight', components=['TARGET'], categories=['TARGET_INJECTION'], stages=['assembly', 'startup']),
+        P(id='ENG-072', title='Extraction and topology compete', severity='HIGH', mechanism=F['combination'] + ' ' + F['hydrogen'], required='Thrust and heat closing together',
+          achieved=f'{4 * K["computed"]["thrust_N"] / 1e6:.2f} MN at {K["computed"]["heat_over"]:,.0f}x', solutions='Choose per goal: topology for thrust, extraction for heat',
+          advances='A coupling of fast-product energy into reaction mass (no physics yet)', next='Hydrogen coupling model', assumptions='Momentum-consistent ledger',
+          components=['TARGET', 'C1'], categories=['FUSION_REACTION', 'MAGNETIC_NOZZLE'], stages=['lab', 'operate'])]
+
+
+def problems(d, x, o=None):
     """Every register entry with cause, component, intended solution, achieved value, deficit, future improvements and maturity; plus the
     new ENG-064/065 from vertex-extraction and the ledger correction."""
     items = d['problems']['items']
@@ -331,16 +392,18 @@ def problems(d, x):
                           next='Coupled plasma expansion (diamagnetic cavity) in the best topology', evidence='lab/studies/vertex-compact-engine/vertex-extraction/results/extraction.json',
                           assumptions='Vacuum field, on-axis point source, equal-speed debris', components=['C1', 'C2', 'L1', 'L2', 'SHIELD'], categories=['MAGNETIC_COILS', 'MAGNETIC_NOZZLE'],
                           stages=['magnets', 'nozzle']))
+    if o and o.get('research') and not any(p['id'] == 'ENG-066' for p in items):
+        items.extend(opt_problems(o))
     for p in items:
         ev = p.get('evidence') or ''
-        kind = 'extraction' if 'extraction' in ev else 'source' if 'vertex-source' in ev else 'thermal' if 'thermal' in ev else 'compact'
+        kind = 'optimize' if 'vertex-optimize' in ev else 'extraction' if 'extraction' in ev else 'source' if 'vertex-source' in ev else 'thermal' if 'thermal' in ev else 'compact'
         p.setdefault('cause', p.get('mechanism'))
         p.setdefault('component', ', '.join(p.get('components') or []) or p.get('subsystem'))
         p.setdefault('intended', p.get('solutions'))
         p.setdefault('deficit', p.get('severity'))
         p.setdefault('future', p.get('advances'))
         p.setdefault('maturity', 'L2 momentum-consistent pulse ledger' if p['id'] == 'ENG-064' else MATURITY[kind])
-    d['problems']['concepts'] = CONCEPTS
+    d['problems']['concepts'] = CONCEPTS + OPT_CONCEPTS
     return d['problems']
 
 
@@ -381,8 +444,9 @@ def build(s, d):
     src, _ = mpn.sources(mpn.canon())
     compact = json.loads(COMPACT.read_text())
     x = extraction(d)
+    o = optimize(d)
     out = dict(matter=matter(d), unwanted=unwanted(d, fusion), mix=mix(d, fusion, src), accel=accel(), spin=spin(d, fusion), radiation=radiation(d),
-               optics=optics(d), shapes=shapes(d), extraction=x, integration=integration(d, compact), compare=compare(d, x), startup=startup(d))
-    problems(d, x)
+               optics=optics(d), shapes=shapes(d), extraction=x, integration=integration(d, compact), compare=compare(d, x, o), startup=startup(d), optimize=o)
+    problems(d, x, o)
     out['extraction'].pop('rows', None)                 # 544 rows stay in the import; the page reads the geometries, frontier and findings
     return r3(out)

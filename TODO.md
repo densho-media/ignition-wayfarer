@@ -721,15 +721,16 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   polarisation) cannot meet B01; the reference burn heats the ship 5,386x the drive's hot radiators, every lever with 5 % X-ray exposure
   ~348x, and neutrons alone ~37x. Open: owner S1-S4 (NOTES.md); SFE-1 Fokker-Planck hybrid with polarisation and synchrotron, then a
   burn-geometry X-ray avoidance study; the D-D suppression of polarised fuel is unmeasured (PolFusion) and stays SPECULATIVE.
-- [ ] **P08 — Fusion Engineering flagship simulation: open follow-ups (six chapters, 24 stages, owner brief 2026-11-24 09:49Z; RESEARCH, not canon).**
+- [ ] **P08 — Fusion Engineering flagship simulation: open follow-ups (six chapters, 24 stages; owner briefs 2026-11-24 09:49Z and 12:16Z; RESEARCH, not canon).**
   Simulations · Fusion Engineering (`engineering/fusion-ignition/`, lab/studies/fusion-ignition with chapters.py, tools/story_ignite.py,
   web/engineering/fusion-ignition.js); the engine research behind it is lab/studies/vertex-compact-engine (MPN, RON, AMPN, HIMS, compact
-  C1-C4, thermal, source, extraction). Owner decisions 2026-11-24: B edge-on blades, thin blanket optional, full blanket archived, source first.
-  Still open, nothing closes: coupled C1 0.41 MN and 8,772 km/s against 21.8 MN and 19,201 km/s, heat 2,200x (B + thin blanket 1,575x);
-  ENG-062 scan: burn 4 m aft with closure x4 gives 0.94 MN at 1,967x (a drawn-geometry change, needs the owner); early extraction is a heat
-  lever (about 300x at 0.34 MN). Next: X-ray pickup for a moved burn, blade and root structural dynamics (ENG-058), edge-strip life (ENG-057),
-  compression and H2 coupling models (start-up), R1 engine sized for the V4 ship, R4 `operating_point.species`; render on demand while paused;
-  portrait-phone camera framing per stage.
+  C1-C4, thermal, source, extraction, optimize). Owner decisions 2026-11-24: B edge-on blades, thin blanket optional, full blanket archived,
+  source first; burn about 4 m aft with stronger closure coils approved as research geometry only (page switch Original / Research).
+  Still open, nothing closes: coupled C1 0.41 MN at 2,200x; research geometry 0.94 MN at 1,155x (pickup re-traced); with 80 % early
+  extraction 0.36 MN at 228x (the levers compete, ENG-072); against 21.8 MN, 19,201 km/s and 1x. Capture at the moved burn needs 286 GJ per
+  engine and 30 T at the windings (ENG-067), 16 GN axial (ENG-068), a 19 min dump (ENG-069). Next: coupled plasma expansion in the research
+  geometry, re-run the thermal study for the moved burn (ENG-070), hydrogen coupling model, blade and root dynamics (ENG-058), edge-strip
+  life (ENG-057), R1 engine sized for the V4 ship, R4 `operating_point.species`; render on demand while paused; portrait-phone framing.
 
 ## Owner routing and question continuity
 

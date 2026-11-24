@@ -194,3 +194,4 @@
 .fi .fi-concepts { font-size: 13px; padding-left: 1.2em; }
 .fi .fi-concepts li { margin: 4px 0; }
 .fi .bad { color: var(--bad); }
+.fi-cfg { margin-left: 0.75rem; }

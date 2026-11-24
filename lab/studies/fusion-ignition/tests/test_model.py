@@ -154,6 +154,21 @@ class Ledger(unittest.TestCase):
         self.assertTrue(all(c['status'] for c in D['problems']['concepts']))
         self.assertFalse(any(r['heat_over'] <= 1.0 for r in D['chapters']['compare']['rows']))      # nothing closes; the page must not say so
 
+    def test_research_geometry_is_momentum_consistent(self):
+        O = D['chapters']['optimize']
+        self.assertTrue({'ENG-066', 'ENG-072'} <= {i['id'] for i in D['problems']['items']})
+        for g in O['geos']:                                     # ship impulse = initial - escaping - trapped = field + hardware
+            b = g['bal']
+            self.assertLess(b['closure'], 1e-3)
+            self.assertAlmostEqual(b['ship'], b['via_field'] + b['via_hardware'], places=3)        # page JSON keeps 4 significant digits
+            self.assertLess(abs(b['p_init']), 1e-3)
+        K = O['combination']                                    # the combination is computed, never the product of the separate gains
+        self.assertLess(K['computed']['thrust_N'], K['best']['base']['thrust_N'])
+        self.assertGreater(K['computed']['heat_over'], 1.0)
+        R = D['ledger']['nozzle']['R|1']; C1 = D['ledger']['nozzle']['C1|1']
+        self.assertLess(R['hit'], C1['hit'])
+        self.assertTrue(all(c['gap_m'] > 0 for c in O['research']['clearances']))
+
 
 if __name__ == '__main__':
     unittest.main()

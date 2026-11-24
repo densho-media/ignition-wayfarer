@@ -444,7 +444,7 @@ def problems(imp, th=None):
 
 def inputs_hash():
     h = hashlib.sha256()
-    for p in [HERE / 'model.py', HERE / 'ledger.py', HERE / 'chapters.py', *CH.EXTRACT, CH.ASF, ROOT / 'references/evidence/vertex_source.json', IMPORT, THERMAL, SOURCE, IGNITION, FUSION, ROOT / 'data/wayfarer_3d.toml', ROOT / 'src/wayfarer/vertex_radiation.py',
+    for p in [HERE / 'model.py', HERE / 'ledger.py', HERE / 'chapters.py', *CH.EXTRACT, *([CH.OPTIM] if CH.OPTIM.exists() else []), CH.ASF, ROOT / 'references/evidence/vertex_source.json', IMPORT, THERMAL, SOURCE, IGNITION, FUSION, ROOT / 'data/wayfarer_3d.toml', ROOT / 'src/wayfarer/vertex_radiation.py',
               ROOT / 'src/wayfarer/vertex_magnet.py', ROOT / 'src/wayfarer/vertex_engine.py', ROOT / 'src/wayfarer/operating_point.py']:
         h.update(p.read_bytes())
     return h.hexdigest()[:16]

@@ -24,6 +24,7 @@ Each subfolder keeps its own `NOTES.md` (except `vertex-source`, described below
 | `vertex-compact` | Compact engine C1-C4 on the approved ship | C4 best, not closed (heat 10,800x); ENG-030..038 |
 | `vertex-thermal` | Supermirrors, cooling mesh, per-part heat; owner decisions 2026-11-24 | B edge-on blades adopted, thin blanket optional, full blanket archived; 1,575x the radiator share remains; ENG-040..060 |
 | `vertex-extraction` | ENG-062: early extraction, closure topology, burn position and field strength against nozzle interception | Topology and burn position set the struck share, field strength alone does not; best 0.94 MN at 1,967x; extraction is a heat lever (300x at 0.34 MN); nothing closes |
+| `vertex-optimize` | Burn 4 m aft with closure coils x4 (research geometry), combined with extraction; coil engineering; plasma cavity; momentum balance | 0.94 MN at 1,155x (pickup re-traced), mostly through the field; with 80 % extraction 0.36 MN at 228x, not multiplied; capture needs 286 GJ and 30 T at the windings; nothing closes |
 | `vertex-source` | Where the burn puts its energy and which levers move it | 85 % X-rays at the design point; early extraction and a tungsten tamper move energy to plasma, heat moves to strikes; ENG-061..063 |
 
 **vertex-source.** `source.py` (about 15 s) writes `results/source.json`: product slowing-down (Sivukhin ion share, Spitzer times and
