@@ -721,7 +721,9 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   polarisation) cannot meet B01; the reference burn heats the ship 5,386x the drive's hot radiators, every lever with 5 % X-ray exposure
   ~348x, and neutrons alone ~37x. Open: owner S1-S4 (NOTES.md); SFE-1 Fokker-Planck hybrid with polarisation and synchrotron, then a
   burn-geometry X-ray avoidance study; the D-D suppression of polarised fuel is unmeasured (PolFusion) and stays SPECULATIVE.
-- [ ] **P08 — Fusion Engineering flagship simulation: open follow-ups (six chapters, 24 stages; owner briefs 2026-11-24 09:49Z and 12:16Z; RESEARCH, not canon).**
+- [ ] **P08 — Vertex Drive and Fusion Engineering: PARKED for a future phase (milestone accepted by the owner 2026-11-25 14:37Z; RESEARCH, not canon).**
+  Do not start another Vertex iteration without a new owner brief. Handoff: lab/studies/vertex-compact-engine/NOTES.md "Phase close"; register
+  lab/studies/vertex-compact-engine/PROBLEMS.md (ENG-001..080, all OPEN items kept); visual reference: the research geometry.
   Simulations · Fusion Engineering (`engineering/fusion-ignition/`, lab/studies/fusion-ignition with chapters.py, tools/story_ignite.py,
   web/engineering/fusion-ignition.js); the engine research behind it is lab/studies/vertex-compact-engine (MPN, RON, AMPN, HIMS, compact
   C1-C4, thermal, source, extraction, optimize). Owner decisions 2026-11-24: B edge-on blades, thin blanket optional, full blanket archived,

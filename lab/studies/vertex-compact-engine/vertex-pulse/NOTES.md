@@ -2,10 +2,10 @@
 | Lab entry | |
 | --- | --- |
 | Kind | Study |
-| Status | ACTIVE (behind the Fusion Engineering page; not canon) |
+| Status | PARKED (phase closed 2026-11-25; behind the Fusion Engineering page; not canon) |
 | Question | On the research geometry (burn about 4 m aft, closure x4), which pulse size, coil current distribution and energy-transfer route bring the engine closest to the mission, and what hardware does it need around the coils? |
 | Model base | main 45a8801; research geometry `mirror4|4` (vertex-optimize), R2-B target burn (fusion-ignition `src.run`), ron.py capture |
-| Branch | claude/project-thread-1p6mtu, 2026-11-25 |
+| Branch | claude/project-thread-1p6mtu, 2026-11-25; on main as 4419550 |
 | Open owner questions | Reconcile the two charged shares (ENG-075); re-trace steering with the optimised ring currents (ENG-076); a renewable or vapour-shielded face, or a protected injection path (ENG-074); nothing closes (ENG-078) |
 | Review | `engineering/fusion-ignition/` Pulse buttons (8 stages) and pulse tables; `REVIEW_PULSE.blend` (local) and the renders in the project files (fusion-pulse) |
 

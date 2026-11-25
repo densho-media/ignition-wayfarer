@@ -71,6 +71,7 @@ M = dict(hot=mat('WORK_INT_hot_lithium', (0.85, 0.28, 0.12), metal=0.7, rough=0.
          shield80=mat('WORK_INT_80K_shield', (0.75, 0.75, 0.78), metal=0.9, rough=0.25),
          vac=mat('WORK_INT_vacuum', (0.03, 0.03, 0.05), rough=1.0),
          ray=mat('WORK_INT_ray', (1.0, 0.85, 0.4), emit=4.0),
+         ink=mat('WORK_INT_ink', (0.04, 0.04, 0.06), rough=1.0),
          text=bpy.data.materials.get('WORK_OPT_text') or mat('WORK_INT_text', (0.95, 0.95, 0.95), emit=2.0))
 NETMAT = dict(hot=M['hot'], cryo=M['cryo'], warm=M['warm'], electrical=M['elec'], structure=M['struct'])
 
@@ -272,15 +273,17 @@ ray_end = (cx + (st['a_lip'] + 0.05) * math.cos(u), cr + (st['a_lip'] + 0.05) * 
 ray_start = (cx + 2.2 * math.cos(u), cr + 2.2 * math.sin(u))
 obj('SEC_ray_to_burn', ve.tube_mesh([(ray_start[0], 0.02, ray_start[1]), (ray_end[0], 0.02, ray_end[1])], 0.01, 6), S, M['ray'],
     'direction to the moved burn (x = %.1f m)' % BX)
-lbl = [('winding', (cx, -0.05, cr), 0.06), ('hoop band + 20 K', (cx, -0.05, cr + wm + bt + 0.12), 0.05),
-       ('80 K shield / vacuum vessel', (cx + 0.15, -0.05, cr + cm + 0.12), 0.05), ('tungsten lip, Li-cooled', ray_end[0:1] + (-0.05, ray_end[1] - 0.12), 0.05),
+lbl = [('winding', (cx, -0.05, cr), 0.06), ('hoop band + 20 K channels (top of the winding)', (cx, -0.05, cr + wm - 0.24), 0.03),
+       ('80 K shield / vacuum vessel', (cx - 0.15, -0.05, cr + cm + 0.32), 0.05), ('tungsten lip, Li-cooled', (ray_end[0] - 0.3, -0.05, ray_end[1] - 0.22), 0.05),
        ('twin-bore Li header', (st['ring']['Hot_Supply'][0], -0.05, st['ring']['Hot_Supply'][1] - 0.18), 0.05),
        ('20 K ring', (st['ring']['Cryo_Ring'][0] + 0.25, -0.05, st['ring']['Cryo_Ring'][1]), 0.05),
        ('warm ring', (st['ring']['Warm_Ring'][0] + 0.25, -0.05, st['ring']['Warm_Ring'][1] + 0.08), 0.05),
        ('to the burn', (ray_start[0], -0.05, ray_start[1] + 0.08), 0.05),
        ('C1 meridian section, research geometry (PROTOTYPE)', (cx, -0.05, cr + 1.45), 0.07)]
 for i, (body, loc, size) in enumerate(lbl):
-    text(f'SEC_LBL_{i}', body, loc, size, S)
+    t_ = text(f'SEC_LBL_{i}', body, loc, size, S)
+    if i < 2:   # labels drawn over the pale winding read in dark ink
+        t_.data.materials[0] = M['ink']
 lt = bpy.data.lights.new('SEC_sun', 'SUN'); lt.energy = 3.0
 lo_ = bpy.data.objects.new('SEC_sun', lt); S.objects.link(lo_); lo_.rotation_euler = (math.radians(90), 0, 0)
 csd = bpy.data.cameras.new('CAM_section'); csd.type = 'ORTHO'; csd.ortho_scale = 3.6
@@ -291,7 +294,11 @@ cso.location = (cx - 0.3, -6.0, cr + 0.35); cso.rotation_euler = (math.pi / 2, 0
 def frame_section(cam, scene, pad=1.3):
     # fit the ortho camera to every SEC_ object (labels included), looking along +y at the meridian plane
     from mathutils import Vector
-    pts = [o.matrix_world @ Vector(c) for o in scene.objects if o.name.startswith('SEC_') and o.type == 'MESH' for c in o.bound_box]   # meshes only: text matrices are not evaluated in background
+    pts = [o.matrix_world @ Vector(c) for o in scene.objects if o.name.startswith('SEC_') and o.type == 'MESH' for c in o.bound_box]
+    for o in scene.objects:   # labels: their matrices are not evaluated in background, so take the location and an estimated text extent
+        if o.name.startswith('SEC_LBL') and o.type == 'FONT':
+            w = 0.3 * o.data.size * len(o.data.body)
+            pts += [Vector((o.location.x - w, 0, o.location.z - 0.2 * o.data.size)), Vector((o.location.x + w, 0, o.location.z + o.data.size))]
     x0, x1 = min(p.x for p in pts), max(p.x for p in pts); z0, z1 = min(p.z for p in pts), max(p.z for p in pts)
     r = scene.render; asp = r.resolution_x / r.resolution_y
     cam.location = ((x0 + x1) / 2, -6.0, (z0 + z1) / 2); cam.rotation_euler = (math.pi / 2, 0, 0)

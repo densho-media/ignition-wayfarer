@@ -523,8 +523,8 @@ def build(e, d, out_dir, revision, built, page):
     body = f'''<header><p class="eyebrow">Simulations · flagship · Fusion Ignition · open problem</p><h1>Fusion Engineering: from nucleus to engine</h1>
 <p class="lead">One connected journey through the Wayfarer's Vertex drive in six chapters: the physics of one D–³He reaction, choosing which reactions
 happen, turning charged products into thrust, the radiation a field cannot steer, the heat and the structure, and the engine assembled, started and running.
-Every stage reads the same engine and the same energy, mass and momentum ledger. The drive does not work yet: at its coupled design pulse the hardware takes
-{X(lp["heat_over"])} the heat its radiators can reject, and four engines give {4 * lp["thrust_N"] / 1e6:.2f} of the {nf["thrust_N"] / 1e6:.1f} MN needed
+Every stage reads the same engine and the same energy, mass and momentum ledger. The drive does not work yet: at its coupled design pulse in the original geometry the hardware takes
+{X(lp["heat_over"])} the heat its radiators can reject, and four engines give {4 * lp["thrust_N"] / 1e6:.2f} MN of the {nf["thrust_N"] / 1e6:.1f} MN needed
 (exhaust {lp["exhaust_m_s"] / 1e3:,.0f} of {d["ledger"]["need"]["exhaust_m_s"] / 1e3:,.0f} km/s). Nothing on this page is canon.</p>
 <p>{chip("OPEN")} {chip("CALCULATED")} {chip("ILLUSTRATIVE")} · <a href="../fusion/">Fusion engine</a> · <a href="../ignition/">Ignition: what breaks</a> ·
   <a href="../{e["kind_dir"]}/{e["folder"].name}/">the study behind this page</a></p></header>
