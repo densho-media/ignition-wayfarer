@@ -1,0 +1,246 @@
+{
+ "cls": "CALCULATED",
+ "source": "lab/studies/vertex-compact-engine/vertex-pulse/transfer.py",
+ "equal_thrust": [
+  {
+   "label": "Research geometry",
+   "thrust_N": 236234.446612049,
+   "rate_factor": 1.0,
+   "fusion_factor": 1.0,
+   "heat_over": 1154.96499950127,
+   "exhaust_m_s": 8451947.749491088,
+   "ve_over_need": 0.44017874087460857
+  },
+  {
+   "label": "Research + 80 % early extraction",
+   "thrust_N": 236234.446612049,
+   "rate_factor": 2.6511219874728513,
+   "fusion_factor": 2.6511219874728513,
+   "heat_over": 604.74164461134,
+   "exhaust_m_s": 2909982.8737986768,
+   "ve_over_need": 0.1515523563704595
+  }
+ ],
+ "mission": {
+  "thrust_N": 5442690.750176589,
+  "exhaust_m_s": 19201172.08,
+  "fusion_W": 65316276045228.1,
+  "jet_share_needed": 0.8,
+  "jet_share_now": 0.05074054716745011,
+  "exhaust_now_m_s": 8772126.739949444
+ },
+ "ranges": {
+  "proton_g_cm2": 0.10828427974763336,
+  "alpha_g_cm2": 0.0007288734372112649,
+  "fuel_rhoR_g_cm2": 96.7,
+  "proton_over_fuel": 0.0011197960677107896,
+  "xray_1e_g_cm2": {
+   "30": 33.333333333333336,
+   "60": 27.700831024930746,
+   "100": 24.630541871921185,
+   "150": 22.675736961451246
+  }
+ },
+ "shells": [
+  {
+   "where": "at the target surface",
+   "R_m": 4.046480734031392e-05,
+   "purpose": "stops the 14.7 MeV protons",
+   "column_g_cm2": 0.10828427974763336,
+   "mass_kg": 2.2280771777217923e-08,
+   "mass_over_fuel": 0.0033593882031323686,
+   "energy_J": 256689191.082249,
+   "impulse_ratio": 1.0016827069197967,
+   "exhaust_m_s": 8757390.618156906,
+   "ve_over_need": 0.45608625253031465
+  },
+  {
+   "where": "at the target surface",
+   "R_m": 4.046480734031392e-05,
+   "purpose": "absorbs 63 % of 100 keV X-rays",
+   "column_g_cm2": 24.630541871921185,
+   "mass_kg": 5.068025418615578e-06,
+   "mass_over_fuel": 0.764132633048227,
+   "energy_J": 844551413.6400635,
+   "impulse_ratio": 2.410586477886997,
+   "exhaust_m_s": 11972936.895371497,
+   "ve_over_need": 0.6235523980248344
+  },
+  {
+   "where": "at 1 cm",
+   "R_m": 0.01,
+   "purpose": "stops the 14.7 MeV protons",
+   "column_g_cm2": 0.10828427974763336,
+   "mass_kg": 0.001360740391017708,
+   "mass_over_fuel": 205.16592794979934,
+   "energy_J": 256689191.082249,
+   "impulse_ratio": 14.3773034593244,
+   "exhaust_m_s": 610137.1348783962,
+   "ve_over_need": 0.03177603598032002
+  },
+  {
+   "where": "at 1 cm",
+   "R_m": 0.01,
+   "purpose": "absorbs 63 % of 100 keV X-rays",
+   "column_g_cm2": 24.630541871921185,
+   "mass_kg": 0.3095165175950536,
+   "mass_over_fuel": 46667.42015402788,
+   "energy_J": 844551413.6400635,
+   "impulse_ratio": 392.3670739562353,
+   "exhaust_m_s": 73558.1594285256,
+   "ve_over_need": 0.0038309202751817435
+  },
+  {
+   "where": "at 0.1 m",
+   "R_m": 0.1,
+   "purpose": "stops the 14.7 MeV protons",
+   "column_g_cm2": 0.10828427974763336,
+   "mass_kg": 0.1360740391017708,
+   "mass_over_fuel": 20516.59279497993,
+   "energy_J": 256689191.082249,
+   "impulse_ratio": 143.42832870862762,
+   "exhaust_m_s": 61160.349694723685,
+   "ve_over_need": 0.003185240434276848
+  },
+  {
+   "where": "at 0.1 m",
+   "R_m": 0.1,
+   "purpose": "absorbs 63 % of 100 keV X-rays",
+   "column_g_cm2": 24.630541871921185,
+   "mass_kg": 30.951651759505356,
+   "mass_over_fuel": 4666742.015402787,
+   "energy_J": 844551413.6400635,
+   "impulse_ratio": 3923.6292314052166,
+   "exhaust_m_s": 7355.893760185958,
+   "ve_over_need": 0.000383096080256886
+  },
+  {
+   "where": "at the cavity (1 m)",
+   "R_m": 1.0,
+   "purpose": "stops the 14.7 MeV protons",
+   "column_g_cm2": 0.10828427974763336,
+   "mass_kg": 13.607403910177078,
+   "mass_over_fuel": 2051659.279497993,
+   "energy_J": 256689191.082249,
+   "impulse_ratio": 1434.2487746604538,
+   "exhaust_m_s": 6116.182140037854,
+   "ve_over_need": 0.00031853170809340795
+  },
+  {
+   "where": "at the cavity (1 m)",
+   "R_m": 1.0,
+   "purpose": "absorbs 63 % of 100 keV X-rays",
+   "column_g_cm2": 24.630541871921185,
+   "mass_kg": 3095.1651759505353,
+   "mass_over_fuel": 466674201.5402787,
+   "energy_J": 844551413.6400635,
+   "impulse_ratio": 39236.28816321427,
+   "exhaust_m_s": 735.5894538371763,
+   "ve_over_need": 3.830961207849226e-05
+  }
+ ],
+ "timing": {
+  "disassembly_s": 1.0855194726080535e-11,
+  "proton_slowing_s": 7.646940030955966e-14,
+  "note": "a transfer must finish inside the burn disassembly; after it the debris is a collisionless shell moving at thousands of km/s and only fields act on it"
+ },
+ "requirements": [
+  "Column: at least the proton range (0.11 g/cm2 of hydrogen) on every line of sight, inside the burn region; the fuel itself is already 893 x thicker, so the products are already given to the fuel (self-heating) and no outside hydrogen sees them",
+  "Opacity: hydrogen absorbs X-rays only by Compton recoil; 25 g/cm2 for 63 % of 100 keV photons, a shell 0.76 x the fuel mass even at the target surface",
+  "Time: the transfer must finish within the burn disassembly (ps); afterwards the debris is collisionless",
+  "Exhaust speed: every added kilogram lowers ve; the mission needs 19201 km/s and the research engine gives 8772 km/s (0.46 of it), so added mass moves away from the requirement",
+  "Mission condition: the jet must carry 80 % of the fusion power (thrust x ve / 2); the coupled pulse carries 5.1 %"
+ ],
+ "downstream": [
+  {
+   "case": "base",
+   "x": 1.0,
+   "I0": 41.46599361004048,
+   "m_h_kg": 6.614949183853714e-06,
+   "inelastic": {
+    "impulse_Ns": 41.46599361004048,
+    "exhaust_m_s": 3599154.783276109,
+    "heat_J": 100612941.06395987
+   },
+   "elastic": {
+    "impulse_Ns": 63.54336596250537,
+    "exhaust_m_s": 5515420.942283608
+   }
+  },
+  {
+   "case": "base",
+   "x": 3.0,
+   "I0": 41.46599361004048,
+   "m_h_kg": 1.9844847551561142e-05,
+   "inelastic": {
+    "impulse_Ns": 41.46599361004048,
+    "exhaust_m_s": 1675330.4002332,
+    "heat_J": 140499585.85100853
+   },
+   "elastic": {
+    "impulse_Ns": 93.13657080545119,
+    "exhaust_m_s": 3762951.6348081063
+   }
+  },
+  {
+   "case": "base",
+   "x": 10.0,
+   "I0": 41.46599361004048,
+   "m_h_kg": 6.614949183853714e-05,
+   "inelastic": {
+    "impulse_Ns": 41.46599361004048,
+    "exhaust_m_s": 583571.256559121,
+    "heat_J": 163135024.68865484
+   },
+   "elastic": {
+    "impulse_Ns": 157.8060073122617,
+    "exhaust_m_s": 2220881.30446959
+   }
+  },
+  {
+   "case": "ext80",
+   "x": 1.0,
+   "I0": 15.640922524869334,
+   "m_h_kg": 6.614949183853714e-06,
+   "inelastic": {
+    "impulse_Ns": 15.640922524869334,
+    "exhaust_m_s": 1304511.622351016,
+    "heat_J": 12555525.729898939
+   },
+   "elastic": {
+    "impulse_Ns": 23.360579120923106,
+    "exhaust_m_s": 1948359.9461374646
+   }
+  },
+  {
+   "case": "ext80",
+   "x": 3.0,
+   "I0": 15.640922524869334,
+   "m_h_kg": 1.9844847551561142e-05,
+   "inelastic": {
+    "impulse_Ns": 15.640922524869334,
+    "exhaust_m_s": 620185.0612599882,
+    "heat_J": 17907275.091766454
+   },
+   "elastic": {
+    "impulse_Ns": 33.8802753196723,
+    "exhaust_m_s": 1343401.617853853
+   }
+  },
+  {
+   "case": "ext80",
+   "x": 10.0,
+   "I0": 15.640922524869334,
+   "m_h_kg": 6.614949183853714e-05,
+   "inelastic": {
+    "impulse_Ns": 15.640922524869334,
+    "exhaust_m_s": 218679.5014449602,
+    "heat_J": 21047233.768952023
+   },
+   "elastic": {
+    "impulse_Ns": 57.05629195617606,
+    "exhaust_m_s": 797717.7471108858
+   }
+  }
+ ]
+}

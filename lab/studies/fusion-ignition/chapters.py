@@ -37,6 +37,7 @@ MEV = 1e6 * QE
 ASF = ROOT / 'lab/studies/accelerator-fusion/results/asf.json'
 COMPACT = ROOT / 'lab/studies/vertex-compact-engine/vertex-compact/results/compact.json'
 EXTRACT = sorted((HERE / 'imports').glob('extraction_*.json'))
+PULSE = HERE / 'imports' / 'pulse.json'              # vertex-pulse: pulse architecture, magnets, transfer, integrated hardware (research geometry)
 OPTIM = HERE / 'imports' / 'optimize.json'          # vertex-optimize: burn moved aft, stronger closure coils (research geometry)
 
 
@@ -324,7 +325,7 @@ CONCEPTS = [
 ]
 
 MATURITY = {'compact': 'L2 vacuum test particles + sky ledger', 'thermal': 'L2 parametric geometry, radiative ledger', 'source': 'L2 0-D burn (R2-B)',
-            'extraction': 'L2 vacuum test particles, species-resolved', 'optimize': 'L2 test particles, vacuum and cavity pictures; coil engineering by formula'}
+            'extraction': 'L2 vacuum test particles, species-resolved', 'pulse': 'L2 0-D burns scaled per pulse, field solver capture, parametric hardware with clash checks', 'optimize': 'L2 test particles, vacuum and cavity pictures; coil engineering by formula'}
 
 OPT_CONCEPTS = [
     dict(id='X-MULT', title='Multiplying the topology and extraction gains', status='CORRECTED 2026-11-24', why='Computed together, extraction removes the momentum the topology won: 0.36 MN, not 0.94 MN, at about 230x.', kept='both levers, chosen per goal'),
@@ -368,7 +369,63 @@ def opt_problems(o):
           components=['TARGET', 'C1'], categories=['FUSION_REACTION', 'MAGNETIC_NOZZLE'], stages=['lab', 'operate'])]
 
 
-def problems(d, x, o=None):
+def pulse(d):
+    """The pulse-architecture study (vertex-pulse, IMPORTED): pulse-size scan at the mission power, magnets, transfer, integrated hardware."""
+    if not PULSE.exists():
+        return dict(cls='OPEN', note='vertex-pulse has not been imported yet')
+    p = json.loads(PULSE.read_text())
+    p['source'] = f'{PULSE.relative_to(ROOT)} ({p["source"]})'
+    return p
+
+
+PULSE_CONCEPTS = [
+    dict(id='X-SMALL', title='Smaller, more frequent pulses to cut the waste heat', status='NO BENEFIT', why='At fixed power the shares do not move with target mass: heat and thrust stay; only per-pulse loads fall.', kept='per-pulse relief of the magnets'),
+    dict(id='X-H2UP', title='Outside hydrogen to take the product energy', status='REJECTED', why='The fuel already stops the products; added mass lowers an exhaust speed already below the need.', kept='an X-ray-absorbing shell at the target (OPEN)'),
+]
+
+
+def pulse_problems(p):
+    """ENG-073..080 from vertex-pulse: results, including what fails."""
+    F = p['findings']; W = p['window']; base = next(r for r in p['rows'] if r['label'] == 'Target mass x1'); M = p['magnets']; T = p['transfer']; G = p['frames']['checks']
+    op = {c['distribution'].startswith('research, opt'): c for c in M['cases'] if c['basis'] == 'operating'}
+    ev = 'lab/studies/vertex-compact-engine/vertex-pulse/results'
+    P = lambda **k: dict(status='OPEN', subsystem='Vertex pulse and nozzle', variants=['RESEARCH'], **k)
+    return [
+        P(id='ENG-073', title='Pulse size does not move the average heat', severity='HIGH', mechanism=F['size'], required='Heat at or below the radiator share',
+          achieved=f'{base["heat_over"]:,.0f}x at every size from x1/64 to x16 (mission power)', solutions='Pulse size chosen for per-pulse loads only',
+          advances='A burn with a lower photon share (the only lever that moves the average)', next='Burn regimes with a lower X-ray share', assumptions='R2-B, design areal density, mass scaled',
+          evidence=f'{ev}/pulse.json', components=['TARGET', 'C1', 'L1'], categories=['FUSION_REACTION'], stages=['optimize', 'operate']),
+        P(id='ENG-074', title='No pulse size fits the face and the injector together', severity='CRITICAL', mechanism=F['window'], required=f'Spike under {W["dT_limit_K"]:.0f} K and injection under 20 km/s',
+          achieved=f'face needs <= x{W["mass_max_surface"]:.3f}, injector >= x{W["mass_min_injection"]:.0f} (gap {W["gap"]:,.0f})', solutions='Re-aimed sacrificial tungsten lips, supermirror strips on their edges',
+          advances='A renewable or vapour-shielded face; a protected injection path', next='Face concept for MJ/m2 per pulse at tens of kHz', assumptions='Cold tungsten, X-ray absorption depth, cavity in the drawn research coils',
+          evidence=f'{ev}/pulse.json', components=['LIP', 'TARGET'], categories=['SHIELDING', 'TARGET_INJECTION'], stages=['heating', 'protection', 'startup']),
+        P(id='ENG-075', title='Two charged shares for one engine', severity='HIGH', mechanism=F['basis'], required='One reconciled source model for capture and thrust',
+          achieved=f'burn ledger {base["W_burn_J"] / 1e9:.1f} GJ, operating point {base["W_op_J"] / 1e9:.0f} GJ at the same pulse', solutions='Both bases carried side by side',
+          advances='A coupled burn and expansion model', next='Reconcile the operating point with the R2-B burn', assumptions='As in each source', evidence=f'{ev}/pulse.json',
+          components=['TARGET', 'C1'], categories=['FUSION_REACTION', 'MAGNETIC_COILS'], stages=['magnets', 'products']),
+        P(id='ENG-076', title='Current distribution not re-traced', severity='HIGH', mechanism=F['magnets'], required='Same steering with the new ring currents',
+          achieved=f'{M["distribution"]["W0_J"] / 1e9:.0f} -> {M["distribution"]["W_J"] / 1e9:.0f} GJ, {op[False]["B_wind_T"]:.0f} -> {op[True]["B_wind_T"]:.0f} T', solutions='Per-coil currents set for capture at least energy',
+          advances='-', next='Test particles in the redistributed field', assumptions='Capture criterion of vertex-ron, filament field', evidence=f'{ev}/magnets.json',
+          components=['C1', 'C2', 'L1', 'L2', 'L3', 'L4'], categories=['MAGNETIC_COILS'], stages=['magnets', 'nozzle']),
+        P(id='ENG-077', title='Quench protection in modules', severity='MEDIUM', mechanism=F['conductor'], required='Every module dumped within 10 s',
+          achieved=f'{op[True]["quench_modules"]} modules of {op[True]["module_energy_GJ"]:.1f} GJ (optimised distribution)', solutions='Modular windings, one dump circuit each',
+          advances='Higher dump voltage; distributed resistors', next='Module boundaries in the winding pack', assumptions='50 kA, 10 kV per module', evidence=f'{ev}/magnets.json',
+          components=['C1', 'C2', 'L1'], categories=['MAGNETIC_COILS', 'ELECTRICAL'], stages=['cryo', 'startup']),
+        P(id='ENG-078', title='The jet must carry 80 % of the fusion power', severity='CRITICAL', mechanism=F['transfer'], required=f'jet {T["mission"]["jet_share_needed"]:.0%} at {T["mission"]["exhaust_m_s"] / 1e3:,.0f} km/s',
+          achieved=f'jet {T["mission"]["jet_share_now"]:.1%}', solutions='None found; extraction trades thrust for heat', advances='An X-ray-absorbing shell that stays absorbing while hot (no physics yet)',
+          next='Hot-shell opacity and re-emission model', assumptions='Momentum-consistent ledger, cold opacities', evidence=f'{ev}/transfer.json',
+          components=['TARGET'], categories=['FUSION_REACTION', 'MAGNETIC_NOZZLE'], stages=['lab', 'nozzle', 'operate']),
+        P(id='ENG-079', title='Service lines in the burn\'s view', severity='MEDIUM', mechanism=F['geometry'], required='Every line and header shadowed or armoured',
+          achieved=f'{len(G["exposed_headers"])} header and {G["exposed_runs"]} runs seen by the burn', solutions='Headers placed in the coil shadow by search',
+          advances='Line armour covers; routing inside the cage members', next='Armour covers sized by the X-ray flux on each run', assumptions='Meridian rays from an on-axis burn',
+          evidence=f'{ev}/frames.json', components=['CAGE', 'LIP'], categories=['HOT_THERMAL', 'CRYOGENIC'], stages=['geometry', 'cooling', 'assembly']),
+        P(id='ENG-080', title='Driver power fixed by the gain', severity='HIGH', mechanism='The driver heats every target; at fixed power its load is the fusion power over the gain, whatever the pulse size',
+          required='Driver power the ship can supply', achieved=f'{base["driver_abs_W"] / 1e12:.1f} TW absorbed ({base["driver_elec_W"] / 1e12:.1f} TW electric) per engine at gain {base["gain"]:.0f}',
+          solutions='-', advances='Higher gain burns', next='Driver concept at the rate', assumptions='Wall-plug 50 %', evidence=f'{ev}/pulse.json',
+          components=['DRIVER'], categories=['TARGET_INJECTION'], stages=['optimize', 'startup'])]
+
+
+def problems(d, x, o=None, pu=None):
     """Every register entry with cause, component, intended solution, achieved value, deficit, future improvements and maturity; plus the
     new ENG-064/065 from vertex-extraction and the ledger correction."""
     items = d['problems']['items']
@@ -394,16 +451,18 @@ def problems(d, x, o=None):
                           stages=['magnets', 'nozzle']))
     if o and o.get('research') and not any(p['id'] == 'ENG-066' for p in items):
         items.extend(opt_problems(o))
+    if pu and pu.get('rows') and not any(p['id'] == 'ENG-073' for p in items):
+        items.extend(pulse_problems(pu))
     for p in items:
         ev = p.get('evidence') or ''
-        kind = 'optimize' if 'vertex-optimize' in ev else 'extraction' if 'extraction' in ev else 'source' if 'vertex-source' in ev else 'thermal' if 'thermal' in ev else 'compact'
+        kind = 'pulse' if 'vertex-pulse' in ev else 'optimize' if 'vertex-optimize' in ev else 'extraction' if 'extraction' in ev else 'source' if 'vertex-source' in ev else 'thermal' if 'thermal' in ev else 'compact'
         p.setdefault('cause', p.get('mechanism'))
         p.setdefault('component', ', '.join(p.get('components') or []) or p.get('subsystem'))
         p.setdefault('intended', p.get('solutions'))
         p.setdefault('deficit', p.get('severity'))
         p.setdefault('future', p.get('advances'))
         p.setdefault('maturity', 'L2 momentum-consistent pulse ledger' if p['id'] == 'ENG-064' else MATURITY[kind])
-    d['problems']['concepts'] = CONCEPTS + OPT_CONCEPTS
+    d['problems']['concepts'] = CONCEPTS + OPT_CONCEPTS + (PULSE_CONCEPTS if pu and pu.get('rows') else [])
     return d['problems']
 
 
@@ -444,9 +503,9 @@ def build(s, d):
     src, _ = mpn.sources(mpn.canon())
     compact = json.loads(COMPACT.read_text())
     x = extraction(d)
-    o = optimize(d)
+    o = optimize(d); pu = pulse(d)
     out = dict(matter=matter(d), unwanted=unwanted(d, fusion), mix=mix(d, fusion, src), accel=accel(), spin=spin(d, fusion), radiation=radiation(d),
-               optics=optics(d), shapes=shapes(d), extraction=x, integration=integration(d, compact), compare=compare(d, x, o), startup=startup(d), optimize=o)
-    problems(d, x, o)
+               optics=optics(d), shapes=shapes(d), extraction=x, integration=integration(d, compact), compare=compare(d, x, o), startup=startup(d), optimize=o, pulse=pu)
+    problems(d, x, o, pu)
     out['extraction'].pop('rows', None)                 # 544 rows stay in the import; the page reads the geometries, frontier and findings
     return r3(out)

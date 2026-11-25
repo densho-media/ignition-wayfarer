@@ -1,0 +1,1048 @@
+{
+ "cls": "CALCULATED",
+ "source": "lab/studies/vertex-compact-engine/vertex-pulse/magnets.py",
+ "P": {
+  "Je": [
+   [
+    "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+    153000000.0
+   ],
+   [
+    "assumed: 2x engineering current density at the same field",
+    306000000.0
+   ],
+   [
+    "assumed: 4x (thin-substrate tape, higher fill)",
+    612000000.0
+   ]
+  ],
+  "sigma": [
+   [
+    "today: high-strength steel / Hastelloy reinforcement",
+    1500000000.0
+   ],
+   [
+    "assumed: carbon-fibre / nanotube composite at 4 K",
+    3000000000.0
+   ],
+   [
+    "assumed: 6 GPa structural fibre at 4 K",
+    6000000000.0
+   ]
+  ],
+  "B_conductor_limit_T": [
+   [
+    "today: REBCO critical field margin at 20 K",
+    30.0
+   ],
+   [
+    "assumed: 45 T class",
+    45.0
+   ],
+   [
+    "assumed: 60 T class",
+    60.0
+   ]
+  ],
+  "t_dump_safe_s": 10.0,
+  "I_op": 50000.0,
+  "V_dump": 10000.0,
+  "steel_c": 500.0,
+  "steel_dT": 400.0
+ },
+ "E_op_J": 10344986017.651829,
+ "E_burn_J": 256689191.08224896,
+ "topology": [
+  {
+   "key": "mirror3|5",
+   "label": "burn 5 m aft, closure x3",
+   "W_over_E": 14.02733831544219,
+   "B_burn_T": 5.11005547169196,
+   "binding": "PLUG",
+   "coil_t": 686.2960757100598
+  },
+  {
+   "key": "mirror3|6",
+   "label": "burn 6 m aft, closure x3",
+   "W_over_E": 14.307492795985517,
+   "B_burn_T": 4.957217397479343,
+   "binding": "RING_5",
+   "coil_t": 695.8530299316477
+  },
+  {
+   "key": "mirror4|5",
+   "label": "burn 5 m aft, closure x4",
+   "W_over_E": 17.214875285148533,
+   "B_burn_T": 5.1497060859306005,
+   "binding": "RING_5",
+   "coil_t": 788.8921307316
+  },
+  {
+   "key": "mirror4|6",
+   "label": "burn 6 m aft, closure x4",
+   "W_over_E": 17.91343668361305,
+   "B_burn_T": 5.004237450264922,
+   "binding": "RING_5",
+   "coil_t": 811.7973512984995
+  },
+  {
+   "key": "space|5",
+   "label": "burn 5 m aft, closure x4, aft rings spaced x1.25",
+   "W_over_E": 20.309355431164914,
+   "B_burn_T": 5.133634316827627,
+   "binding": "RING_5",
+   "coil_t": 894.5038139933932
+  },
+  {
+   "key": "gradeB|4",
+   "label": "burn 4 m aft, closure graded x2/x4/x8 from the shield",
+   "W_over_E": 22.599626048027574,
+   "B_burn_T": 5.903566961007471,
+   "binding": "RING_5",
+   "coil_t": 883.8147875227918
+  },
+  {
+   "key": "mirror3|4",
+   "label": "burn 4 m aft, closure x3",
+   "W_over_E": 22.79912105981138,
+   "B_burn_T": 6.749659758166056,
+   "binding": "RING_1",
+   "coil_t": 973.9995606316029
+  },
+  {
+   "key": "mirror6|5",
+   "label": "burn 5 m aft, closure x6",
+   "W_over_E": 25.125877598136046,
+   "B_burn_T": 5.270010086356731,
+   "binding": "RING_5",
+   "coil_t": 1023.2284179183262
+  },
+  {
+   "key": "gradeB|5",
+   "label": "burn 5 m aft, closure graded x2/x4/x8 from the shield",
+   "W_over_E": 25.620437406734602,
+   "B_burn_T": 5.654610894580571,
+   "binding": "RING_5",
+   "coil_t": 973.1440425127929
+  },
+  {
+   "key": "mirror6|6",
+   "label": "burn 6 m aft, closure x6",
+   "W_over_E": 26.534201852203413,
+   "B_burn_T": 5.0868162468605265,
+   "binding": "RING_5",
+   "coil_t": 1066.2638346516358
+  },
+  {
+   "key": "mirror4|4",
+   "label": "ENG-065 best: burn 4 m aft, closure x4",
+   "W_over_E": 27.6741181289236,
+   "B_burn_T": 6.825090016216744,
+   "binding": "RING_1",
+   "coil_t": 1120.0990973407272
+  },
+  {
+   "key": "space|4",
+   "label": "burn 4 m aft, closure x4, aft rings spaced x1.25",
+   "W_over_E": 32.08297417762257,
+   "B_burn_T": 6.741736545362893,
+   "binding": "RING_1",
+   "coil_t": 1260.1759582705204
+  },
+  {
+   "key": "gradeS|5",
+   "label": "burn 5 m aft, closure graded x8/x4/x2 from the shield",
+   "W_over_E": 33.1862634286907,
+   "B_burn_T": 6.5106929313267425,
+   "binding": "RING_2",
+   "coil_t": 1316.7054438110504
+  },
+  {
+   "key": "mirror6|4",
+   "label": "burn 4 m aft, closure x6",
+   "W_over_E": 36.3366081401337,
+   "B_burn_T": 6.723192566287691,
+   "binding": "RING_1",
+   "coil_t": 1358.6702185248937
+  },
+  {
+   "key": "mirror3|3",
+   "label": "burn 3 m aft, closure x3",
+   "W_over_E": 42.74988582255053,
+   "B_burn_T": 9.484826597229485,
+   "binding": "RING_1",
+   "coil_t": 1575.5164011139561
+  },
+  {
+   "key": "mirror4|3",
+   "label": "burn 3 m aft, closure x4",
+   "W_over_E": 51.882511403886056,
+   "B_burn_T": 9.670725189307774,
+   "binding": "RING_1",
+   "coil_t": 1829.7770550771854
+  },
+  {
+   "key": "gradeS|4",
+   "label": "burn 4 m aft, closure graded x8/x4/x2 from the shield",
+   "W_over_E": 56.570284716234674,
+   "B_burn_T": 8.303415834118839,
+   "binding": "RING_2",
+   "coil_t": 2000.835799895882
+  },
+  {
+   "key": "mirror6|3",
+   "label": "burn 3 m aft, closure x6",
+   "W_over_E": 66.19512162959367,
+   "B_burn_T": 9.519300072511246,
+   "binding": "RING_1",
+   "coil_t": 2200.372233221914
+  },
+  {
+   "key": "drawn|0",
+   "label": "drawn engine, burn at its drawn point (C1)",
+   "W_over_E": 298.7080865770437,
+   "B_burn_T": 24.566574955425317,
+   "binding": "PLUG",
+   "coil_t": 8096.280568266122
+  }
+ ],
+ "distribution": {
+  "mult": {
+   "RING_1": 0.48999999999999994,
+   "RING_2": 0.20408499999999996,
+   "RING_3": 0.5816124999999999,
+   "RING_4": 1.8514999999999997,
+   "RING_5": 1.6099999999999999,
+   "RING_6": 0.3429999999999999
+  },
+  "W0_J": 286288365094.55963,
+  "W_J": 82631446557.06525,
+  "history": [
+   286288365094.55963,
+   105680908402.92113,
+   93115501084.96288,
+   87102617385.1783,
+   82631446557.06525
+  ],
+  "binding": "RING_5"
+ },
+ "floor": {
+  "W_floor_over_E": 1.0,
+  "best_topology": "mirror3|5",
+  "best_topology_W_over_E": 14.02733831544219,
+  "research_W_over_E": 27.6741181289236,
+  "optimised_W_over_E": 7.987584170347817,
+  "gain": 3.4646418164402943
+ },
+ "cases": [
+  {
+   "basis": "burn",
+   "distribution": "research as drawn",
+   "E_J": 256689191.08224896,
+   "k": 0.5124602040768096,
+   "W_J": 7103646996.427995,
+   "W_over_E": 27.67411812892358,
+   "binding": "RING_1",
+   "B_burn_T": 1.0750959364235773,
+   "B_wind_T": 9.515002425286179,
+   "B_wind_by_Je": [
+    {
+     "Je": 153000000.0,
+     "B_peak_T": 9.515002425286179
+    },
+    {
+     "Je": 306000000.0,
+     "B_peak_T": 13.456245475852606
+    },
+    {
+     "Je": 612000000.0,
+     "B_peak_T": 19.030004850572357
+    }
+   ],
+   "hoop_GN": 0.2521262983409122,
+   "Fx_max_GN": 0.3983574699985846,
+   "Fx_net_MN": -1.3409819629415196,
+   "coils": [
+    {
+     "name": "RING_1",
+     "x": 9.0,
+     "r": 2.5,
+     "I_MA": -6.53899220402009,
+     "B_peak_T": 5.03631436686932,
+     "hoop_MN": 8.489251373118096,
+     "structure_m2": 0.0056595009154120635,
+     "structure_t": 0.14223877199074597,
+     "Fx_MN": 17.754924186638835,
+     "conductor_t": 4.028009778437342,
+     "p_mag_MPa": 10.092198925340938
+    },
+    {
+     "name": "RING_2",
+     "x": 7.0,
+     "r": 4.2,
+     "I_MA": -10.987146775406798,
+     "B_peak_T": 9.515002425286179,
+     "hoop_MN": 0.0,
+     "structure_m2": 0.0,
+     "structure_t": 0.0,
+     "Fx_MN": -233.80574233018058,
+     "conductor_t": 11.370351866104258,
+     "p_mag_MPa": 36.022839820492884
+    },
+    {
+     "name": "RING_3",
+     "x": 6.3,
+     "r": 6.4,
+     "I_MA": 15.31231089781507,
+     "B_peak_T": 9.449474263359809,
+     "hoop_MN": 181.71782120992202,
+     "structure_m2": 0.12114521413994801,
+     "structure_t": 7.794460974277079,
+     "Fx_MN": 398.35746999858463,
+     "conductor_t": 24.14684532759028,
+     "p_mag_MPa": 35.528382296741974
+    },
+    {
+     "name": "RING_4",
+     "x": 4.0,
+     "r": 7.6,
+     "I_MA": 4.545522010161301,
+     "B_peak_T": 3.929867308008839,
+     "hoop_MN": 15.782570917121769,
+     "structure_m2": 0.010521713944747846,
+     "structure_t": 0.8038961221220726,
+     "Fx_MN": -103.25470436702646,
+     "conductor_t": 8.512106432100882,
+     "p_mag_MPa": 6.1449154781848705
+    },
+    {
+     "name": "RING_5",
+     "x": -1.6,
+     "r": 8.9,
+     "I_MA": 5.324461520358051,
+     "B_peak_T": 4.121279646752468,
+     "hoop_MN": 23.28535216625606,
+     "structure_m2": 0.015523568110837375,
+     "structure_t": 1.3889333601827731,
+     "Fx_MN": -23.791746165117193,
+     "conductor_t": 11.676303831406878,
+     "p_mag_MPa": 6.758095255971527
+    },
+    {
+     "name": "RING_6",
+     "x": -8.4,
+     "r": 9.9,
+     "I_MA": 5.924039959127919,
+     "B_peak_T": 4.436925114661561,
+     "hoop_MN": 22.851302674494253,
+     "structure_m2": 0.015234201782996167,
+     "structure_t": 1.5161939149029642,
+     "Fx_MN": -56.601183285840754,
+     "conductor_t": 14.450832322366246,
+     "p_mag_MPa": 7.832931670270659
+    }
+   ],
+   "scenarios": [
+    {
+     "Je_label": "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+     "Je": 153000000.0,
+     "sigma_label": "today: high-strength steel / Hastelloy reinforcement",
+     "sigma": 1500000000.0,
+     "conductor_t": 74.18444955800588,
+     "structure_t": 11.645723143475633,
+     "total_t": 85.83017270148152
+    },
+    {
+     "Je_label": "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+     "Je": 153000000.0,
+     "sigma_label": "assumed: carbon-fibre / nanotube composite at 4 K",
+     "sigma": 3000000000.0,
+     "conductor_t": 74.18444955800588,
+     "structure_t": 5.822861571737817,
+     "total_t": 80.0073111297437
+    },
+    {
+     "Je_label": "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+     "Je": 153000000.0,
+     "sigma_label": "assumed: 6 GPa structural fibre at 4 K",
+     "sigma": 6000000000.0,
+     "conductor_t": 74.18444955800588,
+     "structure_t": 2.9114307858689084,
+     "total_t": 77.09588034387478
+    },
+    {
+     "Je_label": "assumed: 2x engineering current density at the same field",
+     "Je": 306000000.0,
+     "sigma_label": "today: high-strength steel / Hastelloy reinforcement",
+     "sigma": 1500000000.0,
+     "conductor_t": 37.09222477900294,
+     "structure_t": 11.645723143475633,
+     "total_t": 48.737947922478575
+    },
+    {
+     "Je_label": "assumed: 2x engineering current density at the same field",
+     "Je": 306000000.0,
+     "sigma_label": "assumed: carbon-fibre / nanotube composite at 4 K",
+     "sigma": 3000000000.0,
+     "conductor_t": 37.09222477900294,
+     "structure_t": 5.822861571737817,
+     "total_t": 42.91508635074076
+    },
+    {
+     "Je_label": "assumed: 2x engineering current density at the same field",
+     "Je": 306000000.0,
+     "sigma_label": "assumed: 6 GPa structural fibre at 4 K",
+     "sigma": 6000000000.0,
+     "conductor_t": 37.09222477900294,
+     "structure_t": 2.9114307858689084,
+     "total_t": 40.00365556487185
+    },
+    {
+     "Je_label": "assumed: 4x (thin-substrate tape, higher fill)",
+     "Je": 612000000.0,
+     "sigma_label": "today: high-strength steel / Hastelloy reinforcement",
+     "sigma": 1500000000.0,
+     "conductor_t": 18.54611238950147,
+     "structure_t": 11.645723143475633,
+     "total_t": 30.1918355329771
+    },
+    {
+     "Je_label": "assumed: 4x (thin-substrate tape, higher fill)",
+     "Je": 612000000.0,
+     "sigma_label": "assumed: carbon-fibre / nanotube composite at 4 K",
+     "sigma": 3000000000.0,
+     "conductor_t": 18.54611238950147,
+     "structure_t": 5.822861571737817,
+     "total_t": 24.368973961239288
+    },
+    {
+     "Je_label": "assumed: 4x (thin-substrate tape, higher fill)",
+     "Je": 612000000.0,
+     "sigma_label": "assumed: 6 GPa structural fibre at 4 K",
+     "sigma": 6000000000.0,
+     "conductor_t": 18.54611238950147,
+     "structure_t": 2.9114307858689084,
+     "total_t": 21.45754317537038
+    }
+   ],
+   "quench_modules": 3,
+   "module_energy_GJ": 2.3678823321426647,
+   "dump_steel_t": 35.51823498213998,
+   "conductor_limit_ok": {
+    "today: REBCO critical field margin at 20 K": true,
+    "assumed: 45 T class": true,
+    "assumed: 60 T class": true
+   }
+  },
+  {
+   "basis": "burn",
+   "distribution": "research, optimised current distribution",
+   "E_J": 256689191.08224896,
+   "k": 0.30166974428698934,
+   "W_J": 2050326519.387957,
+   "W_over_E": 7.987584170347814,
+   "binding": "RING_5",
+   "B_burn_T": 0.8081878859331781,
+   "B_wind_T": 3.9013196188036607,
+   "B_wind_by_Je": [
+    {
+     "Je": 153000000.0,
+     "B_peak_T": 3.9013196188036607
+    },
+    {
+     "Je": 306000000.0,
+     "B_peak_T": 5.517299116064371
+    },
+    {
+     "Je": 612000000.0,
+     "B_peak_T": 7.8026392376073215
+    }
+   ],
+   "hoop_GN": 0.06234621198261609,
+   "Fx_max_GN": 0.09231462688204091,
+   "Fx_net_MN": -0.035421043188851975,
+   "coils": [
+    {
+     "name": "RING_1",
+     "x": 9.0,
+     "r": 2.5,
+     "I_MA": -1.886159909179972,
+     "B_peak_T": 1.9369421263777555,
+     "hoop_MN": 0.0,
+     "structure_m2": 0.0,
+     "structure_t": 0.0,
+     "Fx_MN": -3.2626980995565527,
+     "conductor_t": 1.1618717870932138,
+     "p_mag_MPa": 1.4927718257210192
+    },
+    {
+     "name": "RING_2",
+     "x": 7.0,
+     "r": 4.2,
+     "I_MA": -1.3199808237146509,
+     "B_peak_T": 2.0698705915961004,
+     "hoop_MN": 0.0,
+     "structure_m2": 0.0,
+     "structure_t": 0.0,
+     "Fx_MN": -13.274601842084534,
+     "conductor_t": 1.3660185605002098,
+     "p_mag_MPa": 1.7046943773323024
+    },
+    {
+     "name": "RING_3",
+     "x": 6.3,
+     "r": 6.4,
+     "I_MA": 5.242592237175603,
+     "B_peak_T": 3.5354215922759242,
+     "hoop_MN": 28.368352221841093,
+     "structure_m2": 0.018912234814560728,
+     "structure_t": 1.216809737346849,
+     "Fx_MN": 92.31462688204091,
+     "conductor_t": 8.267338921701775,
+     "p_mag_MPa": 4.973275983460334
+    },
+    {
+     "name": "RING_4",
+     "x": 4.0,
+     "r": 7.6,
+     "I_MA": 4.954263384825089,
+     "B_peak_T": 3.9013196188036607,
+     "hoop_MN": 16.086490751660552,
+     "structure_m2": 0.010724327167773702,
+     "structure_t": 0.8193764882617017,
+     "Fx_MN": -28.420515454253575,
+     "conductor_t": 9.277530090057809,
+     "p_mag_MPa": 6.055962869132085
+    },
+    {
+     "name": "RING_5",
+     "x": -1.6,
+     "r": 8.9,
+     "I_MA": 5.0463013154583285,
+     "B_peak_T": 3.8579155902205367,
+     "hoop_MN": 16.226262419362474,
+     "structure_m2": 0.010817508279574983,
+     "structure_t": 0.9678701453350713,
+     "Fx_MN": -37.317418401056784,
+     "conductor_t": 11.06631105489844,
+     "p_mag_MPa": 5.921961542443996
+    },
+    {
+     "name": "RING_6",
+     "x": -8.4,
+     "r": 9.9,
+     "I_MA": 1.1961446696774554,
+     "B_peak_T": 1.0172517464089006,
+     "hoop_MN": 1.6651065897519686,
+     "structure_m2": 0.0011100710598346457,
+     "structure_t": 0.11048054962156055,
+     "Fx_MN": -10.074814128278318,
+     "conductor_t": 2.9178206382905034,
+     "p_mag_MPa": 0.4117342816507121
+    }
+   ],
+   "scenarios": [
+    {
+     "Je_label": "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+     "Je": 153000000.0,
+     "sigma_label": "today: high-strength steel / Hastelloy reinforcement",
+     "sigma": 1500000000.0,
+     "conductor_t": 34.05689105254195,
+     "structure_t": 3.1145369205651825,
+     "total_t": 37.17142797310713
+    },
+    {
+     "Je_label": "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+     "Je": 153000000.0,
+     "sigma_label": "assumed: carbon-fibre / nanotube composite at 4 K",
+     "sigma": 3000000000.0,
+     "conductor_t": 34.05689105254195,
+     "structure_t": 1.5572684602825912,
+     "total_t": 35.61415951282454
+    },
+    {
+     "Je_label": "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+     "Je": 153000000.0,
+     "sigma_label": "assumed: 6 GPa structural fibre at 4 K",
+     "sigma": 6000000000.0,
+     "conductor_t": 34.05689105254195,
+     "structure_t": 0.7786342301412956,
+     "total_t": 34.83552528268324
+    },
+    {
+     "Je_label": "assumed: 2x engineering current density at the same field",
+     "Je": 306000000.0,
+     "sigma_label": "today: high-strength steel / Hastelloy reinforcement",
+     "sigma": 1500000000.0,
+     "conductor_t": 17.028445526270975,
+     "structure_t": 3.1145369205651825,
+     "total_t": 20.142982446836157
+    },
+    {
+     "Je_label": "assumed: 2x engineering current density at the same field",
+     "Je": 306000000.0,
+     "sigma_label": "assumed: carbon-fibre / nanotube composite at 4 K",
+     "sigma": 3000000000.0,
+     "conductor_t": 17.028445526270975,
+     "structure_t": 1.5572684602825912,
+     "total_t": 18.585713986553564
+    },
+    {
+     "Je_label": "assumed: 2x engineering current density at the same field",
+     "Je": 306000000.0,
+     "sigma_label": "assumed: 6 GPa structural fibre at 4 K",
+     "sigma": 6000000000.0,
+     "conductor_t": 17.028445526270975,
+     "structure_t": 0.7786342301412956,
+     "total_t": 17.80707975641227
+    },
+    {
+     "Je_label": "assumed: 4x (thin-substrate tape, higher fill)",
+     "Je": 612000000.0,
+     "sigma_label": "today: high-strength steel / Hastelloy reinforcement",
+     "sigma": 1500000000.0,
+     "conductor_t": 8.514222763135487,
+     "structure_t": 3.1145369205651825,
+     "total_t": 11.62875968370067
+    },
+    {
+     "Je_label": "assumed: 4x (thin-substrate tape, higher fill)",
+     "Je": 612000000.0,
+     "sigma_label": "assumed: carbon-fibre / nanotube composite at 4 K",
+     "sigma": 3000000000.0,
+     "conductor_t": 8.514222763135487,
+     "structure_t": 1.5572684602825912,
+     "total_t": 10.071491223418079
+    },
+    {
+     "Je_label": "assumed: 4x (thin-substrate tape, higher fill)",
+     "Je": 612000000.0,
+     "sigma_label": "assumed: 6 GPa structural fibre at 4 K",
+     "sigma": 6000000000.0,
+     "conductor_t": 8.514222763135487,
+     "structure_t": 0.7786342301412956,
+     "total_t": 9.292856993276782
+    }
+   ],
+   "quench_modules": 1,
+   "module_energy_GJ": 2.050326519387957,
+   "dump_steel_t": 10.251632596939785,
+   "conductor_limit_ok": {
+    "today: REBCO critical field margin at 20 K": true,
+    "assumed: 45 T class": true,
+    "assumed: 60 T class": true
+   }
+  },
+  {
+   "basis": "operating",
+   "distribution": "research as drawn",
+   "E_J": 10344986017.651829,
+   "k": 3.253278990327253,
+   "W_J": 286288365094.55963,
+   "W_over_E": 27.6741181289236,
+   "binding": "RING_1",
+   "B_burn_T": 6.825090016216744,
+   "B_wind_T": 60.40460749310541,
+   "B_wind_by_Je": [
+    {
+     "Je": 153000000.0,
+     "B_peak_T": 60.40460749310541
+    },
+    {
+     "Je": 306000000.0,
+     "B_peak_T": 85.42501514657316
+    },
+    {
+     "Je": 612000000.0,
+     "B_peak_T": 120.80921498621082
+    }
+   ],
+   "hoop_GN": 10.161094123294466,
+   "Fx_max_GN": 16.054444831851356,
+   "Fx_net_MN": -54.043723454288056,
+   "coils": [
+    {
+     "name": "RING_1",
+     "x": 9.0,
+     "r": 2.5,
+     "I_MA": -41.511839916575745,
+     "B_peak_T": 31.972308460392135,
+     "hoop_MN": 342.13044337772067,
+     "structure_m2": 0.22808696225181377,
+     "structure_t": 5.732450599919285,
+     "Fx_MN": 715.5519158435993,
+     "conductor_t": 25.571233591943113,
+     "p_mag_MPa": 406.7318001581125
+    },
+    {
+     "name": "RING_2",
+     "x": 7.0,
+     "r": 4.2,
+     "I_MA": -69.75030155261629,
+     "B_peak_T": 60.40460749310541,
+     "hoop_MN": 0.0,
+     "structure_m2": 0.0,
+     "structure_t": 0.0,
+     "Fx_MN": -9422.746337914223,
+     "conductor_t": 72.18302327546375,
+     "p_mag_MPa": 1451.7782096235724
+    },
+    {
+     "name": "RING_3",
+     "x": 6.3,
+     "r": 6.4,
+     "I_MA": 97.20797623097833,
+     "B_peak_T": 59.98861149815032,
+     "hoop_MN": 7323.519590555904,
+     "structure_m2": 4.882346393703936,
+     "structure_t": 314.1292761649338,
+     "Fx_MN": 16054.444831851355,
+     "conductor_t": 153.29273173211496,
+     "p_mag_MPa": 1431.850778523106
+    },
+    {
+     "name": "RING_4",
+     "x": 4.0,
+     "r": 7.6,
+     "I_MA": 28.856584644202734,
+     "B_peak_T": 24.94819040817229,
+     "hoop_MN": 636.0629162912732,
+     "structure_m2": 0.42404194419418206,
+     "structure_t": 32.3983028188072,
+     "Fx_MN": -4161.330161313248,
+     "conductor_t": 54.03786830407741,
+     "p_mag_MPa": 247.64994752391362
+    },
+    {
+     "name": "RING_5",
+     "x": -1.6,
+     "r": 8.9,
+     "I_MA": 33.80156870950016,
+     "B_peak_T": 26.163343770658006,
+     "hoop_MN": 938.437031806424,
+     "structure_m2": 0.6256246878709494,
+     "structure_t": 55.976241656147394,
+     "Fx_MN": -958.84552199471,
+     "conductor_t": 74.12531477995522,
+     "p_mag_MPa": 272.36207584051766
+    },
+    {
+     "name": "RING_6",
+     "x": -8.4,
+     "r": 9.9,
+     "I_MA": 37.60790512818304,
+     "B_peak_T": 28.167173065052836,
+     "hoop_MN": 920.9441412631443,
+     "structure_m2": 0.6139627608420962,
+     "structure_t": 61.10504608156302,
+     "Fx_MN": -2281.1184499270616,
+     "conductor_t": 91.73900492778489,
+     "p_mag_MPa": 315.6797069036219
+    }
+   ],
+   "scenarios": [
+    {
+     "Je_label": "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+     "Je": 153000000.0,
+     "sigma_label": "today: high-strength steel / Hastelloy reinforcement",
+     "sigma": 1500000000.0,
+     "conductor_t": 470.9491766113394,
+     "structure_t": 469.3413173213707,
+     "total_t": 940.2904939327101
+    },
+    {
+     "Je_label": "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+     "Je": 153000000.0,
+     "sigma_label": "assumed: carbon-fibre / nanotube composite at 4 K",
+     "sigma": 3000000000.0,
+     "conductor_t": 470.9491766113394,
+     "structure_t": 234.67065866068535,
+     "total_t": 705.6198352720247
+    },
+    {
+     "Je_label": "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+     "Je": 153000000.0,
+     "sigma_label": "assumed: 6 GPa structural fibre at 4 K",
+     "sigma": 6000000000.0,
+     "conductor_t": 470.9491766113394,
+     "structure_t": 117.33532933034267,
+     "total_t": 588.284505941682
+    },
+    {
+     "Je_label": "assumed: 2x engineering current density at the same field",
+     "Je": 306000000.0,
+     "sigma_label": "today: high-strength steel / Hastelloy reinforcement",
+     "sigma": 1500000000.0,
+     "conductor_t": 235.4745883056697,
+     "structure_t": 469.3413173213707,
+     "total_t": 704.8159056270404
+    },
+    {
+     "Je_label": "assumed: 2x engineering current density at the same field",
+     "Je": 306000000.0,
+     "sigma_label": "assumed: carbon-fibre / nanotube composite at 4 K",
+     "sigma": 3000000000.0,
+     "conductor_t": 235.4745883056697,
+     "structure_t": 234.67065866068535,
+     "total_t": 470.14524696635505
+    },
+    {
+     "Je_label": "assumed: 2x engineering current density at the same field",
+     "Je": 306000000.0,
+     "sigma_label": "assumed: 6 GPa structural fibre at 4 K",
+     "sigma": 6000000000.0,
+     "conductor_t": 235.4745883056697,
+     "structure_t": 117.33532933034267,
+     "total_t": 352.80991763601236
+    },
+    {
+     "Je_label": "assumed: 4x (thin-substrate tape, higher fill)",
+     "Je": 612000000.0,
+     "sigma_label": "today: high-strength steel / Hastelloy reinforcement",
+     "sigma": 1500000000.0,
+     "conductor_t": 117.73729415283485,
+     "structure_t": 469.3413173213707,
+     "total_t": 587.0786114742056
+    },
+    {
+     "Je_label": "assumed: 4x (thin-substrate tape, higher fill)",
+     "Je": 612000000.0,
+     "sigma_label": "assumed: carbon-fibre / nanotube composite at 4 K",
+     "sigma": 3000000000.0,
+     "conductor_t": 117.73729415283485,
+     "structure_t": 234.67065866068535,
+     "total_t": 352.4079528135202
+    },
+    {
+     "Je_label": "assumed: 4x (thin-substrate tape, higher fill)",
+     "Je": 612000000.0,
+     "sigma_label": "assumed: 6 GPa structural fibre at 4 K",
+     "sigma": 6000000000.0,
+     "conductor_t": 117.73729415283485,
+     "structure_t": 117.33532933034267,
+     "total_t": 235.07262348317752
+    }
+   ],
+   "quench_modules": 115,
+   "module_energy_GJ": 2.4894640443005187,
+   "dump_steel_t": 1431.4418254727982,
+   "conductor_limit_ok": {
+    "today: REBCO critical field margin at 20 K": false,
+    "assumed: 45 T class": false,
+    "assumed: 60 T class": false
+   }
+  },
+  {
+   "basis": "operating",
+   "distribution": "research, optimised current distribution",
+   "E_J": 10344986017.651829,
+   "k": 1.9151064478738695,
+   "W_J": 82631446557.06525,
+   "W_over_E": 7.987584170347817,
+   "binding": "RING_5",
+   "B_burn_T": 5.130663120036774,
+   "B_wind_T": 24.76695955985518,
+   "B_wind_by_Je": [
+    {
+     "Je": 153000000.0,
+     "B_peak_T": 24.76695955985518
+    },
+    {
+     "Je": 306000000.0,
+     "B_peak_T": 35.02577010829318
+    },
+    {
+     "Je": 612000000.0,
+     "B_peak_T": 49.53391911971036
+    }
+   ],
+   "hoop_GN": 2.512652318916916,
+   "Fx_max_GN": 3.720427495575603,
+   "Fx_net_MN": -1.4275248403496903,
+   "coils": [
+    {
+     "name": "RING_1",
+     "x": 9.0,
+     "r": 2.5,
+     "I_MA": -11.97401155468658,
+     "B_peak_T": 12.296395066571968,
+     "hoop_MN": 0.0,
+     "structure_m2": 0.0,
+     "structure_t": 0.0,
+     "Fx_MN": -131.49196535087702,
+     "conductor_t": 7.375973869451501,
+     "p_mag_MPa": 60.161098328757994
+    },
+    {
+     "name": "RING_2",
+     "x": 7.0,
+     "r": 4.2,
+     "I_MA": -8.37970606744342,
+     "B_peak_T": 13.140272073354081,
+     "hoop_MN": 0.0,
+     "structure_m2": 0.0,
+     "structure_t": 0.0,
+     "Fx_MN": -534.9877408833219,
+     "conductor_t": 8.671969936237856,
+     "p_mag_MPa": 68.70191698964719
+    },
+    {
+     "name": "RING_3",
+     "x": 6.3,
+     "r": 6.4,
+     "I_MA": 33.28183348555154,
+     "B_peak_T": 22.444109213945254,
+     "hoop_MN": 1143.290084952326,
+     "structure_m2": 0.7621933899682174,
+     "structure_t": 49.03938364495569,
+     "Fx_MN": 3720.427495575603,
+     "conductor_t": 52.483997402959055,
+     "p_mag_MPa": 200.43099708992253
+    },
+    {
+     "name": "RING_4",
+     "x": 4.0,
+     "r": 7.6,
+     "I_MA": 31.45141974767522,
+     "B_peak_T": 24.76695955985518,
+     "hoop_MN": 648.311372977489,
+     "structure_m2": 0.43220758198499265,
+     "structure_t": 33.02218639796142,
+     "Fx_MN": -1145.3923468655278,
+     "conductor_t": 58.89704894936605,
+     "p_mag_MPa": 244.06501473806114
+    },
+    {
+     "name": "RING_5",
+     "x": -1.6,
+     "r": 8.9,
+     "I_MA": 32.0357091493893,
+     "B_peak_T": 24.491415404110597,
+     "hoop_MN": 653.9443953184137,
+     "structure_m2": 0.43596293021227583,
+     "structure_t": 39.00671889680657,
+     "Fx_MN": -1503.9518023573378,
+     "conductor_t": 70.25286445448788,
+     "p_mag_MPa": 238.66454639309333
+    },
+    {
+     "name": "RING_6",
+     "x": -8.4,
+     "r": 9.9,
+     "I_MA": 7.593550274335721,
+     "B_peak_T": 6.457874598140999,
+     "hoop_MN": 67.1064656686872,
+     "structure_m2": 0.04473764377912481,
+     "structure_t": 4.452543312161966,
+     "Fx_MN": -406.03116495888844,
+     "conductor_t": 18.52335948153151,
+     "p_mag_MPa": 16.593551791979156
+    }
+   ],
+   "scenarios": [
+    {
+     "Je_label": "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+     "Je": 153000000.0,
+     "sigma_label": "today: high-strength steel / Hastelloy reinforcement",
+     "sigma": 1500000000.0,
+     "conductor_t": 216.20521409403386,
+     "structure_t": 125.52083225188564,
+     "total_t": 341.7260463459195
+    },
+    {
+     "Je_label": "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+     "Je": 153000000.0,
+     "sigma_label": "assumed: carbon-fibre / nanotube composite at 4 K",
+     "sigma": 3000000000.0,
+     "conductor_t": 216.20521409403386,
+     "structure_t": 62.76041612594282,
+     "total_t": 278.9656302199767
+    },
+    {
+     "Je_label": "today: REBCO tape stack at 20 K, ~20 T (engineering current density)",
+     "Je": 153000000.0,
+     "sigma_label": "assumed: 6 GPa structural fibre at 4 K",
+     "sigma": 6000000000.0,
+     "conductor_t": 216.20521409403386,
+     "structure_t": 31.38020806297141,
+     "total_t": 247.58542215700527
+    },
+    {
+     "Je_label": "assumed: 2x engineering current density at the same field",
+     "Je": 306000000.0,
+     "sigma_label": "today: high-strength steel / Hastelloy reinforcement",
+     "sigma": 1500000000.0,
+     "conductor_t": 108.10260704701693,
+     "structure_t": 125.52083225188564,
+     "total_t": 233.62343929890255
+    },
+    {
+     "Je_label": "assumed: 2x engineering current density at the same field",
+     "Je": 306000000.0,
+     "sigma_label": "assumed: carbon-fibre / nanotube composite at 4 K",
+     "sigma": 3000000000.0,
+     "conductor_t": 108.10260704701693,
+     "structure_t": 62.76041612594282,
+     "total_t": 170.86302317295974
+    },
+    {
+     "Je_label": "assumed: 2x engineering current density at the same field",
+     "Je": 306000000.0,
+     "sigma_label": "assumed: 6 GPa structural fibre at 4 K",
+     "sigma": 6000000000.0,
+     "conductor_t": 108.10260704701693,
+     "structure_t": 31.38020806297141,
+     "total_t": 139.48281510998834
+    },
+    {
+     "Je_label": "assumed: 4x (thin-substrate tape, higher fill)",
+     "Je": 612000000.0,
+     "sigma_label": "today: high-strength steel / Hastelloy reinforcement",
+     "sigma": 1500000000.0,
+     "conductor_t": 54.051303523508466,
+     "structure_t": 125.52083225188564,
+     "total_t": 179.5721357753941
+    },
+    {
+     "Je_label": "assumed: 4x (thin-substrate tape, higher fill)",
+     "Je": 612000000.0,
+     "sigma_label": "assumed: carbon-fibre / nanotube composite at 4 K",
+     "sigma": 3000000000.0,
+     "conductor_t": 54.051303523508466,
+     "structure_t": 62.76041612594282,
+     "total_t": 116.81171964945128
+    },
+    {
+     "Je_label": "assumed: 4x (thin-substrate tape, higher fill)",
+     "Je": 612000000.0,
+     "sigma_label": "assumed: 6 GPa structural fibre at 4 K",
+     "sigma": 6000000000.0,
+     "conductor_t": 54.051303523508466,
+     "structure_t": 31.38020806297141,
+     "total_t": 85.43151158647987
+    }
+   ],
+   "quench_modules": 34,
+   "module_energy_GJ": 2.4303366634430956,
+   "dump_steel_t": 413.15723278532624,
+   "conductor_limit_ok": {
+    "today: REBCO critical field margin at 20 K": true,
+    "assumed: 45 T class": true,
+    "assumed: 60 T class": true
+   }
+  }
+ ],
+ "built": {
+  "W_J": 27049614580.208412,
+  "B_burn_T": 2.0979110726467987,
+  "B_wind_T": 18.56730015246224,
+  "hoop_GN": 0.9600588541471236,
+  "Fx_max_GN": 1.5168850639716438,
+  "Fx_net_MN": -5.106256726272946
+ },
+ "pulsed": {
+  "persistent_ripple": 0.12519429888604922,
+  "recharge_every_pulse_W": 470756693635210.25,
+  "recharge_at_mission_rate_W": 85436462328175.44
+ }
+}

@@ -725,12 +725,17 @@ candidates of all nine classes are separate accessory assets (docs/ACCESSORIES.m
   Simulations · Fusion Engineering (`engineering/fusion-ignition/`, lab/studies/fusion-ignition with chapters.py, tools/story_ignite.py,
   web/engineering/fusion-ignition.js); the engine research behind it is lab/studies/vertex-compact-engine (MPN, RON, AMPN, HIMS, compact
   C1-C4, thermal, source, extraction, optimize). Owner decisions 2026-11-24: B edge-on blades, thin blanket optional, full blanket archived,
-  source first; burn about 4 m aft with stronger closure coils approved as research geometry only (page switch Original / Research).
+  source first; burn about 4 m aft with stronger closure coils approved as research geometry (page switch Original / Research), and on
+  2026-11-25 as the primary experimental direction and working model (page default; geometry only, not the performance figures).
   Still open, nothing closes: coupled C1 0.41 MN at 2,200x; research geometry 0.94 MN at 1,155x (pickup re-traced); with 80 % early
   extraction 0.36 MN at 228x (the levers compete, ENG-072); against 21.8 MN, 19,201 km/s and 1x. Capture at the moved burn needs 286 GJ per
   engine and 30 T at the windings (ENG-067), 16 GN axial (ENG-068), a 19 min dump (ENG-069). Next: coupled plasma expansion in the research
   geometry, re-run the thermal study for the moved burn (ENG-070), hydrogen coupling model, blade and root dynamics (ENG-058), edge-strip
   life (ENG-057), R1 engine sized for the V4 ship, R4 `operating_point.species`; render on demand while paused; portrait-phone framing.
+  Pulse study (vertex-pulse, 2026-11-25): pulse size moves the rate, not the heat (8,448x at mission power at every size); no size fits
+  the face spike and the injector together (ENG-074); reconcile the burn-ledger and operating charged shares (ENG-075); re-trace steering
+  with the optimised ring currents (83 GJ, 25 T; ENG-076); quench modules (ENG-077); jet must carry 80 % of the fusion power, carries
+  5.1 % (ENG-078); armour covers for 1 header and 29 line runs (ENG-079); driver fixed by the gain (ENG-080).
 
 ## Owner routing and question continuity
 
