@@ -2,7 +2,7 @@
 | Lab entry | |
 | --- | --- |
 | Kind | Study |
-| Status | ACTIVE (deployed as a RESEARCH page; expanded to six chapters by the owner brief 2026-11-24 09:49Z) |
+| Status | PARKED (live RESEARCH page; six chapters, 24 stages; accepted as the phase milestone by the owner 2026-11-25) |
 | Question | Fusion Engineering, From Nucleus to Engine: how is the Vertex drive built, started and ignited, what do the models predict at each step, and where does it fail? |
 | Model base | main c169a9f with the compact C1-C4, thermal, source and extraction imports of lab/studies/vertex-compact-engine; Vertex modules vertex_engine, vertex_magnet, vertex_radiation; ignition-failures and selective-fusion results |
 | Branch | claude/project-thread-1p6mtu, owner brief 2026-11-23 10:08Z |
