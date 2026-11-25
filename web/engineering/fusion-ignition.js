@@ -28,8 +28,9 @@ const E = v => v >= 1e4 || (v < 1e-2 && v > 0) ? v.toExponential(2).replace('e+'
 const TS = s => s < 1e-6 ? `${(s * 1e9).toPrecision(2)} ns` : s < 1 ? `${(s * 1e3).toPrecision(3)} ms` : `${s.toPrecision(3)} s`;
 const pct = v => `${(100 * v).toFixed(v < 0.1 ? 1 : 0)} %`;
 const CHIP = { SPEC: ['SPEC', 'spec'], CALCULATED: ['CALCULATED', 'calculated'], SAMPLED: ['CALCULATED', 'sampled'], IMPORTED: ['WORKING', 'imported'],
-  'MODEL-BASED': ['ASSUMED', 'model-based'], ILLUSTRATIVE: ['ASSUMED', 'illustrative'], OPEN: ['OPEN', 'open'], SPECULATIVE: ['SPECULATIVE', 'speculative'] };
-const chip = c => `<span class="st st-${CHIP[c][0]}">${CHIP[c][1]}</span>`;
+  'MODEL-BASED': ['ASSUMED', 'model-based'], ILLUSTRATIVE: ['ASSUMED', 'illustrative'], OPEN: ['OPEN', 'open'], SPECULATIVE: ['SPECULATIVE', 'speculative'],
+  PROTOTYPE: ['ASSUMED', 'prototype'], ANALYTIC: ['CALCULATED', 'analytic'], SCENARIO: ['ASSUMED', 'scenario'] };
+const chip = c => { const k = CHIP[c] || ['ASSUMED', String(c || '').toLowerCase()]; return `<span class="st st-${k[0]}">${k[1]}</span>`; };
 
 // ---- chapters, stages and scenes ---------------------------------------------------------------------------------------------------------
 // Twenty-four stages in six chapters (tools/story_ignite.py STAGES). Each stage plays one or more segments of a scene: [scene, from, to, u0, u1]
@@ -88,7 +89,7 @@ let catMeshes = {}, catMats = {}, engineMats = [], burnW = [], N1 = null, cutPla
 let fieldLines = [], pathLines = [], camFrom = null, camTo = null, camT = 1, userCam = false;
 const BURN0 = -18.8;
 let BURN = BURN0;                             // the burn point in the engine frame; moves aft in the Research configuration
-let CFG = 'original', resGroup = null, resState = { op: 1, pos: null };
+let CFG = 'research', resGroup = null, resState = { op: 1, pos: null }, PULSE = 1, cavMesh = null;   // research geometry: the approved working model (owner 2026-11-25)
 
 function v3(a) { return new THREE.Vector3(a[0], a[1], a[2]); }
 function shipPt(x, yb, zb) { return new THREE.Vector3(x, zb, -yb); }       // Blender ship (x, y, z) -> runtime
@@ -179,7 +180,7 @@ function init(bin, field) {
   buildFx();
   buildMarkers();
   buildThermal();
-  buildResearch();
+  buildResearch(); if (OPT()) setCfg(CFG); else CFG = 'original';
   stars();
   new ResizeObserver(() => { dirty = true; }).observe(stage);
   canvas.addEventListener('pointermove', hover);
@@ -441,8 +442,12 @@ function LED() {                              // the ledger every stage reads, b
   if (view === 'concept') { const n = nozOf('C1'); return Object.assign(pulseLedger(Lg.design_cell, Lg.target_mass_kg, Lg.design_Hz, Object.assign({}, n, { eta: 1, hit: 0 }), n.budget_W),
     { state: 'DESIGN', cls: 'SPECULATIVE', label: 'Intended: the engine design point (78 % jet assumed)' }); }
   const R = CFG === 'research' && Lg.nozzle['R|1'], n = R || nozOf('C1');
-  return Object.assign(pulseLedger(Lg.grid.cells[Lg.grid.design], Lg.target_mass_kg, Lg.design_Hz, n, n.budget_W),
-    { state: 'COUPLED', cls: R ? 'SAMPLED' : 'CALCULATED', label: R ? `Modeled: the design target burned (R2-B), research geometry (${OPT().research.label}, not canon)` : 'Modeled: the design target burned (R2-B), nozzle C1' });
+  // pulse size (vertex-pulse): the R2-B target scaled at the design areal density keeps its shares, so the cell scales with the mass and the
+  // rate falls with it to hold the power; heat and thrust stay, every per-pulse load moves (the study's finding, not an assumption here)
+  const f = R && PU() ? PULSE : 1, c0 = Lg.grid.cells[Lg.grid.design];
+  const cell = f === 1 ? c0 : Object.fromEntries(Object.entries(c0).map(([k, v]) => [k, typeof v === 'number' && /_J$|reacted_kg/.test(k) ? v * f : v]));
+  return Object.assign(pulseLedger(cell, Lg.target_mass_kg * f, Lg.design_Hz / f, n, n.budget_W),
+    { state: 'COUPLED', cls: R ? 'SAMPLED' : 'CALCULATED', label: R ? `Modeled: the design target burned (R2-B), research geometry (${OPT().research.label}, not canon)${f !== 1 ? `, pulse ×${fx(f)} at the same power` : ''}` : 'Modeled: the design target burned (R2-B), nozzle C1' });
 }
 function expLedger() {
   const Lg = D.ledger, cell = Lg.grid.cells[`${lab.rhoR}|${lab.Ti0}|${lab.mix}`], noz = nozOf(lab.variant, lab.field);
@@ -553,7 +558,7 @@ function labUpdate() {
     ${lab.mix !== 1 ? `<p class="meta">The ignition animation plays the 1 : 1 burn history; these numbers use the ${lab.mix === 0.5 ? '1 : 2' : '2 : 1'} burn.</p>` : ''}
     <p class="meta">How this is combined: one pulse of the chosen target burns in the R2-B model (precomputed for every lever setting), the nozzle
       shares of the chosen variant split the plasma energy, and the rate turns joules into watts and impulse into thrust. The nozzle and pickup
-      shares are ${chip('IMPORTED')} from the compact study's test particles. Nothing here changes the ship.</p>${compareTable()}${optFor('lab')}${conceptList()}`;
+      shares are ${chip('IMPORTED')} from the compact study's test particles. Nothing here changes the ship.</p>${compareTable()}${optFor('lab')}${pulseFor('lab')}${conceptList()}`;
   window.__fi.lab = { thrust_N: r.thrust_N, heat_over: r.heat_over, jet_share: r.jet_share, flu: r.flu, exhaust_m_s: r.exhaust_m_s };
   dirty = true; draw2d();
 }
@@ -599,7 +604,7 @@ function applyScene(first) {
 }
 function stageReadout() {
   const st = STAGES[si]; if (st === 'lab') { labUpdate(); return; }
-  const sc = SC(), id = ({ operate: 'losses', ship: 'need', hardware: st === 'assembly' ? 'hardware' : 'hardware' })[sc] || sc, xt = extraFor(st) + optFor(st), n = D.need, e = D.engine, ch = D.channels.variants[view === 'exp' ? lab.variant : 'C1'], md = D.modeled;
+  const sc = SC(), id = ({ operate: 'losses', ship: 'need', hardware: st === 'assembly' ? 'hardware' : 'hardware' })[sc] || sc, xt = extraFor(st) + optFor(st) + pulseFor(st), n = D.need, e = D.engine, ch = D.channels.variants[view === 'exp' ? lab.variant : 'C1'], md = D.modeled;
   const row = (a, b, c = '') => `<div><dt>${a}</dt><dd class="num ${c}">${b}</dd></div>`;
   let h = '';
   if (id === 'need') h = row('Departure mass', `${Math.round(n.departure_t).toLocaleString('en')} t`) + row('Cruise speed', `${n.cruise_c.toFixed(3)} c`) + row('Exhaust speed', `${n.exhaust_c.toFixed(3)} c`) +
@@ -692,7 +697,7 @@ function update(t) {
   const stg = STAGES[si], sc0 = SC(), OP = sc0 === 'operate', SHIP = sc0 === 'ship';
   const id = OP ? 'lab' : SHIP ? 'need' : sc0;              // Operating draws the full engine like the lab; In the ship draws the cluster in the ship
   applyScene(false);
-  const lk = view + CFG + JSON.stringify(lab); if (lk !== LEDk || !LEDc) { LEDk = lk; LEDc = LED(); }
+  const lk = view + CFG + PULSE + JSON.stringify(lab); if (lk !== LEDk || !LEDc) { LEDk = lk; LEDc = LED(); }
   // progressive disclosure: one mechanism at a time in Thrust (field, one product, many, exhaust, thrust) and Losses (photons, neutrons, charged, all)
   const NZ = id === 'nozzle' ? stepOf(id) : -1, LS = id === 'losses' ? stepOf(id) : -1, TS = id === 'thermal' ? stepOf(id) : -1;
   const sk = `${stg}:${id}:${stepOf(id)}`; if (sk !== lastStep) { const first = !lastStep.startsWith(`${stg}:${id}:`); lastStep = sk; if (!first && !userCam && stepOf(id) >= 0) camGo(id); if (!first && id === 'thermal') stageReadout(); }
@@ -718,7 +723,7 @@ function update(t) {
     if (stg === 'cryo' && cat === 'CRYOGENIC') { op = 1; em = Math.max(em, 0.35); }
     const msh = catMeshes[cat]; msh.position.set(0, 0, 0);
     if (A) { const k = ASM_CAT[cat] ?? 0, f = A.f(k); op = Math.min(op, A.iso && k !== A.k ? 0.07 : f); msh.position.set(-(1 - ease(f)) * 26, (1 - ease(f)) * 9, 0); if (k === A.k && f > 0) em = Math.max(em, 0.3 * (1 - f) + 0.1); }
-    if (cat === 'MAGNETIC_COILS') { resState = { op, em, pos: msh.position }; if (CFG === 'research') op = 0; }
+    if (cat === 'MAGNETIC_COILS') { resState = { op, em, pos: msh.position }; if (CFG === 'research' && resGroup) op = 0; }
     mat.opacity = op; mat.visible = op > 0.01; mat.depthWrite = op > 0.9;
     mat.emissive.copy(heatOn && em > 0.36 ? new THREE.Color(COL.bad) : base).multiplyScalar(em);
     mat.clippingPlanes = layers.cut && ['hardware', 'magnets', 'fuel', 'nozzle', 'losses', 'lab', 'thermal'].includes(id) ? [cutPlane] : [];
@@ -1970,11 +1975,13 @@ function ctlUpdate() {                       // in-scene controls: one small row
     <label><span>Grazing angle</span><input id="mir-a" type="range" min="-2" max="3" step="0.02" value="${Math.log10(MIR.psi)}" aria-label="Grazing angle, log scale from 0.01 to 1000 mrad"></label>`;
   else if (st === 'assembly') h = `${B('asm', 'dir', ASM.dir < 0 ? 'dir' : '', ASM.dir < 0 ? 'Disassembling' : 'Disassemble')}${B('asm', 'iso', ASM.iso ? 'iso' : '', 'Isolate the current group')}`;
   if (OPT() && CFG_STAGES.has(st)) h += `<span class="fi-cfg">Engine</span>${B('cfg', 'original', CFG, 'Original')}${B('cfg', 'research', CFG, `Research: burn ${OPT().research.dz} m aft`)}`;
+  if (PU() && PULSE_STAGES.has(st) && CFG === 'research') h += `<span class="fi-cfg">Pulse</span>${PULSES.map(f => B('pulse', f, PULSE, `×${fx(f)}`)).join('')}`;
   ctlEl.hidden = !h; ctlEl.innerHTML = h;
 }
 ctlEl.addEventListener('click', ev => { const b = ev.target.closest('button'); if (!b) return; const d = b.dataset;
   if (d.T) PLX.T = +d.T; if (d.ut) { UNW.T = +d.ut; UNW.fl = []; } if (d.md) MIXS.d = +d.md; if (d.mt) MIXS.T = +d.mt; if (d.ak) ACC.k = +d.ak; if (d.sp) SPN.s = d.sp;
   if (d.cfg) setCfg(d.cfg);
+  if (d.pulse) { PULSE = +d.pulse; LEDc = null; window.__fi.pulse = PULSE; }
   if (d.asm === 'dir') { ASM.dir = -ASM.dir; su = 1 - su; syncU(); } if (d.asm === 'iso') ASM.iso = !ASM.iso;
   ctlUpdate(); stageReadout(); dirty = true; draw2d(); });
 ctlEl.addEventListener('input', ev => { if (ev.target.id === 'mir-a') { MIR.psi = 10 ** +ev.target.value; stageReadoutT(); draw2d(); } });
@@ -2014,6 +2021,9 @@ function buildResearch() {
   [mC, mW, mB, mG].forEach(mat => { const gs = parts.filter(p => p[1] === mat).map(p => p[0]); if (!gs.length) return;
     const geo = mergeGeometries(gs, false), im = new THREE.InstancedMesh(geo, mat, engineMats.length); engineMats.forEach((m, i) => im.setMatrixAt(i, m)); im.frustumCulled = false; resGroup.add(im); });
   resGroup.userData.mats = [mC, mW];
+  // the diamagnetic cavity of one pulse in the drawn research coils (vertex-pulse cavity_m): radius to scale, timing slowed
+  if (PU()) { const mc = new THREE.MeshBasicMaterial({ color: COL['wf-ignition'] || '#FFB070', transparent: true, opacity: 0.22, depthWrite: false, side: THREE.DoubleSide });
+    cavMesh = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 24, 14), mc, engineMats.length); cavMesh.frustumCulled = false; cavMesh.visible = false; scene.add(cavMesh); }
 }
 function setCfg(c) {
   const O = OPT(); if (!O) return; CFG = c;
@@ -2025,6 +2035,14 @@ function setCfg(c) {
   window.__fi.cfg = CFG; LEDc = null; dirty = true; ctlUpdate(); stageReadout(); draw2d();
 }
 function resUpdate(t) {
+  if (cavMesh) {
+    const st = STAGES[si], on = CFG === 'research' && ['products', 'magnets', 'nozzle', 'optimize', 'operate'].includes(st) && view !== 'concept';
+    cavMesh.visible = on;
+    if (on) { const row = pulseRow(), ph = (t * 0.7) % 1, r = Math.max(0.05, row.cavity_m * Math.min(1, ph * 1.6)), M4 = new THREE.Matrix4(), S4 = new THREE.Matrix4();
+      cavMesh.material.opacity = 0.28 * (1 - ph);
+      engineMats.forEach((m, i) => { M4.copy(m).multiply(S4.makeTranslation(BURN, 0, 0)).multiply(new THREE.Matrix4().makeScale(r, r, r)); cavMesh.setMatrixAt(i, M4); });
+      cavMesh.instanceMatrix.needsUpdate = true; }
+  }
   if (!resGroup) return;
   resGroup.visible = CFG === 'research';
   if (!resGroup.visible) return;
@@ -2067,6 +2085,66 @@ function optFor(st) {
         ['… with the plasma cavity', MN(4 * K.cavity.ext80.thrust_N), ks(K.cavity.ext80.exhaust_m_s), X(K.cavity.ext80.heat_over)]])
       + `<p class="meta">${esc(O.findings.combination)}</p>` + tbl(['Hydrogen added (× debris mass)', 'Inelastic: exhaust', 'Ideal elastic: thrust ×', 'Ideal elastic: exhaust'], O.hydrogen.filter(h => h.case === 'base').map(h => [`×${h.x}`, ks(h.inelastic.exhaust_m_s), (h.elastic.impulse_Ns / h.I0).toFixed(2), ks(h.elastic.exhaust_m_s)]))
       + `<p class="meta">${esc(O.findings.hydrogen)}</p>` + P_(['ENG-071', 'ENG-072']); }
+  }
+  return '';
+}
+
+// ---- Pulse architecture (lab/studies/vertex-compact-engine/vertex-pulse, IMPORTED, owner brief 2026-11-25): pulse size at the mission
+// power, magnets, transfer, integrated hardware, future-technology properties. Research geometry only; nothing here changes the ship.
+const PULSE_STAGES = new Set(['optimize', 'products', 'magnets', 'nozzle', 'heating', 'protection', 'operate', 'startup']);
+const PULSES = [1 / 16, 1 / 4, 1, 4, 16];
+function PU() { return D && D.chapters && D.chapters.pulse && D.chapters.pulse.rows ? D.chapters.pulse : null; }
+function fx(f) { return f >= 1 ? `${f}` : `1/${Math.round(1 / f)}`; }
+function pulseRow(f = PULSE) { const P = PU(); return P.rows.find(r => r.lever === 'size' && Math.abs(r.mass_factor - f) < 1e-9) || P.rows.find(r => r.label === 'Target mass x1'); }
+function pulseFor(st) {
+  const P = PU(); if (!P) return '';
+  const F = P.findings, cur = PULSE, ks = v => `${Math.round(v / 1e3).toLocaleString('en')} km/s`, GJ = v => `${(v / 1e9).toLocaleString('en', { maximumFractionDigits: v < 1e10 ? 2 : 0 })} GJ`;
+  const kHz = v => `${(v / 1e3).toLocaleString('en', { maximumFractionDigits: v < 1e4 ? 1 : 0 })} kHz`, TW = v => `${(v / 1e12).toFixed(1)} TW`;
+  const size = P.rows.filter(r => r.lever === 'size'), lev = P.rows.filter(r => r.lever !== 'size');
+  const nm = r => r.lever === 'size' ? `${r.mass_factor === cur ? '<b>' : ''}×${fx(r.mass_factor)}${r.mass_factor === cur ? '</b>' : ''}` : esc(r.label);
+  const fl = r => r.fails.length ? `<span class="bad">${esc(r.fails.join(', '))}</span>` : '<span class="good">none</span>';
+  const head = (t_, c = 'CALCULATED') => `<h3 class="fi-h">${t_} ${chip(c)}</h3>`;
+  switch (st) {
+    case 'optimize': return head('Pulse size at the mission power (research geometry)')
+      + `<p class="meta">Each target is the R2-B design target scaled in mass at the design areal density, fired at the rate that holds ${TW(P.P_need_W)} per engine. The Pulse buttons above the scene change the ledger the same way.</p>`
+      + tbl(['Target mass', 'Yield per pulse', 'Rate', 'Gain', 'Burn density', 'Driver per engine', 'Thrust per engine', 'Heat over radiator', 'Capture field energy', 'Surface spike', 'Injection speed', 'Fails'],
+        size.map(r => [nm(r), GJ(r.fusion_J), kHz(r.Hz), r.gain.toFixed(1), `${Math.round(r.rho0_kg_m3 / 1e3).toLocaleString('en')} g/cm³`, TW(r.driver_abs_W), MN(r.thrust_N), X(r.heat_over), GJ(r.W_burn_J),
+          `${Math.round(r.dT_K).toLocaleString('en')} K`, ks(r.v_inj_m_s), fl(r)]))
+      + tbl(['Pulse lever (mass ×1 unless named)', 'X-ray share', 'Rate', 'Thrust per engine', 'Heat over radiator', 'Capture', 'Fails'], lev.map(r => [`${nm(r)} ${r.cls !== 'CALCULATED' ? chip(r.cls) : ''}`, pct(r.xray_share), kHz(r.Hz), MN(r.thrust_N), X(r.heat_over), GJ(r.W_burn_J), fl(r)]))
+      + `<p class="meta">${esc(F.size)}</p><p class="meta">${esc(F.window)}</p><p class="meta">${esc(F.levers)}</p>` + P_(['ENG-073', 'ENG-074', 'ENG-080']);
+    case 'magnets': case 'startup': { const M = P.magnets, r = pulseRow();
+      return head('Capture field for each pulse, and the coil set')
+        + tbl(['Target mass', 'Charged energy basis: burn ledger', 'Operating point', 'Field at the burn', 'Plasma cavity in the drawn coils', 'Dent in the drawn coils’ field energy'],
+          size.map(q => [nm(q), GJ(q.W_burn_J), GJ(q.W_op_J), `${q.B_burn_T.toFixed(2)} T`, `${q.cavity_m.toFixed(2)} m`, pct(q.ripple)]))
+        + `<p class="meta">The drawn research coils hold ${GJ(P.W_built_J)}; the selected pulse (×${fx(cur)}) needs ${GJ(r.W_burn_J)} on the burn-ledger basis. ${esc(F.basis)}</p>`
+        + tbl(['Coil case', 'Stored energy', 'W / E', 'Peak at winding', 'Hoop', 'Largest axial', 'Net axial', 'Quench modules (10 s)', 'Mass today', 'With assumed materials'],
+          M.cases.map(c => [esc(`${c.basis === 'burn' ? 'Burn ledger' : 'Operating point'}: ${c.distribution}`), GJ(c.W_J), c.W_over_E.toFixed(1), `${c.B_wind_T.toFixed(1)} T`, `${c.hoop_GN.toFixed(1)} GN`,
+            `${c.Fx_max_GN.toFixed(2)} GN`, `${Math.abs(c.Fx_net_MN).toFixed(1)} MN`, c.quench_modules, `${Math.round(c.today_t).toLocaleString('en')} t`, `${Math.round(c.best_t).toLocaleString('en')} t`]))
+        + tbl(['Ring', ...Object.keys(M.distribution.mult).map(k => k.replace('RING_', ''))], [['Current × (optimised)', ...Object.values(M.distribution.mult).map(v => v.toFixed(2))]])
+        + `<p class="meta">Rings 1-6 are C1, C2, L1, L2, L3, L4. ${esc(F.magnets)} ${esc(F.conductor)} ${esc(F.loads)}</p>` + P_(['ENG-075', 'ENG-076', 'ENG-077']); }
+    case 'products': case 'nozzle': case 'operate': { const T = P.transfer;
+      return head('Equal thrust: what each pulse lever costs')
+        + tbl(['Pulse', 'Rate for the same thrust', 'Fusion power', 'Heat over radiator'], P.equal_thrust.map(q => [esc(q.label.replace('Target mass x', 'Target ×')), kHz(q.Hz), TW(q.fusion_W), X(q.heat_over)]))
+        + tbl(['Extraction at equal thrust (design rate, research)', 'Fusion power ×', 'Heat over radiator', 'Exhaust', 'of the need'], T.equal_thrust.map(q => [esc(q.label), q.fusion_factor.toFixed(2), X(q.heat_over), ks(q.exhaust_m_s), q.ve_over_need.toFixed(2)]))
+        + `<p class="meta">${esc(F.extraction)}</p>` + head('Moving product energy into reaction mass before the nozzle', 'ANALYTIC')
+        + tbl(['Where', 'Purpose', 'Column', 'Mass per pulse', '× fuel', 'Impulse ×', 'Exhaust / need'], T.shells.filter((q, i) => i < 4 || /cavity/.test(q.where)).map(q => [esc(q.where), esc(q.purpose),
+          `${q.column_g_cm2.toFixed(2)} g/cm²`, q.mass_kg < 1e-3 ? `${(q.mass_kg * 1e6).toFixed(2)} mg` : `${q.mass_kg.toPrecision(2)} kg`, q.mass_over_fuel.toPrecision(2), q.impulse_ratio.toFixed(2), q.ve_over_need.toFixed(3)]))
+        + `<ul class="fi-req">${T.requirements.map(q => `<li>${esc(q)}</li>`).join('')}</ul><p class="meta">${esc(F.transfer)}</p>` + P_(['ENG-078', 'ENG-072']); }
+    case 'heating': case 'protection': return head('The surface spike each pulse leaves on the nearest cryostat face')
+      + tbl(['Target mass', 'X-ray fluence', 'Spike (tungsten face)', 'Thermal stress', 'Cycles a year', 'Within fatigue'], size.map(r => [nm(r), `${(r.fluence_J_m2 / 1e6).toPrecision(3)} MJ/m²`,
+        `${Math.round(r.dT_K).toLocaleString('en')} K`, `${Math.round(r.stress_MPa).toLocaleString('en')} MPa`, r.cycles_per_year.toExponential(1), r.dT_K <= P.window.dT_limit_K ? '<span class="good">yes</span>' : '<span class="bad">no</span>']))
+      + `<p class="meta">Nearest face ${P.d_face_m.toFixed(1)} m from the moved burn; X-rays absorbed in about 0.1 mm of tungsten. ${esc(F.per_pulse)} ${esc(F.window)}</p>` + P_(['ENG-074']);
+    case 'geometry': case 'cooling': case 'cryo': case 'structure': { const G = P.frames, C = G.checks, n = C.connectivity;
+      return head('Integrated hardware of the research geometry', 'PROTOTYPE')
+        + `<dl class="fi-dl"><div><dt>Parametric parts placed by search</dt><dd class="num">${C.n_parts}</dd></div><div><dt>Clashes with the engine or each other</dt><dd class="num ${C.clashes ? 'bad' : 'good'}">${C.clashes}</dd></div>
+          <div><dt>Networks connected from their plant</dt><dd class="num good">hot ${n.hot.reached}/${n.hot.parts} · 20 K ${n.cryo.reached}/${n.cryo.parts} · warm ${n.warm.reached}/${n.warm.parts} · electrical ${n.electrical.reached}/${n.electrical.parts}</dd></div>
+          <div><dt>Longest unsupported run</dt><dd class="num">${C.max_span_m.toFixed(1)} m (limit 3 m)</dd></div><div><dt>In the burn’s view</dt><dd class="num bad">${C.exposed_headers.length} header, ${C.exposed_runs} line runs (need covers)</dd></div></dl>`
+        + tbl(['Coil', 'Lip arc', 'Lithium header', '20 K ring', 'Warm ring'], G.stations.map(s => [s.name, `±${s.lip_half_deg}°`, `${Math.round(s.th_sup % 360)}°`, `${Math.round(s.th_cryo)}°`, `${Math.round(s.th_warm)}°`]))
+        + `<p class="meta">Angles are poloidal round each coil (0° forward, 90° outward). ${esc(F.geometry)}</p>` + P_(['ENG-079']); }
+    case 'assembly': return head('Integrated hardware, in assembly order', 'PROTOTYPE') + `<ol class="fi-asm">${P.assembly.map(a => `<li><b>${esc(a.title)}</b> ${esc(a.why)} <span class="${a.closes ? 'good' : 'bad'}">${esc(a.effect)}</span> <a href="#p-${a.problem}">${a.problem}</a></li>`).join('')}</ol>`;
+    case 'ship': case 'lab': return head('What future technology would have to deliver', 'CALCULATED')
+      + tbl(['Area', 'Property needed', 'Today', 'Gap'], P.future.map(q => [esc(q.area), esc(q.need), esc(q.today), `${esc(q.gap)} ${chip(q.cls)}`]))
+      + `<p class="meta">Stated as measurable properties; no coefficient in the models is improved to make the engine close. ${esc(F.none)}</p>`;
   }
   return '';
 }

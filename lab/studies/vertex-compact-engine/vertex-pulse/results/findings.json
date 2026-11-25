@@ -1,0 +1,118 @@
+{
+ "findings": {
+  "size": "At the mission power (65.3 TW per engine) the pulse size changes the rate, not the averages: from x1/64 to x16 (the R2-B target scaled at the design areal density) thrust stays 1.73 MN per engine and heat 8,448x the radiator share, because yield, X-ray share and gain (23.5) do not move with the target mass. Smaller pulses do not reduce the average waste heat.",
+  "per_pulse": "What smaller pulses do reduce is everything per pulse: capture energy scales with the pulse (W = 27.7 x the charged energy in the research topology), so the design target at the mission rate (42 kHz) needs 7.1 GJ, inside the 27 GJ the drawn research coils hold; the surface spike on the nearest cryostat is 6,491 K at x1 and 101 K at x1/64.",
+  "window": "No pulse size passes the surface spike, the injection speed and the nozzle transit together: the tungsten face needs the target at most x0.018 (spike under 117 K), the injector (under 20 km/s, cavity collapse before the next target) at least x18: a gap of 989 in target mass. Moving the face to keep x1 needs 55 m from the burn (not compact).",
+  "levers": "At equal thrust the best pulse lever is areal density x0.5 (mass x1): heat 5,248x against 8,448x, because its X-ray share falls to 67%; tamping and a 3He-rich mix raise it.",
+  "basis": "The capture energy depends on which charged share is used: the burn ledger (plasma + escaped products, 16% of the yield) gives 7.1 GJ at the mission rate; the mission operating point (90% charged) gives 39 GJ at the same rate and 286 GJ at the design rate. The two source models are not reconciled (ENG-075).",
+  "magnets": "Field strength is not the lever. Per-coil current distribution cuts the stored energy for the same capture from 286 to 83 GJ (x3.5) and the peak at the windings from 60 to 25 T, inside today's REBCO margin; the best scanned topology has W/E 14 against the floor of 1. The new distribution has not been re-traced for steering (ENG-076).",
+  "conductor": "Conductor and structure at capture (operating basis, optimised distribution): 342 t with today's REBCO and 1.5 GPa reinforcement, 85 t only with 4x current density and 6 GPa fibre (assumed, not credited). Quench: 34 modules of 2.4 GJ each dump within 10 s at 50 kA and 10 kV.",
+  "loads": "The coil forces close inside the coil set: up to 16.1 GN on one coil (drawn distribution) against a net 54 MN (optimised 3.7 GN, net 1.4 MN); the cage carries a self-balanced load, the ship sees only the thrust.",
+  "extraction": "Extraction at equal thrust: 80 % early extraction halves the heat per newton (605x against 1,155x) but needs 2.7x the fusion power and gives 2,910 km/s (0.15 of the requirement).",
+  "transfer": "Upstream transfer has a hard condition: the mission thrust at the mission exhaust speed means the jet must carry 80% of the fusion power; the coupled pulse carries 5.1%. Charged products already give their energy to the fuel (its areal density is 893x the proton range), so outside hydrogen would only lower the exhaust speed. The one upstream route that raises it is a low-Z shell at the target that absorbs X-rays (25 g/cm2, 0.76x the fuel): exhaust 0.62 of the need, impulse x2.4, as a cold-opacity upper bound (a shell heated to keV stops absorbing).",
+  "geometry": "Integrated hardware: 87 parametric parts placed by search against the approved engine and each other; 0 clashes, every network connected from its plant (hot 36/36, 20 K 18/18, warm 21/21, electrical 6/6), longest unsupported run 2.8 m; 1 header in the burn's view, 29 line runs that need armour covers.",
+  "none": "No pulse architecture, coil distribution or transfer route closes the engine. The pulse study moves the problem: smaller pulses relieve the magnets but not the heat, and the per-pulse surface load and the injector bound the size from both sides."
+ },
+ "future": [
+  {
+   "area": "Superconductor",
+   "need": "25 T at the winding with the optimised distribution (60 T drawn)",
+   "today": "REBCO about 20-30 T at 20 K",
+   "gap": "met if the distribution holds the steering (ENG-076)",
+   "cls": "CALCULATED"
+  },
+  {
+   "area": "Structural fibre",
+   "need": "10.2 GN hoop (drawn distribution) at 1.5 GPa = 469 t",
+   "today": "1.5 GPa steels and Hastelloy at 4 K",
+   "gap": "x4 lighter at 6 GPa; not credited",
+   "cls": "SCENARIO"
+  },
+  {
+   "area": "Plasma-facing surface",
+   "need": "2.0 MJ/m2 per pulse at 7.3 m, 42 kHz, 1.3e+12 cycles a year",
+   "today": "tungsten: about 117 K spike for 300 MPa fatigue amplitude",
+   "gap": "x56 over; a renewable or vapour-shielded face is needed",
+   "cls": "CALCULATED"
+  },
+  {
+   "area": "Target injection",
+   "need": "136 km/s through the collapsing cavity at x1 (21 km/s at x16)",
+   "today": "gas guns about 1 km/s, electromagnetic about 10 km/s",
+   "gap": "x7-14; or a protected injection path (OPEN)",
+   "cls": "CALCULATED"
+  },
+  {
+   "area": "Driver",
+   "need": "2.8 TW absorbed per engine at gain 23, 42 kHz",
+   "today": "no driver at this rate or power",
+   "gap": "independent of pulse size; wall-plug 50 % assumed",
+   "cls": "IMPORTED"
+  },
+  {
+   "area": "Burn physics",
+   "need": "jet 80% of the fusion power",
+   "today": "R2-B coupled pulse 5.1% (X-rays 85%)",
+   "gap": "needs a photon share near 10 % and a lossless nozzle together (OPEN)",
+   "cls": "CALCULATED"
+  },
+  {
+   "area": "Control (AI)",
+   "need": "target placement, timing and coil current trimmed pulse by pulse at tens of kHz",
+   "today": "no number computed: the placement tolerance of the capture field is OPEN",
+   "gap": "requirement to be set by a coupled model",
+   "cls": "OPEN"
+  },
+  {
+   "area": "Manufacture",
+   "need": "3.6e+09 targets a day per engine at 40 um and 23,897 g/cm3 burn density",
+   "today": "laboratory target fabrication: a few per day",
+   "gap": "several orders of magnitude",
+   "cls": "CALCULATED"
+  }
+ ],
+ "assembly": [
+  {
+   "title": "Re-aimed tungsten lips",
+   "why": "Each coil's burn-facing side gets a sacrificial lip aimed at the moved burn, eight modules split at the longerons so the crawler can exchange them",
+   "effect": "replaces the armour aimed at the drawn burn; spike 6,491 K per pulse at x1",
+   "problem": "ENG-074",
+   "closes": false
+  },
+  {
+   "title": "Twin-bore lithium headers",
+   "why": "One header carries supply and return along the lip edge, inside the coil's shadow, with a feeder into every module",
+   "effect": "hot network connected (36/36)",
+   "problem": "ENG-079",
+   "closes": true
+  },
+  {
+   "title": "20 K distribution rings",
+   "why": "A ring on every cryostat skin, fed from both cage cryogen lines, so a coil keeps cooling if one feed is lost",
+   "effect": "cryo network connected (18/18)",
+   "problem": "ENG-077",
+   "closes": true
+  },
+  {
+   "title": "Warm manifold and headers",
+   "why": "A manifold on the thrust collar rim and two headers along the cage cool the cryostat shields and frames",
+   "effect": "warm network connected (21/21)",
+   "problem": "ENG-079",
+   "closes": true
+  },
+  {
+   "title": "Supermirror strips",
+   "why": "Conical strips on the lip edges, set grazing to the burn rays, turn the X-rays that would skim the lip edge",
+   "effect": "reflect only within a few mrad; most X-ray energy still reaches the lip",
+   "problem": "ENG-074",
+   "closes": false
+  },
+  {
+   "title": "Trays and brackets",
+   "why": "Busbar and instrumentation trays to the lead line; brackets wherever a run would exceed 3 m",
+   "effect": "longest unsupported run 2.8 m",
+   "problem": "ENG-079",
+   "closes": true
+  }
+ ]
+}
