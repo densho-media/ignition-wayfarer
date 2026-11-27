@@ -1,0 +1,379 @@
+<title>Wayfarer Ship Systems Architecture</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+:root{--bg:#0A0F15;--surf:#121A24;--surf2:#18222F;--line:#263445;--ink:#DCE5EF;--muted:#9AA9BA;--accent:#D99AC9;--action:#FF843C;
+--good:#7FD39B;--warn:#E9B85A;--bad:#FF7F73;--info:#8FC1F0;
+--occ:#5E6B7C;--res:#3B4F6B;--dry:#8A6A3E;--free:#1C2836;--use:#7FD39B;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#F4F6F9;--surf:#FFFFFF;--surf2:#EEF2F6;--line:#D3DBE5;--ink:#16202B;--muted:#55657A;--accent:#9C4C88;--action:#C0541A;
+--good:#2E8A4D;--warn:#9A6B0E;--bad:#B9382D;--info:#2C6BA8;--occ:#8C97A6;--res:#B8C7DB;--dry:#D7B98A;--free:#E9EEF4;--use:#2E8A4D;color-scheme:light}}
+:root[data-theme="light"]{--bg:#F4F6F9;--surf:#FFFFFF;--surf2:#EEF2F6;--line:#D3DBE5;--ink:#16202B;--muted:#55657A;--accent:#9C4C88;--action:#C0541A;
+--good:#2E8A4D;--warn:#9A6B0E;--bad:#B9382D;--info:#2C6BA8;--occ:#8C97A6;--res:#B8C7DB;--dry:#D7B98A;--free:#E9EEF4;--use:#2E8A4D;color-scheme:light}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 "IBM Plex Sans",system-ui,sans-serif;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:1180px;margin:0 auto}
+header.top{padding-block:40px 24px;border-bottom:1px solid var(--line)}
+.eyebrow{font:600 12px/1 "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1,h2,h3{font-family:"Space Grotesk",system-ui,sans-serif;text-wrap:balance;line-height:1.2}
+h1{font-size:clamp(28px,4vw,40px);margin:10px 0 12px}
+h2{font-size:24px;margin:0 0 6px}
+h3{font-size:17px;margin:22px 0 6px}
+p,li{max-width:72ch}
+.lede{font-size:17px;color:var(--ink);max-width:80ch}
+.muted{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.06em;padding:6px 8px;border:1px solid var(--line);border-radius:4px;color:var(--muted)}
+.chip.c-model{color:var(--good);border-color:var(--good)}.chip.c-concept{color:var(--accent);border-color:var(--accent)}.chip.c-sim{color:var(--info);border-color:var(--info)}.chip.c-warn{color:var(--warn);border-color:var(--warn)}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding:8px 0;scrollbar-width:thin}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+nav.toc a{font:600 12px/1 "IBM Plex Mono",monospace;color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:4px;white-space:nowrap}
+nav.toc a:hover{color:var(--ink);background:var(--surf)}
+section{padding-block:36px 8px;border-bottom:1px solid var(--line);scroll-margin-top:52px}
+.letter{font:600 13px/1 "IBM Plex Mono",monospace;color:var(--accent);margin-bottom:8px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-block:16px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:14px 16px;min-width:0}
+.card h4{margin:0 0 6px;font:600 13px/1.3 "IBM Plex Mono",monospace;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.big{font:600 26px/1.1 "Space Grotesk",sans-serif}
+.big small{font-size:13px;color:var(--muted);font-weight:500}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin-block:12px;background:var(--surf)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{font:600 11px/1.2 "IBM Plex Mono",monospace;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--surf2);position:sticky;top:0}
+td.num{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+.mono{font-family:"IBM Plex Mono",monospace;font-size:12px;white-space:nowrap}
+.nom{color:var(--muted)}
+.fn{color:var(--muted);font-size:12px;margin-top:3px}
+.bad{color:var(--bad)}.warn{color:var(--warn)}.good{color:var(--good)}
+table.gap td{min-width:120px}table.gap td:first-child{min-width:0}table.gap td:nth-child(2){min-width:220px}
+.mat{font:600 11px/1 "IBM Plex Mono",monospace;padding:3px 6px;border-radius:3px;background:var(--surf2);border:1px solid var(--line)}
+.m0,.m1{color:var(--bad)}.m2,.m3{color:var(--warn)}.m4,.m5{color:var(--info)}.m6,.m7{color:var(--good)}
+.pri{font:600 11px/1 "IBM Plex Mono",monospace}.P1{color:var(--action)}.P2{color:var(--warn)}.P3,.P4{color:var(--muted)}
+.imp{font:600 10px/1 "IBM Plex Mono",monospace;color:var(--muted)}.imp.ARCH-H{color:var(--accent)}
+.cls{font:600 10px/1 "IBM Plex Mono",monospace;padding:2px 5px;border-radius:3px;border:1px solid var(--line)}
+.cls.SPEC{color:var(--good)}.cls.DERIVED{color:var(--info)}.cls.PROTO{color:var(--warn)}.cls.STUDY{color:var(--accent)}
+.filters{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:12px}
+select{max-width:100%}
+select,label.tog{font:500 13px "IBM Plex Sans",sans-serif;color:var(--ink);background:var(--surf);border:1px solid var(--line);border-radius:6px;padding:7px 10px}
+figure{margin:16px 0}
+figure .frame{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;min-width:640px}
+figure img{display:block;border-radius:6px;width:100%}
+figcaption{font-size:13px;color:var(--muted);margin-top:8px;max-width:90ch}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-2px;margin-right:6px;border:1px solid var(--line)}
+.two{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.two>*{min-width:0}
+details{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin-block:10px}
+details summary{cursor:pointer;font-weight:600}
+ol.dr{padding-left:0;list-style:none;display:grid;gap:10px}
+ol.dr li{background:var(--surf);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:10px 14px;max-width:none}
+ol.dr b.id{font-family:"IBM Plex Mono",monospace;color:var(--accent);margin-right:6px}
+.rec{color:var(--good);font-weight:600}
+.phase{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.phase .n{font:600 13px "IBM Plex Mono",monospace;color:var(--action)}
+.phase p{margin:2px 0}
+code{font-family:"IBM Plex Mono",monospace;font-size:.9em;background:var(--surf2);padding:1px 4px;border-radius:3px}
+.callout{border:1px solid var(--warn);background:color-mix(in srgb,var(--warn) 8%,var(--surf));border-radius:8px;padding:12px 16px;margin-block:14px}
+.callout.k{border-color:var(--action);background:color-mix(in srgb,var(--action) 8%,var(--surf))}
+a{color:var(--info)}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">G.U. WAYFARER 001 · ISSA · proposal, 2026-11-27 · not canon</div>
+  <h1>Integrated Ship Systems Architecture</h1>
+  <p class="lede">The ship has its structure, drive, radiators, rings and tanks, but its machinery is mostly unrated proxies. This review lists {{N_SYS}} assemblies with one owner each, models electric load across 15 operating conditions, surveys free space inside the built model, and proposes where power, thermal and stores machinery could go. It changes no canon, geometry or Drive data.</p>
+  <div class="chips">
+    <span class="chip c-model">MODEL-DERIVED: measured from the built .blend</span>
+    <span class="chip c-sim">STUDY: computed by work/ship-systems-architecture</span>
+    <span class="chip c-concept">CONCEPTUAL: proposal, not validated</span>
+    <span class="chip c-warn">OPEN: owner decision needed</span>
+  </div>
+  <div class="grid">
+    <div class="card"><h4>Coast electric demand</h4><div class="big">0.8 → 26 MW</div><p class="fn">Ship service alone, then with the normal active defense band. The defense duty, not the habitat, sizes the plant.</p></div>
+    <div class="card"><h4>Power item in the mass budget</h4><div class="big">{{PC_LEFT}}</div><p class="fn">What the 50 t power/computers/steering/comms item has left after the hardware it already holds ({{PC_USED}}).</p></div>
+    <div class="card"><h4>Usable free volume in the casing</h4><div class="big">{{TOT_USE}} m³ <small>of {{TOT_IN}}</small></div><p class="fn">Blocks with 1 m clear around them. The dry store ({{TOT_DRY}} m³) is the real reserve.</p></div>
+    <div class="card"><h4>Main battery at coast load</h4><div class="big">{{BAT_COAST}}</div><p class="fn">Ride-through only. {{BAT_HV}} with active defense, {{BAT_CRYO}} at survival plus cryocoolers.</p></div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <a href="#a">A State</a><a href="#b">B Hierarchy</a><a href="#c">C Gap matrix</a><a href="#d">D Power</a><a href="#e">E Space</a><a href="#f">F Diagrams</a><a href="#g">G Registry</a><a href="#h">H Budgets</a><a href="#fm">FMEA</a><a href="#i">I Roadmap</a><a href="#j">J Decisions</a><a href="#k">K First task</a><a href="#src">Sources</a>
+</nav>
+
+<section id="a">
+  <div class="letter">A · CURRENT STATE</div>
+  <h2>What the model has, and what does not add up</h2>
+  <p>The structure, drive, radiators, rings, tank farm, shield and EYE are geometry with source references. Below that level the ship's machinery is thin. The two Brayton generators are proxies with no rating (<code>power.rating</code> and <code>power.hotel_source</code> are OPEN). Life support has a material and process model but no equipment layout outside the rings. The aft bay holds the propellant feed and the fabrication cell. The mid-body dry store, 54 modules, has had no assigned contents since the tanks moved outside the casing.</p>
+  <p class="muted">Maturity across the {{N_SYS}} registry rows: {{MAT_COUNTS}} (M0 not contemplated … M7 integrated and validated). {{N_ARCHH}} rows can change the architecture.</p>
+  <h3>Inconsistencies found</h3>
+  <div class="scroll"><table>
+    <tr><th>#</th><th>Finding</th><th>Where</th><th>Effect</th></tr>
+    <tr><td>1</td><td><code>life_support.toml</code> sizes consumables for 5 consumers (12 only as a stress case), and the ECLSS strings serve six.</td><td>data/life_support.toml, ECLSS strings</td><td class="warn">Undersized against the crew-12 lock</td></tr>
+    <tr><td>2</td><td>G01 evidence still lists torus tanks and calls warm and cold rejection UNALLOCATED.</td><td>references/evidence G01</td><td class="warn">Stale after TANK-AXIAL and RAD-ZONE</td></tr>
+    <tr><td>3</td><td>The Brayton A/B proxies have no rating and sit in the propellant run-tank zone at X −102.</td><td>WF_DRIVE proxies</td><td class="warn">Placement collides with FPS feed, no shadow shield</td></tr>
+    <tr><td>4</td><td>The 0.3 MW avionics allowance on the LOW loop is large next to ISS-class computing.</td><td>thermal LOW section</td><td>Probably conservative; keep, label</td></tr>
+    <tr><td>5</td><td>Deadship ring services assume an 80 kW generator per bus "while fusion runs".</td><td>lab/studies/deadship SYS-003</td><td class="warn">Implicitly picks Candidate A</td></tr>
+    <tr><td>6</td><td>No mass line pays for drive-off generation or for the 210 MW of burn power.</td><td>physics.mass_budget</td><td class="bad">Budget gap (DR-04)</td></tr>
+    <tr><td>7</td><td>Food for 12 over six years at 1.83 kg/person/day is about 48 t against a 10 t food item.</td><td>physics.mass_budget food</td><td class="bad">Budget gap (DR-07)</td></tr>
+    <tr><td>8</td><td>The dry store holds about 3,700 m³; the cargo item is 60 t.</td><td>BODY-C3, workshop/spares/cargo</td><td class="good">Spare volume to repurpose (DR-12)</td></tr>
+  </table></div>
+</section>
+
+<section id="b">
+  <div class="letter">B · HIERARCHY</div>
+  <h2>Thirteen families, one owner per assembly</h2>
+  <p>Families follow the brief (5.1–5.11), plus propulsion and structure as interface-only owners so their machinery has a row without reopening parked research. Each assembly belongs to the family that owns its hardware; other families are listed as dependencies. Ring life-support equipment is owned by ECLSS even though EPS powers it and TMS cools it.</p>
+  <div class="grid">
+    <div class="card"><h4>EPS · TMS</h4><p>Generation (burn, coast, survival), storage, distribution A/B/E, conversion; hot, warm, low and cold loops, heat pumps, cryocoolers.</p></div>
+    <div class="card"><h4>ECLSS · SAFETY</h4><p>Ring air, water, waste and food systems; refuge, fire, toxic release, alarms, survival stores.</p></div>
+    <div class="card"><h4>CDH · GNC · COMMS</h4><p>Computers, networks, recorders; star trackers, IMUs, CMGs, RCS; high-gain, low-gain and optical links.</p></div>
+    <div class="card"><h4>MRO · LOG · DOCK</h4><p>Workshop, fabrication, drones, spares; stores, waste, galley; docking ports, airlocks, suit servicing.</p></div>
+    <div class="card"><h4>PROT · PROP · STRUCT</h4><p>Shield, EYE, dust and radiation monitors, structural health; propellant and drive interfaces; spine, rotation bearings.</p></div>
+  </div>
+</section>
+
+<section id="c">
+  <div class="letter">C · GAP MATRIX</div>
+  <h2>Every assembly, what exists and what is missing</h2>
+  <p>Source: <code>work/ship-systems-architecture/systems.toml</code> (study registry). Space needs are PROTOTYPE installed envelopes, including maintenance and removal space, from the cited analogue.</p>
+  <div class="filters">
+    <label for="ff">Family</label>
+    <select id="ff"><option value="">All families</option>{{FAM_OPTS}}</select>
+    <label class="tog"><input type="checkbox" id="fh"> Architecture-level only</label>
+    <span class="muted" id="fc"></span>
+  </div>
+  <div class="scroll" style="max-height:70vh"><table class="gap" id="gap">
+    <tr><th>ID</th><th>Assembly and function</th><th>Current</th><th>Missing</th><th>Space now</th><th>Space needed</th><th>Mass owner</th><th>Depends on</th><th>Maturity</th><th>Priority</th><th>Next action</th></tr>
+    {{GAP_ROWS}}
+  </table></div>
+</section>
+
+<section id="d">
+  <div class="letter">D · ELECTRICAL POWER</div>
+  <h2>The defense field, not the crew, sizes the coast plant</h2>
+  <p>Load bands are low, nominal and high. Each load is labelled SPEC (from canon), DERIVED (shared formulas), PROTO (prototype from the repository) or STUDY (this review's estimate). The 210 MW burn heat-pump load is drive-supplied and is listed so its budget line can be found.</p>
+  <h3>Load by operating condition (MW)</h3>
+  <div class="scroll"><table>
+    <tr><th>Condition</th><th>Continuous MW</th><th>Peak on top</th><th>Assumption</th></tr>
+    {{MODE_ROWS}}
+  </table></div>
+  <details><summary>Load items behind the table (kW)</summary>
+    <div class="scroll"><table><tr><th>ID</th><th>Load</th><th>kW</th><th>Role</th><th>Class</th><th>Basis</th></tr>{{LOAD_ROWS}}</table></div>
+  </details>
+
+  <h3>Candidate sources, single-plant mass (t, excluding radiators and shadow shield)</h3>
+  <div class="scroll"><table>
+    <tr><th>Candidate</th><th>Maturity</th><th>Ship service</th><th>+ proactive defense</th><th>+ normal active defense</th><th>Verdict</th></tr>
+    {{PLANT_ROWS}}
+  </table></div>
+  <p class="muted">Specific mass bands come from SP-100, JIMO, the INL multi-MWe Brayton study and Kilopower/FSP (sources below). Two independent plants double these numbers.</p>
+
+  <h3>Recommended direction: D, a three-level hybrid (not a final selection)</h3>
+  <div class="two">
+    <div class="card"><h4>L1 · Burn power</h4><p>Generated from the drive's hot loop while it runs: burn heat pumps (210 MW at burnout), hot-loop pumps, Burn Watch, recharge. It needs its own budget line in the drive package.</p></div>
+    <div class="card"><h4>L2 · Ship service</h4><p>Two independent fission-Brayton plants as the <b>working baseline</b>, each able to carry essential loads alone. Auxiliary fusion (C) stays a speculative alternative. In coast they reject to the dark blades at 550–650 K.</p></div>
+    <div class="card"><h4>L3 · Survival</h4><p>An isolated kWe source (RPS or small fission-Stirling) plus batteries, near the refuge, sharing no bus or loop with L2. It keeps the crew and, if possible, the cryocoolers alive.</p></div>
+  </div>
+  <div class="callout">Main-drive hotel mode (A) is not credible as the continuous source: one machine would have to hold a burning plasma at 10⁻⁴ to 10⁻⁵ of its rating for six years, and every drive fault would become a ship-power fault. Cryocooling (about 0.4 MW) is mission-critical: uncooled He-3 boils off at about {{HE3}} per day.</div>
+
+  <h3>Can the blades take plant heat in coast?</h3>
+  <p>In coast the hot blades are dark. At 550 K they can reject about 119 MW, at 650 K about 231 MW. Plant waste heat plus defense heat as a share of blade area:</p>
+  <div class="scroll"><table><tr><th>Plant MWe</th><th>Plant waste MW</th><th>Defense heat MW</th><th>Blade area used</th></tr>{{BLADE_ROWS}}</table></div>
+  <p class="muted">During burns the blades run at 1800 K for the drive; the plants then drop to reduced power through the warm loop (440 K, 52 MW of channels) and the heat pumps. No new radiator surface and no silhouette change is needed for ship service.</p>
+
+  <h3>Storage endurance</h3>
+  <div class="grid">
+    <div class="card"><h4>Main battery 2 MWh</h4><div class="big">{{BAT_COAST}}</div><p class="fn">at normal coast; {{BAT_SURV}} at crew-only survival</p></div>
+    <div class="card"><h4>Survival packs 2 × 8 kWh</h4><div class="big">{{PACKS}}</div><p class="fn">at crew survival load</p></div>
+    <div class="card"><h4>Batteries for 30 days of survival</h4><div class="big">{{BAT30}}</div><p class="fn">which is why L3 needs a source, not only storage</p></div>
+  </div>
+</section>
+
+<section id="e">
+  <div class="letter">E · SPACE</div>
+  <h2>The aft bay is full; the dry store is the reserve</h2>
+  <p>A voxel survey of the built vehicle (1 m along the axis, 0.5 m across) classes every point inside the casing. Usable means free with 1 m clear all round: room for a machine plus a working gap. The survey overstates free space where systems have no geometry yet, which is the point of the gap analysis.</p>
+  <figure><div class="frame">{{FIG_LON}}</div>
+    <div class="legend"><span><i style="background:var(--occ)"></i>occupied</span><span><i style="background:var(--res)"></i>reserved (spine, keel lanes, skin standoff)</span><span><i style="background:var(--dry)"></i>dry store</span><span><i style="background:var(--free)"></i>free, fragmented</span><span><i style="background:var(--use)"></i>usable</span></div>
+    <figcaption><span class="chip c-model">MODEL-DERIVED</span> Share of the casing cross-section at each station, D1 to D7.</figcaption></figure>
+  <figure><div class="frame">{{FIG_SEC}}</div>
+    <figcaption><span class="chip c-model">MODEL-DERIVED</span> Cross-sections at seven stations, same colours.</figcaption></figure>
+  <div class="scroll"><table>
+    <tr><th>District</th><th>Name</th><th>X (m)</th><th>Inside casing m³</th><th>Occupied</th><th>Reserved</th><th>Dry store</th><th>Free</th><th>Usable</th></tr>
+    {{DIST_ROWS}}
+    <tr><td></td><td><b>Total</b></td><td></td><td class="num">{{TOT_IN}}</td><td class="num">{{TOT_OCC}}</td><td class="num">{{TOT_RES}}</td><td class="num">{{TOT_DRY}}</td><td class="num">{{TOT_FREE}}</td><td class="num"><b>{{TOT_USE}}</b></td></tr>
+  </table></div>
+
+  <h3>Proposed placement (conceptual, in the review file)</h3>
+  <div class="two">
+    <figure><img src="cam_issa_whole_ship.jpg" alt="Whole ship from below with radiators hidden and the proposal collections in pink" loading="lazy">
+      <figcaption><span class="chip c-concept">CONCEPTUAL</span> Whole ship, radiators and casing hidden (not deleted). Pink is the proposal.</figcaption></figure>
+    <figure><img src="cam_issa_power_district.jpg" alt="Close view of the mid-body power district with plant boxes, shadow cones and bus rods" loading="lazy">
+      <figcaption><span class="chip c-concept">CONCEPTUAL</span> Power district in dry-store modules M1–M4, with shadow cones and bus trunks.</figcaption></figure>
+  </div>
+  <div class="scroll"><table>
+    <tr><th>Item</th><th>Proposed place</th><th>Why</th><th>Trade-off</th></tr>
+    <tr><td>Burn machinery (L1 converters, heat pumps)</td><td>Dry-store M1–M2, all three sectors, X −89 … −67</td><td>Next to the aft bay and the hot loop; the bay itself has 75 m³ usable</td><td>Takes 1,300 m³ of dry store</td></tr>
+    <tr><td>Ship-service plant A</td><td>M3 at 90°, X −65 … −55</td><td>About 160 m from ring A; shadow cone 12.5° covers the rings</td><td>Shield mass not in any budget</td></tr>
+    <tr><td>Ship-service plant B</td><td>M4 at 210°, X −51 … −41</td><td>Separate sector and frame from A: no common fire or debris zone</td><td>EVA keep-out X −70 … −36</td></tr>
+    <tr><td>Survival source L3</td><td>Forward service, X 112.6 … 114.4, near the refuge</td><td>Isolated from L2 by 160 m and the rotor bay</td><td>An RPS near crew needs its own shielding check</td></tr>
+    <tr><td>Food and spares</td><td>M8–M9 and D5</td><td>Close to the rings, low heat</td><td>Mass budget, not volume, is the limit</td></tr>
+    <tr><td>Rejected: reactors in D5</td><td>RAD-ZONE casing</td><td>Only 25–45 m from ring A</td><td>Kept as a hidden box for comparison</td></tr>
+  </table></div>
+</section>
+
+<section id="f">
+  <div class="letter">F · DIAGRAMS</div>
+  <h2>Power levels and failure domains</h2>
+  <figure><div class="frame">
+  <svg viewBox="0 0 980 360" role="img" aria-label="Three-level power architecture">
+    <style>.b{fill:var(--surf2);stroke:var(--line)}.t{fill:var(--ink);font:600 13px 'IBM Plex Sans',sans-serif}.s{fill:var(--muted);font:12px 'IBM Plex Sans',sans-serif}.bus{stroke-width:4}</style>
+    <rect class="b" x="20" y="20" width="220" height="80" rx="8"/><text class="t" x="34" y="46">L1 Drive hot loop</text><text class="s" x="34" y="66">burn only · 210+ MW</text><text class="s" x="34" y="84">budget: drive_package (new)</text>
+    <rect class="b" x="20" y="140" width="220" height="80" rx="8"/><text class="t" x="34" y="166">L2 Plant A (fission-Brayton)</text><text class="s" x="34" y="186">coast · one carries essentials</text><text class="s" x="34" y="204">M3, 90°</text>
+    <rect class="b" x="20" y="240" width="220" height="80" rx="8"/><text class="t" x="34" y="266">L2 Plant B (fission-Brayton)</text><text class="s" x="34" y="286">separate sector and frame</text><text class="s" x="34" y="304">M4, 210°</text>
+    <line class="bus" x1="300" y1="60" x2="300" y2="330" stroke="var(--action)"/><text class="s" x="282" y="350">burn bus</text>
+    <line class="bus" x1="420" y1="40" x2="420" y2="330" stroke="var(--info)"/><text class="t" x="400" y="30">Bus A</text>
+    <line class="bus" x1="520" y1="40" x2="520" y2="330" stroke="var(--good)"/><text class="t" x="500" y="30">Bus B</text>
+    <line class="bus" x1="640" y1="40" x2="640" y2="330" stroke="var(--warn)"/><text class="t" x="620" y="30">Bus E</text>
+    <line x1="240" y1="60" x2="300" y2="60" stroke="var(--action)" stroke-width="2"/>
+    <line x1="240" y1="180" x2="420" y2="180" stroke="var(--info)" stroke-width="2"/>
+    <line x1="240" y1="280" x2="520" y2="280" stroke="var(--good)" stroke-width="2"/>
+    <line x1="300" y1="120" x2="520" y2="120" stroke="var(--action)" stroke-width="2" stroke-dasharray="5 4"/><text class="s" x="330" y="112">burn: feeds A and B</text>
+    <line x1="420" y1="230" x2="520" y2="230" stroke="var(--muted)" stroke-width="2" stroke-dasharray="2 4"/><text class="s" x="430" y="224">tie, normally open</text>
+    <rect class="b" x="700" y="40" width="260" height="70" rx="8"/><text class="t" x="714" y="66">Defense field, EYE, cryocoolers</text><text class="s" x="714" y="86">A + B, shed in steps</text>
+    <rect class="b" x="700" y="130" width="260" height="70" rx="8"/><text class="t" x="714" y="156">Rings, ECLSS, CDH, GNC</text><text class="s" x="714" y="176">dual-fed A and B</text>
+    <rect class="b" x="700" y="230" width="260" height="90" rx="8"/><text class="t" x="714" y="256">L3 Survival source + batteries</text><text class="s" x="714" y="276">refuge, crew ECLSS, core CDH</text><text class="s" x="714" y="294">isolated: shares no bus with L2</text>
+    <line x1="520" y1="75" x2="700" y2="75" stroke="var(--muted)" stroke-width="1.5"/><line x1="420" y1="85" x2="520" y2="85" stroke="var(--muted)" stroke-width="1.5"/>
+    <line x1="520" y1="165" x2="700" y2="165" stroke="var(--muted)" stroke-width="1.5"/><line x1="420" y1="170" x2="520" y2="170" stroke="var(--muted)" stroke-width="1.5"/>
+    <line x1="640" y1="275" x2="700" y2="275" stroke="var(--warn)" stroke-width="2"/>
+    <line x1="520" y1="300" x2="640" y2="300" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="5 4"/><text class="s" x="530" y="318">one-way charge (diode)</text>
+  </svg></div>
+  <figcaption><span class="chip c-concept">CONCEPTUAL</span> Three-level power: burn power from the drive, two independent coast plants on buses A and B, and an isolated survival bus E. Not drawn to any rating.</figcaption></figure>
+
+  <figure><div class="frame">
+  <svg viewBox="0 0 980 230" role="img" aria-label="Failure domains along the ship">
+    <style>.z{stroke:var(--line);stroke-width:1}.t2{fill:var(--ink);font:600 12px 'IBM Plex Sans',sans-serif}.s2{fill:var(--muted);font:11px 'IBM Plex Sans',sans-serif}</style>
+    <rect class="z" x="20" y="40" width="160" height="110" fill="color-mix(in srgb,var(--bad) 18%,var(--surf))"/><text class="t2" x="30" y="62">Drive + aft bay</text><text class="s2" x="30" y="80">fire, plasma, feed leak</text><text class="s2" x="30" y="96">L1 lost → no burn power</text>
+    <rect class="z" x="180" y="40" width="250" height="110" fill="color-mix(in srgb,var(--warn) 18%,var(--surf))"/><text class="t2" x="190" y="62">Power district M1–M4</text><text class="s2" x="190" y="80">A and B in separate sectors</text><text class="s2" x="190" y="96">one plant lost → shed, carry on</text><text class="s2" x="190" y="112">shadow cones toward the rings</text>
+    <rect class="z" x="430" y="40" width="200" height="110" fill="color-mix(in srgb,var(--info) 14%,var(--surf))"/><text class="t2" x="440" y="62">Stores M5–M9, D4</text><text class="s2" x="440" y="80">low energy, inert</text><text class="s2" x="440" y="96">buffer between domains</text>
+    <rect class="z" x="630" y="40" width="160" height="110" fill="color-mix(in srgb,var(--accent) 14%,var(--surf))"/><text class="t2" x="640" y="62">RAD-ZONE, rotor</text><text class="s2" x="640" y="80">rings, crew, ECLSS</text><text class="s2" x="640" y="96">no reactors here</text>
+    <rect class="z" x="790" y="40" width="170" height="110" fill="color-mix(in srgb,var(--good) 16%,var(--surf))"/><text class="t2" x="800" y="62">Forward service</text><text class="s2" x="800" y="80">refuge + L3 survival</text><text class="s2" x="800" y="96">EYE, shield, comms</text>
+    <line x1="20" y1="180" x2="960" y2="180" stroke="var(--muted)"/><text class="s2" x="20" y="200">aft −145 m</text><text class="s2" x="890" y="200">bow +145 m</text>
+    <text class="s2" x="20" y="24">Each domain can fail without taking the next one's power, cooling or crew access with it.</text>
+  </svg></div>
+  <figcaption><span class="chip c-concept">CONCEPTUAL</span> Failure domains, not to scale.</figcaption></figure>
+</section>
+
+<section id="g">
+  <div class="letter">G · PARAMETRIC INTEGRATION</div>
+  <h2>A systems registry that extends what exists</h2>
+  <p>The repository already has the pieces of a registry: <code>data/modules.toml</code> owners, <code>physics.mass_budget</code> and <code>mass_regions</code>, <code>exterior_hardware.inertia_items</code>, the SYSTEM_GROUPS 11–16 with their colours, object custom properties (<code>canon_status</code>, <code>source_ref</code>, <code>engineering_status</code>), the ring-services equipment and LRU tables, the drone fleet and the representation zones. The proposal joins them rather than adding a framework.</p>
+  <ol>
+    <li><b><code>data/systems.toml</code></b> (DR-13): one row per assembly, as in section C, with <code>budget</code> naming a <code>mass_budget</code> key and <code>district</code> naming a placement envelope.</li>
+    <li><b><code>[power.loads]</code></b>: PROTOTYPE load bands per item and mode, read by a pure <code>power_loads.py</code> (first task, K).</li>
+    <li><b>Envelopes before parts:</b> each placed system gets a <code>SYS_&lt;id&gt;</code> envelope object in its system group, carrying <code>sys_id</code>, maturity and status as custom properties, so <code>inspect</code> can check clearances and the website can colour by maturity.</li>
+    <li><b>Checks:</b> budget sums against <code>mass_budget</code>, every envelope inside a district, every powered row on a bus. Tests stay limited to owner numbers and physical invariants.</li>
+  </ol>
+  <h3>Website (WOS) ideas</h3>
+  <p>A <b>Systems</b> section in the Engineering module: the gap matrix with maturity chips, a mode selector that shows the load table and which buses carry it, and the district view coloured by maturity. Values come from <code>wos.json</code>; OPEN values show as OPEN.</p>
+</section>
+
+<section id="h">
+  <div class="letter">H · BUDGETS</div>
+  <h2>Is 50 t enough for power, computers, steering and comms?</h2>
+  <p>Only for ship service with no defense duty, and barely. The item already holds this hardware:</p>
+  <div class="scroll"><table><tr><th>Item</th><th>t (low–high, nominal)</th></tr>{{PC_ROWS}}
+    <tr><td><b>Already used</b></td><td class="num"><b>{{PC_USED}}</b></td></tr>
+    <tr><td><b>Left for generation</b></td><td class="num"><b>{{PC_LEFT}}</b></td></tr></table></div>
+  <p>Two ship-service fission-Brayton plants need about 24 t nominal before shadow shields. With the proactive defense band they need about 107 t, and with the normal active band 400–1,500 t. The proposal is an explicit new line in the budget once DR-01 sets the defense duty, not a silent increase of the 50 t item (DR-04).</p>
+  <p>Other lines to reconcile: food for 12 (about 48 t against 10 t, DR-07); burn generation (no line, proposed under the drive package); shadow shields (no line); dry-store contents (volume is plentiful, mass is not).</p>
+</section>
+
+<section id="fm">
+  <div class="letter">RELIABILITY</div>
+  <h2>FMEA scenarios</h2>
+  <div class="scroll"><table>
+    <tr><th>Scenario</th><th>Immediate effect</th><th>Response</th><th>What the architecture must provide</th></tr>
+    <tr><td>One coast plant trips</td><td>Half of L2 lost</td><td>Shed defense to proactive, keep cryo, restart</td><td>Each plant carries essentials alone; tie breaker</td></tr>
+    <tr><td>Both coast plants lost</td><td>Battery has about 30 min at coast load</td><td>Survival + cryo on battery, then L3; field down</td><td>L3 source; cryo on L3 if at all possible</td></tr>
+    <tr><td>Drive trips mid-burn</td><td>Burn bus lost, hot loop still hot</td><td>Heat pumps off, warm loop holds, L2 back up</td><td>L2 able to restart from battery in burn attitude</td></tr>
+    <tr><td>Cryocooler string fails</td><td>He-3 boil-off begins</td><td>n+1 cooler takes over</td><td>Redundant coolers on two buses (DR-06)</td></tr>
+    <tr><td>Fire in the aft bay</td><td>Feed and fabrication lost</td><td>Isolate, vent, keep L2</td><td>Power district outside the aft bay</td></tr>
+    <tr><td>Dust strike in the power district</td><td>One plant or trunk damaged</td><td>Isolate the sector, run on the other</td><td>Plants in different sectors and frames</td></tr>
+    <tr><td>Black start after a full outage</td><td>Every plant cold</td><td>Nine-step black start from stores</td><td>Protected start energy that is never drawn for loads</td></tr>
+    <tr><td>Bus E fault</td><td>Survival bus lost</td><td>Packs in the refuge, repair</td><td>One-way charge so L2 faults cannot reach E</td></tr>
+  </table></div>
+</section>
+
+<section id="i">
+  <div class="letter">I · ROADMAP</div>
+  <h2>Eight phases, reusing existing TODO items</h2>
+  <div class="phase"><div class="n">Phase 1</div><div><p><b>Registry and loads.</b> <code>data/systems.toml</code>, <code>[power.loads]</code>, <code>power_loads.py</code> (task K). No geometry.</p><p class="muted">Reuses B02 (mass model), G01 (thermal evidence refresh)</p></div></div>
+  <div class="phase"><div class="n">Phase 2</div><div><p><b>Owner decisions DR-01 to DR-05.</b> Defense duty, power levels, blade reuse, budget lines, survival target.</p><p class="muted">Feeds OD-009 power.hotel_source, power.rating</p></div></div>
+  <div class="phase"><div class="n">Phase 3</div><div><p><b>Power and thermal sizing.</b> Plant rating, shadow shield, conversion, coast heat path to the blades.</p><p class="muted">Reuses F02, F03, G02</p></div></div>
+  <div class="phase"><div class="n">Phase 4</div><div><p><b>District envelopes.</b> <code>SYS_</code> envelopes in a <code>WORK_</code> collection, then the chosen ones in the generators; Brayton proxies move out of the run-tank zone.</p><p class="muted">Reuses S01, D-series</p></div></div>
+  <div class="phase"><div class="n">Phase 5</div><div><p><b>Utility routes.</b> Buses A/B/E, coolant trunks, data trunks along the keel lanes, with clearance inspection.</p><p class="muted">Reuses G03, G04</p></div></div>
+  <div class="phase"><div class="n">Phase 6</div><div><p><b>Life support at crew 12.</b> Consumables, strings and stores resized; food line.</p><p class="muted">Reuses I02, I03</p></div></div>
+  <div class="phase"><div class="n">Phase 7</div><div><p><b>Failure and survival.</b> FMEA scenarios run through the Deadship model with the new levels.</p><p class="muted">Reuses DS (Deadship Phase 4, parked until then)</p></div></div>
+  <div class="phase"><div class="n">Phase 8</div><div><p><b>Website and walk.</b> Systems section in Engineering; machinery visible in the walk where it is reachable.</p><p class="muted">TODO O and W, one task at a time</p></div></div>
+</section>
+
+<section id="j">
+  <div class="letter">J · OWNER DECISIONS</div>
+  <h2>Decision register</h2>
+  <ol class="dr">
+    <li><b class="id">DR-01</b><b>Coast defense duty.</b> Is the normal active band (15–30 MW) continuous for the whole cruise, or triggered? <span class="rec">Recommend:</span> proactive continuous, normal active as a triggered mode. This decides whether the coast plant is tens or hundreds of tonnes.</li>
+    <li><b class="id">DR-02</b><b>Power architecture.</b> Adopt three levels (D) with fission-Brayton as the working baseline for L2? <span class="rec">Recommend:</span> yes, with auxiliary fusion kept as a speculative alternative.</li>
+    <li><b class="id">DR-03</b><b>Blade reuse.</b> May coast plants reject heat to the dark hot blades at 550–650 K? <span class="rec">Recommend:</span> yes; no new radiator and no silhouette change.</li>
+    <li><b class="id">DR-04</b><b>Power budget.</b> Add an explicit drive-off generation line instead of growing the 50 t item? <span class="rec">Recommend:</span> yes, sized after DR-01.</li>
+    <li><b class="id">DR-05</b><b>Survival endurance.</b> How long must L3 keep the crew alive, and with or without cryocoolers? <span class="rec">Recommend:</span> 30 days crew-only as a working target.</li>
+    <li><b class="id">DR-06</b><b>Cryo priority.</b> Treat cryocoolers as mission-critical with n+1 units on two buses? <span class="rec">Recommend:</span> yes.</li>
+    <li><b class="id">DR-07</b><b>Food.</b> Raise the food line to about 48 t for 12, or credit the garden? <span class="rec">Recommend:</span> stored food at full rate as the baseline, garden as margin.</li>
+    <li><b class="id">DR-08</b><b>Shield water as makeup.</b> May the forward shield water feed ECLSS losses? <span class="rec">Recommend:</span> only with a minimum-shielding floor.</li>
+    <li><b class="id">DR-09</b><b>RCS propellant.</b> Owner and budget line for RCS propellant over six years.</li>
+    <li><b class="id">DR-10</b><b>Machinery access.</b> Unpressurized ORUs serviced by drones and EVA, or pressurized engine rooms? <span class="rec">Recommend:</span> unpressurized ORUs, as on ISS.</li>
+    <li><b class="id">DR-11</b><b>Braking-direction dust.</b> Which system protects the ship when the drive points forward?</li>
+    <li><b class="id">DR-12</b><b>Dry store.</b> Repurpose modules M1–M4 for power machinery and M8–M9 for food and spares? <span class="rec">Recommend:</span> yes.</li>
+    <li><b class="id">DR-13</b><b>Registry.</b> Adopt <code>data/systems.toml</code> as the systems registry? <span class="rec">Recommend:</span> yes, starting with EPS and TMS.</li>
+  </ol>
+</section>
+
+<section id="k">
+  <div class="letter">K · FIRST TASK</div>
+  <h2>EPS-A: a power-load module, no geometry</h2>
+  <div class="callout k">
+    <p><b>What:</b> a pure module <code>src/wayfarer/power_loads.py</code> and a PROTOTYPE <code>[power.loads]</code> table in <code>data/wayfarer_3d.toml</code>, seeded from this study's load items, plus the first EPS and TMS rows of <code>data/systems.toml</code>.</p>
+    <p><b>Output:</b> <code>references/p1_power_loads.json</code> with continuous and peak load per mode, battery endurance and the budget check.</p>
+    <p><b>Checks:</b> <code>pipeline --quick</code>; tests only for physical invariants (energy balance, survival load below L3 rating). Empty geometry diff.</p>
+    <p><b>Why first:</b> it is reversible, needs no owner decision to start, and every later phase reads from it.</p>
+  </div>
+</section>
+
+<section id="src">
+  <div class="letter">SOURCES</div>
+  <h2>Research and files</h2>
+  <ul>
+    <li>NASA ASCEND 2022, closed Brayton power conversion: <a href="https://ntrs.nasa.gov/citations/20220013600">ntrs 20220013600</a></li>
+    <li>INL 2002, multi-MWe space Brayton study (about 3.5 kg/kWe goal): <a href="https://inldigitallibrary.inl.gov/sites/sti/sti/2808452.pdf">INL 2808452</a></li>
+    <li>JANNAF 2021, NEP specific-mass threshold under about 10 kg/kWe: <a href="https://ntrs.nasa.gov/api/citations/20210017337/downloads/JANNAF-Paper-20210702-red.pdf">ntrs 20210017337</a></li>
+    <li>SP-100, 100 kWe under 3,000 kg, 7–10 year life: <a href="https://apps.dtic.mil/sti/tr/pdf/ADA339023.pdf">DTIC ADA339023</a></li>
+    <li>JIMO, 100 kWe, 496 kWt, 170 m² radiator: <a href="https://ntrs.nasa.gov/api/citations/20050192432/downloads/20050192432.pdf">ntrs 20050192432</a></li>
+    <li>Mason, Brayton power conversion: <a href="https://ntrs.nasa.gov/api/citations/20230006422/downloads/MIT%20Gas%20Turbine%20Workshop_Mason_final.pdf">ntrs 20230006422</a></li>
+    <li>Kilopower KRUSTY and Fission Surface Power (40 kWe under 6 t): <a href="https://ntrs.nasa.gov/api/citations/20240011694/downloads/IAC%202024%20Manuscript_FSP%20FINAL.pdf">ntrs 20240011694</a></li>
+    <li>ISS water recovery at 98 %: <a href="https://www.nasa.gov/missions/station/iss-research/nasa-achieves-water-recovery-milestone-on-international-space-station">NASA</a>, <a href="https://ntrs.nasa.gov/api/citations/20230009809/downloads/ICES%202023-097%20Status%20of%20ISS%20Water%20Management%20and%20Recovery_Presentation_v1.0.pdf">ICES 2023-097</a></li>
+    <li>ISS EPS, 160 V primary and 124 V secondary: <a href="https://ntrs.nasa.gov/citations/20010061622">ntrs 20010061622</a></li>
+    <li>Analogues from general engineering practice: submarine reactor compartments with diesel and battery backup, ISS orbital replacement units, MMRTG (110 We, 45 kg).</li>
+  </ul>
+  <p class="muted">Study files on branch <code>claude/cloud/ship-systems-architecture</code>, folder <code>work/ship-systems-architecture/</code>: <code>eps_study.py</code>, <code>systems.toml</code>, <code>survey_blender.py</code>, <code>districts.py</code>, <code>figures.py</code>, <code>make_review.py</code>, <code>build_report.py</code>, <code>NOTES.md</code>. Review file: <code>REVIEW_SHIP_SYSTEMS_ARCHITECTURE.blend</code>.</p>
+</section>
+</div>
+
+<script>
+(function(){
+  var ff=document.getElementById('ff'),fh=document.getElementById('fh'),fc=document.getElementById('fc');
+  var rows=[].slice.call(document.querySelectorAll('#gap tr[data-f]'));
+  function go(){var n=0;rows.forEach(function(r){var ok=(!ff.value||r.dataset.f===ff.value)&&(!fh.checked||r.dataset.imp==='ARCH-H');r.hidden=!ok;if(ok)n++;});fc.textContent=n+' of '+rows.length+' assemblies';}
+  ff.addEventListener('change',go);fh.addEventListener('change',go);go();
+})();
+</script>

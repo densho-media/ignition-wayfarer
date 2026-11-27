@@ -1,0 +1,1294 @@
+{
+ "status": "ISSA STUDY (NONCANON): bands, not ratings",
+ "loads": [
+  {
+   "id": "HAB.ECLSS",
+   "family": "ECLSS",
+   "title": "Ring air trains (CO2, cabin HX fan, pumps, TCC, ventilation, ring avionics), both rings",
+   "W": [
+    3456.0,
+    3840.0,
+    5760.0
+   ],
+   "role": "CONT",
+   "cls": "PROTO",
+   "basis": "ring_services.EQUIPMENT (ISS CDRA/CCAA class), x2 rings"
+  },
+  {
+   "id": "HAB.O2GEN",
+   "family": "ECLSS",
+   "title": "O2 generation by water electrolysis for 12 (10.1 kg O2/day)",
+   "W": [
+    2310.0,
+    2940.0,
+    3780.0
+   ],
+   "role": "CONT",
+   "cls": "STUDY",
+   "basis": "5.5-9 kWh per kg O2 (ISS OGA class); G01 lists 1.7 kW per string"
+  },
+  {
+   "id": "HAB.WATER",
+   "family": "ECLSS",
+   "title": "Water recovery (urine, condensate, brine) and potable treatment, both rings",
+   "W": [
+    1500.0,
+    3000.0,
+    5000.0
+   ],
+   "role": "CONT",
+   "cls": "STUDY",
+   "basis": "ISS UPA+WPA+BPA order, scaled to 12"
+  },
+  {
+   "id": "HAB.CO2RED",
+   "family": "ECLSS",
+   "title": "CO2 reduction (Sabatier) and trace-gas polishing",
+   "W": [
+    300.0,
+    800.0,
+    1500.0
+   ],
+   "role": "CONT",
+   "cls": "STUDY",
+   "basis": "ISS Sabatier order"
+  },
+  {
+   "id": "HAB.HEATPUMP",
+   "family": "TMS",
+   "title": "Ring heat pumps lifting cabin heat to the 320 K cold loop",
+   "W": [
+    8000.0,
+    12000.0,
+    20000.0
+   ],
+   "role": "CONT",
+   "cls": "DERIVED",
+   "basis": "ring_services COP 0.5 Carnot, ~25-35 kW cabin heat per ring"
+  },
+  {
+   "id": "HAB.HOTEL",
+   "family": "HAB",
+   "title": "Lighting, galley, laboratory and workshop benches",
+   "W": [
+    6580.0,
+    9400.0,
+    16920.0
+   ],
+   "role": "INTER",
+   "cls": "PROTO",
+   "basis": "ring_services LIGHT/GALLEY/LAB, x2"
+  },
+  {
+   "id": "HAB.GARDEN",
+   "family": "ECLSS",
+   "title": "Garden plant lighting and nutrient circuits (6 kW/ring today; 25 % caloric closure for 12 needs ~120 m2 of crop)",
+   "W": [
+    12000.0,
+    40000.0,
+    90000.0
+   ],
+   "role": "CONT",
+   "cls": "STUDY",
+   "basis": "ring_services GARDEN 6 kW x2 (low); 120-250 m2 at 250-400 W/m2 LED (nominal/high)"
+  },
+  {
+   "id": "HAB.MED",
+   "family": "SAFETY",
+   "title": "Medical diagnostics, sterilisation, cold storage",
+   "W": [
+    300.0,
+    1000.0,
+    3000.0
+   ],
+   "role": "INTER",
+   "cls": "STUDY",
+   "basis": "clinic order"
+  },
+  {
+   "id": "HAB.ROTOR",
+   "family": "STRUCT",
+   "title": "Ring hub motors (spin hold), magnetic bearings, contactless transfer losses",
+   "W": [
+    2000.0,
+    8000.0,
+    20000.0
+   ],
+   "role": "CONT",
+   "cls": "STUDY",
+   "basis": "bearing/seal drag; spin-up of a ring is ~11 MJ (3 kWh), so spin-up is not a power driver"
+  },
+  {
+   "id": "SHIP.CDH",
+   "family": "CDH",
+   "title": "Flight, engineering and habitat computers, networks, recorders",
+   "W": [
+    10000.0,
+    30000.0,
+    80000.0
+   ],
+   "role": "CONT",
+   "cls": "STUDY",
+   "basis": "ISS C&DH order x3 for full autonomy; the LOW section carries a 300 kW avionics heat allowance (fuel_loads.cooling)"
+  },
+  {
+   "id": "SHIP.GNC",
+   "family": "GNC",
+   "title": "Star trackers, IMUs, CMG spin and gimbal power, RCS heaters and valves",
+   "W": [
+    3000.0,
+    8000.0,
+    20000.0
+   ],
+   "role": "CONT",
+   "cls": "STUDY",
+   "basis": "six CMGs + sensors"
+  },
+  {
+   "id": "SHIP.COMMS",
+   "family": "COMMS",
+   "title": "Two 4 m Ka dishes + optical terminal at 30-300 AU (duty-averaged)",
+   "W": [
+    1000.0,
+    4000.0,
+    12000.0
+   ],
+   "role": "INTER",
+   "cls": "STUDY",
+   "basis": "kW-class RF/optical transmitter for a deep-space link"
+  },
+  {
+   "id": "SHIP.CRYO",
+   "family": "TMS",
+   "title": "Zero-boil-off cryocoolers of the tank farm (20 K shield + 3 K He-3 stage)",
+   "W": [
+    316192.41301819566,
+    395240.5162727445,
+    592860.7744091167
+   ],
+   "role": "CONT",
+   "cls": "DERIVED",
+   "basis": "p1_fuel_loads.json cooling.rejected_W (input work ~= rejection)"
+  },
+  {
+   "id": "SHIP.EYE",
+   "family": "PROT",
+   "title": "EYE Quiet Watch (drive-off coast)",
+   "W": [
+    100000.0,
+    100000.0,
+    270000.0
+   ],
+   "role": "CONT",
+   "cls": "SPEC",
+   "basis": "eye.power_inputs.quiet_W (WORKING); survey 270 kW as high"
+  },
+  {
+   "id": "SHIP.TMS_PUMPS",
+   "family": "TMS",
+   "title": "Warm-loop and LOW-section circulation pumps (5 MW warm + 1 MW LOW base)",
+   "W": [
+    30000.0,
+    80000.0,
+    200000.0
+   ],
+   "role": "CONT",
+   "cls": "STUDY",
+   "basis": "0.5-3 % of heat moved, pumped-loop order"
+  },
+  {
+   "id": "SHIP.DRONES",
+   "family": "MRO",
+   "title": "Maintenance drones charging, workshop machines (duty-averaged)",
+   "W": [
+    2000.0,
+    10000.0,
+    40000.0
+   ],
+   "role": "INTER",
+   "cls": "STUDY",
+   "basis": "drone fleet + fabrication cell"
+  },
+  {
+   "id": "SHIP.DRIVE_STBY",
+   "family": "PROP",
+   "title": "Drive standby: magnet cryostat keep-cold, plasma-facing heaters, feed conditioning (coast)",
+   "W": [
+    20000.0,
+    100000.0,
+    400000.0
+   ],
+   "role": "CONT",
+   "cls": "STUDY",
+   "basis": "OPEN in canon; superconducting coil keep-cold order"
+  },
+  {
+   "id": "DEF.PROACTIVE",
+   "family": "PROT",
+   "title": "Forward defense proactive field band",
+   "W": [
+    1500000.0,
+    1500000.0,
+    3500000.0
+   ],
+   "role": "CONT",
+   "cls": "SPEC",
+   "basis": "forward_defense.power.bands_W.proactive (WORKING)"
+  },
+  {
+   "id": "DEF.FIELD_SVC",
+   "family": "PROT",
+   "title": "Defense field services",
+   "W": [
+    500000.0,
+    1250000.0,
+    2000000.0
+   ],
+   "role": "CONT",
+   "cls": "SPEC",
+   "basis": "forward_defense.power.field_services_W (OPEN, planning allowance)"
+  },
+  {
+   "id": "DEF.NORMAL",
+   "family": "PROT",
+   "title": "Forward defense normal active band",
+   "W": [
+    15000000.0,
+    22500000.0,
+    30000000.0
+   ],
+   "role": "MODE",
+   "cls": "SPEC",
+   "basis": "forward_defense.power.bands_W.normal_active (WORKING); steady duty OPEN (40!B66)"
+  },
+  {
+   "id": "DEF.SEVERE",
+   "family": "PROT",
+   "title": "Forward defense severe band",
+   "W": [
+    30000000.0,
+    30000000.0,
+    50000000.0
+   ],
+   "role": "MODE",
+   "cls": "SPEC",
+   "basis": "bands_W.severe"
+  },
+  {
+   "id": "DEF.BURST",
+   "family": "PROT",
+   "title": "Forward defense extreme burst (store-fed, Heat Debt)",
+   "W": [
+    50000000.0,
+    65000000.0,
+    80000000.0
+   ],
+   "role": "PEAK",
+   "cls": "SPEC",
+   "basis": "bands_W.extreme_burst; Crown local stores 20 MJ (forward_defense.crown_inputs)"
+  },
+  {
+   "id": "EYE.BURN",
+   "family": "PROT",
+   "title": "EYE Burn Watch",
+   "W": [
+    1050000.0,
+    1050000.0,
+    1050000.0
+   ],
+   "role": "MODE",
+   "cls": "SPEC",
+   "basis": "eye.electrical_demand.burn_watch_W (DERIVED)"
+  },
+  {
+   "id": "EYE.ABLATE",
+   "family": "PROT",
+   "title": "EYE Emergency Ablation",
+   "W": [
+    2250000.0,
+    2250000.0,
+    2250000.0
+   ],
+   "role": "PEAK",
+   "cls": "SPEC",
+   "basis": "eye.electrical_demand.ablation_W (DERIVED)"
+  },
+  {
+   "id": "BURN.HEATPUMP",
+   "family": "TMS",
+   "title": "Burn heat pumps lifting the warm loop into the hot loop (at burnout)",
+   "W": [
+    150000000.0,
+    210000000.0,
+    260000000.0
+   ],
+   "role": "MODE",
+   "cls": "DERIVED",
+   "basis": "p1_heat_rejection.json, F02 (drive electric tap)"
+  },
+  {
+   "id": "BURN.HOTLOOP",
+   "family": "TMS",
+   "title": "Hot-loop circulation during a burn (GW-class heat transport)",
+   "W": [
+    10000000.0,
+    40000000.0,
+    100000000.0
+   ],
+   "role": "MODE",
+   "cls": "STUDY",
+   "basis": "0.5-3 % of ~3.6 GW other-loads + drive absorbed heat; OPEN coolant"
+  },
+  {
+   "id": "START.PULSE",
+   "family": "EPS",
+   "title": "Pulse bank discharge into seed field / startup heating",
+   "W": [
+    50000000.0,
+    50000000.0,
+    50000000.0
+   ],
+   "role": "START",
+   "cls": "SPEC",
+   "basis": "power.storage.pulse_bank.power_W, 200 kWh"
+  },
+  {
+   "id": "EVA.SUPPORT",
+   "family": "EVA",
+   "title": "Airlock pumps, suit charging and O2 top-up, floodlights",
+   "W": [
+    3000.0,
+    8000.0,
+    15000.0
+   ],
+   "role": "INTER",
+   "cls": "STUDY",
+   "basis": "ISS airlock depress pump ~1-2 kW"
+  },
+  {
+   "id": "DOCK.XFER",
+   "family": "DOCK",
+   "title": "Docking mechanisms, umbilical, propellant-transfer pumps",
+   "W": [
+    5000.0,
+    30000.0,
+    200000.0
+   ],
+   "role": "INTER",
+   "cls": "STUDY",
+   "basis": "transfer pump order"
+  }
+ ],
+ "modes": {
+  "NORMAL_COAST": {
+   "continuous_W": [
+    2518638.413018196,
+    3558220.5162727446,
+    7280820.774409117
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 50580.0,
+    "TMS": 487240.5162727445,
+    "HAB": 9400.0,
+    "SAFETY": 1000.0,
+    "STRUCT": 8000.0,
+    "CDH": 30000.0,
+    "GNC": 8000.0,
+    "COMMS": 4000.0,
+    "PROT": 2850000.0,
+    "MRO": 10000.0,
+    "PROP": 100000.0
+   },
+   "note": "drive off, rings spinning, proactive defense field only (inner system or low speed)"
+  },
+  "HIGH_VELOCITY_COAST": {
+   "continuous_W": [
+    17518638.413018197,
+    26058220.516272746,
+    37280820.774409115
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 50580.0,
+    "TMS": 487240.5162727445,
+    "HAB": 9400.0,
+    "SAFETY": 1000.0,
+    "STRUCT": 8000.0,
+    "CDH": 30000.0,
+    "GNC": 8000.0,
+    "COMMS": 4000.0,
+    "PROT": 25350000.0,
+    "MRO": 10000.0,
+    "PROP": 100000.0
+   },
+   "note": "the multi-year cruise at up to 0.016 c with the normal active defense band ON (its steady duty is OPEN)"
+  },
+  "LOW_THRUST": {
+   "continuous_W": [
+    36468638.4130182,
+    58508220.516272746,
+    90060820.77440912
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 50580.0,
+    "TMS": 54487240.516272746,
+    "HAB": 9400.0,
+    "SAFETY": 1000.0,
+    "STRUCT": 8000.0,
+    "CDH": 30000.0,
+    "GNC": 8000.0,
+    "COMMS": 4000.0,
+    "PROT": 3800000.0,
+    "MRO": 10000.0,
+    "PROP": 100000.0
+   },
+   "note": "drive on at low power, rings spinning; drive generators carry burn loads"
+  },
+  "HIGH_THRUST": {
+   "continuous_W": [
+    178461038.4130182,
+    276981820.5162727,
+    397999820.7744091
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 30580.0,
+    "TMS": 250487240.51627275,
+    "HAB": 9400.0,
+    "SAFETY": 1000.0,
+    "STRUCT": 1600.0,
+    "CDH": 30000.0,
+    "GNC": 8000.0,
+    "COMMS": 4000.0,
+    "PROT": 26300000.0,
+    "MRO": 10000.0,
+    "PROP": 100000.0
+   },
+   "note": "drive at peak; rings stopped and locked; burn heat pumps at burnout"
+  },
+  "FIRST_IGNITION": {
+   "continuous_W": [
+    4955348.413018196,
+    11219120.516272744,
+    25973360.774409115
+   ],
+   "peak_add_W": [
+    50000000.0,
+    50000000.0,
+    50000000.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 22580.0,
+    "TMS": 8487240.516272744,
+    "HAB": 4700.0,
+    "SAFETY": 1000.0,
+    "STRUCT": 1600.0,
+    "CDH": 30000.0,
+    "GNC": 8000.0,
+    "COMMS": 4000.0,
+    "PROT": 2550000.0,
+    "MRO": 10000.0,
+    "PROP": 100000.0,
+    "EPS": 0.0
+   },
+   "note": "pulse bank startup transient (seconds) on top of a reduced ship load"
+  },
+  "BLACK_START": {
+   "continuous_W": [
+    467948.41301819566,
+    672280.5162727445,
+    1450220.7744091167
+   ],
+   "peak_add_W": [
+    50000000.0,
+    50000000.0,
+    50000000.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 3840.0,
+    "TMS": 441240.5162727445,
+    "CDH": 18000.0,
+    "GNC": 8000.0,
+    "COMMS": 1200.0,
+    "PROT": 100000.0,
+    "PROP": 100000.0,
+    "EPS": 0.0
+   },
+   "note": "every plant cold; stores wake the ship, battery charges the pulse bank"
+  },
+  "PROPULSION_SHUTDOWN": {
+   "continuous_W": [
+    5017638.413018196,
+    14304220.516272744,
+    35270820.774409115
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 50580.0,
+    "TMS": 12487240.516272744,
+    "HAB": 9400.0,
+    "SAFETY": 1000.0,
+    "STRUCT": 4000.0,
+    "CDH": 30000.0,
+    "GNC": 8000.0,
+    "COMMS": 4000.0,
+    "PROT": 1600000.0,
+    "MRO": 10000.0,
+    "PROP": 100000.0
+   },
+   "note": "drive off, hot loop still circulating"
+  },
+  "POST_BURN_COOLDOWN": {
+   "continuous_W": [
+    4018638.413018196,
+    9558220.516272744,
+    22280820.774409115
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 50580.0,
+    "TMS": 6487240.516272744,
+    "HAB": 9400.0,
+    "SAFETY": 1000.0,
+    "STRUCT": 8000.0,
+    "CDH": 30000.0,
+    "GNC": 8000.0,
+    "COMMS": 4000.0,
+    "PROT": 2850000.0,
+    "MRO": 10000.0,
+    "PROP": 100000.0
+   },
+   "note": "blades cooling, hot loop at part flow, rings spun up again"
+  },
+  "DOCKED": {
+   "continuous_W": [
+    472038.41301819566,
+    781820.5162727445,
+    1829820.7744091167
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 50580.0,
+    "TMS": 487240.5162727445,
+    "HAB": 9400.0,
+    "SAFETY": 1000.0,
+    "STRUCT": 1600.0,
+    "CDH": 30000.0,
+    "GNC": 8000.0,
+    "COMMS": 4000.0,
+    "PROT": 50000.0,
+    "MRO": 10000.0,
+    "PROP": 100000.0,
+    "DOCK": 30000.0
+   },
+   "note": "at a station; rings stopped; propellant transfer"
+  },
+  "EVA_OPERATIONS": {
+   "continuous_W": [
+    2021638.4130181957,
+    2316220.5162727446,
+    5295820.774409117
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 50580.0,
+    "TMS": 487240.5162727445,
+    "HAB": 9400.0,
+    "SAFETY": 1000.0,
+    "STRUCT": 8000.0,
+    "CDH": 30000.0,
+    "GNC": 8000.0,
+    "COMMS": 4000.0,
+    "PROT": 1600000.0,
+    "MRO": 10000.0,
+    "PROP": 100000.0,
+    "EVA": 8000.0
+   },
+   "note": "coast plus airlock cycling and suit servicing"
+  },
+  "MAINTENANCE": {
+   "continuous_W": [
+    2024138.4130181957,
+    2332220.5162727446,
+    5368320.774409117
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 50580.0,
+    "TMS": 487240.5162727445,
+    "HAB": 9400.0,
+    "SAFETY": 1000.0,
+    "STRUCT": 8000.0,
+    "CDH": 30000.0,
+    "GNC": 8000.0,
+    "COMMS": 4000.0,
+    "PROT": 1600000.0,
+    "MRO": 30000.0,
+    "PROP": 100000.0,
+    "EVA": 4000.0
+   },
+   "note": "coast plus heavy drone/workshop duty"
+  },
+  "EMERGENCY_SURVIVAL": {
+   "continuous_W": [
+    8563.6,
+    17004.0,
+    37956.0
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 2304.0,
+    "TMS": 4800.0,
+    "SAFETY": 300.0,
+    "CDH": 6000.0,
+    "GNC": 2400.0,
+    "COMMS": 1200.0
+   },
+   "note": "crew survival loads only (refuge or one ring); tank farm abandoned to boil-off"
+  },
+  "SURVIVAL_WITH_CRYO": {
+   "continuous_W": [
+    324756.01301819563,
+    412244.5162727445,
+    630816.7744091167
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 2304.0,
+    "TMS": 400040.5162727445,
+    "SAFETY": 300.0,
+    "CDH": 6000.0,
+    "GNC": 2400.0,
+    "COMMS": 1200.0
+   },
+   "note": "crew survival plus the tank-farm cryocoolers (keeps the mission alive)"
+  },
+  "PARTIAL_FAILURE_ONE_PLANT": {
+   "continuous_W": [
+    2007948.4130181957,
+    2276520.5162727446,
+    5199360.774409117
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 30580.0,
+    "TMS": 487240.5162727445,
+    "HAB": 4700.0,
+    "SAFETY": 1000.0,
+    "STRUCT": 8000.0,
+    "CDH": 30000.0,
+    "GNC": 8000.0,
+    "COMMS": 4000.0,
+    "PROT": 1600000.0,
+    "MRO": 3000.0,
+    "PROP": 100000.0
+   },
+   "note": "one ship-service plant lost: discretionary loads shed, defense proactive only"
+  },
+  "EXTENDED_DRIVE_OFF": {
+   "continuous_W": [
+    2518638.413018196,
+    3558220.5162727446,
+    7280820.774409117
+   ],
+   "peak_add_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "by_family_nominal_W": {
+    "ECLSS": 50580.0,
+    "TMS": 487240.5162727445,
+    "HAB": 9400.0,
+    "SAFETY": 1000.0,
+    "STRUCT": 8000.0,
+    "CDH": 30000.0,
+    "GNC": 8000.0,
+    "COMMS": 4000.0,
+    "PROT": 2850000.0,
+    "MRO": 10000.0,
+    "PROP": 100000.0
+   },
+   "note": "years of coast; same load as normal coast, the question is endurance and maintenance"
+  }
+ },
+ "storage": {
+  "NORMAL_COAST": {
+   "main_battery_hours": [
+    0.2746943046626927,
+    0.562078710651416,
+    0.7940798447536228
+   ]
+  },
+  "HIGH_VELOCITY_COAST": {
+   "main_battery_hours": [
+    0.053646887553851046,
+    0.07675121172418688,
+    0.11416412353792227
+   ]
+  },
+  "SURVIVAL_WITH_CRYO": {
+   "main_battery_hours": [
+    3.1704927343972282,
+    4.85148964037834,
+    6.1584694965692375
+   ]
+  },
+  "EMERGENCY_SURVIVAL": {
+   "main_battery_hours": [
+    52.692591421646114,
+    117.61938367442954,
+    233.546639263861
+   ]
+  },
+  "survival_packs_2x8kWh_hours": [
+   0.42154073137316894,
+   0.9409550693954364,
+   1.8683731141108877
+  ],
+  "battery_mass_for_30d_survival_t": [
+   7.70724,
+   15.303600000000001,
+   34.1604
+  ],
+  "he3_boiloff_uncooled_t_per_day": 24.02234559483074
+ },
+ "plants": {
+  "ship_service_no_defense": {
+   "P_W": [
+    518638.4130181959,
+    808220.5162727446,
+    1780820.7744091172
+   ],
+   "candidates": {
+    "B_FISSION_BRAYTON": {
+     "single_plant_t": [
+      6.465764130181957,
+      12.12330774409117,
+      24.24661548818234
+     ],
+     "two_plants_100pct_t": [
+      12.931528260363914,
+      24.24661548818234,
+      48.49323097636468
+     ]
+    },
+    "B2_FISSION_STIRLING": {
+     "single_plant_t": [
+      20.205512906818615,
+      32.32882065090978,
+      64.65764130181957
+     ],
+     "two_plants_100pct_t": [
+      40.41102581363723,
+      64.65764130181957,
+      129.31528260363913
+     ]
+    },
+    "C_AUX_FUSION": {
+     "single_plant_t": [
+      4.041102581363723,
+      16.16441032545489,
+      48.49323097636468
+     ],
+     "two_plants_100pct_t": [
+      8.082205162727446,
+      32.32882065090978,
+      96.98646195272936
+     ]
+    },
+    "E1_RPS": {
+     "single_plant_t": [
+      121.23307744091169,
+      242.46615488182337,
+      363.6992323227351
+     ],
+     "two_plants_100pct_t": [
+      242.46615488182337,
+      484.93230976364674,
+      727.3984646454702
+     ]
+    },
+    "E2_SOLAR": {
+     "single_plant_t": [
+      4.041102581363723,
+      6.465764130181957,
+      9.698646195272936
+     ],
+     "two_plants_100pct_t": [
+      8.082205162727446,
+      12.931528260363914,
+      19.39729239054587
+     ]
+    }
+   }
+  },
+  "ship_service_plus_proactive": {
+   "P_W": [
+    2518638.413018196,
+    3558220.5162727446,
+    7280820.774409117
+   ],
+   "candidates": {
+    "B_FISSION_BRAYTON": {
+     "single_plant_t": [
+      28.465764130181956,
+      53.373307744091164,
+      106.74661548818233
+     ],
+     "two_plants_100pct_t": [
+      56.93152826036391,
+      106.74661548818233,
+      213.49323097636466
+     ]
+    },
+    "B2_FISSION_STIRLING": {
+     "single_plant_t": [
+      88.95551290681863,
+      142.3288206509098,
+      284.6576413018196
+     ],
+     "two_plants_100pct_t": [
+      177.91102581363725,
+      284.6576413018196,
+      569.3152826036392
+     ]
+    },
+    "C_AUX_FUSION": {
+     "single_plant_t": [
+      17.791102581363724,
+      71.1644103254549,
+      213.49323097636466
+     ],
+     "two_plants_100pct_t": [
+      35.58220516272745,
+      142.3288206509098,
+      426.9864619527293
+     ]
+    },
+    "E1_RPS": {
+     "single_plant_t": [
+      533.7330774409116,
+      1067.4661548818233,
+      1601.199232322735
+     ],
+     "two_plants_100pct_t": [
+      1067.4661548818233,
+      2134.9323097636466,
+      3202.39846464547
+     ]
+    },
+    "E2_SOLAR": {
+     "single_plant_t": [
+      17.791102581363724,
+      28.465764130181956,
+      42.698646195272936
+     ],
+     "two_plants_100pct_t": [
+      35.58220516272745,
+      56.93152826036391,
+      85.39729239054587
+     ]
+    }
+   }
+  },
+  "ship_service_plus_normal_active": {
+   "P_W": [
+    17518638.413018197,
+    26058220.516272746,
+    37280820.774409115
+   ],
+   "candidates": {
+    "B_FISSION_BRAYTON": {
+     "single_plant_t": [
+      208.46576413018198,
+      390.8733077440912,
+      781.7466154881824
+     ],
+     "two_plants_100pct_t": [
+      416.93152826036396,
+      781.7466154881824,
+      1563.4932309763649
+     ]
+    },
+    "B2_FISSION_STIRLING": {
+     "single_plant_t": [
+      651.4555129068186,
+      1042.3288206509098,
+      2084.6576413018197
+     ],
+     "two_plants_100pct_t": [
+      1302.9110258136373,
+      2084.6576413018197,
+      4169.315282603639
+     ]
+    },
+    "C_AUX_FUSION": {
+     "single_plant_t": [
+      130.29110258136373,
+      521.1644103254549,
+      1563.4932309763649
+     ],
+     "two_plants_100pct_t": [
+      260.58220516272746,
+      1042.3288206509098,
+      3126.9864619527298
+     ]
+    },
+    "E1_RPS": {
+     "single_plant_t": [
+      3908.7330774409124,
+      7817.466154881825,
+      11726.199232322735
+     ],
+     "two_plants_100pct_t": [
+      7817.466154881825,
+      15634.93230976365,
+      23452.39846464547
+     ]
+    },
+    "E2_SOLAR": {
+     "single_plant_t": [
+      130.29110258136373,
+      208.46576413018198,
+      312.698646195273
+     ],
+     "two_plants_100pct_t": [
+      260.58220516272746,
+      416.93152826036396,
+      625.397292390546
+     ]
+    }
+   }
+  }
+ },
+ "candidates": {
+  "A_MAIN_FUSION_HOTEL": {
+   "title": "Main propulsion reactor in low-power hotel mode",
+   "alpha": null,
+   "eff": null,
+   "independent": false,
+   "maturity": "SPECULATIVE (canon drive); turndown OPEN",
+   "verdict": "Not credible as the continuous source: a reactor sized for ~200 GW of jet power would have to hold a burning plasma at 1e-4 to 1e-5 of rating for six years; confinement and power balance do not scale down that far in one fixed machine, and every drive fault becomes a ship-power fault (power.hotel_source OPEN, OD-009)."
+  },
+  "B_FISSION_BRAYTON": {
+   "title": "Independent fission reactor + closed Brayton",
+   "alpha": [
+    8.0,
+    15.0,
+    30.0
+   ],
+   "eff": [
+    0.2,
+    0.25,
+    0.3
+   ],
+   "independent": true,
+   "maturity": "ESTABLISHED PHYSICS; MWe class not flown (SP-100/JIMO/NEP studies)",
+   "verdict": "Credible for ship service and the proactive defense band; mass grows linearly with the defense duty."
+  },
+  "B2_FISSION_STIRLING": {
+   "title": "Fission + free-piston Stirling (Kilopower family)",
+   "alpha": [
+    25.0,
+    40.0,
+    80.0
+   ],
+   "eff": [
+    0.22,
+    0.27,
+    0.32
+   ],
+   "independent": true,
+   "maturity": "ESTABLISHED (KRUSTY 2018 at 1 kWe class)",
+   "verdict": "Good for 10-100 kWe survival or refuge power; too heavy per kWe for MW."
+  },
+  "C_AUX_FUSION": {
+   "title": "Dedicated small fusion plant (D-He3)",
+   "alpha": [
+    5.0,
+    20.0,
+    60.0
+   ],
+   "eff": [
+    0.3,
+    0.4,
+    0.55
+   ],
+   "independent": true,
+   "maturity": "SPECULATIVE (no fusion plant has produced net electricity)",
+   "verdict": "Inside the IGNITION technology frame and fuel-free in practice (grams/day of D-He3); its mass and minimum size are not sourced; a second fusion machine doubles the speculative content."
+  },
+  "E1_RPS": {
+   "title": "Radioisotope power (Pu-238 / Am-241, Stirling or TE)",
+   "alpha": [
+    150.0,
+    300.0,
+    450.0
+   ],
+   "eff": [
+    0.06,
+    0.15,
+    0.25
+   ],
+   "independent": true,
+   "maturity": "ESTABLISHED (MMRTG 110 We / 45 kg)",
+   "verdict": "Only for isolated kWe-class survival loads (beacon, recorder, refuge core); decays ~0.8 %/yr (Pu-238)."
+  },
+  "E2_SOLAR": {
+   "title": "Photovoltaic",
+   "alpha": [
+    5.0,
+    8.0,
+    12.0
+   ],
+   "eff": null,
+   "independent": true,
+   "maturity": "ESTABLISHED",
+   "verdict": "Useful only docked or inside ~2 AU: flux falls as 1/r2 (1/900 at 30 AU, 1/100,000 at 324 AU)."
+  },
+  "E3_FUELCELL": {
+   "title": "H2/O2 fuel cell on stored reactants",
+   "alpha": null,
+   "eff": [
+    0.5,
+    0.6,
+    0.65
+   ],
+   "independent": true,
+   "maturity": "ESTABLISHED",
+   "verdict": "Emergency bridge only: about 0.06 kg H2 and 0.5 kg O2 per kWh; O2 competes with breathing."
+  }
+ },
+ "rejection": {
+  "blades_capacity_at_550K_MW": 118.5618318103669,
+  "blades_capacity_at_650K_MW": 231.28505418590868,
+  "blades_capacity_at_800K_MW": 530.7061136209416,
+  "blades_warm_channels_at_440K_MW": 51.990897578434016,
+  "shared_blade_area": [
+   {
+    "plant_MWe": 1.0,
+    "plant_waste_MW": 3.0,
+    "defense_heat_MW": 0.0,
+    "blade_area_fraction": 0.012971006754239197
+   },
+   {
+    "plant_MWe": 1.0,
+    "plant_waste_MW": 3.0,
+    "defense_heat_MW": 15.0,
+    "blade_area_fraction": 0.30148304825863603
+   },
+   {
+    "plant_MWe": 1.0,
+    "plant_waste_MW": 3.0,
+    "defense_heat_MW": 30.0,
+    "blade_area_fraction": 0.5899950897630329
+   },
+   {
+    "plant_MWe": 5.0,
+    "plant_waste_MW": 15.0,
+    "defense_heat_MW": 0.0,
+    "blade_area_fraction": 0.06485503377119599
+   },
+   {
+    "plant_MWe": 5.0,
+    "plant_waste_MW": 15.0,
+    "defense_heat_MW": 15.0,
+    "blade_area_fraction": 0.35336707527559286
+   },
+   {
+    "plant_MWe": 5.0,
+    "plant_waste_MW": 15.0,
+    "defense_heat_MW": 30.0,
+    "blade_area_fraction": 0.6418791167799897
+   },
+   {
+    "plant_MWe": 15.0,
+    "plant_waste_MW": 45.0,
+    "defense_heat_MW": 0.0,
+    "blade_area_fraction": 0.19456510131358795
+   },
+   {
+    "plant_MWe": 15.0,
+    "plant_waste_MW": 45.0,
+    "defense_heat_MW": 15.0,
+    "blade_area_fraction": 0.4830771428179848
+   },
+   {
+    "plant_MWe": 15.0,
+    "plant_waste_MW": 45.0,
+    "defense_heat_MW": 30.0,
+    "blade_area_fraction": 0.7715891843223817
+   },
+   {
+    "plant_MWe": 35.0,
+    "plant_waste_MW": 105.0,
+    "defense_heat_MW": 0.0,
+    "blade_area_fraction": 0.4539852363983719
+   },
+   {
+    "plant_MWe": 35.0,
+    "plant_waste_MW": 105.0,
+    "defense_heat_MW": 15.0,
+    "blade_area_fraction": 0.7424972779027688
+   },
+   {
+    "plant_MWe": 35.0,
+    "plant_waste_MW": 105.0,
+    "defense_heat_MW": 30.0,
+    "blade_area_fraction": 1.0310093194071657
+   }
+  ]
+ },
+ "pcsc": {
+  "items": [
+   {
+    "item": "Main battery 2 MWh: cells at 800 Wh/kg x packaging 1.4-2.0",
+    "t": [
+     3.5,
+     4.0,
+     5.0
+    ]
+   },
+   {
+    "item": "Pulse bank 200 kWh supercapacitors (20-60 Wh/kg pack)",
+    "t": [
+     3.3,
+     6.0,
+     10.0
+    ]
+   },
+   {
+    "item": "Survival packs, converters BC-A/BC-B, ride-through cells",
+    "t": [
+     1.0,
+     2.0,
+     4.0
+    ]
+   },
+   {
+    "item": "Primary distribution A/B/E: HV DC trunks ~2 x 230 m, switchboards, breakers",
+    "t": [
+     3.0,
+     6.0,
+     10.0
+    ]
+   },
+   {
+    "item": "Computers, networks, recorders (CDH)",
+    "t": [
+     1.5,
+     3.0,
+     6.0
+    ]
+   },
+   {
+    "item": "Six CMGs (rotor rim 182 kg each + gimbals, motors, housing)",
+    "t": [
+     3.0,
+     4.5,
+     6.0
+    ]
+   },
+   {
+    "item": "RCS pods, valves and lines (propellant excluded)",
+    "t": [
+     1.5,
+     2.5,
+     4.0
+    ]
+   },
+   {
+    "item": "Comms: two 4 m Ka dishes, optical terminal, booms, transmitters",
+    "t": [
+     1.5,
+     2.5,
+     4.0
+    ]
+   },
+   {
+    "item": "Star trackers, IMUs, sensors, cabling to the Brow",
+    "t": [
+     0.5,
+     1.0,
+     2.0
+    ]
+   }
+  ],
+  "used_t": [
+   18.8,
+   31.5,
+   51.0
+  ],
+  "left_for_generation_t": [
+   31.2,
+   18.5,
+   -1.0
+  ],
+  "one_ship_service_plant_t": [
+   6.465764130181957,
+   12.12330774409117,
+   24.24661548818234
+  ],
+  "two_ship_service_plants_t": [
+   12.931528260363914,
+   24.24661548818234,
+   48.49323097636468
+  ],
+  "note": "Plant mass excludes radiators (blades reused in coast) and the reactor shadow shield; both would add."
+ },
+ "budget": {
+  "power_computers_steering_comms_t": 50.0,
+  "note": "Holds batteries, pulse bank, survival packs, computers, CMGs, RCS hardware, comms and any drive-off plant"
+ }
+}

@@ -1,0 +1,100 @@
+[
+ {
+  "id": "D1",
+  "name": "Drive and thrust ring",
+  "x": [
+   -136.75,
+   -133.25
+  ],
+  "inside_casing_m3": 437,
+  "occupied_m3": 132,
+  "reserved_m3": 82,
+  "dry_store_m3": 0,
+  "free_m3": 223,
+  "usable_m3": 16
+ },
+ {
+  "id": "D2",
+  "name": "Aft engineering bay (feed, fab, Brayton A/B, stores)",
+  "x": [
+   -133.25,
+   -89.5
+  ],
+  "inside_casing_m3": 4807,
+  "occupied_m3": 1879,
+  "reserved_m3": 788,
+  "dry_store_m3": 40,
+  "free_m3": 2100,
+  "usable_m3": 75
+ },
+ {
+  "id": "D3",
+  "name": "Mid-body dry store (BODY-C3 modules, CMG frames)",
+  "x": [
+   -89.5,
+   21.0
+  ],
+  "inside_casing_m3": 12017,
+  "occupied_m3": 1874,
+  "reserved_m3": 1465,
+  "dry_store_m3": 3705,
+  "free_m3": 4973,
+  "usable_m3": 1
+ },
+ {
+  "id": "D4",
+  "name": "Forward body under the hot blades",
+  "x": [
+   21.0,
+   48.9
+  ],
+  "inside_casing_m3": 3058,
+  "occupied_m3": 431,
+  "reserved_m3": 656,
+  "dry_store_m3": 58,
+  "free_m3": 1913,
+  "usable_m3": 183
+ },
+ {
+  "id": "D5",
+  "name": "RAD-ZONE casing (LOW/WARM sections, bulkhead)",
+  "x": [
+   48.9,
+   93.4
+  ],
+  "inside_casing_m3": 4917,
+  "occupied_m3": 646,
+  "reserved_m3": 1150,
+  "dry_store_m3": 0,
+  "free_m3": 3121,
+  "usable_m3": 309
+ },
+ {
+  "id": "D6",
+  "name": "Rotor bay (rings A, B hubs)",
+  "x": [
+   93.4,
+   108.8
+  ],
+  "inside_casing_m3": 1883,
+  "occupied_m3": 392,
+  "reserved_m3": 344,
+  "dry_store_m3": 0,
+  "free_m3": 1147,
+  "usable_m3": 125
+ },
+ {
+  "id": "D7",
+  "name": "Forward collar / service zone (refuge, storeroom, airlock, docks)",
+  "x": [
+   108.8,
+   141.75
+  ],
+  "inside_casing_m3": 4200,
+  "occupied_m3": 486,
+  "reserved_m3": 790,
+  "dry_store_m3": 0,
+  "free_m3": 2924,
+  "usable_m3": 521
+ }
+]

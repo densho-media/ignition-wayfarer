@@ -1,0 +1,1012 @@
+# ISSA systems inventory and gap matrix (NONCANON study registry, work/ship-systems-architecture).
+# One row per physical assembly group with ONE owner (owner = the family that owns the hardware; `serves` lists the others).
+# Maturity M0..M7: 0 not contemplated, 1 conceptually defined, 2 requirements identified, 3 space allocated, 4 geometry proxy,
+# 5 functional architecture, 6 engineering sizing, 7 integrated and validated. Visible in Blender (M4) is not functional (M5) or sized (M6).
+# budget = the physics.mass_budget item that pays for it (B02). evidence = the repository artefact behind `current`.
+# space_need = PROTOTYPE installed-envelope band in m3 (equipment + maintenance + removal), ISSA judgment from the cited analogue.
+# impact: ARCH-H can change the ship's architecture (districts, budgets, interfaces); ARCH-M local packaging; ARCH-L fit-out.
+# priority: P1 next phase, P2 needed before WF-R1 integration, P3 later, P4 optional. Status words keep their canon meaning.
+
+[[family]]
+id = "EPS"
+name = "Electrical Power System"
+[[family]]
+id = "TMS"
+name = "Thermal Management System"
+[[family]]
+id = "ECLSS"
+name = "Environmental Control and Life Support"
+[[family]]
+id = "CDH"
+name = "Command, Computing and Data"
+[[family]]
+id = "GNC"
+name = "Navigation, Guidance and Control"
+[[family]]
+id = "COMMS"
+name = "External Communications"
+[[family]]
+id = "SAFETY"
+name = "Crew Safety and Survival"
+[[family]]
+id = "MRO"
+name = "Maintenance, Repair and Manufacturing"
+[[family]]
+id = "LOG"
+name = "Logistics and Habitat Support"
+[[family]]
+id = "DOCK"
+name = "Docking and EVA"
+[[family]]
+id = "PROT"
+name = "Protection and Structural Monitoring"
+[[family]]
+id = "PROP"
+name = "Propulsion and Propellant (interfaces only; research parked)"
+[[family]]
+id = "STRUCT"
+name = "Structure and Rotation (interfaces only)"
+
+# ---------------------------------------------------------------- EPS
+[[system]]
+id = "EPS-01"
+family = "EPS"
+name = "Drive-derived high-power generation (burn bus)"
+function = "Electricity from the drive's hot loop / direct conversion while the drive runs: burn heat pumps (210 MW at burnout), hot-loop pumps, Burn Watch, recharge"
+current = "Two Brayton A/B proxies (3 x r1 m) at AFT+42.5 m, BASELINE count only; ratings OPEN (power.rating)"
+missing = "Rating, conversion type, turbomachinery, alternators, rectifiers, HV switchgear; 210 MW tap shown nowhere in geometry"
+space_now = "2 x 9.4 m3 proxies"
+space_need = "300-900 m3 for 2 x 100-150 MWe (turbomachinery + recuperators + HX + PMAD)"
+budget = "drive_package (proposed; today power_computers_steering_comms)"
+deps = ["PROP", "TMS-01", "EPS-06"]
+status = "BASELINE count, OPEN rating"
+maturity = 4
+priority = "P1"
+impact = "ARCH-H"
+next = "Phase 2: decide whether burn generation belongs to the drive package budget; size against the 210 MW tap"
+
+[[system]]
+id = "EPS-02"
+family = "EPS"
+name = "Ship-service generation independent of propulsion (coast plant)"
+function = "Continuous electricity for years of coast: hotel, cryocoolers, EYE, proactive defense; restart independent of the drive"
+current = "Nothing. power.hotel_source OPEN (OD-009); storage explicitly not a hotel source"
+missing = "The whole plant: source, shield, conversion, heat-rejection interface, controls"
+space_now = "none"
+space_need = "60-250 m3 per plant (1-5 MWe), x2 independent plants"
+budget = "power_computers_steering_comms (50 t, shared)"
+deps = ["TMS-01", "TMS-02", "PROT-01", "EPS-06"]
+status = "OPEN"
+maturity = 1
+priority = "P1"
+impact = "ARCH-H"
+next = "Phase 2 EPS trade (this study D): owner decisions DR-01..DR-04"
+
+[[system]]
+id = "EPS-03"
+family = "EPS"
+name = "Main battery (2 MWh)"
+function = "Black-start energy, ride-through of a plant trip, pulse-bank charging"
+current = "WF_POWER_STORAGE box aft (AFT+52.1..54.9 m, 90 deg); 2 MWh / 800 Wh/kg WORKING"
+missing = "Installed mass, containment, thermal control, converters BC-A/BC-B as hardware"
+space_now = "~12 m3 box"
+space_need = "8-15 m3 + converter racks"
+budget = "power_computers_steering_comms"
+deps = ["EPS-06"]
+status = "WORKING"
+maturity = 4
+priority = "P2"
+impact = "ARCH-L"
+next = "Keep; size converters; 2 MWh = 0.3-0.8 h of coast ship service (results/eps_study.json)"
+
+[[system]]
+id = "EPS-04"
+family = "EPS"
+name = "Pulse bank (200 kWh / 50 MW)"
+function = "Fusion ignition, seed-field and magnet transients"
+current = "WF_POWER_STORAGE box aft at 270 deg; WORKING; ignition energy OPEN"
+missing = "Bank mass, HV switching, discharge path to the seed coils"
+space_now = "~10 m3 box"
+space_need = "10-20 m3"
+budget = "power_computers_steering_comms"
+deps = ["PROP", "EPS-03"]
+status = "WORKING"
+maturity = 4
+priority = "P3"
+impact = "ARCH-L"
+next = "Keep; Crown 20 MJ stores stay inside the forward-protection budget (never additive)"
+
+[[system]]
+id = "EPS-05"
+family = "EPS"
+name = "Survival power (isolated)"
+function = "Crew survival loads with every main source lost; never shares a failure path (power.storage.rules)"
+current = "Two survival-pack boxes forward beside the refuge (FWD-13.1..-7.85 m); capacity OPEN; Deadship PROTOTYPE 8 kWh/ring"
+missing = "Capacity, endurance, an independent long-duration source (RPS or small fission), own distribution"
+space_now = "2 x ~1.4 m3"
+space_need = "5-15 m3 batteries + 2-8 m3 for an RPS/Stirling core if adopted"
+budget = "power_computers_steering_comms"
+deps = ["SAFETY-01", "EPS-07"]
+status = "BASELINE rule, OPEN capacity"
+maturity = 4
+priority = "P1"
+impact = "ARCH-M"
+next = "Set an endurance target (DR-05); 30 days at ~20 kW is 15 t of batteries, so a source is needed beyond days"
+
+[[system]]
+id = "EPS-06"
+family = "EPS"
+name = "Primary distribution A/B (HV DC trunks, switchgear, protection)"
+function = "Two separated buses from generation to districts; tie breaker; fault isolation"
+current = "Bus names A/B BASELINE; Deadship SYS-003 models buses, tie breaker and trips; no geometry"
+missing = "Voltage class, trunk routes, switchboards, breakers, fault-current limiting, grounding scheme"
+space_now = "none"
+space_need = "2 trunk chases along the body (~0.3 x 0.3 m each) + 4-6 switchboard rooms 10-20 m3"
+budget = "power_computers_steering_comms"
+deps = ["STRUCT-01", "EPS-02"]
+status = "BASELINE"
+maturity = 2
+priority = "P1"
+impact = "ARCH-M"
+next = "Phase 5: route A and B on opposite keel lanes (120 deg apart), never in one chase"
+
+[[system]]
+id = "EPS-07"
+family = "EPS"
+name = "Emergency distribution (E-bus)"
+function = "Survival loads only, physically separate from A and B"
+current = "Implied by survival_reserve isolation rule; no route"
+missing = "Third route (crew-trunk bore side), refuge feed, rotor survival channel"
+space_now = "none"
+space_need = "one small chase; refuge panel"
+budget = "power_computers_steering_comms"
+deps = ["EPS-05", "STRUCT-02"]
+status = "BASELINE rule"
+maturity = 2
+priority = "P2"
+impact = "ARCH-M"
+next = "Phase 5"
+
+[[system]]
+id = "EPS-08"
+family = "EPS"
+name = "Local conversion, ride-through and load shedding"
+function = "Point-of-load converters, UPS cells, priority shedding tables"
+current = "Ride-through markers at 7 loads (BASELINE scope); Deadship shedding flags"
+missing = "Priority table ship-wide, converter racks per district"
+space_now = "markers"
+space_need = "racks inside each district's equipment rooms"
+budget = "power_computers_steering_comms"
+deps = ["EPS-06", "CDH-03"]
+status = "BASELINE"
+maturity = 3
+priority = "P2"
+impact = "ARCH-L"
+next = "Load priorities from the load model (eps_study.py) in Phase 2"
+
+[[system]]
+id = "EPS-09"
+family = "EPS"
+name = "Grounding, EMC and drive-field protection"
+function = "Single-point structure ground, plasma/charging control, shielding of electronics near the drive magnets and lance coils"
+current = "Not contemplated"
+missing = "Everything"
+space_now = "none"
+space_need = "negligible volume; exclusion zones near magnets"
+budget = "power_computers_steering_comms"
+deps = ["PROP", "PROT-02"]
+status = "-"
+maturity = 0
+priority = "P3"
+impact = "ARCH-M"
+next = "Magnetic exclusion radii around drive coils feed placement (Phase 2/7)"
+
+[[system]]
+id = "EPS-10"
+family = "EPS"
+name = "Rotor power/data transfer"
+function = "Contactless power and data across each rotating hub, plus an emergency channel"
+current = "Rotor-interface proxies per hub (P1-008), PROTOTYPE"
+missing = "Rating (per ring tens of kW), redundancy A/B/E across the hub"
+space_now = "in hub stack"
+space_need = "in hub stack"
+budget = "habitat_pressure_structure / power"
+deps = ["STRUCT-02", "EPS-06"]
+status = "PROTOTYPE"
+maturity = 4
+priority = "P2"
+impact = "ARCH-L"
+next = "Phase 5: three channels per hub (A, B, E)"
+
+# ---------------------------------------------------------------- TMS
+[[system]]
+id = "TMS-01"
+family = "TMS"
+name = "Hot loop (1800 K drive blades) machinery"
+function = "Drive waste heat to the three blades; pumps, HX, accumulators, drain/fill"
+current = "Three blades 182 x 30.5 m BASELINE, trunks/chases and bellows in geometry; coolant choice OPEN"
+missing = "Pumps, heat exchangers, expansion vessels, fill/drain tanks, coolant; per-blade isolation"
+space_now = "chases on the blades"
+space_need = "100-300 m3 aft machinery (GW-class liquid-metal loop)"
+budget = "radiators_thermal"
+deps = ["PROP", "EPS-01"]
+status = "BASELINE blades, OPEN machinery"
+maturity = 4
+priority = "P2"
+impact = "ARCH-H"
+next = "Phase 3; the coast plant may reuse the dark blades at 550-650 K (DR-03)"
+
+[[system]]
+id = "TMS-02"
+family = "TMS"
+name = "Warm loop (450 K) and coast warm channels"
+function = "Machinery, computers, Crown/laser electronics; coast drain-back channels in the blades (51 MW)"
+current = "WARM section 22.5 m (5 MW all modes) built; drain-back channels WORKING architecture, no hardware"
+missing = "Pumps, HX, drain-back tanks, gas purge; burn heat pumps (TMS-04)"
+space_now = "WARM sheet"
+space_need = "40-120 m3 pump/HX rooms near the WARM section roots"
+budget = "radiators_thermal"
+deps = ["PROT-01", "EPS-02"]
+status = "WORKING"
+maturity = 5
+priority = "P2"
+impact = "ARCH-M"
+next = "Phase 3"
+
+[[system]]
+id = "TMS-03"
+family = "TMS"
+name = "LOW section (300 K) and avionics/cryocooler rejection"
+function = "Tank-farm cryocooler heat and stationary avionics (1 MW)"
+current = "LOW section 20 m built; 0.40 MW cryo + 0.3 MW avionics allowance"
+missing = "Circuit pumps, HX, isolation valves"
+space_now = "LOW sheet"
+space_need = "20-60 m3"
+budget = "radiators_thermal"
+deps = ["SHIP.CRYO"]
+status = "WORKING"
+maturity = 5
+priority = "P2"
+impact = "ARCH-L"
+next = "Phase 3"
+
+[[system]]
+id = "TMS-04"
+family = "TMS"
+name = "Burn heat pumps and compressors"
+function = "Lift the warm loop into the hot loop during burns (35 MW warm at burnout, 210 MW work)"
+current = "F02 architecture only"
+missing = "The machines (hundreds of MW of compressors), their room, drive tap"
+space_now = "none"
+space_need = "200-600 m3 near the hot/warm interface"
+budget = "radiators_thermal"
+deps = ["EPS-01", "TMS-01", "TMS-02"]
+status = "WORKING"
+maturity = 2
+priority = "P2"
+impact = "ARCH-H"
+next = "Phase 3; largest single machinery volume after the drive"
+
+[[system]]
+id = "TMS-05"
+family = "TMS"
+name = "Habitat cold loops (320 K, per ring)"
+function = "Crew/Garden/medical heat via cabin HX + heat pump to ring-face radiators"
+current = "ring_services SYS-003 model (CHX, P1/P2, heat pump 16 kW); ring faces 0.15 MW HIGH_POWER, 1.38 MW coast"
+missing = "Hardware placement in rings, ring radiator panels as geometry"
+space_now = "ring frame fill"
+space_need = "4-8 m3 per ring"
+budget = "life_support_garden_medical"
+deps = ["ECLSS-01"]
+status = "WORKING"
+maturity = 5
+priority = "P2"
+impact = "ARCH-L"
+next = "Phase 4 with ECLSS"
+
+[[system]]
+id = "TMS-06"
+family = "TMS"
+name = "Heat buffer (Heat Debt)"
+function = "Absorb 50-80 MW defense bursts and plant trips"
+current = "Rule WORKING (40!A50); no hardware"
+missing = "Phase-change or sensible store, mass, place"
+space_now = "none"
+space_need = "30-150 m3 (e.g. 1 GJ in a salt/water store ~ 3-10 t)"
+budget = "radiators_thermal"
+deps = ["PROT-01"]
+status = "WORKING rule"
+maturity = 2
+priority = "P2"
+impact = "ARCH-M"
+next = "Phase 3"
+
+[[system]]
+id = "TMS-07"
+family = "TMS"
+name = "Cryogenic cooling of the tank farm"
+function = "Zero boil-off: 20 K shields + 3 K He-3 stage (0.40 MW input)"
+current = "Cryocoolers on every fuel station (S04 slice 5), PROTOTYPE"
+missing = "Redundancy (n+1), supply from two buses, survival priority"
+space_now = "on stations"
+space_need = "in place"
+budget = "drive_package / radiators_thermal"
+deps = ["EPS-02", "TMS-03"]
+status = "PROTOTYPE"
+maturity = 4
+priority = "P1"
+impact = "ARCH-M"
+next = "Uncooled He-3 boil-off is 24 t/day: cryo power is a mission-survival load (DR-06)"
+
+# ---------------------------------------------------------------- ECLSS
+[[system]]
+id = "ECLSS-01"
+family = "ECLSS"
+name = "Ring ECLSS strings (CO2, O2, water, Sabatier, trace)"
+function = "Air revitalisation and water recovery per ring"
+current = "One string per Garden sector, both rings, sized for six (41 rates), PROTOTYPE; electrolysis 1.7 kW"
+missing = "Unit masses/volumes/powers beyond electrolysis; sizing for 12 (crew lock); second string per ring for redundancy"
+space_now = "ECLSS bay recess in each Garden sector"
+space_need = "8-15 m3 per string, 2 per ring"
+budget = "life_support_garden_medical"
+deps = ["EPS-06", "TMS-05"]
+status = "PROTOTYPE"
+maturity = 4
+priority = "P1"
+impact = "ARCH-M"
+next = "Phase 4: resize for rated occupancy 12, two strings per ring (one survives in the other ring's absence)"
+
+[[system]]
+id = "ECLSS-02"
+family = "ECLSS"
+name = "O2 / N2 buffer-gas storage and pressure control"
+function = "Leak make-up, repress, emergency O2"
+current = "UNALLOCATED (G01)"
+missing = "Bottle farm, regulators, distribution"
+space_now = "none"
+space_need = "5-20 m3 (72 h O2 for 12 = 30 kg; repress of a ring ~600 kg air)"
+budget = "life_support_garden_medical"
+deps = ["SAFETY-01"]
+status = "OPEN"
+maturity = 2
+priority = "P1"
+impact = "ARCH-M"
+next = "Phase 4; keep clear of Crown magazines and cryogenic fuel"
+
+[[system]]
+id = "ECLSS-03"
+family = "ECLSS"
+name = "Water stores, potable distribution and microbial control"
+function = "Makeup and potable water; the 180 t shield water is not a released potable reserve"
+current = "Shield water in ring frames + 20 t refuge; antibiofilm rules WORKING"
+missing = "Released makeup store (0.9-4.6 t over six years for 12), potable loop"
+space_now = "ring frame water"
+space_need = "small"
+budget = "water_radiation_shielding / life_support"
+deps = ["ECLSS-01"]
+status = "OPEN"
+maturity = 3
+priority = "P2"
+impact = "ARCH-L"
+next = "Owner: may shield water be drawn as makeup (DR-08)?"
+
+[[system]]
+id = "ECLSS-04"
+family = "ECLSS"
+name = "Food production and preservation"
+function = "Garden crops; packaged food; cold chain"
+current = "Garden racks 8 m2 trays per ring; 10 t food category (incl. consumables)"
+missing = "Packaged-food stowage 52 m3+ and cold chain; six-year food for 12 is ~48 t against the 10 t category"
+space_now = "Garden racks"
+space_need = "~110-130 m3 packaged food for 12 x 6 y, or a larger Garden"
+budget = "food_consumables (10 t)"
+deps = ["LOG-01", "EPS-02"]
+status = "STUDY (41)"
+maturity = 3
+priority = "P1"
+impact = "ARCH-H"
+next = "DR-07: largest unclosed consumable budget"
+
+[[system]]
+id = "ECLSS-05"
+family = "ECLSS"
+name = "Waste collection and processing"
+function = "Wet/dry waste, compaction, drying, quarantine; retained-mass ledger"
+current = "SP-46 sealed collection point; no processing bay"
+missing = "Waste bay with its own exhaust; storage of ~11 t (12 crew, 6 y, before processing)"
+space_now = "cabinet"
+space_need = "10-25 m3"
+budget = "workshop_spares_cargo / life_support"
+deps = ["ECLSS-01"]
+status = "SPACE_ALLOCATED"
+maturity = 3
+priority = "P2"
+impact = "ARCH-L"
+next = "Phase 4/6"
+
+# ---------------------------------------------------------------- CDH
+[[system]]
+id = "CDH-01"
+family = "CDH"
+name = "Main flight computers (redundant, dissimilar)"
+function = "Vehicle management, fault detection isolation recovery, autonomy"
+current = "Ops screens; no computer rooms; LOW section carries 0.3 MW avionics heat allowance"
+missing = "Two separated computer rooms (A, B) + a dissimilar backup; radiation-shielded"
+space_now = "none"
+space_need = "2 x 8-15 m3 + 3 m3"
+budget = "power_computers_steering_comms"
+deps = ["EPS-06", "TMS-03"]
+status = "-"
+maturity = 1
+priority = "P2"
+impact = "ARCH-M"
+next = "Phase 6/7: rooms in different districts; one in the refuge shadow"
+
+[[system]]
+id = "CDH-02"
+family = "CDH"
+name = "Networks (optical/electrical) and data storage"
+function = "Ship-wide A/B data, district switches, mass storage"
+current = "Not contemplated as hardware"
+missing = "Backbones on the A/B routes, switch nodes"
+space_now = "none"
+space_need = "in EPS chases"
+budget = "power_computers_steering_comms"
+deps = ["EPS-06"]
+status = "-"
+maturity = 0
+priority = "P3"
+impact = "ARCH-L"
+next = "Phase 5 with the utility chases"
+
+[[system]]
+id = "CDH-03"
+family = "CDH"
+name = "Local subsystem controllers and manual overrides"
+function = "District controllers that keep their system safe if the network is lost; local manual panels"
+current = "Deadship local panels (game layer)"
+missing = "Hardware convention"
+space_now = "-"
+space_need = "racks per district"
+budget = "power_computers_steering_comms"
+deps = ["CDH-02"]
+status = "-"
+maturity = 1
+priority = "P3"
+impact = "ARCH-L"
+next = "Phase 6"
+
+[[system]]
+id = "CDH-04"
+family = "CDH"
+name = "Flight/engineering data recorder (black box)"
+function = "Crash-survivable record; RF beacon link"
+current = "G01: black-box rack in the refuge/ops not placed"
+missing = "Rack, own power (RPS candidate)"
+space_now = "none"
+space_need = "<1 m3"
+budget = "power_computers_steering_comms"
+deps = ["EPS-05", "COMMS-03"]
+status = "OPEN"
+maturity = 2
+priority = "P3"
+impact = "ARCH-L"
+next = "Phase 6"
+
+# ---------------------------------------------------------------- GNC
+[[system]]
+id = "GNC-01"
+family = "GNC"
+name = "Attitude sensors (star trackers, IMUs, sun sensors)"
+function = "Attitude determination"
+current = "Three star-tracker heads at X 10 m with sun sensors, screened"
+missing = "IMUs (internal), cross-strapping"
+space_now = "pedestals"
+space_need = "small"
+budget = "power_computers_steering_comms"
+deps = ["CDH-01"]
+status = "PROTOTYPE"
+maturity = 5
+priority = "P3"
+impact = "ARCH-L"
+next = "-"
+
+[[system]]
+id = "GNC-02"
+family = "GNC"
+name = "Control-moment gyros"
+function = "Momentum storage, fine pointing, ring-crossing trim"
+current = "Six CMGs on the body utility frames, PROTOTYPE sizing (101 kN m s)"
+missing = "Power, spares, replacement route"
+space_now = "utility frames"
+space_need = "in place"
+budget = "power_computers_steering_comms"
+deps = ["EPS-06"]
+status = "PROTOTYPE"
+maturity = 6
+priority = "P3"
+impact = "ARCH-L"
+next = "-"
+
+[[system]]
+id = "GNC-03"
+family = "GNC"
+name = "RCS and its propellant"
+function = "Flips (44-58 min, ~180-240 kg per flip at 300 s), translation"
+current = "Three aft + four rim pods, screened; bottles not placed"
+missing = "RCS propellant store (six-year flips + station-keeping: ~5-15 t), feed lines to the rim pods across the Brow"
+space_now = "pods only"
+space_need = "6-20 m3 bottles"
+budget = "power_computers_steering_comms (hardware); propellant OPEN"
+deps = ["PROP"]
+status = "PROTOTYPE"
+maturity = 4
+priority = "P2"
+impact = "ARCH-M"
+next = "Decide RCS propellant: drive H2 boil-off (resistojet) vs storable (DR-09)"
+
+[[system]]
+id = "GNC-04"
+family = "GNC"
+name = "Navigation processing and thrust-vector interface"
+function = "Trajectory, differential-thrust trim (+/-0.031 deg alignment)"
+current = "attitude.py check WORKING"
+missing = "Processing hardware (in CDH-01), drive interface"
+space_now = "-"
+space_need = "-"
+budget = "power_computers_steering_comms"
+deps = ["CDH-01", "PROP"]
+status = "WORKING"
+maturity = 5
+priority = "P3"
+impact = "ARCH-L"
+next = "-"
+
+# ---------------------------------------------------------------- COMMS
+[[system]]
+id = "COMMS-01"
+family = "COMMS"
+name = "High-gain RF (2 x 4 m Ka) and optical terminal"
+function = "Earth link to 324 AU"
+current = "Gimballed dishes and 0.5 m optical terminal aft, screened; rate/band OPEN"
+missing = "Transmitters, amplifiers, power, link budget sign-off"
+space_now = "booms"
+space_need = "electronics 2-4 m3"
+budget = "power_computers_steering_comms"
+deps = ["EPS-06"]
+status = "PROTOTYPE"
+maturity = 5
+priority = "P3"
+impact = "ARCH-L"
+next = "-"
+
+[[system]]
+id = "COMMS-02"
+family = "COMMS"
+name = "Internal communications and crew alerting"
+function = "Intercom, alarms, crew locators"
+current = "Ring avionics load (ring_services AV)"
+missing = "Hardware convention"
+space_now = "-"
+space_need = "-"
+budget = "power_computers_steering_comms"
+deps = ["CDH-02"]
+status = "PROTOTYPE"
+maturity = 2
+priority = "P3"
+impact = "ARCH-L"
+next = "-"
+
+[[system]]
+id = "COMMS-03"
+family = "COMMS"
+name = "Emergency distress terminals"
+function = "Independent beacon on its own harness"
+current = "Independent survival terminals beside the primary comms; harness OPEN"
+missing = "Own power source (RPS candidate), independent harness"
+space_now = "terminal proxies"
+space_need = "small"
+budget = "power_computers_steering_comms"
+deps = ["EPS-05"]
+status = "PROTOTYPE"
+maturity = 4
+priority = "P3"
+impact = "ARCH-L"
+next = "-"
+
+# ---------------------------------------------------------------- SAFETY
+[[system]]
+id = "SAFETY-01"
+family = "SAFETY"
+name = "Storm refuge (12) and its independent life support"
+function = "Radiation storm and last-resort refuge"
+current = "Stationary refuge for 12, 20 t water, survival packs, SP-48/50/54 envelopes"
+missing = "Refuge cartridge loop (CO2, O2), water, dosimetry, comms; endurance target"
+space_now = "refuge + end zones"
+space_need = "in place + 3-6 m3 equipment"
+budget = "water_radiation_shielding@refuge; life_support"
+deps = ["EPS-05", "ECLSS-02"]
+status = "SPACE_ALLOCATED"
+maturity = 4
+priority = "P1"
+impact = "ARCH-M"
+next = "Phase 4 with an owner endurance (DR-05)"
+
+[[system]]
+id = "SAFETY-02"
+family = "SAFETY"
+name = "Fire detection and suppression"
+function = "Per compartment detection, suppression media, isolation"
+current = "Detection panels above sector doors; media OPEN"
+missing = "Suppression media stores, machinery-space suppression (aft districts), backup breathing"
+space_now = "door panels"
+space_need = "small per district"
+budget = "life_support / habitat_pressure_structure"
+deps = ["CDH-03"]
+status = "SPACE_ALLOCATED"
+maturity = 3
+priority = "P2"
+impact = "ARCH-M"
+next = "Machinery districts unpressurised (vacuum is the suppressant) vs pressurised: DR-10"
+
+[[system]]
+id = "SAFETY-03"
+family = "SAFETY"
+name = "Radiation monitoring and dosimetry"
+function = "Storm warning, crew dose, reactor-plant monitoring"
+current = "Refuge dosimetry OPEN"
+missing = "Detectors ship-wide, plant monitors"
+space_now = "-"
+space_need = "small"
+budget = "life_support / power_computers"
+deps = ["EPS-02"]
+status = "OPEN"
+maturity = 1
+priority = "P3"
+impact = "ARCH-L"
+next = "-"
+
+[[system]]
+id = "SAFETY-04"
+family = "SAFETY"
+name = "Medical"
+function = "Clinic, diagnostics, surgery capability, sterilisation, sample storage"
+current = "Medical couch and stowage in ring A sector 2, ring B mirror"
+missing = "Diagnostics packaging, refuge first-response kit"
+space_now = "work/medical sector"
+space_need = "in place"
+budget = "life_support_garden_medical"
+deps = []
+status = "INSTALLED_PROXY"
+maturity = 4
+priority = "P3"
+impact = "ARCH-L"
+next = "-"
+
+[[system]]
+id = "SAFETY-05"
+family = "SAFETY"
+name = "Casualty transport, emergency access, high-thrust protocol"
+function = "Litter routes, second exits, burn couches"
+current = "D02 care coverage closed (PROTOTYPE); D03/D04 exits decided, not built"
+missing = "SP-11/12/13 build"
+space_now = "routes"
+space_need = "in place"
+budget = "habitat_pressure_structure / main_structure"
+deps = ["DOCK-02"]
+status = "PROTOTYPE"
+maturity = 5
+priority = "P2"
+impact = "ARCH-L"
+next = "TODO D03/D04 (existing)"
+
+# ---------------------------------------------------------------- MRO
+[[system]]
+id = "MRO-01"
+family = "MRO"
+name = "Workshop (mechanical/electronic repair) and contained fabrication cell"
+function = "Repair and selected additive/subtractive manufacture"
+current = "Engineering benches, contained fabrication cell on the ring workbench"
+missing = "A stationary heavy workshop for machinery-scale repairs (pumps, turbomachinery parts), process exhaust"
+space_now = "ring benches"
+space_need = "40-80 m3 stationary shop near the machinery districts"
+budget = "workshop_spares_cargo (60 t)"
+deps = ["EPS-06", "LOG-02"]
+status = "SPACE_ALLOCATED"
+maturity = 4
+priority = "P2"
+impact = "ARCH-M"
+next = "G03 (existing) with the equipment release; no factory implied"
+
+[[system]]
+id = "MRO-02"
+family = "MRO"
+name = "Spares and raw-material stock"
+function = "Line-replaceable units for six years without resupply"
+current = "Not placed (G01)"
+missing = "Spares list from the FMEA, stock room(s)"
+space_now = "none"
+space_need = "60-200 m3 (submarine practice: spares ~ 5-10 % of equipment mass)"
+budget = "workshop_spares_cargo"
+deps = ["all"]
+status = "OPEN"
+maturity = 2
+priority = "P2"
+impact = "ARCH-H"
+next = "Phase 6: spares mass depends on every system's MTBF; the 60 t item may not close"
+
+[[system]]
+id = "MRO-03"
+family = "MRO"
+name = "Maintenance drones, stations and charging"
+function = "IVA/EVA inspection and repair (24 units + 2 arms)"
+current = "DRONE-001 study fleet, stations as PROTOTYPE anchors; crawler rails"
+missing = "Masses, charging power, station geometry"
+space_now = "anchors"
+space_need = "in place"
+budget = "workshop_spares_cargo / power"
+deps = ["EPS-06"]
+status = "STUDY"
+maturity = 4
+priority = "P3"
+impact = "ARCH-L"
+next = "TODO I02/I03 (existing)"
+
+[[system]]
+id = "MRO-04"
+family = "MRO"
+name = "Internal equipment transport and replacement routes"
+function = "Moving a pump, a converter or a turbine module from stock to its bay"
+current = "Keel lanes, crew trunk, SP-45 aft-down entrance"
+missing = "A removal route per heavy assembly (not just crew passages); hoists, rails"
+space_now = "keel lanes"
+space_need = "reserve lanes in every district"
+budget = "main_structure"
+deps = ["STRUCT-01"]
+status = "-"
+maturity = 2
+priority = "P1"
+impact = "ARCH-H"
+next = "Survey rule: an assembly is allocated only with its removal route"
+
+# ---------------------------------------------------------------- LOG
+[[system]]
+id = "LOG-01"
+family = "LOG"
+name = "Food and consumables stowage"
+function = "Packaged food, hygiene consumables, filters"
+current = "Not placed (G01)"
+missing = "Stowage close to the rings (stationary or ring frame)"
+space_now = "none"
+space_need = "110-160 m3"
+budget = "food_consumables"
+deps = ["ECLSS-04"]
+status = "OPEN"
+maturity = 2
+priority = "P1"
+impact = "ARCH-H"
+next = "With DR-07"
+
+[[system]]
+id = "LOG-02"
+family = "LOG"
+name = "General cargo and dry store"
+function = "The aft body bay is the dry store since TANK-AXIAL"
+current = "Body bay framed (S04 slice 6); SP-45 storeroom 30 m3 net"
+missing = "Rack system, inventory, access"
+space_now = "body bay (survey)"
+space_need = "-"
+budget = "workshop_spares_cargo"
+deps = ["MRO-04"]
+status = "PROTOTYPE"
+maturity = 3
+priority = "P2"
+impact = "ARCH-M"
+next = "Survey shows how much of the bay is free (results/survey.json)"
+
+[[system]]
+id = "LOG-03"
+family = "LOG"
+name = "Hygiene and laboratory"
+function = "Hygiene compartments, lab"
+current = "In ring sector fit-out"
+missing = "-"
+space_now = "rings"
+space_need = "in place"
+budget = "life_support"
+deps = []
+status = "PROTOTYPE"
+maturity = 4
+priority = "P4"
+impact = "ARCH-L"
+next = "-"
+
+# ---------------------------------------------------------------- DOCK
+[[system]]
+id = "DOCK-01"
+family = "DOCK"
+name = "Docking ports and interfaces (power, data, fluid)"
+function = "Two ports with capture rings; propellant/refuelling interface"
+current = "Ports + guidance hardware built; umbilicals, fluid transfer and tanker interface OPEN"
+missing = "Umbilical connectors, transfer lines to the farm"
+space_now = "ports"
+space_need = "small"
+budget = "main_structure"
+deps = ["PROP", "EPS-06"]
+status = "PROTOTYPE"
+maturity = 4
+priority = "P3"
+impact = "ARCH-L"
+next = "-"
+
+[[system]]
+id = "DOCK-02"
+family = "DOCK"
+name = "Airlock, suits, suit servicing (SP-49)"
+function = "EVA egress, suit O2/charging, pressure test"
+current = "EVA airlock, suit system (EVA-SYS PROTOTYPE), SP-49 after D04"
+missing = "SP-49 suit support"
+space_now = "airlock"
+space_need = "4-8 m3"
+budget = "workshop_spares_cargo"
+deps = ["ECLSS-02"]
+status = "PROTOTYPE"
+maturity = 4
+priority = "P3"
+impact = "ARCH-L"
+next = "TODO D04/G03 (existing)"
+
+# ---------------------------------------------------------------- PROT
+[[system]]
+id = "PROT-01"
+family = "PROT"
+name = "Forward defense (Brow, disruptor, Crown, Lance, field)"
+function = "Dust protection at up to 0.016 c"
+current = "Full geometry (Brow, 242 plates, Crown 12 bays, Lance, EYE lances); power bands WORKING; power/thermal closure OPEN (OD-022)"
+missing = "Steady duty of the normal active band; generators and stores that feed it in coast"
+space_now = "shield"
+space_need = "-"
+budget = "forward_impact_shielding (100 t)"
+deps = ["EPS-02", "TMS-02", "TMS-06"]
+status = "WORKING"
+maturity = 5
+priority = "P1"
+impact = "ARCH-H"
+next = "DR-01: the coast defense duty sets the size of the coast power plant"
+
+[[system]]
+id = "PROT-02"
+family = "PROT"
+name = "EYE sensing"
+function = "Forward detection and ablation"
+current = "Four facets with hardware; power modes WORKING (Quiet 100 kW .. Ablation 2.25 MW)"
+missing = "-"
+space_now = "wells"
+space_need = "-"
+budget = "eye_sensors (25 t)"
+deps = ["EPS-02"]
+status = "WORKING"
+maturity = 5
+priority = "P3"
+impact = "ARCH-L"
+next = "-"
+
+[[system]]
+id = "PROT-03"
+family = "PROT"
+name = "Braking-direction dust protection"
+function = "Engine-first braking burns meet dust at the drive face"
+current = "Dust study: ~15,700 grains above a 5 mm face braking home (lab, DIAGNOSTIC)"
+missing = "An aft protection concept"
+space_now = "none"
+space_need = "unknown"
+budget = "forward_impact_shielding?"
+deps = ["PROP"]
+status = "DIAGNOSTIC"
+maturity = 1
+priority = "P2"
+impact = "ARCH-H"
+next = "Owner: aft protection owner and budget (DR-11)"
+
+[[system]]
+id = "PROT-04"
+family = "PROT"
+name = "Radiation shielding (habitat water, refuge, reactor shadow shields)"
+function = "Crew dose limits"
+current = "180 t water (160 t rings + 20 t refuge); drive shadow shield envelope, mass unknown"
+missing = "Shadow shields for any fission plant; shield stack OPEN"
+space_now = "ring frames, refuge"
+space_need = "plant shields 1-10 t each"
+budget = "water_radiation_shielding; drive_package"
+deps = ["EPS-02"]
+status = "WORKING"
+maturity = 4
+priority = "P1"
+impact = "ARCH-H"
+next = "With EPS-02 placement"
+
+[[system]]
+id = "PROT-05"
+family = "PROT"
+name = "Structural health, impact and vibration monitoring"
+function = "Impact detection, fatigue, pulse-rate vibration, magnetic-field monitoring"
+current = "Lance tip dust counters; damage display cells"
+missing = "Sensor network, damage assessment logic"
+space_now = "-"
+space_need = "negligible"
+budget = "main_structure / power_computers"
+deps = ["CDH-02"]
+status = "-"
+maturity = 1
+priority = "P3"
+impact = "ARCH-L"
+next = "-"
+
+[[system]]
+id = "PROT-06"
+family = "PROT"
+name = "Shield repair infrastructure"
+function = "Brow crawler, plate stock, handling fixtures"
+current = "216 Brow fixtures, plate sockets, crawler; repair stock S29 not placed"
+missing = "Plate stock store, repair bus power (5 MW DIAGNOSTIC)"
+space_now = "Brow"
+space_need = "plate stock 20-60 m3"
+budget = "forward_impact_shielding"
+deps = ["MRO-03"]
+status = "PROTOTYPE"
+maturity = 4
+priority = "P3"
+impact = "ARCH-M"
+next = "G03 (existing)"
+
+# ---------------------------------------------------------------- interfaces
+[[system]]
+id = "PROP-IF"
+family = "PROP"
+name = "Propulsion and fuel system (interfaces only)"
+function = "Drive standby loads, startup, fuel conditioning; burn electric tap"
+current = "Vertex cluster shown (SPECULATIVE); Fiji canon; FPS V1.1 storage/feed; research parked"
+missing = "Drive standby power, startup energy, burn tap rating (interfaces)"
+space_now = "-"
+space_need = "-"
+budget = "drive_package (250 t; drawn Vertex exceeds it, F06)"
+deps = ["EPS-01", "EPS-04", "TMS-01"]
+status = "SPECULATIVE / PARKED"
+maturity = 5
+priority = "P3"
+impact = "ARCH-H"
+next = "Touch only the interface rows"
+
+[[system]]
+id = "STRUCT-01"
+family = "STRUCT"
+name = "Momentum Spine as utility backbone"
+function = "Spine bore, keel rails and lanes as the routing skeleton"
+current = "Spine core r 0.95 m around the 1.6 m crew trunk; three keel lanes; frames"
+missing = "Utility chases assigned to A/B/E; penetrations at bulkheads and rotor hubs"
+space_now = "spine + lanes"
+space_need = "chases ~0.1-0.3 m2 each"
+budget = "main_structure"
+deps = []
+status = "WORKING"
+maturity = 3
+priority = "P1"
+impact = "ARCH-H"
+next = "Phase 5"
+
+[[system]]
+id = "STRUCT-02"
+family = "STRUCT"
+name = "Rotating-stationary interfaces"
+function = "Hub bearings, motors, fluid couplings, power/data channels"
+current = "P1-008 hub stacks per rotor"
+missing = "Ratings"
+space_now = "hubs"
+space_need = "in place"
+budget = "habitat_pressure_structure"
+deps = []
+status = "PROTOTYPE"
+maturity = 4
+priority = "P2"
+impact = "ARCH-M"
+next = "Phase 5"
