@@ -1,0 +1,4348 @@
+{
+ "status": "ISSA Phase IV STUDY (NONCANON)",
+ "reconcile_thermal": {
+  "rows": [
+   {
+    "figure": "10.5 m",
+    "origin": "Phase III option D: the forward 10.5 m of today's WARM section re-run at 550 K (no new length)",
+    "relation": "capacity = area x eps sigma T^4 / margin; no view factor; no hot exchange",
+    "holds_W": 6797760.1381157795,
+    "units": "1 x 1.75 MWe"
+   },
+   {
+    "figure": "23.4 m (low)",
+    "origin": "Phase III section550(2, 2.66 MWe): two units running, Brayton efficiency band 0.26 / 0.219 / 0.181 at 550 K",
+    "relation": "f_space = 1, no standby heat, no hot exchange",
+    "area_m2": 3855.812904061141,
+    "length_m": 23.4348434201447
+   },
+   {
+    "figure": "29.3 m (nominal)",
+    "origin": "Phase III section550(2, 2.66 MWe): two units running, Brayton efficiency band 0.26 / 0.219 / 0.181 at 550 K",
+    "relation": "f_space = 1, no standby heat, no hot exchange",
+    "area_m2": 4817.977719638549,
+    "length_m": 29.282684681757797
+   },
+   {
+    "figure": "37.2 m (high)",
+    "origin": "Phase III section550(2, 2.66 MWe): two units running, Brayton efficiency band 0.26 / 0.219 / 0.181 at 550 K",
+    "relation": "f_space = 1, no standby heat, no hot exchange",
+    "area_m2": 6119.752264682138,
+    "length_m": 37.19460452602596
+   }
+  ],
+  "reconciled": [
+   {
+    "band": "low",
+    "F_hot": 0.0,
+    "waste_W": 17457777.777777784,
+    "effective_area_m2": 4436.76391577546,
+    "geometric_area_m2": 4929.737684194955,
+    "length_m": 29.961938923389113,
+    "absorbed_W_m2": 0.0,
+    "net_W_m2": 4249.583786272889,
+    "hot_capacity_W": 2670342452.0183053
+   },
+   {
+    "band": "nominal",
+    "F_hot": 0.0,
+    "waste_W": 21791666.66666667,
+    "effective_area_m2": 5538.189428344335,
+    "geometric_area_m2": 6153.543809271483,
+    "length_m": 37.3999826333356,
+    "absorbed_W_m2": 0.0,
+    "net_W_m2": 4249.583786272889,
+    "hot_capacity_W": 3333254285.9094324
+   },
+   {
+    "band": "high",
+    "F_hot": 0.0,
+    "waste_W": 27655263.157894734,
+    "effective_area_m2": 7028.3787101705475,
+    "geometric_area_m2": 7809.309677967273,
+    "length_m": 47.463389452799476,
+    "absorbed_W_m2": 0.0,
+    "net_W_m2": 4249.583786272889,
+    "hot_capacity_W": 4230150261.522256
+   },
+   {
+    "band": "low",
+    "F_hot": 0.0213,
+    "waste_W": 17457777.777777784,
+    "effective_area_m2": 4436.76391577546,
+    "geometric_area_m2": null,
+    "length_m": null,
+    "absorbed_W_m2": 10269.903891079312,
+    "net_W_m2": -6020.320104806423,
+    "hot_capacity_W": null
+   },
+   {
+    "band": "nominal",
+    "F_hot": 0.0213,
+    "waste_W": 21791666.66666667,
+    "effective_area_m2": 5538.189428344335,
+    "geometric_area_m2": null,
+    "length_m": null,
+    "absorbed_W_m2": 10269.903891079312,
+    "net_W_m2": -6020.320104806423,
+    "hot_capacity_W": null
+   },
+   {
+    "band": "high",
+    "F_hot": 0.0213,
+    "waste_W": 27655263.157894734,
+    "effective_area_m2": 7028.3787101705475,
+    "geometric_area_m2": null,
+    "length_m": null,
+    "absorbed_W_m2": 10269.903891079312,
+    "net_W_m2": -6020.320104806423,
+    "hot_capacity_W": null
+   }
+  ],
+  "finding": "All three figures come from one relation with different inputs: 10.5 m is a share of today's WARM section (no new length); 23 / 29 / 37 m are the same 2 x 2.66 MWe section across the efficiency band with f_space = 1 and no standby heat. Phase IV uses one configuration in the geometry, thermal and mass ledgers: 2 running + 1 warm standby x 3.0 MWe, f_space 0.9, 3 % standby heat, margin 1.2. Placed on the forward end of the hot blades it does not close at all: the other two blades' 1800 K faces (F = 0.021) deposit more than a 550 K surface emits (IV-D)."
+ },
+ "reconcile_mass": {
+  "rows": [
+   {
+    "item": "Budget lines (1.1 kt protected ship)",
+    "t": 1100.0,
+    "definition": "sum of the 12 mass_budget items (incl. 60 t workshop/spares/cargo, 10 t food line, 30 t margin)"
+   },
+   {
+    "item": "Operating inventory (B01)",
+    "t": 200.0,
+    "definition": "protected_and_operational - budget lines"
+   },
+   {
+    "item": "Protected + operational end mass",
+    "t": 1300.0,
+    "definition": "operating_point protected_and_operational_kg: the mass the propellant is computed for"
+   },
+   {
+    "item": "Added tankage (full return)",
+    "t": 329.48794367733797,
+    "definition": "tank_dry_fraction 0.15 x (propellant - 600 t legacy inventory)"
+   },
+   {
+    "item": "End mass (operating point)",
+    "t": 1629.4879436773379,
+    "definition": "protected + operational + added tankage = burnout mass after burn 4"
+   },
+   {
+    "item": "CIRC-001 ring circulation",
+    "t": 40.23387125196757,
+    "definition": "in mass_model.dry_parts only: NOT in the operating point end mass"
+   },
+   {
+    "item": "Dry ship (mass model)",
+    "t": 1669.7218149293055,
+    "definition": "end mass + CIRC-001 = 1,669.7 t"
+   },
+   {
+    "item": "Main propellant",
+    "t": 2796.5862911822533,
+    "definition": "operating_point closed form for the 1,300 t end mass (4 burns, 0.016 c)"
+   },
+   {
+    "item": "Departure (operating point)",
+    "t": 4426.074234859591,
+    "definition": "end mass + propellant = 4,426 t"
+   },
+   {
+    "item": "Departure (mass model)",
+    "t": 4466.308106111559,
+    "definition": "dry ship + propellant = 4,466 t (propellant not re-solved for CIRC-001)"
+   },
+   {
+    "item": "Departure, coupled (CIRC-001 included)",
+    "t": 4573.24621908851,
+    "definition": "adds 40.2 t x (1 + 2.31 x 1.15)"
+   },
+   {
+    "item": "RCS propellant (Phase III, not in the model)",
+    "t": 10.6,
+    "definition": "band 9.3-16.1 t; outside both ledgers"
+   },
+   {
+    "item": "Mission provisioning beyond the 10 t food line",
+    "t": null,
+    "definition": "per mission (IV-H): 10-30 t"
+   }
+  ],
+  "by_part": {
+   "main_structure": 150.0,
+   "forward_impact_shielding": 100.0,
+   "habitat_pressure_structure": 90.0,
+   "eye_sensors": 25.0,
+   "life_support_garden_medical": 55.0,
+   "water_radiation_shielding": 180.0,
+   "workshop_spares_cargo": 60.0,
+   "drive_package": 250.0,
+   "radiators_thermal": 100.0,
+   "power_computers_steering_comms": 50.0,
+   "food_consumables": 10.0,
+   "design_margin": 30.0,
+   "CIRC-001 ring circulation": 40.23387125196757,
+   "added tankage (full return)": 329.4879436773379,
+   "operating_inventory": 200.0
+  },
+  "dP_dM": 2.311228339820044,
+  "finding": "1,670 t is the mass-model dry ship; 1,630 t is the operating-point end mass the propellant is solved for; the 40.2 t difference is CIRC-001, which mass_model carries but operating_point does not. 2,797 t of propellant therefore belongs to 1,630 t, and the mass model's 4,466 t departure adds 40 t without the propellant it needs: coupled, the reference departure is ~4,573 t. Every ISSA increment in Phase IV is coupled from this corrected base. Production data stays unchanged (finding for the owner)."
+ },
+ "l1_conditional": {
+  "rows": [
+   {
+    "case": "Phase III N2 (0.6 MW)",
+    "condition": "L2 carries the ship in burns AND no hot-loop pumps (heat-pipe hot blades)",
+    "L1_W": 600000.0
+   },
+   {
+    "case": "With H1 pumped loop",
+    "condition": "derived pump work",
+    "L1_W": 20058833.052148893
+   },
+   {
+    "case": "With H5 zones + fins",
+    "condition": "derived pump work",
+    "L1_W": 6618346.235133323
+   },
+   {
+    "case": "Parasitic: Li trace heating and pre-heat",
+    "condition": "before ignition, from L2",
+    "L1_W": null
+   }
+  ],
+  "finding": "The 0.6 MW L1 is conditional on two things that Phase IV does not find: an L2 sink in burns (needs the bulkhead moved aft of a new section) and pump-free hot transport (not credible over 160 m). With H5 the L1 load is ~5-10 MW, dominated by hot-loop pumps."
+ },
+ "closure_terms": {
+  "terms": [
+   [
+    "individual-state thermal closure",
+    "every active circuit of one state passes at one band"
+   ],
+   [
+    "all-conditions thermal closure",
+    "every state passes at every band with one sector or unit lost"
+   ],
+   [
+    "electrical availability",
+    "demand met after one unit loss at EOL, with restore time stated"
+   ],
+   [
+    "protection availability",
+    "proactive defense held in every state incl. transitions (dust doctrine OPEN)"
+   ],
+   [
+    "radiation closure",
+    "crew dose and 3 K deposit within limits from 3-D transport"
+   ],
+   [
+    "whole-ship closure",
+    "all of the above plus the coupled mass ledger"
+   ]
+  ],
+  "status": {
+   "N2 (Phase III)": [
+    "coast only",
+    "no",
+    "no at EOL",
+    "no (burn gap)",
+    "not assessed",
+    "no"
+   ],
+   "N2-R4a": [
+    "yes (bulkhead moved aft)",
+    "no (LOW high band, sector lost)",
+    "yes",
+    "OPEN",
+    "TRANSPORT-INFORMED only",
+    "no"
+   ]
+  }
+ },
+ "eclss": {
+  "rows": [
+   {
+    "option": "Phase III: 5 units (3 + 2)",
+    "units": 5,
+    "mass_t": [
+     4.5,
+     6.0,
+     8.0
+    ],
+    "added_vs_2x6_t": [
+     1.7999999999999998,
+     2.4000000000000004,
+     3.1999999999999993
+    ],
+    "kW": [
+     1.35,
+     1.7999999999999998,
+     2.4
+    ],
+    "checks": {
+     "12 nominal (6 + 6)": true,
+     "6 crew": true,
+     "one module lost": true,
+     "ring A lost (12 in ring B)": false,
+     "ring A lost + one module failed": false,
+     "extended emergency (12 in B, 30 d, units moved)": true
+    },
+    "transfer": "units move by the spoke lift in ~2-6 h each (1.2 t, 1.0 x 1.2 x 2.0 m); moving happens before or after, not during, a ring loss"
+   },
+   {
+    "option": "6 units (3 + 3)",
+    "units": 6,
+    "mass_t": [
+     5.4,
+     7.199999999999999,
+     9.600000000000001
+    ],
+    "added_vs_2x6_t": [
+     2.7,
+     3.5999999999999996,
+     4.800000000000001
+    ],
+    "kW": [
+     1.62,
+     2.16,
+     2.88
+    ],
+    "checks": {
+     "12 nominal (6 + 6)": true,
+     "6 crew": true,
+     "one module lost": true,
+     "ring A lost (12 in ring B)": true,
+     "ring A lost + one module failed": false,
+     "extended emergency (12 in B, 30 d, units moved)": true
+    },
+    "transfer": "units move by the spoke lift in ~2-6 h each (1.2 t, 1.0 x 1.2 x 2.0 m); moving happens before or after, not during, a ring loss"
+   },
+   {
+    "option": "7 units (3 + 3 + 1 hub, cross-ring)",
+    "units": 7,
+    "mass_t": [
+     6.3,
+     8.4,
+     11.200000000000001
+    ],
+    "added_vs_2x6_t": [
+     3.5999999999999996,
+     4.800000000000001,
+     6.4
+    ],
+    "kW": [
+     1.8900000000000001,
+     2.52,
+     3.36
+    ],
+    "checks": {
+     "12 nominal (6 + 6)": true,
+     "6 crew": true,
+     "one module lost": true,
+     "ring A lost (12 in ring B)": true,
+     "ring A lost + one module failed": true,
+     "extended emergency (12 in B, 30 d, units moved)": true
+    },
+    "transfer": "the hub unit serves either ring through spoke ducts: no transfer"
+   },
+   {
+    "option": "8 units (4 + 4)",
+    "units": 8,
+    "mass_t": [
+     7.2,
+     9.6,
+     12.8
+    ],
+    "added_vs_2x6_t": [
+     4.5,
+     6.0,
+     8.0
+    ],
+    "kW": [
+     2.16,
+     2.88,
+     3.84
+    ],
+    "checks": {
+     "12 nominal (6 + 6)": true,
+     "6 crew": true,
+     "one module lost": true,
+     "ring A lost (12 in ring B)": true,
+     "ring A lost + one module failed": true,
+     "extended emergency (12 in B, 30 d, units moved)": true
+    },
+    "transfer": "units move by the spoke lift in ~2-6 h each (1.2 t, 1.0 x 1.2 x 2.0 m); moving happens before or after, not during, a ring loss"
+   }
+  ],
+  "reconciliation": "Phase III wrote \"a 2-3 t premium\" for the modular option; its own table gave 9.6 t for 5 units (8 extra person-capacities x 1.2 t). The premium of the modular approach over two 6-person strings is the extra capacity, 1.2 t per 4-person unit beyond the three that 12 people need.",
+  "finding": "Five units (3 + 2) carry 12 in ring A but not after the loss of ring A (8 capacity in B). Six units (3 + 3) survive a ring loss but not a ring loss plus one failed unit. Seven units with one cross-ring unit in the hub, or eight (4 + 4), close every case: 12 in one ring after a ring loss and a unit failure. Nominal aggregate capacity is not emergency availability. Recommended: 7 units (8.4 t nominal, +4.8 t over two 6-person strings)."
+ },
+ "transport": {
+  "rows": [
+   {
+    "name": "H1 existing pumped loop (one loop per blade)",
+    "cls": "STUDY",
+    "dT_K": 200.0,
+    "mdot_kg_s_per_blade": 4146.825396825397,
+    "Vdot_m3_s_per_blade": 9.643779992617201,
+    "pump_W": [
+     12155540.603418162,
+     19458833.052148893,
+     34017315.460538104
+    ],
+    "inventory_t": [
+     702.9852285714286,
+     564.8959428571428,
+     472.836419047619
+    ],
+    "mass_t": [
+     821.1597535304071,
+     677.2278881179519,
+     588.4265351438169
+    ],
+    "zones": 1,
+    "heat_pipes": false,
+    "subcooling_Pa_needed": 457793.532901088,
+    "phases": {
+     "accel": "pumped; hydrostatic head along the 160 m header 930 kPa (sets pressurisation, not work)",
+     "braking": "identical (same +x acceleration)",
+     "coast": "part flow on decay heat; Li must stay above 454 K or drain",
+     "startup": "pre-heat from L2 before ignition (MW-h class); frozen sections thawed in order",
+     "postburn": "15-30 % flow on decay heat; heat pipes (H3/H5) cool passively once below their limit"
+    },
+    "failure": "one puncture drains a whole blade loop"
+   },
+   {
+    "name": "H2 optimised pumped (dT 400 K, tapered headers)",
+    "cls": "STUDY",
+    "dT_K": 400.0,
+    "mdot_kg_s_per_blade": 2073.4126984126983,
+    "Vdot_m3_s_per_blade": 4.821889996308601,
+    "pump_W": [
+     5340857.351441407,
+     8611750.66560329,
+     15052891.932632623
+    ],
+    "inventory_t": [
+     242.6876095238095,
+     185.15040714285715,
+     150.6280857142857
+    ],
+    "mass_t": [
+     313.45160170509416,
+     253.2376696223464,
+     224.79405834469026
+    ],
+    "zones": 1,
+    "heat_pipes": false,
+    "subcooling_Pa_needed": 457793.532901088,
+    "phases": {
+     "accel": "pumped; hydrostatic head along the 160 m header 930 kPa (sets pressurisation, not work)",
+     "braking": "identical (same +x acceleration)",
+     "coast": "part flow on decay heat; Li must stay above 454 K or drain",
+     "startup": "pre-heat from L2 before ignition (MW-h class); frozen sections thawed in order",
+     "postburn": "15-30 % flow on decay heat; heat pipes (H3/H5) cool passively once below their limit"
+    },
+    "failure": "one puncture drains a whole blade loop"
+   },
+   {
+    "name": "H3 hybrid: pumped trunk and radial manifolds, ~1.5 m Li heat-pipe fins",
+    "cls": "STUDY",
+    "dT_K": 300.0,
+    "mdot_kg_s_per_blade": 2764.5502645502647,
+    "Vdot_m3_s_per_blade": 6.429186661744802,
+    "pump_W": [
+     3776405.535933518,
+     4793613.767292818,
+     6715919.859090315
+    ],
+    "inventory_t": [
+     311.8805993650794,
+     235.16432952380956,
+     189.13456761904763
+    ],
+    "mass_t": [
+     392.66361600439836,
+     341.08832170509424,
+     329.3812432236945
+    ],
+    "zones": 1,
+    "heat_pipes": true,
+    "subcooling_Pa_needed": 457793.532901088,
+    "phases": {
+     "accel": "pumped; hydrostatic head along the 160 m header 930 kPa (sets pressurisation, not work)",
+     "braking": "identical (same +x acceleration)",
+     "coast": "part flow on decay heat; Li must stay above 454 K or drain",
+     "startup": "pre-heat from L2 before ignition (MW-h class); frozen sections thawed in order",
+     "postburn": "15-30 % flow on decay heat; heat pipes (H3/H5) cool passively once below their limit"
+    },
+    "failure": "a puncture loses one fin (H3) or one zone of six (H5); the loop survives"
+   },
+   {
+    "name": "H4 predominantly passive: axial Li vapour trunk (thermosyphon in burns)",
+    "cls": "SPECULATIVE",
+    "vapour_pressure_Pa": 285492.653731088,
+    "vapour_density": 0.13239509107086778,
+    "vapour_mdot_kg_s": 178.63247863247864,
+    "duct_area_m2": 13.492379301046832,
+    "duct_D_m": 4.1447594476228655,
+    "duct_wall_t": 258.19369646461644,
+    "capillary_head_Pa": 26000.0,
+    "gravity_head_Pa_per_m": 5743.362639,
+    "pump_W": [
+     0.0,
+     200000.0,
+     1000000.0
+    ],
+    "inventory_t": [
+     20.0,
+     40.0,
+     80.0
+    ],
+    "mass_t": [
+     180.7355875252315,
+     258.19369646461644,
+     387.29054469692466
+    ],
+    "phases": {
+     "accel": "condensate returns aft (downhill): thermosyphon works",
+     "braking": "same: the ship always accelerates +x in its own frame",
+     "coast": "0 g: capillary only, cannot carry decay heat over 160 m; needs a pump",
+     "startup": "frozen Li (454 K) start under acceleration: known front-tracking failure; pump-assisted start required",
+     "postburn": "decay heat with no acceleration: pump"
+    },
+    "verdict": "Rejected as the primary path: a ~4.1 m vapour duct per blade, no 0 g operation and a frozen start. Gravity-assisted return is a real asset in burns and is kept as a backup mode in H3/H5."
+   },
+   {
+    "name": "H5 distributed independent zones (6 loops per blade, own pumps)",
+    "cls": "STUDY",
+    "dT_K": 300.0,
+    "mdot_kg_s_per_blade": 2764.5502645502647,
+    "Vdot_m3_s_per_blade": 6.429186661744802,
+    "pump_W": [
+     4499153.927791253,
+     6018346.235133323,
+     8686753.613186229
+    ],
+    "inventory_t": [
+     311.8805993650794,
+     235.16432952380956,
+     189.13456761904763
+    ],
+    "mass_t": [
+     531.060831557475,
+     494.96306407355627,
+     533.3453653461588
+    ],
+    "zones": 6,
+    "heat_pipes": true,
+    "subcooling_Pa_needed": 457793.532901088,
+    "phases": {
+     "accel": "pumped; hydrostatic head along the 160 m header 930 kPa (sets pressurisation, not work)",
+     "braking": "identical (same +x acceleration)",
+     "coast": "part flow on decay heat; Li must stay above 454 K or drain",
+     "startup": "pre-heat from L2 before ignition (MW-h class); frozen sections thawed in order",
+     "postburn": "15-30 % flow on decay heat; heat pipes (H3/H5) cool passively once below their limit"
+    },
+    "failure": "a puncture loses one fin (H3) or one zone of six (H5); the loop survives"
+   }
+  ],
+  "per_blade_W": 3483333333.3333335,
+  "hot_length_m": 162.0,
+  "accel_max_m_s2": 13.3566573,
+  "coolant": "lithium (OPEN in canon; STUDY choice at 1800 K)",
+  "li_vapour_pressure_1800K_Pa": 285492.653731088,
+  "fin_capillary_length_m": 1.4719601443879744,
+  "separation": {
+   "drive_to_root": "trunks from the drive heat exchanger to the blade roots (~30 m) and the tapered root headers (162 m)",
+   "distribution": "radial manifolds or channels across the 30 m blade width, then fins"
+  },
+  "finding": "The OPEN hot-loop pumps are derived: an existing-type pumped Li loop (H1, dT 200 K) needs ~12-34 MW of pump work and carries ~470-700 t of lithium in its trunks and channels, which no mass line holds today. Raising dT to 400 K and tapering the headers (H2) cuts that to ~5-15 MW and ~150-240 t. Long heat pipes fail on capillary limits: an Li fin across the blade carries its strip only to ~1.5 m, so passive transport is local. H3 (pumped trunk + short heat-pipe fins) and H5 (six independent zones) keep the pump work near 4-9 MW, cut the panel inventory, and turn a dust puncture from a loop loss into a fin or zone loss. H4 (vapour trunk) exploits the gravity-assisted return in every burn but cannot start frozen or run in 0 g. Recommended study basis: H5 with heat-pipe fins (H3 inside each zone)."
+ },
+ "thermal": {
+  "view_factors": [
+   {
+    "surface": "WARM, production bulkhead in place",
+    "T_K": 440.0,
+    "F_hot": 0.0005833333333333334,
+    "F_sigma": 9.857256680195523e-05,
+    "emit_W_m2": 1934.0327987304165,
+    "absorbed_W_m2": 281.2571488167261,
+    "ratio": 0.14542522184802428,
+    "T_equilibrium_no_load_K": 271.7143718326274,
+    "works_in_burn": true,
+    "debit": 0.14542522184802428
+   },
+   {
+    "surface": "LOW, production bulkhead in place",
+    "T_K": 300.0,
+    "F_hot": 0.00018333333333333334,
+    "F_sigma": 5.527201254134293e-05,
+    "emit_W_m2": 417.96329842449,
+    "absorbed_W_m2": 88.3951039138282,
+    "ratio": 0.2114901098901099,
+    "T_equilibrium_no_load_K": 203.4434773701981,
+    "works_in_burn": true,
+    "debit": 0.2114901098901099
+   },
+   {
+    "surface": "WARM if the bulkhead were absent",
+    "T_K": 440.0,
+    "F_hot": 0.0254,
+    "F_sigma": 0.0011125385386583245,
+    "emit_W_m2": 1934.0327987304165,
+    "absorbed_W_m2": 12246.739851334016,
+    "ratio": 6.332229659896828,
+    "T_equilibrium_no_load_K": 697.9781717324361,
+    "works_in_burn": false,
+    "debit": 6.332229659896828
+   },
+   {
+    "surface": "LOW if the bulkhead were absent",
+    "T_K": 300.0,
+    "F_hot": 0.00795,
+    "F_sigma": 0.0006279648676478645,
+    "emit_W_m2": 417.96329842449,
+    "absorbed_W_m2": 3833.1331424450955,
+    "ratio": 9.17098021978022,
+    "T_equilibrium_no_load_K": 522.0657398401614,
+    "works_in_burn": false,
+    "debit": 9.17098021978022
+   },
+   {
+    "surface": "550 K on the hot-blade forward end, 20 m (Phase III F, aft of the bulkhead)",
+    "T_K": 550.0,
+    "F_hot": 0.0267,
+    "F_sigma": 0.0011398927581136745,
+    "emit_W_m2": 4721.759762525431,
+    "absorbed_W_m2": 12873.541497268434,
+    "ratio": 2.726428735201688,
+    "T_equilibrium_no_load_K": 706.7425303672521,
+    "works_in_burn": false,
+    "debit": 2.726428735201688
+   },
+   {
+    "surface": "550 K on the hot-blade forward end, 29 m (Phase III F, aft of the bulkhead)",
+    "T_K": 550.0,
+    "F_hot": 0.0213,
+    "F_sigma": 0.001020938538796533,
+    "emit_W_m2": 4721.759762525431,
+    "absorbed_W_m2": 10269.903891079312,
+    "ratio": 2.1750161820148297,
+    "T_equilibrium_no_load_K": 667.9259434930065,
+    "works_in_burn": false,
+    "debit": 2.1750161820148297
+   },
+   {
+    "surface": "550 K on the hot-blade forward end, 37 m (Phase III F, aft of the bulkhead)",
+    "T_K": 550.0,
+    "F_hot": 0.01865,
+    "F_sigma": 0.0009566132316668006,
+    "emit_W_m2": 4721.759762525431,
+    "absorbed_W_m2": 8992.192843597613,
+    "ratio": 1.9044155772101676,
+    "T_equilibrium_no_load_K": 646.1050280576053,
+    "works_in_burn": false,
+    "debit": 1.9044155772101676
+   },
+   {
+    "surface": "700 K section 24 m with the bulkhead moved aft of it (N2-R4a)",
+    "T_K": 700.0,
+    "F_hot": 0.0002,
+    "F_sigma": 5.772925312756667e-05,
+    "emit_W_m2": 12389.25777181729,
+    "absorbed_W_m2": 96.43102245144894,
+    "ratio": 0.007783438219423226,
+    "T_equilibrium_no_load_K": 207.91743589145048,
+    "works_in_burn": true,
+    "debit": 0.007783438219423226
+   },
+   {
+    "surface": "Forward extension beyond LOW (x 93.9-118; collides with the aft storage front at 93.4)",
+    "T_K": 550.0,
+    "F_hot": 0.0,
+    "F_sigma": 0.0,
+    "emit_W_m2": 4721.759762525431,
+    "absorbed_W_m2": 0.0,
+    "ratio": 0.0,
+    "T_equilibrium_no_load_K": 0.0,
+    "works_in_burn": true,
+    "debit": 0.0
+   }
+  ],
+  "baffle_scan": [
+   {
+    "baffle_R_m": 20.0,
+    "surface": "WARM",
+    "F_hot": 0.00575,
+    "F_sigma": 0.00030867829801699157,
+    "absorbed_W_m2": 2772.391895479157,
+    "ratio": 1.4334771867876677,
+    "works_in_burn": false
+   },
+   {
+    "baffle_R_m": 20.0,
+    "surface": "LOW",
+    "F_hot": 0.0019166666666666666,
+    "F_sigma": 0.00017855872309297183,
+    "absorbed_W_m2": 924.1306318263856,
+    "ratio": 2.2110329670329674,
+    "works_in_burn": false
+   },
+   {
+    "baffle_R_m": 30.0,
+    "surface": "WARM",
+    "F_hot": 0.001,
+    "F_sigma": 0.0001290348790056394,
+    "absorbed_W_m2": 482.1551122572447,
+    "ratio": 0.24930038031089874,
+    "works_in_burn": true
+   },
+   {
+    "baffle_R_m": 30.0,
+    "surface": "LOW",
+    "F_hot": 0.00036666666666666667,
+    "F_sigma": 7.815926285713274e-05,
+    "absorbed_W_m2": 176.7902078276564,
+    "ratio": 0.4229802197802198,
+    "works_in_burn": false
+   },
+   {
+    "baffle_R_m": 37.0,
+    "surface": "WARM",
+    "F_hot": 0.0005833333333333334,
+    "F_sigma": 9.857256680195523e-05,
+    "absorbed_W_m2": 281.2571488167261,
+    "ratio": 0.14542522184802428,
+    "works_in_burn": true
+   },
+   {
+    "baffle_R_m": 37.0,
+    "surface": "LOW",
+    "F_hot": 0.00018333333333333334,
+    "F_sigma": 5.527201254134293e-05,
+    "absorbed_W_m2": 88.3951039138282,
+    "ratio": 0.2114901098901099,
+    "works_in_burn": true
+   }
+  ],
+  "baffle": {
+   "station_x": 50.0,
+   "R_m": 37.0,
+   "area_m2": 4248.5,
+   "layers": 3,
+   "existing_t": 4.460925,
+   "mass_t": [
+    0.0,
+    2.0,
+    5.0
+   ],
+   "hot_capacity_lost_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "silhouette": "the production bulkhead moves aft by the section length: no new element, same envelope",
+   "cls": "PROTOTYPE (isolated radiator variant; relocation of an existing production element)"
+  },
+  "hot_allowance": {
+   "ideal_W": 14400000000.0,
+   "peak_absorbed_W": 10450000000.0,
+   "budget_W": 10800000000.0,
+   "per_m_W": 89124487.53220582,
+   "L_max_no_margin_m": 44.32003043577263,
+   "L_max_with_margin_m": 20.86968521785749,
+   "L_max_budget_m": 40.39293913133708,
+   "note": "Fiji/current-drive operating point only (MODEL-DERIVED); Vertex hot loads are not used (no Vertex reopening). With the 20 % rule applied to the hot blade the margin is negative already: 10.45 x 1.2 = 12.5 GW of 14.4 GW leaves 1.9 GW (21 m); without it 3.95 GW (44 m)."
+  },
+  "closure": [
+   {
+    "state": "COAST_HV_PROACTIVE",
+    "band": "low",
+    "condition": "intact",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "COAST_HV_PROACTIVE",
+    "band": "low",
+    "condition": "one blade sector lost",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "COAST_HV_PROACTIVE",
+    "band": "nominal",
+    "condition": "intact",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "COAST_HV_PROACTIVE",
+    "band": "nominal",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 4048000.0,
+      "capacity_W": 3977660.7893888894
+     }
+    ]
+   },
+   {
+    "state": "COAST_HV_PROACTIVE",
+    "band": "high",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 6430000.0,
+      "capacity_W": 5966491.184083334
+     },
+     {
+      "circuit": "LOW section (300 K)",
+      "load_W": 1098565.3825164163,
+      "capacity_W": 1065806.4109824493
+     }
+    ]
+   },
+   {
+    "state": "COAST_HV_PROACTIVE",
+    "band": "high",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "Blade warm channels (L2 waste, CONDITIONAL)",
+      "load_W": 34802524.32299481,
+      "capacity_W": 34266666.666666664
+     },
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 6430000.0,
+      "capacity_W": 3977660.7893888894
+     },
+     {
+      "circuit": "LOW section (300 K)",
+      "load_W": 1098565.3825164163,
+      "capacity_W": 710537.6073216328
+     }
+    ]
+   },
+   {
+    "state": "COAST_HV_TRIGGERED",
+    "band": "low",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 12320666.666666668,
+      "capacity_W": 5966491.184083334
+     }
+    ]
+   },
+   {
+    "state": "COAST_HV_TRIGGERED",
+    "band": "low",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 12320666.666666668,
+      "capacity_W": 3977660.7893888894
+     },
+     {
+      "circuit": "LOW section (300 K)",
+      "load_W": 811959.5342378457,
+      "capacity_W": 710537.6073216328
+     }
+    ]
+   },
+   {
+    "state": "COAST_HV_TRIGGERED",
+    "band": "nominal",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 19048000.0,
+      "capacity_W": 5966491.184083334
+     },
+     {
+      "circuit": "LOW section (300 K)",
+      "load_W": 1614607.177122762,
+      "capacity_W": 1065806.4109824493
+     }
+    ]
+   },
+   {
+    "state": "COAST_HV_TRIGGERED",
+    "band": "nominal",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 19048000.0,
+      "capacity_W": 3977660.7893888894
+     },
+     {
+      "circuit": "LOW section (300 K)",
+      "load_W": 1614607.177122762,
+      "capacity_W": 710537.6073216328
+     }
+    ]
+   },
+   {
+    "state": "COAST_HV_TRIGGERED",
+    "band": "high",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 26263333.333333336,
+      "capacity_W": 5966491.184083334
+     },
+     {
+      "circuit": "LOW section (300 K)",
+      "load_W": 3330565.3825164163,
+      "capacity_W": 1065806.4109824493
+     }
+    ]
+   },
+   {
+    "state": "COAST_HV_TRIGGERED",
+    "band": "high",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 26263333.333333336,
+      "capacity_W": 3977660.7893888894
+     },
+     {
+      "circuit": "LOW section (300 K)",
+      "load_W": 3330565.3825164163,
+      "capacity_W": 710537.6073216328
+     }
+    ]
+   },
+   {
+    "state": "HIGH_THRUST_PROACTIVE",
+    "band": "low",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "L1 conversion reject (~900 K)",
+      "load_W": 8281637.061153731,
+      "capacity_W": 0.0
+     }
+    ]
+   },
+   {
+    "state": "HIGH_THRUST_PROACTIVE",
+    "band": "low",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "L1 conversion reject (~900 K)",
+      "load_W": 8281637.061153731,
+      "capacity_W": 0.0
+     }
+    ]
+   },
+   {
+    "state": "HIGH_THRUST_PROACTIVE",
+    "band": "nominal",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "L1 conversion reject (~900 K)",
+      "load_W": 13272754.464868225,
+      "capacity_W": 0.0
+     }
+    ]
+   },
+   {
+    "state": "HIGH_THRUST_PROACTIVE",
+    "band": "nominal",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "L1 conversion reject (~900 K)",
+      "load_W": 13272754.464868225,
+      "capacity_W": 0.0
+     },
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 4991600.0,
+      "capacity_W": 3977660.7893888894
+     }
+    ]
+   },
+   {
+    "state": "HIGH_THRUST_PROACTIVE",
+    "band": "high",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "L1 conversion reject (~900 K)",
+      "load_W": 19711522.949910976,
+      "capacity_W": 0.0
+     },
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 7194000.0,
+      "capacity_W": 5966491.184083334
+     }
+    ]
+   },
+   {
+    "state": "HIGH_THRUST_PROACTIVE",
+    "band": "high",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "L1 conversion reject (~900 K)",
+      "load_W": 19711522.949910976,
+      "capacity_W": 0.0
+     },
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 7194000.0,
+      "capacity_W": 3977660.7893888894
+     },
+     {
+      "circuit": "Ring cold loops",
+      "load_W": 100949.92,
+      "capacity_W": 100000.0
+     }
+    ]
+   },
+   {
+    "state": "HIGH_THRUST",
+    "band": "low",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "L1 conversion reject (~900 K)",
+      "load_W": 152468178.39448708,
+      "capacity_W": 0.0
+     }
+    ]
+   },
+   {
+    "state": "HIGH_THRUST",
+    "band": "low",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "L1 conversion reject (~900 K)",
+      "load_W": 152468178.39448708,
+      "capacity_W": 0.0
+     },
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 5520000.0,
+      "capacity_W": 3977660.7893888894
+     }
+    ]
+   },
+   {
+    "state": "HIGH_THRUST",
+    "band": "nominal",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "L1 conversion reject (~900 K)",
+      "load_W": 262804274.46486825,
+      "capacity_W": 0.0
+     },
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 6350000.0,
+      "capacity_W": 5966491.184083334
+     }
+    ]
+   },
+   {
+    "state": "HIGH_THRUST",
+    "band": "nominal",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "L1 conversion reject (~900 K)",
+      "load_W": 262804274.46486825,
+      "capacity_W": 0.0
+     },
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 6350000.0,
+      "capacity_W": 3977660.7893888894
+     }
+    ]
+   },
+   {
+    "state": "HIGH_THRUST",
+    "band": "high",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "L1 conversion reject (~900 K)",
+      "load_W": 383256802.94991106,
+      "capacity_W": 0.0
+     },
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 7400000.0,
+      "capacity_W": 5966491.184083334
+     }
+    ]
+   },
+   {
+    "state": "HIGH_THRUST",
+    "band": "high",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "L1 conversion reject (~900 K)",
+      "load_W": 383256802.94991106,
+      "capacity_W": 0.0
+     },
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 7400000.0,
+      "capacity_W": 3977660.7893888894
+     },
+     {
+      "circuit": "Ring cold loops",
+      "load_W": 100949.92,
+      "capacity_W": 100000.0
+     }
+    ]
+   },
+   {
+    "state": "SURVIVAL_MISSION",
+    "band": "low",
+    "condition": "intact",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "SURVIVAL_MISSION",
+    "band": "low",
+    "condition": "one blade sector lost",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "SURVIVAL_MISSION",
+    "band": "nominal",
+    "condition": "intact",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "SURVIVAL_MISSION",
+    "band": "nominal",
+    "condition": "one blade sector lost",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "SURVIVAL_MISSION",
+    "band": "high",
+    "condition": "intact",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "SURVIVAL_MISSION",
+    "band": "high",
+    "condition": "one blade sector lost",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "BLACK_START",
+    "band": "low",
+    "condition": "intact",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "BLACK_START",
+    "band": "low",
+    "condition": "one blade sector lost",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "BLACK_START",
+    "band": "nominal",
+    "condition": "intact",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "BLACK_START",
+    "band": "nominal",
+    "condition": "one blade sector lost",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "BLACK_START",
+    "band": "high",
+    "condition": "intact",
+    "closes": true,
+    "fails": []
+   },
+   {
+    "state": "BLACK_START",
+    "band": "high",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "LOW section (300 K)",
+      "load_W": 1013398.1889164163,
+      "capacity_W": 710537.6073216328
+     }
+    ]
+   },
+   {
+    "state": "POST_BURN_COOLDOWN",
+    "band": "low",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "Blade warm channels (L2 waste, CONDITIONAL)",
+      "load_W": 7433696.787579574,
+      "capacity_W": 0.0
+     }
+    ]
+   },
+   {
+    "state": "POST_BURN_COOLDOWN",
+    "band": "low",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "Blade warm channels (L2 waste, CONDITIONAL)",
+      "load_W": 7433696.787579574,
+      "capacity_W": 0.0
+     }
+    ]
+   },
+   {
+    "state": "POST_BURN_COOLDOWN",
+    "band": "nominal",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "Blade warm channels (L2 waste, CONDITIONAL)",
+      "load_W": 16894400.42656723,
+      "capacity_W": 0.0
+     }
+    ]
+   },
+   {
+    "state": "POST_BURN_COOLDOWN",
+    "band": "nominal",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "Blade warm channels (L2 waste, CONDITIONAL)",
+      "load_W": 16894400.42656723,
+      "capacity_W": 0.0
+     },
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 4048000.0,
+      "capacity_W": 3977660.7893888894
+     }
+    ]
+   },
+   {
+    "state": "POST_BURN_COOLDOWN",
+    "band": "high",
+    "condition": "intact",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "Blade warm channels (L2 waste, CONDITIONAL)",
+      "load_W": 34802524.32299481,
+      "capacity_W": 0.0
+     },
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 6430000.0,
+      "capacity_W": 5966491.184083334
+     },
+     {
+      "circuit": "LOW section (300 K)",
+      "load_W": 1098565.3825164163,
+      "capacity_W": 1065806.4109824493
+     }
+    ]
+   },
+   {
+    "state": "POST_BURN_COOLDOWN",
+    "band": "high",
+    "condition": "one blade sector lost",
+    "closes": false,
+    "fails": [
+     {
+      "circuit": "Blade warm channels (L2 waste, CONDITIONAL)",
+      "load_W": 34802524.32299481,
+      "capacity_W": 0.0
+     },
+     {
+      "circuit": "WARM section (440 K)",
+      "load_W": 6430000.0,
+      "capacity_W": 3977660.7893888894
+     },
+     {
+      "circuit": "LOW section (300 K)",
+      "load_W": 1098565.3825164163,
+      "capacity_W": 710537.6073216328
+     }
+    ]
+   }
+  ],
+  "low_extension": {
+   "high_band_one_sector_W": 1980000.0,
+   "available_W": 1278967.6931789392,
+   "added_length_m": 10.96247091400111,
+   "per_m_W": 63948.38465894697
+  },
+  "l2_cooling": {
+   "states": [
+    "drive start",
+    "full power",
+    "drive trip",
+    "cooldown",
+    "drain / refill",
+    "one unit lost",
+    "one sector lost"
+   ],
+   "options": {
+    "G0 production: L2 on warm channels (coast only)": [
+     "no (channels drained before ignition)",
+     "no",
+     "no for 0.3-4 h",
+     "after refill",
+     "no",
+     "coast yes",
+     "coast 2/3"
+    ],
+    "G1 550 K on the hot-blade forward end, bulkhead unchanged (Phase III F)": [
+     "no: F = 0.02 to 1800 K surfaces",
+     "no",
+     "yes once the hot blades cool (~80 s)",
+     "yes",
+     "yes",
+     "n/a",
+     "n/a"
+    ],
+    "G2 forward extension beyond LOW": [
+     "geometry conflict: aft storage front at x 93.4",
+     "-",
+     "-",
+     "-",
+     "-",
+     "-",
+     "-"
+    ],
+    "G3 700 K on the hot-blade forward end, bulkhead moved aft of it (N2-R4a)": [
+     "yes",
+     "yes (F < 1e-3)",
+     "yes",
+     "yes",
+     "yes (independent of the channels)",
+     "yes: two units on two sectors",
+     "yes if one unit per sector"
+    ],
+    "G4 separate panels on the casing forward of the bulkhead": [
+     "yes",
+     "yes",
+     "yes",
+     "yes",
+     "yes",
+     "yes",
+     "yes; small area (casing ~2,000 m2)"
+    ]
+   }
+  },
+  "hot_absorbed_per_F_W_m2": 482155.1122572447,
+  "finding": "In a burn every radiator surface on a blade can see the 1800 K hot sections of the other two blades. The production design already answers this for WARM and LOW: its three-layer graded bulkhead (r 6.1-37 m) is a full annular baffle, and behind it WARM and LOW see the hot faces with F ~2-6e-4 (verified here): in a burn they absorb ~15-20 % of what they emit, a capacity debit the ledger does not yet carry (it worsens the LOW margin), not a failure. Without the bulkhead F would be 0.025 and 0.008 and neither could work. The Phase III 550 K section on the hot-blade forward end sits aft of that bulkhead and is fully exposed (F 0.02: it absorbs 2-3x what it emits), so option F as drawn has no sink in a burn. Moving the bulkhead aft of the new section (N2-R4a) restores the shadow (F < 1e-3) with no new element. A forward extension beyond LOW collides with the aft storage front at x 93.4."
+ },
+ "l2": {
+  "rows": [
+   {
+    "Pe_W": 2660000.0,
+    "strategy": "A 2 running + cold standby",
+    "margins": {
+     "BOL": {
+      "intact": [
+       1904890.0849023694,
+       -265052.2309752712,
+       -3277784.4388507353
+      ],
+      "immediate_after_loss": [
+       -546299.9150976306,
+       -2716242.230975271,
+       -5728974.438850735
+      ],
+      "one_unit": [
+       1904890.0849023694,
+       -265052.2309752712,
+       -3277784.4388507353
+      ],
+      "immediate_essential": [
+       2109378.3065912584,
+       1998173.2579136183,
+       1717635.8836381538
+      ]
+     },
+     "EOL": {
+      "intact": [
+       1414652.0849023694,
+       -755290.2309752712,
+       -3768022.4388507353
+      ],
+      "immediate_after_loss": [
+       -791418.9150976306,
+       -2961361.230975271,
+       -5974093.438850735
+      ],
+      "one_unit": [
+       1414652.0849023694,
+       -755290.2309752712,
+       -3768022.4388507353
+      ],
+      "immediate_essential": [
+       1864259.3065912584,
+       1753054.2579136183,
+       1472516.8836381538
+      ]
+     }
+    },
+    "restore_h": [
+     6.0,
+     12.0,
+     24.0
+    ],
+    "standby_heat_W": 0.0,
+    "wear": "C runs three units at 2/3 load: 1.5x operating hours per unit; A minimises hours but its restart is the slowest",
+    "mass_t": [
+     118.85044633165514,
+     208.53850677084534,
+     413.55042568395857
+    ]
+   },
+   {
+    "Pe_W": 2660000.0,
+    "strategy": "B 2 running + warm standby",
+    "margins": {
+     "BOL": {
+      "intact": [
+       1904890.0849023694,
+       -265052.2309752712,
+       -3277784.4388507353
+      ],
+      "immediate_after_loss": [
+       -546299.9150976306,
+       -2716242.230975271,
+       -5728974.438850735
+      ],
+      "one_unit": [
+       1904890.0849023694,
+       -265052.2309752712,
+       -3277784.4388507353
+      ],
+      "immediate_essential": [
+       2109378.3065912584,
+       1998173.2579136183,
+       1717635.8836381538
+      ]
+     },
+     "EOL": {
+      "intact": [
+       1414652.0849023694,
+       -755290.2309752712,
+       -3768022.4388507353
+      ],
+      "immediate_after_loss": [
+       -791418.9150976306,
+       -2961361.230975271,
+       -5974093.438850735
+      ],
+      "one_unit": [
+       1414652.0849023694,
+       -755290.2309752712,
+       -3768022.4388507353
+      ],
+      "immediate_essential": [
+       1864259.3065912584,
+       1753054.2579136183,
+       1472516.8836381538
+      ]
+     }
+    },
+    "restore_h": [
+     0.5,
+     1.0,
+     2.0
+    ],
+    "standby_heat_W": 364166.6666666667,
+    "wear": "C runs three units at 2/3 load: 1.5x operating hours per unit; A minimises hours but its restart is the slowest",
+    "mass_t": [
+     118.85044633165514,
+     208.53850677084534,
+     413.55042568395857
+    ]
+   },
+   {
+    "Pe_W": 2660000.0,
+    "strategy": "C 3 at partial load",
+    "margins": {
+     "BOL": {
+      "intact": [
+       4356080.084902369,
+       2186137.769024729,
+       -826594.4388507353
+      ],
+      "immediate_after_loss": [
+       1904890.0849023694,
+       -265052.2309752712,
+       -3277784.4388507353
+      ],
+      "one_unit": [
+       1904890.0849023694,
+       -265052.2309752712,
+       -3277784.4388507353
+      ],
+      "immediate_essential": [
+       4560568.306591258,
+       4449363.257913618,
+       4168825.883638154
+      ]
+     },
+     "EOL": {
+      "intact": [
+       3620723.0849023694,
+       1450780.7690247288,
+       -1561951.4388507353
+      ],
+      "immediate_after_loss": [
+       1414652.0849023694,
+       -755290.2309752712,
+       -3768022.4388507353
+      ],
+      "one_unit": [
+       1414652.0849023694,
+       -755290.2309752712,
+       -3768022.4388507353
+      ],
+      "immediate_essential": [
+       4070330.3065912584,
+       3959125.2579136183,
+       3678587.883638154
+      ]
+     }
+    },
+    "restore_h": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "standby_heat_W": 0.0,
+    "wear": "C runs three units at 2/3 load: 1.5x operating hours per unit; A minimises hours but its restart is the slowest",
+    "mass_t": [
+     119.80859771840795,
+     210.1878559154611,
+     416.6378983522393
+    ]
+   },
+   {
+    "Pe_W": 3000000.0,
+    "strategy": "A 2 running + cold standby",
+    "margins": {
+     "BOL": {
+      "intact": [
+       2531510.0849023694,
+       361567.7690247288,
+       -2651164.4388507353
+      ],
+      "immediate_after_loss": [
+       -232989.91509763058,
+       -2402932.230975271,
+       -5415664.438850735
+      ],
+      "one_unit": [
+       2531510.0849023694,
+       361567.7690247288,
+       -2651164.4388507353
+      ],
+      "immediate_essential": [
+       2422688.3065912584,
+       2311483.2579136183,
+       2030945.8836381538
+      ]
+     },
+     "EOL": {
+      "intact": [
+       1978610.0849023694,
+       -191332.2309752712,
+       -3204064.4388507353
+      ],
+      "immediate_after_loss": [
+       -509439.9150976306,
+       -2679382.230975271,
+       -5692114.438850735
+      ],
+      "one_unit": [
+       1978610.0849023694,
+       -191332.2309752712,
+       -3204064.4388507353
+      ],
+      "immediate_essential": [
+       2146238.3065912584,
+       2035033.2579136183,
+       1754495.8836381538
+      ]
+     }
+    },
+    "restore_h": [
+     6.0,
+     12.0,
+     24.0
+    ],
+    "standby_heat_W": 0.0,
+    "wear": "C runs three units at 2/3 load: 1.5x operating hours per unit; A minimises hours but its restart is the slowest",
+    "mass_t": [
+     126.63219747642725,
+     224.27723134870578,
+     448.99710965711205
+    ]
+   },
+   {
+    "Pe_W": 3000000.0,
+    "strategy": "B 2 running + warm standby",
+    "margins": {
+     "BOL": {
+      "intact": [
+       2531510.0849023694,
+       361567.7690247288,
+       -2651164.4388507353
+      ],
+      "immediate_after_loss": [
+       -232989.91509763058,
+       -2402932.230975271,
+       -5415664.438850735
+      ],
+      "one_unit": [
+       2531510.0849023694,
+       361567.7690247288,
+       -2651164.4388507353
+      ],
+      "immediate_essential": [
+       2422688.3065912584,
+       2311483.2579136183,
+       2030945.8836381538
+      ]
+     },
+     "EOL": {
+      "intact": [
+       1978610.0849023694,
+       -191332.2309752712,
+       -3204064.4388507353
+      ],
+      "immediate_after_loss": [
+       -509439.9150976306,
+       -2679382.230975271,
+       -5692114.438850735
+      ],
+      "one_unit": [
+       1978610.0849023694,
+       -191332.2309752712,
+       -3204064.4388507353
+      ],
+      "immediate_essential": [
+       2146238.3065912584,
+       2035033.2579136183,
+       1754495.8836381538
+      ]
+     }
+    },
+    "restore_h": [
+     0.5,
+     1.0,
+     2.0
+    ],
+    "standby_heat_W": 410714.2857142857,
+    "wear": "C runs three units at 2/3 load: 1.5x operating hours per unit; A minimises hours but its restart is the slowest",
+    "mass_t": [
+     126.63219747642725,
+     224.27723134870578,
+     448.99710965711205
+    ]
+   },
+   {
+    "Pe_W": 3000000.0,
+    "strategy": "C 3 at partial load",
+    "margins": {
+     "BOL": {
+      "intact": [
+       5296010.084902369,
+       3126067.769024729,
+       113335.56114926469
+      ],
+      "immediate_after_loss": [
+       2531510.0849023694,
+       361567.7690247288,
+       -2651164.4388507353
+      ],
+      "one_unit": [
+       2531510.0849023694,
+       361567.7690247288,
+       -2651164.4388507353
+      ],
+      "immediate_essential": [
+       5187188.306591258,
+       5075983.257913618,
+       4795445.883638154
+      ]
+     },
+     "EOL": {
+      "intact": [
+       4466660.084902369,
+       2296717.769024729,
+       -716014.4388507353
+      ],
+      "immediate_after_loss": [
+       1978610.0849023694,
+       -191332.2309752712,
+       -3204064.4388507353
+      ],
+      "one_unit": [
+       1978610.0849023694,
+       -191332.2309752712,
+       -3204064.4388507353
+      ],
+      "immediate_essential": [
+       4634288.306591258,
+       4523083.257913618,
+       4242545.883638154
+      ]
+     }
+    },
+    "restore_h": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "standby_heat_W": 0.0,
+    "wear": "C runs three units at 2/3 load: 1.5x operating hours per unit; A minimises hours but its restart is the slowest",
+    "mass_t": [
+     127.63544708935363,
+     226.00510143970806,
+     452.2311306191289
+    ]
+   },
+   {
+    "Pe_W": 3500000.0,
+    "strategy": "A 2 running + cold standby",
+    "margins": {
+     "BOL": {
+      "intact": [
+       3453010.0849023694,
+       1283067.7690247288,
+       -1729664.4388507353
+      ],
+      "immediate_after_loss": [
+       227760.08490236942,
+       -1942182.2309752712,
+       -4954914.438850735
+      ],
+      "one_unit": [
+       3453010.0849023694,
+       1283067.7690247288,
+       -1729664.4388507353
+      ],
+      "immediate_essential": [
+       2883438.3065912584,
+       2772233.2579136183,
+       2491695.883638154
+      ]
+     },
+     "EOL": {
+      "intact": [
+       2807960.0849023694,
+       638017.7690247288,
+       -2374714.4388507353
+      ],
+      "immediate_after_loss": [
+       -94764.91509763058,
+       -2264707.230975271,
+       -5277439.438850735
+      ],
+      "one_unit": [
+       2807960.0849023694,
+       638017.7690247288,
+       -2374714.4388507353
+      ],
+      "immediate_essential": [
+       2560913.3065912584,
+       2449708.2579136183,
+       2169170.883638154
+      ]
+     }
+    },
+    "restore_h": [
+     6.0,
+     12.0,
+     24.0
+    ],
+    "standby_heat_W": 0.0,
+    "wear": "C runs three units at 2/3 load: 1.5x operating hours per unit; A minimises hours but its restart is the slowest",
+    "mass_t": [
+     137.72178527778854,
+     246.866140663244,
+     500.1905906465805
+    ]
+   },
+   {
+    "Pe_W": 3500000.0,
+    "strategy": "B 2 running + warm standby",
+    "margins": {
+     "BOL": {
+      "intact": [
+       3453010.0849023694,
+       1283067.7690247288,
+       -1729664.4388507353
+      ],
+      "immediate_after_loss": [
+       227760.08490236942,
+       -1942182.2309752712,
+       -4954914.438850735
+      ],
+      "one_unit": [
+       3453010.0849023694,
+       1283067.7690247288,
+       -1729664.4388507353
+      ],
+      "immediate_essential": [
+       2883438.3065912584,
+       2772233.2579136183,
+       2491695.883638154
+      ]
+     },
+     "EOL": {
+      "intact": [
+       2807960.0849023694,
+       638017.7690247288,
+       -2374714.4388507353
+      ],
+      "immediate_after_loss": [
+       -94764.91509763058,
+       -2264707.230975271,
+       -5277439.438850735
+      ],
+      "one_unit": [
+       2807960.0849023694,
+       638017.7690247288,
+       -2374714.4388507353
+      ],
+      "immediate_essential": [
+       2560913.3065912584,
+       2449708.2579136183,
+       2169170.883638154
+      ]
+     }
+    },
+    "restore_h": [
+     0.5,
+     1.0,
+     2.0
+    ],
+    "standby_heat_W": 479166.6666666667,
+    "wear": "C runs three units at 2/3 load: 1.5x operating hours per unit; A minimises hours but its restart is the slowest",
+    "mass_t": [
+     137.72178527778854,
+     246.866140663244,
+     500.1905906465805
+    ]
+   },
+   {
+    "Pe_W": 3500000.0,
+    "strategy": "C 3 at partial load",
+    "margins": {
+     "BOL": {
+      "intact": [
+       6678260.084902369,
+       4508317.769024729,
+       1495585.5611492647
+      ],
+      "immediate_after_loss": [
+       3453010.0849023694,
+       1283067.7690247288,
+       -1729664.4388507353
+      ],
+      "one_unit": [
+       3453010.0849023694,
+       1283067.7690247288,
+       -1729664.4388507353
+      ],
+      "immediate_essential": [
+       6108688.306591258,
+       5997483.257913618,
+       5716945.883638154
+      ]
+     },
+     "EOL": {
+      "intact": [
+       5710685.084902369,
+       3540742.769024729,
+       528010.5611492647
+      ],
+      "immediate_after_loss": [
+       2807960.0849023694,
+       638017.7690247288,
+       -2374714.4388507353
+      ],
+      "one_unit": [
+       2807960.0849023694,
+       638017.7690247288,
+       -2374714.4388507353
+      ],
+      "immediate_essential": [
+       5463638.306591258,
+       5352433.257913618,
+       5071895.883638154
+      ]
+     }
+    },
+    "restore_h": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "standby_heat_W": 0.0,
+    "wear": "C runs three units at 2/3 load: 1.5x operating hours per unit; A minimises hours but its restart is the slowest",
+    "mass_t": [
+     138.78716617764005,
+     248.7022198710427,
+     503.62655311990517
+    ]
+   },
+   {
+    "Pe_W": 4000000.0,
+    "strategy": "A 2 running + cold standby",
+    "margins": {
+     "BOL": {
+      "intact": [
+       4374510.084902369,
+       2204567.769024729,
+       -808164.4388507353
+      ],
+      "immediate_after_loss": [
+       688510.0849023694,
+       -1481432.2309752712,
+       -4494164.438850735
+      ],
+      "one_unit": [
+       4374510.084902369,
+       2204567.769024729,
+       -808164.4388507353
+      ],
+      "immediate_essential": [
+       3344188.3065912584,
+       3232983.2579136183,
+       2952445.883638154
+      ]
+     },
+     "EOL": {
+      "intact": [
+       3637310.0849023694,
+       1467367.7690247288,
+       -1545364.4388507353
+      ],
+      "immediate_after_loss": [
+       319910.0849023694,
+       -1850032.2309752712,
+       -4862764.438850735
+      ],
+      "one_unit": [
+       3637310.0849023694,
+       1467367.7690247288,
+       -1545364.4388507353
+      ],
+      "immediate_essential": [
+       2975588.3065912584,
+       2864383.2579136183,
+       2583845.883638154
+      ]
+     }
+    },
+    "restore_h": [
+     6.0,
+     12.0,
+     24.0
+    ],
+    "standby_heat_W": 0.0,
+    "wear": "C runs three units at 2/3 load: 1.5x operating hours per unit; A minimises hours but its restart is the slowest",
+    "mass_t": [
+     148.47167861907477,
+     268.9208021790989,
+     550.4858771395681
+    ]
+   },
+   {
+    "Pe_W": 4000000.0,
+    "strategy": "B 2 running + warm standby",
+    "margins": {
+     "BOL": {
+      "intact": [
+       4374510.084902369,
+       2204567.769024729,
+       -808164.4388507353
+      ],
+      "immediate_after_loss": [
+       688510.0849023694,
+       -1481432.2309752712,
+       -4494164.438850735
+      ],
+      "one_unit": [
+       4374510.084902369,
+       2204567.769024729,
+       -808164.4388507353
+      ],
+      "immediate_essential": [
+       3344188.3065912584,
+       3232983.2579136183,
+       2952445.883638154
+      ]
+     },
+     "EOL": {
+      "intact": [
+       3637310.0849023694,
+       1467367.7690247288,
+       -1545364.4388507353
+      ],
+      "immediate_after_loss": [
+       319910.0849023694,
+       -1850032.2309752712,
+       -4862764.438850735
+      ],
+      "one_unit": [
+       3637310.0849023694,
+       1467367.7690247288,
+       -1545364.4388507353
+      ],
+      "immediate_essential": [
+       2975588.3065912584,
+       2864383.2579136183,
+       2583845.883638154
+      ]
+     }
+    },
+    "restore_h": [
+     0.5,
+     1.0,
+     2.0
+    ],
+    "standby_heat_W": 547619.0476190476,
+    "wear": "C runs three units at 2/3 load: 1.5x operating hours per unit; A minimises hours but its restart is the slowest",
+    "mass_t": [
+     148.47167861907477,
+     268.9208021790989,
+     550.4858771395681
+    ]
+   },
+   {
+    "Pe_W": 4000000.0,
+    "strategy": "C 3 at partial load",
+    "margins": {
+     "BOL": {
+      "intact": [
+       8060510.084902369,
+       5890567.769024729,
+       2877835.5611492647
+      ],
+      "immediate_after_loss": [
+       4374510.084902369,
+       2204567.769024729,
+       -808164.4388507353
+      ],
+      "one_unit": [
+       4374510.084902369,
+       2204567.769024729,
+       -808164.4388507353
+      ],
+      "immediate_essential": [
+       7030188.306591258,
+       6918983.257913618,
+       6638445.883638154
+      ]
+     },
+     "EOL": {
+      "intact": [
+       6954710.084902369,
+       4784767.769024729,
+       1772035.5611492647
+      ],
+      "immediate_after_loss": [
+       3637310.0849023694,
+       1467367.7690247288,
+       -1545364.4388507353
+      ],
+      "one_unit": [
+       3637310.0849023694,
+       1467367.7690247288,
+       -1545364.4388507353
+      ],
+      "immediate_essential": [
+       6292988.306591258,
+       6181783.257913618,
+       5901245.883638154
+      ]
+     }
+    },
+    "restore_h": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "standby_heat_W": 0.0,
+    "wear": "C runs three units at 2/3 load: 1.5x operating hours per unit; A minimises hours but its restart is the slowest",
+    "mass_t": [
+     149.5951407938754,
+     270.85806764460784,
+     554.1106598899288
+    ]
+   }
+  ],
+  "demand_W": [
+   2997489.9150976306,
+   5167432.230975271,
+   8180164.438850735
+  ],
+  "demand_parts": {
+   "proactive_state": [
+    2058601.0262087416,
+    3368543.3420863817,
+    5271275.549961846
+   ],
+   "planning": [
+    520000.0,
+    1350000.0,
+    2400000.0
+   ],
+   "buffer_recharge": [
+    388888.8888888889,
+    388888.8888888889,
+    388888.8888888889
+   ],
+   "standby": [
+    30000.0,
+    60000.0,
+    120000.0
+   ],
+   "aux_frac": 0.03,
+   "pmad": 0.95,
+   "eol": 0.9
+  },
+  "optimum_Pe_W": [
+   1807132.040210786,
+   3115350.7150028767,
+   4931672.055736864
+  ],
+  "optimum_without_planning_W": [
+   1493633.5172711345,
+   2301460.31890955,
+   3484755.7960153953
+  ],
+  "references": [
+   {
+    "name": "4 x 1.75 (C-lean 3+1)",
+    "units": 4,
+    "after_one_loss_EOL_W": [
+     1356597.5849023694,
+     -813344.7309752712,
+     -3826076.9388507353
+    ]
+   },
+   {
+    "name": "5 x 1.33 (4+1)",
+    "units": 5,
+    "after_one_loss_EOL_W": [
+     1414652.0849023694,
+     -755290.2309752712,
+     -3768022.4388507353
+    ]
+   },
+   {
+    "name": "2 x 100 % (5.3)",
+    "units": 2,
+    "after_one_loss_EOL_W": [
+     1398065.0849023694,
+     -771877.2309752712,
+     -3784609.4388507353
+    ]
+   }
+  ],
+  "finding": "Two units at EOL must carry 5.2 MW nominal (8.2 MW at the high band) once the OPEN planning loads, buffer recharge and standby are counted, so the continuous optimum rating is 3.12 MWe nominal and 4.93 MWe at the high band (2.30 / 3.48 MWe without the planning loads). 2.66 and 3.0 MWe fail after one loss at EOL; 3.5 MWe closes the nominal band with ~0.6 MW margin; no rating in the 2.66-4 MWe range closes the high band after a loss unless the planning loads are shed. Strategy C (three at 2/3 load) loses nothing at the moment of a trip; B needs ~1 h on one unit and costs ~3 % of a unit's heat in standby; A leaves 6-24 h on one unit. Recommended study basis: 3 x 3.5 MWe, strategy C, B as the maintenance mode, with high-band planning loads sheddable."
+ },
+ "storage": {
+  "patterns": [
+   {
+    "pattern": "10 s every 10 min",
+    "band": "low",
+    "power_W": 14000000.0,
+    "energy_kWh": 38.88888888888889,
+    "recharge_W": 259259.25925925927,
+    "best": "flywheel",
+    "mass_t": 2.8,
+    "limited_by": "power",
+    "sustainable_on_L2": true
+   },
+   {
+    "pattern": "10 s every 10 min",
+    "band": "nominal",
+    "power_W": 21000000.0,
+    "energy_kWh": 58.333333333333336,
+    "recharge_W": 388888.8888888889,
+    "best": "flywheel",
+    "mass_t": 7.0,
+    "limited_by": "power",
+    "sustainable_on_L2": true
+   },
+   {
+    "pattern": "10 s every 10 min",
+    "band": "high",
+    "power_W": 28000000.0,
+    "energy_kWh": 77.77777777777779,
+    "recharge_W": 518518.51851851854,
+    "best": "supercap",
+    "mass_t": 8.641975308641975,
+    "limited_by": "energy",
+    "sustainable_on_L2": true
+   },
+   {
+    "pattern": "60 s every 30 min",
+    "band": "low",
+    "power_W": 14000000.0,
+    "energy_kWh": 233.33333333333334,
+    "recharge_W": 518518.51851851854,
+    "best": "li_power",
+    "mass_t": 5.6,
+    "limited_by": "power",
+    "sustainable_on_L2": true
+   },
+   {
+    "pattern": "60 s every 30 min",
+    "band": "nominal",
+    "power_W": 21000000.0,
+    "energy_kWh": 350.0,
+    "recharge_W": 777777.7777777778,
+    "best": "flywheel",
+    "mass_t": 9.722222222222223,
+    "limited_by": "energy",
+    "sustainable_on_L2": true
+   },
+   {
+    "pattern": "60 s every 30 min",
+    "band": "high",
+    "power_W": 28000000.0,
+    "energy_kWh": 466.6666666666667,
+    "recharge_W": 1037037.0370370371,
+    "best": "flywheel",
+    "mass_t": 14.0,
+    "limited_by": "power",
+    "sustainable_on_L2": false
+   },
+   {
+    "pattern": "1 s bursts, 10 per minute",
+    "band": "low",
+    "power_W": 14000000.0,
+    "energy_kWh": 3.888888888888889,
+    "recharge_W": 2592592.592592593,
+    "best": "supercap",
+    "mass_t": 1.4,
+    "limited_by": "power",
+    "sustainable_on_L2": false
+   },
+   {
+    "pattern": "1 s bursts, 10 per minute",
+    "band": "nominal",
+    "power_W": 21000000.0,
+    "energy_kWh": 5.833333333333333,
+    "recharge_W": 3888888.888888889,
+    "best": "supercap",
+    "mass_t": 2.625,
+    "limited_by": "power",
+    "sustainable_on_L2": false
+   },
+   {
+    "pattern": "1 s bursts, 10 per minute",
+    "band": "high",
+    "power_W": 28000000.0,
+    "energy_kWh": 7.777777777777778,
+    "recharge_W": 5185185.185185186,
+    "best": "supercap",
+    "mass_t": 5.6,
+    "limited_by": "power",
+    "sustainable_on_L2": false
+   },
+   {
+    "pattern": "5 min continuous, once a day",
+    "band": "low",
+    "power_W": 14000000.0,
+    "energy_kWh": 1166.6666666666667,
+    "recharge_W": 54012.345679012345,
+    "best": "li_power",
+    "mass_t": 14.583333333333334,
+    "limited_by": "energy",
+    "sustainable_on_L2": true
+   },
+   {
+    "pattern": "5 min continuous, once a day",
+    "band": "nominal",
+    "power_W": 21000000.0,
+    "energy_kWh": 1750.0,
+    "recharge_W": 81018.51851851853,
+    "best": "li_power",
+    "mass_t": 15.625,
+    "limited_by": "energy",
+    "sustainable_on_L2": true
+   },
+   {
+    "pattern": "5 min continuous, once a day",
+    "band": "high",
+    "power_W": 28000000.0,
+    "energy_kWh": 2333.3333333333335,
+    "recharge_W": 108024.69135802469,
+    "best": "li_power",
+    "mass_t": 28.0,
+    "limited_by": "power",
+    "sustainable_on_L2": true
+   }
+  ],
+  "technologies": {
+   "li_power": {
+    "Wh_kg": [
+     100,
+     140,
+     180
+    ],
+    "W_kg": [
+     2500,
+     1500,
+     1000
+    ],
+    "dod": 0.8,
+    "cls": "STUDY"
+   },
+   "supercap": {
+    "Wh_kg": [
+     5,
+     7,
+     10
+    ],
+    "W_kg": [
+     10000,
+     8000,
+     5000
+    ],
+    "dod": 0.9,
+    "cls": "STUDY"
+   },
+   "flywheel": {
+    "Wh_kg": [
+     20,
+     40,
+     60
+    ],
+    "W_kg": [
+     5000,
+     3000,
+     2000
+    ],
+    "dod": 0.9,
+    "cls": "STUDY (gyroscopic coupling with the CMGs)"
+   },
+   "pcm_thermal": {
+    "Wh_kg": [
+     60,
+     80,
+     100
+    ],
+    "W_kg": null,
+    "dod": 1.0,
+    "cls": "heat only"
+   }
+  },
+  "stores": [
+   {
+    "store": "Main battery (EPS-A)",
+    "energy_kWh": 2000,
+    "power_MW": 2.0,
+    "mass_t": 2.5,
+    "role": "coast ride-through and black-start services",
+    "note": "1C limits it to 2 MW < 3.4 MW coast load"
+   },
+   {
+    "store": "Independent restart pack (new, DR3-01)",
+    "energy_kWh": [
+     300,
+     500,
+     900
+    ],
+    "power_MW": [
+     0.3,
+     0.5,
+     0.8
+    ],
+    "mass_t": [
+     2.0,
+     3.5,
+     6.5
+    ],
+    "role": "one L2 unit restart (pumps, heaters, controls, instrumentation) with no propulsion and no crew-reserve draw",
+    "note": "physically separate cells and bus; recharged only by L2; never connected to the refuge"
+   },
+   {
+    "store": "Pulse bank (canon)",
+    "energy_kWh": "canon",
+    "power_MW": "canon",
+    "mass_t": "canon",
+    "role": "drive ignition only",
+    "note": "unchanged"
+   },
+   {
+    "store": "Defense buffer",
+    "energy_kWh": [
+     39,
+     58,
+     78
+    ],
+    "power_MW": [
+     14,
+     21,
+     28
+    ],
+    "mass_t": [
+     9.3,
+     14.0,
+     19.1
+    ],
+    "role": "engagements above L2 surplus",
+    "note": "power-sized for the 10 s pattern; energy-sized for the 60 s and 5 min patterns (table)"
+   },
+   {
+    "store": "Survival storage (refuge)",
+    "energy_kWh": [
+     150,
+     250,
+     400
+    ],
+    "power_MW": 0.05,
+    "mass_t": [
+     1.2,
+     2.0,
+     3.2
+    ],
+    "role": "crew survival bridge to L3",
+    "note": "isolated: never used for propulsion restart (owner rule)"
+   },
+   {
+    "store": "Distributed ride-through cells",
+    "energy_kWh": [
+     30,
+     60,
+     120
+    ],
+    "power_MW": [
+     0.3,
+     0.6,
+     1.0
+    ],
+    "mass_t": [
+     0.4,
+     0.8,
+     1.5
+    ],
+    "role": "per-bus 5-15 min ride-through for switching faults",
+    "note": "one per bus segment"
+   },
+   {
+    "store": "Auxiliary restart unit (APU, option)",
+    "energy_kWh": "fuel-limited",
+    "power_MW": [
+     0.2,
+     0.3,
+     0.5
+    ],
+    "mass_t": [
+     3.0,
+     5.0,
+     9.0
+    ],
+    "role": "RTG/ radioisotope-Stirling or a small fuel cell that restarts one L2 unit with no stored-energy draw",
+    "note": "OPEN technology; listed for DR4"
+   }
+  ],
+  "restart": {
+   "sequence_R1b": "restart pack -> one L2 unit (pumps, heaters, I&C) -> unit at power -> second unit -> battery recharge -> pulse bank -> drive",
+   "canon_kept": true,
+   "R2_pack_t": 2.3,
+   "note": "canon black-start sequence kept until the owner reviews R1b (DR3-01)"
+  },
+  "defense_scaling": {
+   "phase3": "P_def ~ (v / 0.016 c)^3 (Phase III missions), no source",
+   "provenance": "none found in the canon or the dust study",
+   "physics": [
+    [
+     "particle encounter rate",
+     "n v",
+     1
+    ],
+    [
+     "kinetic energy per particle",
+     "m v^2 / 2",
+     2
+    ],
+    [
+     "detection range for fixed warning time",
+     "v",
+     1
+    ]
+   ],
+   "band": [
+    "v^1 (rate-limited: fixed energy per engagement)",
+    "v^2",
+    "v^3 (energy-limited: neutralise kinetic energy)"
+   ],
+   "at_0_008c": [
+    0.5,
+    0.25,
+    0.125
+   ],
+   "cls": "OPEN; the v^3 law is an upper bound, not a derivation"
+  },
+  "finding": "Buffers are power-limited for short engagements and energy-limited for long ones: the 10 s and 1 s patterns need 21 MW in ~10-15 t of high-power cells or supercapacitors; a 60 s engagement doubles the energy but not the mass; a 5 min engagement is energy-limited at ~15-35 t and cannot be recharged by L2 inside a day without shedding. An independent 2-6 t restart pack (or a small APU) restarts one L2 unit with no propulsion and no crew-reserve draw. The v^3 defense scaling has no source: it is an upper bound."
+ },
+ "district": {
+  "units": [
+   {
+    "item": "Placement",
+    "value": "one unit per radiator sector (blades 90/210/330), bays M1-M2 at the 120 deg sectors"
+   },
+   {
+    "item": "Attachment",
+    "value": "four-point kinematic mount to the keel ring frames; shield slab bolted to the module frame, not the unit"
+   },
+   {
+    "item": "Separation",
+    "value": "units 120 deg apart; a unit sees the others edge-on through its own slab (side e-folds)"
+   },
+   {
+    "item": "Thermal",
+    "value": "each unit rejects to its own sector (550 K section, IV-D G3) and the blade warm channels in coast"
+   },
+   {
+    "item": "Electrical",
+    "value": "unit 1 -> bus A, unit 2 -> bus B, unit 3 -> bus A/B tie; strategy C splits load 1/3 each"
+   },
+   {
+    "item": "Maintenance",
+    "value": "conversion ORUs swappable at power-off + 24-72 h decay; reactor side not serviced in flight"
+   },
+   {
+    "item": "Robotics",
+    "value": "keel-lane manipulator reaches the ORU faces; removal hatch per bay (Phase III P3-14 interface)"
+   },
+   {
+    "item": "Replacement",
+    "value": "between missions at the yard; whole-unit swap through the bay hatch"
+   },
+   {
+    "item": "Crew restrictions",
+    "value": "no crew in M1-M2 with a unit at power; transit through the keel lane only behind the shadow wall"
+   },
+   {
+    "item": "Aft machinery interfaces",
+    "value": "L1 machinery, hot-loop trunks (IV-C) and the drive service bay stay aft of the district; coolant risers cross the casing at the sector roots"
+   }
+  ],
+  "transport": {
+   "nu_leak": 0.939829670244841,
+   "g_leak": 1.0058715667945957,
+   "lambda_n_cm": 7.688519318781308,
+   "lambda_g_cm": 33.12781527407391,
+   "he3_per_n_J": 1.614793158314732e-13,
+   "he3_per_g_J": 1.647727547792059e-14,
+   "d_m": 194.7151585588247,
+   "lift_W": 117.81278756245447
+  },
+  "geometry": [
+   {
+    "tank": "Fuel_Tank_O1_He3",
+    "unit": 1,
+    "d_m": 195.06075977422807,
+    "off_axis_deg": 8.130726204080611,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O1_He3",
+    "unit": 2,
+    "d_m": 195.48234001704714,
+    "off_axis_deg": 8.954220586884805,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O1_He3",
+    "unit": 3,
+    "d_m": 194.77218034863307,
+    "off_axis_deg": 7.513234222466334,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O2_He3",
+    "unit": 1,
+    "d_m": 194.7151585588247,
+    "off_axis_deg": 7.384923374153973,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O2_He3",
+    "unit": 2,
+    "d_m": 195.41682915210382,
+    "off_axis_deg": 8.831483590810194,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O2_He3",
+    "unit": 3,
+    "d_m": 195.1832918350063,
+    "off_axis_deg": 8.378734181880963,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O4_He3",
+    "unit": 1,
+    "d_m": 194.79614492268323,
+    "off_axis_deg": 7.566491716600911,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O4_He3",
+    "unit": 2,
+    "d_m": 195.02306076706816,
+    "off_axis_deg": 8.052832522631872,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O4_He3",
+    "unit": 3,
+    "d_m": 195.49607462121955,
+    "off_axis_deg": 8.979731525675048,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O5_He3",
+    "unit": 1,
+    "d_m": 195.06290790717773,
+    "off_axis_deg": 8.1351414637497,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O5_He3",
+    "unit": 2,
+    "d_m": 194.7709072165816,
+    "off_axis_deg": 7.510394015281111,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O5_He3",
+    "unit": 3,
+    "d_m": 195.4814650058303,
+    "off_axis_deg": 8.952592758208194,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O7_He3",
+    "unit": 1,
+    "d_m": 195.50827628026911,
+    "off_axis_deg": 9.002332001291563,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O7_He3",
+    "unit": 2,
+    "d_m": 194.82885205031883,
+    "off_axis_deg": 7.6385615529488,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O7_He3",
+    "unit": 3,
+    "d_m": 194.97815214703655,
+    "off_axis_deg": 7.959014106502302,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O8_He3",
+    "unit": 1,
+    "d_m": 195.4814650058303,
+    "off_axis_deg": 8.952592758208194,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O8_He3",
+    "unit": 2,
+    "d_m": 195.06290790717773,
+    "off_axis_deg": 8.1351414637497,
+    "in_cone": true,
+    "a_env": 6.75
+   },
+   {
+    "tank": "Fuel_Tank_O8_He3",
+    "unit": 3,
+    "d_m": 194.77090721658163,
+    "off_axis_deg": 7.510394015281209,
+    "in_cone": true,
+    "a_env": 6.75
+   }
+  ],
+  "correction": {
+   "phase3_tank_x": -35.5,
+   "actual_tank_x": 109.25,
+   "phase3_d_m": 54.495619089978234,
+   "actual_d_m": 194.7151585588247,
+   "phase3_off_axis_deg": 27.129291741521836,
+   "actual_off_axis_deg_max": 9.002332001291563,
+   "note": "Phase III read fuel_storage x0 as a span from the aft end; it is ship x. The tank farm is forward of the radiator zone, ~200 m from the district and inside the 12.5 deg shadow cone."
+  },
+  "tank_rows": [
+   {
+    "Pe_W": 3000000.0,
+    "Pt_W": 13690476.19047619,
+    "side_shield_cm_LiH_after_5cm_W": 0.0,
+    "n_per_s": 4.015828877524995e+17,
+    "flux_n_m2_s": 842880116757.126,
+    "he3_W_per_tank_per_unit": 21.60995451446466,
+    "wall_W_per_tank_per_unit": 2.981620444868167,
+    "path": "direct"
+   },
+   {
+    "Pe_W": 3000000.0,
+    "Pt_W": 13690476.19047619,
+    "side_shield_cm_LiH_after_5cm_W": 40.0,
+    "n_per_s": 4.015828877524995e+17,
+    "flux_n_m2_s": 4637903977.901169,
+    "he3_W_per_tank_per_unit": 0.2056329535259066,
+    "wall_W_per_tank_per_unit": 0.12250076205909095,
+    "path": "direct"
+   },
+   {
+    "Pe_W": 3000000.0,
+    "Pt_W": 13690476.19047619,
+    "side_shield_cm_LiH_after_5cm_W": 80.0,
+    "n_per_s": 4.015828877524995e+17,
+    "flux_n_m2_s": 25519825.27597051,
+    "he3_W_per_tank_per_unit": 0.030017312793511823,
+    "wall_W_per_tank_per_unit": 0.03601124910902811,
+    "path": "direct"
+   },
+   {
+    "Pe_W": 3000000.0,
+    "Pt_W": 13690476.19047619,
+    "side_shield_cm_LiH_after_5cm_W": 243.58334746401732,
+    "n_per_s": 4.015828877524995e+17,
+    "flux_n_m2_s": 0.014678853747678427,
+    "he3_W_per_tank_per_unit": 0.0002109745716426614,
+    "wall_W_per_tank_per_unit": 0.00025809367595804766,
+    "path": "shadow cone (direct)"
+   },
+   {
+    "Pe_W": 3500000.0,
+    "Pt_W": 15972222.222222224,
+    "side_shield_cm_LiH_after_5cm_W": 0.0,
+    "n_per_s": 4.6851336904458285e+17,
+    "flux_n_m2_s": 983360136216.6471,
+    "he3_W_per_tank_per_unit": 25.21161360020877,
+    "wall_W_per_tank_per_unit": 3.4785571856795285,
+    "path": "direct"
+   },
+   {
+    "Pe_W": 3500000.0,
+    "Pt_W": 15972222.222222224,
+    "side_shield_cm_LiH_after_5cm_W": 40.0,
+    "n_per_s": 4.6851336904458285e+17,
+    "flux_n_m2_s": 5410887974.218031,
+    "he3_W_per_tank_per_unit": 0.23990511244689106,
+    "wall_W_per_tank_per_unit": 0.1429175557356061,
+    "path": "direct"
+   },
+   {
+    "Pe_W": 3500000.0,
+    "Pt_W": 15972222.222222224,
+    "side_shield_cm_LiH_after_5cm_W": 80.0,
+    "n_per_s": 4.6851336904458285e+17,
+    "flux_n_m2_s": 29773129.48863227,
+    "he3_W_per_tank_per_unit": 0.03502019825909713,
+    "wall_W_per_tank_per_unit": 0.0420131239605328,
+    "path": "direct"
+   },
+   {
+    "Pe_W": 3500000.0,
+    "Pt_W": 15972222.222222224,
+    "side_shield_cm_LiH_after_5cm_W": 243.58334746401732,
+    "n_per_s": 4.6851336904458285e+17,
+    "flux_n_m2_s": 0.0171253293722915,
+    "he3_W_per_tank_per_unit": 0.0002461370002497717,
+    "wall_W_per_tank_per_unit": 0.00030110928861772237,
+    "path": "shadow cone (direct)"
+   }
+  ],
+  "layers": [
+   {
+    "layer": "Outer structure / micrometeoroid shell (~300 K)",
+    "neutron": "~2 % of incident neutron energy (scatter)",
+    "gamma": "~55 % of incident photon energy (Al 2 cm)",
+    "status": "TRANSPORT-INFORMED (S3, 1-D)"
+   },
+   {
+    "layer": "Thermal shields / MLI (40-80 K)",
+    "neutron": "small (thin, light)",
+    "gamma": "part of the wall share, by mass",
+    "status": "STUDY (by mass fraction)"
+   },
+   {
+    "layer": "Intermediate stages (4-20 K)",
+    "neutron": "small",
+    "gamma": "by mass",
+    "status": "OPEN (needs the tank layer stack)"
+   },
+   {
+    "layer": "He-3 liquid (3 K stage)",
+    "neutron": "~100 %: He-3(n,p)T captures essentially every neutron that enters; 764 keV + recoil energy deposited locally (1.01 MeV per incident leakage neutron)",
+    "gamma": "~45 % of incident photon energy (0.10 MeV per photon in 50 cm)",
+    "status": "TRANSPORT-INFORMED (S3)"
+   },
+   {
+    "layer": "Coolers",
+    "neutron": "indirect: the deposit is the 3 K load",
+    "gamma": "indirect",
+    "status": "STUDY"
+   }
+  ],
+  "allowed_flux_n_m2_s": 106188350711.85095,
+  "needed_transmission": 0.10798520989512256,
+  "needed_LiH_cm": 17.112806498628874,
+  "finding": "Phase III placed the He-3 tanks 54 m from the district and outside the shadow cone; the tank farm is in fact forward of the radiator zone (ship x 109-138), ~195 m from the units and 9.0 deg off axis at most: inside the 12.5 deg shadow cone. With the transport-informed leakage (0.94 n per fission, surrogate core) and the S3 deposit (1.01 MeV in the He-3 per incident neutron, almost all at 3 K), one bare 3.5 MWe unit would put ~25.2 W into each tank at that distance; three units against a 25 % share of the 118 W lift (PROTOTYPE allocation) need a transmission of 0.11 (~17 cm of LiH), which the 244 cm shadow shield exceeds by many orders. The direct path closes. What stays OPEN is scatter: neutrons and gammas leaving the unshielded sides scatter off the blades, the casing and the tank farm structure toward the tanks; that needs the 3-D transport model (DR4-08). Gammas deposit mostly in the warm wall, not at 3 K."
+ },
+ "logistics": {
+  "container": {
+   "tare_t": [
+    0.8,
+    1.0,
+    1.3
+   ],
+   "gross_max_t": 6.0,
+   "payload_max_t": 5.0,
+   "volume_m3": 44.8,
+   "usable_fraction": 0.7,
+   "structural": "6 t gross at 1.36 g peak axial = 80 kN per container on four twist-locks (rated 1.5 g: 88 kN)"
+  },
+  "compatibility": {
+   "FOOD_SHELF": "A",
+   "FOOD_FROZEN": "F",
+   "WATER_O2": "W",
+   "ECLSS_EXP": "A",
+   "MEDICAL": "M",
+   "HYGIENE": "A",
+   "SPARES_ORU": "S",
+   "RESERVE": "R",
+   "HAZMAT": "H",
+   "GARDEN": "A"
+  },
+  "rows": [
+   {
+    "mission": "12 crew, 12 months",
+    "payload_t": 18.861180894094456,
+    "dedicated": 10,
+    "shared_by_compatibility": 8,
+    "phase3_count": 10,
+    "gross_t": 28.861180894094456,
+    "tare_t": 10.0
+   },
+   {
+    "mission": "12 crew, 24 months",
+    "payload_t": 35.80236178818892,
+    "dedicated": 13,
+    "shared_by_compatibility": 11,
+    "phase3_count": 13,
+    "gross_t": 48.80236178818892,
+    "tare_t": 13.0
+   },
+   {
+    "mission": "12 crew, 36 months",
+    "payload_t": 53.65747324228337,
+    "dedicated": 17,
+    "shared_by_compatibility": 15,
+    "phase3_count": 16,
+    "gross_t": 70.65747324228337,
+    "tare_t": 17.0
+   }
+  ],
+  "finding": "Counts follow mass (6 t gross, 1 t tare), not volume: dense loads (water, food) fill a container by mass at a third of its volume. Sharing containers between compatible categories (dry consumables A; frozen F; water W; medical M; spares S; reserve R; hazardous H always alone) saves ~20-35 % of containers against one category per container. Phase III counts omitted the tare: 1 t per container adds 10-20 t of departure mass."
+ },
+ "missions": {
+  "rows": [
+   {
+    "D_AU": 45.0,
+    "v_c": 0.004,
+    "round_trip_d": 164.09813659991326,
+    "months": 5.390871767408451,
+    "burn_d": 8.212459907703815,
+    "burn_AU": 2.81428300071686,
+    "propellant_t": 804.5127202159689,
+    "tank_fill": 0.16535239970136978,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 0.0,
+    "end_t": 2834.949585939043,
+    "departure_t": 3639.462306155012,
+    "L2_MWh": 23630.131670387513,
+    "defense_rel": [
+     0.25,
+     0.0625,
+     0.015625
+    ],
+    "dust_fluence_rel": 0.08616404975510572,
+    "equipment_h": 3938.3552783979185,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 45.0,
+    "v_c": 0.008,
+    "round_trip_d": 104.54752155182237,
+    "months": 3.434544072004677,
+    "burn_d": 18.755482761846388,
+    "burn_AU": 12.71926350050114,
+    "propellant_t": 1837.3331042435013,
+    "tank_fill": 0.3776291290408358,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 0.0,
+    "end_t": 2834.949585939043,
+    "departure_t": 4672.282690182545,
+    "L2_MWh": 15054.843103462423,
+    "defense_rel": [
+     0.5,
+     0.25,
+     0.125
+    ],
+    "dust_fluence_rel": 0.07637513865842023,
+    "equipment_h": 2509.140517243737,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 45.0,
+    "v_c": 0.012,
+    "round_trip_d": 89.96554364132722,
+    "months": 2.955504061804442,
+    "burn_d": 32.2904445336173,
+    "burn_AU": 32.49846156926842,
+    "propellant_t": 3163.251164776367,
+    "tank_fill": 0.6501465518326596,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 0.0,
+    "end_t": 2834.949585939043,
+    "departure_t": 5998.20075071541,
+    "L2_MWh": 12955.03828435112,
+    "defense_rel": [
+     0.75,
+     0.5625,
+     0.421875
+    ],
+    "dust_fluence_rel": 0.056827718907001896,
+    "equipment_h": 2159.1730473918533,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 45.0,
+    "v_c": 0.016,
+    "round_trip_d": 88.35350355924368,
+    "months": 2.9025461090421705,
+    "burn_d": 49.666408969786396,
+    "burn_AU": 65.93401917283262,
+    "propellant_t": 4865.4432694592715,
+    "tank_fill": 1.0,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 0.0,
+    "end_t": 2834.949585939043,
+    "departure_t": 7700.392855398315,
+    "L2_MWh": 12722.90451253109,
+    "defense_rel": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "dust_fluence_rel": 0.02378396875963664,
+    "equipment_h": 2120.4840854218482,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 120.0,
+    "v_c": 0.004,
+    "round_trip_d": 380.6928869208244,
+    "months": 12.506336626833914,
+    "burn_d": 8.23782168592441,
+    "burn_AU": 2.822974089880929,
+    "propellant_t": 806.9972222305997,
+    "tank_fill": 0.16586304218079734,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 8.75491190035129,
+    "end_t": 2843.7044978014083,
+    "departure_t": 3650.701720032008,
+    "L2_MWh": 54819.77571659871,
+    "defense_rel": [
+     0.25,
+     0.0625,
+     0.015625
+    ],
+    "dust_fluence_rel": 0.23439771747768648,
+    "equipment_h": 9136.629286099786,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 120.0,
+    "v_c": 0.008,
+    "round_trip_d": 212.84254237961645,
+    "months": 6.992199158331683,
+    "burn_d": 18.763421737701993,
+    "burn_AU": 12.724647415546896,
+    "propellant_t": 1838.1108257950336,
+    "tank_fill": 0.3777889750216561,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 1.2000009341388505,
+    "end_t": 2836.149586845466,
+    "departure_t": 4674.260412640499,
+    "L2_MWh": 30649.326102664767,
+    "defense_rel": [
+     0.5,
+     0.25,
+     0.125
+    ],
+    "dust_fluence_rel": 0.22461207480070422,
+    "equipment_h": 5108.2210171107945,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 120.0,
+    "v_c": 0.012,
+    "round_trip_d": 162.15952278428966,
+    "months": 5.327185373991119,
+    "burn_d": 32.2904445336173,
+    "burn_AU": 32.49846156926842,
+    "propellant_t": 3163.251164776367,
+    "tank_fill": 0.6501465518326596,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 0.0,
+    "end_t": 2834.949585939043,
+    "departure_t": 5998.20075071541,
+    "L2_MWh": 23350.971280937712,
+    "defense_rel": [
+     0.75,
+     0.5625,
+     0.421875
+    ],
+    "dust_fluence_rel": 0.20506997587407058,
+    "equipment_h": 3891.828546822952,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 120.0,
+    "v_c": 0.016,
+    "round_trip_d": 142.49898791646552,
+    "months": 4.681307093182179,
+    "burn_d": 49.666408969786396,
+    "burn_AU": 65.93401917283262,
+    "propellant_t": 4865.4432694592715,
+    "tank_fill": 1.0,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 0.0,
+    "end_t": 2834.949585939043,
+    "departure_t": 7700.392855398315,
+    "L2_MWh": 20519.854259971034,
+    "defense_rel": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "dust_fluence_rel": 0.17202622572670534,
+    "equipment_h": 3419.9757099951726,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 200.0,
+    "v_c": 0.004,
+    "round_trip_d": 611.7288390363624,
+    "months": 20.096216788316767,
+    "burn_d": 8.267945821999572,
+    "burn_AU": 2.833297165429593,
+    "propellant_t": 809.9482565041734,
+    "tank_fill": 0.1664695715574931,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 19.15379462530449,
+    "end_t": 2854.103380481242,
+    "departure_t": 3664.051636985415,
+    "L2_MWh": 88088.95282123619,
+    "defense_rel": [
+     0.25,
+     0.0625,
+     0.015625
+    ],
+    "dust_fluence_rel": 0.3925125894691053,
+    "equipment_h": 14681.492136872697,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 200.0,
+    "v_c": 0.008,
+    "round_trip_d": 328.3704677783281,
+    "months": 10.787466089958215,
+    "burn_d": 18.79782320646773,
+    "burn_AU": 12.747977198714368,
+    "propellant_t": 1841.4808780725714,
+    "tank_fill": 0.37848162563762194,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 6.399890114492737,
+    "end_t": 2841.3494759057203,
+    "departure_t": 4682.830353978291,
+    "L2_MWh": 47285.34736007925,
+    "defense_rel": [
+     0.5,
+     0.25,
+     0.125
+    ],
+    "dust_fluence_rel": 0.3827140925008355,
+    "equipment_h": 7880.891226679874,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 200.0,
+    "v_c": 0.012,
+    "round_trip_d": 239.1804432800898,
+    "months": 7.857439003945132,
+    "burn_d": 32.317615284583404,
+    "burn_AU": 32.525807355888375,
+    "propellant_t": 3165.912878199107,
+    "tank_fill": 0.6506936167711098,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 2.3854646690146057,
+    "end_t": 2837.335050441423,
+    "departure_t": 6003.24792864053,
+    "L2_MWh": 34441.98383233293,
+    "defense_rel": [
+     0.75,
+     0.5625,
+     0.421875
+    ],
+    "dust_fluence_rel": 0.3631680246314299,
+    "equipment_h": 5740.3306387221555,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 200.0,
+    "v_c": 0.016,
+    "round_trip_d": 200.25995278302167,
+    "months": 6.578842075657742,
+    "burn_d": 49.67751028314724,
+    "burn_AU": 65.94875658234461,
+    "propellant_t": 4866.530781350993,
+    "tank_fill": 1.0002235175361198,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 0.6336610532973991,
+    "end_t": 2835.5832468855165,
+    "departure_t": 7702.1140282365095,
+    "L2_MWh": 28837.433200755124,
+    "defense_rel": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "dust_fluence_rel": 0.33013673511259256,
+    "equipment_h": 4806.238866792521,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 500.0,
+    "v_c": 0.004,
+    "round_trip_d": 1478.1154637266457,
+    "months": 48.558326666446966,
+    "burn_d": 8.384482670134568,
+    "burn_AU": 2.873232540986892,
+    "propellant_t": 821.3644920477443,
+    "tank_fill": 0.16881596322446235,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 59.382434349880114,
+    "end_t": 2894.3320200216344,
+    "departure_t": 3715.696512069379,
+    "L2_MWh": 212848.626776637,
+    "defense_rel": [
+     0.25,
+     0.0625,
+     0.015625
+    ],
+    "dust_fluence_rel": 0.9854421499360104,
+    "equipment_h": 35474.7711294395,
+    "feasible_36mo": false
+   },
+   {
+    "D_AU": 500.0,
+    "v_c": 0.008,
+    "round_trip_d": 761.6001880234966,
+    "months": 25.019717083557705,
+    "burn_d": 18.92682871433922,
+    "burn_AU": 12.835463885592494,
+    "propellant_t": 1854.118574113338,
+    "tank_fill": 0.38107906544749376,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 25.8994745408198,
+    "end_t": 2860.849059881673,
+    "departure_t": 4714.96763399501,
+    "L2_MWh": 109670.4270753835,
+    "defense_rel": [
+     0.5,
+     0.25,
+     0.125
+    ],
+    "dust_fluence_rel": 0.9755966588763277,
+    "equipment_h": 18278.404512563917,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 500.0,
+    "v_c": 0.012,
+    "round_trip_d": 528.0327134935002,
+    "months": 17.3466725852004,
+    "burn_d": 32.46570044906385,
+    "burn_AU": 32.67484649413363,
+    "propellant_t": 3180.419664209477,
+    "tank_fill": 0.6536752127340985,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 15.386648490325744,
+    "end_t": 2850.336233354545,
+    "departure_t": 6030.755897564022,
+    "L2_MWh": 76036.71074306403,
+    "defense_rel": [
+     0.75,
+     0.5625,
+     0.421875
+    ],
+    "dust_fluence_rel": 0.9559897598448386,
+    "equipment_h": 12672.785123844005,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 500.0,
+    "v_c": 0.016,
+    "round_trip_d": 416.93087077957597,
+    "months": 13.696809158330353,
+    "burn_d": 49.8483642567661,
+    "burn_AU": 66.17557163513396,
+    "propellant_t": 4883.268055763361,
+    "tank_fill": 1.0036635482764698,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 10.385976420333245,
+    "end_t": 2845.335560608489,
+    "departure_t": 7728.60361637185,
+    "L2_MWh": 60038.04539225894,
+    "defense_rel": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "dust_fluence_rel": 0.9228816058119367,
+    "equipment_h": 10006.340898709823,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 1000.0,
+    "v_c": 0.004,
+    "round_trip_d": 2922.091927034108,
+    "months": 95.99513557930709,
+    "burn_d": 8.576247373757761,
+    "burn_AU": 2.938947339184934,
+    "propellant_t": 840.1502328717065,
+    "tank_fill": 0.1726770175587882,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 125.57980708485569,
+    "end_t": 2960.5293924586463,
+    "departure_t": 3800.679625330353,
+    "L2_MWh": 420781.2374929115,
+    "defense_rel": [
+     0.25,
+     0.0625,
+     0.015625
+    ],
+    "dust_fluence_rel": 1.9736589183164615,
+    "equipment_h": 70130.20624881859,
+    "feasible_36mo": false
+   },
+   {
+    "D_AU": 1000.0,
+    "v_c": 0.008,
+    "round_trip_d": 1483.6539006911369,
+    "months": 48.74027269024759,
+    "burn_d": 19.150025323080886,
+    "burn_AU": 12.986827436989769,
+    "propellant_t": 1875.9834614747115,
+    "tank_fill": 0.38557298021547004,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 59.63633736383078,
+    "end_t": 2894.5859218739633,
+    "departure_t": 4770.569383348676,
+    "L2_MWh": 213646.16169952368,
+    "defense_rel": [
+     0.5,
+     0.25,
+     0.125
+    ],
+    "dust_fluence_rel": 1.963728782160241,
+    "equipment_h": 35607.69361658728,
+    "feasible_36mo": false
+   },
+   {
+    "D_AU": 1000.0,
+    "v_c": 0.012,
+    "round_trip_d": 1009.4531638491843,
+    "months": 33.162061887292516,
+    "burn_d": 32.71250905653129,
+    "burn_AU": 32.923245057875725,
+    "propellant_t": 3204.5976408934275,
+    "tank_fill": 0.6586445393390796,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 37.05528819251097,
+    "end_t": 2872.004871543083,
+    "departure_t": 6076.602512436511,
+    "L2_MWh": 145361.25559428253,
+    "defense_rel": [
+     0.75,
+     0.5625,
+     0.421875
+    ],
+    "dust_fluence_rel": 1.9440259852005195,
+    "equipment_h": 24226.875932380422,
+    "feasible_36mo": true
+   },
+   {
+    "D_AU": 1000.0,
+    "v_c": 0.016,
+    "round_trip_d": 778.0490674404997,
+    "months": 25.56008762945137,
+    "burn_d": 50.13312087946419,
+    "burn_AU": 66.55359672311626,
+    "propellant_t": 4911.163513117308,
+    "tank_fill": 1.0093969328437196,
+    "tankage_t": 639.8164904188907,
+    "consumables_t": 26.639835365392994,
+    "end_t": 2861.5894168134428,
+    "departure_t": 7772.752929930751,
+    "L2_MWh": 112039.06571143196,
+    "defense_rel": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "dust_fluence_rel": 1.9107897236441769,
+    "equipment_h": 18673.177618571994,
+    "feasible_36mo": true
+   }
+  ],
+  "crossover": [
+   {
+    "D_AU": 45.0,
+    "slowest_within_36mo": 0.004,
+    "steps": [
+     {
+      "step": "0.004->0.008 c",
+      "days_saved": 59.55061504809089,
+      "departure_added_t": 1032.8203840275328,
+      "days_per_100t": 5.765824916804063
+     },
+     {
+      "step": "0.008->0.012 c",
+      "days_saved": 14.581977910495155,
+      "departure_added_t": 1325.9180605328656,
+      "days_per_100t": 1.0997646343722693
+     },
+     {
+      "step": "0.012->0.016 c",
+      "days_saved": 1.6120400820835386,
+      "departure_added_t": 1702.1921046829048,
+      "days_per_100t": 0.09470376919553623
+     }
+    ]
+   },
+   {
+    "D_AU": 120.0,
+    "slowest_within_36mo": 0.004,
+    "steps": [
+     {
+      "step": "0.004->0.008 c",
+      "days_saved": 167.85034454120793,
+      "departure_added_t": 1023.5586926084916,
+      "days_per_100t": 16.398702463602664
+     },
+     {
+      "step": "0.008->0.012 c",
+      "days_saved": 50.68301959532678,
+      "departure_added_t": 1323.9403380749109,
+      "days_per_100t": 3.8281951337039066
+     },
+     {
+      "step": "0.012->0.016 c",
+      "days_saved": 19.66053486782414,
+      "departure_added_t": 1702.1921046829048,
+      "days_per_100t": 1.1550126929701998
+     }
+    ]
+   },
+   {
+    "D_AU": 200.0,
+    "slowest_within_36mo": 0.004,
+    "steps": [
+     {
+      "step": "0.004->0.008 c",
+      "days_saved": 283.3583712580343,
+      "departure_added_t": 1018.7787169928761,
+      "days_per_100t": 27.813534630407453
+     },
+     {
+      "step": "0.008->0.012 c",
+      "days_saved": 89.19002449823827,
+      "departure_added_t": 1320.4175746622386,
+      "days_per_100t": 6.754683231253794
+     },
+     {
+      "step": "0.012->0.016 c",
+      "days_saved": 38.92049049706813,
+      "departure_added_t": 1698.86609959598,
+      "days_per_100t": 2.290968694138055
+     }
+    ]
+   },
+   {
+    "D_AU": 500.0,
+    "slowest_within_36mo": 0.008,
+    "steps": [
+     {
+      "step": "0.004->0.008 c",
+      "days_saved": 716.5152757031491,
+      "departure_added_t": 999.2711219256312,
+      "days_per_100t": 71.70379089134474
+     },
+     {
+      "step": "0.008->0.012 c",
+      "days_saved": 233.5674745299964,
+      "departure_added_t": 1315.788263569012,
+      "days_per_100t": 17.751144389786234
+     },
+     {
+      "step": "0.012->0.016 c",
+      "days_saved": 111.10184271392421,
+      "departure_added_t": 1697.8477188078277,
+      "days_per_100t": 6.543687133021343
+     }
+    ]
+   },
+   {
+    "D_AU": 1000.0,
+    "slowest_within_36mo": 0.012,
+    "steps": [
+     {
+      "step": "0.004->0.008 c",
+      "days_saved": 1438.438026342971,
+      "departure_added_t": 969.8897580183229,
+      "days_per_100t": 148.30943562926007
+     },
+     {
+      "step": "0.008->0.012 c",
+      "days_saved": 474.20073684195256,
+      "departure_added_t": 1306.0331290878348,
+      "days_per_100t": 36.308476889337854
+     },
+     {
+      "step": "0.012->0.016 c",
+      "days_saved": 231.4040964086846,
+      "departure_added_t": 1696.1504174942402,
+      "days_per_100t": 13.642899475303782
+     }
+    ]
+   }
+  ],
+  "tankage_fixed_t": 639.8164904188907,
+  "P_max_t": 4865.4432694592715,
+  "hardware_added_t": 854.9330955201526,
+  "finding": "With one hardware set (tanks sized once for 0.016 c), a slower mission carries the same tankage and its end mass changes only by its consumables. At 45 AU every speed fits in a few months and 0.004-0.008 c costs a third to a half of the propellant; at 120-200 AU 0.008 c keeps round trips near 1-1.5 years; from ~500 AU the 0.004 c case exceeds 36 months and higher speed pays most; at 1,000 AU only 0.012-0.016 c stay inside 36 months. The table gives days saved per 100 t of departure mass for each step; the owner sets the value of a day."
+ },
+ "convergence": {
+  "base": {
+   "end_t": 1683.6246505664528,
+   "propellant_t": 2889.4976704430187,
+   "departure_t": 4573.122321009472,
+   "note": "includes CIRC-001 (IV-A 3.2)"
+  },
+  "candidates": [
+   {
+    "name": "Baseline (today's lines, no ISSA additions)",
+    "source": "Phase III (recoupled on the corrected base)",
+    "dry_added_t": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "coupled": [
+     {
+      "propellant_t": 2889.4976704430187,
+      "tankage_t": 343.42465056645284,
+      "departure_t": 4573.122321009472,
+      "extra_departure_t": 0.0
+     },
+     {
+      "propellant_t": 2889.4976704430187,
+      "tankage_t": 343.42465056645284,
+      "departure_t": 4573.122321009472,
+      "extra_departure_t": 0.0
+     },
+     {
+      "propellant_t": 2889.4976704430187,
+      "tankage_t": 343.42465056645284,
+      "departure_t": 4573.122321009472,
+      "extra_departure_t": 0.0
+     }
+    ],
+    "status": {
+     "thermal": "does not close in burns (IV-D: WARM/LOW heated by hot blades)",
+     "electrical": "see IV-E",
+     "protection": "OPEN",
+     "radiation": "TRANSPORT GATE open"
+    },
+    "still_valid": "reference"
+   },
+   {
+    "name": "Phase II as reported (corrected ledger categories)",
+    "source": "Phase III (recoupled on the corrected base)",
+    "dry_added_t": [
+     287.46692620854134,
+     580.0903754276845,
+     1368.8748390282599
+    ],
+    "coupled": [
+     {
+      "propellant_t": 3553.8993770571565,
+      "tankage_t": 443.0849065585735,
+      "departure_t": 5624.651209824271,
+      "extra_departure_t": 1051.5288888147995
+     },
+     {
+      "propellant_t": 4230.218985788331,
+      "tankage_t": 544.5328478682496,
+      "departure_t": 6695.042209084265,
+      "extra_departure_t": 2121.919888074793
+     },
+     {
+      "propellant_t": 6053.2799920717325,
+      "tankage_t": 817.9919988107598,
+      "departure_t": 9580.346829910752,
+      "extra_departure_t": 5007.2245089012795
+     }
+    ],
+    "status": {
+     "thermal": "does not close in burns (IV-D: WARM/LOW heated by hot blades)",
+     "electrical": "see IV-E",
+     "protection": "OPEN",
+     "radiation": "TRANSPORT GATE open"
+    },
+    "still_valid": "reference"
+   },
+   {
+    "name": "N1: working doctrine, existing radiators, pumped hot loop",
+    "source": "Phase III (recoupled on the corrected base)",
+    "dry_added_t": [
+     191.34612370585464,
+     441.5487863583289,
+     1149.3420803172376
+    ],
+    "coupled": [
+     {
+      "propellant_t": 3331.7422542667023,
+      "tankage_t": 409.7613381400053,
+      "departure_t": 5273.049716112561,
+      "extra_departure_t": 699.9273951030896
+     },
+     {
+      "propellant_t": 3910.017738887535,
+      "tankage_t": 496.5026608331302,
+      "departure_t": 6188.269186078994,
+      "extra_departure_t": 1615.1468650695215
+     },
+     {
+      "propellant_t": 5545.889658619943,
+      "tankage_t": 741.8834487929913,
+      "departure_t": 8777.315187730172,
+      "extra_departure_t": 4204.1928667206985
+     }
+    ],
+    "status": {
+     "thermal": "does not close in burns (IV-D: WARM/LOW heated by hot blades)",
+     "electrical": "see IV-E",
+     "protection": "OPEN",
+     "radiation": "TRANSPORT GATE open"
+    },
+    "still_valid": "reference"
+   },
+   {
+    "name": "N2: hybrid F with 2+1 x 2.66 MWe (DR-01, 550 K section, buffer, heat-pipe hot blades)",
+    "source": "Phase III (recoupled on the corrected base)",
+    "dry_added_t": [
+     159.74165107501682,
+     283.0216760545486,
+     554.0352630014041
+    ],
+    "coupled": [
+     {
+      "propellant_t": 3258.6971014572423,
+      "tankage_t": 398.80456521858633,
+      "departure_t": 5157.443317750845,
+      "extra_departure_t": 584.320996741373
+     },
+     {
+      "propellant_t": 3543.625388923659,
+      "tankage_t": 441.5438083385488,
+      "departure_t": 5608.390873316756,
+      "extra_departure_t": 1035.2685523072844
+     },
+     {
+      "propellant_t": 4169.999671551516,
+      "tankage_t": 535.4999507327273,
+      "departure_t": 6599.734885285648,
+      "extra_departure_t": 2026.6125642761756
+     }
+    ],
+    "status": {
+     "thermal": "does not close in burns (IV-D: WARM/LOW heated by hot blades)",
+     "electrical": "see IV-E",
+     "protection": "OPEN",
+     "radiation": "TRANSPORT GATE open"
+    },
+    "still_valid": "no"
+   },
+   {
+    "name": "N3: hybrid F with 4+1 x 1.33 MWe",
+    "source": "Phase III (recoupled on the corrected base)",
+    "dry_added_t": [
+     186.12689344204892,
+     316.191204170109,
+     593.9072423619015
+    ],
+    "coupled": [
+     {
+      "propellant_t": 3319.6794213689477,
+      "tankage_t": 407.9519132053421,
+      "departure_t": 5253.9582280163395,
+      "extra_departure_t": 680.8359070068673
+     },
+     {
+      "propellant_t": 3620.2877423228,
+      "tankage_t": 453.04316134842,
+      "departure_t": 5729.7221078413295,
+      "extra_departure_t": 1156.5997868318577
+     },
+     {
+      "propellant_t": 4262.1529202142165,
+      "tankage_t": 549.3229380321325,
+      "departure_t": 6745.58310060825,
+      "extra_departure_t": 2172.460779598778
+     }
+    ],
+    "status": {
+     "thermal": "does not close in burns (IV-D: WARM/LOW heated by hot blades)",
+     "electrical": "see IV-E",
+     "protection": "OPEN",
+     "radiation": "TRANSPORT GATE open"
+    },
+    "still_valid": "reference"
+   },
+   {
+    "name": "N2-R4a: 3 x 3.5 MWe (C), 700 K section on the hot-blade forward end, bulkhead moved aft of it (silhouette kept)",
+    "source": "Phase IV",
+    "items_t": {
+     "L2": [
+      151.4259841462207,
+      282.2313283894203,
+      601.5082607925691
+     ],
+     "L1": [
+      7.849670240534905,
+      20.463461354511953,
+      48.47572833221004
+     ],
+     "L3": [
+      9.0,
+      12.0,
+      16.0
+     ],
+     "storage": [
+      14.3,
+      21.5,
+      31.6
+     ],
+     "distribution": [
+      4.0,
+      8.0,
+      15.0
+     ],
+     "scatter_allowance": [
+      0.0,
+      3.0,
+      10.0
+     ],
+     "ECLSS_modular": [
+      3.5999999999999996,
+      4.800000000000001,
+      6.4
+     ],
+     "heat_transport_H5": [
+      531.060831557475,
+      494.96306407355627,
+      533.3453653461588
+     ],
+     "section_700K": [
+      2.8900248301735805,
+      5.975241702664092,
+      12.282188621491603
+     ],
+     "bulkhead_relocation": [
+      0.0,
+      2.0,
+      5.0
+     ]
+    },
+    "dry_added_t": [
+     724.1265107744042,
+     854.9330955201526,
+     1279.6115430924297
+    ],
+    "dry_added_without_transport_t": [
+     193.0656792169292,
+     359.97003144659635,
+     746.2661777462708
+    ],
+    "coupled": [
+     {
+      "propellant_t": 4563.119383759827,
+      "tankage_t": 594.4679075639739,
+      "departure_t": 7221.9138020982045,
+      "extra_departure_t": 2648.7914810887323
+     },
+     {
+      "propellant_t": 4865.4432694592715,
+      "tankage_t": 639.8164904188907,
+      "departure_t": 7700.392855398315,
+      "extra_departure_t": 3127.270534388843
+     },
+     {
+      "propellant_t": 5846.972132799099,
+      "tankage_t": 787.0458199198649,
+      "departure_t": 9253.829495811393,
+      "extra_departure_t": 4680.707174801922
+     }
+    ],
+    "coupled_without_transport": [
+     {
+      "propellant_t": 3335.7165396957907,
+      "tankage_t": 410.35748095436867,
+      "departure_t": 5279.339699867089,
+      "extra_departure_t": 706.2173788576164
+     },
+     {
+      "propellant_t": 3721.4706086083047,
+      "tankage_t": 468.2205912912457,
+      "departure_t": 5889.861231346147,
+      "extra_departure_t": 1316.7389103366752
+     },
+     {
+      "propellant_t": 4614.289209499381,
+      "tankage_t": 602.1433814249073,
+      "departure_t": 7302.898768670559,
+      "extra_departure_t": 2729.776447661087
+     }
+    ],
+    "status": {
+     "thermal": "L2 sink works behind the relocated bulkhead (F < 1e-3); takes 24 m = 2.1 GW of hot capacity against 3.95 GW ideal margin (fits) and 1.9 GW with the 20 % rule (does not); WARM/LOW unchanged",
+     "electrical": "closes after one loss at EOL to the nominal band",
+     "protection": "OPEN (dust doctrine, DR3-02)",
+     "radiation": "TRANSPORT-INFORMED tank band; 3-D gate open"
+    },
+    "still_valid": "leading research candidate if the hot-blade margin rule can be relaxed (not closed)",
+    "length_m": [
+     18.03129720773056,
+     24.01023139380987,
+     32.53283494852818
+    ]
+   }
+  ],
+  "T_scan": [
+   {
+    "T_K": 550.0,
+    "eta": 0.21913043478260869,
+    "length_m": 45.170829263186675,
+    "hot_capacity_W": 4025827009.4862785,
+    "unit_t": 82.90073995701422
+   },
+   {
+    "T_K": 650.0,
+    "eta": 0.1826086956521739,
+    "length_m": 28.571108964698976,
+    "hot_capacity_W": 2546385444.705608,
+    "unit_t": 89.69769668204552
+   },
+   {
+    "T_K": 700.0,
+    "eta": 0.1643478260869565,
+    "length_m": 24.01023139380987,
+    "hot_capacity_W": 2139899568.5029845,
+    "unit_t": 94.0771094631401
+   },
+   {
+    "T_K": 750.0,
+    "eta": 0.14608695652173911,
+    "length_m": 20.871127305506747,
+    "hot_capacity_W": 1860128525.3227165,
+    "unit_t": 99.41293261643041
+   }
+  ],
+  "T_selected": 700.0,
+  "claim_283t": "The Phase III N2 figure (283 t dry, +1,035 t departure) is no longer valid: its 550 K section does not reject in burns, its 2.66 MWe units fail after one loss at EOL, and it carried no tank-side shield, restart pack, transport hardware or ECLSS cross-ring unit.",
+  "no_r4b": "A forward-extension alternative (700 K beyond LOW) is not carried: it collides with the aft storage front at x 93.4."
+ },
+ "problems": [
+  {
+   "id": "P4-01",
+   "severity": "BLOCKER",
+   "problem": "The Phase III 550 K section sits aft of the graded bulkhead and sees the other blades' 1800 K faces (F 0.02): it absorbs 2-3x what it emits",
+   "consequence": "option F as drawn has no L2 sink in a burn; the bulkhead must move aft of any new section (N2-R4a)"
+  },
+  {
+   "id": "P4-02",
+   "severity": "MAJOR",
+   "problem": "Scatter toward the He-3 tanks (blades, casing, tank structure) is not assessed; the direct path closes inside the shadow cone",
+   "consequence": "3-D transport needed before tank protection is closed"
+  },
+  {
+   "id": "P4-03",
+   "severity": "BLOCKER",
+   "problem": "No 3-D radiation transport with the real geometry (district, blades, tanks)",
+   "consequence": "crew and tank safety not established; workflow now exists"
+  },
+  {
+   "id": "P4-04",
+   "severity": "MAJOR",
+   "problem": "Hot-loop transport: 4-34 MW pump work and 150-700 t of lithium in trunks and channels (by candidate); in no mass line",
+   "consequence": "drive package / radiator mass OPEN"
+  },
+  {
+   "id": "P4-05",
+   "severity": "MAJOR",
+   "problem": "CIRC-001 (40.2 t) is in the mass model but not the operating point end mass",
+   "consequence": "propellant under-solved by ~93 t; departure ~4,573 t"
+  },
+  {
+   "id": "P4-06",
+   "severity": "MAJOR",
+   "problem": "Hot-blade 20 % margin rule: 10.45 GW x 1.2 = 12.5 GW of 14.4 GW leaves 1.9 GW (21 m) for anything taken from the blade",
+   "consequence": "option F length (29-37 m) does not fit"
+  },
+  {
+   "id": "P4-07",
+   "severity": "MAJOR",
+   "problem": "2.66 MWe units fail after one loss at EOL once planning loads, recharge and standby are counted",
+   "consequence": "rating >= 3.0-3.5 MWe"
+  },
+  {
+   "id": "P4-08",
+   "severity": "MAJOR",
+   "problem": "LOW at the high band with one sector lost needs ~2.0 MW (1.28 MW available)",
+   "consequence": "LOW extension ~11 m or load shedding"
+  },
+  {
+   "id": "P4-09",
+   "severity": "MAJOR",
+   "problem": "Five ECLSS units do not carry 12 after a ring loss",
+   "consequence": "7 units (cross-ring hub unit) needed"
+  },
+  {
+   "id": "P4-10",
+   "severity": "MAJOR",
+   "problem": "Secondary gammas in LiH relax over ~33 cm (neutrons 7.7 cm): beyond ~40 cm LiH the gamma term dominates",
+   "consequence": "shield needs a gamma layer after the LiH"
+  },
+  {
+   "id": "P4-11",
+   "severity": "OPEN",
+   "problem": "Defense power vs speed: v^3 has no source (v^1-v^3)",
+   "consequence": "mission protection power uncertain by up to 8x at 0.008 c"
+  },
+  {
+   "id": "P4-12",
+   "severity": "OPEN",
+   "problem": "Relocated bulkhead: its own heat balance at the new station and the coolant headers crossing it",
+   "consequence": "research variant only"
+  },
+  {
+   "id": "P4-16",
+   "severity": "MAJOR",
+   "problem": "Phase III tank geometry error (span read as ship x): tanks are ~200 m forward, inside the shadow cone",
+   "consequence": "Phase III P3-05 withdrawn"
+  },
+  {
+   "id": "P4-13",
+   "severity": "OPEN",
+   "problem": "Surrogate core: leakage per fission depends on the real reactor (OPEN, no core design)",
+   "consequence": "transport results are scalable, not final"
+  },
+  {
+   "id": "P4-14",
+   "severity": "MINOR",
+   "problem": "Phase III ECLSS premium misprinted (2-3 t vs 9.6 t)",
+   "consequence": "corrected"
+  },
+  {
+   "id": "P4-15",
+   "severity": "MINOR",
+   "problem": "Container tare missing from Phase III logistics",
+   "consequence": "corrected: +10-20 t departure"
+  }
+ ],
+ "decisions": [
+  {
+   "id": "DR4-01",
+   "question": "Take N2-R4a as the radiator research variant: 700 K L2 section on the hot-blade forward end with the graded bulkhead moved aft of it",
+   "recommended": "R4a"
+  },
+  {
+   "id": "DR4-02",
+   "question": "Move the L2 study rating to 3 x 3.5 MWe, strategy C (3 at partial load), strategy B as maintenance mode",
+   "recommended": "3 x 3.5, C"
+  },
+  {
+   "id": "DR4-03",
+   "question": "Take H5 (six independent pumped zones per blade with Li heat-pipe fins) as the hot-transport study basis, as a propulsion-interface request",
+   "recommended": "H5"
+  },
+  {
+   "id": "DR4-04",
+   "question": "Keep the 12.5 deg shadow cone as the tank protection (tanks at ~200 m, <= 8 deg off axis) and carry a 0-10 t scatter allowance until 3-D transport",
+   "recommended": "yes"
+  },
+  {
+   "id": "DR4-05",
+   "question": "Couple CIRC-001 into the operating point end mass (owner/canon change; not done here)",
+   "recommended": "owner"
+  },
+  {
+   "id": "DR4-06",
+   "question": "Adopt 7 modular ECLSS units (3 + 3 + 1 cross-ring hub unit)",
+   "recommended": "7 units"
+  },
+  {
+   "id": "DR4-07",
+   "question": "Adopt the independent restart pack (2-6 t) for R1b; study an APU as its alternative",
+   "recommended": "pack"
+  },
+  {
+   "id": "DR4-08",
+   "question": "Commission a 3-D OpenMC model of the district, blades and tank farm with the IV-B workflow (local or CI-side)",
+   "recommended": "yes"
+  },
+  {
+   "id": "DR4-09",
+   "question": "Choose how to value mission days against departure mass for the speed choice (IV-H)",
+   "recommended": "owner"
+  }
+ ],
+ "next_sequence": [
+  "1. Owner decisions DR4-01..09 (R4a bulkhead relocation, rating, transport basis, tank protection, CIRC-001 coupling).",
+  "2. 3-D OpenMC model: district (three units, slabs, shadow walls), blades as scatterers, He-3 tank stack; crew dose and 3 K deposit.",
+  "3. R4a variant: the relocated bulkhead's heat balance from a radiosity model, and the hot-blade margin rule (owner).",
+  "4. Hot-transport interface with propulsion (H5): pump hardware, Li inventory, mass line.",
+  "5. Dust doctrine (DR3-02) to fix the engagement pattern; then size the buffer once.",
+  "6. Only then: EPS-G1 generator geometry for the selected district (owner go)."
+ ],
+ "radiation": {
+  "bench": {
+   "solver": "OpenMC 0.15.3",
+   "library": "ENDF/B-VIII.0 (NNDC HDF5)",
+   "cases": [
+    {
+     "case": "B1 Godiva HEU-MET-FAST-001",
+     "k_calc": 0.999943898574191,
+     "sigma": 0.0004936244802241347,
+     "k_bench": 1.0,
+     "bench_unc": 0.001,
+     "diff_pcm": -5.610142580902977,
+     "within": true,
+     "runtime_s": 4.950340032577515,
+     "batches": 150,
+     "inactive": 30,
+     "particles": 20000
+    },
+    {
+     "calc": 0.12409200000000002,
+     "sigma": 0.00035811481709376015,
+     "ref": 0.1240793385211438,
+     "rel_diff": 0.00010204341034634165,
+     "runtime_s": 2.598663806915283,
+     "case": "B2 uncollided 2 MeV n, 10 cm Fe (code verification)",
+     "Sigma_t_cm": 0.20868340911955705
+    },
+    {
+     "calc": 0.095774,
+     "sigma": 0.00034346340578202773,
+     "ref": 0.09439836744453324,
+     "rel_diff": 0.014572630784902655,
+     "runtime_s": 3.7128798961639404,
+     "case": "B3 uncollided 1 MeV photons, 5 cm Fe vs NIST XCOM (data validation)",
+     "mu_cm": 0.47204630000000003,
+     "ref_without_coherent": 0.09604785712607936,
+     "note": "XCOM 1 MeV Fe: 0.05995 cm2/g with coherent, 0.05951 without; the uncollided tally agrees with the no-coherent value, i.e. coherent (Rayleigh) events are not counted as collisions here",
+     "rel_diff_without_coherent": -0.00285125701159447
+    }
+   ]
+  },
+  "wayfarer": {
+   "solver": "OpenMC 0.15.3",
+   "library": "ENDF/B-VIII.0 (NNDC HDF5)",
+   "status": "STUDY (transport-informed, not validated for Wayfarer)",
+   "S1": {
+    "k_eff": 1.134091185668061,
+    "k_sigma": 0.000705955254772916,
+    "core": {
+     "r_cm": 14.0,
+     "h_cm": 30.0,
+     "reflector_cm": 8.0,
+     "fuel": "UN 93 %, 45 vol %",
+     "coolant": "Li-7 30 vol %",
+     "structure": "Mo 25 vol %",
+     "reflector": "BeO"
+    },
+    "neutrons_leaking_per_fission": 0.939829670244841,
+    "photons_leaking_per_fission": 1.0058715667945957,
+    "mean_leak_energy_n_eV": 645125.2131261461,
+    "mean_leak_energy_g_eV": 876167.5224507188,
+    "rel_err_n": 0.0013738372120071687,
+    "spectrum_n": [
+     0.0,
+     1.9668584353641148e-06,
+     1.3768009047548805e-05,
+     3.7370310271918194e-05,
+     7.277376210847223e-05,
+     0.00010424349707429808,
+     0.0002969956237399813,
+     0.000495648325711757,
+     0.0007120027536018099,
+     0.001044401829178345,
+     0.0013748340463195163,
+     0.001518414712101096,
+     0.001461375817475538,
+     0.0014672763927816293,
+     0.0015321827211486453,
+     0.0015852878989034765,
+     0.0017839406008752523,
+     0.0020396321974725865,
+     0.0023995672911442203,
+     0.0026257560112110936,
+     0.0030132271229778235,
+     0.00356591434331514,
+     0.004061562669026897,
+     0.004399862319909525,
+     0.00518070511874908,
+     0.005727491763780303,
+     0.006573240890986871,
+     0.007493730638737278,
+     0.008528298175738799,
+     0.009435019914441654,
+     0.011069479274229235,
+     0.012279097211978169,
+     0.013760141613807345,
+     0.015233318581895068,
+     0.01700545803215813,
+     0.01905099080493682,
+     0.021029650390913115,
+     0.02314402320892955,
+     0.025445247578305564,
+     0.027866450312238777,
+     0.029951320253724736,
+     0.03277179525003688,
+     0.0350730196194129,
+     0.036874661946206436,
+     0.040100309780203576,
+     0.041589221615774226,
+     0.0441225352805232,
+     0.04707478979200473,
+     0.04806018586812215,
+     0.04640999164085164,
+     0.04459851502188129,
+     0.05630525642916851,
+     0.04354821261739688,
+     0.06919604661454491,
+     0.06756748783006344,
+     0.026847617642720173,
+     0.01873629345527856,
+     0.006050056547180017,
+     0.000652997000540886,
+     3.93371687072823e-05
+    ],
+    "spectrum_g": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     3.925122587138991e-06,
+     1.8377216095462174e-06,
+     5.5131648286386526e-06,
+     2.622379514769746e-05,
+     0.00011350181952759074,
+     0.0002755101270259917,
+     0.005874800664244426,
+     0.03740796126226368,
+     0.06730209556567461,
+     0.07991667773430804,
+     0.07398189855478612,
+     0.07056818517070923,
+     0.08619102603450805,
+     0.10913384170691934,
+     0.11510578377885089,
+     0.11482798590562204,
+     0.10167948298457602,
+     0.07958780700895901,
+     0.0439671635807482,
+     0.012094827627403486,
+     0.0019300288308379075,
+     3.9218388623595655e-06,
+     0.0
+    ],
+    "bounds_eV": [
+     0.001,
+     0.001484854273587409,
+     0.0022047922137907947,
+     0.003273795141019506,
+     0.004861108705992513,
+     0.0072180380364659435,
+     0.010717734625362928,
+     0.0159142740616459,
+     0.023630377851476182,
+     0.03508766753924968,
+     0.052100073095869136,
+     0.07736101619061768,
+     0.11486983549970341,
+     0.17056496614801747,
+     0.2532641189091755,
+     0.3760603093086394,
+     0.5583947574035361,
+     0.8291348418794451,
+     1.231144413344916,
+     1.8280700435584623,
+     2.7144176165949068,
+     4.030514598301896,
+     5.98472682604501,
+     8.886447203906155,
+     13.195079107728922,
+     19.592769603435265,
+     29.09240767707434,
+     43.19798586825099,
+     64.14271392684098,
+     95.24258289376446,
+     141.4213562373095,
+     209.99010518549642,
+     311.80470509575395,
+     462.984548886092,
+     687.4645860184525,
+     1020.7847284895003,
+     1515.7165665103976,
+     2250.618221330198,
+     3341.840084155838,
+     4962.145530604504,
+     7368.062997280774,
+     10940.499829573611,
+     16245.047927124699,
+     24121.528839223392,
+     35816.955182382786,
+     53182.958969449784,
+     78968.9439078115,
+     117257.3738421983,
+     174110.11265922428,
+     258528.14485683496,
+     383876.6207332969,
+     570000.8408261278,
+     846368.1844490941,
+     1256733.4157076515,
+     1866065.983073612,
+     2770836.0497629484,
+     4114287.7499005604,
+     6109117.748208185,
+     9071149.596275594,
+     13469335.244380545,
+     20000000.000000004
+    ],
+    "runtime_s": 117.2642297744751
+   },
+   "S2": {
+    "rows": [
+     {
+      "lih_cm": 0,
+      "n_number_T": 0.3837150000000001,
+      "n_energy_T": 0.4048563009926167,
+      "n_src_g_energy_T": 0.0793643711097928,
+      "g_energy_T": 0.024289730540074304
+     },
+     {
+      "lih_cm": 20,
+      "n_number_T": 0.004083333333333334,
+      "n_energy_T": 0.009560961154361055,
+      "n_src_g_energy_T": 0.0840585131136103,
+      "g_energy_T": 0.015214952030055628
+     },
+     {
+      "lih_cm": 40,
+      "n_number_T": 9.166666666666665e-05,
+      "n_energy_T": 0.0003161078558277102,
+      "n_src_g_energy_T": 0.045230374426076164,
+      "g_energy_T": 0.009431104797482767
+     },
+     {
+      "lih_cm": 60,
+      "n_number_T": 3.3333333333333333e-06,
+      "n_energy_T": 8.724995633977591e-06,
+      "n_src_g_energy_T": 0.024796381729120194,
+      "g_energy_T": 0.005730234610715022
+     },
+     {
+      "lih_cm": 80,
+      "n_number_T": 1.6666666666666667e-06,
+      "n_energy_T": 1.3599099417550878e-10,
+      "n_src_g_energy_T": 0.013740481313870958,
+      "g_energy_T": 0.0034975160205884008
+     }
+    ],
+    "note": "per source particle; W 5 cm then LiH (natural Li); broad beam (reflective sides); energy transmission relative to the incident mean energy; n_src_g = secondary photons produced by neutrons in the shield",
+    "relaxation_cm": {
+     "neutron_number": 7.688519318781308,
+     "neutron_energy": 3.3207209705604717,
+     "secondary_gamma": 33.12781527407391
+    }
+   },
+   "S3": {
+    "layers": "2 cm Al wall + 50 cm liquid He-3",
+    "per_incident_neutron": {
+     "wall_eV": 19596.99677387206,
+     "he3_eV": 1007985.7417694957,
+     "rel_err": [
+      0.008440184854807232,
+      0.0017852497289279816
+     ],
+     "incident_mean_eV": 645125.2131261461
+    },
+    "per_incident_photon": {
+     "wall_eV": 125825.92766073886,
+     "he3_eV": 102854.40373233825,
+     "rel_err": [
+      0.0047392977802646835,
+      0.004185394249091623
+     ],
+     "incident_mean_eV": 876167.5224507188
+    }
+   }
+  }
+ }
+}

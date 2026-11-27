@@ -72,3 +72,26 @@ on a 550 K section; L1 reduced to drive-specific loads with heat-pipe hot blades
 
 **Unknowns / blockers.** Radiation transport (BLOCKER: no MCNP/OpenMC here); L1 900 K rejection; LOW margin at the high band; He-3 tank
 shadow; hot-loop pumps; channel refill time; unit restart energy; Brayton degradation; engagement frequency.
+
+## Phase IV (owner brief 2026-11-27 12:55Z): physical closure and infrastructure
+
+**Function.** Resolve the physical assumptions behind N2 rather than reduce mass: reconcile Phase III, build a radiation-transport
+capability, derive hot-loop transport, check radiator view factors in burns, size L2/storage/district/cryo heating/ECLSS/logistics, run
+missions on one hardware set, converge. Run order after Phase III: `radiation/` (README: install, `fetch_data.py`, `bench.py`,
+`wayfarer_rt.py`; OpenMC env, data outside Git) → `python3 work/ship-systems-architecture/phase4/study4.py` (`results/phase4.json`;
+`phase4/viewfactor.py` is the Monte Carlo) → `/snap/bin/blender -b assets/wayfarer/WF_WAYFARER_001.blend --python
+work/ship-systems-architecture/make_review4.py -- --render` (REVIEW_ISSA_PHASE4.blend, two stills) → `build_report.py` (Phase IV from
+`phase4/report4.py`; III, II, I kept).
+
+**Fixed constraints.** As Phase III; owner directions DR3-01..09 (N2 leading research architecture, not final). No canon, Drive or
+production-geometry change; radiator and district work is review geometry only.
+
+**Findings (STUDY / TRANSPORT-INFORMED).** The production graded bulkhead already shadows WARM and LOW from the other blades' hot faces
+(F ~2e-4; without it 0.025 / 0.008); the Phase III 550 K section sits aft of it and is exposed (F 0.02), so N2-R4a moves the bulkhead aft
+of a 700 K section (24 m, 2.1 GW of hot capacity: inside the 3.95 GW ideal margin, outside the 20 % rule). Phase III read the tank x as a
+span: the He-3 tanks are ~195 m forward, inside the 12.5 deg shadow cone, so the direct path closes; scatter needs 3-D transport. Hot
+transport is ~5-30 MW of pump work and ~150-700 t of lithium hardware (H5 zones + heat-pipe fins recommended). L2 optimum ~3.1 MWe per
+unit nominal (4.9 at the high band): study basis 3 x 3.5 MWe, strategy C. CIRC-001 (40.2 t) is not in the operating-point end mass
+(reference departure ~4,573 t coupled). ECLSS needs 7 units for ring loss + unit failure. N2-R4a ~855 t dry (~360 t without transport),
++3.1 kt departure; the 283 t Phase III figure is withdrawn. Owner: DR4-01..09.
+

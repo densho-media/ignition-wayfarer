@@ -1,0 +1,40 @@
+{
+ "solver": "OpenMC 0.15.3",
+ "library": "ENDF/B-VIII.0 (NNDC HDF5)",
+ "cases": [
+  {
+   "case": "B1 Godiva HEU-MET-FAST-001",
+   "k_calc": 0.999943898574191,
+   "sigma": 0.0004936244802241347,
+   "k_bench": 1.0,
+   "bench_unc": 0.001,
+   "diff_pcm": -5.610142580902977,
+   "within": true,
+   "runtime_s": 4.950340032577515,
+   "batches": 150,
+   "inactive": 30,
+   "particles": 20000
+  },
+  {
+   "calc": 0.12409200000000002,
+   "sigma": 0.00035811481709376015,
+   "ref": 0.1240793385211438,
+   "rel_diff": 0.00010204341034634165,
+   "runtime_s": 2.598663806915283,
+   "case": "B2 uncollided 2 MeV n, 10 cm Fe (code verification)",
+   "Sigma_t_cm": 0.20868340911955705
+  },
+  {
+   "calc": 0.095774,
+   "sigma": 0.00034346340578202773,
+   "ref": 0.09439836744453324,
+   "rel_diff": 0.014572630784902655,
+   "runtime_s": 3.7128798961639404,
+   "case": "B3 uncollided 1 MeV photons, 5 cm Fe vs NIST XCOM (data validation)",
+   "mu_cm": 0.47204630000000003,
+   "ref_without_coherent": 0.09604785712607936,
+   "note": "XCOM 1 MeV Fe: 0.05995 cm2/g with coherent, 0.05951 without; the uncollided tally agrees with the no-coherent value, i.e. coherent (Rayleigh) events are not counted as collisions here",
+   "rel_diff_without_coherent": -0.00285125701159447
+  }
+ ]
+}

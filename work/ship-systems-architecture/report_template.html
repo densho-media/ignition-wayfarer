@@ -80,28 +80,32 @@ a{color:var(--info)}
 
 <div class="wrap">
 <header class="top">
-  <div class="eyebrow">G.U. WAYFARER 001 · ISSA · Phase III for owner review, 2026-11-27 · not canon</div>
+  <div class="eyebrow">G.U. WAYFARER 001 · ISSA · Phase IV for owner review, 2026-11-27 · not canon</div>
   <h1>Integrated Ship Systems Architecture</h1>
-  <p class="lede">Phase III corrects Phase II, couples power, heat, storage, shielding and mass in one calculation, models one parametric power unit (EPS-G1) and four districts in review geometry, and compares complete candidates on coupled propellant. It changes no canon, Drive data or production geometry. Phases II and I follow below, kept for the record.</p>
+  <p class="lede">Phase IV works on physical closure instead of mass: it reconciles Phase III, builds a working radiation-transport capability (OpenMC), derives the hot-loop transport, checks what every radiator section sees in a burn, sizes the three-unit L2 plant, the stores, the district, the cryogenic heating, life support, logistics and the missions on one hardware set. It changes no canon, Drive data or production geometry. Phases III, II and I follow below, kept for the record.</p>
   <div class="chips">
-    <span class="chip c-model">MODEL-DERIVED: measured from the built .blend</span>
+    <span class="chip c-model">MODEL-DERIVED: from the spec or the built model</span>
     <span class="chip c-sim">STUDY: computed by work/ship-systems-architecture</span>
+    <span class="chip c-sim">TRANSPORT-INFORMED: OpenMC 1-D, not validated</span>
     <span class="chip c-concept">PROTOTYPE: unsourced choice</span>
     <span class="chip c-warn">SPECULATIVE: beyond demonstrated technology</span>
     <span class="chip c-warn">OPEN: owner decision needed</span>
   </div>
   <div class="grid">
-    <div class="card"><h4>Added dry mass, recommended N2</h4><div class="big">{{P3_N2}} t</div><p class="fn">Nominal, coupled: +{{P3_N2DEP}} t at departure. Phase II as corrected: {{P3_P2}} t.</p></div>
-    <div class="card"><h4>Battery protected share</h4><div class="big">{{P3_BAT}}</div><p class="fn">R1 L2-first restart, nominal; canon today 72 % (1,442 of 2,000 kWh).</p></div>
-    <div class="card"><h4>Shield per 1.75 MWe unit</h4><div class="big">{{P3_SH}} t</div><p class="fn">Volume × 1.9 t/m³. Radiation transport unavailable: BLOCKER, shielding OPEN.</p></div>
-    <div class="card"><h4>Burn-to-coast protection gap</h4><div class="big">0.3–3.8 h</div><p class="fn">Today's radiators after a drive trip at velocity; closed by a 550 K section (option F).</p></div>
+    <div class="card"><h4>Phase III 550 K section in a burn</h4><div class="big">{{P4_WARM}}×</div><p class="fn">It absorbs that multiple of what it emits from the other blades' 1800 K faces; the bulkhead must move aft of it.</p></div>
+    <div class="card"><h4>Hot-loop transport</h4><div class="big">{{P4_PUMP}} MW</div><p class="fn">Derived pump work for H5 zones, nominal, with ~{{P4_LI}} t of lithium; no mass line holds it.</p></div>
+    <div class="card"><h4>L2 rating</h4><div class="big">{{P4_OPT}} MWe</div><p class="fn">Optimum per unit for two units at end of life, nominal band; study basis 3 × 3.5 MWe.</p></div>
+    <div class="card"><h4>He-3 tanks to the district</h4><div class="big">{{P4_LIH}} m</div><p class="fn">Inside the shadow cone (Phase III had 54 m, outside): the direct path closes; scatter OPEN.</p></div>
   </div>
 </header>
 
 <nav class="toc" aria-label="Sections">
+  <a href="#r1">1 Reconcile</a><a href="#r2">2 Radiation</a><a href="#r3">3 Bench</a><a href="#r4">4 Transport</a><a href="#r5">5 Radiators</a><a href="#r6">6 Thermal</a><a href="#r7">7 L2</a><a href="#r8">8 Storage</a><a href="#r9">9 District</a><a href="#r10">10 Cryo</a><a href="#r11">11 ECLSS</a><a href="#r12">12 Logistics</a><a href="#r13">13 Missions</a><a href="#r14">14 Mass</a><a href="#r15">15 Problems</a><a href="#r16">16 Decide</a><a href="#r17">17 Next</a><a href="#phase3">Phase III:</a>
   <a href="#q1">1 Fixes</a><a href="#q2">2 Battery</a><a href="#q3">3 Buffer</a><a href="#q4">4 Closure</a><a href="#q5">5 Shield</a><a href="#q6">6 Redundancy</a><a href="#q7">7 Mass</a><a href="#q8">8 Thermal A–F</a><a href="#q9">9 L1/L2</a><a href="#q10">10 EPS-G1</a><a href="#q11">11 Gap</a><a href="#q12">12 Missions</a><a href="#q13">13 Convergence</a><a href="#q14">14 Decide</a><a href="#phase2">Phase II:</a>
   <a href="#p1">1 EPS-A</a><a href="#p2">2 Loads</a><a href="#p3">3 Fixes</a><a href="#p4">4 Duty</a><a href="#p5">5 Generation</a><a href="#p6">6 Storage</a><a href="#p7">7 Thermal</a><a href="#p8">8 Survival</a><a href="#p9">9 ECLSS</a><a href="#p10">10 Missions</a><a href="#p11">11 Mass</a><a href="#p12">12 Placement</a><a href="#p13">13 FMEA</a><a href="#p14">14 Registry</a><a href="#p15">15 Decisions</a><a href="#p16">16 Problems</a><a href="#p17">17 Next</a><a href="#phase1">Phase I:</a><a href="#a">A State</a><a href="#b">B Hierarchy</a><a href="#c">C Gap matrix</a><a href="#d">D Power</a><a href="#e">E Space</a><a href="#f">F Diagrams</a><a href="#g">G Registry</a><a href="#h">H Budgets</a><a href="#fm">FMEA</a><a href="#i">I Roadmap</a><a href="#j">J Decisions</a><a href="#k">K First task</a><a href="#src">Sources</a>
 </nav>
+{{PHASE4}}
+<section id="phase3"><div class="letter">PHASE III · 2026-11-27 NOON</div><h2>The Phase III study</h2><div class="callout">Kept for the record. Superseded where Phase IV says so: the 550 K section on the hot-blade forward end does not reject in a burn, 2.66 MWe units fail after a loss at end of life, the ECLSS premium was 9.6 t, and the 283 t N2 figure is no longer valid (deliverables 1, 5, 7 and 14 above).</div></section>
 {{PHASE3}}
 <section id="phase2"><div class="letter">PHASE II · 2026-11-27 MIDDAY</div><h2>The Phase II study</h2><div class="callout">Kept for the record. Corrected by Phase III: battery labels, blade separation, coast LOW closure, ramp kinematics, the propellant multiplier, shield density and volume, the buffer and cryocooler ledger lines, and the provisions count (section 1 above). Phase II figures below are the corrected reruns where a fix applied.</div></section>
 {{PHASE2}}
