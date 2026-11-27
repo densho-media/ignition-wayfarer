@@ -23,6 +23,7 @@ from pathlib import Path
 import fuel_storage
 import habitat_ring
 import layout
+import copy
 import operating_point
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -49,6 +50,16 @@ def _part(name, m, x0, x1, model, yz=(0.0, 0.0)):
         rx = rt = 0.0
     ax = m*L**2/12
     return dict(name=name, m=m, c=((x0+x1)/2, yz[0], yz[1]), I=(rx, rt+ax, rt+ax), x=(x0, x1))
+
+
+def coupled_mission(s, extra_end_kg=0.0):
+    """operating_point.mission with extra burnout mass outside protected_and_operational_kg, propellant and tankage re-solved (development
+    configurations only, e.g. the ISSA CIRC-001 correction: the 40.2 t ring circulation that dry_parts carries but the operating point
+    omits). It runs the same closed form on a copy of the spec; production calls operating_point.mission and is unchanged."""
+    if not extra_end_kg:
+        return operating_point.mission(s)
+    t = copy.deepcopy(s); t['physics']['operating_point']['protected_and_operational_kg'] += extra_end_kg
+    return operating_point.mission(t)
 
 
 def dry_parts(s):

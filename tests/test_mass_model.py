@@ -12,6 +12,14 @@ class MassModelTests(unittest.TestCase):
     def setUp(self):
         self.s = load()[0]
 
+    def test_coupled_mission_resolves_propellant(self):
+        # ISSA development configurations: extra burnout mass re-solves the propellant; 0 is the production operating point
+        import operating_point
+        base = operating_point.mission(self.s); self.assertEqual(mm.coupled_mission(self.s), base)
+        m = mm.coupled_mission(self.s, 40.2e3); R = m['mass_ratio_per_burn']
+        self.assertAlmostEqual(m['departure_mass_kg']/R**4, m['end_mass_kg'], delta=1.0)
+        self.assertGreater(m['propellant_kg']-base['propellant_kg'], (R**4-1)*40.2e3)
+
     def test_mass_closes(self):
         # departure = the full-return mission (1.3 kt ship + return tankage + 2.8 kt propellant, pass 7) + the unbudgeted CIRC-001 corridors
         import ring_circulation

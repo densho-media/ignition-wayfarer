@@ -388,11 +388,11 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   (210 MW at burnout, with F03); Heat Debt buffer for 50-80 MW bursts; the hot coolant choice. The Q38 candidate panels are removed (owner,
   2026-11-01); the RAD-ZONE sections aft of the rings reject the 5 MW warm base load and the 1 MW low-temperature load in every mode, burns included (Graded Thermal Blade). Keep all three loops separate.
 
-- [ ] **ISSA Phase IV — owner review (2026-11-27).** Physical closure on the ISSA page (`work/ship-systems-architecture/`, NOTES "Phase IV"):
-  OpenMC capability (installed, benchmarked, not validated), heat transport H1-H5, view factors (production bulkhead verified; Phase III
-  550 K section exposed), L2 3 x 3.5 MWe, storage/restart pack, corrected tank geometry (inside the shadow cone), ECLSS 7 units, missions,
-  N2-R4a. Owner: DR4-01..09. Open gates: 3-D transport incl. scatter (P4-02/03), hot-transport mass line (P4-04), CIRC-001 coupling (P4-05),
-  hot-blade margin rule (P4-06). EPS-G1 as a generator only after a district pick and a transport result.
+- [ ] **ISSA Phase V — owner review (2026-11-27).** Thermal network and convergence on the ISSA page (`work/ship-systems-architecture/`,
+  NOTES "Phase V"): config N2-R4a-P5.0, corrections C5-01..10, H6 network (walls dominate; material is the lever), R5-A 750 K
+  cross-strapped L2, 3-D OpenMC (frame verified; scatter ~19 % of bare tank heating), coupled mass via `operating_point.mission(extra_end_kg)`,
+  ECLSS-G1 (7 units), LOG-G1 (3 t), missions Pareto, research vs fictional baselines. Owner: DR5-01..08. Open: L1 900 K reject radiator,
+  side/structure shielding, hot-loop pressure boundary (research), EPS-G1 generator after a district pick.
 - [ ] **F03 — Integrate electrical, black-start and survival power. AFTER B02; F02 architecture set 2026-10-31 (drive tap rated 210 MW; EPS-A running work ~82 MW nominal).** Size/place owner-released A/B distribution,
   storage, survival reserve and drive-off generation; preserve category suballocations and failure domains.
   **Done when:** required operating/black-start/failure states consume sourced budgets and endurance, with matching geometry and

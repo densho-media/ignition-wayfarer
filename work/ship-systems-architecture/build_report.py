@@ -14,7 +14,7 @@ E = html.escape
 
 def stills():
     from PIL import Image
-    for n in ('cam_issa_whole_ship', 'cam_issa_power_district', 'cam_issa3_district', 'cam_issa3_unit', 'cam_issa3_tank_sightlines', 'cam_issa4_baffle', 'cam_issa4_sightlines'):
+    for n in ('cam_issa_whole_ship', 'cam_issa_power_district', 'cam_issa3_district', 'cam_issa3_unit', 'cam_issa3_tank_sightlines', 'cam_issa4_baffle', 'cam_issa4_sightlines', 'cam_issa5_overview', 'cam_issa5_district', 'cam_issa5_rad3d'):
         if not (R / f'{n}.png').exists():
             continue
         im = Image.open(R / f'{n}.png').convert('RGB'); im.thumbnail((1500, 1500)); im.save(R / f'{n}.jpg', quality=82)
@@ -68,6 +68,8 @@ def main():
     import sys; sys.path.insert(0, str(H / 'phase2')); import report2
     sys.path.insert(0, str(H / 'phase3')); import report3
     sys.path.insert(0, str(H / 'phase4')); import report4
+    sys.path.insert(0, str(H / 'phase5')); import report5
+    P5 = json.loads((R / 'phase5.json').read_text())
     P4 = json.loads((R / 'phase4.json').read_text())
     h5 = next(r for r in P4['transport']['rows'] if r['name'].startswith('H5'))
     P3 = json.loads((R / 'phase3.json').read_text()); cv = {c['name'][:2]: c for c in P3['convergence']['candidates']}
@@ -75,6 +77,11 @@ def main():
     pl2 = json.loads((H.parents[1] / 'references/p1_power_loads.json').read_text())
     l2 = next(r for r in em['mass']['adds'] if r['budget'] == 'PROPOSED.ship_service_generation')
     page = (H / 'report_template.html').read_text()
+    h6 = P5['transport']['topologies']['H6a']; rs = P5['radiation_summary']
+    for k, v in dict(PHASE5=report5.build(), P5_H6=f"{h6['total_t'][1]:,.0f}", P5_TIN=f"{P5['transport']['inlet_T']['300']:.0f}",
+                     P5_L2=f"{P5['radiators']['l2_750']['cross']['length_m']:.1f}", P5_SCAT=f"{100*rs['scatter_over_bare']:.0f}",
+                     P5_DEP=f"{P5['mass']['cases'][1]['departure_t']:,.0f}", P5_FIC=f"{P5['mass_fictional']['cases'][1]['departure_t']:,.0f}").items():
+        page = page.replace('{{' + k + '}}', v)
     for k, v in dict(PHASE4=report4.build(), P4_WARM=f"{next(r for r in P4['thermal']['view_factors'] if '29 m' in r['surface'])['ratio']:.1f}", P4_PUMP=f"{h5['pump_W'][1]/1e6:.0f}",
                      P4_LI=f"{h5['inventory_t'][1]:.0f}", P4_OPT=f"{P4['l2']['optimum_Pe_W'][1]/1e6:.1f}", P4_LIH=f"{P4['district']['transport']['d_m']:.0f}",
                      PHASE3=report3.build(), P3_N2=f"{cv['N2']['dry_added_t'][1]:.0f}", P3_N2DEP=f"{cv['N2']['extra_departure_t'][1]:,.0f}",

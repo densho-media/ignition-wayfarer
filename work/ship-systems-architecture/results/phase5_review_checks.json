@@ -1,0 +1,916 @@
+{
+ "note": "bounding-box overlaps are a screen, not a collision proof: a box around a ring or a blade overlaps much empty space",
+ "new_objects": [
+  {
+   "obj": "ISSA5_R5A_750K_90",
+   "bbox_overlaps": 11,
+   "first": [
+    "Radiator_Bulkhead_Layer_1_Battens",
+    "Radiator_Bulkhead_Layer_1_Gore_06",
+    "Radiator_Bulkhead_Layer_1_Gore_07",
+    "Radiator_Bulkhead_Layer_1_Hoops"
+   ]
+  },
+  {
+   "obj": "ISSA5_R5A_750K_210",
+   "bbox_overlaps": 45,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_R5A_750K_330",
+   "bbox_overlaps": 44,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop"
+   ]
+  },
+  {
+   "obj": "ISSA5_R5A_Bulkhead_Relocated",
+   "bbox_overlaps": 20,
+   "first": [
+    "Prod_RAD_FRAME_Clamps",
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Trunk_90_0",
+   "bbox_overlaps": 67,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings",
+    "Prod_RA_EXT_AFT_nodes"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Trunk_90_1",
+   "bbox_overlaps": 65,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings",
+    "Prod_RA_EXT_AFT_nodes"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_90_1",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_90_1_0",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_90_1_1",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Section_90_2",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_90_2_0",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_90_2_1",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Section_90_3",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_90_3_0",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_90_3_1",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Section_90_4",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_90_4_0",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_90_4_1",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Section_90_5",
+   "bbox_overlaps": 36,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings",
+    "Prod_RA_EXT_AFT_nodes"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_90_5_0",
+   "bbox_overlaps": 8,
+   "first": [
+    "VTX_CRYOGENIC_cryo",
+    "VTX_ELECTRICAL_power",
+    "VTX_HOT_THERMAL_hot",
+    "VTX_MAGNETIC_NOZZLE_coil"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_90_5_1",
+   "bbox_overlaps": 8,
+   "first": [
+    "VTX_CRYOGENIC_cryo",
+    "VTX_ELECTRICAL_power",
+    "VTX_HOT_THERMAL_hot",
+    "VTX_MAGNETIC_NOZZLE_coil"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_90_6",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_90_6_0",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_90_6_1",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Trunk_210_0",
+   "bbox_overlaps": 72,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings",
+    "Prod_RA_EXT_AFT_nodes"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Trunk_210_1",
+   "bbox_overlaps": 95,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings",
+    "Prod_RA_EXT_AFT_nodes"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_210_1",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_210_1_0",
+   "bbox_overlaps": 6,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_210_1_1",
+   "bbox_overlaps": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_210_2",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_210_2_0",
+   "bbox_overlaps": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_210_2_1",
+   "bbox_overlaps": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_210_3",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_210_3_0",
+   "bbox_overlaps": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_210_3_1",
+   "bbox_overlaps": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_210_4",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_210_4_0",
+   "bbox_overlaps": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_210_4_1",
+   "bbox_overlaps": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_210_5",
+   "bbox_overlaps": 20,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_nodes",
+    "Prod_RA_EXT_AFT_spin_index"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_210_5_0",
+   "bbox_overlaps": 15,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_210_5_1",
+   "bbox_overlaps": 17,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_210_6",
+   "bbox_overlaps": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_210_6_0",
+   "bbox_overlaps": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_210_6_1",
+   "bbox_overlaps": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Trunk_330_0",
+   "bbox_overlaps": 95,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings",
+    "Prod_RA_EXT_AFT_nodes"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Trunk_330_1",
+   "bbox_overlaps": 70,
+   "first": [
+    "Prod_SPK_Frames",
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_330_1",
+   "bbox_overlaps": 1,
+   "first": [
+    "FPS_Farm_Flanges"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_330_1_0",
+   "bbox_overlaps": 6,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_330_1_1",
+   "bbox_overlaps": 4,
+   "first": [
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop",
+    "Casing_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_330_2",
+   "bbox_overlaps": 1,
+   "first": [
+    "FPS_Farm_Flanges"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_330_2_0",
+   "bbox_overlaps": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_330_2_1",
+   "bbox_overlaps": 5,
+   "first": [
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop",
+    "Casing_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_330_3",
+   "bbox_overlaps": 1,
+   "first": [
+    "FPS_Farm_Flanges"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_330_3_0",
+   "bbox_overlaps": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_330_3_1",
+   "bbox_overlaps": 5,
+   "first": [
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop",
+    "Casing_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_330_4",
+   "bbox_overlaps": 1,
+   "first": [
+    "FPS_Farm_Flanges"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_330_4_0",
+   "bbox_overlaps": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_330_4_1",
+   "bbox_overlaps": 6,
+   "first": [
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop",
+    "Casing_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_330_5",
+   "bbox_overlaps": 33,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings",
+    "Prod_RA_EXT_AFT_occupancy"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_330_5_0",
+   "bbox_overlaps": 15,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_330_5_1",
+   "bbox_overlaps": 12,
+   "first": [
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop",
+    "Casing_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Section_330_6",
+   "bbox_overlaps": 1,
+   "first": [
+    "FPS_Farm_Flanges"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_330_6_0",
+   "bbox_overlaps": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop"
+   ]
+  },
+  {
+   "obj": "ISSA5_H6a_Valve_330_6_1",
+   "bbox_overlaps": 5,
+   "first": [
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "Casing_Seams_Hoop",
+    "Casing_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA5_RestartPack_90",
+   "bbox_overlaps": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_RestartPack_210",
+   "bbox_overlaps": 11,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA5_RestartPack_330",
+   "bbox_overlaps": 13,
+   "first": [
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA5_Route_KeelLane",
+   "bbox_overlaps": 119,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings",
+    "Prod_RA_EXT_AFT_nodes"
+   ]
+  },
+  {
+   "obj": "ISSA5_ECLSS_A1",
+   "bbox_overlaps": 10,
+   "first": [
+    "Ring_1_Circ_Corridor_3",
+    "Ring_1_Circ_Door_AC3",
+    "Ring_1_Circ_Fit_Band_3",
+    "Ring_1_Circ_Fit_Frame_3"
+   ]
+  },
+  {
+   "obj": "ISSA5_ECLSS_A2",
+   "bbox_overlaps": 10,
+   "first": [
+    "Ring_1_Circ_Corridor_1",
+    "Ring_1_Circ_Door_AC1",
+    "Ring_1_Circ_Fit_Band_1",
+    "Ring_1_Circ_Fit_Frame_1"
+   ]
+  },
+  {
+   "obj": "ISSA5_ECLSS_A3",
+   "bbox_overlaps": 9,
+   "first": [
+    "Ring_1_Circ_Corridor_2",
+    "Ring_1_Circ_Door_AC2",
+    "Ring_1_Circ_Fit_Band_2",
+    "Ring_1_Circ_Fit_Frame_2"
+   ]
+  },
+  {
+   "obj": "ISSA5_ECLSS_B1",
+   "bbox_overlaps": 11,
+   "first": [
+    "Ring_2_Circ_Corridor_3",
+    "Ring_2_Circ_Door_BC3",
+    "Ring_2_Circ_Fit_Band_3",
+    "Ring_2_Circ_Fit_Frame_3"
+   ]
+  },
+  {
+   "obj": "ISSA5_ECLSS_B2",
+   "bbox_overlaps": 11,
+   "first": [
+    "Ring_2_Circ_Corridor_1",
+    "Ring_2_Circ_Door_BC1",
+    "Ring_2_Circ_Fit_Band_1",
+    "Ring_2_Circ_Fit_Frame_1"
+   ]
+  },
+  {
+   "obj": "ISSA5_ECLSS_B3",
+   "bbox_overlaps": 10,
+   "first": [
+    "Ring_2_Circ_Corridor_2",
+    "Ring_2_Circ_Door_BC2",
+    "Ring_2_Circ_Fit_Band_2",
+    "Ring_2_Circ_Fit_Frame_2"
+   ]
+  },
+  {
+   "obj": "ISSA5_ECLSS_HUB",
+   "bbox_overlaps": 3,
+   "first": [
+    "Crew_Tube_2_1",
+    "FPS_Farm_Flanges",
+    "Fuel_Deck_Ring_Lacing"
+   ]
+  },
+  {
+   "obj": "ISSA5_LOG_1",
+   "bbox_overlaps": 9,
+   "first": [
+    "Refuge_Light_5",
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA5_LOG_2",
+   "bbox_overlaps": 12,
+   "first": [
+    "Refuge_Light_5",
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA5_LOG_3",
+   "bbox_overlaps": 4,
+   "first": [
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long",
+    "FPS_PMD_Farm"
+   ]
+  },
+  {
+   "obj": "ISSA5_LOG_4",
+   "bbox_overlaps": 4,
+   "first": [
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long",
+    "FPS_PMD_Farm"
+   ]
+  },
+  {
+   "obj": "ISSA5_LOG_5",
+   "bbox_overlaps": 8,
+   "first": [
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long",
+    "Refuge_Storm_Shelter"
+   ]
+  },
+  {
+   "obj": "ISSA5_LOG_6",
+   "bbox_overlaps": 11,
+   "first": [
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long",
+    "Refuge_Storm_Shelter"
+   ]
+  },
+  {
+   "obj": "ISSA5_LOG_7",
+   "bbox_overlaps": 4,
+   "first": [
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long",
+    "FPS_PMD_Farm"
+   ]
+  },
+  {
+   "obj": "ISSA5_LOG_8",
+   "bbox_overlaps": 4,
+   "first": [
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long",
+    "FPS_PMD_Farm"
+   ]
+  }
+ ],
+ "frame": [
+  {
+   "tank": "O1",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    27.587688446044922,
+    2.9969823360443115
+   ],
+   "csg_center": [
+    123.55,
+    27.58768925023175,
+    2.9969821208421337
+   ],
+   "d_m": 3.1632663809739145e-06
+  },
+  {
+   "tank": "O2",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    9.080296635627747,
+    26.222332000732422
+   ],
+   "csg_center": [
+    123.55,
+    9.080296696670132,
+    26.22233231237148
+   ],
+   "d_m": 3.0682357861948253e-06
+  },
+  {
+   "tank": "O3",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    -5.390003204345703,
+    27.221505165100098
+   ],
+   "csg_center": [
+    123.55,
+    -5.390003246354222,
+    27.221505560940066
+   ],
+   "d_m": 3.077609422916709e-06
+  },
+  {
+   "tank": "O4",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    -18.387706756591797,
+    20.78352165222168
+   ],
+   "csg_center": [
+    123.55,
+    -18.387706337986717,
+    20.783521251894808
+   ],
+   "d_m": 3.1062384938375485e-06
+  },
+  {
+   "tank": "O5",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    -27.60300350189209,
+    2.8524930477142334
+   ],
+   "csg_center": [
+    123.55,
+    -27.603003175001586,
+    2.852492895846097
+   ],
+   "d_m": 3.072970402709156e-06
+  },
+  {
+   "tank": "O6",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    -18.6940016746521,
+    -20.50845718383789
+   ],
+   "csg_center": [
+    123.55,
+    -18.69400137081989,
+    -20.50845710305346
+   ],
+   "d_m": 3.0679090435047268e-06
+  },
+  {
+   "tank": "O7",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    -5.793234646320343,
+    -27.1385498046875
+   ],
+   "csg_center": [
+    123.55,
+    -5.793234476286982,
+    -27.13855070380067
+   ],
+   "d_m": 3.1859914630101713e-06
+  },
+  {
+   "tank": "O8",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    11.331170558929443,
+    -25.331149101257324
+   ],
+   "csg_center": [
+    123.55,
+    11.331170275583437,
+    -25.331148418216934
+   ],
+   "d_m": 3.140072435112391e-06
+  },
+  {
+   "tank": "O9",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    25.331149101257324,
+    -11.331170558929443
+   ],
+   "csg_center": [
+    123.55,
+    25.33114841821693,
+    -11.33117027558345
+   ],
+   "d_m": 3.1400724347631576e-06
+  },
+  {
+   "tank": "I1",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    -0.8758888244628906,
+    13.471555709838867
+   ],
+   "csg_center": [
+    123.55,
+    -0.8758886748066362,
+    13.47155592458961
+   ],
+   "d_m": 3.0629627225572022e-06
+  },
+  {
+   "tank": "I2",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    -11.726525783538818,
+    6.688692063093185
+   ],
+   "csg_center": [
+    123.55,
+    -11.726525444915582,
+    6.6886920238375
+   ],
+   "d_m": 3.0707380983095414e-06
+  },
+  {
+   "tank": "I3",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    0.8758888244628906,
+    -13.471555709838867
+   ],
+   "csg_center": [
+    123.55,
+    0.8758886748066406,
+    -13.47155592458961
+   ],
+   "d_m": 3.0629627223456447e-06
+  },
+  {
+   "tank": "I4",
+   "found": true,
+   "model_center": [
+    123.55000305175781,
+    13.470941305160522,
+    -0.8852934837341309
+   ],
+   "csg_center": [
+    123.55,
+    13.47094115605268,
+    -0.8852933808439356
+   ],
+   "d_m": 3.0571302400259932e-06
+  }
+ ]
+}

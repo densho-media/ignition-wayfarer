@@ -73,6 +73,22 @@ on a 550 K section; L1 reduced to drive-specific loads with heat-pipe hot blades
 **Unknowns / blockers.** Radiation transport (BLOCKER: no MCNP/OpenMC here); L1 900 K rejection; LOW margin at the high band; He-3 tank
 shadow; hot-loop pumps; channel refill time; unit restart energy; Brayton degradation; engagement frequency.
 
+## Phase V (owner brief 2026-11-27 13:53Z): thermal network optimisation and convergence
+
+**Function.** Fix one configuration (N2-R4a-P5.0, `results/phase5_config.json`), correct Phase IV (C5-01..10), study the hot loop as a
+sectionalized network (H6) with pressure- and creep-based walls, radiator zoning (R5-A..E), electrical transient, 3-D OpenMC in the ship
+frame, coupled mass (CIRC-001 through `mass_model.coupled_mission(s, extra_end_kg)`, production operating_point unchanged), ECLSS-G1, LOG-G1, allocation,
+missions; keep a RESEARCH and a FICTIONAL baseline apart (owner rule 2026-11-27, dual philosophy).
+Run order after Phase IV: `phase5/rad3d.py` (OpenMC env, optional; ~2 min for 3 M particles), `phase5/study5.py`, then
+`/snap/bin/blender -b assets/wayfarer/WF_WAYFARER_001.blend --python make_review5.py -- --render`, then `build_report.py`.
+**Fixed constraints.** 20 % HOT rule kept; production geometry, canon and Drive unchanged; Li a study coolant; no core design.
+**Findings.** Hot loop is a structural problem: ~1990 K inlet for an 1800 K mean surface, ~2 MPa at the aft end of a 1.36 g burn, walls
+dominate (H6a ~2.3 kt nominal at 15 MPa allowable; ~0.55 kt with a 100 MPa composite boundary, the fictional assumption). Only 750 K
+cross-strapped L2 sections keep the HOT rule (R5-A); R5-C (bulkhead emitter) irradiates the He-3 tanks; R5-B conflicts with the fixed
+aft edge. 3-D OpenMC: frame verified (void kernel ratio 1.01); structure scatter around the shadow cone delivers ~19 % of the unshielded
+tank heating (~160 W for three units vs 118 W lift). Research baseline departs ~14 kt nominal and overfills the tanks x2; fictional ~7.9 kt.
+**Open.** DR5-01..08 on the page; L1 900 K reject (incl. the canon burn heat pumps) still has no radiator.
+
 ## Phase IV (owner brief 2026-11-27 12:55Z): physical closure and infrastructure
 
 **Function.** Resolve the physical assumptions behind N2 rather than reduce mass: reconcile Phase III, build a radiation-transport

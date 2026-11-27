@@ -1,0 +1,112 @@
+{
+ "id": "N2-R4a-P5.0",
+ "label": "N2-R4a initial research variant as fixed for Phase V reconciliation (owner DR4-01, 2026-11-27)",
+ "phase": "V",
+ "status": "STUDY / NONCANON",
+ "supersedes": "every Phase IV integrated N2-R4a figure",
+ "generation": {
+  "L2": {
+   "units": 3,
+   "rating_We": 3500000.0,
+   "strategy_operating": "C: all three at partial load (high-velocity coast, burns, critical phases)",
+   "strategy_maintenance": "B: two running + warm standby",
+   "BOL_factor": 1.0,
+   "EOL_factor": 0.9,
+   "aux_frac": 0.03,
+   "pmad": 0.95,
+   "technology": "closed Brayton, reactor-heated (PROVISIONAL; rating and technology provisional per DR4-02)",
+   "rejection_T_K": 700.0,
+   "placement": "one unit per radiator sector (azimuth 90/210/330), x_aft ~ -89.5, r ~2.9"
+  },
+  "L1": "drive-specific services in burns; derived from the chosen heat transport (V-D), no fixed 6 or 40 MW",
+  "L3": "refuge survival (independent)"
+ },
+ "loads": {
+  "source": "references/p1_power_loads.json (Phase II/III ledger)",
+  "planning_bands_W": [
+   0.0,
+   1000000.0,
+   2000000.0
+  ],
+  "demand_two_unit_basis_W": "Phase IV l2.demand_W (proactive + planning + recharge + standby)"
+ },
+ "radiators": {
+  "hot": {
+   "T_K": 1800.0,
+   "ideal_W": 14400000000.0,
+   "absorbed_peak_W": 10450000000.0,
+   "margin_rule": 1.2,
+   "per_m_W": 89124487.53220582,
+   "hot_length_m": 162.0,
+   "x": [
+    -111.6,
+    50.4
+   ]
+  },
+  "L2": {
+   "T_K": 700.0,
+   "length_m": 24.0,
+   "x": [
+    26.4,
+    50.4
+   ],
+   "on": "hot-blade forward end, all three blades"
+  },
+  "bulkhead": {
+   "layers": 3,
+   "eps": 0.05,
+   "R_m": 37.0,
+   "station_x": 26.2,
+   "origin": "production graded bulkhead moved aft"
+  },
+  "WARM": {
+   "T_K": 440.0,
+   "x": [
+    50.4,
+    72.9
+   ],
+   "area_m2": 3702.0
+  },
+  "LOW": {
+   "T_K": 300.0,
+   "x": [
+    73.4,
+    93.4
+   ],
+   "area_m2": 3060.0
+  }
+ },
+ "hot_loop": {
+  "reference": "H5 (distributed redundancy reference only, DR4-03)",
+  "coolant": "Li (study assumption)"
+ },
+ "storage": {
+  "main_battery_kWh": 2000,
+  "restart_pack": "independent L2 restart pack (R1b), 2-6.5 t",
+  "defense_buffer": "power-sized 21 MW class",
+  "survival": "refuge, independent",
+  "ride_through": "per bus segment",
+  "pulse_bank": "canon, unchanged"
+ },
+ "failure_domains": [
+  "L2 unit (one per sector)",
+  "radiator sector (blade)",
+  "hot-loop zone (H5: 6 per blade)",
+  "ring A",
+  "ring B",
+  "stationary hub",
+  "bus segment",
+  "refuge"
+ ],
+ "mission_loading": {
+  "standard": "12 months, 12 crew, modular extended provisioning (owner DR4-09)",
+  "velocity": "per mission, 0.016 c reference max"
+ },
+ "mass_base": {
+  "historical_departure_t": 4426.074234859591,
+  "coupled_departure_t": 4573.122321009472,
+  "CIRC001_t": 40.2,
+  "note": "coupled base = mass_model.coupled_mission(s, CIRC-001), development configuration"
+ },
+ "hash": "23a9f8d0ec32"
+}
