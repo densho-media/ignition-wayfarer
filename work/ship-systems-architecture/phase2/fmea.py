@@ -112,7 +112,7 @@ def main():
         ['battery shared by ride-through and reserve (one pack)'], 'battery degradation (0.5-2 %/yr) at end of life', 'SAFE for 30 d', 'LOST without an L2 restart')
     add('F12', 'Complete blackout and black start',
         'All buses dark; L3 keeps crew-only loads; the reserve restarts in steps (pulse bank charged from the main battery).',
-        ['black-start reserve ' + f'{pl["storage"]["black_start_reserve_J"]/3.6e9:.0f} kWh', 'L3 source', 'refuge packs'],
+        ['black-start reserve ' + f'{pl["storage"]["black_start_reserve_J"]/3.6e6:,.0f} kWh', 'L3 source', 'refuge packs'],
         ['all but restart loads'], ['restart services ' + f'{pl["storage"]["black_start_services_W"][1]/1e3:.0f} kW nominal', 'crew ECLSS'],
         f'cryo hold ~{hold:.0f} h sets the deadline for an L2 restart',
         'step sequence of power.black_start; the survival reserve never charges the pulse bank or restarts the drive',

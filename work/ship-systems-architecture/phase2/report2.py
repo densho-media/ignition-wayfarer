@@ -209,7 +209,7 @@ def build():
         ('Cryocoolers', '395 kW "rejected"', 'that is input work; the lifted 3.8 kW adds 1 % at the rejector'),
         ('Avionics allowance', '0.3 MW on the LOW section', 'about ten times the computing estimate, but it covers PMAD losses at proactive coast; the LOW section is 1 MW'),
         ('Battery mass', '800 Wh/kg plus a packaging factor', '800 Wh/kg is already pack-level: 2.5 t, installed mass OPEN; Phase I counted packaging twice'),
-        ('Battery ride-through', 'Phase I: hours', f'once the black-start reserve ({st["black_start_reserve_J"]/3.6e9:.0f} kWh) is protected, coast ride-through is {S and pl["storage"]["endurance"]["COAST_HV_PROACTIVE"]["ride_through_h"][1]*60:.0f} min'),
+        ('Battery ride-through', 'Phase I: hours', f'once the black-start reserve ({st["black_start_reserve_J"]/3.6e6:,.0f} kWh) is protected, coast ride-through is {S and pl["storage"]["endurance"]["COAST_HV_PROACTIVE"]["ride_through_h"][1]*60:.0f} min'),
         ('Deadship converters', '40 kW battery converters', 'cannot carry the coast load; they are survival hardware only'),
         ('Food', '48 t "shortfall"', 'a 12-person, six-year, conventional-food scenario; six years is narrative (owner 2026-11-27): provisioning is per mission'),
         ('ECLSS strings', '"a string serves six"', 'per string, one per ring: 12 is two strings at 1.0x; 12 in one ring or on one string needs 2.0x, above the 1.7x surge'),
@@ -252,7 +252,7 @@ def build():
     out.append(section('p6', '6 · STORAGE', 'Energy storage: ride-through, black start, defense buffer',
         table(['Store', 'Energy', 'Role', 'Finding'], [
             ['Main battery', '2 MWh usable (2.5 t pack, installed OPEN)', 'ride-through + protected black-start reserve',
-             f'reserve {st["black_start_reserve_J"]/3.6e9:.0f} kWh; ride-through {st["ride_through_J"]/3.6e9:.0f} kWh = {pl["storage"]["endurance"]["COAST_HV_PROACTIVE"]["ride_through_h"][1]*60:.0f} min at proactive coast; end-of-life {st["end_of_life_usable_J"][1]/3.6e9:.0f} kWh'],
+             f'reserve {st["black_start_reserve_J"]/3.6e6:,.0f} kWh; ride-through {st["ride_through_J"]/3.6e6:,.0f} kWh = {pl["storage"]["endurance"]["COAST_HV_PROACTIVE"]["ride_through_h"][1]*60:.0f} min at proactive coast; end-of-life {st["end_of_life_usable_J"][1]/3.6e6:,.0f} kWh'],
             ['Pulse bank', '200 kWh / 50 MW', 'drive start only', 'never charged from the survival reserve; never used for defense'],
             ['Defense buffer', '0.1–5 GJ (sizing by duty)', 'triggered active defense', 'new line; 0.5–12 t for 1 GJ by chemistry'],
             ['L3 source', '10–40 kWe continuous', 'crew survival 30 d', 'storage alone for 30 d weighs 48 t at 800 Wh/kg: L3 needs a source'],

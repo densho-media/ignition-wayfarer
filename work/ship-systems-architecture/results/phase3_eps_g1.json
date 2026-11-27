@@ -1,0 +1,2768 @@
+{
+ "status": "ISSA Phase III STUDY / PROTOTYPE (NONCANON)",
+ "bay": {
+  "r0": 1.5,
+  "r1": 4.3,
+  "width": 3.2,
+  "casing_r": 5.6,
+  "module_len": 11.0,
+  "end_gap": 0.4,
+  "bay_aft_x": -89.75,
+  "module_offsets": [
+   0.0,
+   12.0
+  ],
+  "sectors": [
+   90.0,
+   210.0,
+   330.0
+  ],
+  "keel_lanes": [
+   30.0,
+   150.0,
+   270.0
+  ],
+  "basis": "[fuel_storage.body] dry_store, module_offsets; survey.json casing radius"
+ },
+ "rho_shield": 1900.0,
+ "units": {
+  "C-lean 3+1 x 1.75 MWe (Phase II reference)": {
+   "Pe_W": 1750000.0,
+   "eta": 0.219,
+   "Pt_W": 7990867.5799086755,
+   "waste_W": 6240867.5799086755,
+   "T_rej_K": 550.0,
+   "envelopes": [
+    {
+     "name": "Reactor equipment envelope (vessel, core, reflector, drums)",
+     "cls": "PHYSICAL",
+     "family": "REACTOR",
+     "shape": "frustum",
+     "u": [
+      0.3,
+      2.089602182750844
+     ],
+     "vc": 1.4,
+     "wc": 0.0,
+     "r": [
+      0.6883085318272477,
+      0.6883085318272477
+     ],
+     "volume_m3": 2.6636225266362255,
+     "mass_kg": 2897.2602739726026,
+     "status": "OPEN",
+     "note": "No internal design: an envelope at an assumed power density"
+    },
+    {
+     "name": "Thermal exclusion around the hot vessel (1100-1300 K)",
+     "cls": "THERMAL_EXCLUSION",
+     "family": "REACTOR",
+     "shape": "frustum",
+     "u": [
+      0.0,
+      2.139602182750844
+     ],
+     "vc": 1.4,
+     "wc": 0.0,
+     "r": [
+      0.9883085318272478,
+      0.9883085318272478
+     ],
+     "volume_m3": 6.565502847870654,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Shadow shield envelope (LiH + W, smeared)",
+     "cls": "PHYSICAL",
+     "family": "SHIELD",
+     "shape": "frustum",
+     "u": [
+      2.139602182750844,
+      4.575435657391017
+     ],
+     "vc": 1.4,
+     "wc": 0.0,
+     "r": [
+      0.7383085318272478,
+      1.278319812241981
+     ],
+     "volume_m3": 7.966133212706973,
+     "mass_kg": 15135.653104143248,
+     "status": "OPEN",
+     "note": "20.3 e-folds x 0.12 m (combined exposure of 3 running units); simplified attenuation, not a transport result"
+    },
+    {
+     "name": "Blade-facing scatter shield (outward slab)",
+     "cls": "PHYSICAL",
+     "family": "SHIELD",
+     "shape": "box",
+     "u": [
+      0.0,
+      2.3896021827508442
+     ],
+     "v": [
+      2.1383085318272474,
+      3.7343085318272475
+     ],
+     "w": [
+      -1.5,
+      1.5
+     ],
+     "volume_m3": 11.441415251011042,
+     "mass_kg": 21738.68897692098,
+     "status": "OPEN",
+     "note": "13.3 e-folds against single scatter from the own blade; fits under the casing: True"
+    },
+    {
+     "name": "Primary pumps and intermediate heat exchanger",
+     "cls": "PHYSICAL",
+     "family": "HEAT_TRANSPORT",
+     "shape": "box",
+     "u": [
+      4.775435657391017,
+      5.175435657391017
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.496000000000002,
+     "mass_kg": 2876.712328767123,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Brayton turbo-alternator-compressor",
+     "cls": "PHYSICAL",
+     "family": "CONVERSION",
+     "shape": "box",
+     "u": [
+      5.325435657391017,
+      5.725435657391017
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.496000000000002,
+     "mass_kg": 1750.0,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Recuperator",
+     "cls": "PHYSICAL",
+     "family": "CONVERSION",
+     "shape": "box",
+     "u": [
+      5.875435657391017,
+      6.576557452262811
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 4.374999999999999,
+     "mass_kg": 2100.0,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Gas cooler (to the 550 K blade channel loop)",
+     "cls": "PHYSICAL",
+     "family": "HEAT_TRANSPORT",
+     "shape": "box",
+     "u": [
+      6.726557452262812,
+      7.126557452262812
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.496000000000002,
+     "mass_kg": 700.0000000000001,
+     "status": "PROTOTYPE",
+     "note": "reject temperature not approved (DR-03)"
+    },
+    {
+     "name": "Power conditioning and plant switchgear",
+     "cls": "PHYSICAL",
+     "family": "ELECTRICAL",
+     "shape": "box",
+     "u": [
+      7.276557452262812,
+      7.676557452262812
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.496000000000002,
+     "mass_kg": 1750.0,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Coolant riser to the blade-root header",
+     "cls": "INTERFACE",
+     "family": "HEAT_TRANSPORT",
+     "shape": "box",
+     "u": [
+      7.226557452262812,
+      7.626557452262811
+     ],
+     "v": [
+      2.5999999999999996,
+      5.0
+     ],
+     "w": [
+      -0.25,
+      0.25
+     ],
+     "volume_m3": 0.4799999999999994,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "crosses the casing: an OPEN pressure/thermal penetration"
+    },
+    {
+     "name": "Electrical interface to bus A/B (keel-lane side)",
+     "cls": "INTERFACE",
+     "family": "ELECTRICAL",
+     "shape": "box",
+     "u": [
+      6.426557452262811,
+      7.026557452262812
+     ],
+     "v": [
+      0.2,
+      0.8
+     ],
+     "w": [
+      1.5,
+      2.2
+     ],
+     "volume_m3": 0.25200000000000033,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Data and control interface",
+     "cls": "INTERFACE",
+     "family": "ELECTRICAL",
+     "shape": "box",
+     "u": [
+      5.826557452262811,
+      6.226557452262812
+     ],
+     "v": [
+      0.2,
+      0.6
+     ],
+     "w": [
+      1.5,
+      2.1
+     ],
+     "volume_m3": 0.0960000000000001,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Structural attachment 1 (module frame)",
+     "cls": "ATTACHMENT",
+     "family": "STRUCTURE",
+     "shape": "box",
+     "u": [
+      -0.1,
+      0.1
+     ],
+     "v": [
+      -0.1,
+      2.9
+     ],
+     "w": [
+      -1.6,
+      1.6
+     ],
+     "volume_m3": 1.9200000000000004,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "thrust-rated 1.5 g axial; sliding at the hot end for thermal growth"
+    },
+    {
+     "name": "Structural attachment 2 (module frame)",
+     "cls": "ATTACHMENT",
+     "family": "STRUCTURE",
+     "shape": "box",
+     "u": [
+      7.726557452262812,
+      7.926557452262811
+     ],
+     "v": [
+      -0.1,
+      2.9
+     ],
+     "w": [
+      -1.6,
+      1.6
+     ],
+     "volume_m3": 1.9199999999999933,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "thrust-rated 1.5 g axial; sliding at the hot end for thermal growth"
+    },
+    {
+     "name": "Maintenance clearance (service side, 0.6-1.0 m)",
+     "cls": "MAINTENANCE",
+     "family": "ACCESS",
+     "shape": "box",
+     "u": [
+      4.775435657391017,
+      7.826557452262811
+     ],
+     "v": [
+      0.2,
+      2.8
+     ],
+     "w": [
+      -1.6,
+      -1.3
+     ],
+     "volume_m3": 2.3798749999999997,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Robotic access lane (keel-lane face)",
+     "cls": "ROBOTIC",
+     "family": "ACCESS",
+     "shape": "box",
+     "u": [
+      0.0,
+      7.826557452262811
+     ],
+     "v": [
+      0.0,
+      0.8
+     ],
+     "w": [
+      1.6,
+      2.4000000000000004
+     ],
+     "volume_m3": 5.008996769448202,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "drones and the keel-lane manipulator; no crew while any unit in line of sight runs"
+    },
+    {
+     "name": "ORU removal path (radial, through a casing hatch)",
+     "cls": "REMOVAL",
+     "family": "ACCESS",
+     "shape": "box",
+     "u": [
+      4.775435657391017,
+      7.826557452262811
+     ],
+     "v": [
+      2.8,
+      4.3999999999999995
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 12.692666666666662,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "ORUs leave radially; the reactor and shields are not ORUs (module swap between missions)"
+    }
+   ],
+   "length_m": 8.126557452262812,
+   "fits_one_module": true,
+   "slab_fits": true,
+   "shadow_t_m": 2.435833474640173,
+   "side_t_m": 1.596,
+   "shadow_kg": 15135.653104143248,
+   "slab_kg": 21738.68897692098,
+   "physical_mass_kg": 48948.314683803954,
+   "physical_volume_m3": 36.43017099035425,
+   "core_r_m": 0.6883085318272477,
+   "core_L_m": 1.7896021827508442
+  },
+  "2+1 x 2.66 MWe (one unit per blade)": {
+   "Pe_W": 2660000.0,
+   "eta": 0.219,
+   "Pt_W": 12146118.721461188,
+   "waste_W": 9486118.721461188,
+   "T_rej_K": 550.0,
+   "envelopes": [
+    {
+     "name": "Reactor equipment envelope (vessel, core, reflector, drums)",
+     "cls": "PHYSICAL",
+     "family": "REACTOR",
+     "shape": "frustum",
+     "u": [
+      0.3,
+      2.357647752177924
+     ],
+     "vc": 1.4,
+     "wc": 0.0,
+     "r": [
+      0.7914029816068938,
+      0.7914029816068938
+     ],
+     "volume_m3": 4.048706240487062,
+     "mass_kg": 4143.835616438357,
+     "status": "OPEN",
+     "note": "No internal design: an envelope at an assumed power density"
+    },
+    {
+     "name": "Thermal exclusion around the hot vessel (1100-1300 K)",
+     "cls": "THERMAL_EXCLUSION",
+     "family": "REACTOR",
+     "shape": "frustum",
+     "u": [
+      0.0,
+      2.407647752177924
+     ],
+     "vc": 1.4,
+     "wc": 0.0,
+     "r": [
+      1.0914029816068938,
+      1.0914029816068938
+     ],
+     "volume_m3": 9.009757310002266,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Shadow shield envelope (LiH + W, smeared)",
+     "cls": "PHYSICAL",
+     "family": "SHIELD",
+     "shape": "frustum",
+     "u": [
+      2.407647752177924,
+      4.794825413845117
+     ],
+     "vc": 1.4,
+     "wc": 0.0,
+     "r": [
+      0.8414029816068939,
+      1.3706275279789644
+     ],
+     "volume_m3": 9.348998532678687,
+     "mass_kg": 17763.097212089506,
+     "status": "OPEN",
+     "note": "19.9 e-folds x 0.12 m (combined exposure of 2 running units); simplified attenuation, not a transport result"
+    },
+    {
+     "name": "Blade-facing scatter shield (outward slab)",
+     "cls": "PHYSICAL",
+     "family": "SHIELD",
+     "shape": "box",
+     "u": [
+      0.0,
+      2.6576477521779243
+     ],
+     "v": [
+      2.2414029816068934,
+      3.8374029816068935
+     ],
+     "w": [
+      -1.5,
+      1.5
+     ],
+     "volume_m3": 12.724817437427902,
+     "mass_kg": 24177.153131113013,
+     "status": "OPEN",
+     "note": "13.3 e-folds against single scatter from the own blade; fits under the casing: True"
+    },
+    {
+     "name": "Primary pumps and intermediate heat exchanger",
+     "cls": "PHYSICAL",
+     "family": "HEAT_TRANSPORT",
+     "shape": "box",
+     "u": [
+      4.994825413845117,
+      5.394825413845117
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.496000000000002,
+     "mass_kg": 4372.602739726028,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Brayton turbo-alternator-compressor",
+     "cls": "PHYSICAL",
+     "family": "CONVERSION",
+     "shape": "box",
+     "u": [
+      5.544825413845117,
+      5.944825413845117
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.496000000000002,
+     "mass_kg": 2660.0,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Recuperator",
+     "cls": "PHYSICAL",
+     "family": "CONVERSION",
+     "shape": "box",
+     "u": [
+      6.094825413845117,
+      7.160530542050244
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 6.649999999999998,
+     "mass_kg": 3192.0,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Gas cooler (to the 550 K blade channel loop)",
+     "cls": "PHYSICAL",
+     "family": "HEAT_TRANSPORT",
+     "shape": "box",
+     "u": [
+      7.310530542050245,
+      7.710530542050245
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.496000000000002,
+     "mass_kg": 1064.0,
+     "status": "PROTOTYPE",
+     "note": "reject temperature not approved (DR-03)"
+    },
+    {
+     "name": "Power conditioning and plant switchgear",
+     "cls": "PHYSICAL",
+     "family": "ELECTRICAL",
+     "shape": "box",
+     "u": [
+      7.8605305420502445,
+      8.372069003588706
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 3.192,
+     "mass_kg": 2660.0,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Coolant riser to the blade-root header",
+     "cls": "INTERFACE",
+     "family": "HEAT_TRANSPORT",
+     "shape": "box",
+     "u": [
+      7.922069003588707,
+      8.322069003588707
+     ],
+     "v": [
+      2.5999999999999996,
+      5.0
+     ],
+     "w": [
+      -0.25,
+      0.25
+     ],
+     "volume_m3": 0.4800000000000005,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "crosses the casing: an OPEN pressure/thermal penetration"
+    },
+    {
+     "name": "Electrical interface to bus A/B (keel-lane side)",
+     "cls": "INTERFACE",
+     "family": "ELECTRICAL",
+     "shape": "box",
+     "u": [
+      7.122069003588706,
+      7.7220690035887065
+     ],
+     "v": [
+      0.2,
+      0.8
+     ],
+     "w": [
+      1.5,
+      2.2
+     ],
+     "volume_m3": 0.25200000000000033,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Data and control interface",
+     "cls": "INTERFACE",
+     "family": "ELECTRICAL",
+     "shape": "box",
+     "u": [
+      6.522069003588706,
+      6.922069003588707
+     ],
+     "v": [
+      0.2,
+      0.6
+     ],
+     "w": [
+      1.5,
+      2.1
+     ],
+     "volume_m3": 0.0960000000000001,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Structural attachment 1 (module frame)",
+     "cls": "ATTACHMENT",
+     "family": "STRUCTURE",
+     "shape": "box",
+     "u": [
+      -0.1,
+      0.1
+     ],
+     "v": [
+      -0.1,
+      2.9
+     ],
+     "w": [
+      -1.6,
+      1.6
+     ],
+     "volume_m3": 1.9200000000000004,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "thrust-rated 1.5 g axial; sliding at the hot end for thermal growth"
+    },
+    {
+     "name": "Structural attachment 2 (module frame)",
+     "cls": "ATTACHMENT",
+     "family": "STRUCTURE",
+     "shape": "box",
+     "u": [
+      8.422069003588707,
+      8.622069003588706
+     ],
+     "v": [
+      -0.1,
+      2.9
+     ],
+     "w": [
+      -1.6,
+      1.6
+     ],
+     "volume_m3": 1.9199999999999933,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "thrust-rated 1.5 g axial; sliding at the hot end for thermal growth"
+    },
+    {
+     "name": "Maintenance clearance (service side, 0.6-1.0 m)",
+     "cls": "MAINTENANCE",
+     "family": "ACCESS",
+     "shape": "box",
+     "u": [
+      4.994825413845117,
+      8.522069003588706
+     ],
+     "v": [
+      0.2,
+      2.8
+     ],
+     "w": [
+      -1.6,
+      -1.3
+     ],
+     "volume_m3": 2.7512499999999998,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Robotic access lane (keel-lane face)",
+     "cls": "ROBOTIC",
+     "family": "ACCESS",
+     "shape": "box",
+     "u": [
+      0.0,
+      8.522069003588706
+     ],
+     "v": [
+      0.0,
+      0.8
+     ],
+     "w": [
+      1.6,
+      2.4000000000000004
+     ],
+     "volume_m3": 5.454124162296774,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "drones and the keel-lane manipulator; no crew while any unit in line of sight runs"
+    },
+    {
+     "name": "ORU removal path (radial, through a casing hatch)",
+     "cls": "REMOVAL",
+     "family": "ACCESS",
+     "shape": "box",
+     "u": [
+      4.994825413845117,
+      8.522069003588706
+     ],
+     "v": [
+      2.8,
+      4.3999999999999995
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 14.67333333333333,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "ORUs leave radially; the reactor and shields are not ORUs (module swap between missions)"
+    }
+   ],
+   "length_m": 8.822069003588707,
+   "fits_one_module": true,
+   "slab_fits": true,
+   "shadow_t_m": 2.387177661667193,
+   "side_t_m": 1.596,
+   "shadow_kg": 17763.097212089506,
+   "slab_kg": 24177.153131113013,
+   "physical_mass_kg": 60032.6886993669,
+   "physical_volume_m3": 43.452522210593656,
+   "core_r_m": 0.7914029816068938,
+   "core_L_m": 2.057647752177924
+  },
+  "2 x 100 % x 5.3 MWe": {
+   "Pe_W": 5300000.0,
+   "eta": 0.219,
+   "Pt_W": 24200913.242009133,
+   "waste_W": 18900913.242009133,
+   "T_rej_K": 550.0,
+   "envelopes": [
+    {
+     "name": "Reactor equipment envelope (vessel, core, reflector, drums)",
+     "cls": "PHYSICAL",
+     "family": "REACTOR",
+     "shape": "frustum",
+     "u": [
+      0.3,
+      2.8892209227136036
+     ],
+     "vc": 1.4,
+     "wc": 0.0,
+     "r": [
+      0.9958542010436938,
+      0.9958542010436938
+     ],
+     "volume_m3": 8.06697108066971,
+     "mass_kg": 7760.273972602739,
+     "status": "OPEN",
+     "note": "No internal design: an envelope at an assumed power density"
+    },
+    {
+     "name": "Thermal exclusion around the hot vessel (1100-1300 K)",
+     "cls": "THERMAL_EXCLUSION",
+     "family": "REACTOR",
+     "shape": "frustum",
+     "u": [
+      0.0,
+      2.9392209227136035
+     ],
+     "vc": 1.4,
+     "wc": 0.0,
+     "r": [
+      1.2958542010436938,
+      1.2958542010436938
+     ],
+     "volume_m3": 15.505807398473188,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Shadow shield envelope (LiH + W, smeared)",
+     "cls": "PHYSICAL",
+     "family": "SHIELD",
+     "shape": "frustum",
+     "u": [
+      2.9392209227136035,
+      5.243220922713603
+     ],
+     "vc": 1.4,
+     "wc": 0.0,
+     "r": [
+      1.0458542010436938,
+      1.5566387037730272
+     ],
+     "volume_m3": 12.41344819871632,
+     "mass_kg": 23585.551577561007,
+     "status": "OPEN",
+     "note": "19.2 e-folds x 0.12 m (combined exposure of 1 running units); simplified attenuation, not a transport result"
+    },
+    {
+     "name": "Blade-facing scatter shield (outward slab)",
+     "cls": "PHYSICAL",
+     "family": "SHIELD",
+     "shape": "box",
+     "u": [
+      0.0,
+      3.189220922713604
+     ],
+     "v": [
+      2.4458542010436934,
+      4.0418542010436935
+     ],
+     "w": [
+      -1.5,
+      1.5
+     ],
+     "volume_m3": 15.269989777952738,
+     "mass_kg": 29012.9805781102,
+     "status": "OPEN",
+     "note": "13.3 e-folds against single scatter from the own blade; fits under the casing: True"
+    },
+    {
+     "name": "Primary pumps and intermediate heat exchanger",
+     "cls": "PHYSICAL",
+     "family": "HEAT_TRANSPORT",
+     "shape": "box",
+     "u": [
+      5.4432209227136035,
+      6.141324189310021
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 4.356164383561645,
+     "mass_kg": 8712.328767123287,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Brayton turbo-alternator-compressor",
+     "cls": "PHYSICAL",
+     "family": "CONVERSION",
+     "shape": "box",
+     "u": [
+      6.2913241893100205,
+      6.716003676489508
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.6500000000000004,
+     "mass_kg": 5300.0,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Recuperator",
+     "cls": "PHYSICAL",
+     "family": "CONVERSION",
+     "shape": "box",
+     "u": [
+      6.866003676489507,
+      8.989401112386943
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 13.250000000000002,
+     "mass_kg": 6359.999999999999,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Gas cooler (to the 550 K blade channel loop)",
+     "cls": "PHYSICAL",
+     "family": "HEAT_TRANSPORT",
+     "shape": "box",
+     "u": [
+      9.139401112386942,
+      9.539401112386942
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.496000000000002,
+     "mass_kg": 2120.0,
+     "status": "PROTOTYPE",
+     "note": "reject temperature not approved (DR-03)"
+    },
+    {
+     "name": "Power conditioning and plant switchgear",
+     "cls": "PHYSICAL",
+     "family": "ELECTRICAL",
+     "shape": "box",
+     "u": [
+      9.689401112386943,
+      10.708631881617713
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 6.360000000000006,
+     "mass_kg": 5300.0,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Coolant riser to the blade-root header",
+     "cls": "INTERFACE",
+     "family": "HEAT_TRANSPORT",
+     "shape": "box",
+     "u": [
+      10.258631881617712,
+      10.658631881617712
+     ],
+     "v": [
+      2.5999999999999996,
+      5.0
+     ],
+     "w": [
+      -0.25,
+      0.25
+     ],
+     "volume_m3": 0.4800000000000005,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "crosses the casing: an OPEN pressure/thermal penetration"
+    },
+    {
+     "name": "Electrical interface to bus A/B (keel-lane side)",
+     "cls": "INTERFACE",
+     "family": "ELECTRICAL",
+     "shape": "box",
+     "u": [
+      9.45863188161771,
+      10.05863188161771
+     ],
+     "v": [
+      0.2,
+      0.8
+     ],
+     "w": [
+      1.5,
+      2.2
+     ],
+     "volume_m3": 0.25199999999999995,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Data and control interface",
+     "cls": "INTERFACE",
+     "family": "ELECTRICAL",
+     "shape": "box",
+     "u": [
+      8.858631881617711,
+      9.258631881617712
+     ],
+     "v": [
+      0.2,
+      0.6
+     ],
+     "w": [
+      1.5,
+      2.1
+     ],
+     "volume_m3": 0.0960000000000001,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Structural attachment 1 (module frame)",
+     "cls": "ATTACHMENT",
+     "family": "STRUCTURE",
+     "shape": "box",
+     "u": [
+      -0.1,
+      0.1
+     ],
+     "v": [
+      -0.1,
+      2.9
+     ],
+     "w": [
+      -1.6,
+      1.6
+     ],
+     "volume_m3": 1.9200000000000004,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "thrust-rated 1.5 g axial; sliding at the hot end for thermal growth"
+    },
+    {
+     "name": "Structural attachment 2 (module frame)",
+     "cls": "ATTACHMENT",
+     "family": "STRUCTURE",
+     "shape": "box",
+     "u": [
+      10.1,
+      10.299999999999999
+     ],
+     "v": [
+      -0.1,
+      2.9
+     ],
+     "w": [
+      -1.6,
+      1.6
+     ],
+     "volume_m3": 1.9199999999999933,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "thrust-rated 1.5 g axial; sliding at the hot end for thermal growth"
+    },
+    {
+     "name": "Maintenance clearance (service side, 0.6-1.0 m)",
+     "cls": "MAINTENANCE",
+     "family": "ACCESS",
+     "shape": "box",
+     "u": [
+      5.4432209227136035,
+      10.858631881617711
+     ],
+     "v": [
+      0.2,
+      2.8
+     ],
+     "w": [
+      -1.6,
+      -1.3
+     ],
+     "volume_m3": 4.224020547945204,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Robotic access lane (keel-lane face)",
+     "cls": "ROBOTIC",
+     "family": "ACCESS",
+     "shape": "box",
+     "u": [
+      0.0,
+      10.858631881617711
+     ],
+     "v": [
+      0.0,
+      0.8
+     ],
+     "w": [
+      1.6,
+      2.4000000000000004
+     ],
+     "volume_m3": 6.949524404235337,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "drones and the keel-lane manipulator; no crew while any unit in line of sight runs"
+    },
+    {
+     "name": "ORU removal path (radial, through a casing hatch)",
+     "cls": "REMOVAL",
+     "family": "ACCESS",
+     "shape": "box",
+     "u": [
+      5.4432209227136035,
+      10.858631881617711
+     ],
+     "v": [
+      2.8,
+      4.3999999999999995
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 22.528109589041083,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "ORUs leave radially; the reactor and shields are not ORUs (module swap between missions)"
+    }
+   ],
+   "length_m": 11.158631881617712,
+   "fits_one_module": false,
+   "slab_fits": true,
+   "shadow_t_m": 2.304,
+   "side_t_m": 1.596,
+   "shadow_kg": 23585.551577561007,
+   "slab_kg": 29012.9805781102,
+   "physical_mass_kg": 88151.13489539723,
+   "physical_volume_m3": 64.86257344090042,
+   "core_r_m": 0.9958542010436938,
+   "core_L_m": 2.589220922713604
+  },
+  "4+1 x 1.33 MWe (modular, two per blade except one)": {
+   "Pe_W": 1330000.0,
+   "eta": 0.219,
+   "Pt_W": 6073059.360730594,
+   "waste_W": 4743059.360730594,
+   "T_rej_K": 550.0,
+   "envelopes": [
+    {
+     "name": "Reactor equipment envelope (vessel, core, reflector, drums)",
+     "cls": "PHYSICAL",
+     "family": "REACTOR",
+     "shape": "frustum",
+     "u": [
+      0.3,
+      1.9331561031936189
+     ],
+     "vc": 1.4,
+     "wc": 0.0,
+     "r": [
+      0.6281369627667764,
+      0.6281369627667764
+     ],
+     "volume_m3": 2.0243531202435308,
+     "mass_kg": 2321.9178082191784,
+     "status": "OPEN",
+     "note": "No internal design: an envelope at an assumed power density"
+    },
+    {
+     "name": "Thermal exclusion around the hot vessel (1100-1300 K)",
+     "cls": "THERMAL_EXCLUSION",
+     "family": "REACTOR",
+     "shape": "frustum",
+     "u": [
+      0.0,
+      1.983156103193619
+     ],
+     "vc": 1.4,
+     "wc": 0.0,
+     "r": [
+      0.9281369627667764,
+      0.9281369627667764
+     ],
+     "volume_m3": 5.366991541729428,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Shadow shield envelope (LiH + W, smeared)",
+     "cls": "PHYSICAL",
+     "family": "SHIELD",
+     "shape": "frustum",
+     "u": [
+      1.983156103193619,
+      4.453511426528006
+     ],
+     "vc": 1.4,
+     "wc": 0.0,
+     "r": [
+      0.6781369627667765,
+      1.2258015527815842
+     ],
+     "volume_m3": 7.227215448798958,
+     "mass_kg": 13731.709352718022,
+     "status": "OPEN",
+     "note": "20.6 e-folds x 0.12 m (combined exposure of 4 running units); simplified attenuation, not a transport result"
+    },
+    {
+     "name": "Blade-facing scatter shield (outward slab)",
+     "cls": "PHYSICAL",
+     "family": "SHIELD",
+     "shape": "box",
+     "u": [
+      0.0,
+      2.2331561031936187
+     ],
+     "v": [
+      2.0781369627667763,
+      3.6741369627667764
+     ],
+     "w": [
+      -1.5,
+      1.5
+     ],
+     "volume_m3": 10.692351422091047,
+     "mass_kg": 20315.46770197299,
+     "status": "OPEN",
+     "note": "13.3 e-folds against single scatter from the own blade; fits under the casing: True"
+    },
+    {
+     "name": "Primary pumps and intermediate heat exchanger",
+     "cls": "PHYSICAL",
+     "family": "HEAT_TRANSPORT",
+     "shape": "box",
+     "u": [
+      4.653511426528006,
+      5.053511426528006
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.496000000000002,
+     "mass_kg": 2186.301369863014,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Brayton turbo-alternator-compressor",
+     "cls": "PHYSICAL",
+     "family": "CONVERSION",
+     "shape": "box",
+     "u": [
+      5.203511426528006,
+      5.603511426528006
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.496000000000002,
+     "mass_kg": 1330.0,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Recuperator",
+     "cls": "PHYSICAL",
+     "family": "CONVERSION",
+     "shape": "box",
+     "u": [
+      5.753511426528005,
+      6.286363990630569
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 3.324999999999999,
+     "mass_kg": 1596.0,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Gas cooler (to the 550 K blade channel loop)",
+     "cls": "PHYSICAL",
+     "family": "HEAT_TRANSPORT",
+     "shape": "box",
+     "u": [
+      6.43636399063057,
+      6.83636399063057
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.496000000000002,
+     "mass_kg": 532.0,
+     "status": "PROTOTYPE",
+     "note": "reject temperature not approved (DR-03)"
+    },
+    {
+     "name": "Power conditioning and plant switchgear",
+     "cls": "PHYSICAL",
+     "family": "ELECTRICAL",
+     "shape": "box",
+     "u": [
+      6.9863639906305695,
+      7.38636399063057
+     ],
+     "v": [
+      0.2,
+      2.6
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 2.496000000000002,
+     "mass_kg": 1330.0,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Coolant riser to the blade-root header",
+     "cls": "INTERFACE",
+     "family": "HEAT_TRANSPORT",
+     "shape": "box",
+     "u": [
+      6.93636399063057,
+      7.336363990630569
+     ],
+     "v": [
+      2.5999999999999996,
+      5.0
+     ],
+     "w": [
+      -0.25,
+      0.25
+     ],
+     "volume_m3": 0.4799999999999994,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "crosses the casing: an OPEN pressure/thermal penetration"
+    },
+    {
+     "name": "Electrical interface to bus A/B (keel-lane side)",
+     "cls": "INTERFACE",
+     "family": "ELECTRICAL",
+     "shape": "box",
+     "u": [
+      6.136363990630569,
+      6.7363639906305695
+     ],
+     "v": [
+      0.2,
+      0.8
+     ],
+     "w": [
+      1.5,
+      2.2
+     ],
+     "volume_m3": 0.25200000000000033,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Data and control interface",
+     "cls": "INTERFACE",
+     "family": "ELECTRICAL",
+     "shape": "box",
+     "u": [
+      5.536363990630569,
+      5.93636399063057
+     ],
+     "v": [
+      0.2,
+      0.6
+     ],
+     "w": [
+      1.5,
+      2.1
+     ],
+     "volume_m3": 0.0960000000000001,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Structural attachment 1 (module frame)",
+     "cls": "ATTACHMENT",
+     "family": "STRUCTURE",
+     "shape": "box",
+     "u": [
+      -0.1,
+      0.1
+     ],
+     "v": [
+      -0.1,
+      2.9
+     ],
+     "w": [
+      -1.6,
+      1.6
+     ],
+     "volume_m3": 1.9200000000000004,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "thrust-rated 1.5 g axial; sliding at the hot end for thermal growth"
+    },
+    {
+     "name": "Structural attachment 2 (module frame)",
+     "cls": "ATTACHMENT",
+     "family": "STRUCTURE",
+     "shape": "box",
+     "u": [
+      7.43636399063057,
+      7.636363990630569
+     ],
+     "v": [
+      -0.1,
+      2.9
+     ],
+     "w": [
+      -1.6,
+      1.6
+     ],
+     "volume_m3": 1.9199999999999933,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "thrust-rated 1.5 g axial; sliding at the hot end for thermal growth"
+    },
+    {
+     "name": "Maintenance clearance (service side, 0.6-1.0 m)",
+     "cls": "MAINTENANCE",
+     "family": "ACCESS",
+     "shape": "box",
+     "u": [
+      4.653511426528006,
+      7.536363990630569
+     ],
+     "v": [
+      0.2,
+      2.8
+     ],
+     "w": [
+      -1.6,
+      -1.3
+     ],
+     "volume_m3": 2.2486249999999997,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": ""
+    },
+    {
+     "name": "Robotic access lane (keel-lane face)",
+     "cls": "ROBOTIC",
+     "family": "ACCESS",
+     "shape": "box",
+     "u": [
+      0.0,
+      7.536363990630569
+     ],
+     "v": [
+      0.0,
+      0.8
+     ],
+     "w": [
+      1.6,
+      2.4000000000000004
+     ],
+     "volume_m3": 4.823272954003566,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "drones and the keel-lane manipulator; no crew while any unit in line of sight runs"
+    },
+    {
+     "name": "ORU removal path (radial, through a casing hatch)",
+     "cls": "REMOVAL",
+     "family": "ACCESS",
+     "shape": "box",
+     "u": [
+      4.653511426528006,
+      7.536363990630569
+     ],
+     "v": [
+      2.8,
+      4.3999999999999995
+     ],
+     "w": [
+      -1.3,
+      1.3
+     ],
+     "volume_m3": 11.992666666666661,
+     "mass_kg": null,
+     "status": "PROTOTYPE",
+     "note": "ORUs leave radially; the reactor and shields are not ORUs (module swap between missions)"
+    }
+   ],
+   "length_m": 7.836363990630569,
+   "fits_one_module": true,
+   "slab_fits": true,
+   "shadow_t_m": 2.470355323334387,
+   "side_t_m": 1.596,
+   "shadow_kg": 13731.709352718022,
+   "slab_kg": 20315.46770197299,
+   "physical_mass_kg": 43343.3962327732,
+   "physical_volume_m3": 33.252919991133545,
+   "core_r_m": 0.6281369627667764,
+   "core_L_m": 1.6331561031936188
+  }
+ },
+ "districts": {
+  "C-lean 3+1 x 1.75 MWe (Phase II reference)": {
+   "name": "C-lean 3+1 x 1.75 MWe (Phase II reference)",
+   "units": [
+    {
+     "unit": 1,
+     "module": "M1",
+     "azimuth_deg": 90.0,
+     "x_aft": -89.35,
+     "x_fwd": -81.22344254773718,
+     "bus": "A",
+     "blade_header": "BLADE_90",
+     "samples": {
+      "PHYSICAL": {
+       "F": 847,
+       "R": 71,
+       "D": 113,
+       "O": 27
+      },
+      "MAINTENANCE": {
+       "D": 80
+      },
+      "ROBOTIC": {
+       "F": 52,
+       "D": 52
+      },
+      "REMOVAL": {
+       "D": 92,
+       "F": 290,
+       "O": 18
+      }
+     }
+    },
+    {
+     "unit": 2,
+     "module": "M1",
+     "azimuth_deg": 210.0,
+     "x_aft": -89.35,
+     "x_fwd": -81.22344254773718,
+     "bus": "B",
+     "blade_header": "BLADE_210",
+     "samples": {
+      "PHYSICAL": {
+       "F": 699,
+       "R": 73,
+       "D": 265,
+       "O": 21
+      },
+      "MAINTENANCE": {
+       "D": 70,
+       "F": 10
+      },
+      "ROBOTIC": {
+       "D": 52,
+       "F": 52
+      },
+      "REMOVAL": {
+       "D": 125,
+       "F": 177,
+       "O": 28,
+       "R": 60,
+       "X": 10
+      }
+     }
+    },
+    {
+     "unit": 3,
+     "module": "M1",
+     "azimuth_deg": 330.0,
+     "x_aft": -89.35,
+     "x_fwd": -81.22344254773718,
+     "bus": "A",
+     "blade_header": "BLADE_330",
+     "samples": {
+      "PHYSICAL": {
+       "F": 689,
+       "R": 83,
+       "D": 262,
+       "O": 24
+      },
+      "MAINTENANCE": {
+       "F": 10,
+       "D": 70
+      },
+      "ROBOTIC": {
+       "D": 78,
+       "F": 26
+      },
+      "REMOVAL": {
+       "D": 126,
+       "O": 28,
+       "F": 176,
+       "R": 60,
+       "X": 10
+      }
+     }
+    },
+    {
+     "unit": 4,
+     "module": "M2",
+     "azimuth_deg": 210.0,
+     "x_aft": -77.35,
+     "x_fwd": -69.22344254773718,
+     "bus": "B",
+     "blade_header": "BLADE_210",
+     "samples": {
+      "PHYSICAL": {
+       "F": 699,
+       "R": 73,
+       "D": 265,
+       "O": 21
+      },
+      "MAINTENANCE": {
+       "D": 70,
+       "F": 10
+      },
+      "ROBOTIC": {
+       "D": 52,
+       "F": 52
+      },
+      "REMOVAL": {
+       "D": 125,
+       "F": 177,
+       "O": 28,
+       "R": 60,
+       "X": 10
+      }
+     }
+    }
+   ],
+   "note": "",
+   "headers": {
+    "BLADE_90": [
+     1
+    ],
+    "BLADE_210": [
+     2,
+     4
+    ],
+    "BLADE_330": [
+     3
+    ]
+   },
+   "shared_headers": {
+    "BLADE_210": [
+     2,
+     4
+    ]
+   },
+   "damage_zones": {
+    "M1": [
+     1,
+     2,
+     3
+    ],
+    "M2": [
+     4
+    ]
+   },
+   "physical_overlap": {
+    "occupied": 0.021975425330812856,
+    "reserved": 0.07088846880907372,
+    "dry_store": 0.2138468809073724,
+    "free": 0.693289224952741,
+    "outside": 0.0
+   },
+   "samples": {
+    "PHYSICAL": {
+     "F": 2934,
+     "R": 300,
+     "D": 905,
+     "O": 93
+    },
+    "MAINTENANCE": {
+     "D": 290,
+     "F": 30
+    },
+    "ROBOTIC": {
+     "F": 182,
+     "D": 234
+    },
+    "REMOVAL": {
+     "D": 468,
+     "F": 820,
+     "O": 102,
+     "R": 180,
+     "X": 30
+    }
+   }
+  },
+  "2+1 x 2.66 MWe (one unit per blade)": {
+   "name": "2+1 x 2.66 MWe (one unit per blade)",
+   "units": [
+    {
+     "unit": 1,
+     "module": "M1",
+     "azimuth_deg": 90.0,
+     "x_aft": -89.35,
+     "x_fwd": -80.52793099641129,
+     "bus": "A",
+     "blade_header": "BLADE_90",
+     "samples": {
+      "PHYSICAL": {
+       "F": 997,
+       "R": 82,
+       "D": 131,
+       "O": 27
+      },
+      "MAINTENANCE": {
+       "D": 88
+      },
+      "ROBOTIC": {
+       "F": 56,
+       "D": 56
+      },
+      "REMOVAL": {
+       "D": 104,
+       "F": 312,
+       "O": 24
+      }
+     }
+    },
+    {
+     "unit": 2,
+     "module": "M1",
+     "azimuth_deg": 210.0,
+     "x_aft": -89.35,
+     "x_fwd": -80.52793099641129,
+     "bus": "B",
+     "blade_header": "BLADE_210",
+     "samples": {
+      "PHYSICAL": {
+       "F": 817,
+       "R": 97,
+       "D": 302,
+       "O": 21
+      },
+      "MAINTENANCE": {
+       "D": 77,
+       "F": 11
+      },
+      "ROBOTIC": {
+       "D": 56,
+       "F": 56
+      },
+      "REMOVAL": {
+       "D": 136,
+       "F": 192,
+       "O": 35,
+       "R": 66,
+       "X": 11
+      }
+     }
+    },
+    {
+     "unit": 3,
+     "module": "M1",
+     "azimuth_deg": 330.0,
+     "x_aft": -89.35,
+     "x_fwd": -80.52793099641129,
+     "bus": "A",
+     "blade_header": "BLADE_330",
+     "samples": {
+      "PHYSICAL": {
+       "F": 800,
+       "R": 111,
+       "D": 299,
+       "O": 27
+      },
+      "MAINTENANCE": {
+       "F": 11,
+       "D": 77
+      },
+      "ROBOTIC": {
+       "D": 84,
+       "F": 28
+      },
+      "REMOVAL": {
+       "D": 138,
+       "F": 190,
+       "R": 66,
+       "O": 35,
+       "X": 11
+      }
+     }
+    }
+   ],
+   "note": "",
+   "headers": {
+    "BLADE_90": [
+     1
+    ],
+    "BLADE_210": [
+     2
+    ],
+    "BLADE_330": [
+     3
+    ]
+   },
+   "shared_headers": {},
+   "damage_zones": {
+    "M1": [
+     1,
+     2,
+     3
+    ]
+   },
+   "physical_overlap": {
+    "occupied": 0.02021018593371059,
+    "reserved": 0.07814605227701428,
+    "dry_store": 0.19725141471301536,
+    "free": 0.7043923470762598,
+    "outside": 0.0
+   },
+   "samples": {
+    "PHYSICAL": {
+     "F": 2614,
+     "R": 290,
+     "D": 732,
+     "O": 75
+    },
+    "MAINTENANCE": {
+     "D": 242,
+     "F": 22
+    },
+    "ROBOTIC": {
+     "F": 140,
+     "D": 196
+    },
+    "REMOVAL": {
+     "D": 378,
+     "F": 694,
+     "O": 94,
+     "R": 132,
+     "X": 22
+    }
+   }
+  },
+  "2 x 100 % x 5.3 MWe": {
+   "name": "2 x 100 % x 5.3 MWe",
+   "units": [
+    {
+     "unit": 1,
+     "module": "M1",
+     "azimuth_deg": 90.0,
+     "x_aft": -89.35,
+     "x_fwd": -78.19136811838229,
+     "bus": "A",
+     "blade_header": "BLADE_90",
+     "samples": {
+      "PHYSICAL": {
+       "F": 1461,
+       "R": 162,
+       "D": 387,
+       "O": 38
+      },
+      "MAINTENANCE": {
+       "D": 144
+      },
+      "ROBOTIC": {
+       "F": 72,
+       "D": 72
+      },
+      "REMOVAL": {
+       "D": 168,
+       "F": 516,
+       "O": 36
+      }
+     }
+    },
+    {
+     "unit": 2,
+     "module": "M2",
+     "azimuth_deg": 330.0,
+     "x_aft": -77.35,
+     "x_fwd": -66.19136811838229,
+     "bus": "B",
+     "blade_header": "BLADE_330",
+     "samples": {
+      "PHYSICAL": {
+       "F": 1243,
+       "D": 566,
+       "R": 205,
+       "O": 34
+      },
+      "MAINTENANCE": {
+       "F": 15,
+       "D": 129
+      },
+      "ROBOTIC": {
+       "D": 108,
+       "F": 36
+      },
+      "REMOVAL": {
+       "D": 210,
+       "F": 330,
+       "R": 108,
+       "O": 54,
+       "X": 18
+      }
+     }
+    }
+   ],
+   "note": "",
+   "headers": {
+    "BLADE_90": [
+     1
+    ],
+    "BLADE_330": [
+     2
+    ]
+   },
+   "shared_headers": {},
+   "damage_zones": {
+    "M1": [
+     1
+    ],
+    "M2": [
+     2
+    ]
+   },
+   "physical_overlap": {
+    "occupied": 0.017578125,
+    "reserved": 0.089599609375,
+    "dry_store": 0.232666015625,
+    "free": 0.66015625,
+    "outside": 0.0
+   },
+   "samples": {
+    "PHYSICAL": {
+     "F": 2704,
+     "R": 367,
+     "D": 953,
+     "O": 72
+    },
+    "MAINTENANCE": {
+     "D": 273,
+     "F": 15
+    },
+    "ROBOTIC": {
+     "F": 108,
+     "D": 180
+    },
+    "REMOVAL": {
+     "D": 378,
+     "F": 846,
+     "O": 90,
+     "R": 108,
+     "X": 18
+    }
+   }
+  },
+  "4+1 x 1.33 MWe (modular, two per blade except one)": {
+   "name": "4+1 x 1.33 MWe (modular, two per blade except one)",
+   "units": [
+    {
+     "unit": 1,
+     "module": "M1",
+     "azimuth_deg": 90.0,
+     "x_aft": -89.35,
+     "x_fwd": -81.51363600936942,
+     "bus": "A",
+     "blade_header": "BLADE_90",
+     "samples": {
+      "PHYSICAL": {
+       "F": 715,
+       "R": 55,
+       "D": 171,
+       "O": 18
+      },
+      "MAINTENANCE": {
+       "D": 72
+      },
+      "ROBOTIC": {
+       "F": 50,
+       "D": 50
+      },
+      "REMOVAL": {
+       "D": 80,
+       "F": 268,
+       "O": 12
+      }
+     }
+    },
+    {
+     "unit": 2,
+     "module": "M1",
+     "azimuth_deg": 210.0,
+     "x_aft": -89.35,
+     "x_fwd": -81.51363600936942,
+     "bus": "B",
+     "blade_header": "BLADE_210",
+     "samples": {
+      "PHYSICAL": {
+       "F": 638,
+       "R": 56,
+       "D": 247,
+       "O": 18
+      },
+      "MAINTENANCE": {
+       "D": 63,
+       "F": 9
+      },
+      "ROBOTIC": {
+       "D": 50,
+       "F": 50
+      },
+      "REMOVAL": {
+       "D": 114,
+       "F": 162,
+       "O": 21,
+       "R": 54,
+       "X": 9
+      }
+     }
+    },
+    {
+     "unit": 3,
+     "module": "M1",
+     "azimuth_deg": 330.0,
+     "x_aft": -89.35,
+     "x_fwd": -81.51363600936942,
+     "bus": "A",
+     "blade_header": "BLADE_330",
+     "samples": {
+      "PHYSICAL": {
+       "F": 622,
+       "R": 66,
+       "D": 247,
+       "O": 24
+      },
+      "MAINTENANCE": {
+       "F": 9,
+       "D": 63
+      },
+      "ROBOTIC": {
+       "D": 75,
+       "F": 25
+      },
+      "REMOVAL": {
+       "D": 114,
+       "O": 21,
+       "F": 162,
+       "R": 54,
+       "X": 9
+      }
+     }
+    },
+    {
+     "unit": 4,
+     "module": "M2",
+     "azimuth_deg": 90.0,
+     "x_aft": -77.35,
+     "x_fwd": -69.51363600936942,
+     "bus": "B",
+     "blade_header": "BLADE_90",
+     "samples": {
+      "PHYSICAL": {
+       "F": 715,
+       "R": 55,
+       "D": 171,
+       "O": 18
+      },
+      "MAINTENANCE": {
+       "D": 72
+      },
+      "ROBOTIC": {
+       "F": 50,
+       "D": 50
+      },
+      "REMOVAL": {
+       "D": 80,
+       "F": 268,
+       "O": 12
+      }
+     }
+    },
+    {
+     "unit": 5,
+     "module": "M2",
+     "azimuth_deg": 330.0,
+     "x_aft": -77.35,
+     "x_fwd": -69.51363600936942,
+     "bus": "A",
+     "blade_header": "BLADE_330",
+     "samples": {
+      "PHYSICAL": {
+       "F": 622,
+       "R": 66,
+       "D": 247,
+       "O": 24
+      },
+      "MAINTENANCE": {
+       "F": 9,
+       "D": 63
+      },
+      "ROBOTIC": {
+       "D": 75,
+       "F": 25
+      },
+      "REMOVAL": {
+       "D": 114,
+       "O": 21,
+       "F": 162,
+       "R": 54,
+       "X": 9
+      }
+     }
+    }
+   ],
+   "note": "",
+   "headers": {
+    "BLADE_90": [
+     1,
+     4
+    ],
+    "BLADE_210": [
+     2
+    ],
+    "BLADE_330": [
+     3,
+     5
+    ]
+   },
+   "shared_headers": {
+    "BLADE_90": [
+     1,
+     4
+    ],
+    "BLADE_330": [
+     3,
+     5
+    ]
+   },
+   "damage_zones": {
+    "M1": [
+     1,
+     2,
+     3
+    ],
+    "M2": [
+     4,
+     5
+    ]
+   },
+   "physical_overlap": {
+    "occupied": 0.021272158498435872,
+    "reserved": 0.06214807090719499,
+    "dry_store": 0.22586027111574558,
+    "free": 0.6907194994786235,
+    "outside": 0.0
+   },
+   "samples": {
+    "PHYSICAL": {
+     "F": 3312,
+     "R": 298,
+     "D": 1083,
+     "O": 102
+    },
+    "MAINTENANCE": {
+     "D": 333,
+     "F": 27
+    },
+    "ROBOTIC": {
+     "F": 200,
+     "D": 300
+    },
+    "REMOVAL": {
+     "D": 502,
+     "F": 1022,
+     "O": 87,
+     "R": 162,
+     "X": 27
+    }
+   }
+  }
+ },
+ "thermal_machinery": [
+  {
+   "name": "Burn heat pumps, Phase II running case (82 MW work)",
+   "family": "HEAT_PUMP",
+   "capacity_W": 82000000.0,
+   "volume_m3": 65.60000000000001,
+   "mass_kg": 123000.0,
+   "district": "D2 aft bay / M1-M2",
+   "status": "STUDY"
+  },
+  {
+   "name": "Burn heat pumps, DR-01 working doctrine (backup for 1.2 MW margin)",
+   "family": "HEAT_PUMP",
+   "capacity_W": 7000000.0,
+   "volume_m3": 5.6000000000000005,
+   "mass_kg": 10500.0,
+   "district": "D2 aft bay",
+   "status": "STUDY"
+  },
+  {
+   "name": "L1 conversion, base burn loads (4.3 MWe)",
+   "family": "L1_CONVERSION",
+   "capacity_W": 4300000.0,
+   "volume_m3": 8.6,
+   "mass_kg": 12900.0,
+   "district": "D2 aft bay beside Brayton A/B",
+   "status": "PROTOTYPE"
+  },
+  {
+   "name": "L1 conversion with OPEN hot-loop pumps (nominal 45 MWe)",
+   "family": "L1_CONVERSION",
+   "capacity_W": 45000000.0,
+   "volume_m3": 90.0,
+   "mass_kg": 135000.0,
+   "district": "D2 aft bay",
+   "status": "OPEN"
+  },
+  {
+   "name": "Engagement thermal buffer (1 GJ PCM at ~450 K)",
+   "family": "THERMAL_BUFFER",
+   "capacity_W": 16666666.666666666,
+   "volume_m3": 24.999999999999996,
+   "mass_kg": 4999.999999999999,
+   "district": "D5 WARM section roots",
+   "status": "PROTOTYPE"
+  },
+  {
+   "name": "Hot-loop circulation pumps (OPEN 10-100 MW)",
+   "family": "PUMPS",
+   "capacity_W": 40000000.0,
+   "volume_m3": 4.0,
+   "mass_kg": 20000.0,
+   "district": "D1/D2 blade roots",
+   "status": "OPEN"
+  },
+  {
+   "name": "Warm-loop pumps and distribution (5-7 MW)",
+   "family": "PUMPS",
+   "capacity_W": 7000000.0,
+   "volume_m3": 1.4000000000000001,
+   "mass_kg": 7000.0,
+   "district": "D5 / keel lanes",
+   "status": "PROTOTYPE"
+  }
+ ],
+ "reference_unit": {
+  "Pe_W": 1750000.0,
+  "eta": 0.219,
+  "Pt_W": 7990867.5799086755,
+  "waste_W": 6240867.5799086755,
+  "T_rej_K": 550.0,
+  "envelopes": [
+   {
+    "name": "Reactor equipment envelope (vessel, core, reflector, drums)",
+    "cls": "PHYSICAL",
+    "family": "REACTOR",
+    "shape": "frustum",
+    "u": [
+     0.3,
+     2.089602182750844
+    ],
+    "vc": 1.4,
+    "wc": 0.0,
+    "r": [
+     0.6883085318272477,
+     0.6883085318272477
+    ],
+    "volume_m3": 2.6636225266362255,
+    "mass_kg": 2897.2602739726026,
+    "status": "OPEN",
+    "note": "No internal design: an envelope at an assumed power density"
+   },
+   {
+    "name": "Thermal exclusion around the hot vessel (1100-1300 K)",
+    "cls": "THERMAL_EXCLUSION",
+    "family": "REACTOR",
+    "shape": "frustum",
+    "u": [
+     0.0,
+     2.139602182750844
+    ],
+    "vc": 1.4,
+    "wc": 0.0,
+    "r": [
+     0.9883085318272478,
+     0.9883085318272478
+    ],
+    "volume_m3": 6.565502847870654,
+    "mass_kg": null,
+    "status": "PROTOTYPE",
+    "note": ""
+   },
+   {
+    "name": "Shadow shield envelope (LiH + W, smeared)",
+    "cls": "PHYSICAL",
+    "family": "SHIELD",
+    "shape": "frustum",
+    "u": [
+     2.139602182750844,
+     4.575435657391017
+    ],
+    "vc": 1.4,
+    "wc": 0.0,
+    "r": [
+     0.7383085318272478,
+     1.278319812241981
+    ],
+    "volume_m3": 7.966133212706973,
+    "mass_kg": 15135.653104143248,
+    "status": "OPEN",
+    "note": "20.3 e-folds x 0.12 m (combined exposure of 3 running units); simplified attenuation, not a transport result"
+   },
+   {
+    "name": "Blade-facing scatter shield (outward slab)",
+    "cls": "PHYSICAL",
+    "family": "SHIELD",
+    "shape": "box",
+    "u": [
+     0.0,
+     2.3896021827508442
+    ],
+    "v": [
+     2.1383085318272474,
+     3.7343085318272475
+    ],
+    "w": [
+     -1.5,
+     1.5
+    ],
+    "volume_m3": 11.441415251011042,
+    "mass_kg": 21738.68897692098,
+    "status": "OPEN",
+    "note": "13.3 e-folds against single scatter from the own blade; fits under the casing: True"
+   },
+   {
+    "name": "Primary pumps and intermediate heat exchanger",
+    "cls": "PHYSICAL",
+    "family": "HEAT_TRANSPORT",
+    "shape": "box",
+    "u": [
+     4.775435657391017,
+     5.175435657391017
+    ],
+    "v": [
+     0.2,
+     2.6
+    ],
+    "w": [
+     -1.3,
+     1.3
+    ],
+    "volume_m3": 2.496000000000002,
+    "mass_kg": 2876.712328767123,
+    "status": "PROTOTYPE",
+    "note": ""
+   },
+   {
+    "name": "Brayton turbo-alternator-compressor",
+    "cls": "PHYSICAL",
+    "family": "CONVERSION",
+    "shape": "box",
+    "u": [
+     5.325435657391017,
+     5.725435657391017
+    ],
+    "v": [
+     0.2,
+     2.6
+    ],
+    "w": [
+     -1.3,
+     1.3
+    ],
+    "volume_m3": 2.496000000000002,
+    "mass_kg": 1750.0,
+    "status": "PROTOTYPE",
+    "note": ""
+   },
+   {
+    "name": "Recuperator",
+    "cls": "PHYSICAL",
+    "family": "CONVERSION",
+    "shape": "box",
+    "u": [
+     5.875435657391017,
+     6.576557452262811
+    ],
+    "v": [
+     0.2,
+     2.6
+    ],
+    "w": [
+     -1.3,
+     1.3
+    ],
+    "volume_m3": 4.374999999999999,
+    "mass_kg": 2100.0,
+    "status": "PROTOTYPE",
+    "note": ""
+   },
+   {
+    "name": "Gas cooler (to the 550 K blade channel loop)",
+    "cls": "PHYSICAL",
+    "family": "HEAT_TRANSPORT",
+    "shape": "box",
+    "u": [
+     6.726557452262812,
+     7.126557452262812
+    ],
+    "v": [
+     0.2,
+     2.6
+    ],
+    "w": [
+     -1.3,
+     1.3
+    ],
+    "volume_m3": 2.496000000000002,
+    "mass_kg": 700.0000000000001,
+    "status": "PROTOTYPE",
+    "note": "reject temperature not approved (DR-03)"
+   },
+   {
+    "name": "Power conditioning and plant switchgear",
+    "cls": "PHYSICAL",
+    "family": "ELECTRICAL",
+    "shape": "box",
+    "u": [
+     7.276557452262812,
+     7.676557452262812
+    ],
+    "v": [
+     0.2,
+     2.6
+    ],
+    "w": [
+     -1.3,
+     1.3
+    ],
+    "volume_m3": 2.496000000000002,
+    "mass_kg": 1750.0,
+    "status": "PROTOTYPE",
+    "note": ""
+   },
+   {
+    "name": "Coolant riser to the blade-root header",
+    "cls": "INTERFACE",
+    "family": "HEAT_TRANSPORT",
+    "shape": "box",
+    "u": [
+     7.226557452262812,
+     7.626557452262811
+    ],
+    "v": [
+     2.5999999999999996,
+     5.0
+    ],
+    "w": [
+     -0.25,
+     0.25
+    ],
+    "volume_m3": 0.4799999999999994,
+    "mass_kg": null,
+    "status": "PROTOTYPE",
+    "note": "crosses the casing: an OPEN pressure/thermal penetration"
+   },
+   {
+    "name": "Electrical interface to bus A/B (keel-lane side)",
+    "cls": "INTERFACE",
+    "family": "ELECTRICAL",
+    "shape": "box",
+    "u": [
+     6.426557452262811,
+     7.026557452262812
+    ],
+    "v": [
+     0.2,
+     0.8
+    ],
+    "w": [
+     1.5,
+     2.2
+    ],
+    "volume_m3": 0.25200000000000033,
+    "mass_kg": null,
+    "status": "PROTOTYPE",
+    "note": ""
+   },
+   {
+    "name": "Data and control interface",
+    "cls": "INTERFACE",
+    "family": "ELECTRICAL",
+    "shape": "box",
+    "u": [
+     5.826557452262811,
+     6.226557452262812
+    ],
+    "v": [
+     0.2,
+     0.6
+    ],
+    "w": [
+     1.5,
+     2.1
+    ],
+    "volume_m3": 0.0960000000000001,
+    "mass_kg": null,
+    "status": "PROTOTYPE",
+    "note": ""
+   },
+   {
+    "name": "Structural attachment 1 (module frame)",
+    "cls": "ATTACHMENT",
+    "family": "STRUCTURE",
+    "shape": "box",
+    "u": [
+     -0.1,
+     0.1
+    ],
+    "v": [
+     -0.1,
+     2.9
+    ],
+    "w": [
+     -1.6,
+     1.6
+    ],
+    "volume_m3": 1.9200000000000004,
+    "mass_kg": null,
+    "status": "PROTOTYPE",
+    "note": "thrust-rated 1.5 g axial; sliding at the hot end for thermal growth"
+   },
+   {
+    "name": "Structural attachment 2 (module frame)",
+    "cls": "ATTACHMENT",
+    "family": "STRUCTURE",
+    "shape": "box",
+    "u": [
+     7.726557452262812,
+     7.926557452262811
+    ],
+    "v": [
+     -0.1,
+     2.9
+    ],
+    "w": [
+     -1.6,
+     1.6
+    ],
+    "volume_m3": 1.9199999999999933,
+    "mass_kg": null,
+    "status": "PROTOTYPE",
+    "note": "thrust-rated 1.5 g axial; sliding at the hot end for thermal growth"
+   },
+   {
+    "name": "Maintenance clearance (service side, 0.6-1.0 m)",
+    "cls": "MAINTENANCE",
+    "family": "ACCESS",
+    "shape": "box",
+    "u": [
+     4.775435657391017,
+     7.826557452262811
+    ],
+    "v": [
+     0.2,
+     2.8
+    ],
+    "w": [
+     -1.6,
+     -1.3
+    ],
+    "volume_m3": 2.3798749999999997,
+    "mass_kg": null,
+    "status": "PROTOTYPE",
+    "note": ""
+   },
+   {
+    "name": "Robotic access lane (keel-lane face)",
+    "cls": "ROBOTIC",
+    "family": "ACCESS",
+    "shape": "box",
+    "u": [
+     0.0,
+     7.826557452262811
+    ],
+    "v": [
+     0.0,
+     0.8
+    ],
+    "w": [
+     1.6,
+     2.4000000000000004
+    ],
+    "volume_m3": 5.008996769448202,
+    "mass_kg": null,
+    "status": "PROTOTYPE",
+    "note": "drones and the keel-lane manipulator; no crew while any unit in line of sight runs"
+   },
+   {
+    "name": "ORU removal path (radial, through a casing hatch)",
+    "cls": "REMOVAL",
+    "family": "ACCESS",
+    "shape": "box",
+    "u": [
+     4.775435657391017,
+     7.826557452262811
+    ],
+    "v": [
+     2.8,
+     4.3999999999999995
+    ],
+    "w": [
+     -1.3,
+     1.3
+    ],
+    "volume_m3": 12.692666666666662,
+    "mass_kg": null,
+    "status": "PROTOTYPE",
+    "note": "ORUs leave radially; the reactor and shields are not ORUs (module swap between missions)"
+   }
+  ],
+  "length_m": 8.126557452262812,
+  "fits_one_module": true,
+  "slab_fits": true,
+  "shadow_t_m": 2.435833474640173,
+  "side_t_m": 1.596,
+  "shadow_kg": 15135.653104143248,
+  "slab_kg": 21738.68897692098,
+  "physical_mass_kg": 48948.314683803954,
+  "physical_volume_m3": 36.43017099035425,
+  "core_r_m": 0.6883085318272477,
+  "core_L_m": 1.7896021827508442
+ },
+ "bands": {
+  "low": {
+   "Pe_W": 1750000.0,
+   "eta": 0.219,
+   "Pt_W": 7990867.5799086755,
+   "waste_W": 6240867.5799086755,
+   "T_rej_K": 550.0,
+   "length_m": 7.213895812290465,
+   "fits_one_module": true,
+   "slab_fits": true,
+   "shadow_t_m": 2.029861228866811,
+   "side_t_m": 1.33,
+   "shadow_kg": 9508.542829819584,
+   "slab_kg": 16400.443580780877,
+   "physical_mass_kg": 37982.95901334019,
+   "physical_volume_m3": 28.02105698824896,
+   "core_r_m": 0.6012928871156066,
+   "core_L_m": 1.5633615065005773
+  },
+  "nominal": {
+   "Pe_W": 1750000.0,
+   "eta": 0.219,
+   "Pt_W": 7990867.5799086755,
+   "waste_W": 6240867.5799086755,
+   "T_rej_K": 550.0,
+   "length_m": 8.126557452262812,
+   "fits_one_module": true,
+   "slab_fits": true,
+   "shadow_t_m": 2.435833474640173,
+   "side_t_m": 1.596,
+   "shadow_kg": 15135.653104143248,
+   "slab_kg": 21738.68897692098,
+   "physical_mass_kg": 48948.314683803954,
+   "physical_volume_m3": 36.43017099035425,
+   "core_r_m": 0.6883085318272477,
+   "core_L_m": 1.7896021827508442
+  },
+  "high": {
+   "Pe_W": 1750000.0,
+   "eta": 0.219,
+   "Pt_W": 7990867.5799086755,
+   "waste_W": 6240867.5799086755,
+   "T_rej_K": 550.0,
+   "length_m": 9.576067258091946,
+   "fits_one_module": true,
+   "slab_fits": false,
+   "shadow_t_m": 3.0447918433002163,
+   "side_t_m": 1.995,
+   "shadow_kg": 25800.27485332928,
+   "slab_kg": 30118.362802381085,
+   "physical_mass_kg": 67992.61025845009,
+   "physical_volume_m3": 51.41429571401243,
+   "core_r_m": 0.7879165796536237,
+   "core_L_m": 2.0485831070994216
+  }
+ }
+}

@@ -14,7 +14,9 @@ E = html.escape
 
 def stills():
     from PIL import Image
-    for n in ('cam_issa_whole_ship', 'cam_issa_power_district'):
+    for n in ('cam_issa_whole_ship', 'cam_issa_power_district', 'cam_issa3_district', 'cam_issa3_unit', 'cam_issa3_tank_sightlines'):
+        if not (R / f'{n}.png').exists():
+            continue
         im = Image.open(R / f'{n}.png').convert('RGB'); im.thumbnail((1500, 1500)); im.save(R / f'{n}.jpg', quality=82)
 
 
@@ -64,11 +66,15 @@ def main():
     blade_rows = '\n'.join(f'<tr><td class="num">{r["plant_MWe"]:.0f}</td><td class="num">{r["plant_waste_MW"]:.0f}</td><td class="num">{r["defense_heat_MW"]:.0f}</td><td class="num {"bad" if r["blade_area_fraction"] > 1 else ("warn" if r["blade_area_fraction"] > 0.6 else "")}">{100*r["blade_area_fraction"]:.0f} %</td></tr>' for r in rj['shared_blade_area'])
     fam_opts = ''.join(f'<option value="{k}">{E(v)}</option>' for k, v in fams.items())
     import sys; sys.path.insert(0, str(H / 'phase2')); import report2
+    sys.path.insert(0, str(H / 'phase3')); import report3
+    P3 = json.loads((R / 'phase3.json').read_text()); cv = {c['name'][:2]: c for c in P3['convergence']['candidates']}
     em = json.loads((R / 'phase2_eclss_mass.json').read_text()); ms = json.loads((R / 'phase2_mission.json').read_text())
     pl2 = json.loads((H.parents[1] / 'references/p1_power_loads.json').read_text())
     l2 = next(r for r in em['mass']['adds'] if r['budget'] == 'PROPOSED.ship_service_generation')
     page = (H / 'report_template.html').read_text()
-    for k, v in dict(PHASE2=report2.build(), P2_COAST=f"{pl2['states']['COAST_HV_PROACTIVE']['continuous_W'][1]/1e6:.1f} MW",
+    for k, v in dict(PHASE3=report3.build(), P3_N2=f"{cv['N2']['dry_added_t'][1]:.0f}", P3_N2DEP=f"{cv['N2']['extra_departure_t'][1]:,.0f}",
+                     P3_P2=f"{cv['Ph']['dry_added_t'][1]:.0f}", P3_BAT=f"{100*P3['battery']['options']['R1 L2-first restart']['fraction_BOL'][1]:.0f} %",
+                     P3_SH=f"{P3['shielding']['eps_g1']['per_unit_t']:.0f}", PHASE2=report2.build(), P2_COAST=f"{pl2['states']['COAST_HV_PROACTIVE']['continuous_W'][1]/1e6:.1f} MW",
                      P2_L2=f"{l2['t'][1]:.0f}", P2_ADD=f"~{em['mass']['total_added_t'][1]:.0f}", P2_STD=f"{ms['standard_load']['t']:.0f}",
                      P2_CONT=str(ms['standard_load']['containers'])).items():
         page = page.replace('{{' + k + '}}', v)

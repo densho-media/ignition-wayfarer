@@ -314,7 +314,12 @@ def storage(s, Ls=None, I=None):
             endurance[sid] = dict(ride_through_h=tuple(ride*e/gw/3600.0 for e, gw in zip(eta_d, reversed(g))),
                                   whole_battery_h=tuple(E*e/gw/3600.0 for e, gw in zip(eta_d, reversed(g))))
     mb = st['main_battery']
+    pulse_part = pulse_J/eta_c[0]; services_part = reserve-pulse_part
     return dict(main_usable_J=E, black_start_services_W=bs, black_start_reserve_J=reserve, ride_through_J=ride, end_of_life_usable_J=tuple(eol),
+                reserve_breakdown_J=dict(pulse_bank_recharge=pulse_part, restart_services_hold=services_part),
+                reserve_fraction=reserve/E, ride_through_at_end_of_life_J=tuple(e-reserve for e in eol),
+                kWh=dict(main_usable=E/3.6e6, black_start_reserve=reserve/3.6e6, ride_through=ride/3.6e6, pulse_bank_recharge=pulse_part/3.6e6,
+                         restart_services_hold=services_part/3.6e6),
                 pack_mass_kg=E/WH/mb['specific_energy_Wh_kg'], pack_mass_basis=mb['specific_energy_basis'],
                 installed_mass='OPEN (power.storage.main_battery.installed_mass): the 800 Wh/kg figure is already pack-level, so no '
                                'packaging factor is applied to it; containment, thermal and switching remain unsized',
@@ -325,7 +330,8 @@ def storage(s, Ls=None, I=None):
 
 # ---------- the active-defense duty model -----------------------------------------------------------------------------------
 
-def engagement(P_pro, P_act, t_eng_s, interval_s, P_gen_def, E_buf_J, P_export=0.0, Q_reject_def=None, Q_pro_heat=None):
+def engagement(P_pro, P_act, t_eng_s, interval_s, P_gen_def, E_buf_J, P_export=0.0, Q_reject_def=None, Q_pro_heat=None,
+               eta_c=1.0, eta_d=1.0, P_dis_max=math.inf):
     """One repeating engagement cycle: proactive between engagements, the active band during one (t_eng_s every interval_s).
     P_gen_def: generation available to defense (W); E_buf_J: dedicated defense buffer; P_export: energy leaving the ship while
     engaged (optical); Q_reject_def: heat rejection available to defense (W); Q_pro_heat: defense heat between engagements.
@@ -333,12 +339,16 @@ def engagement(P_pro, P_act, t_eng_s, interval_s, P_gen_def, E_buf_J, P_export=0
     if not (0 < t_eng_s <= interval_s):
         raise ValueError('engagement shorter than its interval')
     avg = P_pro + (P_act-P_pro)*t_eng_s/interval_s
-    draw = max(0.0, (P_act-P_gen_def)*t_eng_s)
+    # eta_d: stored energy per delivered joule is 1/eta_d; eta_c: recharge takes 1/eta_c of the stored energy from the generators;
+    # P_dis_max: the buffer cannot deliver more than this, so the shortfall above it is unserved (the cycle fails)
+    draw = max(0.0, (P_act-P_gen_def)*t_eng_s)/eta_d
     spare = P_gen_def-P_pro
-    recharge = draw/spare if draw and spare > 0 else (0.0 if not draw else math.inf)
-    sustainable = draw <= E_buf_J and recharge <= interval_s-t_eng_s and P_gen_def >= P_pro
-    out = dict(average_W=avg, buffer_draw_J=draw, buffer_ok=draw <= E_buf_J, recharge_s=recharge, sustainable=sustainable,
-               max_engagement_s=(E_buf_J/(P_act-P_gen_def) if P_act > P_gen_def else math.inf))
+    recharge = draw/(spare*eta_c) if draw and spare > 0 else (0.0 if not draw else math.inf)
+    power_ok = P_act-P_gen_def <= P_dis_max
+    sustainable = draw <= E_buf_J and recharge <= interval_s-t_eng_s and P_gen_def >= P_pro and power_ok
+    out = dict(average_W=avg, buffer_draw_J=draw, buffer_ok=draw <= E_buf_J, recharge_s=recharge, sustainable=sustainable, power_ok=power_ok,
+               max_engagement_s=(E_buf_J*eta_d/(P_act-P_gen_def) if P_act > P_gen_def else math.inf),
+               storage_loss_heat_J=draw*(1-eta_d)+(draw/eta_c-draw if draw else 0.0))
     if Q_reject_def is not None:
         Qp = P_pro if Q_pro_heat is None else Q_pro_heat
         debt = max(0.0, (P_act-P_export-Q_reject_def)*t_eng_s)

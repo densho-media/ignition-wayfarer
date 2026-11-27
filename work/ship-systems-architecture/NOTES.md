@@ -52,3 +52,23 @@ band (~28 t per unit), L1 from the drive hot loop, L3 10–40 kWe crew-only for 
 
 **Unknowns.** Defense engagement frequency at 0.016 c; drive standby/restart energy; scatter dose (needs a transport calculation);
 reactor/Brayton reliability; mass (~600 t beyond today's lines, three PROPOSED lines); the M1–M2 allocation (DR-12/DR-15).
+
+## Phase III (owner brief 2026-11-27 12:00Z): architecture optimisation and parametric equipment modelling
+
+**Function.** Correct Phase II, couple power, heat, storage, shielding, redundancy and mass, model one parametric L2 unit (EPS-G1) and
+district variants in review geometry, compare complete candidates on coupled propellant. Run order after Phase II:
+`python3 src/wayfarer/power_loads.py` → `phase2/{eps_b,placement,mission,eclss_mass,fmea}.py` (corrected) → `phase3/eps_g1.py`
+(unit envelopes, four districts, survey-grid conflict screen, thermal-machinery envelopes) → `PYTHONPATH=work/ship-systems-architecture/phase3
+python3 work/ship-systems-architecture/phase3/study.py` (III-A/B/D/E → `results/phase3.json`) → `/snap/bin/blender -b
+assets/wayfarer/WF_WAYFARER_001.blend --python work/ship-systems-architecture/make_review3.py -- --render` (REVIEW_ISSA_PHASE3.blend, three
+stills) → `build_report.py` (page; Phase III from `phase3/report3.py`, Phases II and I kept).
+
+**Fixed constraints.** No canon, Drive, production-geometry or final mass-budget change (owner boundaries). Production radiators stay the
+baseline (DR-03); the 550 K section is an isolated research variant. Dry-store repurposing only in review geometry (DR-12).
+
+**Decisions taken here (STUDY).** Working doctrine DR-01 in burns removes the burn heat pumps; EPS-A gains state HIGH_THRUST_PROACTIVE.
+Shield mass = envelope volume × 1.9 t/m³. Recommended research direction N2: 2+1 × 2.66 MWe, one unit per blade, running through burns
+on a 550 K section; L1 reduced to drive-specific loads with heat-pipe hot blades; R1 black start. ~283 t dry (+1,035 t at departure), not closed.
+
+**Unknowns / blockers.** Radiation transport (BLOCKER: no MCNP/OpenMC here); L1 900 K rejection; LOW margin at the high band; He-3 tank
+shadow; hot-loop pumps; channel refill time; unit restart energy; Brayton degradation; engagement frequency.

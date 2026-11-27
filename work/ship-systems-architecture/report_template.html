@@ -80,26 +80,30 @@ a{color:var(--info)}
 
 <div class="wrap">
 <header class="top">
-  <div class="eyebrow">G.U. WAYFARER 001 · ISSA · Phase II for owner review, 2026-11-27 · not canon</div>
+  <div class="eyebrow">G.U. WAYFARER 001 · ISSA · Phase III for owner review, 2026-11-27 · not canon</div>
   <h1>Integrated Ship Systems Architecture</h1>
-  <p class="lede">Phase II turns the ISSA proposal into a power-load model in the repository (EPS-A), compares generation architectures, checks heat, survival, life support, mass, placement and failure modes, and adds mission profiles now that six years is a story scenario rather than a provisioning rule. It changes no canon, Drive data or geometry; the Phase I proposal follows below it, with its superseded numbers marked.</p>
+  <p class="lede">Phase III corrects Phase II, couples power, heat, storage, shielding and mass in one calculation, models one parametric power unit (EPS-G1) and four districts in review geometry, and compares complete candidates on coupled propellant. It changes no canon, Drive data or production geometry. Phases II and I follow below, kept for the record.</p>
   <div class="chips">
     <span class="chip c-model">MODEL-DERIVED: measured from the built .blend</span>
     <span class="chip c-sim">STUDY: computed by work/ship-systems-architecture</span>
-    <span class="chip c-concept">CONCEPTUAL: proposal, not validated</span>
+    <span class="chip c-concept">PROTOTYPE: unsourced choice</span>
+    <span class="chip c-warn">SPECULATIVE: beyond demonstrated technology</span>
     <span class="chip c-warn">OPEN: owner decision needed</span>
   </div>
   <div class="grid">
-    <div class="card"><h4>Proactive coast demand</h4><div class="big">{{P2_COAST}}</div><p class="fn">Known loads, MW nominal. Triggered active defense draws a dedicated buffer; continuous active (~26 MW) is the bound.</p></div>
-    <div class="card"><h4>Working ship-service plant</h4><div class="big">4 × 1.75 MWe</div><p class="fn">Fission-Brayton, 3+1, about {{P2_L2}} t with shadow and scatter shielding.</p></div>
-    <div class="card"><h4>Added power and thermal mass</h4><div class="big">{{P2_ADD}} t</div><p class="fn">Nominal, beyond today's lines; none of it fits the 50 t item.</p></div>
-    <div class="card"><h4>Standard mission load</h4><div class="big">{{P2_STD}} t</div><p class="fn">12 crew, 12 months, in {{P2_CONT}} of 54 dry-store containers. Six years is narrative.</p></div>
+    <div class="card"><h4>Added dry mass, recommended N2</h4><div class="big">{{P3_N2}} t</div><p class="fn">Nominal, coupled: +{{P3_N2DEP}} t at departure. Phase II as corrected: {{P3_P2}} t.</p></div>
+    <div class="card"><h4>Battery protected share</h4><div class="big">{{P3_BAT}}</div><p class="fn">R1 L2-first restart, nominal; canon today 72 % (1,442 of 2,000 kWh).</p></div>
+    <div class="card"><h4>Shield per 1.75 MWe unit</h4><div class="big">{{P3_SH}} t</div><p class="fn">Volume × 1.9 t/m³. Radiation transport unavailable: BLOCKER, shielding OPEN.</p></div>
+    <div class="card"><h4>Burn-to-coast protection gap</h4><div class="big">0.3–3.8 h</div><p class="fn">Today's radiators after a drive trip at velocity; closed by a 550 K section (option F).</p></div>
   </div>
 </header>
 
 <nav class="toc" aria-label="Sections">
+  <a href="#q1">1 Fixes</a><a href="#q2">2 Battery</a><a href="#q3">3 Buffer</a><a href="#q4">4 Closure</a><a href="#q5">5 Shield</a><a href="#q6">6 Redundancy</a><a href="#q7">7 Mass</a><a href="#q8">8 Thermal A–F</a><a href="#q9">9 L1/L2</a><a href="#q10">10 EPS-G1</a><a href="#q11">11 Gap</a><a href="#q12">12 Missions</a><a href="#q13">13 Convergence</a><a href="#q14">14 Decide</a><a href="#phase2">Phase II:</a>
   <a href="#p1">1 EPS-A</a><a href="#p2">2 Loads</a><a href="#p3">3 Fixes</a><a href="#p4">4 Duty</a><a href="#p5">5 Generation</a><a href="#p6">6 Storage</a><a href="#p7">7 Thermal</a><a href="#p8">8 Survival</a><a href="#p9">9 ECLSS</a><a href="#p10">10 Missions</a><a href="#p11">11 Mass</a><a href="#p12">12 Placement</a><a href="#p13">13 FMEA</a><a href="#p14">14 Registry</a><a href="#p15">15 Decisions</a><a href="#p16">16 Problems</a><a href="#p17">17 Next</a><a href="#phase1">Phase I:</a><a href="#a">A State</a><a href="#b">B Hierarchy</a><a href="#c">C Gap matrix</a><a href="#d">D Power</a><a href="#e">E Space</a><a href="#f">F Diagrams</a><a href="#g">G Registry</a><a href="#h">H Budgets</a><a href="#fm">FMEA</a><a href="#i">I Roadmap</a><a href="#j">J Decisions</a><a href="#k">K First task</a><a href="#src">Sources</a>
 </nav>
+{{PHASE3}}
+<section id="phase2"><div class="letter">PHASE II · 2026-11-27 MIDDAY</div><h2>The Phase II study</h2><div class="callout">Kept for the record. Corrected by Phase III: battery labels, blade separation, coast LOW closure, ramp kinematics, the propellant multiplier, shield density and volume, the buffer and cryocooler ledger lines, and the provisions count (section 1 above). Phase II figures below are the corrected reruns where a fix applied.</div></section>
 {{PHASE2}}
 <section id="phase1"><div class="letter">PHASE I · 2026-11-27 MORNING</div><h2>The Phase I proposal</h2><div class="callout">Kept for the record. Superseded by Phase II: the coast demand (0.8 / 3.6 / 26 MW), the battery mass (packaging counted twice), the food "shortfall" (six years is narrative), the decision register J (now 15) and the first task K (EPS-A is done; see 17).</div></section>
 

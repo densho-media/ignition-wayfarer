@@ -388,11 +388,11 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   (210 MW at burnout, with F03); Heat Debt buffer for 50-80 MW bursts; the hot coolant choice. The Q38 candidate panels are removed (owner,
   2026-11-01); the RAD-ZONE sections aft of the rings reject the 5 MW warm base load and the 1 MW low-temperature load in every mode, burns included (Graded Thermal Blade). Keep all three loops separate.
 
-- [ ] **ISSA Phase II — owner review (2026-11-27).** EPS-A load model and the EPS/TMS registry are in the repository (docs/MODEL.md
-  "Electric loads and systems registry (EPS-A)"); the Gate 2-4 studies, mission profiles, provisioning, placement, FMEA and the updated
-  decision register (DR-01..15) are on the ISSA page (`work/ship-systems-architecture/`). Owner: DR-04 proposed mass lines, DR-07/DR-14
-  nominal mission and provisioning basis, DR-12/DR-15 aft nuclear district; then EPS-G1 (one L2 unit envelope generator) as the first
-  production-modelling task. Six years is narrative (owner 2026-11-27); provisioning is per mission.
+- [ ] **ISSA Phase III — owner review (2026-11-27).** Corrections, coupled buffer/thermal/shielding/redundancy/mass, EPS-G1 unit and
+  district envelopes (review geometry only), thermal architectures A–F, L1/L2 options, missions and convergence are on the ISSA page
+  (`work/ship-systems-architecture/`, NOTES "Phase III"); EPS-A has HIGH_THRUST_PROACTIVE and the reserve breakdown; `data/systems.toml`
+  has the six PROPOSED lines of DR-04. Owner: DR3-01..09. Blockers to closure: radiation transport (P3-01), L1 900 K rejection (P3-02),
+  LOW margin (P3-03), He-3 tank shadow (P3-05). EPS-G1 as a generator only after a district pick and a transport result.
 - [ ] **F03 — Integrate electrical, black-start and survival power. AFTER B02; F02 architecture set 2026-10-31 (drive tap rated 210 MW; EPS-A running work ~82 MW nominal).** Size/place owner-released A/B distribution,
   storage, survival reserve and drive-off generation; preserve category suballocations and failure domains.
   **Done when:** required operating/black-start/failure states consume sourced budgets and endurance, with matching geometry and

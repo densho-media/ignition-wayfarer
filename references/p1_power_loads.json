@@ -3700,6 +3700,510 @@
     }
    ]
   },
+  "HIGH_THRUST_PROACTIVE": {
+   "id": "HIGH_THRUST_PROACTIVE",
+   "kind": "OPERATING",
+   "supply_levels": [
+    "L1"
+   ],
+   "note": "DR-01 working doctrine in a burn (ISSA Phase III): drive at peak, proactive defense held, active engagements triggered from the defense buffer with their heat taken by a thermal buffer (study), so the heat pumps lift only the steady warm heat",
+   "legacy": null,
+   "continuous_W": [
+    2941041.7730181958,
+    4131736.5162727446,
+    5599810.694409117
+   ],
+   "peak_W": [
+    2941041.7730181958,
+    4131736.5162727446,
+    5599810.694409117
+   ],
+   "pmad_loss_W": [
+    88231.25319054587,
+    206586.82581363723,
+    447984.8555527294
+   ],
+   "generation_W": [
+    3029273.0262087416,
+    4338323.342086382,
+    6047795.549961846
+   ],
+   "time_averaged_W": [
+    3029273.0262087416,
+    4338323.342086382,
+    6047795.549961846
+   ],
+   "time_averaged_without_param_W": [
+    2941041.7730181958,
+    4131736.5162727446,
+    5599810.694409117
+   ],
+   "param_duties": [],
+   "by_supply_W": {
+    "L1": [
+     2941041.7730181958,
+     4131736.5162727446,
+     5599810.694409117
+    ]
+   },
+   "heat_W": {
+    "RING_COLD": [
+     28449.36,
+     52896.0,
+     100949.92
+    ],
+    "WARM": [
+     2582400.0,
+     3641600.0,
+     4794000.0
+    ],
+    "LOW": [
+     333000.2810472998,
+     440200.3513091247,
+     708100.5269636869
+    ],
+    "HOT": [
+     88231.25319054587,
+     206586.82581363723,
+     447984.8555527294
+    ],
+    "TANKS": [
+     -3007.8680291041346,
+     -3759.835036380168,
+     -5639.752554570251
+    ]
+   },
+   "exported_W": [
+    200.0,
+    800.0,
+    2400.0
+   ],
+   "stored_W": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "electrical_W": [
+    3029273.0262087416,
+    4338323.342086382,
+    6047795.549961846
+   ],
+   "open": [
+    {
+     "id": "PROT.DEF_FIELD_SERVICES",
+     "level": 1,
+     "planning_W": [
+      500000.0,
+      1250000.0,
+      2000000.0
+     ],
+     "basis": "field_services_W is OPEN (40!E49): may already sit inside the proactive band"
+    },
+    {
+     "id": "PROT.MAG_FIELD",
+     "level": 1,
+     "planning_W": null,
+     "basis": "forward_defense.magnetic_diversion.field OPEN; may be inside the proactive band"
+    },
+    {
+     "id": "PROP.DRIVE_STANDBY",
+     "level": 1,
+     "planning_W": [
+      20000.0,
+      100000.0,
+      400000.0
+     ],
+     "basis": "OPEN in canon; superconducting coil keep-cold order"
+    },
+    {
+     "id": "PROP.FEED_PUMPS",
+     "level": 1,
+     "planning_W": [
+      100000.0,
+      500000.0,
+      2000000.0
+     ],
+     "basis": "pump hardware OPEN (FPS open list)"
+    },
+    {
+     "id": "TMS.HOT_LOOP_PUMPS",
+     "level": 1,
+     "planning_W": [
+      10000000.0,
+      40000000.0,
+      100000000.0
+     ],
+     "basis": "0.5-3 % of ~3.6 GW; coolant OPEN"
+    }
+   ],
+   "loads": [
+    {
+     "id": "ECLSS.RING_AIR",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      3456.0,
+      3840.0,
+      5760.0
+     ],
+     "bus": "AB",
+     "priority": "ESSENTIAL",
+     "heat": "RING_COLD",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "ECLSS.O2_GEN",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      2313.36,
+      2856.0,
+      3769.92
+     ],
+     "bus": "AB",
+     "priority": "MISSION",
+     "heat": "RING_COLD",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "ECLSS.WATER",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      1500.0,
+      3000.0,
+      5000.0
+     ],
+     "bus": "AB",
+     "priority": "MISSION",
+     "heat": "RING_COLD",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "ECLSS.CO2_REDUCTION",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      300.0,
+      800.0,
+      1500.0
+     ],
+     "bus": "AB",
+     "priority": "NOMINAL",
+     "heat": "RING_COLD",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "ECLSS.GARDEN",
+     "level": 0.5,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      6000.0,
+      20000.0,
+      45000.0
+     ],
+     "bus": "B",
+     "priority": "DISCRETIONARY",
+     "heat": "RING_COLD",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "TMS.RING_HEAT_PUMPS",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      8000.0,
+      12000.0,
+      20000.0
+     ],
+     "bus": "AB",
+     "priority": "ESSENTIAL",
+     "heat": "RING_COLD",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "HAB.HOTEL",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      6580.0,
+      9400.0,
+      16920.0
+     ],
+     "bus": "AB",
+     "priority": "NOMINAL",
+     "heat": "RING_COLD",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "SAFETY.MEDICAL",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      300.0,
+      1000.0,
+      3000.0
+     ],
+     "bus": "AB",
+     "priority": "ESSENTIAL",
+     "heat": "RING_COLD",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "STRUCT.ROTOR",
+     "level": 0.2,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      400.0,
+      1600.0,
+      4000.0
+     ],
+     "bus": "AB",
+     "priority": "MISSION",
+     "heat": "WARM",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "CDH.COMPUTE",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      10000.0,
+      30000.0,
+      80000.0
+     ],
+     "bus": "AB",
+     "priority": "ESSENTIAL",
+     "heat": "LOW",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "GNC.SENSORS_CMG",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      3000.0,
+      8000.0,
+      20000.0
+     ],
+     "bus": "AB",
+     "priority": "MISSION",
+     "heat": "LOW",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "COMMS.LINK",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      1000.0,
+      4000.0,
+      12000.0
+     ],
+     "bus": "AB",
+     "priority": "MISSION",
+     "heat": "LOW",
+     "exported_W": [
+      200.0,
+      800.0,
+      2400.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "TMS.CRYOCOOLERS",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      316192.41301819566,
+      395240.5162727445,
+      592860.7744091167
+     ],
+     "bus": "AB",
+     "priority": "MISSION",
+     "heat": "LOW",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "TMS.LOOP_PUMPS",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      30000.0,
+      80000.0,
+      200000.0
+     ],
+     "bus": "AB",
+     "priority": "MISSION",
+     "heat": "WARM",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "PROT.DEF_PROACTIVE",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      1500000.0,
+      2500000.0,
+      3500000.0
+     ],
+     "bus": "AB",
+     "priority": "MISSION",
+     "heat": "WARM",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "MRO.DRONES_WORKSHOP",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      2000.0,
+      10000.0,
+      40000.0
+     ],
+     "bus": "AB",
+     "priority": "DISCRETIONARY",
+     "heat": "WARM",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "PROT.EYE_BURN_WATCH",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      1050000.0,
+      1050000.0,
+      1050000.0
+     ],
+     "bus": "L1",
+     "priority": "MISSION",
+     "heat": "WARM",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    },
+    {
+     "id": "TMS.BURN_HEAT_PUMPS",
+     "level": 1,
+     "role": "CONT",
+     "duty": 1.0,
+     "W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "lift_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "bus": "L1",
+     "priority": "MISSION",
+     "heat": "HOT",
+     "exported_W": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "replaced_by": null
+    }
+   ]
+  },
   "FIRST_IGNITION": {
    "id": "FIRST_IGNITION",
    "kind": "OPERATING",
@@ -8071,6 +8575,23 @@
    6768000000.0,
    6984000000.0
   ],
+  "reserve_breakdown_J": {
+   "pulse_bank_recharge": 800000000.0,
+   "restart_services_hold": 4390600398.820048
+  },
+  "reserve_fraction": 0.72091672205834,
+  "ride_through_at_end_of_life_J": [
+   1145399601.1799517,
+   1577399601.1799517,
+   1793399601.1799517
+  ],
+  "kWh": {
+   "main_usable": 2000.0,
+   "black_start_reserve": 1441.83344411668,
+   "ride_through": 558.1665558833199,
+   "pulse_bank_recharge": 222.22222222222223,
+   "restart_services_hold": 1219.611221894458
+  },
   "pack_mass_kg": 2500.0,
   "pack_mass_basis": "pack-level extrapolation",
   "installed_mass": "OPEN (power.storage.main_battery.installed_mass): the 800 Wh/kg figure is already pack-level, so no packaging factor is applied to it; containment, thermal and switching remain unsized",
@@ -8141,6 +8662,18 @@
      0.011491915321264895,
      0.017073985562033073,
      0.029927415976899734
+    ]
+   },
+   "HIGH_THRUST_PROACTIVE": {
+    "ride_through_h": [
+     0.08583208421699413,
+     0.12222653460268423,
+     0.17872986506086955
+    ],
+    "whole_battery_h": [
+     0.3075500791377999,
+     0.4379572130016141,
+     0.6404176788343139
     ]
    },
    "FIRST_IGNITION": {
@@ -8555,6 +9088,28 @@
     62898805.7730182,
     105894296.51627275,
     149651630.69440913
+   ],
+   "NOMINAL": [
+    6880.0,
+    10200.0,
+    18420.0
+   ],
+   "DISCRETIONARY": [
+    8000.0,
+    30000.0,
+    85000.0
+   ]
+  },
+  "HIGH_THRUST_PROACTIVE": {
+   "ESSENTIAL": [
+    21756.0,
+    46840.0,
+    108760.0
+   ],
+   "MISSION": [
+    2904405.7730181958,
+    4044696.5162727446,
+    5387630.694409117
    ],
    "NOMINAL": [
     6880.0,

@@ -297,7 +297,7 @@
    "scenario": "Complete blackout and black start",
    "immediate": "All buses dark; L3 keeps crew-only loads; the reserve restarts in steps (pulse bank charged from the main battery).",
    "independent_resources": [
-    "black-start reserve 1 kWh",
+    "black-start reserve 1,442 kWh",
     "L3 source",
     "refuge packs"
    ],

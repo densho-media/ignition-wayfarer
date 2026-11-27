@@ -243,8 +243,9 @@ def main():
         thermal.append(dict(arch=a['name'], Pe_W=Pe, eta=u['eta'], primary_W=Pe/u['eta'], conversion_waste_W=waste, consumer_heat_W=Pe,
                             exported_W=(pro if 'bound' not in a['name'] else act)['exported_W'][1], T_rej_K=u['T_rej_K'],
                             blade_fraction_plant=f_plant, blade_fraction_defense_warm=f_def, blade_fraction_total=f_plant+f_def,
-                            closes_in_coast=f_plant+f_def <= 0.8,
+                            blades_ok=f_plant+f_def <= 0.8,
                             low_section_heat_W=low, low_section_W=sections['LOW']['load_W'], low_ok=low <= sections['LOW']['load_W'],
+                            closes_in_coast=(f_plant+f_def <= 0.8) and low <= sections['LOW']['load_W'],   # every circuit, not the blades alone (Phase III-A); full per-circuit closure in phase3/corrections.py
                             coolant='Li or NaK primary, He-Xe Brayton working gas, NaK/organic to the blade channels (OPEN)',
                             heat_storage='none needed in steady coast; a defense heat buffer only for engagements beyond the channels'))
     P0 = design[1]/brayton_eff(T_rej, 1)

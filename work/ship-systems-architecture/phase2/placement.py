@@ -183,7 +183,7 @@ def main():
         xs = L['x']
         if len(xs) > 1:
             dmin = min(abs(a-b) for i, a in enumerate(xs) for b in xs[i+1:])
-            sep.append(dict(layout=name, min_axial_m=dmin, sectors=L['sectors'], separate_blades=len(set(L['sectors'])) == len(L['sectors']) or len(xs) > 3,
+            sep.append(dict(layout=name, min_axial_m=dmin, sectors=L['sectors'], separate_blades=len(set(L["sectors"])) == len(L["sectors"]), shared_blade_units=len(L["sectors"])-len(set(L["sectors"])),
                             shared=['spine keel structure', 'coolant headers if not split per blade', 'one cone axis (all shields look forward)'] +
                                    (['drive exclusion district and the drive fault domain (DRIVE_AFT)'] if 'aft' in name else [])))
     res = dict(status='ISSA Phase II STUDY (NONCANON)', dose_model=dict(K_Sv_m2_h_per_Wt=K_SV_M2_H_PER_W, lam_m=LAM, albedo=ALBEDO, rho_shield=RHO_SHIELD),

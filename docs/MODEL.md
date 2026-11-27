@@ -711,7 +711,7 @@ ride-through, and the 800 Wh/kg figure is pack-level (2.5 t pack, installed mass
 ride-through about 10 minutes. Report `references/p1_power_loads.json`; `data/systems.toml` (`systems.py`) is the systems registry, EPS
 and TMS first: one physical owner and one mass-budget owner per assembly (a `physics.mass_budget` line or a PROPOSED line), its load ids,
 heat loop, interfaces, failure domain, sources and maturity; OPEN masses are listed with their planning bands, never summed. Studies and
-the proposal: `work/ship-systems-architecture/` (Phase II in `phase2/`).
+the proposal: `work/ship-systems-architecture/` (Phase II in `phase2/`, Phase III in `phase3/`). HIGH_THRUST_PROACTIVE (ISSA Phase III, DR-01 working doctrine) is the burn with defense proactive: 4.1 MW nominal on L1, warm heat inside the WARM section, no heat-pump lift. `storage()` splits the protected reserve into pulse-bank recharge and restart services and reports it in kWh; `engagement()` takes charge/discharge efficiencies and a discharge-power limit.
 
 ## Radiator zoning (RAD-ZONE): the Graded Thermal Blade
 

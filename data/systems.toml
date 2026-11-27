@@ -15,7 +15,10 @@ failure_domains = ["DRIVE_AFT", "POWER_DISTRICT_A", "POWER_DISTRICT_B", "MIDBODY
 proposed_budget_items = [
   { id = "PROPOSED.burn_generation", note = "Drive-derived electrical generation (L1); proposed under drive_package, owner decision DR-04" },
   { id = "PROPOSED.ship_service_generation", note = "Continuous ship-service generation (L2) and its shielding; no line exists (DR-04)" },
-  { id = "PROPOSED.power_thermal_machinery", note = "Burn heat pumps and their compressors; no line exists (DR-04)" },
+  { id = "PROPOSED.power_thermal_machinery", note = "Burn heat pumps, L1 conversion reject panels, engagement thermal buffer, warm-loop pumps; no line exists (DR-04)" },
+  { id = "PROPOSED.survival_generation", note = "L3 30-day survival source when it no longer fits power_computers_steering_comms (DR-04, ISSA Phase III ledger)" },
+  { id = "PROPOSED.mission_provisioning", note = "Departure loading per mission beyond the 10 t food_consumables line: consumables, spares, medical (DR-04, DR-07/14; mission cargo, not dry mass)" },
+  { id = "PROPOSED.rcs_propellant_tankage", note = "RCS propellant and its tankage; selection OPEN (DR-04, DR-09)" },
 ]
 
 [[system]]

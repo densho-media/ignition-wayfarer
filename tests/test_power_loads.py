@@ -32,6 +32,27 @@ class PowerLoadTests(unittest.TestCase):
                 self.assertGreaterEqual(lifted, 0.0)
             self.assertLessEqual(L['continuous_W'][1], L['peak_W'][1])
 
+    def test_black_start_reserve_breakdown_is_whole(self):
+        st = pl.storage(self.s)
+        self.assertAlmostEqual(sum(st['reserve_breakdown_J'].values()), st['black_start_reserve_J'], delta=1.0)
+        self.assertAlmostEqual(st['black_start_reserve_J']+st['ride_through_J'], st['main_usable_J'], delta=1.0)
+        self.assertAlmostEqual(st['kWh']['main_usable']*3.6e6, st['main_usable_J'], delta=1.0)
+
+    def test_proactive_burn_needs_no_heat_pump_lift(self):
+        # ISSA Phase III (DR-01 working doctrine): with defense proactive in a burn the warm heat fits the WARM section, so the
+        # burn heat pumps lift nothing and draw nothing
+        L = self.L['HIGH_THRUST_PROACTIVE']; row = next((r for r in L['loads'] if r['id'] == 'TMS.BURN_HEAT_PUMPS'), None)
+        self.assertLessEqual(L['heat_W']['WARM'][1], pl.items(self.s)['TMS.BURN_HEAT_PUMPS']['lift']['sink_W'])
+        if row is not None:
+            self.assertEqual(row['W'][1], 0.0)
+
+    def test_engagement_losses_conserve_energy(self):
+        e = pl.engagement(3e6, 24e6, 10.0, 600.0, 5e6, 1e9, eta_c=0.95, eta_d=0.95)
+        delivered = (24e6-5e6)*10.0
+        self.assertAlmostEqual(e['buffer_draw_J']*0.95, delivered, delta=1.0)
+        self.assertAlmostEqual(e['storage_loss_heat_J'], e['buffer_draw_J']/0.95-delivered, delta=1.0)
+        self.assertFalse(pl.engagement(3e6, 24e6, 10.0, 600.0, 5e6, 1e9, P_dis_max=1e6)['sustainable'])
+
     def test_heat_pumps_move_heat_without_creating_it(self):
         L = self.L['HIGH_THRUST']; it = pl.items(self.s)['TMS.BURN_HEAT_PUMPS']
         row = next(r for r in L['loads'] if r['id'] == 'TMS.BURN_HEAT_PUMPS')
