@@ -165,6 +165,7 @@ def build():
            dict(meaning='illustrative magnetic/neutron exclusion radius round the drive; real radius OPEN (EPS-09)'))
     tube('ISSA_EVA_Keepout_Plants_Running', -70.0, -36.0, 6.4, 7.6, cX, mat('ISSA_EVA', (1.0, 0.1, 0.1), 0.15),
          dict(meaning='EVA keep-out on the hull outside the shadow cones while plants A/B run (EVA there only with the plant at decay power)'))
+    phase2(root, cL)
     # Cameras
     def cam(name, loc, target, lens=24):
         cd = bpy.data.cameras.new(name); cd.lens = lens; cd.clip_end = 3000
@@ -179,6 +180,34 @@ def build():
             if area.type == 'VIEW_3D':
                 sp = area.spaces[0]; sp.region_3d.view_perspective = 'CAMERA'; sp.shading.type = 'SOLID'
                 sp.shading.color_type = 'MATERIAL'; sp.clip_end = 3000; sp.overlay.show_extras = False
+
+
+def phase2(root, cL):
+    """ISSA Phase II candidate layouts (results/phase2_placement.json): one hidden collection per layout, the preferred one visible."""
+    import json
+    P = json.loads((HERE / 'results' / 'phase2_placement.json').read_text())
+    cols = {'L-A': (0.2, 0.55, 0.95), 'L-B': (0.95, 0.35, 0.2), 'L-C': (0.6, 0.4, 0.95), 'L-E': (0.2, 0.85, 0.6), 'L-D': (0.9, 0.15, 0.15)}
+    preferred = 'L-E'
+    for name, L in P['layouts'].items():
+        key = name.split()[0]
+        c = coll(f'WORK_ISSA_6{list(cols).index(key)}_LAYOUT_{key.replace("-", "")}', root)
+        m = mat(f'ISSA2_{key}', cols[key], 0.7); mc = mat(f'ISSA2_{key}_cone', (0.95, 0.9, 0.3), 0.06)
+        mb = mat(f'ISSA2_{key}_band', (0.95, 0.6, 0.1), 0.35)
+        for k, (x, deg) in enumerate(zip(L['x'], L['sectors'])):
+            sector_box(f'ISSA2_{key}_Unit_{k+1}', x-2.6, x+2.6, deg, 1.5, 4.3, 3.0, c, m,
+                       dict(layout=name, unit=k+1, envelope_m3=round(P['envelopes']['C-lean']['unit_total_m3'][1]),
+                            shield_kg=round(L['per_unit_shield_kg'][1]), note=L['note']))
+            tube(f'ISSA2_{key}_ScatterBand_{k+1}', x-1.0, x+1.0, 1.0, 1.0+L['side_efolds'][1]*P['dose_model']['lam_m'][1]*0.5, c, mb,
+                 dict(meaning='blade-facing side shield against single scatter (schematic thickness, not a design)'))
+        x0 = min(L['x']); cone(f'ISSA2_{key}_ShadowCone', (x0, 0, 0), 145.0-x0, L['cone_half_angle_needed_deg'], c, mc,
+                               dict(half_angle_deg=round(L['cone_half_angle_needed_deg'], 1)))
+        tube(f'ISSA2_{key}_CrewExclusion', min(L['x'])-6.0, max(L['x'])+6.0, 4.4, 6.3, c, mat(f'ISSA2_{key}_excl', (1.0, 0.1, 0.1), 0.12),
+             dict(meaning='no crew or EVA in line of sight of a running unit (21-24 e-folds needed at 2-4 m); drones only'))
+        label(f'{key}: {name[4:40]}', ((min(L['x'])+max(L['x']))/2, 0, -14.0), c, 1.4)
+        if key != preferred:
+            c.hide_viewport = True
+            for o in c.objects:
+                o.hide_render = True
 
 
 def main():

@@ -80,9 +80,9 @@ a{color:var(--info)}
 
 <div class="wrap">
 <header class="top">
-  <div class="eyebrow">G.U. WAYFARER 001 · ISSA · proposal, 2026-11-27 · not canon</div>
+  <div class="eyebrow">G.U. WAYFARER 001 · ISSA · Phase II for owner review, 2026-11-27 · not canon</div>
   <h1>Integrated Ship Systems Architecture</h1>
-  <p class="lede">The ship has its structure, drive, radiators, rings and tanks, but its machinery is mostly unrated proxies. This review lists {{N_SYS}} assemblies with one owner each, models electric load across 15 operating conditions, surveys free space inside the built model, and proposes where power, thermal and stores machinery could go. It changes no canon, geometry or Drive data.</p>
+  <p class="lede">Phase II turns the ISSA proposal into a power-load model in the repository (EPS-A), compares generation architectures, checks heat, survival, life support, mass, placement and failure modes, and adds mission profiles now that six years is a story scenario rather than a provisioning rule. It changes no canon, Drive data or geometry; the Phase I proposal follows below it, with its superseded numbers marked.</p>
   <div class="chips">
     <span class="chip c-model">MODEL-DERIVED: measured from the built .blend</span>
     <span class="chip c-sim">STUDY: computed by work/ship-systems-architecture</span>
@@ -90,16 +90,19 @@ a{color:var(--info)}
     <span class="chip c-warn">OPEN: owner decision needed</span>
   </div>
   <div class="grid">
-    <div class="card"><h4>Coast electric demand</h4><div class="big">0.8 → 26 MW</div><p class="fn">Ship service alone, then with the normal active defense band. The defense duty, not the habitat, sizes the plant.</p></div>
-    <div class="card"><h4>Power item in the mass budget</h4><div class="big">{{PC_LEFT}}</div><p class="fn">What the 50 t power/computers/steering/comms item has left after the hardware it already holds ({{PC_USED}}).</p></div>
-    <div class="card"><h4>Usable free volume in the casing</h4><div class="big">{{TOT_USE}} m³ <small>of {{TOT_IN}}</small></div><p class="fn">Blocks with 1 m clear around them. The dry store ({{TOT_DRY}} m³) is the real reserve.</p></div>
-    <div class="card"><h4>Main battery at coast load</h4><div class="big">{{BAT_COAST}}</div><p class="fn">Ride-through only. {{BAT_HV}} with active defense, {{BAT_CRYO}} at survival plus cryocoolers.</p></div>
+    <div class="card"><h4>Proactive coast demand</h4><div class="big">{{P2_COAST}}</div><p class="fn">Known loads, MW nominal. Triggered active defense draws a dedicated buffer; continuous active (~26 MW) is the bound.</p></div>
+    <div class="card"><h4>Working ship-service plant</h4><div class="big">4 × 1.75 MWe</div><p class="fn">Fission-Brayton, 3+1, about {{P2_L2}} t with shadow and scatter shielding.</p></div>
+    <div class="card"><h4>Added power and thermal mass</h4><div class="big">{{P2_ADD}} t</div><p class="fn">Nominal, beyond today's lines; none of it fits the 50 t item.</p></div>
+    <div class="card"><h4>Standard mission load</h4><div class="big">{{P2_STD}} t</div><p class="fn">12 crew, 12 months, in {{P2_CONT}} of 54 dry-store containers. Six years is narrative.</p></div>
   </div>
 </header>
 
 <nav class="toc" aria-label="Sections">
-  <a href="#a">A State</a><a href="#b">B Hierarchy</a><a href="#c">C Gap matrix</a><a href="#d">D Power</a><a href="#e">E Space</a><a href="#f">F Diagrams</a><a href="#g">G Registry</a><a href="#h">H Budgets</a><a href="#fm">FMEA</a><a href="#i">I Roadmap</a><a href="#j">J Decisions</a><a href="#k">K First task</a><a href="#src">Sources</a>
+  <a href="#p1">1 EPS-A</a><a href="#p2">2 Loads</a><a href="#p3">3 Fixes</a><a href="#p4">4 Duty</a><a href="#p5">5 Generation</a><a href="#p6">6 Storage</a><a href="#p7">7 Thermal</a><a href="#p8">8 Survival</a><a href="#p9">9 ECLSS</a><a href="#p10">10 Missions</a><a href="#p11">11 Mass</a><a href="#p12">12 Placement</a><a href="#p13">13 FMEA</a><a href="#p14">14 Registry</a><a href="#p15">15 Decisions</a><a href="#p16">16 Problems</a><a href="#p17">17 Next</a><a href="#phase1">Phase I:</a><a href="#a">A State</a><a href="#b">B Hierarchy</a><a href="#c">C Gap matrix</a><a href="#d">D Power</a><a href="#e">E Space</a><a href="#f">F Diagrams</a><a href="#g">G Registry</a><a href="#h">H Budgets</a><a href="#fm">FMEA</a><a href="#i">I Roadmap</a><a href="#j">J Decisions</a><a href="#k">K First task</a><a href="#src">Sources</a>
 </nav>
+{{PHASE2}}
+<section id="phase1"><div class="letter">PHASE I · 2026-11-27 MORNING</div><h2>The Phase I proposal</h2><div class="callout">Kept for the record. Superseded by Phase II: the coast demand (0.8 / 3.6 / 26 MW), the battery mass (packaging counted twice), the food "shortfall" (six years is narrative), the decision register J (now 15) and the first task K (EPS-A is done; see 17).</div></section>
+
 
 <section id="a">
   <div class="letter">A · CURRENT STATE</div>

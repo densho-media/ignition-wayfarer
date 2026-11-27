@@ -1,0 +1,373 @@
+{
+ "status": "ISSA Phase II STUDY (NONCANON)",
+ "occupancy": {
+  "design_12": {
+   "people": 12,
+   "rings": "6 + 6"
+  },
+  "story": {
+   "people": 6,
+   "consumers": 5,
+   "note": "Seraph eats no human food or O2"
+  },
+  "one_ring_emergency": {
+   "people": 12,
+   "rings": "12 in one ring"
+  },
+  "refuge": {
+   "people": 12,
+   "rings": "storm refuge"
+  }
+ },
+ "strings": {
+  "string": {
+   "count": 2,
+   "nominal_people": 6,
+   "max_people": 10,
+   "o2_kg_day": 5.0,
+   "electrolysis_kW": 1.7,
+   "sabatier_ch4_vent_kg_day": 1.3
+  },
+  "reading": "six PER STRING (one string per ring), not six for the ship: 12 rated is two strings at 1.0x",
+  "cases": {
+   "design 12, both rings": {
+    "people": 12,
+    "per_string": 6.0,
+    "load": 1.0,
+    "within_max": true
+   },
+   "story 6, both rings": {
+    "people": 6,
+    "per_string": 3.0,
+    "load": 0.5,
+    "within_max": true
+   },
+   "12 in one ring": {
+    "people": 12,
+    "per_string": 12.0,
+    "load": 2.0,
+    "within_max": false
+   },
+   "12, one string failed": {
+    "people": 12,
+    "per_string": 12.0,
+    "load": 2.0,
+    "within_max": false
+   }
+  },
+  "finding": "12 people in one ring, or 12 on one string, needs 2.0x a string: above the 1.7x surge. Hardware is not doubled: a third (spare) string or per-ring surge to 2.0x is the question."
+ },
+ "ledger": {
+  "O2_generated_t": 22.09032,
+  "CO2_removed_t": 26.298,
+  "water_turnover_t": 109.39968,
+  "water_makeup_t": {
+   "90 % recovery": 10.939967999999999,
+   "98 % recovery": 2.187993600000002
+  },
+  "sabatier_methane_vent_water_loss_t": 6.410137500000001,
+  "waste_t": 26.298,
+  "filters_cartridges_t": [
+   3.0,
+   5.0,
+   9.0
+  ],
+  "hygiene_clothing_medical_t": [
+   4.0,
+   6.5,
+   10.5
+  ],
+  "note": "O2 recovery credited 0 and Garden credit 0 (life_support process rules); Sabatier vents methane, so water is lost with its hydrogen."
+ },
+ "food": {
+  "conventional packaged (ISS, 41!B18)": {
+   "per_person_day_kg": 1.83,
+   "dry_kg": 0.8,
+   "water_kg": 0.7,
+   "packaging_kg": 0.33,
+   "mission_12_t": 48.12534,
+   "mission_story_t": 20.052225000000004,
+   "volume_12_m3": 94.67280000000001,
+   "extra_power_W": 0,
+   "note": "owner rate incl. packaging"
+  },
+  "dehydrated + rehydration": {
+   "per_person_day_kg": 0.95,
+   "dry_kg": 0.78,
+   "water_kg": 0.05,
+   "packaging_kg": 0.12,
+   "mission_12_t": 24.9831,
+   "mission_story_t": 10.409625,
+   "volume_12_m3": 55.2258,
+   "extra_power_W": 0,
+   "note": "rehydration ~0.8 kg water/person-day from the recovered loop (no makeup if recovery holds)"
+  },
+  "mixed (50 % dehydrated)": {
+   "per_person_day_kg": 1.39,
+   "dry_kg": 0.79,
+   "water_kg": 0.38,
+   "packaging_kg": 0.22,
+   "mission_12_t": 36.55422,
+   "mission_story_t": 15.230925,
+   "volume_12_m3": 76.2642,
+   "extra_power_W": 0,
+   "note": ""
+  },
+  "bulk staples + galley + 25 % garden calories": {
+   "per_person_day_kg": 0.6500000000000001,
+   "dry_kg": 0.6,
+   "water_kg": 0.03,
+   "packaging_kg": 0.05,
+   "mission_12_t": 17.093700000000005,
+   "mission_story_t": 7.122375000000002,
+   "volume_12_m3": 39.447,
+   "extra_power_W": 40000.0,
+   "note": "garden 120 m2 at the nominal 40 kW lighting load; seeds, nutrients and spares ~1-2 t"
+  }
+ },
+ "food_vs_budget": {
+  "conventional packaged (ISS, 41!B18)": {
+   "food_12_t": 48.12534,
+   "with_consumables_t": 54.98534,
+   "vs_10t": 44.98534,
+   "food_story_t": 20.052225000000004
+  },
+  "dehydrated + rehydration": {
+   "food_12_t": 24.9831,
+   "with_consumables_t": 31.8431,
+   "vs_10t": 21.8431,
+   "food_story_t": 10.409625
+  },
+  "mixed (50 % dehydrated)": {
+   "food_12_t": 36.55422,
+   "with_consumables_t": 43.41422,
+   "vs_10t": 33.41422,
+   "food_story_t": 15.230925
+  },
+  "bulk staples + galley + 25 % garden calories": {
+   "food_12_t": 17.093700000000005,
+   "with_consumables_t": 23.953700000000005,
+   "vs_10t": 13.953700000000005,
+   "food_story_t": 7.122375000000002
+  }
+ },
+ "reserve": {
+  "emergency_30d_12_t": 0.36,
+  "note": "dense emergency rations 1.0 kg/person-day, kept in the refuge"
+ },
+ "preservation": {
+  "degradation": "Vitamins (C, B1, A) and texture decline over 3-5 years at room temperature (NASA Advanced Food Technology: many ISS foods fall below nutrition targets after ~3 years). A six-year store needs cold storage (~4 C) or frozen (-20 C) for the later half, supplements, and fresh garden produce for vitamins.",
+  "cold_store": {
+   "volume_m3": [
+    30,
+    50,
+    80
+   ],
+   "power_W": [
+    3000.0,
+    6000.0,
+    12000.0
+   ],
+   "note": "refrigerated/frozen store for ~half the food; heat to the ring cold loops"
+  },
+  "storage": "low temperature, low oxygen (nitrogen-flushed packs), dark; rotation first-in first-out"
+ },
+ "shield_water": {
+  "total_t": 180.0,
+  "rotating_t": 160.0,
+  "refuge_t": 20.0,
+  "makeup_need_t": [
+   8.598131100000003,
+   17.350105499999998
+  ],
+  "share_needed": [
+   0.053738319375000024,
+   0.10843815937499998
+  ],
+  "dose_effect": "GCR dose falls slowly with water areal density (~1-2 % per g/cm2 near 20-30 g/cm2): withdrawing 10 % of the ring water raises the habitat GCR dose by roughly 2-5 % (order of magnitude, needs a transport calculation).",
+  "rules": [
+   "mandatory floor: the refuge 20 t never; ring water no lower than 90 % (PROTOTYPE) of its design areal density",
+   "draw symmetrically from paired compartments 180 deg apart, per ring, within the ring-balance tolerance (physics.ring_balance momentum 0.1 %)",
+   "shield water is non-potable until processed: biocide/additive chemistry and contamination checks, then the water processor",
+   "compartmentalised tanks with isolation valves; a leak isolates one cell, not the shield"
+  ],
+  "verdict": "A controlled 10 % draw (16 t) covers the 98 %-recovery makeup plus the methane-vent loss (8.6 t, 5.4 %) with margin; at 90 % recovery (17.4 t) it is exceeded. Closing the Sabatier loop (methane pyrolysis / Bosch) removes the 6.4 t loss."
+ },
+ "rcs": {
+  "impulse": {
+   "flips_Ns": 2738806.7581596146,
+   "docking_translation_Ns": 26797848.636669353,
+   "trim_and_desat_Ns": 2000000.0,
+   "note": "four flips (two per round trip, attitude.flips at Isp 300 s), 3 m/s of docking translation at departure and arrival mass, trim and CMG desaturation (STUDY)"
+  },
+  "total_Ns": 31536655.394828968,
+  "options": {
+   "cold gas N2": {
+    "isp_s": 70,
+    "propellant_t": 45.94062687029278,
+    "with_tankage_t": 82.69312836652702,
+    "note": "simple, inert, very heavy; tank pressure vessels"
+   },
+   "hydrazine monopropellant": {
+    "isp_s": 230,
+    "propellant_t": 13.981929917045631,
+    "with_tankage_t": 16.079219404602473,
+    "note": "flight-proven; toxic, freezes at 275 K, six-year storage heritage (Voyager)"
+   },
+   "MMH/NTO bipropellant": {
+    "isp_s": 310,
+    "propellant_t": 10.373689938453207,
+    "with_tankage_t": 11.618532731067594,
+    "note": "flight-proven; toxic, hypergolic"
+   },
+   "gaseous H2/O2 (boil-off H2 + electrolysis O2)": {
+    "isp_s": 380,
+    "propellant_t": 8.462747055053935,
+    "with_tankage_t": 10.57843381881742,
+    "note": "uses propellant and ECLSS the ship already carries; igniters; O2 competes with breathing"
+   },
+   "H2 resistojet / arcjet (boil-off H2)": {
+    "isp_s": 700,
+    "propellant_t": 4.594062687029278,
+    "with_tankage_t": 5.742578358786597,
+    "note": "electric: ~F ve / 2 eta of power; good for trim and desaturation, too weak for flips"
+   }
+  }
+ },
+ "mass": {
+  "adds": [
+   {
+    "item": "L2 ship-service generation (C-lean 3+1, shadow + blade-scatter shield, layout L-E)",
+    "budget": "PROPOSED.ship_service_generation",
+    "t": [
+     127.77672786908089,
+     209.16905441455495,
+     389.6919113309577
+    ],
+    "x_m": -78.0
+   },
+   {
+    "item": "L1 burn generation",
+    "budget": "PROPOSED.burn_generation",
+    "t": [
+     107.19128233946046,
+     229.69560501312958,
+     535.9564116973023
+    ],
+    "x_m": -100.0
+   },
+   {
+    "item": "Burn heat pumps (running lift at burnout, 0.5/1.5/5 kg/kW)",
+    "budget": "PROPOSED.power_thermal_machinery",
+    "t": [
+     40.9248,
+     122.7744,
+     409.248
+    ],
+    "x_m": -100.0
+   },
+   {
+    "item": "L3 survival source (crew + nav/comms, 30 d: RPS or fission-Stirling)",
+    "budget": "power_computers_steering_comms",
+    "t": [
+     9.0,
+     12.0,
+     16.0
+    ],
+    "x_m": 113.0
+   },
+   {
+    "item": "Cryocoolers (TMS-07)",
+    "budget": "radiators_thermal",
+    "t": [
+     3.0,
+     6.0,
+     12.0
+    ],
+    "x_m": 0.0
+   },
+   {
+    "item": "Defense buffer (1 GJ, D-variant only)",
+    "budget": "power_computers_steering_comms",
+    "t": [
+     0.45,
+     2.4,
+     12.0
+    ],
+    "x_m": 120.0
+   },
+   {
+    "item": "Standard 12-month crew load beyond the 10 t line (mission cargo, 12 crew)",
+    "budget": "food_consumables",
+    "t": [
+     2.124116000000001,
+     4.051315999999998,
+     5.978515999999999
+    ],
+    "x_m": 100.0
+   },
+   {
+    "item": "RCS propellant (H2/O2 or biprop)",
+    "budget": "PROPOSED.rcs_propellant",
+    "t": [
+     9.294826184854076,
+     10.57843381881742,
+     16.079219404602473
+    ],
+    "x_m": 0.0
+   }
+  ],
+  "total_added_t": [
+   299.7617523933954,
+   596.668809246502,
+   1396.9540584328624
+  ],
+  "dry_ship_t": 1669.7218149293055,
+  "departure_t": 4466.308106111559,
+  "propellant_t": 2796.5862911822533,
+  "mission_mass_ratio": 2.6748815678021534,
+  "extra_propellant_t": [
+   577.3752488881366,
+   1149.2520292928389,
+   2690.692494065955
+  ],
+  "delta_v_fraction_lost_if_propellant_fixed": [
+   0.1017927731447302,
+   0.18308575060973933,
+   0.3412861354405256
+  ],
+  "dry_cg_x_m": 35.06059717343276,
+  "dry_cg_x_after_m": 3.9835978418611924,
+  "cg_shift_m": -31.076999331571567,
+  "axial_load_added_N_at_1_5g": [
+   4409487.883663036,
+   8776983.267295813,
+   20549159.275695946
+  ],
+  "pcsc": {
+   "allocation_t": 50.0,
+   "registry_eps_t": [
+    10.3,
+    17.8,
+    29.4
+   ],
+   "cdh_gnc_rcs_comms_t": [
+    8.0,
+    13.5,
+    22.0
+   ],
+   "committed_t": [
+    18.3,
+    31.3,
+    51.4
+   ],
+   "left_t": [
+    31.7,
+    18.7,
+    -1.3999999999999986
+   ],
+   "note": "Battery corrected to pack-level 2.5 t (the 800 Wh/kg figure is already a pack figure; Phase I applied packaging twice)."
+  },
+  "note": "Power mass kept apart from the Vertex drive-mass research; the drive_package (250 t) is unchanged here. Volume is not mass: the empty dry store is not unused mass allowance."
+ }
+}

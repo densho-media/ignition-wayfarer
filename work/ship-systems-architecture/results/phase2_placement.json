@@ -1,0 +1,1229 @@
+{
+ "status": "ISSA Phase II STUDY (NONCANON)",
+ "dose_model": {
+  "K_Sv_m2_h_per_Wt": 0.9560026132239018,
+  "lam_m": [
+   0.1,
+   0.12,
+   0.15
+  ],
+  "albedo": [
+   0.02,
+   0.05,
+   0.15
+  ],
+  "rho_shield": 1600.0
+ },
+ "module": {
+  "gross_m3": 91.392,
+  "note": "one M-pair (two dry-store modules, one sector): 10.2 x 2.8 x 3.2 m (Phase I make_review envelope)"
+ },
+ "envelopes": {
+  "B": {
+   "unit_MWe": 5.62,
+   "assemblies": {
+    "reactor + shadow shield": {
+     "equipment_m3": [
+      5.62,
+      8.992,
+      14.05
+     ],
+     "insulation_m3": 2.594510599010545,
+     "with_access_m3": [
+      9.511765898515819,
+      12.883765898515819,
+      17.94176589851582
+     ],
+     "clearance": "no hands-on access; 0.3 m gap for thermal growth; remote removal path along x to the casing hatch",
+     "mount": "thrust-rated frame (1.5 g axial)"
+    },
+    "Brayton turbo-alternator-compressor": {
+     "equipment_m3": [
+      8.43,
+      14.05,
+      22.48
+     ],
+     "insulation_m3": 2.3290431825682165,
+     "with_access_m3": [
+      15.41712954770465,
+      21.03712954770465,
+      29.46712954770465
+     ],
+     "clearance": "0.8 m service side; removal envelope = rotor assembly diameter + 0.5 m along a straight path",
+     "mount": "isolated (rotor dynamics, CMG coupling)"
+    },
+    "recuperator + gas cooler + manifolds": {
+     "equipment_m3": [
+      16.86,
+      28.1,
+      44.96
+     ],
+     "insulation_m3": 3.6971255980881503,
+     "with_access_m3": [
+      26.102813995220373,
+      37.342813995220375,
+      54.202813995220374
+     ],
+     "clearance": "0.6 m inspection, 1.2 m at isolation valves",
+     "mount": "sliding supports (thermal expansion 550-1100 K)"
+    },
+    "power conditioning + switchgear": {
+     "equipment_m3": [
+      5.62,
+      8.43,
+      14.05
+     ],
+     "insulation_m3": 0.0,
+     "with_access_m3": [
+      9.76207905097256,
+      12.572079050972558,
+      18.19207905097256
+     ],
+     "clearance": "1.0 m front access (ORU drawers), cold plates on LOW",
+     "mount": "shock-isolated rack"
+    }
+   },
+   "unit_total_m3": [
+    60.7937884924134,
+    83.83578849241341,
+    119.80378849241339
+   ],
+   "removal_lane_m3": 23.519999999999996,
+   "modules_needed": [
+    0.9225510820685989,
+    1.174673806158235,
+    1.5682312291274223
+   ],
+   "note": "The Phase I 1-m clearance was one generic margin; these are per assembly. Removal lanes may be shared by units in a row."
+  },
+  "C": {
+   "unit_MWe": 2.88,
+   "assemblies": {
+    "reactor + shadow shield": {
+     "equipment_m3": [
+      2.88,
+      4.608,
+      7.199999999999999
+     ],
+     "insulation_m3": 1.661471504994134,
+     "with_access_m3": [
+      5.372207257491201,
+      7.100207257491201,
+      9.6922072574912
+     ],
+     "clearance": "no hands-on access; 0.3 m gap for thermal growth; remote removal path along x to the casing hatch",
+     "mount": "thrust-rated frame (1.5 g axial)"
+    },
+    "Brayton turbo-alternator-compressor": {
+     "equipment_m3": [
+      4.32,
+      7.199999999999999,
+      11.52
+     ],
+     "insulation_m3": 1.4914716028578523,
+     "with_access_m3": [
+      8.794414808573556,
+      11.674414808573555,
+      15.994414808573556
+     ],
+     "clearance": "0.8 m service side; removal envelope = rotor assembly diameter + 0.5 m along a straight path",
+     "mount": "isolated (rotor dynamics, CMG coupling)"
+    },
+    "recuperator + gas cooler + manifolds": {
+     "equipment_m3": [
+      8.64,
+      14.399999999999999,
+      23.04
+     ],
+     "insulation_m3": 2.3675635913572513,
+     "with_access_m3": [
+      14.558908978393129,
+      20.318908978393125,
+      28.958908978393126
+     ],
+     "clearance": "0.6 m inspection, 1.2 m at isolation valves",
+     "mount": "sliding supports (thermal expansion 550-1100 K)"
+    },
+    "power conditioning + switchgear": {
+     "equipment_m3": [
+      2.88,
+      4.32,
+      7.199999999999999
+     ],
+     "insulation_m3": 0.0,
+     "with_access_m3": [
+      5.5325026790210785,
+      6.972502679021079,
+      9.852502679021079
+     ],
+     "clearance": "1.0 m front access (ORU drawers), cold plates on LOW",
+     "mount": "shock-isolated rack"
+    }
+   },
+   "unit_total_m3": [
+    34.25803372347896,
+    46.06603372347897,
+    64.49803372347895
+   ],
+   "removal_lane_m3": 23.519999999999996,
+   "modules_needed": [
+    0.6322001239001112,
+    0.7614018045723802,
+    0.9630824768412876
+   ],
+   "note": "The Phase I 1-m clearance was one generic margin; these are per assembly. Removal lanes may be shared by units in a row."
+  },
+  "C-lean": {
+   "unit_MWe": 1.75,
+   "assemblies": {
+    "reactor + shadow shield": {
+     "equipment_m3": [
+      1.75,
+      2.8000000000000003,
+      4.375
+     ],
+     "insulation_m3": 1.1919460660551222,
+     "with_access_m3": [
+      3.537919099082683,
+      4.587919099082684,
+      6.162919099082683
+     ],
+     "clearance": "no hands-on access; 0.3 m gap for thermal growth; remote removal path along x to the casing hatch",
+     "mount": "thrust-rated frame (1.5 g axial)"
+    },
+    "Brayton turbo-alternator-compressor": {
+     "equipment_m3": [
+      2.625,
+      4.375,
+      7.0
+     ],
+     "insulation_m3": 1.0699874805650795,
+     "with_access_m3": [
+      5.834962441695239,
+      7.584962441695239,
+      10.20996244169524
+     ],
+     "clearance": "0.8 m service side; removal envelope = rotor assembly diameter + 0.5 m along a straight path",
+     "mount": "isolated (rotor dynamics, CMG coupling)"
+    },
+    "recuperator + gas cooler + manifolds": {
+     "equipment_m3": [
+      5.25,
+      8.75,
+      14.0
+     ],
+     "insulation_m3": 1.6984992522418108,
+     "with_access_m3": [
+      9.496248130604528,
+      12.996248130604528,
+      18.246248130604524
+     ],
+     "clearance": "0.6 m inspection, 1.2 m at isolation valves",
+     "mount": "sliding supports (thermal expansion 550-1100 K)"
+    },
+    "power conditioning + switchgear": {
+     "equipment_m3": [
+      1.75,
+      2.625,
+      4.375
+     ],
+     "insulation_m3": 0.0,
+     "with_access_m3": [
+      3.6529156527550617,
+      4.527915652755062,
+      6.277915652755062
+     ],
+     "clearance": "1.0 m front access (ORU drawers), cold plates on LOW",
+     "mount": "shock-isolated rack"
+    }
+   },
+   "unit_total_m3": [
+    22.52204532413751,
+    29.697045324137513,
+    40.89704532413751
+   ],
+   "removal_lane_m3": 23.519999999999996,
+   "modules_needed": [
+    0.5037863852868687,
+    0.5822943509731433,
+    0.7048433705809863
+   ],
+   "note": "The Phase I 1-m clearance was one generic margin; these are per assembly. Removal lanes may be shared by units in a row."
+  }
+ },
+ "layouts": {
+  "L-A mid-body M3/M4 (Phase I)": {
+   "x": [
+    -60.25,
+    -46.25
+   ],
+   "sectors": [
+    90,
+    210
+   ],
+   "districts": "D3 dry-store modules",
+   "repurposes_dry_store": true,
+   "note": "Phase I candidate; two plants 14 m apart, different sectors",
+   "targets": [
+    {
+     "target": "RING_A",
+     "who": "crew, 6 + 6 people (habitat sectors)",
+     "plant_x": -46.25,
+     "d_m": 145.22603933179477,
+     "off_axis_deg": 12.946509515636931,
+     "bare_Sv_h": 362.21299454668724,
+     "allow_Sv_h": 1.267523512561158e-06,
+     "efolds_needed": 19.470677972831197,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false,
+     "blade_scatter_over_bare_direct": [
+      0.0012792878259891788,
+      0.0031982195649729447,
+      0.00959465869491883
+     ]
+    },
+    {
+     "target": "RING_B",
+     "who": "crew",
+     "plant_x": -46.25,
+     "d_m": 151.1595266597511,
+     "off_axis_deg": 12.443591484598391,
+     "bare_Sv_h": 334.33509499155815,
+     "allow_Sv_h": 1.267523512561158e-06,
+     "efolds_needed": 19.390589319756135,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true,
+     "blade_scatter_over_bare_direct": [
+      0.0012112176891415282,
+      0.003028044222853819,
+      0.009084132668561461
+     ]
+    },
+    {
+     "target": "REFUGE",
+     "who": "crew in storms, survival",
+     "plant_x": -46.25,
+     "d_m": 154.05,
+     "off_axis_deg": 2.1933135944648674,
+     "bare_Sv_h": 321.9063975809625,
+     "allow_Sv_h": 5e-05,
+     "efolds_needed": 15.67774836507944,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true,
+     "blade_scatter_over_bare_direct": [
+      0.00011274402062253023,
+      0.00028186005155632555,
+      0.0008455801546689771
+     ]
+    },
+    {
+     "target": "FWD_SERVICE",
+     "who": "airlock, storeroom, docks",
+     "plant_x": -46.25,
+     "d_m": 166.25,
+     "off_axis_deg": 2.7549650214232133,
+     "bare_Sv_h": 276.3946963945991,
+     "allow_Sv_h": 1e-05,
+     "efolds_needed": 17.134755368526967,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true
+    },
+    {
+     "target": "BROW_EYE",
+     "who": "EYE electronics and optics (unmanned)",
+     "plant_x": -46.25,
+     "d_m": 187.75,
+     "off_axis_deg": 14.341005378347555,
+     "bare_Sv_h": 216.71707073764335,
+     "allow_Sv_h": 0.01901285268841737,
+     "efolds_needed": 9.341232752564851,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "TANK_FARM",
+     "who": "cryogenic propellant (neutron heating)",
+     "plant_x": -46.25,
+     "d_m": 170.07443223483065,
+     "off_axis_deg": 10.267713758791096,
+     "bare_Sv_h": 264.10398464385986,
+     "allow_Sv_h": null,
+     "efolds_needed": 2.982149263570556,
+     "unshielded_tank_heat_W": 986.5088228377493,
+     "in_shadow_cone": true
+    },
+    {
+     "target": "KEEL_LANE_AT_PLANT",
+     "who": "crew transit along the spine lanes past a plant",
+     "plant_x": -60.25,
+     "d_m": 2.0,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 1909822.5720797123,
+     "allow_Sv_h": 0.0001,
+     "efolds_needed": 23.67286127348496,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "EVA_HULL_AT_PLANT",
+     "who": "EVA on the casing beside a plant",
+     "plant_x": -60.25,
+     "d_m": 3.9000000000000004,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 502254.45682569675,
+     "allow_Sv_h": 0.00025,
+     "efolds_needed": 21.420911796459492,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "PLANT_MAINTENANCE",
+     "who": "hands-on work at a plant at decay power",
+     "plant_x": -60.25,
+     "d_m": 2.0,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 1909822.5720797123,
+     "allow_Sv_h": 0.001,
+     "efolds_needed": 21.37027618049091,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    }
+   ],
+   "cone_half_angle_needed_deg": 12.946509515636931,
+   "shadow_thickness_m": [
+    1.9470677972831198,
+    2.3364813567397436,
+    2.9206016959246797
+   ],
+   "shadow_shield_kg": [
+    6805.348145495486,
+    9142.339266818155,
+    13404.837309863646
+   ],
+   "blade_scatter": [
+    0.0012792878259891788,
+    0.0031982195649729447,
+    0.00959465869491883
+   ],
+   "side_efolds": [
+    12.809226230994536,
+    13.725516962868689,
+    14.8241292515368
+   ],
+   "side_band_kg": [
+    15452.686473777452,
+    19869.68828495018,
+    26825.112318236297
+   ],
+   "per_unit_shield_kg": [
+    22258.034619272938,
+    29012.027551768337,
+    40229.949628099945
+   ],
+   "keel_lane_efolds": 23.67286127348496,
+   "keel_lane_shield_m": [
+    2.3672861273484958,
+    2.840743352818195,
+    3.550929191022744
+   ],
+   "units": 2
+  },
+  "L-B aft bay with the drive (one nuclear district)": {
+   "x": [
+    -108.0,
+    -100.0
+   ],
+   "sectors": [
+    90,
+    330
+   ],
+   "districts": "D2 aft engineering bay",
+   "repurposes_dry_store": false,
+   "note": "all fission and the drive in one exclusion district; D2 usable 75 m3",
+   "targets": [
+    {
+     "target": "RING_A",
+     "who": "crew, 6 + 6 people (habitat sectors)",
+     "plant_x": -100.0,
+     "d_m": 198.5227694749396,
+     "off_axis_deg": 9.495283287278355,
+     "bare_Sv_h": 193.83507335889914,
+     "allow_Sv_h": 1.267523512561158e-06,
+     "efolds_needed": 18.845453211475412,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true,
+     "blade_scatter_over_bare_direct": [
+      0.0009062080879083686,
+      0.002265520219770919,
+      0.006796560659312754
+     ]
+    },
+    {
+     "target": "RING_B",
+     "who": "crew",
+     "plant_x": -100.0,
+     "d_m": 204.48689444558545,
+     "off_axis_deg": 9.219932505099768,
+     "bare_Sv_h": 182.69306192886907,
+     "allow_Sv_h": 1.267523512561158e-06,
+     "efolds_needed": 18.78625303876046,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true,
+     "blade_scatter_over_bare_direct": [
+      0.000868667967983059,
+      0.0021716699199576597,
+      0.006515009759872956
+     ]
+    },
+    {
+     "target": "REFUGE",
+     "who": "crew in storms, survival",
+     "plant_x": -100.0,
+     "d_m": 207.8,
+     "off_axis_deg": 1.6263441063414632,
+     "bare_Sv_h": 176.91388792619247,
+     "allow_Sv_h": 5e-05,
+     "efolds_needed": 15.079150657834541,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true,
+     "blade_scatter_over_bare_direct": [
+      8.160015152160047e-05,
+      0.00020400037880400045,
+      0.0006120011364120007
+     ]
+    },
+    {
+     "target": "FWD_SERVICE",
+     "who": "airlock, storeroom, docks",
+     "plant_x": -100.0,
+     "d_m": 220.0,
+     "off_axis_deg": 2.0825652797308845,
+     "bare_Sv_h": 157.83657620493491,
+     "allow_Sv_h": 1e-05,
+     "efolds_needed": 16.57448563489417,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true
+    },
+    {
+     "target": "BROW_EYE",
+     "who": "EYE electronics and optics (unmanned)",
+     "plant_x": -100.0,
+     "d_m": 241.5,
+     "off_axis_deg": 11.241478767626473,
+     "bare_Sv_h": 130.98414907379,
+     "allow_Sv_h": 0.01901285268841737,
+     "efolds_needed": 8.837716387668085,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true
+    },
+    {
+     "target": "TANK_FARM",
+     "who": "cryogenic propellant (neutron heating)",
+     "plant_x": -100.0,
+     "d_m": 223.74650835264447,
+     "off_axis_deg": 7.833793959269899,
+     "bare_Sv_h": 152.59506193895328,
+     "allow_Sv_h": null,
+     "efolds_needed": 2.433594115566297,
+     "unshielded_tank_heat_W": 569.9890334000308,
+     "in_shadow_cone": true
+    },
+    {
+     "target": "KEEL_LANE_AT_PLANT",
+     "who": "crew transit along the spine lanes past a plant",
+     "plant_x": -108.0,
+     "d_m": 2.0,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 1909822.5720797123,
+     "allow_Sv_h": 0.0001,
+     "efolds_needed": 23.67286127348496,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "EVA_HULL_AT_PLANT",
+     "who": "EVA on the casing beside a plant",
+     "plant_x": -108.0,
+     "d_m": 3.9000000000000004,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 502254.45682569675,
+     "allow_Sv_h": 0.00025,
+     "efolds_needed": 21.420911796459492,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "PLANT_MAINTENANCE",
+     "who": "hands-on work at a plant at decay power",
+     "plant_x": -108.0,
+     "d_m": 2.0,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 1909822.5720797123,
+     "allow_Sv_h": 0.001,
+     "efolds_needed": 21.37027618049091,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    }
+   ],
+   "cone_half_angle_needed_deg": 9.495283287278355,
+   "shadow_thickness_m": [
+    1.8845453211475414,
+    2.2614543853770495,
+    2.826817981721312
+   ],
+   "shadow_shield_kg": [
+    6335.949139698484,
+    8464.054969526835,
+    12318.297541749427
+   ],
+   "blade_scatter": [
+    0.0009062080879083686,
+    0.002265520219770919,
+    0.006796560659312754
+   ],
+   "side_efolds": [
+    11.839211610785311,
+    12.755502342659465,
+    13.854114631327574
+   ],
+   "side_band_kg": [
+    14282.488404763435,
+    18465.45060213337,
+    25069.815214715272
+   ],
+   "per_unit_shield_kg": [
+    20618.437544461918,
+    26929.505571660204,
+    37388.1127564647
+   ],
+   "keel_lane_efolds": 23.67286127348496,
+   "keel_lane_shield_m": [
+    2.3672861273484958,
+    2.840743352818195,
+    3.550929191022744
+   ],
+   "units": 2
+  },
+  "L-C distributed 3+1 (C-lean)": {
+   "x": [
+    -82.0,
+    -60.25,
+    -46.25,
+    -24.0
+   ],
+   "sectors": [
+    90,
+    210,
+    330,
+    90
+   ],
+   "districts": "D3 M1, M3, M4, M7",
+   "repurposes_dry_store": true,
+   "note": "one unit per module group; blade sectors separate units",
+   "targets": [
+    {
+     "target": "RING_A",
+     "who": "crew, 6 + 6 people (habitat sectors)",
+     "plant_x": -24.0,
+     "d_m": 123.2789114163489,
+     "off_axis_deg": 15.21914145141157,
+     "bare_Sv_h": 502.66127867582827,
+     "allow_Sv_h": 1.267523512561158e-06,
+     "efolds_needed": 19.7983620923367,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false,
+     "blade_scatter_over_bare_direct": [
+      0.001498144870200315,
+      0.003745362175500783,
+      0.01123608652650235
+     ]
+    },
+    {
+     "target": "RING_B",
+     "who": "crew",
+     "plant_x": -24.0,
+     "d_m": 129.18703495320264,
+     "off_axis_deg": 14.532893078972583,
+     "bare_Sv_h": 457.7360863355391,
+     "allow_Sv_h": 1.267523512561158e-06,
+     "efolds_needed": 19.704738338630055,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false,
+     "blade_scatter_over_bare_direct": [
+      0.0014077792078792113,
+      0.0035194480196980332,
+      0.010558344059094097
+     ]
+    },
+    {
+     "target": "REFUGE",
+     "who": "crew in storms, survival",
+     "plant_x": -24.0,
+     "d_m": 131.8,
+     "off_axis_deg": 2.5631226771419064,
+     "bare_Sv_h": 439.76655024735413,
+     "allow_Sv_h": 5e-05,
+     "efolds_needed": 15.989731571027981,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true,
+     "blade_scatter_over_bare_direct": [
+      0.00013033739211321834,
+      0.00032584348028304655,
+      0.0009775304408491396
+     ]
+    },
+    {
+     "target": "FWD_SERVICE",
+     "who": "airlock, storeroom, docks",
+     "plant_x": -24.0,
+     "d_m": 144.0,
+     "off_axis_deg": 3.1798301198642345,
+     "bare_Sv_h": 368.4071319598211,
+     "allow_Sv_h": 1e-05,
+     "efolds_needed": 17.422114128446893,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true
+    },
+    {
+     "target": "BROW_EYE",
+     "who": "EYE electronics and optics (unmanned)",
+     "plant_x": -24.0,
+     "d_m": 165.5,
+     "off_axis_deg": 16.173755710117025,
+     "bare_Sv_h": 278.90546045833275,
+     "allow_Sv_h": 0.01901285268841737,
+     "efolds_needed": 9.593512944219103,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "TANK_FARM",
+     "who": "cryogenic propellant (neutron heating)",
+     "plant_x": -24.0,
+     "d_m": 147.8732565408634,
+     "off_axis_deg": 11.776044705849833,
+     "bare_Sv_h": 349.360450383868,
+     "allow_Sv_h": null,
+     "efolds_needed": 3.2619105550932077,
+     "unshielded_tank_heat_W": 1304.967689597743,
+     "in_shadow_cone": true
+    },
+    {
+     "target": "KEEL_LANE_AT_PLANT",
+     "who": "crew transit along the spine lanes past a plant",
+     "plant_x": -82.0,
+     "d_m": 2.0,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 1909822.5720797123,
+     "allow_Sv_h": 0.0001,
+     "efolds_needed": 23.67286127348496,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "EVA_HULL_AT_PLANT",
+     "who": "EVA on the casing beside a plant",
+     "plant_x": -82.0,
+     "d_m": 3.9000000000000004,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 502254.45682569675,
+     "allow_Sv_h": 0.00025,
+     "efolds_needed": 21.420911796459492,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "PLANT_MAINTENANCE",
+     "who": "hands-on work at a plant at decay power",
+     "plant_x": -82.0,
+     "d_m": 2.0,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 1909822.5720797123,
+     "allow_Sv_h": 0.001,
+     "efolds_needed": 21.37027618049091,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    }
+   ],
+   "cone_half_angle_needed_deg": 15.21914145141157,
+   "shadow_thickness_m": [
+    1.97983620923367,
+    2.375803451080404,
+    2.9697543138505047
+   ],
+   "shadow_shield_kg": [
+    7761.122401920136,
+    10593.348667620445,
+    15858.222726557768
+   ],
+   "blade_scatter": [
+    0.001498144870200315,
+    0.003745362175500783,
+    0.01123608652650235
+   ],
+   "side_efolds": [
+    13.294834402852551,
+    14.211125134726704,
+    15.309737423394814
+   ],
+   "side_band_kg": [
+    16038.510370826658,
+    20572.67696140923,
+    27703.8481638101
+   ],
+   "per_unit_shield_kg": [
+    23799.632772746794,
+    31166.025629029675,
+    43562.07089036787
+   ],
+   "keel_lane_efolds": 23.67286127348496,
+   "keel_lane_shield_m": [
+    2.3672861273484958,
+    2.840743352818195,
+    3.550929191022744
+   ],
+   "units": 4
+  },
+  "L-E aft cluster M1-M2 (3+1, aft of all crew spaces)": {
+   "x": [
+    -86.6,
+    -81.1,
+    -75.6,
+    -70.1
+   ],
+   "sectors": [
+    90,
+    210,
+    330,
+    210
+   ],
+   "districts": "D3 M1-M2 (aftmost dry-store modules)",
+   "repurposes_dry_store": true,
+   "note": "crew boundary at the M2/M3 frame; D2 and M1-M2 drone-only while units run",
+   "targets": [
+    {
+     "target": "RING_A",
+     "who": "crew, 6 + 6 people (habitat sectors)",
+     "plant_x": -70.1,
+     "d_m": 168.83945036631692,
+     "off_axis_deg": 11.15187555216179,
+     "bare_Sv_h": 267.9817098933323,
+     "allow_Sv_h": 1.267523512561158e-06,
+     "efolds_needed": 19.169364282824297,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true,
+     "blade_scatter_over_bare_direct": [
+      0.0010942328648905406,
+      0.0027355821622263503,
+      0.008206746486679056
+     ]
+    },
+    {
+     "target": "RING_B",
+     "who": "crew",
+     "plant_x": -70.1,
+     "d_m": 174.79004548314526,
+     "off_axis_deg": 10.77518739228351,
+     "bare_Sv_h": 250.0458336110775,
+     "allow_Sv_h": 1.267523512561158e-06,
+     "efolds_needed": 19.10008978681187,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true,
+     "blade_scatter_over_bare_direct": [
+      0.001042713492554997,
+      0.0026067837313874906,
+      0.007820351194162483
+     ]
+    },
+    {
+     "target": "REFUGE",
+     "who": "crew in storms, survival",
+     "plant_x": -70.1,
+     "d_m": 177.89999999999998,
+     "off_axis_deg": 1.8995010824051153,
+     "bare_Sv_h": 241.37990781586976,
+     "allow_Sv_h": 5e-05,
+     "efolds_needed": 15.389859625821215,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true,
+     "blade_scatter_over_bare_direct": [
+      9.751114959718746e-05,
+      0.00024377787399296866,
+      0.0007313336219789055
+     ]
+    },
+    {
+     "target": "FWD_SERVICE",
+     "who": "airlock, storeroom, docks",
+     "plant_x": -70.1,
+     "d_m": 190.1,
+     "off_axis_deg": 2.4097629466332577,
+     "bare_Sv_h": 211.39211285621013,
+     "allow_Sv_h": 1e-05,
+     "efolds_needed": 16.866640228610127,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true
+    },
+    {
+     "target": "BROW_EYE",
+     "who": "EYE electronics and optics (unmanned)",
+     "plant_x": -70.1,
+     "d_m": 211.6,
+     "off_axis_deg": 12.780857102905207,
+     "bare_Sv_h": 170.61675845209533,
+     "allow_Sv_h": 0.01901285268841737,
+     "efolds_needed": 9.10205993388505,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "TANK_FARM",
+     "who": "cryogenic propellant (neutron heating)",
+     "plant_x": -70.1,
+     "d_m": 193.88452748994695,
+     "off_axis_deg": 9.02505003901688,
+     "bare_Sv_h": 203.2201221593785,
+     "allow_Sv_h": null,
+     "efolds_needed": 2.7200960939247785,
+     "unshielded_tank_heat_W": 759.0890525893964,
+     "in_shadow_cone": true
+    },
+    {
+     "target": "KEEL_LANE_AT_PLANT",
+     "who": "crew transit along the spine lanes past a plant",
+     "plant_x": -86.6,
+     "d_m": 2.0,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 1909822.5720797123,
+     "allow_Sv_h": 0.0001,
+     "efolds_needed": 23.67286127348496,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "EVA_HULL_AT_PLANT",
+     "who": "EVA on the casing beside a plant",
+     "plant_x": -86.6,
+     "d_m": 3.9000000000000004,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 502254.45682569675,
+     "allow_Sv_h": 0.00025,
+     "efolds_needed": 21.420911796459492,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "PLANT_MAINTENANCE",
+     "who": "hands-on work at a plant at decay power",
+     "plant_x": -86.6,
+     "d_m": 2.0,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 1909822.5720797123,
+     "allow_Sv_h": 0.001,
+     "efolds_needed": 21.37027618049091,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    }
+   ],
+   "cone_half_angle_needed_deg": 11.15187555216179,
+   "shadow_thickness_m": [
+    1.9169364282824297,
+    2.3003237139389157,
+    2.8754046424236446
+   ],
+   "shadow_shield_kg": [
+    6505.803080898505,
+    8702.903744363588,
+    12689.033560640817
+   ],
+   "blade_scatter": [
+    0.0010942328648905406,
+    0.0027355821622263503,
+    0.008206746486679056
+   ],
+   "side_efolds": [
+    12.351662541581133,
+    13.267953273455287,
+    14.366565562123398
+   ],
+   "side_band_kg": [
+    14900.694643296583,
+    19207.298088373143,
+    25997.124572514997
+   ],
+   "per_unit_shield_kg": [
+    21406.497724195087,
+    27910.201832736733,
+    38686.15813315581
+   ],
+   "keel_lane_efolds": 23.67286127348496,
+   "keel_lane_shield_m": [
+    2.3672861273484958,
+    2.840743352818195,
+    3.550929191022744
+   ],
+   "units": 4
+  },
+  "L-D RAD-ZONE casing (rejected Phase I)": {
+   "x": [
+    66.0
+   ],
+   "sectors": [
+    90
+   ],
+   "districts": "D5",
+   "repurposes_dry_store": false,
+   "note": "25-45 m from ring A; shadow cone would have to open to ~40 deg",
+   "targets": [
+    {
+     "target": "RING_A",
+     "who": "crew, 6 + 6 people (habitat sectors)",
+     "plant_x": 66.0,
+     "d_m": 38.258201735052836,
+     "off_axis_deg": 46.51446562821494,
+     "bare_Sv_h": 5219.199617623165,
+     "allow_Sv_h": 1.267523512561158e-06,
+     "efolds_needed": 22.138544890472215,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false,
+     "blade_scatter_over_bare_direct": [
+      0.00012934800486202639,
+      0.0003233700121550662,
+      0.0009701100364651997
+     ]
+    },
+    {
+     "target": "RING_B",
+     "who": "crew",
+     "plant_x": 66.0,
+     "d_m": 43.30461869131282,
+     "off_axis_deg": 41.499782548844024,
+     "bare_Sv_h": 4073.6580946514146,
+     "allow_Sv_h": 1.267523512561158e-06,
+     "efolds_needed": 21.890742220826166,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false,
+     "blade_scatter_over_bare_direct": [
+      0.0001232007357522005,
+      0.00030800183938050105,
+      0.0009240055181415009
+     ]
+    },
+    {
+     "target": "REFUGE",
+     "who": "crew in storms, survival",
+     "plant_x": 66.0,
+     "d_m": 41.8,
+     "off_axis_deg": 8.034129613909744,
+     "bare_Sv_h": 4372.204327006508,
+     "allow_Sv_h": 5e-05,
+     "efolds_needed": 18.286510136103374,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true,
+     "blade_scatter_over_bare_direct": [
+      8.733679851017458e-06,
+      2.1834199627543616e-05,
+      6.550259888263096e-05
+     ]
+    },
+    {
+     "target": "FWD_SERVICE",
+     "who": "airlock, storeroom, docks",
+     "plant_x": 66.0,
+     "d_m": 54.0,
+     "off_axis_deg": 8.426969021480673,
+     "bare_Sv_h": 2619.7840494920606,
+     "allow_Sv_h": 1e-05,
+     "efolds_needed": 19.383772634470347,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": true
+    },
+    {
+     "target": "BROW_EYE",
+     "who": "EYE electronics and optics (unmanned)",
+     "plant_x": 66.0,
+     "d_m": 75.5,
+     "off_axis_deg": 32.446633449869424,
+     "bare_Sv_h": 1340.1675870915924,
+     "allow_Sv_h": 0.01901285268841737,
+     "efolds_needed": 11.16319002134338,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "TANK_FARM",
+     "who": "cryogenic propellant (neutron heating)",
+     "plant_x": 66.0,
+     "d_m": 58.450834040242746,
+     "off_axis_deg": 28.137096492942984,
+     "bare_Sv_h": 2235.9989136013023,
+     "allow_Sv_h": null,
+     "efolds_needed": 5.118249705156178,
+     "unshielded_tank_heat_W": 8352.136977781074,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "KEEL_LANE_AT_PLANT",
+     "who": "crew transit along the spine lanes past a plant",
+     "plant_x": 66.0,
+     "d_m": 2.0,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 1909822.5720797123,
+     "allow_Sv_h": 0.0001,
+     "efolds_needed": 23.67286127348496,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "EVA_HULL_AT_PLANT",
+     "who": "EVA on the casing beside a plant",
+     "plant_x": 66.0,
+     "d_m": 3.9000000000000004,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 502254.45682569675,
+     "allow_Sv_h": 0.00025,
+     "efolds_needed": 21.420911796459492,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    },
+    {
+     "target": "PLANT_MAINTENANCE",
+     "who": "hands-on work at a plant at decay power",
+     "plant_x": 66.0,
+     "d_m": 2.0,
+     "off_axis_deg": 90.0,
+     "bare_Sv_h": 1909822.5720797123,
+     "allow_Sv_h": 0.001,
+     "efolds_needed": 21.37027618049091,
+     "unshielded_tank_heat_W": null,
+     "in_shadow_cone": false
+    }
+   ],
+   "cone_half_angle_needed_deg": 46.51446562821494,
+   "shadow_thickness_m": [
+    2.2138544890472214,
+    2.656625386856666,
+    3.3207817335708323
+   ],
+   "shadow_shield_kg": [
+    39798.9963542804,
+    62169.15219040841,
+    109277.78117996843
+   ],
+   "blade_scatter": [
+    0.00012934800486202639,
+    0.0003233700121550662,
+    0.0009701100364651997
+   ],
+   "side_efolds": [
+    13.185540816684156,
+    14.101831548558312,
+    15.200443837226423
+   ],
+   "side_band_kg": [
+    15906.661694708473,
+    20414.45855006741,
+    27506.07514963283
+   ],
+   "per_unit_shield_kg": [
+    55705.65804898887,
+    82583.61074047582,
+    136783.85632960126
+   ],
+   "keel_lane_efolds": 23.67286127348496,
+   "keel_lane_shield_m": [
+    2.3672861273484958,
+    2.840743352818195,
+    3.550929191022744
+   ],
+   "units": 1
+  }
+ },
+ "separation": [
+  {
+   "layout": "L-A mid-body M3/M4 (Phase I)",
+   "min_axial_m": 14.0,
+   "sectors": [
+    90,
+    210
+   ],
+   "separate_blades": true,
+   "shared": [
+    "spine keel structure",
+    "coolant headers if not split per blade",
+    "one cone axis (all shields look forward)"
+   ]
+  },
+  {
+   "layout": "L-B aft bay with the drive (one nuclear district)",
+   "min_axial_m": 8.0,
+   "sectors": [
+    90,
+    330
+   ],
+   "separate_blades": true,
+   "shared": [
+    "spine keel structure",
+    "coolant headers if not split per blade",
+    "one cone axis (all shields look forward)",
+    "drive exclusion district and the drive fault domain (DRIVE_AFT)"
+   ]
+  },
+  {
+   "layout": "L-C distributed 3+1 (C-lean)",
+   "min_axial_m": 14.0,
+   "sectors": [
+    90,
+    210,
+    330,
+    90
+   ],
+   "separate_blades": true,
+   "shared": [
+    "spine keel structure",
+    "coolant headers if not split per blade",
+    "one cone axis (all shields look forward)"
+   ]
+  },
+  {
+   "layout": "L-E aft cluster M1-M2 (3+1, aft of all crew spaces)",
+   "min_axial_m": 5.5,
+   "sectors": [
+    90,
+    210,
+    330,
+    210
+   ],
+   "separate_blades": true,
+   "shared": [
+    "spine keel structure",
+    "coolant headers if not split per blade",
+    "one cone axis (all shields look forward)",
+    "drive exclusion district and the drive fault domain (DRIVE_AFT)"
+   ]
+  }
+ ],
+ "eps_b_shield_check": {
+  "eps_b_shadow_kg_unit": [
+   8484.551718205461,
+   14470.73041434535,
+   27873.51951642785
+  ],
+  "placement_shadow_plus_scatter_kg_unit": [
+   21406.497724195087,
+   27910.201832736733,
+   38686.15813315581
+  ],
+  "delta_kg_architecture": [
+   51687.784023958506,
+   53757.885673565535,
+   43250.55446691185
+  ],
+  "c_lean_mass_with_scatter_kg": [
+   127776.72786908089,
+   209169.05441455494,
+   389691.91133095766
+  ],
+  "note": "eps_b sized a shadow shield only; the blade-facing side band against single scatter is new at Gate 4"
+ }
+}

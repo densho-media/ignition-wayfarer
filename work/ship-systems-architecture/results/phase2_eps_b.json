@@ -1,0 +1,4224 @@
+{
+ "cryo": {
+  "he3_inventory_kg": 1094169.7195251463,
+  "he3_leak_uncooled_W": 2363.3094624544133,
+  "he3_stage_lift_W": 117.81278756245447,
+  "sealed_hold_h": [
+   77.1636651136945,
+   77.16366511369452,
+   57.87274883527088
+  ],
+  "loss_after_hold_t_per_day": {
+   "helium_3": 24.02234559483074,
+   "hydrogen": 0.35745755973948873,
+   "deuterium": 0.18858915416375435
+  },
+  "lose_3K_stage_only_t_per_day": 1.1975323347524784,
+  "lose_20K_shield_keep_3K": "the 3 K stage would have to lift the full 2.4 kW at 1500 W/W (3.5 MW): it cannot; He-3 warms as in a total loss",
+  "n_plus_1": "Cryocooler trains as N+1 units split over buses A and B; the 3 K He-3 stage is the critical one (1.2 t/day if it alone fails, 24 t/day after the sealed hold if everything fails).",
+  "recovery": "Re-cooling after a hold: a warmed vessel must be brought back below its relief point; with the 20 K shield back, the 3 K stage recovers ~0.1 K a day per 100 W of spare lift (slow): spare lift capacity sets recovery."
+ },
+ "status": "ISSA Phase II STUDY (NONCANON)",
+ "anchors": {
+  "SP-100": "SP-100 GES (1980s-1990s): 100 kWe, ~2.4 MWt, thermoelectric, ~4.6 t total incl. radiator and an unmanned 25 m shadow shield; 7-10 yr life. Scope: whole power system, unmanned dose limits. Used for reactor-core scaling only.",
+  "JIMO": "JIMO/Prometheus (2005): 100 kWe Brayton, ~500 kWt, 170 m2 radiator for ~360 kWt; reactor module ~ a few t. Scope: unmanned.",
+  "INL2002": "INL multi-MWe space Brayton study: ~3.5 kg/kWe system goal (3-5), called substantial development. Scope: optimistic total incl. radiator, unmanned shield. Not demonstrated.",
+  "Mason2023": "Mason, NASA GRC Brayton conversion: MW-class closed Brayton turbo-alternator-compressor + recuperator + gas cooler ~2-5 kg/kWe (conversion only). Brayton component technology flown in none; terrestrial and lab heritage (BRU, 2 kWe-class).",
+  "Kilopower": "KRUSTY 2018: 1 kWe-class Stirling, demonstrated on the ground; Fission Surface Power 40 kWe under 6 t (incl. shield for surface use). Scope: whole plant.",
+  "MMRTG": "MMRTG: 110 We BOL, 45 kg, ~4.8 kg Pu-238 dioxide, -4.8 %/yr output incl. thermocouple degradation (flight).",
+  "ASRG": "Advanced Stirling RG (cancelled 2013): ~130 We, ~32 kg, 4x less Pu-238 than an MMRTG (lab-tested).",
+  "Fusion": "No fusion plant has produced net electricity. Compact D-He3 power plant masses in studies span tens of t to hundreds of t; minimum machine size is the dominant unknown. SPECULATIVE within the IGNITION technology frame.",
+  "Decay": "Way-Wigner decay heat P/P0 = 0.0622 (t^-0.2 - (t+T)^-0.2), t and T in s (order of magnitude, +/-30 %)."
+ },
+ "components": {
+  "reactor_fixed_kg": [
+   300.0,
+   500.0,
+   900.0
+  ],
+  "reactor_kg_per_kWt": [
+   0.15,
+   0.3,
+   0.6
+  ],
+  "heat_transport_kg_per_kWt": [
+   0.3,
+   0.6,
+   1.2
+  ],
+  "conversion_kg_per_kWe": [
+   1.5,
+   3.0,
+   6.0
+  ],
+  "pmad_kg_per_kWe": [
+   0.5,
+   1.0,
+   2.0
+  ],
+  "structure_frac": [
+   0.08,
+   0.1,
+   0.15
+  ],
+  "coolant_frac": [
+   0.03,
+   0.05,
+   0.08
+  ],
+  "spares_frac": [
+   0.05,
+   0.1,
+   0.2
+  ],
+  "rejection_kg_per_m2": [
+   1.5,
+   3.0,
+   5.0
+  ],
+  "headers_kg": [
+   1000.0,
+   2000.0,
+   4000.0
+  ]
+ },
+ "shield_model": {
+  "ref_Pt_W": 2500000.0,
+  "ref_d_m": 150.0,
+  "ref_kg": [
+   4000.0,
+   6000.0,
+   10000.0
+  ],
+  "ref_t_m": 1.0,
+  "lam_m": 0.1
+ },
+ "efficiency": {
+  "T_hot_K": [
+   1300.0,
+   1150.0,
+   1050.0
+  ],
+  "carnot_frac": [
+   0.45,
+   0.42,
+   0.38
+  ]
+ },
+ "demand": {
+  "essential_W": [
+   22408.68,
+   49182.0,
+   117460.8
+  ],
+  "mission_core_W": [
+   492094.6262087416,
+   680333.3420863819,
+   1330981.9499618465
+  ],
+  "must_keep_with_proactive_W": [
+   2037094.6262087417,
+   3305333.342086382,
+   5110981.949961847
+  ],
+  "design_proactive_W": [
+   2594201.0262087416,
+   4786043.342086382,
+   7863275.549961846
+  ],
+  "design_continuous_active_W": [
+   16499201.026208742,
+   25786043.342086382,
+   36483275.54996185
+  ],
+  "planning_open_W": [
+   520000.0,
+   1350000.0,
+   2400000.0
+  ]
+ },
+ "duty": {
+  "rows": [
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2533333.3333333335,
+    "buffer_draw_J": 19500000.0,
+    "buffer_ok": true,
+    "recharge_s": 39.0,
+    "sustainable": true,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2533333.3333333335,
+    "buffer_draw_J": 19500000.0,
+    "buffer_ok": true,
+    "recharge_s": 39.0,
+    "sustainable": true,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2533333.3333333335,
+    "buffer_draw_J": 19500000.0,
+    "buffer_ok": true,
+    "recharge_s": 39.0,
+    "sustainable": true,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2533333.3333333335,
+    "buffer_draw_J": 18000000.0,
+    "buffer_ok": true,
+    "recharge_s": 9.0,
+    "sustainable": true,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2533333.3333333335,
+    "buffer_draw_J": 18000000.0,
+    "buffer_ok": true,
+    "recharge_s": 9.0,
+    "sustainable": true,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2533333.3333333335,
+    "buffer_draw_J": 18000000.0,
+    "buffer_ok": true,
+    "recharge_s": 9.0,
+    "sustainable": true,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2533333.3333333335,
+    "buffer_draw_J": 15000000.0,
+    "buffer_ok": true,
+    "recharge_s": 3.0,
+    "sustainable": true,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2533333.3333333335,
+    "buffer_draw_J": 15000000.0,
+    "buffer_ok": true,
+    "recharge_s": 3.0,
+    "sustainable": true,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2533333.3333333335,
+    "buffer_draw_J": 15000000.0,
+    "buffer_ok": true,
+    "recharge_s": 3.0,
+    "sustainable": true,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 3600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2505555.5555555555,
+    "buffer_draw_J": 19500000.0,
+    "buffer_ok": true,
+    "recharge_s": 39.0,
+    "sustainable": true,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 3600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2505555.5555555555,
+    "buffer_draw_J": 19500000.0,
+    "buffer_ok": true,
+    "recharge_s": 39.0,
+    "sustainable": true,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 3600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2505555.5555555555,
+    "buffer_draw_J": 19500000.0,
+    "buffer_ok": true,
+    "recharge_s": 39.0,
+    "sustainable": true,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 3600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2505555.5555555555,
+    "buffer_draw_J": 18000000.0,
+    "buffer_ok": true,
+    "recharge_s": 9.0,
+    "sustainable": true,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 3600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2505555.5555555555,
+    "buffer_draw_J": 18000000.0,
+    "buffer_ok": true,
+    "recharge_s": 9.0,
+    "sustainable": true,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 3600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2505555.5555555555,
+    "buffer_draw_J": 18000000.0,
+    "buffer_ok": true,
+    "recharge_s": 9.0,
+    "sustainable": true,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 3600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2505555.5555555555,
+    "buffer_draw_J": 15000000.0,
+    "buffer_ok": true,
+    "recharge_s": 3.0,
+    "sustainable": true,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 3600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2505555.5555555555,
+    "buffer_draw_J": 15000000.0,
+    "buffer_ok": true,
+    "recharge_s": 3.0,
+    "sustainable": true,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 3600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2505555.5555555555,
+    "buffer_draw_J": 15000000.0,
+    "buffer_ok": true,
+    "recharge_s": 3.0,
+    "sustainable": true,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2500231.4814814813,
+    "buffer_draw_J": 19500000.0,
+    "buffer_ok": true,
+    "recharge_s": 39.0,
+    "sustainable": true,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2500231.4814814813,
+    "buffer_draw_J": 19500000.0,
+    "buffer_ok": true,
+    "recharge_s": 39.0,
+    "sustainable": true,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2500231.4814814813,
+    "buffer_draw_J": 19500000.0,
+    "buffer_ok": true,
+    "recharge_s": 39.0,
+    "sustainable": true,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2500231.4814814813,
+    "buffer_draw_J": 18000000.0,
+    "buffer_ok": true,
+    "recharge_s": 9.0,
+    "sustainable": true,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2500231.4814814813,
+    "buffer_draw_J": 18000000.0,
+    "buffer_ok": true,
+    "recharge_s": 9.0,
+    "sustainable": true,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2500231.4814814813,
+    "buffer_draw_J": 18000000.0,
+    "buffer_ok": true,
+    "recharge_s": 9.0,
+    "sustainable": true,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2500231.4814814813,
+    "buffer_draw_J": 15000000.0,
+    "buffer_ok": true,
+    "recharge_s": 3.0,
+    "sustainable": true,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2500231.4814814813,
+    "buffer_draw_J": 15000000.0,
+    "buffer_ok": true,
+    "recharge_s": 3.0,
+    "sustainable": true,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2500231.4814814813,
+    "buffer_draw_J": 15000000.0,
+    "buffer_ok": true,
+    "recharge_s": 3.0,
+    "sustainable": true,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2500033.0687830686,
+    "buffer_draw_J": 19500000.0,
+    "buffer_ok": true,
+    "recharge_s": 39.0,
+    "sustainable": true,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2500033.0687830686,
+    "buffer_draw_J": 19500000.0,
+    "buffer_ok": true,
+    "recharge_s": 39.0,
+    "sustainable": true,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2500033.0687830686,
+    "buffer_draw_J": 19500000.0,
+    "buffer_ok": true,
+    "recharge_s": 39.0,
+    "sustainable": true,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2500033.0687830686,
+    "buffer_draw_J": 18000000.0,
+    "buffer_ok": true,
+    "recharge_s": 9.0,
+    "sustainable": true,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2500033.0687830686,
+    "buffer_draw_J": 18000000.0,
+    "buffer_ok": true,
+    "recharge_s": 9.0,
+    "sustainable": true,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2500033.0687830686,
+    "buffer_draw_J": 18000000.0,
+    "buffer_ok": true,
+    "recharge_s": 9.0,
+    "sustainable": true,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2500033.0687830686,
+    "buffer_draw_J": 15000000.0,
+    "buffer_ok": true,
+    "recharge_s": 3.0,
+    "sustainable": true,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2500033.0687830686,
+    "buffer_draw_J": 15000000.0,
+    "buffer_ok": true,
+    "recharge_s": 3.0,
+    "sustainable": true,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 1.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2500033.0687830686,
+    "buffer_draw_J": 15000000.0,
+    "buffer_ok": true,
+    "recharge_s": 3.0,
+    "sustainable": true,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 195000000.0,
+    "buffer_ok": false,
+    "recharge_s": 390.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 195000000.0,
+    "buffer_ok": true,
+    "recharge_s": 390.0,
+    "sustainable": true,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 195000000.0,
+    "buffer_ok": true,
+    "recharge_s": 390.0,
+    "sustainable": true,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 180000000.0,
+    "buffer_ok": false,
+    "recharge_s": 90.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 180000000.0,
+    "buffer_ok": true,
+    "recharge_s": 90.0,
+    "sustainable": true,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 180000000.0,
+    "buffer_ok": true,
+    "recharge_s": 90.0,
+    "sustainable": true,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 150000000.0,
+    "buffer_ok": false,
+    "recharge_s": 30.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 150000000.0,
+    "buffer_ok": true,
+    "recharge_s": 30.0,
+    "sustainable": true,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 150000000.0,
+    "buffer_ok": true,
+    "recharge_s": 30.0,
+    "sustainable": true,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 3600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2555555.5555555555,
+    "buffer_draw_J": 195000000.0,
+    "buffer_ok": false,
+    "recharge_s": 390.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 3600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2555555.5555555555,
+    "buffer_draw_J": 195000000.0,
+    "buffer_ok": true,
+    "recharge_s": 390.0,
+    "sustainable": true,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 3600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2555555.5555555555,
+    "buffer_draw_J": 195000000.0,
+    "buffer_ok": true,
+    "recharge_s": 390.0,
+    "sustainable": true,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 3600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2555555.5555555555,
+    "buffer_draw_J": 180000000.0,
+    "buffer_ok": false,
+    "recharge_s": 90.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 3600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2555555.5555555555,
+    "buffer_draw_J": 180000000.0,
+    "buffer_ok": true,
+    "recharge_s": 90.0,
+    "sustainable": true,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 3600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2555555.5555555555,
+    "buffer_draw_J": 180000000.0,
+    "buffer_ok": true,
+    "recharge_s": 90.0,
+    "sustainable": true,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 3600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2555555.5555555555,
+    "buffer_draw_J": 150000000.0,
+    "buffer_ok": false,
+    "recharge_s": 30.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 3600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2555555.5555555555,
+    "buffer_draw_J": 150000000.0,
+    "buffer_ok": true,
+    "recharge_s": 30.0,
+    "sustainable": true,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 3600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2555555.5555555555,
+    "buffer_draw_J": 150000000.0,
+    "buffer_ok": true,
+    "recharge_s": 30.0,
+    "sustainable": true,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2502314.814814815,
+    "buffer_draw_J": 195000000.0,
+    "buffer_ok": false,
+    "recharge_s": 390.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2502314.814814815,
+    "buffer_draw_J": 195000000.0,
+    "buffer_ok": true,
+    "recharge_s": 390.0,
+    "sustainable": true,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2502314.814814815,
+    "buffer_draw_J": 195000000.0,
+    "buffer_ok": true,
+    "recharge_s": 390.0,
+    "sustainable": true,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2502314.814814815,
+    "buffer_draw_J": 180000000.0,
+    "buffer_ok": false,
+    "recharge_s": 90.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2502314.814814815,
+    "buffer_draw_J": 180000000.0,
+    "buffer_ok": true,
+    "recharge_s": 90.0,
+    "sustainable": true,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2502314.814814815,
+    "buffer_draw_J": 180000000.0,
+    "buffer_ok": true,
+    "recharge_s": 90.0,
+    "sustainable": true,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2502314.814814815,
+    "buffer_draw_J": 150000000.0,
+    "buffer_ok": false,
+    "recharge_s": 30.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2502314.814814815,
+    "buffer_draw_J": 150000000.0,
+    "buffer_ok": true,
+    "recharge_s": 30.0,
+    "sustainable": true,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2502314.814814815,
+    "buffer_draw_J": 150000000.0,
+    "buffer_ok": true,
+    "recharge_s": 30.0,
+    "sustainable": true,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2500330.687830688,
+    "buffer_draw_J": 195000000.0,
+    "buffer_ok": false,
+    "recharge_s": 390.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2500330.687830688,
+    "buffer_draw_J": 195000000.0,
+    "buffer_ok": true,
+    "recharge_s": 390.0,
+    "sustainable": true,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2500330.687830688,
+    "buffer_draw_J": 195000000.0,
+    "buffer_ok": true,
+    "recharge_s": 390.0,
+    "sustainable": true,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2500330.687830688,
+    "buffer_draw_J": 180000000.0,
+    "buffer_ok": false,
+    "recharge_s": 90.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2500330.687830688,
+    "buffer_draw_J": 180000000.0,
+    "buffer_ok": true,
+    "recharge_s": 90.0,
+    "sustainable": true,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2500330.687830688,
+    "buffer_draw_J": 180000000.0,
+    "buffer_ok": true,
+    "recharge_s": 90.0,
+    "sustainable": true,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2500330.687830688,
+    "buffer_draw_J": 150000000.0,
+    "buffer_ok": false,
+    "recharge_s": 30.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2500330.687830688,
+    "buffer_draw_J": 150000000.0,
+    "buffer_ok": true,
+    "recharge_s": 30.0,
+    "sustainable": true,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 10.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2500330.687830688,
+    "buffer_draw_J": 150000000.0,
+    "buffer_ok": true,
+    "recharge_s": 30.0,
+    "sustainable": true,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 4500000.0,
+    "buffer_draw_J": 1170000000.0,
+    "buffer_ok": false,
+    "recharge_s": 2340.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 4500000.0,
+    "buffer_draw_J": 1170000000.0,
+    "buffer_ok": false,
+    "recharge_s": 2340.0,
+    "sustainable": false,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 4500000.0,
+    "buffer_draw_J": 1170000000.0,
+    "buffer_ok": true,
+    "recharge_s": 2340.0,
+    "sustainable": false,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 4500000.0,
+    "buffer_draw_J": 1080000000.0,
+    "buffer_ok": false,
+    "recharge_s": 540.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 4500000.0,
+    "buffer_draw_J": 1080000000.0,
+    "buffer_ok": false,
+    "recharge_s": 540.0,
+    "sustainable": false,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 4500000.0,
+    "buffer_draw_J": 1080000000.0,
+    "buffer_ok": true,
+    "recharge_s": 540.0,
+    "sustainable": true,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 4500000.0,
+    "buffer_draw_J": 900000000.0,
+    "buffer_ok": false,
+    "recharge_s": 180.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 4500000.0,
+    "buffer_draw_J": 900000000.0,
+    "buffer_ok": true,
+    "recharge_s": 180.0,
+    "sustainable": true,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 4500000.0,
+    "buffer_draw_J": 900000000.0,
+    "buffer_ok": true,
+    "recharge_s": 180.0,
+    "sustainable": true,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 3600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 1170000000.0,
+    "buffer_ok": false,
+    "recharge_s": 2340.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 3600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 1170000000.0,
+    "buffer_ok": false,
+    "recharge_s": 2340.0,
+    "sustainable": false,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 3600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 1170000000.0,
+    "buffer_ok": true,
+    "recharge_s": 2340.0,
+    "sustainable": true,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 3600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 1080000000.0,
+    "buffer_ok": false,
+    "recharge_s": 540.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 3600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 1080000000.0,
+    "buffer_ok": false,
+    "recharge_s": 540.0,
+    "sustainable": false,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 3600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 1080000000.0,
+    "buffer_ok": true,
+    "recharge_s": 540.0,
+    "sustainable": true,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 3600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 900000000.0,
+    "buffer_ok": false,
+    "recharge_s": 180.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 3600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 900000000.0,
+    "buffer_ok": true,
+    "recharge_s": 180.0,
+    "sustainable": true,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 3600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2833333.3333333335,
+    "buffer_draw_J": 900000000.0,
+    "buffer_ok": true,
+    "recharge_s": 180.0,
+    "sustainable": true,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2513888.888888889,
+    "buffer_draw_J": 1170000000.0,
+    "buffer_ok": false,
+    "recharge_s": 2340.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2513888.888888889,
+    "buffer_draw_J": 1170000000.0,
+    "buffer_ok": false,
+    "recharge_s": 2340.0,
+    "sustainable": false,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2513888.888888889,
+    "buffer_draw_J": 1170000000.0,
+    "buffer_ok": true,
+    "recharge_s": 2340.0,
+    "sustainable": true,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2513888.888888889,
+    "buffer_draw_J": 1080000000.0,
+    "buffer_ok": false,
+    "recharge_s": 540.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2513888.888888889,
+    "buffer_draw_J": 1080000000.0,
+    "buffer_ok": false,
+    "recharge_s": 540.0,
+    "sustainable": false,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2513888.888888889,
+    "buffer_draw_J": 1080000000.0,
+    "buffer_ok": true,
+    "recharge_s": 540.0,
+    "sustainable": true,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2513888.888888889,
+    "buffer_draw_J": 900000000.0,
+    "buffer_ok": false,
+    "recharge_s": 180.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2513888.888888889,
+    "buffer_draw_J": 900000000.0,
+    "buffer_ok": true,
+    "recharge_s": 180.0,
+    "sustainable": true,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2513888.888888889,
+    "buffer_draw_J": 900000000.0,
+    "buffer_ok": true,
+    "recharge_s": 180.0,
+    "sustainable": true,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2501984.126984127,
+    "buffer_draw_J": 1170000000.0,
+    "buffer_ok": false,
+    "recharge_s": 2340.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2501984.126984127,
+    "buffer_draw_J": 1170000000.0,
+    "buffer_ok": false,
+    "recharge_s": 2340.0,
+    "sustainable": false,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2501984.126984127,
+    "buffer_draw_J": 1170000000.0,
+    "buffer_ok": true,
+    "recharge_s": 2340.0,
+    "sustainable": true,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2501984.126984127,
+    "buffer_draw_J": 1080000000.0,
+    "buffer_ok": false,
+    "recharge_s": 540.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2501984.126984127,
+    "buffer_draw_J": 1080000000.0,
+    "buffer_ok": false,
+    "recharge_s": 540.0,
+    "sustainable": false,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2501984.126984127,
+    "buffer_draw_J": 1080000000.0,
+    "buffer_ok": true,
+    "recharge_s": 540.0,
+    "sustainable": true,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2501984.126984127,
+    "buffer_draw_J": 900000000.0,
+    "buffer_ok": false,
+    "recharge_s": 180.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2501984.126984127,
+    "buffer_draw_J": 900000000.0,
+    "buffer_ok": true,
+    "recharge_s": 180.0,
+    "sustainable": true,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 60.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2501984.126984127,
+    "buffer_draw_J": 900000000.0,
+    "buffer_ok": true,
+    "recharge_s": 180.0,
+    "sustainable": true,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 3600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 5833333.333333334,
+    "buffer_draw_J": 11700000000.0,
+    "buffer_ok": false,
+    "recharge_s": 23400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 3600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 5833333.333333334,
+    "buffer_draw_J": 11700000000.0,
+    "buffer_ok": false,
+    "recharge_s": 23400.0,
+    "sustainable": false,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 3600.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 5833333.333333334,
+    "buffer_draw_J": 11700000000.0,
+    "buffer_ok": false,
+    "recharge_s": 23400.0,
+    "sustainable": false,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 3600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 5833333.333333334,
+    "buffer_draw_J": 10800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 5400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 3600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 5833333.333333334,
+    "buffer_draw_J": 10800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 5400.0,
+    "sustainable": false,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 3600.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 5833333.333333334,
+    "buffer_draw_J": 10800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 5400.0,
+    "sustainable": false,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 3600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 5833333.333333334,
+    "buffer_draw_J": 9000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 1800.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 3600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 5833333.333333334,
+    "buffer_draw_J": 9000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 1800.0,
+    "sustainable": false,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 3600.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 5833333.333333334,
+    "buffer_draw_J": 9000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 1800.0,
+    "sustainable": false,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2638888.888888889,
+    "buffer_draw_J": 11700000000.0,
+    "buffer_ok": false,
+    "recharge_s": 23400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2638888.888888889,
+    "buffer_draw_J": 11700000000.0,
+    "buffer_ok": false,
+    "recharge_s": 23400.0,
+    "sustainable": false,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2638888.888888889,
+    "buffer_draw_J": 11700000000.0,
+    "buffer_ok": false,
+    "recharge_s": 23400.0,
+    "sustainable": false,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2638888.888888889,
+    "buffer_draw_J": 10800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 5400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2638888.888888889,
+    "buffer_draw_J": 10800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 5400.0,
+    "sustainable": false,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2638888.888888889,
+    "buffer_draw_J": 10800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 5400.0,
+    "sustainable": false,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2638888.888888889,
+    "buffer_draw_J": 9000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 1800.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2638888.888888889,
+    "buffer_draw_J": 9000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 1800.0,
+    "sustainable": false,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2638888.888888889,
+    "buffer_draw_J": 9000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 1800.0,
+    "sustainable": false,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2519841.26984127,
+    "buffer_draw_J": 11700000000.0,
+    "buffer_ok": false,
+    "recharge_s": 23400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2519841.26984127,
+    "buffer_draw_J": 11700000000.0,
+    "buffer_ok": false,
+    "recharge_s": 23400.0,
+    "sustainable": false,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2519841.26984127,
+    "buffer_draw_J": 11700000000.0,
+    "buffer_ok": false,
+    "recharge_s": 23400.0,
+    "sustainable": false,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2519841.26984127,
+    "buffer_draw_J": 10800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 5400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2519841.26984127,
+    "buffer_draw_J": 10800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 5400.0,
+    "sustainable": false,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2519841.26984127,
+    "buffer_draw_J": 10800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 5400.0,
+    "sustainable": false,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2519841.26984127,
+    "buffer_draw_J": 9000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 1800.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2519841.26984127,
+    "buffer_draw_J": 9000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 1800.0,
+    "sustainable": false,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2519841.26984127,
+    "buffer_draw_J": 9000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 1800.0,
+    "sustainable": false,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 3333333.3333333335,
+    "buffer_draw_J": 70200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 140400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 3333333.3333333335,
+    "buffer_draw_J": 70200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 140400.0,
+    "sustainable": false,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 3333333.3333333335,
+    "buffer_draw_J": 70200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 140400.0,
+    "sustainable": false,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 3333333.3333333335,
+    "buffer_draw_J": 64800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 32400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 3333333.3333333335,
+    "buffer_draw_J": 64800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 32400.0,
+    "sustainable": false,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 3333333.3333333335,
+    "buffer_draw_J": 64800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 32400.0,
+    "sustainable": false,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 3333333.3333333335,
+    "buffer_draw_J": 54000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 10800.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 3333333.3333333335,
+    "buffer_draw_J": 54000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 10800.0,
+    "sustainable": false,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 3333333.3333333335,
+    "buffer_draw_J": 54000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 10800.0,
+    "sustainable": false,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2619047.619047619,
+    "buffer_draw_J": 70200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 140400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2619047.619047619,
+    "buffer_draw_J": 70200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 140400.0,
+    "sustainable": false,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2619047.619047619,
+    "buffer_draw_J": 70200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 140400.0,
+    "sustainable": false,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2619047.619047619,
+    "buffer_draw_J": 64800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 32400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2619047.619047619,
+    "buffer_draw_J": 64800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 32400.0,
+    "sustainable": false,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2619047.619047619,
+    "buffer_draw_J": 64800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 32400.0,
+    "sustainable": false,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 2619047.619047619,
+    "buffer_draw_J": 54000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 10800.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 2619047.619047619,
+    "buffer_draw_J": 54000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 10800.0,
+    "sustainable": false,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 3600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 2619047.619047619,
+    "buffer_draw_J": 54000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 10800.0,
+    "sustainable": false,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 7500000.0,
+    "buffer_draw_J": 421200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 842400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 7500000.0,
+    "buffer_draw_J": 421200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 842400.0,
+    "sustainable": false,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 7500000.0,
+    "buffer_draw_J": 421200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 842400.0,
+    "sustainable": false,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 7500000.0,
+    "buffer_draw_J": 388800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 194400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 7500000.0,
+    "buffer_draw_J": 388800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 194400.0,
+    "sustainable": false,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 7500000.0,
+    "buffer_draw_J": 388800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 194400.0,
+    "sustainable": false,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 7500000.0,
+    "buffer_draw_J": 324000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 64800.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 7500000.0,
+    "buffer_draw_J": 324000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 64800.0,
+    "sustainable": false,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 86400.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 7500000.0,
+    "buffer_draw_J": 324000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 64800.0,
+    "sustainable": false,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 3214285.7142857146,
+    "buffer_draw_J": 421200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 842400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 3214285.7142857146,
+    "buffer_draw_J": 421200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 842400.0,
+    "sustainable": false,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 3214285.7142857146,
+    "buffer_draw_J": 421200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 842400.0,
+    "sustainable": false,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 3214285.7142857146,
+    "buffer_draw_J": 388800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 194400.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 3214285.7142857146,
+    "buffer_draw_J": 388800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 194400.0,
+    "sustainable": false,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 3214285.7142857146,
+    "buffer_draw_J": 388800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 194400.0,
+    "sustainable": false,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 3214285.7142857146,
+    "buffer_draw_J": 324000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 64800.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 3214285.7142857146,
+    "buffer_draw_J": 324000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 64800.0,
+    "sustainable": false,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 21600.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 3214285.7142857146,
+    "buffer_draw_J": 324000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 64800.0,
+    "sustainable": false,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 86400.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 5357142.857142857,
+    "buffer_draw_J": 1684800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 3369600.0,
+    "sustainable": false,
+    "max_engagement_s": 5.128205128205129,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 86400.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 5357142.857142857,
+    "buffer_draw_J": 1684800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 3369600.0,
+    "sustainable": false,
+    "max_engagement_s": 51.282051282051285,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 86400.0,
+    "interval_s": 604800.0,
+    "surplus_W": 500000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 5357142.857142857,
+    "buffer_draw_J": 1684800000000.0,
+    "buffer_ok": false,
+    "recharge_s": 3369600.0,
+    "sustainable": false,
+    "max_engagement_s": 256.4102564102564,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 86400.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 5357142.857142857,
+    "buffer_draw_J": 1555200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 777600.0,
+    "sustainable": false,
+    "max_engagement_s": 5.555555555555555,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 86400.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 5357142.857142857,
+    "buffer_draw_J": 1555200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 777600.0,
+    "sustainable": false,
+    "max_engagement_s": 55.55555555555556,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 86400.0,
+    "interval_s": 604800.0,
+    "surplus_W": 2000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 5357142.857142857,
+    "buffer_draw_J": 1555200000000.0,
+    "buffer_ok": false,
+    "recharge_s": 777600.0,
+    "sustainable": false,
+    "max_engagement_s": 277.77777777777777,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 86400.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 100000000.0,
+    "average_W": 5357142.857142857,
+    "buffer_draw_J": 1296000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 259200.0,
+    "sustainable": false,
+    "max_engagement_s": 6.666666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 86400.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 1000000000.0,
+    "average_W": 5357142.857142857,
+    "buffer_draw_J": 1296000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 259200.0,
+    "sustainable": false,
+    "max_engagement_s": 66.66666666666667,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   },
+   {
+    "t_eng_s": 86400.0,
+    "interval_s": 604800.0,
+    "surplus_W": 5000000.0,
+    "buffer_J": 5000000000.0,
+    "average_W": 5357142.857142857,
+    "buffer_draw_J": 1296000000000.0,
+    "buffer_ok": false,
+    "recharge_s": 259200.0,
+    "sustainable": false,
+    "max_engagement_s": 333.3333333333333,
+    "heat_debt_J": 0.0,
+    "thermal_recovery_s": 0.0
+   }
+  ],
+  "buffers_kg": {
+   "supercapacitor (pulse-bank class, 30 Wh/kg)": {
+    "0.1 GJ": 1203.7037037037037,
+    "1 GJ": 12037.037037037036,
+    "5 GJ": 60185.18518518519,
+    "20 GJ": 240740.74074074076
+   },
+   "high-power Li cells (150 Wh/kg)": {
+    "0.1 GJ": 240.74074074074076,
+    "1 GJ": 2407.4074074074074,
+    "5 GJ": 12037.037037037036,
+    "20 GJ": 48148.148148148146
+   },
+   "main-battery chemistry (800 Wh/kg, WORKING extrapolation)": {
+    "0.1 GJ": 45.13888888888889,
+    "1 GJ": 451.38888888888886,
+    "5 GJ": 2256.944444444445,
+    "20 GJ": 9027.77777777778
+   }
+  },
+  "dust": {
+   "note": "Vertex research-mission profile (467 d), not the six-year canon mission: an order-of-magnitude context only.",
+   "brow_breaches": {
+    "LOW": 1.8966,
+    "NOMINAL": 2994.7,
+    "HIGH": 503350.0
+   },
+   "mean_interval_s": {
+    "LOW": 21267902.562480226,
+    "NOMINAL": 13469.363876181254,
+    "HIGH": 80.13649349359292
+   },
+   "warning": "At 0.016 c a grain covers 4,800 km/s: warning times are milliseconds to seconds; neutral dust ignores fields."
+  },
+  "warm_channel_capacity_W": 51990897.57843401,
+  "active_W": 22500000.0,
+  "proactive_W": 2500000.0,
+  "active_exported_W": 5000000.0
+ },
+ "architectures": [
+  {
+   "name": "A: 2 x 100 %",
+   "tech": "FISSION",
+   "units": 2,
+   "unit_W": 8649603.104958031,
+   "installed_W": 17299206.209916063,
+   "running": "both at ~50 % (hot, load-sharing)",
+   "mass_kg": [
+    149604.94977551114,
+    315593.6539056262,
+    721736.4767467647
+   ],
+   "unit": [
+    {
+     "Pe_W": 8649603.104958031,
+     "eta": 0.2596153846153846,
+     "Pt_W": 33316989.737616125,
+     "waste_W": 24667386.632658094,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 5224.193494220628,
+     "blade_fraction": 0.19433712506105733,
+     "parts_kg": {
+      "reactor": 5297.548460642419,
+      "heat_transport": 9995.096921284838,
+      "conversion": 12974.404657437046,
+      "pmad": 4324.801552479015,
+      "structure": 2607.3481273474654,
+      "coolant": 977.7555477552995,
+      "spares": 1629.592579592166,
+      "rejection": 8836.290241330942,
+      "shield": 28159.63679988637
+     },
+     "mass_kg": 74802.47488775557,
+     "volume_m3": 109.23239189506438,
+     "fuel_kg_6y": 128.05437434615465
+    },
+    {
+     "Pe_W": 8649603.104958031,
+     "eta": 0.21913043478260869,
+     "Pt_W": 39472395.12183229,
+     "waste_W": 30822792.016874257,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 6527.818772463066,
+     "blade_fraction": 0.24283126851321354,
+     "parts_kg": {
+      "reactor": 12341.718536549686,
+      "heat_transport": 23683.437073099372,
+      "conversion": 25948.80931487409,
+      "pmad": 8649.60310495803,
+      "structure": 7062.356802948118,
+      "coolant": 3531.178401474059,
+      "spares": 7062.356802948118,
+      "rejection": 21583.4563173892,
+      "shield": 47933.91059857242
+     },
+     "mass_kg": 157796.8269528131,
+     "volume_m3": 121.54320266349669,
+     "fuel_kg_6y": 151.71277180433842
+    },
+    {
+     "Pe_W": 8649603.104958031,
+     "eta": 0.18095238095238095,
+     "Pt_W": 47800438.211610176,
+     "waste_W": 39150835.10665214,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 8291.57709745748,
+     "blade_fraction": 0.30844210826505464,
+     "parts_kg": {
+      "reactor": 29580.262926966105,
+      "heat_transport": 57360.52585393221,
+      "conversion": 51897.61862974818,
+      "pmad": 17299.20620991606,
+      "structure": 23420.642043084383,
+      "coolant": 12491.009089645006,
+      "spares": 31227.522724112514,
+      "rejection": 45457.88548728741,
+      "shield": 92133.56540869047
+     },
+     "mass_kg": 360868.23837338237,
+     "volume_m3": 138.19928884305247,
+     "fuel_kg_6y": 183.7217364733544
+    }
+   ],
+   "waste_at_design_W": 17055027.465053856,
+   "blade_fraction_at_design": 0.1343646594896212,
+   "volume_m3": 243.08640532699337,
+   "reliability": {
+    "u=0.02": {
+     "p_short_essential": 0.0004,
+     "p_short_mission": 0.0004,
+     "p_short_full": 0.0004
+    },
+    "u=0.05": {
+     "p_short_essential": 0.0025000000000000005,
+     "p_short_mission": 0.0025000000000000005,
+     "p_short_full": 0.0025000000000000005
+    },
+    "u=0.1": {
+     "p_short_essential": 0.010000000000000002,
+     "p_short_mission": 0.010000000000000002,
+     "p_short_full": 0.010000000000000002
+    }
+   },
+   "note": "Each plant carries the whole design load alone.",
+   "buffer_kg": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "B: 2 x 60 %, essentials on either",
+   "tech": "FISSION",
+   "units": 2,
+   "unit_W": 5622080.144958031,
+   "installed_W": 11244160.289916063,
+   "running": "both sharing",
+   "mass_kg": [
+    102383.43010559183,
+    214148.85528513673,
+    486689.1415636428
+   ],
+   "unit": [
+    {
+     "Pe_W": 5622080.144958031,
+     "eta": 0.2596153846153846,
+     "Pt_W": 21655419.817616124,
+     "waste_W": 16033339.672658093,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 3395.6280029127674,
+     "blade_fraction": 0.12631549436155284,
+     "parts_kg": {
+      "reactor": 3548.312972642418,
+      "heat_transport": 6496.625945284836,
+      "conversion": 8433.120217437046,
+      "pmad": 2811.0400724790156,
+      "structure": 1703.1279366274653,
+      "coolant": 638.6729762352994,
+      "spares": 1064.4549603921657,
+      "rejection": 6093.442004369152,
+      "shield": 20402.91796732852
+     },
+     "mass_kg": 51191.71505279592,
+     "volume_m3": 73.79916021506438,
+     "fuel_kg_6y": 83.23294684745332
+    },
+    {
+     "Pe_W": 5622080.144958031,
+     "eta": 0.21913043478260869,
+     "Pt_W": 25656318.12183229,
+     "waste_W": 20034237.97687426,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 4242.960037034784,
+     "blade_fraction": 0.15783578006030768,
+     "parts_kg": {
+      "reactor": 8196.895436549687,
+      "heat_transport": 15393.790873099373,
+      "conversion": 16866.240434874093,
+      "pmad": 5622.080144958031,
+      "structure": 4607.900688948119,
+      "coolant": 2303.9503444740594,
+      "spares": 4607.900688948119,
+      "rejection": 14728.880111104354,
+      "shield": 34746.788919612525
+     },
+     "mass_kg": 107074.42764256836,
+     "volume_m3": 81.8009568234967,
+     "fuel_kg_6y": 98.6104624394622
+    },
+    {
+     "Pe_W": 5622080.144958031,
+     "eta": 0.18095238095238095,
+     "Pt_W": 31069390.27476807,
+     "waste_W": 25447310.12981004,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 5389.369940371459,
+     "blade_fraction": 0.2004815980229157,
+     "parts_kg": {
+      "reactor": 19541.63416486084,
+      "heat_transport": 37283.26832972168,
+      "conversion": 33732.480869748186,
+      "pmad": 11244.160289916063,
+      "structure": 15270.231548137013,
+      "coolant": 8144.1234923397415,
+      "spares": 20360.308730849356,
+      "rejection": 30946.849701857296,
+      "shield": 66821.51365439124
+     },
+     "mass_kg": 243344.5707818214,
+     "volume_m3": 92.62710112936827,
+     "fuel_kg_6y": 119.41569044156381
+    }
+   ],
+   "waste_at_design_W": 17055027.465053856,
+   "blade_fraction_at_design": 0.1343646594896212,
+   "volume_m3": 163.6019136469934,
+   "reliability": {
+    "u=0.02": {
+     "p_short_essential": 0.0004,
+     "p_short_mission": 0.0004,
+     "p_short_full": 0.039599999999999996
+    },
+    "u=0.05": {
+     "p_short_essential": 0.0025000000000000005,
+     "p_short_mission": 0.0025000000000000005,
+     "p_short_full": 0.0975
+    },
+    "u=0.1": {
+     "p_short_essential": 0.010000000000000002,
+     "p_short_mission": 0.010000000000000002,
+     "p_short_full": 0.19000000000000003
+    }
+   },
+   "note": "Either plant alone carries everything that must keep running (crew, cryo, nav, comms, proactive defense).",
+   "buffer_kg": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "C: 3+1 modular (N+1)",
+   "tech": "FISSION",
+   "units": 4,
+   "unit_W": 2883201.0349860103,
+   "installed_W": 11532804.139944041,
+   "running": "three running, one warm standby",
+   "mass_kg": [
+    115186.00464422855,
+    237683.0808089141,
+    534478.2864924043
+   ],
+   "unit": [
+    {
+     "Pe_W": 2883201.0349860103,
+     "eta": 0.2596153846153846,
+     "Pt_W": 11105663.245872041,
+     "waste_W": 8222462.210886031,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 1741.3978314068759,
+     "blade_fraction": 0.0647790416870191,
+     "parts_kg": {
+      "reactor": 1965.8494868808061,
+      "heat_transport": 3331.6989737616123,
+      "conversion": 4324.801552479015,
+      "pmad": 1441.600517493005,
+      "structure": 885.1160424491551,
+      "coolant": 331.9185159184331,
+      "spares": 553.1975265307219,
+      "rejection": 3612.096747110314,
+      "shield": 12350.221798434075
+     },
+     "mass_kg": 28796.50116105714,
+     "volume_m3": 41.74413063168812,
+     "fuel_kg_6y": 42.6847914487182
+    },
+    {
+     "Pe_W": 2883201.0349860103,
+     "eta": 0.21913043478260869,
+     "Pt_W": 13157465.040610762,
+     "waste_W": 10274264.005624752,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 2175.939590821022,
+     "blade_fraction": 0.08094375617107119,
+     "parts_kg": {
+      "reactor": 4447.239512183229,
+      "heat_transport": 7894.479024366457,
+      "conversion": 8649.60310495803,
+      "pmad": 2883.20103498601,
+      "structure": 2387.4522676493725,
+      "coolant": 1193.7261338246863,
+      "spares": 2387.4522676493725,
+      "rejection": 8527.818772463066,
+      "shield": 21049.798084148297
+     },
+     "mass_kg": 59420.77020222852,
+     "volume_m3": 45.84773422116557,
+     "fuel_kg_6y": 50.57092393477947
+    },
+    {
+     "Pe_W": 2883201.0349860103,
+     "eta": 0.18095238095238095,
+     "Pt_W": 15933479.403870057,
+     "waste_W": 13050278.368884047,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 2763.8590324858274,
+     "blade_fraction": 0.10281403608835157,
+     "parts_kg": {
+      "reactor": 10460.087642322034,
+      "heat_transport": 19120.17528464407,
+      "conversion": 17299.20620991606,
+      "pmad": 5766.40206997202,
+      "structure": 7896.880681028128,
+      "coolant": 4211.669696548335,
+      "spares": 10529.174241370838,
+      "rejection": 17819.295162429138,
+      "shield": 40516.68063487045
+     },
+     "mass_kg": 133619.57162310107,
+     "volume_m3": 51.39976294768416,
+     "fuel_kg_6y": 61.24057882445146
+    }
+   ],
+   "waste_at_design_W": 17055027.465053856,
+   "blade_fraction_at_design": 0.13436465948962123,
+   "volume_m3": 183.39093688466227,
+   "reliability": {
+    "u=0.02": {
+     "p_short_essential": 1.6e-07,
+     "p_short_mission": 3.152e-05,
+     "p_short_full": 0.00233648
+    },
+    "u=0.05": {
+     "p_short_essential": 6.250000000000001e-06,
+     "p_short_mission": 0.0004812500000000001,
+     "p_short_full": 0.014018750000000003
+    },
+    "u=0.1": {
+     "p_short_essential": 0.00010000000000000002,
+     "p_short_mission": 0.0037000000000000006,
+     "p_short_full": 0.05230000000000001
+    }
+   },
+   "note": "Four identical modules; any three carry the design load.",
+   "buffer_kg": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "C2: 5+1 modular",
+   "tech": "FISSION",
+   "units": 6,
+   "unit_W": 1729920.6209916063,
+   "installed_W": 10379523.725949638,
+   "running": "five running, one warm standby",
+   "mass_kg": [
+    112799.12014131134,
+    230323.56493159482,
+    513300.41623866896
+   ],
+   "unit": [
+    {
+     "Pe_W": 1729920.6209916063,
+     "eta": 0.2596153846153846,
+     "Pt_W": 6663397.947523225,
+     "waste_W": 4933477.326531619,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 1044.8386988441255,
+     "blade_fraction": 0.03886742501221146,
+     "parts_kg": {
+      "reactor": 1299.5096921284837,
+      "heat_transport": 1999.0193842569674,
+      "conversion": 2594.8809314874093,
+      "pmad": 864.9603104958031,
+      "structure": 540.6696254694931,
+      "coolant": 202.7511095510599,
+      "spares": 337.91851591843323,
+      "rejection": 2567.2580482661883,
+      "shield": 8392.885739311389
+     },
+     "mass_kg": 18799.853356885225,
+     "volume_m3": 28.246478379012878,
+     "fuel_kg_6y": 25.610874869230923
+    },
+    {
+     "Pe_W": 1729920.6209916063,
+     "eta": 0.21913043478260869,
+     "Pt_W": 7894479.024366458,
+     "waste_W": 6164558.403374852,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 1305.5637544926133,
+     "blade_fraction": 0.04856625370264271,
+     "parts_kg": {
+      "reactor": 2868.3437073099376,
+      "heat_transport": 4736.687414619875,
+      "conversion": 5189.7618629748185,
+      "pmad": 1729.9206209916063,
+      "structure": 1452.4713605896238,
+      "coolant": 726.2356802948119,
+      "spares": 1452.4713605896238,
+      "rejection": 5916.69126347784,
+      "shield": 14314.67755108433
+     },
+     "mass_kg": 38387.26082193247,
+     "volume_m3": 30.70864053269934,
+     "fuel_kg_6y": 30.34255436086768
+    },
+    {
+     "Pe_W": 1729920.6209916063,
+     "eta": 0.18095238095238095,
+     "Pt_W": 9560087.642322036,
+     "waste_W": 7830167.021330429,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 1658.3154194914964,
+     "blade_fraction": 0.061688421653010944,
+     "parts_kg": {
+      "reactor": 6636.052585393221,
+      "heat_transport": 11472.105170786443,
+      "conversion": 10379.523725949637,
+      "pmad": 3459.8412419832125,
+      "structure": 4792.128408616877,
+      "coolant": 2555.801817929001,
+      "spares": 6389.504544822503,
+      "rejection": 12291.577097457483,
+      "shield": 27573.534780173104
+     },
+     "mass_kg": 85550.06937311149,
+     "volume_m3": 34.039857768610496,
+     "fuel_kg_6y": 36.74434729467089
+    }
+   ],
+   "waste_at_design_W": 17055027.465053856,
+   "blade_fraction_at_design": 0.13436465948962123,
+   "volume_m3": 184.25184319619603,
+   "reliability": {
+    "u=0.02": {
+     "p_short_essential": 6.400000000000001e-11,
+     "p_short_mission": 2.3238399999999995e-06,
+     "p_short_full": 0.005687123519999999
+    },
+    "u=0.05": {
+     "p_short_essential": 1.5625000000000006e-08,
+     "p_short_mission": 8.640625e-05,
+     "p_short_full": 0.032773828125
+    },
+    "u=0.1": {
+     "p_short_essential": 1.0000000000000004e-06,
+     "p_short_mission": 0.00127,
+     "p_short_full": 0.11426500000000002
+    }
+   },
+   "note": "Smaller modules: more shield discs and controls, better availability.",
+   "buffer_kg": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "D: 3+1 modular + dedicated defense buffer",
+   "tech": "FISSION",
+   "units": 4,
+   "unit_W": 3549867.7016526773,
+   "installed_W": 14199470.806610709,
+   "running": "three running",
+   "mass_kg": [
+    137531.81365049124,
+    285004.0934100587,
+    643091.7467699002
+   ],
+   "unit": [
+    {
+     "Pe_W": 3549867.7016526773,
+     "eta": 0.2596153846153846,
+     "Pt_W": 13673564.480439944,
+     "waste_W": 10123696.778787266,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 2144.051643443336,
+     "blade_fraction": 0.07975754206465775,
+     "parts_kg": {
+      "reactor": 2351.0346720659913,
+      "heat_transport": 4102.069344131983,
+      "conversion": 5324.801552479015,
+      "pmad": 1774.9338508263386,
+      "structure": 1084.2271535602663,
+      "coolant": 406.58518258509986,
+      "spares": 677.6419709751665,
+      "rejection": 4216.0774651650045,
+      "shield": 14445.582220833945
+     },
+     "mass_kg": 34382.95341262281,
+     "volume_m3": 49.54659976749059,
+     "fuel_kg_6y": 52.554560253312474
+    },
+    {
+     "Pe_W": 3549867.7016526773,
+     "eta": 0.21913043478260869,
+     "Pt_W": 16199793.082938805,
+     "waste_W": 12649925.381286127,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 2679.070096213519,
+     "blade_fraction": 0.0996599342867291,
+     "parts_kg": {
+      "reactor": 5359.937924881641,
+      "heat_transport": 9719.875849763283,
+      "conversion": 10649.60310495803,
+      "pmad": 3549.867701652677,
+      "structure": 2927.9284581255633,
+      "coolant": 1463.9642290627817,
+      "spares": 2927.9284581255633,
+      "rejection": 10037.210288640556,
+      "shield": 24614.70733730458
+     },
+     "mass_kg": 71251.02335251468,
+     "volume_m3": 54.59905697248831,
+     "fuel_kg_6y": 62.26415964077198
+    },
+    {
+     "Pe_W": 3549867.7016526773,
+     "eta": 0.18095238095238095,
+     "Pt_W": 19617689.930185847,
+     "waste_W": 16067822.22853317,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 3402.930906408356,
+     "blade_fraction": 0.12658715835552647,
+     "parts_kg": {
+      "reactor": 12670.613958111508,
+      "heat_transport": 23541.227916223015,
+      "conversion": 21299.20620991606,
+      "pmad": 7099.735403305354,
+      "structure": 9691.61752313339,
+      "coolant": 5168.862679004475,
+      "spares": 12922.156697511187,
+      "rejection": 21014.65453204178,
+      "shield": 47364.861773228295
+     },
+     "mass_kg": 160772.93669247505,
+     "volume_m3": 61.4348506669824,
+     "fuel_kg_6y": 75.40089995857329
+    }
+   ],
+   "waste_at_design_W": 17055027.465053856,
+   "blade_fraction_at_design": 0.1343646594896212,
+   "volume_m3": 218.39622788995325,
+   "reliability": {
+    "u=0.02": {
+     "p_short_essential": 1.6e-07,
+     "p_short_mission": 3.152e-05,
+     "p_short_full": 0.00233648
+    },
+    "u=0.05": {
+     "p_short_essential": 6.250000000000001e-06,
+     "p_short_mission": 0.0004812500000000001,
+     "p_short_full": 0.014018750000000003
+    },
+    "u=0.1": {
+     "p_short_essential": 0.00010000000000000002,
+     "p_short_mission": 0.0037000000000000006,
+     "p_short_full": 0.05230000000000001
+    }
+   },
+   "note": "Modules sized for design plus 2 MW to recharge a defense buffer; engagements up to the buffer limit draw the active band from storage (buffer mass listed apart).",
+   "buffer_kg": [
+    451.38888888888886,
+    2407.4074074074074,
+    12037.037037037036
+   ]
+  },
+  {
+   "name": "E: 2 x 60 % auxiliary fusion (SPECULATIVE)",
+   "tech": "FUSION",
+   "units": 2,
+   "unit_W": 5622080.144958031,
+   "installed_W": 11244160.289916063,
+   "running": "both sharing",
+   "mass_kg": [
+    100628.41155707282,
+    336377.77619246044,
+    942524.4295279172
+   ],
+   "unit": [
+    {
+     "Pe_W": 5622080.144958031,
+     "eta": 0.55,
+     "Pt_W": 10221963.899923693,
+     "waste_W": 4599883.754965662,
+     "T_rej_K": 900.0,
+     "blade_area_m2": 135.87003583083492,
+     "blade_fraction": 0.005054290614334621,
+     "parts_kg": {
+      "machine": 20000.0,
+      "scaling": 28110.400724790157,
+      "shield": 2000.0,
+      "rejection": 203.80505374625238
+     },
+     "mass_kg": 50314.20577853641,
+     "volume_m3": 60.0,
+     "fuel_kg_6y": 5.529953965169691
+    },
+    {
+     "Pe_W": 5622080.144958031,
+     "eta": 0.4,
+     "Pt_W": 14055200.362395078,
+     "waste_W": 8433120.217437048,
+     "T_rej_K": 900.0,
+     "blade_area_m2": 249.09506568986404,
+     "blade_fraction": 0.009266199459613472,
+     "parts_kg": {
+      "machine": 50000.0,
+      "scaling": 112441.60289916063,
+      "shield": 5000.0,
+      "rejection": 747.2851970695922
+     },
+     "mass_kg": 168188.88809623022,
+     "volume_m3": 120.0,
+     "fuel_kg_6y": 7.603686702108324
+    },
+    {
+     "Pe_W": 5622080.144958031,
+     "eta": 0.3,
+     "Pt_W": 18740267.149860106,
+     "waste_W": 13118187.004902076,
+     "T_rej_K": 900.0,
+     "blade_area_m2": 387.4812132953441,
+     "blade_fraction": 0.014414088048287624,
+     "parts_kg": {
+      "machine": 120000.0,
+      "scaling": 337324.8086974819,
+      "shield": 12000.0,
+      "rejection": 1937.4060664767205
+     },
+     "mass_kg": 471262.2147639586,
+     "volume_m3": 300.0,
+     "fuel_kg_6y": 10.138248936144434
+    }
+   ],
+   "waste_at_design_W": 7179065.013129573,
+   "blade_fraction_at_design": 0.007888260410143717,
+   "volume_m3": 240.0,
+   "reliability": {
+    "u=0.02": {
+     "p_short_essential": 0.0004,
+     "p_short_mission": 0.0004,
+     "p_short_full": 0.039599999999999996
+    },
+    "u=0.05": {
+     "p_short_essential": 0.0025000000000000005,
+     "p_short_mission": 0.0025000000000000005,
+     "p_short_full": 0.0975
+    },
+    "u=0.1": {
+     "p_short_essential": 0.010000000000000002,
+     "p_short_mission": 0.010000000000000002,
+     "p_short_full": 0.19000000000000003
+    }
+   },
+   "note": "D-He3 in the IGNITION frame; no fusion plant has made net electricity.",
+   "buffer_kg": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "B-lean: 2 x 60 % at nominal demand",
+   "tech": "FISSION",
+   "units": 2,
+   "unit_W": 3635866.6762950206,
+   "installed_W": 7271733.352590041,
+   "running": "both sharing",
+   "mass_kg": [
+    70191.74712254984,
+    145527.83561776407,
+    328500.4728374507
+   ],
+   "unit": [
+    {
+     "Pe_W": 3635866.6762950206,
+     "eta": 0.2596153846153846,
+     "Pt_W": 14004819.790173415,
+     "waste_W": 10368953.113878395,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 2195.993365899786,
+     "blade_fraction": 0.08168974557589308,
+     "parts_kg": {
+      "reactor": 2400.722968526012,
+      "heat_transport": 4201.445937052024,
+      "conversion": 5453.800014442531,
+      "pmad": 1817.9333381475103,
+      "structure": 1109.9121806534463,
+      "coolant": 416.21706774504236,
+      "spares": 693.695112908404,
+      "rejection": 4293.990048849679,
+      "shield": 14708.156892950272
+     },
+     "mass_kg": 35095.87356127492,
+     "volume_m3": 50.55310628552691,
+     "fuel_kg_6y": 53.82774524904061
+    },
+    {
+     "Pe_W": 3635866.6762950206,
+     "eta": 0.21913043478260869,
+     "Pt_W": 16592248.721187595,
+     "waste_W": 12956382.044892576,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 2743.973157576077,
+     "blade_fraction": 0.10207429247748417,
+     "parts_kg": {
+      "reactor": 5477.674616356278,
+      "heat_transport": 9955.349232712557,
+      "conversion": 10907.600028885063,
+      "pmad": 3635.8666762950206,
+      "structure": 2997.649055424892,
+      "coolant": 1498.824527712446,
+      "spares": 2997.649055424892,
+      "rejection": 10231.91947272823,
+      "shield": 25061.385143342653
+     },
+     "mass_kg": 72763.91780888203,
+     "volume_m3": 55.72796414755527,
+     "fuel_kg_6y": 63.772569062221876
+    },
+    {
+     "Pe_W": 3635866.6762950206,
+     "eta": 0.18095238095238095,
+     "Pt_W": 20092947.42163038,
+     "waste_W": 16457080.74533536,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 3485.3701952285046,
+     "blade_fraction": 0.12965385456406267,
+     "parts_kg": {
+      "reactor": 12955.768452978227,
+      "heat_transport": 24111.536905956455,
+      "conversion": 21815.200057770126,
+      "pmad": 7271.733352590041,
+      "structure": 9923.135815394227,
+      "coolant": 5292.339101543588,
+      "spares": 13230.847753858972,
+      "rejection": 21426.850976142523,
+      "shield": 48222.82400249118
+     },
+     "mass_kg": 164250.23641872534,
+     "volume_m3": 62.729361548440835,
+     "fuel_kg_6y": 77.22755960578446
+    }
+   ],
+   "waste_at_design_W": 17055027.465053856,
+   "blade_fraction_at_design": 0.1343646594896212,
+   "volume_m3": 111.45592829511054,
+   "reliability": {
+    "u=0.02": {
+     "p_short_essential": 0.0004,
+     "p_short_mission": 0.039599999999999996,
+     "p_short_full": 0.9999999999999999
+    },
+    "u=0.05": {
+     "p_short_essential": 0.0025000000000000005,
+     "p_short_mission": 0.0975,
+     "p_short_full": 1.0
+    },
+    "u=0.1": {
+     "p_short_essential": 0.010000000000000002,
+     "p_short_mission": 0.19000000000000003,
+     "p_short_full": 1.0
+    }
+   },
+   "note": "Smallest credible two-plant sizing.",
+   "buffer_kg": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "C-lean: 3+1 at nominal demand",
+   "tech": "FISSION",
+   "units": 4,
+   "unit_W": 1754882.558765007,
+   "installed_W": 7019530.235060028,
+   "running": "three running",
+   "mass_kg": [
+    76088.94384512238,
+    155411.1687409894,
+    346441.3568640458
+   ],
+   "unit": [
+    {
+     "Pe_W": 1754882.558765007,
+     "eta": 0.2596153846153846,
+     "Pt_W": 6759547.633761509,
+     "waste_W": 5004665.074996502,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 1059.9152279445407,
+     "blade_fraction": 0.03942826360375968,
+     "parts_kg": {
+      "reactor": 1313.9321450642265,
+      "heat_transport": 2027.8642901284527,
+      "conversion": 2632.3238381475103,
+      "pmad": 877.4412793825035,
+      "structure": 548.1249242178154,
+      "coolant": 205.54684658168077,
+      "spares": 342.57807763613465,
+      "rejection": 2589.872841916811,
+      "shield": 8484.551718205461
+     },
+     "mass_kg": 19022.235961280596,
+     "volume_m3": 28.53862550258305,
+     "fuel_kg_6y": 25.980427701338122
+    },
+    {
+     "Pe_W": 1754882.558765007,
+     "eta": 0.21913043478260869,
+     "Pt_W": 8008392.629284754,
+     "waste_W": 6253510.070519747,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 1324.4024230438738,
+     "blade_fraction": 0.04926704181286111,
+     "parts_kg": {
+      "reactor": 2902.517788785426,
+      "heat_transport": 4805.035577570852,
+      "conversion": 5264.647676295021,
+      "pmad": 1754.882558765007,
+      "structure": 1472.7083601416307,
+      "coolant": 736.3541800708153,
+      "spares": 1472.7083601416307,
+      "rejection": 5973.207269131622,
+      "shield": 14470.73041434535
+     },
+     "mass_kg": 38852.79218524735,
+     "volume_m3": 31.036315493629537,
+     "fuel_kg_6y": 30.78038309396172
+    },
+    {
+     "Pe_W": 1754882.558765007,
+     "eta": 0.18095238095238095,
+     "Pt_W": 9698035.193175038,
+     "waste_W": 7943152.634410031,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 1682.2441280158735,
+     "blade_fraction": 0.06257855645107994,
+     "parts_kg": {
+      "reactor": 6718.821115905022,
+      "heat_transport": 11637.642231810045,
+      "conversion": 10529.295352590041,
+      "pmad": 3509.765117530014,
+      "structure": 4859.328572675268,
+      "coolant": 2591.64190542681,
+      "spares": 6479.104763567025,
+      "rejection": 12411.220640079368,
+      "shield": 27873.51951642785
+     },
+     "mass_kg": 86610.33921601145,
+     "volume_m3": 34.41560062141011,
+     "fuel_kg_6y": 37.27455087717286
+    }
+   ],
+   "waste_at_design_W": 17055027.465053856,
+   "blade_fraction_at_design": 0.1343646594896212,
+   "volume_m3": 124.14526197451815,
+   "reliability": {
+    "u=0.02": {
+     "p_short_essential": 1.6e-07,
+     "p_short_mission": 0.00233648,
+     "p_short_full": 0.9999999999999999
+    },
+    "u=0.05": {
+     "p_short_essential": 6.250000000000001e-06,
+     "p_short_mission": 0.014018750000000003,
+     "p_short_full": 0.9999999999999999
+    },
+    "u=0.1": {
+     "p_short_essential": 0.00010000000000000002,
+     "p_short_mission": 0.05230000000000001,
+     "p_short_full": 1.0
+    }
+   },
+   "note": "Smallest credible modular sizing.",
+   "buffer_kg": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "A-bound: 2 x 100 % for continuous active defense",
+   "tech": "FISSION",
+   "units": 2,
+   "unit_W": 40131603.104958035,
+   "installed_W": 80263206.20991607,
+   "running": "both at ~50 %",
+   "mass_kg": [
+    598872.096386035,
+    1299282.0634516994,
+    3028859.430412623
+   ],
+   "unit": [
+    {
+     "Pe_W": 40131603.104958035,
+     "eta": 0.2596153846153846,
+     "Pt_W": 154580989.73761615,
+     "waste_W": 114449386.63265812,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 24238.714460018382,
+     "blade_fraction": 0.9016668483942869,
+     "parts_kg": {
+      "reactor": 23487.148460642424,
+      "heat_transport": 46374.29692128485,
+      "conversion": 60197.40465743705,
+      "pmad": 20065.801552479017,
+      "structure": 12009.972127347468,
+      "coolant": 4503.7395477553,
+      "spares": 7506.232579592168,
+      "rejection": 37358.07169002757,
+      "shield": 87933.38065645166
+     },
+     "mass_kg": 299436.0481930175,
+     "volume_m3": 477.68839189506446,
+     "fuel_kg_6y": 594.1344666055094
+    },
+    {
+     "Pe_W": 40131603.104958035,
+     "eta": 0.21913043478260869,
+     "Pt_W": 183140252.26468945,
+     "waste_W": 143008649.15973142,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 30287.150628612944,
+     "blade_fraction": 1.126665347668928,
+     "parts_kg": {
+      "reactor": 55442.07567940684,
+      "heat_transport": 109884.15135881367,
+      "conversion": 120394.8093148741,
+      "pmad": 40131.603104958034,
+      "structure": 32585.263945805265,
+      "coolant": 16292.631972902633,
+      "spares": 32585.263945805265,
+      "rejection": 92861.45188583883,
+      "shield": 149463.78051744506
+     },
+     "mass_kg": 649641.0317258497,
+     "volume_m3": 534.806916949211,
+     "fuel_kg_6y": 703.9024415484228
+    },
+    {
+     "Pe_W": 40131603.104958035,
+     "eta": 0.18095238095238095,
+     "Pt_W": 221779911.89582074,
+     "waste_W": 181648308.7908627,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 38470.46819970108,
+     "blade_fraction": 1.4310802610878564,
+     "parts_kg": {
+      "reactor": 133967.94713749242,
+      "heat_transport": 266135.89427498484,
+      "conversion": 240789.6186297482,
+      "pmad": 80263.20620991607,
+      "structure": 108173.49993782124,
+      "coolant": 57692.53330017133,
+      "spares": 144231.33325042832,
+      "rejection": 196352.3409985054,
+      "shield": 286823.34146724374
+     },
+     "mass_kg": 1514429.7152063115,
+     "volume_m3": 612.0862362114735,
+     "fuel_kg_6y": 852.4145813899893
+    }
+   ],
+   "waste_at_design_W": 17055027.465053856,
+   "blade_fraction_at_design": 0.1343646594896212,
+   "volume_m3": 1069.613833898422,
+   "reliability": {
+    "u=0.02": {
+     "p_short_essential": 0.0004,
+     "p_short_mission": 0.0004,
+     "p_short_full": 0.0004
+    },
+    "u=0.05": {
+     "p_short_essential": 0.0025000000000000005,
+     "p_short_mission": 0.0025000000000000005,
+     "p_short_full": 0.0025000000000000005
+    },
+    "u=0.1": {
+     "p_short_essential": 0.010000000000000002,
+     "p_short_mission": 0.010000000000000002,
+     "p_short_full": 0.010000000000000002
+    }
+   },
+   "note": "Bounding: the normal active band all cruise.",
+   "buffer_kg": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "name": "C-bound: 3+1 for continuous active defense",
+   "tech": "FISSION",
+   "units": 4,
+   "unit_W": 13377201.034986012,
+   "installed_W": 53508804.13994405,
+   "running": "three running",
+   "mass_kg": [
+    441480.26645327616,
+    939129.376860991,
+    2160446.1230061236
+   ],
+   "unit": [
+    {
+     "Pe_W": 13377201.034986012,
+     "eta": 0.2596153846153846,
+     "Pt_W": 51526996.57920539,
+     "waste_W": 38149795.544219375,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 8079.571486672794,
+     "blade_fraction": 0.30055561613142895,
+     "parts_kg": {
+      "reactor": 8029.049486880807,
+      "heat_transport": 15458.098973761615,
+      "conversion": 20065.801552479017,
+      "pmad": 6688.600517493006,
+      "structure": 4019.324042449156,
+      "coolant": 1507.2465159184335,
+      "spares": 2512.0775265307225,
+      "rejection": 13119.357230009191,
+      "shield": 38970.51076779709
+     },
+     "mass_kg": 110370.06661331904,
+     "volume_m3": 164.56279729835484,
+     "fuel_kg_6y": 198.0448222018364
+    },
+    {
+     "Pe_W": 13377201.034986012,
+     "eta": 0.21913043478260869,
+     "Pt_W": 61046750.754896484,
+     "waste_W": 47669549.71991047,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 10095.716876204315,
+     "blade_fraction": 0.37555511588964263,
+     "parts_kg": {
+      "reactor": 18814.025226468944,
+      "heat_transport": 36628.05045293789,
+      "conversion": 40131.603104958034,
+      "pmad": 13377.201034986012,
+      "structure": 10895.087981935088,
+      "coolant": 5447.543990967544,
+      "spares": 10895.087981935088,
+      "rejection": 32287.150628612944,
+      "shield": 66306.59381244621
+     },
+     "mass_kg": 234782.34421524775,
+     "volume_m3": 183.60230564973705,
+     "fuel_kg_6y": 234.63414718280757
+    },
+    {
+     "Pe_W": 13377201.034986012,
+     "eta": 0.18095238095238095,
+     "Pt_W": 73926637.2986069,
+     "waste_W": 60549436.26362089,
+     "T_rej_K": 550.0,
+     "blade_area_m2": 12823.489399900356,
+     "blade_fraction": 0.47702675369595204,
+     "parts_kg": {
+      "reactor": 45255.98237916414,
+      "heat_transport": 88711.96475832828,
+      "conversion": 80263.20620991607,
+      "pmad": 26754.402069972024,
+      "structure": 36147.83331260707,
+      "coolant": 19278.84443339044,
+      "spares": 48197.111083476106,
+      "rejection": 68117.44699950179,
+      "shield": 127384.73950517496
+     },
+     "mass_kg": 540111.5307515309,
+     "volume_m3": 209.36207873715784,
+     "fuel_kg_6y": 284.13819379666313
+    }
+   ],
+   "waste_at_design_W": 17055027.465053856,
+   "blade_fraction_at_design": 0.1343646594896212,
+   "volume_m3": 734.4092225989482,
+   "reliability": {
+    "u=0.02": {
+     "p_short_essential": 1.6e-07,
+     "p_short_mission": 1.6e-07,
+     "p_short_full": 1.6e-07
+    },
+    "u=0.05": {
+     "p_short_essential": 6.250000000000001e-06,
+     "p_short_mission": 6.250000000000001e-06,
+     "p_short_full": 6.250000000000001e-06
+    },
+    "u=0.1": {
+     "p_short_essential": 0.00010000000000000002,
+     "p_short_mission": 0.00010000000000000002,
+     "p_short_full": 0.00010000000000000002
+    }
+   },
+   "note": "Bounding.",
+   "buffer_kg": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ ],
+ "rejection_temperature": [
+  {
+   "Pe_W": 2000000.0,
+   "eta": 0.25930434782608697,
+   "Pt_W": 7712944.332662642,
+   "waste_W": 5712944.332662642,
+   "T_rej_K": 440.0,
+   "blade_area_m2": 2953.902506934147,
+   "blade_fraction": 0.10988354882783151,
+   "mass_kg": 44228.571093506485,
+   "volume_m3": 31.42588866532528,
+   "fuel_kg_6y": 29.644822916600724
+  },
+  {
+   "Pe_W": 2000000.0,
+   "eta": 0.2373913043478261,
+   "Pt_W": 8424908.424908424,
+   "waste_W": 6424908.424908424,
+   "T_rej_K": 500.0,
+   "blade_area_m2": 1992.203944716842,
+   "blade_fraction": 0.07410889117714944,
+   "mass_kg": 43116.24042493884,
+   "volume_m3": 32.84981684981685,
+   "fuel_kg_6y": 32.38126810890233
+  },
+  {
+   "Pe_W": 2000000.0,
+   "eta": 0.21913043478260869,
+   "Pt_W": 9126984.126984127,
+   "waste_W": 7126984.126984127,
+   "T_rej_K": 550.0,
+   "blade_area_m2": 1509.3915161774903,
+   "blade_fraction": 0.056148534346973776,
+   "mass_kg": 43395.679939934846,
+   "volume_m3": 34.25396825396825,
+   "fuel_kg_6y": 35.07970711797753
+  },
+  {
+   "Pe_W": 2000000.0,
+   "eta": 0.2008695652173913,
+   "Pt_W": 9956709.956709957,
+   "waste_W": 7956709.956709957,
+   "T_rej_K": 600.0,
+   "blade_area_m2": 1189.8039233801635,
+   "blade_fraction": 0.044260051644691725,
+   "mass_kg": 44455.5861914493,
+   "volume_m3": 35.913419913419915,
+   "fuel_kg_6y": 38.26877140143003
+  },
+  {
+   "Pe_W": 2000000.0,
+   "eta": 0.1826086956521739,
+   "Pt_W": 10952380.952380951,
+   "waste_W": 8952380.952380951,
+   "T_rej_K": 650.0,
+   "blade_area_m2": 971.9233120492553,
+   "blade_fraction": 0.03615501272156677,
+   "mass_kg": 46194.35000032821,
+   "volume_m3": 37.9047619047619,
+   "fuel_kg_6y": 42.09564854157303
+  }
+ ],
+ "shield_cover_kg": {
+  "SHADOW": 15974.64824854523,
+  "SECTOR": 39936.62062136308,
+  "FOUR_PI": 191695.77898254278
+ },
+ "shield_distance_kg": {
+  "40 m": 19828.542145755862,
+  "80 m": 17856.430195320507,
+  "155 m": 15974.64824854523,
+  "250 m": 14614.561758668646
+ },
+ "operating_modes": [
+  {
+   "mode": "All units at partial load (hot, sharing)",
+   "start": "instant pickup (seconds)",
+   "min_stable": "Brayton ~30-40 % of rating; reactor any",
+   "penalty": "every unit accumulates turbomachinery hours and fuel burn; no dormant failures",
+   "benefit": "a trip loses only its share"
+  },
+  {
+   "mode": "Warm standby (reactor at low power, loop hot, TAC idling or stopped)",
+   "start": "minutes (TAC restart, ramp)",
+   "min_stable": "n/a",
+   "penalty": "decay and idle heat still rejected; standby reactor still needs shielding",
+   "benefit": "spare unit ready after a trip"
+  },
+  {
+   "mode": "Cold standby (subcritical, loop frozen or drained)",
+   "start": "hours to a day (thaw a Li loop: Li freezes at 454 K; NaK does not)",
+   "min_stable": "n/a",
+   "penalty": "dormant failures undetected; slow",
+   "benefit": "no wear, no heat"
+  }
+ ],
+ "L1": {
+  "high_thrust_generation_W": [
+   64823505.02620875,
+   111280403.34208639,
+   161852915.54996186
+  ],
+  "with_open_planning_W": [
+   75443505.02620876,
+   153130403.34208637,
+   266252915.54996186
+  ],
+  "rated_F02_pump_work_W": 262500000.0,
+  "mass_kg": [
+   107191.28233946046,
+   229695.6050131296,
+   535956.4116973024
+  ],
+  "note": "Conversion from the drive hot loop at ~1800 K (Brayton/MHD/direct conversion OPEN); 0.7-3.5 kg/kWe (INL2002 total as the conservative end). The hot-loop pumps (OPEN, 10-100 MW planning) dominate the uncertainty."
+ },
+ "L3": {
+  "scenarios": {
+   "1 crew only": {
+    "P_W": [
+     8820.508,
+     17854.2,
+     40992.48
+    ],
+    "rows": {
+     "battery (conservative chemistry 250 Wh/kg pack, +30 % installed)": {
+      "72 h": 15347.584512000001,
+      "7 d": 35811.030528,
+      "30 d": 153475.84512000004
+     },
+     "battery (800 Wh/kg main-battery chemistry, +30 %)": {
+      "72 h": 4796.12016,
+      "7 d": 11190.947040000001,
+      "30 d": 47961.20160000001
+     },
+     "H2/O2 fuel cell on stored reactants (0.45 kg reactant/kWh, tanks x2, +stack 5 kg/kW)": {
+      "72 h": 2861.275104,
+      "7 d": 6403.025376000001,
+      "30 d": 26768.089440000007
+     },
+     "RPS (advanced Stirling 4 We/kg, Pu-238 decays 0.8 %/yr)": {
+      "72 h": 10248.12,
+      "7 d": 10248.12,
+      "30 d": 10248.12
+     },
+     "fission-Stirling (Kilopower family: 10 kWe 1.5 t, 40 kWe 6 t incl. shield; 130 kg/kWe + 1 t)": {
+      "72 h": 6329.0224,
+      "7 d": 6329.0224,
+      "30 d": 6329.0224
+     }
+    }
+   },
+   "2 crew + cryo": {
+    "P_W": [
+     341811.6934087415,
+     453016.74208638177,
+     733554.1163618461
+    ],
+    "rows": {
+     "battery (conservative chemistry 250 Wh/kg pack, +30 % installed)": {
+      "72 h": 274642.6611658752,
+      "7 d": 640832.8760537087,
+      "30 d": 2746426.611658752
+     },
+     "battery (800 Wh/kg main-battery chemistry, +30 %)": {
+      "72 h": 85825.831614336,
+      "7 d": 200260.27376678397,
+      "30 d": 858258.31614336
+     },
+     "H2/O2 fuel cell on stored reactants (0.45 kg reactant/kWh, tanks x2, +stack 5 kg/kW)": {
+      "72 h": 51202.07732205685,
+      "7 d": 114581.15297572037,
+      "30 d": 479010.83798428555
+     },
+     "RPS (advanced Stirling 4 We/kg, Pu-238 decays 0.8 %/yr)": {
+      "72 h": 183388.52909046152,
+      "7 d": 183388.52909046152,
+      "30 d": 183388.52909046152
+     },
+     "fission-Stirling (Kilopower family: 10 kWe 1.5 t, 40 kWe 6 t incl. shield; 130 kg/kWe + 1 t)": {
+      "72 h": 96362.03512704,
+      "7 d": 96362.03512704,
+      "30 d": 96362.03512704
+     }
+    }
+   },
+   "3 crew + nav/comms": {
+    "P_W": [
+     28820.508,
+     37854.2,
+     60992.48
+    ],
+    "rows": {
+     "battery (conservative chemistry 250 Wh/kg pack, +30 % installed)": {
+      "72 h": 22835.584512,
+      "7 d": 53283.03052800001,
+      "30 d": 228355.84512
+     },
+     "battery (800 Wh/kg main-battery chemistry, +30 %)": {
+      "72 h": 7136.12016,
+      "7 d": 16650.94704,
+      "30 d": 71361.2016
+     },
+     "H2/O2 fuel cell on stored reactants (0.45 kg reactant/kWh, tanks x2, +stack 5 kg/kW)": {
+      "72 h": 4257.275104,
+      "7 d": 9527.025376,
+      "30 d": 39828.089439999996
+     },
+     "RPS (advanced Stirling 4 We/kg, Pu-238 decays 0.8 %/yr)": {
+      "72 h": 15248.12,
+      "7 d": 15248.12,
+      "30 d": 15248.12
+     },
+     "fission-Stirling (Kilopower family: 10 kWe 1.5 t, 40 kWe 6 t incl. shield; 130 kg/kWe + 1 t)": {
+      "72 h": 8929.0224,
+      "7 d": 8929.0224,
+      "30 d": 8929.0224
+     }
+    }
+   },
+   "4 mission recovery (2 + protected black-start reserve)": {
+    "P_W": [
+     341811.6934087415,
+     453016.74208638177,
+     733554.1163618461
+    ],
+    "rows": {
+     "battery (conservative chemistry 250 Wh/kg pack, +30 % installed)": {
+      "72 h": 276985.6405125648,
+      "7 d": 643175.8554003984,
+      "30 d": 2748769.5910054417
+     },
+     "battery (800 Wh/kg main-battery chemistry, +30 %)": {
+      "72 h": 88168.8109610256,
+      "7 d": 202603.25311347356,
+      "30 d": 860601.2954900496
+     },
+     "H2/O2 fuel cell on stored reactants (0.45 kg reactant/kWh, tanks x2, +stack 5 kg/kW)": {
+      "72 h": 53545.05666874646,
+      "7 d": 116924.13232240998,
+      "30 d": 481353.81733097514
+     },
+     "RPS (advanced Stirling 4 We/kg, Pu-238 decays 0.8 %/yr)": {
+      "72 h": 183388.52909046152,
+      "7 d": 183388.52909046152,
+      "30 d": 183388.52909046152
+     },
+     "fission-Stirling (Kilopower family: 10 kWe 1.5 t, 40 kWe 6 t incl. shield; 130 kg/kWe + 1 t)": {
+      "72 h": 96362.03512704,
+      "7 d": 96362.03512704,
+      "30 d": 96362.03512704
+     }
+    }
+   },
+   "5 high-velocity protected": {
+    "P_W": [
+     1989811.6934087414,
+     3183016.7420863817,
+     4805154.116361846
+    ],
+    "rows": {
+     "battery (conservative chemistry 250 Wh/kg pack, +30 % installed)": {
+      "72 h": 1799049.7011658752,
+      "7 d": 4197782.636053709,
+      "30 d": 17990497.011658754
+     },
+     "battery (800 Wh/kg main-battery chemistry, +30 %)": {
+      "72 h": 562203.031614336,
+      "7 d": 1311807.073766784,
+      "30 d": 5622030.316143361
+     },
+     "H2/O2 fuel cell on stored reactants (0.45 kg reactant/kWh, tanks x2, +stack 5 kg/kW)": {
+      "72 h": 335399.75732205686,
+      "7 d": 750565.0729757204,
+      "30 d": 3137765.6379842856
+     },
+     "RPS (advanced Stirling 4 We/kg, Pu-238 decays 0.8 %/yr)": {
+      "72 h": 1201288.5290904616,
+      "7 d": 1201288.5290904616,
+      "30 d": 1201288.5290904616
+     },
+     "fission-Stirling (Kilopower family: 10 kWe 1.5 t, 40 kWe 6 t incl. shield; 130 kg/kWe + 1 t)": {
+      "72 h": 625670.03512704,
+      "7 d": 625670.03512704,
+      "30 d": 625670.03512704
+     }
+    }
+   }
+  },
+  "radiation": {
+   "RPS": "Pu-238 alpha source: gamma and spontaneous-fission neutrons are weak; ~0.1-1 mSv/h at 1 m unshielded for a kWt-class unit; a few cm of shielding or a few metres of distance suffice beside a refuge.",
+   "fission": "A 10-40 kWe fission-Stirling (40-150 kWt) next to the refuge needs a shadow shield of ~1-3 t and tens of metres, or the refuge itself as shield: placing it beside the refuge is not acceptable without it; 20-40 m away on the forward collar is.",
+   "recommendation": "Local batteries/fuel cells per ring and refuge for crew-only (no single point), plus one isolated kWe-class RPS or fission-Stirling for mission preservation; cryo at 0.4 MW is beyond any isolated survival source short of L2."
+  }
+ },
+ "thermal": [
+  {
+   "arch": "A: 2 x 100 %",
+   "Pe_W": 4786043.342086382,
+   "eta": 0.21913043478260869,
+   "primary_W": 21841070.80714024,
+   "conversion_waste_W": 17055027.465053856,
+   "consumer_heat_W": 4786043.342086382,
+   "exported_W": 800.0,
+   "T_rej_K": 550.0,
+   "blade_fraction_plant": 0.13436465948962123,
+   "blade_fraction_defense_warm": 0.0,
+   "blade_fraction_total": 0.13436465948962123,
+   "closes_in_coast": true,
+   "low_section_heat_W": 600607.177122762,
+   "low_section_W": 1000000.0,
+   "low_ok": true,
+   "coolant": "Li or NaK primary, He-Xe Brayton working gas, NaK/organic to the blade channels (OPEN)",
+   "heat_storage": "none needed in steady coast; a defense heat buffer only for engagements beyond the channels"
+  },
+  {
+   "arch": "B: 2 x 60 %, essentials on either",
+   "Pe_W": 4786043.342086382,
+   "eta": 0.21913043478260869,
+   "primary_W": 21841070.80714024,
+   "conversion_waste_W": 17055027.465053856,
+   "consumer_heat_W": 4786043.342086382,
+   "exported_W": 800.0,
+   "T_rej_K": 550.0,
+   "blade_fraction_plant": 0.13436465948962123,
+   "blade_fraction_defense_warm": 0.0,
+   "blade_fraction_total": 0.13436465948962123,
+   "closes_in_coast": true,
+   "low_section_heat_W": 600607.177122762,
+   "low_section_W": 1000000.0,
+   "low_ok": true,
+   "coolant": "Li or NaK primary, He-Xe Brayton working gas, NaK/organic to the blade channels (OPEN)",
+   "heat_storage": "none needed in steady coast; a defense heat buffer only for engagements beyond the channels"
+  },
+  {
+   "arch": "C: 3+1 modular (N+1)",
+   "Pe_W": 4786043.342086382,
+   "eta": 0.21913043478260869,
+   "primary_W": 21841070.80714024,
+   "conversion_waste_W": 17055027.465053856,
+   "consumer_heat_W": 4786043.342086382,
+   "exported_W": 800.0,
+   "T_rej_K": 550.0,
+   "blade_fraction_plant": 0.13436465948962123,
+   "blade_fraction_defense_warm": 0.0,
+   "blade_fraction_total": 0.13436465948962123,
+   "closes_in_coast": true,
+   "low_section_heat_W": 600607.177122762,
+   "low_section_W": 1000000.0,
+   "low_ok": true,
+   "coolant": "Li or NaK primary, He-Xe Brayton working gas, NaK/organic to the blade channels (OPEN)",
+   "heat_storage": "none needed in steady coast; a defense heat buffer only for engagements beyond the channels"
+  },
+  {
+   "arch": "D: 3+1 modular + dedicated defense buffer",
+   "Pe_W": 4786043.342086382,
+   "eta": 0.21913043478260869,
+   "primary_W": 21841070.80714024,
+   "conversion_waste_W": 17055027.465053856,
+   "consumer_heat_W": 4786043.342086382,
+   "exported_W": 800.0,
+   "T_rej_K": 550.0,
+   "blade_fraction_plant": 0.13436465948962123,
+   "blade_fraction_defense_warm": 0.0,
+   "blade_fraction_total": 0.13436465948962123,
+   "closes_in_coast": true,
+   "low_section_heat_W": 600607.177122762,
+   "low_section_W": 1000000.0,
+   "low_ok": true,
+   "coolant": "Li or NaK primary, He-Xe Brayton working gas, NaK/organic to the blade channels (OPEN)",
+   "heat_storage": "none needed in steady coast; a defense heat buffer only for engagements beyond the channels"
+  },
+  {
+   "arch": "E: 2 x 60 % auxiliary fusion (SPECULATIVE)",
+   "Pe_W": 4786043.342086382,
+   "eta": 0.4,
+   "primary_W": 11965108.355215956,
+   "conversion_waste_W": 7179065.013129573,
+   "consumer_heat_W": 4786043.342086382,
+   "exported_W": 800.0,
+   "T_rej_K": 900.0,
+   "blade_fraction_plant": 0.007888260410143719,
+   "blade_fraction_defense_warm": 0.0,
+   "blade_fraction_total": 0.007888260410143719,
+   "closes_in_coast": true,
+   "low_section_heat_W": 600607.177122762,
+   "low_section_W": 1000000.0,
+   "low_ok": true,
+   "coolant": "Li or NaK primary, He-Xe Brayton working gas, NaK/organic to the blade channels (OPEN)",
+   "heat_storage": "none needed in steady coast; a defense heat buffer only for engagements beyond the channels"
+  },
+  {
+   "arch": "A-bound: 2 x 100 % for continuous active defense",
+   "Pe_W": 25786043.342086382,
+   "eta": 0.21913043478260869,
+   "primary_W": 117674404.14047357,
+   "conversion_waste_W": 91888360.7983872,
+   "consumer_heat_W": 25786043.342086382,
+   "exported_W": 5000800.0,
+   "T_rej_K": 550.0,
+   "blade_fraction_plant": 0.723924270132846,
+   "blade_fraction_defense_warm": 0.24423506020152208,
+   "blade_fraction_total": 0.9681593303343681,
+   "closes_in_coast": false,
+   "low_section_heat_W": 1600607.177122762,
+   "low_section_W": 1000000.0,
+   "low_ok": false,
+   "coolant": "Li or NaK primary, He-Xe Brayton working gas, NaK/organic to the blade channels (OPEN)",
+   "heat_storage": "none needed in steady coast; a defense heat buffer only for engagements beyond the channels"
+  }
+ ],
+ "transitions": {
+  "coast_to_burn": "Warm channels drained and purged before the blades heat: L2 loses its coast sink. L2 steps down to hot standby and L1 takes the ship load; L2 decay heat goes to the WARM section margin.",
+  "burn_decay_heat_W": {
+   "60": 568975.9800797256,
+   "3600": 234087.64210621204,
+   "86400": 109850.6468686264,
+   "864000": 58252.84878231265
+  },
+  "warm_section_in_burn": {
+   "capacity_W": 5000000.0,
+   "high_thrust_warm_after_pumps_W": [
+    5000000.0,
+    5000000.0,
+    5000000.0
+   ],
+   "note": "The WARM section rejects its 5 MW in every mode; plant decay heat (~0.05-0.1 MW after an hour) must fit beside the machinery base load or be heat-pumped (6 W of L1 work per W)."
+  },
+  "l2_running_through_burn_extra_L1_W": 102330164.79032314,
+  "burn_to_coast": "Blades cool radiatively from 1800 K to below ~500 K in minutes (thin C/C sheets); hot-loop decay heat sets hours. Channels refill and L2 restarts from hot standby; battery bridges minutes only.",
+  "drive_trip_in_burn": "L1 lost with hot blades and drained channels: heat pumps stop, so the WARM section (5 MW) is free for L2 at reduced power (~1.0-1.3 MWe at 25 % efficiency) until the channels refill: crew, cryo, nav keep running; proactive defense (2.5 MW) cannot.",
+  "generator_trip": "One unit lost: architecture-dependent (see reliability); the blade channels of the lost unit stay available.",
+  "heat_pump_trip": "In a burn: warm heat beyond the WARM section has no sink; defense heat goes to Heat Debt (buffer OPEN) or the active band is shed to proactive within the buffer time.",
+  "radiator_circuit_loss": "Plants on separate blades (A on blade 1, B on blade 2) keep independent rejection paths; one shared manifold would be a common mode that defeats plant redundancy.",
+  "emergency_rejection": "LOW and WARM sections (1 + 5 MW) are the only surfaces that work in every mode; with blades hot and channels drained they are the ship's whole emergency sink."
+ }
+}

@@ -696,6 +696,23 @@ blades are dark, and drain-back warm channels in the blade panels (a separate ci
 50–80 MW bursts stay with load shedding and Heat Debt. The cold loop stays on each ring's usable faces: 0.15 MW in HIGH_POWER against the
 owner's 100 kW bound (+50 %), 1.38 MW in the coast. No geometry changes; the Q38 candidate panels keep no credited area.
 
+## Electric loads and systems registry (EPS-A)
+
+**PROTOTYPE (ISSA Phase II, owner brief 2026-11-27; no canon).** `power_loads.py` reads `[power.loads]` in `data/wayfarer_3d.toml`: 34
+loads with min/nominal/max power, standby, peak and start energy, duty, bus, priority, heat loop, exported energy, dependencies, source and
+maturity; 17 operating states (base chains, levels and duties per state, each naming its Phase I mode), 5 faults kept apart from the
+states, and storage rules. Values owned elsewhere are references (`spec:`, `calc:`); doctrine duties stay PARAM and are never defaulted
+(the time-averaged load is then left empty); unknown loads stay OPEN with a planning band that is never summed into a known total. The
+ledger gives continuous, peak and time-averaged load, load by supply level (L1 burn, L2 ship service, L3 survival, stores), heat per loop
+(RING_COLD, WARM, LOW, HOT, TANKS), exported light and stored energy, and balances energy exactly: loops + exported + stored = electrical
++ heat lifted from the tanks. Burn heat pumps lift only the warm heat the WARM section cannot reject (work = lift x (1800/450 - 1)/0.5).
+Storage protects the black-start reserve (pulse-bank recharge plus one hour of restart services) inside the 2 MWh main battery; the rest is
+ride-through, and the 800 Wh/kg figure is pack-level (2.5 t pack, installed mass OPEN). Proactive coast is 3.2 MW nominal (2.0-4.9),
+ride-through about 10 minutes. Report `references/p1_power_loads.json`; `data/systems.toml` (`systems.py`) is the systems registry, EPS
+and TMS first: one physical owner and one mass-budget owner per assembly (a `physics.mass_budget` line or a PROPOSED line), its load ids,
+heat loop, interfaces, failure domain, sources and maturity; OPEN masses are listed with their planning bands, never summed. Studies and
+the proposal: `work/ship-systems-architecture/` (Phase II in `phase2/`).
+
 ## Radiator zoning (RAD-ZONE): the Graded Thermal Blade
 
 **WORKING layout (owner pick 2026-11-01, S&E 15 row 242); Graded Thermal Blade PROTOTYPE (owner brief 2026-11-01, Claude under the

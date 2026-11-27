@@ -1,0 +1,296 @@
+# Ship systems registry (DR-13, ISSA Phase II, owner brief 2026-11-27). PROTOTYPE, read by src/wayfarer/systems.py.
+# One row per physical assembly with ONE physical owner (family) and ONE mass-budget owner (budget_item, a physics.mass_budget id or a
+# PROPOSED line below). Functional relations (serves, interfaces) are separate from ownership. Values owned elsewhere are referenced:
+# loads are power.loads ids, mass_ref / spec paths point at their owner; a mass band here is a PROTOTYPE estimate only where no other
+# owner exists. mass_kg = [low, nominal, high]; mass_open = true keeps an unsized assembly OPEN (planning_kg reported apart, never in a sum).
+# Started with EPS and TMS; the full 56-assembly ISSA study inventory (work/ship-systems-architecture/systems.toml on the ISSA branch)
+# is the broader reference and is not read by code.
+# maturity: 0 not contemplated, 1 conceptually defined, 2 requirements identified, 3 space allocated, 4 geometry proxy, 5 functional
+# architecture, 6 engineering sizing, 7 integrated and validated.
+
+[registry]
+status = "PROTOTYPE"
+families = ["EPS", "TMS"]
+failure_domains = ["DRIVE_AFT", "POWER_DISTRICT_A", "POWER_DISTRICT_B", "MIDBODY_STORES", "RAD_ZONE", "ROTOR_RINGS", "FORWARD_SERVICE", "BLADES"]
+proposed_budget_items = [
+  { id = "PROPOSED.burn_generation", note = "Drive-derived electrical generation (L1); proposed under drive_package, owner decision DR-04" },
+  { id = "PROPOSED.ship_service_generation", note = "Continuous ship-service generation (L2) and its shielding; no line exists (DR-04)" },
+  { id = "PROPOSED.power_thermal_machinery", note = "Burn heat pumps and their compressors; no line exists (DR-04)" },
+]
+
+[[system]]
+id = "EPS-01"
+family = "EPS"
+name = "Drive-derived generation (L1 burn bus)"
+serves = ["TMS-04", "PROP", "PROT"]
+budget_item = "PROPOSED.burn_generation"
+mass_open = true
+planning_kg = [150000.0, 400000.0, 900000.0]   # 210-260 MWe at 0.7-3.5 kg/kWe (INL multi-MWe Brayton 3.5 kg/kWe conversion incl. PMAD)
+loads = []
+heat = "HOT"
+interfaces = [{ kind = "HEAT", with = "TMS-01", via = "drive hot loop tap" }, { kind = "ELECTRIC", with = "EPS-06", via = "L1 burn bus" }]
+failure_domain = "DRIVE_AFT"
+district = ["D2_AFT_ENGINEERING", "M1", "M2"]
+sources = ["spec:power.generator_count", "spec:power.rating"]
+maturity = 4
+open = ["conversion type and rating", "where the 210 MW tap is taken", "budget line"]
+
+[[system]]
+id = "EPS-02"
+family = "EPS"
+name = "Ship-service generation (L2, independent of propulsion)"
+serves = ["ECLSS", "CDH", "GNC", "COMMS", "PROT", "TMS-07"]
+budget_item = "PROPOSED.ship_service_generation"
+mass_open = true
+planning_kg = [12000.0, 60000.0, 200000.0]    # EPS-B trade result range for the proactive working case (work/ship-systems-architecture)
+loads = []
+heat = "WARM"
+interfaces = [{ kind = "HEAT", with = "TMS-02", via = "coast rejection (DR-03 OPEN)" }, { kind = "ELECTRIC", with = "EPS-06", via = "buses A and B" }]
+failure_domain = "POWER_DISTRICT_A"
+district = ["M1", "M2", "M3", "M4"]   # ISSA Phase II layouts L-A (M3/M4) and L-E (M1-M2, working candidate); candidates only (DR-12)
+sources = ["spec:power.hotel_source"]
+maturity = 1
+open = ["technology (fission-Brayton reference, auxiliary fusion alternative)", "modularity: 3+1 x ~1.75 MWe working case (ISSA Phase II)", "shielding: shadow cone plus a blade-facing scatter band (transport calculation needed)", "heat path in burns (warm channels drained: hot standby)", "crew exclusion in line of sight of running units (DR-15)"]
+
+[[system]]
+id = "EPS-03"
+family = "EPS"
+name = "Main battery (2 MWh usable)"
+serves = ["EPS-04", "EPS-06"]
+budget_item = "power_computers_steering_comms"
+mass_kg = [2500.0, 3000.0, 3600.0]             # 2.5 t pack-level (800 Wh/kg is already a pack figure) + installed containment/thermal/switching 0-45 %
+mass_ref = "calc:power_storage.main_battery_extrapolated_pack_mass_kg"
+loads = []
+heat = "LOW"
+interfaces = [{ kind = "ELECTRIC", with = "EPS-06", via = "BC-A, BC-B" }, { kind = "ELECTRIC", with = "EPS-04", via = "pulse charger" }]
+failure_domain = "DRIVE_AFT"
+district = ["D2_AFT_ENGINEERING"]
+sources = ["spec:power.storage.main_battery"]
+maturity = 4
+open = ["installed mass (power.storage.main_battery.installed_mass)", "converter rating: the Deadship 40 kW converters cannot carry the coast load"]
+
+[[system]]
+id = "EPS-04"
+family = "EPS"
+name = "Ignition pulse bank (200 kWh / 50 MW)"
+serves = ["PROP"]
+budget_item = "power_computers_steering_comms"
+mass_kg = [3300.0, 6000.0, 10000.0]            # 20-60 Wh/kg supercapacitor pack
+loads = ["PROP.PULSE_DISCHARGE", "EPS.PULSE_CHARGE"]
+heat = "HOT"
+interfaces = [{ kind = "ELECTRIC", with = "PROP", via = "seed field / startup heating" }]
+failure_domain = "DRIVE_AFT"
+district = ["D2_AFT_ENGINEERING"]
+sources = ["spec:power.storage.pulse_bank"]
+maturity = 4
+open = ["ignition energy drawn per start (power.storage.pulse_bank.ignition_energy)"]
+
+[[system]]
+id = "EPS-05"
+family = "EPS"
+name = "Survival power (L3, isolated)"
+serves = ["ECLSS", "CDH", "COMMS", "SAFETY"]
+budget_item = "power_computers_steering_comms"
+mass_kg = [600.0, 1200.0, 2500.0]              # today's distributed packs only; an L3 source is an EPS-B result (planning apart)
+loads = []
+heat = "RING_COLD"
+interfaces = [{ kind = "ELECTRIC", with = "EPS-07", via = "bus E" }]
+failure_domain = "FORWARD_SERVICE"
+district = ["D7_FORWARD_SERVICE", "ROTOR_RINGS"]
+sources = ["spec:power.storage.survival_reserve"]
+maturity = 4
+open = ["capacity (survival_reserve.capacity OPEN)", "L3 source and endurance target (DR-05)"]
+
+[[system]]
+id = "EPS-06"
+family = "EPS"
+name = "Primary distribution A/B (HV DC trunks, switchboards, protection)"
+serves = ["ALL"]
+budget_item = "power_computers_steering_comms"
+mass_kg = [3000.0, 5500.0, 9000.0]
+loads = []
+heat = "LOW"
+interfaces = [{ kind = "ELECTRIC", with = "EPS-01", via = "L1 tie" }, { kind = "ELECTRIC", with = "EPS-02", via = "plant breakers" }]
+failure_domain = "MIDBODY_STORES"
+district = ["keel lanes 0/120/240 deg"]
+sources = ["spec:power.bus_names"]
+maturity = 2
+open = ["voltage", "trunk routes and separation", "tie and protection philosophy"]
+
+[[system]]
+id = "EPS-07"
+family = "EPS"
+name = "Emergency distribution (bus E)"
+serves = ["EPS-05"]
+budget_item = "power_computers_steering_comms"
+mass_kg = [200.0, 500.0, 1000.0]
+loads = []
+heat = "LOW"
+interfaces = [{ kind = "ELECTRIC", with = "EPS-06", via = "one-way charge (diode)" }]
+failure_domain = "FORWARD_SERVICE"
+district = ["one keel lane, refuge panel"]
+sources = ["spec:power.storage.survival_reserve.isolated_from"]
+maturity = 2
+open = ["route", "one-way charge path"]
+
+[[system]]
+id = "EPS-08"
+family = "EPS"
+name = "Local conversion, ride-through cells and load shedding"
+serves = ["ALL"]
+budget_item = "power_computers_steering_comms"
+mass_kg = [400.0, 800.0, 1500.0]
+loads = []
+heat = "LOW"
+interfaces = [{ kind = "ELECTRIC", with = "EPS-06", via = "district racks" }]
+failure_domain = "MIDBODY_STORES"
+district = ["each district's equipment racks"]
+sources = ["spec:power.storage.ride_through"]
+maturity = 3
+open = ["ride-through capacity (OPEN)"]
+
+[[system]]
+id = "EPS-09"
+family = "EPS"
+name = "Grounding, EMC and drive-field protection"
+serves = ["ALL"]
+budget_item = "power_computers_steering_comms"
+mass_kg = [100.0, 300.0, 800.0]
+loads = []
+heat = "LOW"
+interfaces = []
+failure_domain = "MIDBODY_STORES"
+district = ["distributed"]
+sources = []
+maturity = 0
+open = ["exclusion zones near the drive and defense magnets"]
+
+[[system]]
+id = "EPS-10"
+family = "EPS"
+name = "Rotor power and data transfer"
+serves = ["ECLSS", "TMS-05"]
+budget_item = "power_computers_steering_comms"
+mass_kg = [200.0, 500.0, 1000.0]
+loads = ["STRUCT.ROTOR"]
+heat = "WARM"
+interfaces = [{ kind = "ELECTRIC", with = "EPS-06", via = "contactless transfer per hub" }]
+failure_domain = "ROTOR_RINGS"
+district = ["D6_ROTOR_BAY"]
+sources = []
+maturity = 4
+open = ["transfer losses"]
+
+[[system]]
+id = "TMS-01"
+family = "TMS"
+name = "Hot loop machinery (1800 K drive blades)"
+serves = ["PROP", "TMS-04"]
+budget_item = "radiators_thermal"
+mass_open = true
+loads = ["TMS.HOT_LOOP_PUMPS"]
+heat = "HOT"
+interfaces = [{ kind = "FLUID", with = "PROP", via = "drive heat exchanger" }, { kind = "HEAT", with = "BLADES", via = "blade manifolds" }]
+failure_domain = "BLADES"
+district = ["D1_DRIVE", "D2_AFT_ENGINEERING"]
+sources = ["spec:radiators.temperature", "spec:radiators.effective_area"]
+maturity = 4
+open = ["coolant", "pump power and mass"]
+
+[[system]]
+id = "TMS-02"
+family = "TMS"
+name = "Warm loop (450 K): WARM section and coast warm channels"
+serves = ["PROT", "EPS-02", "STRUCT"]
+budget_item = "radiators_thermal"
+mass_open = true
+loads = ["TMS.LOOP_PUMPS"]
+heat = "WARM"
+interfaces = [{ kind = "HEAT", with = "BLADES", via = "drain-back channels (coast only)" }, { kind = "HEAT", with = "TMS-04", via = "burn heat pumps" }]
+failure_domain = "RAD_ZONE"
+district = ["D5_RAD_ZONE"]
+sources = ["spec:thermal.loops.architecture", "spec:radiators.zones"]
+maturity = 5
+open = ["channel hardware", "drain/purge time", "coast plant rejection temperature (DR-03)"]
+
+[[system]]
+id = "TMS-03"
+family = "TMS"
+name = "LOW section (300 K): cryocooler, avionics and conversion-loss rejection"
+serves = ["TMS-07", "CDH", "EPS-06"]
+budget_item = "radiators_thermal"
+mass_open = true
+loads = []
+heat = "LOW"
+interfaces = [{ kind = "HEAT", with = "TMS-07", via = "cryocooler rejectors" }]
+failure_domain = "RAD_ZONE"
+district = ["D5_RAD_ZONE"]
+sources = ["spec:radiators.zones"]
+maturity = 5
+open = ["loop hardware"]
+
+[[system]]
+id = "TMS-04"
+family = "TMS"
+name = "Burn heat pumps (warm loop to hot loop)"
+serves = ["TMS-02", "PROT"]
+budget_item = "PROPOSED.power_thermal_machinery"
+mass_open = true
+planning_kg = [100000.0, 300000.0, 1000000.0]   # 210 MW of compressor work at 0.5-5 kg/kW (industrial heat pumps are heavier; space-rated OPEN)
+loads = ["TMS.BURN_HEAT_PUMPS"]
+heat = "HOT"
+interfaces = [{ kind = "ELECTRIC", with = "EPS-01", via = "L1" }, { kind = "HEAT", with = "TMS-01", via = "hot-side exchanger" }]
+failure_domain = "DRIVE_AFT"
+district = ["D2_AFT_ENGINEERING", "M1", "M2"]
+sources = ["spec:thermal.loops.architecture.heat_pump_second_law_efficiency"]
+maturity = 2
+open = ["machine type at a 1800/450 K lift", "mass", "space"]
+
+[[system]]
+id = "TMS-05"
+family = "TMS"
+name = "Habitat cold loops (320 K, per ring)"
+serves = ["ECLSS"]
+budget_item = "life_support_garden_medical"
+mass_kg = [1000.0, 2000.0, 3000.0]
+loads = ["TMS.RING_HEAT_PUMPS"]
+heat = "RING_COLD"
+interfaces = [{ kind = "HEAT", with = "ROTOR_RINGS", via = "ring faces" }]
+failure_domain = "ROTOR_RINGS"
+district = ["rings"]
+sources = ["spec:thermal.loops.cold"]
+maturity = 5
+open = []
+
+[[system]]
+id = "TMS-06"
+family = "TMS"
+name = "Heat buffer (Heat Debt store)"
+serves = ["PROT"]
+budget_item = "radiators_thermal"
+mass_open = true
+planning_kg = [3000.0, 10000.0, 30000.0]
+loads = []
+heat = "WARM"
+interfaces = [{ kind = "HEAT", with = "TMS-02", via = "buffer exchanger" }]
+failure_domain = "RAD_ZONE"
+district = ["D5_RAD_ZONE"]
+sources = ["spec:forward_defense.power_thermal_closure"]
+maturity = 2
+open = ["capacity", "medium"]
+
+[[system]]
+id = "TMS-07"
+family = "TMS"
+name = "Cryogenic cooling of the tank farm (zero boil-off)"
+serves = ["PROP"]
+budget_item = "radiators_thermal"
+mass_kg = [3000.0, 6000.0, 12000.0]            # ~0.4 MW input at 8-30 kg/kW (large reverse-Brayton cryocoolers)
+loads = ["TMS.CRYOCOOLERS"]
+heat = "LOW"
+interfaces = [{ kind = "HEAT", with = "TMS-03", via = "LOW section" }, { kind = "ELECTRIC", with = "EPS-06", via = "two buses (DR-06)" }]
+failure_domain = "MIDBODY_STORES"
+district = ["tank farm stations"]
+sources = ["spec:physics.fuel_loads.cooling"]
+maturity = 4
+open = ["redundancy (n+1)", "mass"]

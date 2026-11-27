@@ -63,7 +63,15 @@ def main():
     pc_rows = '\n'.join(f'<tr><td>{E(i["item"])}</td><td class="num">{i["t"][0]:.1f}–{i["t"][2]:.1f} <span class="nom">({i["t"][1]:.1f})</span></td></tr>' for i in pc['items'])
     blade_rows = '\n'.join(f'<tr><td class="num">{r["plant_MWe"]:.0f}</td><td class="num">{r["plant_waste_MW"]:.0f}</td><td class="num">{r["defense_heat_MW"]:.0f}</td><td class="num {"bad" if r["blade_area_fraction"] > 1 else ("warn" if r["blade_area_fraction"] > 0.6 else "")}">{100*r["blade_area_fraction"]:.0f} %</td></tr>' for r in rj['shared_blade_area'])
     fam_opts = ''.join(f'<option value="{k}">{E(v)}</option>' for k, v in fams.items())
+    import sys; sys.path.insert(0, str(H / 'phase2')); import report2
+    em = json.loads((R / 'phase2_eclss_mass.json').read_text()); ms = json.loads((R / 'phase2_mission.json').read_text())
+    pl2 = json.loads((H.parents[1] / 'references/p1_power_loads.json').read_text())
+    l2 = next(r for r in em['mass']['adds'] if r['budget'] == 'PROPOSED.ship_service_generation')
     page = (H / 'report_template.html').read_text()
+    for k, v in dict(PHASE2=report2.build(), P2_COAST=f"{pl2['states']['COAST_HV_PROACTIVE']['continuous_W'][1]/1e6:.1f} MW",
+                     P2_L2=f"{l2['t'][1]:.0f}", P2_ADD=f"~{em['mass']['total_added_t'][1]:.0f}", P2_STD=f"{ms['standard_load']['t']:.0f}",
+                     P2_CONT=str(ms['standard_load']['containers'])).items():
+        page = page.replace('{{' + k + '}}', v)
     for k, v in dict(GAP_ROWS=gap_rows(reg), MODE_ROWS=mode_rows, LOAD_ROWS=load_rows, DIST_ROWS=dist_rows, PLANT_ROWS=plant_rows,
                      PC_ROWS=pc_rows, BLADE_ROWS=blade_rows, FAM_OPTS=fam_opts, FIG_LON=lon, FIG_SEC=sec,
                      N_SYS=str(len(reg['system'])), N_ARCHH=str(len(archH)),

@@ -1,0 +1,1840 @@
+{
+ "l2_reliability": {
+  "6 months": {
+   "u=0.02": {
+    "C_lean_3_of_4": 0.0005861832629369124,
+    "C2_5_of_6": 0.0014461209169593925,
+    "B_1_of_2": 9.900580841926132e-05
+   },
+   "u=0.05": {
+    "C_lean_3_of_4": 0.003538308793667122,
+    "C2_5_of_6": 0.008558466617716753,
+    "B_1_of_2": 0.0006096004440486746
+   },
+   "u=0.1": {
+    "C_lean_3_of_4": 0.013360353533714342,
+    "C2_5_of_6": 0.03128640498016011,
+    "B_1_of_2": 0.002378569034531486
+   }
+  },
+  "12 months standard": {
+   "u=0.02": {
+    "C_lean_3_of_4": 0.0022909048229124984,
+    "C2_5_of_6": 0.005577675370030177,
+    "B_1_of_2": 0.0003920925388126717
+   },
+   "u=0.05": {
+    "C_lean_3_of_4": 0.013360353533714342,
+    "C2_5_of_6": 0.03128640498016011,
+    "B_1_of_2": 0.002378569034531486
+   },
+   "u=0.1": {
+    "C_lean_3_of_4": 0.04768725538004648,
+    "C2_5_of_6": 0.10487422219433173,
+    "B_1_of_2": 0.009055917006062786
+   }
+  },
+  "24 months extended": {
+   "u=0.02": {
+    "C_lean_3_of_4": 0.008749620030003902,
+    "C2_5_of_6": 0.020754786864875863,
+    "B_1_of_2": 0.0015374680819892905
+   },
+   "u=0.05": {
+    "C_lean_3_of_4": 0.04768725538004648,
+    "C2_5_of_6": 0.10487422219433173,
+    "B_1_of_2": 0.009055917006062786
+   },
+   "u=0.1": {
+    "C_lean_3_of_4": 0.15274034797555913,
+    "C2_5_of_6": 0.2986944125323566,
+    "B_1_of_2": 0.032858539879675686
+   }
+  },
+  "36 months long-duration": {
+   "u=0.02": {
+    "C_lean_3_of_4": 0.01880273755457207,
+    "C2_5_of_6": 0.043472306264848104,
+    "B_1_of_2": 0.0033913695486600393
+   },
+   "u=0.05": {
+    "C_lean_3_of_4": 0.09592230179498618,
+    "C2_5_of_6": 0.1986489822569073,
+    "B_1_of_2": 0.01940226783160226
+   },
+   "u=0.1": {
+    "C_lean_3_of_4": 0.2773039967742098,
+    "C2_5_of_6": 0.4877134802173537,
+    "B_1_of_2": 0.06717519473059064
+   }
+  },
+  "5 years exceptional": {
+   "u=0.02": {
+    "C_lean_3_of_4": 0.04768725538004648,
+    "C2_5_of_6": 0.10487422219433173,
+    "B_1_of_2": 0.009055917006062786
+   },
+   "u=0.05": {
+    "C_lean_3_of_4": 0.21417211255026813,
+    "C2_5_of_6": 0.3966220195810086,
+    "B_1_of_2": 0.04892909356982367
+   },
+   "u=0.1": {
+    "C_lean_3_of_4": 0.5134852091161188,
+    "C2_5_of_6": 0.7564253500959269,
+    "B_1_of_2": 0.15481812174617549
+   }
+  },
+  "10 years endurance bound": {
+   "u=0.02": {
+    "C_lean_3_of_4": 0.15274034797555913,
+    "C2_5_of_6": 0.2986944125323566,
+    "B_1_of_2": 0.032858539879675686
+   },
+   "u=0.05": {
+    "C_lean_3_of_4": 0.5134852091161188,
+    "C2_5_of_6": 0.7564253500959269,
+    "B_1_of_2": 0.15481812174617549
+   },
+   "u=0.1": {
+    "C_lean_3_of_4": 0.8557986431947467,
+    "C2_5_of_6": 0.971966078888819,
+    "B_1_of_2": 0.39957640089372803
+   }
+  }
+ },
+ "status": "ISSA Phase II STUDY (NONCANON)",
+ "clarification": "owner 2026-11-27: six years is a narrative scenario, not a provisioning requirement",
+ "parameters": [
+  {
+   "name": "max_design_occupancy",
+   "value": 12,
+   "kind": "engineering requirement (working)",
+   "note": "crew.rated_occupancy"
+  },
+  {
+   "name": "mission_occupancy",
+   "value": "6-12 per mission",
+   "kind": "mission plan",
+   "note": "new parameter"
+  },
+  {
+   "name": "nominal_mission_duration",
+   "value": "12 months (proposal)",
+   "kind": "mission plan",
+   "note": "replaces the narrative 6 yr as the provisioning basis"
+  },
+  {
+   "name": "extended_mission_duration",
+   "value": "24-36 months via logistics modules",
+   "kind": "mission plan",
+   "note": "new"
+  },
+  {
+   "name": "loaded_consumables",
+   "value": "per mission, in dry-store containers",
+   "kind": "cargo",
+   "note": "new"
+  },
+  {
+   "name": "autonomous_endurance",
+   "value": "loaded consumables + reserve",
+   "kind": "derived",
+   "note": "new"
+  },
+  {
+   "name": "emergency_endurance",
+   "value": "30 d for 12 (DR-05)",
+   "kind": "requirement (preliminary)",
+   "note": "survival reserve"
+  },
+  {
+   "name": "equipment_lifetime",
+   "value": "per system (service table)",
+   "kind": "design",
+   "note": "new"
+  },
+  {
+   "name": "service_lifetime",
+   "value": "10-20 yr candidate",
+   "kind": "design",
+   "note": "new"
+  },
+  {
+   "name": "narrative_duration",
+   "value": "~6 yr, 6 people",
+   "kind": "story",
+   "note": "mission.duration (LOCKED in data; not changed here)"
+  }
+ ],
+ "kinematics_check": {
+  "v_peak_c": 0.016,
+  "ramp_d": 7.5482279,
+  "ramp_AU": 6.9703207844637465,
+  "coast_d": 360964.8635628789,
+  "one_way_d": 360979.9600186789,
+  "check_T0_d": 7.5482279,
+  "check_x0_AU": 6.970320784
+ },
+ "destinations": [
+  {
+   "id": "JUPITER",
+   "name": "Jupiter system (outer planets, near)",
+   "one_way_AU": 5.2,
+   "ops_d": 60,
+   "purpose": "shakedown, moons, field and dust science",
+   "speeds": {
+    "0.016 c": {
+     "v_peak_c": 0.005222924010556806,
+     "ramp_d": 4.312626690925748,
+     "ramp_AU": 2.6,
+     "coast_d": 0.0,
+     "one_way_d": 8.625253381851495,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 1.8770434577170234,
+     "mission_d": 107.25050676370299,
+     "mission_yr": 0.293635884363321,
+     "propellant_t": 632.4107251363365,
+     "propellant_vs_full_return": 0.22613667496345544
+    },
+    "0.008 c": {
+     "v_peak_c": 0.008,
+     "ramp_d": 5.337403134031493,
+     "ramp_AU": 2.4643805468699242,
+     "coast_d": 0.19581815941305294,
+     "one_way_d": 10.870624427476038,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 3.754086915434047,
+     "mission_d": 111.74124885495208,
+     "mission_yr": 0.3059308661326546,
+     "propellant_t": 1061.11909529781,
+     "propellant_vs_full_return": 0.37943370409973054
+    },
+    "0.004 c": {
+     "v_peak_c": 0.004,
+     "ramp_d": 3.77411395,
+     "ramp_AU": 0.8712900980579683,
+     "coast_d": 4.992097864201428,
+     "one_way_d": 12.540325764201429,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 7.508173830868094,
+     "mission_d": 115.08065152840285,
+     "mission_yr": 0.31507365237071283,
+     "propellant_t": 465.63404321415976,
+     "propellant_vs_full_return": 0.16650086739047612
+    }
+   }
+  },
+  {
+   "id": "NEPTUNE",
+   "name": "Neptune / outer planets",
+   "one_way_AU": 30.1,
+   "ops_d": 60,
+   "purpose": "ice giants, Triton",
+   "speeds": {
+    "0.016 c": {
+     "v_peak_c": 0.016,
+     "ramp_d": 7.5482279,
+     "ramp_AU": 6.9703207844637465,
+     "coast_d": 5.833041927682515,
+     "one_way_d": 20.929497727682513,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 10.865193861015848,
+     "mission_d": 131.85899545536503,
+     "mission_yr": 0.36101025449791935,
+     "propellant_t": 2796.586291182252,
+     "propellant_vs_full_return": 0.9999999999999997
+    },
+    "0.008 c": {
+     "v_peak_c": 0.008,
+     "ramp_d": 5.337403134031493,
+     "ramp_AU": 2.4643805468699242,
+     "coast_d": 18.172118966010704,
+     "one_way_d": 28.846925234073687,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 21.730387722031697,
+     "mission_d": 147.6938504681474,
+     "mission_yr": 0.4043637247587882,
+     "propellant_t": 1061.11909529781,
+     "propellant_vs_full_return": 0.37943370409973054
+    },
+    "0.004 c": {
+     "v_peak_c": 0.004,
+     "ramp_d": 3.77411395,
+     "ramp_AU": 0.8712900980579683,
+     "coast_d": 40.944699477396725,
+     "one_way_d": 48.492927377396725,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 43.460775444063394,
+     "mission_d": 186.98585475479345,
+     "mission_yr": 0.51193936962298,
+     "propellant_t": 465.63404321415976,
+     "propellant_vs_full_return": 0.16650086739047612
+    }
+   }
+  },
+  {
+   "id": "KUIPER",
+   "name": "Kuiper Belt (classical, 45 AU)",
+   "one_way_AU": 45.0,
+   "ops_d": 60,
+   "purpose": "KBO rendezvous, survey",
+   "speeds": {
+    "0.016 c": {
+     "v_peak_c": 0.016,
+     "ramp_d": 7.5482279,
+     "ramp_AU": 6.9703207844637465,
+     "coast_d": 11.211493373833218,
+     "one_way_d": 26.30794917383322,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 16.243645307166553,
+     "mission_d": 142.61589834766644,
+     "mission_yr": 0.3904610495487103,
+     "propellant_t": 2796.586291182252,
+     "propellant_vs_full_return": 0.9999999999999997
+    },
+    "0.008 c": {
+     "v_peak_c": 0.008,
+     "ramp_d": 5.337403134031493,
+     "ramp_AU": 2.4643805468699242,
+     "coast_d": 28.929021858312108,
+     "one_way_d": 39.60382812637509,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 32.487290614333105,
+     "mission_d": 169.20765625275018,
+     "mission_yr": 0.4632653148603701,
+     "propellant_t": 1061.11909529781,
+     "propellant_vs_full_return": 0.37943370409973054
+    },
+    "0.004 c": {
+     "v_peak_c": 0.004,
+     "ramp_d": 3.77411395,
+     "ramp_AU": 0.8712900980579683,
+     "coast_d": 62.458505261999534,
+     "one_way_d": 70.00673316199953,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 64.97458122866621,
+     "mission_d": 230.01346632399907,
+     "mission_yr": 0.629742549826144,
+     "propellant_t": 465.63404321415976,
+     "propellant_vs_full_return": 0.16650086739047612
+    }
+   }
+  },
+  {
+   "id": "TERMINATION_SHOCK",
+   "name": "Termination shock (~90 AU)",
+   "one_way_AU": 90.0,
+   "ops_d": 30,
+   "purpose": "solar wind physics",
+   "speeds": {
+    "0.016 c": {
+     "v_peak_c": 0.016,
+     "ramp_d": 7.5482279,
+     "ramp_AU": 6.9703207844637465,
+     "coast_d": 27.455138680999763,
+     "one_way_d": 42.55159448099976,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 32.487290614333105,
+     "mission_d": 145.10318896199954,
+     "mission_yr": 0.39727088011498846,
+     "propellant_t": 2796.586291182252,
+     "propellant_vs_full_return": 0.9999999999999997
+    },
+    "0.008 c": {
+     "v_peak_c": 0.008,
+     "ramp_d": 5.337403134031493,
+     "ramp_AU": 2.4643805468699242,
+     "coast_d": 61.41631247264521,
+     "one_way_d": 72.0911187407082,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 64.97458122866621,
+     "mission_d": 204.1822374814164,
+     "mission_yr": 0.5590204996068895,
+     "propellant_t": 1061.11909529781,
+     "propellant_vs_full_return": 0.37943370409973054
+    },
+    "0.004 c": {
+     "v_peak_c": 0.004,
+     "ramp_d": 3.77411395,
+     "ramp_AU": 0.8712900980579683,
+     "coast_d": 127.43308649066574,
+     "one_way_d": 134.98131439066574,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 129.94916245733242,
+     "mission_d": 329.9626287813315,
+     "mission_yr": 0.9033884429331458,
+     "propellant_t": 465.63404321415976,
+     "propellant_vs_full_return": 0.16650086739047612
+    }
+   }
+  },
+  {
+   "id": "HELIOPAUSE",
+   "name": "Heliopause (~120 AU)",
+   "one_way_AU": 120.0,
+   "ops_d": 30,
+   "purpose": "heliosphere boundary, interstellar medium",
+   "speeds": {
+    "0.016 c": {
+     "v_peak_c": 0.016,
+     "ramp_d": 7.5482279,
+     "ramp_AU": 6.9703207844637465,
+     "coast_d": 38.28423555244414,
+     "one_way_d": 53.38069135244414,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 43.31638748577747,
+     "mission_d": 166.76138270488826,
+     "mission_yr": 0.45656778290181593,
+     "propellant_t": 2796.586291182252,
+     "propellant_vs_full_return": 0.9999999999999997
+    },
+    "0.008 c": {
+     "v_peak_c": 0.008,
+     "ramp_d": 5.337403134031493,
+     "ramp_AU": 2.4643805468699242,
+     "coast_d": 83.07450621553394,
+     "one_way_d": 93.74931248359694,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 86.63277497155494,
+     "mission_d": 247.49862496719388,
+     "mission_yr": 0.6776143051805444,
+     "propellant_t": 1061.11909529781,
+     "propellant_vs_full_return": 0.37943370409973054
+    },
+    "0.004 c": {
+     "v_peak_c": 0.004,
+     "ramp_d": 3.77411395,
+     "ramp_AU": 0.8712900980579683,
+     "coast_d": 170.7494739764432,
+     "one_way_d": 178.29770187644317,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 173.26554994310987,
+     "mission_d": 416.59540375288634,
+     "mission_yr": 1.1405760540804555,
+     "propellant_t": 465.63404321415976,
+     "propellant_vs_full_return": 0.16650086739047612
+    }
+   }
+  },
+  {
+   "id": "ISM_200",
+   "name": "Nearby interstellar space (200 AU)",
+   "one_way_AU": 200.0,
+   "ops_d": 30,
+   "purpose": "pristine interstellar medium and dust",
+   "speeds": {
+    "0.016 c": {
+     "v_peak_c": 0.016,
+     "ramp_d": 7.5482279,
+     "ramp_AU": 6.9703207844637465,
+     "coast_d": 67.16182720962911,
+     "one_way_d": 82.2582830096291,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 72.19397914296245,
+     "mission_d": 224.5165660192582,
+     "mission_yr": 0.6146928570000224,
+     "propellant_t": 2796.586291182252,
+     "propellant_vs_full_return": 0.9999999999999997
+    },
+    "0.008 c": {
+     "v_peak_c": 0.008,
+     "ramp_d": 5.337403134031493,
+     "ramp_AU": 2.4643805468699242,
+     "coast_d": 140.8296895299039,
+     "one_way_d": 151.50449579796688,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 144.3879582859249,
+     "mission_d": 363.00899159593376,
+     "mission_yr": 0.9938644533769576,
+     "propellant_t": 1061.11909529781,
+     "propellant_vs_full_return": 0.37943370409973054
+    },
+    "0.004 c": {
+     "v_peak_c": 0.004,
+     "ramp_d": 3.77411395,
+     "ramp_AU": 0.8712900980579683,
+     "coast_d": 286.2598406051831,
+     "one_way_d": 293.8080685051831,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 288.7759165718498,
+     "mission_d": 647.6161370103662,
+     "mission_yr": 1.7730763504732818,
+     "propellant_t": 465.63404321415976,
+     "propellant_vs_full_return": 0.16650086739047612
+    }
+   }
+  },
+  {
+   "id": "AU_500",
+   "name": "500 AU",
+   "one_way_AU": 500.0,
+   "ops_d": 30,
+   "purpose": "solar gravitational lens begins near 550 AU",
+   "speeds": {
+    "0.016 c": {
+     "v_peak_c": 0.016,
+     "ramp_d": 7.5482279,
+     "ramp_AU": 6.9703207844637465,
+     "coast_d": 175.4527959240728,
+     "one_way_d": 190.5492517240728,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 180.48494785740613,
+     "mission_d": 441.0985034481456,
+     "mission_yr": 1.2076618848682974,
+     "propellant_t": 2796.586291182252,
+     "propellant_vs_full_return": 0.9999999999999997
+    },
+    "0.008 c": {
+     "v_peak_c": 0.008,
+     "ramp_d": 5.337403134031493,
+     "ramp_AU": 2.4643805468699242,
+     "coast_d": 357.41162695879126,
+     "one_way_d": 368.08643322685424,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 360.96989571481225,
+     "mission_d": 796.1728664537085,
+     "mission_yr": 2.179802509113507,
+     "propellant_t": 1061.11909529781,
+     "propellant_vs_full_return": 0.37943370409973054
+    },
+    "0.004 c": {
+     "v_peak_c": 0.004,
+     "ramp_d": 3.77411395,
+     "ramp_AU": 0.8712900980579683,
+     "coast_d": 719.4237154629577,
+     "one_way_d": 726.9719433629577,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 721.9397914296245,
+     "mission_d": 1513.9438867259155,
+     "mission_yr": 4.144952461946381,
+     "propellant_t": 465.63404321415976,
+     "propellant_vs_full_return": 0.16650086739047612
+    }
+   }
+  },
+  {
+   "id": "SGL_650",
+   "name": "Solar gravitational lens line (650 AU)",
+   "one_way_AU": 650.0,
+   "ops_d": 90,
+   "purpose": "SGL imaging campaign along the focal line",
+   "speeds": {
+    "0.016 c": {
+     "v_peak_c": 0.016,
+     "ramp_d": 7.5482279,
+     "ramp_AU": 6.9703207844637465,
+     "coast_d": 229.59828028129465,
+     "one_way_d": 244.69473608129465,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 234.63043221462794,
+     "mission_d": 609.3894721625893,
+     "mission_yr": 1.668417446030361,
+     "propellant_t": 2796.586291182252,
+     "propellant_vs_full_return": 0.9999999999999997
+    },
+    "0.008 c": {
+     "v_peak_c": 0.008,
+     "ramp_d": 5.337403134031493,
+     "ramp_AU": 2.4643805468699242,
+     "coast_d": 465.70259567323495,
+     "one_way_d": 476.37740194129793,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 469.2608644292559,
+     "mission_d": 1072.7548038825958,
+     "mission_yr": 2.9370425842097077,
+     "propellant_t": 1061.11909529781,
+     "propellant_vs_full_return": 0.37943370409973054
+    },
+    "0.004 c": {
+     "v_peak_c": 0.004,
+     "ramp_d": 3.77411395,
+     "ramp_AU": 0.8712900980579683,
+     "coast_d": 936.005652891845,
+     "one_way_d": 943.553880791845,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 938.5217288585118,
+     "mission_d": 2007.10776158369,
+     "mission_yr": 5.495161564910855,
+     "propellant_t": 465.63404321415976,
+     "propellant_vs_full_return": 0.16650086739047612
+    }
+   }
+  },
+  {
+   "id": "AU_1000",
+   "name": "1,000 AU",
+   "one_way_AU": 1000.0,
+   "ops_d": 30,
+   "purpose": "deep interstellar precursor",
+   "speeds": {
+    "0.016 c": {
+     "v_peak_c": 0.016,
+     "ramp_d": 7.5482279,
+     "ramp_AU": 6.9703207844637465,
+     "coast_d": 355.9377437814789,
+     "one_way_d": 371.0341995814789,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 360.96989571481225,
+     "mission_d": 802.0683991629578,
+     "mission_yr": 2.1959435979820885,
+     "propellant_t": 2796.586291182252,
+     "propellant_vs_full_return": 0.9999999999999997
+    },
+    "0.008 c": {
+     "v_peak_c": 0.008,
+     "ramp_d": 5.337403134031493,
+     "ramp_AU": 2.4643805468699242,
+     "coast_d": 718.3815226736034,
+     "one_way_d": 729.0563289416664,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 721.9397914296245,
+     "mission_d": 1518.1126578833328,
+     "mission_yr": 4.156365935341089,
+     "propellant_t": 1061.11909529781,
+     "propellant_vs_full_return": 0.37943370409973054
+    },
+    "0.004 c": {
+     "v_peak_c": 0.004,
+     "ramp_d": 3.77411395,
+     "ramp_AU": 0.8712900980579683,
+     "coast_d": 1441.363506892582,
+     "one_way_d": 1448.9117347925821,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 1443.879582859249,
+     "mission_d": 2957.8234695851643,
+     "mission_yr": 8.098079314401545,
+     "propellant_t": 465.63404321415976,
+     "propellant_vs_full_return": 0.16650086739047612
+    }
+   }
+  },
+  {
+   "id": "OORT_INNER",
+   "name": "Inner Oort Cloud (inner edge, ~2,000 AU)",
+   "one_way_AU": 2000.0,
+   "ops_d": 60,
+   "purpose": "Oort objects, Hills-cloud survey",
+   "speeds": {
+    "0.016 c": {
+     "v_peak_c": 0.016,
+     "ramp_d": 7.5482279,
+     "ramp_AU": 6.9703207844637465,
+     "coast_d": 716.9076394962912,
+     "one_way_d": 732.0040952962912,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 721.9397914296245,
+     "mission_d": 1554.0081905925824,
+     "mission_yr": 4.254642547823634,
+     "propellant_t": 2796.586291182252,
+     "propellant_vs_full_return": 0.9999999999999997
+    },
+    "0.008 c": {
+     "v_peak_c": 0.008,
+     "ramp_d": 5.337403134031493,
+     "ramp_AU": 2.4643805468699242,
+     "coast_d": 1440.321314103228,
+     "one_way_d": 1450.996120371291,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 1443.879582859249,
+     "mission_d": 2991.992240742582,
+     "mission_yr": 8.191628311410218,
+     "propellant_t": 1061.11909529781,
+     "propellant_vs_full_return": 0.37943370409973054
+    },
+    "0.004 c": {
+     "v_peak_c": 0.004,
+     "ramp_d": 3.77411395,
+     "ramp_AU": 0.8712900980579683,
+     "coast_d": 2885.243089751831,
+     "one_way_d": 2892.7913176518314,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 2887.759165718498,
+     "mission_d": 5875.582635303663,
+     "mission_yr": 16.08646854292584,
+     "propellant_t": 465.63404321415976,
+     "propellant_vs_full_return": 0.16650086739047612
+    }
+   }
+  },
+  {
+   "id": "NARRATIVE_6Y",
+   "name": "Story mission (~3,000 AU, six years)",
+   "one_way_AU": 3000.0,
+   "ops_d": 60,
+   "purpose": "narrative scenario only",
+   "speeds": {
+    "0.016 c": {
+     "v_peak_c": 0.016,
+     "ramp_d": 7.5482279,
+     "ramp_AU": 6.9703207844637465,
+     "coast_d": 1077.8775352111033,
+     "one_way_d": 1092.9739910111034,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 1082.9096871444367,
+     "mission_d": 2275.947982022207,
+     "mission_yr": 6.231205974051217,
+     "propellant_t": 2796.586291182252,
+     "propellant_vs_full_return": 0.9999999999999997
+    },
+    "0.008 c": {
+     "v_peak_c": 0.008,
+     "ramp_d": 5.337403134031493,
+     "ramp_AU": 2.4643805468699242,
+     "coast_d": 2162.2611055328525,
+     "one_way_d": 2172.9359118009156,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 2165.8193742888734,
+     "mission_d": 4435.871823601831,
+     "mission_yr": 12.144755163865383,
+     "propellant_t": 1061.11909529781,
+     "propellant_vs_full_return": 0.37943370409973054
+    },
+    "0.004 c": {
+     "v_peak_c": 0.004,
+     "ramp_d": 3.77411395,
+     "ramp_AU": 0.8712900980579683,
+     "coast_d": 4329.122672611081,
+     "one_way_d": 4336.67090051108,
+     "check_T0_d": 7.5482279,
+     "check_x0_AU": 6.970320784,
+     "constant_velocity_one_way_d": 4331.638748577747,
+     "mission_d": 8763.34180102216,
+     "mission_yr": 23.992722247836166,
+     "propellant_t": 465.63404321415976,
+     "propellant_vs_full_return": 0.16650086739047612
+    }
+   }
+  }
+ ],
+ "reach": {
+  "6 months": {
+   "years": 0.5,
+   "max_one_way_AU": 100.4188896737571,
+   "note": "30 d departure/return margin and 60 d destination operations"
+  },
+  "12 months standard": {
+   "years": 1.0,
+   "max_one_way_AU": 353.3831980108222,
+   "note": "30 d departure/return margin and 60 d destination operations"
+  },
+  "24 months extended": {
+   "years": 2.0,
+   "max_one_way_AU": 859.3118146849525,
+   "note": "30 d departure/return margin and 60 d destination operations"
+  },
+  "36 months long-duration": {
+   "years": 3.0,
+   "max_one_way_AU": 1365.2404313590828,
+   "note": "30 d departure/return margin and 60 d destination operations"
+  },
+  "5 years exceptional": {
+   "years": 5.0,
+   "max_one_way_AU": 2377.0976647073435,
+   "note": "30 d departure/return margin and 60 d destination operations"
+  },
+  "10 years endurance bound": {
+   "years": 10.0,
+   "max_one_way_AU": 4906.740748077994,
+   "note": "30 d departure/return margin and 60 d destination operations"
+  }
+ },
+ "provisioning": {
+  "6 months": {
+   "6 crew": {
+    "conventional": {
+     "people": 6,
+     "days": 183,
+     "food": "conventional",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 2009.3400000000001,
+      "water_makeup": 91.35360000000009,
+      "o2_water": 1037.61,
+      "hygiene_clothing": 186.66000000000003,
+      "medical": 54.900000000000006,
+      "eclss_expendables": 219.60000000000002,
+      "spares": 2004.1067761806983,
+      "reserve": 810.0
+     },
+     "total_kg": 6413.570376180698,
+     "volume_m3": 18.705447710849434,
+     "containers": 2,
+     "crew_consumables_kg": 4409.4636
+    },
+    "mixed": {
+     "people": 6,
+     "days": 183,
+     "food": "mixed",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 1526.2199999999998,
+      "water_makeup": 91.35360000000009,
+      "o2_water": 1037.61,
+      "hygiene_clothing": 186.66000000000003,
+      "medical": 54.900000000000006,
+      "eclss_expendables": 219.60000000000002,
+      "spares": 2004.1067761806983,
+      "reserve": 810.0
+     },
+     "total_kg": 5930.450376180698,
+     "volume_m3": 17.60744771084943,
+     "containers": 1,
+     "crew_consumables_kg": 3926.3436
+    },
+    "dehydrated": {
+     "people": 6,
+     "days": 183,
+     "food": "dehydrated",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 1043.1,
+      "water_makeup": 91.35360000000009,
+      "o2_water": 1037.61,
+      "hygiene_clothing": 186.66000000000003,
+      "medical": 54.900000000000006,
+      "eclss_expendables": 219.60000000000002,
+      "spares": 2004.1067761806983,
+      "reserve": 810.0
+     },
+     "total_kg": 5447.330376180698,
+     "volume_m3": 16.352590567992287,
+     "containers": 1,
+     "crew_consumables_kg": 3443.2236000000003
+    }
+   },
+   "12 crew": {
+    "conventional": {
+     "people": 12,
+     "days": 183,
+     "food": "conventional",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 4018.6800000000003,
+      "water_makeup": 182.70720000000017,
+      "o2_water": 2075.22,
+      "hygiene_clothing": 373.32000000000005,
+      "medical": 109.80000000000001,
+      "eclss_expendables": 439.20000000000005,
+      "spares": 2004.1067761806983,
+      "reserve": 1620.0
+     },
+     "total_kg": 10823.033976180699,
+     "volume_m3": 30.253371221053516,
+     "containers": 2,
+     "crew_consumables_kg": 8818.9272
+    },
+    "mixed": {
+     "people": 12,
+     "days": 183,
+     "food": "mixed",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 3052.4399999999996,
+      "water_makeup": 182.70720000000017,
+      "o2_water": 2075.22,
+      "hygiene_clothing": 373.32000000000005,
+      "medical": 109.80000000000001,
+      "eclss_expendables": 439.20000000000005,
+      "spares": 2004.1067761806983,
+      "reserve": 1620.0
+     },
+     "total_kg": 9856.793976180697,
+     "volume_m3": 28.057371221053515,
+     "containers": 2,
+     "crew_consumables_kg": 7852.687199999999
+    },
+    "dehydrated": {
+     "people": 12,
+     "days": 183,
+     "food": "dehydrated",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 2086.2,
+      "water_makeup": 182.70720000000017,
+      "o2_water": 2075.22,
+      "hygiene_clothing": 373.32000000000005,
+      "medical": 109.80000000000001,
+      "eclss_expendables": 439.20000000000005,
+      "spares": 2004.1067761806983,
+      "reserve": 1620.0
+     },
+     "total_kg": 8890.553976180698,
+     "volume_m3": 25.54765693533923,
+     "containers": 2,
+     "crew_consumables_kg": 6886.4472
+    }
+   }
+  },
+  "12 months standard": {
+   "6 crew": {
+    "conventional": {
+     "people": 6,
+     "days": 365,
+     "food": "conventional",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 4007.7000000000003,
+      "water_makeup": 182.20800000000014,
+      "o2_water": 2069.5499999999997,
+      "hygiene_clothing": 372.3,
+      "medical": 109.5,
+      "eclss_expendables": 438.0,
+      "spares": 3997.262149212868,
+      "reserve": 810.0
+     },
+     "total_kg": 11986.520149212867,
+     "volume_m3": 35.6646517573929,
+     "containers": 2,
+     "crew_consumables_kg": 7989.258
+    },
+    "mixed": {
+     "people": 6,
+     "days": 365,
+     "food": "mixed",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 3044.1,
+      "water_makeup": 182.20800000000014,
+      "o2_water": 2069.5499999999997,
+      "hygiene_clothing": 372.3,
+      "medical": 109.5,
+      "eclss_expendables": 438.0,
+      "spares": 3997.262149212868,
+      "reserve": 810.0
+     },
+     "total_kg": 11022.920149212867,
+     "volume_m3": 33.4746517573929,
+     "containers": 2,
+     "crew_consumables_kg": 7025.657999999999
+    },
+    "dehydrated": {
+     "people": 6,
+     "days": 365,
+     "food": "dehydrated",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 2080.5,
+      "water_makeup": 182.20800000000014,
+      "o2_water": 2069.5499999999997,
+      "hygiene_clothing": 372.3,
+      "medical": 109.5,
+      "eclss_expendables": 438.0,
+      "spares": 3997.262149212868,
+      "reserve": 810.0
+     },
+     "total_kg": 10059.320149212868,
+     "volume_m3": 30.971794614535757,
+     "containers": 2,
+     "crew_consumables_kg": 6062.058000000001
+    }
+   },
+   "12 crew": {
+    "conventional": {
+     "people": 12,
+     "days": 365,
+     "food": "conventional",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 8015.400000000001,
+      "water_makeup": 364.4160000000003,
+      "o2_water": 4139.099999999999,
+      "hygiene_clothing": 744.6,
+      "medical": 219.0,
+      "eclss_expendables": 876.0,
+      "spares": 3997.262149212868,
+      "reserve": 1620.0
+     },
+     "total_kg": 19975.778149212867,
+     "volume_m3": 57.05336726759698,
+     "containers": 4,
+     "crew_consumables_kg": 15978.516
+    },
+    "mixed": {
+     "people": 12,
+     "days": 365,
+     "food": "mixed",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 6088.2,
+      "water_makeup": 364.4160000000003,
+      "o2_water": 4139.099999999999,
+      "hygiene_clothing": 744.6,
+      "medical": 219.0,
+      "eclss_expendables": 876.0,
+      "spares": 3997.262149212868,
+      "reserve": 1620.0
+     },
+     "total_kg": 18048.578149212866,
+     "volume_m3": 52.67336726759699,
+     "containers": 4,
+     "crew_consumables_kg": 14051.315999999999
+    },
+    "dehydrated": {
+     "people": 12,
+     "days": 365,
+     "food": "dehydrated",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 4161.0,
+      "water_makeup": 364.4160000000003,
+      "o2_water": 4139.099999999999,
+      "hygiene_clothing": 744.6,
+      "medical": 219.0,
+      "eclss_expendables": 876.0,
+      "spares": 3997.262149212868,
+      "reserve": 1620.0
+     },
+     "total_kg": 16121.378149212867,
+     "volume_m3": 47.667652981882696,
+     "containers": 3,
+     "crew_consumables_kg": 12124.116
+    }
+   }
+  },
+  "24 months extended": {
+   "6 crew": {
+    "conventional": {
+     "people": 6,
+     "days": 730,
+     "food": "conventional",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 8015.400000000001,
+      "water_makeup": 364.4160000000003,
+      "o2_water": 4139.099999999999,
+      "hygiene_clothing": 744.6,
+      "medical": 219.0,
+      "eclss_expendables": 876.0,
+      "spares": 7994.524298425736,
+      "reserve": 810.0
+     },
+     "total_kg": 23163.040298425734,
+     "volume_m3": 69.676242290296,
+     "containers": 4,
+     "crew_consumables_kg": 15168.516
+    },
+    "mixed": {
+     "people": 6,
+     "days": 730,
+     "food": "mixed",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 6088.2,
+      "water_makeup": 364.4160000000003,
+      "o2_water": 4139.099999999999,
+      "hygiene_clothing": 744.6,
+      "medical": 219.0,
+      "eclss_expendables": 876.0,
+      "spares": 7994.524298425736,
+      "reserve": 810.0
+     },
+     "total_kg": 21235.840298425734,
+     "volume_m3": 65.29624229029601,
+     "containers": 4,
+     "crew_consumables_kg": 13241.315999999999
+    },
+    "dehydrated": {
+     "people": 6,
+     "days": 730,
+     "food": "dehydrated",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 4161.0,
+      "water_makeup": 364.4160000000003,
+      "o2_water": 4139.099999999999,
+      "hygiene_clothing": 744.6,
+      "medical": 219.0,
+      "eclss_expendables": 876.0,
+      "spares": 7994.524298425736,
+      "reserve": 810.0
+     },
+     "total_kg": 19308.640298425737,
+     "volume_m3": 60.29052800458172,
+     "containers": 4,
+     "crew_consumables_kg": 11314.116000000002
+    }
+   },
+   "12 crew": {
+    "conventional": {
+     "people": 12,
+     "days": 730,
+     "food": "conventional",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 16030.800000000001,
+      "water_makeup": 728.8320000000006,
+      "o2_water": 8278.199999999999,
+      "hygiene_clothing": 1489.2,
+      "medical": 438.0,
+      "eclss_expendables": 1752.0,
+      "spares": 7994.524298425736,
+      "reserve": 1620.0
+     },
+     "total_kg": 38331.556298425734,
+     "volume_m3": 110.80061208621437,
+     "containers": 7,
+     "crew_consumables_kg": 30337.032
+    },
+    "mixed": {
+     "people": 12,
+     "days": 730,
+     "food": "mixed",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 12176.4,
+      "water_makeup": 728.8320000000006,
+      "o2_water": 8278.199999999999,
+      "hygiene_clothing": 1489.2,
+      "medical": 438.0,
+      "eclss_expendables": 1752.0,
+      "spares": 7994.524298425736,
+      "reserve": 1620.0
+     },
+     "total_kg": 34477.15629842573,
+     "volume_m3": 102.04061208621438,
+     "containers": 6,
+     "crew_consumables_kg": 26482.631999999998
+    },
+    "dehydrated": {
+     "people": 12,
+     "days": 730,
+     "food": "dehydrated",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 8322.0,
+      "water_makeup": 728.8320000000006,
+      "o2_water": 8278.199999999999,
+      "hygiene_clothing": 1489.2,
+      "medical": 438.0,
+      "eclss_expendables": 1752.0,
+      "spares": 7994.524298425736,
+      "reserve": 1620.0
+     },
+     "total_kg": 30622.756298425735,
+     "volume_m3": 92.0291835147858,
+     "containers": 6,
+     "crew_consumables_kg": 22628.232
+    }
+   }
+  },
+  "36 months long-duration": {
+   "6 crew": {
+    "conventional": {
+     "people": 6,
+     "days": 1096,
+     "food": "conventional",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 12635.784,
+      "water_makeup": 547.1232000000005,
+      "o2_water": 6214.32,
+      "hygiene_clothing": 1117.92,
+      "medical": 328.8,
+      "eclss_expendables": 1315.2,
+      "spares": 12002.737850787133,
+      "reserve": 810.0
+     },
+     "total_kg": 34971.88505078713,
+     "volume_m3": 103.78101526301528,
+     "containers": 6,
+     "crew_consumables_kg": 22969.1472
+    },
+    "mixed": {
+     "people": 6,
+     "days": 1096,
+     "food": "mixed",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 9597.672,
+      "water_makeup": 547.1232000000005,
+      "o2_water": 6214.32,
+      "hygiene_clothing": 1117.92,
+      "medical": 328.8,
+      "eclss_expendables": 1315.2,
+      "spares": 12002.737850787133,
+      "reserve": 810.0
+     },
+     "total_kg": 31933.773050787135,
+     "volume_m3": 97.20501526301527,
+     "containers": 6,
+     "crew_consumables_kg": 19931.035200000002
+    },
+    "dehydrated": {
+     "people": 6,
+     "days": 1096,
+     "food": "dehydrated",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 6559.56,
+      "water_makeup": 547.1232000000005,
+      "o2_water": 6214.32,
+      "hygiene_clothing": 1117.92,
+      "medical": 328.8,
+      "eclss_expendables": 1315.2,
+      "spares": 12002.737850787133,
+      "reserve": 810.0
+     },
+     "total_kg": 28895.661050787134,
+     "volume_m3": 89.68958669158671,
+     "containers": 5,
+     "crew_consumables_kg": 16892.9232
+    }
+   },
+   "12 crew": {
+    "conventional": {
+     "people": 12,
+     "days": 1096,
+     "food": "conventional",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 25271.568,
+      "water_makeup": 1094.246400000001,
+      "o2_water": 12428.64,
+      "hygiene_clothing": 2235.84,
+      "medical": 657.6,
+      "eclss_expendables": 2630.4,
+      "spares": 12002.737850787133,
+      "reserve": 1620.0
+     },
+     "total_kg": 57941.03225078713,
+     "volume_m3": 164.69510963036223,
+     "containers": 10,
+     "crew_consumables_kg": 45938.2944
+    },
+    "mixed": {
+     "people": 12,
+     "days": 1096,
+     "food": "mixed",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 19195.344,
+      "water_makeup": 1094.246400000001,
+      "o2_water": 12428.64,
+      "hygiene_clothing": 2235.84,
+      "medical": 657.6,
+      "eclss_expendables": 2630.4,
+      "spares": 12002.737850787133,
+      "reserve": 1620.0
+     },
+     "total_kg": 51864.80825078714,
+     "volume_m3": 151.5431096303622,
+     "containers": 9,
+     "crew_consumables_kg": 39862.070400000004
+    },
+    "dehydrated": {
+     "people": 12,
+     "days": 1096,
+     "food": "dehydrated",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 13119.12,
+      "water_makeup": 1094.246400000001,
+      "o2_water": 12428.64,
+      "hygiene_clothing": 2235.84,
+      "medical": 657.6,
+      "eclss_expendables": 2630.4,
+      "spares": 12002.737850787133,
+      "reserve": 1620.0
+     },
+     "total_kg": 45788.584250787135,
+     "volume_m3": 136.51225248750507,
+     "containers": 8,
+     "crew_consumables_kg": 33785.8464
+    }
+   }
+  },
+  "5 years exceptional": {
+   "6 crew": {
+    "conventional": {
+     "people": 6,
+     "days": 1826,
+     "food": "conventional",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 21051.954,
+      "water_makeup": 911.5392000000008,
+      "o2_water": 10353.42,
+      "hygiene_clothing": 1862.5200000000002,
+      "medical": 547.8000000000001,
+      "eclss_expendables": 2191.2000000000003,
+      "spares": 19997.262149212867,
+      "reserve": 810.0
+     },
+     "total_kg": 57725.69534921287,
+     "volume_m3": 171.8041963288215,
+     "containers": 10,
+     "crew_consumables_kg": 37728.4332
+    },
+    "mixed": {
+     "people": 6,
+     "days": 1826,
+     "food": "mixed",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 15990.282,
+      "water_makeup": 911.5392000000008,
+      "o2_water": 10353.42,
+      "hygiene_clothing": 1862.5200000000002,
+      "medical": 547.8000000000001,
+      "eclss_expendables": 2191.2000000000003,
+      "spares": 19997.262149212867,
+      "reserve": 810.0
+     },
+     "total_kg": 52664.02334921287,
+     "volume_m3": 160.84819632882147,
+     "containers": 9,
+     "crew_consumables_kg": 32666.7612
+    },
+    "dehydrated": {
+     "people": 6,
+     "days": 1826,
+     "food": "dehydrated",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 10928.609999999999,
+      "water_makeup": 911.5392000000008,
+      "o2_water": 10353.42,
+      "hygiene_clothing": 1862.5200000000002,
+      "medical": 547.8000000000001,
+      "eclss_expendables": 2191.2000000000003,
+      "spares": 19997.262149212867,
+      "reserve": 810.0
+     },
+     "total_kg": 47602.35134921287,
+     "volume_m3": 148.32705347167862,
+     "containers": 8,
+     "crew_consumables_kg": 27605.089200000002
+    }
+   },
+   "12 crew": {
+    "conventional": {
+     "people": 12,
+     "days": 1826,
+     "food": "conventional",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 42103.908,
+      "water_makeup": 1823.0784000000017,
+      "o2_water": 20706.84,
+      "hygiene_clothing": 3725.0400000000004,
+      "medical": 1095.6000000000001,
+      "eclss_expendables": 4382.400000000001,
+      "spares": 19997.262149212867,
+      "reserve": 1620.0
+     },
+     "total_kg": 95454.12854921287,
+     "volume_m3": 272.18959926759703,
+     "containers": 16,
+     "crew_consumables_kg": 75456.8664
+    },
+    "mixed": {
+     "people": 12,
+     "days": 1826,
+     "food": "mixed",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 31980.564,
+      "water_makeup": 1823.0784000000017,
+      "o2_water": 20706.84,
+      "hygiene_clothing": 3725.0400000000004,
+      "medical": 1095.6000000000001,
+      "eclss_expendables": 4382.400000000001,
+      "spares": 19997.262149212867,
+      "reserve": 1620.0
+     },
+     "total_kg": 85330.78454921287,
+     "volume_m3": 250.27759926759697,
+     "containers": 15,
+     "crew_consumables_kg": 65333.5224
+    },
+    "dehydrated": {
+     "people": 12,
+     "days": 1826,
+     "food": "dehydrated",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 21857.219999999998,
+      "water_makeup": 1823.0784000000017,
+      "o2_water": 20706.84,
+      "hygiene_clothing": 3725.0400000000004,
+      "medical": 1095.6000000000001,
+      "eclss_expendables": 4382.400000000001,
+      "spares": 19997.262149212867,
+      "reserve": 1620.0
+     },
+     "total_kg": 75207.44054921287,
+     "volume_m3": 225.23531355331133,
+     "containers": 13,
+     "crew_consumables_kg": 55210.178400000004
+    }
+   }
+  },
+  "10 years endurance bound": {
+   "6 crew": {
+    "conventional": {
+     "people": 6,
+     "days": 3652,
+     "food": "conventional",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 42103.908,
+      "water_makeup": 1823.0784000000017,
+      "o2_water": 20706.84,
+      "hygiene_clothing": 3725.0400000000004,
+      "medical": 1095.6000000000001,
+      "eclss_expendables": 4382.400000000001,
+      "spares": 39994.524298425735,
+      "reserve": 810.0
+     },
+     "total_kg": 114641.39069842573,
+     "volume_m3": 341.95533143315316,
+     "containers": 20,
+     "crew_consumables_kg": 74646.8664
+    },
+    "mixed": {
+     "people": 6,
+     "days": 3652,
+     "food": "mixed",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 31980.564,
+      "water_makeup": 1823.0784000000017,
+      "o2_water": 20706.84,
+      "hygiene_clothing": 3725.0400000000004,
+      "medical": 1095.6000000000001,
+      "eclss_expendables": 4382.400000000001,
+      "spares": 39994.524298425735,
+      "reserve": 810.0
+     },
+     "total_kg": 104518.04669842574,
+     "volume_m3": 320.0433314331531,
+     "containers": 18,
+     "crew_consumables_kg": 64523.5224
+    },
+    "dehydrated": {
+     "people": 6,
+     "days": 3652,
+     "food": "dehydrated",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 21857.219999999998,
+      "water_makeup": 1823.0784000000017,
+      "o2_water": 20706.84,
+      "hygiene_clothing": 3725.0400000000004,
+      "medical": 1095.6000000000001,
+      "eclss_expendables": 4382.400000000001,
+      "spares": 39994.524298425735,
+      "reserve": 810.0
+     },
+     "total_kg": 94394.70269842574,
+     "volume_m3": 295.00104571886743,
+     "containers": 16,
+     "crew_consumables_kg": 54400.178400000004
+    }
+   },
+   "12 crew": {
+    "conventional": {
+     "people": 12,
+     "days": 3652,
+     "food": "conventional",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 84207.816,
+      "water_makeup": 3646.1568000000034,
+      "o2_water": 41413.68,
+      "hygiene_clothing": 7450.080000000001,
+      "medical": 2191.2000000000003,
+      "eclss_expendables": 8764.800000000001,
+      "spares": 39994.524298425735,
+      "reserve": 1620.0
+     },
+     "total_kg": 189288.25709842573,
+     "volume_m3": 541.0730760862144,
+     "containers": 32,
+     "crew_consumables_kg": 149293.7328
+    },
+    "mixed": {
+     "people": 12,
+     "days": 3652,
+     "food": "mixed",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 63961.128,
+      "water_makeup": 3646.1568000000034,
+      "o2_water": 41413.68,
+      "hygiene_clothing": 7450.080000000001,
+      "medical": 2191.2000000000003,
+      "eclss_expendables": 8764.800000000001,
+      "spares": 39994.524298425735,
+      "reserve": 1620.0
+     },
+     "total_kg": 169041.56909842574,
+     "volume_m3": 497.2490760862143,
+     "containers": 29,
+     "crew_consumables_kg": 129047.0448
+    },
+    "dehydrated": {
+     "people": 12,
+     "days": 3652,
+     "food": "dehydrated",
+     "recovery": 0.98,
+     "items_kg": {
+      "food": 43714.439999999995,
+      "water_makeup": 3646.1568000000034,
+      "o2_water": 41413.68,
+      "hygiene_clothing": 7450.080000000001,
+      "medical": 2191.2000000000003,
+      "eclss_expendables": 8764.800000000001,
+      "spares": 39994.524298425735,
+      "reserve": 1620.0
+     },
+     "total_kg": 148794.88109842574,
+     "volume_m3": 447.16450465764296,
+     "containers": 25,
+     "crew_consumables_kg": 108800.35680000001
+    }
+   }
+  }
+ },
+ "allowance_t": 10.0,
+ "fits_10t": {
+  "6 crew, conventional": {
+   "days": 467,
+   "months": 15.341655716162943
+  },
+  "12 crew, conventional": {
+   "days": 213,
+   "months": 6.9973718791064385
+  },
+  "6 crew, mixed": {
+   "days": 539,
+   "months": 17.706964520367936
+  },
+  "12 crew, mixed": {
+   "days": 246,
+   "months": 8.081471747700395
+  },
+  "6 crew, dehydrated": {
+   "days": 638,
+   "months": 20.9592641261498
+  },
+  "12 crew, dehydrated": {
+   "days": 291,
+   "months": 9.559789750328514
+  }
+ },
+ "food_only_days_10t": {
+  "6 crew, conventional": 894.3533697632058,
+  "12 crew, conventional": 438.9799635701275,
+  "6 crew, mixed": 1177.4580335731416,
+  "12 crew, mixed": 577.9376498800959,
+  "6 crew, dehydrated": 1722.80701754386,
+  "12 crew, dehydrated": 845.6140350877195
+ },
+ "logistics": {
+  "6 months": {
+   "6 crew conventional": {
+    "t": 6.413570376180698,
+    "containers": 2,
+    "share_of_54": 0.037037037037037035
+   },
+   "6 crew dehydrated": {
+    "t": 5.447330376180698,
+    "containers": 1,
+    "share_of_54": 0.018518518518518517
+   },
+   "12 crew conventional": {
+    "t": 10.8230339761807,
+    "containers": 2,
+    "share_of_54": 0.037037037037037035
+   },
+   "12 crew dehydrated": {
+    "t": 8.890553976180698,
+    "containers": 2,
+    "share_of_54": 0.037037037037037035
+   }
+  },
+  "12 months standard": {
+   "6 crew conventional": {
+    "t": 11.986520149212867,
+    "containers": 2,
+    "share_of_54": 0.037037037037037035
+   },
+   "6 crew dehydrated": {
+    "t": 10.059320149212867,
+    "containers": 2,
+    "share_of_54": 0.037037037037037035
+   },
+   "12 crew conventional": {
+    "t": 19.975778149212868,
+    "containers": 4,
+    "share_of_54": 0.07407407407407407
+   },
+   "12 crew dehydrated": {
+    "t": 16.121378149212866,
+    "containers": 3,
+    "share_of_54": 0.05555555555555555
+   }
+  },
+  "24 months extended": {
+   "6 crew conventional": {
+    "t": 23.163040298425734,
+    "containers": 4,
+    "share_of_54": 0.07407407407407407
+   },
+   "6 crew dehydrated": {
+    "t": 19.308640298425736,
+    "containers": 4,
+    "share_of_54": 0.07407407407407407
+   },
+   "12 crew conventional": {
+    "t": 38.33155629842573,
+    "containers": 7,
+    "share_of_54": 0.12962962962962962
+   },
+   "12 crew dehydrated": {
+    "t": 30.622756298425735,
+    "containers": 6,
+    "share_of_54": 0.1111111111111111
+   }
+  },
+  "36 months long-duration": {
+   "6 crew conventional": {
+    "t": 34.97188505078713,
+    "containers": 6,
+    "share_of_54": 0.1111111111111111
+   },
+   "6 crew dehydrated": {
+    "t": 28.895661050787133,
+    "containers": 5,
+    "share_of_54": 0.09259259259259259
+   },
+   "12 crew conventional": {
+    "t": 57.94103225078713,
+    "containers": 10,
+    "share_of_54": 0.18518518518518517
+   },
+   "12 crew dehydrated": {
+    "t": 45.78858425078713,
+    "containers": 8,
+    "share_of_54": 0.14814814814814814
+   }
+  },
+  "5 years exceptional": {
+   "6 crew conventional": {
+    "t": 57.72569534921287,
+    "containers": 10,
+    "share_of_54": 0.18518518518518517
+   },
+   "6 crew dehydrated": {
+    "t": 47.60235134921287,
+    "containers": 8,
+    "share_of_54": 0.14814814814814814
+   },
+   "12 crew conventional": {
+    "t": 95.45412854921287,
+    "containers": 16,
+    "share_of_54": 0.2962962962962963
+   },
+   "12 crew dehydrated": {
+    "t": 75.20744054921288,
+    "containers": 13,
+    "share_of_54": 0.24074074074074073
+   }
+  },
+  "10 years endurance bound": {
+   "6 crew conventional": {
+    "t": 114.64139069842574,
+    "containers": 20,
+    "share_of_54": 0.37037037037037035
+   },
+   "6 crew dehydrated": {
+    "t": 94.39470269842573,
+    "containers": 16,
+    "share_of_54": 0.2962962962962963
+   },
+   "12 crew conventional": {
+    "t": 189.28825709842573,
+    "containers": 32,
+    "share_of_54": 0.5925925925925926
+   },
+   "12 crew dehydrated": {
+    "t": 148.79488109842575,
+    "containers": 25,
+    "share_of_54": 0.46296296296296297
+   }
+  }
+ },
+ "container": {
+  "count": 54,
+  "volume_m3": 44.7962962962963,
+  "packing": 0.7,
+  "rack_mass_limit_t": [
+   4.0,
+   6.0,
+   8.0
+  ],
+  "basis": "docs/MODEL.md: 54 dry-store containers, 2,419 m3; rack mass limit PROTOTYPE (1.5 g axial on the rack frames)"
+ },
+ "narrative": {
+  "six crew, same rations": {
+   "days": 771.1811359892624,
+   "years": 2.1113788801896303
+  },
+  "six crew, 80 % rations": {
+   "days": 868.1017787239886,
+   "years": 2.3767331381902492
+  },
+  "six crew, 80 % rations, 99 % water recovery": {
+   "days": 880.6820873684943,
+   "years": 2.411176146114974
+  },
+  "six crew, 80 % rations, 99 %, Garden 25 % of calories (UNCREDITED sensitivity)": {
+   "days": 1009.3771460512656,
+   "years": 2.7635240138296115
+  },
+  "six crew, 80 % rations, 99 %, Garden 50 % (UNCREDITED, needs a dedicated ring sector)": {
+   "days": 1182.1219489385578,
+   "years": 3.236473508387564
+  },
+  "six crew on a 36-month 12-crew load, same rations": {
+   "days": 2294.363492160332,
+   "years": 6.281624892978321
+  },
+  "six crew on a 36-month 12-crew load, 80 % rations, 99 %": {
+   "days": 2620.1429666271856,
+   "years": 7.173560483578879
+  }
+ },
+ "narrative_need_6x6yr": {
+  "t": 69.13377010157427,
+  "crew_t": 45.1282944,
+  "containers": 12
+ },
+ "standard_load": {
+  "t": 19.975778149212868,
+  "crew_t": 15.978515999999999,
+  "containers": 4
+ },
+ "service_life": {
+  "hours": {
+   "10 yr": 87660,
+   "15 yr": 131490,
+   "20 yr": 175320
+  },
+  "systems": [
+   {
+    "system": "L2 fission cores",
+    "basis": "space reactor design life 7-15 full-power years (SP-100 7 yr; Kilopower-class 10-15)",
+    "answer": "replace the reactor module (ORU) between missions; modular L2 makes this a module swap, not a ship rebuild"
+   },
+   {
+    "system": "Brayton turbo-alternators",
+    "basis": "gas-foil bearings 40,000-100,000 h demonstrated in ground tests",
+    "answer": "one overhaul in 10 yr, two in 20 yr"
+   },
+   {
+    "system": "Main battery",
+    "basis": "calendar fade 0.5-2 %/yr (power.loads.storage)",
+    "answer": "replace at 10 yr; sized at end of life"
+   },
+   {
+    "system": "ECLSS hardware",
+    "basis": "ISS ECLSS > 15 yr with ORU replacement",
+    "answer": "12-person machinery, ORU spares per mission"
+   },
+   {
+    "system": "Cryocoolers",
+    "basis": "space Stirling/pulse-tube > 10 yr continuous",
+    "answer": "N+1 trains, swap between missions"
+   },
+   {
+    "system": "Radiator blades",
+    "basis": "micrometeoroid and dust erosion per mission (lab dust study)",
+    "answer": "inspect and resurface between missions"
+   },
+   {
+    "system": "Structure",
+    "basis": "fatigue from burns (4 per mission at up to 1.5 g) and spin",
+    "answer": "20 yr / ~10-20 missions credible with inspection"
+   },
+   {
+    "system": "Propellant",
+    "basis": "full-return load per mission",
+    "answer": "refuel at the home station between missions"
+   }
+  ]
+ },
+ "rates": {
+  "per_person_day": {
+   "hygiene_clothing": [
+    0.1,
+    0.17,
+    0.25
+   ],
+   "medical": [
+    0.02,
+    0.05,
+    0.1
+   ],
+   "eclss_expendables": [
+    0.1,
+    0.2,
+    0.35
+   ]
+  },
+  "food": {
+   "conventional": [
+    1.83,
+    3.6
+   ],
+   "mixed": [
+    1.39,
+    2.9
+   ],
+   "dehydrated": [
+    0.95,
+    2.1
+   ]
+  },
+  "spares_t_per_yr": [
+   2.0,
+   4.0,
+   8.0
+  ],
+  "reserve_d": 30
+ }
+}

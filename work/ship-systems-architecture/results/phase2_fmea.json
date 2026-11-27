@@ -1,0 +1,326 @@
+{
+ "status": "ISSA Phase II STUDY (NONCANON)",
+ "scenarios": [
+  {
+   "id": "F01",
+   "scenario": "One generating plant lost (C-lean 3+1)",
+   "immediate": "Running set drops from 3 to 2 units (3.5 MWe); load above it rides on the battery for minutes.",
+   "independent_resources": [
+    "standby unit (warm start hours, cold start a day)",
+    "main battery ride-through 0.16 h"
+   ],
+   "sheddable": [
+    "hotel non-essentials",
+    "MRO workshop",
+    "Garden lighting (hours)"
+   ],
+   "must_keep": [
+    "ECLSS",
+    "cryocoolers",
+    "nav/comms",
+    "proactive defense at high velocity"
+   ],
+   "time_to_irreversible": "none while 2 units carry the mission core (0.68 MW nominal); proactive defense stays only if 2 units cover 3.3 MW",
+   "recovery": "start the standby unit; replace or repair the failed unit by ORU (power conversion) or retire it (reactor)",
+   "common_mode": [
+    "shared coolant header per blade",
+    "shared bus if the two units sit on one bus"
+   ],
+   "uncertainty": "unit failure rate u = 0.02-0.10 per unit-year assumed; real Brayton/reactor reliability unknown",
+   "crew_survival": "SAFE",
+   "ship_and_mission": "SAFE with N+1; B (2 x 100 %) loses its redundancy at once"
+  },
+  {
+   "id": "F02",
+   "scenario": "All continuous generating plants lost",
+   "immediate": "L2 gone. Battery carries the coast load for 0.16 h before touching the black-start reserve.",
+   "independent_resources": [
+    "main battery (ride-through, then black-start reserve)",
+    "L3 survival source (crew + nav/comms)",
+    "L1 drive generators only with the drive lit"
+   ],
+   "sheddable": [
+    "proactive defense",
+    "field",
+    "hotel",
+    "Garden",
+    "MRO"
+   ],
+   "must_keep": [
+    "crew ECLSS (L3)",
+    "nav/comms beacon"
+   ],
+   "time_to_irreversible": "cryo: sealed He-3 hold ~58 h, then ~24 t/day of He-3 boils off; protection at high velocity: lost at once",
+   "recovery": "restart one L2 unit from the battery black-start reserve; if no unit restarts, the mission ends (drive propellant cannot be kept)",
+   "common_mode": [
+    "common fuel/design fault across identical units",
+    "shared heat-rejection channels",
+    "control software"
+   ],
+   "uncertainty": "whether identical modules share a design-level failure mode",
+   "crew_survival": "SAFE for 30 d on L3 (crew-only 18 kW nominal)",
+   "ship_and_mission": "LOST after the cryo hold unless one unit restarts: cryo preservation is an L2 job, not an L3 job"
+  },
+  {
+   "id": "F03",
+   "scenario": "Main drive trip during high-power operation",
+   "immediate": "L1 lost with hot blades and drained warm channels: burn heat pumps stop; active defense loses its supply.",
+   "independent_resources": [
+    "WARM section (5 MW) frees up for L2 at reduced power (~1.0-1.3 MWe)",
+    "defense buffer (if fitted)",
+    "main battery"
+   ],
+   "sheddable": [
+    "active defense to proactive",
+    "MRO",
+    "hotel"
+   ],
+   "must_keep": [
+    "ECLSS",
+    "cryo",
+    "nav",
+    "drive cool-down pumps"
+   ],
+   "time_to_irreversible": "decay heat 569 kW at 60 s, 234 kW at 1 h: hot loop must keep circulating; proactive defense (2.5 MW) cannot be held until the channels refill",
+   "recovery": "refill and re-prime warm channels, restart L2 from hot standby, then diagnose the drive",
+   "common_mode": [
+    "drive and L1 share the aft district (DRIVE_AFT)",
+    "hot-loop pumps on L1"
+   ],
+   "uncertainty": "drive standby and restart energy are OPEN (PROP.DRIVE_STANDBY)",
+   "crew_survival": "SAFE",
+   "ship_and_mission": "DEGRADED: protection gap during the burn-to-coast transition"
+  },
+  {
+   "id": "F04",
+   "scenario": "Loss of one electrical bus (A or B)",
+   "immediate": "Half the distribution lost; loads dual-fed from A and B transfer.",
+   "independent_resources": [
+    "other bus",
+    "bus E for essentials"
+   ],
+   "sheddable": [
+    "non-dual-fed loads on the lost bus"
+   ],
+   "must_keep": [
+    "dual-fed ECLSS, cryo trains, nav"
+   ],
+   "time_to_irreversible": "none if essential loads are dual-fed and each bus carries the must-keep set (3.3 MW nominal)",
+   "recovery": "isolate the fault, repair the switchgear ORU",
+   "common_mode": [
+    "bus trunks in the same keel lane (Phase I rule: never)",
+    "shared PMAD cold plates on LOW"
+   ],
+   "uncertainty": "bus capacity sizing; protection coordination",
+   "crew_survival": "SAFE",
+   "ship_and_mission": "SAFE if each bus is rated for the must-keep set"
+  },
+  {
+   "id": "F05",
+   "scenario": "Failure of the emergency bus (E)",
+   "immediate": "Essential loads lose their independent feed; they still run from A/B.",
+   "independent_resources": [
+    "A/B feeds",
+    "L3 source can be cross-tied to A"
+   ],
+   "sheddable": [
+    "none"
+   ],
+   "must_keep": [
+    "ECLSS, refuge, nav beacon"
+   ],
+   "time_to_irreversible": "none while A/B run; it becomes critical only in a coincident F02",
+   "recovery": "repair E; until then F02 becomes crew-critical",
+   "common_mode": [
+    "E routed with A or B",
+    "L3 source location beside the refuge"
+   ],
+   "uncertainty": "E bus topology not designed",
+   "crew_survival": "SAFE (latent)",
+   "ship_and_mission": "SAFE (latent)"
+  },
+  {
+   "id": "F06",
+   "scenario": "Loss of one coolant circuit",
+   "immediate": "One blade warm circuit lost: the L2 units on that blade lose their sink; ECLSS loops on that ring go to the other.",
+   "independent_resources": [
+    "other two blades (each carries ~1/3 of the warm area)",
+    "ring loops cross-connect"
+   ],
+   "sheddable": [
+    "L2 units on the lost blade",
+    "Garden lighting"
+   ],
+   "must_keep": [
+    "crew loops",
+    "cryocooler heat rejection (LOW)"
+   ],
+   "time_to_irreversible": "ring: hours (cabin heat-up); cryo: depends on the LOW section (1 MW, already above capacity in the active bound)",
+   "recovery": "isolate the leak, refill from coolant spares, restart the units",
+   "common_mode": [
+    "shared header across blades (design must split it)",
+    "one LOW section for all cryocoolers"
+   ],
+   "uncertainty": "coolant inventory and leak rates OPEN",
+   "crew_survival": "SAFE",
+   "ship_and_mission": "DEGRADED: one third of L2 capacity"
+  },
+  {
+   "id": "F07",
+   "scenario": "Heat-pump failure",
+   "immediate": "In a burn, warm heat beyond the 5 MW WARM section has no sink.",
+   "independent_resources": [
+    "WARM section (5 MW)",
+    "Heat Debt buffer (TMS-06, OPEN)"
+   ],
+   "sheddable": [
+    "active defense to proactive",
+    "MRO"
+   ],
+   "must_keep": [
+    "ECLSS, cryo"
+   ],
+   "time_to_irreversible": "seconds to minutes for active defense heat; the base load fits the WARM section",
+   "recovery": "shed defense to proactive within the buffer, restart pumps",
+   "common_mode": [
+    "pumps on L1 (drive trip takes both)"
+   ],
+   "uncertainty": "pump unit size and spares",
+   "crew_survival": "SAFE",
+   "ship_and_mission": "DEGRADED: active defense not available in burns"
+  },
+  {
+   "id": "F08",
+   "scenario": "Cryogenic cooling failure",
+   "immediate": "Tanks warm; He-3 at 3 K is the critical stage.",
+   "independent_resources": [
+    "N+1 cryocooler trains on A and B",
+    "sealed hold"
+   ],
+   "sheddable": [
+    "20 K stage before 3 K (it cannot: 3 K cannot lift the shield load)"
+   ],
+   "must_keep": [
+    "3 K He-3 stage"
+   ],
+   "time_to_irreversible": "~58 h sealed hold; losing only the 3 K stage costs 1.2 t/day He-3",
+   "recovery": "Re-cooling after a hold: a warmed vessel must be brought back below its relief point; with the 20 K shield back, the 3 K stage recovers ~0.1 K a day per 100 W of spare lift (slow): spare lift capacity sets recovery.",
+   "common_mode": [
+    "LOW section 300 K rejection",
+    "both trains on one bus"
+   ],
+   "uncertainty": "tank insulation performance over six years",
+   "crew_survival": "SAFE",
+   "ship_and_mission": "MISSION-CRITICAL: He-3 losses end the braking budget"
+  },
+  {
+   "id": "F09",
+   "scenario": "Repeated active-defense engagements",
+   "immediate": "Buffer drawn per engagement; recharge from the L2 margin; heat debt accumulates.",
+   "independent_resources": [
+    "dedicated defense buffer (not the pulse bank)",
+    "L2 margin above the proactive load"
+   ],
+   "sheddable": [
+    "MRO",
+    "Garden lighting",
+    "hotel"
+   ],
+   "must_keep": [
+    "proactive defense",
+    "ECLSS",
+    "cryo"
+   ],
+   "time_to_irreversible": "when the recharge time exceeds the interval between engagements the buffer runs down: see the duty sweep (eps_b duty)",
+   "recovery": "reduce engagement duration or accept the continuous-active bound (25.8 MW design, 939 t class)",
+   "common_mode": [
+    "buffer and L2 margin are the same generators"
+   ],
+   "uncertainty": "engagement frequency is OPEN (dust environment, detection range)",
+   "crew_survival": "SAFE",
+   "ship_and_mission": "DEGRADED or LOST protection above the sustainable duty"
+  },
+  {
+   "id": "F10",
+   "scenario": "Loss of a generator during high-velocity coast",
+   "immediate": "As F01 but proactive defense is mandatory at this velocity.",
+   "independent_resources": [
+    "standby unit",
+    "battery (0.16 h)",
+    "defense buffer"
+   ],
+   "sheddable": [
+    "hotel",
+    "MRO",
+    "Garden"
+   ],
+   "must_keep": [
+    "proactive defense",
+    "ECLSS",
+    "cryo"
+   ],
+   "time_to_irreversible": "protection gap if the remaining units cannot cover 3.3 MW; a dust strike in the gap is the irreversible event",
+   "recovery": "start the standby unit; with B-lean (2 x 3.64) one loss leaves 3.64 MW, at the edge of the must-keep set",
+   "common_mode": [
+    "same as F01"
+   ],
+   "uncertainty": "dust flux at 0.016 c (lab dust study uses the Vertex profile)",
+   "crew_survival": "SAFE",
+   "ship_and_mission": "AT RISK during the gap"
+  },
+  {
+   "id": "F11",
+   "scenario": "Exhaustion of available emergency energy",
+   "immediate": "Ride-through spent; the black-start reserve is protected and is not spent on loads.",
+   "independent_resources": [
+    "L3 source",
+    "black-start reserve (restart only)"
+   ],
+   "sheddable": [
+    "everything except crew-only"
+   ],
+   "must_keep": [
+    "crew ECLSS on L3",
+    "nav beacon"
+   ],
+   "time_to_irreversible": "crew-only on the battery ride-through: 30 h; whole battery 4.4 d; L3 adds 30 d",
+   "recovery": "restart L2 from the reserve; if not, L3 for 30 d awaiting repair",
+   "common_mode": [
+    "battery shared by ride-through and reserve (one pack)"
+   ],
+   "uncertainty": "battery degradation (0.5-2 %/yr) at end of life",
+   "crew_survival": "SAFE for 30 d",
+   "ship_and_mission": "LOST without an L2 restart"
+  },
+  {
+   "id": "F12",
+   "scenario": "Complete blackout and black start",
+   "immediate": "All buses dark; L3 keeps crew-only loads; the reserve restarts in steps (pulse bank charged from the main battery).",
+   "independent_resources": [
+    "black-start reserve 1 kWh",
+    "L3 source",
+    "refuge packs"
+   ],
+   "sheddable": [
+    "all but restart loads"
+   ],
+   "must_keep": [
+    "restart services 601 kW nominal",
+    "crew ECLSS"
+   ],
+   "time_to_irreversible": "cryo hold ~58 h sets the deadline for an L2 restart",
+   "recovery": "step sequence of power.black_start; the survival reserve never charges the pulse bank or restarts the drive",
+   "common_mode": [
+    "restart depends on one battery pack and one control path"
+   ],
+   "uncertainty": "restart energy of an L2 unit and its start time",
+   "crew_survival": "SAFE",
+   "ship_and_mission": "SAFE if an L2 unit restarts inside the cryo hold"
+  }
+ ],
+ "summary": {
+  "crew": "The crew survives every scenario for 30 d on L3 plus the refuge, provided the L3 source is independent of L2 and E.",
+  "ship": "The ship and mission depend on L2 restarting within the ~58-77 h cryo hold and on the protection gap at high velocity; both need N+1 modular L2 with units on different blades and buses.",
+  "not_credited": "Redundancy is not credited across identical units for a design-level fault, across units sharing a blade header, or between L1 and the drive."
+ }
+}

@@ -2,7 +2,7 @@
 
 | Kind | Status | Question | Model base | Owner questions |
 | --- | --- | --- | --- | --- |
-| study + proposal | ACTIVE (owner review) | Which ship systems are missing, how much power and space they need, and where they could go without changing canon, silhouette or budgets | main at branch start, built locally (assets/wayfarer) | DR-01 … DR-13 |
+| study + proposal | ACTIVE (Phase II, owner review) | Which ship systems are missing, how much power and space they need, and where they could go without changing canon, silhouette or budgets | main at branch start, built locally (assets/wayfarer) | DR-01 … DR-15 |
 
 **Function.** Systems-engineering review of G.U. WAYFARER 001: inventory (`systems.toml`, 56 assemblies, 13 families, one owner
 each), electric load model over 15 conditions and a source screen (`eps_study.py`), a voxel survey of the built vehicle
@@ -33,3 +33,22 @@ python3 work/ship-systems-architecture/districts.py && python3 work/ship-systems
 python3 work/ship-systems-architecture/build_report.py
 ```
 Review file (not in Git): `work/ship-systems-architecture/REVIEW_SHIP_SYSTEMS_ARCHITECTURE.blend`, copy in the project files `review/`.
+
+## Phase II (owner brief 2026-11-27 11:08Z, clarification 11:36Z)
+
+**Function.** EPS-A in the repository (`src/wayfarer/power_loads.py`, `[power.loads]`, `data/systems.toml` + `src/wayfarer/systems.py`,
+`references/p1_power_loads.json`, `tests/test_power_loads.py`); studies in `phase2/`, run in this order:
+`eps_b.py` (generation A–F, lean sizing, duty, L1, L3, thermal, transitions, cryo) → `placement.py` (assembly envelopes, five layouts,
+dose screen with blade scatter) → `mission.py` (destinations at 0.016 c, provisioning 6 months–10 years for 6 and 12, logistics
+containers, narrative, service life, L2 reliability by duration) → `eclss_mass.py` (strings, resource ledger, shield water, RCS,
+integrated mass) → `fmea.py` (12 scenarios) → `build_report.py` (page, Phase II from `phase2/report2.py`). `make_review.py` adds the
+layouts as `WORK_ISSA_6x_LAYOUT_*` (L-E visible).
+
+**Decisions taken here (STUDY, owner review).** Phase I numbers superseded: coast 3.2 MW known (+ OPEN bands), burn heat-pump running work
+~82 MW (not 210), battery pack 2.5 t (no second packaging factor), ride-through ~10 min after the protected black-start reserve. Working
+architecture: L2 4 × 1.75 MWe fission-Brayton (3+1) in layout L-E (M1–M2, aft of all crew spaces), shadow shield + blade-facing scatter
+band (~28 t per unit), L1 from the drive hot loop, L3 10–40 kWe crew-only for 30 d, dedicated defense buffer. Six years is narrative
+(owner): provisioning per mission; 12-month standard load for 12 is ~20 t in 4 of 54 containers.
+
+**Unknowns.** Defense engagement frequency at 0.016 c; drive standby/restart energy; scatter dose (needs a transport calculation);
+reactor/Brayton reliability; mass (~600 t beyond today's lines, three PROPOSED lines); the M1–M2 allocation (DR-12/DR-15).

@@ -388,7 +388,12 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   (210 MW at burnout, with F03); Heat Debt buffer for 50-80 MW bursts; the hot coolant choice. The Q38 candidate panels are removed (owner,
   2026-11-01); the RAD-ZONE sections aft of the rings reject the 5 MW warm base load and the 1 MW low-temperature load in every mode, burns included (Graded Thermal Blade). Keep all three loops separate.
 
-- [ ] **F03 — Integrate electrical, black-start and survival power. AFTER B02; F02 architecture set 2026-10-31 (drive tap 210 MW for the burn heat pumps).** Size/place owner-released A/B distribution,
+- [ ] **ISSA Phase II — owner review (2026-11-27).** EPS-A load model and the EPS/TMS registry are in the repository (docs/MODEL.md
+  "Electric loads and systems registry (EPS-A)"); the Gate 2-4 studies, mission profiles, provisioning, placement, FMEA and the updated
+  decision register (DR-01..15) are on the ISSA page (`work/ship-systems-architecture/`). Owner: DR-04 proposed mass lines, DR-07/DR-14
+  nominal mission and provisioning basis, DR-12/DR-15 aft nuclear district; then EPS-G1 (one L2 unit envelope generator) as the first
+  production-modelling task. Six years is narrative (owner 2026-11-27); provisioning is per mission.
+- [ ] **F03 — Integrate electrical, black-start and survival power. AFTER B02; F02 architecture set 2026-10-31 (drive tap rated 210 MW; EPS-A running work ~82 MW nominal).** Size/place owner-released A/B distribution,
   storage, survival reserve and drive-off generation; preserve category suballocations and failure domains.
   **Done when:** required operating/black-start/failure states consume sourced budgets and endurance, with matching geometry and
   presentation. Finite batteries alone cannot become a six-year energy source.
@@ -445,7 +450,7 @@ physical item once, reuse existing envelopes and do not fund components twice. N
   G01 allocation (2026-10-31, `references/evidence/g01_allocation_2026-10-31.json`) splits this into: ECLSS unit masses/powers and 98 %
   water recovery; an O2/buffer-gas bottle farm beside the refuge (none placed; 41 72 h case O2 30.24 kg for 12); the refuge cartridge
   loop, water, dosimetry, comms and first-response kit; suppression media and backup breathing; 52 m³ packaged food stowage and cold
-  chain (owner gate: the 10 t food category runs out on day 1,093); medical diagnostics and sample storage; Seraph dock power (with F03);
+  chain (owner 2026-11-27: provisioning is per mission in dry-store containers; the 10 t line is about 7-10 months of crew consumables for 12, ISSA Phase II); medical diagnostics and sample storage; Seraph dock power (with F03);
   machinery mounts (S24); a black-box rack in the refuge/ops.
 
 - [ ] **G03 — Integrate selected workshop and service district. AFTER D04/F02/F03 and equipment release.** Package approved
