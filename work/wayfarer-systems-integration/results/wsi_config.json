@@ -1,0 +1,3029 @@
+{
+ "id": "WSI-0.1",
+ "status": "STUDY / PROTOTYPE, Track F working configuration; noncanon; production geometry unchanged",
+ "sources": {
+  "issa": "claude/cloud/ship-systems-architecture 8b30b71 (WF-F1-C1.1, SSI-1.1, register v1.2)",
+  "psa": "claude/cloud/primary-structural-architecture 1beb693 (Phase II c3138d8, Phase III.0 WIP)",
+  "production": "main 11f1e94 (read only)"
+ },
+ "ownership": "ISSA owns machinery, its supports (saddles, slides, rack brackets, rail chairs) and utilities; PSA owns primary load-bearing structure (frames, longerons, decks, hoops, bearings) and the loads they carry; a mount id is the boundary between them",
+ "coordinate_system": "ship axes: +X bow, +Z dorsal, azimuth from +Y toward +Z; metres, tonnes, kN; X datum = production layout (aft end of the drive unchanged)",
+ "dimensions": {
+  "ship_length_m": 338.30847879734165,
+  "farm_x": [
+   109.25,
+   186.65847879734162
+  ],
+  "brow_x": [
+   190.55847879734165,
+   193.55847879734165
+  ],
+  "body_radius_m": 6.5,
+  "rail_radius_m": 5.0,
+  "radiator_envelope": {
+   "blades": [
+    90.0,
+    210.0,
+    330.0
+   ],
+   "r_max_m": 37.0,
+   "hot_x": [
+    -133.25,
+    41.02
+   ],
+   "l2_x": [
+    41.02,
+    50.4
+   ],
+   "warm_x": [
+    50.4,
+    72.9
+   ],
+   "low_x": [
+    73.4,
+    93.4
+   ],
+   "low_tabs_x": [
+    93.4,
+    106.45
+   ]
+  },
+  "ring_radius_m": 30.0,
+  "brow_radius_m": 45.0
+ },
+ "structural_topology": {
+  "concept": "H (leading reference; HC, A, C, H3 retained as alternatives)",
+  "rotor_bay": "stationary hub path (hub cones, no bypass collar as primary path)",
+  "rails": {
+   "count": 6,
+   "arrangement": "three paired sectors at az 30/150/270 +- 8.6 deg",
+   "radius_m": 5.0
+  },
+  "stations": {
+   "thrust_ring_x": -135.25,
+   "transition_x": -127.25,
+   "cage_end_x": 93.59936,
+   "bay_m": 4.0,
+   "module_frame_every_bays": 2
+  },
+  "spine": {
+   "x": [
+    -89.8,
+    118.5
+   ],
+   "radius_m": 0.95,
+   "role": "Momentum Spine structural shell (PSA), axial datum"
+  },
+  "deck": {
+   "kind": "TD-A corrected (PSA Phase III model3): aft layer x 107.0, skirt plane = farm aft end",
+   "alternatives": "TD-B..TD-F (PSA analysis)"
+  },
+  "keels": "three sector keels from the deck to the Brow interface ring",
+  "brow_interface": "keel-to-Brow interface ring (PSA ends there)",
+  "materials": {
+   "rail": "AL6061",
+   "frame": "AL5083",
+   "modframe": "AL6061",
+   "diag": "AL6061",
+   "spine": "AL6061",
+   "collar": "AL6061",
+   "keel": "AL6061",
+   "deck": "AL6061",
+   "ring": "TI64",
+   "pickup": "TI64",
+   "trans": "TI64"
+  },
+  "pickup": "four nozzle pickups, beam struts (3.8 MN limit, 5.3 MN ultimate per strut)",
+  "l2_interface_x": 41.0,
+  "rotating": "two habitat rings on the hub bearings, free in roll"
+ },
+ "structural_materials": [
+  {
+   "id": "AL5083",
+   "name": "Al 5083-H116 plate/extrusion (lunar Al-Mg)",
+   "track": "R",
+   "E_GPa": [
+    69.0,
+    70.3,
+    71.0
+   ],
+   "rho": 2660,
+   "Fty_MPa": [
+    200,
+    215,
+    230
+   ],
+   "alpha_ppm_K": 23.8,
+   "specific_modulus_MJ_kg": 26.428571428571427
+  },
+  {
+   "id": "AL6061",
+   "name": "Al 6061-T6 extrusion (lunar Al-Mg-Si)",
+   "track": "R",
+   "E_GPa": [
+    67.0,
+    68.9,
+    70.0
+   ],
+   "rho": 2700,
+   "Fty_MPa": [
+    230,
+    241,
+    260
+   ],
+   "alpha_ppm_K": 23.6,
+   "specific_modulus_MJ_kg": 25.51851851851852
+  },
+  {
+   "id": "TI64",
+   "name": "Ti-6Al-4V (wrought or DED + HIP), nodes and high-load members",
+   "track": "R",
+   "E_GPa": [
+    110,
+    114,
+    117
+   ],
+   "rho": 4430,
+   "Fty_MPa": [
+    760,
+    827,
+    880
+   ],
+   "alpha_ppm_K": 8.6,
+   "specific_modulus_MJ_kg": 25.733634311512414
+  }
+ ],
+ "propellant": {
+  "species_t": {
+   "helium-3": 3266.1341156241806,
+   "deuterium": 2181.0325293369865,
+   "hydrogen": 2900.739287658948
+  },
+  "mission_t": 8347.905932620115,
+  "loaded_t": 8514.864051272518,
+  "carried_t": 166.95811865240285,
+  "allowances": {
+   "ullage": 0.03,
+   "residual": 0.015,
+   "boiloff_reserve": 0.005,
+   "density_kg_m3": {
+    "helium_3": 58.61,
+    "deuterium": 175.2,
+    "hydrogen": 70.8
+   },
+   "split": "production B01 proportions"
+  },
+  "fill": {
+   "helium-3": 0.970873786407767,
+   "deuterium": 0.9072803225097097,
+   "hydrogen": 0.965834369435207
+  },
+  "usable_m3": {
+   "helium-3": 55726.567405292284,
+   "deuterium": 12448.815806717961,
+   "hydrogen": 40970.89389348797
+  },
+  "capacity_m3": {
+   "helium-3": 58546.33171600006,
+   "hydrogen": 43268.611155135775,
+   "deuterium": 13995.445297135744
+  }
+ },
+ "tanks": {
+  "arrangement": "T-A (13 vessels, stretched forward farm)",
+  "added_length_m": 48.808478797341635,
+  "vessels": [
+   {
+    "id": "O1",
+    "species": "helium-3",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 27.75,
+    "az": 6.2,
+    "a": 6.45,
+    "volume_m3": 9757.721952666678,
+    "loaded_t": 555.2427996561107,
+    "fill": 0.970873786407767
+   },
+   {
+    "id": "O2",
+    "species": "helium-3",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 27.75,
+    "az": 70.9,
+    "a": 6.45,
+    "volume_m3": 9757.721952666678,
+    "loaded_t": 555.2427996561107,
+    "fill": 0.970873786407767
+   },
+   {
+    "id": "O3",
+    "species": "hydrogen",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 27.75,
+    "az": 101.2,
+    "a": 6.45,
+    "volume_m3": 9757.721952666678,
+    "loaded_t": 667.2435006328752,
+    "fill": 0.9658343694352071
+   },
+   {
+    "id": "O4",
+    "species": "helium-3",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 27.75,
+    "az": 131.5,
+    "a": 6.45,
+    "volume_m3": 9757.721952666678,
+    "loaded_t": 555.2427996561107,
+    "fill": 0.970873786407767
+   },
+   {
+    "id": "O5",
+    "species": "helium-3",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 27.75,
+    "az": 174.1,
+    "a": 6.45,
+    "volume_m3": 9757.721952666678,
+    "loaded_t": 555.2427996561107,
+    "fill": 0.970873786407767
+   },
+   {
+    "id": "O6",
+    "species": "hydrogen",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 27.75,
+    "az": 227.65,
+    "a": 6.45,
+    "volume_m3": 9757.721952666678,
+    "loaded_t": 667.2435006328752,
+    "fill": 0.9658343694352071
+   },
+   {
+    "id": "O7",
+    "species": "helium-3",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 27.75,
+    "az": 257.95,
+    "a": 6.45,
+    "volume_m3": 9757.721952666678,
+    "loaded_t": 555.2427996561107,
+    "fill": 0.970873786407767
+   },
+   {
+    "id": "O8",
+    "species": "helium-3",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 27.75,
+    "az": 294.1,
+    "a": 6.45,
+    "volume_m3": 9757.721952666678,
+    "loaded_t": 555.2427996561107,
+    "fill": 0.970873786407767
+   },
+   {
+    "id": "O9",
+    "species": "hydrogen",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 27.75,
+    "az": 335.9,
+    "a": 6.45,
+    "volume_m3": 9757.721952666678,
+    "loaded_t": 667.2435006328752,
+    "fill": 0.9658343694352071
+   },
+   {
+    "id": "I1",
+    "species": "deuterium",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 13.5,
+    "az": 93.72,
+    "a": 5.45,
+    "volume_m3": 6997.722648567872,
+    "loaded_t": 1112.326589961863,
+    "fill": 0.9072803225097097
+   },
+   {
+    "id": "I2",
+    "species": "hydrogen",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 13.5,
+    "az": 150.3,
+    "a": 5.45,
+    "volume_m3": 6997.722648567872,
+    "loaded_t": 478.51178575675084,
+    "fill": 0.965834369435207
+   },
+   {
+    "id": "I3",
+    "species": "deuterium",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 13.5,
+    "az": 273.72,
+    "a": 5.45,
+    "volume_m3": 6997.722648567872,
+    "loaded_t": 1112.326589961863,
+    "fill": 0.9072803225097097
+   },
+   {
+    "id": "I4",
+    "species": "hydrogen",
+    "x": [
+     109.25,
+     186.65847879734162
+    ],
+    "R": 13.5,
+    "az": 356.24,
+    "a": 5.45,
+    "volume_m3": 6997.722648567872,
+    "loaded_t": 478.51178575675084,
+    "fill": 0.965834369435207
+   }
+  ],
+  "supports": {
+   "aft": "each vessel on its aft skirt at the thrust deck (axial burn load, anchor)",
+   "forward": "forward guide ring on the forward hoop (radial only, axial slide for contraction: 120 mm on the historical length, 325 mm on the stretched barrel)",
+   "keel": "keel rails lengthen with the barrel",
+   "burn_axial_kN_total": 61468.89770928117
+  }
+ },
+ "equipment": [
+  {
+   "id": "PWR-L2U-1",
+   "name": "L2 power unit 1 (az 90)",
+   "owner": "ISSA (machinery) / PSA (district frame)",
+   "mass_t": 96.8588454148225,
+   "cg": [
+    -90.7,
+    1.7757378587636622e-16,
+    2.9
+   ],
+   "envelope": {
+    "shape": "unit envelope along x",
+    "x": [
+     -91.7,
+     -79.7
+    ],
+    "r": [
+     0.0,
+     5.3
+    ],
+    "shield_cone_half_deg": 12.5
+   },
+   "register": "FT-03",
+   "maturity": "M2"
+  },
+  {
+   "id": "PWR-L2U-2",
+   "name": "L2 power unit 2 (az 210)",
+   "owner": "ISSA (machinery) / PSA (district frame)",
+   "mass_t": 96.8588454148225,
+   "cg": [
+    -90.7,
+    -2.5114736709748717,
+    -1.4500000000000002
+   ],
+   "envelope": {
+    "shape": "unit envelope along x",
+    "x": [
+     -91.7,
+     -79.7
+    ],
+    "r": [
+     0.0,
+     5.3
+    ],
+    "shield_cone_half_deg": 12.5
+   },
+   "register": "FT-03",
+   "maturity": "M2"
+  },
+  {
+   "id": "PWR-L2U-3",
+   "name": "L2 power unit 3 (az 330)",
+   "owner": "ISSA (machinery) / PSA (district frame)",
+   "mass_t": 96.8588454148225,
+   "cg": [
+    -90.7,
+    2.5114736709748713,
+    -1.4500000000000013
+   ],
+   "envelope": {
+    "shape": "unit envelope along x",
+    "x": [
+     -91.7,
+     -79.7
+    ],
+    "r": [
+     0.0,
+     5.3
+    ],
+    "shield_cone_half_deg": 12.5
+   },
+   "register": "FT-03",
+   "maturity": "M2"
+  },
+  {
+   "id": "TH-H6A-TRUNKS",
+   "name": "H6a hot trunks (4 per blade) and saddles",
+   "owner": "ISSA (trunks, saddles, slides) / PSA (frames they bear on)",
+   "mass_t": 544.5356997349759,
+   "cg": [
+    -40.0,
+    0.0,
+    0.0
+   ],
+   "envelope": {
+    "x": [
+     -111.6,
+     41.02056207739442
+    ],
+    "r": [
+     6.0,
+     8.2
+    ]
+   },
+   "register": "FT-01/FT-02",
+   "maturity": "M2"
+  },
+  {
+   "id": "RAD-HOT-MAN-90",
+   "name": "HOT forward-fin manifolds, blade 90",
+   "owner": "ISSA",
+   "mass_t": 5.9597361978198515,
+   "cg": [
+    -46.0,
+    1.3471114790620886e-15,
+    22.0
+   ],
+   "envelope": {
+    "x": [
+     -111.6,
+     41.02056207739442
+    ],
+    "r": [
+     6.5,
+     37.0
+    ],
+    "pitch_m": 1.47,
+    "count": 105
+   },
+   "register": "FT-06",
+   "maturity": "M2"
+  },
+  {
+   "id": "RAD-L2-90",
+   "name": "L2 radiator section, blade 90",
+   "owner": "ISSA",
+   "mass_t": 28.84666102115054,
+   "cg": [
+    45.71028103869721,
+    1.3471114790620886e-15,
+    22.0
+   ],
+   "envelope": {
+    "x": [
+     41.02056207739442,
+     50.4
+    ],
+    "r": [
+     6.5,
+     36.1
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "RAD-LOWTAB-90",
+   "name": "LOW forward tip extension, blade 90",
+   "owner": "ISSA (panel, spar) / PSA (root frame lugs)",
+   "mass_t": 2.3881499999999996,
+   "cg": [
+    99.92500000000001,
+    2.097207643539842e-15,
+    34.25
+   ],
+   "envelope": {
+    "x": [
+     93.4,
+     106.45
+    ],
+    "r": [
+     31.5,
+     37.0
+    ]
+   },
+   "register": "",
+   "maturity": "M2 (DR-C-02 APPROVED)"
+  },
+  {
+   "id": "RAD-HOT-MAN-210",
+   "name": "HOT forward-fin manifolds, blade 210",
+   "owner": "ISSA",
+   "mass_t": 5.9597361978198515,
+   "cg": [
+    -46.0,
+    -19.05255888325765,
+    -11.000000000000002
+   ],
+   "envelope": {
+    "x": [
+     -111.6,
+     41.02056207739442
+    ],
+    "r": [
+     6.5,
+     37.0
+    ],
+    "pitch_m": 1.47,
+    "count": 105
+   },
+   "register": "FT-06",
+   "maturity": "M2"
+  },
+  {
+   "id": "RAD-L2-210",
+   "name": "L2 radiator section, blade 210",
+   "owner": "ISSA",
+   "mass_t": 28.84666102115054,
+   "cg": [
+    45.71028103869721,
+    -19.05255888325765,
+    -11.000000000000002
+   ],
+   "envelope": {
+    "x": [
+     41.02056207739442,
+     50.4
+    ],
+    "r": [
+     6.5,
+     36.1
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "RAD-LOWTAB-210",
+   "name": "LOW forward tip extension, blade 210",
+   "owner": "ISSA (panel, spar) / PSA (root frame lugs)",
+   "mass_t": 2.3881499999999996,
+   "cg": [
+    99.92500000000001,
+    -29.661370079617022,
+    -17.125000000000004
+   ],
+   "envelope": {
+    "x": [
+     93.4,
+     106.45
+    ],
+    "r": [
+     31.5,
+     37.0
+    ]
+   },
+   "register": "",
+   "maturity": "M2 (DR-C-02 APPROVED)"
+  },
+  {
+   "id": "RAD-HOT-MAN-330",
+   "name": "HOT forward-fin manifolds, blade 330",
+   "owner": "ISSA",
+   "mass_t": 5.9597361978198515,
+   "cg": [
+    -46.0,
+    19.052558883257646,
+    -11.00000000000001
+   ],
+   "envelope": {
+    "x": [
+     -111.6,
+     41.02056207739442
+    ],
+    "r": [
+     6.5,
+     37.0
+    ],
+    "pitch_m": 1.47,
+    "count": 105
+   },
+   "register": "FT-06",
+   "maturity": "M2"
+  },
+  {
+   "id": "RAD-L2-330",
+   "name": "L2 radiator section, blade 330",
+   "owner": "ISSA",
+   "mass_t": 28.84666102115054,
+   "cg": [
+    45.71028103869721,
+    19.052558883257646,
+    -11.00000000000001
+   ],
+   "envelope": {
+    "x": [
+     41.02056207739442,
+     50.4
+    ],
+    "r": [
+     6.5,
+     36.1
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "RAD-LOWTAB-330",
+   "name": "LOW forward tip extension, blade 330",
+   "owner": "ISSA (panel, spar) / PSA (root frame lugs)",
+   "mass_t": 2.3881499999999996,
+   "cg": [
+    99.92500000000001,
+    29.661370079617015,
+    -17.125000000000014
+   ],
+   "envelope": {
+    "x": [
+     93.4,
+     106.45
+    ],
+    "r": [
+     31.5,
+     37.0
+    ]
+   },
+   "register": "",
+   "maturity": "M2 (DR-C-02 APPROVED)"
+  },
+  {
+   "id": "FARM-O1",
+   "name": "Propellant vessel O1 (helium-3)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 381.5234617120238,
+   "cg": [
+    136.2750050919679,
+    27.58768925023175,
+    2.9969821208421337
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "FARM-O2",
+   "name": "Propellant vessel O2 (helium-3)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 381.5234617120238,
+   "cg": [
+    136.2750050919679,
+    9.080296696670132,
+    26.22233231237148
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "FARM-O3",
+   "name": "Propellant vessel O3 (hydrogen)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 458.1824511742274,
+   "cg": [
+    136.2750050919679,
+    -5.390003246354222,
+    27.221505560940066
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "FARM-O4",
+   "name": "Propellant vessel O4 (helium-3)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 381.5234617120238,
+   "cg": [
+    136.2750050919679,
+    -18.387706337986717,
+    20.783521251894808
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "FARM-O5",
+   "name": "Propellant vessel O5 (helium-3)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 381.5234617120238,
+   "cg": [
+    136.2750050919679,
+    -27.603003175001586,
+    2.852492895846097
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "FARM-O6",
+   "name": "Propellant vessel O6 (hydrogen)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 458.1824511742274,
+   "cg": [
+    136.2750050919679,
+    -18.69400137081989,
+    -20.50845710305346
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "FARM-O7",
+   "name": "Propellant vessel O7 (helium-3)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 381.5234617120238,
+   "cg": [
+    136.2750050919679,
+    -5.793234476286982,
+    -27.13855070380067
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "FARM-O8",
+   "name": "Propellant vessel O8 (helium-3)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 381.5234617120238,
+   "cg": [
+    136.2750050919679,
+    11.331170275583437,
+    -25.331148418216934
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "FARM-O9",
+   "name": "Propellant vessel O9 (hydrogen)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 458.1824511742274,
+   "cg": [
+    136.2750050919679,
+    25.33114841821693,
+    -11.33117027558345
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "FARM-I1",
+   "name": "Propellant vessel I1 (deuterium)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 764.311921594336,
+   "cg": [
+    136.2750050919679,
+    -0.8758886748066362,
+    13.47155592458961
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 13.5,
+    "a": 5.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "FARM-I2",
+   "name": "Propellant vessel I2 (hydrogen)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 329.2492724258333,
+   "cg": [
+    136.2750050919679,
+    -11.726525444915582,
+    6.6886920238375
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 13.5,
+    "a": 5.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "FARM-I3",
+   "name": "Propellant vessel I3 (deuterium)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 764.311921594336,
+   "cg": [
+    136.2750050919679,
+    0.8758886748066406,
+    -13.47155592458961
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 13.5,
+    "a": 5.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "FARM-I4",
+   "name": "Propellant vessel I4 (hydrogen)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "mass_t": 329.2492724258333,
+   "cg": [
+    136.2750050919679,
+    13.47094115605268,
+    -0.8852933808439356
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     163.30001018393583
+    ],
+    "R": 13.5,
+    "a": 5.45
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "BROW-TRANSLATION",
+   "name": "Brow, EYE and forward assembly (translated)",
+   "owner": "PSA (structure) / ISSA (interfaces)",
+   "mass_t": null,
+   "cg": [
+    168.70001018393583,
+    0.0,
+    0.0
+   ],
+   "envelope": {
+    "x": [
+     167.20001018393583,
+     170.20001018393583
+    ],
+    "r": [
+     0.0,
+     45.0
+    ],
+    "translation_m": 25.450010183935827
+   },
+   "register": "",
+   "maturity": "M1"
+  },
+  {
+   "id": "MRU-RAIL",
+   "name": "MRU heavy-carriage twin rails and park stations",
+   "owner": "ISSA (rails, chairs, locks) / PSA (frames, longerons)",
+   "mass_t": 8.726799999999999,
+   "cg": [
+    -0.3500000000000014,
+    -8.450062914116736e-16,
+    -4.6
+   ],
+   "envelope": {
+    "x": [
+     -92.7,
+     92.0
+    ],
+    "az": [
+     255.0,
+     285.0
+    ],
+    "r": 4.6,
+    "note": "SSI-1.1: forward end x 92.0, >= 0.5 m aft of the PSA hub cones"
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "BODY-M10",
+   "name": "Body-bay module 10 (relocated dry store)",
+   "owner": "PSA (frames, longerons) / ISSA (racks, restraints)",
+   "mass_t": 4.0,
+   "cg": [
+    27.75,
+    0.0,
+    0.0
+   ],
+   "envelope": {
+    "x": [
+     22.25,
+     33.25
+    ],
+    "r": [
+     1.5,
+     4.3
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "HUB-ECLSS",
+   "name": "Stationary hub ECLSS unit and both rotary interfaces",
+   "owner": "ISSA (unit, ducts) / PSA (hub frame, bearings)",
+   "mass_t": 1.2,
+   "cg": [
+    100.299,
+    0,
+    3.2
+   ],
+   "envelope": {
+    "box": [
+     2.0,
+     2.2,
+     1.4
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "HUB-ROTARYCOUPLING_A",
+   "name": "RotaryCoupling A (rotating habitat interface)",
+   "owner": "PSA (bearing, drum) / ISSA (air, power, data passes)",
+   "mass_t": null,
+   "cg": [
+    99.199,
+    0,
+    0
+   ],
+   "envelope": {
+    "ring": [
+     0.6,
+     1.45,
+     1.45
+    ]
+   },
+   "register": "",
+   "maturity": "M1"
+  },
+  {
+   "id": "HUB-ROTARYCOUPLING_B",
+   "name": "RotaryCoupling B (rotating habitat interface)",
+   "owner": "PSA (bearing, drum) / ISSA (air, power, data passes)",
+   "mass_t": null,
+   "cg": [
+    101.399,
+    0,
+    0
+   ],
+   "envelope": {
+    "ring": [
+     0.6,
+     1.45,
+     1.45
+    ]
+   },
+   "register": "",
+   "maturity": "M1"
+  },
+  {
+   "id": "CRYO-O1",
+   "name": "Cryocooler station O1",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    27.58768925023175,
+    2.9969821208421337
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "CRYO-O2",
+   "name": "Cryocooler station O2",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    9.080296696670132,
+    26.22233231237148
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "CRYO-O3",
+   "name": "Cryocooler station O3",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    -5.390003246354222,
+    27.221505560940066
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "CRYO-O4",
+   "name": "Cryocooler station O4",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    -18.387706337986717,
+    20.783521251894808
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "CRYO-O5",
+   "name": "Cryocooler station O5",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    -27.603003175001586,
+    2.852492895846097
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "CRYO-O6",
+   "name": "Cryocooler station O6",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    -18.69400137081989,
+    -20.50845710305346
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "CRYO-O7",
+   "name": "Cryocooler station O7",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    -5.793234476286982,
+    -27.13855070380067
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "CRYO-O8",
+   "name": "Cryocooler station O8",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    11.331170275583437,
+    -25.331148418216934
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "CRYO-O9",
+   "name": "Cryocooler station O9",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    25.33114841821693,
+    -11.33117027558345
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "CRYO-I1",
+   "name": "Cryocooler station I1",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    -0.8758886748066362,
+    13.47155592458961
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "CRYO-I2",
+   "name": "Cryocooler station I2",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    -11.726525444915582,
+    6.6886920238375
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "CRYO-I3",
+   "name": "Cryocooler station I3",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    0.8758886748066406,
+    -13.47155592458961
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "CRYO-I4",
+   "name": "Cryocooler station I4",
+   "owner": "ISSA",
+   "mass_t": 1.0381213314650906,
+   "cg": [
+    164.30001018393583,
+    13.47094115605268,
+    -0.8852933808439356
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "register": "",
+   "maturity": "M2"
+  },
+  {
+   "id": "EXT-TA",
+   "name": "EXT-TA external heavy-handling rail and arm (FT-07, provisional, DR-C-04)",
+   "owner": "ISSA (rail, arm, pins) / PSA (aft frame lugs)",
+   "mass_t": 2.5,
+   "cg": [
+    -129.0,
+    -1.3226185430791415e-15,
+    -7.2
+   ],
+   "envelope": {
+    "x": [
+     -133.5,
+     -125.0
+    ],
+    "az": 270.0,
+    "r": [
+     6.5,
+     13.0
+    ],
+    "reach_m": 6.0
+   },
+   "register": "FT-07 (PROVISIONAL)",
+   "maturity": "M2"
+  }
+ ],
+ "mounts": [
+  {
+   "item": "PWR-L2U-1",
+   "id": "U1-M1",
+   "type": "anchor",
+   "x": -90.7,
+   "az": 90.0,
+   "r": 2.9,
+   "dof": "6-DOF"
+  },
+  {
+   "item": "PWR-L2U-1",
+   "id": "U1-M2",
+   "type": "slide",
+   "x": -84.7,
+   "az": 90.0,
+   "r": 2.9,
+   "dof": "radial + lateral (axial free)"
+  },
+  {
+   "item": "PWR-L2U-2",
+   "id": "U2-M1",
+   "type": "anchor",
+   "x": -90.7,
+   "az": 210.0,
+   "r": 2.9,
+   "dof": "6-DOF"
+  },
+  {
+   "item": "PWR-L2U-2",
+   "id": "U2-M2",
+   "type": "slide",
+   "x": -84.7,
+   "az": 210.0,
+   "r": 2.9,
+   "dof": "radial + lateral (axial free)"
+  },
+  {
+   "item": "PWR-L2U-3",
+   "id": "U3-M1",
+   "type": "anchor",
+   "x": -90.7,
+   "az": 330.0,
+   "r": 2.9,
+   "dof": "6-DOF"
+  },
+  {
+   "item": "PWR-L2U-3",
+   "id": "U3-M2",
+   "type": "slide",
+   "x": -84.7,
+   "az": 330.0,
+   "r": 2.9,
+   "dof": "radial + lateral (axial free)"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S0",
+   "type": "slide",
+   "x": -111.6,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S1",
+   "type": "slide",
+   "x": -105.2408099134419,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S2",
+   "type": "anchor",
+   "x": -98.88161982688379,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S3",
+   "type": "slide",
+   "x": -92.52242974032569,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S4",
+   "type": "slide",
+   "x": -86.16323965376759,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S5",
+   "type": "slide",
+   "x": -79.80404956720949,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S6",
+   "type": "anchor",
+   "x": -73.44485948065139,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S7",
+   "type": "slide",
+   "x": -67.08566939409329,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S8",
+   "type": "slide",
+   "x": -60.726479307535186,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S9",
+   "type": "slide",
+   "x": -54.367289220977085,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S10",
+   "type": "anchor",
+   "x": -48.008099134418984,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S11",
+   "type": "slide",
+   "x": -41.64890904786088,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S12",
+   "type": "slide",
+   "x": -35.28971896130278,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S13",
+   "type": "slide",
+   "x": -28.93052887474468,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S14",
+   "type": "anchor",
+   "x": -22.57133878818658,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S15",
+   "type": "slide",
+   "x": -16.21214870162848,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S16",
+   "type": "slide",
+   "x": -9.852958615070378,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S17",
+   "type": "slide",
+   "x": -3.493768528512277,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S18",
+   "type": "anchor",
+   "x": 2.865421558045824,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S19",
+   "type": "slide",
+   "x": 9.224611644603925,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S20",
+   "type": "slide",
+   "x": 15.583801731162026,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S21",
+   "type": "slide",
+   "x": 21.942991817720127,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S22",
+   "type": "anchor",
+   "x": 28.30218190427823,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S23",
+   "type": "slide",
+   "x": 34.66137199083633,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-90-S24",
+   "type": "slide",
+   "x": 41.02056207739443,
+   "az": 90.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S0",
+   "type": "slide",
+   "x": -111.6,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S1",
+   "type": "slide",
+   "x": -105.2408099134419,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S2",
+   "type": "anchor",
+   "x": -98.88161982688379,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S3",
+   "type": "slide",
+   "x": -92.52242974032569,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S4",
+   "type": "slide",
+   "x": -86.16323965376759,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S5",
+   "type": "slide",
+   "x": -79.80404956720949,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S6",
+   "type": "anchor",
+   "x": -73.44485948065139,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S7",
+   "type": "slide",
+   "x": -67.08566939409329,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S8",
+   "type": "slide",
+   "x": -60.726479307535186,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S9",
+   "type": "slide",
+   "x": -54.367289220977085,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S10",
+   "type": "anchor",
+   "x": -48.008099134418984,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S11",
+   "type": "slide",
+   "x": -41.64890904786088,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S12",
+   "type": "slide",
+   "x": -35.28971896130278,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S13",
+   "type": "slide",
+   "x": -28.93052887474468,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S14",
+   "type": "anchor",
+   "x": -22.57133878818658,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S15",
+   "type": "slide",
+   "x": -16.21214870162848,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S16",
+   "type": "slide",
+   "x": -9.852958615070378,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S17",
+   "type": "slide",
+   "x": -3.493768528512277,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S18",
+   "type": "anchor",
+   "x": 2.865421558045824,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S19",
+   "type": "slide",
+   "x": 9.224611644603925,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S20",
+   "type": "slide",
+   "x": 15.583801731162026,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S21",
+   "type": "slide",
+   "x": 21.942991817720127,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S22",
+   "type": "anchor",
+   "x": 28.30218190427823,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S23",
+   "type": "slide",
+   "x": 34.66137199083633,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-210-S24",
+   "type": "slide",
+   "x": 41.02056207739443,
+   "az": 210.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S0",
+   "type": "slide",
+   "x": -111.6,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S1",
+   "type": "slide",
+   "x": -105.2408099134419,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S2",
+   "type": "anchor",
+   "x": -98.88161982688379,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S3",
+   "type": "slide",
+   "x": -92.52242974032569,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S4",
+   "type": "slide",
+   "x": -86.16323965376759,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S5",
+   "type": "slide",
+   "x": -79.80404956720949,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S6",
+   "type": "anchor",
+   "x": -73.44485948065139,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S7",
+   "type": "slide",
+   "x": -67.08566939409329,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S8",
+   "type": "slide",
+   "x": -60.726479307535186,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S9",
+   "type": "slide",
+   "x": -54.367289220977085,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S10",
+   "type": "anchor",
+   "x": -48.008099134418984,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S11",
+   "type": "slide",
+   "x": -41.64890904786088,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S12",
+   "type": "slide",
+   "x": -35.28971896130278,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S13",
+   "type": "slide",
+   "x": -28.93052887474468,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S14",
+   "type": "anchor",
+   "x": -22.57133878818658,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S15",
+   "type": "slide",
+   "x": -16.21214870162848,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S16",
+   "type": "slide",
+   "x": -9.852958615070378,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S17",
+   "type": "slide",
+   "x": -3.493768528512277,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S18",
+   "type": "anchor",
+   "x": 2.865421558045824,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S19",
+   "type": "slide",
+   "x": 9.224611644603925,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S20",
+   "type": "slide",
+   "x": 15.583801731162026,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S21",
+   "type": "slide",
+   "x": 21.942991817720127,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S22",
+   "type": "anchor",
+   "x": 28.30218190427823,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "axial anchor"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S23",
+   "type": "slide",
+   "x": 34.66137199083633,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "TH-H6A-TRUNKS",
+   "id": "H6A-330-S24",
+   "type": "slide",
+   "x": 41.02056207739443,
+   "az": 330.0,
+   "r": 6.523755521358693,
+   "dof": "radial/lateral"
+  },
+  {
+   "item": "RAD-HOT-MAN-90",
+   "id": "HOT-90-ROOT",
+   "type": "slide",
+   "note": "every manifold root on the trunk saddle line, radial slide; the blade root frame (PSA) carries the shear"
+  },
+  {
+   "item": "RAD-L2-90",
+   "id": "L2-90-A",
+   "type": "anchor",
+   "x": 41.0,
+   "note": "structural interface station x 41.0 (owner SSI-D3); PSA verifies"
+  },
+  {
+   "item": "RAD-L2-90",
+   "id": "L2-90-S",
+   "type": "slide",
+   "x": 50.4
+  },
+  {
+   "item": "RAD-LOWTAB-90",
+   "id": "LT-90-C0",
+   "type": "clevis",
+   "x": 93.4,
+   "r": 31.5
+  },
+  {
+   "item": "RAD-LOWTAB-90",
+   "id": "LT-90-C1",
+   "type": "clevis",
+   "x": 93.4,
+   "r": 37.0
+  },
+  {
+   "item": "RAD-HOT-MAN-210",
+   "id": "HOT-210-ROOT",
+   "type": "slide",
+   "note": "every manifold root on the trunk saddle line, radial slide; the blade root frame (PSA) carries the shear"
+  },
+  {
+   "item": "RAD-L2-210",
+   "id": "L2-210-A",
+   "type": "anchor",
+   "x": 41.0,
+   "note": "structural interface station x 41.0 (owner SSI-D3); PSA verifies"
+  },
+  {
+   "item": "RAD-L2-210",
+   "id": "L2-210-S",
+   "type": "slide",
+   "x": 50.4
+  },
+  {
+   "item": "RAD-LOWTAB-210",
+   "id": "LT-210-C0",
+   "type": "clevis",
+   "x": 93.4,
+   "r": 31.5
+  },
+  {
+   "item": "RAD-LOWTAB-210",
+   "id": "LT-210-C1",
+   "type": "clevis",
+   "x": 93.4,
+   "r": 37.0
+  },
+  {
+   "item": "RAD-HOT-MAN-330",
+   "id": "HOT-330-ROOT",
+   "type": "slide",
+   "note": "every manifold root on the trunk saddle line, radial slide; the blade root frame (PSA) carries the shear"
+  },
+  {
+   "item": "RAD-L2-330",
+   "id": "L2-330-A",
+   "type": "anchor",
+   "x": 41.0,
+   "note": "structural interface station x 41.0 (owner SSI-D3); PSA verifies"
+  },
+  {
+   "item": "RAD-L2-330",
+   "id": "L2-330-S",
+   "type": "slide",
+   "x": 50.4
+  },
+  {
+   "item": "RAD-LOWTAB-330",
+   "id": "LT-330-C0",
+   "type": "clevis",
+   "x": 93.4,
+   "r": 31.5
+  },
+  {
+   "item": "RAD-LOWTAB-330",
+   "id": "LT-330-C1",
+   "type": "clevis",
+   "x": 93.4,
+   "r": 37.0
+  },
+  {
+   "item": "FARM-O1",
+   "id": "O1-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-O1",
+   "id": "O1-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "FARM-O2",
+   "id": "O2-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-O2",
+   "id": "O2-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "FARM-O3",
+   "id": "O3-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-O3",
+   "id": "O3-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "FARM-O4",
+   "id": "O4-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-O4",
+   "id": "O4-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "FARM-O5",
+   "id": "O5-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-O5",
+   "id": "O5-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "FARM-O6",
+   "id": "O6-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-O6",
+   "id": "O6-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "FARM-O7",
+   "id": "O7-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-O7",
+   "id": "O7-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "FARM-O8",
+   "id": "O8-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-O8",
+   "id": "O8-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "FARM-O9",
+   "id": "O9-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-O9",
+   "id": "O9-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "FARM-I1",
+   "id": "I1-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-I1",
+   "id": "I1-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "FARM-I2",
+   "id": "I2-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-I2",
+   "id": "I2-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "FARM-I3",
+   "id": "I3-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-I3",
+   "id": "I3-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "FARM-I4",
+   "id": "I4-SKIRT",
+   "type": "anchor",
+   "x": 109.25,
+   "note": "aft skirt on the thrust deck"
+  },
+  {
+   "item": "FARM-I4",
+   "id": "I4-GUIDE",
+   "type": "slide",
+   "x": 163.30001018393583,
+   "note": "forward guide on the hoop, axial slide"
+  },
+  {
+   "item": "BROW-TRANSLATION",
+   "id": "BROW-HOOP",
+   "type": "anchor",
+   "x": 167.20001018393583
+  },
+  {
+   "item": "MRU-RAIL",
+   "id": "MRU-CHAIRS",
+   "type": "slide",
+   "pitch_m": 2.0,
+   "note": "rail chairs on frames; rail joints slide"
+  },
+  {
+   "item": "MRU-RAIL",
+   "id": "MRU-PARK-D",
+   "type": "anchor",
+   "x": -90.7
+  },
+  {
+   "item": "MRU-RAIL",
+   "id": "MRU-PARK-W",
+   "type": "anchor",
+   "x": 90.0
+  },
+  {
+   "item": "BODY-M10",
+   "id": "M10-F0",
+   "type": "frame",
+   "x": 22.25
+  },
+  {
+   "item": "BODY-M10",
+   "id": "M10-F1",
+   "type": "frame",
+   "x": 33.25
+  },
+  {
+   "item": "HUB-ECLSS",
+   "id": "HUB-ECL-4",
+   "type": "4-point",
+   "note": "frame posts on the hub deck"
+  },
+  {
+   "item": "HUB-ROTARYCOUPLING_A",
+   "id": "RotaryCoupling_A-BRG",
+   "type": "bearing",
+   "note": "PSA"
+  },
+  {
+   "item": "HUB-ROTARYCOUPLING_B",
+   "id": "RotaryCoupling_B-BRG",
+   "type": "bearing",
+   "note": "PSA"
+  },
+  {
+   "item": "CRYO-O1",
+   "id": "CRYO-O1-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "CRYO-O2",
+   "id": "CRYO-O2-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "CRYO-O3",
+   "id": "CRYO-O3-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "CRYO-O4",
+   "id": "CRYO-O4-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "CRYO-O5",
+   "id": "CRYO-O5-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "CRYO-O6",
+   "id": "CRYO-O6-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "CRYO-O7",
+   "id": "CRYO-O7-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "CRYO-O8",
+   "id": "CRYO-O8-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "CRYO-O9",
+   "id": "CRYO-O9-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "CRYO-I1",
+   "id": "CRYO-I1-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "CRYO-I2",
+   "id": "CRYO-I2-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "CRYO-I3",
+   "id": "CRYO-I3-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "CRYO-I4",
+   "id": "CRYO-I4-B",
+   "type": "4-point",
+   "note": "bracket on the vessel forward guide ring"
+  },
+  {
+   "item": "EXT-TA",
+   "id": "EXT-L1",
+   "type": "anchor",
+   "x": -133.0,
+   "az": 262.0,
+   "r": 6.6
+  },
+  {
+   "item": "EXT-TA",
+   "id": "EXT-L2",
+   "type": "anchor",
+   "x": -133.0,
+   "az": 278.0,
+   "r": 6.6
+  },
+  {
+   "item": "EXT-TA",
+   "id": "EXT-L3",
+   "type": "slide",
+   "x": -125.5,
+   "az": 262.0,
+   "r": 6.6
+  },
+  {
+   "item": "EXT-TA",
+   "id": "EXT-L4",
+   "type": "slide",
+   "x": -125.5,
+   "az": 278.0,
+   "r": 6.6
+  }
+ ],
+ "load_cases": [
+  {
+   "id": "LC-ENV",
+   "what": "ISSA machinery design envelope",
+   "axial_g": 0.7361342613411239,
+   "lateral_g": 0.05,
+   "note": "Phase VI F1 end-of-burn value, kept as the conservative machinery envelope"
+  },
+  {
+   "id": "LC-C11",
+   "what": "end of the last burn, C1.1 ledger without the PSA structure",
+   "axial_g": 0.6642188265045246,
+   "thrust_N": 21770763.000706356
+  },
+  {
+   "id": "LC-CMB",
+   "what": "end of the last burn with the PSA Phase II structure (provisional)",
+   "axial_g": 0.45705766826806526,
+   "note": "PSA computed 0.56 g on CP4 stations"
+  },
+  {
+   "id": "LC-COAST",
+   "what": "coast",
+   "axial_g": 0.0,
+   "note": "spin interfaces only"
+  },
+  {
+   "id": "PSA-LC-01",
+   "what": "nominal propulsion",
+   "axial_g": null,
+   "note": "PSA data/load_cases.toml"
+  },
+  {
+   "id": "PSA-LC-02",
+   "what": "thrust-bounded envelope",
+   "axial_g": null,
+   "note": "PSA data/load_cases.toml"
+  },
+  {
+   "id": "PSA-LC-03",
+   "what": "startup/shutdown transients",
+   "axial_g": null,
+   "note": "PSA data/load_cases.toml"
+  },
+  {
+   "id": "PSA-LC-05",
+   "what": "engine-out",
+   "axial_g": null,
+   "note": "PSA data/load_cases.toml"
+  },
+  {
+   "id": "PSA-LC-08",
+   "what": "thermal",
+   "axial_g": null,
+   "note": "PSA data/load_cases.toml"
+  },
+  {
+   "id": "PSA-LC-10",
+   "what": "member failure",
+   "axial_g": null,
+   "note": "PSA data/load_cases.toml"
+  },
+  {
+   "id": "PSA-LC-14",
+   "what": "rotating habitat",
+   "axial_g": null,
+   "note": "PSA data/load_cases.toml"
+  }
+ ],
+ "load_rule": "thrust-bounded (owner PSA-D01): limit x 1.4 ultimate, 1.5 g a separate envelope; lambda target 1.95 x operating thrust (1.87 x DLF 1.04)",
+ "thermal_interfaces": [
+  {
+   "id": "TI-HOT",
+   "loop": "HOT (H6a Li)",
+   "T_K": 1800.0,
+   "carries": "drive waste heat, L2 primary",
+   "interfaces": "trunk saddles (anchor/slide) on PSA frames; blade roots"
+  },
+  {
+   "id": "TI-L2",
+   "loop": "L2 NaK / K heat pipes",
+   "T_K": 896.0,
+   "carries": "L2 Brayton reject",
+   "interfaces": "L2 section x 41.02-50.4; structural station x 41.0"
+  },
+  {
+   "id": "TI-WARM",
+   "loop": "WARM water",
+   "T_K": 450.5,
+   "carries": "converter and pump losses, insulation leak (FT-09 machinery)",
+   "interfaces": "WARM section x 50.4-72.9"
+  },
+  {
+   "id": "TI-LOW",
+   "loop": "LOW ammonia",
+   "T_K": 320.0,
+   "carries": "avionics, cryocooler reject, batteries (sensitive items)",
+   "interfaces": "LOW section x 73.4-93.4 and tip extensions x 93.4-106.4"
+  },
+  {
+   "id": "TI-CRYO",
+   "loop": "3 K / 20 K cryocooler stages",
+   "T_K": [
+    3.0,
+    20.0
+   ],
+   "carries": "vessel leak and nuclear heating",
+   "interfaces": "13 stations at the vessel forward guides"
+  }
+ ],
+ "utility_routes": [
+  {
+   "id": "UR-BUS",
+   "what": "sector HVDC buses",
+   "az": [
+    30.0,
+    150.0,
+    270.0
+   ],
+   "r_m": 5.0,
+   "x": [
+    -92.0,
+    100.0
+   ]
+  },
+  {
+   "id": "UR-DATA",
+   "what": "data A/B",
+   "az": [
+    0.0,
+    180.0
+   ],
+   "r_m": 4.6,
+   "x": [
+    -140.0,
+    160.0
+   ]
+  },
+  {
+   "id": "UR-NAK",
+   "what": "L2 NaK transport loops",
+   "az": [
+    10.0,
+    50.0,
+    130.0,
+    170.0,
+    250.0,
+    290.0
+   ],
+   "r_m": 5.8,
+   "x": [
+    -81.6,
+    40.4
+   ]
+  },
+  {
+   "id": "UR-H6A",
+   "what": "H6a hot trunks (outside the hull)",
+   "az": [
+    90.0,
+    210.0,
+    330.0
+   ],
+   "r_m": 6.52,
+   "x": [
+    -111.6,
+    41.02
+   ]
+  },
+  {
+   "id": "UR-MRU",
+   "what": "MRU twin rails",
+   "az": [
+    255.0,
+    285.0
+   ],
+   "r_m": 4.6,
+   "x": [
+    -92.7,
+    92.0
+   ]
+  },
+  {
+   "id": "UR-L1",
+   "what": "L1 conductors (two half-rated segments)",
+   "az": [
+    30.0,
+    150.0
+   ],
+   "r_m": 5.0,
+   "x": [
+    -140.0,
+    -92.0
+   ]
+  }
+ ],
+ "maintenance_envelopes": [
+  {
+   "id": "ME-MRU-F",
+   "what": "in-flight MRU swept tube (TAC)",
+   "lane_r_m": 2.9,
+   "radius_m": 0.55,
+   "x": [
+    -92.7,
+    92.0
+   ]
+  },
+  {
+   "id": "ME-MRU-Y",
+   "what": "yard MRU swept tube (reactor/IHX)",
+   "lane_r_m": 3.6,
+   "radius_m": 0.85,
+   "x": [
+    -92.7,
+    92.0
+   ],
+   "remove_first": [
+    "RideThrough_3_1",
+    "RideThrough_3_2",
+    "RideThrough_3_3",
+    "RideThrough_3_4",
+    "Switchgear_3"
+   ]
+  },
+  {
+   "id": "ME-EXT-TA",
+   "what": "EXT-TA reach",
+   "x": [
+    -133.5,
+    -125.0
+   ],
+   "reach_m": 6.0
+  },
+  {
+   "id": "ME-M10",
+   "what": "module 10 item-level removal through the keel lanes; container-level = yard",
+   "x": [
+    22.25,
+    33.25
+   ]
+  },
+  {
+   "id": "ME-LOG-G1",
+   "what": "LOG-G1 3 t containers hub store -> rings",
+   "x": [
+    95.0,
+    106.0
+   ]
+  }
+ ],
+ "keepouts": [
+  {
+   "id": "K-RING",
+   "what": "ring sweep",
+   "x": [
+    93.65,
+    106.95
+   ],
+   "r_max_m": 31.5
+  },
+  {
+   "id": "K-BROW",
+   "what": "Brow shadow (radiators and tabs)",
+   "r_max_m": 37.0
+  },
+  {
+   "id": "K-HUBCONE",
+   "what": "PSA hub cones / collar",
+   "x": [
+    93.0,
+    94.0
+   ],
+   "note": "MRU rail ends at x 92.0"
+  },
+  {
+   "id": "K-MRU-F",
+   "what": "in-flight MRU swept tube",
+   "r_lane_m": 2.9,
+   "radius_m": 0.55,
+   "x": [
+    -92.7,
+    92.0
+   ]
+  },
+  {
+   "id": "K-MRU-Y",
+   "what": "yard MRU swept tube",
+   "r_lane_m": 3.6,
+   "radius_m": 0.85,
+   "x": [
+    -92.7,
+    92.0
+   ]
+  },
+  {
+   "id": "K-PLUME",
+   "what": "drive plume cone",
+   "half_angle_deg": 15.0
+  },
+  {
+   "id": "K-SHADOW",
+   "what": "L2 shadow-shield cones",
+   "half_angle_deg": 12.5
+  }
+ ],
+ "technology_dependencies": [
+  {
+   "id": "FT-00",
+   "name": "Fiji/Lattice D-He3 fusion drive",
+   "status": "CANON",
+   "dependents": [
+    "FT-04",
+    "hot loop (H6a)",
+    "HOT radiators"
+   ]
+  },
+  {
+   "id": "FT-01",
+   "name": "Refractory-composite pressure boundary",
+   "status": "APPROVED",
+   "dependents": [
+    "FT-02",
+    "FT-03",
+    "FT-06",
+    "H6a hot network (Track F)",
+    "L1 direct-conversion pickup cooling"
+   ]
+  },
+  {
+   "id": "FT-02",
+   "name": "High-temperature lithium transport",
+   "status": "APPROVED",
+   "dependents": [
+    "hot loop H6a",
+    "HOT radiators",
+    "FT-04 sink"
+   ]
+  },
+  {
+   "id": "FT-03",
+   "name": "High-temperature closed-Brayton turbomachinery (1500 K turbine inlet)",
+   "status": "APPROVED",
+   "dependents": [
+    "L2 power district (Track F variant F1)",
+    "L2 radiator section 9.38 m at 896 K (x 41.02-50.4)",
+    "HOT headroom for L1 and the burn heat pumps",
+    "config WF-F1-C1.0"
+   ]
+  },
+  {
+   "id": "FT-04",
+   "name": "Direct conversion of charged fusion products (L1)",
+   "status": "CONDITIONAL",
+   "dependents": [
+    "L1 bus",
+    "burn heat pumps",
+    "EYE Burn Watch",
+    "hot-loop pumps in a burn"
+   ]
+  },
+  {
+   "id": "FT-05",
+   "name": "Electrical energy storage",
+   "status": "CONTEMPORARY",
+   "dependents": [
+    "main battery",
+    "restart packs R1b",
+    "defense buffer",
+    "ride-through",
+    "survival bridge",
+    "DC pulse buffer"
+   ]
+  },
+  {
+   "id": "FT-06",
+   "name": "Advanced high-temperature heat pipes",
+   "status": "APPROVED",
+   "dependents": [
+    "HOT radiator fins",
+    "H6a sections"
+   ]
+  },
+  {
+   "id": "FT-07",
+   "name": "Robotics and autonomous maintenance",
+   "status": "APPROVED",
+   "dependents": [
+    "power district maintenance",
+    "H6a section replacement",
+    "LOG-G1",
+    "workshop",
+    "MRU heavy carriage",
+    "EXT-TA"
+   ]
+  },
+  {
+   "id": "FT-08",
+   "name": "Existing structural and manufacturing capabilities",
+   "status": "CANON",
+   "dependents": [
+    "hull",
+    "tank farm",
+    "rings",
+    "drive coils"
+   ]
+  },
+  {
+   "id": "FT-09",
+   "name": "High-temperature power electronics and machinery for the 451 K WARM loop",
+   "status": "APPROVED",
+   "dependents": [
+    "WARM radiator sections",
+    "HVDC converters on the WARM loop",
+    "WARM pumps",
+    "ride-through stores (on LOW)"
+   ]
+  }
+ ],
+ "structure": {
+  "variant": "H:hub:F1",
+  "source": "PSA Phase II c3138d8 results/p2_ledger.json",
+  "items_t": {
+   "thrust ring, transition and drive pickups": 38.49897183025899,
+   "frames (4 m)": 44.5668664705544,
+   "module frames (L3 joints)": 16.24894371432792,
+   "diagonals (shear and torsion)": 28.56140193506099,
+   "longerons (rails)": 117.61883454483767,
+   "Momentum Spine structural shell": 22.13770571703892,
+   "spine ties and axial datum": 0.9375716581238466,
+   "forward keels to the Brow": 25.469983168934586,
+   "rotor-bay collar (Q45 bypass)": 144.11381074297364,
+   "rotor-bay hub path (cones)": 18.16442638362699,
+   "common thrust deck (tank-farm aft)": 633.573233129831,
+   "node fittings and joints (explicit, Ti-6Al-4V)": 85.8092783406431,
+   "protective casing (secondary)": 22.446051191368355,
+   "rotating ring structure (2 rings)": 24.782270256551865
+  },
+  "total_t": 1222.9293490841324,
+  "delta_vs_line_t": 1072.9293490841324,
+  "status": "PROVISIONAL: strength-sized, follower lambda 0.68 / static 0.71 against 1.95 (operating basis)"
+ },
+ "mission": {
+  "velocity_c": 0.016,
+  "burns": 4,
+  "thrust_N": 21770763.000706356,
+  "profile": "maximum reference capability (WSI-E compares others)"
+ },
+ "mass": {
+  "departure_t": 13212.012084278296,
+  "ledger_total_t": 13212.045955530264,
+  "by_category_t": {
+   "HISTORICAL": 1190.2338712519677,
+   "NEW": 1107.2040131040137,
+   "HISTORICAL (moved)": 2.0,
+   "REPLACEMENT": 12.447862389486392,
+   "STRUCTURE (provisional)": 1222.929349084132,
+   "TANKAGE": 1162.1886183975994,
+   "PAYLOAD": 0.16,
+   "CARRIED": 166.95811865240285,
+   "PROPELLANT": 8347.924122650662
+  },
+  "duplicates": []
+ }
+}
