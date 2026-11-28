@@ -43,7 +43,7 @@ def wrap(a):
 
 class Build3(mdl.Build):
     def __init__(self, concept, cfg, deck='A', rotor='hub', deck_depth=None, slice_m=4.0, **kw):
-        self.deck_kind = deck; self.slice_m = slice_m; self.deck_depth = deck_depth
+        self.deck_kind = deck; self.slice_m = slice_m; self.deck_depth = deck_depth; self.guide_ring = kw.pop('guide_ring', False)
         self.farm = cfg['farm']; self.brow = cfg['brow']
         cfg = dict(cfg); cfg['parts'] = cfg['bodies']
         if deck == 'F':
@@ -151,6 +151,8 @@ class Build3(mdl.Build):
         self.build_guide()
         if self.deck_kind == 'D':
             self.stringers_to_guide()
+        if self.guide_ring:
+            self.build_guide_ring()
         bn = [self.keel_nodes[keel_end][b] for b in rails] + [self.chord[a][1][-1] for a in sect] + [self.chord[a][0][-1] for a in sect]
         self.brow_nodes = bn
         for a in sect:
@@ -314,6 +316,18 @@ class Build3(mdl.Build):
             for q in sorted(gp, key=lambda q: np.linalg.norm(self.m.X[q]-self.m.X[n]))[:3]:
                 if np.linalg.norm(self.m.X[q]-self.m.X[n]) > 0.3:
                     self.add(n, q, 'guide', self.x_guide, extra='-st')
+
+    def build_guide_ring(self, r=36.0, n=12):
+        """Farm forward tie ring (WSI closure item a): a circumferential girder at the guide plane, outside the outer vessels
+        (34.2 m envelope), each node tied to the three nearest guide-plane nodes, so the farm's forward end works as one section."""
+        x = self.x_guide; ring = [self.m.node(self.p(x, r, 360.0*k/n+15.0)) for k in range(n)]
+        gp = [q for q in range(len(self.m.X)) if abs(self.m.X[q][0]-x) < 1e-6 and q not in ring]
+        for k in range(n):
+            self.add(ring[k], ring[(k+1) % n], 'guide', x, extra='-tr')
+            for q in sorted(gp, key=lambda q: np.linalg.norm(self.m.X[q]-self.m.X[ring[k]]))[:3]:
+                if np.linalg.norm(self.m.X[q]-self.m.X[ring[k]]) > 0.3:
+                    self.add(ring[k], q, 'guide', x, extra='-tr')
+        self.guide_ring_nodes = ring
 
     def tank_credit_t(self):
         """TD-E: mass of the credited pressure-shell share already in the tankage ledger (subtracted from the PSA increment)."""

@@ -26,8 +26,8 @@ import model as mdl  # noqa: E402
 LF = an.LF_ULT
 K_EFF = 1.0                     # nominal effective-length factor (pin-ended between nodes); 1.2 as the uncertainty case
 # composite in-plane shear design values and hoop/axial modulus ratios (PROTO, documented in the report)
-FS_COMPOSITE = {'CFPEEK': 110e6, 'ALAL2O3F': 80e6, 'CC': 20e6, 'SICSIC': 60e6}
-HOOP_RATIO = {'CFPEEK': 0.45, 'ALAL2O3F': 0.55, 'CC': 1.0, 'SICSIC': 1.0}
+FS_COMPOSITE = {'CFPEEK': 110e6, 'ALAL2O3F': 80e6, 'CC': 20e6, 'SICSIC': 60e6, 'CFRPHM': 70e6, 'FCNT': 150e6}
+HOOP_RATIO = {'CFPEEK': 0.45, 'ALAL2O3F': 0.55, 'CC': 1.0, 'SICSIC': 1.0, 'CFRPHM': 0.15, 'FCNT': 0.3}
 
 
 def envelope3(b, cs):

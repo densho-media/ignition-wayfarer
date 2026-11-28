@@ -141,3 +141,39 @@ min_gauge_mm = 2.0
 class = "LIT"
 source = "2D C/C order of magnitude"
 uncertainty = "Sublimation/creep negligible at 1800 K in vacuum; oxidation absent; interlaminar strength low."
+
+[[material]]
+id = "CFRPHM"
+name = "High-modulus carbon fibre / cyanate-ester tube (M55J class, ~70 % 0 deg, ±45), Track R"
+track = "R"
+E = [230, 260, 290]
+G = 12.0
+rho = 1650
+alpha = -0.5
+Fty = [900, 1100, 1300]
+Ftu = [900, 1100, 1300]
+Fcy = [350, 450, 550]
+T_max_K = 400
+k_T_350K = 0.95
+min_gauge_mm = 1.5
+class = "LIT (unverified) + PROTO"
+source = "M55J/cyanate UD tensile ~2.0 GPa, compression ~0.8-0.9 GPa (manufacturer class data, not verified here); 70 % 0 deg tube laminate with B-basis and notch knockdown: E 260 GPa, Fc 450 MPa. WSI asked for E 300 (R-CFRP-HM); PSA uses 260 for a tube with off-axis plies."
+uncertainty = "MEDIUM-HIGH: HM fibre compression and impact tolerance are weak; joints and outgassing in vacuum; carbon imported. Hoop modulus about 0.15 x axial."
+
+[[material]]
+id = "FCNT"
+name = "CNT-yarn composite tube (F-CNT-CFRP), Track F idealized, sensitivity only"
+track = "F"
+E = [300, 350, 400]
+G = 20.0
+rho = 1550
+alpha = 0.0
+Fty = [1500, 2000, 2500]
+Ftu = [1500, 2000, 2500]
+Fcy = [700, 1000, 1300]
+T_max_K = 450
+k_T_350K = 0.95
+min_gauge_mm = 1.5
+class = "TRACK F (idealized, not an engineering value)"
+source = "Idealized hard-SF baseline value; no qualified material exists. Used only as a labelled sensitivity (owner Phase III: no proceeding by stronger fictional materials)."
+uncertainty = "UNBOUNDED"
