@@ -1,0 +1,22 @@
+{
+ "run": "20261128T125441Z-pipeline",
+ "result": "PASS",
+ "verification": "FULL: all unit tests, whole-ship inspection, fingerprint diff",
+ "geometry_diff": {
+  "baseline": "/home/user/ignition-wayfarer/references/baseline_fuel_propellant_v1_1_rr",
+  "result": "PASS",
+  "changed": 0,
+  "added": 0,
+  "removed": 0,
+  "files_added": 0,
+  "files_removed": 0,
+  "links_changed": 0,
+  "expected_prefixes": [
+   "WSI_"
+  ],
+  "unexpected_count": 0,
+  "unexpected": [],
+  "sample": []
+ },
+ "commit": "d7f9fa9 + register FT-10 (v1.3)"
+}

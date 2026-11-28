@@ -1,0 +1,214 @@
+{
+ "problems": [
+  [
+   "WSI-P01",
+   "OPEN",
+   "Global stability closure: strength-sized structure reaches lambda 0.63 static / 1.02 follower at departure (target 1.95). Closure costs stiffening mass: Al +313..516 t, CFRP-HM rails +187..260 t (round 1, not yet closed).",
+   "PSA (closure) + WSI (loop)"
+  ],
+  [
+   "WSI-P02",
+   "OPEN",
+   "I-08 spin resonance: first global mode 0.047 Hz (departure) to 0.072 Hz (end) crosses the 0.068 Hz ring spin during every burn; closure target f1 >= 0.095 Hz at all states.",
+   "PSA / owner rule"
+  ],
+  [
+   "WSI-P03",
+   "OPEN",
+   "Mass spiral: each tonne of dry mass costs ~3.9 t of departure; Al stability closure moves the point +6..10 % and must be resized.",
+   "WSI"
+  ],
+  [
+   "WSI-P04",
+   "RESOLVED",
+   "Hub-cone aft legs crossed the MRU flight lane (members 3091/3095, x 91.2): the two legs beside az 255/285 omitted; mru_violations() = 0.",
+   "PSA"
+  ],
+  [
+   "WSI-P05",
+   "OPEN",
+   "Hub path capped: the 1.9 m hub bore can only thicken; AL5083 fails (util 1.07), Ti-6Al-4V passes; the stability mode keeps returning to the hub. Favours the bypass interface if it closes.",
+   "PSA"
+  ],
+  [
+   "WSI-P06",
+   "RESOLVED (rule + area)",
+   "LOW at the joint point: nominal -103 kW, one loop lost -305 kW. Grow LOW tabs by 351 m2 so one loop lost carries nominal; recovery capped at 100 %.",
+   "ISSA thermal"
+  ],
+  [
+   "C-01",
+   "PARTLY RESOLVED",
+   "Shutdown bridge vs defense buffer: dedicated 2.4 t store on the services bus; defense keeps 209 MJ. Pump power at part flow depends on the EM-pump fixed losses (0.3-30 %); the shutdown transient (decay heat, Li freeze) stays OPEN.",
+   "ISSA + Track R"
+  ],
+  [
+   "C-11",
+   "RESOLVED (pending EOS check)",
+   "He-3 at 3.0 K with the consistent density (61.6, not 58.61 kg/m3) and 8 % ullage allows +0.3 K; bulk hold time with one head lost ~1 year; destratification pumps per vessel.",
+   "ISSA cryo"
+  ],
+  [
+   "C-14",
+   "RESOLVED",
+   "One LOW loop lost: cryocoolers capped at 100 %, re-cool at reduced rate; vessel hold times 244 d (H2) to 572 d (D2); no 332 K float.",
+   "ISSA"
+  ],
+  [
+   "I-01",
+   "IN PROGRESS",
+   "Operating point converged with the PSA structure (this phase); final closure pending.",
+   "WSI"
+  ],
+  [
+   "I-02",
+   "RESOLVED",
+   "L2 station x 41.0 carried by a module frame (PSA III.0: utilisation 0.81 H).",
+   "PSA"
+  ],
+  [
+   "I-03",
+   "OPEN",
+   "LOW tab lugs and spar (now with the grown tabs): first mode >= 1 Hz, tip <= 0.30 m.",
+   "PSA / ISSA"
+  ],
+  [
+   "I-04",
+   "OPEN",
+   "EXT-TA rail lugs EXT-L1..L4 on the aft frames.",
+   "PSA"
+  ],
+  [
+   "I-05",
+   "RESOLVED",
+   "H6a slides: FE axial span at departure 619 mm whole ship, within the slide travel per section.",
+   "ISSA / PSA"
+  ],
+  [
+   "I-06 / J-01",
+   "CLOSED (not adopted)",
+   "Defense-buffer relocation not needed: the dedicated shutdown store removes the C-01 conflict; yard-only aft route stays.",
+   "ISSA"
+  ],
+  [
+   "I-07",
+   "OPEN (requirement set)",
+   "TAC 600-800 Hz and EM-pump 50-400 Hz: unit mounts isolated (5-10 Hz mount mode, transmissibility < 4 % at 50 Hz); frame local modes not tuned.",
+   "PSA / ISSA"
+  ],
+  [
+   "I-08",
+   "OPEN",
+   "See WSI-P02.",
+   "PSA / owner"
+  ],
+  [
+   "J-02",
+   "CLOSED",
+   "Concept G screened: no aft location outside the excluded x -70..-20 holds more than ~3 % of the H2 (G-HULL); annular storage between the HOT blades is not feasible (MW-class 20 K load, blocks HOT view).",
+   "WSI"
+  ],
+  [
+   "J-03",
+   "DONE",
+   "MRU forward end x 92.0 kept; cone legs adjusted (WSI-P04).",
+   "ISSA / PSA"
+  ],
+  [
+   "RAD-R",
+   "OPEN (Track R)",
+   "Radiation: independent Track R item; no crew-safety claim is made here.",
+   "Track R"
+  ]
+ ],
+ "decisions": [
+  [
+   "WSI-D1",
+   "Structural interface at the rotor bay: hub path (capped, needs Ti) or bypass collar (closes better at left 0, heavier collar).",
+   "Pending the f1 continuation runs; recommendation follows the lighter variant that closes lambda 1.95 and f1 0.095 Hz."
+  ],
+  [
+   "WSI-D2",
+   "Rail material: CFRP-HM (Track R) for the primary longerons, Al-Li frames and Ti hub/pickups.",
+   "Recommend: saves ~270-350 t structure and ~1 kt departure against Al at equal lambda; no fictional material needed."
+  ],
+  [
+   "WSI-D3",
+   "Propellant arrangement: keep T-A (stretched farm).",
+   "Recommend: T-B costs +0.8 kt for modularity; G is not feasible outside the excluded zone."
+  ],
+  [
+   "WSI-D4",
+   "Which profile sizes the ship: 0.016 c maximum (13.2 kt) or a reference profile (0.014 c: 10.5 kt; 0.012 c: 8.4 kt).",
+   "Owner choice; 0.016 c stays the maximum reference until decided."
+  ],
+  [
+   "WSI-D5",
+   "I-08: stiffen to f1 >= 0.095 Hz, or an operating rule (spin-down / balance limits in burns).",
+   "Recommend stiffness if its mass is < 5 %; else the rule."
+  ],
+  [
+   "WSI-D6",
+   "C-11: He-3 at 3.0 K, corrected density, 8 % ullage.",
+   "Recommend (after an EOS check)."
+  ],
+  [
+   "WSI-D7",
+   "C-01: dedicated 2.4 t shutdown store; defense buffer stays whole.",
+   "Recommend."
+  ],
+  [
+   "WSI-D8",
+   "C-14: LOW tab growth (~350 m2) + 100 % recovery cap with one loop lost.",
+   "Recommend."
+  ]
+ ],
+ "ssi_1_2": [
+  "Farm vessels, cryo stations and the Brow translation follow the WSI farm stretch (cg and masses from the WSI tanks block)",
+  "Hub cone: the two aft legs beside az 255/285 omitted; MRU rail forward end stays x 92.0 (mru_violations = 0)",
+  "Hub path material Ti-6Al-4V (AL5083 fails at 22 MN)",
+  "Primary longerons CFRP-HM (pending WSI-D2); frames Al; pickups and thrust ring Ti",
+  "New item: dedicated shutdown store on the services bus x -92..-80 (LOW cold plate, cell limit 330 K)",
+  "LOW tabs grown ~350 m2 (lugs I-03 re-checked)",
+  "Structural requirement f1 >= 0.095 Hz at all depletion states (I-08) next to lambda >= 1.95",
+  "He-3 vessels: ullage 8 %, density 61.6 kg/m3 at 3.0 K; destratification pump per He-3 vessel"
+ ],
+ "readiness": [
+  [
+   "Shared configuration (WSI-0.1, one authority, regenerates)",
+   "READY"
+  ],
+  [
+   "Coupled convergence (numerical)",
+   "READY"
+  ],
+  [
+   "Physical satisfaction: stability + I-08",
+   "NOT YET (closure runs)"
+  ],
+  [
+   "Propellant arrangement",
+   "READY (T-A)"
+  ],
+  [
+   "Integrated 3D model and checks",
+   "READY (CP3 file)"
+  ],
+  [
+   "Thermal / electrical at the joint point",
+   "READY with WSI-D7/D8"
+  ],
+  [
+   "Shutdown transient (C-01)",
+   "OPEN"
+  ],
+  [
+   "Radiation / crew dose",
+   "OPEN (Track R)"
+  ],
+  [
+   "Canon / Drive / production",
+   "UNCHANGED (not authorised)"
+  ]
+ ]
+}

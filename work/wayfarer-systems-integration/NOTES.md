@@ -30,3 +30,31 @@ are merged here. No other session edits shared geometry, configuration or mass.
 - Joint ledger closes to the coupled departure (13,212.0 t both ways). Two double counts removed: the production 150 t structure
   line (replaced by PSA's 1,222.9 t) and the production tankage rows (329.5 t, inside the re-solved tankage).
 - Not yet physically satisfied: PSA global stability lambda 0.71 static / 0.68 follower against 1.95 (CP2).
+
+    python3 work/wayfarer-systems-integration/wsi/coupled.py        # CP2: wsi_cp2.json (loop, ROM, rail materials, propellant, profiles)
+    python3 work/wayfarer-systems-integration/wsi/members.py        # CP3: wsi_members.json (PSA TD-A members, checks, deflections)
+    /snap/bin/blender -b assets/wayfarer/WF_WAYFARER_001.blend --python work/wayfarer-systems-integration/wsi/make_review_wsi.py -- --render
+    python3 work/wayfarer-systems-integration/wsi/remaining.py      # CP4: wsi_remaining.json (C-01, C-11, C-14)
+    python3 work/wayfarer-systems-integration/wsi/review.py         # CP4: wsi_cp4.json (PSA closures reconverged, ledger)
+    python3 work/wayfarer-systems-integration/wsi/build_page.py     # wsi.html + wsi_register.json
+
+## CP2 — coupled architecture
+- Coupling: about 3.9 t of departure per tonne of dry mass (propellant, tankage, cryo, radiators).
+- PSA FE on S-COMB (TD-A, 1,157 t): lambda 0.63/1.02 (static/follower) at departure. TD-D is the lightest deck (976 t), TD-F (bypass) the stiffest.
+- ROM (planar beam, f1 matched to the FE): the global beam is not the governing mode. The governing modes are local: farm walls and deck, the aft thrust structure, the hub.
+- Rails in Track R CFRP-HM carry the stiffness for about 270-350 t less than Al. FT-10 (CNT) is a sensitivity only.
+- Propellant: T-A stays. T-B costs +0.8 kt. G is not feasible outside the excluded zone.
+- Profiles: 0.016 c 13.2 kt, 0.014 c 10.5 kt, 0.012 c 8.4 kt (ships sized for each).
+- PSA audit 13:04Z: with thrust on the nozzle pickups, the lambda-closed HM designs fall to 0.72-0.80. Closure stays OPEN (runs *_noz).
+  TVC spillover needs a notch filter or an IMU at the node; the 2x spin sits on the second bending pair.
+
+## CP3 — integrated geometry
+- 4,938 members checked. The hub-cone aft legs crossed the MRU lane; PSA omitted them, and the rail end stays at 92.0.
+- Departure deflection: 47.8 mm radial (rule 50 mm), 619 mm axial (taken by the slides).
+- REVIEW_WSI_CP3.blend has 16 view layers and is regenerated from the JSON (not in Git).
+
+## CP4 — whole spacecraft
+- C-01: dedicated 2.4 t shutdown store (Track R). The defense buffer keeps 209 MJ. The transient stays OPEN.
+- C-11: He-3 at 3.0 K with the consistent density 61.6 kg/m3 and 8 % ullage allows +0.3 K. The EOS check is pending.
+- C-14: LOW +350 m2 at the joint point; re-cool capped at 100 % with one loop lost.
+- Full pipeline PASS, geometry diff 0 (runs/20261128T125441Z-pipeline).

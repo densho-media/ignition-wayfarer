@@ -14,7 +14,7 @@
 # values with these ids. Physical conservation holds in every entry.
 
 [register]
-version = "1.2"
+version = "1.3"
 created = "2026-11-28"
 basis = "owner ISSA Phase VI brief 2026-11-28 (DR5-01..08); ISSA closeout 2026-11-28 10:51Z (DR-C-01..05); PMDS levels; existing canon fictional technologies (Fiji/Lattice drive)"
 civilization = """IGNITION's spacefaring civilization is a mature high-temperature and plasma civilization: it builds hermetic ceramic-matrix and \
@@ -177,3 +177,18 @@ adopted = { warm_T_K = 451.0, coolant_supply_return_K = [440.0, 451.0], junction
 dependents = ["WARM radiator sections", "HVDC converters on the WARM loop", "WARM pumps", "ride-through stores (on LOW)"]
 consequence = "WARM must reject at <= 440 K: the 496 kW shortfall needs new WARM area that the envelope does not have, or HOT heat-pump duty returns (0.39 GW HOT reserve shrinks)."
 source = "work/ship-systems-architecture/integration3d/consolidate.py warm_machinery()"
+
+[[technology]]
+id = "FT-10"
+name = "High-modulus CNT-composite primary longerons (stiffness sensitivity only)"
+status = "SENSITIVITY (not used by WSI-0.2)"
+level = "C"
+decision = "WSI Phase I (owner brief 2026-11-28 11:35Z, WSI-D): the stability closure proceeds with Track R materials (CFRP-HM rails, Ti-6Al-4V hub); stronger fictional materials are a labelled sensitivity, never the closure path (owner Phase III rule)"
+principle = "Global bending stiffness of a laced column scales with E x A x r^2; a higher specific modulus buys the same EI with less mass."
+precedent = "M55J/cyanate-ester high-modulus CFRP (E ~300 GPa UD, ~260 GPa as a 70 % 0-degree tube) flies in space structures today; lab CNT yarns reach 100-200 GPa with short-gauge strengths of 3-5 GPa."
+limitation = "Qualified long-length CNT composites do not exist; compression and interlaminar strength, joint efficiency (~0.6 for bonded/bolted composites), creep above ~400 K and matrix radiation tolerance are open."
+advance = "F-CNT-CFRP tube at E 350 GPa, rho 1550 kg/m3, Fc 1000 MPa (PSA allowables FCNT) with metallic end fittings at >= 0.6 joint efficiency, kept inside the shadow cones and below 420 K."
+adopted = { E_GPa = 350.0, rho_kg_m3 = 1550.0, Fc_MPa = 1000.0, T_max_K = 420.0, joint_efficiency = 0.6, used_by = "none (sensitivity in PSA closure runs only)" }
+dependents = []
+consequence = "None for WSI-0.2: the Track R CFRP-HM rails carry the closure; FT-10 only shows the further mass a fictional material would save."
+source = "work/wayfarer-systems-integration/wsi/coupled.py material_table(); work/primary-structural-architecture/phase2/allowables.toml FCNT"
