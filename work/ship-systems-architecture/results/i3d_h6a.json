@@ -1,0 +1,6311 @@
+{
+ "status": "STUDY / PROTOTYPE, Track F1 (FT-01, FT-02); noncanon; production drive unchanged",
+ "network": {
+  "v_trunk": 10.0,
+  "v_manifold": 8.0,
+  "T_in": 1990.3582794935191,
+  "T_out": 1690.3582794935191,
+  "rho": 377.9641720506481,
+  "p_sat": 677960.3169206965,
+  "p_trunk_max": 1645346.9430913157,
+  "p_section_max": 1393562.5354159535,
+  "head_full": 503568.81535072444,
+  "head_section": 70285.49821157551,
+  "dp": 163817.81081989474,
+  "mdot": 2764.5502645502647,
+  "D_trunk": 0.7475110427173849,
+  "t_trunk": 0.0064495750453102555,
+  "D_manifold": 0.1496219540240631,
+  "t_manifold": 0.0013425377480183129,
+  "n_manifolds": 52,
+  "inventory_kg": 81529.74305805039,
+  "pump_W": 3423473.181016578,
+  "valves": 34,
+  "bellows": 30,
+  "hardware_kg": 188398.92730284217,
+  "objective_kg": 202092.82002690848,
+  "wall_over_T_limit": false,
+  "freeze_K": 453.7
+ },
+ "hot_length_m": 154.55698493009567,
+ "a_design_g": 0.7361342613411239,
+ "geometry": {
+  "r_trunk_axis": 6.523755521358693,
+  "t_supply": 0.7487555213586925,
+  "t_return": 1.6462665640760772,
+  "x_hot0": -111.6,
+  "x_fwd": 42.95698493009567,
+  "hull_clear_m": 0.35451169260159165,
+  "root_shade_m": 0.3975110427173849,
+  "blade_width_m": 30.5
+ },
+ "parts": [
+  {
+   "blade": 90.0,
+   "name": "H6A_90_A_Supply",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -138.5,
+     0.7487555213586929,
+     6.523755521358693
+    ],
+    "p1": [
+     42.656984930095675,
+     0.7487555213586929,
+     6.523755521358693
+    ],
+    "r": 0.3802050964040027
+   },
+   "mass_t": 24.069874515414718,
+   "material": "FT-01 composite, Li",
+   "meaning": "trunk pair A supply (1990 K, D 0.75 m, v 10 m/s)",
+   "maturity": "M2",
+   "domain": "blade 90 pair A"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_A_Return",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -138.5,
+     1.6462665640760776,
+     6.523755521358693
+    ],
+    "p1": [
+     42.656984930095675,
+     1.6462665640760776,
+     6.523755521358693
+    ],
+    "r": 0.3802050964040027
+   },
+   "mass_t": 24.069874515414718,
+   "material": "FT-01 composite, Li",
+   "meaning": "trunk pair A return (1690 K, D 0.75 m, v 10 m/s)",
+   "maturity": "M2",
+   "domain": "blade 90 pair A"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_B_Supply",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -138.5,
+     -0.748755521358692,
+     6.523755521358693
+    ],
+    "p1": [
+     42.656984930095675,
+     -0.748755521358692,
+     6.523755521358693
+    ],
+    "r": 0.3802050964040027
+   },
+   "mass_t": 24.069874515414718,
+   "material": "FT-01 composite, Li",
+   "meaning": "trunk pair B supply (1990 K, D 0.75 m, v 10 m/s)",
+   "maturity": "M2",
+   "domain": "blade 90 pair B"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_B_Return",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -138.5,
+     -1.6462665640760767,
+     6.523755521358693
+    ],
+    "p1": [
+     42.656984930095675,
+     -1.6462665640760767,
+     6.523755521358693
+    ],
+    "r": 0.3802050964040027
+   },
+   "mass_t": 24.069874515414718,
+   "material": "FT-01 composite, Li",
+   "meaning": "trunk pair B return (1690 K, D 0.75 m, v 10 m/s)",
+   "maturity": "M2",
+   "domain": "blade 90 pair B"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -111.0,
+     0.3450000000000004,
+     6.8
+    ],
+    "p1": [
+     -86.4405025116507,
+     0.3450000000000004,
+     6.8
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 1 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 90 section 1"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -111.1,
+     1.1975110427173852,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 1 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 1"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -110.19999999999999,
+     0.7487555213586929,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 1 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -86.34050251165071,
+     1.1975110427173852,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 1 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 1"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -87.24050251165072,
+     1.6462665640760776,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 1 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -111.0,
+     -0.34499999999999953,
+     6.8
+    ],
+    "p1": [
+     -86.4405025116507,
+     -0.34499999999999953,
+     6.8
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 1 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 90 section 1"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -111.1,
+     -1.1975110427173843,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 1 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 1"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -110.19999999999999,
+     -0.748755521358692,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 1 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -86.34050251165071,
+     -1.1975110427173843,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 1 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 1"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -87.24050251165072,
+     -1.6462665640760767,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 1 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -87.04050251165071,
+     0.7487555213586929,
+     7.197511042717385
+    ],
+    "p1": [
+     -87.04050251165071,
+     -0.748755521358692,
+     7.197511042717385
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 1 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -98.72025125582536,
+     3.722926269407954e-16,
+     6.08
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 1 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S1_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -97.22025125582536,
+     -1.6462665640760767,
+     7.147511042717385
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 1 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -85.24050251165072,
+     0.3450000000000004,
+     6.8
+    ],
+    "p1": [
+     -60.68100502330144,
+     0.3450000000000004,
+     6.8
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 2 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 90 section 2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -85.34050251165071,
+     1.1975110427173852,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 2 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -84.4405025116507,
+     0.7487555213586929,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 2 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -60.58100502330144,
+     1.1975110427173852,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 2 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -61.481005023301435,
+     1.6462665640760776,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 2 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -85.24050251165072,
+     -0.34499999999999953,
+     6.8
+    ],
+    "p1": [
+     -60.68100502330144,
+     -0.34499999999999953,
+     6.8
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 2 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 90 section 2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -85.34050251165071,
+     -1.1975110427173843,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 2 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -84.4405025116507,
+     -0.748755521358692,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 2 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -60.58100502330144,
+     -1.1975110427173843,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 2 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -61.481005023301435,
+     -1.6462665640760767,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 2 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -61.28100502330144,
+     0.7487555213586929,
+     7.197511042717385
+    ],
+    "p1": [
+     -61.28100502330144,
+     -0.748755521358692,
+     7.197511042717385
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 2 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -72.96075376747608,
+     3.722926269407954e-16,
+     6.08
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 2 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S2_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -71.46075376747608,
+     -1.6462665640760767,
+     7.147511042717385
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 2 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -59.481005023301435,
+     0.3450000000000004,
+     6.8
+    ],
+    "p1": [
+     -34.92150753495216,
+     0.3450000000000004,
+     6.8
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 3 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 90 section 3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -59.58100502330144,
+     1.1975110427173852,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 3 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -58.68100502330144,
+     0.7487555213586929,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 3 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -34.82150753495216,
+     1.1975110427173852,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 3 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -35.72150753495216,
+     1.6462665640760776,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 3 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -59.481005023301435,
+     -0.34499999999999953,
+     6.8
+    ],
+    "p1": [
+     -34.92150753495216,
+     -0.34499999999999953,
+     6.8
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 3 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 90 section 3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -59.58100502330144,
+     -1.1975110427173843,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 3 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -58.68100502330144,
+     -0.748755521358692,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 3 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -34.82150753495216,
+     -1.1975110427173843,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 3 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -35.72150753495216,
+     -1.6462665640760767,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 3 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -35.521507534952164,
+     0.7487555213586929,
+     7.197511042717385
+    ],
+    "p1": [
+     -35.521507534952164,
+     -0.748755521358692,
+     7.197511042717385
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 3 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -47.201256279126795,
+     3.722926269407954e-16,
+     6.08
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 3 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S3_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -45.701256279126795,
+     -1.6462665640760767,
+     7.147511042717385
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 3 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -33.72150753495216,
+     0.3450000000000004,
+     6.8
+    ],
+    "p1": [
+     -9.162010046602878,
+     0.3450000000000004,
+     6.8
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 4 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 90 section 4"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -33.82150753495216,
+     1.1975110427173852,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 4 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 4"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -32.92150753495216,
+     0.7487555213586929,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 4 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -9.062010046602879,
+     1.1975110427173852,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 4 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 4"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -9.96201004660288,
+     1.6462665640760776,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 4 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -33.72150753495216,
+     -0.34499999999999953,
+     6.8
+    ],
+    "p1": [
+     -9.162010046602878,
+     -0.34499999999999953,
+     6.8
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 4 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 90 section 4"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -33.82150753495216,
+     -1.1975110427173843,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 4 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 4"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -32.92150753495216,
+     -0.748755521358692,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 4 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -9.062010046602879,
+     -1.1975110427173843,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 4 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 4"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -9.96201004660288,
+     -1.6462665640760767,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 4 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -9.762010046602878,
+     0.7487555213586929,
+     7.197511042717385
+    ],
+    "p1": [
+     -9.762010046602878,
+     -0.748755521358692,
+     7.197511042717385
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 4 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -21.44175879077752,
+     3.722926269407954e-16,
+     6.08
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 4 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S4_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -19.94175879077752,
+     -1.6462665640760767,
+     7.147511042717385
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 4 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -7.962010046602879,
+     0.3450000000000004,
+     6.8
+    ],
+    "p1": [
+     16.597487441746402,
+     0.3450000000000004,
+     6.8
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 5 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 90 section 5"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -8.062010046602879,
+     1.1975110427173852,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 5 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 5"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -7.162010046602878,
+     0.7487555213586929,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 5 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     16.697487441746404,
+     1.1975110427173852,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 5 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 5"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     15.797487441746403,
+     1.6462665640760776,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 5 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -7.962010046602879,
+     -0.34499999999999953,
+     6.8
+    ],
+    "p1": [
+     16.597487441746402,
+     -0.34499999999999953,
+     6.8
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 5 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 90 section 5"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -8.062010046602879,
+     -1.1975110427173843,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 5 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 5"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -7.162010046602878,
+     -0.748755521358692,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 5 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     16.697487441746404,
+     -1.1975110427173843,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 5 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 5"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     15.797487441746403,
+     -1.6462665640760767,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 5 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     15.997487441746404,
+     0.7487555213586929,
+     7.197511042717385
+    ],
+    "p1": [
+     15.997487441746404,
+     -0.748755521358692,
+     7.197511042717385
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 5 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     4.317738697571762,
+     3.722926269407954e-16,
+     6.08
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 5 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S5_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     5.817738697571762,
+     -1.6462665640760767,
+     7.147511042717385
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 5 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     17.797487441746405,
+     0.3450000000000004,
+     6.8
+    ],
+    "p1": [
+     42.35698493009567,
+     0.3450000000000004,
+     6.8
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 6 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 90 section 6"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     17.697487441746404,
+     1.1975110427173852,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 6 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 6"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     18.597487441746402,
+     0.7487555213586929,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 6 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     42.45698493009567,
+     1.1975110427173852,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 6 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 6"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     41.55698493009567,
+     1.6462665640760776,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 6 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     17.797487441746405,
+     -0.34499999999999953,
+     6.8
+    ],
+    "p1": [
+     42.35698493009567,
+     -0.34499999999999953,
+     6.8
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 6 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 90 section 6"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     17.697487441746404,
+     -1.1975110427173843,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 6 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 6"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     18.597487441746402,
+     -0.748755521358692,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 6 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     42.45698493009567,
+     -1.1975110427173843,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 6 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 90 section 6"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     41.55698493009567,
+     -1.6462665640760767,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 6 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     41.75698493009567,
+     0.7487555213586929,
+     7.197511042717385
+    ],
+    "p1": [
+     41.75698493009567,
+     -0.748755521358692,
+     7.197511042717385
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 6 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     30.077236185921038,
+     3.722926269407954e-16,
+     6.08
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 6 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_S6_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     31.577236185921038,
+     -1.6462665640760767,
+     7.147511042717385
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 6 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_HXInterface",
+   "kind": "torus",
+   "geo": {
+    "x": -139.1,
+    "R": 6.523755521358693,
+    "r": 0.3,
+    "a0": 55.0,
+    "a1": 125.0
+   },
+   "mass_t": 0.8939604296729777,
+   "material": "FT-01",
+   "meaning": "drive heat-exchanger interface (supply out / return in), production drive side unchanged",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_PumpA",
+   "kind": "cylx",
+   "geo": {
+    "c": [
+     -134.0,
+     1.6462665640760776,
+     6.523755521358693
+    ],
+    "L": 2.4,
+    "r": 0.55
+   },
+   "mass_t": 7.531640998236472,
+   "material": "EM pump (annular linear induction)",
+   "meaning": "pair A return pump, 1.71 MW, L1 bus fed; removable to the drive-bay hatch",
+   "maturity": "M3",
+   "oru": false
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_PumpBypassA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -135.6,
+     1.6462665640760776,
+     7.423755521358693
+    ],
+    "p1": [
+     -132.4,
+     1.6462665640760776,
+     7.423755521358693
+    ],
+    "r": 0.14
+   },
+   "mass_t": 0.3,
+   "material": "FT-01",
+   "meaning": "pair A pump bypass with check valve (natural circulation / pump swap)",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_BypassBellowsA",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -134.0,
+     1.6462665640760776,
+     7.423755521358693
+    ],
+    "r": 0.22,
+    "t": 0.3
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "bypass bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_ValveASupply",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -137.1,
+     0.7487555213586929,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.5,
+     0.49375552135869244
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01",
+   "meaning": "manifold isolation valve pair A supply",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_BellowsASupply",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -136.1,
+     0.7487555213586929,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "manifold bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_ValveAReturn",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -137.1,
+     1.6462665640760776,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.5,
+     0.49375552135869244
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01",
+   "meaning": "manifold isolation valve pair A return",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_BellowsAReturn",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -136.1,
+     1.6462665640760776,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "manifold bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_PumpB",
+   "kind": "cylx",
+   "geo": {
+    "c": [
+     -134.0,
+     -1.6462665640760767,
+     6.523755521358693
+    ],
+    "L": 2.4,
+    "r": 0.55
+   },
+   "mass_t": 7.531640998236472,
+   "material": "EM pump (annular linear induction)",
+   "meaning": "pair B return pump, 1.71 MW, L1 bus fed; removable to the drive-bay hatch",
+   "maturity": "M3",
+   "oru": false
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_PumpBypassB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -135.6,
+     -1.6462665640760767,
+     7.423755521358693
+    ],
+    "p1": [
+     -132.4,
+     -1.6462665640760767,
+     7.423755521358693
+    ],
+    "r": 0.14
+   },
+   "mass_t": 0.3,
+   "material": "FT-01",
+   "meaning": "pair B pump bypass with check valve (natural circulation / pump swap)",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_BypassBellowsB",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -134.0,
+     -1.6462665640760767,
+     7.423755521358693
+    ],
+    "r": 0.22,
+    "t": 0.3
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "bypass bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_ValveBSupply",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -137.1,
+     -0.748755521358692,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.5,
+     0.49375552135869244
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01",
+   "meaning": "manifold isolation valve pair B supply",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_BellowsBSupply",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -136.1,
+     -0.748755521358692,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "manifold bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_ValveBReturn",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -137.1,
+     -1.6462665640760767,
+     6.5737555213586925
+    ],
+    "half": [
+     0.35,
+     0.5,
+     0.49375552135869244
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01",
+   "meaning": "manifold isolation valve pair B return",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_BellowsBReturn",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -136.1,
+     -1.6462665640760767,
+     6.523755521358693
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "manifold bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_Accumulator",
+   "kind": "cylx",
+   "geo": {
+    "c": [
+     -129.5,
+     4.729436238314309e-16,
+     7.723755521358693
+    ],
+    "L": 2.6,
+    "r": 0.6
+   },
+   "mass_t": 4.079111390546852,
+   "material": "FT-01, Ar cover gas",
+   "meaning": "accumulator / pressurizer on the returns",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_DrainRecovery",
+   "kind": "cylx",
+   "geo": {
+    "c": [
+     -125.0,
+     3.1228493378257504e-16,
+     5.1
+    ],
+    "L": 3.6,
+    "r": 0.75
+   },
+   "mass_t": 4.597072627418766,
+   "material": "FT-01 + trace heat",
+   "meaning": "drain and recovery tank inside the hull (freeze valve, trace-heated; frozen start)",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_DrainLine",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -127.0,
+     3.9946481588258977e-16,
+     6.523755521358693
+    ],
+    "p1": [
+     -125.0,
+     3.429011037612589e-16,
+     5.6
+    ],
+    "r": 0.1
+   },
+   "mass_t": 0.2,
+   "material": "FT-01",
+   "meaning": "drain line through the hull (penetration OPEN)",
+   "maturity": "M3"
+  },
+  {
+   "blade": 90.0,
+   "name": "H6A_90_Aft_PumpRemoval",
+   "kind": "path",
+   "geo": {
+    "points": [
+     [
+      -134.0,
+      4.851900918229045e-16,
+      7.923755521358693
+     ],
+     [
+      -142.0,
+      4.851900918229045e-16,
+      7.923755521358693
+     ]
+    ]
+   },
+   "mass_t": 0.0,
+   "material": "-",
+   "meaning": "pump removal path to the drive-bay hatch",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_A_Supply",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -138.5,
+     -6.024115770254968,
+     -2.6134364579588576
+    ],
+    "p1": [
+     42.656984930095675,
+     -6.024115770254968,
+     -2.6134364579588576
+    ],
+    "r": 0.3802050964040027
+   },
+   "mass_t": 24.069874515414718,
+   "material": "FT-01 composite, Li",
+   "meaning": "trunk pair A supply (1990 K, D 0.75 m, v 10 m/s)",
+   "maturity": "M2",
+   "domain": "blade 210 pair A"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_A_Return",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -138.5,
+     -6.472871291613661,
+     -1.836169094788542
+    ],
+    "p1": [
+     42.656984930095675,
+     -6.472871291613661,
+     -1.836169094788542
+    ],
+    "r": 0.3802050964040027
+   },
+   "mass_t": 24.069874515414718,
+   "material": "FT-01 composite, Li",
+   "meaning": "trunk pair A return (1690 K, D 0.75 m, v 10 m/s)",
+   "maturity": "M2",
+   "domain": "blade 210 pair A"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_B_Supply",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -138.5,
+     -5.275360248896276,
+     -3.910319063399837
+    ],
+    "p1": [
+     42.656984930095675,
+     -5.275360248896276,
+     -3.910319063399837
+    ],
+    "r": 0.3802050964040027
+   },
+   "mass_t": 24.069874515414718,
+   "material": "FT-01 composite, Li",
+   "meaning": "trunk pair B supply (1990 K, D 0.75 m, v 10 m/s)",
+   "maturity": "M2",
+   "domain": "blade 210 pair B"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_B_Return",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -138.5,
+     -4.826604727537584,
+     -4.687586426570152
+    ],
+    "p1": [
+     42.656984930095675,
+     -4.826604727537584,
+     -4.687586426570152
+    ],
+    "r": 0.3802050964040027
+   },
+   "mass_t": 24.069874515414718,
+   "material": "FT-01 composite, Li",
+   "meaning": "trunk pair B return (1690 K, D 0.75 m, v 10 m/s)",
+   "maturity": "M2",
+   "domain": "blade 210 pair B"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -111.0,
+     -6.061472745734183,
+     -3.1012212356943696
+    ],
+    "p1": [
+     -86.4405025116507,
+     -6.061472745734183,
+     -3.1012212356943696
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 1 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 210 section 1"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -111.1,
+     -6.291794801123537,
+     -2.2498027763737
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 1 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 1"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -110.19999999999999,
+     -6.024115770254968,
+     -2.6134364579588576
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 1 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -86.34050251165071,
+     -6.291794801123537,
+     -2.2498027763737
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 1 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 1"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -87.24050251165072,
+     -6.472871291613661,
+     -1.836169094788542
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 1 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -111.0,
+     -5.716472745734182,
+     -3.698778764305632
+    ],
+    "p1": [
+     -86.4405025116507,
+     -5.716472745734182,
+     -3.698778764305632
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 1 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 210 section 1"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -111.1,
+     -5.094283758406151,
+     -4.323952744984995
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 1 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 1"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -110.19999999999999,
+     -5.275360248896276,
+     -3.910319063399837
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 1 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -86.34050251165071,
+     -5.094283758406151,
+     -4.323952744984995
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 1 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 1"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -87.24050251165072,
+     -4.826604727537584,
+     -4.687586426570152
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 1 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -87.04050251165071,
+     -6.6076051676916245,
+     -2.9503142186382036
+    ],
+    "p1": [
+     -87.04050251165071,
+     -5.858849646332932,
+     -4.247196824079182
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 1 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -98.72025125582536,
+     -5.265434455009387,
+     -3.040000000000001
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 1 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S1_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -97.22025125582536,
+     -5.366792854785018,
+     -4.999464187249498
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 1 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -85.24050251165072,
+     -6.061472745734183,
+     -3.1012212356943696
+    ],
+    "p1": [
+     -60.68100502330144,
+     -6.061472745734183,
+     -3.1012212356943696
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 2 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 210 section 2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -85.34050251165071,
+     -6.291794801123537,
+     -2.2498027763737
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 2 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -84.4405025116507,
+     -6.024115770254968,
+     -2.6134364579588576
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 2 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -60.58100502330144,
+     -6.291794801123537,
+     -2.2498027763737
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 2 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -61.481005023301435,
+     -6.472871291613661,
+     -1.836169094788542
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 2 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -85.24050251165072,
+     -5.716472745734182,
+     -3.698778764305632
+    ],
+    "p1": [
+     -60.68100502330144,
+     -5.716472745734182,
+     -3.698778764305632
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 2 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 210 section 2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -85.34050251165071,
+     -5.094283758406151,
+     -4.323952744984995
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 2 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -84.4405025116507,
+     -5.275360248896276,
+     -3.910319063399837
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 2 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -60.58100502330144,
+     -5.094283758406151,
+     -4.323952744984995
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 2 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -61.481005023301435,
+     -4.826604727537584,
+     -4.687586426570152
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 2 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -61.28100502330144,
+     -6.6076051676916245,
+     -2.9503142186382036
+    ],
+    "p1": [
+     -61.28100502330144,
+     -5.858849646332932,
+     -4.247196824079182
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 2 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -72.96075376747608,
+     -5.265434455009387,
+     -3.040000000000001
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 2 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S2_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -71.46075376747608,
+     -5.366792854785018,
+     -4.999464187249498
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 2 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -59.481005023301435,
+     -6.061472745734183,
+     -3.1012212356943696
+    ],
+    "p1": [
+     -34.92150753495216,
+     -6.061472745734183,
+     -3.1012212356943696
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 3 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 210 section 3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -59.58100502330144,
+     -6.291794801123537,
+     -2.2498027763737
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 3 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -58.68100502330144,
+     -6.024115770254968,
+     -2.6134364579588576
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 3 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -34.82150753495216,
+     -6.291794801123537,
+     -2.2498027763737
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 3 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -35.72150753495216,
+     -6.472871291613661,
+     -1.836169094788542
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 3 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -59.481005023301435,
+     -5.716472745734182,
+     -3.698778764305632
+    ],
+    "p1": [
+     -34.92150753495216,
+     -5.716472745734182,
+     -3.698778764305632
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 3 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 210 section 3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -59.58100502330144,
+     -5.094283758406151,
+     -4.323952744984995
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 3 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -58.68100502330144,
+     -5.275360248896276,
+     -3.910319063399837
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 3 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -34.82150753495216,
+     -5.094283758406151,
+     -4.323952744984995
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 3 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -35.72150753495216,
+     -4.826604727537584,
+     -4.687586426570152
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 3 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -35.521507534952164,
+     -6.6076051676916245,
+     -2.9503142186382036
+    ],
+    "p1": [
+     -35.521507534952164,
+     -5.858849646332932,
+     -4.247196824079182
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 3 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -47.201256279126795,
+     -5.265434455009387,
+     -3.040000000000001
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 3 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S3_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -45.701256279126795,
+     -5.366792854785018,
+     -4.999464187249498
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 3 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -33.72150753495216,
+     -6.061472745734183,
+     -3.1012212356943696
+    ],
+    "p1": [
+     -9.162010046602878,
+     -6.061472745734183,
+     -3.1012212356943696
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 4 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 210 section 4"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -33.82150753495216,
+     -6.291794801123537,
+     -2.2498027763737
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 4 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 4"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -32.92150753495216,
+     -6.024115770254968,
+     -2.6134364579588576
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 4 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -9.062010046602879,
+     -6.291794801123537,
+     -2.2498027763737
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 4 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 4"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -9.96201004660288,
+     -6.472871291613661,
+     -1.836169094788542
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 4 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -33.72150753495216,
+     -5.716472745734182,
+     -3.698778764305632
+    ],
+    "p1": [
+     -9.162010046602878,
+     -5.716472745734182,
+     -3.698778764305632
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 4 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 210 section 4"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -33.82150753495216,
+     -5.094283758406151,
+     -4.323952744984995
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 4 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 4"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -32.92150753495216,
+     -5.275360248896276,
+     -3.910319063399837
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 4 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -9.062010046602879,
+     -5.094283758406151,
+     -4.323952744984995
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 4 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 4"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -9.96201004660288,
+     -4.826604727537584,
+     -4.687586426570152
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 4 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -9.762010046602878,
+     -6.6076051676916245,
+     -2.9503142186382036
+    ],
+    "p1": [
+     -9.762010046602878,
+     -5.858849646332932,
+     -4.247196824079182
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 4 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -21.44175879077752,
+     -5.265434455009387,
+     -3.040000000000001
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 4 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S4_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -19.94175879077752,
+     -5.366792854785018,
+     -4.999464187249498
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 4 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -7.962010046602879,
+     -6.061472745734183,
+     -3.1012212356943696
+    ],
+    "p1": [
+     16.597487441746402,
+     -6.061472745734183,
+     -3.1012212356943696
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 5 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 210 section 5"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -8.062010046602879,
+     -6.291794801123537,
+     -2.2498027763737
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 5 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 5"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -7.162010046602878,
+     -6.024115770254968,
+     -2.6134364579588576
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 5 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     16.697487441746404,
+     -6.291794801123537,
+     -2.2498027763737
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 5 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 5"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     15.797487441746403,
+     -6.472871291613661,
+     -1.836169094788542
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 5 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -7.962010046602879,
+     -5.716472745734182,
+     -3.698778764305632
+    ],
+    "p1": [
+     16.597487441746402,
+     -5.716472745734182,
+     -3.698778764305632
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 5 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 210 section 5"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -8.062010046602879,
+     -5.094283758406151,
+     -4.323952744984995
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 5 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 5"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -7.162010046602878,
+     -5.275360248896276,
+     -3.910319063399837
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 5 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     16.697487441746404,
+     -5.094283758406151,
+     -4.323952744984995
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 5 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 5"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     15.797487441746403,
+     -4.826604727537584,
+     -4.687586426570152
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 5 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     15.997487441746404,
+     -6.6076051676916245,
+     -2.9503142186382036
+    ],
+    "p1": [
+     15.997487441746404,
+     -5.858849646332932,
+     -4.247196824079182
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 5 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     4.317738697571762,
+     -5.265434455009387,
+     -3.040000000000001
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 5 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S5_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     5.817738697571762,
+     -5.366792854785018,
+     -4.999464187249498
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 5 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     17.797487441746405,
+     -6.061472745734183,
+     -3.1012212356943696
+    ],
+    "p1": [
+     42.35698493009567,
+     -6.061472745734183,
+     -3.1012212356943696
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 6 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 210 section 6"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     17.697487441746404,
+     -6.291794801123537,
+     -2.2498027763737
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 6 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 6"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     18.597487441746402,
+     -6.024115770254968,
+     -2.6134364579588576
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 6 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     42.45698493009567,
+     -6.291794801123537,
+     -2.2498027763737
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 6 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 6"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     41.55698493009567,
+     -6.472871291613661,
+     -1.836169094788542
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 6 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     17.797487441746405,
+     -5.716472745734182,
+     -3.698778764305632
+    ],
+    "p1": [
+     42.35698493009567,
+     -5.716472745734182,
+     -3.698778764305632
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 6 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 210 section 6"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     17.697487441746404,
+     -5.094283758406151,
+     -4.323952744984995
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 6 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 6"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     18.597487441746402,
+     -5.275360248896276,
+     -3.910319063399837
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 6 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     42.45698493009567,
+     -5.094283758406151,
+     -4.323952744984995
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 6 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 210 section 6"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     41.55698493009567,
+     -4.826604727537584,
+     -4.687586426570152
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 6 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     41.75698493009567,
+     -6.6076051676916245,
+     -2.9503142186382036
+    ],
+    "p1": [
+     41.75698493009567,
+     -5.858849646332932,
+     -4.247196824079182
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 6 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     30.077236185921038,
+     -5.265434455009387,
+     -3.040000000000001
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 6 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_S6_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     31.577236185921038,
+     -5.366792854785018,
+     -4.999464187249498
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 6 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_HXInterface",
+   "kind": "torus",
+   "geo": {
+    "x": -139.1,
+    "R": 6.523755521358693,
+    "r": 0.3,
+    "a0": 175.0,
+    "a1": 245.0
+   },
+   "mass_t": 0.8939604296729777,
+   "material": "FT-01",
+   "meaning": "drive heat-exchanger interface (supply out / return in), production drive side unchanged",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_PumpA",
+   "kind": "cylx",
+   "geo": {
+    "c": [
+     -134.0,
+     -6.472871291613661,
+     -1.836169094788542
+    ],
+    "L": 2.4,
+    "r": 0.55
+   },
+   "mass_t": 7.531640998236472,
+   "material": "EM pump (annular linear induction)",
+   "meaning": "pair A return pump, 1.71 MW, L1 bus fed; removable to the drive-bay hatch",
+   "maturity": "M3",
+   "oru": false
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_PumpBypassA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -135.6,
+     -7.252294155019656,
+     -2.2861690947885425
+    ],
+    "p1": [
+     -132.4,
+     -7.252294155019656,
+     -2.2861690947885425
+    ],
+    "r": 0.14
+   },
+   "mass_t": 0.3,
+   "material": "FT-01",
+   "meaning": "pair A pump bypass with check valve (natural circulation / pump swap)",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_BypassBellowsA",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -134.0,
+     -7.252294155019656,
+     -2.2861690947885425
+    ],
+    "r": 0.22,
+    "t": 0.3
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "bypass bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_ValveASupply",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -137.1,
+     -6.06741704044419,
+     -2.6384364579588575
+    ],
+    "half": [
+     0.35,
+     0.5,
+     0.49375552135869244
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01",
+   "meaning": "manifold isolation valve pair A supply",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_BellowsASupply",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -136.1,
+     -6.024115770254968,
+     -2.6134364579588576
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "manifold bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_ValveAReturn",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -137.1,
+     -6.5161725618028825,
+     -1.861169094788542
+    ],
+    "half": [
+     0.35,
+     0.5,
+     0.49375552135869244
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01",
+   "meaning": "manifold isolation valve pair A return",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_BellowsAReturn",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -136.1,
+     -6.472871291613661,
+     -1.836169094788542
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "manifold bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_PumpB",
+   "kind": "cylx",
+   "geo": {
+    "c": [
+     -134.0,
+     -4.826604727537584,
+     -4.687586426570152
+    ],
+    "L": 2.4,
+    "r": 0.55
+   },
+   "mass_t": 7.531640998236472,
+   "material": "EM pump (annular linear induction)",
+   "meaning": "pair B return pump, 1.71 MW, L1 bus fed; removable to the drive-bay hatch",
+   "maturity": "M3",
+   "oru": false
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_PumpBypassB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -135.6,
+     -5.606027590943579,
+     -5.137586426570152
+    ],
+    "p1": [
+     -132.4,
+     -5.606027590943579,
+     -5.137586426570152
+    ],
+    "r": 0.14
+   },
+   "mass_t": 0.3,
+   "material": "FT-01",
+   "meaning": "pair B pump bypass with check valve (natural circulation / pump swap)",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_BypassBellowsB",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -134.0,
+     -5.606027590943579,
+     -5.137586426570152
+    ],
+    "r": 0.22,
+    "t": 0.3
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "bypass bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_ValveBSupply",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -137.1,
+     -5.318661519085498,
+     -3.9353190633998367
+    ],
+    "half": [
+     0.35,
+     0.5,
+     0.49375552135869244
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01",
+   "meaning": "manifold isolation valve pair B supply",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_BellowsBSupply",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -136.1,
+     -5.275360248896276,
+     -3.910319063399837
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "manifold bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_ValveBReturn",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -137.1,
+     -4.869905997726805,
+     -4.7125864265701525
+    ],
+    "half": [
+     0.35,
+     0.5,
+     0.49375552135869244
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01",
+   "meaning": "manifold isolation valve pair B return",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_BellowsBReturn",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -136.1,
+     -4.826604727537584,
+     -4.687586426570152
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "manifold bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_Accumulator",
+   "kind": "cylx",
+   "geo": {
+    "c": [
+     -129.5,
+     -6.688968494116949,
+     -3.8618777606793473
+    ],
+    "L": 2.6,
+    "r": 0.6
+   },
+   "mass_t": 4.079111390546852,
+   "material": "FT-01, Ar cover gas",
+   "meaning": "accumulator / pressurizer on the returns",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_DrainRecovery",
+   "kind": "cylx",
+   "geo": {
+    "c": [
+     -125.0,
+     -4.416729559300636,
+     -2.5500000000000003
+    ],
+    "L": 3.6,
+    "r": 0.75
+   },
+   "mass_t": 4.597072627418766,
+   "material": "FT-01 + trace heat",
+   "meaning": "drain and recovery tank inside the hull (freeze valve, trace-heated; frozen start)",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_DrainLine",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -127.0,
+     -5.649738009575622,
+     -3.261877760679347
+    ],
+    "p1": [
+     -125.0,
+     -4.849742261192856,
+     -2.8000000000000003
+    ],
+    "r": 0.1
+   },
+   "mass_t": 0.2,
+   "material": "FT-01",
+   "meaning": "drain line through the hull (penetration OPEN)",
+   "maturity": "M3"
+  },
+  {
+   "blade": 210.0,
+   "name": "H6A_210_Aft_PumpRemoval",
+   "kind": "path",
+   "geo": {
+    "points": [
+     [
+      -134.0,
+      -6.862173574873837,
+      -3.9618777606793474
+     ],
+     [
+      -142.0,
+      -6.862173574873837,
+      -3.9618777606793474
+     ]
+    ]
+   },
+   "mass_t": 0.0,
+   "material": "-",
+   "meaning": "pump removal path to the drive-bay hatch",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_A_Supply",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -138.5,
+     5.275360248896275,
+     -3.9103190633998386
+    ],
+    "p1": [
+     42.656984930095675,
+     5.275360248896275,
+     -3.9103190633998386
+    ],
+    "r": 0.3802050964040027
+   },
+   "mass_t": 24.069874515414718,
+   "material": "FT-01 composite, Li",
+   "meaning": "trunk pair A supply (1990 K, D 0.75 m, v 10 m/s)",
+   "maturity": "M2",
+   "domain": "blade 330 pair A"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_A_Return",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -138.5,
+     4.826604727537582,
+     -4.687586426570154
+    ],
+    "p1": [
+     42.656984930095675,
+     4.826604727537582,
+     -4.687586426570154
+    ],
+    "r": 0.3802050964040027
+   },
+   "mass_t": 24.069874515414718,
+   "material": "FT-01 composite, Li",
+   "meaning": "trunk pair A return (1690 K, D 0.75 m, v 10 m/s)",
+   "maturity": "M2",
+   "domain": "blade 330 pair A"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_B_Supply",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -138.5,
+     6.0241157702549675,
+     -2.6134364579588603
+    ],
+    "p1": [
+     42.656984930095675,
+     6.0241157702549675,
+     -2.6134364579588603
+    ],
+    "r": 0.3802050964040027
+   },
+   "mass_t": 24.069874515414718,
+   "material": "FT-01 composite, Li",
+   "meaning": "trunk pair B supply (1990 K, D 0.75 m, v 10 m/s)",
+   "maturity": "M2",
+   "domain": "blade 330 pair B"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_B_Return",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -138.5,
+     6.472871291613661,
+     -1.8361690947885447
+    ],
+    "p1": [
+     42.656984930095675,
+     6.472871291613661,
+     -1.8361690947885447
+    ],
+    "r": 0.3802050964040027
+   },
+   "mass_t": 24.069874515414718,
+   "material": "FT-01 composite, Li",
+   "meaning": "trunk pair B return (1690 K, D 0.75 m, v 10 m/s)",
+   "maturity": "M2",
+   "domain": "blade 330 pair B"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -111.0,
+     5.716472745734181,
+     -3.6987787643056342
+    ],
+    "p1": [
+     -86.4405025116507,
+     5.716472745734181,
+     -3.6987787643056342
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 1 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 330 section 1"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -111.1,
+     5.09428375840615,
+     -4.323952744984997
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 1 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 1"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -110.19999999999999,
+     5.275360248896275,
+     -3.9103190633998386
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 1 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -86.34050251165071,
+     5.09428375840615,
+     -4.323952744984997
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 1 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 1"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -87.24050251165072,
+     4.826604727537582,
+     -4.687586426570154
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 1 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -111.0,
+     6.061472745734181,
+     -3.101221235694372
+    ],
+    "p1": [
+     -86.4405025116507,
+     6.061472745734181,
+     -3.101221235694372
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 1 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 330 section 1"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -111.1,
+     6.291794801123536,
+     -2.249802776373702
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 1 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 1"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -110.19999999999999,
+     6.0241157702549675,
+     -2.6134364579588603
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 1 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -86.34050251165071,
+     6.291794801123536,
+     -2.249802776373702
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 1 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 1"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -87.24050251165072,
+     6.472871291613661,
+     -1.8361690947885447
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 1 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -87.04050251165071,
+     5.858849646332931,
+     -4.247196824079185
+    ],
+    "p1": [
+     -87.04050251165071,
+     6.607605167691624,
+     -2.950314218638206
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 1 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -98.72025125582536,
+     5.265434455009386,
+     -3.0400000000000027
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 1 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S1_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -97.22025125582536,
+     7.013059418861095,
+     -2.148046855467891
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 1 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -85.24050251165072,
+     5.716472745734181,
+     -3.6987787643056342
+    ],
+    "p1": [
+     -60.68100502330144,
+     5.716472745734181,
+     -3.6987787643056342
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 2 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 330 section 2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -85.34050251165071,
+     5.09428375840615,
+     -4.323952744984997
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 2 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -84.4405025116507,
+     5.275360248896275,
+     -3.9103190633998386
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 2 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -60.58100502330144,
+     5.09428375840615,
+     -4.323952744984997
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 2 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -61.481005023301435,
+     4.826604727537582,
+     -4.687586426570154
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 2 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -85.24050251165072,
+     6.061472745734181,
+     -3.101221235694372
+    ],
+    "p1": [
+     -60.68100502330144,
+     6.061472745734181,
+     -3.101221235694372
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 2 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 330 section 2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -85.34050251165071,
+     6.291794801123536,
+     -2.249802776373702
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 2 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -84.4405025116507,
+     6.0241157702549675,
+     -2.6134364579588603
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 2 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -60.58100502330144,
+     6.291794801123536,
+     -2.249802776373702
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 2 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -61.481005023301435,
+     6.472871291613661,
+     -1.8361690947885447
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 2 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -61.28100502330144,
+     5.858849646332931,
+     -4.247196824079185
+    ],
+    "p1": [
+     -61.28100502330144,
+     6.607605167691624,
+     -2.950314218638206
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 2 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -72.96075376747608,
+     5.265434455009386,
+     -3.0400000000000027
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 2 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S2_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -71.46075376747608,
+     7.013059418861095,
+     -2.148046855467891
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 2 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -59.481005023301435,
+     5.716472745734181,
+     -3.6987787643056342
+    ],
+    "p1": [
+     -34.92150753495216,
+     5.716472745734181,
+     -3.6987787643056342
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 3 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 330 section 3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -59.58100502330144,
+     5.09428375840615,
+     -4.323952744984997
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 3 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -58.68100502330144,
+     5.275360248896275,
+     -3.9103190633998386
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 3 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -34.82150753495216,
+     5.09428375840615,
+     -4.323952744984997
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 3 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -35.72150753495216,
+     4.826604727537582,
+     -4.687586426570154
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 3 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -59.481005023301435,
+     6.061472745734181,
+     -3.101221235694372
+    ],
+    "p1": [
+     -34.92150753495216,
+     6.061472745734181,
+     -3.101221235694372
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 3 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 330 section 3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -59.58100502330144,
+     6.291794801123536,
+     -2.249802776373702
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 3 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -58.68100502330144,
+     6.0241157702549675,
+     -2.6134364579588603
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 3 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -34.82150753495216,
+     6.291794801123536,
+     -2.249802776373702
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 3 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -35.72150753495216,
+     6.472871291613661,
+     -1.8361690947885447
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 3 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -35.521507534952164,
+     5.858849646332931,
+     -4.247196824079185
+    ],
+    "p1": [
+     -35.521507534952164,
+     6.607605167691624,
+     -2.950314218638206
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 3 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -47.201256279126795,
+     5.265434455009386,
+     -3.0400000000000027
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 3 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S3_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -45.701256279126795,
+     7.013059418861095,
+     -2.148046855467891
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 3 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -33.72150753495216,
+     5.716472745734181,
+     -3.6987787643056342
+    ],
+    "p1": [
+     -9.162010046602878,
+     5.716472745734181,
+     -3.6987787643056342
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 4 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 330 section 4"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -33.82150753495216,
+     5.09428375840615,
+     -4.323952744984997
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 4 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 4"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -32.92150753495216,
+     5.275360248896275,
+     -3.9103190633998386
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 4 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -9.062010046602879,
+     5.09428375840615,
+     -4.323952744984997
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 4 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 4"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -9.96201004660288,
+     4.826604727537582,
+     -4.687586426570154
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 4 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -33.72150753495216,
+     6.061472745734181,
+     -3.101221235694372
+    ],
+    "p1": [
+     -9.162010046602878,
+     6.061472745734181,
+     -3.101221235694372
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 4 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 330 section 4"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -33.82150753495216,
+     6.291794801123536,
+     -2.249802776373702
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 4 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 4"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -32.92150753495216,
+     6.0241157702549675,
+     -2.6134364579588603
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 4 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -9.062010046602879,
+     6.291794801123536,
+     -2.249802776373702
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 4 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 4"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -9.96201004660288,
+     6.472871291613661,
+     -1.8361690947885447
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 4 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -9.762010046602878,
+     5.858849646332931,
+     -4.247196824079185
+    ],
+    "p1": [
+     -9.762010046602878,
+     6.607605167691624,
+     -2.950314218638206
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 4 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -21.44175879077752,
+     5.265434455009386,
+     -3.0400000000000027
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 4 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S4_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -19.94175879077752,
+     7.013059418861095,
+     -2.148046855467891
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 4 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -7.962010046602879,
+     5.716472745734181,
+     -3.6987787643056342
+    ],
+    "p1": [
+     16.597487441746402,
+     5.716472745734181,
+     -3.6987787643056342
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 5 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 330 section 5"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -8.062010046602879,
+     5.09428375840615,
+     -4.323952744984997
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 5 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 5"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -7.162010046602878,
+     5.275360248896275,
+     -3.9103190633998386
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 5 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     16.697487441746404,
+     5.09428375840615,
+     -4.323952744984997
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 5 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 5"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     15.797487441746403,
+     4.826604727537582,
+     -4.687586426570154
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 5 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -7.962010046602879,
+     6.061472745734181,
+     -3.101221235694372
+    ],
+    "p1": [
+     16.597487441746402,
+     6.061472745734181,
+     -3.101221235694372
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 5 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 330 section 5"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -8.062010046602879,
+     6.291794801123536,
+     -2.249802776373702
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 5 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 5"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -7.162010046602878,
+     6.0241157702549675,
+     -2.6134364579588603
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 5 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     16.697487441746404,
+     6.291794801123536,
+     -2.249802776373702
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 5 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 5"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     15.797487441746403,
+     6.472871291613661,
+     -1.8361690947885447
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 5 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     15.997487441746404,
+     5.858849646332931,
+     -4.247196824079185
+    ],
+    "p1": [
+     15.997487441746404,
+     6.607605167691624,
+     -2.950314218638206
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 5 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     4.317738697571762,
+     5.265434455009386,
+     -3.0400000000000027
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 5 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S5_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     5.817738697571762,
+     7.013059418861095,
+     -2.148046855467891
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 5 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_HeaderA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     17.797487441746405,
+     5.716472745734181,
+     -3.6987787643056342
+    ],
+    "p1": [
+     42.35698493009567,
+     5.716472745734181,
+     -3.6987787643056342
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 6 header, face A (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 330 section 6"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_ValveA1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     17.697487441746404,
+     5.09428375840615,
+     -4.323952744984997
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 6 isolation valve, pair A, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 6"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_BellowsA1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     18.597487441746402,
+     5.275360248896275,
+     -3.9103190633998386
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 6 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_ValveA2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     42.45698493009567,
+     5.09428375840615,
+     -4.323952744984997
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 6 isolation valve, pair A, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 6"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_BellowsA2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     41.55698493009567,
+     4.826604727537582,
+     -4.687586426570154
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 6 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_HeaderB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     17.797487441746405,
+     6.061472745734181,
+     -3.101221235694372
+    ],
+    "p1": [
+     42.35698493009567,
+     6.061472745734181,
+     -3.101221235694372
+    ],
+    "r": 0.10481097701203154
+   },
+   "mass_t": 0.4966446831516543,
+   "material": "FT-01 composite",
+   "meaning": "section 6 header, face B (feeds 9 fin manifolds)",
+   "maturity": "M2",
+   "domain": "blade 330 section 6"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_ValveB1",
+   "kind": "box",
+   "geo": {
+    "c": [
+     17.697487441746404,
+     6.291794801123536,
+     -2.249802776373702
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 6 isolation valve, pair B, aft (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 6"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_BellowsB1",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     18.597487441746402,
+     6.0241157702549675,
+     -2.6134364579588603
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 6 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_ValveB2",
+   "kind": "box",
+   "geo": {
+    "c": [
+     42.45698493009567,
+     6.291794801123536,
+     -2.249802776373702
+    ],
+    "half": [
+     0.35,
+     0.45,
+     0.947511042717385
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01 composite body",
+   "meaning": "section 6 isolation valve, pair B, fwd (close in ~8 s)",
+   "maturity": "M2",
+   "domain": "blade 330 section 6"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_BellowsB2",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     41.55698493009567,
+     6.472871291613661,
+     -1.8361690947885447
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "section 6 expansion bellows (~10 mm/m)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_CrossFeedValve",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     41.75698493009567,
+     5.858849646332931,
+     -4.247196824079185
+    ],
+    "p1": [
+     41.75698493009567,
+     6.607605167691624,
+     -2.950314218638206
+    ],
+    "r": 0.12
+   },
+   "mass_t": 0.657379716452273,
+   "material": "FT-01",
+   "meaning": "section 6 cross-feed with valve (pair A <-> B)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_Saddle",
+   "kind": "box",
+   "geo": {
+    "c": [
+     30.077236185921038,
+     5.265434455009386,
+     -3.0400000000000027
+    ],
+    "half": [
+     0.4,
+     0.08,
+     2.2200220854347696
+    ]
+   },
+   "mass_t": 1.6802827980045725,
+   "material": "composite saddle on hull frame",
+   "meaning": "section 6 sliding trunk saddle (thermal growth)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_S6_Inspection",
+   "kind": "box",
+   "geo": {
+    "c": [
+     31.577236185921038,
+     7.013059418861095,
+     -2.148046855467891
+    ],
+    "half": [
+     0.3,
+     0.2,
+     0.3
+    ]
+   },
+   "mass_t": 0.19999999999999998,
+   "material": "port",
+   "meaning": "section 6 inspection and replacement port (robot access along the blade root)",
+   "maturity": "M2"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_HXInterface",
+   "kind": "torus",
+   "geo": {
+    "x": -139.1,
+    "R": 6.523755521358693,
+    "r": 0.3,
+    "a0": 295.0,
+    "a1": 365.0
+   },
+   "mass_t": 0.8939604296729777,
+   "material": "FT-01",
+   "meaning": "drive heat-exchanger interface (supply out / return in), production drive side unchanged",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_PumpA",
+   "kind": "cylx",
+   "geo": {
+    "c": [
+     -134.0,
+     4.826604727537582,
+     -4.687586426570154
+    ],
+    "L": 2.4,
+    "r": 0.55
+   },
+   "mass_t": 7.531640998236472,
+   "material": "EM pump (annular linear induction)",
+   "meaning": "pair A return pump, 1.71 MW, L1 bus fed; removable to the drive-bay hatch",
+   "maturity": "M3",
+   "oru": false
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_PumpBypassA",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -135.6,
+     5.606027590943577,
+     -5.137586426570154
+    ],
+    "p1": [
+     -132.4,
+     5.606027590943577,
+     -5.137586426570154
+    ],
+    "r": 0.14
+   },
+   "mass_t": 0.3,
+   "material": "FT-01",
+   "meaning": "pair A pump bypass with check valve (natural circulation / pump swap)",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_BypassBellowsA",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -134.0,
+     5.606027590943577,
+     -5.137586426570154
+    ],
+    "r": 0.22,
+    "t": 0.3
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "bypass bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_ValveASupply",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -137.1,
+     5.318661519085497,
+     -3.935319063399839
+    ],
+    "half": [
+     0.35,
+     0.5,
+     0.49375552135869244
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01",
+   "meaning": "manifold isolation valve pair A supply",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_BellowsASupply",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -136.1,
+     5.275360248896275,
+     -3.9103190633998386
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "manifold bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_ValveAReturn",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -137.1,
+     4.8699059977268035,
+     -4.712586426570154
+    ],
+    "half": [
+     0.35,
+     0.5,
+     0.49375552135869244
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01",
+   "meaning": "manifold isolation valve pair A return",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_BellowsAReturn",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -136.1,
+     4.826604727537582,
+     -4.687586426570154
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "manifold bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_PumpB",
+   "kind": "cylx",
+   "geo": {
+    "c": [
+     -134.0,
+     6.472871291613661,
+     -1.8361690947885447
+    ],
+    "L": 2.4,
+    "r": 0.55
+   },
+   "mass_t": 7.531640998236472,
+   "material": "EM pump (annular linear induction)",
+   "meaning": "pair B return pump, 1.71 MW, L1 bus fed; removable to the drive-bay hatch",
+   "maturity": "M3",
+   "oru": false
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_PumpBypassB",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -135.6,
+     7.252294155019656,
+     -2.286169094788545
+    ],
+    "p1": [
+     -132.4,
+     7.252294155019656,
+     -2.286169094788545
+    ],
+    "r": 0.14
+   },
+   "mass_t": 0.3,
+   "material": "FT-01",
+   "meaning": "pair B pump bypass with check valve (natural circulation / pump swap)",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_BypassBellowsB",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -134.0,
+     7.252294155019656,
+     -2.286169094788545
+    ],
+    "r": 0.22,
+    "t": 0.3
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "bypass bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_ValveBSupply",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -137.1,
+     6.067417040444189,
+     -2.6384364579588597
+    ],
+    "half": [
+     0.35,
+     0.5,
+     0.49375552135869244
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01",
+   "meaning": "manifold isolation valve pair B supply",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_BellowsBSupply",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -136.1,
+     6.0241157702549675,
+     -2.6134364579588603
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "manifold bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_ValveBReturn",
+   "kind": "box",
+   "geo": {
+    "c": [
+     -137.1,
+     6.5161725618028825,
+     -1.8611690947885446
+    ],
+    "half": [
+     0.35,
+     0.5,
+     0.49375552135869244
+    ]
+   },
+   "mass_t": 1.314759432904546,
+   "material": "FT-01",
+   "meaning": "manifold isolation valve pair B return",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_BellowsBReturn",
+   "kind": "ring",
+   "geo": {
+    "c": [
+     -136.1,
+     6.472871291613661,
+     -1.8361690947885447
+    ],
+    "r": 0.45375552135869246,
+    "t": 0.35
+   },
+   "mass_t": 0.060000000000000005,
+   "material": "refractory bellows",
+   "meaning": "manifold bellows",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_Accumulator",
+   "kind": "cylx",
+   "geo": {
+    "c": [
+     -129.5,
+     6.688968494116947,
+     -3.86187776067935
+    ],
+    "L": 2.6,
+    "r": 0.6
+   },
+   "mass_t": 4.079111390546852,
+   "material": "FT-01, Ar cover gas",
+   "meaning": "accumulator / pressurizer on the returns",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_DrainRecovery",
+   "kind": "cylx",
+   "geo": {
+    "c": [
+     -125.0,
+     4.416729559300635,
+     -2.550000000000002
+    ],
+    "L": 3.6,
+    "r": 0.75
+   },
+   "mass_t": 4.597072627418766,
+   "material": "FT-01 + trace heat",
+   "meaning": "drain and recovery tank inside the hull (freeze valve, trace-heated; frozen start)",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_DrainLine",
+   "kind": "seg",
+   "geo": {
+    "p0": [
+     -127.0,
+     5.649738009575621,
+     -3.2618777606793494
+    ],
+    "p1": [
+     -125.0,
+     4.849742261192855,
+     -2.8000000000000025
+    ],
+    "r": 0.1
+   },
+   "mass_t": 0.2,
+   "material": "FT-01",
+   "meaning": "drain line through the hull (penetration OPEN)",
+   "maturity": "M3"
+  },
+  {
+   "blade": 330.0,
+   "name": "H6A_330_Aft_PumpRemoval",
+   "kind": "path",
+   "geo": {
+    "points": [
+     [
+      -134.0,
+      6.862173574873835,
+      -3.96187776067935
+     ],
+     [
+      -142.0,
+      6.862173574873835,
+      -3.96187776067935
+     ]
+    ]
+   },
+   "mass_t": 0.0,
+   "material": "-",
+   "meaning": "pump removal path to the drive-bay hatch",
+   "maturity": "M3"
+  }
+ ],
+ "mass_drawn_t": 544.5356997349759,
+ "mass_phase6_t": 565.1967819858065,
+ "counts_per_blade": {
+  "valves": 34,
+  "valves_model": 34,
+  "bellows": 30,
+  "bellows_model": 30,
+  "trunks": 4
+ },
+ "corrections": [
+  "Phase VI drew one trunk per path; each H6a path is a supply + return pair (4 trunks per blade)"
+ ],
+ "findings": [
+  "Per blade: 2,765 kg/s Li, 1990 K out and 1690 K back, trunks D 0.75 m at 10 m/s, p max 1.65 MPa, pumps 3.4 MW.",
+  "Trunks outside the hull at r 6.52 m flanking the blade root (0.35 m off the hull); they reach 0.40 m up the blade root (1.3 % of the 30.5 m width) and partly shade the next metres (view factor re-run OPEN); the heat-pipe fins (13.9 t) belong to the blade and are not drawn.",
+  "Valves 34 per blade (model 34), bellows 30 (model 30): the drawn network matches the mass model counts.",
+  "EM pumps 7.5 t each: above the 3 t ORU limit."
+ ]
+}

@@ -62,4 +62,37 @@ def build():
                        + table(['Item', 't', 'Class'], [[E(r['item']), f'{r["t"]:.1f}', E(r['cls'])] for r in L['items']]
                                + [['Propellant', f'{L["propellant_t"]:,.0f}', 'coupled'], ['Added tankage', f'{L["tankage_t"]:,.0f}', 'coupled'],
                                   ['<b>Departure</b>', f'<b>{L["departure_t"]:,.0f}</b>', E(L['note'])]])))
+    return '\n'.join(out)+build_cp2()
+
+
+def build_cp2():
+    if not (R/'i3d_power.json').exists():
+        return ''
+    PW = json.loads((R/'i3d_power.json').read_text()); H = json.loads((R/'i3d_h6a.json').read_text()); U = PW['unit']; C = PW['checks']; n = H['network']
+    out = []
+    prow = [[E(p['name']), f'{p["mass_t"]:.1f}', str(p['modules']), f'{p["module_t"]:.1f}', E(p['replacement']), E('; '.join(p['interfaces'])),
+             (f'{p["shadow_margin_m"]:+.2f}' if 'shadow_margin_m' in p else '–'), E(p['note'])] for p in U['parts']]
+    ck = [[E(k.replace('_', ' ')), f'{v:.2f}' if isinstance(v, float) else E(str(v))] for k, v in C.items() if k not in ('dry_store_displaced',)]
+    out.append(section('i4', '3D · C', 'Checkpoint 2: L2 power unit (M3) and district (M2)',
+                       f'<p>One reusable assembly, placed three times with shared mesh data (<code>integration3d/power_unit.py</code>, parameters in <code>[power_unit]</code> and '
+                       f'<code>[district]</code>). Duties: {U["duty"]["thermal_W"]/1e6:.1f} MWt in, {U["duty"]["electric_W"]/1e6:.1f} MWe out, recuperator '
+                       f'{U["duty"]["recuperator_W"]/1e6:.0f} MW, gas cooler {U["duty"]["gas_cooler_W"]/1e6:.1f} MW to the 950 K sections. Reactor and shield stay '
+                       'ADJUSTABLE envelopes (no core design; shielding OPEN).</p>'
+                       + svg('i3d_power_unit.svg')
+                       + table(['Part', 't', 'Modules', 't each', 'Replacement', 'Interfaces', 'Shadow margin m', 'Note'], prow)
+                       + img('cam_i3d_unit', 'L2 power unit', 'Unit 1 isolated: reactor envelope (red), shield (amber), mount ring, gas ducts around the shield, TAC, recuperator, gas cooler, PMAD.')
+                       + svg('i3d_district.svg') + img('cam_i3d_district_end', 'District end view', 'District end view: three units, L1 bus slot, removal route and replacement paths.')
+                       + '<h3>Clearances and paths</h3>' + table(['Check', 'Value'], ck)
+                       + '<h3>Findings</h3><ul>' + ''.join(f'<li>{E(f)}</li>' for f in PW['findings']) + '</ul>'))
+    cnt = H['counts_per_blade']; G = H['geometry']
+    out.append(section('i5', '3D · D', 'H6a hot network (M2) and aft manifold (M3)',
+                       f'<p>Four trunks per blade (pairs A and B, supply and return, each pair 60 %), six isolatable sections with headers, cross-feed, saddles and inspection ports, '
+                       f'and an aft manifold with two EM pumps, bypasses, accumulator, drain/recovery and manifold valves (<code>integration3d/h6a3d.py</code>, from the Phase V '
+                       f'network model with the F1 composite and hot length {H["hot_length_m"]:.1f} m). Drawn hardware {H["mass_drawn_t"]:.0f} t of the {H["mass_phase6_t"]:.0f} t '
+                       f'line; valves {cnt["valves"]} and bellows {cnt["bellows"]} per blade match the model ({cnt["valves_model"]}, {cnt["bellows_model"]}).</p>'
+                       + svg('i3d_h6a_section.svg')
+                       + img('cam_i3d_h6a_section', 'H6a section', 'Transverse cut at x −100 looking forward: trunk quartets at the three blade roots and the district units inside the hull.')
+                       + img('cam_i3d_aft_manifold', 'Aft manifold', 'Aft manifold of one blade: HX interface arc, EM pumps on the returns (blue), bypasses, bellows, valves, accumulator.')
+                       + '<h3>Findings</h3><ul>' + ''.join(f'<li>{E(f)}</li>' for f in H['findings']+H['corrections']) + '</ul>'
+                       + img('cam_i3d_cp2_ship', 'Ship with Checkpoint 2 layers', 'Whole ship with the Checkpoint 2 layers.')))
     return '\n'.join(out)

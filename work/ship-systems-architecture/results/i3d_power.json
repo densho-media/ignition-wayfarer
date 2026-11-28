@@ -1,0 +1,895 @@
+{
+ "status": "STUDY / PROTOTYPE, Track F1 (WF-F1-P6.0); reactor and shield ADJUSTABLE envelopes; noncanon",
+ "unit": {
+  "parts": [
+   {
+    "key": "reactor_ihx",
+    "name": "Reactor + IHX envelope",
+    "shape": "cyl",
+    "u": 0.0,
+    "v": 0.0,
+    "w": 0.0,
+    "half": [
+     0.8,
+     0.75
+    ],
+    "mass_t": 21.46728738872812,
+    "interfaces": [
+     "Li primary",
+     "gas hot leg",
+     "control drives"
+    ],
+    "note": "ADJUSTABLE envelope; no core design",
+    "modules": 1,
+    "oru": false,
+    "module_t": 21.46728738872812,
+    "replacement": "MRU: heavy carriage on the removal route (new requirement: > 3 t)"
+   },
+   {
+    "key": "shield",
+    "name": "Shadow shield (LiH-W) envelope",
+    "shape": "cone",
+    "u": 2.57,
+    "v": 0.0,
+    "w": 0.0,
+    "half": [
+     1.27,
+     1.0,
+     1.5631044431130672
+    ],
+    "mass_t": 25.301220785728752,
+    "interfaces": [
+     "mount ring"
+    ],
+    "note": "12.5 deg cone, 13.3 m3; final shielding OPEN",
+    "modules": 1,
+    "oru": false,
+    "module_t": 25.301220785728752,
+    "replacement": "PERMANENT (replaced with the unit at a yard)"
+   },
+   {
+    "key": "tac",
+    "name": "Turbo-alternator-compressor",
+    "shape": "cyl",
+    "u": 5.24,
+    "v": 0.0,
+    "w": 0.0,
+    "half": [
+     1.0,
+     0.45
+    ],
+    "mass_t": 7.8713387092003115,
+    "interfaces": [
+     "hot leg",
+     "recuperator",
+     "alternator bus"
+    ],
+    "note": "single shaft, gas bearings; FT-03 turbine",
+    "modules": 1,
+    "oru": false,
+    "module_t": 7.8713387092003115,
+    "replacement": "MRU: heavy carriage on the removal route (new requirement: > 3 t)",
+    "in_shadow": true,
+    "shadow_margin_m": 1.4348986169908415
+   },
+   {
+    "key": "recuperator",
+    "name": "Recuperator (4 cores)",
+    "shape": "box",
+    "u": 7.34,
+    "v": 0.0,
+    "w": 0.0,
+    "half": [
+     0.8,
+     0.55,
+     0.55
+    ],
+    "mass_t": 10.73364369436406,
+    "interfaces": [
+     "TAC",
+     "gas cooler"
+    ],
+    "note": "34 MW duty, 1.36 m3 core",
+    "modules": 4,
+    "oru": true,
+    "module_t": 2.683410923591015,
+    "replacement": "ORU: robot, LOG-G1 handling",
+    "in_shadow": true,
+    "shadow_margin_m": 1.6957945633355183
+   },
+   {
+    "key": "gas_cooler",
+    "name": "Gas cooler / L2 header manifold (3 cores)",
+    "shape": "box",
+    "u": 9.139999999999999,
+    "v": 0.0,
+    "w": 0.0,
+    "half": [
+     0.7,
+     0.6,
+     0.6
+    ],
+    "mass_t": 7.155762462909374,
+    "interfaces": [
+     "L2 headers A/B (two sectors)",
+     "recuperator"
+    ],
+    "note": "19.0 MW to the 950 K sections",
+    "modules": 3,
+    "oru": true,
+    "module_t": 2.3852541543031247,
+    "replacement": "ORU: robot, LOG-G1 handling",
+    "in_shadow": true,
+    "shadow_margin_m": 1.9850519980533772
+   },
+   {
+    "key": "pmad",
+    "name": "Rectifier + unit switchgear (3 cabinets)",
+    "shape": "box",
+    "u": 10.739999999999998,
+    "v": 0.0,
+    "w": 0.25,
+    "half": [
+     0.6,
+     0.55,
+     0.8
+    ],
+    "mass_t": 7.155762462909374,
+    "interfaces": [
+     "main bus sector",
+     "restart bus"
+    ],
+    "note": "HVDC output",
+    "modules": 3,
+    "oru": true,
+    "module_t": 2.3852541543031247,
+    "replacement": "ORU: robot, LOG-G1 handling",
+    "in_shadow": true,
+    "shadow_margin_m": 1.9658720994553063
+   },
+   {
+    "key": "ic",
+    "name": "I&C and protection cabinet",
+    "shape": "box",
+    "u": 10.739999999999998,
+    "v": 0.0,
+    "w": -0.75,
+    "half": [
+     0.6,
+     0.35,
+     0.35
+    ],
+    "mass_t": 2.1467287388728122,
+    "interfaces": [
+     "data A/B"
+    ],
+    "note": "two-network",
+    "modules": 1,
+    "oru": true,
+    "module_t": 2.1467287388728122,
+    "replacement": "ORU: robot, LOG-G1 handling",
+    "in_shadow": true,
+    "shadow_margin_m": 1.9968594205067565
+   },
+   {
+    "key": "restart",
+    "name": "Restart pack R1b",
+    "shape": "box",
+    "u": 5.24,
+    "v": 0.0,
+    "w": -1.05,
+    "half": [
+     0.6,
+     0.4,
+     0.5
+    ],
+    "mass_t": 2.1467287388728122,
+    "interfaces": [
+     "start bus"
+    ],
+    "note": "independent cells",
+    "modules": 1,
+    "oru": true,
+    "module_t": 2.1467287388728122,
+    "replacement": "ORU: robot, LOG-G1 handling",
+    "in_shadow": true,
+    "shadow_margin_m": 0.3858152812095774
+   },
+   {
+    "key": "structure",
+    "name": "Mount ring + struts",
+    "shape": "ring",
+    "u": 3.9899999999999998,
+    "v": 0.0,
+    "w": 0.0,
+    "half": [
+     0.12,
+     1.7000000000000002
+    ],
+    "mass_t": 7.155762462909374,
+    "interfaces": [
+     "casing frames",
+     "spine"
+    ],
+    "note": "6 struts",
+    "modules": 1,
+    "oru": false,
+    "module_t": 7.155762462909374,
+    "replacement": "PERMANENT (replaced with the unit at a yard)"
+   },
+   {
+    "key": "ducts",
+    "name": "Gas ducts (hot leg, return) around the shield",
+    "shape": "duct",
+    "u": 1.92,
+    "v": 0.0,
+    "w": 0.0,
+    "half": [
+     2.52,
+     1.8131044431130672
+    ],
+    "mass_t": 5.724609970327499,
+    "interfaces": [
+     "IHX",
+     "TAC"
+    ],
+    "note": "dog-leg outside the shield (no straight streaming path)",
+    "modules": 1,
+    "oru": false,
+    "module_t": 5.724609970327499,
+    "replacement": "MRU: heavy carriage on the removal route (new requirement: > 3 t)"
+   }
+  ],
+  "duty": {
+   "thermal_W": 22727272.727272727,
+   "electric_W": 3500000.0,
+   "recuperator_W": 34090909.09090909,
+   "gas_cooler_W": 19043062.200956937,
+   "generator_loss_W": 184210.52631578926
+  },
+  "unit_mass_t": 96.8588454148225,
+  "shield_t": 25.301220785728752,
+  "shield_V_m3": 13.316431992488816,
+  "shadow_slope": 0.21174594872736124,
+  "shield_back_r": 1.5631044431130672,
+  "u_range": [
+   -0.8,
+   11.339999999999998
+  ],
+  "length_m": 12.139999999999999,
+  "shadow": [
+   [
+    0.0,
+    0.75
+   ],
+   [
+    3.84,
+    1.5631044431130672
+   ],
+   [
+    11.339999999999998,
+    3.151199058568276
+   ]
+  ]
+ },
+ "district": [
+  {
+   "index": 1,
+   "azimuth_deg": 90.0,
+   "centre": [
+    -90.7,
+    1.7757378587636622e-16,
+    2.9
+   ],
+   "domain": "L2 unit 1 / sector 90"
+  },
+  {
+   "index": 2,
+   "azimuth_deg": 210.0,
+   "centre": [
+    -90.7,
+    -2.5114736709748717,
+    -1.4500000000000002
+   ],
+   "domain": "L2 unit 2 / sector 210"
+  },
+  {
+   "index": 3,
+   "azimuth_deg": 330.0,
+   "centre": [
+    -90.7,
+    2.5114736709748713,
+    -1.4500000000000013
+   ],
+   "domain": "L2 unit 3 / sector 330"
+  }
+ ],
+ "checks": {
+  "unit_reach_m": 1.8131044431130672,
+  "unit_to_unit_m": 1.396738455723609,
+  "unit_to_hull_m": 1.286895556886933,
+  "L1_bus_m": 1.2729506078502408,
+  "removal_route_m": 0.8929506078502395,
+  "main_buses_m": 2.3154585379187114,
+  "data_nets_m": 0.6594222975587354,
+  "h6a_trunks_m": 0.8118955568869333,
+  "L1_to_main_bus_1_m": 0.96,
+  "phase6_L1_through_unit_90": "fixed: L1 bus moved to az 30, r 3.6",
+  "dry_store_displaced": {
+   "containers": 6,
+   "of": 54,
+   "modules": [
+    1
+   ],
+   "volume_m3": 268.8,
+   "x": [
+    -91.5,
+    -79.36
+   ]
+  },
+  "paths": 24,
+  "paths_crossing_another_unit": 0
+ },
+ "paths": [
+  {
+   "unit": 1,
+   "part": "Reactor + IHX envelope",
+   "cls": "MRU",
+   "points": [
+    [
+     -90.7,
+     1.7757378587636622e-16,
+     2.9
+    ],
+    [
+     -90.7,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 1,
+   "part": "Turbo-alternator-compressor",
+   "cls": "MRU",
+   "points": [
+    [
+     -85.46000000000001,
+     1.7757378587636622e-16,
+     2.9
+    ],
+    [
+     -85.46000000000001,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 1,
+   "part": "Recuperator (4 cores)",
+   "cls": "ORU",
+   "points": [
+    [
+     -83.36,
+     1.7757378587636622e-16,
+     2.9
+    ],
+    [
+     -83.36,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 1,
+   "part": "Gas cooler / L2 header manifold (3 cores)",
+   "cls": "ORU",
+   "points": [
+    [
+     -81.56,
+     1.7757378587636622e-16,
+     2.9
+    ],
+    [
+     -81.56,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 1,
+   "part": "Rectifier + unit switchgear (3 cabinets)",
+   "cls": "ORU",
+   "points": [
+    [
+     -79.96000000000001,
+     1.7757378587636622e-16,
+     2.9
+    ],
+    [
+     -79.96000000000001,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 1,
+   "part": "I&C and protection cabinet",
+   "cls": "ORU",
+   "points": [
+    [
+     -79.96000000000001,
+     1.7757378587636622e-16,
+     2.9
+    ],
+    [
+     -79.96000000000001,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 1,
+   "part": "Restart pack R1b",
+   "cls": "ORU",
+   "points": [
+    [
+     -85.46000000000001,
+     1.7757378587636622e-16,
+     2.9
+    ],
+    [
+     -85.46000000000001,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 1,
+   "part": "Gas ducts (hot leg, return) around the shield",
+   "cls": "MRU",
+   "points": [
+    [
+     -88.78,
+     1.7757378587636622e-16,
+     2.9
+    ],
+    [
+     -88.78,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 2,
+   "part": "Reactor + IHX envelope",
+   "cls": "MRU",
+   "points": [
+    [
+     -90.7,
+     -2.5114736709748717,
+     -1.4500000000000002
+    ],
+    [
+     -90.7,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 2,
+   "part": "Turbo-alternator-compressor",
+   "cls": "MRU",
+   "points": [
+    [
+     -85.46000000000001,
+     -2.5114736709748717,
+     -1.4500000000000002
+    ],
+    [
+     -85.46000000000001,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 2,
+   "part": "Recuperator (4 cores)",
+   "cls": "ORU",
+   "points": [
+    [
+     -83.36,
+     -2.5114736709748717,
+     -1.4500000000000002
+    ],
+    [
+     -83.36,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 2,
+   "part": "Gas cooler / L2 header manifold (3 cores)",
+   "cls": "ORU",
+   "points": [
+    [
+     -81.56,
+     -2.5114736709748717,
+     -1.4500000000000002
+    ],
+    [
+     -81.56,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 2,
+   "part": "Rectifier + unit switchgear (3 cabinets)",
+   "cls": "ORU",
+   "points": [
+    [
+     -79.96000000000001,
+     -2.5114736709748717,
+     -1.4500000000000002
+    ],
+    [
+     -79.96000000000001,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 2,
+   "part": "I&C and protection cabinet",
+   "cls": "ORU",
+   "points": [
+    [
+     -79.96000000000001,
+     -2.5114736709748717,
+     -1.4500000000000002
+    ],
+    [
+     -79.96000000000001,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 2,
+   "part": "Restart pack R1b",
+   "cls": "ORU",
+   "points": [
+    [
+     -85.46000000000001,
+     -2.5114736709748717,
+     -1.4500000000000002
+    ],
+    [
+     -85.46000000000001,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 2,
+   "part": "Gas ducts (hot leg, return) around the shield",
+   "cls": "MRU",
+   "points": [
+    [
+     -88.78,
+     -2.5114736709748717,
+     -1.4500000000000002
+    ],
+    [
+     -88.78,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 3,
+   "part": "Reactor + IHX envelope",
+   "cls": "MRU",
+   "points": [
+    [
+     -90.7,
+     2.5114736709748713,
+     -1.4500000000000013
+    ],
+    [
+     -90.7,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 3,
+   "part": "Turbo-alternator-compressor",
+   "cls": "MRU",
+   "points": [
+    [
+     -85.46000000000001,
+     2.5114736709748713,
+     -1.4500000000000013
+    ],
+    [
+     -85.46000000000001,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 3,
+   "part": "Recuperator (4 cores)",
+   "cls": "ORU",
+   "points": [
+    [
+     -83.36,
+     2.5114736709748713,
+     -1.4500000000000013
+    ],
+    [
+     -83.36,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 3,
+   "part": "Gas cooler / L2 header manifold (3 cores)",
+   "cls": "ORU",
+   "points": [
+    [
+     -81.56,
+     2.5114736709748713,
+     -1.4500000000000013
+    ],
+    [
+     -81.56,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 3,
+   "part": "Rectifier + unit switchgear (3 cabinets)",
+   "cls": "ORU",
+   "points": [
+    [
+     -79.96000000000001,
+     2.5114736709748713,
+     -1.4500000000000013
+    ],
+    [
+     -79.96000000000001,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 3,
+   "part": "I&C and protection cabinet",
+   "cls": "ORU",
+   "points": [
+    [
+     -79.96000000000001,
+     2.5114736709748713,
+     -1.4500000000000013
+    ],
+    [
+     -79.96000000000001,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 3,
+   "part": "Restart pack R1b",
+   "cls": "ORU",
+   "points": [
+    [
+     -85.46000000000001,
+     2.5114736709748713,
+     -1.4500000000000013
+    ],
+    [
+     -85.46000000000001,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  },
+  {
+   "unit": 3,
+   "part": "Gas ducts (hot leg, return) around the shield",
+   "cls": "MRU",
+   "points": [
+    [
+     -88.78,
+     2.5114736709748713,
+     -1.4500000000000013
+    ],
+    [
+     -88.78,
+     -6.613092715395707e-16,
+     -3.6
+    ],
+    [
+     -77.36,
+     -6.613092715395707e-16,
+     -3.6
+    ]
+   ],
+   "crosses_units": []
+  }
+ ],
+ "findings": [
+  "Unit: 12.1 m long, 97 t (Phase VI nominal); the shield is 25 t of it (13.3 m3 LiH-W).",
+  "Every conversion part sits inside the shadow boundary (smallest margin 0.39 m).",
+  "Recuperator, gas cooler and PMAD split into cores and cabinets under the 3 t ORU limit; the TAC (7.9 t) and the reactor/IHX envelope are not ORUs: they need a heavy carriage on the removal route (a new MRU requirement) or a yard.",
+  "District clearances: unit-unit 1.40 m, unit-hull 1.29 m; the Phase VI L1 bus ran through unit 90 and now has its own slot (1.27 m clear).",
+  "The district (x -91.5..-79.4) takes body-bay module(s) [1]: 6 of 54 dry-store containers (269 m3) move to the LOG-G1 store (Stage H).",
+  "24 replacement paths; 0 cross another unit on the straight radial move to the route."
+ ]
+}

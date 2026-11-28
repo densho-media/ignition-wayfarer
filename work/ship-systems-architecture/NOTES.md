@@ -84,6 +84,12 @@ then `build_report.py`.
 (`results/i3d_masterplan.json`, side/farm/maturity SVGs). Tanks: all 13 vessels are at their packing limits, so volume comes from length or
 density: T-A stretch +18.2 m (exact; supersedes Phase VI's 20.1 m linear estimate), T-B tandem modular segment +23.9 m (+64 t tankage,
 mission-modular), T-C slush H2/D2 + re-allocation +16.4 m (FT-09 proposed, new balance search). Recommended T-A as reference (DR-3D-01).
+**Checkpoint 2 (C + D).** `power_unit.py`: one reusable L2 unit (M3; 12.1 m, 97 t, shield 25 t from its geometry, all conversion parts inside
+the shadow boundary, recuperator/gas cooler/PMAD split under the 3 t ORU limit; TAC 7.9 t and reactor/IHX need a heavy carriage, a new MRU
+requirement), placed three times with shared mesh data; district clearances screened, L1 bus moved to its own slot (az 30), district displaces
+body-bay module 1 (6 dry-store containers). `h6a3d.py`: four trunks per blade (Phase VI drew one per path), outside the hull flanking the blade
+root (a 1990 K line inside would heat the bay), valves 34 and bellows 30 per blade = model, EM pumps 7.5 t each (MRU). Review file
+`REVIEW_I3D.blend` (built by `make_review_i3d.py`, CP1 + CP2 layers).
 
 ## Phase VI (owner brief 2026-11-28 06:33Z): dual-baseline integration (Track R / Track F)
 

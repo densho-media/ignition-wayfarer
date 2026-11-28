@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 629 430" font-family="IBM Plex Mono, monospace" font-size="11">
+<rect width="629" height="430" fill="#14161c"/>
+<text x="16" y="22" fill="#e8e6df" font-size="14">L2 power unit (M3) · side section · 3.5 MWe, 22.7 MWt · 97 t</text>
+<text x="16" y="40" fill="#9aa0ad">u = along +X from the reactor centre; dashed = shadow boundary (reactor edge through the shield back edge)</text>
+<polyline points="94,218 255,184 570,118" fill="none" stroke="#9fe0a8" stroke-dasharray="5 4"/>
+<polyline points="94,282 255,316 570,382" fill="none" stroke="#9fe0a8" stroke-dasharray="5 4"/>
+<line x1="59.99999999999999" y1="250" x2="569.8799999999999" y2="250" stroke="#444" stroke-dasharray="2 3"/>
+<rect x="60" y="218" width="67" height="63" fill="#c0392b" fill-opacity=".75" stroke="#c0392b"><title>Reactor + IHX envelope</title></rect>
+<polygon points="148.2,208.0 254.88,184.34961338925118 254.88,315.6503866107488 148.2,292.0" fill="#d9a33a" fill-opacity=".55" stroke="#d9a33a"/>
+<rect x="272" y="231" width="84" height="38" fill="#4b3fa6" fill-opacity=".75" stroke="#4b3fa6"><title>Turbo-alternator-compressor</title></rect>
+<rect x="368" y="227" width="67" height="46" fill="#e67e22" fill-opacity=".75" stroke="#e67e22"><title>Recuperator (4 cores)</title></rect>
+<rect x="448" y="225" width="59" height="50" fill="#e8a33c" fill-opacity=".75" stroke="#e8a33c"><title>Gas cooler / L2 header manifold (3 cores)</title></rect>
+<rect x="519" y="206" width="50" height="67" fill="#5b6ad0" fill-opacity=".75" stroke="#5b6ad0"><title>Rectifier + unit switchgear (3 cabinets)</title></rect>
+<rect x="519" y="267" width="50" height="29" fill="#8fa0b5" fill-opacity=".75" stroke="#8fa0b5"><title>I&C and protection cabinet</title></rect>
+<rect x="288" y="273" width="50" height="42" fill="#6c5ce7" fill-opacity=".75" stroke="#6c5ce7"><title>Restart pack R1b</title></rect>
+<rect x="256.14" y="178.6" width="10.08" height="10.5" fill="#8e9094"/><rect x="256.14" y="310.9" width="10.08" height="10.5" fill="#8e9094"/>
+<polyline points="118.8,229.0 131.4,173.84961338925118 254.87999999999997,173.84961338925118 280.08,231.1" fill="none" stroke="#c0392b" stroke-width="5" stroke-opacity=".7"/>
+<rect x="16" y="321" width="10" height="10" fill="#c0392b"/><text x="30" y="330" fill="#e8e6df">Reactor + IHX envelope · 21.5 t · MRU</text>
+<rect x="330" y="321" width="10" height="10" fill="#d9a33a"/><text x="344" y="330" fill="#e8e6df">Shadow shield (LiH-W) envelope · 25.3 t · PERMANENT (replaced with the unit at a yard)</text>
+<rect x="16" y="337" width="10" height="10" fill="#4b3fa6"/><text x="30" y="346" fill="#e8e6df">Turbo-alternator-compressor · 7.9 t · MRU</text>
+<rect x="330" y="337" width="10" height="10" fill="#e67e22"/><text x="344" y="346" fill="#e8e6df">Recuperator (4 cores) · 10.7 t · ORU</text>
+<rect x="16" y="353" width="10" height="10" fill="#e8a33c"/><text x="30" y="362" fill="#e8e6df">Gas cooler / L2 header manifold (3 cores) · 7.2 t · ORU</text>
+<rect x="330" y="353" width="10" height="10" fill="#5b6ad0"/><text x="344" y="362" fill="#e8e6df">Rectifier + unit switchgear (3 cabinets) · 7.2 t · ORU</text>
+<rect x="16" y="369" width="10" height="10" fill="#8fa0b5"/><text x="30" y="378" fill="#e8e6df">I&C and protection cabinet · 2.1 t · ORU</text>
+<rect x="330" y="369" width="10" height="10" fill="#6c5ce7"/><text x="344" y="378" fill="#e8e6df">Restart pack R1b · 2.1 t · ORU</text>
+<rect x="16" y="385" width="10" height="10" fill="#8e9094"/><text x="30" y="394" fill="#e8e6df">Mount ring + struts · 7.2 t · PERMANENT (replaced with the unit at a yard)</text>
+<rect x="330" y="385" width="10" height="10" fill="#c0392b"/><text x="344" y="394" fill="#e8e6df">Gas ducts (hot leg, return) around the shield · 5.7 t · MRU</text>
+</svg>

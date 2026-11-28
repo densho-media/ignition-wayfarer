@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" font-family="IBM Plex Mono, monospace" font-size="11">
+<rect width="560" height="420" fill="#14161c"/>
+<text x="16" y="22" fill="#e8e6df" font-size="14">H6a at a blade root · transverse section (blade 90, looking aft)</text>
+<text x="16" y="40" fill="#9aa0ad">Li 1990 K out / 1690 K back · 2,765 kg/s per blade · p max 1.65 MPa</text>
+<line x1="80.0" y1="270.0" x2="440.0" y2="270.0" stroke="#8e9094" stroke-width="3"/><text x="80.0" y="286.0" fill="#8e9094">hull r 6.0</text>
+<rect x="246.5" y="0.0" width="27.0" height="240.0" fill="#c0392b" fill-opacity=".8"/><text x="279.5" y="12.0" fill="#e88">HOT blade (root r 6.5)</text>
+<circle cx="161" cy="239" r="22" fill="#ff9a5a" stroke="#fff" stroke-opacity=".5"/><text x="161" y="275" fill="#e8e6df" text-anchor="middle">A ret</text>
+<circle cx="215" cy="239" r="22" fill="#ff5a36" stroke="#fff" stroke-opacity=".5"/><text x="215" y="275" fill="#e8e6df" text-anchor="middle">A sup</text>
+<circle cx="305" cy="239" r="22" fill="#ff5a36" stroke="#fff" stroke-opacity=".5"/><text x="305" y="275" fill="#e8e6df" text-anchor="middle">B sup</text>
+<circle cx="359" cy="239" r="22" fill="#ff9a5a" stroke="#fff" stroke-opacity=".5"/><text x="359" y="275" fill="#e8e6df" text-anchor="middle">B ret</text>
+<circle cx="239" cy="222" r="6" fill="#ffb07a"/>
+<circle cx="281" cy="222" r="6" fill="#ffb07a"/>
+<text x="16" y="400" fill="#9aa0ad">trunks D 0.75 m, wall 6.4 mm (FT-01) · hull clearance 0.35 m · trunks reach 0.40 m up the root</text>
+</svg>

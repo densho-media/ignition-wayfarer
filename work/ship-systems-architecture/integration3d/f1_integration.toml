@@ -22,7 +22,7 @@ M4 = "production detail: not in scope of this brief"
 id = "PWR-L2U"
 name = "L2 power unit (reusable assembly)"
 stage = "C"
-now = "M1"
+now = "M3"
 target = "M3"
 colour = "POWER"
 track = "F1"
@@ -31,7 +31,7 @@ register = ["FT-03"]
 id = "PWR-DIST"
 name = "Power district (three L2 units, shields, PMAD, restart packs)"
 stage = "C"
-now = "M1"
+now = "M2"
 target = "M2"
 colour = "POWER"
 track = "F1"
@@ -40,7 +40,7 @@ register = ["FT-03"]
 id = "TH-H6A"
 name = "H6a hot network (trunks, EM pumps, accumulators, drain/recovery)"
 stage = "D"
-now = "M1"
+now = "M2"
 target = "M2"
 colour = "HOT_RADIATOR"
 track = "F1"
@@ -49,7 +49,7 @@ register = ["FT-01", "FT-02"]
 id = "TH-H6A-AFT"
 name = "H6a aft manifold and section valves"
 stage = "D"
-now = "M1"
+now = "M3"
 target = "M3"
 colour = "HOT_RADIATOR"
 track = "F1"
@@ -228,3 +228,40 @@ name = "Propellant extension (T-A reference)"
 ref = "tanks:T-A"
 colour = "HELIUM3"
 maturity = "M0"
+
+# ---------------------------------------------------------------------------------------------------------------------- Stage C
+# Reusable L2 power unit (PWR-L2U, target M3). Unit frame: +u along the ship +X (reactor aft, shield forward of it), origin = reactor centre.
+# Performance from WF-F1-P6.0 (3.5 MWe, 1500 K turbine inlet FT-03, 950 K reject, eta 0.154). Every dimension PROTOTYPE; the reactor and
+# the shadow shield are ADJUSTABLE envelopes (no core design, final shielding OPEN, DR5-08).
+[power_unit]
+Pe_W = 3.5e6
+eta = 0.154
+turbine_inlet_K = 1500.0
+reject_K = 950.0
+generator_eff = 0.95
+recuperator_duty_per_Pt = 1.5          # recuperated low-pressure-ratio Brayton (He-Xe), first order
+hx_power_density_W_m3 = 2.5e7          # compact refractory plate-fin cores (FT-01 materials), PROTOTYPE
+shield_density_kg_m3 = 1900.0          # LiH + 6 vol% W (rad6 material)
+shield = { r_front_m = 1.0, length_m = 2.54, half_angle_deg = 12.5, gap_m = 0.5 }
+reactor = { length_m = 1.6, radius_m = 0.75 }
+oru_limit_t = 3.0                      # FT-07 robot / LOG-G1 handling class
+clearance_m = 1.0                      # maintenance envelope around the power conversion unit
+mount = { ring_radius_m = 1.35, struts = 6, strut_radius_m = 0.06, frame_radius_m = 5.6 }
+# component mass fractions of the non-shield unit mass (sum 1.0); the shield mass is computed from its geometry
+fractions = { reactor_ihx = 0.30, tac = 0.11, recuperator = 0.15, gas_cooler = 0.10, pmad = 0.10, structure = 0.10, ducts = 0.08, ic = 0.03, restart = 0.03 }
+
+[district]
+reactor_x = -90.7
+azimuths_deg = [90.0, 210.0, 330.0]
+unit_radius_m = 2.9
+hull_radius_m = 6.0
+l1_bus = { azimuth_deg = 30.0, radius_m = 3.6 }    # dedicated slot between units 330 and 90 (Phase VI ran it through unit 90)
+removal_route = { azimuth_deg = 270.0, radius_m = 3.6, clear_m = 1.2 }
+
+# ---------------------------------------------------------------------------------------------------------------------- Stage D
+[h6a]
+sectors_deg = [90.0, 210.0, 330.0]
+trunk_radius_m = 5.9
+trunk_offset_m = 0.9
+manifold = { x_m = -138.5, ring_radius_m = 5.9, tube_radius_m = 0.30, bellows = 2 }
+pump = { x_m = -134.0, length_m = 2.4, radius_m = 0.55, mass_t = 2.6 }

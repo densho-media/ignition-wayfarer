@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 580" font-family="IBM Plex Mono, monospace" font-size="11">
+<rect width="520" height="580" fill="#14161c"/>
+<text x="16" y="22" fill="#e8e6df" font-size="14">Power district · end view (looking aft)</text>
+<circle cx="260" cy="260" r="240.0" fill="none" stroke="#8e9094"/><text x="264" y="16.0" fill="#8e9094">hull r 6.0</text>
+<circle cx="260" cy="144" r="73" fill="#4b3fa6" fill-opacity=".55" stroke="#9b8cff"/><text x="260" y="148" fill="#fff" text-anchor="middle">U1</text>
+<circle cx="160" cy="318" r="73" fill="#4b3fa6" fill-opacity=".55" stroke="#9b8cff"/><text x="160" y="322" fill="#fff" text-anchor="middle">U2</text>
+<circle cx="360" cy="318" r="73" fill="#4b3fa6" fill-opacity=".55" stroke="#9b8cff"/><text x="360" y="322" fill="#fff" text-anchor="middle">U3</text>
+<circle cx="433" cy="160" r="9" fill="#5b9bff"/><text x="441" y="164" fill="#5b9bff" font-size="10">main bus</text>
+<circle cx="87" cy="160" r="9" fill="#5b9bff"/><text x="95" y="164" fill="#5b9bff" font-size="10">main bus</text>
+<circle cx="260" cy="460" r="9" fill="#5b9bff"/><text x="268" y="464" fill="#5b9bff" font-size="10">main bus</text>
+<circle cx="444" cy="260" r="3" fill="#9fe0a8"/><text x="452" y="264" fill="#9fe0a8" font-size="10">data</text>
+<circle cx="76" cy="260" r="3" fill="#9fe0a8"/><text x="84" y="264" fill="#9fe0a8" font-size="10">data</text>
+<circle cx="385" cy="188" r="9" fill="#ff7a59"/><text x="393" y="192" fill="#ff7a59" font-size="10">L1 bus</text>
+<circle cx="260" cy="404" r="24" fill="#f3e8c2"/><text x="268" y="408" fill="#f3e8c2" font-size="10">removal route</text>
+<circle cx="296" cy="24" r="15" fill="#c0392b"/>
+<circle cx="224" cy="24" r="15" fill="#c0392b"/>
+<circle cx="38" cy="347" r="15" fill="#c0392b"/>
+<circle cx="74" cy="409" r="15" fill="#c0392b"/>
+<circle cx="446" cy="409" r="15" fill="#c0392b"/>
+<circle cx="482" cy="347" r="15" fill="#c0392b"/>
+<text x="16" y="530" fill="#9aa0ad">unit-unit 1.40 m · unit-hull 1.29 m · L1 bus 1.27 m · route 0.89 m</text>
+<text x="16" y="548" fill="#9aa0ad">main buses 2.32 m · data 0.66 m · H6a trunks (red) 0.81 m</text>
+</svg>
