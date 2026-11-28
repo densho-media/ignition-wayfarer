@@ -61,15 +61,16 @@ def register(cp2, cp4, rem, mem):
         ('J-03', 'DONE', 'MRU forward end x 92.0 kept; cone legs adjusted (WSI-P04).', 'ISSA / PSA'),
         ('WSI-P07', 'OPEN', 'Thrust convention: with thrust on the four nozzle pickups (not the 12 ring nodes) the ring-node HM closures drop to 0.72-0.80; '
          'the nozzle-thrust reruns (a43e132) restore lambda 1.95: bypass HM 1,275.9 t FE (+171 t aft cage), hub HM 1,413.5 t; f1 at departure 0.091 / 0.084 Hz '
-         'vs 0.095 (I-08 short ~4 %), both stopped at the 16-pass cap; reconverged bypass point 13,615 t (+3 % over the sizing point, loads not yet re-sized). '
+         'vs 0.095 (I-08 short ~4 %), both stopped at the 16-pass cap. The f1 continuation D_byp_ring_HM_nozf1 (a2d08ee) closes both: 1,284.9 t FE, lambda 1.95-2.01, f1 0.0950 / 0.121 / 0.141 Hz; '
+         'reconverged point 13,649 t (+3.3 % over the sizing point, loads not yet re-sized); forward end frame:14/diag:14 still strength-short locally (radius cap). '
          'Original critical strain energy in the spine, tie:03, aft frames and rails. All ring-node lambda (Phase II, round 1) are unconservative screening values. '
          'Puller sensitivity (same thrust at the Brow) is stable to 12: the problem is the compression path (research finding, not a proposal).', 'PSA'),
-        ('WSI-P08', 'OPEN', 'Closed-loop TVC (PD, mid-spine IMU) only marginally stable (min damping 0.0006, negative at left 0.5/0); aft IMU unstable. A structural '
+        ('WSI-P08', 'OPEN', 'Closed-loop TVC: on the nozzle-thrust bypass point (1656bc4) stable at all states with a 0.004 Hz attitude loop and 0.03 Hz sensor roll-off (gain margin x2, delay x2-3); unstable with an aft IMU, 3x delay or damping 0.002 (slow, detectable). Earlier PD loop was only marginally stable (min damping 0.0006, negative at left 0.5/0); aft IMU unstable. A structural '
          'notch filter or IMU near the bending node is a design requirement. Ring spin 2x (0.133 Hz) sits on the second bending pair at left 0.5/0 (1-3 %).', 'PSA / ISSA GNC'),
         ('RAD-R', 'OPEN (Track R)', 'Radiation: independent Track R item; no crew-safety claim is made here.', 'Track R')]
     decisions = [
         ('WSI-D1', 'Structural interface at the rotor bay: hub path (capped, needs Ti) or bypass collar (closes better at left 0, heavier collar).',
-         'Recommend bypass (TD-F): 138 t lighter at lambda 1.95 and closer on f1 (0.091 vs 0.084 Hz). It is a habitat-interface change and needs owner approval.'),
+         'Recommend bypass (TD-F): the only variant that closes lambda 1.95 and f1 0.095 Hz with nozzle thrust (1,284.9 t FE). It is a habitat-interface change and needs owner approval.'),
         ('WSI-D2', 'Rail material: CFRP-HM (Track R) for the primary longerons, Al-Li frames and Ti hub/pickups.', 'Recommend: saves ~270-350 t structure and ~1 kt '
          'departure against Al at equal lambda; no fictional material needed.'),
         ('WSI-D3', 'Propellant arrangement: keep T-A (stretched farm).', 'Recommend: T-B costs +0.8 kt for modularity; G is not feasible outside the excluded zone.'),
@@ -143,7 +144,7 @@ def main():
             ('cam_wsi_wsi_13_research_alternatives_aft.jpg', 'Research alternatives: G-HULL (blue ghost) and the rejected G-ANNULAR sectors (red)')]
     fig = ''.join(f'<figure><img src="{i}" alt="{E(c)}" loading="lazy"><figcaption>{E(c)}</figcaption></figure>' for i, c in imgs)
     head_kpi = [('Joint departure (S-COMB)', f'{sp[2]["departure_t"]:,.0f} t'), ('Ship length', f'{sp[2]["ship_length_m"]:.1f} m'),
-                ('Stability, nozzle thrust (bypass HM)', '1.95 closed; f1 0.091 of 0.095 Hz OPEN'), ('Lead closure (round 1)', f'{pref["tag"] if pref else "—"}')]
+                ('Stability, nozzle thrust (bypass HM)', 'λ 1.95, f1 0.095 Hz: closed (end fitting open)'), ('Lead closure (round 1)', f'{pref["tag"] if pref else "—"}')]
     kpi = ''.join(f'<div class="k"><span>{E(a)}</span><b>{E(b)}</b></div>' for a, b in head_kpi)
     page = f'''<title>Wayfarer Systems Integration</title>
 <meta name="claude:viewport-fit-sides" content="cover">

@@ -60,3 +60,6 @@ are merged here. No other session edits shared geometry, configuration or mass.
 - Full pipeline PASS, geometry diff 0 (runs/20261128T125441Z-pipeline).
 - PSA nozzle-thrust closures (a43e132): bypass HM 1,275.9 t FE reaches lambda 1.95, but f1 is 0.091 Hz at departure (target 0.095). Hub HM is 1,413.5 t, f1 0.084.
   The reconverged bypass point is 13,615 t / 340.6 m, +3 % over the sizing point, so loads still have to be re-sized there. f1 closure is OPEN.
+- PSA f1 continuation D_byp_ring_HM_nozf1 (a2d08ee): 1,284.9 t FE, lambda 1.95-2.01 and f1 0.0950 Hz at departure, so the structure closes.
+  The reconverged point is 13,649 t / 340.8 m, +3.3 % over the sizing point. Still open: the forward end frame:14/diag:14 (local, a few t),
+  a re-size at the new point, and TVC robustness (unstable with an aft IMU, 3x delay or damping 0.002).
