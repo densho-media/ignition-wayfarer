@@ -43,7 +43,7 @@ def wrap(a):
 
 class Build3(mdl.Build):
     def __init__(self, concept, cfg, deck='A', rotor='hub', deck_depth=None, slice_m=4.0, **kw):
-        self.deck_kind = deck; self.slice_m = slice_m; self.deck_depth = deck_depth
+        self.deck_kind = deck; self.slice_m = slice_m; self.deck_depth = deck_depth; self.guide_ring = kw.pop('guide_ring', False)
         self.farm = cfg['farm']; self.brow = cfg['brow']
         cfg = dict(cfg); cfg['parts'] = cfg['bodies']
         if deck == 'F':
@@ -133,7 +133,10 @@ class Build3(mdl.Build):
             prevx = self.xs[-2]
             for b in rails:
                 self.add(self.station_nodes[prevx][b], self.sp(X_CAGE_END), 'hubcone')
-                self.add(cage[b], self.sp(X_CAGE_END-4.0), 'hubcone')
+                if abs(wrap(b-270.0)) > 20.0:
+                    # the aft legs of the rail pair beside the MRU lane (az 255/285) crossed the flight MRU swept tube (r 2.9 +- 0.55,
+                    # x ~91.2; WSI member check 2026-11-28): those two legs are omitted, the other four and all forward legs remain
+                    self.add(cage[b], self.sp(X_CAGE_END-4.0), 'hubcone')
                 self.add(self.sp(self.x_deck_aft), self.keel_nodes[kx[2]][b], 'hubcone')
                 self.add(self.sp(self.x_skirt), self.keel_nodes[kx[3]][b], 'hubcone')
         else:
@@ -151,6 +154,8 @@ class Build3(mdl.Build):
         self.build_guide()
         if self.deck_kind == 'D':
             self.stringers_to_guide()
+        if self.guide_ring:
+            self.build_guide_ring()
         bn = [self.keel_nodes[keel_end][b] for b in rails] + [self.chord[a][1][-1] for a in sect] + [self.chord[a][0][-1] for a in sect]
         self.brow_nodes = bn
         for a in sect:
@@ -315,6 +320,18 @@ class Build3(mdl.Build):
                 if np.linalg.norm(self.m.X[q]-self.m.X[n]) > 0.3:
                     self.add(n, q, 'guide', self.x_guide, extra='-st')
 
+    def build_guide_ring(self, r=36.0, n=12):
+        """Farm forward tie ring (WSI closure item a): a circumferential girder at the guide plane, outside the outer vessels
+        (34.2 m envelope), each node tied to the three nearest guide-plane nodes, so the farm's forward end works as one section."""
+        x = self.x_guide; ring = [self.m.node(self.p(x, r, 360.0*k/n+15.0)) for k in range(n)]
+        gp = [q for q in range(len(self.m.X)) if abs(self.m.X[q][0]-x) < 1e-6 and q not in ring]
+        for k in range(n):
+            self.add(ring[k], ring[(k+1) % n], 'guide', x, extra='-tr')
+            for q in sorted(gp, key=lambda q: np.linalg.norm(self.m.X[q]-self.m.X[ring[k]]))[:3]:
+                if np.linalg.norm(self.m.X[q]-self.m.X[ring[k]]) > 0.3:
+                    self.add(ring[k], q, 'guide', x, extra='-tr')
+        self.guide_ring_nodes = ring
+
     def tank_credit_t(self):
         """TD-E: mass of the credited pressure-shell share already in the tankage ledger (subtracted from the PSA increment)."""
         return sum(c['m_kg'] for c in getattr(self, 'tw_credit', {}).values())/1e3
@@ -331,6 +348,19 @@ class Build3(mdl.Build):
                 q = a+(b-a)*t; r = math.hypot(q[1], q[2])
                 if K_RING[0]+0.01 < q[0] < K_RING[1]-0.01 and R_SPINE+0.05 < r < K_RING[2]:
                     bad.append((md['group'], round(float(q[0]), 2), round(r, 2))); break
+        return bad
+
+    def mru_violations(self, r0=2.9, half=0.55, clear=0.10, x=(-92.7, 92.0), az=270.0):
+        """Primary members entering the flight MRU swept tube (WSI-0.1 keep-out: r 2.9 +- 0.55 at az 270, x -92.7..92.0)."""
+        c = lambda xx: np.array([xx, r0*math.cos(math.radians(az)), r0*math.sin(math.radians(az))]); bad = []
+        for e, md in zip(self.m.el, self.meta):
+            if e['kind'] == 'spring' or md['fam'] in ('iface', 'mount'):
+                continue
+            a, b = self.m.X[e['a']], self.m.X[e['b']]
+            for t in np.linspace(0, 1, 21):
+                q = a+(b-a)*t
+                if x[0] <= q[0] <= x[1] and np.linalg.norm(q[1:]-c(q[0])[1:]) < half+clear:
+                    bad.append((md['group'], round(float(q[0]), 2))); break
         return bad
 
     def gap_points(self):
