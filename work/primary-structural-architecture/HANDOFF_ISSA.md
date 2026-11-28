@@ -49,3 +49,11 @@ Full register: `data/interface.toml`.
 - HO-01 corrected: each trunk is 0.211 t/m (Li plus a 6.4 mm composite wall). Supports sit at a 6.4 m pitch, 4 per 25.4 m section. Each saddle carries 5.4 t, shared by four trunks. The anchor takes 155 kN per section (~39 kN per trunk) at 0.736 g. End travel is ±38 to ±127 mm. The table is in ISSA `results/i3d_h6a.json` under "supports"; the objects are named `H6A_<az>_S<k>_Anchor/Slide<j>`. These figures supersede the 08:29Z values above.
 - HO-02: the L2 section runs from X 41.02 to 50.4, so the working frame station is about X 40.8. DR-3D-02 is still pending.
 - HO-04 (new): the NaK transport loops run in the casing-hull annulus at r 5.8, az 10/50, 130/170 and 250/290. They are D 223 mm and 43 t in total, over X −81.6 to 40.4, about 0.12 t/m per loop pair. They fall in MZ-04 and need HP-S/HP-M clips on the frames; SC-04 corridor clearance is to be checked in Phase III.
+
+## ISSA CP4 update (2026-11-28 09:01Z, ISSA 9faee26)
+
+- ECLSS hub unit: 1.2 t, envelope 2.0 × 2.2 × 1.4 m, at X 100.3, Z +3.2. Two D 0.28 m air ducts pass through the transfer drums at X 99.2 and 101.4 (r 1.3-1.5). Both sit in the rotor-bay keep-out (KO-09/SC-07), so the stationary hub frame needs pass-throughs.
+- Logistics body-bay module 10: X 22.25-33.25 (ISSA states an offset of 112 m), holding 6 dry-store containers. It is a frame and deck interface in MZ-04.
+- MRU heavy-carriage rail: keel lane az 270, r 3.6, X −88 to 98, 22 kg/m. The carriage is rated 24.7 t, runs in coast only, and parks and locks to the frame before a burn, putting 40-160 kN into the frame lugs (HP-M/HP-L class). PSA still has to set the lug stations; that is a Phase III item. The lane must stay clear of KO-07 (crawler track at 110°).
+- Cryocoolers: 13 stations at the forward end of each T-A vessel (X ≈ 157), about 11 t in total. X 157 lies beyond today's FWD datum of 144.75, so it is the T-A stretched layout. It is HP-M on the tank-farm forward ring (MZ-09/10).
+- GNC: M1 placeholders. TMS-01 heat-sink sections are short (WARM +2.7 m, LOW +0.8 m pending the owner), so the MZ-06 frame stations may move.
