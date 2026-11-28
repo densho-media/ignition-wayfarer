@@ -248,7 +248,7 @@ def run(b, states, iters=4, log=None, ramp=None):
 
 
 # ---------- reduced-basis stability ----------------------------------------------------------------------------------------
-def reduced_stability(b, N, lam_hi=40.0, nbasis=60, follower=True, partial=1.0, tvc_gain=0.0):
+def reduced_stability(b, N, lam_hi=40.0, nbasis=60, follower=True, partial=1.0, tvc_gain=0.0, zeta=0.005):
     """Nonconservative stability of the free-free ship under follower thrust in a modal basis (the lowest `nbasis` free-free modes,
     rigid modes removed). partial: fraction of the thrust that follows the nozzle rotation (0 = fixed direction, 1 = full follower).
     tvc_gain: closed-loop TVC that steers thrust against the measured attitude at the nozzle (rad/rad); it enters as an extra
@@ -271,10 +271,17 @@ def reduced_stability(b, N, lam_hi=40.0, nbasis=60, follower=True, partial=1.0, 
                 if 6*n+fd in pos and 6*bn+rd in pos:
                     C[pos[6*n+fd], pos[6*bn+rd]] += (1 if fd == 1 else -1)*tvc_gain*T/4
         lf = lf + V.T @ C @ V
+    # standard form through the Cholesky factor of the modal mass (m ~ I for M-orthonormal modes): the generalized QZ on a
+    # badly scaled pair showed spurious complex pairs at zero load once very soft modes entered the basis (Phase III fix)
+    Li = sla.inv(sla.cholesky(0.5*(m+m.T), lower=True))
+    def std(A):
+        return Li @ A @ Li.T
     def status(lam):
-        A = k + lam*(g + partial*lf)
-        e = sla.eigvals(A, m)
-        if np.any(np.abs(np.imag(e)) > 1e-6*np.abs(e)):
+        # flutter only when a complex pair grows faster than structural damping removes energy: Im(sqrt mu) > zeta Re(sqrt mu).
+        # A follower load splits every degenerate (axisymmetric) pair into a complex pair at once with a negligible growth rate
+        # (Phase III: Im/Re ~ 1e-5 at lambda 0.02); without damping that read as flutter at lambda ~0.01
+        e = sla.eigvals(std(k + lam*(g + partial*lf))); sq = np.sqrt(e.astype(complex))
+        if np.any((np.abs(np.imag(sq)) > zeta*np.abs(np.real(sq))) & (np.real(e) > 0)):
             return 'flutter'
         if np.any(np.real(e) < 0):
             return 'divergence'
@@ -292,13 +299,13 @@ def reduced_stability(b, N, lam_hi=40.0, nbasis=60, follower=True, partial=1.0, 
                     a = mid
                 else:
                     c = mid
-            e, Q = sla.eig(k + c*1.02*(g + partial*lf), m); j = int(np.argmin(np.real(e)) if status(c) == 'divergence' else np.argmax(np.abs(np.imag(e))))
+            e, Q = sla.eig(std(k + c*1.02*(g + partial*lf))); Q = Li.T @ Q; j = int(np.argmin(np.real(e)) if status(c) == 'divergence' else np.argmax(np.abs(np.imag(e))))
             uf = np.zeros(b.m.ndof); uf[free] = np.real(V @ Q[:, j])
             return dict(lam=float(c), kind=status(c), f1=float(np.sqrt(w2[keep][0])/(2*math.pi)), mode=uf)
         prev = gv
     return dict(lam=None, kind=f'stable_to_{lam_hi:g}', f1=float(np.sqrt(w2[keep][0])/(2*math.pi)))
 
-def global_stability(b, partial=1.0, nbasis=60, lam_hi=12.0, tvc_gain=0.0):
+def global_stability(b, partial=1.0, nbasis=60, lam_hi=12.0, tvc_gain=0.0, zeta=0.005):
     """Global stability of the free-free ship: thrust T introduced at the 12 thrust-ring nodes (the drive yoke sets the thrust
     direction, so the follower rotation is the ring's), axial force field from inertia relief, then the reduced-basis eigen sweep.
     partial = 1 follower (rigidly mounted nozzles), 0 fixed inertial direction (TVC holding the line of thrust faster than the
@@ -309,7 +316,7 @@ def global_stability(b, partial=1.0, nbasis=60, lam_hi=12.0, tvc_gain=0.0):
         b.m.thrust(n, (T/len(ring), 0.0, 0.0), follower=True)
     r = b.m.solve_static(inertia_relief=True); fs = b.m.element_forces(r['u'])
     N = [f['N'] if f else 0.0 for f in fs]
-    out = reduced_stability(b, N, lam_hi=lam_hi, nbasis=nbasis, partial=partial, tvc_gain=tvc_gain)
+    out = reduced_stability(b, N, lam_hi=lam_hi, nbasis=nbasis, partial=partial, tvc_gain=tvc_gain, zeta=zeta)
     if out.get('mode') is not None:
         # geometric-stiffness energy of the critical mode per design group: which groups the mode lives in
         u = out.pop('mode'); en = {}

@@ -31,6 +31,10 @@ K_GUIDE = [1.0e3, 1.0e9, 1.0e9, 1.0e3, 1.0e3, 1.0e3]          # forward guide ri
 K_BEARING = [5.0e10, 5.0e10, 5.0e10, 1.0e3, 5.0e11, 5.0e11]  # hub bearing pair: free in roll (spin), stiff in tilt (PROTOTYPE)
 K_ANCHOR = [5.0e9]*3 + [5.0e8]*3
 K_SLIDE = [1.0e3, 5.0e9, 5.0e9, 1.0e3, 1.0e3, 1.0e3]
+K_SADDLE = [2.0e8, 1.0e9, 1.0e9, 1.0e3, 1.0e3, 1.0e3]     # TD-D intermediate saddle: axial shear flexure (contraction), radial/tangential stiff (PROTO)
+K_FWD_E = [5.0e8, 1.0e9, 1.0e9, 1.0e7, 1.0e7, 1.0e7]      # TD-E forward end: tank wall continuous with the guide plane, axial flexure (PROTO)
+TANKWALL_CREDIT = 0.5                                      # TD-E: share of the tankage mass that is pressure shell, credited to the wall (PROTO)
+STRINGER_PITCH = 8.0
 
 
 def wrap(a):
@@ -42,6 +46,8 @@ class Build3(mdl.Build):
         self.deck_kind = deck; self.slice_m = slice_m; self.deck_depth = deck_depth
         self.farm = cfg['farm']; self.brow = cfg['brow']
         cfg = dict(cfg); cfg['parts'] = cfg['bodies']
+        if deck == 'F':
+            rotor = 'bypass'      # TD-F: habitat interface on the outer collar path; the hub path stops being primary
         super().__init__(concept, cfg, rotor=rotor, **kw)
         self.place(cfg['bodies'])
 
@@ -143,6 +149,8 @@ class Build3(mdl.Build):
                     self.add(cage[b], na[0], 'collar'); self.add(self.station_nodes[self.xs[-2]][b], na[0], 'collar')
         self.build_deck()
         self.build_guide()
+        if self.deck_kind == 'D':
+            self.stringers_to_guide()
         bn = [self.keel_nodes[keel_end][b] for b in rails] + [self.chord[a][1][-1] for a in sect] + [self.chord[a][0][-1] for a in sect]
         self.brow_nodes = bn
         for a in sect:
@@ -202,7 +210,10 @@ class Build3(mdl.Build):
         for v in vs:
             for k, q in enumerate(self.skirt_points(v)):
                 pts.append(q); self.skirt_nodes.setdefault(v['vid'], []).append(len(pts)-1)
-        kind = self.deck_kind
+        kind = {'E': 'A', 'F': 'A'}.get(self.deck_kind, self.deck_kind)
+        if kind == 'D':
+            self.build_stringers()
+            kind = 'A'
         if kind in ('A', 'B'):
             xf, xa = self.x_skirt, self.x_deck_aft
             idf, yzf, ef = self.plate(xf, pts, 'deck', 't')
@@ -236,8 +247,8 @@ class Build3(mdl.Build):
                     for i in near:
                         self.add(n, ida[nba+i], 'deck', xf, extra='-c')   # long compression struts: apex to aft layer
                         self.add(n, idf[nb+i], 'deck', xf, extra='-c')
-                    kk = [self.keel_nodes[min(self.kx, key=lambda q: abs(q-(xf+self.deck_depth or 8.0)))][b] for b in self.rail_az()]
-                    k = min(kk, key=lambda q: np.linalg.norm(self.m.X[q][1:]-np.array(g)))
+                    xk = min(self.kx, key=lambda q: abs(q-(xf+(self.deck_depth or 8.0))))
+                    k = min(self.keel_nodes[xk].values(), key=lambda q: np.linalg.norm(self.m.X[q][1:]-np.array(g)))
                     self.add(n, k, 'deck', xf, extra='-c')
             self.skirt_struct = {v['vid']: [idf[nb+i] for i in self.skirt_nodes[v['vid']]] for v in vs}
         elif kind == 'C':
@@ -257,6 +268,70 @@ class Build3(mdl.Build):
             self.plate(self.x_deck_aft, [], 'deck', 'tie')
         else:
             raise ValueError(kind)
+
+    def build_stringers(self):
+        """TD-D longitudinally integrated supports: stringers in the gaps between vessels from the skirt plane to the guide plane, with
+        frame struts every STRINGER_PITCH to the keels / chords; each vessel also bears on the stringers through two intermediate
+        saddles (axial shear flexures), so part of its thrust load enters the farm structure along its length instead of all at the deck."""
+        gaps = self.gap_points(); xs = [self.x_skirt]
+        while xs[-1]+STRINGER_PITCH < self.x_guide-2.0:
+            xs.append(round(xs[-1]+STRINGER_PITCH, 4))
+        self.str_x = xs; self.str_nodes = {x: [self.m.node((x, g[0], g[1])) for g in gaps] for x in xs}
+        pool_k = lambda x: list(self.keel_nodes[min(self.kx, key=lambda q: abs(q-x))].values())
+        for i, x in enumerate(xs):
+            row = self.str_nodes[x]
+            if i:
+                for a, b in zip(self.str_nodes[xs[i-1]], row):
+                    self.add(a, b, 'deck', x, extra='-s')
+            if i == 0:
+                continue
+            for n in row:
+                y = self.m.X[n]
+                near = sorted([q for q in row if q != n], key=lambda q: np.linalg.norm(self.m.X[q]-y))[:2]
+                for q in near:
+                    if q > n:
+                        self.add(n, q, 'deck', x, extra='-sf')
+                k = min(pool_k(x), key=lambda q: np.linalg.norm(self.m.X[q][1:]-y[1:]))
+                if np.linalg.norm(self.m.X[k]-y) > 0.3:
+                    self.add(n, k, 'deck', x, extra='-sf')
+        self.saddle_pts = {}
+        for v in self.vessels():
+            c = np.array(self.p(0, v['R'], v['az']))[1:]; L = v['x1']-v['x0']
+            for f in (1/3, 2/3):
+                x = min(xs[1:], key=lambda q: abs(q-(v['x0']+f*L)))
+                near = sorted(self.str_nodes[x], key=lambda q: np.linalg.norm(self.m.X[q][1:]-c))[:3]
+                self.saddle_pts.setdefault(v['vid'], []).append((f, near))
+
+    def stringers_to_guide(self):
+        """Stringer roots on the deck forward layer and tips on the guide plane (nearest three plane nodes each)."""
+        root = self.str_nodes[self.str_x[0]]; tip = self.str_nodes[self.str_x[-1]]
+        fwd = [n for n in range(len(self.m.X)) if abs(self.m.X[n][0]-self.x_skirt) < 1e-6 and n not in root]
+        gp = [n for n in range(len(self.m.X)) if abs(self.m.X[n][0]-self.x_guide) < 1e-6]
+        for n in root:
+            for q in sorted(fwd, key=lambda q: np.linalg.norm(self.m.X[q]-self.m.X[n]))[:3]:
+                self.add(n, q, 'deck', self.x_skirt, extra='-sr')
+        for n in tip:
+            for q in sorted(gp, key=lambda q: np.linalg.norm(self.m.X[q]-self.m.X[n]))[:3]:
+                if np.linalg.norm(self.m.X[q]-self.m.X[n]) > 0.3:
+                    self.add(n, q, 'guide', self.x_guide, extra='-st')
+
+    def tank_credit_t(self):
+        """TD-E: mass of the credited pressure-shell share already in the tankage ledger (subtracted from the PSA increment)."""
+        return sum(c['m_kg'] for c in getattr(self, 'tw_credit', {}).values())/1e3
+
+    def keepout_violations(self):
+        """Primary members entering the rotor keep-out K-RING (x 93.65..106.95, r <= 31.5), except the hub path inside the
+        stationary spine (r <= R_SPINE)."""
+        bad = []
+        for e, md in zip(self.m.el, self.meta):
+            if e['kind'] == 'spring' or md['fam'] in ('iface', 'mount', 'spine', 'hub', 'tie', 'slide'):
+                continue
+            a, b = self.m.X[e['a']], self.m.X[e['b']]
+            for t in np.linspace(0, 1, 11):
+                q = a+(b-a)*t; r = math.hypot(q[1], q[2])
+                if K_RING[0]+0.01 < q[0] < K_RING[1]-0.01 and R_SPINE+0.05 < r < K_RING[2]:
+                    bad.append((md['group'], round(float(q[0]), 2), round(r, 2))); break
+        return bad
 
     def gap_points(self):
         vs = self.vessels(); g = []
@@ -283,9 +358,27 @@ class Build3(mdl.Build):
         self.guide_struct = {k: [ids[nb+i] for i in idx] for k, idx in self.guide_idx.items()}
 
     # ---------- bodies --------------------------------------------------------------------------------------------------------------
+    def group(self, fam, x=None, extra=''):
+        if fam == 'tankwall':
+            return fam+extra
+        return super().group(fam, x, extra)
+
+    def tie(self, sn, q, a):
+        """Spine tie with the axial slide at the spine node (zero-length, global axes). Phase II put the slide between the spine node and a
+        node 0.5 m off axis, which resisted rigid roll (3.6e11 J/rad^2 of fictitious energy, a spurious 0.01 Hz roll mode)."""
+        if self.spine_coupled is True:
+            self.add(sn, q, 'tie'); return
+        mid = self.m.node(self.m.X[sn]); self.add(mid, q, 'tie')
+        self.m.spring(sn, mid, [1.0, 1e10, 1e10, 1e9, 1e9, 1e9], group='slide')
+        self.meta.append(dict(fam='slide', group='slide'))
+
     def link(self, a, b):
-        if np.linalg.norm(self.m.X[a]-self.m.X[b]) > 1e-6:
+        d = np.linalg.norm(self.m.X[a]-self.m.X[b])
+        if d > 0.01:
             self.add(a, b, 'iface')
+        elif d > 1e-9 or a != b:
+            # near-coincident nodes: a rigid 6-dof spring, not a 40-micron beam (its 12EI/L^3 ~ 1e24 wrecked the conditioning)
+            self.m.spring(a, b, [1.0e12]*6, group='iface'); self.meta.append(dict(fam='iface', group='iface'))
 
     def connect(self, body_node, struct_node, k6, tag):
         """Body-side node coincident with the structure node, rigid arm from the body node, spring with the mount's releases."""
@@ -304,14 +397,36 @@ class Build3(mdl.Build):
                     continue
                 n = 8; L = b['x1']-b['x0']; xs = [b['x0']+L*(i+0.5)/n for i in range(n)]
                 ch = [self.m.node(self.p(x, b['R'], b['az'])) for x in xs]
-                for i in range(n-1):
-                    self.link(ch[i], ch[i+1])
                 aft = self.m.node(self.p(b['x0'], b['R'], b['az'])); fwd = self.m.node(self.p(b['x1'], b['R'], b['az']))
-                self.link(aft, ch[0]); self.link(ch[-1], fwd)
+                chain = [aft]+ch+[fwd]
+                if self.deck_kind == 'E':
+                    # TD-E integral tank: the vessel wall is a structural tube (r = a), thickness >= the credited pressure-shell share
+                    g = self.group('tankwall', None, f'-{vid[0]}')
+                    mt = next(q['m'] for q in bodies if q['kind'] == 'vessel' and q['vid'] == vid and q['owner'] == 'tankage')
+                    rho = mdl.mat('AL6061')['rho']; tc = TANKWALL_CREDIT*mt/(rho*2*math.pi*b['a']*L)
+                    self.tw_credit = getattr(self, 'tw_credit', {}); self.tw_credit[vid] = dict(t=tc, m_kg=TANKWALL_CREDIT*mt)
+                    if g not in self.sec:
+                        self.sec[g] = dict(r=b['a'], t=max(tc, 0.004), mat='AL6061', fam='tankwall', rmax=b['a'], tmin=tc)
+                    for i in range(len(chain)-1):
+                        self.add(chain[i], chain[i+1], 'tankwall', extra=f'-{vid[0]}')
+                else:
+                    # the vessel's own wall stiffness (not PSA structure, massless here, mass is in the bodies): Al-Li shell of the
+                    # credited pressure-shell thickness. Phase III.0 first runs used the generic 0.6 m iface tube (EI 70x too low),
+                    # which let the loaded vessels buckle as columns (iface 24-31 % of the critical-mode energy)
+                    mt = next(q['m'] for q in bodies if q['kind'] == 'vessel' and q['vid'] == vid and q['owner'] == 'tankage')
+                    tv = TANKWALL_CREDIT*mt/(2700.0*2*math.pi*b['a']*L)
+                    for i in range(len(chain)-1):
+                        self.m.beam(chain[i], chain[i+1], fe.tube(b['a'], tv), dict(E=7.0e10, G=2.7e10, rho=0.0, alpha=0.0), group='iface')
+                        self.meta.append(dict(fam='iface', group='vesselwall'))
                 for s in self.skirt_struct[vid]:
                     self.connect(aft, s, K_SKIRT, 'skirt')
                 for g in self.guide_struct[vid]:
-                    self.connect(fwd, g, K_GUIDE, 'guide')
+                    self.connect(fwd, g, K_FWD_E if self.deck_kind == 'E' else K_GUIDE, 'guide')
+                if self.deck_kind == 'D':
+                    for f, near in self.saddle_pts[vid]:
+                        nd = ch[min(range(n), key=lambda i: abs(xs[i]-(b['x0']+f*L)))]
+                        for q in near:
+                            self.connect(nd, q, K_SADDLE, 'saddle')
                 self.vchain[vid] = dict(nodes=ch, xs=xs, L=L)
             elif k == 'rotor':
                 tag = b['ring']
@@ -391,8 +506,10 @@ class Build3(mdl.Build):
             if k == 'vessel':
                 ch = self.vchain[b['vid']]; n = len(ch['nodes']); dx = ch['L']/n
                 if b['owner'] == 'tankage':
+                    # TD-E: the credited wall share is carried by the tankwall members' own mass, not twice
+                    f = 1.0-(self.tw_credit[b['vid']]['m_kg']/b['m'] if self.deck_kind == 'E' else 0.0)
                     for nd in ch['nodes']:
-                        self._put(nd, b['m']/n, b['I']/n, slice_L=0.0)
+                        self._put(nd, f*b['m']/n, f*b['I']/n, slice_L=0.0)
                 else:
                     Lq = b.get('level_m', ch['L']); full = Lq/dx; rest = b['m']
                     for i, nd in enumerate(ch['nodes']):
