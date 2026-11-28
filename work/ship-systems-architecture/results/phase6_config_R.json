@@ -1,0 +1,142 @@
+{
+ "id": "WF-R-P6.0",
+ "track": "R (research)",
+ "status": "STUDY / NONCANON",
+ "derived_from": "N2-R4a-P5.0 (Phase V) + Phase VI corrections C6-01..",
+ "production_unchanged": true,
+ "generation": {
+  "L2": {
+   "units": 3,
+   "rating_We": 3500000.0,
+   "strategy": "C (B for maintenance)",
+   "turbine_inlet_K": 1150.0,
+   "reject_K": 750.0,
+   "eta": 0.14608695652173911,
+   "register": null
+  },
+  "L1": {
+   "type": "thermal conversion 0.27, 900 K reject (OPEN)",
+   "rated_W": 17837765.94200168
+  },
+  "L3": "refuge survival (independent)"
+ },
+ "radiators": {
+  "hot": {
+   "T_K": 1800.0,
+   "length_m": 141.48916986338992,
+   "margin_rule": 1.2
+  },
+  "L2": {
+   "T_K": 750.0,
+   "length_m": 20.510830136610082,
+   "layout": "cross-strapped dual headers"
+  },
+  "bulkhead_x": 29.689169863389917,
+  "WARM": "R5-D re-zoned + burn heat-pump lift of the shortfall",
+  "LOW": "R5-D"
+ },
+ "hot_loop": {
+  "topology": "H6a",
+  "coolant": "Li",
+  "wall": "Mo-Re class 8-30 MPa",
+  "mass_t": [
+   1073.2946900387303,
+   1832.9726024510403,
+   3310.046126930491
+  ],
+  "pump_W": [
+   7820641.934078282,
+   10055111.058100648,
+   14077155.481340908
+  ]
+ },
+ "eclss": "7 (3 A + 3 B + 1 hub)",
+ "logistics": "LOG-G1 3 t (hub store) + soft bags + racks",
+ "loading": "12 crew, 12 months standard, modular extension; 0.016 c reference",
+ "items_t": {
+  "L2 (3 x 3.5 MWe, 750 K)": [
+   160.01449496280512,
+   298.2387978492912,
+   635.6243356076641
+  ],
+  "L1 (derived)": [
+   31.0302860538875,
+   60.636026394146675,
+   99.87292256222088
+  ],
+  "L3": [
+   9.0,
+   12.0,
+   16.0
+  ],
+  "storage (buffer + restart)": [
+   14.3,
+   21.5,
+   31.6
+  ],
+  "distribution": [
+   4.0,
+   8.0,
+   15.0
+  ],
+  "scatter allowance (OPEN)": [
+   0.0,
+   3.0,
+   10.0
+  ],
+  "ECLSS modular increment": [
+   3.5999999999999996,
+   4.800000000000001,
+   6.4
+  ],
+  "L2 sections 750 K cross-strapped + dual headers": [
+   13.934237561607423,
+   20.147104748854193,
+   30.389392885871807
+  ],
+  "bulkhead relocation": [
+   0.0,
+   2.0,
+   5.0
+  ],
+  "LOG-G1 tare (3 t containers, 12 months)": [
+   4.807860357015053,
+   4.807860357015053,
+   4.807860357015053
+  ],
+  "WARM shortfall lift (canon heat pumps)": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "hot loop H6a": [
+   1073.2946900387303,
+   1832.9726024510403,
+   3310.046126930491
+  ]
+ },
+ "mass": {
+  "departure_t": [
+   9379.552046229639,
+   12869.642617183794,
+   19807.379539392776
+  ],
+  "dry_added_t": [
+   1313.9815689740453,
+   2268.1023918003475,
+   4164.740638343263
+  ],
+  "propellant_t": [
+   5926.409110657038,
+   8131.600195985606,
+   12515.164261782185
+  ],
+  "end_t": [
+   3453.142935572601,
+   4738.042421198188,
+   7292.21527761059
+  ]
+ },
+ "register_refs": [],
+ "hash": "c10559bf0e18"
+}

@@ -1,0 +1,8284 @@
+{
+ "status": "STUDY / NONCANON (ISSA Phase VI)",
+ "register": {
+  "version": "1.0",
+  "ids": [
+   "FT-00",
+   "FT-01",
+   "FT-02",
+   "FT-03",
+   "FT-04",
+   "FT-05",
+   "FT-06",
+   "FT-07",
+   "FT-08"
+  ],
+  "statuses": {
+   "FT-00": "CANON",
+   "FT-01": "APPROVED",
+   "FT-02": "APPROVED",
+   "FT-03": "PROPOSED",
+   "FT-04": "CONDITIONAL",
+   "FT-05": "CONTEMPORARY",
+   "FT-06": "APPROVED",
+   "FT-07": "APPROVED",
+   "FT-08": "CANON"
+  }
+ },
+ "configs": {
+  "R": {
+   "id": "WF-R-P6.0",
+   "track": "R (research)",
+   "status": "STUDY / NONCANON",
+   "derived_from": "N2-R4a-P5.0 (Phase V) + Phase VI corrections C6-01..",
+   "production_unchanged": true,
+   "generation": {
+    "L2": {
+     "units": 3,
+     "rating_We": 3500000.0,
+     "strategy": "C (B for maintenance)",
+     "turbine_inlet_K": 1150.0,
+     "reject_K": 750.0,
+     "eta": 0.14608695652173911,
+     "register": null
+    },
+    "L1": {
+     "type": "thermal conversion 0.27, 900 K reject (OPEN)",
+     "rated_W": 17837765.94200168
+    },
+    "L3": "refuge survival (independent)"
+   },
+   "radiators": {
+    "hot": {
+     "T_K": 1800.0,
+     "length_m": 141.48916986338992,
+     "margin_rule": 1.2
+    },
+    "L2": {
+     "T_K": 750.0,
+     "length_m": 20.510830136610082,
+     "layout": "cross-strapped dual headers"
+    },
+    "bulkhead_x": 29.689169863389917,
+    "WARM": "R5-D re-zoned + burn heat-pump lift of the shortfall",
+    "LOW": "R5-D"
+   },
+   "hot_loop": {
+    "topology": "H6a",
+    "coolant": "Li",
+    "wall": "Mo-Re class 8-30 MPa",
+    "mass_t": [
+     1073.2946900387303,
+     1832.9726024510403,
+     3310.046126930491
+    ],
+    "pump_W": [
+     7820641.934078282,
+     10055111.058100648,
+     14077155.481340908
+    ]
+   },
+   "eclss": "7 (3 A + 3 B + 1 hub)",
+   "logistics": "LOG-G1 3 t (hub store) + soft bags + racks",
+   "loading": "12 crew, 12 months standard, modular extension; 0.016 c reference",
+   "items_t": {
+    "L2 (3 x 3.5 MWe, 750 K)": [
+     160.01449496280512,
+     298.2387978492912,
+     635.6243356076641
+    ],
+    "L1 (derived)": [
+     31.0302860538875,
+     60.636026394146675,
+     99.87292256222088
+    ],
+    "L3": [
+     9.0,
+     12.0,
+     16.0
+    ],
+    "storage (buffer + restart)": [
+     14.3,
+     21.5,
+     31.6
+    ],
+    "distribution": [
+     4.0,
+     8.0,
+     15.0
+    ],
+    "scatter allowance (OPEN)": [
+     0.0,
+     3.0,
+     10.0
+    ],
+    "ECLSS modular increment": [
+     3.5999999999999996,
+     4.800000000000001,
+     6.4
+    ],
+    "L2 sections 750 K cross-strapped + dual headers": [
+     13.934237561607423,
+     20.147104748854193,
+     30.389392885871807
+    ],
+    "bulkhead relocation": [
+     0.0,
+     2.0,
+     5.0
+    ],
+    "LOG-G1 tare (3 t containers, 12 months)": [
+     4.807860357015053,
+     4.807860357015053,
+     4.807860357015053
+    ],
+    "WARM shortfall lift (canon heat pumps)": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hot loop H6a": [
+     1073.2946900387303,
+     1832.9726024510403,
+     3310.046126930491
+    ]
+   },
+   "mass": {
+    "departure_t": [
+     9379.552046229639,
+     12869.642617183794,
+     19807.379539392776
+    ],
+    "dry_added_t": [
+     1313.9815689740453,
+     2268.1023918003475,
+     4164.740638343263
+    ],
+    "propellant_t": [
+     5926.409110657038,
+     8131.600195985606,
+     12515.164261782185
+    ],
+    "end_t": [
+     3453.142935572601,
+     4738.042421198188,
+     7292.21527761059
+    ]
+   },
+   "register_refs": [],
+   "hash": "c10559bf0e18"
+  },
+  "F0": {
+   "id": "WF-F0-P6.0",
+   "track": "F (fiction) F0",
+   "status": "STUDY / NONCANON",
+   "derived_from": "N2-R4a-P5.0 (Phase V) + Phase VI corrections C6-01..",
+   "production_unchanged": true,
+   "generation": {
+    "L2": {
+     "units": 3,
+     "rating_We": 3500000.0,
+     "strategy": "C (B for maintenance)",
+     "turbine_inlet_K": 1150.0,
+     "reject_K": 750.0,
+     "eta": 0.14608695652173911,
+     "register": null
+    },
+    "L1": {
+     "type": "direct conversion (FT-04, CONDITIONAL)",
+     "rated_W": 20000000.0
+    },
+    "L3": "refuge survival (independent)"
+   },
+   "radiators": {
+    "hot": {
+     "T_K": 1800.0,
+     "length_m": 141.48916986338992,
+     "margin_rule": 1.2
+    },
+    "L2": {
+     "T_K": 750.0,
+     "length_m": 20.510830136610082,
+     "layout": "cross-strapped dual headers"
+    },
+    "bulkhead_x": 29.689169863389917,
+    "WARM": "R5-D re-zoned + burn heat-pump lift of the shortfall",
+    "LOW": "R5-D"
+   },
+   "hot_loop": {
+    "topology": "H6a",
+    "coolant": "Li",
+    "wall": "refractory composite 100 MPa, 3 t/m3 (FT-01)",
+    "mass_t": [
+     483.25214818476934,
+     546.6884404659878,
+     673.1541126799827
+    ],
+    "pump_W": [
+     7820641.934078282,
+     10055111.058100648,
+     14077155.481340908
+    ]
+   },
+   "eclss": "7 (3 A + 3 B + 1 hub)",
+   "logistics": "LOG-G1 3 t (hub store) + soft bags + racks",
+   "loading": "12 crew, 12 months standard, modular extension; 0.016 c reference",
+   "items_t": {
+    "L2 (3 x 3.5 MWe, 750 K)": [
+     160.01449496280512,
+     298.2387978492912,
+     635.6243356076641
+    ],
+    "L1 (derived)": [
+     6.0,
+     14.0,
+     28.0
+    ],
+    "L3": [
+     9.0,
+     12.0,
+     16.0
+    ],
+    "storage (buffer + restart)": [
+     14.3,
+     21.5,
+     31.6
+    ],
+    "distribution": [
+     4.0,
+     8.0,
+     15.0
+    ],
+    "scatter allowance (OPEN)": [
+     0.0,
+     3.0,
+     10.0
+    ],
+    "ECLSS modular increment": [
+     3.5999999999999996,
+     4.800000000000001,
+     6.4
+    ],
+    "L2 sections 750 K cross-strapped + dual headers": [
+     13.934237561607423,
+     20.147104748854193,
+     30.389392885871807
+    ],
+    "bulkhead relocation": [
+     0.0,
+     2.0,
+     5.0
+    ],
+    "LOG-G1 tare (3 t containers, 12 months)": [
+     4.807860357015053,
+     4.807860357015053,
+     4.807860357015053
+    ],
+    "hot loop H6a": [
+     483.25214818476934,
+     546.6884404659878,
+     673.1541126799827
+    ]
+   },
+   "mass": {
+    "departure_t": [
+     7129.669404770833,
+     7993.937077589278,
+     9898.954171526757
+    ],
+    "dry_added_t": [
+     698.908741066197,
+     935.1822034211483,
+     1455.9757015305338
+    ],
+    "propellant_t": [
+     4504.835359743162,
+     5050.917281885329,
+     6254.589973909758
+    ],
+    "end_t": [
+     2624.8340450276714,
+     2943.019795703948,
+     3644.3641976169974
+    ]
+   },
+   "register_refs": [
+    "FT-01/FT-02",
+    "FT-04"
+   ],
+   "hash": "46152ce82db2"
+  },
+  "F1": {
+   "id": "WF-F1-P6.0",
+   "track": "F (fiction) F1",
+   "status": "STUDY / NONCANON",
+   "derived_from": "N2-R4a-P5.0 (Phase V) + Phase VI corrections C6-01..",
+   "production_unchanged": true,
+   "generation": {
+    "L2": {
+     "units": 3,
+     "rating_We": 3500000.0,
+     "strategy": "C (B for maintenance)",
+     "turbine_inlet_K": 1500.0,
+     "reject_K": 950.0,
+     "eta": 0.154,
+     "register": "FT-03"
+    },
+    "L1": {
+     "type": "direct conversion (FT-04, CONDITIONAL)",
+     "rated_W": 100000000.0
+    },
+    "L3": "refuge survival (independent)"
+   },
+   "radiators": {
+    "hot": {
+     "T_K": 1800.0,
+     "length_m": 154.55698493009567,
+     "margin_rule": 1.2
+    },
+    "L2": {
+     "T_K": 950.0,
+     "length_m": 7.443015069904324,
+     "layout": "cross-strapped dual headers"
+    },
+    "bulkhead_x": 42.75698493009567,
+    "WARM": "R5-D re-zoned + burn heat-pump lift of the shortfall",
+    "LOW": "R5-D"
+   },
+   "hot_loop": {
+    "topology": "H6a",
+    "coolant": "Li",
+    "wall": "refractory composite 100 MPa, 3 t/m3 (FT-01)",
+    "mass_t": [
+     499.0175893278574,
+     565.1967819858065,
+     696.1045072929302
+    ],
+    "pump_W": [
+     7988104.089038681,
+     10270419.543049734,
+     14378587.360269625
+    ]
+   },
+   "eclss": "7 (3 A + 3 B + 1 hub)",
+   "logistics": "LOG-G1 3 t (hub store) + soft bags + racks",
+   "loading": "12 crew, 12 months standard, modular extension; 0.016 c reference",
+   "items_t": {
+    "L1 (derived)": [
+     30.0,
+     70.0,
+     140.0
+    ],
+    "L3": [
+     9.0,
+     12.0,
+     16.0
+    ],
+    "storage (buffer + restart)": [
+     14.3,
+     21.5,
+     31.6
+    ],
+    "distribution": [
+     4.0,
+     8.0,
+     15.0
+    ],
+    "scatter allowance (OPEN)": [
+     0.0,
+     3.0,
+     10.0
+    ],
+    "ECLSS modular increment": [
+     3.5999999999999996,
+     4.800000000000001,
+     6.4
+    ],
+    "bulkhead relocation": [
+     0.0,
+     2.0,
+     5.0
+    ],
+    "LOG-G1 tare (3 t containers, 12 months)": [
+     4.807860357015053,
+     4.807860357015053,
+     4.807860357015053
+    ],
+    "L2 (3 x 3.5 MWe, FT-03 1500 K inlet)": [
+     155.90345062581605,
+     290.5765362444675,
+     619.2940661157676
+    ],
+    "L2 sections 950 K cross-strapped + dual headers": [
+     5.056486717890201,
+     7.311025602664686,
+     11.027769607972111
+    ],
+    "hot loop H6a": [
+     499.0175893278574,
+     565.1967819858065,
+     696.1045072929302
+    ]
+   },
+   "mass": {
+    "departure_t": [
+     7227.616035175837,
+     8191.500939430233,
+     10262.033095162073
+    ],
+    "dry_added_t": [
+     725.6853870285787,
+     989.1922041899537,
+     1555.234203373685
+    ],
+    "propellant_t": [
+     4566.722302736747,
+     5175.746726295895,
+     6483.999036337728
+    ],
+    "end_t": [
+     2660.8937324390904,
+     3015.754213134338,
+     3778.0340588243444
+    ]
+   },
+   "register_refs": [
+    "FT-01/FT-02",
+    "FT-03",
+    "FT-04"
+   ],
+   "hash": "42d2a807fe23"
+  }
+ },
+ "reconciliation": {
+  "mass": {
+   "convergence_departure_t": 7888.326918981443,
+   "mass_fictional_departure_t": 8041.97597985044,
+   "convergence_dry_t": 906.3105024205136,
+   "mass_fictional_dry_t": 948.3150766292385,
+   "items": [
+    {
+     "item": "L2 units",
+     "convergence_t": 282.2313283894203,
+     "mass_fictional_t": 298.2387978492912,
+     "cause": "convergence row reused the Phase IV 700 K unit mass; mass_fictional scaled it to 750 K",
+     "delta_t": 16.00746945987089
+    },
+    {
+     "item": "L2 sections 750 K + dual headers",
+     "convergence_t": 0.0,
+     "mass_fictional_t": 20.147104748854193,
+     "cause": "left out of the convergence row (it dropped the Phase IV 700 K section and added nothing)",
+     "delta_t": 20.147104748854193
+    },
+    {
+     "item": "bulkhead relocation",
+     "convergence_t": 0.0,
+     "mass_fictional_t": 2.0,
+     "cause": "left out of the convergence row",
+     "delta_t": 2.0
+    },
+    {
+     "item": "LOG-G1 tare",
+     "convergence_t": 0.0,
+     "mass_fictional_t": 3.8500000000000005,
+     "cause": "left out of the convergence row",
+     "delta_t": 3.8500000000000005
+    }
+   ],
+   "sum_delta_t": 42.00457420872508,
+   "verdict": "Two configurations, not one ship: the 7,888 t row was a convergence summary on Phase IV items (700 K L2, no sections, no bulkhead, no container tare); 8,042 t was the full Phase V item list. Both also carried the 3 mm-era L1 mass (H5 pumps), the 700 K hot header length and the research loading. Phase VI replaces both with the frozen F0 configuration below."
+  },
+  "electrical": {
+   "R": [
+    {
+     "id": "PROT.EYE_BURN_WATCH",
+     "title": "EYE Burn Watch",
+     "installed_W": 1050000.0,
+     "continuous_proactive_burn_W": 1050000.0,
+     "continuous_reactive_burn_W": 1050000.0,
+     "intermittent_W": 0.0,
+     "startup_J": 0.0,
+     "peak_W": 1050000.0,
+     "storage_discharge_W": 0.0,
+     "bus": "L1",
+     "basis": "canon SPEC",
+     "cls": "DRIVE-SPECIFIC"
+    },
+    {
+     "id": "PROP.FEED_PUMPS",
+     "title": "Propellant boost pumps and conditioning (OPEN in canon)",
+     "installed_W": 1000000.0,
+     "continuous_proactive_burn_W": 500000.0,
+     "continuous_reactive_burn_W": 500000.0,
+     "intermittent_W": 0.0,
+     "startup_J": 0.0,
+     "peak_W": 1000000.0,
+     "storage_discharge_W": 0.0,
+     "bus": "L1",
+     "basis": "estimate 0.2-1.0 MW",
+     "cls": "OPEN"
+    },
+    {
+     "id": "TMS.HOT_LOOP_PUMPS",
+     "title": "H6a EM pumps (Track R walls)",
+     "installed_W": 12568888.82262581,
+     "continuous_proactive_burn_W": 10055111.058100648,
+     "continuous_reactive_burn_W": 10055111.058100648,
+     "intermittent_W": 0.0,
+     "startup_J": 0.0,
+     "peak_W": 10055111.058100648,
+     "storage_discharge_W": 0.0,
+     "bus": "L1",
+     "basis": "derived (H6a, R5-A length, coupled acceleration)",
+     "cls": "DERIVED"
+    },
+    {
+     "id": "TMS.BURN_HEAT_PUMPS",
+     "title": "Burn heat pumps (canon F02 rating 210 MW at burnout, reactive defense)",
+     "installed_W": 210000000.0,
+     "continuous_proactive_burn_W": 2665101.6955006956,
+     "continuous_reactive_burn_W": 81849600.0,
+     "intermittent_W": 79184498.3044993,
+     "startup_J": 0.0,
+     "peak_W": 81849600.0,
+     "storage_discharge_W": 0.0,
+     "bus": "L1",
+     "basis": "proactive doctrine (working): canon ledger runs them at 0 W; Phase VI adds the WARM shortfall lift 0.44 MW (incl. 20 %) x 6 = 2.7 MW. Reactive in a burn: canon HIGH_THRUST 82 MW at burnout (defense heat ~ (t/T)^3, burn average ~1/4 of that). The 210 MW rating is installed equipment, never continuous demand.",
+     "cls": "EXISTING (canon)"
+    },
+    {
+     "id": "PROP.PULSE_DISCHARGE",
+     "title": "Pulse bank discharge into startup heating and seed field",
+     "installed_W": 50000000.0,
+     "continuous_proactive_burn_W": 0.0,
+     "continuous_reactive_burn_W": 0.0,
+     "intermittent_W": 0.0,
+     "startup_J": null,
+     "peak_W": 50000000.0,
+     "storage_discharge_W": 50000000.0,
+     "bus": "pulse bank",
+     "basis": "storage discharge at ignition only; not a generation load",
+     "cls": "EXISTING (canon)"
+    },
+    {
+     "id": "EPS.PULSE_CHARGE",
+     "title": "Main battery / L2 charging the pulse bank",
+     "installed_W": 2000000.0,
+     "continuous_proactive_burn_W": 0.0,
+     "continuous_reactive_burn_W": 0.0,
+     "intermittent_W": 1000000.0,
+     "startup_J": null,
+     "peak_W": 2000000.0,
+     "storage_discharge_W": 0.0,
+     "bus": "A",
+     "basis": "before ignition, from L2 surplus",
+     "cls": "EXISTING (study)"
+    },
+    {
+     "id": "ISSA.COOLDOWN",
+     "title": "cooldown circulation after a burn (25 % flow)",
+     "installed_W": 160881.77692961038,
+     "continuous_proactive_burn_W": 0.0,
+     "continuous_reactive_burn_W": 0.0,
+     "intermittent_W": 160881.77692961038,
+     "startup_J": 0.0,
+     "peak_W": 160881.77692961038,
+     "storage_discharge_W": 0.0,
+     "bus": "L2 / ride-through",
+     "basis": "cube law at 25 % flow",
+     "cls": "DERIVED"
+    }
+   ],
+   "F": [
+    {
+     "id": "PROT.EYE_BURN_WATCH",
+     "title": "EYE Burn Watch",
+     "installed_W": 1050000.0,
+     "continuous_proactive_burn_W": 1050000.0,
+     "continuous_reactive_burn_W": 1050000.0,
+     "intermittent_W": 0.0,
+     "startup_J": 0.0,
+     "peak_W": 1050000.0,
+     "storage_discharge_W": 0.0,
+     "bus": "L1",
+     "basis": "canon SPEC",
+     "cls": "DRIVE-SPECIFIC"
+    },
+    {
+     "id": "PROP.FEED_PUMPS",
+     "title": "Propellant boost pumps and conditioning (OPEN in canon)",
+     "installed_W": 1000000.0,
+     "continuous_proactive_burn_W": 500000.0,
+     "continuous_reactive_burn_W": 500000.0,
+     "intermittent_W": 0.0,
+     "startup_J": 0.0,
+     "peak_W": 1000000.0,
+     "storage_discharge_W": 0.0,
+     "bus": "L1",
+     "basis": "estimate 0.2-1.0 MW",
+     "cls": "OPEN"
+    },
+    {
+     "id": "TMS.HOT_LOOP_PUMPS",
+     "title": "H6a EM pumps (Track F composite walls, FT-01/02)",
+     "installed_W": 12568888.82262581,
+     "continuous_proactive_burn_W": 10055111.058100648,
+     "continuous_reactive_burn_W": 10055111.058100648,
+     "intermittent_W": 0.0,
+     "startup_J": 0.0,
+     "peak_W": 10055111.058100648,
+     "storage_discharge_W": 0.0,
+     "bus": "L1",
+     "basis": "derived (H6a at the FT-01 allowable; larger, slower trunks)",
+     "cls": "DERIVED"
+    },
+    {
+     "id": "TMS.BURN_HEAT_PUMPS",
+     "title": "Burn heat pumps (canon F02 rating 210 MW at burnout, reactive defense)",
+     "installed_W": 210000000.0,
+     "continuous_proactive_burn_W": 2665101.6955006956,
+     "continuous_reactive_burn_W": 81849600.0,
+     "intermittent_W": 79184498.3044993,
+     "startup_J": 0.0,
+     "peak_W": 81849600.0,
+     "storage_discharge_W": 0.0,
+     "bus": "L1",
+     "basis": "proactive doctrine (working): canon ledger runs them at 0 W; Phase VI adds the WARM shortfall lift 0.44 MW (incl. 20 %) x 6 = 2.7 MW. Reactive in a burn: canon HIGH_THRUST 82 MW at burnout (defense heat ~ (t/T)^3, burn average ~1/4 of that). The 210 MW rating is installed equipment, never continuous demand.",
+     "cls": "EXISTING (canon)"
+    },
+    {
+     "id": "PROP.PULSE_DISCHARGE",
+     "title": "Pulse bank discharge into startup heating and seed field",
+     "installed_W": 50000000.0,
+     "continuous_proactive_burn_W": 0.0,
+     "continuous_reactive_burn_W": 0.0,
+     "intermittent_W": 0.0,
+     "startup_J": null,
+     "peak_W": 50000000.0,
+     "storage_discharge_W": 50000000.0,
+     "bus": "pulse bank",
+     "basis": "storage discharge at ignition only; not a generation load",
+     "cls": "EXISTING (canon)"
+    },
+    {
+     "id": "EPS.PULSE_CHARGE",
+     "title": "Main battery / L2 charging the pulse bank",
+     "installed_W": 2000000.0,
+     "continuous_proactive_burn_W": 0.0,
+     "continuous_reactive_burn_W": 0.0,
+     "intermittent_W": 1000000.0,
+     "startup_J": null,
+     "peak_W": 2000000.0,
+     "storage_discharge_W": 0.0,
+     "bus": "A",
+     "basis": "before ignition, from L2 surplus",
+     "cls": "EXISTING (study)"
+    },
+    {
+     "id": "ISSA.COOLDOWN",
+     "title": "cooldown circulation after a burn (25 % flow)",
+     "installed_W": 160881.77692961038,
+     "continuous_proactive_burn_W": 0.0,
+     "continuous_reactive_burn_W": 0.0,
+     "intermittent_W": 160881.77692961038,
+     "startup_J": 0.0,
+     "peak_W": 160881.77692961038,
+     "storage_discharge_W": 0.0,
+     "bus": "L2 / ride-through",
+     "basis": "cube law at 25 % flow",
+     "cls": "DERIVED"
+    }
+   ],
+   "sum_R": {
+    "continuous_proactive_W": 14270212.753601344,
+    "continuous_reactive_W": 93454711.05810064,
+    "installed_W": 224618888.82262582,
+    "phase5_counted_W": 271519645.55958956
+   },
+   "sum_F": {
+    "continuous_proactive_W": 14270212.753601344,
+    "continuous_reactive_W": 93454711.05810064,
+    "installed_W": 224618888.82262582,
+    "phase5_counted_W": null
+   },
+   "heat_pump": {
+    "installed_W": 210000000.0,
+    "rated_lift_basis": "35 MW at burnout (5 MW machinery + 30 MW defense)",
+    "proactive_W": 2665101.6955006956,
+    "proactive_lift_W": 444183.6159167826,
+    "reactive_peak_W": 81849600.0,
+    "reactive_lift_W": 13641600.0,
+    "reactive_mean_W": 20462400.0,
+    "factor": 6.0
+   },
+   "L2": {
+    "demand_W": [
+     2997489.9150976306,
+     5167432.230975271,
+     8180164.438850735
+    ],
+    "available_W": {
+     "BOL": 9675750.0,
+     "EOL": 8708175.0,
+     "one_unit_EOL": 2902725.0
+    },
+    "surplus_coast_W": {
+     "BOL": 4508317.769024729,
+     "EOL": 3540742.769024729,
+     "one_unit_EOL": -2264707.230975271
+    },
+    "note": "L2 demand = Phase IV ledger (proactive + planning + recharge + standby); pulse charging comes from this surplus before ignition"
+   }
+  },
+  "radiators": {
+   "found": [
+    {
+     "where": "phase5 config generation.L2.rejection_T_K",
+     "was": "700 K",
+     "now": "750 K (R5-A)",
+     "effect": "label only; the ledgers already used 750 K"
+    },
+    {
+     "where": "phase5 config radiators.L2",
+     "was": "700 K, 24 m, x 26.4-50.4",
+     "now": "750 K, 20.5 m, x 29.9-50.4",
+     "effect": "geometry label; the review file already drew 20.5 m"
+    },
+    {
+     "where": "phase5 transport(): hot header length",
+     "was": "162 - 24 = 138 m (700 K section)",
+     "now": "162 - 20.5 = 141.5 m",
+     "effect": "H6a recomputed below on the R5-A length"
+    },
+    {
+     "where": "phase5 electrical(): part-load efficiency base",
+     "was": "0.164 (700 K full-load)",
+     "now": "0.146 (750 K full-load)",
+     "effect": "part-load waste recomputed below"
+    },
+    {
+     "where": "phase5 radiators(): bulkhead radiosity cold side",
+     "was": "700 K",
+     "now": "750 K",
+     "effect": "bulkhead layer temperatures below"
+    },
+    {
+     "where": "phase5 rad3d.py bulkhead station",
+     "was": "x 26.2 (aft of a 24 m section)",
+     "now": "x 29.7",
+     "effect": "3 mm Al layer moved 3.7 m; rerun in rad6.py (effect on tallies within statistics)"
+    },
+    {
+     "where": "phase5 R5-C emitter Monte Carlo",
+     "was": "700 K",
+     "now": "kept (rejected variant, 700 K is its own design point)",
+     "effect": "none"
+    }
+   ],
+   "part_load": [
+    {
+     "load_frac": 0.5,
+     "eta": 0.1351304347826087,
+     "waste_per_unit_W": 11200450.45045045,
+     "linear_W": 10229166.666666668
+    },
+    {
+     "load_frac": 0.6666666666666666,
+     "eta": 0.14121739130434782,
+     "waste_per_unit_W": 14189655.17241379,
+     "linear_W": 13638888.88888889
+    },
+    {
+     "load_frac": 0.8,
+     "eta": 0.14433391304347826,
+     "waste_per_unit_W": 16599460.188933874,
+     "linear_W": 16366666.66666667
+    },
+    {
+     "load_frac": 1.0,
+     "eta": 0.14608695652173911,
+     "waste_per_unit_W": 20458333.333333336,
+     "linear_W": 20458333.333333336
+    }
+   ],
+   "l2_loads": {
+    "C_part_load": 42568965.51724137,
+    "C_linear": 40916666.66666667,
+    "two_survivors_full": 40916666.66666667
+   },
+   "l2_capacity_W": 49588140.86332183,
+   "l2_failures": [
+    {
+     "case": "intact, strategy C (3 units at 2/3, part-load efficiency)",
+     "capacity_W": 49588140.86332183,
+     "load_W": 42568965.51724137,
+     "margin": 0.16488949780180917,
+     "max_output_MWe": 10.5
+    },
+    {
+     "case": "trip: two survivors at 100 %",
+     "capacity_W": 49588140.86332183,
+     "load_W": 40916666.66666667,
+     "margin": 0.211930122932509,
+     "max_output_MWe": 7.0
+    },
+    {
+     "case": "one L2 section lost (one blade), strategy C",
+     "capacity_W": 33058760.57554789,
+     "load_W": 42568965.51724137,
+     "margin": -0.22340700146546055,
+     "max_output_MWe": 8.154226484612664
+    },
+    {
+     "case": "one L2 section lost + one unit tripped (two survivors at 100 %)",
+     "capacity_W": 33058760.57554789,
+     "load_W": 40916666.66666667,
+     "margin": -0.1920465847116607,
+     "max_output_MWe": 5.655673907018375
+    }
+   ],
+   "hot_capacity_W": 12610149755.431847,
+   "hot_failures": [
+    {
+     "case": "intact",
+     "capacity_W": 12610149755.431847,
+     "margin": 0.20671289525663594,
+     "meets_20pct": true,
+     "drive_power_at_20pct": 1.0,
+     "drive_power_no_margin": 1.0
+    },
+    {
+     "case": "one H6a section (1 of 6 on one blade)",
+     "capacity_W": 11909585880.130077,
+     "margin": 0.1396732899646007,
+     "meets_20pct": false,
+     "drive_power_at_20pct": 0.9497277416371672,
+     "drive_power_no_margin": 1.0
+    },
+    {
+     "case": "one trunk of a pair (60 % path rating)",
+     "capacity_W": 10928796454.7076,
+     "margin": 0.045817842555751165,
+     "meets_20pct": false,
+     "drive_power_at_20pct": 0.8715148687964593,
+     "drive_power_no_margin": 1.0
+    },
+    {
+     "case": "isolation valve fails open: two sections",
+     "capacity_W": 11209022004.828308,
+     "margin": 0.07263368467256548,
+     "meets_20pct": false,
+     "drive_power_at_20pct": 0.8938614038938045,
+     "drive_power_no_margin": 1.0
+    },
+    {
+     "case": "whole blade",
+     "capacity_W": 8406766503.621231,
+     "margin": -0.195524736495576,
+     "meets_20pct": false,
+     "drive_power_at_20pct": 0.6703960529203533,
+     "drive_power_no_margin": 0.804475263504424
+    }
+   ],
+   "bulkhead": {
+    "intact": {
+     "q_W_m2": 248.47644314027443,
+     "layer_T_K": [
+      954.227511011311,
+      900.7203709305114,
+      835.5071046916784
+     ],
+     "q_intact_W_m2": 248.47644314027443
+    },
+    "one_layer_lost": {
+     "q_W_m2": 331.30192418703257,
+     "layer_T_K": [
+      937.3965878290064,
+      858.9220766369946
+     ],
+     "q_intact_W_m2": 331.30192418703257
+    },
+    "holed_5pct": {
+     "q_W_m2": 1980.357251827987,
+     "layer_T_K": [
+      954.227511011311,
+      900.7203709305114,
+      835.5071046916784
+     ],
+     "q_intact_W_m2": 248.47644314027443
+    }
+   },
+   "finding": null
+  },
+  "eclss": {
+   "layouts": [
+    {
+     "layout": "7 (3 A + 3 B + 1 hub)",
+     "units": 7,
+     "mass_t": 8.4,
+     "results": {
+      "nominal 6 + 6": true,
+      "hub unit failed (6 + 6)": true,
+      "one A unit + hub unit failed (6 + 6)": true,
+      "two A units failed (6 + 6)": true,
+      "ring A lost (12 in B)": true,
+      "ring A lost + one B unit failed": true,
+      "ring A lost + hub unit failed": true,
+      "ring A lost + B unit + hub unit failed": false,
+      "ring A rotary coupling lost (A occupied 6 + 6)": true,
+      "ring A rotary coupling lost + one A unit failed": true
+     },
+     "passes": 9,
+     "of": 10
+    },
+    {
+     "layout": "8 (4 A + 4 B)",
+     "units": 8,
+     "mass_t": 9.6,
+     "results": {
+      "nominal 6 + 6": true,
+      "hub unit failed (6 + 6)": true,
+      "one A unit + hub unit failed (6 + 6)": true,
+      "two A units failed (6 + 6)": true,
+      "ring A lost (12 in B)": true,
+      "ring A lost + one B unit failed": true,
+      "ring A lost + hub unit failed": true,
+      "ring A lost + B unit + hub unit failed": true,
+      "ring A rotary coupling lost (A occupied 6 + 6)": true,
+      "ring A rotary coupling lost + one A unit failed": true
+     },
+     "passes": 10,
+     "of": 10
+    },
+    {
+     "layout": "8 (3 A + 3 B + 2 hub)",
+     "units": 8,
+     "mass_t": 9.6,
+     "results": {
+      "nominal 6 + 6": true,
+      "hub unit failed (6 + 6)": true,
+      "one A unit + hub unit failed (6 + 6)": true,
+      "two A units failed (6 + 6)": true,
+      "ring A lost (12 in B)": true,
+      "ring A lost + one B unit failed": true,
+      "ring A lost + hub unit failed": true,
+      "ring A lost + B unit + hub unit failed": true,
+      "ring A rotary coupling lost (A occupied 6 + 6)": true,
+      "ring A rotary coupling lost + one A unit failed": true
+     },
+     "passes": 10,
+     "of": 10
+    }
+   ],
+   "rotary": {
+    "per_ring": [
+     "air duct D 0.28 m at 4 m/s through the existing fluid-coupling cartridge position (rotor_interface), labyrinth + lift-off face seal, ~300 Pa duct pressure",
+     "water supply/return DN25 swivel",
+     "O2 / N2 make-up swivel (DN15)",
+     "cooling loop pair to the ring cold loop",
+     "power: existing contactless power channel (2 x 60 kW per ring for ECLSS)",
+     "data: existing contactless data channel, two networks"
+    ],
+    "leak_kg_d": [
+     0.05,
+     0.2,
+     1.0
+    ],
+    "seal_boundary": "HAB-001 double boundary: primary seal plane + monitored guard cavity (no single rotary seal leak path)",
+    "verdict": "CREDIBLE for Track F: both rings already carry a stationary-to-rotating fluid-coupling cartridge and contactless power/data channels at the hub (rotor_interface, OD-013 OPEN). The hub unit reaches each ring through that ring's own coupling; seven units pass every case except a coupling loss combined with a second failure, which eight 4 + 4 units also cover differently (they lose ring A + hub-free cases).",
+    "consumables": "O2/N2 90 d reserve (casing service bays), water buffer per ring 2 t, LiOH emergency canisters in the refuge (L3, 12 crew x 14 d)"
+   },
+   "unit": {
+    "crew": 4,
+    "mass_t": 1.2,
+    "power_kW": 3.4,
+    "envelope_m": [
+     2.0,
+     1.4,
+     2.2
+    ],
+    "oru_max_width_m": 0.7,
+    "maint_clear_m": 1.0
+   },
+   "choice": "7 (3 A + 3 B + 1 hub)",
+   "bug_fixed": "Phase V counted a negative hub capacity (4 x (0 - 1)) for 8 (4 + 4) \"ring A lost + hub failed\": that case passes"
+  },
+  "logistics": {
+   "container": {
+    "gross_t": 3.0,
+    "edge_m": 2.0462493363208125,
+    "tare_t": 0.6009825446268816,
+    "payload_t": 2.3990174553731185,
+    "fittings": "4 corner fittings, each rated 3 t x 2 g x 1.5 / 4 = 22 kN (2 g covers the 1.36 g burn peak and handling)",
+    "hatch": "2.5 m cargo hatch (clear 2.3 m): edge 2.05 m passes with 0.25 m clearance",
+    "handling": "single-arm manipulator in the stationary hub store (FT-07)",
+    "route": "hard containers stay in the stationary hub store; goods transfer to the rotating rings in soft bags <= 0.70 m (ORU width) through the crew-transfer vestibules; LOG-G1 never crosses a rotary seal",
+    "small": "1.5 t containers for EVA/airlock use, permanent racks for spares that never move"
+   },
+   "accounting": {
+    "phase5_mass_line_t": 3.8500000000000005,
+    "phase5_logistics_t": 4.807860357015053,
+    "phase6_t": 4.807860357015053,
+    "n": 8,
+    "note": "Phase V carried 7 x 0.55 t in the mass ledger while V-G computed 8 containers at 0.60 t tare: Phase VI uses V-G"
+   },
+   "workshop": {
+    "volume_m3": 40.0,
+    "mass_t": 6.0,
+    "power_kW": 8.0,
+    "zone": "stationary hub",
+    "fab": "fab cell (canon), small-part additive + machining; spares in permanent racks (60 t workshop/spares/cargo line holds the spares)"
+   }
+  },
+  "l1_mass": {
+   "phase5_t": [
+    7.849670240534905,
+    20.463461354511953,
+    48.47572833221004
+   ],
+   "basis5": "Phase IV formula on 0.1 MW + H5 pump work (4-34 MW)",
+   "R_t": [
+    31.0302860538875,
+    60.636026394146675,
+    99.87292256222088
+   ],
+   "R_basis": "thermal conversion rated 17.8 MWe (proactive continuous x 1.25)",
+   "F0_t": [
+    6.0,
+    14.0,
+    28.0
+   ],
+   "F1_t": [
+    30.0,
+    70.0,
+    140.0
+   ]
+  },
+  "cryo": {
+   "he3_leak_lift_W": 117.81278756245447,
+   "shield_leak_lift_W": 3642.0222488177133,
+   "he3_W_per_W": 1500.0,
+   "shield_W_per_W": 60.0,
+   "note": "fuel_loads.cooling gives the REQUIRED lift for the conduction/radiation leak (it sizes the cryocoolers to the leak; the canon band spread 0.8-1.5 is on the input work). Phase V called 118 W the \"lift\": it is that requirement, not an installed margin."
+  },
+  "preheat": {
+   "R": {
+    "thaw_J": 133108218277.68062,
+    "blade_J": 8107244539.670322,
+    "to_operating_J": 404886208725.55963,
+    "hours_on_L2": {
+     "BOL": 8.700921154843508,
+     "EOL": 11.078612598584451,
+     "one_unit_EOL": 39226517.449264154
+    },
+    "hours_one_unit_black_start": 18.655086827456827,
+    "drive_10pct_minutes": 6.457515290678782
+   },
+   "F": {
+    "thaw_J": 133108218277.68062,
+    "blade_J": 8107244539.670322,
+    "to_operating_J": 404886208725.55963,
+    "hours_on_L2": {
+     "BOL": 8.700921154843508,
+     "EOL": 11.078612598584451,
+     "one_unit_EOL": 39226517.449264154
+    },
+    "hours_one_unit_black_start": 18.655086827456827,
+    "drive_10pct_minutes": 6.457515290678782
+   },
+   "note": "Phase V P5-07 said \"L2 alone takes days\": with all three units in strategy C the coast surplus thaws the loop in hours; only a one-unit black start stretches it. Heating from the melt point to the operating temperature comes from the drive at ~10 % power (minutes)."
+  },
+  "corrections": [
+   {
+    "id": "C6-01",
+    "item": "fictional mass 7,888 vs 8,042 t",
+    "fix": "Two configurations, not one ship: the 7,888 t row was a convergence summary on Phase IV items (700 K L2, no sections, no bulkhead, no container tare); 8,042 t was the full Phase V item list. Both also carried the 3 mm-era L1 mass (H5 pumps), the 700 K hot header length and the research loading. Phase VI replaces both with the frozen F0 configuration below."
+   },
+   {
+    "id": "C6-02",
+    "item": "L1 = 600 MW in the Phase V ledger",
+    "fix": "installed 210 MW heat-pump rating and the 50 MW pulse discharge were counted as continuous; continuous proactive burn L1 is 14.3 MW (R)"
+   },
+   {
+    "id": "C6-03",
+    "item": "700 K values in the 750 K configuration",
+    "fix": "phase5 config generation.L2.rejection_T_K; phase5 config radiators.L2; phase5 transport(): hot header length; phase5 electrical(): part-load efficiency base; phase5 radiators(): bulkhead radiosity cold side; phase5 rad3d.py bulkhead station"
+   },
+   {
+    "id": "C6-04",
+    "item": "ECLSS 8 (4 + 4) \"ring A lost + hub failed\"",
+    "fix": "Phase V counted a negative hub capacity (4 x (0 - 1)) for 8 (4 + 4) \"ring A lost + hub failed\": that case passes"
+   },
+   {
+    "id": "C6-05",
+    "item": "LOG-G1 tare in the mass ledger",
+    "fix": "Phase V carried 7 x 0.55 t in the mass ledger while V-G computed 8 containers at 0.60 t tare: Phase VI uses V-G"
+   },
+   {
+    "id": "C6-06",
+    "item": "L1 machinery mass",
+    "fix": "Phase V reused the Phase IV H5-pump basis (20 t nom); now 61 t (R thermal) and 14/70 t (F0/F1 DC)"
+   },
+   {
+    "id": "C6-07",
+    "item": "He-3 \"lift\" 118 W",
+    "fix": "fuel_loads.cooling gives the REQUIRED lift for the conduction/radiation leak (it sizes the cryocoolers to the leak; the canon band spread 0.8-1.5 is on the input work). Phase V called 118 W the \"lift\": it is that requirement, not an installed margin."
+   },
+   {
+    "id": "C6-08",
+    "item": "startup preheat duration",
+    "fix": "Phase V P5-07 said \"L2 alone takes days\": with all three units in strategy C the coast surplus thaws the loop in hours; only a one-unit black start stretches it. Heating from the melt point to the operating temperature comes from the drive at ~10 % power (minutes)."
+   },
+   {
+    "id": "C6-09",
+    "item": "hot header length 138 m",
+    "fix": "R5-A leaves 141.5 m; H6a recomputed"
+   }
+  ]
+ },
+ "radiators": {
+  "R": {
+   "T_K": 750.0,
+   "eta": 0.14608695652173911,
+   "length_m": 20.510830136610082,
+   "area_m2": 3374.7152518102453,
+   "waste_per_unit_full_W": 20458333.333333336,
+   "capacity_W": 49100000.00000001,
+   "header_t": 18.45974712294907,
+   "hot_capacity_W": 12610149755.431847,
+   "hot_headroom_W": 58458129.52653885,
+   "hot_length_m": 141.48916986338992
+  },
+  "F0": {
+   "T_K": 750.0,
+   "eta": 0.14608695652173911,
+   "length_m": 20.510830136610082,
+   "area_m2": 3374.7152518102453,
+   "waste_per_unit_full_W": 20458333.333333336,
+   "capacity_W": 49100000.00000001,
+   "header_t": 18.45974712294907,
+   "hot_capacity_W": 12610149755.431847,
+   "hot_headroom_W": 58458129.52653885,
+   "hot_length_m": 141.48916986338992
+  },
+  "F1": {
+   "T_K": 950.0,
+   "eta": 0.154,
+   "length_m": 7.443015069904324,
+   "area_m2": 1224.6240795015915,
+   "waste_per_unit_full_W": 19227272.727272727,
+   "capacity_W": 46145454.54545454,
+   "header_t": 6.698713562913892,
+   "reactor_MWt": 22.727272727272727,
+   "hot_free_gain_m": 13.067815066705759,
+   "within_research_reactor_power": true,
+   "hot_capacity_W": 13774812076.417635,
+   "hot_headroom_W": 1029010063.6813622,
+   "hot_length_m": 154.55698493009567
+  },
+  "scan": [
+   {
+    "T_K": 700.0,
+    "eta": 0.22399999999999998,
+    "length_m": 16.070226429948388,
+    "area_m2": 2644.0879219408416,
+    "waste_per_unit_full_W": 12125000.0,
+    "capacity_W": 29100000.0,
+    "header_t": 14.463203786953548,
+    "reactor_MWt": 15.625000000000002,
+    "hot_free_gain_m": 4.440603706661694,
+    "within_research_reactor_power": true
+   },
+   {
+    "T_K": 750.0,
+    "eta": 0.21,
+    "length_m": 13.200452796677768,
+    "area_m2": 2171.9145001467155,
+    "waste_per_unit_full_W": 13166666.666666666,
+    "capacity_W": 31599999.999999996,
+    "header_t": 11.88040751700999,
+    "reactor_MWt": 16.666666666666668,
+    "hot_free_gain_m": 7.310377339932314,
+    "within_research_reactor_power": true
+   },
+   {
+    "T_K": 800.0,
+    "eta": 0.196,
+    "length_m": 11.093915532009591,
+    "area_m2": 1825.318902199978,
+    "waste_per_unit_full_W": 14357142.857142856,
+    "capacity_W": 34457142.85714285,
+    "header_t": 9.984523978808632,
+    "reactor_MWt": 17.857142857142858,
+    "hot_free_gain_m": 9.41691460460049,
+    "within_research_reactor_power": true
+   },
+   {
+    "T_K": 850.0,
+    "eta": 0.182,
+    "length_m": 9.522150595284996,
+    "area_m2": 1566.7111779442246,
+    "waste_per_unit_full_W": 15730769.23076923,
+    "capacity_W": 37753846.15384615,
+    "header_t": 8.569935535756496,
+    "reactor_MWt": 19.23076923076923,
+    "hot_free_gain_m": 10.988679541325086,
+    "within_research_reactor_power": true
+   },
+   {
+    "T_K": 900.0,
+    "eta": 0.168,
+    "length_m": 8.33758689333979,
+    "area_m2": 1371.8109635175067,
+    "waste_per_unit_full_W": 17333333.333333332,
+    "capacity_W": 41599999.99999999,
+    "header_t": 7.50382820400581,
+    "reactor_MWt": 20.833333333333332,
+    "hot_free_gain_m": 12.173243243270292,
+    "within_research_reactor_power": true
+   },
+   {
+    "T_K": 950.0,
+    "eta": 0.154,
+    "length_m": 7.443015069904324,
+    "area_m2": 1224.6240795015915,
+    "waste_per_unit_full_W": 19227272.727272727,
+    "capacity_W": 46145454.54545454,
+    "header_t": 6.698713562913892,
+    "reactor_MWt": 22.727272727272727,
+    "hot_free_gain_m": 13.067815066705759,
+    "within_research_reactor_power": true,
+    "hot_capacity_W": 13774812076.417635,
+    "hot_headroom_W": 1029010063.6813622,
+    "hot_length_m": 154.55698493009567
+   },
+   {
+    "T_K": 1000.0,
+    "eta": 0.14,
+    "length_m": 6.774152402117245,
+    "area_m2": 1114.5738752283573,
+    "waste_per_unit_full_W": 21500000.0,
+    "capacity_W": 51600000.0,
+    "header_t": 6.09673716190552,
+    "reactor_MWt": 24.999999999999996,
+    "hot_free_gain_m": 13.736677734492837,
+    "within_research_reactor_power": false
+   }
+  ],
+  "rule": "F1 picks the rejection temperature that frees the most HOT length while the reactor stays at or below the research thermal power"
+ },
+ "warm_shortfall_W": 370153.0132639855,
+ "direct_conversion": {
+  "F0": {
+   "ledger": {
+    "fusion_W": 261265104180912.4,
+    "jet_W": 209012083344729.94,
+    "absorbed_W": 10450604167.236498,
+    "other_W": 52242570232015.234,
+    "thrust_N": 21770763.000706356,
+    "ve_m_s": 19201172.08,
+    "note": "P_fusion = P_jet + P_absorbed + P_other; the pickup takes P_e/eta from the jet (thrust falls by half that share at constant mass flow); the loss is deposited in the pickup winding inside the existing nozzle structure and carried by the H6a loop to the HOT radiators (1800 K): a real sink, inside the 20 % rule only while it fits the HOT headroom"
+   },
+   "rows": [
+    {
+     "state": "proactive burn",
+     "case": "opt",
+     "P_e_W": 14270212.753601344,
+     "eta": 0.8,
+     "extracted_from_jet_W": 17837765.942001678,
+     "loss_to_hot_loop_W": 3567553.1884003337,
+     "thrust_change_rel": -4.2671614139602904e-08,
+     "ve_change_rel": -4.2671614139602904e-08,
+     "extra_propellant_rel": 4.2671614139602904e-08,
+     "hot_load_added_W": 3567553.1884003337,
+     "hot_headroom_W": 58458129.52653885,
+     "fits_hot_headroom": true
+    },
+    {
+     "state": "proactive burn",
+     "case": "nom",
+     "P_e_W": 14270212.753601344,
+     "eta": 0.65,
+     "extracted_from_jet_W": 21954173.46707899,
+     "loss_to_hot_loop_W": 7683960.713477647,
+     "thrust_change_rel": -5.2518909710280506e-08,
+     "ve_change_rel": -5.2518909710280506e-08,
+     "extra_propellant_rel": 5.2518909710280506e-08,
+     "hot_load_added_W": 7683960.713477647,
+     "hot_headroom_W": 58458129.52653885,
+     "fits_hot_headroom": true
+    },
+    {
+     "state": "proactive burn",
+     "case": "cons",
+     "P_e_W": 14270212.753601344,
+     "eta": 0.5,
+     "extracted_from_jet_W": 28540425.50720269,
+     "loss_to_hot_loop_W": 14270212.753601344,
+     "thrust_change_rel": -6.827458262336466e-08,
+     "ve_change_rel": -6.827458262336466e-08,
+     "extra_propellant_rel": 6.827458262336466e-08,
+     "hot_load_added_W": 14270212.753601344,
+     "hot_headroom_W": 58458129.52653885,
+     "fits_hot_headroom": true
+    },
+    {
+     "state": "reactive burn (peak at burnout)",
+     "case": "opt",
+     "P_e_W": 93454711.05810064,
+     "eta": 0.8,
+     "extracted_from_jet_W": 116818388.8226258,
+     "loss_to_hot_loop_W": 23363677.76452516,
+     "thrust_change_rel": -2.7945367309208075e-07,
+     "ve_change_rel": -2.7945367309208075e-07,
+     "extra_propellant_rel": 2.7945367309208075e-07,
+     "hot_load_added_W": 23363677.76452516,
+     "hot_headroom_W": 58458129.52653885,
+     "fits_hot_headroom": false
+    },
+    {
+     "state": "reactive burn (peak at burnout)",
+     "case": "nom",
+     "P_e_W": 93454711.05810064,
+     "eta": 0.65,
+     "extracted_from_jet_W": 143776478.55092406,
+     "loss_to_hot_loop_W": 50321767.49282342,
+     "thrust_change_rel": -3.4394298226717633e-07,
+     "ve_change_rel": -3.4394298226717633e-07,
+     "extra_propellant_rel": 3.4394298226717633e-07,
+     "hot_load_added_W": 50321767.49282342,
+     "hot_headroom_W": 58458129.52653885,
+     "fits_hot_headroom": false
+    },
+    {
+     "state": "reactive burn (peak at burnout)",
+     "case": "cons",
+     "P_e_W": 93454711.05810064,
+     "eta": 0.5,
+     "extracted_from_jet_W": 186909422.11620128,
+     "loss_to_hot_loop_W": 93454711.05810064,
+     "thrust_change_rel": -4.4712587694732925e-07,
+     "ve_change_rel": -4.4712587694732925e-07,
+     "extra_propellant_rel": 4.4712587694732925e-07,
+     "hot_load_added_W": 93454711.05810064,
+     "hot_headroom_W": 58458129.52653885,
+     "fits_hot_headroom": false
+    }
+   ],
+   "buffer": [
+    {
+     "rate_Hz": 10.0,
+     "P_e_W": 20000000.0,
+     "energy_per_pulse_J": 2000000.0,
+     "buffer_J": 4000000.0,
+     "capacitor_t": 2.0
+    },
+    {
+     "rate_Hz": 10.0,
+     "P_e_W": 100000000.0,
+     "energy_per_pulse_J": 10000000.0,
+     "buffer_J": 20000000.0,
+     "capacitor_t": 10.0
+    },
+    {
+     "rate_Hz": 196.0,
+     "P_e_W": 20000000.0,
+     "energy_per_pulse_J": 102040.8163265306,
+     "buffer_J": 204081.6326530612,
+     "capacitor_t": 0.1020408163265306
+    },
+    {
+     "rate_Hz": 196.0,
+     "P_e_W": 100000000.0,
+     "energy_per_pulse_J": 510204.0816326531,
+     "buffer_J": 1020408.1632653062,
+     "capacitor_t": 0.5102040816326531
+    },
+    {
+     "rate_Hz": 1000.0,
+     "P_e_W": 20000000.0,
+     "energy_per_pulse_J": 20000.0,
+     "buffer_J": 40000.0,
+     "capacitor_t": 0.02
+    },
+    {
+     "rate_Hz": 1000.0,
+     "P_e_W": 100000000.0,
+     "energy_per_pulse_J": 100000.0,
+     "buffer_J": 200000.0,
+     "capacitor_t": 0.1
+    }
+   ],
+   "startup": {
+    "rule": "direct conversion produces power only while the drive burns: ignition, preheat and restart come from the pulse bank, the main battery and L2 (continuous generation and stored pulse energy are separate)",
+    "first_pulses": "pulse bank (canon 50 MW discharge)",
+    "steady": "DC feeds L1 after ignition; the pulse bank recharges from DC"
+   },
+   "physics": [
+    {
+     "principle": "Faraday induction (flux change in a pickup winding as the burn plasma expands against the nozzle field)",
+     "precedent": "Daedalus induction loop (BIS 1978); pulsed inductive recovery in magneto-inertial fusion experiments",
+     "limit": "steady flow induces no EMF: needs a pulsed or modulated exhaust"
+    },
+    {
+     "principle": "Electrostatic deceleration of ions (Venetian blind)",
+     "precedent": "Moir & Barr 1973 design studies, 50-70 % calculated",
+     "limit": "large grid area in the beam; grid erosion"
+    },
+    {
+     "principle": "Travelling-wave direct energy converter (TWDEC)",
+     "precedent": "Momota et al. for D-3He 14.7 MeV protons, ~60-70 % calculated",
+     "limit": "never demonstrated at power"
+    }
+   ],
+   "register": "FT-04 (CONDITIONAL)",
+   "thermal": "Track R keeps thermal conversion at 0.27 with a ~900 K reject (no radiator, OPEN). Track F replaces the 900 K cycle by DC losses at ~1900 K into the HOT loop: the rejection requirement moves to HOT and is checked against its headroom, not removed."
+  },
+  "F1": {
+   "ledger": {
+    "fusion_W": 261265104180912.4,
+    "jet_W": 209012083344729.94,
+    "absorbed_W": 10450604167.236498,
+    "other_W": 52242570232015.234,
+    "thrust_N": 21770763.000706356,
+    "ve_m_s": 19201172.08,
+    "note": "P_fusion = P_jet + P_absorbed + P_other; the pickup takes P_e/eta from the jet (thrust falls by half that share at constant mass flow); the loss is deposited in the pickup winding inside the existing nozzle structure and carried by the H6a loop to the HOT radiators (1800 K): a real sink, inside the 20 % rule only while it fits the HOT headroom"
+   },
+   "rows": [
+    {
+     "state": "proactive burn",
+     "case": "opt",
+     "P_e_W": 14270212.753601344,
+     "eta": 0.8,
+     "extracted_from_jet_W": 17837765.942001678,
+     "loss_to_hot_loop_W": 3567553.1884003337,
+     "thrust_change_rel": -4.2671614139602904e-08,
+     "ve_change_rel": -4.2671614139602904e-08,
+     "extra_propellant_rel": 4.2671614139602904e-08,
+     "hot_load_added_W": 3567553.1884003337,
+     "hot_headroom_W": 1029010063.6813622,
+     "fits_hot_headroom": true
+    },
+    {
+     "state": "proactive burn",
+     "case": "nom",
+     "P_e_W": 14270212.753601344,
+     "eta": 0.65,
+     "extracted_from_jet_W": 21954173.46707899,
+     "loss_to_hot_loop_W": 7683960.713477647,
+     "thrust_change_rel": -5.2518909710280506e-08,
+     "ve_change_rel": -5.2518909710280506e-08,
+     "extra_propellant_rel": 5.2518909710280506e-08,
+     "hot_load_added_W": 7683960.713477647,
+     "hot_headroom_W": 1029010063.6813622,
+     "fits_hot_headroom": true
+    },
+    {
+     "state": "proactive burn",
+     "case": "cons",
+     "P_e_W": 14270212.753601344,
+     "eta": 0.5,
+     "extracted_from_jet_W": 28540425.50720269,
+     "loss_to_hot_loop_W": 14270212.753601344,
+     "thrust_change_rel": -6.827458262336466e-08,
+     "ve_change_rel": -6.827458262336466e-08,
+     "extra_propellant_rel": 6.827458262336466e-08,
+     "hot_load_added_W": 14270212.753601344,
+     "hot_headroom_W": 1029010063.6813622,
+     "fits_hot_headroom": true
+    },
+    {
+     "state": "reactive burn (peak at burnout)",
+     "case": "opt",
+     "P_e_W": 93454711.05810064,
+     "eta": 0.8,
+     "extracted_from_jet_W": 116818388.8226258,
+     "loss_to_hot_loop_W": 23363677.76452516,
+     "thrust_change_rel": -2.7945367309208075e-07,
+     "ve_change_rel": -2.7945367309208075e-07,
+     "extra_propellant_rel": 2.7945367309208075e-07,
+     "hot_load_added_W": 23363677.76452516,
+     "hot_headroom_W": 1029010063.6813622,
+     "fits_hot_headroom": true
+    },
+    {
+     "state": "reactive burn (peak at burnout)",
+     "case": "nom",
+     "P_e_W": 93454711.05810064,
+     "eta": 0.65,
+     "extracted_from_jet_W": 143776478.55092406,
+     "loss_to_hot_loop_W": 50321767.49282342,
+     "thrust_change_rel": -3.4394298226717633e-07,
+     "ve_change_rel": -3.4394298226717633e-07,
+     "extra_propellant_rel": 3.4394298226717633e-07,
+     "hot_load_added_W": 50321767.49282342,
+     "hot_headroom_W": 1029010063.6813622,
+     "fits_hot_headroom": true
+    },
+    {
+     "state": "reactive burn (peak at burnout)",
+     "case": "cons",
+     "P_e_W": 93454711.05810064,
+     "eta": 0.5,
+     "extracted_from_jet_W": 186909422.11620128,
+     "loss_to_hot_loop_W": 93454711.05810064,
+     "thrust_change_rel": -4.4712587694732925e-07,
+     "ve_change_rel": -4.4712587694732925e-07,
+     "extra_propellant_rel": 4.4712587694732925e-07,
+     "hot_load_added_W": 93454711.05810064,
+     "hot_headroom_W": 1029010063.6813622,
+     "fits_hot_headroom": true
+    }
+   ],
+   "buffer": [
+    {
+     "rate_Hz": 10.0,
+     "P_e_W": 20000000.0,
+     "energy_per_pulse_J": 2000000.0,
+     "buffer_J": 4000000.0,
+     "capacitor_t": 2.0
+    },
+    {
+     "rate_Hz": 10.0,
+     "P_e_W": 100000000.0,
+     "energy_per_pulse_J": 10000000.0,
+     "buffer_J": 20000000.0,
+     "capacitor_t": 10.0
+    },
+    {
+     "rate_Hz": 196.0,
+     "P_e_W": 20000000.0,
+     "energy_per_pulse_J": 102040.8163265306,
+     "buffer_J": 204081.6326530612,
+     "capacitor_t": 0.1020408163265306
+    },
+    {
+     "rate_Hz": 196.0,
+     "P_e_W": 100000000.0,
+     "energy_per_pulse_J": 510204.0816326531,
+     "buffer_J": 1020408.1632653062,
+     "capacitor_t": 0.5102040816326531
+    },
+    {
+     "rate_Hz": 1000.0,
+     "P_e_W": 20000000.0,
+     "energy_per_pulse_J": 20000.0,
+     "buffer_J": 40000.0,
+     "capacitor_t": 0.02
+    },
+    {
+     "rate_Hz": 1000.0,
+     "P_e_W": 100000000.0,
+     "energy_per_pulse_J": 100000.0,
+     "buffer_J": 200000.0,
+     "capacitor_t": 0.1
+    }
+   ],
+   "startup": {
+    "rule": "direct conversion produces power only while the drive burns: ignition, preheat and restart come from the pulse bank, the main battery and L2 (continuous generation and stored pulse energy are separate)",
+    "first_pulses": "pulse bank (canon 50 MW discharge)",
+    "steady": "DC feeds L1 after ignition; the pulse bank recharges from DC"
+   },
+   "physics": [
+    {
+     "principle": "Faraday induction (flux change in a pickup winding as the burn plasma expands against the nozzle field)",
+     "precedent": "Daedalus induction loop (BIS 1978); pulsed inductive recovery in magneto-inertial fusion experiments",
+     "limit": "steady flow induces no EMF: needs a pulsed or modulated exhaust"
+    },
+    {
+     "principle": "Electrostatic deceleration of ions (Venetian blind)",
+     "precedent": "Moir & Barr 1973 design studies, 50-70 % calculated",
+     "limit": "large grid area in the beam; grid erosion"
+    },
+    {
+     "principle": "Travelling-wave direct energy converter (TWDEC)",
+     "precedent": "Momota et al. for D-3He 14.7 MeV protons, ~60-70 % calculated",
+     "limit": "never demonstrated at power"
+    }
+   ],
+   "register": "FT-04 (CONDITIONAL)",
+   "thermal": "Track R keeps thermal conversion at 0.27 with a ~900 K reject (no radiator, OPEN). Track F replaces the 900 K cycle by DC losses at ~1900 K into the HOT loop: the rejection requirement moves to HOT and is checked against its headroom, not removed."
+  }
+ },
+ "l1_research_reject": {
+  "L1_continuous_W": 14270212.753601346,
+  "reject_W": 38582427.07455178,
+  "section_900K_m": 8.31177401792865,
+  "hot_free_after_R5A_m": 0.35885508124740895,
+  "fits": false,
+  "note": "a 900 K section on the hot blades would take hot length the 20 % rule no longer has after R5-A; Track R L1 rejection stays OPEN"
+ },
+ "hot": {
+  "R": {
+   "total_t": [
+    1073.2946900387303,
+    1832.9726024510403,
+    3310.046126930491
+   ],
+   "pump_W": [
+    7820641.934078282,
+    10055111.058100648,
+    14077155.481340908
+   ],
+   "by_item_t": {
+    "coolant": [
+     233.85961958902388,
+     233.85961958902388,
+     233.85961958902388
+    ],
+    "trunk_walls": [
+     404.7370369084229,
+     821.5595007101301,
+     1595.7637791945372
+    ],
+    "manifold_walls": [
+     160.66197782210412,
+     314.5454819602751,
+     598.7153541508413
+    ],
+    "valves": [
+     134.10546215626368,
+     134.10546215626368,
+     134.10546215626368
+    ],
+    "bellows": [
+     3.36,
+     5.04,
+     8.4
+    ],
+    "section_hx": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "supports": [
+     70.28644768867906,
+     191.2875667240003,
+     467.3969191003285
+    ],
+    "accumulators": [
+     33.9345828030555,
+     58.65430655179039,
+     101.91382311207647
+    ],
+    "heat_pipe_fins": [
+     0.0,
+     12.73402528770509,
+     25.46805057541018
+    ],
+    "pumps": [
+     17.205412254972224,
+     44.24248865564285,
+     123.8789682358
+    ],
+    "recovery": [
+     13.34415081620933,
+     13.34415081620933,
+     13.34415081620933
+    ],
+    "maintenance": [
+     1.8,
+     3.6,
+     7.2
+    ]
+   },
+   "D_trunk": 0.7475110427173849,
+   "t_trunk": 0.03608546171794017,
+   "a_g": 0.4685479366203352,
+   "wall_over_limit": [
+    false,
+    true,
+    true
+   ]
+  },
+  "F0": {
+   "total_t": [
+    483.25214818476934,
+    546.6884404659878,
+    673.1541126799827
+   ],
+   "pump_W": [
+    7820641.934078282,
+    10055111.058100648,
+    14077155.481340908
+   ],
+   "by_item_t": {
+    "coolant": [
+     233.85961958902388,
+     233.85961958902388,
+     233.85961958902388
+    ],
+    "trunk_walls": [
+     34.347613915122785,
+     40.885787334744585,
+     50.72559365933023
+    ],
+    "manifold_walls": [
+     15.260198404450406,
+     17.565525819338436,
+     21.033283841893326
+    ],
+    "valves": [
+     134.10546215626368,
+     134.10546215626368,
+     134.10546215626368
+    ],
+    "bellows": [
+     3.36,
+     5.04,
+     8.4
+    ],
+    "section_hx": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "supports": [
+     18.707327447583687,
+     29.639516296552006,
+     42.85286793149744
+    ],
+    "accumulators": [
+     11.262363601143358,
+     11.671864510507909,
+     12.286115874554737
+    ],
+    "heat_pipe_fins": [
+     0.0,
+     12.73402528770509,
+     25.46805057541018
+    ],
+    "pumps": [
+     17.205412254972224,
+     44.24248865564285,
+     123.8789682358
+    ],
+    "recovery": [
+     13.34415081620933,
+     13.34415081620933,
+     13.34415081620933
+    ],
+    "maintenance": [
+     1.8,
+     3.6,
+     7.2
+    ]
+   },
+   "D_trunk": 0.7475110427173849,
+   "t_trunk": 0.006346694878053534,
+   "a_g": 0.7543272401064571
+  },
+  "F1": {
+   "total_t": [
+    499.0175893278574,
+    565.1967819858065,
+    696.1045072929302
+   ],
+   "pump_W": [
+    7988104.089038681,
+    10270419.543049734,
+    14378587.360269625
+   ],
+   "a_g": 0.7361342613411239
+  }
+ },
+ "mass": {
+  "R": {
+   "historical": {
+    "departure_t": 4426.074234859591,
+    "propellant_t": 2796.5862911822533
+   },
+   "corrected": {
+    "departure_t": 4573.122321009472,
+    "propellant_t": 2889.4976704430187,
+    "end_t": 1683.6246505664528
+   },
+   "cases": [
+    {
+     "case": "opt",
+     "dry_added_t": 1313.9815689740453,
+     "propellant_t": 5926.409110657038,
+     "tankage_t": 798.9613665985556,
+     "end_t": 3453.142935572601,
+     "departure_t": 9379.552046229639,
+     "extra_departure_t": 4806.429725220166
+    },
+    {
+     "case": "nom",
+     "dry_added_t": 2268.1023918003475,
+     "propellant_t": 8131.600195985606,
+     "tankage_t": 1129.7400293978408,
+     "end_t": 4738.042421198188,
+     "departure_t": 12869.642617183794,
+     "extra_departure_t": 8296.520296174322
+    },
+    {
+     "case": "cons",
+     "dry_added_t": 4164.740638343263,
+     "propellant_t": 12515.164261782185,
+     "tankage_t": 1787.274639267328,
+     "end_t": 7292.21527761059,
+     "departure_t": 19807.379539392776,
+     "extra_departure_t": 15234.257218383305
+    }
+   ],
+   "tanks": [
+    {
+     "case": "corrected base",
+     "need_m3": {
+      "helium-3": 19288.883703177864,
+      "deuterium": 4308.963776499551,
+      "hydrogen": 14181.437047415866
+     },
+     "capacity_m3": {
+      "helium-3": 20271.276608337346,
+      "deuterium": 4886.498925039901,
+      "hydrogen": 15022.137229208574
+     },
+     "fill": {
+      "helium-3": 0.9515376893058903,
+      "deuterium": 0.8818100326225624,
+      "hydrogen": 0.9440359138672973
+     }
+    },
+    {
+     "case": "opt",
+     "need_m3": {
+      "helium-3": 39561.830169390894,
+      "deuterium": 8837.758356324544,
+      "hydrogen": 29086.36977967482
+     },
+     "capacity_m3": {
+      "helium-3": 20271.276608337346,
+      "deuterium": 4886.498925039901,
+      "hydrogen": 15022.137229208574
+     },
+     "fill": {
+      "helium-3": 1.9516200648714725,
+      "deuterium": 1.808607449197869,
+      "hydrogen": 1.9362337952232385
+     }
+    },
+    {
+     "case": "nom",
+     "need_m3": {
+      "helium-3": 54282.61531598897,
+      "deuterium": 12126.249848855727,
+      "hydrogen": 39909.28162141201
+     },
+     "capacity_m3": {
+      "helium-3": 20271.276608337346,
+      "deuterium": 4886.498925039901,
+      "hydrogen": 15022.137229208574
+     },
+     "fill": {
+      "helium-3": 2.6778094130323864,
+      "deuterium": 2.4815824243237112,
+      "hydrogen": 2.656697979287105
+     }
+    },
+    {
+     "case": "cons",
+     "need_m3": {
+      "helium-3": 83545.16096033825,
+      "deuterium": 18663.240331560126,
+      "hydrogen": 61423.48406507667
+     },
+     "capacity_m3": {
+      "helium-3": 20271.276608337346,
+      "deuterium": 4886.498925039901,
+      "hydrogen": 15022.137229208574
+     },
+     "fill": {
+      "helium-3": 4.1213566651237485,
+      "deuterium": 3.819348089063118,
+      "hydrogen": 4.088864528919811
+     }
+    }
+   ],
+   "accel": {
+    "end_mass_base_t": 1683.6246505664528,
+    "a_end_base_g": 1.3185836874775578,
+    "a_end_nom_g": 0.4685479366203352,
+    "burn_time_ratio": 2.8141916427774336,
+    "thrust_N": 21770763.000706356
+   },
+   "attitude": {
+    "cg_shift_m": -54.521726226071806,
+    "I_pitch_ratio": 1.869148105385353,
+    "cg_base": 35.06059717343276,
+    "cg_new": -19.461129052639045
+   },
+   "items": {
+    "L2 (3 x 3.5 MWe, 750 K)": {
+     "t": [
+      160.01449496280512,
+      298.2387978492912,
+      635.6243356076641
+     ],
+     "x": [
+      -92.0,
+      -80.0
+     ],
+     "cls": "NEW"
+    },
+    "L1 (derived)": {
+     "t": [
+      31.0302860538875,
+      60.636026394146675,
+      99.87292256222088
+     ],
+     "x": [
+      -140.0,
+      -120.0
+     ],
+     "cls": "RESEARCH (thermal, 900 K reject OPEN)"
+    },
+    "L3": {
+     "t": [
+      9.0,
+      12.0,
+      16.0
+     ],
+     "x": [
+      95.0,
+      106.0
+     ],
+     "cls": "NEW"
+    },
+    "storage (buffer + restart)": {
+     "t": [
+      14.3,
+      21.5,
+      31.6
+     ],
+     "x": [
+      -92.0,
+      40.0
+     ],
+     "cls": "NEW"
+    },
+    "distribution": {
+     "t": [
+      4.0,
+      8.0,
+      15.0
+     ],
+     "x": [
+      -92.0,
+      100.0
+     ],
+     "cls": "NEW"
+    },
+    "scatter allowance (OPEN)": {
+     "t": [
+      0.0,
+      3.0,
+      10.0
+     ],
+     "x": [
+      105.0,
+      140.0
+     ],
+     "cls": "NEW (OPEN)"
+    },
+    "ECLSS modular increment": {
+     "t": [
+      3.5999999999999996,
+      4.800000000000001,
+      6.4
+     ],
+     "x": [
+      95.0,
+      106.0
+     ],
+     "cls": "NEW"
+    },
+    "L2 sections 750 K cross-strapped + dual headers": {
+     "t": [
+      13.934237561607423,
+      20.147104748854193,
+      30.389392885871807
+     ],
+     "x": [
+      26.0,
+      50.4
+     ],
+     "cls": "NEW"
+    },
+    "bulkhead relocation": {
+     "t": [
+      0.0,
+      2.0,
+      5.0
+     ],
+     "x": [
+      26.0,
+      27.0
+     ],
+     "cls": "EXISTING (moved)"
+    },
+    "LOG-G1 tare (3 t containers, 12 months)": {
+     "t": [
+      4.807860357015053,
+      4.807860357015053,
+      4.807860357015053
+     ],
+     "x": [
+      95.0,
+      106.0
+     ],
+     "cls": "NEW (V-G tare)"
+    },
+    "WARM shortfall lift (canon heat pumps)": {
+     "t": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "x": [
+      0.0,
+      0.0
+     ],
+     "cls": "EXISTING (no added mass)"
+    },
+    "hot loop H6a": {
+     "t": [
+      1073.2946900387303,
+      1832.9726024510403,
+      3310.046126930491
+     ],
+     "x": [
+      -140.0,
+      26.0
+     ],
+     "cls": "RESEARCH"
+    }
+   }
+  },
+  "F0": {
+   "historical": {
+    "departure_t": 4426.074234859591,
+    "propellant_t": 2796.5862911822533
+   },
+   "corrected": {
+    "departure_t": 4573.122321009472,
+    "propellant_t": 2889.4976704430187,
+    "end_t": 1683.6246505664528
+   },
+   "cases": [
+    {
+     "case": "opt",
+     "dry_added_t": 698.908741066197,
+     "propellant_t": 4504.835359743162,
+     "tankage_t": 585.7253039614743,
+     "end_t": 2624.8340450276714,
+     "departure_t": 7129.669404770833,
+     "extra_departure_t": 2556.5470837613616
+    },
+    {
+     "case": "nom",
+     "dry_added_t": 935.1822034211483,
+     "propellant_t": 5050.917281885329,
+     "tankage_t": 667.6375922827995,
+     "end_t": 2943.019795703948,
+     "departure_t": 7993.937077589278,
+     "extra_departure_t": 3420.8147565798054
+    },
+    {
+     "case": "cons",
+     "dry_added_t": 1455.9757015305338,
+     "propellant_t": 6254.589973909758,
+     "tankage_t": 848.1884960864637,
+     "end_t": 3644.3641976169974,
+     "departure_t": 9898.954171526757,
+     "extra_departure_t": 5325.831850517284
+    }
+   ],
+   "tanks": [
+    {
+     "case": "corrected base",
+     "need_m3": {
+      "helium-3": 19288.883703177864,
+      "deuterium": 4308.963776499551,
+      "hydrogen": 14181.437047415866
+     },
+     "capacity_m3": {
+      "helium-3": 20271.276608337346,
+      "deuterium": 4886.498925039901,
+      "hydrogen": 15022.137229208574
+     },
+     "fill": {
+      "helium-3": 0.9515376893058903,
+      "deuterium": 0.8818100326225624,
+      "hydrogen": 0.9440359138672973
+     }
+    },
+    {
+     "case": "opt",
+     "need_m3": {
+      "helium-3": 30072.093929989827,
+      "deuterium": 6717.83631555982,
+      "hydrogen": 22109.392825146584
+     },
+     "capacity_m3": {
+      "helium-3": 20271.276608337346,
+      "deuterium": 4886.498925039901,
+      "hydrogen": 15022.137229208574
+     },
+     "fill": {
+      "helium-3": 1.4834829848664546,
+      "deuterium": 1.3747749500435968,
+      "hydrogen": 1.4717874352896851
+     }
+    },
+    {
+     "case": "nom",
+     "need_m3": {
+      "helium-3": 33717.47173954976,
+      "deuterium": 7532.181052910335,
+      "hydrogen": 24789.521790401523
+     },
+     "capacity_m3": {
+      "helium-3": 20271.276608337346,
+      "deuterium": 4886.498925039901,
+      "hydrogen": 15022.137229208574
+     },
+     "fill": {
+      "helium-3": 1.6633126956435562,
+      "deuterium": 1.5414269333639177,
+      "hydrogen": 1.6501993965413624
+     }
+    },
+    {
+     "case": "cons",
+     "need_m3": {
+      "helium-3": 41752.606292743745,
+      "deuterium": 9327.158111292858,
+      "hydrogen": 30697.056751321175
+     },
+     "capacity_m3": {
+      "helium-3": 20271.276608337346,
+      "deuterium": 4886.498925039901,
+      "hydrogen": 15022.137229208574
+     },
+     "fill": {
+      "helium-3": 2.059692988233971,
+      "deuterium": 1.9087609051743926,
+      "hydrogen": 2.0434546884337323
+     }
+    }
+   ],
+   "accel": {
+    "end_mass_base_t": 1683.6246505664528,
+    "a_end_base_g": 1.3185836874775578,
+    "a_end_nom_g": 0.7543272401064571,
+    "burn_time_ratio": 1.7480260785643482,
+    "thrust_N": 21770763.000706356
+   },
+   "attitude": {
+    "cg_shift_m": -34.00628746709876,
+    "I_pitch_ratio": 1.4787248820459389,
+    "cg_base": 35.06059717343276,
+    "cg_new": 1.0543097063339995
+   },
+   "items": {
+    "L2 (3 x 3.5 MWe, 750 K)": {
+     "t": [
+      160.01449496280512,
+      298.2387978492912,
+      635.6243356076641
+     ],
+     "x": [
+      -92.0,
+      -80.0
+     ],
+     "cls": "NEW"
+    },
+    "L1 (derived)": {
+     "t": [
+      6.0,
+      14.0,
+      28.0
+     ],
+     "x": [
+      -140.0,
+      -120.0
+     ],
+     "cls": "FT-04 (CONDITIONAL)"
+    },
+    "L3": {
+     "t": [
+      9.0,
+      12.0,
+      16.0
+     ],
+     "x": [
+      95.0,
+      106.0
+     ],
+     "cls": "NEW"
+    },
+    "storage (buffer + restart)": {
+     "t": [
+      14.3,
+      21.5,
+      31.6
+     ],
+     "x": [
+      -92.0,
+      40.0
+     ],
+     "cls": "NEW"
+    },
+    "distribution": {
+     "t": [
+      4.0,
+      8.0,
+      15.0
+     ],
+     "x": [
+      -92.0,
+      100.0
+     ],
+     "cls": "NEW"
+    },
+    "scatter allowance (OPEN)": {
+     "t": [
+      0.0,
+      3.0,
+      10.0
+     ],
+     "x": [
+      105.0,
+      140.0
+     ],
+     "cls": "NEW (OPEN)"
+    },
+    "ECLSS modular increment": {
+     "t": [
+      3.5999999999999996,
+      4.800000000000001,
+      6.4
+     ],
+     "x": [
+      95.0,
+      106.0
+     ],
+     "cls": "NEW"
+    },
+    "L2 sections 750 K cross-strapped + dual headers": {
+     "t": [
+      13.934237561607423,
+      20.147104748854193,
+      30.389392885871807
+     ],
+     "x": [
+      26.0,
+      50.4
+     ],
+     "cls": "NEW"
+    },
+    "bulkhead relocation": {
+     "t": [
+      0.0,
+      2.0,
+      5.0
+     ],
+     "x": [
+      26.0,
+      27.0
+     ],
+     "cls": "EXISTING (moved)"
+    },
+    "LOG-G1 tare (3 t containers, 12 months)": {
+     "t": [
+      4.807860357015053,
+      4.807860357015053,
+      4.807860357015053
+     ],
+     "x": [
+      95.0,
+      106.0
+     ],
+     "cls": "NEW (V-G tare)"
+    },
+    "hot loop H6a": {
+     "t": [
+      483.25214818476934,
+      546.6884404659878,
+      673.1541126799827
+     ],
+     "x": [
+      -140.0,
+      26.0
+     ],
+     "cls": "FT-01/FT-02"
+    }
+   }
+  },
+  "F1": {
+   "historical": {
+    "departure_t": 4426.074234859591,
+    "propellant_t": 2796.5862911822533
+   },
+   "corrected": {
+    "departure_t": 4573.122321009472,
+    "propellant_t": 2889.4976704430187,
+    "end_t": 1683.6246505664528
+   },
+   "cases": [
+    {
+     "case": "opt",
+     "dry_added_t": 725.6853870285787,
+     "propellant_t": 4566.722302736747,
+     "tankage_t": 595.0083454105121,
+     "end_t": 2660.8937324390904,
+     "departure_t": 7227.616035175837,
+     "extra_departure_t": 2654.4937141663654
+    },
+    {
+     "case": "nom",
+     "dry_added_t": 989.1922041899537,
+     "propellant_t": 5175.746726295895,
+     "tankage_t": 686.3620089443841,
+     "end_t": 3015.754213134338,
+     "departure_t": 8191.500939430233,
+     "extra_departure_t": 3618.378618420761
+    },
+    {
+     "case": "cons",
+     "dry_added_t": 1555.234203373685,
+     "propellant_t": 6483.999036337728,
+     "tankage_t": 882.5998554506593,
+     "end_t": 3778.0340588243444,
+     "departure_t": 10262.033095162073,
+     "extra_departure_t": 5688.910774152601
+    }
+   ],
+   "tanks": [
+    {
+     "case": "corrected base",
+     "need_m3": {
+      "helium-3": 19288.883703177864,
+      "deuterium": 4308.963776499551,
+      "hydrogen": 14181.437047415866
+     },
+     "capacity_m3": {
+      "helium-3": 20271.276608337346,
+      "deuterium": 4886.498925039901,
+      "hydrogen": 15022.137229208574
+     },
+     "fill": {
+      "helium-3": 0.9515376893058903,
+      "deuterium": 0.8818100326225624,
+      "hydrogen": 0.9440359138672973
+     }
+    },
+    {
+     "case": "opt",
+     "need_m3": {
+      "helium-3": 30485.22111758346,
+      "deuterium": 6810.125227340379,
+      "hydrogen": 22413.12928255857
+     },
+     "capacity_m3": {
+      "helium-3": 20271.276608337346,
+      "deuterium": 4886.498925039901,
+      "hydrogen": 15022.137229208574
+     },
+     "fill": {
+      "helium-3": 1.5038629143388649,
+      "deuterium": 1.3936614602416535,
+      "hydrogen": 1.4920066925616404
+     }
+    },
+    {
+     "case": "nom",
+     "need_m3": {
+      "helium-3": 34550.772510336865,
+      "deuterium": 7718.3329781075,
+      "hydrogen": 25402.175306505902
+     },
+     "capacity_m3": {
+      "helium-3": 20271.276608337346,
+      "deuterium": 4886.498925039901,
+      "hydrogen": 15022.137229208574
+     },
+     "fill": {
+      "helium-3": 1.704420159514104,
+      "deuterium": 1.5795220865713124,
+      "hydrogen": 1.6909827755477234
+     }
+    },
+    {
+     "case": "cons",
+     "need_m3": {
+      "helium-3": 43284.02982386213,
+      "deuterium": 9669.264405447195,
+      "hydrogen": 31822.979159983355
+     },
+     "capacity_m3": {
+      "helium-3": 20271.276608337346,
+      "deuterium": 4886.498925039901,
+      "hydrogen": 15022.137229208574
+     },
+     "fill": {
+      "helium-3": 2.1352394651878956,
+      "deuterium": 1.9787714176910904,
+      "hydrogen": 2.1184055686901693
+     }
+    }
+   ],
+   "accel": {
+    "end_mass_base_t": 1683.6246505664528,
+    "a_end_base_g": 1.3185836874775578,
+    "a_end_nom_g": 0.7361342613411239,
+    "burn_time_ratio": 1.7912271670052422,
+    "thrust_N": 21770763.000706356
+   },
+   "attitude": {
+    "cg_shift_m": -37.07570450197841,
+    "I_pitch_ratio": 1.5376385711398626,
+    "cg_base": 35.06059717343276,
+    "cg_new": -2.015107328545647
+   },
+   "items": {
+    "L1 (derived)": {
+     "t": [
+      30.0,
+      70.0,
+      140.0
+     ],
+     "x": [
+      -140.0,
+      -120.0
+     ],
+     "cls": "FT-04 (CONDITIONAL)"
+    },
+    "L3": {
+     "t": [
+      9.0,
+      12.0,
+      16.0
+     ],
+     "x": [
+      95.0,
+      106.0
+     ],
+     "cls": "NEW"
+    },
+    "storage (buffer + restart)": {
+     "t": [
+      14.3,
+      21.5,
+      31.6
+     ],
+     "x": [
+      -92.0,
+      40.0
+     ],
+     "cls": "NEW"
+    },
+    "distribution": {
+     "t": [
+      4.0,
+      8.0,
+      15.0
+     ],
+     "x": [
+      -92.0,
+      100.0
+     ],
+     "cls": "NEW"
+    },
+    "scatter allowance (OPEN)": {
+     "t": [
+      0.0,
+      3.0,
+      10.0
+     ],
+     "x": [
+      105.0,
+      140.0
+     ],
+     "cls": "NEW (OPEN)"
+    },
+    "ECLSS modular increment": {
+     "t": [
+      3.5999999999999996,
+      4.800000000000001,
+      6.4
+     ],
+     "x": [
+      95.0,
+      106.0
+     ],
+     "cls": "NEW"
+    },
+    "bulkhead relocation": {
+     "t": [
+      0.0,
+      2.0,
+      5.0
+     ],
+     "x": [
+      26.0,
+      27.0
+     ],
+     "cls": "EXISTING (moved)"
+    },
+    "LOG-G1 tare (3 t containers, 12 months)": {
+     "t": [
+      4.807860357015053,
+      4.807860357015053,
+      4.807860357015053
+     ],
+     "x": [
+      95.0,
+      106.0
+     ],
+     "cls": "NEW (V-G tare)"
+    },
+    "L2 (3 x 3.5 MWe, FT-03 1500 K inlet)": {
+     "t": [
+      155.90345062581605,
+      290.5765362444675,
+      619.2940661157676
+     ],
+     "x": [
+      -92.0,
+      -80.0
+     ],
+     "cls": "FT-03 (PROPOSED)"
+    },
+    "L2 sections 950 K cross-strapped + dual headers": {
+     "t": [
+      5.056486717890201,
+      7.311025602664686,
+      11.027769607972111
+     ],
+     "x": [
+      42.95698493009567,
+      50.4
+     ],
+     "cls": "FT-03 (PROPOSED)"
+    },
+    "hot loop H6a": {
+     "t": [
+      499.0175893278574,
+      565.1967819858065,
+      696.1045072929302
+     ],
+     "x": [
+      -140.0,
+      26.0
+     ],
+     "cls": "FT-01/FT-02"
+    }
+   }
+  }
+ },
+ "tanks": {
+  "R": {
+   "farm_x": [
+    109.25,
+    137.85
+   ],
+   "farm_length_m": 28.599999999999994,
+   "rows": [
+    {
+     "case": "corrected base",
+     "max_fill": 0.9515376893058903,
+     "fill": {
+      "helium-3": 0.9515376893058903,
+      "deuterium": 0.8818100326225624,
+      "hydrogen": 0.9440359138672973
+     },
+     "tank_length_m": 28.599999999999994,
+     "extension_m": 0.0,
+     "ship_length_m": 289.5,
+     "extra_liquid_m3": {
+      "helium-3": 0.0,
+      "deuterium": 0.0,
+      "hydrogen": 0.0
+     }
+    },
+    {
+     "case": "opt",
+     "max_fill": 1.9516200648714725,
+     "fill": {
+      "helium-3": 1.9516200648714725,
+      "deuterium": 1.808607449197869,
+      "hydrogen": 1.9362337952232385
+     },
+     "tank_length_m": 55.8163338553241,
+     "extension_m": 27.21633385532411,
+     "ship_length_m": 316.71633385532414,
+     "extra_liquid_m3": {
+      "helium-3": 19290.553561053548,
+      "deuterium": 3951.259431284643,
+      "hydrogen": 14064.232550466246
+     }
+    },
+    {
+     "case": "nom",
+     "max_fill": 2.6778094130323864,
+     "fill": {
+      "helium-3": 2.6778094130323864,
+      "deuterium": 2.4815824243237112,
+      "hydrogen": 2.656697979287105
+     },
+     "tank_length_m": 76.58534921272624,
+     "extension_m": 47.98534921272624,
+     "ship_length_m": 337.48534921272625,
+     "extra_liquid_m3": {
+      "helium-3": 34011.33870765162,
+      "deuterium": 7239.750923815825,
+      "hydrogen": 24887.144392203438
+     }
+    },
+    {
+     "case": "cons",
+     "max_fill": 4.1213566651237485,
+     "fill": {
+      "helium-3": 4.1213566651237485,
+      "deuterium": 3.819348089063118,
+      "hydrogen": 4.088864528919811
+     },
+     "tank_length_m": 117.87080062253918,
+     "extension_m": 89.27080062253918,
+     "ship_length_m": 378.7708006225392,
+     "extra_liquid_m3": {
+      "helium-3": 63273.88435200091,
+      "deuterium": 13776.741406520225,
+      "hydrogen": 46401.3468358681
+     }
+    }
+   ],
+   "options": [
+    "A: lengthen all 13 tanks forward (geometry below)",
+    "B: add a second farm forward of the first (more skirts, same diameters)",
+    "C: larger diameters: blocked by the 12.5 deg shield shadow and the ring clearance"
+   ]
+  },
+  "F0": {
+   "farm_x": [
+    109.25,
+    137.85
+   ],
+   "farm_length_m": 28.599999999999994,
+   "rows": [
+    {
+     "case": "corrected base",
+     "max_fill": 0.9515376893058903,
+     "fill": {
+      "helium-3": 0.9515376893058903,
+      "deuterium": 0.8818100326225624,
+      "hydrogen": 0.9440359138672973
+     },
+     "tank_length_m": 28.599999999999994,
+     "extension_m": 0.0,
+     "ship_length_m": 289.5,
+     "extra_liquid_m3": {
+      "helium-3": 0.0,
+      "deuterium": 0.0,
+      "hydrogen": 0.0
+     }
+    },
+    {
+     "case": "opt",
+     "max_fill": 1.4834829848664546,
+     "fill": {
+      "helium-3": 1.4834829848664546,
+      "deuterium": 1.3747749500435968,
+      "hydrogen": 1.4717874352896851
+     },
+     "tank_length_m": 42.42761336718059,
+     "extension_m": 13.827613367180598,
+     "ship_length_m": 303.3276133671806,
+     "extra_liquid_m3": {
+      "helium-3": 9800.817321652481,
+      "deuterium": 1831.3373905199187,
+      "hydrogen": 7087.25559593801
+     }
+    },
+    {
+     "case": "nom",
+     "max_fill": 1.6633126956435562,
+     "fill": {
+      "helium-3": 1.6633126956435562,
+      "deuterium": 1.5414269333639177,
+      "hydrogen": 1.6501993965413624
+     },
+     "tank_length_m": 47.570743095405696,
+     "extension_m": 18.970743095405705,
+     "ship_length_m": 308.4707430954057,
+     "extra_liquid_m3": {
+      "helium-3": 13446.195131212411,
+      "deuterium": 2645.6821278704338,
+      "hydrogen": 9767.384561192948
+     }
+    },
+    {
+     "case": "cons",
+     "max_fill": 2.059692988233971,
+     "fill": {
+      "helium-3": 2.059692988233971,
+      "deuterium": 1.9087609051743926,
+      "hydrogen": 2.0434546884337323
+     },
+     "tank_length_m": 58.907219463491565,
+     "extension_m": 30.30721946349157,
+     "ship_length_m": 319.80721946349155,
+     "extra_liquid_m3": {
+      "helium-3": 21481.3296844064,
+      "deuterium": 4440.659186252957,
+      "hydrogen": 15674.919522112601
+     }
+    }
+   ],
+   "options": [
+    "A: lengthen all 13 tanks forward (geometry below)",
+    "B: add a second farm forward of the first (more skirts, same diameters)",
+    "C: larger diameters: blocked by the 12.5 deg shield shadow and the ring clearance"
+   ]
+  },
+  "F1": {
+   "farm_x": [
+    109.25,
+    137.85
+   ],
+   "farm_length_m": 28.599999999999994,
+   "rows": [
+    {
+     "case": "corrected base",
+     "max_fill": 0.9515376893058903,
+     "fill": {
+      "helium-3": 0.9515376893058903,
+      "deuterium": 0.8818100326225624,
+      "hydrogen": 0.9440359138672973
+     },
+     "tank_length_m": 28.599999999999994,
+     "extension_m": 0.0,
+     "ship_length_m": 289.5,
+     "extra_liquid_m3": {
+      "helium-3": 0.0,
+      "deuterium": 0.0,
+      "hydrogen": 0.0
+     }
+    },
+    {
+     "case": "opt",
+     "max_fill": 1.5038629143388649,
+     "fill": {
+      "helium-3": 1.5038629143388649,
+      "deuterium": 1.3936614602416535,
+      "hydrogen": 1.4920066925616404
+     },
+     "tank_length_m": 43.01047935009153,
+     "extension_m": 14.410479350091533,
+     "ship_length_m": 303.9104793500915,
+     "extra_liquid_m3": {
+      "helium-3": 10213.944509246114,
+      "deuterium": 1923.6263023004776,
+      "hydrogen": 7390.992053349995
+     }
+    },
+    {
+     "case": "nom",
+     "max_fill": 1.704420159514104,
+     "fill": {
+      "helium-3": 1.704420159514104,
+      "deuterium": 1.5795220865713124,
+      "hydrogen": 1.6909827755477234
+     },
+     "tank_length_m": 48.74641656210336,
+     "extension_m": 20.14641656210337,
+     "ship_length_m": 309.64641656210335,
+     "extra_liquid_m3": {
+      "helium-3": 14279.495901999519,
+      "deuterium": 2831.8340530675987,
+      "hydrogen": 10380.038077297328
+     }
+    },
+    {
+     "case": "cons",
+     "max_fill": 2.1352394651878956,
+     "fill": {
+      "helium-3": 2.1352394651878956,
+      "deuterium": 1.9787714176910904,
+      "hydrogen": 2.1184055686901693
+     },
+     "tank_length_m": 61.0678487043738,
+     "extension_m": 32.46784870437381,
+     "ship_length_m": 321.9678487043738,
+     "extra_liquid_m3": {
+      "helium-3": 23012.753215524786,
+      "deuterium": 4782.765480407294,
+      "hydrogen": 16800.841930774783
+     }
+    }
+   ],
+   "options": [
+    "A: lengthen all 13 tanks forward (geometry below)",
+    "B: add a second farm forward of the first (more skirts, same diameters)",
+    "C: larger diameters: blocked by the 12.5 deg shield shadow and the ring clearance"
+   ]
+  }
+ },
+ "accel": {
+  "R": [
+   {
+    "case": "opt",
+    "departure_t": 9379.552046229639,
+    "end_t": 3453.142935572601,
+    "a_departure_g": 0.23668507719027124,
+    "a_end_g": 0.6428925884308659,
+    "burns": [
+     {
+      "burn": 1,
+      "a_start_g": 0.23668507719027124,
+      "a_end_g": 0.30385246395062465,
+      "t_days": 21.164993246835216
+     },
+     {
+      "burn": 2,
+      "a_start_g": 0.30385246395062465,
+      "a_end_g": 0.3900808658699024,
+      "t_days": 16.486415792806575
+     },
+     {
+      "burn": 3,
+      "a_start_g": 0.3900808658699024,
+      "a_end_g": 0.5007794899518699,
+      "t_days": 12.842050196918617
+     },
+     {
+      "burn": 4,
+      "a_start_g": 0.5007794899518699,
+      "a_end_g": 0.6428925884308659,
+      "t_days": 10.003281206345378
+     }
+    ],
+    "burn_days_total": 60.49674044290579,
+    "tank_support_load_MN": 13.755715364381961,
+    "thrust_structure_load_MN": 21.770763000706356
+   },
+   {
+    "case": "nom",
+    "departure_t": 12869.642617183794,
+    "end_t": 4738.042421198188,
+    "a_departure_g": 0.17249896256698238,
+    "a_end_g": 0.4685479366203352,
+    "burns": [
+     {
+      "burn": 1,
+      "a_start_g": 0.17249896256698238,
+      "a_end_g": 0.2214513708558328,
+      "t_days": 29.04039529173151
+     },
+     {
+      "burn": 2,
+      "a_start_g": 0.2214513708558328,
+      "a_end_g": 0.28429567879218287,
+      "t_days": 22.620939491135346
+     },
+     {
+      "burn": 3,
+      "a_start_g": 0.28429567879218287,
+      "a_end_g": 0.364974182221366,
+      "t_days": 17.620521288403438
+     },
+     {
+      "burn": 4,
+      "a_start_g": 0.364974182221366,
+      "a_end_g": 0.4685479366203352,
+      "t_days": 13.725458688254326
+     }
+    ],
+    "burn_days_total": 83.00731475952462,
+    "tank_support_load_MN": 13.755715364381961,
+    "thrust_structure_load_MN": 21.770763000706356
+   },
+   {
+    "case": "cons",
+    "departure_t": 19807.379539392776,
+    "end_t": 7292.21527761059,
+    "a_departure_g": 0.11207943966827658,
+    "a_end_g": 0.30443423782182233,
+    "burns": [
+     {
+      "burn": 1,
+      "a_start_g": 0.11207943966827658,
+      "a_end_g": 0.14388576713703793,
+      "t_days": 44.69542384566948
+     },
+     {
+      "burn": 2,
+      "a_start_g": 0.14388576713703793,
+      "a_end_g": 0.18471821456182572,
+      "t_days": 34.81538278617745
+     },
+     {
+      "burn": 3,
+      "a_start_g": 0.18471821456182572,
+      "a_end_g": 0.2371382484162714,
+      "t_days": 27.119350802744425
+     },
+     {
+      "burn": 4,
+      "a_start_g": 0.2371382484162714,
+      "a_end_g": 0.30443423782182233,
+      "t_days": 21.124546941770525
+     }
+    ],
+    "burn_days_total": 127.75470437636189,
+    "tank_support_load_MN": 13.755715364381961,
+    "thrust_structure_load_MN": 21.770763000706356
+   }
+  ],
+  "F0": [
+   {
+    "case": "opt",
+    "departure_t": 7129.669404770833,
+    "end_t": 2624.8340450276714,
+    "a_departure_g": 0.3113748862726385,
+    "a_end_g": 0.8457677559758354,
+    "burns": [
+     {
+      "burn": 1,
+      "a_start_g": 0.3113748862726385,
+      "a_end_g": 0.39973802966136346,
+      "t_days": 16.08812489769172
+     },
+     {
+      "burn": 2,
+      "a_start_g": 0.39973802966136346,
+      "a_end_g": 0.5131772002242894,
+      "t_days": 12.531802552292795
+     },
+     {
+      "burn": 3,
+      "a_start_g": 0.5131772002242894,
+      "a_end_g": 0.6588085678341312,
+      "t_days": 9.761614619997415
+     },
+     {
+      "burn": 4,
+      "a_start_g": 0.6588085678341312,
+      "a_end_g": 0.8457677559758354,
+      "t_days": 7.6037840200341735
+     }
+    ],
+    "burn_days_total": 45.9853260900161,
+    "tank_support_load_MN": 13.755715364381961,
+    "thrust_structure_load_MN": 21.770763000706356
+   },
+   {
+    "case": "nom",
+    "departure_t": 7993.937077589278,
+    "end_t": 2943.019795703948,
+    "a_departure_g": 0.27771046713586484,
+    "a_end_g": 0.7543272401064571,
+    "burns": [
+     {
+      "burn": 1,
+      "a_start_g": 0.2777104671358648,
+      "a_end_g": 0.3565201942844752,
+      "t_days": 18.038348039319622
+     },
+     {
+      "burn": 2,
+      "a_start_g": 0.3565201942844752,
+      "a_end_g": 0.4576948439990033,
+      "t_days": 14.050923736346979
+     },
+     {
+      "burn": 3,
+      "a_start_g": 0.4576948439990033,
+      "a_end_g": 0.5875812186283047,
+      "t_days": 10.944930068667482
+     },
+     {
+      "burn": 4,
+      "a_start_g": 0.5875812186283047,
+      "a_end_g": 0.7543272401064571,
+      "t_days": 8.525524474817605
+     }
+    ],
+    "burn_days_total": 51.559726319151686,
+    "tank_support_load_MN": 13.755715364381958,
+    "thrust_structure_load_MN": 21.770763000706356
+   },
+   {
+    "case": "cons",
+    "departure_t": 9898.954171526757,
+    "end_t": 3644.3641976169974,
+    "a_departure_g": 0.22426611555164203,
+    "a_end_g": 0.6091597545392575,
+    "burns": [
+     {
+      "burn": 1,
+      "a_start_g": 0.22426611555164203,
+      "a_end_g": 0.2879092023880369,
+      "t_days": 22.33702602837134
+     },
+     {
+      "burn": 2,
+      "a_start_g": 0.2879092023880369,
+      "a_end_g": 0.36961316521589305,
+      "t_days": 17.39936764371697
+     },
+     {
+      "burn": 3,
+      "a_start_g": 0.36961316521589305,
+      "a_end_g": 0.4745033877617645,
+      "t_days": 13.553191638703467
+     },
+     {
+      "burn": 4,
+      "a_start_g": 0.4745033877617645,
+      "a_end_g": 0.6091597545392575,
+      "t_days": 10.557222961016812
+     }
+    ],
+    "burn_days_total": 63.84680827180859,
+    "tank_support_load_MN": 13.755715364381958,
+    "thrust_structure_load_MN": 21.770763000706356
+   }
+  ],
+  "F1": [
+   {
+    "case": "opt",
+    "departure_t": 7227.616035175837,
+    "end_t": 2660.8937324390904,
+    "a_departure_g": 0.3071552209286695,
+    "a_end_g": 0.8343061479712232,
+    "burns": [
+     {
+      "burn": 1,
+      "a_start_g": 0.3071552209286695,
+      "a_end_g": 0.39432089171995743,
+      "t_days": 16.309141824817303
+     },
+     {
+      "burn": 2,
+      "a_start_g": 0.39432089171995743,
+      "a_end_g": 0.5062227663808181,
+      "t_days": 12.70396310605936
+     },
+     {
+      "burn": 3,
+      "a_start_g": 0.5062227663808181,
+      "a_end_g": 0.6498805784407753,
+      "t_days": 9.895718630304147
+     },
+     {
+      "burn": 4,
+      "a_start_g": 0.6498805784407753,
+      "a_end_g": 0.8343061479712232,
+      "t_days": 7.7082439859606975
+     }
+    ],
+    "burn_days_total": 46.61706754714151,
+    "tank_support_load_MN": 13.755715364381963,
+    "thrust_structure_load_MN": 21.770763000706356
+   },
+   {
+    "case": "nom",
+    "departure_t": 8191.500939430233,
+    "end_t": 3015.754213134338,
+    "a_departure_g": 0.2710126039766337,
+    "a_end_g": 0.7361342613411239,
+    "burns": [
+     {
+      "burn": 1,
+      "a_start_g": 0.2710126039766337,
+      "a_end_g": 0.34792158617493035,
+      "t_days": 18.4841516108626
+     },
+     {
+      "burn": 2,
+      "a_start_g": 0.34792158617493035,
+      "a_end_g": 0.446656090345216,
+      "t_days": 14.39818125524436
+     },
+     {
+      "burn": 3,
+      "a_start_g": 0.446656090345216,
+      "a_end_g": 0.5734098456948484,
+      "t_days": 11.215425399185806
+     },
+     {
+      "burn": 4,
+      "a_start_g": 0.5734098456948484,
+      "a_end_g": 0.7361342613411239,
+      "t_days": 8.73622610070187
+     }
+    ],
+    "burn_days_total": 52.83398436599464,
+    "tank_support_load_MN": 13.755715364381961,
+    "thrust_structure_load_MN": 21.770763000706356
+   },
+   {
+    "case": "cons",
+    "departure_t": 10262.033095162073,
+    "end_t": 3778.0340588243444,
+    "a_departure_g": 0.21633140133982065,
+    "a_end_g": 0.5876071960989288,
+    "burns": [
+     {
+      "burn": 1,
+      "a_start_g": 0.21633140133982065,
+      "a_end_g": 0.27772274495427235,
+      "t_days": 23.156314937791983
+     },
+     {
+      "burn": 2,
+      "a_start_g": 0.27772274495427235,
+      "a_end_g": 0.3565359563486466,
+      "t_days": 18.03755058370744
+     },
+     {
+      "burn": 3,
+      "a_start_g": 0.3565359563486466,
+      "a_end_g": 0.4577150790813848,
+      "t_days": 14.050302560396394
+     },
+     {
+      "burn": 4,
+      "a_start_g": 0.4577150790813848,
+      "a_end_g": 0.5876071960989288,
+      "t_days": 10.94444620529544
+     }
+    ],
+    "burn_days_total": 66.18861428719126,
+    "tank_support_load_MN": 13.755715364381961,
+    "thrust_structure_load_MN": 21.770763000706356
+   }
+  ]
+ },
+ "missions": {
+  "R": [
+   {
+    "D_AU": 45.0,
+    "defense_law": "v2",
+    "pareto_v": [
+     0.002,
+     0.004,
+     0.006,
+     0.008,
+     0.01,
+     0.012
+    ]
+   },
+   {
+    "D_AU": 120.0,
+    "defense_law": "v2",
+    "pareto_v": [
+     0.002,
+     0.004,
+     0.006,
+     0.008,
+     0.01,
+     0.012,
+     0.014,
+     0.016
+    ]
+   },
+   {
+    "D_AU": 200.0,
+    "defense_law": "v2",
+    "pareto_v": [
+     0.002,
+     0.004,
+     0.006,
+     0.008,
+     0.01,
+     0.012,
+     0.014,
+     0.016
+    ]
+   },
+   {
+    "D_AU": 500.0,
+    "defense_law": "v2",
+    "pareto_v": [
+     0.002,
+     0.004,
+     0.006,
+     0.008,
+     0.01,
+     0.012,
+     0.014,
+     0.016
+    ]
+   },
+   {
+    "D_AU": 1000.0,
+    "defense_law": "v2",
+    "pareto_v": [
+     0.002,
+     0.004,
+     0.006,
+     0.008,
+     0.01,
+     0.012,
+     0.014,
+     0.016
+    ]
+   }
+  ],
+  "F0": [
+   {
+    "D_AU": 45.0,
+    "defense_law": "v2",
+    "pareto_v": [
+     0.002,
+     0.004,
+     0.006,
+     0.008,
+     0.01,
+     0.012,
+     0.014
+    ]
+   },
+   {
+    "D_AU": 120.0,
+    "defense_law": "v2",
+    "pareto_v": [
+     0.002,
+     0.004,
+     0.006,
+     0.008,
+     0.01,
+     0.012,
+     0.014,
+     0.016
+    ]
+   },
+   {
+    "D_AU": 200.0,
+    "defense_law": "v2",
+    "pareto_v": [
+     0.002,
+     0.004,
+     0.006,
+     0.008,
+     0.01,
+     0.012,
+     0.014,
+     0.016
+    ]
+   },
+   {
+    "D_AU": 500.0,
+    "defense_law": "v2",
+    "pareto_v": [
+     0.002,
+     0.004,
+     0.006,
+     0.008,
+     0.01,
+     0.012,
+     0.014,
+     0.016
+    ]
+   },
+   {
+    "D_AU": 1000.0,
+    "defense_law": "v2",
+    "pareto_v": [
+     0.002,
+     0.004,
+     0.006,
+     0.008,
+     0.01,
+     0.012,
+     0.014,
+     0.016
+    ]
+   }
+  ],
+  "note": "one hardware set per track; v^2 defense law shown; Pareto sets only (owner DR4-09)"
+ },
+ "layout": [
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U1_ReactorEnvelope",
+   "shape": "cyl",
+   "c": [
+    -90.7,
+    0.0,
+    2.9
+   ],
+   "d": [
+    1.6,
+    0.75,
+    0.75
+   ],
+   "axis": "x",
+   "meaning": "reactor envelope (ADJUSTABLE, no core design)",
+   "interfaces": [
+    "IHX primary"
+   ],
+   "clearance_m": 0.5,
+   "route": null,
+   "failure_domain": "L2 unit 1 / sector 90",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U1_ShadowShieldEnvelope",
+   "shape": "cyl",
+   "c": [
+    -88.6,
+    0.0,
+    2.9
+   ],
+   "d": [
+    2.54,
+    1.0,
+    1.0
+   ],
+   "axis": "x",
+   "meaning": "shadow shield envelope 12.5 deg (ADJUSTABLE, OPEN: final shielding not approved)",
+   "interfaces": [],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 unit 1 / sector 90",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U1_TAC",
+   "shape": "cyl",
+   "c": [
+    -86.1,
+    0.0,
+    2.9
+   ],
+   "d": [
+    2.0,
+    0.45,
+    0.45
+   ],
+   "axis": "x",
+   "meaning": "turbo-alternator-compressor (closed Brayton, He-Xe)",
+   "interfaces": [
+    "hot gas from IHX",
+    "recuperator",
+    "alternator bus"
+   ],
+   "clearance_m": 1.0,
+   "route": "radial to keel lane, then forward",
+   "failure_domain": "L2 unit 1 / sector 90",
+   "track": "F",
+   "register": "FT-03 (F1 only)"
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U1_Recuperator",
+   "shape": "box",
+   "c": [
+    -84.2,
+    0.0,
+    2.9
+   ],
+   "d": [
+    1.4,
+    1.1,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "recuperator",
+   "interfaces": [
+    "TAC"
+   ],
+   "clearance_m": 0.8,
+   "route": "keel lane",
+   "failure_domain": "L2 unit 1 / sector 90",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U1_GasCooler",
+   "shape": "box",
+   "c": [
+    -82.9,
+    0.0,
+    2.9
+   ],
+   "d": [
+    1.0,
+    1.2,
+    1.0
+   ],
+   "axis": "x",
+   "meaning": "gas cooler / L2 header manifold (dual headers to two sectors)",
+   "interfaces": [
+    "L2 headers A/B",
+    "casing header duct"
+   ],
+   "clearance_m": 0.8,
+   "route": "keel lane",
+   "failure_domain": "L2 unit 1 / sector 90",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U1_PMAD",
+   "shape": "box",
+   "c": [
+    -81.2,
+    0.0,
+    3.19
+   ],
+   "d": [
+    1.2,
+    0.7,
+    1.6
+   ],
+   "axis": "x",
+   "meaning": "alternator rectifier + unit switchgear",
+   "interfaces": [
+    "main bus sector",
+    "restart bus"
+   ],
+   "clearance_m": 1.0,
+   "route": "keel lane",
+   "failure_domain": "L2 unit 1 / sector 90",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U1_MountFrame",
+   "shape": "ring",
+   "c": [
+    -86.0,
+    0.0,
+    2.9
+   ],
+   "d": [
+    0.12,
+    1.35,
+    1.35
+   ],
+   "axis": "x",
+   "meaning": "unit mount ring (struts to the casing frames)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 unit 1 / sector 90",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U1_Clearance",
+   "shape": "box",
+   "c": [
+    -85.5,
+    0.0,
+    2.9
+   ],
+   "d": [
+    8.0,
+    2.4,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "maintenance clearance envelope (1 m around the PCU)",
+   "interfaces": [],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 unit 1 / sector 90",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U2_ReactorEnvelope",
+   "shape": "cyl",
+   "c": [
+    -90.7,
+    -2.511,
+    -1.45
+   ],
+   "d": [
+    1.6,
+    0.75,
+    0.75
+   ],
+   "axis": "x",
+   "meaning": "reactor envelope (ADJUSTABLE, no core design)",
+   "interfaces": [
+    "IHX primary"
+   ],
+   "clearance_m": 0.5,
+   "route": null,
+   "failure_domain": "L2 unit 2 / sector 210",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U2_ShadowShieldEnvelope",
+   "shape": "cyl",
+   "c": [
+    -88.6,
+    -2.511,
+    -1.45
+   ],
+   "d": [
+    2.54,
+    1.0,
+    1.0
+   ],
+   "axis": "x",
+   "meaning": "shadow shield envelope 12.5 deg (ADJUSTABLE, OPEN: final shielding not approved)",
+   "interfaces": [],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 unit 2 / sector 210",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U2_TAC",
+   "shape": "cyl",
+   "c": [
+    -86.1,
+    -2.511,
+    -1.45
+   ],
+   "d": [
+    2.0,
+    0.45,
+    0.45
+   ],
+   "axis": "x",
+   "meaning": "turbo-alternator-compressor (closed Brayton, He-Xe)",
+   "interfaces": [
+    "hot gas from IHX",
+    "recuperator",
+    "alternator bus"
+   ],
+   "clearance_m": 1.0,
+   "route": "radial to keel lane, then forward",
+   "failure_domain": "L2 unit 2 / sector 210",
+   "track": "F",
+   "register": "FT-03 (F1 only)"
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U2_Recuperator",
+   "shape": "box",
+   "c": [
+    -84.2,
+    -2.511,
+    -1.45
+   ],
+   "d": [
+    1.4,
+    1.1,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "recuperator",
+   "interfaces": [
+    "TAC"
+   ],
+   "clearance_m": 0.8,
+   "route": "keel lane",
+   "failure_domain": "L2 unit 2 / sector 210",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U2_GasCooler",
+   "shape": "box",
+   "c": [
+    -82.9,
+    -2.511,
+    -1.45
+   ],
+   "d": [
+    1.0,
+    1.2,
+    1.0
+   ],
+   "axis": "x",
+   "meaning": "gas cooler / L2 header manifold (dual headers to two sectors)",
+   "interfaces": [
+    "L2 headers A/B",
+    "casing header duct"
+   ],
+   "clearance_m": 0.8,
+   "route": "keel lane",
+   "failure_domain": "L2 unit 2 / sector 210",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U2_PMAD",
+   "shape": "box",
+   "c": [
+    -81.2,
+    -2.763,
+    -1.595
+   ],
+   "d": [
+    1.2,
+    0.7,
+    1.6
+   ],
+   "axis": "x",
+   "meaning": "alternator rectifier + unit switchgear",
+   "interfaces": [
+    "main bus sector",
+    "restart bus"
+   ],
+   "clearance_m": 1.0,
+   "route": "keel lane",
+   "failure_domain": "L2 unit 2 / sector 210",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U2_MountFrame",
+   "shape": "ring",
+   "c": [
+    -86.0,
+    -2.511,
+    -1.45
+   ],
+   "d": [
+    0.12,
+    1.35,
+    1.35
+   ],
+   "axis": "x",
+   "meaning": "unit mount ring (struts to the casing frames)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 unit 2 / sector 210",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U2_Clearance",
+   "shape": "box",
+   "c": [
+    -85.5,
+    -2.511,
+    -1.45
+   ],
+   "d": [
+    8.0,
+    2.4,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "maintenance clearance envelope (1 m around the PCU)",
+   "interfaces": [],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 unit 2 / sector 210",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U3_ReactorEnvelope",
+   "shape": "cyl",
+   "c": [
+    -90.7,
+    2.511,
+    -1.45
+   ],
+   "d": [
+    1.6,
+    0.75,
+    0.75
+   ],
+   "axis": "x",
+   "meaning": "reactor envelope (ADJUSTABLE, no core design)",
+   "interfaces": [
+    "IHX primary"
+   ],
+   "clearance_m": 0.5,
+   "route": null,
+   "failure_domain": "L2 unit 3 / sector 330",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U3_ShadowShieldEnvelope",
+   "shape": "cyl",
+   "c": [
+    -88.6,
+    2.511,
+    -1.45
+   ],
+   "d": [
+    2.54,
+    1.0,
+    1.0
+   ],
+   "axis": "x",
+   "meaning": "shadow shield envelope 12.5 deg (ADJUSTABLE, OPEN: final shielding not approved)",
+   "interfaces": [],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 unit 3 / sector 330",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U3_TAC",
+   "shape": "cyl",
+   "c": [
+    -86.1,
+    2.511,
+    -1.45
+   ],
+   "d": [
+    2.0,
+    0.45,
+    0.45
+   ],
+   "axis": "x",
+   "meaning": "turbo-alternator-compressor (closed Brayton, He-Xe)",
+   "interfaces": [
+    "hot gas from IHX",
+    "recuperator",
+    "alternator bus"
+   ],
+   "clearance_m": 1.0,
+   "route": "radial to keel lane, then forward",
+   "failure_domain": "L2 unit 3 / sector 330",
+   "track": "F",
+   "register": "FT-03 (F1 only)"
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U3_Recuperator",
+   "shape": "box",
+   "c": [
+    -84.2,
+    2.511,
+    -1.45
+   ],
+   "d": [
+    1.4,
+    1.1,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "recuperator",
+   "interfaces": [
+    "TAC"
+   ],
+   "clearance_m": 0.8,
+   "route": "keel lane",
+   "failure_domain": "L2 unit 3 / sector 330",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U3_GasCooler",
+   "shape": "box",
+   "c": [
+    -82.9,
+    2.511,
+    -1.45
+   ],
+   "d": [
+    1.0,
+    1.2,
+    1.0
+   ],
+   "axis": "x",
+   "meaning": "gas cooler / L2 header manifold (dual headers to two sectors)",
+   "interfaces": [
+    "L2 headers A/B",
+    "casing header duct"
+   ],
+   "clearance_m": 0.8,
+   "route": "keel lane",
+   "failure_domain": "L2 unit 3 / sector 330",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U3_PMAD",
+   "shape": "box",
+   "c": [
+    -81.2,
+    2.763,
+    -1.595
+   ],
+   "d": [
+    1.2,
+    0.7,
+    1.6
+   ],
+   "axis": "x",
+   "meaning": "alternator rectifier + unit switchgear",
+   "interfaces": [
+    "main bus sector",
+    "restart bus"
+   ],
+   "clearance_m": 1.0,
+   "route": "keel lane",
+   "failure_domain": "L2 unit 3 / sector 330",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U3_MountFrame",
+   "shape": "ring",
+   "c": [
+    -86.0,
+    2.511,
+    -1.45
+   ],
+   "d": [
+    0.12,
+    1.35,
+    1.35
+   ],
+   "axis": "x",
+   "meaning": "unit mount ring (struts to the casing frames)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 unit 3 / sector 330",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "L2U3_Clearance",
+   "shape": "box",
+   "c": [
+    -85.5,
+    2.511,
+    -1.45
+   ],
+   "d": [
+    8.0,
+    2.4,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "maintenance clearance envelope (1 m around the PCU)",
+   "interfaces": [],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 unit 3 / sector 330",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "POWER_DISTRICT",
+   "name": "District_RemovalRoute",
+   "shape": "rod",
+   "c": [
+    -92.0,
+    0,
+    -3.6
+   ],
+   "d": [
+    93.0,
+    0,
+    -3.6
+   ],
+   "axis": "x",
+   "meaning": "service and removal route (keel lane, 1.2 m clear, FT-07 robots)",
+   "interfaces": [],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Trunk_90_0",
+   "shape": "rod",
+   "c": [
+    -140.0,
+    0.9,
+    5.9
+   ],
+   "d": [
+    29.889,
+    0.9,
+    5.9
+   ],
+   "axis": "x",
+   "meaning": "primary trunk path A (60 % each), D 0.75 m, FT-01 wall",
+   "interfaces": [
+    "drive HX",
+    "section headers"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 90 path A",
+   "track": "F",
+   "register": "FT-01/FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "EMPump_90_0",
+   "shape": "cyl",
+   "c": [
+    -134.0,
+    0.9,
+    5.0
+   ],
+   "d": [
+    2.4,
+    0.55,
+    0.55
+   ],
+   "axis": "x",
+   "meaning": "annular linear induction pump (EM)",
+   "interfaces": [
+    "L1 bus",
+    "trunk"
+   ],
+   "clearance_m": 1.0,
+   "route": "drive bay removal hatch",
+   "failure_domain": "hot sector 90 path A",
+   "track": "F",
+   "register": "FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Trunk_90_1",
+   "shape": "rod",
+   "c": [
+    -140.0,
+    -0.9,
+    5.9
+   ],
+   "d": [
+    29.889,
+    -0.9,
+    5.9
+   ],
+   "axis": "x",
+   "meaning": "primary trunk path B (60 % each), D 0.75 m, FT-01 wall",
+   "interfaces": [
+    "drive HX",
+    "section headers"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 90 path B",
+   "track": "F",
+   "register": "FT-01/FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "EMPump_90_1",
+   "shape": "cyl",
+   "c": [
+    -134.0,
+    -0.9,
+    5.0
+   ],
+   "d": [
+    2.4,
+    0.55,
+    0.55
+   ],
+   "axis": "x",
+   "meaning": "annular linear induction pump (EM)",
+   "interfaces": [
+    "L1 bus",
+    "trunk"
+   ],
+   "clearance_m": 1.0,
+   "route": "drive bay removal hatch",
+   "failure_domain": "hot sector 90 path B",
+   "track": "F",
+   "register": "FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Accumulator_90",
+   "shape": "cyl",
+   "c": [
+    -128.0,
+    0.0,
+    4.4
+   ],
+   "d": [
+    3.0,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "accumulator / pressurizer (Ar cover gas)",
+   "interfaces": [
+    "trunk pair"
+   ],
+   "clearance_m": 0.8,
+   "route": null,
+   "failure_domain": "hot sector 90",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "DrainRecovery_90",
+   "shape": "cyl",
+   "c": [
+    -124.0,
+    0.0,
+    4.0
+   ],
+   "d": [
+    4.0,
+    0.8,
+    0.8
+   ],
+   "axis": "x",
+   "meaning": "drain and recovery tank with trace heating (frozen-start, section drain)",
+   "interfaces": [
+    "section drain lines",
+    "trace heat L2"
+   ],
+   "clearance_m": 0.8,
+   "route": null,
+   "failure_domain": "hot sector 90",
+   "track": "F",
+   "register": "FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_90_1",
+   "shape": "rod",
+   "c": [
+    -111.2,
+    0.0,
+    6.4
+   ],
+   "d": [
+    -88.418,
+    0.0,
+    6.4
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 90 section 1",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_90_1_0",
+   "shape": "box",
+   "c": [
+    -111.1,
+    0.9,
+    6.0
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 90 section 1",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_90_1_1",
+   "shape": "box",
+   "c": [
+    -111.1,
+    -0.9,
+    6.0
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 90 section 1",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_90_1",
+   "shape": "box",
+   "c": [
+    -99.809,
+    0.0,
+    5.75
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_90_1",
+   "shape": "box",
+   "c": [
+    -99.809,
+    -1.6,
+    5.3
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_90_2",
+   "shape": "rod",
+   "c": [
+    -87.618,
+    0.0,
+    6.4
+   ],
+   "d": [
+    -64.837,
+    0.0,
+    6.4
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 90 section 2",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_90_2_0",
+   "shape": "box",
+   "c": [
+    -87.518,
+    0.9,
+    6.0
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 90 section 2",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_90_2_1",
+   "shape": "box",
+   "c": [
+    -87.518,
+    -0.9,
+    6.0
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 90 section 2",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_90_2",
+   "shape": "box",
+   "c": [
+    -76.228,
+    0.0,
+    5.75
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_90_2",
+   "shape": "box",
+   "c": [
+    -76.228,
+    -1.6,
+    5.3
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_90_3",
+   "shape": "rod",
+   "c": [
+    -64.037,
+    0.0,
+    6.4
+   ],
+   "d": [
+    -41.255,
+    0.0,
+    6.4
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 90 section 3",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_90_3_0",
+   "shape": "box",
+   "c": [
+    -63.937,
+    0.9,
+    6.0
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 90 section 3",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_90_3_1",
+   "shape": "box",
+   "c": [
+    -63.937,
+    -0.9,
+    6.0
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 90 section 3",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_90_3",
+   "shape": "box",
+   "c": [
+    -52.646,
+    0.0,
+    5.75
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_90_3",
+   "shape": "box",
+   "c": [
+    -52.646,
+    -1.6,
+    5.3
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_90_4",
+   "shape": "rod",
+   "c": [
+    -40.455,
+    0.0,
+    6.4
+   ],
+   "d": [
+    -17.674,
+    0.0,
+    6.4
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 90 section 4",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_90_4_0",
+   "shape": "box",
+   "c": [
+    -40.355,
+    0.9,
+    6.0
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 90 section 4",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_90_4_1",
+   "shape": "box",
+   "c": [
+    -40.355,
+    -0.9,
+    6.0
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 90 section 4",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_90_4",
+   "shape": "box",
+   "c": [
+    -29.065,
+    0.0,
+    5.75
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_90_4",
+   "shape": "box",
+   "c": [
+    -29.065,
+    -1.6,
+    5.3
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_90_5",
+   "shape": "rod",
+   "c": [
+    -16.874,
+    0.0,
+    6.4
+   ],
+   "d": [
+    5.908,
+    0.0,
+    6.4
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 90 section 5",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_90_5_0",
+   "shape": "box",
+   "c": [
+    -16.774,
+    0.9,
+    6.0
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 90 section 5",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_90_5_1",
+   "shape": "box",
+   "c": [
+    -16.774,
+    -0.9,
+    6.0
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 90 section 5",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_90_5",
+   "shape": "box",
+   "c": [
+    -5.483,
+    0.0,
+    5.75
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_90_5",
+   "shape": "box",
+   "c": [
+    -5.483,
+    -1.6,
+    5.3
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_90_6",
+   "shape": "rod",
+   "c": [
+    6.708,
+    0.0,
+    6.4
+   ],
+   "d": [
+    29.489,
+    0.0,
+    6.4
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 90 section 6",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_90_6_0",
+   "shape": "box",
+   "c": [
+    6.808,
+    0.9,
+    6.0
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 90 section 6",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_90_6_1",
+   "shape": "box",
+   "c": [
+    6.808,
+    -0.9,
+    6.0
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 90 section 6",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_90_6",
+   "shape": "box",
+   "c": [
+    18.098,
+    0.0,
+    5.75
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_90_6",
+   "shape": "box",
+   "c": [
+    18.098,
+    -1.6,
+    5.3
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Trunk_210_0",
+   "shape": "rod",
+   "c": [
+    -140.0,
+    -5.56,
+    -2.171
+   ],
+   "d": [
+    29.889,
+    -5.56,
+    -2.171
+   ],
+   "axis": "x",
+   "meaning": "primary trunk path A (60 % each), D 0.75 m, FT-01 wall",
+   "interfaces": [
+    "drive HX",
+    "section headers"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 210 path A",
+   "track": "F",
+   "register": "FT-01/FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "EMPump_210_0",
+   "shape": "cyl",
+   "c": [
+    -134.0,
+    -4.78,
+    -1.721
+   ],
+   "d": [
+    2.4,
+    0.55,
+    0.55
+   ],
+   "axis": "x",
+   "meaning": "annular linear induction pump (EM)",
+   "interfaces": [
+    "L1 bus",
+    "trunk"
+   ],
+   "clearance_m": 1.0,
+   "route": "drive bay removal hatch",
+   "failure_domain": "hot sector 210 path A",
+   "track": "F",
+   "register": "FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Trunk_210_1",
+   "shape": "rod",
+   "c": [
+    -140.0,
+    -4.66,
+    -3.729
+   ],
+   "d": [
+    29.889,
+    -4.66,
+    -3.729
+   ],
+   "axis": "x",
+   "meaning": "primary trunk path B (60 % each), D 0.75 m, FT-01 wall",
+   "interfaces": [
+    "drive HX",
+    "section headers"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 210 path B",
+   "track": "F",
+   "register": "FT-01/FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "EMPump_210_1",
+   "shape": "cyl",
+   "c": [
+    -134.0,
+    -3.88,
+    -3.279
+   ],
+   "d": [
+    2.4,
+    0.55,
+    0.55
+   ],
+   "axis": "x",
+   "meaning": "annular linear induction pump (EM)",
+   "interfaces": [
+    "L1 bus",
+    "trunk"
+   ],
+   "clearance_m": 1.0,
+   "route": "drive bay removal hatch",
+   "failure_domain": "hot sector 210 path B",
+   "track": "F",
+   "register": "FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Accumulator_210",
+   "shape": "cyl",
+   "c": [
+    -128.0,
+    -3.811,
+    -2.2
+   ],
+   "d": [
+    3.0,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "accumulator / pressurizer (Ar cover gas)",
+   "interfaces": [
+    "trunk pair"
+   ],
+   "clearance_m": 0.8,
+   "route": null,
+   "failure_domain": "hot sector 210",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "DrainRecovery_210",
+   "shape": "cyl",
+   "c": [
+    -124.0,
+    -3.464,
+    -2.0
+   ],
+   "d": [
+    4.0,
+    0.8,
+    0.8
+   ],
+   "axis": "x",
+   "meaning": "drain and recovery tank with trace heating (frozen-start, section drain)",
+   "interfaces": [
+    "section drain lines",
+    "trace heat L2"
+   ],
+   "clearance_m": 0.8,
+   "route": null,
+   "failure_domain": "hot sector 210",
+   "track": "F",
+   "register": "FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_210_1",
+   "shape": "rod",
+   "c": [
+    -111.2,
+    -5.543,
+    -3.2
+   ],
+   "d": [
+    -88.418,
+    -5.543,
+    -3.2
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 210 section 1",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_210_1_0",
+   "shape": "box",
+   "c": [
+    -111.1,
+    -5.646,
+    -2.221
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 210 section 1",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_210_1_1",
+   "shape": "box",
+   "c": [
+    -111.1,
+    -4.746,
+    -3.779
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 210 section 1",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_210_1",
+   "shape": "box",
+   "c": [
+    -99.809,
+    -4.98,
+    -2.875
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_210_1",
+   "shape": "box",
+   "c": [
+    -99.809,
+    -3.79,
+    -4.036
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_210_2",
+   "shape": "rod",
+   "c": [
+    -87.618,
+    -5.543,
+    -3.2
+   ],
+   "d": [
+    -64.837,
+    -5.543,
+    -3.2
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 210 section 2",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_210_2_0",
+   "shape": "box",
+   "c": [
+    -87.518,
+    -5.646,
+    -2.221
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 210 section 2",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_210_2_1",
+   "shape": "box",
+   "c": [
+    -87.518,
+    -4.746,
+    -3.779
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 210 section 2",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_210_2",
+   "shape": "box",
+   "c": [
+    -76.228,
+    -4.98,
+    -2.875
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_210_2",
+   "shape": "box",
+   "c": [
+    -76.228,
+    -3.79,
+    -4.036
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_210_3",
+   "shape": "rod",
+   "c": [
+    -64.037,
+    -5.543,
+    -3.2
+   ],
+   "d": [
+    -41.255,
+    -5.543,
+    -3.2
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 210 section 3",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_210_3_0",
+   "shape": "box",
+   "c": [
+    -63.937,
+    -5.646,
+    -2.221
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 210 section 3",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_210_3_1",
+   "shape": "box",
+   "c": [
+    -63.937,
+    -4.746,
+    -3.779
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 210 section 3",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_210_3",
+   "shape": "box",
+   "c": [
+    -52.646,
+    -4.98,
+    -2.875
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_210_3",
+   "shape": "box",
+   "c": [
+    -52.646,
+    -3.79,
+    -4.036
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_210_4",
+   "shape": "rod",
+   "c": [
+    -40.455,
+    -5.543,
+    -3.2
+   ],
+   "d": [
+    -17.674,
+    -5.543,
+    -3.2
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 210 section 4",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_210_4_0",
+   "shape": "box",
+   "c": [
+    -40.355,
+    -5.646,
+    -2.221
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 210 section 4",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_210_4_1",
+   "shape": "box",
+   "c": [
+    -40.355,
+    -4.746,
+    -3.779
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 210 section 4",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_210_4",
+   "shape": "box",
+   "c": [
+    -29.065,
+    -4.98,
+    -2.875
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_210_4",
+   "shape": "box",
+   "c": [
+    -29.065,
+    -3.79,
+    -4.036
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_210_5",
+   "shape": "rod",
+   "c": [
+    -16.874,
+    -5.543,
+    -3.2
+   ],
+   "d": [
+    5.908,
+    -5.543,
+    -3.2
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 210 section 5",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_210_5_0",
+   "shape": "box",
+   "c": [
+    -16.774,
+    -5.646,
+    -2.221
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 210 section 5",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_210_5_1",
+   "shape": "box",
+   "c": [
+    -16.774,
+    -4.746,
+    -3.779
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 210 section 5",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_210_5",
+   "shape": "box",
+   "c": [
+    -5.483,
+    -4.98,
+    -2.875
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_210_5",
+   "shape": "box",
+   "c": [
+    -5.483,
+    -3.79,
+    -4.036
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_210_6",
+   "shape": "rod",
+   "c": [
+    6.708,
+    -5.543,
+    -3.2
+   ],
+   "d": [
+    29.489,
+    -5.543,
+    -3.2
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 210 section 6",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_210_6_0",
+   "shape": "box",
+   "c": [
+    6.808,
+    -5.646,
+    -2.221
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 210 section 6",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_210_6_1",
+   "shape": "box",
+   "c": [
+    6.808,
+    -4.746,
+    -3.779
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 210 section 6",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_210_6",
+   "shape": "box",
+   "c": [
+    18.098,
+    -4.98,
+    -2.875
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_210_6",
+   "shape": "box",
+   "c": [
+    18.098,
+    -3.79,
+    -4.036
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Trunk_330_0",
+   "shape": "rod",
+   "c": [
+    -140.0,
+    4.66,
+    -3.729
+   ],
+   "d": [
+    29.889,
+    4.66,
+    -3.729
+   ],
+   "axis": "x",
+   "meaning": "primary trunk path A (60 % each), D 0.75 m, FT-01 wall",
+   "interfaces": [
+    "drive HX",
+    "section headers"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 330 path A",
+   "track": "F",
+   "register": "FT-01/FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "EMPump_330_0",
+   "shape": "cyl",
+   "c": [
+    -134.0,
+    3.88,
+    -3.279
+   ],
+   "d": [
+    2.4,
+    0.55,
+    0.55
+   ],
+   "axis": "x",
+   "meaning": "annular linear induction pump (EM)",
+   "interfaces": [
+    "L1 bus",
+    "trunk"
+   ],
+   "clearance_m": 1.0,
+   "route": "drive bay removal hatch",
+   "failure_domain": "hot sector 330 path A",
+   "track": "F",
+   "register": "FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Trunk_330_1",
+   "shape": "rod",
+   "c": [
+    -140.0,
+    5.56,
+    -2.171
+   ],
+   "d": [
+    29.889,
+    5.56,
+    -2.171
+   ],
+   "axis": "x",
+   "meaning": "primary trunk path B (60 % each), D 0.75 m, FT-01 wall",
+   "interfaces": [
+    "drive HX",
+    "section headers"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 330 path B",
+   "track": "F",
+   "register": "FT-01/FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "EMPump_330_1",
+   "shape": "cyl",
+   "c": [
+    -134.0,
+    4.78,
+    -1.721
+   ],
+   "d": [
+    2.4,
+    0.55,
+    0.55
+   ],
+   "axis": "x",
+   "meaning": "annular linear induction pump (EM)",
+   "interfaces": [
+    "L1 bus",
+    "trunk"
+   ],
+   "clearance_m": 1.0,
+   "route": "drive bay removal hatch",
+   "failure_domain": "hot sector 330 path B",
+   "track": "F",
+   "register": "FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Accumulator_330",
+   "shape": "cyl",
+   "c": [
+    -128.0,
+    3.811,
+    -2.2
+   ],
+   "d": [
+    3.0,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "accumulator / pressurizer (Ar cover gas)",
+   "interfaces": [
+    "trunk pair"
+   ],
+   "clearance_m": 0.8,
+   "route": null,
+   "failure_domain": "hot sector 330",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "DrainRecovery_330",
+   "shape": "cyl",
+   "c": [
+    -124.0,
+    3.464,
+    -2.0
+   ],
+   "d": [
+    4.0,
+    0.8,
+    0.8
+   ],
+   "axis": "x",
+   "meaning": "drain and recovery tank with trace heating (frozen-start, section drain)",
+   "interfaces": [
+    "section drain lines",
+    "trace heat L2"
+   ],
+   "clearance_m": 0.8,
+   "route": null,
+   "failure_domain": "hot sector 330",
+   "track": "F",
+   "register": "FT-02"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_330_1",
+   "shape": "rod",
+   "c": [
+    -111.2,
+    5.543,
+    -3.2
+   ],
+   "d": [
+    -88.418,
+    5.543,
+    -3.2
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 330 section 1",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_330_1_0",
+   "shape": "box",
+   "c": [
+    -111.1,
+    4.746,
+    -3.779
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 330 section 1",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_330_1_1",
+   "shape": "box",
+   "c": [
+    -111.1,
+    5.646,
+    -2.221
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 330 section 1",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_330_1",
+   "shape": "box",
+   "c": [
+    -99.809,
+    4.98,
+    -2.875
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_330_1",
+   "shape": "box",
+   "c": [
+    -99.809,
+    5.39,
+    -1.264
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_330_2",
+   "shape": "rod",
+   "c": [
+    -87.618,
+    5.543,
+    -3.2
+   ],
+   "d": [
+    -64.837,
+    5.543,
+    -3.2
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 330 section 2",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_330_2_0",
+   "shape": "box",
+   "c": [
+    -87.518,
+    4.746,
+    -3.779
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 330 section 2",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_330_2_1",
+   "shape": "box",
+   "c": [
+    -87.518,
+    5.646,
+    -2.221
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 330 section 2",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_330_2",
+   "shape": "box",
+   "c": [
+    -76.228,
+    4.98,
+    -2.875
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_330_2",
+   "shape": "box",
+   "c": [
+    -76.228,
+    5.39,
+    -1.264
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_330_3",
+   "shape": "rod",
+   "c": [
+    -64.037,
+    5.543,
+    -3.2
+   ],
+   "d": [
+    -41.255,
+    5.543,
+    -3.2
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 330 section 3",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_330_3_0",
+   "shape": "box",
+   "c": [
+    -63.937,
+    4.746,
+    -3.779
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 330 section 3",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_330_3_1",
+   "shape": "box",
+   "c": [
+    -63.937,
+    5.646,
+    -2.221
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 330 section 3",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_330_3",
+   "shape": "box",
+   "c": [
+    -52.646,
+    4.98,
+    -2.875
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_330_3",
+   "shape": "box",
+   "c": [
+    -52.646,
+    5.39,
+    -1.264
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_330_4",
+   "shape": "rod",
+   "c": [
+    -40.455,
+    5.543,
+    -3.2
+   ],
+   "d": [
+    -17.674,
+    5.543,
+    -3.2
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 330 section 4",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_330_4_0",
+   "shape": "box",
+   "c": [
+    -40.355,
+    4.746,
+    -3.779
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 330 section 4",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_330_4_1",
+   "shape": "box",
+   "c": [
+    -40.355,
+    5.646,
+    -2.221
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 330 section 4",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_330_4",
+   "shape": "box",
+   "c": [
+    -29.065,
+    4.98,
+    -2.875
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_330_4",
+   "shape": "box",
+   "c": [
+    -29.065,
+    5.39,
+    -1.264
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_330_5",
+   "shape": "rod",
+   "c": [
+    -16.874,
+    5.543,
+    -3.2
+   ],
+   "d": [
+    5.908,
+    5.543,
+    -3.2
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 330 section 5",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_330_5_0",
+   "shape": "box",
+   "c": [
+    -16.774,
+    4.746,
+    -3.779
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 330 section 5",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_330_5_1",
+   "shape": "box",
+   "c": [
+    -16.774,
+    5.646,
+    -2.221
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 330 section 5",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_330_5",
+   "shape": "box",
+   "c": [
+    -5.483,
+    4.98,
+    -2.875
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_330_5",
+   "shape": "box",
+   "c": [
+    -5.483,
+    5.39,
+    -1.264
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Header_330_6",
+   "shape": "rod",
+   "c": [
+    6.708,
+    5.543,
+    -3.2
+   ],
+   "d": [
+    29.489,
+    5.543,
+    -3.2
+   ],
+   "axis": "x",
+   "meaning": "section header (feeds the heat-pipe fins)",
+   "interfaces": [
+    "trunk A",
+    "trunk B"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hot sector 330 section 6",
+   "track": "F",
+   "register": "FT-01/FT-06"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_330_6_0",
+   "shape": "box",
+   "c": [
+    6.808,
+    4.746,
+    -3.779
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 330 section 6",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Valve_330_6_1",
+   "shape": "box",
+   "c": [
+    6.808,
+    5.646,
+    -2.221
+   ],
+   "d": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "axis": "x",
+   "meaning": "section isolation valve pair (detect + close ~8 s)",
+   "interfaces": [
+    "trunk",
+    "header"
+   ],
+   "clearance_m": 0.6,
+   "route": "robot access along the blade root",
+   "failure_domain": "hot sector 330 section 6",
+   "track": "F",
+   "register": "FT-01"
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Support_330_6",
+   "shape": "box",
+   "c": [
+    18.098,
+    4.98,
+    -2.875
+   ],
+   "d": [
+    0.5,
+    0.3,
+    2.4
+   ],
+   "axis": "x",
+   "meaning": "trunk support saddle (sliding, thermal growth ~10 mm/m)",
+   "interfaces": [
+    "casing frame"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "THERMAL_H6A",
+   "name": "Inspection_330_6",
+   "shape": "box",
+   "c": [
+    18.098,
+    5.39,
+    -1.264
+   ],
+   "d": [
+    0.7,
+    0.7,
+    0.7
+   ],
+   "axis": "x",
+   "meaning": "inspection and replacement port",
+   "interfaces": [],
+   "clearance_m": 0.7,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "RADIATOR_F0",
+   "name": "L2Section_F0_90",
+   "shape": "sector",
+   "c": [
+    29.889,
+    90.0,
+    6.5
+   ],
+   "d": [
+    50.4,
+    36.1,
+    0.45
+   ],
+   "axis": "x",
+   "meaning": "L2 section R5-A 750 K cross-strapped (approved DR5-01)",
+   "interfaces": [
+    "dual headers from two units"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 section 90",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "RADIATOR_F0",
+   "name": "L2Section_F0_210",
+   "shape": "sector",
+   "c": [
+    29.889,
+    210.0,
+    6.5
+   ],
+   "d": [
+    50.4,
+    36.1,
+    0.45
+   ],
+   "axis": "x",
+   "meaning": "L2 section R5-A 750 K cross-strapped (approved DR5-01)",
+   "interfaces": [
+    "dual headers from two units"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 section 210",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "RADIATOR_F0",
+   "name": "L2Section_F0_330",
+   "shape": "sector",
+   "c": [
+    29.889,
+    330.0,
+    6.5
+   ],
+   "d": [
+    50.4,
+    36.1,
+    0.45
+   ],
+   "axis": "x",
+   "meaning": "L2 section R5-A 750 K cross-strapped (approved DR5-01)",
+   "interfaces": [
+    "dual headers from two units"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 section 330",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "RADIATOR_F0",
+   "name": "Bulkhead_F0",
+   "shape": "tube",
+   "c": [
+    29.589,
+    6.1,
+    37.0
+   ],
+   "d": [
+    29.889,
+    0,
+    0
+   ],
+   "axis": "x",
+   "meaning": "graded thermal bulkhead, relocated aft of the L2 section",
+   "interfaces": [],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "RADIATOR_F1",
+   "name": "L2Section_F1_90",
+   "shape": "sector",
+   "c": [
+    42.957,
+    90.0,
+    6.5
+   ],
+   "d": [
+    50.4,
+    36.1,
+    0.45
+   ],
+   "axis": "x",
+   "meaning": "L2 section FT-03 1500 K inlet, 900 K reject (PROPOSED)",
+   "interfaces": [
+    "dual headers from two units"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 section 90",
+   "track": "F",
+   "register": "FT-03"
+  },
+  {
+   "family": "RADIATOR_F1",
+   "name": "L2Section_F1_210",
+   "shape": "sector",
+   "c": [
+    42.957,
+    210.0,
+    6.5
+   ],
+   "d": [
+    50.4,
+    36.1,
+    0.45
+   ],
+   "axis": "x",
+   "meaning": "L2 section FT-03 1500 K inlet, 900 K reject (PROPOSED)",
+   "interfaces": [
+    "dual headers from two units"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 section 210",
+   "track": "F",
+   "register": "FT-03"
+  },
+  {
+   "family": "RADIATOR_F1",
+   "name": "L2Section_F1_330",
+   "shape": "sector",
+   "c": [
+    42.957,
+    330.0,
+    6.5
+   ],
+   "d": [
+    50.4,
+    36.1,
+    0.45
+   ],
+   "axis": "x",
+   "meaning": "L2 section FT-03 1500 K inlet, 900 K reject (PROPOSED)",
+   "interfaces": [
+    "dual headers from two units"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L2 section 330",
+   "track": "F",
+   "register": "FT-03"
+  },
+  {
+   "family": "RADIATOR_F1",
+   "name": "Bulkhead_F1",
+   "shape": "tube",
+   "c": [
+    42.657,
+    6.1,
+    37.0
+   ],
+   "d": [
+    42.957,
+    0,
+    0
+   ],
+   "axis": "x",
+   "meaning": "graded thermal bulkhead, relocated aft of the L2 section",
+   "interfaces": [],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": null,
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "MainBus_1",
+   "shape": "rod",
+   "c": [
+    -80.0,
+    4.33,
+    2.5
+   ],
+   "d": [
+    95.0,
+    4.33,
+    2.5
+   ],
+   "axis": "x",
+   "meaning": "main bus sector 1 (HVDC duct, own failure domain)",
+   "interfaces": [
+    "L2 unit",
+    "switchgear",
+    "ring hubs"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "bus sector 1",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "Switchgear_1",
+   "shape": "box",
+   "c": [
+    14.0,
+    3.897,
+    2.25
+   ],
+   "d": [
+    3.0,
+    1.0,
+    1.8
+   ],
+   "axis": "x",
+   "meaning": "main switchgear and protection (sector)",
+   "interfaces": [
+    "bus",
+    "ride-through"
+   ],
+   "clearance_m": 1.0,
+   "route": "keel lane",
+   "failure_domain": "bus sector 1",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RideThrough_1_1",
+   "shape": "box",
+   "c": [
+    -40.0,
+    3.681,
+    2.125
+   ],
+   "d": [
+    0.8,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "ride-through cells (bus segment)",
+   "interfaces": [
+    "bus segment"
+   ],
+   "clearance_m": 0.6,
+   "route": null,
+   "failure_domain": "bus sector 1",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RideThrough_1_2",
+   "shape": "box",
+   "c": [
+    0.0,
+    3.681,
+    2.125
+   ],
+   "d": [
+    0.8,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "ride-through cells (bus segment)",
+   "interfaces": [
+    "bus segment"
+   ],
+   "clearance_m": 0.6,
+   "route": null,
+   "failure_domain": "bus sector 1",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RideThrough_1_3",
+   "shape": "box",
+   "c": [
+    40.0,
+    3.681,
+    2.125
+   ],
+   "d": [
+    0.8,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "ride-through cells (bus segment)",
+   "interfaces": [
+    "bus segment"
+   ],
+   "clearance_m": 0.6,
+   "route": null,
+   "failure_domain": "bus sector 1",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RideThrough_1_4",
+   "shape": "box",
+   "c": [
+    80.0,
+    3.681,
+    2.125
+   ],
+   "d": [
+    0.8,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "ride-through cells (bus segment)",
+   "interfaces": [
+    "bus segment"
+   ],
+   "clearance_m": 0.6,
+   "route": null,
+   "failure_domain": "bus sector 1",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RestartPack_1",
+   "shape": "box",
+   "c": [
+    -78.5,
+    -2.109,
+    3.861
+   ],
+   "d": [
+    1.6,
+    0.9,
+    1.2
+   ],
+   "axis": "x",
+   "meaning": "independent restart pack R1b (own cells, bus, converter)",
+   "interfaces": [
+    "L2 unit start bus"
+   ],
+   "clearance_m": 0.8,
+   "route": "keel lane",
+   "failure_domain": "L2 unit 1",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "MainBus_2",
+   "shape": "rod",
+   "c": [
+    -80.0,
+    -4.33,
+    2.5
+   ],
+   "d": [
+    95.0,
+    -4.33,
+    2.5
+   ],
+   "axis": "x",
+   "meaning": "main bus sector 2 (HVDC duct, own failure domain)",
+   "interfaces": [
+    "L2 unit",
+    "switchgear",
+    "ring hubs"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "bus sector 2",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "Switchgear_2",
+   "shape": "box",
+   "c": [
+    14.0,
+    -3.897,
+    2.25
+   ],
+   "d": [
+    3.0,
+    1.0,
+    1.8
+   ],
+   "axis": "x",
+   "meaning": "main switchgear and protection (sector)",
+   "interfaces": [
+    "bus",
+    "ride-through"
+   ],
+   "clearance_m": 1.0,
+   "route": "keel lane",
+   "failure_domain": "bus sector 2",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RideThrough_2_1",
+   "shape": "box",
+   "c": [
+    -40.0,
+    -3.681,
+    2.125
+   ],
+   "d": [
+    0.8,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "ride-through cells (bus segment)",
+   "interfaces": [
+    "bus segment"
+   ],
+   "clearance_m": 0.6,
+   "route": null,
+   "failure_domain": "bus sector 2",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RideThrough_2_2",
+   "shape": "box",
+   "c": [
+    0.0,
+    -3.681,
+    2.125
+   ],
+   "d": [
+    0.8,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "ride-through cells (bus segment)",
+   "interfaces": [
+    "bus segment"
+   ],
+   "clearance_m": 0.6,
+   "route": null,
+   "failure_domain": "bus sector 2",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RideThrough_2_3",
+   "shape": "box",
+   "c": [
+    40.0,
+    -3.681,
+    2.125
+   ],
+   "d": [
+    0.8,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "ride-through cells (bus segment)",
+   "interfaces": [
+    "bus segment"
+   ],
+   "clearance_m": 0.6,
+   "route": null,
+   "failure_domain": "bus sector 2",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RideThrough_2_4",
+   "shape": "box",
+   "c": [
+    80.0,
+    -3.681,
+    2.125
+   ],
+   "d": [
+    0.8,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "ride-through cells (bus segment)",
+   "interfaces": [
+    "bus segment"
+   ],
+   "clearance_m": 0.6,
+   "route": null,
+   "failure_domain": "bus sector 2",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RestartPack_2",
+   "shape": "box",
+   "c": [
+    -78.5,
+    -2.289,
+    -3.758
+   ],
+   "d": [
+    1.6,
+    0.9,
+    1.2
+   ],
+   "axis": "x",
+   "meaning": "independent restart pack R1b (own cells, bus, converter)",
+   "interfaces": [
+    "L2 unit start bus"
+   ],
+   "clearance_m": 0.8,
+   "route": "keel lane",
+   "failure_domain": "L2 unit 2",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "MainBus_3",
+   "shape": "rod",
+   "c": [
+    -80.0,
+    -0.0,
+    -5.0
+   ],
+   "d": [
+    95.0,
+    -0.0,
+    -5.0
+   ],
+   "axis": "x",
+   "meaning": "main bus sector 3 (HVDC duct, own failure domain)",
+   "interfaces": [
+    "L2 unit",
+    "switchgear",
+    "ring hubs"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "bus sector 3",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "Switchgear_3",
+   "shape": "box",
+   "c": [
+    14.0,
+    -0.0,
+    -4.5
+   ],
+   "d": [
+    3.0,
+    1.0,
+    1.8
+   ],
+   "axis": "x",
+   "meaning": "main switchgear and protection (sector)",
+   "interfaces": [
+    "bus",
+    "ride-through"
+   ],
+   "clearance_m": 1.0,
+   "route": "keel lane",
+   "failure_domain": "bus sector 3",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RideThrough_3_1",
+   "shape": "box",
+   "c": [
+    -40.0,
+    -0.0,
+    -4.25
+   ],
+   "d": [
+    0.8,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "ride-through cells (bus segment)",
+   "interfaces": [
+    "bus segment"
+   ],
+   "clearance_m": 0.6,
+   "route": null,
+   "failure_domain": "bus sector 3",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RideThrough_3_2",
+   "shape": "box",
+   "c": [
+    0.0,
+    -0.0,
+    -4.25
+   ],
+   "d": [
+    0.8,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "ride-through cells (bus segment)",
+   "interfaces": [
+    "bus segment"
+   ],
+   "clearance_m": 0.6,
+   "route": null,
+   "failure_domain": "bus sector 3",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RideThrough_3_3",
+   "shape": "box",
+   "c": [
+    40.0,
+    -0.0,
+    -4.25
+   ],
+   "d": [
+    0.8,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "ride-through cells (bus segment)",
+   "interfaces": [
+    "bus segment"
+   ],
+   "clearance_m": 0.6,
+   "route": null,
+   "failure_domain": "bus sector 3",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RideThrough_3_4",
+   "shape": "box",
+   "c": [
+    80.0,
+    -0.0,
+    -4.25
+   ],
+   "d": [
+    0.8,
+    0.6,
+    0.6
+   ],
+   "axis": "x",
+   "meaning": "ride-through cells (bus segment)",
+   "interfaces": [
+    "bus segment"
+   ],
+   "clearance_m": 0.6,
+   "route": null,
+   "failure_domain": "bus sector 3",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "RestartPack_3",
+   "shape": "box",
+   "c": [
+    -78.5,
+    4.399,
+    -0.104
+   ],
+   "d": [
+    1.6,
+    0.9,
+    1.2
+   ],
+   "axis": "x",
+   "meaning": "independent restart pack R1b (own cells, bus, converter)",
+   "interfaces": [
+    "L2 unit start bus"
+   ],
+   "clearance_m": 0.8,
+   "route": "keel lane",
+   "failure_domain": "L2 unit 3",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "DefenseBuffer_1",
+   "shape": "box",
+   "c": [
+    32.0,
+    0.0,
+    3.8
+   ],
+   "d": [
+    2.8,
+    2.4,
+    1.4
+   ],
+   "axis": "x",
+   "meaning": "defense buffer module (21 MW class, defense bus only)",
+   "interfaces": [
+    "defense bus"
+   ],
+   "clearance_m": 1.0,
+   "route": "keel lane",
+   "failure_domain": "defense bus",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "DefenseBuffer_2",
+   "shape": "box",
+   "c": [
+    35.2,
+    0.0,
+    3.8
+   ],
+   "d": [
+    2.8,
+    2.4,
+    1.4
+   ],
+   "axis": "x",
+   "meaning": "defense buffer module (21 MW class, defense bus only)",
+   "interfaces": [
+    "defense bus"
+   ],
+   "clearance_m": 1.0,
+   "route": "keel lane",
+   "failure_domain": "defense bus",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "DefenseBuffer_3",
+   "shape": "box",
+   "c": [
+    38.4,
+    0.0,
+    3.8
+   ],
+   "d": [
+    2.8,
+    2.4,
+    1.4
+   ],
+   "axis": "x",
+   "meaning": "defense buffer module (21 MW class, defense bus only)",
+   "interfaces": [
+    "defense bus"
+   ],
+   "clearance_m": 1.0,
+   "route": "keel lane",
+   "failure_domain": "defense bus",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "DefenseBuffer_4",
+   "shape": "box",
+   "c": [
+    41.6,
+    0.0,
+    3.8
+   ],
+   "d": [
+    2.8,
+    2.4,
+    1.4
+   ],
+   "axis": "x",
+   "meaning": "defense buffer module (21 MW class, defense bus only)",
+   "interfaces": [
+    "defense bus"
+   ],
+   "clearance_m": 1.0,
+   "route": "keel lane",
+   "failure_domain": "defense bus",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "L1_DC_Pickup",
+   "shape": "ring",
+   "c": [
+    -140.0,
+    0,
+    0
+   ],
+   "d": [
+    1.2,
+    9.0,
+    9.0
+   ],
+   "axis": "x",
+   "meaning": "L1 direct-conversion pickup winding in the existing nozzle structure (FT-04, CONDITIONAL)",
+   "interfaces": [
+    "nozzle field",
+    "H6a cooling",
+    "L1 bus"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L1",
+   "track": "F",
+   "register": "FT-04"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "L1_Conditioning",
+   "shape": "box",
+   "c": [
+    -121.0,
+    0,
+    3.2
+   ],
+   "d": [
+    4.0,
+    2.4,
+    1.6
+   ],
+   "axis": "x",
+   "meaning": "L1 power conditioning + pulse buffer (FT-04/FT-05)",
+   "interfaces": [
+    "L1 bus",
+    "heat pumps",
+    "EM pumps"
+   ],
+   "clearance_m": 1.0,
+   "route": "drive bay hatch",
+   "failure_domain": "L1",
+   "track": "F",
+   "register": "FT-04"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "L1_Bus",
+   "shape": "rod",
+   "c": [
+    -140.0,
+    0,
+    3.2
+   ],
+   "d": [
+    -80.0,
+    0,
+    3.2
+   ],
+   "axis": "x",
+   "meaning": "L1 bus (drive services; isolated from the main bus)",
+   "interfaces": [
+    "DC pickup",
+    "EM pumps",
+    "heat pumps",
+    "EYE"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "L1",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "SurvivalBridge",
+   "shape": "box",
+   "c": [
+    101.0,
+    0,
+    -3.0
+   ],
+   "d": [
+    2.0,
+    1.2,
+    1.0
+   ],
+   "axis": "x",
+   "meaning": "survival bridge (refuge bus, L3, independent)",
+   "interfaces": [
+    "refuge bus"
+   ],
+   "clearance_m": 0.8,
+   "route": null,
+   "failure_domain": "refuge",
+   "track": "F",
+   "register": "FT-05"
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "DataNet_A",
+   "shape": "rod",
+   "c": [
+    -140.0,
+    4.6,
+    0.0
+   ],
+   "d": [
+    140.0,
+    4.6,
+    0.0
+   ],
+   "axis": "x",
+   "meaning": "data and control network A (fibre, physically separated)",
+   "interfaces": [
+    "every unit"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "network A",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ELECTRICAL",
+   "name": "DataNet_B",
+   "shape": "rod",
+   "c": [
+    -140.0,
+    -4.6,
+    0.0
+   ],
+   "d": [
+    140.0,
+    -4.6,
+    0.0
+   ],
+   "axis": "x",
+   "meaning": "data and control network B (fibre, physically separated)",
+   "interfaces": [
+    "every unit"
+   ],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "network B",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ECLSS",
+   "name": "ECLSS_A1",
+   "shape": "box",
+   "c": [
+    97.299,
+    23.902,
+    13.8
+   ],
+   "d": [
+    2.0,
+    1.4,
+    2.2
+   ],
+   "axis": "x",
+   "meaning": "ECLSS-G1 four-person unit",
+   "interfaces": [
+    "ring bus (two segments)",
+    "ring cold loop",
+    "O2/N2",
+    "water",
+    "data A/B"
+   ],
+   "clearance_m": 1.0,
+   "route": "ring aisle; ORU <= 0.70 m",
+   "failure_domain": "ring A",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ECLSS",
+   "name": "ECLSS_A2",
+   "shape": "box",
+   "c": [
+    97.299,
+    -23.902,
+    13.8
+   ],
+   "d": [
+    2.0,
+    1.4,
+    2.2
+   ],
+   "axis": "x",
+   "meaning": "ECLSS-G1 four-person unit",
+   "interfaces": [
+    "ring bus (two segments)",
+    "ring cold loop",
+    "O2/N2",
+    "water",
+    "data A/B"
+   ],
+   "clearance_m": 1.0,
+   "route": "ring aisle; ORU <= 0.70 m",
+   "failure_domain": "ring A",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ECLSS",
+   "name": "ECLSS_A3",
+   "shape": "box",
+   "c": [
+    97.299,
+    -0.0,
+    -27.6
+   ],
+   "d": [
+    2.0,
+    1.4,
+    2.2
+   ],
+   "axis": "x",
+   "meaning": "ECLSS-G1 four-person unit",
+   "interfaces": [
+    "ring bus (two segments)",
+    "ring cold loop",
+    "O2/N2",
+    "water",
+    "data A/B"
+   ],
+   "clearance_m": 1.0,
+   "route": "ring aisle; ORU <= 0.70 m",
+   "failure_domain": "ring A",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ECLSS",
+   "name": "RotaryCoupling_A",
+   "shape": "ring",
+   "c": [
+    99.199,
+    0,
+    0
+   ],
+   "d": [
+    0.6,
+    1.45,
+    1.45
+   ],
+   "axis": "x",
+   "meaning": "ring A rotary utility coupling (air duct, water, gas swivels; contactless power/data): existing cartridge position",
+   "interfaces": [
+    "hub ECLSS duct"
+   ],
+   "clearance_m": 0.8,
+   "route": null,
+   "failure_domain": "ring A coupling",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ECLSS",
+   "name": "ECLSS_B1",
+   "shape": "box",
+   "c": [
+    103.299,
+    23.902,
+    13.8
+   ],
+   "d": [
+    2.0,
+    1.4,
+    2.2
+   ],
+   "axis": "x",
+   "meaning": "ECLSS-G1 four-person unit",
+   "interfaces": [
+    "ring bus (two segments)",
+    "ring cold loop",
+    "O2/N2",
+    "water",
+    "data A/B"
+   ],
+   "clearance_m": 1.0,
+   "route": "ring aisle; ORU <= 0.70 m",
+   "failure_domain": "ring B",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ECLSS",
+   "name": "ECLSS_B2",
+   "shape": "box",
+   "c": [
+    103.299,
+    -23.902,
+    13.8
+   ],
+   "d": [
+    2.0,
+    1.4,
+    2.2
+   ],
+   "axis": "x",
+   "meaning": "ECLSS-G1 four-person unit",
+   "interfaces": [
+    "ring bus (two segments)",
+    "ring cold loop",
+    "O2/N2",
+    "water",
+    "data A/B"
+   ],
+   "clearance_m": 1.0,
+   "route": "ring aisle; ORU <= 0.70 m",
+   "failure_domain": "ring B",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ECLSS",
+   "name": "ECLSS_B3",
+   "shape": "box",
+   "c": [
+    103.299,
+    -0.0,
+    -27.6
+   ],
+   "d": [
+    2.0,
+    1.4,
+    2.2
+   ],
+   "axis": "x",
+   "meaning": "ECLSS-G1 four-person unit",
+   "interfaces": [
+    "ring bus (two segments)",
+    "ring cold loop",
+    "O2/N2",
+    "water",
+    "data A/B"
+   ],
+   "clearance_m": 1.0,
+   "route": "ring aisle; ORU <= 0.70 m",
+   "failure_domain": "ring B",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ECLSS",
+   "name": "RotaryCoupling_B",
+   "shape": "ring",
+   "c": [
+    101.399,
+    0,
+    0
+   ],
+   "d": [
+    0.6,
+    1.45,
+    1.45
+   ],
+   "axis": "x",
+   "meaning": "ring B rotary utility coupling (air duct, water, gas swivels; contactless power/data): existing cartridge position",
+   "interfaces": [
+    "hub ECLSS duct"
+   ],
+   "clearance_m": 0.8,
+   "route": null,
+   "failure_domain": "ring B coupling",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ECLSS",
+   "name": "ECLSS_HUB",
+   "shape": "box",
+   "c": [
+    100.299,
+    0,
+    3.2
+   ],
+   "d": [
+    2.0,
+    2.2,
+    1.4
+   ],
+   "axis": "x",
+   "meaning": "ECLSS-G1 hub unit (serves both rings through their couplings)",
+   "interfaces": [
+    "both couplings"
+   ],
+   "clearance_m": 1.0,
+   "route": null,
+   "failure_domain": "stationary hub",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "ECLSS",
+   "name": "HubDuct",
+   "shape": "rod",
+   "c": [
+    99.199,
+    0,
+    2.6
+   ],
+   "d": [
+    101.399,
+    0,
+    2.6
+   ],
+   "axis": "x",
+   "meaning": "hub-to-ring air ducts (D 0.28 m) to both couplings",
+   "interfaces": [],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "stationary hub",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "LOGISTICS",
+   "name": "LOG_G1_1",
+   "shape": "box",
+   "c": [
+    106.5,
+    -2.2,
+    -3.0
+   ],
+   "d": [
+    2.05,
+    2.05,
+    2.05
+   ],
+   "axis": "x",
+   "meaning": "LOG-G1 3 t container (12 months, 12 crew)",
+   "interfaces": [
+    "4 corner fittings"
+   ],
+   "clearance_m": 0.2,
+   "route": "hub store rail",
+   "failure_domain": "hub store",
+   "track": "F",
+   "register": "FT-07"
+  },
+  {
+   "family": "LOGISTICS",
+   "name": "LOG_G1_2",
+   "shape": "box",
+   "c": [
+    108.75,
+    -2.2,
+    -3.0
+   ],
+   "d": [
+    2.05,
+    2.05,
+    2.05
+   ],
+   "axis": "x",
+   "meaning": "LOG-G1 3 t container (12 months, 12 crew)",
+   "interfaces": [
+    "4 corner fittings"
+   ],
+   "clearance_m": 0.2,
+   "route": "hub store rail",
+   "failure_domain": "hub store",
+   "track": "F",
+   "register": "FT-07"
+  },
+  {
+   "family": "LOGISTICS",
+   "name": "LOG_G1_3",
+   "shape": "box",
+   "c": [
+    111.0,
+    -2.2,
+    -3.0
+   ],
+   "d": [
+    2.05,
+    2.05,
+    2.05
+   ],
+   "axis": "x",
+   "meaning": "LOG-G1 3 t container (12 months, 12 crew)",
+   "interfaces": [
+    "4 corner fittings"
+   ],
+   "clearance_m": 0.2,
+   "route": "hub store rail",
+   "failure_domain": "hub store",
+   "track": "F",
+   "register": "FT-07"
+  },
+  {
+   "family": "LOGISTICS",
+   "name": "LOG_G1_4",
+   "shape": "box",
+   "c": [
+    113.25,
+    -2.2,
+    -3.0
+   ],
+   "d": [
+    2.05,
+    2.05,
+    2.05
+   ],
+   "axis": "x",
+   "meaning": "LOG-G1 3 t container (12 months, 12 crew)",
+   "interfaces": [
+    "4 corner fittings"
+   ],
+   "clearance_m": 0.2,
+   "route": "hub store rail",
+   "failure_domain": "hub store",
+   "track": "F",
+   "register": "FT-07"
+  },
+  {
+   "family": "LOGISTICS",
+   "name": "LOG_G1_5",
+   "shape": "box",
+   "c": [
+    106.5,
+    0.05,
+    -3.0
+   ],
+   "d": [
+    2.05,
+    2.05,
+    2.05
+   ],
+   "axis": "x",
+   "meaning": "LOG-G1 3 t container (12 months, 12 crew)",
+   "interfaces": [
+    "4 corner fittings"
+   ],
+   "clearance_m": 0.2,
+   "route": "hub store rail",
+   "failure_domain": "hub store",
+   "track": "F",
+   "register": "FT-07"
+  },
+  {
+   "family": "LOGISTICS",
+   "name": "LOG_G1_6",
+   "shape": "box",
+   "c": [
+    108.75,
+    0.05,
+    -3.0
+   ],
+   "d": [
+    2.05,
+    2.05,
+    2.05
+   ],
+   "axis": "x",
+   "meaning": "LOG-G1 3 t container (12 months, 12 crew)",
+   "interfaces": [
+    "4 corner fittings"
+   ],
+   "clearance_m": 0.2,
+   "route": "hub store rail",
+   "failure_domain": "hub store",
+   "track": "F",
+   "register": "FT-07"
+  },
+  {
+   "family": "LOGISTICS",
+   "name": "LOG_G1_7",
+   "shape": "box",
+   "c": [
+    111.0,
+    0.05,
+    -3.0
+   ],
+   "d": [
+    2.05,
+    2.05,
+    2.05
+   ],
+   "axis": "x",
+   "meaning": "LOG-G1 3 t container (12 months, 12 crew)",
+   "interfaces": [
+    "4 corner fittings"
+   ],
+   "clearance_m": 0.2,
+   "route": "hub store rail",
+   "failure_domain": "hub store",
+   "track": "F",
+   "register": "FT-07"
+  },
+  {
+   "family": "LOGISTICS",
+   "name": "LOG_G1_8",
+   "shape": "box",
+   "c": [
+    113.25,
+    0.05,
+    -3.0
+   ],
+   "d": [
+    2.05,
+    2.05,
+    2.05
+   ],
+   "axis": "x",
+   "meaning": "LOG-G1 3 t container (12 months, 12 crew)",
+   "interfaces": [
+    "4 corner fittings"
+   ],
+   "clearance_m": 0.2,
+   "route": "hub store rail",
+   "failure_domain": "hub store",
+   "track": "F",
+   "register": "FT-07"
+  },
+  {
+   "family": "LOGISTICS",
+   "name": "HubStoreRail",
+   "shape": "rod",
+   "c": [
+    105.0,
+    -3.4,
+    0.4
+   ],
+   "d": [
+    115.0,
+    -3.4,
+    0.4
+   ],
+   "axis": "x",
+   "meaning": "manipulator rail (single-arm 3 t)",
+   "interfaces": [],
+   "clearance_m": null,
+   "route": null,
+   "failure_domain": "hub store",
+   "track": "F",
+   "register": "FT-07"
+  },
+  {
+   "family": "LOGISTICS",
+   "name": "Workshop",
+   "shape": "box",
+   "c": [
+    95.5,
+    0.0,
+    -3.0
+   ],
+   "d": [
+    4.0,
+    3.2,
+    2.6
+   ],
+   "axis": "x",
+   "meaning": "workshop + fab cell (canon fab cell; additive + machining)",
+   "interfaces": [],
+   "clearance_m": 1.0,
+   "route": null,
+   "failure_domain": "stationary hub",
+   "track": "F",
+   "register": null
+  },
+  {
+   "family": "LOGISTICS",
+   "name": "SparesRacks",
+   "shape": "box",
+   "c": [
+    92.5,
+    0.0,
+    3.4
+   ],
+   "d": [
+    3.0,
+    3.6,
+    1.2
+   ],
+   "axis": "x",
+   "meaning": "permanent spares racks (60 t line)",
+   "interfaces": [],
+   "clearance_m": 0.8,
+   "route": null,
+   "failure_domain": "stationary hub",
+   "track": "F",
+   "register": null
+  }
+ ],
+ "problems": [
+  {
+   "id": "P6-01",
+   "track": "R",
+   "sev": "BLOCKER (research)",
+   "text": "Hot-loop walls: 1,833 t nominal on the R5-A length; Mo-Re walls exceed their temperature limit at the nominal inlet."
+  },
+  {
+   "id": "P6-02",
+   "track": "R",
+   "sev": "HIGH",
+   "text": "L1 thermal conversion rejects 39 MW at 900 K; a 900 K section needs 8.3 m of hot length that the 20 % rule no longer has after R5-A."
+  },
+  {
+   "id": "P6-03",
+   "track": "R/F",
+   "sev": "HIGH",
+   "text": "He-3 stage: nuclear heating from structural scatter adds to the 118 W leak lift; final shielding and the installed cryocooler rating stay OPEN (rad6)."
+  },
+  {
+   "id": "P6-04",
+   "track": "F",
+   "sev": "HIGH",
+   "text": "F0: HOT headroom under the 20 % rule is 58 MW; a reactive defense engagement in a burn (heat pumps + DC loss) does not fit. F1 (FT-03) frees 1,029 MW."
+  },
+  {
+   "id": "P6-05",
+   "track": "R/F",
+   "sev": "HIGH",
+   "text": "Propellant does not fit the historical tank farm in any coupled case; the farm must grow (Track F geometry below)."
+  },
+  {
+   "id": "P6-06",
+   "track": "F",
+   "sev": "MEDIUM",
+   "text": "FT-04 needs a pulsed or modulated exhaust; the production drive repetition rate is OPEN in canon."
+  },
+  {
+   "id": "P6-07",
+   "track": "R/F",
+   "sev": "MEDIUM",
+   "text": "Rotary utility couplings (air, water, gas) at both ring hubs are not designed (OD-013); the 7-unit ECLSS depends on them."
+  },
+  {
+   "id": "P6-08",
+   "track": "R/F",
+   "sev": "MEDIUM",
+   "text": "Strategy C part-load efficiency raises L2 waste above the linear share; the cross-strapped sections still close (see 4.3)."
+  },
+  {
+   "id": "P6-09",
+   "track": "R",
+   "sev": "MEDIUM",
+   "text": "OpenMC: surrogate source, simplified structure, no dose; deep-penetration convergence through the shadow shield reported with weight windows (rad6)."
+  }
+ ],
+ "decisions": [
+  {
+   "id": "DR6-01",
+   "q": "Freeze F0 (approved assumptions only) as the Track F working configuration, with F1 as its candidate upgrade?",
+   "rec": "yes"
+  },
+  {
+   "id": "DR6-02",
+   "q": "Adopt FT-03 (1500 K turbine inlet, 950 K L2 reject) for Track F, making F1 the fictional baseline?",
+   "rec": "yes: it is what lets L1 and a reactive defense fit the HOT rule"
+  },
+  {
+   "id": "DR6-03",
+   "q": "Track F tank farm: lengthen the 13 tanks forward (option A) in a fictional geometry variant?",
+   "rec": "yes, as an isolated variant"
+  },
+  {
+   "id": "DR6-04",
+   "q": "Accept 7 ECLSS units with the hub unit served through each ring's rotary coupling (P6-07 stays open)?",
+   "rec": "yes"
+  },
+  {
+   "id": "DR6-05",
+   "q": "Rate the Track F DC L1 at 100 MWe (reactive defense in a burn) only with F1, 20 MWe with F0?",
+   "rec": "yes"
+  },
+  {
+   "id": "DR6-06",
+   "q": "Publish the Phase VI R/F comparison on the website after review (no deployment until approved)?",
+   "rec": "owner"
+  }
+ ],
+ "radiation": {
+  "status": "not run"
+ }
+}

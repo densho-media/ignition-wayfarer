@@ -1,0 +1,284 @@
+{
+ "F0": {
+  "id": "WF-F0-P6.0",
+  "track": "F (fiction) F0",
+  "status": "STUDY / NONCANON",
+  "derived_from": "N2-R4a-P5.0 (Phase V) + Phase VI corrections C6-01..",
+  "production_unchanged": true,
+  "generation": {
+   "L2": {
+    "units": 3,
+    "rating_We": 3500000.0,
+    "strategy": "C (B for maintenance)",
+    "turbine_inlet_K": 1150.0,
+    "reject_K": 750.0,
+    "eta": 0.14608695652173911,
+    "register": null
+   },
+   "L1": {
+    "type": "direct conversion (FT-04, CONDITIONAL)",
+    "rated_W": 20000000.0
+   },
+   "L3": "refuge survival (independent)"
+  },
+  "radiators": {
+   "hot": {
+    "T_K": 1800.0,
+    "length_m": 141.48916986338992,
+    "margin_rule": 1.2
+   },
+   "L2": {
+    "T_K": 750.0,
+    "length_m": 20.510830136610082,
+    "layout": "cross-strapped dual headers"
+   },
+   "bulkhead_x": 29.689169863389917,
+   "WARM": "R5-D re-zoned + burn heat-pump lift of the shortfall",
+   "LOW": "R5-D"
+  },
+  "hot_loop": {
+   "topology": "H6a",
+   "coolant": "Li",
+   "wall": "refractory composite 100 MPa, 3 t/m3 (FT-01)",
+   "mass_t": [
+    483.25214818476934,
+    546.6884404659878,
+    673.1541126799827
+   ],
+   "pump_W": [
+    7820641.934078282,
+    10055111.058100648,
+    14077155.481340908
+   ]
+  },
+  "eclss": "7 (3 A + 3 B + 1 hub)",
+  "logistics": "LOG-G1 3 t (hub store) + soft bags + racks",
+  "loading": "12 crew, 12 months standard, modular extension; 0.016 c reference",
+  "items_t": {
+   "L2 (3 x 3.5 MWe, 750 K)": [
+    160.01449496280512,
+    298.2387978492912,
+    635.6243356076641
+   ],
+   "L1 (derived)": [
+    6.0,
+    14.0,
+    28.0
+   ],
+   "L3": [
+    9.0,
+    12.0,
+    16.0
+   ],
+   "storage (buffer + restart)": [
+    14.3,
+    21.5,
+    31.6
+   ],
+   "distribution": [
+    4.0,
+    8.0,
+    15.0
+   ],
+   "scatter allowance (OPEN)": [
+    0.0,
+    3.0,
+    10.0
+   ],
+   "ECLSS modular increment": [
+    3.5999999999999996,
+    4.800000000000001,
+    6.4
+   ],
+   "L2 sections 750 K cross-strapped + dual headers": [
+    13.934237561607423,
+    20.147104748854193,
+    30.389392885871807
+   ],
+   "bulkhead relocation": [
+    0.0,
+    2.0,
+    5.0
+   ],
+   "LOG-G1 tare (3 t containers, 12 months)": [
+    4.807860357015053,
+    4.807860357015053,
+    4.807860357015053
+   ],
+   "hot loop H6a": [
+    483.25214818476934,
+    546.6884404659878,
+    673.1541126799827
+   ]
+  },
+  "mass": {
+   "departure_t": [
+    7129.669404770833,
+    7993.937077589278,
+    9898.954171526757
+   ],
+   "dry_added_t": [
+    698.908741066197,
+    935.1822034211483,
+    1455.9757015305338
+   ],
+   "propellant_t": [
+    4504.835359743162,
+    5050.917281885329,
+    6254.589973909758
+   ],
+   "end_t": [
+    2624.8340450276714,
+    2943.019795703948,
+    3644.3641976169974
+   ]
+  },
+  "register_refs": [
+   "FT-01/FT-02",
+   "FT-04"
+  ],
+  "hash": "46152ce82db2"
+ },
+ "F1": {
+  "id": "WF-F1-P6.0",
+  "track": "F (fiction) F1",
+  "status": "STUDY / NONCANON",
+  "derived_from": "N2-R4a-P5.0 (Phase V) + Phase VI corrections C6-01..",
+  "production_unchanged": true,
+  "generation": {
+   "L2": {
+    "units": 3,
+    "rating_We": 3500000.0,
+    "strategy": "C (B for maintenance)",
+    "turbine_inlet_K": 1500.0,
+    "reject_K": 950.0,
+    "eta": 0.154,
+    "register": "FT-03"
+   },
+   "L1": {
+    "type": "direct conversion (FT-04, CONDITIONAL)",
+    "rated_W": 100000000.0
+   },
+   "L3": "refuge survival (independent)"
+  },
+  "radiators": {
+   "hot": {
+    "T_K": 1800.0,
+    "length_m": 154.55698493009567,
+    "margin_rule": 1.2
+   },
+   "L2": {
+    "T_K": 950.0,
+    "length_m": 7.443015069904324,
+    "layout": "cross-strapped dual headers"
+   },
+   "bulkhead_x": 42.75698493009567,
+   "WARM": "R5-D re-zoned + burn heat-pump lift of the shortfall",
+   "LOW": "R5-D"
+  },
+  "hot_loop": {
+   "topology": "H6a",
+   "coolant": "Li",
+   "wall": "refractory composite 100 MPa, 3 t/m3 (FT-01)",
+   "mass_t": [
+    499.0175893278574,
+    565.1967819858065,
+    696.1045072929302
+   ],
+   "pump_W": [
+    7988104.089038681,
+    10270419.543049734,
+    14378587.360269625
+   ]
+  },
+  "eclss": "7 (3 A + 3 B + 1 hub)",
+  "logistics": "LOG-G1 3 t (hub store) + soft bags + racks",
+  "loading": "12 crew, 12 months standard, modular extension; 0.016 c reference",
+  "items_t": {
+   "L1 (derived)": [
+    30.0,
+    70.0,
+    140.0
+   ],
+   "L3": [
+    9.0,
+    12.0,
+    16.0
+   ],
+   "storage (buffer + restart)": [
+    14.3,
+    21.5,
+    31.6
+   ],
+   "distribution": [
+    4.0,
+    8.0,
+    15.0
+   ],
+   "scatter allowance (OPEN)": [
+    0.0,
+    3.0,
+    10.0
+   ],
+   "ECLSS modular increment": [
+    3.5999999999999996,
+    4.800000000000001,
+    6.4
+   ],
+   "bulkhead relocation": [
+    0.0,
+    2.0,
+    5.0
+   ],
+   "LOG-G1 tare (3 t containers, 12 months)": [
+    4.807860357015053,
+    4.807860357015053,
+    4.807860357015053
+   ],
+   "L2 (3 x 3.5 MWe, FT-03 1500 K inlet)": [
+    155.90345062581605,
+    290.5765362444675,
+    619.2940661157676
+   ],
+   "L2 sections 950 K cross-strapped + dual headers": [
+    5.056486717890201,
+    7.311025602664686,
+    11.027769607972111
+   ],
+   "hot loop H6a": [
+    499.0175893278574,
+    565.1967819858065,
+    696.1045072929302
+   ]
+  },
+  "mass": {
+   "departure_t": [
+    7227.616035175837,
+    8191.500939430233,
+    10262.033095162073
+   ],
+   "dry_added_t": [
+    725.6853870285787,
+    989.1922041899537,
+    1555.234203373685
+   ],
+   "propellant_t": [
+    4566.722302736747,
+    5175.746726295895,
+    6483.999036337728
+   ],
+   "end_t": [
+    2660.8937324390904,
+    3015.754213134338,
+    3778.0340588243444
+   ]
+  },
+  "register_refs": [
+   "FT-01/FT-02",
+   "FT-03",
+   "FT-04"
+  ],
+  "hash": "42d2a807fe23"
+ },
+ "baseline": "F0 (owner-approved assumptions only); F1 adds the PROPOSED FT-03"
+}
