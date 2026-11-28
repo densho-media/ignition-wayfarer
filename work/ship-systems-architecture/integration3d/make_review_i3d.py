@@ -492,16 +492,166 @@ def render4():
     for o in bpy.data.objects: o.hide_render = keep.get(o.name, o.hide_render)
 
 
+CX = json.loads((HERE / 'results' / 'i3d_consolidated.json').read_text()); SSI = json.loads((HERE / 'results' / 'i3d_structure_interface.json').read_text())
+X5 = {}
+
+
+def _ghost(name, rgb, alpha):
+    m = ns['mat'](name, rgb, alpha)
+    try:
+        m.blend_method = 'BLEND'
+    except Exception:
+        pass
+    return m
+
+
+def hook5(r6):
+    coll, mat, cam, cyl_x, ring_x = ns['coll'], ns['mat'], ns['cam'], ns['cyl_x'], ns['ring_x']
+    root = coll('WORK_I3D_CONSOLIDATION_C1', r6)
+    T5 = CX['tanks']; dL = T5['added_length_m']; ts = ns['_fs'].tanks(ns['S']); x1 = T['farm']['x1']
+    # 1 final T-A farm (supersedes the CP1 T-A collection, which moves to the research comparison)
+    old = ALTS.get('T-A')
+    if old:
+        old.hide_viewport = True
+        for o in old.all_objects: o.hide_render = True
+    cf = coll('WORK_I3D_X_FARM_TA_FINAL', root); X5['FARM'] = cf; mats = {k: mat(f'I3D_{k}', v, 1.0) for k, v in SPC.items()}
+    base = dict(track='F1 (fiction)', config='WF-F1-C1.0', maturity='M2 arrangement', kind='machinery')
+    for t in ts:
+        cyl_x(f'I3D_X_{t["id"]}_Stretch', (x1+dL/2, t['y'], t['z']), dL, t['a_env'], t['a_env'], cf, mats[t['species']],
+              dict(base, meaning=f'final T-A barrel of vessel {t["id"]} ({t["species"]}), +{dL:.2f} m (current coupled inventory)'))
+    ring_x('I3D_X_BrowTranslated', (144.75+dL-1.5, 0.0, 0.0), 3.0, 45.0, cf, _ghost('I3D_brow_res', (0.95, 0.70, 0.20), 0.35),
+           dict(base, kind='reservation', maturity='M1', meaning=f'Brow, EYE and forward assembly translated {dL:.2f} m (x {T5["brow_x"][0]:.2f}); structure is PSA\'s'))
+    shift = dL-T['alternatives'][0]['added_length_m']
+    for o in bpy.data.objects:                                                   # CP4 cryo stations and Brow-mounted GNC blocks follow the final farm
+        if o.name.startswith('I3D_Cryo_') or o.name.startswith('I3D_GNC_Star') or o.name.startswith('I3D_GNC_Nav'):
+            o.matrix_world = Matrix.Translation((shift, 0, 0)) @ o.matrix_world
+    # 2 HOT forward-pointing fin manifolds (DR-3D-04): one shared radial manifold mesh, 1.47 m pitch, every blade
+    ch = coll('WORK_I3D_X_HOT_MANIFOLDS', root); X5['HOT'] = ch; F = CX['radiators']['fins']; mm_ = mat('I3D_hot_manifold', (0.86, 0.22, 0.16), 1.0)
+    me = _cyl_mesh('I3D_HotManifold', 0.05, 0.05, 30.5, 8); x0h = H6['geometry']['x_hot0']
+    for az in (90.0, 210.0, 330.0):
+        rot = Matrix.Rotation(math.radians(az), 4, 'X')
+        for k in range(F['manifolds_per_blade']):
+            x = x0h+k*F['pitch_m']
+            if x > RD['section']['x0']-0.2: break
+            o = _obj(f'I3D_X_HotMan_{az:.0f}_{k:03d}', me, ch, mm_, dict(base, register='FT-06', meaning=f'HOT Li manifold {k+1} of blade {az:.0f}: forward-pointing fin '
+                                                                                                f'to the next manifold ({F["pitch_m"]:.2f} m)'))
+            o.matrix_world = rot @ Matrix.Translation((x, 6.5+15.25, 0.0)) @ Matrix.Rotation(math.radians(-90), 4, 'X')
+    # 3 LOW forward tip extensions
+    cl = coll('WORK_I3D_X_LOW_TABS', root); X5['LOW'] = cl; P = CX['radiators']['preferred']; ml = mat('I3D_low_tab', (0.23, 0.56, 0.82), 1.0)
+    for az in (90.0, 210.0, 330.0):
+        rot = Matrix.Rotation(math.radians(az), 4, 'X'); L = P['low_tab_x'][1]-P['low_tab_x'][0]; rr = P['low_tab_r']
+        o = _obj(f'I3D_X_LowTab_{az:.0f}', _box_mesh(f'I3D_X_LowTab_{az:.0f}', L/2, (rr[1]-rr[0])/2, 0.05), cl, ml,
+                 dict(base, meaning=f'LOW forward tip extension, blade {az:.0f}: x {P["low_tab_x"][0]:.1f}-{P["low_tab_x"][1]:.1f}, r {rr[0]}-{rr[1]}, LOW at {P["T_low_K"]:.0f} K'))
+        o.matrix_world = rot @ Matrix.Translation(((P['low_tab_x'][0]+P['low_tab_x'][1])/2, (rr[0]+rr[1])/2, 0.0))
+        seg(f'I3D_X_LowTabSpar_{az:.0f}', tuple(rot @ Vector((P['low_tab_x'][0], rr[0], 0))), tuple(rot @ Vector((P['low_tab_x'][1], rr[0], 0))), 0.08, cl,
+            mat('I3D_low_spar', (0.5, 0.5, 0.55), 1.0), dict(base, meaning='LOW tab spar (forward extension of the LOW forward spar)'))
+    # 4 MRU architecture: twin rails, cradle with fixtures, park stations, EXT-TA
+    cm = coll('WORK_I3D_X_MRU', root); X5['MRU'] = cm; MR = CX['mru']; cr = LG4['carriage']
+    for nm in ('I3D_MRU_Rail',):
+        o = bpy.data.objects.get(nm)
+        if o: o.hide_render = True; o.hide_viewport = True
+    mr = mat('I3D_mru_rail', (0.79, 0.52, 0.16), 1.0)
+    for az in (255.0, 285.0):
+        a = math.radians(az); p0 = (cr['x'][0], 4.6*math.cos(a), 4.6*math.sin(a)); p1 = (cr['x'][1], 4.6*math.cos(a), 4.6*math.sin(a))
+        seg(f'I3D_X_MRU_Rail_{az:.0f}', p0, p1, 0.09, cm, mr, dict(base, register='FT-07', meaning=f'MRU twin rail az {az:.0f}, r 4.6 (clear of bus 3 by '
+                                                                                                   f'{MR["rail"]["twin_rail_clear_to_bus3_m"]:.2f} m)'))
+    a = math.radians(270.0)
+    _box_at('I3D_X_MRU_Cradle', (1.4, 0.7, 0.25), (-70.0, 3.9*math.cos(a), 3.9*math.sin(a)), cm, mat('I3D_mru_cradle', (0.92, 0.62, 0.10), 1.0),
+            dict(base, meaning='carriage cradle with the MIF-A heavy fixture pattern (2 cone + 2 flat latches, 2 shear pins)'))
+    for nm_, x in (('District', cr['x'][0]+2.0), ('Workshop', cr['x'][1]-2.0)):
+        _box_at(f'I3D_X_MRU_Park_{nm_}', (0.6, 1.4, 0.3), (x, 4.6*math.cos(a), 4.6*math.sin(a)), cm, mat('I3D_mru_park', (0.55, 0.35, 0.27), 1.0),
+                dict(base, kind='structural interface', meaning=f'MRU park station ({nm_}): four shear-pin burn locks onto the PSA frame'))
+    arm = mat('I3D_ext_ta', (0.95, 0.85, 0.20), 1.0); b0 = (-131.0, 0.0, -7.0)
+    seg('I3D_X_EXT_TA_Boom1', b0, (-127.0, 0.0, -10.0), 0.18, cm, arm, dict(base, register='FT-07 PROVISIONAL', meaning='EXT-TA external transfer arm (8 t at 6 m), drive-bay hatch'))
+    seg('I3D_X_EXT_TA_Boom2', (-127.0, 0.0, -10.0), (-133.5, 0.0, -11.0), 0.14, cm, arm, dict(base, register='FT-07 PROVISIONAL', meaning='EXT-TA second boom'))
+    # 5 removal swept volumes (transparent) and SSI markers
+    cs = coll('WORK_I3D_X_REMOVAL_SWEEPS', root); X5['SWEEP'] = cs
+    for tag, rr, R_ in (('Flight', MR['flight']['route_r'], MR['flight']['swept_radius_m']), ('Yard', MR['yard']['route_r'], MR['yard']['swept_radius_m'])):
+        p0 = (cr['x'][0], rr*math.cos(a), rr*math.sin(a)); p1 = (cr['x'][1], rr*math.cos(a), rr*math.sin(a))
+        seg(f'I3D_X_Sweep_{tag}', p0, p1, R_, cs, _ghost(f'I3D_sweep_{tag}', (0.95, 0.75, 0.25) if tag == 'Flight' else (0.85, 0.25, 0.25), 0.18),
+            dict(base, kind='removal path', meaning=f'{tag} MRU swept tube: {MR[tag.lower()]["item"]}, r {R_:.2f} m at lane radius {rr}'))
+    ck = coll('WORK_I3D_X_SSI_MARKERS', root); X5['SSI'] = ck; mk = {'anchor': mat('I3D_ssi_anchor', (0.85, 0.10, 0.10), 1.0), 'slide': mat('I3D_ssi_slide', (0.10, 0.55, 0.85), 1.0),
+                                                                  'other': mat('I3D_ssi_other', (0.9, 0.9, 0.9), 1.0)}
+    mesh_m = {k: _box_mesh(f'I3D_SSI_Marker_{k}', 0.3, 0.3, 0.3) for k in mk}; n = 0
+    for k, me_ in mesh_m.items(): me_.materials.append(mk[k])
+    for it in SSI['items']:
+        for mo in it['mounts']:
+            x = mo.get('x'); az = mo.get('az'); r = mo.get('r')
+            if x is None: continue
+            if az is None or r is None:
+                c = it['cg']; y, z = (c[1], c[2]) if isinstance(c, (list, tuple)) and len(c) == 3 else (0.0, 0.0)
+            else:
+                y, z = r*math.cos(math.radians(az)), r*math.sin(math.radians(az))
+            ty = mo.get('type', 'other'); ty = ty if ty in mk else 'other'
+            o = _obj(f'I3D_SSI_{mo["id"]}', mesh_m[ty], ck, None, dict(kind='structural interface marker', ssi=SSI['version'], item=it['id'], mount_type=mo.get('type', ''),
+                                                                       meaning=f'{it["id"]} mount {mo["id"]} ({mo.get("type", "")}): ISSA/PSA boundary'))
+            o.matrix_world = Matrix.Translation((x, y, z)); n += 1
+    print('SSI markers', n)
+    # cameras
+    cam(root, 'CAM_I3D_X_SHIP', (60.0, -230.0, -95.0), (5.0, 0.0, 0.0), 30)
+    o = cam(root, 'CAM_I3D_X_LONG', (10.0, -400.0, 0.0), (10.0, 0.0, 0.0), 50); o.data.type = 'ORTHO'; o.data.ortho_scale = 340.0; o.data.clip_start = 400.0-0.2
+    for nm_, x in (('X_M84', -84.0), ('X_P28', 27.75), ('X_P60', 60.0)):
+        o = cam(root, f'CAM_I3D_{nm_}', (x-0.05, 0.0, 0.0), (x+100.0, 0.0, 0.0), 50); o.data.type = 'ORTHO'; o.data.ortho_scale = 15.0 if x < 50 else 80.0; o.data.clip_start = 0.01; o.data.clip_end = 3.0
+    cam(root, 'CAM_I3D_X_LOWTABS', (80.0, -55.0, 60.0), (100.0, 0.0, 20.0), 30)
+    cam(root, 'CAM_I3D_X_HOTFINS', (20.0, -30.0, 40.0), (0.0, 0.0, 22.0), 30)
+    cam(root, 'CAM_I3D_X_MRU', (-62.0, -9.0, -12.0), (-80.0, 0.0, -3.5), 30)
+    # view layers: one review file, several isolatable views (the default layer shows the complete fictional configuration)
+    views = {'C2_EXTERIOR': ['10_SHIP', 'WORK_I3D_X_FARM_TA_FINAL', 'WORK_I3D_X_HOT_MANIFOLDS', 'WORK_I3D_X_LOW_TABS'],
+             'C3_STRUCTURE_INTERFACES': ['11_STRUCTURE', 'WORK_I3D_X_SSI_MARKERS', 'WORK_I3D_X_MRU', 'WORK_I3D_D_H6A_BLADE'],
+             'C4_THERMAL': ['13_THERMAL', 'WORK_I3D_D_H6A_BLADE', 'WORK_I3D_CP3_RADIATORS_AND_ELECTRICAL', 'WORK_I3D_E_', 'WORK_I3D_X_HOT_MANIFOLDS', 'WORK_I3D_X_LOW_TABS'],
+             'C5_ELECTRICAL': ['WORK_I3D_F_ELECTRICAL', 'WORK_I3D_C_POWER_UNIT', 'WORK_I3D_C_DISTRICT_SERVICES'],
+             'C6_HABITAT_LIFE_SUPPORT': ['14_HABITAT', 'WORK_I3D_G_ECLSS', '20_HUMAN_SCALE'],
+             'C7_LOGISTICS_MAINTENANCE': ['WORK_I3D_H_LOGISTICS', 'WORK_I3D_X_MRU', 'WORK_I3D_X_REMOVAL_SWEEPS', 'WORK_I3D_C_POWER_UNIT'],
+             'C8_RESEARCH_AND_FICTION_COMPARE': ['WORK_ISSA6_TRACK', 'WORK_I3D_TANKS_', 'WORK_I3D_CP1_PROPELLANT']}
+    sc = bpy.context.scene
+    def apply(lc, keep):
+        hit_self = any(lc.name.startswith(k) or k in lc.name for k in keep)
+        if hit_self:
+            lc.exclude = False
+            return True
+        any_child = False
+        for ch_ in lc.children:
+            any_child = apply(ch_, keep) or any_child
+        if lc.name != sc.collection.name:
+            lc.exclude = not any_child
+        return any_child
+    for vn, keep in views.items():
+        vl = sc.view_layers.get(vn) or sc.view_layers.new(vn)
+        for ch_ in vl.layer_collection.children: apply(ch_, keep)
+    sc.view_layers[0].name = 'C1_COMPLETE_F1_C1.0'
+
+
+def render5():
+    if '--render' not in sys.argv: return
+    sc = bpy.context.scene; keep = {o.name: o.hide_render for o in bpy.data.objects}
+    def only(colls):
+        names = {o.name for c in colls for o in c.all_objects}
+        for o in bpy.data.objects:
+            if o.type in ('MESH', 'CURVE'): o.hide_render = o.name not in names
+            if o.type == 'FONT': o.hide_render = True
+    for o in bpy.data.objects:
+        if o.type == 'FONT': o.hide_render = True
+    sc.camera = bpy.data.objects['CAM_I3D_X_SHIP']; sc.render.filepath = str(HERE / 'results' / 'cam_i3d_x_ship.jpg'); bpy.ops.render.render(write_still=True)
+    sc.camera = bpy.data.objects['CAM_I3D_X_LONG']; sc.render.filepath = str(HERE / 'results' / 'cam_i3d_x_long.jpg'); bpy.ops.render.render(write_still=True)
+    for nm_ in ('X_M84', 'X_P28', 'X_P60'):
+        sc.camera = bpy.data.objects[f'CAM_I3D_{nm_}']; sc.render.filepath = str(HERE / 'results' / f'cam_i3d_{nm_.lower()}.jpg'); bpy.ops.render.render(write_still=True)
+    sc.camera = bpy.data.objects['CAM_I3D_X_LOWTABS']; sc.render.filepath = str(HERE / 'results' / 'cam_i3d_x_lowtabs.jpg'); bpy.ops.render.render(write_still=True)
+    for cname, colls in (('CAM_I3D_X_HOTFINS', [X5['HOT']]+[CP2[k] for k in CP2 if k.startswith('H')]),
+                         ('CAM_I3D_X_MRU', [X5['MRU'], X5['SWEEP'], CP4['H']]+[CP2[k] for k in ('U1', 'U2', 'U3')]+[CP3['EL']])):
+        only(colls); sc.camera = bpy.data.objects[cname]; sc.render.filepath = str(HERE / 'results' / f'{cname.lower()}.jpg'); bpy.ops.render.render(write_still=True)
+    for o in bpy.data.objects: o.hide_render = keep.get(o.name, o.hide_render)
+
+
 P6_LAY = json.loads((HERE / 'results' / 'phase6.json').read_text())['layout']
 C3_FACE = '1.2'
 
 
 def hook_all(r6):
-    hook(r6); hook2(r6); hook3(r6); hook4(r6)
+    hook(r6); hook2(r6); hook3(r6); hook4(r6); hook5(r6)
 
 
 def render_all():
-    render(); render2(); render3(); render4()
+    render(); render2(); render3(); render4(); render5()
 
 
 ns['I3D_HOOK'] = hook_all; ns['I3D_RENDER'] = render_all

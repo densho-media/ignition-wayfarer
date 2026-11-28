@@ -392,11 +392,10 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   WF-F0-P6.0, WF-F1-P6.0 (F1 = Track F reference with FT-03 1500 K), technology register `data/technology_register.toml`, Phase V
   reconciliation C6-01..09, direct conversion ledger (FT-04 conditional), ECLSS 7 units, OpenMC Track R step. Owner: DR6-01..06. Then the
   3D Systems Integration brief (2026-11-28 07:03Z) on the same branch.
-- [ ] **3D Systems Integration (Track F1) — checkpoints 1-4.** `work/ship-systems-architecture/integration3d/` (NOTES "3D Systems
-  Integration"). Checkpoint 1 (masterplan, tank alternatives T-A/T-B/T-C, maturity registry): owner DR-3D-01 (T-A stretch as reference).
-  Checkpoints 2-4 done (all 19 systems at target maturity; live ledger 8,573 t): owner DR-3D-02 (FT-03 component set, 896 K L2 radiator),
-  DR-3D-03 (L2 placement), DR-3D-04 (forward-pointing HOT fins), MRU heavy carriage, body-bay module 10, WARM +2.7 m / LOW +0.8 m
-  (heat-sink shortfalls); PSA HO-02 frame station (~40.8).
+- [ ] **3D Systems Integration (Track F1) — consolidation WF-F1-C1.0 (2026-11-28).** `work/ship-systems-architecture/integration3d/`
+  (NOTES "Consolidation WF-F1-C1.0"). DR-3D-01..04 implemented; one configuration supersedes CP4 (8,655 t, T-A +20.70 m,
+  ship 310.2 m); SSI-1.0 handed to PSA. Owner: DR-C-01 (WARM 451 K), DR-C-02 (LOW tip extensions + 316 K),
+  DR-C-03 (pickup-fault doctrine), DR-C-04 (EXT-TA arm), DR-C-05 (lower the defense buffers for module-10 removal). PSA: SSI-D1..D3.
 - [ ] **ISSA Phase V — owner review (2026-11-27).** Thermal network and convergence on the ISSA page (`work/ship-systems-architecture/`,
   NOTES "Phase V"): config N2-R4a-P5.0, corrections C5-01..10, H6 network (walls dominate; material is the lever), R5-A 750 K
   cross-strapped L2, 3-D OpenMC (frame verified; scatter ~19 % of bare tank heating), coupled mass via `operating_point.mission(extra_end_kg)`,

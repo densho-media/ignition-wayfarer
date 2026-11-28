@@ -1,0 +1,2769 @@
+{
+ "version": "SSI-1.0",
+ "config": "WF-F1-C1.0",
+ "created": "2026-11-28",
+ "frame": "ship axes: +X bow, az from +Y toward +Z, metres, tonnes, kN",
+ "ownership_rule": "ISSA owns machinery, its supports (saddles, slides, rack brackets, rail chairs) and utilities; PSA owns primary load-bearing structure (frames, longerons, decks, hoops, bearings) and the loads they carry; a mount id is the boundary between them",
+ "load_cases": {
+  "burn_axial_g": 0.7361342613411239,
+  "burn_lateral_g": 0.05,
+  "coast": "0 g + spin interfaces",
+  "notes": "operating values, not limit loads: PSA applies its factors"
+ },
+ "items": [
+  {
+   "id": "PWR-L2U-1",
+   "name": "L2 power unit 1 (az 90)",
+   "owner": "ISSA (machinery) / PSA (district frame)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "FT-03",
+   "mass_t": 96.8588454148225,
+   "cg": [
+    -90.7,
+    1.7757378587636622e-16,
+    2.9
+   ],
+   "envelope": {
+    "shape": "unit envelope along x",
+    "x": [
+     -91.7,
+     -79.7
+    ],
+    "r": [
+     0.0,
+     5.3
+    ],
+    "shield_cone_half_deg": 12.5
+   },
+   "mounts": [
+    {
+     "id": "U1-M1",
+     "type": "anchor",
+     "x": -90.7,
+     "az": 90.0,
+     "r": 2.9,
+     "dof": "6-DOF"
+    },
+    {
+     "id": "U1-M2",
+     "type": "slide",
+     "x": -84.7,
+     "az": 90.0,
+     "r": 2.9,
+     "dof": "radial + lateral (axial free)"
+    }
+   ],
+   "loads": {
+    "axial_kN": 699.225075725434,
+    "lateral_kN": 47.49303981936345,
+    "stiffness": "first mode > 15 Hz on its mount (PROTOTYPE target)",
+    "excitation": {
+     "TAC_rpm": [
+      36000,
+      48000
+     ],
+     "TAC_Hz": [
+      600,
+      800
+     ],
+     "imbalance": "ISO 1940 G1.0 (gas bearings)",
+     "EM_pumps": "no rotating parts; 50-400 Hz MHD ripple",
+     "status": "PROTOTYPE estimate"
+    }
+   },
+   "thermal_expansion": "mount ring at the anchor; slide at the TAC end (unit grows ~12 mm hot)",
+   "clearances": "district 1.4 m unit-to-unit, 1.29 m to the hull",
+   "removal": {
+    "path": "keel lane az 270 to the workshop (in flight r 2.9, yard r 3.6)",
+    "swept_radius_m": 0.85,
+    "class_": "MRU (reactor/IHX = yard)"
+   },
+   "utilities": [
+    "NaK supply/return to blades (2 loops)",
+    "HVDC feeder 3.5 MW",
+    "Li primary (H6a branch)",
+    "data A/B"
+   ],
+   "environment": "1500 K inside the IHX; mount ring < 600 K",
+   "failure": "one unit per failure domain; unit-to-unit 1.4 m; shadow-shield cone keeps crewed/cryogenic volume out"
+  },
+  {
+   "id": "PWR-L2U-2",
+   "name": "L2 power unit 2 (az 210)",
+   "owner": "ISSA (machinery) / PSA (district frame)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "FT-03",
+   "mass_t": 96.8588454148225,
+   "cg": [
+    -90.7,
+    -2.5114736709748717,
+    -1.4500000000000002
+   ],
+   "envelope": {
+    "shape": "unit envelope along x",
+    "x": [
+     -91.7,
+     -79.7
+    ],
+    "r": [
+     0.0,
+     5.3
+    ],
+    "shield_cone_half_deg": 12.5
+   },
+   "mounts": [
+    {
+     "id": "U2-M1",
+     "type": "anchor",
+     "x": -90.7,
+     "az": 210.0,
+     "r": 2.9,
+     "dof": "6-DOF"
+    },
+    {
+     "id": "U2-M2",
+     "type": "slide",
+     "x": -84.7,
+     "az": 210.0,
+     "r": 2.9,
+     "dof": "radial + lateral (axial free)"
+    }
+   ],
+   "loads": {
+    "axial_kN": 699.225075725434,
+    "lateral_kN": 47.49303981936345,
+    "stiffness": "first mode > 15 Hz on its mount (PROTOTYPE target)",
+    "excitation": {
+     "TAC_rpm": [
+      36000,
+      48000
+     ],
+     "TAC_Hz": [
+      600,
+      800
+     ],
+     "imbalance": "ISO 1940 G1.0 (gas bearings)",
+     "EM_pumps": "no rotating parts; 50-400 Hz MHD ripple",
+     "status": "PROTOTYPE estimate"
+    }
+   },
+   "thermal_expansion": "mount ring at the anchor; slide at the TAC end (unit grows ~12 mm hot)",
+   "clearances": "district 1.4 m unit-to-unit, 1.29 m to the hull",
+   "removal": {
+    "path": "keel lane az 270 to the workshop (in flight r 2.9, yard r 3.6)",
+    "swept_radius_m": 0.85,
+    "class_": "MRU (reactor/IHX = yard)"
+   },
+   "utilities": [
+    "NaK supply/return to blades (2 loops)",
+    "HVDC feeder 3.5 MW",
+    "Li primary (H6a branch)",
+    "data A/B"
+   ],
+   "environment": "1500 K inside the IHX; mount ring < 600 K",
+   "failure": "one unit per failure domain; unit-to-unit 1.4 m; shadow-shield cone keeps crewed/cryogenic volume out"
+  },
+  {
+   "id": "PWR-L2U-3",
+   "name": "L2 power unit 3 (az 330)",
+   "owner": "ISSA (machinery) / PSA (district frame)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "FT-03",
+   "mass_t": 96.8588454148225,
+   "cg": [
+    -90.7,
+    2.5114736709748713,
+    -1.4500000000000013
+   ],
+   "envelope": {
+    "shape": "unit envelope along x",
+    "x": [
+     -91.7,
+     -79.7
+    ],
+    "r": [
+     0.0,
+     5.3
+    ],
+    "shield_cone_half_deg": 12.5
+   },
+   "mounts": [
+    {
+     "id": "U3-M1",
+     "type": "anchor",
+     "x": -90.7,
+     "az": 330.0,
+     "r": 2.9,
+     "dof": "6-DOF"
+    },
+    {
+     "id": "U3-M2",
+     "type": "slide",
+     "x": -84.7,
+     "az": 330.0,
+     "r": 2.9,
+     "dof": "radial + lateral (axial free)"
+    }
+   ],
+   "loads": {
+    "axial_kN": 699.225075725434,
+    "lateral_kN": 47.49303981936345,
+    "stiffness": "first mode > 15 Hz on its mount (PROTOTYPE target)",
+    "excitation": {
+     "TAC_rpm": [
+      36000,
+      48000
+     ],
+     "TAC_Hz": [
+      600,
+      800
+     ],
+     "imbalance": "ISO 1940 G1.0 (gas bearings)",
+     "EM_pumps": "no rotating parts; 50-400 Hz MHD ripple",
+     "status": "PROTOTYPE estimate"
+    }
+   },
+   "thermal_expansion": "mount ring at the anchor; slide at the TAC end (unit grows ~12 mm hot)",
+   "clearances": "district 1.4 m unit-to-unit, 1.29 m to the hull",
+   "removal": {
+    "path": "keel lane az 270 to the workshop (in flight r 2.9, yard r 3.6)",
+    "swept_radius_m": 0.85,
+    "class_": "MRU (reactor/IHX = yard)"
+   },
+   "utilities": [
+    "NaK supply/return to blades (2 loops)",
+    "HVDC feeder 3.5 MW",
+    "Li primary (H6a branch)",
+    "data A/B"
+   ],
+   "environment": "1500 K inside the IHX; mount ring < 600 K",
+   "failure": "one unit per failure domain; unit-to-unit 1.4 m; shadow-shield cone keeps crewed/cryogenic volume out"
+  },
+  {
+   "id": "TH-H6A-TRUNKS",
+   "name": "H6a hot trunks (4 per blade) and saddles",
+   "owner": "ISSA (trunks, saddles, slides) / PSA (frames they bear on)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "FT-01/FT-02",
+   "mass_t": 544.5356997349759,
+   "cg": [
+    -40.0,
+    0.0,
+    0.0
+   ],
+   "envelope": {
+    "x": [
+     -111.6,
+     41.02056207739442
+    ],
+    "r": [
+     6.0,
+     8.2
+    ]
+   },
+   "mounts": [
+    {
+     "id": "H6A-90-S0",
+     "type": "slide",
+     "x": -111.6,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S1",
+     "type": "slide",
+     "x": -105.2408099134419,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S2",
+     "type": "anchor",
+     "x": -98.88161982688379,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-90-S3",
+     "type": "slide",
+     "x": -92.52242974032569,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S4",
+     "type": "slide",
+     "x": -86.16323965376759,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S5",
+     "type": "slide",
+     "x": -79.80404956720949,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S6",
+     "type": "anchor",
+     "x": -73.44485948065139,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-90-S7",
+     "type": "slide",
+     "x": -67.08566939409329,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S8",
+     "type": "slide",
+     "x": -60.726479307535186,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S9",
+     "type": "slide",
+     "x": -54.367289220977085,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S10",
+     "type": "anchor",
+     "x": -48.008099134418984,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-90-S11",
+     "type": "slide",
+     "x": -41.64890904786088,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S12",
+     "type": "slide",
+     "x": -35.28971896130278,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S13",
+     "type": "slide",
+     "x": -28.93052887474468,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S14",
+     "type": "anchor",
+     "x": -22.57133878818658,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-90-S15",
+     "type": "slide",
+     "x": -16.21214870162848,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S16",
+     "type": "slide",
+     "x": -9.852958615070378,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S17",
+     "type": "slide",
+     "x": -3.493768528512277,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S18",
+     "type": "anchor",
+     "x": 2.865421558045824,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-90-S19",
+     "type": "slide",
+     "x": 9.224611644603925,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S20",
+     "type": "slide",
+     "x": 15.583801731162026,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S21",
+     "type": "slide",
+     "x": 21.942991817720127,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S22",
+     "type": "anchor",
+     "x": 28.30218190427823,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-90-S23",
+     "type": "slide",
+     "x": 34.66137199083633,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-90-S24",
+     "type": "slide",
+     "x": 41.02056207739443,
+     "az": 90.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S0",
+     "type": "slide",
+     "x": -111.6,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S1",
+     "type": "slide",
+     "x": -105.2408099134419,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S2",
+     "type": "anchor",
+     "x": -98.88161982688379,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-210-S3",
+     "type": "slide",
+     "x": -92.52242974032569,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S4",
+     "type": "slide",
+     "x": -86.16323965376759,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S5",
+     "type": "slide",
+     "x": -79.80404956720949,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S6",
+     "type": "anchor",
+     "x": -73.44485948065139,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-210-S7",
+     "type": "slide",
+     "x": -67.08566939409329,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S8",
+     "type": "slide",
+     "x": -60.726479307535186,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S9",
+     "type": "slide",
+     "x": -54.367289220977085,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S10",
+     "type": "anchor",
+     "x": -48.008099134418984,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-210-S11",
+     "type": "slide",
+     "x": -41.64890904786088,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S12",
+     "type": "slide",
+     "x": -35.28971896130278,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S13",
+     "type": "slide",
+     "x": -28.93052887474468,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S14",
+     "type": "anchor",
+     "x": -22.57133878818658,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-210-S15",
+     "type": "slide",
+     "x": -16.21214870162848,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S16",
+     "type": "slide",
+     "x": -9.852958615070378,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S17",
+     "type": "slide",
+     "x": -3.493768528512277,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S18",
+     "type": "anchor",
+     "x": 2.865421558045824,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-210-S19",
+     "type": "slide",
+     "x": 9.224611644603925,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S20",
+     "type": "slide",
+     "x": 15.583801731162026,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S21",
+     "type": "slide",
+     "x": 21.942991817720127,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S22",
+     "type": "anchor",
+     "x": 28.30218190427823,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-210-S23",
+     "type": "slide",
+     "x": 34.66137199083633,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-210-S24",
+     "type": "slide",
+     "x": 41.02056207739443,
+     "az": 210.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S0",
+     "type": "slide",
+     "x": -111.6,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S1",
+     "type": "slide",
+     "x": -105.2408099134419,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S2",
+     "type": "anchor",
+     "x": -98.88161982688379,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-330-S3",
+     "type": "slide",
+     "x": -92.52242974032569,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S4",
+     "type": "slide",
+     "x": -86.16323965376759,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S5",
+     "type": "slide",
+     "x": -79.80404956720949,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S6",
+     "type": "anchor",
+     "x": -73.44485948065139,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-330-S7",
+     "type": "slide",
+     "x": -67.08566939409329,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S8",
+     "type": "slide",
+     "x": -60.726479307535186,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S9",
+     "type": "slide",
+     "x": -54.367289220977085,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S10",
+     "type": "anchor",
+     "x": -48.008099134418984,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-330-S11",
+     "type": "slide",
+     "x": -41.64890904786088,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S12",
+     "type": "slide",
+     "x": -35.28971896130278,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S13",
+     "type": "slide",
+     "x": -28.93052887474468,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S14",
+     "type": "anchor",
+     "x": -22.57133878818658,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-330-S15",
+     "type": "slide",
+     "x": -16.21214870162848,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S16",
+     "type": "slide",
+     "x": -9.852958615070378,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S17",
+     "type": "slide",
+     "x": -3.493768528512277,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S18",
+     "type": "anchor",
+     "x": 2.865421558045824,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-330-S19",
+     "type": "slide",
+     "x": 9.224611644603925,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S20",
+     "type": "slide",
+     "x": 15.583801731162026,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S21",
+     "type": "slide",
+     "x": 21.942991817720127,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S22",
+     "type": "anchor",
+     "x": 28.30218190427823,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "axial anchor"
+    },
+    {
+     "id": "H6A-330-S23",
+     "type": "slide",
+     "x": 34.66137199083633,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    },
+    {
+     "id": "H6A-330-S24",
+     "type": "slide",
+     "x": 41.02056207739443,
+     "az": 330.0,
+     "r": 6.523755521358693,
+     "dof": "radial/lateral"
+    }
+   ],
+   "loads": {
+    "saddle_carried_t": 5.371068643370348,
+    "anchor_axial_kN_per_saddle": 155.09521563272367,
+    "a_peak_g": 0.7361342613411239
+   },
+   "thermal_expansion": {
+    "growth_mm_per_m": [
+     3.0,
+     10.0
+    ],
+    "end_travel_mm": [
+     38.155140519348606,
+     127.18380173116202
+    ]
+   },
+   "clearances": "hull 0.35 m",
+   "removal": "section replacement by MRU (sections 6 per blade)",
+   "utilities": [
+    "Li branches to the L2 units",
+    "EM pump modules at the aft manifold"
+   ],
+   "environment": "1840 K mean Li; saddles insulated",
+   "failure": "sectionalized: one section isolates"
+  },
+  {
+   "id": "RAD-HOT-MAN-90",
+   "name": "HOT forward-fin manifolds, blade 90",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "FT-06",
+   "mass_t": 5.9597361978198515,
+   "cg": [
+    -46.0,
+    1.3471114790620886e-15,
+    22.0
+   ],
+   "envelope": {
+    "x": [
+     -111.6,
+     41.02056207739442
+    ],
+    "r": [
+     6.5,
+     37.0
+    ],
+    "pitch_m": 1.47,
+    "count": 105
+   },
+   "mounts": [
+    {
+     "id": "HOT-90-ROOT",
+     "type": "slide",
+     "note": "every manifold root on the trunk saddle line, radial slide; the blade root frame (PSA) carries the shear"
+    }
+   ],
+   "loads": {
+    "burn_axial_note": "fin and manifold inertia go to the blade root frames"
+   },
+   "thermal_expansion": {
+    "growth": "blade grows ~3 mm/m axially at 1800 K: root slides"
+   },
+   "clearances": "K-HOTVIEW",
+   "removal": "manifold section with its trunk section",
+   "utilities": [
+    "Li manifolds from H6a"
+   ],
+   "environment": "1800 K",
+   "failure": "per-section isolation"
+  },
+  {
+   "id": "RAD-L2-90",
+   "name": "L2 radiator section, blade 90",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 28.84666102115054,
+   "cg": [
+    45.71028103869721,
+    1.3471114790620886e-15,
+    22.0
+   ],
+   "envelope": {
+    "x": [
+     41.02056207739442,
+     50.4
+    ],
+    "r": [
+     6.5,
+     36.1
+    ]
+   },
+   "mounts": [
+    {
+     "id": "L2-90-A",
+     "type": "anchor",
+     "x": 41.02056207739442
+    },
+    {
+     "id": "L2-90-S",
+     "type": "slide",
+     "x": 50.4
+    }
+   ],
+   "loads": {
+    "axial_kN": 208.24436478212664
+   },
+   "thermal_expansion": {
+    "growth_mm": 23.450000000000003
+   },
+   "clearances": "bulkhead 0.4 m",
+   "removal": "heat-pipe rows as ORUs",
+   "utilities": [
+    "NaK headers A/B"
+   ],
+   "environment": "896 K",
+   "failure": "header A/B cross-strap"
+  },
+  {
+   "id": "RAD-LOWTAB-90",
+   "name": "LOW forward tip extension, blade 90",
+   "owner": "ISSA (panel, spar) / PSA (root frame lugs)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 2.3881499999999996,
+   "cg": [
+    99.92500000000001,
+    2.097207643539842e-15,
+    34.25
+   ],
+   "envelope": {
+    "x": [
+     93.4,
+     106.45
+    ],
+    "r": [
+     31.5,
+     37.0
+    ]
+   },
+   "mounts": [
+    {
+     "id": "LT-90-C0",
+     "type": "clevis",
+     "x": 93.4,
+     "r": 31.5
+    },
+    {
+     "id": "LT-90-C1",
+     "type": "clevis",
+     "x": 93.4,
+     "r": 37.0
+    }
+   ],
+   "loads": {
+    "axial_kN": 17.24008124856456
+   },
+   "thermal_expansion": {
+    "growth": "300 K, none"
+   },
+   "clearances": "1.5 m to the ring rim (r 30)",
+   "removal": "panel swap at a yard",
+   "utilities": [
+    "ammonia A/B from the LOW header"
+   ],
+   "environment": "300 K",
+   "failure": "A/B interleave"
+  },
+  {
+   "id": "RAD-HOT-MAN-210",
+   "name": "HOT forward-fin manifolds, blade 210",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "FT-06",
+   "mass_t": 5.9597361978198515,
+   "cg": [
+    -46.0,
+    -19.05255888325765,
+    -11.000000000000002
+   ],
+   "envelope": {
+    "x": [
+     -111.6,
+     41.02056207739442
+    ],
+    "r": [
+     6.5,
+     37.0
+    ],
+    "pitch_m": 1.47,
+    "count": 105
+   },
+   "mounts": [
+    {
+     "id": "HOT-210-ROOT",
+     "type": "slide",
+     "note": "every manifold root on the trunk saddle line, radial slide; the blade root frame (PSA) carries the shear"
+    }
+   ],
+   "loads": {
+    "burn_axial_note": "fin and manifold inertia go to the blade root frames"
+   },
+   "thermal_expansion": {
+    "growth": "blade grows ~3 mm/m axially at 1800 K: root slides"
+   },
+   "clearances": "K-HOTVIEW",
+   "removal": "manifold section with its trunk section",
+   "utilities": [
+    "Li manifolds from H6a"
+   ],
+   "environment": "1800 K",
+   "failure": "per-section isolation"
+  },
+  {
+   "id": "RAD-L2-210",
+   "name": "L2 radiator section, blade 210",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 28.84666102115054,
+   "cg": [
+    45.71028103869721,
+    -19.05255888325765,
+    -11.000000000000002
+   ],
+   "envelope": {
+    "x": [
+     41.02056207739442,
+     50.4
+    ],
+    "r": [
+     6.5,
+     36.1
+    ]
+   },
+   "mounts": [
+    {
+     "id": "L2-210-A",
+     "type": "anchor",
+     "x": 41.02056207739442
+    },
+    {
+     "id": "L2-210-S",
+     "type": "slide",
+     "x": 50.4
+    }
+   ],
+   "loads": {
+    "axial_kN": 208.24436478212664
+   },
+   "thermal_expansion": {
+    "growth_mm": 23.450000000000003
+   },
+   "clearances": "bulkhead 0.4 m",
+   "removal": "heat-pipe rows as ORUs",
+   "utilities": [
+    "NaK headers A/B"
+   ],
+   "environment": "896 K",
+   "failure": "header A/B cross-strap"
+  },
+  {
+   "id": "RAD-LOWTAB-210",
+   "name": "LOW forward tip extension, blade 210",
+   "owner": "ISSA (panel, spar) / PSA (root frame lugs)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 2.3881499999999996,
+   "cg": [
+    99.92500000000001,
+    -29.661370079617022,
+    -17.125000000000004
+   ],
+   "envelope": {
+    "x": [
+     93.4,
+     106.45
+    ],
+    "r": [
+     31.5,
+     37.0
+    ]
+   },
+   "mounts": [
+    {
+     "id": "LT-210-C0",
+     "type": "clevis",
+     "x": 93.4,
+     "r": 31.5
+    },
+    {
+     "id": "LT-210-C1",
+     "type": "clevis",
+     "x": 93.4,
+     "r": 37.0
+    }
+   ],
+   "loads": {
+    "axial_kN": 17.24008124856456
+   },
+   "thermal_expansion": {
+    "growth": "300 K, none"
+   },
+   "clearances": "1.5 m to the ring rim (r 30)",
+   "removal": "panel swap at a yard",
+   "utilities": [
+    "ammonia A/B from the LOW header"
+   ],
+   "environment": "300 K",
+   "failure": "A/B interleave"
+  },
+  {
+   "id": "RAD-HOT-MAN-330",
+   "name": "HOT forward-fin manifolds, blade 330",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "FT-06",
+   "mass_t": 5.9597361978198515,
+   "cg": [
+    -46.0,
+    19.052558883257646,
+    -11.00000000000001
+   ],
+   "envelope": {
+    "x": [
+     -111.6,
+     41.02056207739442
+    ],
+    "r": [
+     6.5,
+     37.0
+    ],
+    "pitch_m": 1.47,
+    "count": 105
+   },
+   "mounts": [
+    {
+     "id": "HOT-330-ROOT",
+     "type": "slide",
+     "note": "every manifold root on the trunk saddle line, radial slide; the blade root frame (PSA) carries the shear"
+    }
+   ],
+   "loads": {
+    "burn_axial_note": "fin and manifold inertia go to the blade root frames"
+   },
+   "thermal_expansion": {
+    "growth": "blade grows ~3 mm/m axially at 1800 K: root slides"
+   },
+   "clearances": "K-HOTVIEW",
+   "removal": "manifold section with its trunk section",
+   "utilities": [
+    "Li manifolds from H6a"
+   ],
+   "environment": "1800 K",
+   "failure": "per-section isolation"
+  },
+  {
+   "id": "RAD-L2-330",
+   "name": "L2 radiator section, blade 330",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 28.84666102115054,
+   "cg": [
+    45.71028103869721,
+    19.052558883257646,
+    -11.00000000000001
+   ],
+   "envelope": {
+    "x": [
+     41.02056207739442,
+     50.4
+    ],
+    "r": [
+     6.5,
+     36.1
+    ]
+   },
+   "mounts": [
+    {
+     "id": "L2-330-A",
+     "type": "anchor",
+     "x": 41.02056207739442
+    },
+    {
+     "id": "L2-330-S",
+     "type": "slide",
+     "x": 50.4
+    }
+   ],
+   "loads": {
+    "axial_kN": 208.24436478212664
+   },
+   "thermal_expansion": {
+    "growth_mm": 23.450000000000003
+   },
+   "clearances": "bulkhead 0.4 m",
+   "removal": "heat-pipe rows as ORUs",
+   "utilities": [
+    "NaK headers A/B"
+   ],
+   "environment": "896 K",
+   "failure": "header A/B cross-strap"
+  },
+  {
+   "id": "RAD-LOWTAB-330",
+   "name": "LOW forward tip extension, blade 330",
+   "owner": "ISSA (panel, spar) / PSA (root frame lugs)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 2.3881499999999996,
+   "cg": [
+    99.92500000000001,
+    29.661370079617015,
+    -17.125000000000014
+   ],
+   "envelope": {
+    "x": [
+     93.4,
+     106.45
+    ],
+    "r": [
+     31.5,
+     37.0
+    ]
+   },
+   "mounts": [
+    {
+     "id": "LT-330-C0",
+     "type": "clevis",
+     "x": 93.4,
+     "r": 31.5
+    },
+    {
+     "id": "LT-330-C1",
+     "type": "clevis",
+     "x": 93.4,
+     "r": 37.0
+    }
+   ],
+   "loads": {
+    "axial_kN": 17.24008124856456
+   },
+   "thermal_expansion": {
+    "growth": "300 K, none"
+   },
+   "clearances": "1.5 m to the ring rim (r 30)",
+   "removal": "panel swap at a yard",
+   "utilities": [
+    "ammonia A/B from the LOW header"
+   ],
+   "environment": "300 K",
+   "failure": "A/B interleave"
+  },
+  {
+   "id": "FARM-O1",
+   "name": "Propellant vessel O1 (helium-3)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 358.95646440464014,
+   "cg": [
+    133.9000418008975,
+    27.58768925023175,
+    2.9969821208421337
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "mounts": [
+    {
+     "id": "O1-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "O1-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 2591.31068443501
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "FARM-O2",
+   "name": "Propellant vessel O2 (helium-3)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 358.95646440464014,
+   "cg": [
+    133.9000418008975,
+    9.080296696670132,
+    26.22233231237148
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "mounts": [
+    {
+     "id": "O2-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "O2-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 2591.31068443501
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "FARM-O3",
+   "name": "Propellant vessel O3 (hydrogen)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 428.1402287062489,
+   "cg": [
+    133.9000418008975,
+    -5.390003246354222,
+    27.221505560940066
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "mounts": [
+    {
+     "id": "O3-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "O3-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 3090.749043684335
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "FARM-O4",
+   "name": "Propellant vessel O4 (helium-3)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 358.95646440464014,
+   "cg": [
+    133.9000418008975,
+    -18.387706337986717,
+    20.783521251894808
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "mounts": [
+    {
+     "id": "O4-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "O4-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 2591.31068443501
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "FARM-O5",
+   "name": "Propellant vessel O5 (helium-3)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 358.95646440464014,
+   "cg": [
+    133.9000418008975,
+    -27.603003175001586,
+    2.852492895846097
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "mounts": [
+    {
+     "id": "O5-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "O5-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 2591.31068443501
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "FARM-O6",
+   "name": "Propellant vessel O6 (hydrogen)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 428.1402287062489,
+   "cg": [
+    133.9000418008975,
+    -18.69400137081989,
+    -20.50845710305346
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "mounts": [
+    {
+     "id": "O6-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "O6-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 3090.749043684335
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "FARM-O7",
+   "name": "Propellant vessel O7 (helium-3)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 358.95646440464014,
+   "cg": [
+    133.9000418008975,
+    -5.793234476286982,
+    -27.13855070380067
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "mounts": [
+    {
+     "id": "O7-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "O7-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 2591.31068443501
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "FARM-O8",
+   "name": "Propellant vessel O8 (helium-3)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 358.95646440464014,
+   "cg": [
+    133.9000418008975,
+    11.331170275583437,
+    -25.331148418216934
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "mounts": [
+    {
+     "id": "O8-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "O8-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 2591.31068443501
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "FARM-O9",
+   "name": "Propellant vessel O9 (hydrogen)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 428.1402287062489,
+   "cg": [
+    133.9000418008975,
+    25.33114841821693,
+    -11.33117027558345
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 27.75,
+    "a": 6.45
+   },
+   "mounts": [
+    {
+     "id": "O9-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "O9-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 3090.749043684335
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "FARM-I1",
+   "name": "Propellant vessel I1 (deuterium)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 662.1597762280169,
+   "cg": [
+    133.9000418008975,
+    -0.8758886748066362,
+    13.47155592458961
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 13.5,
+    "a": 5.45
+   },
+   "mounts": [
+    {
+     "id": "I1-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "I1-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 4780.138744091593
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "FARM-I2",
+   "name": "Propellant vessel I2 (hydrogen)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 307.86364213259264,
+   "cg": [
+    133.9000418008975,
+    -11.726525444915582,
+    6.6886920238375
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 13.5,
+    "a": 5.45
+   },
+   "mounts": [
+    {
+     "id": "I2-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "I2-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 2222.471035674016
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "FARM-I3",
+   "name": "Propellant vessel I3 (deuterium)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 662.1597762280169,
+   "cg": [
+    133.9000418008975,
+    0.8758886748066406,
+    -13.47155592458961
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 13.5,
+    "a": 5.45
+   },
+   "mounts": [
+    {
+     "id": "I3-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "I3-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 4780.138744091593
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "FARM-I4",
+   "name": "Propellant vessel I4 (hydrogen)",
+   "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 307.86364213259264,
+   "cg": [
+    133.9000418008975,
+    13.47094115605268,
+    -0.8852933808439356
+   ],
+   "envelope": {
+    "x": [
+     109.25,
+     158.550083601795
+    ],
+    "R": 13.5,
+    "a": 5.45
+   },
+   "mounts": [
+    {
+     "id": "I4-SKIRT",
+     "type": "anchor",
+     "x": 109.25,
+     "note": "aft skirt on the thrust deck"
+    },
+    {
+     "id": "I4-GUIDE",
+     "type": "slide",
+     "x": 158.550083601795,
+     "note": "forward guide on the hoop, axial slide"
+    }
+   ],
+   "loads": {
+    "axial_kN": 2222.471035674016
+   },
+   "thermal_expansion": {
+    "contraction_mm": 207.06035112753895
+   },
+   "clearances": "gap rule 1.0 m",
+   "removal": "yard",
+   "utilities": [
+    "outlet",
+    "cryocooler station"
+   ],
+   "environment": "20 K / 3 K",
+   "failure": "per-species isolation"
+  },
+  {
+   "id": "BROW-TRANSLATION",
+   "name": "Brow, EYE and forward assembly (translated)",
+   "owner": "PSA (structure) / ISSA (interfaces)",
+   "config": "F1",
+   "maturity": "M1",
+   "register": "",
+   "mass_t": null,
+   "cg": [
+    163.950083601795,
+    0.0,
+    0.0
+   ],
+   "envelope": {
+    "x": [
+     162.450083601795,
+     165.450083601795
+    ],
+    "r": [
+     0.0,
+     45.0
+    ],
+    "translation_m": 20.700083601794997
+   },
+   "mounts": [
+    {
+     "id": "BROW-HOOP",
+     "type": "anchor",
+     "x": 162.450083601795
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "K-BROW",
+   "removal": "n/a",
+   "utilities": [
+    "EYE power",
+    "data"
+   ],
+   "environment": "shield",
+   "failure": "n/a"
+  },
+  {
+   "id": "MRU-RAIL",
+   "name": "MRU heavy-carriage twin rails and park stations",
+   "owner": "ISSA (rails, chairs, locks) / PSA (frames, longerons)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 8.7928,
+   "cg": [
+    0.3999999999999986,
+    -8.450062914116736e-16,
+    -4.6
+   ],
+   "envelope": {
+    "x": [
+     -92.7,
+     93.5
+    ],
+    "az": [
+     255.0,
+     285.0
+    ],
+    "r": 4.6
+   },
+   "mounts": [
+    {
+     "id": "MRU-CHAIRS",
+     "type": "slide",
+     "pitch_m": 2.0,
+     "note": "rail chairs on frames; rail joints slide"
+    },
+    {
+     "id": "MRU-PARK-D",
+     "type": "anchor",
+     "x": -90.7
+    },
+    {
+     "id": "MRU-PARK-W",
+     "type": "anchor",
+     "x": 91.5
+    }
+   ],
+   "loads": {
+    "chair_kN": 105.14889889414803,
+    "park_lock_kN": 315.44669668244416
+   },
+   "thermal_expansion": {
+    "growth": "casing temperature, joints every 12 m"
+   },
+   "clearances": "in-flight swept radius 0.55 m at r 2.9: nearest Switchgear_3 0.15 m",
+   "removal": "n/a",
+   "utilities": [
+    "carriage power 20 kW from sector 3",
+    "data A/B"
+   ],
+   "environment": "casing interior 250-320 K",
+   "failure": "dead-man stop, pins drop"
+  },
+  {
+   "id": "BODY-M10",
+   "name": "Body-bay module 10 (relocated dry store)",
+   "owner": "PSA (frames, longerons) / ISSA (racks, restraints)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 4.0,
+   "cg": [
+    27.75,
+    0.0,
+    0.0
+   ],
+   "envelope": {
+    "x": [
+     22.25,
+     33.25
+    ],
+    "r": [
+     1.5,
+     4.3
+    ]
+   },
+   "mounts": [
+    {
+     "id": "M10-F0",
+     "type": "frame",
+     "x": 22.25
+    },
+    {
+     "id": "M10-F1",
+     "type": "frame",
+     "x": 33.25
+    }
+   ],
+   "loads": {
+    "rack_axial_kN": 679.1645599585261
+   },
+   "thermal_expansion": {},
+   "clearances": "0.69 m to data/buses",
+   "removal": "item-level in flight; container-level yard",
+   "utilities": [
+    "lighting",
+    "data",
+    "service power"
+   ],
+   "environment": "casing interior",
+   "failure": "n/a"
+  },
+  {
+   "id": "HUB-ECLSS",
+   "name": "Stationary hub ECLSS unit and both rotary interfaces",
+   "owner": "ISSA (unit, ducts) / PSA (hub frame, bearings)",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 1.2,
+   "cg": [
+    100.299,
+    0,
+    3.2
+   ],
+   "envelope": {
+    "box": [
+     2.0,
+     2.2,
+     1.4
+    ]
+   },
+   "mounts": [
+    {
+     "id": "HUB-ECL-4",
+     "type": "4-point",
+     "note": "frame posts on the hub deck"
+    }
+   ],
+   "loads": {
+    "axial_kN": 8.66281326477712
+   },
+   "thermal_expansion": {},
+   "clearances": "maintenance face 1.0 m",
+   "removal": "ORU (<= 0.70 m)",
+   "utilities": [
+    "air ducts D 0.28 m to couplings A/B",
+    "water",
+    "O2/N2",
+    "data A/B"
+   ],
+   "environment": "cabin",
+   "failure": "hub unit fails: rings carry 6+6"
+  },
+  {
+   "id": "HUB-ROTARYCOUPLING_A",
+   "name": "RotaryCoupling A (rotating habitat interface)",
+   "owner": "PSA (bearing, drum) / ISSA (air, power, data passes)",
+   "config": "F1",
+   "maturity": "M1",
+   "register": "",
+   "mass_t": null,
+   "cg": [
+    99.199,
+    0,
+    0
+   ],
+   "envelope": {
+    "ring": [
+     0.6,
+     1.45,
+     1.45
+    ]
+   },
+   "mounts": [
+    {
+     "id": "RotaryCoupling_A-BRG",
+     "type": "bearing",
+     "note": "PSA"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "transfer drum r 1.3-1.5",
+   "removal": "yard",
+   "utilities": [
+    "air duct",
+    "power slip rings",
+    "data"
+   ],
+   "environment": "cabin",
+   "failure": "seal leak 0.05-1.0 kg/d"
+  },
+  {
+   "id": "HUB-ROTARYCOUPLING_B",
+   "name": "RotaryCoupling B (rotating habitat interface)",
+   "owner": "PSA (bearing, drum) / ISSA (air, power, data passes)",
+   "config": "F1",
+   "maturity": "M1",
+   "register": "",
+   "mass_t": null,
+   "cg": [
+    101.399,
+    0,
+    0
+   ],
+   "envelope": {
+    "ring": [
+     0.6,
+     1.45,
+     1.45
+    ]
+   },
+   "mounts": [
+    {
+     "id": "RotaryCoupling_B-BRG",
+     "type": "bearing",
+     "note": "PSA"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "transfer drum r 1.3-1.5",
+   "removal": "yard",
+   "utilities": [
+    "air duct",
+    "power slip rings",
+    "data"
+   ],
+   "environment": "cabin",
+   "failure": "seal leak 0.05-1.0 kg/d"
+  },
+  {
+   "id": "CRYO-O1",
+   "name": "Cryocooler station O1",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    27.58768925023175,
+    2.9969821208421337
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-O1-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  },
+  {
+   "id": "CRYO-O2",
+   "name": "Cryocooler station O2",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    9.080296696670132,
+    26.22233231237148
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-O2-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  },
+  {
+   "id": "CRYO-O3",
+   "name": "Cryocooler station O3",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    -5.390003246354222,
+    27.221505560940066
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-O3-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  },
+  {
+   "id": "CRYO-O4",
+   "name": "Cryocooler station O4",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    -18.387706337986717,
+    20.783521251894808
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-O4-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  },
+  {
+   "id": "CRYO-O5",
+   "name": "Cryocooler station O5",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    -27.603003175001586,
+    2.852492895846097
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-O5-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  },
+  {
+   "id": "CRYO-O6",
+   "name": "Cryocooler station O6",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    -18.69400137081989,
+    -20.50845710305346
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-O6-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  },
+  {
+   "id": "CRYO-O7",
+   "name": "Cryocooler station O7",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    -5.793234476286982,
+    -27.13855070380067
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-O7-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  },
+  {
+   "id": "CRYO-O8",
+   "name": "Cryocooler station O8",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    11.331170275583437,
+    -25.331148418216934
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-O8-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  },
+  {
+   "id": "CRYO-O9",
+   "name": "Cryocooler station O9",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    25.33114841821693,
+    -11.33117027558345
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-O9-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  },
+  {
+   "id": "CRYO-I1",
+   "name": "Cryocooler station I1",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    -0.8758886748066362,
+    13.47155592458961
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-I1-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  },
+  {
+   "id": "CRYO-I2",
+   "name": "Cryocooler station I2",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    -11.726525444915582,
+    6.6886920238375
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-I2-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  },
+  {
+   "id": "CRYO-I3",
+   "name": "Cryocooler station I3",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    0.8758886748066406,
+    -13.47155592458961
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-I3-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  },
+  {
+   "id": "CRYO-I4",
+   "name": "Cryocooler station I4",
+   "owner": "ISSA",
+   "config": "F1",
+   "maturity": "M2",
+   "register": "",
+   "mass_t": 0.9480643073710758,
+   "cg": [
+    159.550083601795,
+    13.47094115605268,
+    -0.8852933808439356
+   ],
+   "envelope": {
+    "box": [
+     1.6,
+     1.8,
+     1.8
+    ]
+   },
+   "mounts": [
+    {
+     "id": "CRYO-I4-B",
+     "type": "4-point",
+     "note": "bracket on the vessel forward guide ring"
+    }
+   ],
+   "loads": {},
+   "thermal_expansion": {},
+   "clearances": "0.4 m",
+   "removal": "ORU heads",
+   "utilities": [
+    "L2 power",
+    "LOW ammonia"
+   ],
+   "environment": "300 K warm end",
+   "failure": "two heads per station"
+  }
+ ],
+ "disagreements": [
+  {
+   "id": "SSI-D1",
+   "topic": "farm extension",
+   "issa": "T-A +20.70 m (current inventory)",
+   "psa": "PSA Phase I worked with +18.2 m (CP1)",
+   "action": "PSA to adopt the new value; no silent override"
+  },
+  {
+   "id": "SSI-D2",
+   "topic": "propellant densification",
+   "issa": "not adopted (owner)",
+   "psa": "PSA prefers densify (T-C) for structure",
+   "action": "owner decision stays T-A; T-C kept as research option"
+  },
+  {
+   "id": "SSI-D3",
+   "topic": "L2 frame station",
+   "issa": "L2 section x 41.02-50.4",
+   "psa": "frame ~40.8",
+   "action": "PSA to place the frame at x 41.0 (aft edge of the L2 section) or report the conflict"
+  }
+ ]
+}

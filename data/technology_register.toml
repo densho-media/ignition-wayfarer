@@ -14,7 +14,7 @@
 # values with these ids. Physical conservation holds in every entry.
 
 [register]
-version = "1.0"
+version = "1.1"
 created = "2026-11-28"
 basis = "owner ISSA Phase VI brief 2026-11-28 (DR5-01..08); PMDS levels; existing canon fictional technologies (Fiji/Lattice drive)"
 civilization = """IGNITION's spacefaring civilization is a mature high-temperature and plasma civilization: it builds hermetic ceramic-matrix and \
@@ -67,22 +67,23 @@ advance = "Li loops and EM pumps run reliably near 2000 K inside FT-01 boundarie
 adopted = { coolant = "Li", inlet_K = 1990.0, dT_K = 300.0, topology = "H6a: two redundant trunk paths, isolatable sections, heat-pipe fins, cross-feed", em_pump_efficiency = 0.35 }
 dependents = ["hot loop H6a", "HOT radiators", "FT-04 sink"]
 consequence = "Without it the HOT radiators cannot be fed at 1800 K mean surface; the drive's absorbed heat has no sink."
-source = "work/ship-systems-architecture/phase5/hot.py"
+source = "work/ship-systems-architecture/phase5/hot.py; integration3d/radiators3d.py hot_fins; integration3d/consolidate.py"
 
 [[technology]]
 id = "FT-03"
 name = "High-temperature closed-Brayton turbomachinery (1500 K turbine inlet)"
 status = "APPROVED"
 level = "B"
-decision = "owner DR5-01 asked for the investigation (2026-11-28 06:33Z); approved as an explicit fictional development assumption in the 3D integration brief (2026-11-28 07:03Z), F1 = Track F reference"
+decision = "owner DR5-01 asked for the investigation (2026-11-28 06:33Z); approved as an explicit fictional development assumption in the 3D integration brief (2026-11-28 07:03Z), F1 = Track F reference; component set approved as DR-3D-02 (owner 2026-11-28 09:15Z): the Carnot-fraction 0.154 is reached by a recuperated He-Xe cycle only with advanced components and a 872 K compressor inlet"
 principle = "Brayton efficiency = Carnot fraction x (1 - T_reject / T_inlet)."
 precedent = "SiC/SiC CMC turbine shrouds and vanes near 1600 K in service; JIMO/Prometheus closed Brayton design at ~1150 K inlet; ceramic gas turbines (1990s demonstrators)."
 limitation = "Space closed-Brayton work is at ~1150 K turbine inlet (Track R, eta 0.146 at 750 K rejection); a reactor and recuperator at 1500 K for years are not demonstrated."
 advance = "Reactor outlet, IHX and turbine at 1500 K for the service life, using the FT-01 material family for the hot-gas boundary and CMC rotors."
-adopted = { turbine_inlet_K = 1500.0, carnot_fraction = 0.42, reject_K = 950.0, efficiency = 0.154 }
-dependents = ["L2 power district (Track F variant F1)", "R5-A L2 radiator section length", "HOT headroom for L1 and the burn heat pumps"]
+adopted = { turbine_inlet_K = 1500.0, turbine_efficiency = 0.94, compressor_efficiency = 0.90, recuperator_effectiveness = 0.97, pressure_loss = 0.02, compressor_inlet_K = 872.0, efficiency = 0.154, l2_radiator_emission_K = 896.0, l2_section_m = 9.38 }
+cycle = "recuperated closed Brayton, He-Xe; pressure-loss parameter = total fractional pressure loss around the loop (documented in work/ship-systems-architecture/integration3d/radiators3d.py cycle())"
+dependents = ["L2 power district (Track F variant F1)", "L2 radiator section 9.38 m at 896 K (x 41.02-50.4)", "HOT headroom for L1 and the burn heat pumps", "config WF-F1-C1.0"]
 consequence = "Track F returns to F0 (1150 K inlet, 750 K rejection): the L2 section stays 20.5 m and the HOT headroom under the 20 % rule is ~0.05 GW, too small for a reactive defense in a burn."
-source = "work/ship-systems-architecture/phase6/study6.py radiators_f"
+source = "work/ship-systems-architecture/phase6/study6.py radiators_f; integration3d/radiators3d.py cycle (DR-3D-02)"
 
 [[technology]]
 id = "FT-04"
@@ -118,15 +119,16 @@ id = "FT-06"
 name = "Advanced high-temperature heat pipes"
 status = "APPROVED"
 level = "B"
-decision = "part of DR5-02 (local heat-pipe fins)"
+decision = "part of DR5-02 (local heat-pipe fins); forward-pointing fins approved as DR-3D-04 (owner 2026-11-28 09:15Z)"
 principle = "Capillary-pumped evaporation and condensation; capillary, sonic and entrainment limits."
 precedent = "Li/W and Na heat pipes at 1300-1800 K (space reactor and solar-thermal tests, 1e4 h class)."
 limitation = "Li heat pipes near 1800-2000 K over 1e5 h in a composite envelope; frozen-start transients."
-advance = "Li heat-pipe fins in FT-01 envelopes with reliable frozen start, fin spacing 2.94 m (2 x capillary limit)."
-adopted = { fluid = "Li", T_K = 1800.0, fin_spacing_m = 2.94 }
+advance = "Li heat-pipe fins in FT-01 envelopes with reliable frozen start; every fin points forward from a manifold at its aft end (1.47 m pitch), so burn acceleration returns the condensate to the evaporator."
+adopted = { fluid = "Li", T_K = 1800.0, manifold_pitch_m = 1.47, fin_direction = "forward from the manifold", manifolds_per_blade = 106 }
+also = "L2 section potassium heat pipes (896 K vapour 842-965 K), aft dual-saddle evaporators, worst limit margin 1.59 (integration3d/radiators3d.py)"
 dependents = ["HOT radiator fins", "H6a sections"]
-consequence = "Fins revert to pumped manifolds: more inventory and pump work."
-source = "work/ship-systems-architecture/phase5/hot.py"
+consequence = "Fins revert to pumped manifolds: more inventory and pump work; with aft-pointing fin halves the blades lose 5.6 % (0.77 GW) at 0.74 g."
+source = "work/ship-systems-architecture/phase5/hot.py; integration3d/radiators3d.py hot_fins; integration3d/consolidate.py"
 
 [[technology]]
 id = "FT-07"
@@ -138,8 +140,10 @@ principle = "Teleoperated and autonomous manipulation; radiation-hardened electr
 precedent = "ISS Canadarm2/Dextre ORU swaps; nuclear hot-cell manipulators; JET remote handling."
 limitation = "Dexterity and autonomy for unplanned repairs in a high-radiation zone without crew in the loop."
 advance = "Supervised autonomous robots replace any ORU up to 3 t (LOG-G1 class) along defined routes; crew supervise from shielded stations."
-adopted = { max_oru_t = 3.0, handling = "single-arm up to 3 t, dual-arm or rail above", routes = "keel lane, district removal route, hub store" }
-dependents = ["power district maintenance", "H6a section replacement", "LOG-G1", "workshop"]
+adopted = { max_oru_t = 3.0, handling = "single-arm up to 3 t, MRU heavy carriage above", routes = "keel lane, district removal route, hub store", mru_carriage_rating_t = 24.7, mru_route_m = 186.0 }
+provisional = "EXT-TA external transfer arm at the drive-bay hatch for the 7.5 t H6a EM pump modules (two-joint luffing arm, 8 t at 6 m; PROVISIONAL, registered for fictional modelling only, owner brief 2026-11-28 09:15Z)"
+limit = "the carriage moving a reactor-class mass does not make in-flight reactor servicing possible: decay heat, activation and shutdown gamma keep the reactor/IHX a yard item"
+dependents = ["power district maintenance", "H6a section replacement", "LOG-G1", "workshop", "MRU heavy carriage", "EXT-TA"]
 consequence = "Crewed servicing only after weeks of decay; maintenance windows stretch; spares mass rises."
 source = "work/ship-systems-architecture/phase6/study6.py layout"
 

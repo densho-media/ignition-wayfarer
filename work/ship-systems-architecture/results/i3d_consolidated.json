@@ -1,0 +1,1592 @@
+{
+ "status": "STUDY / PROTOTYPE, Track F1 working configuration WF-F1-C1.0; noncanon; production unchanged",
+ "config": "WF-F1-C1.0",
+ "decisions": [
+  {
+   "id": "DR-3D-01",
+   "what": "T-A reference, resized to the current inventory",
+   "state": "IMPLEMENTED"
+  },
+  {
+   "id": "DR-3D-02",
+   "what": "FT-03 component set (0.94 / 0.90 / 0.97 / 2 %), 896 K L2, 9.38 m",
+   "state": "IMPLEMENTED (register)"
+  },
+  {
+   "id": "DR-3D-03",
+   "what": "forward L2 kept; aft placement a research alternative",
+   "state": "IMPLEMENTED"
+  },
+  {
+   "id": "DR-3D-04",
+   "what": "forward-pointing HOT fins, 1.47 m manifold pitch",
+   "state": "IMPLEMENTED (geometry, ledger, register)"
+  },
+  {
+   "id": "CP4-WL",
+   "what": "WARM/LOW closure",
+   "state": "IMPLEMENTED (preferred O5)"
+  },
+  {
+   "id": "CP4-MRU",
+   "what": "heavy MRU transport architecture",
+   "state": "IMPLEMENTED (M2)"
+  },
+  {
+   "id": "CP4-M10",
+   "what": "body-bay module 10",
+   "state": "IMPLEMENTED (interfaces; az-90 yard route finding)"
+  }
+ ],
+ "tanks": {
+  "decision": "DR-3D-01 APPROVED: T-A reference; T-B kept as mission-modular alternative; T-C research option (no densification adopted)",
+  "propellant_t": 5468.349597052476,
+  "cp1_propellant_t": 5175.746726295895,
+  "scale": 1.0565334600454817,
+  "need_m3": {
+   "helium-3": 36504.04722759052,
+   "deuterium": 8154.677047143064,
+   "hydrogen": 26838.248169264574
+  },
+  "added_length_m": 20.700083601794997,
+  "cp1_added_length_m": 18.209261123439585,
+  "vessel_length_m": 49.300083601794995,
+  "farm_x": [
+   109.25,
+   158.550083601795
+  ],
+  "brow_x": [
+   162.450083601795,
+   165.450083601795
+  ],
+  "ship_length_m": 310.200083601795,
+  "capacity_m3": {
+   "helium-3": 36504.04722759052,
+   "hydrogen": 27001.70279097039,
+   "deuterium": 8749.679177175129
+  },
+  "fill": {
+   "helium-3": 1.0,
+   "deuterium": 0.9319972632157509,
+   "hydrogen": 0.9939465068936143
+  },
+  "shell_area_m2": 25611.080287024397,
+  "cp1_shell_area_m2": 24361.403896000586,
+  "vessels": [
+   {
+    "id": "O1",
+    "species": "helium-3",
+    "cls": "L",
+    "az": 6.2,
+    "R": 27.75,
+    "a": 6.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 6084.007871265087,
+    "prop_t": 358.95646440464014,
+    "axial_kN": 2591.31068443501
+   },
+   {
+    "id": "O2",
+    "species": "helium-3",
+    "cls": "L",
+    "az": 70.9,
+    "R": 27.75,
+    "a": 6.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 6084.007871265087,
+    "prop_t": 358.95646440464014,
+    "axial_kN": 2591.31068443501
+   },
+   {
+    "id": "O3",
+    "species": "hydrogen",
+    "cls": "L",
+    "az": 101.2,
+    "R": 27.75,
+    "a": 6.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 6084.007871265087,
+    "prop_t": 428.1402287062489,
+    "axial_kN": 3090.749043684335
+   },
+   {
+    "id": "O4",
+    "species": "helium-3",
+    "cls": "L",
+    "az": 131.5,
+    "R": 27.75,
+    "a": 6.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 6084.007871265087,
+    "prop_t": 358.95646440464014,
+    "axial_kN": 2591.31068443501
+   },
+   {
+    "id": "O5",
+    "species": "helium-3",
+    "cls": "L",
+    "az": 174.1,
+    "R": 27.75,
+    "a": 6.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 6084.007871265087,
+    "prop_t": 358.95646440464014,
+    "axial_kN": 2591.31068443501
+   },
+   {
+    "id": "O6",
+    "species": "hydrogen",
+    "cls": "L",
+    "az": 227.65,
+    "R": 27.75,
+    "a": 6.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 6084.007871265087,
+    "prop_t": 428.1402287062489,
+    "axial_kN": 3090.749043684335
+   },
+   {
+    "id": "O7",
+    "species": "helium-3",
+    "cls": "L",
+    "az": 257.95,
+    "R": 27.75,
+    "a": 6.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 6084.007871265087,
+    "prop_t": 358.95646440464014,
+    "axial_kN": 2591.31068443501
+   },
+   {
+    "id": "O8",
+    "species": "helium-3",
+    "cls": "L",
+    "az": 294.1,
+    "R": 27.75,
+    "a": 6.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 6084.007871265087,
+    "prop_t": 358.95646440464014,
+    "axial_kN": 2591.31068443501
+   },
+   {
+    "id": "O9",
+    "species": "hydrogen",
+    "cls": "L",
+    "az": 335.9,
+    "R": 27.75,
+    "a": 6.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 6084.007871265087,
+    "prop_t": 428.1402287062489,
+    "axial_kN": 3090.749043684335
+   },
+   {
+    "id": "I1",
+    "species": "deuterium",
+    "cls": "M",
+    "az": 93.72,
+    "R": 13.5,
+    "a": 5.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 4374.839588587564,
+    "prop_t": 662.1597762280169,
+    "axial_kN": 4780.138744091593
+   },
+   {
+    "id": "I2",
+    "species": "hydrogen",
+    "cls": "M",
+    "az": 150.3,
+    "R": 13.5,
+    "a": 5.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 4374.839588587564,
+    "prop_t": 307.86364213259264,
+    "axial_kN": 2222.471035674016
+   },
+   {
+    "id": "I3",
+    "species": "deuterium",
+    "cls": "M",
+    "az": 273.72,
+    "R": 13.5,
+    "a": 5.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 4374.839588587564,
+    "prop_t": 662.1597762280169,
+    "axial_kN": 4780.138744091593
+   },
+   {
+    "id": "I4",
+    "species": "hydrogen",
+    "cls": "M",
+    "az": 356.24,
+    "R": 13.5,
+    "a": 5.45,
+    "x0": 109.25,
+    "x1": 158.550083601795,
+    "volume_m3": 4374.839588587564,
+    "prop_t": 307.86364213259264,
+    "axial_kN": 2222.471035674016
+   }
+  ],
+  "supports": {
+   "aft": "each vessel on its aft skirt at the thrust deck (axial burn load, anchor)",
+   "forward": "forward guide ring on the forward hoop (radial only, axial slide for contraction: 120 mm on the historical length, 207 mm on the stretched barrel)",
+   "keel": "keel rails lengthen with the barrel",
+   "burn_axial_kN_total": 38825.330797194285
+  },
+  "interfaces": [
+   "Brow, EYE, lances and the forward hoop move forward 20.70 m (x 162.45-165.45)",
+   "farm outlets, ring mains and the aft deck stay (aft end unchanged)",
+   "forward links and guides re-anchor at the new forward hoop",
+   "docking corridors 195/315 deg and the EVA lane 50 deg lengthen with the farm"
+  ]
+ },
+ "radiators": {
+  "fins": {
+   "decision": "DR-3D-04 APPROVED",
+   "pitch_m": 1.47,
+   "hot_length_m": 152.62056207739442,
+   "manifolds_per_blade": 105,
+   "manifolds_total": 315,
+   "phase6_manifolds_per_blade": 53,
+   "extra_t": 17.879208593459555,
+   "layout": "manifold at the AFT end of every fin; Li heat-pipe fin points forward 1.47 m to the next manifold",
+   "modes": [
+    {
+     "mode": "acceleration burn (+x, up to 0.74 g)",
+     "condensate": "driven aft to the manifold (evaporator) by the acceleration: assists the wick",
+     "ok": true
+    },
+    {
+     "mode": "braking burn",
+     "condensate": "Wayfarer brakes after the turnover with the drive still aft, so the acceleration is +x in ship axes: same as acceleration",
+     "ok": true
+    },
+    {
+     "mode": "coast (0 g)",
+     "condensate": "capillary return only over 1.47 m (one fin length, half the Phase V 2.94 m): margin rises",
+     "ok": true
+    },
+    {
+     "mode": "startup (frozen Li)",
+     "condensate": "the manifold thaws first and the melt front runs forward along each fin; the residual acceleration of the first seconds holds the melt at the evaporator, which is the safe direction",
+     "ok": true
+    },
+    {
+     "mode": "shutdown",
+     "condensate": "the tail-off acceleration parks the liquid at the manifold before it freezes, so the next start finds it at the evaporator; a coast freeze (no acceleration) is the Phase V frozen-start case and stays an FT-06 assumption",
+     "ok": true
+    }
+   ]
+  },
+  "budget": {
+   "items": [
+    [
+     "HOT headroom (Phase VI, 20 % rule)",
+     1029010063.6813622
+    ],
+    [
+     "L2 section growth to 9.38 m (DR-3D-02)",
+     -172582694.39265126
+    ],
+    [
+     "H6a trunk shading (bound)",
+     -471285822.41965145
+    ],
+    [
+     "forward-pointing fins (DR-3D-04): fin loss removed",
+     0.0
+    ],
+    [
+     "burn heat pumps proactive duty retired (WARM closure)",
+     3109285.311417478
+    ]
+   ],
+   "reserve_nominal_W": 388250832.18047684,
+   "reactive": [
+    [
+     "burn heat pumps at the reactive peak (work + lift)",
+     -95491200.0
+    ],
+    [
+     "L1 pickup loss at eta 0.65 on 90.8 MW",
+     -48886712.733707644
+    ]
+   ],
+   "reserve_reactive_W": 243872919.4467692
+  },
+  "need": {
+   "warm_W": 496468.40130753204,
+   "low_capacity_W": 1303157.720646877,
+   "low_short_W": 303157.7206468771,
+   "avionics_W": 300000.0,
+   "cryo_reject_W": 785964.7672057309,
+   "warm_ext_equiv_m": 2.680929367060673,
+   "low_ext_equiv_m": 6.063154412937542
+  },
+  "options": [
+   {
+    "id": "O1",
+    "name": "Longitudinal: shift L2, WARM and LOW aft into HOT",
+    "area_m2": 1600.1673317396735,
+    "hot_cost_W": 779311985.831014,
+    "reserve_reactive_after_W": -535439066.3842448,
+    "geometry": "L2/WARM/LOW boundaries move 8.7 m aft; envelope and blades unchanged",
+    "verdict": "REJECTED: consumes HOT that the reactive-defense peak needs (reserve goes negative)"
+   },
+   {
+    "id": "O2",
+    "name": "Radial: wider WARM/LOW span beyond r 37 m",
+    "area_m2": null,
+    "hot_cost_W": 0.0,
+    "geometry": "tip radius > 37 m",
+    "verdict": "REJECTED: breaks the Brow shadow rule (radiators inside r 45 - 8 m)"
+   },
+   {
+    "id": "O3",
+    "name": "Longitudinal forward: WARM/LOW past x 93.4",
+    "area_m2": null,
+    "hot_cost_W": 0.0,
+    "geometry": "forward of LOW is the ring sweep keep-out (x 93.65-106.95, r < 31.5)",
+    "verdict": "REJECTED at full span: collides with the ring sweep"
+   },
+   {
+    "id": "O4",
+    "name": "Temperature redistribution only",
+    "area_m2": 0.0,
+    "hot_cost_W": 0.0,
+    "geometry": "none",
+    "T_warm_K": 450.5376706016776,
+    "T_low_K": 320.5313406825639,
+    "verdict": "possible: WARM 440 -> 450.5 K, LOW 300 -> 320.5 K; the LOW rise costs cryocooler input (Carnot work rises with the reject temperature) and avionics margin"
+   },
+   {
+    "id": "O5",
+    "name": "PREFERRED: WARM at 451 K (no new area) + LOW forward tip extensions beside the rings + LOW at 316 K",
+    "area_m2": 430.6499999999999,
+    "hot_cost_W": 0.0,
+    "geometry": "LOW tabs x 93.4-106.5, r 31.5-37; WARM 451 K, LOW 316 K",
+    "verdict": "PREFERRED"
+   }
+  ],
+  "preferred": {
+   "id": "O5",
+   "name": "PREFERRED: WARM at 451 K (no new area) + LOW forward tip extensions beside the rings + LOW at 316 K",
+   "T_warm_K": 450.5376706016776,
+   "warm_area_m2": 0.0,
+   "low_tab_length_m": 13.049999999999997,
+   "low_tab_x": [
+    93.4,
+    106.45
+   ],
+   "low_tab_r": [
+    31.5,
+    37.0
+   ],
+   "low_tab_area_m2": 430.6499999999999,
+   "low_tab_capacity_W": 105897.54098360655,
+   "low_tab_mass_t": 7.164449999999999,
+   "hot_cost_W": 0.0,
+   "T_low_K": 315.60000000000355,
+   "cryo_reject_at_T_W": 828088.43574295,
+   "cryo_input_at_T_W": 821655.7330549323,
+   "low_need_at_T_W": 1353706.12289154,
+   "low_have_at_T_W": 1354496.389277101,
+   "tabs_limited": true,
+   "tabs_needed_alone_m": 37.358830221130304,
+   "view_factor_note": "tab faces lose 10 % to the rings' rim (PROTOTYPE)",
+   "clear_to_ring_m": 1.5,
+   "brow_shadow_margin_m": 8.0,
+   "verdict": "keeps the radial envelope, the three blades and all HOT; WARM machinery runs 11 K warmer; LOW gains physical area where the rings leave room and runs slightly warmer for the rest"
+  },
+  "pumps": {
+   "warm_W": [
+    10199.918400652794,
+    13549.956194674465
+   ],
+   "low_W": [
+    4432.624113475177,
+    9809.612423956989
+   ],
+   "mdot_warm": 31.9562116355089,
+   "mdot_low": 13.863380006881671
+  },
+  "joint": {
+   "dT_before_K": 140.0,
+   "dT_after_K": 150.53767060167758,
+   "leak_increase": 0.0752690757262684
+  },
+  "expansion": {
+   "warm_extra_mm": 0.3556463828066182,
+   "tab_growth_mm": 0.0,
+   "note": "WARM grows 0.4 mm more over 22.5 m (C-C, ~1.5e-6/K); the LOW tabs stay at the LOW temperature (no new growth); the tab spar slides at its forward clevis"
+  },
+  "degraded": {
+   "warm_one_loop": 0.7913584705574679,
+   "low_one_loop": 0.8595084514751682,
+   "tabs": "own A/B interleave on each tab (same 86 % rule)",
+   "warm_after_loop_loss_W": 5219612.193031415,
+   "warm_load_W": 5496468.401307532
+  },
+  "heat_pump": {
+   "before": "Phase VI: the 370 kW WARM burn shortfall was lifted into HOT by the burn heat pumps (2.67 MW of L1 work, 3.11 MW into HOT)",
+   "after": "WARM at 451 K absorbs it directly: the proactive heat-pump duty is retired, L1 continuous falls by that work, HOT gains it back; the 210 MW heat-pump rating stays installed for the reactive defense",
+   "retired_W": 2665101.6955006956,
+   "hot_returned_W": 3109285.311417478,
+   "counted_once": true
+  },
+  "supports": {
+   "tab": "LOW forward spar extended by the tab length; tab cantilevered from the LOW forward spar at r 31.5-37 with two hinge-clevis lugs per blade (ISSA bracket) onto the PSA radiator root frame at x 93.4; burn load 17.2 kN per blade"
+  },
+  "mass_t": {
+   "fins": 17.879208593459555,
+   "low_tabs": 7.164449999999999,
+   "warm_pump_upgrade": 0.15
+  }
+ },
+ "cryo": {
+  "area_factor": 1.6821072704944753,
+  "A0_m2": 15225.59276466103,
+  "area_m2": 25611.080287024397,
+  "power_factor": 0.9480519480519479,
+  "stages": [
+   {
+    "stage": "3 K (helium-3 only, 6 vessels)",
+    "T_cold": 3.0,
+    "leak_W": 198.17374651602577,
+    "nuclear_W": 75.13868628720701,
+    "lift_W": 273.3124328032328,
+    "W_per_W": 1500.0,
+    "input_W": 409968.6492048492,
+    "input_at_T_W": 431502.3560317755
+   },
+   {
+    "stage": "20 K shields (all 13 vessels)",
+    "T_cold": 20.0,
+    "leak_W": 6126.272104038914,
+    "nuclear_W": 33.11815117548668,
+    "lift_W": 6159.390255214401,
+    "W_per_W": 60.0,
+    "input_W": 369563.41531286406,
+    "input_at_T_W": 390153.3770231569
+   }
+  ],
+  "operating_input_W": 821655.7330549323,
+  "installed_input_W": 1027069.6663186654,
+  "reject_operating_W": 828088.43574295,
+  "reject_installed_W": 1035110.5446786875,
+  "existing_input_W": 395240.5162727445,
+  "sensitivity": [
+   {
+    "nuclear": 0.0,
+    "input_W": 664836.9460163736
+   },
+   {
+    "nuclear": 0.5,
+    "input_W": 722184.5052670434
+   },
+   {
+    "nuclear": 1.0,
+    "input_W": 779532.0645177133
+   },
+   {
+    "nuclear": 2.0,
+    "input_W": 894227.183019053
+   },
+   {
+    "nuclear": 5.0,
+    "input_W": 1238312.5385230721
+   }
+  ],
+  "stations": 13,
+  "heads_per_station": 2,
+  "redundancy": "two cooler heads per station, each 62.5 % of the station need (installed 125 %): one head lost keeps 62.5 %, so the vessel warms slowly and its neighbours cannot help; recovery = head swap (ORU, LOG-G1 class) within the vessel's thermal hold time",
+  "hold_time_h": null,
+  "mass_new_t": 12.324835995823985,
+  "mass_existing_t": 5.928607744091168,
+  "mass_increment_t": 6.3962282517328175,
+  "flows": [
+   [
+    "electrical input (L2 bus)",
+    821655.7330549323
+   ],
+   [
+    "heat lifted from the 3 K and 20 K stages",
+    6432.702688017634
+   ],
+   [
+    "heat rejected to LOW at 316 K (input + lift)",
+    -828088.43574295
+   ]
+  ],
+  "explain": "CP4 quoted 934 kW = the INSTALLED input (operating x 1.25) and 776 kW for LOW, which mixed the scaled production rejection with installed nuclear terms: two bases, not a lost energy flow. Now every watt has one destination: 822 kW of operating input from the L2 bus plus 6433 W lifted from the cold stages leave as 828 kW into LOW at 316 K (the input is 5 % above the 300 K value because the coolers reject warmer). At full installed capacity (re-cool after a fault) LOW sees 1035 kW for hours, inside its 20 % margin.",
+  "radiation_note": "nuclear heating comes from the Phase VI OpenMC surrogate (simplified source and structure): a sensitivity, not a validated shielding result",
+  "T_reject_K": 315.60000000000355,
+  "input_at_300K_W": 779532.0645177133
+ },
+ "electrical": {
+  "continuous_W": 11605111.058100648,
+  "reactive_W": 90789609.36259994,
+  "peak_with_buffer_W": 111789609.36259994,
+  "ft04_rating_W": 100000000.0,
+  "rows": [
+   {
+    "id": "PROT.EYE_BURN_WATCH",
+    "title": "EYE Burn Watch",
+    "supply": "direct (L1 pickup, FT-04)",
+    "installed_W": 1050000.0,
+    "proactive_W": 1050000.0,
+    "reactive_W": 1050000.0,
+    "peak_W": 1050000.0,
+    "storage_W": 0.0
+   },
+   {
+    "id": "PROP.FEED_PUMPS",
+    "title": "Propellant boost pumps and conditioning (OPEN in canon)",
+    "supply": "direct (L1 pickup, FT-04)",
+    "installed_W": 1000000.0,
+    "proactive_W": 500000.0,
+    "reactive_W": 500000.0,
+    "peak_W": 1000000.0,
+    "storage_W": 0.0
+   },
+   {
+    "id": "TMS.HOT_LOOP_PUMPS",
+    "title": "H6a EM pumps (Track F composite walls, FT-01/02)",
+    "supply": "direct (L1 pickup, FT-04)",
+    "installed_W": 12568888.82262581,
+    "proactive_W": 10055111.058100648,
+    "reactive_W": 10055111.058100648,
+    "peak_W": 10055111.058100648,
+    "storage_W": 0.0
+   },
+   {
+    "id": "TMS.BURN_HEAT_PUMPS",
+    "title": "Burn heat pumps (canon F02 rating 210 MW at burnout, reactive defense)",
+    "supply": "direct (L1 pickup, FT-04)",
+    "installed_W": 210000000.0,
+    "proactive_W": 0.0,
+    "reactive_W": 79184498.3044993,
+    "peak_W": 81849600.0,
+    "storage_W": 0.0
+   },
+   {
+    "id": "PROP.PULSE_DISCHARGE",
+    "title": "Pulse bank discharge into startup heating and seed field",
+    "supply": "buffered (pulse bank, own store)",
+    "installed_W": 50000000.0,
+    "proactive_W": 0.0,
+    "reactive_W": 0.0,
+    "peak_W": 50000000.0,
+    "storage_W": 50000000.0
+   },
+   {
+    "id": "EPS.PULSE_CHARGE",
+    "title": "Main battery / L2 charging the pulse bank",
+    "supply": "L2 bus (charging)",
+    "installed_W": 2000000.0,
+    "proactive_W": 0.0,
+    "reactive_W": 0.0,
+    "peak_W": 2000000.0,
+    "storage_W": 0.0
+   },
+   {
+    "id": "ISSA.COOLDOWN",
+    "title": "cooldown circulation after a burn (25 % flow)",
+    "supply": "L2 / ride-through",
+    "installed_W": 160881.77692961038,
+    "proactive_W": 0.0,
+    "reactive_W": 0.0,
+    "peak_W": 160881.77692961038,
+    "storage_W": 0.0
+   },
+   {
+    "id": "DEF.ENGAGEMENT",
+    "title": "Defense engagement burst (CP3 defense bus)",
+    "supply": "buffered (defense buffer, 4 modules)",
+    "installed_W": 21000000.0,
+    "proactive_W": 0.0,
+    "reactive_W": 0.0,
+    "peak_W": 21000000.0,
+    "storage_W": 21000000.0
+   }
+  ],
+  "conductor": {
+   "V": 10000.0,
+   "J_A_mm2": 1.5,
+   "length_m": 60.0,
+   "A_cont_mm2": 773.6740705400433,
+   "A_peak_mm2": 6052.640624173328,
+   "mass_old_t": 0.25067039885497405,
+   "mass_new_t": 1.9610555622321586,
+   "rule": "L1 conductors sized for the reactive peak (minutes at burnout), not the proactive continuous load; two half-rated segments on separate routes (az 30 and az 150)",
+   "within_distribution_line": true
+  },
+  "converter": {
+   "rating_W": 100000000.0,
+   "note": "the 100 MWe FT-04 rating (CONDITIONAL) is the converter rating; it covers the reactive peak with 9.2 MW to spare; the defense burst comes from the buffer, not the pickup"
+  },
+  "thermal": {
+   "pickup_loss_cont_W": 6248905.954361886,
+   "pickup_loss_peak_W": 48886712.733707644,
+   "sink": "HOT loop (H6a), inside the HOT budget below",
+   "peak_duration": "the reactive peak lasts while a defense engagement runs at burnout; the buffer covers 10 s bursts; minutes-long peaks are HOT-limited (budget below), not conductor-limited"
+  },
+  "surplus_W": {
+   "BOL": 4081902.5522425408,
+   "EOL": 3114327.5522425408
+  },
+  "extra_cryo_W": 426415.2167821878,
+  "buffer_recharge_s": {
+   "BOL": 51.15261751785039,
+   "EOL": 67.0449708636617
+  },
+  "h6a_pump_W": 10055111.058100648,
+  "note": "The H6a pumps (10 MW) run from L1 in a burn. With the pickup lost they must come from L2 (8.7 MW EOL, demand ~5.5 MW): they cannot all run, so a pickup fault means a controlled drive shutdown (decay heat goes to the H6a at part flow, 0.15 of the pump power, which L2 can carry). This is an existing Phase V/VI rule and is stated here, not solved."
+ },
+ "l2_failure": {
+  "case": "one NaK loop of unit 1 lost (unit feeds only its own blade): fixed split loads that blade to 125 %",
+  "usable_cap_W": 12818181.818181818,
+  "unit_waste_full_W": 19227272.727272727,
+  "safe_state": {
+   "unit_waste_W": [
+    12689999.999999998,
+    12882272.727272728,
+    12882272.727272728
+   ],
+   "Pe_W": [
+    2310000.0,
+    2345000.0000000005,
+    2345000.0000000005
+   ],
+   "total_Pe_W": 7000000.000000001,
+   "split_unit2": 0.9950248756218905,
+   "split_unit3": 0.9900497512437809
+  },
+  "derating": "faulted unit to 66 % on its remaining loop, the other two at 100 % with biased splits: 7.00 MWe of 10.5",
+  "demand_W": [
+   2997489.9150976306,
+   5167432.230975271,
+   8180164.438850735
+  ],
+  "shed_W": 1180164.4388507344,
+  "transient": {
+   "heat_capacity_J_K": 7057154.114111429,
+   "excess_W": 3845454.545454545,
+   "t_to_plus50K_s": 91.75968706291458,
+   "sequence": [
+    "0 s: loop low-flow trip on the faulted unit",
+    "< 2 s: flow-control valves rebias the neighbouring units (67/33 class)",
+    "< 5 s: TAC bypass sets the faulted unit back (turbine bypass to the recuperator); the overloaded blade gains < 50 K in 92 s",
+    "1-3 min: reactor ramp-down of the faulted unit to hot standby (decay heat on its own loop A)",
+    "L2 load shedding of discretionary loads if the demand band is above the derated output"
+   ]
+  },
+  "recovery": [
+   "isolate the failed loop (isolation valves at the root and the gas cooler)",
+   "diagnose: EM pump ORU swap (robot, coast) or a leak (drain to the NaK reserve, sectional repair = yard if the leak is in the casing-hull annulus)",
+   "refill, warm the loop with the unit's decay heat, rebias, return to strategy C"
+  ],
+  "verdict": "safe degraded state without full output: 2 units + standby carry the coast and burn demand bands except the highest, which sheds discretionary loads"
+ },
+ "eclss": {
+  "matrix": {
+   "nominal 6 + 6": true,
+   "hub unit failed (6 + 6)": true,
+   "one A unit + hub unit failed (6 + 6)": true,
+   "two A units failed (6 + 6)": true,
+   "ring A lost (12 in B)": true,
+   "ring A lost + one B unit failed": true,
+   "ring A lost + hub unit failed": true,
+   "ring A lost + B unit + hub unit failed": false,
+   "ring A rotary coupling lost (A occupied 6 + 6)": true,
+   "ring A rotary coupling lost + one A unit failed": true
+  },
+  "passes": 9,
+  "of": 10,
+  "failing": "ring A lost + B unit + hub unit failed",
+  "failing_eval": {
+   "overload_persons": 4,
+   "co2_kg_day": 4.16,
+   "lioh_kg_day": 5.2,
+   "reserve_days": 30,
+   "lioh_t": 0.156,
+   "o2": "O2 from the O2 reserve / generation (separate system), unaffected",
+   "repair": "hub unit ORU swap (spares in the hub store, 4-24 h)",
+   "reliability": "three concurrent losses (ring A + one B unit + hub unit) before a repair: with ORU repair times of hours this is a rare compound case; the emergency CO2 reserve bridges it, so an eighth unit is not required (it stays the alternative, +1.2 t)"
+  },
+  "maintenance": "hub unit: maintenance face on the hub aisle (1.0 m clear); ring units: ORUs <= 0.70 m through the ring aisle",
+  "rotating": "both rotary couplings carry the hub ducts (D 0.28 m) through the transfer drums; seal leak 0.05-1.0 kg/d each",
+  "occupancy": "emergency occupancy of the stationary hub: 12 people for the refuge time on the hub unit + CO2 reserve"
+ },
+ "mru": {
+  "items": [
+   {
+    "name": "Reactor + IHX envelope",
+    "t": 21.46728738872812,
+    "env": {
+     "L": 1.6,
+     "D": 1.5
+    },
+    "oru": false,
+    "handling": "MRU carriage",
+    "service": "YARD"
+   },
+   {
+    "name": "Shadow shield (LiH-W) envelope",
+    "t": 25.301220785728752,
+    "env": {
+     "L": 2.54,
+     "D": 3.1262088862261344
+    },
+    "oru": false,
+    "handling": "MRU carriage",
+    "service": "YARD"
+   },
+   {
+    "name": "Turbo-alternator-compressor",
+    "t": 7.8713387092003115,
+    "env": {
+     "L": 2.0,
+     "D": 0.9
+    },
+    "oru": false,
+    "handling": "MRU carriage",
+    "service": "IN-FLIGHT (restricted)"
+   },
+   {
+    "name": "Recuperator (4 cores)",
+    "t": 2.683410923591015,
+    "env": {
+     "L": 1.6,
+     "D": 1.5556349186104046
+    },
+    "oru": true,
+    "handling": "robot / LOG-G1",
+    "service": "IN-FLIGHT (ORU)"
+   },
+   {
+    "name": "Gas cooler / L2 header manifold (3 cores)",
+    "t": 2.3852541543031247,
+    "env": {
+     "L": 1.4,
+     "D": 1.697056274847714
+    },
+    "oru": true,
+    "handling": "robot / LOG-G1",
+    "service": "IN-FLIGHT (ORU)"
+   },
+   {
+    "name": "Rectifier + unit switchgear (3 cabinets)",
+    "t": 2.3852541543031247,
+    "env": {
+     "L": 1.2,
+     "D": 1.94164878389476
+    },
+    "oru": true,
+    "handling": "robot / LOG-G1",
+    "service": "IN-FLIGHT (ORU)"
+   },
+   {
+    "name": "I&C and protection cabinet",
+    "t": 2.1467287388728122,
+    "env": {
+     "L": 1.2,
+     "D": 0.9899494936611665
+    },
+    "oru": true,
+    "handling": "robot / LOG-G1",
+    "service": "IN-FLIGHT (ORU)"
+   },
+   {
+    "name": "Restart pack R1b",
+    "t": 2.1467287388728122,
+    "env": {
+     "L": 1.2,
+     "D": 1.2806248474865698
+    },
+    "oru": true,
+    "handling": "robot / LOG-G1",
+    "service": "IN-FLIGHT (ORU)"
+   },
+   {
+    "name": "Mount ring + struts",
+    "t": 7.155762462909374,
+    "env": {
+     "L": 0.24,
+     "D": 3.4000000000000004
+    },
+    "oru": false,
+    "handling": "MRU carriage",
+    "service": "YARD"
+   },
+   {
+    "name": "Gas ducts (hot leg, return) around the shield",
+    "t": 5.724609970327499,
+    "env": {
+     "L": 5.04,
+     "D": 0.6,
+     "note": "removed in duct segments (D 0.6 m), not as the wrapped assembly"
+    },
+    "oru": false,
+    "handling": "MRU carriage",
+    "service": "IN-FLIGHT (restricted)"
+   }
+  ],
+  "envelope_max": {
+   "name": "Reactor + IHX envelope",
+   "t": 21.46728738872812,
+   "env": {
+    "L": 1.6,
+    "D": 1.5
+   },
+   "oru": false,
+   "handling": "MRU carriage",
+   "service": "YARD"
+  },
+  "swept_radius_m": 0.85,
+  "route": [
+   [
+    -92.7,
+    -6.613092715395707e-16,
+    -3.6
+   ],
+   [
+    93.5,
+    -6.613092715395707e-16,
+    -3.6
+   ]
+  ],
+  "nearest": [
+   [
+    "Switchgear_3",
+    -0.85
+   ],
+   [
+    "RideThrough_3_1",
+    -0.5
+   ],
+   [
+    "RideThrough_3_2",
+    -0.5
+   ],
+   [
+    "RideThrough_3_3",
+    -0.5
+   ],
+   [
+    "RideThrough_3_4",
+    -0.5
+   ],
+   [
+    "EL_Bus3",
+    0.29999999999999993
+   ],
+   [
+    "NaK U2 Supply_A210",
+    0.3103072496471727
+   ],
+   [
+    "NaK U2 Return_B330",
+    0.3103072496471745
+   ]
+  ],
+  "flight": {
+   "item": "Turbo-alternator-compressor",
+   "swept_radius_m": 0.55,
+   "route_r": 2.9,
+   "route": [
+    [
+     -92.7,
+     -5.327213576290986e-16,
+     -2.9
+    ],
+    [
+     93.5,
+     -5.327213576290986e-16,
+     -2.9
+    ]
+   ],
+   "nearest": [
+    [
+     "Switchgear_3",
+     0.15000000000000002
+    ],
+    [
+     "Dry_Store_M1_S2_",
+     0.3628440463082441
+    ],
+    [
+     "Dry_Store_M1_S2_",
+     0.3628440463082441
+    ],
+    [
+     "Dry_Store_M2_S2_",
+     0.3628440463082441
+    ],
+    [
+     "Dry_Store_M2_S2_",
+     0.3628440463082441
+    ],
+    [
+     "Dry_Store_M3_S2_",
+     0.3628440463082441
+    ],
+    [
+     "Dry_Store_M3_S2_",
+     0.3628440463082441
+    ],
+    [
+     "Dry_Store_M4_S2_",
+     0.3628440463082441
+    ]
+   ],
+   "clear": true
+  },
+  "yard": {
+   "item": "Reactor + IHX envelope",
+   "swept_radius_m": 0.85,
+   "route_r": 3.6,
+   "remove_first": [
+    "RideThrough_3_1",
+    "RideThrough_3_2",
+    "RideThrough_3_3",
+    "RideThrough_3_4",
+    "Switchgear_3"
+   ],
+   "rule": "the yard route for the reactor/IHX (and shield) runs on the lane centre r 3.6 after the sector-3 lane equipment listed is unbolted"
+  },
+  "rail": {
+   "single_rail_clear_to_bus3_m": -0.040000000000000174,
+   "twin_rail_clear_to_bus3_m": 0.9743104620685535,
+   "layout": "twin rails at az 255 and 285, r 4.6, 22 kg/m each",
+   "rail_t": 8.1928,
+   "supports": "rail chairs every 2.0 m onto the body-bay ring frames and keel longerons (PSA), 94 per rail",
+   "chair_load_kN": 105.14889889414803
+  },
+  "fixtures": [
+   {
+    "id": "MIF-A",
+    "name": "heavy fixture adapter (reactor/IHX, TAC, gas ducts)",
+    "interface": "four kinematic latch points (two cone, two flat) + two shear pins on the equipment mount ring; the same pattern on the carriage cradle",
+    "mass_t": 0.8
+   },
+   {
+    "id": "MIF-B",
+    "name": "ORU fixture (recuperator, gas cooler, cabinets)",
+    "interface": "LOG-G1 grapple pattern (<= 3 t, robot)",
+    "mass_t": 0.0
+   },
+   {
+    "id": "MIF-C",
+    "name": "module-10 container cradle",
+    "interface": "dry-store rack rails, cargo restraint pins",
+    "mass_t": 0.3
+   }
+  ],
+  "sequence": [
+   "shutdown, decay and radiation hold (weeks for the reactor/IHX: shutdown gamma, Phase III); crew outside line of sight",
+   "carriage parks at the unit, cradle aligned by optical targets; equipment mount latches released one pair at a time while the cradle latches close (capture before release: the item is never free)",
+   "jacking rails slide the item from its mount onto the cradle (0.05 m/s)",
+   "carriage moves at 5 cm/s on the twin rails, coast only; robot supervision from the hub consoles (data A/B), two independent brakes",
+   "workshop transfer: cradle-to-stand latch exchange (capture before release)"
+  ],
+  "burn": {
+   "rule": "moves only in coast; parks and locks to the frame before a burn (0.2-0.74 g would put 40-160 kN on the rail)",
+   "restraint": "two park stations (district, workshop) with four shear-pin locks each; rated 315 kN axial at 0.74 g x 1.5",
+   "mass_t": 0.6
+  },
+  "recovery": [
+   "brake fault: the second brake holds; the carriage is winched to the nearest park station",
+   "latch fault: manual override from the cradle face (EVA-suited crew only after the radiation hold)",
+   "jammed load: the item is lashed in place and the ship flies with it restrained (no burn until locked)",
+   "loss of supervision link: carriage stops (dead-man), restraint pins drop"
+  ],
+  "decay": {
+   "unit_MWt": 22.727272727272727,
+   "t_1h_W": 291629.03374403075,
+   "t_1d_W": 154450.21264185297,
+   "t_30d_W": 78228.36611329744,
+   "note": "Way-Wigner decay heat (0.066 t^-0.2) on a long-run core: tens of kW after a month; the reactor/IHX needs active cooling during and after any move, so its replacement is a yard operation"
+  },
+  "external": {
+   "item": "H6a EM pump modules (7.5 t, outside the hull at the aft manifold)",
+   "interface": "EXT-TA: provisional external transfer arm on a short rail at the drive-bay hatch (two-joint luffing arm, 8 t at 6 m, PROTOTYPE, registered under FT-07)",
+   "mass_t": 2.5,
+   "note": "handled only in coast with the HOT loop drained at that section; the hatch is the existing drive-bay hatch (OPEN in production)"
+  },
+  "rating_t": 24.68738049703734,
+  "route_m": 186.2,
+  "in_flight": [
+   "Turbo-alternator-compressor",
+   "Recuperator (4 cores)",
+   "Gas cooler / L2 header manifold (3 cores)",
+   "Rectifier + unit switchgear (3 cabinets)",
+   "I&C and protection cabinet",
+   "Restart pack R1b",
+   "Gas ducts (hot leg, return) around the shield"
+  ],
+  "yard_items": [
+   "Reactor + IHX envelope",
+   "Shadow shield (LiH-W) envelope",
+   "Mount ring + struts"
+  ],
+  "claim": "The carriage can move the reactor/IHX mass, but in-flight reactor servicing is NOT claimed: decay heat, activation and shutdown gamma make it a yard operation; in flight the carriage serves the TAC (after a decay hold, restricted), and the ORU-class parts",
+  "mass_t": {
+   "fixtures": 1.1,
+   "second_rail": 4.0964,
+   "burn_restraint": 0.6,
+   "ext_arm": 2.5
+  }
+ },
+ "module10": {
+  "x": [
+   22.25,
+   33.25
+  ],
+  "offset_m": 112.0,
+  "containers": 6,
+  "clearance_m": 0.6881373746196755,
+  "buffer_shift_m": 3.049999999999997,
+  "standard": [
+   {
+    "interface": "structural frame",
+    "what": "two ring frames at the module ends (PSA), four rack longerons per sector; the module repeats the body-bay frame pitch (module length 11.0 m)",
+    "owner": "PSA (frames, longerons) / ISSA (rack brackets)"
+   },
+   {
+    "interface": "equipment mounting",
+    "what": "dry-store racks on the longerons, same rack as modules 1-9",
+    "owner": "ISSA"
+   },
+   {
+    "interface": "utilities",
+    "what": "lighting, data A/B drops, 120 V service power from the sector bus; no fluids",
+    "owner": "ISSA"
+   },
+   {
+    "interface": "cargo restraints",
+    "what": "rack rails + restraint pins rated for 0.74 g x 1.5 axial",
+    "owner": "ISSA"
+   },
+   {
+    "interface": "robotic handling",
+    "what": "keel-lane manipulators (az 30/150/270) reach every container face",
+    "owner": "ISSA"
+   },
+   {
+    "interface": "maintenance access",
+    "what": "keel lanes are the access aisles (item-level picking, soft bags <= 0.70 m)",
+    "owner": "ISSA"
+   }
+  ],
+  "removal": {
+   "in_flight": "item-level: containers stay; goods leave through the keel lanes to the hub (LOG-G1 rule: no container crosses a rotary seal)",
+   "yard_container": "container-level exchange is a yard operation along the sector",
+   "yard_blocked_by": [
+    {
+     "buffer": "DefenseBuffer_1",
+     "x": [
+      33.65,
+      36.449999999999996
+     ]
+    },
+    {
+     "buffer": "DefenseBuffer_2",
+     "x": [
+      36.85,
+      39.65
+     ]
+    },
+    {
+     "buffer": "DefenseBuffer_3",
+     "x": [
+      40.05,
+      42.849999999999994
+     ]
+    },
+    {
+     "buffer": "DefenseBuffer_4",
+     "x": [
+      43.25,
+      46.05
+     ]
+    }
+   ],
+   "finding": "the az-90 column cannot slide forward out of module 10: the retained defense buffers (4) occupy its sector at r 3.1-4.5; the az-210/330 columns are clear. Yard extraction of the az-90 column goes aft through modules 1-9 (empty them first) or the buffers are lowered to r 4.6-5.5 (option DR-C-05)"
+  },
+  "ownership": {
+   "dry_store": "6 existing production containers (269 m3): MOVED, their mass stays in the historical dry mass and the mission payload",
+   "racks": "4.0 t of new racks (ISSA, new)",
+   "frame": "module 10 frames and longerons: PSA (OPEN)",
+   "log_g1": "LOG-G1 is a different system (8 x 3 t in the hub store, tare 4.81 t in the ledger): not duplicated"
+  }
+ },
+ "ledger": {
+  "rows": [
+   {
+    "item": "L1 (derived)",
+    "t": 70.0,
+    "cat": "NEW",
+    "owner": "ISSA",
+    "cls": "FT-04 (CONDITIONAL)",
+    "note": ""
+   },
+   {
+    "item": "L3",
+    "t": 12.0,
+    "cat": "NEW",
+    "owner": "ISSA",
+    "cls": "NEW",
+    "note": ""
+   },
+   {
+    "item": "storage (buffer + restart)",
+    "t": 21.5,
+    "cat": "NEW",
+    "owner": "ISSA",
+    "cls": "NEW",
+    "note": ""
+   },
+   {
+    "item": "distribution",
+    "t": 8.0,
+    "cat": "NEW",
+    "owner": "ISSA",
+    "cls": "NEW",
+    "note": ""
+   },
+   {
+    "item": "scatter allowance (OPEN)",
+    "t": 3.0,
+    "cat": "NEW",
+    "owner": "ISSA",
+    "cls": "NEW (OPEN)",
+    "note": ""
+   },
+   {
+    "item": "ECLSS modular increment",
+    "t": 4.800000000000001,
+    "cat": "NEW",
+    "owner": "ISSA",
+    "cls": "NEW",
+    "note": ""
+   },
+   {
+    "item": "bulkhead relocation",
+    "t": 2.0,
+    "cat": "HISTORICAL (moved)",
+    "owner": "ISSA thermal",
+    "cls": "EXISTING (moved)",
+    "note": ""
+   },
+   {
+    "item": "LOG-G1 tare (3 t containers, 12 months)",
+    "t": 4.807860357015053,
+    "cat": "NEW",
+    "owner": "ISSA logistics",
+    "cls": "NEW (V-G tare)",
+    "note": "payload is mission payload, not dry mass"
+   },
+   {
+    "item": "L2 (3 x 3.5 MWe, FT-03 1500 K inlet) (restart packs moved to the storage line)",
+    "t": 284.13635002784906,
+    "cat": "NEW",
+    "owner": "ISSA power",
+    "cls": "FT-03 (APPROVED)",
+    "note": "-6.44 t: the 3 restart packs were in both lines"
+   },
+   {
+    "item": "L2 sections 950 K cross-strapped + dual headers",
+    "t": 7.311025602664686,
+    "cat": "NEW",
+    "owner": "ISSA",
+    "cls": "FT-03 (APPROVED)",
+    "note": ""
+   },
+   {
+    "item": "hot loop H6a",
+    "t": 565.1967819858065,
+    "cat": "NEW",
+    "owner": "ISSA",
+    "cls": "FT-01/FT-02",
+    "note": ""
+   },
+   {
+    "item": "L2 NaK transport loops + pumps (Stage E)",
+    "t": 46.69641381738595,
+    "cat": "NEW",
+    "owner": "ISSA",
+    "cls": "FT-03 (APPROVED), NEW line",
+    "note": ""
+   },
+   {
+    "item": "L2 section hardware above the Phase VI header line (Stage E)",
+    "t": 31.688394230366477,
+    "cat": "NEW",
+    "owner": "ISSA",
+    "cls": "FT-03 / FT-06",
+    "note": ""
+   },
+   {
+    "item": "distribution above the Phase VI line (Stage F)",
+    "t": 0.0,
+    "cat": "NEW",
+    "owner": "ISSA",
+    "cls": "NEW",
+    "note": ""
+   },
+   {
+    "item": "robots, crawlers, MRU carriage + rail (Stage H)",
+    "t": 10.610128489466721,
+    "cat": "NEW",
+    "owner": "ISSA MRO",
+    "cls": "FT-07 (APPROVED), NEW",
+    "note": ""
+   },
+   {
+    "item": "body-bay module 10 racks (relocated dry store, Stage H)",
+    "t": 4.0,
+    "cat": "NEW",
+    "owner": "ISSA",
+    "cls": "NEW (PROTOTYPE)",
+    "note": ""
+   },
+   {
+    "item": "cryocooler stations (final T-A, increment over the existing coolers)",
+    "t": 6.3962282517328175,
+    "cat": "REPLACEMENT",
+    "owner": "ISSA cryo",
+    "cls": "NEW (PROTOTYPE)",
+    "note": "new 12.3 t replaces the existing 5.9 t (historical dry mass)"
+   },
+   {
+    "item": "HOT forward-pointing fin manifolds (DR-3D-04)",
+    "t": 17.879208593459555,
+    "cat": "NEW",
+    "owner": "ISSA thermal",
+    "cls": "FT-06 (APPROVED)",
+    "note": ""
+   },
+   {
+    "item": "LOW forward tip extensions (3 blades)",
+    "t": 7.164449999999999,
+    "cat": "NEW",
+    "owner": "ISSA thermal",
+    "cls": "NEW (PROTOTYPE)",
+    "note": ""
+   },
+   {
+    "item": "WARM pump upgrade (451 K, +mass flow)",
+    "t": 0.15,
+    "cat": "NEW",
+    "owner": "ISSA thermal",
+    "cls": "NEW (PROTOTYPE)",
+    "note": ""
+   },
+   {
+    "item": "MRU fixtures (MIF-A/C)",
+    "t": 1.1,
+    "cat": "NEW",
+    "owner": "ISSA MRO",
+    "cls": "FT-07 (APPROVED)",
+    "note": ""
+   },
+   {
+    "item": "MRU second rail (twin rails clear of bus 3)",
+    "t": 4.0964,
+    "cat": "NEW",
+    "owner": "ISSA MRO",
+    "cls": "FT-07 (APPROVED)",
+    "note": ""
+   },
+   {
+    "item": "MRU burn restraints (two park stations)",
+    "t": 0.6,
+    "cat": "NEW",
+    "owner": "ISSA MRO",
+    "cls": "FT-07 (APPROVED)",
+    "note": ""
+   },
+   {
+    "item": "EXT-TA external transfer arm (H6a EM pumps)",
+    "t": 2.5,
+    "cat": "NEW",
+    "owner": "ISSA MRO",
+    "cls": "FT-07 (PROVISIONAL)",
+    "note": ""
+   },
+   {
+    "item": "L1 conductors resized for the reactive peak",
+    "t": 0.0,
+    "cat": "NEW",
+    "owner": "ISSA electrical",
+    "cls": "within the 8 t distribution line",
+    "note": "inside the existing line"
+   }
+  ],
+  "payload": [
+   {
+    "item": "ECLSS emergency CO2 reserve (LiOH, 30 d for 4 persons)",
+    "t": 0.16,
+    "cat": "MISSION PAYLOAD"
+   }
+  ],
+  "dry_added_t": 1115.6332413557468,
+  "dry_with_payload_t": 1115.7932413557469,
+  "departure_t": 8654.596467286447,
+  "propellant_t": 5468.350631244087,
+  "tankage_t": 730.252594686613,
+  "end_t": 3186.2458360423598,
+  "coolant": {
+   "NaK_t": 27.486516103610224,
+   "note": "NaK transport inventory (inside the loop line); Li of the H6a inside the 565 t H6a line; WARM water and LOW ammonia inside the production radiators"
+  }
+ },
+ "cp4": {
+  "departure_t": 8572.660234446545,
+  "propellant_t": 5416.5797540847125,
+  "dry_added_t": 1093.393517249125,
+  "tankage_t": 722.4869631127069,
+  "ship_length_m": 307.7092611234396,
+  "farm_added_m": 18.209261123439585
+ },
+ "registry": [
+  [
+   "PWR-L2U",
+   "M3",
+   "M3"
+  ],
+  [
+   "PWR-DIST",
+   "M2",
+   "M2"
+  ],
+  [
+   "TH-H6A",
+   "M2",
+   "M2"
+  ],
+  [
+   "TH-H6A-AFT",
+   "M3",
+   "M3"
+  ],
+  [
+   "RAD-HOT",
+   "M2",
+   "M2 (forward fins drawn)"
+  ],
+  [
+   "RAD-L2",
+   "M3",
+   "M3"
+  ],
+  [
+   "RAD-WL",
+   "M2",
+   "M2 (451 K WARM, LOW tabs drawn)"
+  ],
+  [
+   "EPS-L1",
+   "M2",
+   "M2 (peak-rated)"
+  ],
+  [
+   "EPS-BUS",
+   "M2",
+   "M2"
+  ],
+  [
+   "EPS-STOR",
+   "M2",
+   "M2"
+  ],
+  [
+   "ECLSS-RING",
+   "M2",
+   "M2"
+  ],
+  [
+   "ECLSS-HUB",
+   "M3",
+   "M3"
+  ],
+  [
+   "LOG-G1",
+   "M3",
+   "M3"
+  ],
+  [
+   "MRO-WS",
+   "M2",
+   "M2"
+  ],
+  [
+   "MRO-ROB",
+   "M2",
+   "M2 (MRU architecture, EXT-TA)"
+  ],
+  [
+   "PROP-FARM",
+   "M2",
+   "M2 (final T-A)"
+  ],
+  [
+   "PROP-CRYO",
+   "M2",
+   "M2 (final T-A)"
+  ],
+  [
+   "GNC-CDH",
+   "M1",
+   "M1"
+  ],
+  [
+   "STRUCT-F1",
+   "M2",
+   "M2 (interfaces to PSA)"
+  ]
+ ],
+ "problems": [
+  {
+   "id": "C-01",
+   "sev": "OPEN",
+   "what": "L1 pickup fault in a burn forces a controlled drive shutdown (H6a pumps exceed the L2 surplus)",
+   "owner": "owner / Track R"
+  },
+  {
+   "id": "C-02",
+   "sev": "OPEN",
+   "what": "WARM machinery at 451 K: power electronics on the WARM loop need ~200 C junction parts (SiC/GaN class)",
+   "owner": "ISSA (next detail)"
+  },
+  {
+   "id": "C-03",
+   "sev": "OPEN",
+   "what": "az-90 dry-store column cannot slide forward past the retained defense buffers (yard extraction aft or DR-C-05)",
+   "owner": "owner"
+  },
+  {
+   "id": "C-04",
+   "sev": "OPEN",
+   "what": "primary structure mass, frames and limit loads: PSA (not in this ledger)",
+   "owner": "PSA"
+  },
+  {
+   "id": "C-05",
+   "sev": "OPEN",
+   "what": "shielding: the OpenMC surrogate gives a sensitivity only; no crew dose or shielding approval",
+   "owner": "Track R"
+  },
+  {
+   "id": "C-06",
+   "sev": "OPEN",
+   "what": "EXT-TA external arm and the drive-bay hatch are provisional (FT-07 register note)",
+   "owner": "owner"
+  },
+  {
+   "id": "C-07",
+   "sev": "MITIGATED",
+   "what": "NaK loop loss: safe degraded state at ~7 MWe, highest demand band sheds 1.2 MW",
+   "owner": "ISSA"
+  },
+  {
+   "id": "C-08",
+   "sev": "MITIGATED",
+   "what": "ECLSS compound case (ring A + B unit + hub unit): 30-day CO2 reserve, no eighth unit",
+   "owner": "ISSA"
+  },
+  {
+   "id": "C-09",
+   "sev": "OPEN",
+   "what": "TAC / EM-pump excitation bands are PROTOTYPE estimates for PSA modal work",
+   "owner": "ISSA/PSA"
+  },
+  {
+   "id": "C-10",
+   "sev": "CLOSED",
+   "what": "restart packs were counted in both the L2 and the storage lines (-6.45 t)",
+   "owner": "ISSA"
+  }
+ ],
+ "readiness": [
+  {
+   "area": "geometry (fictional development model)",
+   "state": "READY for coordinated integration",
+   "note": "all 19 systems at target maturity; review file regenerated"
+  },
+  {
+   "area": "mass",
+   "state": "READY (ISSA side)",
+   "note": "one owner per item; structure and shielding OPEN"
+  },
+  {
+   "area": "structure",
+   "state": "WAITING on PSA Phase II",
+   "note": "SSI-1.0 handed over; reactions and stiffness come back from PSA"
+  },
+  {
+   "area": "thermal",
+   "state": "READY with C-02",
+   "note": "every zone closes; HOT reserve positive at the reactive peak"
+  },
+  {
+   "area": "electrical",
+   "state": "READY with C-01",
+   "note": "peak-rated L1; pickup-fault doctrine stated"
+  },
+  {
+   "area": "canon / Drive",
+   "state": "NOT STARTED (not authorized)",
+   "note": "nothing written to Drive; production ship unchanged"
+  },
+  {
+   "area": "production generators",
+   "state": "NOT STARTED",
+   "note": "integration into src/ after owner review and PSA Phase II"
+  }
+ ],
+ "owner_questions": [
+  {
+   "id": "DR-C-01",
+   "q": "Accept WARM at 451 K (temperature redistribution) instead of new WARM area?",
+   "rec": "yes: the only closure that keeps HOT at the reactive peak"
+  },
+  {
+   "id": "DR-C-02",
+   "q": "Accept the LOW forward tip extensions beside the rings (r 31.5-37)?",
+   "rec": "yes"
+  },
+  {
+   "id": "DR-C-03",
+   "q": "Accept the pickup-fault doctrine (controlled drive shutdown)?",
+   "rec": "yes for F1; Track R keeps it OPEN"
+  },
+  {
+   "id": "DR-C-04",
+   "q": "Register EXT-TA as a provisional FT-07 item?",
+   "rec": "yes"
+  },
+  {
+   "id": "DR-C-05",
+   "q": "Lower the defense buffers to r 4.6-5.5 so the az-90 dry-store column can slide forward?",
+   "rec": "yes, at the next detail pass"
+  }
+ ]
+}

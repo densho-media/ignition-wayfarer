@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 330" font-family="Inter,system-ui,sans-serif" font-size="11" role="img" aria-label="Transverse sections">
+<style>.t{fill:var(--fg,#223)} .m{fill:var(--muted,#667)}</style>
+<text x="14" y="18" class="t" font-weight="600">Transverse sections looking forward (y right, z up; casing r 6, blades at 90/210/330)</text>
+<text x="30" y="45" class="t">x -84: L2 district</text>
+<circle cx="140" cy="175" r="75" fill="none" stroke="#999"/>
+<line x1="140" y1="94" x2="140" y2="56" stroke="#e0553a" stroke-width="3"/>
+<line x1="70" y1="216" x2="37" y2="234" stroke="#e0553a" stroke-width="3"/>
+<line x1="210" y1="216" x2="243" y2="234" stroke="#e0553a" stroke-width="3"/>
+<circle cx="194" cy="144" r="3.1" fill="#3a8fd0"/>
+<circle cx="86" cy="144" r="3.1" fill="#3a8fd0"/>
+<circle cx="140" cy="238" r="3.1" fill="#3a8fd0"/>
+<circle cx="198" cy="175" r="3" fill="#2fa36b"/>
+<circle cx="82" cy="175" r="3" fill="#2fa36b"/>
+<rect x="122" y="228" width="6" height="6" fill="#c9852a"/>
+<rect x="152" y="228" width="6" height="6" fill="#c9852a"/>
+<circle cx="140" cy="220" r="11" fill="none" stroke="#c9852a" stroke-dasharray="3 2"/>
+<circle cx="140" cy="139" r="10" fill="#e07b3a" fill-opacity="0.5"/>
+<circle cx="109" cy="193" r="10" fill="#e07b3a" fill-opacity="0.5"/>
+<circle cx="171" cy="193" r="10" fill="#e07b3a" fill-opacity="0.5"/>
+<polygon points="158,156 158,121 122,121 122,156" fill="#5aa0b8" fill-opacity="0.35" stroke="#5aa0b8"/>
+<polygon points="115,169 85,187 102,217 133,200" fill="#5aa0b8" fill-opacity="0.35" stroke="#5aa0b8"/>
+<polygon points="147,200 178,217 195,187 165,169" fill="#5aa0b8" fill-opacity="0.35" stroke="#5aa0b8"/>
+<circle cx="211" cy="162" r="1.4" fill="#f08a2a"/>
+<circle cx="187" cy="119" r="1.4" fill="#f08a2a"/>
+<circle cx="93" cy="119" r="1.4" fill="#f08a2a"/>
+<circle cx="69" cy="162" r="1.4" fill="#f08a2a"/>
+<circle cx="115" cy="243" r="1.4" fill="#f08a2a"/>
+<circle cx="165" cy="243" r="1.4" fill="#f08a2a"/>
+<text x="300" y="45" class="t">x 28: module 10</text>
+<circle cx="410" cy="175" r="75" fill="none" stroke="#999"/>
+<line x1="410" y1="94" x2="410" y2="56" stroke="#e0553a" stroke-width="3"/>
+<line x1="340" y1="216" x2="307" y2="234" stroke="#e0553a" stroke-width="3"/>
+<line x1="480" y1="216" x2="513" y2="234" stroke="#e0553a" stroke-width="3"/>
+<circle cx="464" cy="144" r="3.1" fill="#3a8fd0"/>
+<circle cx="356" cy="144" r="3.1" fill="#3a8fd0"/>
+<circle cx="410" cy="238" r="3.1" fill="#3a8fd0"/>
+<circle cx="468" cy="175" r="3" fill="#2fa36b"/>
+<circle cx="352" cy="175" r="3" fill="#2fa36b"/>
+<rect x="392" y="228" width="6" height="6" fill="#c9852a"/>
+<rect x="422" y="228" width="6" height="6" fill="#c9852a"/>
+<circle cx="410" cy="220" r="11" fill="none" stroke="#c9852a" stroke-dasharray="3 2"/>
+<polygon points="428,156 428,121 392,121 392,156" fill="#5aa0b8" fill-opacity="0.35" stroke="#5aa0b8"/>
+<polygon points="385,169 355,187 372,217 403,200" fill="#5aa0b8" fill-opacity="0.35" stroke="#5aa0b8"/>
+<polygon points="417,200 448,217 465,187 435,169" fill="#5aa0b8" fill-opacity="0.35" stroke="#5aa0b8"/>
+<circle cx="481" cy="162" r="1.4" fill="#f08a2a"/>
+<circle cx="457" cy="119" r="1.4" fill="#f08a2a"/>
+<circle cx="363" cy="119" r="1.4" fill="#f08a2a"/>
+<circle cx="339" cy="162" r="1.4" fill="#f08a2a"/>
+<circle cx="385" cy="243" r="1.4" fill="#f08a2a"/>
+<circle cx="435" cy="243" r="1.4" fill="#f08a2a"/>
+<text x="570" y="45" class="t">x 60: WARM</text>
+<circle cx="680" cy="175" r="75" fill="none" stroke="#999"/>
+<line x1="680" y1="94" x2="680" y2="56" stroke="#e0553a" stroke-width="3"/>
+<line x1="610" y1="216" x2="577" y2="234" stroke="#e0553a" stroke-width="3"/>
+<line x1="750" y1="216" x2="783" y2="234" stroke="#e0553a" stroke-width="3"/>
+<circle cx="734" cy="144" r="3.1" fill="#3a8fd0"/>
+<circle cx="626" cy="144" r="3.1" fill="#3a8fd0"/>
+<circle cx="680" cy="238" r="3.1" fill="#3a8fd0"/>
+<circle cx="738" cy="175" r="3" fill="#2fa36b"/>
+<circle cx="622" cy="175" r="3" fill="#2fa36b"/>
+<rect x="662" y="228" width="6" height="6" fill="#c9852a"/>
+<rect x="692" y="228" width="6" height="6" fill="#c9852a"/>
+<circle cx="680" cy="220" r="11" fill="none" stroke="#c9852a" stroke-dasharray="3 2"/>
+<circle cx="751" cy="162" r="1.4" fill="#f08a2a"/>
+<circle cx="727" cy="119" r="1.4" fill="#f08a2a"/>
+<circle cx="633" cy="119" r="1.4" fill="#f08a2a"/>
+<circle cx="609" cy="162" r="1.4" fill="#f08a2a"/>
+<circle cx="655" cy="243" r="1.4" fill="#f08a2a"/>
+<circle cx="705" cy="243" r="1.4" fill="#f08a2a"/>
+<text x="840" y="45" class="t">x 125: farm</text>
+<circle cx="1049" cy="164" r="23" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="983" cy="81" r="23" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="931" cy="77" r="23" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="884" cy="100" r="23" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="851" cy="165" r="23" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="883" cy="249" r="23" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="929" cy="273" r="23" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="991" cy="266" r="23" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="1041" cy="216" r="23" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="947" cy="127" r="20" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="908" cy="151" r="20" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="953" cy="223" r="20" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="998" cy="178" r="20" fill="#8a6fd8" fill-opacity="0.3" stroke="#8a6fd8"/>
+<circle cx="950" cy="175" r="162" fill="none" stroke="#999" stroke-dasharray="4 3"/>
+<text x="14" y="318" class="m">Red: blade roots; blue dots: sector buses r 5; green: data A/B; orange: NaK loops r 5.8; amber squares: MRU twin rails; dashed amber: swept tube of the largest MRU item (r 0.85 m); teal: dry store; violet: farm vessels.</text>
+</svg>

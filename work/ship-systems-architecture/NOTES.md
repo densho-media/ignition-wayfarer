@@ -77,7 +77,7 @@ shadow; hot-loop pumps; channel refill time; unit restart energy; Brayton degrad
 
 **Function.** Build the F1 reference (WF-F1-P6.0, FT-03 1500 K approved as fiction) in 3D, stage by stage (A masterplan .. I remaining),
 maturity M0-M4 (most systems to M2, selected M3), checkpoints 1-4 committed separately; F0 and Track R stay comparisons; production unchanged.
-Code and config in `integration3d/` (`f1_integration.toml` = registry and zones). Run order after Phase VI: `integration3d/tanks3d.py`, `power_unit.py`, `radiators3d.py`, `h6a3d.py`, `radiators3d.py` again, `electrical3d.py`, `systems3d.py`,
+Code and config in `integration3d/` (`f1_integration.toml` = registry and zones). Run order after Phase VI: `integration3d/tanks3d.py`, `power_unit.py`, `radiators3d.py`, `h6a3d.py`, `radiators3d.py` again, `electrical3d.py`, `systems3d.py`, `consolidate.py`,
 `integration3d/masterplan.py`, `ledger3d.py`, then `/snap/bin/blender -b assets/wayfarer/WF_WAYFARER_001.blend --python integration3d/make_review_i3d.py -- --render`,
 then `build_report.py`.
 **Checkpoint 1 (A + B + registry).** Masterplan: production zones from the pure modules, F1 zones from `phase6.json`, keep-outs, live ledger
@@ -166,3 +166,17 @@ unit nominal (4.9 at the high band): study basis 3 x 3.5 MWe, strategy C. CIRC-0
 (reference departure ~4,573 t coupled). ECLSS needs 7 units for ring loss + unit failure. N2-R4a ~855 t dry (~360 t without transport),
 +3.1 kt departure; the 283 t Phase III figure is withdrawn. Owner: DR4-01..09.
 
+
+## Consolidation WF-F1-C1.0 (2026-11-28)
+
+Owner brief 2026-11-28 09:15Z: the 19 systems are the working fictional architecture; consolidate instead of researching. `integration3d/consolidate.py`
+iterates dry mass, coupled propellant, the T-A stretch, cryo and radiators to one configuration (`results/i3d_consolidated.json`) and writes the
+systems-to-structure interface SSI-1.0 (`results/i3d_structure_interface.json`) for PSA. Departure 8,655 t (CP4 8,573; the owner's
+~8,671 t is a reference, not a target), propellant 5,468 t, T-A +20.70 m (CP1 18.21), ship 310.2 m.
+DR-3D-01..04 implemented (FT-03 and FT-06 in the register v1.1, FT-07 MRU rating and provisional EXT-TA arm). WARM closes at 451 K on
+its existing area; LOW gets forward tip extensions x 93.4-106.5, r 31.5-37 (the ring sweep limits them to 13 m) and runs at
+316 K; HOT is not spent (aft shift would leave -0.54 GW at the reactive peak). The brief's LOW +76 kW was understated: CP4 mixed the cryo
+input bases (934 kW installed vs 776 kW mixed); corrected need is 1.2 x (avionics + cryo reject). MRU: in-flight route r 2.9 clears everything
+for the TAC; the reactor/IHX is a shipyard job after unbolting the sector-3 ride-through units and switchgear; twin rails az 255/285. Module 10
+cannot slide forward past the retained buffers (yard extraction aft, or DR-C-05). Review view layers C1-C8 in `REVIEW_I3D.blend`; page
+sections c0-c6. Owner questions DR-C-01..05; problems C-01..C-10; SSI disagreements SSI-D1..D3 stay with PSA.

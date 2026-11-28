@@ -62,7 +62,7 @@ def build():
                        + table(['Item', 't', 'Class'], [[E(r['item']), f'{r["t"]:.1f}', E(r['cls'])] for r in L['items']]
                                + [['Propellant', f'{L["propellant_t"]:,.0f}', 'coupled'], ['Added tankage', f'{L["tankage_t"]:,.0f}', 'coupled'],
                                   ['<b>Departure</b>', f'<b>{L["departure_t"]:,.0f}</b>', E(L['note'])]])))
-    return '\n'.join(out)+build_cp2()+build_cp3()+build_cp4()+build_ledger()
+    return build_consolidation()+'\n'.join(out)+build_cp2()+build_cp3()+build_cp4()+build_ledger()
 
 
 def build_cp2():
@@ -205,4 +205,159 @@ def build_cp4():
                        + '<h3>GNC / C&amp;DH placeholders</h3>' + table(['Block', 'Level'], gn)
                        + f'<p class="fn">{E(RM["structure"]["note"])}.</p>'
                        + '<h3>Findings</h3><ul>' + ''.join(f'<li>{E(f)}</li>' for f in RM['findings']) + '</ul>'))
+    return '\n'.join(out)
+
+
+def build_consolidation():
+    if not (R/'i3d_consolidated.json').exists():
+        return ''
+    C = json.loads((R/'i3d_consolidated.json').read_text()); S = json.loads((R/'i3d_structure_interface.json').read_text())
+    T = C['tanks']; RA = C['radiators']; P = RA['preferred']; L = C['ledger']; CR = C['cryo']; EL = C['electrical']; LF = C['l2_failure']; EC = C['eclss']
+    MR = C['mru']; M10 = C['module10']; cp4 = C['cp4']; out = []
+    f0 = lambda v, d=0: f'{v:,.{d}f}'
+    dec = [[E(d['id']), E(d['what']), E(d['state'])] for d in C['decisions']]
+    cmp_ = [['Departure mass (t)', f0(cp4['departure_t']), f0(L['departure_t']), f'{L["departure_t"]-cp4["departure_t"]:+,.0f}'],
+            ['Propellant (t)', f0(cp4['propellant_t']), f0(L['propellant_t']), f'{L["propellant_t"]-cp4["propellant_t"]:+,.0f}'],
+            ['Added tankage (t)', f0(cp4['tankage_t']), f0(L['tankage_t']), f'{L["tankage_t"]-cp4["tankage_t"]:+,.0f}'],
+            ['Dry additions over the historical ship (t)', f0(cp4['dry_added_t'], 1), f0(L['dry_added_t'], 1), f'{L["dry_added_t"]-cp4["dry_added_t"]:+,.1f}'],
+            ['Farm stretch (m)', f'{cp4["farm_added_m"]:.2f}', f'{T["added_length_m"]:.2f}', f'{T["added_length_m"]-cp4["farm_added_m"]:+.2f}'],
+            ['Ship length (m)', f'{cp4["ship_length_m"]:.1f}', f'{T["ship_length_m"]:.1f}', f'{T["ship_length_m"]-cp4["ship_length_m"]:+.1f}'],
+            ['WARM / LOW', 'short 496 / 76 kW (pending)', f'closed: WARM {P["T_warm_K"]:.0f} K; LOW tabs {P["low_tab_length_m"]:.1f} m + {P["T_low_K"]:.0f} K', ''],
+            ['HOT fins', 'aft-pointing halves (-0.77 GW in burns)', f'forward-pointing, {RA["fins"]["manifolds_per_blade"]} manifolds per blade', ''],
+            ['L1 continuous / reactive peak (MW)', '14.3 / 93.5', f'{EL["continuous_W"]/1e6:.1f} / {EL["reactive_W"]/1e6:.1f}', 'proactive heat-pump duty retired']]
+    rd = [[E(r['area']), E(r['state']), E(r['note'])] for r in C['readiness']]
+    out.append(section('c0', 'Consolidation', 'ISSA consolidation: one fictional working configuration, WF-F1-C1.0',
+                       f'<p>The owner accepted the 19 developed systems (2026-11-28 09:15Z) and asked for consolidation rather than another research phase. This section '
+                       f'implements the owner decisions, closes the radiator shortfalls, develops the heavy maintenance transport, reconciles electrical, cryogenic and '
+                       f'mass accounting and hands a versioned interface to the primary-structure work (PSA). Nominal departure <b>{L["departure_t"]:,.0f} t</b> '
+                       f'(owner indicative ~8,671 t, not forced). Production ship unchanged; nothing written to Drive; Track R findings below stay as published evidence.</p>'
+                       + '<h3>Implemented owner decisions</h3>' + table(['Id', 'Decision', 'State'], dec)
+                       + '<h3>Comparison with Checkpoint 4</h3>' + table(['Quantity', 'Checkpoint 4', 'WF-F1-C1.0', 'Change'], cmp_)
+                       + img('cam_i3d_x_ship', 'Consolidated ship', 'WF-F1-C1.0 whole ship: final T-A farm and translated Brow envelope, HOT manifolds, LOW tip extensions, '
+                             'and every 3D-integration assembly.')
+                       + svg('i3d_c_longitudinal.svg') + img('cam_i3d_x_long', 'Longitudinal section', 'Longitudinal section at the y = 0 plane (Blender).')
+                       + svg('i3d_c_transverse.svg')
+                       + img('cam_i3d_x_m84', 'Section at x -84', 'Transverse slab looking forward from x -84 (power district).')
+                       + img('cam_i3d_x_p28', 'Section at x 27.75', 'Transverse slab looking forward from x 27.75 (body-bay module 10).')
+                       + img('cam_i3d_x_p60', 'Section at x 60', 'Transverse slab looking forward from x 60 (WARM section and blades).')
+                       + '<h3>Production-integration readiness</h3>' + table(['Area', 'State', 'Note'], rd)))
+    # radiators
+    op = [[E(o['id']), E(o['name']), f'{o["hot_cost_W"]/1e9:.2f}' if o.get('hot_cost_W') is not None else '–', E(o['geometry']), E(o['verdict'])] for o in RA['options']]
+    bud = [[E(k), f'{v/1e9:+.3f}'] for k, v in RA['budget']['items']] + [['<b>HOT reserve at peak burn</b>', f'<b>{RA["budget"]["reserve_nominal_W"]/1e9:+.3f}</b>']] + \
+          [[E(k), f'{v/1e9:+.3f}'] for k, v in RA['budget']['reactive']] + [['<b>HOT reserve at the reactive-defense peak (burnout)</b>', f'<b>{RA["budget"]["reserve_reactive_W"]/1e9:+.3f}</b>']]
+    md = [[E(m['mode']), E(m['condensate']), 'OK' if m['ok'] else 'NO'] for m in RA['fins']['modes']]
+    th = [['WARM load (kW)', f'{RA["need"]["warm_W"]/1e3:.0f} added (Phase VI burn shortfall + NaK insulation leak + bus loss)'],
+          ['WARM closure', f'{P["T_warm_K"]:.1f} K on the existing 22.5 m (capacity x{(P["T_warm_K"]/440)**4:.3f}); after one loop lost {100*RA["degraded"]["warm_one_loop"]:.0f} %'],
+          ['LOW need with the 20 % rule (kW)', f'{RA["need"]["low_capacity_W"]/1e3:.0f} at 300 K ({RA["need"]["avionics_W"]/1e3:.0f} avionics + {RA["need"]["cryo_reject_W"]/1e3:.0f} cryo)'],
+          ['LOW tip extensions', f'x {P["low_tab_x"][0]:.1f}-{P["low_tab_x"][1]:.1f}, r 31.5-37, {P["low_tab_area_m2"]:.0f} m2 (both faces), {P["low_tab_capacity_W"]/1e3:.0f} kW at 300 K, '
+                                  f'{P["low_tab_mass_t"]:.1f} t; alone they would need {P["tabs_needed_alone_m"]:.0f} m (the ring sweep stops them at 13 m)'],
+          ['LOW closure', f'{P["T_low_K"]:.1f} K: capacity {P["low_have_at_T_W"]/1e3:.0f} kW vs need {P["low_need_at_T_W"]/1e3:.0f} kW (the warmer reject raises the cryo input)'],
+          ['Heat pumps', E(RA['heat_pump']['after'])],
+          ['Pumps (W)', f'WARM {RA["pumps"]["warm_W"][0]/1e3:.1f} -> {RA["pumps"]["warm_W"][1]/1e3:.1f} kW; LOW {RA["pumps"]["low_W"][0]/1e3:.1f} -> {RA["pumps"]["low_W"][1]/1e3:.1f} kW'],
+          ['WARM/LOW joint', f'dT {RA["joint"]["dT_before_K"]:.0f} -> {RA["joint"]["dT_after_K"]:.0f} K: joint leak +{100*RA["joint"]["leak_increase"]:.0f} % (bulkhead positions unchanged)'],
+          ['Expansion', E(RA['expansion']['note'])], ['Supports', E(RA['supports']['tab'])]]
+    out.append(section('c1', 'Consolidation · thermal', 'Radiator geometry and the thermal ledger',
+                       '<p>The shortfalls are closed without spending HOT. Moving L2/WARM/LOW aft into HOT fails the complete propulsion heat budget at the reactive-defense '
+                       'peak; widening breaks the Brow shadow; extending forward at full span hits the ring sweep. WARM therefore runs 11 K warmer on its existing area, '
+                       'LOW gains physical tip extensions where the rings leave room (r 31.5-37 m beside them) and runs 16 K warmer for the rest.</p>'
+                       + '<h3>Options</h3>' + table(['Id', 'Option', 'HOT used (GW)', 'Geometry', 'Verdict'], op)
+                       + '<h3>Complete HOT budget (GW)</h3>' + table(['Item', 'GW'], bud)
+                       + '<h3>Preferred configuration</h3>' + table(['Item', 'Value'], th)
+                       + img('cam_i3d_x_lowtabs', 'LOW tip extensions', 'LOW forward tip extensions beside the rings (blue), outside the ring sweep and inside the Brow shadow.')
+                       + img('cam_i3d_x_hotfins', 'HOT manifolds', f'HOT forward-pointing fin manifolds ({RA["fins"]["pitch_m"]:.2f} m pitch) above the H6a trunks.')
+                       + '<h3>Forward-pointing HOT fins (DR-3D-04) in every mode</h3>' + table(['Mode', 'Condensate', 'Result'], md)))
+    # tanks
+    vs = [[E(v['id']), E(v['species']), E(v['cls']), f'{v["x0"]:.2f}-{v["x1"]:.2f}', f'{v["volume_m3"]:,.0f}', f'{v["prop_t"]:,.0f}', f'{v["axial_kN"]:,.0f}'] for v in T['vessels']]
+    fl = [[E(k), f'{T["need_m3"][k]:,.0f}', f'{T["capacity_m3"][k]:,.0f}', f'{100*T["fill"][k]:.1f} %'] for k in T['need_m3']]
+    out.append(section('c2', 'Consolidation · tanks', 'T-A farm resized to the current coupled inventory',
+                       f'<p>T-A is the reference (T-B mission-modular alternative, T-C research option, no densification). The stretch follows the coupled propellant '
+                       f'{T["propellant_t"]:,.0f} t (CP1 sized for {T["cp1_propellant_t"]:,.0f} t): <b>+{T["added_length_m"]:.2f} m</b> (CP1 {T["cp1_added_length_m"]:.2f} m), '
+                       f'vessels {T["vessel_length_m"]:.2f} m, farm x {T["farm_x"][0]:.2f}-{T["farm_x"][1]:.2f}, Brow x {T["brow_x"][0]:.2f}-{T["brow_x"][1]:.2f}, ship '
+                       f'{T["ship_length_m"]:.1f} m; insulated shell {T["shell_area_m2"]:,.0f} m² (CP1 {T["cp1_shell_area_m2"]:,.0f}).</p>'
+                       + table(['Species', 'Need m³', 'Capacity m³', 'Fill'], fl) + table(['Vessel', 'Species', 'Class', 'x', 'm³', 'Propellant t', 'Burn axial kN'], vs)
+                       + '<p class="fn">' + E('; '.join(f'{k}: {v}' for k, v in T['supports'].items() if k != 'burn_axial_kN_total')) + '. Forward interfaces: '
+                       + E('; '.join(T['interfaces'])) + '.</p>'))
+    # MRU and module 10
+    it = [[E(i['name']), f'{i["t"]:.1f}', f'{i["env"]["L"]:.1f} x {i["env"]["D"]:.1f}', E(i['handling']), E(i['service'])] for i in MR['items']]
+    nf = [[E(n), f'{d:.2f}'] for n, d in MR['flight']['nearest'][:5]]
+    fx = [[E(f['id']), E(f['name']), E(f['interface']), f'{f["mass_t"]:.1f}'] for f in MR['fixtures']]
+    out.append(section('c3', 'Consolidation · maintenance', 'Heavy maintenance transport (MRU) and body-bay module 10',
+                       f'<p>{E(MR["claim"])}. The carriage (rated {MR["rating_t"]:.1f} t) runs on twin rails at az 255/285 (a single rail under the load would sit '
+                       f'{MR["rail"]["single_rail_clear_to_bus3_m"]:.2f} m from bus 3). Swept volumes use full envelopes: in flight the largest item is the '
+                       f'{E(MR["flight"]["item"])} (tube r {MR["flight"]["swept_radius_m"]:.2f} m at lane radius 2.9), which clears everything; the yard route for the '
+                       f'{E(MR["yard"]["item"])} (r {MR["yard"]["swept_radius_m"]:.2f} m) needs {", ".join(MR["yard"]["remove_first"])} unbolted first.</p>'
+                       + table(['Item', 't', 'Envelope L x D (m)', 'Handling', 'Service'], it)
+                       + '<h3>In-flight swept tube: nearest neighbours (m)</h3>' + table(['Neighbour', 'Clear m'], nf)
+                       + '<h3>Fixtures and transfer</h3>' + table(['Id', 'Fixture', 'Interface', 't'], fx)
+                       + '<ol>' + ''.join(f'<li>{E(x)}</li>' for x in MR['sequence']) + '</ol>'
+                       + f'<p>Burn restraint: {E(MR["burn"]["restraint"])}. Recovery: ' + E('; '.join(MR['recovery'])) + '.</p>'
+                       + f'<p>Decay heat of a unit: {MR["decay"]["t_1h_W"]/1e3:.0f} kW after 1 h, {MR["decay"]["t_1d_W"]/1e3:.0f} kW after a day, '
+                       f'{MR["decay"]["t_30d_W"]/1e3:.0f} kW after 30 days. {E(MR["external"]["item"])}: {E(MR["external"]["interface"])}.</p>'
+                       + img('cam_i3d_x_mru', 'MRU', 'MRU twin rails, cradle, park station and the two swept tubes (amber in flight, red yard) beside the power units.')
+                       + f'<h3>Module 10</h3><p>x {M10["x"][0]:.2f}-{M10["x"][1]:.2f}, {M10["containers"]} containers, closest clearance {M10["clearance_m"]:.2f} m; defense buffers '
+                       f'retained +{M10["buffer_shift_m"]:.0f} m. {E(M10["removal"]["in_flight"])}; {E(M10["removal"]["finding"])}.</p>'
+                       + table(['Interface', 'What', 'Owner'], [[E(r['interface']), E(r['what']), E(r['owner'])] for r in M10['standard']])
+                       + '<p class="fn">' + E('; '.join(f'{k}: {v}' for k, v in M10['ownership'].items())) + '.</p>'))
+    # electrical, L2 failure, ECLSS, cryo
+    er = [[E(r['id']), E(r['supply']), f'{r["installed_W"]/1e6:.1f}', f'{r["proactive_W"]/1e6:.2f}', f'{r["reactive_W"]/1e6:.2f}', f'{r["peak_W"]/1e6:.1f}'] for r in EL['rows']]
+    st = [[E(s['state']), E(s['L1']), E(s['L2']), E(s['buffer']), 'OK' if s['ok'] else 'LIMIT'] for s in EL['states']] if 'states' in EL else []
+    cr = [[E(s['stage']), f'{s["leak_W"]:.0f}', f'{s["nuclear_W"]:.0f}', f'{s["lift_W"]:.0f}', f'{s["W_per_W"]:.0f}', f'{s.get("input_at_T_W", s["input_W"])/1e3:.0f}'] for s in CR['stages']]
+    fw = [[E(k), f'{v/1e3:+.1f}'] for k, v in CR['flows']]
+    sens = [[f'x{s["nuclear"]:.1f}', f'{s["input_W"]/1e3:.0f}'] for s in CR['sensitivity']]
+    ecl = [[E(k), 'pass' if v else '<b>FAIL</b>'] for k, v in EC['matrix'].items()]
+    fe = EC['failing_eval']
+    out.append(section('c4', 'Consolidation · power, cooling, life support', 'Electrical, L2 cooling redundancy, ECLSS and cryogenics',
+                       f'<p><b>L1.</b> Continuous {EL["continuous_W"]/1e6:.1f} MW (proactive burn, heat-pump duty retired), reactive peak {EL["reactive_W"]/1e6:.1f} MW inside the '
+                       f'100 MWe FT-04 converter rating; the 21 MW defense burst comes from the buffer. L1 conductors are sized for the peak: {EL["conductor"]["A_peak_mm2"]:,.0f} mm² per '
+                       f'pole ({EL["conductor"]["mass_new_t"]:.2f} t, inside the 8 t distribution line). Pickup losses {EL["thermal"]["pickup_loss_peak_W"]/1e6:.0f} MW at the peak go '
+                       f'to the HOT loop (in the budget above). Buffer recharge {EL["buffer_recharge_s"]["EOL"]:.0f} s from the L2 surplus ({EL["surplus_W"]["EOL"]/1e6:.2f} MW EOL '
+                       f'after the cryo increase). {E(EL["note"])}</p>'
+                       + table(['Load', 'Supply', 'Installed MW', 'Proactive MW', 'Reactive MW', 'Peak MW'], er)
+                       + f'<p><b>NaK loop loss.</b> {E(LF["case"])}. Safe state: {E(LF["derating"])}. Highest demand band sheds {LF["shed_W"]/1e6:.2f} MW. The overloaded blade gains '
+                       f'50 K in {LF["transient"]["t_to_plus50K_s"]:.0f} s, so the valve rebias (&lt; 2 s) and TAC bypass (&lt; 5 s) act long before. Recovery: '
+                       + E('; '.join(LF['recovery'])) + '.</p>'
+                       + f'<p><b>ECLSS.</b> Seven four-person units pass {EC["passes"]} of {EC["of"]} expanded cases. The failing case ({E(EC["failing"])}) leaves '
+                       f'{fe["overload_persons"]} people over capacity: {fe["co2_kg_day"]:.1f} kg/d of CO2, bridged by a {fe["reserve_days"]}-day LiOH reserve '
+                       f'({fe["lioh_t"]:.2f} t). {E(fe["reliability"])}.</p>' + table(['Case', 'Seven units'], ecl)
+                       + f'<p><b>Cryogenics.</b> {E(CR["explain"])} {E(CR["redundancy"])}. {E(CR["radiation_note"])}.</p>'
+                       + table(['Stage', 'Leak W', 'Nuclear W', 'Lift W', 'W/W', f'Input kW at {CR["T_reject_K"]:.0f} K'], cr)
+                       + table(['Energy flow', 'kW'], fw) + '<h3>Nuclear-heating sensitivity (input kW at 300 K)</h3>' + table(['Nuclear heating', 'Input kW'], sens)))
+    # ledger
+    cats = {}
+    for r in L['rows']: cats.setdefault(r['cat'], []).append(r)
+    lr = [[E(r['item']), E(r['cat']), E(r['owner']), f'{r["t"]:.2f}', E(r['note'])] for r in L['rows']]
+    hist = L['end_t']-L['dry_with_payload_t']-L['tankage_t']
+    summ = [['Existing historical ship (production dry mass incl. payload, unchanged)', f'{hist:,.0f}'],
+            ['New equipment', f'{sum(r["t"] for r in cats.get("NEW", [])):,.1f}'], ['Replacement equipment (increment)', f'{sum(r["t"] for r in cats.get("REPLACEMENT", [])):,.1f}'],
+            ['Historical equipment moved', f'{sum(r["t"] for r in cats.get("HISTORICAL (moved)", [])):,.1f}'],
+            ['Coolant inventory (NaK transport, inside the loop line)', f'{L["coolant"]["NaK_t"]:,.1f}'],
+            ['Mission payload additions', f'{sum(p["t"] for p in L["payload"]):,.2f}'], ['Propellant', f'{L["propellant_t"]:,.0f}'], ['Added tankage', f'{L["tankage_t"]:,.0f}'],
+            ['Structural additions confirmed by PSA', '0 (none confirmed yet)'], ['Structural additions OPEN', 'OPEN (PSA Phase II)'], ['Shielding additions OPEN', 'OPEN (Track R)'],
+            ['<b>Nominal departure</b>', f'<b>{L["departure_t"]:,.0f}</b>']]
+    out.append(section('c5', 'Consolidation · mass', 'Reconciled live mass ledger (supersedes Checkpoint 4)',
+                       '<p>Every physical item has one owner. Audit results: restart packs were in both the L2 and the storage lines (removed from L2); new cryocooler stations '
+                       'count only their increment over the existing coolers; pipe supports (saddles, slides) are ISSA machinery, the frames they bear on are PSA; module-10 '
+                       'racks are ISSA, its frames PSA; displaced dry-store containers keep their historical mass; LOG-G1 tare is separate and not duplicated.</p>'
+                       + table(['Category', 't'], summ) + table(['Item', 'Category', 'Owner', 't', 'Note'], lr)))
+    # registers, SSI, problems
+    rg = [[E(a), E(b), E(c)] for a, b, c in C['registry']]
+    ss = [[E(i['id']), E(i['owner']), f'{i["mass_t"]:.1f}' if isinstance(i['mass_t'], (int, float)) else 'PSA', str(len(i['mounts'])), E(i['maturity'])] for i in S['items']]
+    ds = [[E(d['id']), E(d['topic']), E(d['issa']), E(d['psa']), E(d['action'])] for d in S['disagreements']]
+    pr = [[E(p['id']), E(p['sev']), E(p['what']), E(p['owner'])] for p in C['problems']]
+    oq = [[E(q['id']), E(q['q']), E(q['rec'])] for q in C['owner_questions']]
+    out.append(section('c6', 'Consolidation · handover', 'Registers, systems-to-structure interface and open problems',
+                       '<p>Technology register v1.1 (<code>data/technology_register.toml</code>): FT-03 carries the approved component set (0.94 / 0.90 / 0.97 / 2 %, 872 K '
+                       'compressor inlet, 896 K L2, 9.38 m); FT-06 the forward-pointing fins (1.47 m pitch, 106 manifolds per blade); FT-07 the 24.7 t MRU carriage and the '
+                       'provisional EXT-TA arm, with the explicit limit that carrying a reactor-class mass is not in-flight reactor servicing.</p>'
+                       + table(['System', 'Level (CP4)', 'Level (C1.0)'], rg)
+                       + f'<h3>Systems-to-structure interface {E(S["version"])}</h3><p>{E(S["ownership_rule"])}. File: '
+                       '<code style="overflow-wrap:anywhere">work/ship-systems-architecture/results/i3d_structure_interface.json</code> (position, mass, CG, envelope, mounts with anchor/slide type, load '
+                       'cases, thermal growth, clearances, removal, utilities, environment, failure requirements; TAC and EM-pump excitation bands for PSA modal work).</p>'
+                       + table(['Item', 'Owner', 't', 'Mounts', 'Maturity'], ss)
+                       + '<h3>Disagreements with PSA (not overridden)</h3>' + table(['Id', 'Topic', 'ISSA', 'PSA', 'Action'], ds)
+                       + '<h3>Problem register</h3>' + table(['Id', 'State', 'Problem', 'Owner'], pr)
+                       + '<h3>Owner questions</h3>' + table(['Id', 'Question', 'Recommendation'], oq)
+                       + '<p class="fn">Review file: view layers C1 complete, C2 exterior, C3 structure and interfaces, C4 thermal, C5 electrical, C6 habitat and life support, '
+                       'C7 logistics and maintenance, C8 research and fiction comparison. Machinery is solid; reservations, swept tubes and the translated Brow are '
+                       'translucent; SSI markers are red (anchor), blue (slide) and white (other). Software checks passing does not establish physical feasibility.</p>'))
     return '\n'.join(out)
