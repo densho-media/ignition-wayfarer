@@ -1,0 +1,244 @@
+{
+ "point": "S-COMB (WSI-0.1)",
+ "c11": {
+  "options": [
+   {
+    "id": "H0 C1.1 as built (3.0 K, 3 % ullage, density 58.61 = a 3.19 K value)",
+    "T_K": 3.0,
+    "rho_kg_m3": 61.6,
+    "beta_per_K": 0.23556607131276677,
+    "P_kPa": 74.0,
+    "ullage": 0.03,
+    "allowed_warm_K": 0.08490187015703765,
+    "he3_volume_factor": 1.0,
+    "he3_capacity_m3": 58546.331716000066,
+    "cooler_input_3K_W": 573650.4223811815,
+    "hold_days_one_head_lost": 60.49446426703327,
+    "control_K": 0.05,
+    "notes": "as built: the 58.61 kg/m3 density belongs to ~3.19 K (NBP); at 3.0 K the liquid is ~5 % denser, and the 2 % expansion share holds only +0.1 K"
+   },
+   {
+    "id": "H1 3.0 K, consistent density, ullage for +0.3 K (preferred)",
+    "T_K": 3.0,
+    "rho_kg_m3": 61.6,
+    "beta_per_K": 0.23556607131276677,
+    "P_kPa": 74.0,
+    "ullage": 0.08066982139383003,
+    "allowed_warm_K": 0.3,
+    "he3_volume_factor": 0.9982672145992366,
+    "he3_capacity_m3": 58444.88348713433,
+    "cooler_input_3K_W": 573650.4223811815,
+    "hold_days_one_head_lost": 362.96678560219954,
+    "control_K": 0.3,
+    "notes": "near-critical: expansion and compressibility large",
+    "farm": {
+     "departure_t": 13211.907941231098,
+     "farm_added_m": 48.678524290090245,
+     "ship_length_m": 338.17852429009025,
+     "tankage_t": 1162.1787480812873,
+     "shell_area_m2": 39648.209423946195
+    }
+   },
+   {
+    "id": "H2 2.5 K, ullage for +0.3 K",
+    "T_K": 2.5,
+    "rho_kg_m3": 69.3,
+    "beta_per_K": 0.14470843837931274,
+    "P_kPa": 38.0,
+    "ullage": 0.053412531513793826,
+    "allowed_warm_K": 0.3,
+    "he3_volume_factor": 0.8649674059880843,
+    "he3_capacity_m3": 50640.66867450649,
+    "cooler_input_3K_W": 689539.396599602,
+    "hold_days_one_head_lost": 362.96678560219954,
+    "control_K": 0.3,
+    "notes": "sub-atmospheric vapour pressure: feed by a cold pump or a He-3 gas pressurant loop (no He-4 contamination)",
+    "farm": {
+     "departure_t": 13211.699674298323,
+     "farm_added_m": 48.41864002908365,
+     "ship_length_m": 337.91864002908363,
+     "tankage_t": 1162.159009264736,
+     "shell_area_m2": 39517.82228146584
+    }
+   },
+   {
+    "id": "H3 2.0 K, ullage for +0.5 K",
+    "T_K": 2.0,
+    "rho_kg_m3": 74.5,
+    "beta_per_K": 0.09949695522248703,
+    "P_kPa": 16.0,
+    "ullage": 0.059748477611243515,
+    "allowed_warm_K": 0.5,
+    "he3_volume_factor": 0.8094332217735711,
+    "he3_capacity_m3": 47389.34590390614,
+    "cooler_input_3K_W": 863372.8579272327,
+    "hold_days_one_head_lost": 604.9446426703328,
+    "control_K": 0.5,
+    "notes": "sub-atmospheric vapour pressure: feed by a cold pump or a He-3 gas pressurant loop (no He-4 contamination)",
+    "farm": {
+     "departure_t": 13211.699674298323,
+     "farm_added_m": 48.41864002908365,
+     "ship_length_m": 337.91864002908363,
+     "tankage_t": 1162.159009264736,
+     "shell_area_m2": 39517.82228146584
+    }
+   },
+   {
+    "id": "H4 supercritical 3.5 K, 0.3 MPa (no phase boundary)",
+    "T_K": 3.5,
+    "rho_kg_m3": 46.0,
+    "beta_per_K": 0.06,
+    "P_kPa": 300.0,
+    "ullage": 0.03,
+    "allowed_warm_K": 0.3333333333333333,
+    "he3_volume_factor": 1.2741304347826088,
+    "he3_capacity_m3": 74595.66308423401,
+    "cooler_input_3K_W": 490872.58365373826,
+    "hold_days_one_head_lost": 604.9446426703328,
+    "control_K": 1.0,
+    "notes": "near-critical: expansion and compressibility large"
+   }
+  ],
+  "recommendation": "H1: keep 3.0 K, correct the density (61.6 kg/m3 at 3.0 K, not the 3.19 K value 58.61) and raise the He-3 ullage to 8 % so the liquid may warm +0.3 K: the denser liquid pays for the extra ullage, the farm length is set by the D2/H2 classes, and no cooler input is added. H3 (2.0 K) gives more allowance but adds ~290 kW of cooler input and LOW rejection, which the joint point cannot afford. Bulk hold time with one head lost is months; the residual risk is stratification (mixing pump per vessel). Property data must be verified against a He-3 EOS before adoption."
+ },
+ "c01": {
+  "P0_W": 10055111.058100648,
+  "surplus_EOL_W": 2710885.276392303,
+  "surplus_change_W": -325392.85496875877,
+  "buffer_J": 208800000.0,
+  "cases": [
+   {
+    "fixed_share": 0.0,
+    "model": "linear (C1.1)",
+    "part_flow_power_W": 1508266.6587150972,
+    "bridge_J": 94662333.40129201,
+    "steady_deficit_W": 0.0,
+    "closes": true
+   },
+   {
+    "fixed_share": 0.1,
+    "model": "q^3 hydraulic + 10% fixed",
+    "part_flow_power_W": 1036053.5056490456,
+    "bridge_J": 45540249.759390265,
+    "steady_deficit_W": 0.0,
+    "closes": true
+   },
+   {
+    "fixed_share": 0.2,
+    "model": "q^3 hydraulic + 20% fixed",
+    "part_flow_power_W": 2038171.0114770015,
+    "bridge_J": 54484811.0899794,
+    "steady_deficit_W": 0.0,
+    "closes": true
+   },
+   {
+    "fixed_share": 0.3,
+    "model": "q^3 hydraulic + 30% fixed",
+    "part_flow_power_W": 3040288.517304957,
+    "bridge_J": 71242854.5631232,
+    "steady_deficit_W": 329403.240912654,
+    "closes": false
+   }
+  ],
+  "shared_doctrine": {
+   "reserve_J": 189324666.80258402,
+   "defense_left_J": 19475333.197415978,
+   "verdict": "C1.1 shared doctrine leaves the defense only 44 MJ of 209 MJ while the drive runs; with the q^3 + fixed-loss pump model the reserve can exceed the buffer: not acceptable as the only bridge"
+  },
+  "dedicated": {
+   "energy_J": 189324666.80258402,
+   "power_W": 7344225.781708345,
+   "mass_t": 2.4480752605694485,
+   "tech": "high-power Li-ion / hybrid capacitor pack on the essential services bus (Track R, 150 kJ/kg, 3 kW/kg pack level)",
+   "location": "services bus beside the L2 tie, x -92..-80 (LOW-cooled, cell limit 330 K)",
+   "verdict": "recommended: 2.4 t dedicated shutdown store; the defense buffer keeps its full 209 MJ"
+  },
+  "transfer_path": [
+   "L1 isolators open (fault)",
+   "services bus transfers to L2 tie (>= 3 MW, < 50 ms) + dedicated store",
+   "H6a pump drives ramp 30 s",
+   "store recharges from L2 surplus after the ramp"
+  ],
+  "flow_vs_power": "flow fraction is not the pump-power fraction: hydraulic power falls ~q^3 but EM-pump coil/excitation losses do not, so electrical power at 15 % flow is 0.3-30 % of full power depending on the fixed share; the pump vendor curve decides (OPEN)",
+  "open": "drive decay heat, HOT loop at part flow and Li freeze margins in the transient: NOT verified (C-01 transient OPEN)"
+ },
+ "c14": {
+  "low_growth": {
+   "panel_W_m2": 1010.7890501846697,
+   "for_nominal_10pct_W": 256887.7911595588,
+   "for_one_loop_lost_nominal_W": 354293.11348686507,
+   "for_one_loop_lost_full_recovery_W": 713513.8877945258,
+   "area_m2": {
+    "nominal_10pct": 254.14579937586956,
+    "one_loop_lost": 350.5114280988068,
+    "one_loop_full_recovery": 705.8979197134831
+   },
+   "verdict": "at the joint point the bigger farm raises the cryo rejection: LOW must grow by the one-loop-lost amount (area above) so that one loop lost still carries nominal; the 125 % recovery is then an operating choice, not a design case"
+  },
+  "low_cases": {
+   "T_K": 320.00000000000455,
+   "rows": [
+    {
+     "case": "nominal (coolers at the operating point)",
+     "load_W": 1535013.165851554,
+     "capacity_W": 1431626.6912771505,
+     "margin_W": -103386.47457440337,
+     "ok": false,
+     "T_needed_K": 325.6271122666327
+    },
+    {
+     "case": "maximum cryogenic recovery (all heads at the installed 125 %, re-cool after a fault, hours)",
+     "load_W": 1843766.4573144424,
+     "capacity_W": 1431626.6912771505,
+     "margin_W": -412139.76603729185,
+     "ok": false,
+     "T_needed_K": 340.8937266082346
+    },
+    {
+     "case": "one LOW loop lost, nominal",
+     "load_W": 1535013.165851554,
+     "capacity_W": 1230495.2405101424,
+     "margin_W": -304517.9253414115,
+     "ok": false,
+     "T_needed_K": 338.187864968581
+    },
+    {
+     "case": "one LOW loop lost, recovery",
+     "load_W": 1843766.4573144424,
+     "capacity_W": 1230495.2405101424,
+     "margin_W": -613271.2168043,
+     "ok": false,
+     "T_needed_K": 354.0433742765942
+    }
+   ],
+   "recovery_limit_one_loop": 0.7534294096926138,
+   "rule": "nominal margin -103 kW; a full-rate re-cool (installed 125 %) uses the whole LOW margin (-412 kW, i.e. at the limit); with one LOW loop lost the re-cool runs at <= 75 % of the operating cooler input or LOW floats to 354 K for the recovery hours (C-14)",
+   "hot_margin": "HOT keeps the 20 % rule and the reactive-peak reserve unchanged (LOW and WARM close without HOT)",
+   "brow": "tabs end at r 37.0: the Brow protection envelope (shadow inside r 37) is unchanged; 8.0 m inside the r 45 Brow rim",
+   "psa": {
+    "first_mode_min_Hz": 1.0,
+    "tip_deflection_max_m": 0.3,
+    "clearance_to_ring_rim_m": 1.5,
+    "note": "tab first mode >= 1 Hz (10x the 0.096 Hz global mode, 15x the 0.068 Hz ring spin); lateral tip deflection <= 0.30 m so 1.2 m of the 1.5 m clearance to the ring rim survives; thermal growth nil at 316 K (ammonia panels); two clevis lugs per blade on the PSA radiator root frame"
+   }
+  },
+  "rule": "one LOW loop lost: cap the cryocooler input at the operating point (100 %), no 125 % surge; re-cool at the reduced rate (<= 75 % allowed); a 332 K float is NOT allowed (cell limit 330 K)",
+  "vessel_holds": [
+   {
+    "species": "hydrogen",
+    "smallest_vessel_t": 478.51178575675084,
+    "allowed_warm_K": 1.25,
+    "hold_days_one_head_lost": 244.20566797957756
+   },
+   {
+    "species": "deuterium",
+    "smallest_vessel_t": 1112.326589961863,
+    "allowed_warm_K": 2.2222222222222223,
+    "hold_days_one_head_lost": 572.2210741148671
+   }
+  ],
+  "design_margin_W": -103386.47457440337,
+  "emergency_capacity_W": -304517.9253414115,
+  "verdict": "vessel hold times are weeks to months, so recovery does not need the 125 % rate; the LOW design margin covers nominal operation, the emergency capacity (one loop lost) covers operation at 100 % cooler input"
+ }
+}
