@@ -115,6 +115,18 @@
    "ISSA / PSA"
   ],
   [
+   "WSI-P07",
+   "OPEN",
+   "Thrust convention: with thrust on the four nozzle pickups (not the 12 ring nodes) the ring-node HM closures drop to 0.72-0.80; the nozzle-thrust reruns (a43e132) restore lambda 1.95: bypass HM 1,275.9 t FE (+171 t aft cage), hub HM 1,413.5 t; f1 at departure 0.091 / 0.084 Hz vs 0.095 (I-08 short ~4 %), both stopped at the 16-pass cap; reconverged bypass point 13,615 t (+3 % over the sizing point, loads not yet re-sized). Original critical strain energy in the spine, tie:03, aft frames and rails. All ring-node lambda (Phase II, round 1) are unconservative screening values. Puller sensitivity (same thrust at the Brow) is stable to 12: the problem is the compression path (research finding, not a proposal).",
+   "PSA"
+  ],
+  [
+   "WSI-P08",
+   "OPEN",
+   "Closed-loop TVC (PD, mid-spine IMU) only marginally stable (min damping 0.0006, negative at left 0.5/0); aft IMU unstable. A structural notch filter or IMU near the bending node is a design requirement. Ring spin 2x (0.133 Hz) sits on the second bending pair at left 0.5/0 (1-3 %).",
+   "PSA / ISSA GNC"
+  ],
+  [
    "RAD-R",
    "OPEN (Track R)",
    "Radiation: independent Track R item; no crew-safety claim is made here.",
@@ -125,7 +137,7 @@
   [
    "WSI-D1",
    "Structural interface at the rotor bay: hub path (capped, needs Ti) or bypass collar (closes better at left 0, heavier collar).",
-   "Pending the f1 continuation runs; recommendation follows the lighter variant that closes lambda 1.95 and f1 0.095 Hz."
+   "Recommend bypass (TD-F): 138 t lighter at lambda 1.95 and closer on f1 (0.091 vs 0.084 Hz). It is a habitat-interface change and needs owner approval."
   ],
   [
    "WSI-D2",

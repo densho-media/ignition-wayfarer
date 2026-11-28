@@ -393,8 +393,8 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   reconciliation C6-01..09, direct conversion ledger (FT-04 conditional), ECLSS 7 units, OpenMC Track R step. Owner: DR6-01..06. Then the
   3D Systems Integration brief (2026-11-28 07:03Z) on the same branch.
 - [ ] **WSI Phase I — joint ISSA–PSA integration (Track F1), owner review.** Branch `claude/cloud/wayfarer-systems-integration`,
-  `work/wayfarer-systems-integration/` (NOTES run order). Joint config WSI-0.1, combined point 13,212 t / 338.3 m; structural closure
-  (lambda 1.95 with nozzle-pickup thrust + f1 >= 0.095 Hz) still OPEN with PSA; C-01 store, C-11 He-3 ullage, C-14 LOW growth proposed;
+  `work/wayfarer-systems-integration/` (NOTES run order). Joint config WSI-0.1, combined point 13,212 t / 338.3 m; with nozzle-pickup thrust the bypass HM
+  closure (PSA a43e132) reaches lambda 1.95 at 13,615 t reconverged, but f1 0.091 < 0.095 Hz (I-08) stays OPEN; C-01 store, C-11 He-3 ullage, C-14 LOW growth proposed;
   owner WSI-D1..D8 open; register FT-10 sensitivity only. No squash, production, canon or Drive change.
 - [ ] **ISSA Phase V — owner review (2026-11-27).** Thermal network and convergence on the ISSA page (`work/ship-systems-architecture/`,
   NOTES "Phase V"): config N2-R4a-P5.0, corrections C5-01..10, H6 network (walls dominate; material is the lever), R5-A 750 K

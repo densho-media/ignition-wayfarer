@@ -58,3 +58,5 @@ are merged here. No other session edits shared geometry, configuration or mass.
 - C-11: He-3 at 3.0 K with the consistent density 61.6 kg/m3 and 8 % ullage allows +0.3 K. The EOS check is pending.
 - C-14: LOW +350 m2 at the joint point; re-cool capped at 100 % with one loop lost.
 - Full pipeline PASS, geometry diff 0 (runs/20261128T125441Z-pipeline).
+- PSA nozzle-thrust closures (a43e132): bypass HM 1,275.9 t FE reaches lambda 1.95, but f1 is 0.091 Hz at departure (target 0.095). Hub HM is 1,413.5 t, f1 0.084.
+  The reconverged bypass point is 13,615 t / 340.6 m, +3 % over the sizing point, so loads still have to be re-sized there. f1 closure is OPEN.
