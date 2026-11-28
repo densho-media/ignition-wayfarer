@@ -68,3 +68,10 @@ thermal transient.
 - P2-D3 joint G study with ISSA.
 - P2-D4 Phase III stability target: passive 1.87, or lower with certified active control.
 - P2-D5 fail-safe joints as a requirement (+134 t class penalty for six rails).
+
+## 9. ISSA response (2026-11-28 10:47Z)
+
+- MRU clash resolved on the ISSA side: rail and park station end at x <= 92.0 (SSI-1.1). No PSA change needed.
+- G is not feasible as drawn: x -70..-20 holds the dry store M1-M4, the MRU lane and sector buses, and the cryo LOW budget
+  is tight. ISSA agrees to a joint Phase III study (annular or split tank, dry-store move, cryo heating) on the owner's go.
+- Farm layout for the deck trade: SSI-1.0 FARM-O1..O9 and FARM-I1..I4.
