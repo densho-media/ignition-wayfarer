@@ -82,6 +82,23 @@ def tech_deps():
     return [dict(id=t['id'], name=t['name'], status=t['status'], dependents=t.get('dependents', [])) for t in reg['technology']]
 
 
+def shift_item(i, d, vessels=None):
+    """SSI-1.1 item at the WSI farm: farm vessels, their cryo stations and the Brow translation move with the farm stretch over C1.1."""
+    cg = list(i['cg']) if i['cg'] else i['cg']; env = dict(i['envelope']) if isinstance(i['envelope'], dict) else i['envelope']
+    moved = i['id'].startswith(('FARM-', 'CRYO-', 'BROW-'))
+    mass = i['mass_t']
+    if moved and d:
+        cg[0] += d/2 if i['id'].startswith('FARM-') else d
+        if isinstance(env, dict) and 'x' in env:
+            env['x'] = [env['x'][0]+(d if not i['id'].startswith('FARM-') else 0.0), env['x'][1]+d]
+        if i['id'].startswith('BROW-'):
+            env['translation_m'] = env.get('translation_m', 0.0)+d
+    if vessels and i['id'].startswith('FARM-'):
+        v = vessels[i['id'].split('-', 1)[1]]; mass = v['prop_t']
+    return dict(id=i['id'], name=i['name'], owner=i['owner'], mass_t=mass, cg=cg, envelope=env, register=i.get('register', ''),
+                maturity=i.get('maturity', ''), shifted_with_farm_m=d if moved else 0.0)
+
+
 def ledger_rows(P, struct):
     """Joint ledger: production items (150 t line replaced by PSA structure), ISSA C1.1 rows, PSA structure by family, tankage, propellant.
     One row per physical item, one owner per row."""
@@ -149,8 +166,7 @@ def main():
                tanks=dict(arrangement='T-A (13 vessels, stretched forward farm)', added_length_m=T['added_length_m'],
                           vessels=[dict(id=v['id'], species=v['species'], x=(v['x0'], v['x1']), R=v['R'], az=v['az'], a=v['a'], volume_m3=v['volume_m3'],
                                         loaded_t=v['prop_t'], fill=v['fill']) for v in T['vessels']], supports=T['supports']),
-               equipment=[dict(id=i['id'], name=i['name'], owner=i['owner'], mass_t=i['mass_t'], cg=i['cg'], envelope=i['envelope'], register=i.get('register', ''),
-                               maturity=i.get('maturity', '')) for i in SSI['items']],
+               equipment=[shift_item(i, T['added_length_m']-C['tanks']['added_length_m'], {v['id']: v for v in T['vessels']}) for i in SSI['items']],
                mounts=[dict(item=i['id'], **m) for i in SSI['items'] for m in i['mounts']],
                load_cases=SSI['shared']['load_cases'] + [dict(id=f'PSA-{x}', what=n, axial_g=None, note='PSA data/load_cases.toml') for x, n in
                                                          (('LC-01', 'nominal propulsion'), ('LC-02', 'thrust-bounded envelope'), ('LC-03', 'startup/shutdown transients'),

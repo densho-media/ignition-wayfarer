@@ -408,7 +408,8 @@
      "shield_cone_half_deg": 12.5
     },
     "register": "FT-03",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "PWR-L2U-2",
@@ -433,7 +434,8 @@
      "shield_cone_half_deg": 12.5
     },
     "register": "FT-03",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "PWR-L2U-3",
@@ -458,7 +460,8 @@
      "shield_cone_half_deg": 12.5
     },
     "register": "FT-03",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "TH-H6A-TRUNKS",
@@ -481,7 +484,8 @@
      ]
     },
     "register": "FT-01/FT-02",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "RAD-HOT-MAN-90",
@@ -506,7 +510,8 @@
      "count": 105
     },
     "register": "FT-06",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "RAD-L2-90",
@@ -529,7 +534,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "RAD-LOWTAB-90",
@@ -552,7 +558,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2 (DR-C-02 APPROVED)"
+    "maturity": "M2 (DR-C-02 APPROVED)",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "RAD-HOT-MAN-210",
@@ -577,7 +584,8 @@
      "count": 105
     },
     "register": "FT-06",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "RAD-L2-210",
@@ -600,7 +608,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "RAD-LOWTAB-210",
@@ -623,7 +632,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2 (DR-C-02 APPROVED)"
+    "maturity": "M2 (DR-C-02 APPROVED)",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "RAD-HOT-MAN-330",
@@ -648,7 +658,8 @@
      "count": 105
     },
     "register": "FT-06",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "RAD-L2-330",
@@ -671,7 +682,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "RAD-LOWTAB-330",
@@ -694,280 +706,294 @@
      ]
     },
     "register": "",
-    "maturity": "M2 (DR-C-02 APPROVED)"
+    "maturity": "M2 (DR-C-02 APPROVED)",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "FARM-O1",
     "name": "Propellant vessel O1 (helium-3)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 381.5234617120238,
+    "mass_t": 555.2427996561107,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      27.58768925023175,
      2.9969821208421337
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 27.75,
      "a": 6.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "FARM-O2",
     "name": "Propellant vessel O2 (helium-3)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 381.5234617120238,
+    "mass_t": 555.2427996561107,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      9.080296696670132,
      26.22233231237148
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 27.75,
      "a": 6.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "FARM-O3",
     "name": "Propellant vessel O3 (hydrogen)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 458.1824511742274,
+    "mass_t": 667.2435006328752,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      -5.390003246354222,
      27.221505560940066
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 27.75,
      "a": 6.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "FARM-O4",
     "name": "Propellant vessel O4 (helium-3)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 381.5234617120238,
+    "mass_t": 555.2427996561107,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      -18.387706337986717,
      20.783521251894808
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 27.75,
      "a": 6.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "FARM-O5",
     "name": "Propellant vessel O5 (helium-3)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 381.5234617120238,
+    "mass_t": 555.2427996561107,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      -27.603003175001586,
      2.852492895846097
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 27.75,
      "a": 6.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "FARM-O6",
     "name": "Propellant vessel O6 (hydrogen)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 458.1824511742274,
+    "mass_t": 667.2435006328752,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      -18.69400137081989,
      -20.50845710305346
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 27.75,
      "a": 6.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "FARM-O7",
     "name": "Propellant vessel O7 (helium-3)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 381.5234617120238,
+    "mass_t": 555.2427996561107,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      -5.793234476286982,
      -27.13855070380067
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 27.75,
      "a": 6.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "FARM-O8",
     "name": "Propellant vessel O8 (helium-3)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 381.5234617120238,
+    "mass_t": 555.2427996561107,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      11.331170275583437,
      -25.331148418216934
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 27.75,
      "a": 6.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "FARM-O9",
     "name": "Propellant vessel O9 (hydrogen)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 458.1824511742274,
+    "mass_t": 667.2435006328752,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      25.33114841821693,
      -11.33117027558345
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 27.75,
      "a": 6.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "FARM-I1",
     "name": "Propellant vessel I1 (deuterium)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 764.311921594336,
+    "mass_t": 1112.326589961863,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      -0.8758886748066362,
      13.47155592458961
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 13.5,
      "a": 5.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "FARM-I2",
     "name": "Propellant vessel I2 (hydrogen)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 329.2492724258333,
+    "mass_t": 478.51178575675084,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      -11.726525444915582,
      6.6886920238375
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 13.5,
      "a": 5.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "FARM-I3",
     "name": "Propellant vessel I3 (deuterium)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 764.311921594336,
+    "mass_t": 1112.326589961863,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      0.8758886748066406,
      -13.47155592458961
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 13.5,
      "a": 5.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "FARM-I4",
     "name": "Propellant vessel I4 (hydrogen)",
     "owner": "ISSA (vessel, contents) / PSA (deck, hoop, keel)",
-    "mass_t": 329.2492724258333,
+    "mass_t": 478.51178575675084,
     "cg": [
-     136.2750050919679,
+     147.9542393986708,
      13.47094115605268,
      -0.8852933808439356
     ],
     "envelope": {
      "x": [
       109.25,
-      163.30001018393583
+      186.65847879734164
      ],
      "R": 13.5,
      "a": 5.45
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "BROW-TRANSLATION",
@@ -975,23 +1001,24 @@
     "owner": "PSA (structure) / ISSA (interfaces)",
     "mass_t": null,
     "cg": [
-     168.70001018393583,
+     192.05847879734165,
      0.0,
      0.0
     ],
     "envelope": {
      "x": [
-      167.20001018393583,
-      170.20001018393583
+      190.55847879734165,
+      193.55847879734165
      ],
      "r": [
       0.0,
       45.0
      ],
-     "translation_m": 25.450010183935827
+     "translation_m": 48.808478797341635
     },
     "register": "",
-    "maturity": "M1"
+    "maturity": "M1",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "MRU-RAIL",
@@ -1016,7 +1043,8 @@
      "note": "SSI-1.1: forward end x 92.0, >= 0.5 m aft of the PSA hub cones"
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "BODY-M10",
@@ -1039,7 +1067,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "HUB-ECLSS",
@@ -1059,7 +1088,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "HUB-ROTARYCOUPLING_A",
@@ -1079,7 +1109,8 @@
      ]
     },
     "register": "",
-    "maturity": "M1"
+    "maturity": "M1",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "HUB-ROTARYCOUPLING_B",
@@ -1099,7 +1130,8 @@
      ]
     },
     "register": "",
-    "maturity": "M1"
+    "maturity": "M1",
+    "shifted_with_farm_m": 0.0
    },
    {
     "id": "CRYO-O1",
@@ -1107,7 +1139,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      27.58768925023175,
      2.9969821208421337
     ],
@@ -1119,7 +1151,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "CRYO-O2",
@@ -1127,7 +1160,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      9.080296696670132,
      26.22233231237148
     ],
@@ -1139,7 +1172,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "CRYO-O3",
@@ -1147,7 +1181,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      -5.390003246354222,
      27.221505560940066
     ],
@@ -1159,7 +1193,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "CRYO-O4",
@@ -1167,7 +1202,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      -18.387706337986717,
      20.783521251894808
     ],
@@ -1179,7 +1214,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "CRYO-O5",
@@ -1187,7 +1223,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      -27.603003175001586,
      2.852492895846097
     ],
@@ -1199,7 +1235,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "CRYO-O6",
@@ -1207,7 +1244,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      -18.69400137081989,
      -20.50845710305346
     ],
@@ -1219,7 +1256,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "CRYO-O7",
@@ -1227,7 +1265,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      -5.793234476286982,
      -27.13855070380067
     ],
@@ -1239,7 +1277,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "CRYO-O8",
@@ -1247,7 +1286,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      11.331170275583437,
      -25.331148418216934
     ],
@@ -1259,7 +1298,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "CRYO-O9",
@@ -1267,7 +1307,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      25.33114841821693,
      -11.33117027558345
     ],
@@ -1279,7 +1319,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "CRYO-I1",
@@ -1287,7 +1328,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      -0.8758886748066362,
      13.47155592458961
     ],
@@ -1299,7 +1340,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "CRYO-I2",
@@ -1307,7 +1349,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      -11.726525444915582,
      6.6886920238375
     ],
@@ -1319,7 +1361,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "CRYO-I3",
@@ -1327,7 +1370,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      0.8758886748066406,
      -13.47155592458961
     ],
@@ -1339,7 +1382,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "CRYO-I4",
@@ -1347,7 +1391,7 @@
     "owner": "ISSA",
     "mass_t": 1.0381213314650906,
     "cg": [
-     164.30001018393583,
+     187.65847879734164,
      13.47094115605268,
      -0.8852933808439356
     ],
@@ -1359,7 +1403,8 @@
      ]
     },
     "register": "",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 23.358468613405808
    },
    {
     "id": "EXT-TA",
@@ -1384,7 +1429,8 @@
      "reach_m": 6.0
     },
     "register": "FT-07 (PROVISIONAL)",
-    "maturity": "M2"
+    "maturity": "M2",
+    "shifted_with_farm_m": 0.0
    }
   ],
   "mounts": [
