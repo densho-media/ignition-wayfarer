@@ -30,6 +30,7 @@ import run3  # noqa: E402
 
 OUT = H.parent / 'results' / 'p3_closure'; OUT.mkdir(parents=True, exist_ok=True)
 LAM_TARGET = 1.95
+F1_MIN = 0.0       # WSI I-08: 0.095 Hz first elastic mode at every state when requested (--f1)
 COVER = 0.6
 CASES = (('static', 0.0), ('follower', 1.0))
 SIZED_FAMS = None   # every sized family may be stiffened
@@ -77,6 +78,14 @@ def group_mass(b):
     return m
 
 
+def first_mode(b):
+    import scipy.sparse.linalg as spla
+    K = b.m.assemble('K'); M = b.m.assemble('M'); free = b.m.free_mask(); Kf = K[free][:, free].tocsc(); Mf = M[free][:, free].tocsc()
+    w2, V = spla.eigsh(Kf, M=Mf, k=12, sigma=-0.5, which='LM'); o = np.argsort(w2); w2, V = w2[o], V[:, o]
+    j = int(np.argmax(w2 > 1e-4*w2.max())); u = np.zeros(b.m.ndof); u[free] = V[:, j]
+    return float(np.sqrt(w2[j])/(2*math.pi)), u
+
+
 def sweep(b, hs, log):
     res = []
     for s in hs:
@@ -105,13 +114,22 @@ def strength_fix(b, env, K=a3.K_EFF):
     return sorted(set(fixed))
 
 
-def run(tag, concept, deck, rotor, ring=False, mats=None, target=LAM_TARGET, passes=10, n_states=3, src='wsi', log=print):
+def run(tag, concept, deck, rotor, ring=False, mats=None, target=LAM_TARGET, passes=10, n_states=3, src='wsi', log=print, f1_min=F1_MIN,
+        start=None):
     t0 = time.time(); hs = run3.hist(n_states, src)
     b = m3.Build3(concept, hs[0]['cfg'], deck=deck, rotor=rotor, guide_ring=ring, mats=mats or {})
     b.attach(hs[0]['cfg']['bodies']); mc = b.mass_check(hs[0]['cfg']['bodies'])
-    res = a3.run3(b, hs, iters=4, log=log)
+    if start:
+        sd = json.loads(Path(start).read_text())
+        for g, q in sd['sections'].items():
+            if g in b.sec:
+                b.sec[g].update(q)
+        b.update_sections(); res = dict(joints_t=sd['strength_joints_t'], sizing={})
+        failing0 = sd.get('strength_failing', [])
+    else:
+        res = a3.run3(b, hs, iters=4, log=log); failing0 = None
     strength_members = b.structure_mass()[0]/1e3; m0 = group_mass(b)
-    failing = [g for g, s in res['sizing'].items() if not s['passes']]
+    failing = failing0 if failing0 is not None else [g for g, s in res['sizing'].items() if not s['passes']]
     log(f'  strength: members {strength_members:.1f} t, joints {res["joints_t"]:.1f} t, failing {failing}')
     hist = []
     st = sweep(b, hs, log)
@@ -119,16 +137,28 @@ def run(tag, concept, deck, rotor, ring=False, mats=None, target=LAM_TARGET, pas
         worst = min(st, key=lambda r: r['lam'])
         hist.append(dict(pass_=k, members_t=b.structure_mass()[0]/1e3, lam={f"{r['left']:.1f}:{r['case']}": r['lam'] for r in st},
                          worst=f"{worst['left']:.1f}:{worst['case']}"))
-        if worst['lam'] >= target or worst['mode'] is None:
+        f1s = []
+        if f1_min:
+            for s_ in hs:
+                b.attach(s_['cfg']['bodies']); f1s.append((first_mode(b), s_['left']))
+            hist[-1]['f1'] = {f"{l:.1f}": f for (f, _), l in f1s}
+            log('    f1 ' + '  '.join(f"{l:.1f} {f:.3f}" for (f, _), l in f1s))
+        lam_ok = worst['lam'] >= target or worst['mode'] is None
+        f1_low = [x for x in f1s if x[0][0] < f1_min]
+        if lam_ok and not f1_low:
             break
-        U, rest = energies(b, worst['mode']); tot = sum(U.values())+rest; gm = group_mass(b)
+        if not lam_ok:
+            mode = worst['mode']; need = target/worst['lam'] - 1.0; why = f"{worst['left']:.1f}:{worst['case']} lambda {worst['lam']:.2f}"
+        else:
+            (f1, mode), l = min(f1_low, key=lambda x: x[0][0]); need = (f1_min/f1)**2 - 1.0; why = f'{l:.1f}: f1 {f1:.3f} Hz'
+        U, rest = energies(b, mode); tot = sum(U.values())+rest; gm = group_mass(b)
         eff = sorted(((U[g]/tot)/max(gm.get(g, 1.0)/1e3, 1e-3), g) for g in U if U[g] > 0)[::-1]
         pick, cov = [], 0.0
         for e_, g in eff:
             pick.append(g); cov += U[g]/tot
             if cov >= COVER or len(pick) >= 12:
                 break
-        need = target/worst['lam'] - 1.0; d = min(0.6, 1.1*need/max(cov, 1e-3))
+        d = min(0.6, 1.1*need/max(cov, 1e-3))
         for g in pick:
             s = b.sec[g]; fr = (1+d)**(1/3)
             if s['fam'] not in ('spine', 'hub', 'tankwall') and s['r']*fr <= s['rmax']:
@@ -137,12 +167,15 @@ def run(tag, concept, deck, rotor, ring=False, mats=None, target=LAM_TARGET, pas
                 s['t'] = min(s['t']*(1+d), s['r']/4)
         b.update_sections()
         hist[-1].update(picked={g: round(U[g]/tot, 3) for g in pick}, cover=cov, d=d, unsized_share=rest/tot)
-        log(f"  pass {k+1}: worst {worst['left']:.1f}:{worst['case']} lambda {worst['lam']:.2f}; stiffen {len(pick)} groups "
+        log(f"  pass {k+1}: worst {why}; stiffen {len(pick)} groups "
             f"(cover {cov:.2f}, unsized share {rest/tot:.2f}) by EI x{1+d:.2f}: {', '.join(pick[:6])}")
         cs = an.cases(b, hs); env = a3.envelope3(b, cs); fixed = strength_fix(b, env)
         if fixed:
             log(f'    strength re-fix: {fixed}')
         st = sweep(b, hs, log)
+    f1_end = {}
+    for s_ in hs:
+        b.attach(s_['cfg']['bodies']); f1_end[f"{s_['left']:.1f}"] = first_mode(b)[0]
     cs = an.cases(b, hs); env = a3.envelope3(b, cs); jt, per = an.joints(b, env)
     sm, by = b.structure_mass(); m1 = group_mass(b)
     added = {g: (m1.get(g, 0)-m0.get(g, 0))/1e3 for g in m1 if abs(m1.get(g, 0)-m0.get(g, 0)) > 50.0}
@@ -152,7 +185,8 @@ def run(tag, concept, deck, rotor, ring=False, mats=None, target=LAM_TARGET, pas
                added_by_group_t=dict(sorted(added.items(), key=lambda kv: -kv[1])), by_family_t={k: v/1e3 for k, v in by.items()},
                tankwall_credit_t=b.tank_credit_t(), psa_increment_t=sm/1e3+jt/1e3-b.tank_credit_t(),
                stability=[{k: v for k, v in r.items() if k != 'mode'} for r in st], passes=hist,
-               closed=bool(min(r['lam'] for r in st) >= target), seconds=time.time()-t0,
+               f1_Hz=f1_end, f1_min=f1_min,
+               closed=bool(min(r['lam'] for r in st) >= target and min(f1_end.values()) >= (f1_min or 0)), seconds=time.time()-t0,
                sections={g: dict(r=s['r'], t=s['t'], mat=s['mat']) for g, s in b.sec.items()})
     (OUT / f'{tag}.json').write_text(json.dumps(out, indent=1, default=float))
     log(f"{tag}: structure {out['structure_t']:.1f} t (strength {strength_members+res['joints_t']:.1f}, stiffening +{out['stiffening_t']:.1f}), "
@@ -165,7 +199,7 @@ if __name__ == '__main__':
     p.add_argument('tag'); p.add_argument('concept'); p.add_argument('deck'); p.add_argument('rotor')
     p.add_argument('--ring', action='store_true'); p.add_argument('--mats', default='')
     p.add_argument('--target', type=float, default=LAM_TARGET); p.add_argument('--passes', type=int, default=10)
-    p.add_argument('--src', default='wsi')
+    p.add_argument('--src', default='wsi'); p.add_argument('--f1', type=float, default=0.0); p.add_argument('--start', default=None)
     a = p.parse_args()
     mats = dict(kv.split('=') for kv in a.mats.split(',') if kv)
-    run(a.tag, a.concept, a.deck, a.rotor, ring=a.ring, mats=mats, target=a.target, passes=a.passes, src=a.src)
+    run(a.tag, a.concept, a.deck, a.rotor, ring=a.ring, mats=mats, target=a.target, passes=a.passes, src=a.src, f1_min=a.f1, start=a.start)

@@ -133,7 +133,10 @@ class Build3(mdl.Build):
             prevx = self.xs[-2]
             for b in rails:
                 self.add(self.station_nodes[prevx][b], self.sp(X_CAGE_END), 'hubcone')
-                self.add(cage[b], self.sp(X_CAGE_END-4.0), 'hubcone')
+                if abs(wrap(b-270.0)) > 20.0:
+                    # the aft legs of the rail pair beside the MRU lane (az 255/285) crossed the flight MRU swept tube (r 2.9 +- 0.55,
+                    # x ~91.2; WSI member check 2026-11-28): those two legs are omitted, the other four and all forward legs remain
+                    self.add(cage[b], self.sp(X_CAGE_END-4.0), 'hubcone')
                 self.add(self.sp(self.x_deck_aft), self.keel_nodes[kx[2]][b], 'hubcone')
                 self.add(self.sp(self.x_skirt), self.keel_nodes[kx[3]][b], 'hubcone')
         else:
@@ -345,6 +348,19 @@ class Build3(mdl.Build):
                 q = a+(b-a)*t; r = math.hypot(q[1], q[2])
                 if K_RING[0]+0.01 < q[0] < K_RING[1]-0.01 and R_SPINE+0.05 < r < K_RING[2]:
                     bad.append((md['group'], round(float(q[0]), 2), round(r, 2))); break
+        return bad
+
+    def mru_violations(self, r0=2.9, half=0.55, clear=0.10, x=(-92.7, 92.0), az=270.0):
+        """Primary members entering the flight MRU swept tube (WSI-0.1 keep-out: r 2.9 +- 0.55 at az 270, x -92.7..92.0)."""
+        c = lambda xx: np.array([xx, r0*math.cos(math.radians(az)), r0*math.sin(math.radians(az))]); bad = []
+        for e, md in zip(self.m.el, self.meta):
+            if e['kind'] == 'spring' or md['fam'] in ('iface', 'mount'):
+                continue
+            a, b = self.m.X[e['a']], self.m.X[e['b']]
+            for t in np.linspace(0, 1, 21):
+                q = a+(b-a)*t
+                if x[0] <= q[0] <= x[1] and np.linalg.norm(q[1:]-c(q[0])[1:]) < half+clear:
+                    bad.append((md['group'], round(float(q[0]), 2))); break
         return bad
 
     def gap_points(self):
