@@ -43,3 +43,9 @@ Full register: `data/interface.toml`.
 | HO-03 | noted | Densify is listed among the DR-3D-01 options. ISSA still recommends T-A, because T-C needs FT-09 slush. |
 | HO-04 | partial | EPS-02: 3 × 96.9 t, reactor centre X −90.7, r 2.9, az 90/210/330. CG 4.14 m forward along the unit axis (X ≈ −86.6). Inertia, mount stiffness and TAC speed band are OPEN. TMS-01, GNC-02 and ECLSS-01 follow at CP4. |
 | HO-05 | OPEN | Stray field not computed by ISSA; the ferromagnetic exclusion stays a precaution aft of X −60. |
+
+## ISSA CP3 update (2026-11-28 08:44Z, ISSA 8cd3736)
+
+- HO-01 corrected: each trunk is 0.211 t/m (Li plus a 6.4 mm composite wall). Supports sit at a 6.4 m pitch, 4 per 25.4 m section. Each saddle carries 5.4 t, shared by four trunks. The anchor takes 155 kN per section (~39 kN per trunk) at 0.736 g. End travel is ±38 to ±127 mm. The table is in ISSA `results/i3d_h6a.json` under "supports"; the objects are named `H6A_<az>_S<k>_Anchor/Slide<j>`. These figures supersede the 08:29Z values above.
+- HO-02: the L2 section runs from X 41.02 to 50.4, so the working frame station is about X 40.8. DR-3D-02 is still pending.
+- HO-04 (new): the NaK transport loops run in the casing-hull annulus at r 5.8, az 10/50, 130/170 and 250/290. They are D 223 mm and 43 t in total, over X −81.6 to 40.4, about 0.12 t/m per loop pair. They fall in MZ-04 and need HP-S/HP-M clips on the frames; SC-04 corridor clearance is to be checked in Phase III.
