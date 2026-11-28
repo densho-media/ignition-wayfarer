@@ -1,0 +1,1451 @@
+{
+ "reference_line_t": 150.0,
+ "owners": [
+  [
+   "longerons, frames, module frames, diagonals",
+   "PSA",
+   "primary load path"
+  ],
+  [
+   "thrust ring, transition, pickups to the nozzle yoke",
+   "PSA",
+   "drive owns the nozzle yoke and cage; PSA owns the struts from the yoke lug outward"
+  ],
+  [
+   "common thrust deck (tank-farm aft fixity) and the farm forward ring",
+   "PSA",
+   "D04: common decks and major frames are PSA"
+  ],
+  [
+   "tank shells, insulation, internal structure (baffles, slosh), tank cradles and skirts, tank mounts (V-links), containment",
+   "Tankage budget",
+   "D04: tankage has its own budget; PSA provides the deck hard-points and V-link lugs"
+  ],
+  [
+   "V-link lugs on the deck (structure side of the tank mount)",
+   "PSA",
+   "shared item: the lug is PSA, the link and its tank fitting are tankage"
+  ],
+  [
+   "Momentum Spine structural shell (load-bearing tube, ties, axial datum)",
+   "PSA",
+   "D05"
+  ],
+  [
+   "spine pressure liner and its seals (crew transit tube)",
+   "Habitat / crew transfer",
+   "D05 option B: pressure-retaining liner separate from the load-bearing shell; the liner hangs on the shell, carries pressure hoop only"
+  ],
+  [
+   "spine utilities (power, data, coolant, ducts, rails)",
+   "their subsystems (ISSA)",
+   "D05"
+  ],
+  [
+   "rotor-bay collar or hub path",
+   "PSA",
+   "primary path around or through the rotor"
+  ],
+  [
+   "rotating ring structure (rim, spokes, bearing races)",
+   "PSA (rotating structure)",
+   "correction 3.7 sized explicitly; habitat pressure structure stays habitat-owned"
+  ],
+  [
+   "protective casing (Whipple and MLI carrier)",
+   "PSA (secondary structure)",
+   "carried by frames; protection layers are ISSA PROT"
+  ],
+  [
+   "Brow truss and forward shield carrier",
+   "Forward defense",
+   "PSA ends at the keel-to-Brow interface ring"
+  ],
+  [
+   "radiator backbone and blade roots",
+   "Thermal (with PSA frame interface)",
+   "section 3.6 trade; PSA owns the frame lugs"
+  ],
+  [
+   "hot-loop saddles and anchors",
+   "ISSA (TMS)",
+   "PSA owns the frame hard-points and their reactions"
+  ],
+  [
+   "MRU carriage rail",
+   "ISSA (logistics)",
+   "PSA owns the lugs"
+  ]
+ ],
+ "hand_sized": {
+  "casing_t": 22.446051191368355,
+  "casing_area_m2": 8633.096612064752,
+  "rotating_per_ring": {
+   "hoop_t": 0.7714325447971073,
+   "spokes_t": 3.8170350741115993,
+   "stays_t": 1.7616675093672252,
+   "races_t": 6.041,
+   "total_t": 12.391135128275932
+  },
+  "rings": 2,
+  "spine_liner_t": 7.206445729667102,
+  "spine_liner_t_mm": 2.0
+ },
+ "variants": {
+  "H:bypass:F1": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 40.17151935303459,
+    "frames (4 m)": 72.00010828207535,
+    "module frames (L3 joints)": 46.00874287945598,
+    "diagonals (shear and torsion)": 51.18770399920979,
+    "longerons (rails)": 134.38554424482055,
+    "Momentum Spine structural shell": 21.766782876732467,
+    "spine ties and axial datum": 2.6942779246150055,
+    "forward keels to the Brow": 49.38706594902556,
+    "rotor-bay collar (Q45 bypass)": 1123.9787261864174,
+    "common thrust deck (tank-farm aft)": 286.386544064717,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 176.2373643223066,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 2051.4327015303306,
+   "delta_vs_line_t": 1901.4327015303306,
+   "coupled_departure_delta_t": 6698.052239763869,
+   "coupled_departure_t": 15270.712474210413,
+   "uncertainty_t": {
+    "low_allowables": 91.10948362325175,
+    "high_allowables": -131.819010338078
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 19.719341466901998,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 36.5593403152022,
+      "finished specialist components": 5.287120929669198
+     },
+     "total_t": 61.565802711773394,
+     "structure_fraction": 0.030718325597732552,
+     "longeron_fraction": 0.006000000000000002,
+     "whole_ship_fraction_psa_only": 0.00590451732082461
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 19.719341466901998,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 36.5593403152022,
+      "finished specialist components": 5.287120929669198
+     },
+     "total_t": 61.565802711773394,
+     "structure_fraction": 0.030718325597732552,
+     "longeron_fraction": 0.006000000000000002,
+     "whole_ship_fraction_psa_only": 0.00590451732082461
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 19.719341466901998,
+      "specialty metals": 208.9504674201409,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 54.839010472803295,
+      "finished specialist components": 8.81186821611533
+     },
+     "total_t": 292.32068757596153,
+     "structure_fraction": 0.14585373152609354,
+     "longeron_fraction": 0.006000000000000002,
+     "whole_ship_fraction_psa_only": 0.028035248254751562
+    }
+   },
+   "failing_groups": [
+    "modframe:14",
+    "frame:14",
+    "diag:14",
+    "rail:14",
+    "collar:14"
+   ],
+   "config": "F1",
+   "concept": "H",
+   "rotor": "bypass"
+  },
+  "H:hub:F1": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 38.49897183025899,
+    "frames (4 m)": 44.5668664705544,
+    "module frames (L3 joints)": 16.24894371432792,
+    "diagonals (shear and torsion)": 28.56140193506099,
+    "longerons (rails)": 117.61883454483767,
+    "Momentum Spine structural shell": 22.13770571703892,
+    "spine ties and axial datum": 0.9375716581238466,
+    "forward keels to the Brow": 25.469983168934586,
+    "rotor-bay collar (Q45 bypass)": 144.11381074297364,
+    "rotor-bay hub path (cones)": 18.16442638362699,
+    "common thrust deck (tank-farm aft)": 633.573233129831,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 85.8092783406431,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1222.9293490841324,
+   "delta_vs_line_t": 1072.9293490841324,
+   "coupled_departure_delta_t": 3779.537831634756,
+   "coupled_departure_t": 12352.1980660813,
+   "uncertainty_t": {
+    "low_allowables": 56.07308264626208,
+    "high_allowables": -77.55004941141998
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 12.139244487907666,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 21.797834985911365,
+      "finished specialist components": 2.574278350219293
+     },
+     "total_t": 36.51135782403833,
+     "structure_fraction": 0.03105496802826286,
+     "longeron_fraction": 0.006000000000000001,
+     "whole_ship_fraction_psa_only": 0.0038039023520959558
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 12.139244487907666,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 21.797834985911365,
+      "finished specialist components": 2.574278350219293
+     },
+     "total_t": 36.51135782403833,
+     "structure_fraction": 0.03105496802826286,
+     "longeron_fraction": 0.006000000000000001,
+     "whole_ship_fraction_psa_only": 0.0038039023520959558
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 12.139244487907666,
+      "specialty metals": 136.77376949234792,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 32.69675247886704,
+      "finished specialist components": 4.290463917032155
+     },
+     "total_t": 185.90023037615478,
+     "structure_fraction": 0.15811862540420996,
+     "longeron_fraction": 0.006000000000000001,
+     "whole_ship_fraction_psa_only": 0.01936784512345538
+    }
+   },
+   "failing_groups": [],
+   "config": "F1",
+   "concept": "H",
+   "rotor": "hub"
+  },
+  "HC:bypass:F1": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 40.17151935303459,
+    "frames (4 m)": 60.14153123282812,
+    "module frames (L3 joints)": 46.56448886968271,
+    "diagonals (shear and torsion)": 15.7449246016122,
+    "longerons (rails)": 102.14701285398242,
+    "Momentum Spine structural shell": 29.700498528245777,
+    "spine ties and axial datum": 3.2284296154817502,
+    "forward keels to the Brow": 16.007437223265523,
+    "rotor-bay collar (Q45 bypass)": 566.4658082340035,
+    "common thrust deck (tank-farm aft)": 374.4615636331907,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 167.24062058258485,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1469.1021561758323,
+   "delta_vs_line_t": 1319.1021561758323,
+   "coupled_departure_delta_t": 4646.714629731503,
+   "coupled_departure_t": 13219.374864178048,
+   "uncertainty_t": {
+    "low_allowables": 294.1365467053307,
+    "high_allowables": -218.5178977477307
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 358.93090203532876,
+      "polymer matrices": 239.2872680235525,
+      "alloying elements": 12.437349775508007,
+      "specialty metals": 0.0,
+      "ceramic precursors": 3.064410385619471,
+      "manufacturing consumables": 25.092664282906544,
+      "finished specialist components": 5.017218617477545
+     },
+     "total_t": 643.8298131203928,
+     "structure_fraction": 0.45280375613888085,
+     "longeron_fraction": 0.030000000000000006,
+     "whole_ship_fraction_psa_only": 0.06539949919757523
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 358.93090203532876,
+      "polymer matrices": 239.2872680235525,
+      "alloying elements": 12.743790814069953,
+      "specialty metals": 0.0,
+      "ceramic precursors": 3.064410385619471,
+      "manufacturing consumables": 25.092664282906544,
+      "finished specialist components": 5.017218617477545
+     },
+     "total_t": 644.1362541589548,
+     "structure_fraction": 0.4530192752876811,
+     "longeron_fraction": 0.03300000000000001,
+     "whole_ship_fraction_psa_only": 0.06543062712928502
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 358.93090203532876,
+      "polymer matrices": 239.2872680235525,
+      "alloying elements": 12.437349775508007,
+      "specialty metals": 228.94017500097084,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 37.63899642435982,
+      "finished specialist components": 67.607298484439
+     },
+     "total_t": 944.8419897441589,
+     "structure_fraction": 0.664504801106325,
+     "longeron_fraction": 0.58,
+     "whole_ship_fraction_psa_only": 0.09597597329428684
+    }
+   },
+   "failing_groups": [
+    "modframe:14",
+    "rail:14"
+   ],
+   "config": "F1",
+   "concept": "HC",
+   "rotor": "bypass"
+  },
+  "HC:hub:F1": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 40.17151935303459,
+    "frames (4 m)": 41.142491806336096,
+    "module frames (L3 joints)": 18.87095004462002,
+    "diagonals (shear and torsion)": 10.056263104577692,
+    "longerons (rails)": 80.34577454088067,
+    "Momentum Spine structural shell": 24.728952424110464,
+    "spine ties and axial datum": 1.0699663008261275,
+    "forward keels to the Brow": 9.875171301941537,
+    "rotor-bay collar (Q45 bypass)": 54.02681790720513,
+    "rotor-bay hub path (cones)": 18.16442638362699,
+    "common thrust deck (tank-farm aft)": 751.5992274240941,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 84.74497309491422,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1182.0248551340878,
+   "delta_vs_line_t": 1032.0248551340878,
+   "coupled_departure_delta_t": 3635.44625421632,
+   "coupled_departure_t": 12208.106488662865,
+   "uncertainty_t": {
+    "low_allowables": 112.25716121541132,
+    "high_allowables": -109.91608563986117
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 44.374951388234564,
+      "polymer matrices": 29.583300925489716,
+      "alloying elements": 11.124114489751651,
+      "specialty metals": 0.0,
+      "ceramic precursors": 2.410373236226418,
+      "manufacturing consumables": 21.001031211825072,
+      "finished specialist components": 2.542349192847426
+     },
+     "total_t": 111.03612044437484,
+     "structure_fraction": 0.0978467215472499,
+     "longeron_fraction": 0.029999999999999995,
+     "whole_ship_fraction_psa_only": 0.011617706428799961
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 44.374951388234564,
+      "polymer matrices": 29.583300925489716,
+      "alloying elements": 11.365151813374293,
+      "specialty metals": 0.0,
+      "ceramic precursors": 2.410373236226418,
+      "manufacturing consumables": 21.001031211825072,
+      "finished specialist components": 2.542349192847426
+     },
+     "total_t": 111.2771577679975,
+     "structure_fraction": 0.09805912731028099,
+     "longeron_fraction": 0.032999999999999995,
+     "whole_ship_fraction_psa_only": 0.011642926157776663
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 44.374951388234564,
+      "polymer matrices": 29.583300925489716,
+      "alloying elements": 11.124114489751651,
+      "specialty metals": 147.98567855328787,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 31.501546817737605,
+      "finished specialist components": 50.837797888456464
+     },
+     "total_t": 315.40739006295786,
+     "structure_fraction": 0.27794179899229843,
+     "longeron_fraction": 0.58,
+     "whole_ship_fraction_psa_only": 0.03300106711726417
+    }
+   },
+   "failing_groups": [],
+   "config": "F1",
+   "concept": "HC",
+   "rotor": "hub"
+  },
+  "A:bypass:F1": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 71.29788475332066,
+    "frames (4 m)": 83.0845769008105,
+    "diagonals (shear and torsion)": 57.155925781271534,
+    "longerons (rails)": 116.23003663861738,
+    "module frames (L3 joints)": 16.809482174244405,
+    "Momentum Spine structural shell": 26.17054075410729,
+    "spine ties and axial datum": 4.708425192680744,
+    "forward keels to the Brow": 32.19422805874645,
+    "rotor-bay collar (Q45 bypass)": 979.669996848907,
+    "common thrust deck (tank-farm aft)": 354.007228186126,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 189.20365107168104,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1977.7602978084333,
+   "delta_vs_line_t": 1827.7602978084333,
+   "coupled_departure_delta_t": 6438.531296234765,
+   "coupled_departure_t": 15011.19153068131,
+   "uncertainty_t": {
+    "low_allowables": 83.28091990511798,
+    "high_allowables": -127.25091607879921
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 18.016115994600238,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 34.82656650577666,
+      "finished specialist components": 5.676109532150431
+     },
+     "total_t": 58.51879203252733,
+     "structure_fraction": 0.0303122625002298,
+     "longeron_fraction": 0.006,
+     "whole_ship_fraction_psa_only": 0.005652227776029522
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 18.016115994600238,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 34.82656650577666,
+      "finished specialist components": 5.676109532150431
+     },
+     "total_t": 58.51879203252733,
+     "structure_fraction": 0.0303122625002298,
+     "longeron_fraction": 0.006,
+     "whole_ship_fraction_psa_only": 0.005652227776029522
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 18.016115994600238,
+      "specialty metals": 181.63550502881378,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 52.23984975866499,
+      "finished specialist components": 9.460182553584053
+     },
+     "total_t": 261.35165333566306,
+     "structure_fraction": 0.135378049437114,
+     "longeron_fraction": 0.006,
+     "whole_ship_fraction_psa_only": 0.02524349910493658
+    }
+   },
+   "failing_groups": [
+    "frame:14",
+    "diag:14",
+    "rail:14",
+    "modframe:14",
+    "collar:14"
+   ],
+   "config": "F1",
+   "concept": "A",
+   "rotor": "bypass"
+  },
+  "A:hub:F1": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 75.68801289430561,
+    "frames (4 m)": 47.36826946172478,
+    "diagonals (shear and torsion)": 31.680439623494514,
+    "longerons (rails)": 114.65636817636715,
+    "module frames (L3 joints)": 0.09262423603808402,
+    "Momentum Spine structural shell": 22.230881028549483,
+    "spine ties and axial datum": 0.9135346449715805,
+    "forward keels to the Brow": 27.053547597720375,
+    "rotor-bay collar (Q45 bypass)": 224.62060094207223,
+    "rotor-bay hub path (cones)": 31.629977070336377,
+    "common thrust deck (tank-farm aft)": 647.5596554313556,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 94.7752925992384,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1365.4975251540943,
+   "delta_vs_line_t": 1215.4975251540943,
+   "coupled_departure_delta_t": 4281.753392709256,
+   "coupled_departure_t": 12854.413627155802,
+   "uncertainty_t": {
+    "low_allowables": 58.514926183375145,
+    "high_allowables": -89.40917042704527
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 11.131975170611152,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 24.469878222138732,
+      "finished specialist components": 2.8432587779771517
+     },
+     "total_t": 38.445112170727036,
+     "structure_fraction": 0.02916332420012745,
+     "longeron_fraction": 0.0059999999999999975,
+     "whole_ship_fraction_psa_only": 0.003946746430469471
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 11.131975170611152,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 24.469878222138732,
+      "finished specialist components": 2.8432587779771517
+     },
+     "total_t": 38.445112170727036,
+     "structure_fraction": 0.02916332420012745,
+     "longeron_fraction": 0.0059999999999999975,
+     "whole_ship_fraction_psa_only": 0.003946746430469471
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 11.131975170611152,
+      "specialty metals": 90.98428089526885,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 36.7048173332081,
+      "finished specialist components": 4.73876462996192
+     },
+     "total_t": 143.55983802905,
+     "structure_fraction": 0.10890024406657355,
+     "longeron_fraction": 0.0059999999999999975,
+     "whole_ship_fraction_psa_only": 0.014737745484622257
+    }
+   },
+   "failing_groups": [
+    "keel:15"
+   ],
+   "config": "F1",
+   "concept": "A",
+   "rotor": "hub"
+  },
+  "C:bypass:F1": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 42.75512887247977,
+    "frames (4 m)": 93.3906985569842,
+    "diagonals (shear and torsion)": 27.454375528747086,
+    "longerons (rails)": 49.85626184575127,
+    "module frames (L3 joints)": 16.809482174244405,
+    "Momentum Spine structural shell": 35.7136474607129,
+    "spine ties and axial datum": 4.722912160463094,
+    "forward keels to the Brow": 10.753640555689778,
+    "rotor-bay collar (Q45 bypass)": 552.5339114934723,
+    "common thrust deck (tank-farm aft)": 460.2205729949043,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 185.30845469176322,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1526.7474077831325,
+   "delta_vs_line_t": 1376.7474077831325,
+   "coupled_departure_delta_t": 4849.777775920835,
+   "coupled_departure_t": 13422.43801036738,
+   "uncertainty_t": {
+    "low_allowables": 263.3006046919811,
+    "high_allowables": -199.22166375315825
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 384.35891365419616,
+      "polymer matrices": 256.23927576946414,
+      "alloying elements": 14.04841939316411,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 25.88421263286895,
+      "finished specialist components": 5.559253640752896
+     },
+     "total_t": 686.0900750904462,
+     "structure_fraction": 0.46372505865395813,
+     "longeron_fraction": 1.0,
+     "whole_ship_fraction_psa_only": 0.0692865384520707
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 384.35891365419616,
+      "polymer matrices": 256.23927576946414,
+      "alloying elements": 14.04841939316411,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 25.88421263286895,
+      "finished specialist components": 5.559253640752896
+     },
+     "total_t": 686.0900750904462,
+     "structure_fraction": 0.46372505865395813,
+     "longeron_fraction": 1.0,
+     "whole_ship_fraction_psa_only": 0.0692865384520707
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 384.35891365419616,
+      "polymer matrices": 256.23927576946414,
+      "alloying elements": 14.04841939316411,
+      "specialty metals": 254.5381838596179,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 38.82631894930343,
+      "finished specialist components": 9.265422734588162
+     },
+     "total_t": 957.2765343603339,
+     "structure_fraction": 0.6470187125003714,
+     "longeron_fraction": 1.0,
+     "whole_ship_fraction_psa_only": 0.09667298772464904
+    }
+   },
+   "failing_groups": [
+    "frame:14",
+    "diag:14",
+    "rail:14",
+    "modframe:14",
+    "collar:14"
+   ],
+   "config": "F1",
+   "concept": "C",
+   "rotor": "bypass"
+  },
+  "C:hub:F1": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 42.836399813371884,
+    "frames (4 m)": 61.50825586371644,
+    "diagonals (shear and torsion)": 14.588050033158417,
+    "longerons (rails)": 45.87663199924132,
+    "module frames (L3 joints)": 0.1300237501538979,
+    "Momentum Spine structural shell": 26.97477106165107,
+    "spine ties and axial datum": 1.0851077005540255,
+    "forward keels to the Brow": 11.092476240630102,
+    "rotor-bay collar (Q45 bypass)": 87.85431025533047,
+    "rotor-bay hub path (cones)": 16.77731181526852,
+    "common thrust deck (tank-farm aft)": 647.5596554313556,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 97.72948988747757,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1101.2408052998296,
+   "delta_vs_line_t": 951.2408052998296,
+   "coupled_departure_delta_t": 3350.8735814658944,
+   "coupled_departure_t": 11923.533815912439,
+   "uncertainty_t": {
+    "low_allowables": 98.0181242556248,
+    "high_allowables": -94.40349464100225
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 95.64688111701619,
+      "polymer matrices": 63.764587411344124,
+      "alloying elements": 11.170040985654392,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 19.12565987928861,
+      "finished specialist components": 2.931884696624327
+     },
+     "total_t": 192.63905408992764,
+     "structure_fraction": 0.1827673362899125,
+     "longeron_fraction": 1.0000000000000002,
+     "whole_ship_fraction_psa_only": 0.020327637272461608
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 95.64688111701619,
+      "polymer matrices": 63.764587411344124,
+      "alloying elements": 11.170040985654392,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 19.12565987928861,
+      "finished specialist components": 2.931884696624327
+     },
+     "total_t": 192.63905408992764,
+     "structure_fraction": 0.1827673362899125,
+     "longeron_fraction": 1.0000000000000002,
+     "whole_ship_fraction_psa_only": 0.020327637272461608
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 95.64688111701619,
+      "polymer matrices": 63.764587411344124,
+      "alloying elements": 11.170040985654392,
+      "specialty metals": 163.8334558224874,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 28.68848981893291,
+      "finished specialist components": 4.8864744943738785
+     },
+     "total_t": 367.9899296498089,
+     "structure_fraction": 0.34913242042919923,
+     "longeron_fraction": 1.0000000000000002,
+     "whole_ship_fraction_psa_only": 0.03883099325408856
+    }
+   },
+   "failing_groups": [
+    "deck:15"
+   ],
+   "config": "F1",
+   "concept": "C",
+   "rotor": "hub"
+  },
+  "H3:hub:F1": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 42.13868371711693,
+    "frames (4 m)": 39.425324203100686,
+    "module frames (L3 joints)": 15.976470862908164,
+    "diagonals (shear and torsion)": 31.267774725866797,
+    "longerons (rails)": 115.30790912881199,
+    "Momentum Spine structural shell": 23.63870653603299,
+    "spine ties and axial datum": 0.9317358761777923,
+    "forward keels to the Brow": 26.922013703236473,
+    "rotor-bay collar (Q45 bypass)": 259.03130055165235,
+    "rotor-bay hub path (cones)": 14.638636417057391,
+    "common thrust deck (tank-farm aft)": 647.5596554313556,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 93.1488466808993,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1357.2153792821366,
+   "delta_vs_line_t": 1207.2153792821366,
+   "coupled_departure_delta_t": 4252.578420772006,
+   "coupled_departure_t": 12825.23865521855,
+   "uncertainty_t": {
+    "low_allowables": 62.00920667407859,
+    "high_allowables": -86.86410035386251
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 13.177789825756614,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 24.336764223066343,
+      "finished specialist components": 2.794465400426979
+     },
+     "total_t": 40.30901944924994,
+     "structure_fraction": 0.030770547852504954,
+     "longeron_fraction": 0.0059999999999999975,
+     "whole_ship_fraction_psa_only": 0.004141615118379028
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 13.177789825756614,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 24.336764223066343,
+      "finished specialist components": 2.794465400426979
+     },
+     "total_t": 40.30901944924994,
+     "structure_fraction": 0.030770547852504954,
+     "longeron_fraction": 0.0059999999999999975,
+     "whole_ship_fraction_psa_only": 0.004141615118379028
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 13.177789825756614,
+      "specialty metals": 143.92912014247065,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 36.505146334599516,
+      "finished specialist components": 4.657442334044965
+     },
+     "total_t": 198.26949863687176,
+     "structure_fraction": 0.15135225760525298,
+     "longeron_fraction": 0.0059999999999999975,
+     "whole_ship_fraction_psa_only": 0.020371518937635138
+    }
+   },
+   "failing_groups": [
+    "keel:15"
+   ],
+   "config": "F1",
+   "concept": "H3",
+   "rotor": "hub"
+  },
+  "H:hub:P": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 39.60103860538032,
+    "frames (4 m)": 43.52368648015877,
+    "module frames (L3 joints)": 14.548938294917583,
+    "diagonals (shear and torsion)": 26.31117774232981,
+    "longerons (rails)": 118.0227562707963,
+    "Momentum Spine structural shell": 20.889522934645136,
+    "spine ties and axial datum": 0.9549656684051837,
+    "forward keels to the Brow": 24.31784721111998,
+    "rotor-bay collar (Q45 bypass)": 137.8087006391174,
+    "rotor-bay hub path (cones)": 18.16442638362699,
+    "common thrust deck (tank-farm aft)": 633.573233129831,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 85.53776412348168,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1210.4823789317304,
+   "delta_vs_line_t": 1060.4823789317304,
+   "coupled_departure_delta_t": 3534.07248908353,
+   "coupled_departure_t": 8000.380595195089,
+   "uncertainty_t": {
+    "low_allowables": 55.50784755792741,
+    "high_allowables": -76.63681184872627
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 12.08869831004343,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 21.55432586720655,
+      "finished specialist components": 2.5661329237044503
+     },
+     "total_t": 36.20915710095443,
+     "structure_fraction": 0.031127471138400403,
+     "longeron_fraction": 0.006000000000000001,
+     "whole_ship_fraction_psa_only": 0.006608038383343405
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 12.08869831004343,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 21.55432586720655,
+      "finished specialist components": 2.5661329237044503
+     },
+     "total_t": 36.20915710095443,
+     "structure_fraction": 0.031127471138400403,
+     "longeron_fraction": 0.006000000000000001,
+     "whole_ship_fraction_psa_only": 0.006608038383343405
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 12.08869831004343,
+      "specialty metals": 137.57109994798944,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 32.33148880080982,
+      "finished specialist components": 4.2768882061740845
+     },
+     "total_t": 186.26817526501677,
+     "structure_fraction": 0.16012682188096247,
+     "longeron_fraction": 0.006000000000000001,
+     "whole_ship_fraction_psa_only": 0.03399325889621781
+    }
+   },
+   "failing_groups": [],
+   "config": "P",
+   "concept": "H",
+   "rotor": "hub"
+  },
+  "H:hub:R": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 40.707140041659436,
+    "frames (4 m)": 49.54469391122385,
+    "module frames (L3 joints)": 17.220493283763815,
+    "diagonals (shear and torsion)": 31.31451502915854,
+    "longerons (rails)": 125.05056102978871,
+    "Momentum Spine structural shell": 21.48484993908434,
+    "spine ties and axial datum": 0.9446800961069851,
+    "forward keels to the Brow": 24.485271205266212,
+    "rotor-bay collar (Q45 bypass)": 155.74688166649688,
+    "rotor-bay hub path (cones)": 18.16442638362699,
+    "common thrust deck (tank-farm aft)": 690.3099689025361,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 92.00348490994539,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1314.2052878465774,
+   "delta_vs_line_t": 1164.2052878465774,
+   "coupled_departure_delta_t": 4152.303137886296,
+   "coupled_departure_t": 17021.94575507009,
+   "uncertainty_t": {
+    "low_allowables": 60.367721612171465,
+    "high_allowables": -83.66515601909731
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 12.992520606540843,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 23.499469629774154,
+      "finished specialist components": 2.7601045472983614
+     },
+     "total_t": 39.25209478361336,
+     "structure_fraction": 0.030980906381578785,
+     "longeron_fraction": 0.006,
+     "whole_ship_fraction_psa_only": 0.002806403259132581
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 12.992520606540843,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 23.499469629774154,
+      "finished specialist components": 2.7601045472983614
+     },
+     "total_t": 39.25209478361336,
+     "structure_fraction": 0.030980906381578785,
+     "longeron_fraction": 0.006,
+     "whole_ship_fraction_psa_only": 0.002806403259132581
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 12.992520606540843,
+      "specialty metals": 144.84004928182253,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 35.24920444466123,
+      "finished specialist components": 4.60017424549727
+     },
+     "total_t": 197.68194857852188,
+     "structure_fraction": 0.15602647389906965,
+     "longeron_fraction": 0.006,
+     "whole_ship_fraction_psa_only": 0.014133647333238533
+    }
+   },
+   "failing_groups": [],
+   "config": "R",
+   "concept": "H",
+   "rotor": "hub"
+  },
+  "HC:hub:P": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 40.17151935303459,
+    "frames (4 m)": 39.81849548896557,
+    "module frames (L3 joints)": 15.970323219804333,
+    "diagonals (shear and torsion)": 8.89601965435881,
+    "longerons (rails)": 77.23290269706389,
+    "Momentum Spine structural shell": 24.728952424110464,
+    "spine ties and axial datum": 1.0455561351550686,
+    "forward keels to the Brow": 8.322813690341707,
+    "rotor-bay collar (Q45 bypass)": 54.880766780619275,
+    "rotor-bay hub path (cones)": 18.16442638362699,
+    "common thrust deck (tank-farm aft)": 690.3099689025361,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 82.0791656947119,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1108.849231872249,
+   "delta_vs_line_t": 958.849231872249,
+   "coupled_departure_delta_t": 3195.3785926665896,
+   "coupled_departure_t": 7661.686698778149,
+   "uncertainty_t": {
+    "low_allowables": 106.90248089648581,
+    "high_allowables": -103.5689324598127
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 43.259760075191906,
+      "polymer matrices": 28.839840050127943,
+      "alloying elements": 10.624252442767077,
+      "specialty metals": 0.0,
+      "ceramic precursors": 2.3169870809119075,
+      "manufacturing consumables": 19.59083489459233,
+      "finished specialist components": 2.462374970841357
+     },
+     "total_t": 107.09404951443253,
+     "structure_fraction": 0.10087786371090522,
+     "longeron_fraction": 0.030000000000000002,
+     "whole_ship_fraction_psa_only": 0.019913622731936975
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 43.259760075191906,
+      "polymer matrices": 28.839840050127943,
+      "alloying elements": 10.855951150858267,
+      "specialty metals": 0.0,
+      "ceramic precursors": 2.3169870809119075,
+      "manufacturing consumables": 19.59083489459233,
+      "finished specialist components": 2.462374970841357
+     },
+     "total_t": 107.32574822252371,
+     "structure_fraction": 0.10109611365852407,
+     "longeron_fraction": 0.033,
+     "whole_ship_fraction_psa_only": 0.019956705990823206
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 43.259760075191906,
+      "polymer matrices": 28.839840050127943,
+      "alloying elements": 10.624252442767077,
+      "specialty metals": 145.42650344909367,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 29.386252341888493,
+      "finished specialist components": 48.89904184903248
+     },
+     "total_t": 306.43565020810155,
+     "structure_fraction": 0.2886488455522411,
+     "longeron_fraction": 0.5800000000000001,
+     "whole_ship_fraction_psa_only": 0.05698023333254917
+    }
+   },
+   "failing_groups": [],
+   "config": "P",
+   "concept": "HC",
+   "rotor": "hub"
+  },
+  "HC:hub:R": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 40.41583013918342,
+    "frames (4 m)": 44.3112929534357,
+    "module frames (L3 joints)": 19.299273652120995,
+    "diagonals (shear and torsion)": 10.56585712418519,
+    "longerons (rails)": 81.04326470281701,
+    "Momentum Spine structural shell": 24.728952424110464,
+    "spine ties and axial datum": 1.047925826160243,
+    "forward keels to the Brow": 9.329819968586142,
+    "rotor-bay collar (Q45 bypass)": 59.802962824800424,
+    "rotor-bay hub path (cones)": 18.16442638362699,
+    "common thrust deck (tank-farm aft)": 751.5992274240941,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 83.96938552200379,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1191.5065403930448,
+   "delta_vs_line_t": 1041.5065403930448,
+   "coupled_departure_delta_t": 3714.6806675328003,
+   "coupled_departure_t": 16584.323284716593,
+   "uncertainty_t": {
+    "low_allowables": 114.84867480915183,
+    "high_allowables": -111.81499671012799
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 47.81918395054308,
+      "polymer matrices": 31.879455967028726,
+      "alloying elements": 11.124313923960797,
+      "specialty metals": 0.0,
+      "ceramic precursors": 2.4312979410845066,
+      "manufacturing consumables": 21.20617666846242,
+      "finished specialist components": 2.5190815656601138
+     },
+     "total_t": 116.97951001673964,
+     "structure_fraction": 0.10222995428907099,
+     "longeron_fraction": 0.030000000000000002,
+     "whole_ship_fraction_psa_only": 0.00843769316050153
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 47.81918395054308,
+      "polymer matrices": 31.879455967028726,
+      "alloying elements": 11.367443718069246,
+      "specialty metals": 0.0,
+      "ceramic precursors": 2.4312979410845066,
+      "manufacturing consumables": 21.20617666846242,
+      "finished specialist components": 2.5190815656601138
+     },
+     "total_t": 117.2226398108481,
+     "structure_fraction": 0.1024424286594497,
+     "longeron_fraction": 0.033,
+     "whole_ship_fraction_psa_only": 0.008455230031707176
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 47.81918395054308,
+      "polymer matrices": 31.879455967028726,
+      "alloying elements": 11.124313923960797,
+      "specialty metals": 147.47565283799676,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 31.809265002693625,
+      "finished specialist components": 51.20356280373399
+     },
+     "total_t": 321.31143448595697,
+     "structure_fraction": 0.2807983488335243,
+     "longeron_fraction": 0.5800000000000001,
+     "whole_ship_fraction_psa_only": 0.023176086929797668
+    }
+   },
+   "failing_groups": [],
+   "config": "R",
+   "concept": "HC",
+   "rotor": "hub"
+  },
+  "H:hub:F1:radius=7.0": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 43.20073742247035,
+    "frames (4 m)": 48.21171968284583,
+    "module frames (L3 joints)": 21.8468826567801,
+    "diagonals (shear and torsion)": 28.74632402432463,
+    "longerons (rails)": 123.11408739354238,
+    "Momentum Spine structural shell": 23.21796869223,
+    "spine ties and axial datum": 1.793604225490501,
+    "forward keels to the Brow": 24.558749097625917,
+    "rotor-bay collar (Q45 bypass)": 192.09005118252017,
+    "rotor-bay hub path (cones)": 29.30039015632438,
+    "common thrust deck (tank-farm aft)": 570.8597484741495,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 92.13477402879425,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1246.3033584850182,
+   "delta_vs_line_t": 1096.3033584850182,
+   "coupled_departure_delta_t": 3861.8759211679067,
+   "coupled_departure_t": 12434.53615561445,
+   "uncertainty_t": {
+    "low_allowables": 57.6218131120082,
+    "high_allowables": -78.31712690028881
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 13.045915293326887,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 22.13880526016606,
+      "finished specialist components": 2.7640432208638277
+     },
+     "total_t": 37.94876377435678,
+     "structure_fraction": 0.03164836444942412,
+     "longeron_fraction": 0.006,
+     "whole_ship_fraction_psa_only": 0.003944052617704709
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 13.045915293326887,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 22.13880526016606,
+      "finished specialist components": 2.7640432208638277
+     },
+     "total_t": 37.94876377435678,
+     "structure_fraction": 0.03164836444942412,
+     "longeron_fraction": 0.006,
+     "whole_ship_fraction_psa_only": 0.003944052617704709
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 13.045915293326887,
+      "specialty metals": 158.05046554328544,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 33.208207890249085,
+      "finished specialist components": 4.6067387014397125
+     },
+     "total_t": 208.91132742830112,
+     "structure_fraction": 0.17422706751073644,
+     "longeron_fraction": 0.006,
+     "whole_ship_fraction_psa_only": 0.021712361243465105
+    }
+   },
+   "failing_groups": [],
+   "config": "F1",
+   "concept": "H",
+   "rotor": "hub"
+  },
+  "H:hub:F1:radius=9.0": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 42.59788664467912,
+    "frames (4 m)": 44.92546719634643,
+    "module frames (L3 joints)": 24.19331982926148,
+    "diagonals (shear and torsion)": 31.856764543273705,
+    "longerons (rails)": 111.09875010786237,
+    "Momentum Spine structural shell": 20.045767574917953,
+    "spine ties and axial datum": 2.852980100525036,
+    "forward keels to the Brow": 16.430306476069703,
+    "rotor-bay collar (Q45 bypass)": 267.7249258130202,
+    "rotor-bay hub path (cones)": 34.92582515108212,
+    "common thrust deck (tank-farm aft)": 332.9447824226784,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 89.8351390237662,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1066.660236331403,
+   "delta_vs_line_t": 916.660236331403,
+   "coupled_departure_delta_t": 3229.0588797176483,
+   "coupled_departure_t": 11801.719114164192,
+   "uncertainty_t": {
+    "low_allowables": 49.172631354891564,
+    "high_allowables": -65.26345483838197
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 12.035264664704094,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 18.59193551719434,
+      "finished specialist components": 2.695054170712986
+     },
+     "total_t": 33.322254352611424,
+     "structure_fraction": 0.03268708176202235,
+     "longeron_fraction": 0.006000000000000001,
+     "whole_ship_fraction_psa_only": 0.0035291050214724313
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 12.035264664704094,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 18.59193551719434,
+      "finished specialist components": 2.695054170712986
+     },
+     "total_t": 33.322254352611424,
+     "structure_fraction": 0.03268708176202235,
+     "longeron_fraction": 0.006000000000000001,
+     "whole_ship_fraction_psa_only": 0.0035291050214724313
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 12.035264664704094,
+      "specialty metals": 160.66449678674633,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 27.887903275791505,
+      "finished specialist components": 4.49175695118831
+     },
+     "total_t": 205.07942167843024,
+     "structure_fraction": 0.20117029757879412,
+     "longeron_fraction": 0.006000000000000001,
+     "whole_ship_fraction_psa_only": 0.02171962344406303
+    }
+   },
+   "failing_groups": [],
+   "config": "F1",
+   "concept": "H",
+   "rotor": "hub"
+  },
+  "H:hub:F1:g_aft=0.3": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 38.49897183025899,
+    "frames (4 m)": 46.99917798855732,
+    "module frames (L3 joints)": 18.790509649582077,
+    "diagonals (shear and torsion)": 30.54134129296875,
+    "longerons (rails)": 120.78232689810312,
+    "Momentum Spine structural shell": 19.607911457452595,
+    "spine ties and axial datum": 0.9566076117192487,
+    "forward keels to the Brow": 23.779755993093605,
+    "rotor-bay collar (Q45 bypass)": 126.76293774209081,
+    "rotor-bay hub path (cones)": 16.96676294058273,
+    "common thrust deck (tank-farm aft)": 581.1323155067555,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 82.93798450059379,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1154.9849248596788,
+   "delta_vs_line_t": 1004.9849248596788,
+   "coupled_departure_delta_t": 3540.1944657139993,
+   "coupled_departure_t": 12112.854700160544,
+   "uncertainty_t": {
+    "low_allowables": 52.94383323690022,
+    "high_allowables": -72.81980376367261
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 11.597912338913387,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 20.496372378223295,
+      "finished specialist components": 2.4881395350178135
+     },
+     "total_t": 34.582424252154496,
+     "structure_fraction": 0.031218432050546793,
+     "longeron_fraction": 0.006000000000000001,
+     "whole_ship_fraction_psa_only": 0.0036286242180652334
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 11.597912338913387,
+      "specialty metals": 0.0,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 20.496372378223295,
+      "finished specialist components": 2.4881395350178135
+     },
+     "total_t": 34.582424252154496,
+     "structure_fraction": 0.031218432050546793,
+     "longeron_fraction": 0.006000000000000001,
+     "whole_ship_fraction_psa_only": 0.0036286242180652334
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 0.0,
+      "polymer matrices": 0.0,
+      "alloying elements": 11.597912338913387,
+      "specialty metals": 132.8675705005781,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 30.74455856733494,
+      "finished specialist components": 4.146899225029689
+     },
+     "total_t": 179.3569406318561,
+     "structure_fraction": 0.1619100622640913,
+     "longeron_fraction": 0.006000000000000001,
+     "whole_ship_fraction_psa_only": 0.018819355569449275
+    }
+   },
+   "failing_groups": [],
+   "config": "F1",
+   "concept": "H",
+   "rotor": "hub"
+  },
+  "HC:hub:F1:g_aft=0.3": {
+   "items_t": {
+    "thrust ring, transition and drive pickups": 40.41583013918342,
+    "frames (4 m)": 43.27060684634957,
+    "module frames (L3 joints)": 21.14715855617401,
+    "diagonals (shear and torsion)": 10.922790366660942,
+    "longerons (rails)": 82.65040270692178,
+    "Momentum Spine structural shell": 23.53952220098286,
+    "spine ties and axial datum": 1.0555724741105943,
+    "forward keels to the Brow": 9.100601945548778,
+    "rotor-bay collar (Q45 bypass)": 52.28764114679912,
+    "rotor-bay hub path (cones)": 16.96676294058273,
+    "common thrust deck (tank-farm aft)": 633.573233129831,
+    "node fittings and joints (explicit, Ti-6Al-4V)": 84.19239720513707,
+    "protective casing (secondary)": 22.446051191368355,
+    "rotating ring structure (2 rings)": 24.782270256551865
+   },
+   "psa_total_t": 1066.350841106202,
+   "delta_vs_line_t": 916.3508411062021,
+   "coupled_departure_delta_t": 3227.9689934547996,
+   "coupled_departure_t": 11800.629227901343,
+   "uncertainty_t": {
+    "low_allowables": 107.24505446549166,
+    "high_allowables": -101.910369523182
+   },
+   "imports": {
+    "lunar-first": {
+     "by_category_t": {
+      "carbon fibres": 43.3866200754053,
+      "polymer matrices": 28.924413383603536,
+      "alloying elements": 10.37492437912952,
+      "specialty metals": 0.0,
+      "ceramic precursors": 2.4795120812076528,
+      "manufacturing consumables": 18.69860244906292,
+      "finished specialist components": 2.525771916154112
+     },
+     "total_t": 106.38984428456304,
+     "structure_fraction": 0.10439357607389156,
+     "longeron_fraction": 0.029999999999999995,
+     "whole_ship_fraction_psa_only": 0.011267942230401314
+    },
+    "balanced": {
+     "by_category_t": {
+      "carbon fibres": 43.3866200754053,
+      "polymer matrices": 28.924413383603536,
+      "alloying elements": 10.622875587250284,
+      "specialty metals": 0.0,
+      "ceramic precursors": 2.4795120812076528,
+      "manufacturing consumables": 18.69860244906292,
+      "finished specialist components": 2.525771916154112
+     },
+     "total_t": 106.63779549268381,
+     "structure_fraction": 0.10463687479738941,
+     "longeron_fraction": 0.033,
+     "whole_ship_fraction_psa_only": 0.011294203194573704
+    },
+    "performance-first": {
+     "by_category_t": {
+      "carbon fibres": 43.3866200754053,
+      "polymer matrices": 28.924413383603536,
+      "alloying elements": 10.37492437912952,
+      "specialty metals": 146.53998714848223,
+      "ceramic precursors": 0.0,
+      "manufacturing consumables": 28.04790367359438,
+      "finished specialist components": 52.14685343027148
+     },
+     "total_t": 309.42070209048643,
+     "structure_fraction": 0.303614821694095,
+     "longeron_fraction": 0.5800000000000001,
+     "whole_ship_fraction_psa_only": 0.03277131026454285
+    }
+   },
+   "failing_groups": [],
+   "config": "F1",
+   "concept": "HC",
+   "rotor": "hub"
+  }
+ },
+ "coupling": {
+  "P": {
+   "R": 2.674881567802154,
+   "k": 0.11782221812319058,
+   "coupling": 3.3325141080076723,
+   "issa_coupling": null,
+   "departure_t": 4466.308106111559
+  },
+  "F1": {
+   "R": 2.7162362581652935,
+   "k": 0.13338434877984953,
+   "coupling": 3.5226343979321872,
+   "issa_coupling": null,
+   "departure_t": 8572.660234446545
+  },
+  "R": {
+   "R": 2.7162362581652935,
+   "k": 0.13892790237075162,
+   "coupling": 3.5666417093559013,
+   "issa_coupling": null,
+   "departure_t": 12869.642617183794
+  }
+ }
+}

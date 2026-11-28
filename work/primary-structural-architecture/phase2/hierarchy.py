@@ -13,8 +13,8 @@ sys.path.insert(0, str(H))
 import model as mdl  # noqa: E402
 
 OUT = H.parent / 'results'
-R_CAT = [0.06, 0.09, 0.12, 0.18, 0.25, 0.35, 0.45, 0.60, 0.80, 0.95, 1.20]
-T_CAT = [0.002, 0.003, 0.004, 0.006, 0.008, 0.012, 0.016, 0.020, 0.025, 0.032, 0.040, 0.050, 0.060, 0.080]
+R_CAT = [0.06, 0.075, 0.09, 0.11, 0.14, 0.18, 0.22, 0.28, 0.35, 0.45, 0.55, 0.70, 0.85, 0.95, 1.00, 1.20]   # ~1.25 ratio steps
+T_CAT = [0.002, 0.0025, 0.003, 0.004, 0.005, 0.006, 0.008, 0.010, 0.012, 0.016, 0.020, 0.025, 0.032, 0.040, 0.050, 0.060, 0.080, 0.100]
 END_CLASS = [('C1', 1.0), ('C2', 4.0), ('C3', 12.0), ('C4', 40.0)]   # ultimate axial capacity of the end fitting (MN)
 
 L2_BAY = dict(length_m=4.0, alternatives=[
@@ -49,8 +49,8 @@ def standardise(sizing):
         A, I = tube(s['r'], s['t']); rho = mdl.MATS[s['mat']]['rho']; L = s['L_m']
         best = None
         for r in R_CAT:
-            if r < s['r']*0.999 and not g.startswith(('spine', 'hub')):
-                continue
+            if g.startswith(('spine', 'hub')) and abs(r-0.95) > 1e-6:
+                continue                                     # the spine keeps its 1.9 m bore
             for t in T_CAT:
                 if t > r/4:
                     continue

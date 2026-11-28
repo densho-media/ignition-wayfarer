@@ -314,7 +314,7 @@ class Build:
         unplaced = 0.0
         for p in parts:
             x0, x1 = p['x']; M = p['m']
-            if p['owner'] in ('propellant', 'tankage') or p['name'].startswith('cryocooler') or 'cryocooler' in p['name']:
+            if (p['owner'] in ('propellant', 'tankage') and x0 >= farm[0]-1.0) or 'cryocooler' in p['name']:
                 for n in self.deck_nodes:
                     m.mass(n, M/len(self.deck_nodes))
                 continue

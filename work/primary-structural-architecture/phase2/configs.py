@@ -83,7 +83,7 @@ def prop_pattern(left, farm=FARM_P, scale=1.0):
     return out
 
 
-def config(name, left=1.0):
+def config(name, left=1.0, g_aft=0.0):
     """Placed parts for configuration name at `left` (1 = departure, 0 = all mission propellant used). Returns a dict with parts,
     thrust, datums (farm, Brow) and bookkeeping."""
     if name == 'P':
@@ -110,6 +110,20 @@ def config(name, left=1.0):
         parts.append(part('ISSA:tankage (T-A)', led['tankage_t']*1e3, farm[0], farm[1], r=12.0, cls='ISSA', owner='tankage'))
         scale = led['propellant_t']*1e3/sum(p['m'] for p in prop_pattern(1.0))
         parts += prop_pattern(left, farm, scale)
+        if g_aft:
+            # Concept G sensitivity (owner D06): move a share of the H2 reaction mass and its tankage share aft into the midbody
+            # (X -70..-20, inside the cage around the spine); He-3 and D2 stay forward behind the shield. PROTOTYPE placement only.
+            moved = 0.0
+            for p in parts:
+                if p['cls'] == 'PROPELLANT' and '_H2' in p['name']:
+                    dm = p['m']*g_aft; p['m'] -= dm; moved += dm
+            parts.append(part('G:H2 aft share', moved, -70.0, -20.0, r=4.0, cls='PROPELLANT', owner='propellant'))
+            h2_full = sum(q['m'] for q in prop_pattern(1.0, farm, scale) if '_H2' in q['name'])
+            tank_share = led['tankage_t']*1e3*g_aft*h2_full/(led['propellant_t']*1e3)
+            for p in parts:
+                if p['name'] == 'ISSA:tankage (T-A)':
+                    p['m'] -= tank_share
+            parts.append(part('G:H2 aft tankage share', tank_share, -70.0, -20.0, r=4.0, cls='ISSA', owner='tankage'))
         placed_end = sum(p['m'] for p in parts if p['cls'] != 'PROPELLANT')/1e3
         return dict(name='F1', id=f'WF-F1-P6.0 at ISSA {ISSA_REF} (CP4 ledger)', parts=parts, thrust=THRUST_N, farm=farm,
                     brow=(138.15+shift, 144.75+shift), fwd=144.75+shift, propellant_full_t=led['propellant_t'],
@@ -143,12 +157,12 @@ def config(name, left=1.0):
     raise KeyError(name)
 
 
-def history(name, n=6):
+def history(name, n=6, g_aft=0.0):
     """Mass states along the propellant-depletion history (left = 1 .. 0): total mass, acceleration and the placed parts."""
     out = []
     for k in range(n):
         left = 1.0-k/(n-1)
-        c = config(name, left); M = sum(p['m'] for p in c['parts'])
+        c = config(name, left, g_aft=g_aft); M = sum(p['m'] for p in c['parts'])
         out.append(dict(left=left, M_kg=M, a=c['thrust']/M, cfg=c))
     return out
 

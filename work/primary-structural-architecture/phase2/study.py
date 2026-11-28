@@ -32,6 +32,7 @@ VARIANTS = [
     ('H', 'hub', 'P', {}), ('H', 'hub', 'R', {}),              # configuration dependence
     ('HC', 'hub', 'P', {}), ('HC', 'hub', 'R', {}),
     ('H', 'hub', 'F1', {'radius': 7.0}), ('H', 'hub', 'F1', {'radius': 9.0}),   # morphology: does a larger structural radius pay off?
+    ('H', 'hub', 'F1', {'g_aft': 0.3}), ('HC', 'hub', 'F1', {'g_aft': 0.3}),        # concept G sensitivity: 30 % of the H2 aft
 ]
 
 
@@ -71,8 +72,9 @@ def section_loads(b, f, scale):
 
 def run_variant(c, r, cfgname, opt, quick=False, log=print):
     t0 = time.time()
-    hist = configs.history(cfgname, 2 if quick else 3)
-    b = mdl.Build(c, hist[0]['cfg'], rotor=r, **opt)
+    bopt = {k: v for k, v in opt.items() if k != 'g_aft'}
+    hist = configs.history(cfgname, 2 if quick else 3, g_aft=opt.get('g_aft', 0.0))
+    b = mdl.Build(c, hist[0]['cfg'], rotor=r, **bopt)
     res = an.run(b, hist, iters=2 if quick else 4, log=log)
     sm, by = b.structure_mass()
     steady = next(x for x in res['cases'] if x['name'].startswith('steady x') and x['left'] == 1.0)
@@ -94,13 +96,40 @@ def run_variant(c, r, cfgname, opt, quick=False, log=print):
         N = [f['N'] if f else 0.0 for f in steady['f']]
         b.attach(hist[0]['cfg']['parts']); rs, _ = an.solve(b)       # reset loads to the steady thrust for the follower matrix
         stab = {}
-        for name, kw in (('fixed-direction', dict(partial=0.0)), ('follower', dict(partial=1.0)), ('partial follower 0.5', dict(partial=0.5)),
-                         ('follower + TVC gain 1', dict(partial=1.0, tvc_gain=1.0))):
+        for name, kw in (('fixed-direction (static)', dict(partial=0.0)), ('follower', dict(partial=1.0)), ('partial follower 0.5', dict(partial=0.5)),
+                         ('partial follower 0.25', dict(partial=0.25)), ('follower + TVC gain 1', dict(partial=1.0, tvc_gain=1.0))):
             try:
-                stab[name] = an.reduced_stability(b, N, lam_hi=60.0, nbasis=40, **kw)
+                stab[name] = an.global_stability(b, lam_hi=12.0, **kw)
             except Exception as ex:
                 stab[name] = dict(error=str(ex))
+        if out['key'] == 'H:hub:F1':
+            stab['basis convergence (follower)'] = {n: an.global_stability(b, partial=1.0, nbasis=n).get('lam') for n in (30, 60, 100, 140)}
+            stab['basis convergence (static)'] = {n: an.global_stability(b, partial=0.0, nbasis=n).get('lam') for n in (30, 60, 100, 140)}
+        # joint compliance: rails and diagonals at 70 % axial stiffness (bolted splices and node fittings, PROTOTYPE)
+        saved = [(e, e['mat']) for e, md in zip(b.m.el, b.meta) if md['fam'] in ('rail', 'diag', 'keel', 'trans')]
+        for e, m_ in saved:
+            e['mat'] = dict(m_, E=m_['E']*0.7)
+        stab['static with joint compliance 0.7'] = an.global_stability(b, partial=0.0)
+        stab['follower with joint compliance 0.7'] = an.global_stability(b, partial=1.0)
+        out['modes_joint_compliance'] = an.axial_modes(b)[:6]
+        for e, m_ in saved:
+            e['mat'] = m_
         out['stability'] = stab
+        # analytic global bounds from the cage section EI at X 0 (heavy-nose analogues): static Euler cantilever pi^2 EI/(4 L^2),
+        # Beck follower cantilever 20.05 EI/L^2, uniform free-free follower (Beal) 109.9 EI/L^2; L = thrust ring to the deck
+        EI = {}
+        for ax in (1, 2):
+            tot = 0.0
+            for e_, md in zip(b.m.el, b.meta):
+                if md['fam'] in ('rail',) and e_['on']:
+                    xa, xb = b.m.X[e_['a']], b.m.X[e_['b']]
+                    if min(xa[0], xb[0]) <= 0.75 < max(xa[0], xb[0]):
+                        tot += e_['mat']['E']*e_['sec']['A']*((xa[ax]+xb[ax])/2)**2 + e_['mat']['E']*e_['sec']['Iy']
+            EI[ax] = tot
+        EImin = min(EI.values()); Lg = mdl.X_DECK-mdl.X_RING; T0 = hist[0]['cfg']['thrust']
+        out['global_EI_Nm2'] = EImin
+        out['analytic_bounds'] = dict(L_m=Lg, static_cantilever_lambda=math.pi**2*EImin/(4*Lg**2)/T0, beck_lambda=20.05*EImin/Lg**2/T0, beal_uniform_lambda=109.9*EImin/Lg**2/T0,
+                                      rail_area_factor_for_static=max(1.0, an.LAM_REQ*steady['dlf']/(math.pi**2*EImin/(4*Lg**2)/T0)))
         out['damage'] = failure.run(b, steady['dlf'])
         (OUT / 'p2_geom').mkdir(parents=True, exist_ok=True)
         (OUT / 'p2_geom' / (out['key'].replace(':', '_')+'.json')).write_text(json.dumps(geometry(b, res, steady, rs['u'][0::6])))

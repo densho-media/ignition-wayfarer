@@ -174,7 +174,7 @@ def issa_envelopes(root):
 def note(root):
     c = coll('WORK_PSA_P2_00_README', root)
     txt = ('PSA PHASE II REVIEW (STUDY / NONCANON)\nH and HC, hub path, F1 configuration (ISSA CP4 9faee26)\n'
-           'Toggle the WORK_ view collections (01 shown). Production ship unchanged.\n'
+           'Toggle the WORK_ view collections (01 shown). Production structure and radiators hidden, not deleted.\n'
            '03 axial: red compression, blue tension (MN, steady x DLF)\n04/05 engine-out bending/torsion  06 utilisation (red > 1)\n'
            '10 engine-out deformation x200  11 worst damage case: red lost, orange overloaded\nF1 tank farm and Brow lie forward of the production Brow')
     cu = bpy.data.curves.new('P2_readme', 'FONT'); cu.body = txt; cu.size = 4.0
@@ -200,8 +200,13 @@ def main():
         d = json.loads(f.read_text())
         build_variant(d, root, hide=(d['concept'] != 'H'))
     issa_envelopes(root); camera(root)
-    for area in []:
-        pass
+    # the PSA truss replaces the production structure and sits inside the radiator blades: hide (never delete) both
+    for c in bpy.data.collections:
+        if any(c.name.startswith(k) for k in ('11_STRUCTURE', '13_THERMAL')):
+            lc = find_layer(bpy.context.view_layer.layer_collection, c.name)
+            if lc:
+                lc.hide_viewport = True
+            c.hide_render = True
     bpy.ops.file.pack_all()
     bpy.ops.wm.save_as_mainfile(filepath=str(OUTF), compress=True)
     print('saved', OUTF)

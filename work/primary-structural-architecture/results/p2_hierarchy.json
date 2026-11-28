@@ -1,0 +1,6619 @@
+{
+ "L2": {
+  "length_m": 4.0,
+  "alternatives": [
+   {
+    "name": "Warren bay (production)",
+    "diagonals_per_face": 1,
+    "note": "one diagonal per face, alternating; lightest, single shear path"
+   },
+   {
+    "name": "X-braced bay",
+    "diagonals_per_face": 2,
+    "note": "two crossing tension diagonals; fail-safe in shear, +diag mass"
+   },
+   {
+    "name": "Portal bay (open)",
+    "diagonals_per_face": 0,
+    "note": "rigid frames, no diagonals; open for equipment removal, frame bending governs"
+   }
+  ]
+ },
+ "L3": {
+  "length_m": [
+   8.0,
+   12.0
+  ],
+  "joint": "module frame (deep, Ti nodes), 15 (6 rails) or 12 (3 rails) splice points",
+  "alignment": "three kinematic cones per module frame (one per sector) set the datum; splice plates take the rails; laser tracker + FBG",
+  "transport": "8 m module: 10-12 m diameter, 15-35 t; launch from the lunar yard by mass driver or tug as one piece",
+  "orbital_joining": "friction-stir or bolted splice per rail (6 or 3), frames bolted; 1 splice pair per rail per 8 m"
+ },
+ "L4": [
+  {
+   "name": "propulsion",
+   "x": [
+    -145.0,
+    -113.0
+   ],
+   "note": "thrust ring, pickups, transition; Ti nodes; magnetic exclusion (no ferritic steel)"
+  },
+  {
+   "name": "power",
+   "x": [
+    -113.0,
+    -80.0
+   ],
+   "note": "L1/L2 units 3 x 96.9 t on module frames; stiffness and spectra OPEN"
+  },
+  {
+   "name": "hot loop",
+   "x": [
+    -111.6,
+    41.0
+   ],
+   "note": "H6a trunks on 6.4 m saddles; anchor per 25.4 m; bulkhead at X ~40.8"
+  },
+  {
+   "name": "equipment",
+   "x": [
+    -80.0,
+    22.0
+   ],
+   "note": "racks and ORUs on rail hard-points; MRU lane az 270"
+  },
+  {
+   "name": "workshop",
+   "x": [
+    22.0,
+    50.0
+   ],
+   "note": "module 10 dry store, workshop; portal bays for removal"
+  },
+  {
+   "name": "radiator",
+   "x": [
+    -133.0,
+    93.6
+   ],
+   "note": "blade roots at az 90/210/330 frame lugs (backbone trade 3.6)"
+  },
+  {
+   "name": "rotating habitat",
+   "x": [
+    93.6,
+    106.0
+   ],
+   "note": "rotor bay: collar (bypass) or hub path; ring keep-out r 31.5 m"
+  },
+  {
+   "name": "cryo",
+   "x": [
+    106.0,
+    160.0
+   ],
+   "note": "tank farm on the common thrust deck; cryocoolers forward"
+  },
+  {
+   "name": "forward shielding",
+   "x": [
+    160.0,
+    166.0
+   ],
+   "note": "Brow interface ring; forward defense owns the Brow truss"
+  }
+ ],
+ "end_classes": [
+  [
+   "C1",
+   1.0
+  ],
+  [
+   "C2",
+   4.0
+  ],
+  [
+   "C3",
+   12.0
+  ],
+  [
+   "C4",
+   40.0
+  ]
+ ],
+ "interface": "common end fitting: Ti-6Al-4V spigot with two-flange bolt circle per class, FBG fibre pass-through and an alignment key; any cassette of a class fits any node socket of that class",
+ "variants": {
+  "H:bypass:F1": {
+   "members_t": 1827.9670157601045,
+   "penalty_t": 344.5884630052001,
+   "penalty_pct": 18.85091251834834,
+   "distinct_cassettes": 48,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL5083-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R350-T10",
+     "end_class": "C1"
+    },
+    "diag:00": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "AL6061-R550-T16",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL5083-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL5083-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL5083-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL5083-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL5083-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T100",
+     "end_class": "C3"
+    },
+    "frame:14": {
+     "cassette": "AL5083-R335-T80",
+     "end_class": "C3"
+    },
+    "diag:14": {
+     "cassette": "AL6061-R239-T55.2636",
+     "end_class": "C2"
+    },
+    "rail:14": {
+     "cassette": "AL6061-R550-T100",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "AL6061-R950-T8",
+     "end_class": "C2"
+    },
+    "tie:03": {
+     "cassette": "AL5083-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL5083-R60-T4",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL5083-R60-T4",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL5083-R280-T8",
+     "end_class": "C2"
+    },
+    "cone": {
+     "cassette": "TI64-R350-T12",
+     "end_class": "C2"
+    },
+    "frame:15": {
+     "cassette": "AL5083-R350-T10",
+     "end_class": "C2"
+    },
+    "tie:15": {
+     "cassette": "AL5083-R75-T3",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "AL6061-R450-T60",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "AL6061-R220-T3",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL5083-R180-T3",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "AL6061-R350-T4",
+     "end_class": "C2"
+    },
+    "diag:16": {
+     "cassette": "AL6061-R60-T4",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL5083-R140-T2.5",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "AL6061-R450-T3",
+     "end_class": "C2"
+    },
+    "diag:17": {
+     "cassette": "AL6061-R60-T4",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL5083-R350-T80",
+     "end_class": "C4"
+    },
+    "keel:18": {
+     "cassette": "AL6061-R450-T60",
+     "end_class": "C2"
+    },
+    "diag:18": {
+     "cassette": "AL6061-R220-T12",
+     "end_class": "C2"
+    },
+    "collar:14": {
+     "cassette": "AL6061-R950-T100",
+     "end_class": "C4"
+    },
+    "collar:15": {
+     "cassette": "AL6061-R950-T20",
+     "end_class": "C3"
+    },
+    "collar:16": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C2"
+    },
+    "collar:17": {
+     "cassette": "AL6061-R700-T16",
+     "end_class": "C3"
+    },
+    "collar:18": {
+     "cassette": "AL6061-R1000-T16",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T32",
+     "end_class": "C3"
+    }
+   }
+  },
+  "H:hub:F1": {
+   "members_t": 1089.891749295569,
+   "penalty_t": 287.87433252110185,
+   "penalty_pct": 26.41311237626709,
+   "distinct_cassettes": 44,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL5083-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R350-T8",
+     "end_class": "C1"
+    },
+    "diag:00": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "AL6061-R550-T16",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL5083-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL5083-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL5083-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL5083-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C2"
+    },
+    "frame:14": {
+     "cassette": "AL5083-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:14": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "AL6061-R550-T32",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "AL6061-R950-T3",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL5083-R950-T32",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL5083-R90-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL5083-R140-T3",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL5083-R350-T25",
+     "end_class": "C3"
+    },
+    "tie:15": {
+     "cassette": "AL5083-R75-T2.5",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "AL6061-R450-T50",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL5083-R75-T3",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "diag:16": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL5083-R60-T2.5",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "diag:17": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL5083-R280-T12",
+     "end_class": "C2"
+    },
+    "keel:18": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C1"
+    },
+    "diag:18": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "AL6061-R700-T12",
+     "end_class": "C2"
+    },
+    "collar:15": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C2"
+    },
+    "collar:16": {
+     "cassette": "AL6061-R220-T2.5",
+     "end_class": "C1"
+    },
+    "collar:17": {
+     "cassette": "AL6061-R280-T2.5",
+     "end_class": "C1"
+    },
+    "collar:18": {
+     "cassette": "AL6061-R450-T8",
+     "end_class": "C2"
+    },
+    "hubcone": {
+     "cassette": "TI64-R950-T32",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T80",
+     "end_class": "C3"
+    }
+   }
+  },
+  "HC:bypass:F1": {
+   "members_t": 1254.6332141453274,
+   "penalty_t": 288.00385003226575,
+   "penalty_pct": 22.955222832073495,
+   "distinct_cassettes": 48,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL6061-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R450-T8",
+     "end_class": "C1"
+    },
+    "diag:00": {
+     "cassette": "CFPEEK-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "CFPEEK-R110-T2.5",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "ALAL2O3F-R350-T10",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "CFPEEK-R110-T3",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "CFPEEK-R110-T3",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "CFPEEK-R110-T3",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "CFPEEK-R110-T3",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "CFPEEK-R110-T3",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "ALAL2O3F-R350-T10",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "ALAL2O3F-R450-T6",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "ALAL2O3F-R350-T10",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL6061-R280-T8",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T100",
+     "end_class": "C3"
+    },
+    "frame:14": {
+     "cassette": "AL6061-R350-T16",
+     "end_class": "C2"
+    },
+    "diag:14": {
+     "cassette": "CFPEEK-R220-T20",
+     "end_class": "C2"
+    },
+    "rail:14": {
+     "cassette": "ALAL2O3F-R550-T100",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "TI64-R950-T6",
+     "end_class": "C2"
+    },
+    "tie:03": {
+     "cassette": "AL6061-R60-T2.5",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL6061-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL6061-R60-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL6061-R220-T12",
+     "end_class": "C2"
+    },
+    "cone": {
+     "cassette": "TI64-R350-T12",
+     "end_class": "C2"
+    },
+    "frame:15": {
+     "cassette": "AL6061-R350-T10",
+     "end_class": "C2"
+    },
+    "tie:15": {
+     "cassette": "AL6061-R90-T2.5",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "CFPEEK-R450-T32",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "CFPEEK-R220-T3",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "CFPEEK-R280-T2.5",
+     "end_class": "C2"
+    },
+    "diag:16": {
+     "cassette": "CFPEEK-R60-T2",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "CFPEEK-R280-T2.5",
+     "end_class": "C2"
+    },
+    "diag:17": {
+     "cassette": "CFPEEK-R60-T2",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL6061-R350-T80",
+     "end_class": "C4"
+    },
+    "keel:18": {
+     "cassette": "CFPEEK-R450-T40",
+     "end_class": "C2"
+    },
+    "diag:18": {
+     "cassette": "CFPEEK-R220-T16",
+     "end_class": "C2"
+    },
+    "collar:14": {
+     "cassette": "CFPEEK-R1000-T80",
+     "end_class": "C4"
+    },
+    "collar:15": {
+     "cassette": "CFPEEK-R700-T16",
+     "end_class": "C3"
+    },
+    "collar:16": {
+     "cassette": "CFPEEK-R350-T10",
+     "end_class": "C2"
+    },
+    "collar:17": {
+     "cassette": "CFPEEK-R450-T10",
+     "end_class": "C3"
+    },
+    "collar:18": {
+     "cassette": "CFPEEK-R850-T16",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T50",
+     "end_class": "C3"
+    }
+   }
+  },
+  "HC:hub:F1": {
+   "members_t": 1050.0515605912526,
+   "penalty_t": 329.1708080416595,
+   "penalty_pct": 31.348061409128636,
+   "distinct_cassettes": 40,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL6061-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R450-T8",
+     "end_class": "C1"
+    },
+    "diag:00": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "CFPEEK-R110-T2.5",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "ALAL2O3F-R350-T10",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "ALAL2O3F-R350-T10",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "ALAL2O3F-R450-T6",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "CFPEEK-R110-T2.5",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "ALAL2O3F-R450-T6",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "CFPEEK-R110-T2.5",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C2"
+    },
+    "frame:14": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:14": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "ALAL2O3F-R550-T20",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "TI64-R950-T2.5",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL6061-R950-T32",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL6061-R60-T4",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL6061-R350-T20",
+     "end_class": "C3"
+    },
+    "tie:15": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "CFPEEK-R450-T32",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL6061-R75-T3",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "diag:16": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL6061-R75-T3",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "diag:17": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL6061-R350-T10",
+     "end_class": "C2"
+    },
+    "keel:18": {
+     "cassette": "CFPEEK-R350-T10",
+     "end_class": "C1"
+    },
+    "diag:18": {
+     "cassette": "CFPEEK-R75-T2",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "CFPEEK-R550-T10",
+     "end_class": "C2"
+    },
+    "collar:15": {
+     "cassette": "CFPEEK-R450-T10",
+     "end_class": "C2"
+    },
+    "collar:16": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "collar:17": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "collar:18": {
+     "cassette": "CFPEEK-R280-T6",
+     "end_class": "C2"
+    },
+    "hubcone": {
+     "cassette": "TI64-R950-T32",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T100",
+     "end_class": "C4"
+    }
+   }
+  },
+  "A:bypass:F1": {
+   "members_t": 1741.328325288832,
+   "penalty_t": 303.5729442459203,
+   "penalty_pct": 17.43341217375345,
+   "distinct_cassettes": 40,
+   "groups": {
+    "ring": {
+     "cassette": "AL6061-R450-T32",
+     "end_class": "C2"
+    },
+    "frame:00": {
+     "cassette": "AL6061-R350-T16",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "AL6061-R550-T32",
+     "end_class": "C3"
+    },
+    "diag:00": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "AL6061-R550-T32",
+     "end_class": "C3"
+    },
+    "frame:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "frame:02": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "frame:03": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "frame:04": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:06": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:07": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:08": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:09": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:10": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:11": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:12": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:13": {
+     "cassette": "AL6061-R280-T8",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "frame:14": {
+     "cassette": "AL6061-R335-T80",
+     "end_class": "C3"
+    },
+    "diag:14": {
+     "cassette": "AL6061-R239-T55.2636",
+     "end_class": "C2"
+    },
+    "rail:14": {
+     "cassette": "AL6061-R550-T100",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T100",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "AL6061-R450-T80",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "AL6061-R950-T8",
+     "end_class": "C2"
+    },
+    "tie:03": {
+     "cassette": "AL6061-R60-T2.5",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL6061-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL6061-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL6061-R280-T20",
+     "end_class": "C3"
+    },
+    "cone": {
+     "cassette": "AL6061-R550-T16",
+     "end_class": "C2"
+    },
+    "frame:15": {
+     "cassette": "AL6061-R350-T8",
+     "end_class": "C2"
+    },
+    "tie:15": {
+     "cassette": "AL6061-R90-T2.5",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "AL6061-R450-T80",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "AL6061-R220-T2.5",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL6061-R90-T2.5",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "AL6061-R450-T4",
+     "end_class": "C2"
+    },
+    "diag:16": {
+     "cassette": "AL6061-R60-T3",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "AL6061-R450-T6",
+     "end_class": "C2"
+    },
+    "diag:17": {
+     "cassette": "AL6061-R60-T3",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL6061-R350-T60",
+     "end_class": "C4"
+    },
+    "keel:18": {
+     "cassette": "AL6061-R450-T80",
+     "end_class": "C2"
+    },
+    "diag:18": {
+     "cassette": "AL6061-R220-T40",
+     "end_class": "C2"
+    },
+    "collar:14": {
+     "cassette": "AL6061-R950-T100",
+     "end_class": "C4"
+    },
+    "collar:15": {
+     "cassette": "AL6061-R1000-T16",
+     "end_class": "C3"
+    },
+    "collar:16": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C2"
+    },
+    "collar:17": {
+     "cassette": "AL6061-R700-T12",
+     "end_class": "C3"
+    },
+    "collar:18": {
+     "cassette": "AL6061-R850-T16",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T50",
+     "end_class": "C3"
+    }
+   }
+  },
+  "A:hub:F1": {
+   "members_t": 1223.4939111069361,
+   "penalty_t": 247.52080044278333,
+   "penalty_pct": 20.230652412388626,
+   "distinct_cassettes": 32,
+   "groups": {
+    "ring": {
+     "cassette": "AL6061-R450-T32",
+     "end_class": "C2"
+    },
+    "frame:00": {
+     "cassette": "AL6061-R350-T16",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "AL6061-R550-T40",
+     "end_class": "C3"
+    },
+    "diag:00": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "AL6061-R550-T32",
+     "end_class": "C3"
+    },
+    "frame:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "frame:02": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "frame:03": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "frame:04": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "frame:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "frame:06": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "frame:07": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "frame:08": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:10": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:11": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:12": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:13": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:14": {
+     "cassette": "AL6061-R350-T5",
+     "end_class": "C1"
+    },
+    "diag:14": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "AL6061-R550-T32",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R75-T3",
+     "end_class": "C1"
+    },
+    "pickup": {
+     "cassette": "AL6061-R450-T80",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "AL6061-R950-T4",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL6061-R950-T32",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL6061-R60-T4",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL6061-R75-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL6061-R350-T10",
+     "end_class": "C2"
+    },
+    "tie:15": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "AL6061-R450-T100",
+     "end_class": "C3"
+    },
+    "diag:15": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL6061-R75-T3",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C2"
+    },
+    "diag:16": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL6061-R75-T3",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C2"
+    },
+    "diag:17": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL6061-R350-T20",
+     "end_class": "C3"
+    },
+    "keel:18": {
+     "cassette": "AL6061-R450-T32",
+     "end_class": "C2"
+    },
+    "diag:18": {
+     "cassette": "AL6061-R220-T3",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "AL6061-R950-T20",
+     "end_class": "C2"
+    },
+    "collar:15": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C1"
+    },
+    "collar:16": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "collar:17": {
+     "cassette": "AL6061-R350-T5",
+     "end_class": "C1"
+    },
+    "collar:18": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C2"
+    },
+    "hubcone": {
+     "cassette": "AL6061-R950-T80",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T100",
+     "end_class": "C4"
+    }
+   }
+  },
+  "C:bypass:F1": {
+   "members_t": 1294.2106316434486,
+   "penalty_t": 331.1299268233659,
+   "penalty_pct": 25.58547416681949,
+   "distinct_cassettes": 42,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T12",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL6061-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "diag:00": {
+     "cassette": "CFPEEK-R220-T4",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "CFPEEK-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "CFPEEK-R220-T4",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:02": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "CFPEEK-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:03": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "CFPEEK-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:04": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:06": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:07": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:08": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:10": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "CFPEEK-R550-T12",
+     "end_class": "C3"
+    },
+    "frame:11": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "CFPEEK-R550-T12",
+     "end_class": "C3"
+    },
+    "frame:12": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "CFPEEK-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:13": {
+     "cassette": "AL6061-R350-T10",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "CFPEEK-R180-T5",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:14": {
+     "cassette": "AL6061-R335-T80",
+     "end_class": "C3"
+    },
+    "diag:14": {
+     "cassette": "CFPEEK-R239-T55.2636",
+     "end_class": "C2"
+    },
+    "rail:14": {
+     "cassette": "CFPEEK-R550-T100",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T100",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "TI64-R950-T8",
+     "end_class": "C2"
+    },
+    "tie:03": {
+     "cassette": "AL6061-R75-T2.5",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL6061-R60-T4",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL6061-R60-T2.5",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL6061-R280-T25",
+     "end_class": "C3"
+    },
+    "cone": {
+     "cassette": "TI64-R350-T12",
+     "end_class": "C2"
+    },
+    "frame:15": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C2"
+    },
+    "tie:15": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "CFPEEK-R450-T50",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "CFPEEK-R180-T2.5",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "CFPEEK-R350-T2.5",
+     "end_class": "C2"
+    },
+    "diag:16": {
+     "cassette": "CFPEEK-R60-T2",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "CFPEEK-R350-T2.5",
+     "end_class": "C2"
+    },
+    "diag:17": {
+     "cassette": "CFPEEK-R60-T2",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL6061-R350-T60",
+     "end_class": "C4"
+    },
+    "keel:18": {
+     "cassette": "CFPEEK-R450-T40",
+     "end_class": "C2"
+    },
+    "diag:18": {
+     "cassette": "CFPEEK-R220-T25",
+     "end_class": "C2"
+    },
+    "collar:14": {
+     "cassette": "CFPEEK-R950-T100",
+     "end_class": "C4"
+    },
+    "collar:15": {
+     "cassette": "CFPEEK-R700-T20",
+     "end_class": "C3"
+    },
+    "collar:16": {
+     "cassette": "CFPEEK-R450-T10",
+     "end_class": "C2"
+    },
+    "collar:17": {
+     "cassette": "CFPEEK-R450-T10",
+     "end_class": "C3"
+    },
+    "collar:18": {
+     "cassette": "CFPEEK-R700-T16",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T80",
+     "end_class": "C3"
+    }
+   }
+  },
+  "C:hub:F1": {
+   "members_t": 956.2829939644321,
+   "penalty_t": 205.72488571069218,
+   "penalty_pct": 21.512971265736414,
+   "distinct_cassettes": 34,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T12",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL6061-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "diag:00": {
+     "cassette": "CFPEEK-R220-T4",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "CFPEEK-R550-T20",
+     "end_class": "C3"
+    },
+    "frame:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "CFPEEK-R220-T4",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:02": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "CFPEEK-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:03": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "CFPEEK-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:04": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C4"
+    },
+    "frame:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C4"
+    },
+    "frame:06": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:07": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:08": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:10": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "CFPEEK-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:11": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "CFPEEK-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "CFPEEK-R550-T12",
+     "end_class": "C3"
+    },
+    "frame:12": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "CFPEEK-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "CFPEEK-R550-T12",
+     "end_class": "C3"
+    },
+    "frame:13": {
+     "cassette": "AL6061-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "CFPEEK-R550-T16",
+     "end_class": "C3"
+    },
+    "frame:14": {
+     "cassette": "AL6061-R350-T16",
+     "end_class": "C2"
+    },
+    "diag:14": {
+     "cassette": "CFPEEK-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "CFPEEK-R550-T32",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "TI64-R950-T3",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL6061-R950-T32",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL6061-R60-T2.5",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL6061-R350-T16",
+     "end_class": "C2"
+    },
+    "tie:15": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "CFPEEK-R450-T80",
+     "end_class": "C3"
+    },
+    "diag:15": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "CFPEEK-R180-T5",
+     "end_class": "C2"
+    },
+    "diag:16": {
+     "cassette": "CFPEEK-R180-T2",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "CFPEEK-R180-T5",
+     "end_class": "C2"
+    },
+    "diag:17": {
+     "cassette": "CFPEEK-R180-T2",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL6061-R350-T25",
+     "end_class": "C3"
+    },
+    "keel:18": {
+     "cassette": "CFPEEK-R450-T16",
+     "end_class": "C2"
+    },
+    "diag:18": {
+     "cassette": "CFPEEK-R180-T2",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "CFPEEK-R850-T16",
+     "end_class": "C2"
+    },
+    "collar:15": {
+     "cassette": "CFPEEK-R450-T10",
+     "end_class": "C1"
+    },
+    "collar:16": {
+     "cassette": "CFPEEK-R180-T4",
+     "end_class": "C1"
+    },
+    "collar:17": {
+     "cassette": "CFPEEK-R180-T5",
+     "end_class": "C1"
+    },
+    "collar:18": {
+     "cassette": "CFPEEK-R450-T10",
+     "end_class": "C2"
+    },
+    "hubcone": {
+     "cassette": "TI64-R950-T32",
+     "end_class": "C4"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T100",
+     "end_class": "C4"
+    }
+   }
+  },
+  "H3:hub:F1": {
+   "members_t": 1216.838211153318,
+   "penalty_t": 257.93878959057304,
+   "penalty_pct": 21.197459713736215,
+   "distinct_cassettes": 41,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T12",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL5083-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R450-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C1"
+    },
+    "diag:00": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "AL6061-R550-T32",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL5083-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL5083-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL5083-R220-T3",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "AL6061-R450-T25",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL5083-R220-T3",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL5083-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T8",
+     "end_class": "C1"
+    },
+    "frame:14": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:14": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "AL6061-R550-T50",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "AL6061-R950-T4",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL5083-R950-T32",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL5083-R60-T4",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL5083-R75-T3",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL5083-R140-T3",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL5083-R350-T16",
+     "end_class": "C2"
+    },
+    "tie:15": {
+     "cassette": "AL5083-R75-T2.5",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "AL6061-R450-T100",
+     "end_class": "C3"
+    },
+    "diag:15": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL5083-R90-T2.5",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:16": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL5083-R90-T2.5",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:17": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL5083-R350-T16",
+     "end_class": "C3"
+    },
+    "keel:18": {
+     "cassette": "AL6061-R450-T32",
+     "end_class": "C1"
+    },
+    "diag:18": {
+     "cassette": "AL6061-R220-T2.5",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "AL6061-R950-T25",
+     "end_class": "C2"
+    },
+    "collar:15": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C1"
+    },
+    "collar:16": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "collar:17": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "collar:18": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C2"
+    },
+    "hubcone": {
+     "cassette": "TI64-R950-T40",
+     "end_class": "C4"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T100",
+     "end_class": "C4"
+    }
+   }
+  },
+  "H:hub:P": {
+   "members_t": 1077.7162933603283,
+   "penalty_t": 304.77064286011273,
+   "penalty_pct": 28.279301773367028,
+   "distinct_cassettes": 39,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL5083-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R350-T8",
+     "end_class": "C1"
+    },
+    "diag:00": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL5083-R280-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R140-T5",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL5083-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL5083-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C2"
+    },
+    "frame:14": {
+     "cassette": "AL5083-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:14": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "AL6061-R550-T32",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "AL6061-R950-T2.5",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL5083-R950-T32",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL5083-R90-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL5083-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL5083-R350-T25",
+     "end_class": "C3"
+    },
+    "tie:15": {
+     "cassette": "AL5083-R75-T3",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "AL6061-R450-T50",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL5083-R110-T2.5",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:16": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL5083-R350-T16",
+     "end_class": "C3"
+    },
+    "keel:17": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C1"
+    },
+    "diag:17": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "AL6061-R850-T12",
+     "end_class": "C1"
+    },
+    "collar:15": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C1"
+    },
+    "collar:16": {
+     "cassette": "AL6061-R350-T4",
+     "end_class": "C2"
+    },
+    "collar:17": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C2"
+    },
+    "hubcone": {
+     "cassette": "TI64-R950-T32",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T80",
+     "end_class": "C3"
+    }
+   }
+  },
+  "H:hub:R": {
+   "members_t": 1174.9734814887122,
+   "penalty_t": 257.8439305375364,
+   "penalty_pct": 21.944659568898828,
+   "distinct_cassettes": 42,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T20",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL5083-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R450-T8",
+     "end_class": "C1"
+    },
+    "diag:00": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "AL6061-R550-T16",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL5083-R350-T8",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL5083-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL5083-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL5083-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL5083-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C2"
+    },
+    "frame:14": {
+     "cassette": "AL5083-R350-T8",
+     "end_class": "C1"
+    },
+    "diag:14": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "AL6061-R550-T32",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "AL6061-R950-T2.5",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL5083-R950-T32",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL5083-R90-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL5083-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL5083-R350-T32",
+     "end_class": "C3"
+    },
+    "tie:15": {
+     "cassette": "AL5083-R75-T2.5",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "AL6061-R450-T50",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL5083-R75-T2.5",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "diag:16": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL5083-R75-T2.5",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "diag:17": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL5083-R75-T2.5",
+     "end_class": "C1"
+    },
+    "keel:18": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "diag:18": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "frame:19": {
+     "cassette": "AL5083-R350-T10",
+     "end_class": "C2"
+    },
+    "keel:19": {
+     "cassette": "AL6061-R280-T8",
+     "end_class": "C1"
+    },
+    "diag:19": {
+     "cassette": "AL6061-R90-T2.5",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "AL6061-R700-T16",
+     "end_class": "C2"
+    },
+    "collar:15": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C2"
+    },
+    "collar:16": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "collar:17": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "collar:18": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "collar:19": {
+     "cassette": "AL6061-R350-T5",
+     "end_class": "C1"
+    },
+    "hubcone": {
+     "cassette": "TI64-R950-T32",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T80",
+     "end_class": "C4"
+    }
+   }
+  },
+  "HC:hub:P": {
+   "members_t": 979.5417447296172,
+   "penalty_t": 225.0311594101684,
+   "penalty_pct": 22.973105599729568,
+   "distinct_cassettes": 39,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL6061-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R350-T8",
+     "end_class": "C1"
+    },
+    "diag:00": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "CFPEEK-R110-T2.5",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "CFPEEK-R110-T3",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "CFPEEK-R110-T3",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "CFPEEK-R110-T2.5",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "ALAL2O3F-R450-T6",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "ALAL2O3F-R450-T6",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL6061-R220-T3",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C2"
+    },
+    "frame:14": {
+     "cassette": "AL6061-R350-T5",
+     "end_class": "C1"
+    },
+    "diag:14": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "ALAL2O3F-R550-T20",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "TI64-R950-T2.5",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL6061-R950-T32",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL6061-R60-T4",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL6061-R350-T20",
+     "end_class": "C3"
+    },
+    "tie:15": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "CFPEEK-R450-T32",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL6061-R75-T2.5",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "diag:16": {
+     "cassette": "CFPEEK-R90-T2",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL6061-R350-T20",
+     "end_class": "C3"
+    },
+    "keel:17": {
+     "cassette": "CFPEEK-R280-T8",
+     "end_class": "C1"
+    },
+    "diag:17": {
+     "cassette": "CFPEEK-R90-T2",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "CFPEEK-R700-T10",
+     "end_class": "C2"
+    },
+    "collar:15": {
+     "cassette": "CFPEEK-R350-T10",
+     "end_class": "C2"
+    },
+    "collar:16": {
+     "cassette": "CFPEEK-R180-T3",
+     "end_class": "C1"
+    },
+    "collar:17": {
+     "cassette": "CFPEEK-R350-T8",
+     "end_class": "C2"
+    },
+    "hubcone": {
+     "cassette": "TI64-R950-T32",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T80",
+     "end_class": "C3"
+    }
+   }
+  },
+  "HC:hub:R": {
+   "members_t": 1060.3088334231197,
+   "penalty_t": 332.4739142910919,
+   "penalty_pct": 31.35632787456153,
+   "distinct_cassettes": 43,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL6061-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R450-T8",
+     "end_class": "C1"
+    },
+    "diag:00": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R280-T8",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "CFPEEK-R110-T2.5",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "CFPEEK-R110-T2.5",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "CFPEEK-R110-T3",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "ALAL2O3F-R350-T10",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "CFPEEK-R110-T3",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "ALAL2O3F-R450-T6",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "ALAL2O3F-R450-T6",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "CFPEEK-R110-T2.5",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C2"
+    },
+    "frame:14": {
+     "cassette": "AL6061-R350-T5",
+     "end_class": "C1"
+    },
+    "diag:14": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "ALAL2O3F-R550-T20",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "TI64-R950-T2.5",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL6061-R950-T32",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL6061-R60-T4",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL6061-R90-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL6061-R350-T20",
+     "end_class": "C3"
+    },
+    "tie:15": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "CFPEEK-R450-T32",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL6061-R90-T2.5",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "diag:16": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL6061-R90-T2.5",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "CFPEEK-R110-T2.5",
+     "end_class": "C1"
+    },
+    "diag:17": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL6061-R90-T2.5",
+     "end_class": "C1"
+    },
+    "keel:18": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "diag:18": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "frame:19": {
+     "cassette": "AL6061-R350-T10",
+     "end_class": "C2"
+    },
+    "keel:19": {
+     "cassette": "CFPEEK-R220-T6",
+     "end_class": "C1"
+    },
+    "diag:19": {
+     "cassette": "CFPEEK-R90-T2",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "CFPEEK-R700-T10",
+     "end_class": "C2"
+    },
+    "collar:15": {
+     "cassette": "CFPEEK-R450-T10",
+     "end_class": "C2"
+    },
+    "collar:16": {
+     "cassette": "CFPEEK-R75-T2",
+     "end_class": "C1"
+    },
+    "collar:17": {
+     "cassette": "CFPEEK-R60-T2",
+     "end_class": "C1"
+    },
+    "collar:18": {
+     "cassette": "CFPEEK-R75-T2",
+     "end_class": "C1"
+    },
+    "collar:19": {
+     "cassette": "CFPEEK-R180-T5",
+     "end_class": "C1"
+    },
+    "hubcone": {
+     "cassette": "TI64-R950-T32",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T100",
+     "end_class": "C4"
+    }
+   }
+  },
+  "H:hub:F1:radius=7.0": {
+   "members_t": 1106.9402630083046,
+   "penalty_t": 383.9479143557894,
+   "penalty_pct": 34.68551349937742,
+   "distinct_cassettes": 45,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T20",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL5083-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R450-T8",
+     "end_class": "C2"
+    },
+    "diag:00": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "AL6061-R550-T20",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL5083-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "AL6061-R220-T3",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL5083-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL5083-R180-T3",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R140-T5",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL5083-R220-T3",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL5083-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL5083-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL5083-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL5083-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C2"
+    },
+    "frame:14": {
+     "cassette": "AL5083-R350-T5",
+     "end_class": "C1"
+    },
+    "diag:14": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "AL6061-R550-T40",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "AL6061-R950-T4",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL5083-R950-T32",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL5083-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL5083-R60-T4",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL5083-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL5083-R140-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL5083-R350-T16",
+     "end_class": "C2"
+    },
+    "tie:15": {
+     "cassette": "AL5083-R75-T3",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "AL6061-R450-T50",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL5083-R90-T2.5",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "diag:16": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL5083-R75-T3",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "diag:17": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL5083-R350-T4",
+     "end_class": "C2"
+    },
+    "keel:18": {
+     "cassette": "AL6061-R450-T8",
+     "end_class": "C1"
+    },
+    "diag:18": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "AL6061-R950-T16",
+     "end_class": "C2"
+    },
+    "collar:15": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C1"
+    },
+    "collar:16": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "collar:17": {
+     "cassette": "AL6061-R220-T3",
+     "end_class": "C1"
+    },
+    "collar:18": {
+     "cassette": "AL6061-R350-T8",
+     "end_class": "C1"
+    },
+    "hubcone": {
+     "cassette": "TI64-R950-T32",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T80",
+     "end_class": "C3"
+    }
+   }
+  },
+  "H:hub:F1:radius=9.0": {
+   "members_t": 929.5967758597162,
+   "penalty_t": 318.2306839100519,
+   "penalty_pct": 34.23319574400885,
+   "distinct_cassettes": 43,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R450-T16",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL5083-R350-T32",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R450-T16",
+     "end_class": "C2"
+    },
+    "diag:00": {
+     "cassette": "AL6061-R220-T10",
+     "end_class": "C2"
+    },
+    "rail:00": {
+     "cassette": "AL6061-R550-T25",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL5083-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL5083-R220-T3",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL5083-R140-T2.5",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL5083-R180-T3",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL5083-R220-T3",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL5083-R220-T3",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R140-T5",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL5083-R220-T3",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL5083-R180-T3",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL5083-R220-T3",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL5083-R220-T3",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R350-T8",
+     "end_class": "C1"
+    },
+    "frame:14": {
+     "cassette": "AL5083-R220-T5",
+     "end_class": "C1"
+    },
+    "diag:14": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "AL6061-R550-T32",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "AL6061-R950-T4",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL5083-R950-T20",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL5083-R60-T2.5",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL5083-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL5083-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL5083-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL5083-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL5083-R60-T4",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL5083-R60-T4",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL5083-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL5083-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL5083-R60-T3",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL5083-R140-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL5083-R220-T3",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL5083-R350-T8",
+     "end_class": "C2"
+    },
+    "tie:15": {
+     "cassette": "AL5083-R75-T2.5",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "AL6061-R450-T32",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL5083-R110-T2.5",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "diag:16": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL5083-R110-T2.5",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "diag:17": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL5083-R180-T2.5",
+     "end_class": "C1"
+    },
+    "keel:18": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:18": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "AL6061-R950-T25",
+     "end_class": "C3"
+    },
+    "collar:15": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C2"
+    },
+    "collar:16": {
+     "cassette": "AL6061-R90-T2.5",
+     "end_class": "C1"
+    },
+    "collar:17": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "collar:18": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "hubcone": {
+     "cassette": "TI64-R950-T40",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T40",
+     "end_class": "C3"
+    }
+   }
+  },
+  "H:hub:F1:g_aft=0.3": {
+   "members_t": 1024.818618911165,
+   "penalty_t": 369.33363435428373,
+   "penalty_pct": 36.03892703927337,
+   "distinct_cassettes": 40,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL5083-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R350-T10",
+     "end_class": "C1"
+    },
+    "diag:00": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "AL6061-R550-T16",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL5083-R350-T8",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL5083-R350-T8",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL5083-R350-T5",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL5083-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "AL6061-R550-T12",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL5083-R280-T6",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL5083-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL5083-R280-T4",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C2"
+    },
+    "frame:14": {
+     "cassette": "AL5083-R350-T8",
+     "end_class": "C1"
+    },
+    "diag:14": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "AL6061-R550-T32",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "AL6061-R950-T2.5",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL5083-R950-T32",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL5083-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL5083-R90-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL5083-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL5083-R350-T25",
+     "end_class": "C3"
+    },
+    "tie:15": {
+     "cassette": "AL5083-R75-T2.5",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "AL6061-R450-T50",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "AL6061-R140-T2.5",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL5083-R90-T2.5",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "diag:16": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL5083-R75-T2.5",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "diag:17": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL5083-R350-T8",
+     "end_class": "C2"
+    },
+    "keel:18": {
+     "cassette": "AL6061-R450-T10",
+     "end_class": "C1"
+    },
+    "diag:18": {
+     "cassette": "AL6061-R140-T3",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "AL6061-R700-T10",
+     "end_class": "C2"
+    },
+    "collar:15": {
+     "cassette": "AL6061-R550-T10",
+     "end_class": "C2"
+    },
+    "collar:16": {
+     "cassette": "AL6061-R220-T2.5",
+     "end_class": "C1"
+    },
+    "collar:17": {
+     "cassette": "AL6061-R280-T2.5",
+     "end_class": "C1"
+    },
+    "collar:18": {
+     "cassette": "AL6061-R450-T8",
+     "end_class": "C2"
+    },
+    "hubcone": {
+     "cassette": "TI64-R950-T40",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T80",
+     "end_class": "C3"
+    }
+   }
+  },
+  "HC:hub:F1:g_aft=0.3": {
+   "members_t": 934.9301224531445,
+   "penalty_t": 291.37654501278064,
+   "penalty_pct": 31.16559601783324,
+   "distinct_cassettes": 41,
+   "groups": {
+    "ring": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "frame:00": {
+     "cassette": "AL6061-R350-T25",
+     "end_class": "C2"
+    },
+    "trans:00": {
+     "cassette": "TI64-R350-T16",
+     "end_class": "C3"
+    },
+    "modframe:00": {
+     "cassette": "AL6061-R450-T8",
+     "end_class": "C1"
+    },
+    "diag:00": {
+     "cassette": "CFPEEK-R140-T3",
+     "end_class": "C1"
+    },
+    "rail:00": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:01": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:01": {
+     "cassette": "CFPEEK-R180-T3",
+     "end_class": "C1"
+    },
+    "rail:01": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:02": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:02": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:02": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:02": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:03": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "frame:03": {
+     "cassette": "AL6061-R280-T6",
+     "end_class": "C1"
+    },
+    "diag:03": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:03": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:04": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:04": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:04": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:04": {
+     "cassette": "ALAL2O3F-R550-T8",
+     "end_class": "C3"
+    },
+    "modframe:05": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:05": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "diag:05": {
+     "cassette": "CFPEEK-R110-T2.5",
+     "end_class": "C1"
+    },
+    "rail:05": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:06": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "frame:06": {
+     "cassette": "AL6061-R180-T4",
+     "end_class": "C1"
+    },
+    "diag:06": {
+     "cassette": "CFPEEK-R110-T3",
+     "end_class": "C1"
+    },
+    "rail:06": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:07": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:07": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:07": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "frame:08": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:08": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:08": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:09": {
+     "cassette": "AL6061-R220-T6",
+     "end_class": "C1"
+    },
+    "frame:09": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:09": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:09": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:10": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:10": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:10": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:10": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:11": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:11": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:11": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:11": {
+     "cassette": "ALAL2O3F-R450-T6",
+     "end_class": "C3"
+    },
+    "modframe:12": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "frame:12": {
+     "cassette": "AL6061-R280-T5",
+     "end_class": "C1"
+    },
+    "diag:12": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "rail:12": {
+     "cassette": "ALAL2O3F-R450-T6",
+     "end_class": "C3"
+    },
+    "modframe:13": {
+     "cassette": "AL6061-R220-T5",
+     "end_class": "C1"
+    },
+    "frame:13": {
+     "cassette": "AL6061-R220-T4",
+     "end_class": "C1"
+    },
+    "diag:13": {
+     "cassette": "CFPEEK-R140-T2",
+     "end_class": "C1"
+    },
+    "rail:13": {
+     "cassette": "ALAL2O3F-R450-T8",
+     "end_class": "C3"
+    },
+    "modframe:14": {
+     "cassette": "AL6061-R450-T12",
+     "end_class": "C2"
+    },
+    "frame:14": {
+     "cassette": "AL6061-R350-T6",
+     "end_class": "C1"
+    },
+    "diag:14": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "rail:14": {
+     "cassette": "ALAL2O3F-R550-T20",
+     "end_class": "C3"
+    },
+    "pickup": {
+     "cassette": "TI64-R450-T20",
+     "end_class": "C3"
+    },
+    "spine": {
+     "cassette": "TI64-R950-T2.5",
+     "end_class": "C1"
+    },
+    "hub": {
+     "cassette": "AL6061-R950-T32",
+     "end_class": "C4"
+    },
+    "tie:03": {
+     "cassette": "AL6061-R60-T4",
+     "end_class": "C1"
+    },
+    "tie:04": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:05": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:06": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:07": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:08": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:09": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:10": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:11": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:12": {
+     "cassette": "AL6061-R60-T5",
+     "end_class": "C1"
+    },
+    "tie:13": {
+     "cassette": "AL6061-R110-T2.5",
+     "end_class": "C1"
+    },
+    "tie:14": {
+     "cassette": "AL6061-R180-T3",
+     "end_class": "C1"
+    },
+    "frame:15": {
+     "cassette": "AL6061-R350-T16",
+     "end_class": "C3"
+    },
+    "tie:15": {
+     "cassette": "AL6061-R180-T2.5",
+     "end_class": "C1"
+    },
+    "keel:15": {
+     "cassette": "CFPEEK-R450-T32",
+     "end_class": "C2"
+    },
+    "diag:15": {
+     "cassette": "CFPEEK-R110-T2.5",
+     "end_class": "C1"
+    },
+    "frame:16": {
+     "cassette": "AL6061-R75-T3",
+     "end_class": "C1"
+    },
+    "keel:16": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "diag:16": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "frame:17": {
+     "cassette": "AL6061-R75-T3",
+     "end_class": "C1"
+    },
+    "keel:17": {
+     "cassette": "CFPEEK-R140-T2.5",
+     "end_class": "C1"
+    },
+    "diag:17": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "frame:18": {
+     "cassette": "AL6061-R350-T10",
+     "end_class": "C2"
+    },
+    "keel:18": {
+     "cassette": "CFPEEK-R350-T8",
+     "end_class": "C1"
+    },
+    "diag:18": {
+     "cassette": "CFPEEK-R90-T2",
+     "end_class": "C1"
+    },
+    "collar:14": {
+     "cassette": "CFPEEK-R550-T10",
+     "end_class": "C2"
+    },
+    "collar:15": {
+     "cassette": "CFPEEK-R450-T8",
+     "end_class": "C2"
+    },
+    "collar:16": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "collar:17": {
+     "cassette": "CFPEEK-R110-T2",
+     "end_class": "C1"
+    },
+    "collar:18": {
+     "cassette": "CFPEEK-R280-T6",
+     "end_class": "C2"
+    },
+    "hubcone": {
+     "cassette": "TI64-R950-T40",
+     "end_class": "C3"
+    },
+    "deck:15": {
+     "cassette": "AL6061-R450-T80",
+     "end_class": "C3"
+    }
+   }
+  }
+ }
+}

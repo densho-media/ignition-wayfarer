@@ -1,13 +1,13 @@
-# PSA: Primary Structural Architecture (Phase I)
+# PSA: Primary Structural Architecture (Phases I and II)
 
 | Field | Value |
 | --- | --- |
 | Kind | study (architecture exploration; no geometry change) |
-| Status | ACTIVE, Phase I complete, awaiting owner review gate |
+| Status | ACTIVE, Phase I accepted (2026-11-28), Phase II complete, awaiting owner review gate |
 | Question | What physically credible, space-manufacturable, multi-material primary structure can carry Wayfarer's loads, and how does it develop together with ISSA? |
 | Model base | main `11f1e94f1c36a6e53835343c3ad645ff7da8f2d5`; ISSA `claude/cloud/ship-systems-architecture` @ `5eae7016c1c31631c9437b2d7d06aa30b740a374` (Phase VI) |
 | Branch | `claude/cloud/primary-structural-architecture` |
-| Owner questions | PSA-D01..D08 (below) |
+| Owner questions | PSA-D01..D08 answered 2026-11-28; Phase II P2-D1..D5 open (REPORT_PHASE2.md) |
 
 ## Function
 
@@ -72,3 +72,15 @@ The study ends with `checks: []` (no zero masses, unknown processes or load-case
 - **PSA-D06** Phase II candidates: PSA proposes H and HC (lunar-first and mass-first), with G as a layout question for ISSA.
 - **PSA-D07** Carbon imports: acceptable mass fraction for CF/PEEK cassettes (HC ~25-40 % of longeron mass)?
 - **PSA-D08** Go for Phase II.
+
+## Phase II (2026-11-28)
+
+Owner brief 2026-11-28 09:16Z with decisions D01 to D08. Code in `phase2/`, results in `results/p2_*.json`, report
+`results/psa_phase2.html` (artifact E63AiD7jSqGbNNAamn7ReD), review `REVIEW_PSA_PHASE2.blend` (not in Git), summary
+`REPORT_PHASE2.md`. Reproduce: `python3 phase2/study.py --part i/4` then `--merge`, `failsafe.py`, `thermal.py`,
+`interface.py`, `ledger.py`, `hierarchy.py`, `post.py`, `build_report_p2.py`; the review file with
+`/snap/bin/blender -b assets/wayfarer/WF_WAYFARER_001.blend --python work/primary-structural-architecture/phase2/make_review_p2.py`.
+
+PROTOTYPE choices: 30 s thrust ramp, 2 % TVC, 10 % differential thrust, 2e5 N ACS pair, joint compliance 0.7, Ti node
+fitting rule, rmax per family, G = 30 % of the H2 share at X -70..-20, cassette catalogue. No canon, production
+geometry or owner workbook changed.

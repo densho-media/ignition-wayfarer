@@ -27,8 +27,11 @@ RAMP_S = 30.0           # thrust ramp time at startup and shutdown (PROTOTYPE re
 TVC_FRAC = 0.02         # lateral thrust fraction from gimbal / plume misalignment (1.15 deg, PROTOTYPE)
 DIFF_FRAC = 0.10        # nozzle-to-nozzle thrust mismatch (PROTOTYPE)
 ACS_N = 2.0e5
-LAM_REQ = 1.4/0.75      # global stability margin on the limit thrust: ultimate factor over the global imperfection knockdown (one factor
-                        # on load, the knockdown on the critical value; owner D01)
+LAM_REQ = 1.4/0.75      # global stability margin on the limit thrust (follower: rigidly mounted nozzles): ultimate factor over the global
+                        # imperfection knockdown (one factor on load, the knockdown on the critical value; owner D01). Sized on the
+                        # conservative (dead, fixed-direction) load: static global buckling, monotone in stiffness. The follower and
+                        # partial-follower results are dynamic (flutter) and are reported, not sized: stiffness does not cure them.
+STIFF_PASSES = 0        # stability-driven resizing is OFF: the reduced-basis indicators are not monotone in stiffness (see report E)
 LONGITUDINAL = ('rail', 'trans', 'keel', 'spine', 'hub', 'collar', 'hubcone', 'cone')           # attitude-control pair force at the Brow (PROTOTYPE; Phase VI RCS order)
 
 
@@ -212,19 +215,22 @@ def run(b, states, iters=4, log=None, ramp=None):
     # longitudinal primary groups are thickened together (global EI is carried by the rails at r 5 m and the rotor-bay path)
     stiff = []
     strength_t = b.structure_mass()[0]/1e3
-    for k in range(8):
+    for k in range(STIFF_PASSES):
         cs = cases(b, states[:1], ramp); st = next(c for c in cs if c['name'].startswith('steady x'))
         N = [f['N'] if f else 0.0 for f in st['f']]
         b.attach(states[0]['cfg']['parts']); solve(b)
-        lam = min((reduced_stability(b, N, lam_hi=12.0, nbasis=40, partial=pp)['lam'] or 12.0) for pp in (0.0, 1.0))
-        req = LAM_REQ*st['dlf']; stiff.append(dict(pass_=k, lam=lam, req=req, members_t=b.structure_mass()[0]/1e3))
+        gs = global_stability(b, partial=0.0); lam = gs['lam'] or 12.0
+        req = LAM_REQ*st['dlf']; stiff.append(dict(pass_=k, lam=lam, req=req, kind=gs['kind'], members_t=b.structure_mass()[0]/1e3, mode_groups=gs.get('mode_groups', {})))
         if log:
             log(f'  stability pass {k+1}: lambda {lam:.2f} (required {req:.2f}), members {stiff[-1]["members_t"]:.1f} t')
         if lam >= req:
             break
         f = min(3.0, (req/lam)*1.05)
+        # stiffen the groups the critical mode lives in (a laced column buckles in shear when its lacing is light: Engesser);
+        # groups carrying >= 5 % of the mode's geometric energy are thickened
+        hit = {g for g, v in gs.get('mode_groups', {}).items() if v >= 0.05} or {g for g, s_ in b.sec.items() if s_['fam'] in LONGITUDINAL}
         for g, s in b.sec.items():
-            if s['fam'] in LONGITUDINAL:
+            if g in hit:
                 s['t'] *= f
                 if s['t'] > s['r']/4:
                     s['r'] = min(s['rmax'] if s['fam'] not in ('spine', 'hub') else s['r'], s['r']*math.sqrt(s['t']/(s['r']/4))); s['t'] = min(s['t'], s['r']/4)
@@ -286,6 +292,33 @@ def reduced_stability(b, N, lam_hi=40.0, nbasis=60, follower=True, partial=1.0, 
                     a = mid
                 else:
                     c = mid
-            return dict(lam=float(c), kind=status(c), f1=float(np.sqrt(w2[keep][0])/(2*math.pi)))
+            e, Q = sla.eig(k + c*1.02*(g + partial*lf), m); j = int(np.argmin(np.real(e)) if status(c) == 'divergence' else np.argmax(np.abs(np.imag(e))))
+            uf = np.zeros(b.m.ndof); uf[free] = np.real(V @ Q[:, j])
+            return dict(lam=float(c), kind=status(c), f1=float(np.sqrt(w2[keep][0])/(2*math.pi)), mode=uf)
         prev = gv
     return dict(lam=None, kind=f'stable_to_{lam_hi:g}', f1=float(np.sqrt(w2[keep][0])/(2*math.pi)))
+
+def global_stability(b, partial=1.0, nbasis=60, lam_hi=12.0, tvc_gain=0.0):
+    """Global stability of the free-free ship: thrust T introduced at the 12 thrust-ring nodes (the drive yoke sets the thrust
+    direction, so the follower rotation is the ring's), axial force field from inertia relief, then the reduced-basis eigen sweep.
+    partial = 1 follower (rigidly mounted nozzles), 0 fixed inertial direction (TVC holding the line of thrust faster than the
+    structure bends), between = partial follower."""
+    T = b.cfg['thrust']; ring = list(b.station_nodes[b.xs[0]].values())
+    b.m.loads = {}; b.m.follow = {}
+    for n in ring:
+        b.m.thrust(n, (T/len(ring), 0.0, 0.0), follower=True)
+    r = b.m.solve_static(inertia_relief=True); fs = b.m.element_forces(r['u'])
+    N = [f['N'] if f else 0.0 for f in fs]
+    out = reduced_stability(b, N, lam_hi=lam_hi, nbasis=nbasis, partial=partial, tvc_gain=tvc_gain)
+    if out.get('mode') is not None:
+        # geometric-stiffness energy of the critical mode per design group: which groups the mode lives in
+        u = out.pop('mode'); en = {}
+        for j, (e, md) in enumerate(zip(b.m.el, b.meta)):
+            if e['kind'] != 'beam' or not N[j]:
+                continue
+            L, R_, Tm = b.m.frame(e); ul = Tm @ u[b.m._dofs(e)]
+            en[md['group']] = en.get(md['group'], 0.0) + abs(float(ul @ b.m.kg_local(L, N[j]) @ ul))
+        tot = sum(en.values()) or 1.0
+        out['mode_groups'] = {g: v/tot for g, v in sorted(en.items(), key=lambda kv: -kv[1])[:8]}
+    b.apply_thrust(T)
+    return out
