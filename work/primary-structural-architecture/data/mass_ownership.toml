@@ -1,0 +1,127 @@
+# PSA Phase I: structural mass ownership and allocation proposal (STUDY / NONCANON). No budget line is changed.
+# Canon: S&E 10_WAYFARER_MASS row 2 'Main structure / protective casing' 150 t PROVISIONAL: primary structure, external service casing and
+# load paths; ~25 t provisionally for rotating hubs/bearings/locks/spokes; owner 2026-10-18: tank shells, insulation, mounts, passive
+# structural thermal barriers and pipe supports belong here as UNSIZED sub-allocations. Row 'Power / computers / steering / comms' 50 t
+# includes the Momentum Spine. Drive 250 t includes magnet/cage structure (UNSIZED). Thermal 100 t includes radiator hardware.
+# Production model (main 11f1e94): operating_point adds 458 t tankage for the full return (incl. the 161 t thrust deck and 20 t guides).
+# `psa_estimate_t` = Phase I first-order screening (psa_phase1.json concept_mass), production flight-bounded loads, ranges.
+
+[meta]
+status = "STUDY / NONCANON"
+principle = "One physical item, one budget owner. Structure that exists only to carry one subsystem belongs to that subsystem; structure that carries more than one, or the ship's global loads, belongs to PSA."
+
+[[item]]
+id = "PSA-01"
+name = "Primary longitudinal structure (sector rails/keels, cassettes)"
+current_owner = "main_structure (150 t)"
+proposed_owner = "PSA primary"
+psa_estimate_t = { A_aluminium = [70, 100], HC_multimaterial = [30, 45], canon_1p5g_A = [220, 280] }
+double_count_risk = "low"
+
+[[item]]
+id = "PSA-02"
+name = "Transverse frames, diagonal bracing, nodes, splices"
+current_owner = "main_structure"
+proposed_owner = "PSA primary"
+psa_estimate_t = { A_aluminium = [60, 90], HC_multimaterial = [50, 75] }
+double_count_risk = "low"
+
+[[item]]
+id = "PSA-03"
+name = "12-node thrust ring and 8 m transition"
+current_owner = "main_structure"
+proposed_owner = "PSA primary"
+psa_estimate_t = [5, 15]
+double_count_risk = "medium: nozzle yokes/pickups are in the drive line (magnet_cage_support); the pickup lug on the ring is PSA"
+
+[[item]]
+id = "PSA-04"
+name = "Q45 stationary bypass collar (3 girders round the rotor bay)"
+current_owner = "main_structure (geometry OPEN, mass OPEN in canon)"
+proposed_owner = "PSA primary"
+psa_estimate_t = [15, 35]
+double_count_risk = "medium: its ring girder is counted in the 161 t tank thrust deck (MODEL.md: 'ring chords 55 t'); assign the girder to ONE owner"
+
+[[item]]
+id = "PSA-05"
+name = "Brow keels, hub path, shield mount struts"
+current_owner = "split: forward_impact_shielding (100 t) holds the Brow truss; keels and struts unassigned"
+proposed_owner = "PSA primary up to the Brow hub ring; Brow truss stays forward defense"
+psa_estimate_t = [3, 8]
+double_count_risk = "medium"
+
+[[item]]
+id = "PSA-06"
+name = "Protective casing (panels, straps, access doors)"
+current_owner = "main_structure"
+proposed_owner = "PSA secondary (casing is not in the primary load path except in concept E)"
+psa_estimate_t = [20, 45]
+double_count_risk = "low"
+
+[[item]]
+id = "PSA-07"
+name = "Momentum Spine (alignment, torsion share, utility backbone, crew trunk shell)"
+current_owner = "power_computers_steering_comms (50 t) per 10_WAYFARER_MASS"
+proposed_owner = "PSA primary for its structural shell; utilities stay EPS/CDH"
+psa_estimate_t = [8, 20]
+double_count_risk = "HIGH: booked under power while the 07 load path counts it as primary structure; ISSA counts ~31.5 t of the 50 t line already used"
+
+[[item]]
+id = "PSA-08"
+name = "Rotating structure: hubs, bearings, locks, spokes"
+current_owner = "main_structure rotating_allowance 25 t"
+proposed_owner = "habitat (rotating) with PSA owning the stationary hub and latches"
+psa_estimate_t = "OPEN (25 t allowance kept)"
+double_count_risk = "medium: ring frames vs habitat_pressure_structure 90 t"
+
+[[item]]
+id = "PSA-09"
+name = "Tank shells, insulation, skirts, thrust deck, guides"
+current_owner = "owner rule 2026-10-18: inside main_structure 150 t (UNSIZED); model: 458 t added tankage (operating_point)"
+proposed_owner = "Propellant storage (its own line); the deck ring girder shared with PSA-04 by agreement"
+psa_estimate_t = "458 t (P, main) / 686 t (F1) / ISSA tankage"
+double_count_risk = "HIGH: the 150 t line cannot hold 458 t; the production mass model already books it outside. Owner decision PSA-D04."
+
+[[item]]
+id = "PSA-10"
+name = "Radiator blade trusses, root booms, stays"
+current_owner = "radiators_thermal (100 t)"
+proposed_owner = "thermal (blade-only structure); the root lugs and hull-side frames PSA"
+psa_estimate_t = "OPEN (blade backbone runs at ~1650-1800 K: C/C or refractory)"
+double_count_risk = "low if the root lug is the boundary"
+
+[[item]]
+id = "PSA-11"
+name = "Equipment mounts and stand-offs (hot-loop thermal breaks, L2 mount frames, cryo struts)"
+current_owner = "unassigned (owner rule: pipe supports and thermal barriers in main_structure)"
+proposed_owner = "the supported subsystem (ISSA), using PSA hard-point classes"
+psa_estimate_t = "OPEN (ISSA H6a supports in its 565 t?)"
+double_count_risk = "HIGH until ISSA states whether its H6a mass includes supports"
+
+[[item]]
+id = "PSA-12"
+name = "Magnet cage and coil support structure"
+current_owner = "drive_package 250 t (UNSIZED suballocation)"
+proposed_owner = "drive"
+psa_estimate_t = "OPEN (Vertex 1.2 sized its own cage)"
+double_count_risk = "low"
+
+[[item]]
+id = "PSA-13"
+name = "Structural health monitoring (sensing layer, AE sensors, harness)"
+current_owner = "unassigned"
+proposed_owner = "PSA primary (sensors), CDH (processing)"
+psa_estimate_t = [1, 4]
+double_count_risk = "low"
+
+[[item]]
+id = "PSA-14"
+name = "Manufacturing and assembly allowance (weld lands, fixture lugs, tolerance shims)"
+current_owner = "design_margin 30 t?"
+proposed_owner = "PSA primary (explicit 5-8 %)"
+psa_estimate_t = [8, 15]
+double_count_risk = "medium: do not also take it from design_margin"
+
+[allocation_proposal]
+note = "Phase I first-order totals for PSA-01..07 + 13 + 14 (flight-bounded loads, production P): concept A ~240 t, H ~200 t, HC ~160 t, C ~140 t, G ~120 t (layout change). Against 150 t, which must also hold 25 t rotating structure: none closes with lunar aluminium alone; HC/C close only if tankage stays outside the line (PSA-09) and the design load is thrust-bounded (PSA-D01). The canon 1.5 g envelope (63 MN) gives 280-720 t: the 150 t line does not survive it."
+coupling = "each structure tonne costs ~3.6-3.7 t of departure mass (psa_phase1.json coupling)"

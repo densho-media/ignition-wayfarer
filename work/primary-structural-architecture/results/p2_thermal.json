@@ -1,0 +1,278 @@
+{
+ "H:hub:F1": [
+  {
+   "ties": "all ties fixed",
+   "case": "uniform soak +60 K",
+   "max_util": 0.5992815744845302,
+   "at": "collar:18",
+   "top": [
+    "collar:18",
+    "collar:18",
+    "collar:18",
+    "keel:18",
+    "keel:18"
+   ],
+   "growth_mm": 406.6528178070901,
+   "brow_bow_mm": 7.518402685795541,
+   "spine_slip_mm_at_x60": -2.026073791559657,
+   "residual": 1.8373595053433708e-13
+  },
+  {
+   "ties": "all ties fixed",
+   "case": "hot sector +50 K (az 240-300)",
+   "max_util": 0.344855966218299,
+   "at": "modframe:04",
+   "top": [
+    "modframe:04",
+    "frame:16",
+    "diag:15",
+    "diag:15",
+    "frame:04"
+   ],
+   "growth_mm": 62.43081569646934,
+   "brow_bow_mm": 188.55762850128866,
+   "spine_slip_mm_at_x60": 26.476781760051843,
+   "residual": 3.8407764195959904e-13
+  },
+  {
+   "ties": "all ties fixed",
+   "case": "rail through-section gradient 20 K",
+   "max_util": 0.09970383544604712,
+   "at": "modframe:00",
+   "top": [
+    "modframe:00",
+    "modframe:14",
+    "modframe:14",
+    "modframe:14",
+    "modframe:14"
+   ],
+   "growth_mm": -0.7177484739428518,
+   "brow_bow_mm": 5.416634482271956,
+   "spine_slip_mm_at_x60": 0.3783034676536643,
+   "residual": 1.4836398081528157e-14
+  },
+  {
+   "ties": "all ties fixed",
+   "case": "warm spine +40 K",
+   "max_util": 0.46378801847973944,
+   "at": "tie:03",
+   "top": [
+    "tie:03",
+    "tie:03",
+    "tie:03",
+    "tie:03",
+    "tie:03"
+   ],
+   "growth_mm": 11.047831358229443,
+   "brow_bow_mm": 0.14708866353949956,
+   "spine_slip_mm_at_x60": -31.093821792038295,
+   "residual": 8.219445244624191e-15
+  },
+  {
+   "ties": "one axial datum + slides",
+   "case": "uniform soak +60 K",
+   "max_util": 0.5992313280590197,
+   "at": "collar:18",
+   "top": [
+    "collar:18",
+    "collar:18",
+    "collar:18",
+    "keel:18",
+    "keel:18"
+   ],
+   "growth_mm": 406.61116121074025,
+   "brow_bow_mm": 7.537615183867207,
+   "spine_slip_mm_at_x60": -2.1073516397609415,
+   "residual": 3.4819175458008775e-08
+  },
+  {
+   "ties": "one axial datum + slides",
+   "case": "hot sector +50 K (az 240-300)",
+   "max_util": 0.34480380169013203,
+   "at": "modframe:04",
+   "top": [
+    "modframe:04",
+    "frame:16",
+    "diag:15",
+    "diag:15",
+    "frame:04"
+   ],
+   "growth_mm": 62.49489627206822,
+   "brow_bow_mm": 188.57858628414368,
+   "spine_slip_mm_at_x60": 26.66528102504556,
+   "residual": 1.575584851965821e-09
+  },
+  {
+   "ties": "one axial datum + slides",
+   "case": "rail through-section gradient 20 K",
+   "max_util": 0.0997038075437305,
+   "at": "modframe:00",
+   "top": [
+    "modframe:00",
+    "modframe:14",
+    "modframe:14",
+    "modframe:14",
+    "modframe:14"
+   ],
+   "growth_mm": -0.7177049268945771,
+   "brow_bow_mm": 5.414129918785619,
+   "spine_slip_mm_at_x60": 0.37840894932335317,
+   "residual": 4.3303993515520373e-13
+  },
+  {
+   "ties": "one axial datum + slides",
+   "case": "warm spine +40 K",
+   "max_util": 0.012750051947830835,
+   "at": "collar:14",
+   "top": [
+    "collar:14",
+    "collar:14",
+    "collar:14",
+    "collar:14",
+    "collar:14"
+   ],
+   "growth_mm": 10.876407172589207,
+   "brow_bow_mm": 0.13929293656617808,
+   "spine_slip_mm_at_x60": -31.58918200285113,
+   "residual": 4.5055437795460623e-10
+  }
+ ],
+ "HC:hub:F1": [
+  {
+   "ties": "all ties fixed",
+   "case": "uniform soak +60 K",
+   "max_util": 0.4812382536108795,
+   "at": "keel:18",
+   "top": [
+    "keel:18",
+    "keel:18",
+    "keel:18",
+    "keel:18",
+    "keel:18"
+   ],
+   "growth_mm": 101.02373805725288,
+   "brow_bow_mm": 114.89827124026526,
+   "spine_slip_mm_at_x60": -11.177284885046387,
+   "residual": 1.3262191768266727e-13
+  },
+  {
+   "ties": "all ties fixed",
+   "case": "hot sector +50 K (az 240-300)",
+   "max_util": 0.2670591487552131,
+   "at": "diag:14",
+   "top": [
+    "diag:14",
+    "diag:14",
+    "diag:14",
+    "diag:18",
+    "frame:15"
+   ],
+   "growth_mm": 16.779332489199035,
+   "brow_bow_mm": 55.474953773319534,
+   "spine_slip_mm_at_x60": 6.908636771689626,
+   "residual": 7.257683749423792e-14
+  },
+  {
+   "ties": "all ties fixed",
+   "case": "rail through-section gradient 20 K",
+   "max_util": 0.04348804601344104,
+   "at": "modframe:14",
+   "top": [
+    "modframe:14",
+    "modframe:14",
+    "modframe:14",
+    "modframe:14",
+    "rail:13"
+   ],
+   "growth_mm": -0.18174012120207378,
+   "brow_bow_mm": 0.3350745291801972,
+   "spine_slip_mm_at_x60": 0.12984714466139885,
+   "residual": 2.7685455697415147e-15
+  },
+  {
+   "ties": "all ties fixed",
+   "case": "warm spine +40 K",
+   "max_util": 0.19641803147478423,
+   "at": "tie:03",
+   "top": [
+    "tie:03",
+    "tie:03",
+    "tie:03",
+    "tie:03",
+    "tie:03"
+   ],
+   "growth_mm": 11.118743080610402,
+   "brow_bow_mm": 0.10716559240852538,
+   "spine_slip_mm_at_x60": -14.439080630473523,
+   "residual": 1.57221543456211e-14
+  },
+  {
+   "ties": "one axial datum + slides",
+   "case": "uniform soak +60 K",
+   "max_util": 0.4812402636576548,
+   "at": "keel:18",
+   "top": [
+    "keel:18",
+    "keel:18",
+    "keel:18",
+    "keel:18",
+    "frame:14"
+   ],
+   "growth_mm": 100.9324619961739,
+   "brow_bow_mm": 114.86314191898032,
+   "spine_slip_mm_at_x60": -11.371208809114682,
+   "residual": 4.913117939152769e-07
+  },
+  {
+   "ties": "one axial datum + slides",
+   "case": "hot sector +50 K (az 240-300)",
+   "max_util": 0.2670691664698147,
+   "at": "diag:14",
+   "top": [
+    "diag:14",
+    "diag:14",
+    "diag:14",
+    "diag:18",
+    "frame:15"
+   ],
+   "growth_mm": 16.79145222114762,
+   "brow_bow_mm": 55.475559857002935,
+   "spine_slip_mm_at_x60": 6.945298899447394,
+   "residual": 2.8982788767028394e-10
+  },
+  {
+   "ties": "one axial datum + slides",
+   "case": "rail through-section gradient 20 K",
+   "max_util": 0.04348782962198101,
+   "at": "modframe:14",
+   "top": [
+    "modframe:14",
+    "modframe:14",
+    "modframe:14",
+    "modframe:14",
+    "rail:13"
+   ],
+   "growth_mm": -0.18174106712844723,
+   "brow_bow_mm": 0.3383895836148238,
+   "spine_slip_mm_at_x60": 0.13003259195598554,
+   "residual": 7.493237699173904e-13
+  },
+  {
+   "ties": "one axial datum + slides",
+   "case": "warm spine +40 K",
+   "max_util": 0.010020423784461944,
+   "at": "collar:14",
+   "top": [
+    "collar:14",
+    "collar:14",
+    "collar:14",
+    "collar:14",
+    "collar:14"
+   ],
+   "growth_mm": 11.041399836282748,
+   "brow_bow_mm": 0.11103125212677449,
+   "spine_slip_mm_at_x60": -14.628465565169899,
+   "residual": 1.2345793757112688e-10
+  }
+ ]
+}

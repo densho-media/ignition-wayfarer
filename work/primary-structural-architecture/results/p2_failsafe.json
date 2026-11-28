@@ -1,0 +1,753 @@
+{
+ "H:hub:F1|EMERGENCY": {
+  "key": "H:hub:F1",
+  "target": "EMERGENCY",
+  "intact_members_t": 1089.8917492955682,
+  "failsafe_members_t": 1063.7949746452093,
+  "penalty_t": -26.09677465035884,
+  "passes": [
+   {
+    "iter": 1,
+    "members_t": 1097.1879192536132,
+    "at_max": []
+   },
+   {
+    "iter": 2,
+    "members_t": 1110.584069165611,
+    "at_max": []
+   },
+   {
+    "iter": 3,
+    "members_t": 1063.7949746452093,
+    "at_max": []
+   }
+  ],
+  "verify": [
+   {
+    "name": "rail bay X -111",
+    "u_nom": 7.264842192184059,
+    "f_emer": 0.4144544580451116,
+    "collapse_chain": [
+     "diag:01",
+     "modframe:01",
+     "frame:01",
+     "diag:01",
+     "modframe:02",
+     "diag:01",
+     "frame:01",
+     "diag:01"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X -111",
+    "u_nom": 8.479119988309575,
+    "f_emer": 0.5089774035979726,
+    "collapse_chain": [
+     "frame:01",
+     "diag:01",
+     "modframe:02",
+     "frame:02",
+     "diag:02",
+     "modframe:02",
+     "diag:01",
+     "frame:02"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail bay X -55",
+    "u_nom": 4.124087533550002,
+    "f_emer": 0.4288194868665716,
+    "collapse_chain": [
+     "modframe:05",
+     "diag:04",
+     "frame:04",
+     "diag:04",
+     "diag:05",
+     "modframe:04",
+     "frame:04",
+     "diag:05"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X -55",
+    "u_nom": 433.4354156237769,
+    "f_emer": 0.0032300083231205172,
+    "collapse_chain": [
+     "diag:04",
+     "diag:04",
+     "frame:04",
+     "modframe:04",
+     "frame:04",
+     "diag:04",
+     "modframe:04",
+     "diag:04"
+    ],
+    "class": "IMMEDIATE REPAIR"
+   },
+   {
+    "name": "rail bay X +1",
+    "u_nom": 9.592181595132768,
+    "f_emer": 0.36069709665783234,
+    "collapse_chain": [
+     "diag:08",
+     "modframe:08",
+     "frame:08",
+     "diag:08",
+     "modframe:09",
+     "modframe:09",
+     "frame:09",
+     "diag:09"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X +1",
+    "u_nom": 376.519956508448,
+    "f_emer": 0.40471341563524327,
+    "collapse_chain": [
+     "spine",
+     "mechanism"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail bay X +57",
+    "u_nom": 4.306983058049176,
+    "f_emer": 0.4769961225991879,
+    "collapse_chain": [
+     "modframe:12",
+     "diag:12",
+     "diag:11",
+     "frame:11",
+     "modframe:11",
+     "diag:12",
+     "frame:11",
+     "diag:11"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X +57",
+    "u_nom": 401.96617926677135,
+    "f_emer": 0.21731392107041894,
+    "collapse_chain": [
+     "diag:11",
+     "frame:11",
+     "modframe:11",
+     "spine",
+     "mechanism"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail bay X +85",
+    "u_nom": 557.8335521804248,
+    "f_emer": 0.32524602870122316,
+    "collapse_chain": [
+     "diag:13",
+     "diag:13",
+     "frame:13",
+     "modframe:13",
+     "diag:13",
+     "spine",
+     "mechanism"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X +85",
+    "u_nom": 3.2828158584056446,
+    "f_emer": 0.4308376081802392,
+    "collapse_chain": [
+     "modframe:13",
+     "diag:13",
+     "frame:13",
+     "diag:13",
+     "modframe:13",
+     "modframe:13",
+     "spine",
+     "mechanism"
+    ],
+    "class": "COAST-ONLY"
+   }
+  ],
+  "by_family_t": {
+   "ring": 3.7762018724235014,
+   "frame": 43.3416965263613,
+   "trans": 25.33063386634796,
+   "modframe": 19.13379833984393,
+   "diag": 27.303488807317994,
+   "rail": 118.58498794138453,
+   "pickup": 10.704355836573596,
+   "spine": 6.152131254221658,
+   "hub": 12.283971168594114,
+   "tie": 1.0702472388120712,
+   "keel": 21.875757661755756,
+   "collar": 177.25859578851413,
+   "hubcone": 15.846792836301551,
+   "deck": 581.1323155067555
+  }
+ },
+ "H:hub:F1|NOMINAL": {
+  "key": "H:hub:F1",
+  "target": "NOMINAL",
+  "intact_members_t": 1089.8917492955682,
+  "failsafe_members_t": 1224.1430995937194,
+  "penalty_t": 134.25135029815124,
+  "passes": [
+   {
+    "iter": 1,
+    "members_t": 1190.8477881990489,
+    "at_max": []
+   },
+   {
+    "iter": 2,
+    "members_t": 1221.7136654383837,
+    "at_max": []
+   },
+   {
+    "iter": 3,
+    "members_t": 1224.1430995937194,
+    "at_max": []
+   }
+  ],
+  "verify": [
+   {
+    "name": "rail bay X -111",
+    "u_nom": 1.0270626773141145,
+    "f_emer": 1.0,
+    "collapse_chain": [],
+    "class": "REDUCED THRUST"
+   },
+   {
+    "name": "rail joint X -111",
+    "u_nom": 1.0248008085308917,
+    "f_emer": 1.0,
+    "collapse_chain": [],
+    "class": "REDUCED THRUST"
+   },
+   {
+    "name": "rail bay X -55",
+    "u_nom": 1.0643136952135526,
+    "f_emer": 1.0,
+    "collapse_chain": [],
+    "class": "REDUCED THRUST"
+   },
+   {
+    "name": "rail joint X -55",
+    "u_nom": 431.05163779037684,
+    "f_emer": 0.0789323223915909,
+    "collapse_chain": [
+     "diag:04",
+     "frame:04",
+     "modframe:04",
+     "modframe:04",
+     "frame:04",
+     "diag:04",
+     "modframe:04",
+     "diag:04"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail bay X +1",
+    "u_nom": 1.0248653534022256,
+    "f_emer": 1.0,
+    "collapse_chain": [],
+    "class": "REDUCED THRUST"
+   },
+   {
+    "name": "rail joint X +1",
+    "u_nom": 1.3088484185120735,
+    "f_emer": 1.0,
+    "collapse_chain": [],
+    "class": "REDUCED THRUST"
+   },
+   {
+    "name": "rail bay X +57",
+    "u_nom": 1.0504115864631802,
+    "f_emer": 1.0,
+    "collapse_chain": [],
+    "class": "REDUCED THRUST"
+   },
+   {
+    "name": "rail joint X +57",
+    "u_nom": 366.3321314304477,
+    "f_emer": 0.0038216685894663484,
+    "collapse_chain": [
+     "diag:11",
+     "frame:11",
+     "modframe:11",
+     "frame:11",
+     "diag:11",
+     "diag:11",
+     "modframe:11",
+     "diag:10"
+    ],
+    "class": "IMMEDIATE REPAIR"
+   },
+   {
+    "name": "rail bay X +85",
+    "u_nom": 1.099431606163742,
+    "f_emer": 1.0,
+    "collapse_chain": [],
+    "class": "REDUCED THRUST"
+   },
+   {
+    "name": "rail joint X +85",
+    "u_nom": 1.5098982551130595,
+    "f_emer": 0.9272147942810686,
+    "collapse_chain": [
+     "modframe:13"
+    ],
+    "class": "REDUCED THRUST"
+   }
+  ],
+  "by_family_t": {
+   "ring": 3.864117242646623,
+   "frame": 58.66299109683993,
+   "trans": 25.33063386634796,
+   "modframe": 42.70456372703054,
+   "diag": 60.44815731231071,
+   "rail": 158.07266044844425,
+   "pickup": 10.704355836573596,
+   "spine": 7.400314036615441,
+   "hub": 12.283971168594114,
+   "tie": 1.1344655974161357,
+   "keel": 23.859058494228613,
+   "collar": 170.61251667951836,
+   "hubcone": 15.492060957324925,
+   "deck": 633.573233129831
+  }
+ },
+ "H3:hub:F1|EMERGENCY": {
+  "key": "H3:hub:F1",
+  "target": "EMERGENCY",
+  "intact_members_t": 1216.8382111533172,
+  "failsafe_members_t": 1464.9586096809014,
+  "penalty_t": 248.12039852758426,
+  "passes": [
+   {
+    "iter": 1,
+    "members_t": 1427.9728439287896,
+    "at_max": [
+     "keel:15"
+    ]
+   },
+   {
+    "iter": 2,
+    "members_t": 1470.0917144871678,
+    "at_max": [
+     "keel:15"
+    ]
+   },
+   {
+    "iter": 3,
+    "members_t": 1464.9586096809014,
+    "at_max": [
+     "keel:15"
+    ]
+   }
+  ],
+  "verify": [
+   {
+    "name": "rail bay X -111",
+    "u_nom": 3.0561484104515433,
+    "f_emer": 0.4765494760769333,
+    "collapse_chain": [
+     "diag:01",
+     "modframe:02",
+     "frame:01",
+     "diag:02",
+     "frame:01",
+     "diag:01",
+     "diag:02",
+     "diag:02"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X -111",
+    "u_nom": 4.3045645665486525,
+    "f_emer": 0.32523614836204046,
+    "collapse_chain": [
+     "frame:01",
+     "modframe:02",
+     "diag:02",
+     "diag:02",
+     "diag:01",
+     "modframe:02",
+     "frame:01",
+     "diag:02"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail bay X -55",
+    "u_nom": 3.1165703425232962,
+    "f_emer": 0.47333233244718953,
+    "collapse_chain": [
+     "diag:05",
+     "modframe:05",
+     "diag:04",
+     "frame:04",
+     "modframe:04",
+     "frame:04",
+     "modframe:04",
+     "diag:03"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X -55",
+    "u_nom": 14654.808186970775,
+    "f_emer": 9.553178602806313e-05,
+    "collapse_chain": [
+     "diag:04",
+     "diag:04",
+     "diag:04",
+     "diag:04",
+     "diag:04",
+     "diag:04",
+     "diag:04",
+     "frame:04"
+    ],
+    "class": "IMMEDIATE REPAIR"
+   },
+   {
+    "name": "rail bay X +1",
+    "u_nom": 3.1992553267327724,
+    "f_emer": 0.45771263146146046,
+    "collapse_chain": [
+     "diag:08",
+     "frame:08",
+     "diag:09",
+     "modframe:09",
+     "diag:08",
+     "diag:09",
+     "diag:09",
+     "diag:09"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X +1",
+    "u_nom": 4.58645190551882,
+    "f_emer": 0.32279242720111684,
+    "collapse_chain": [
+     "frame:08",
+     "modframe:09",
+     "diag:09",
+     "diag:09",
+     "diag:08",
+     "diag:09",
+     "diag:09",
+     "diag:09"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail bay X +57",
+    "u_nom": 2.99497596041872,
+    "f_emer": 0.49214710714562887,
+    "collapse_chain": [
+     "diag:12",
+     "modframe:12",
+     "diag:11",
+     "diag:11",
+     "frame:11",
+     "modframe:12",
+     "diag:11",
+     "diag:11"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X +57",
+    "u_nom": 13853.601420789115,
+    "f_emer": 0.00010105675466446726,
+    "collapse_chain": [
+     "diag:11",
+     "diag:11",
+     "diag:11",
+     "diag:11",
+     "diag:11",
+     "diag:11",
+     "diag:11",
+     "diag:11"
+    ],
+    "class": "IMMEDIATE REPAIR"
+   },
+   {
+    "name": "rail bay X +85",
+    "u_nom": 218.3602345119097,
+    "f_emer": 0.4127659142784004,
+    "collapse_chain": [
+     "diag:14",
+     "modframe:14",
+     "diag:14",
+     "frame:13",
+     "diag:13",
+     "diag:14",
+     "modframe:13",
+     "diag:14"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X +85",
+    "u_nom": 564.0455969850346,
+    "f_emer": 0.32835247793263955,
+    "collapse_chain": [
+     "diag:13",
+     "diag:14",
+     "modframe:13",
+     "diag:14",
+     "modframe:13",
+     "modframe:13",
+     "frame:13",
+     "modframe:13"
+    ],
+    "class": "COAST-ONLY"
+   }
+  ],
+  "by_family_t": {
+   "ring": 2.8664088691263943,
+   "frame": 46.16437786284193,
+   "trans": 27.538203502202663,
+   "modframe": 24.589831298627086,
+   "diag": 194.92670065199363,
+   "rail": 125.16468887571074,
+   "pickup": 11.700047567754048,
+   "spine": 15.484479126493005,
+   "hub": 12.283971168594114,
+   "tie": 1.8701724388504735,
+   "keel": 24.40780552396174,
+   "collar": 369.3756983255962,
+   "hubcone": 13.366482118370142,
+   "deck": 595.2197423507802
+  }
+ },
+ "H3:hub:F1|NOMINAL": {
+  "key": "H3:hub:F1",
+  "target": "NOMINAL",
+  "intact_members_t": 1216.8382111533172,
+  "failsafe_members_t": 1643.1827806136962,
+  "penalty_t": 426.34456946037903,
+  "passes": [
+   {
+    "iter": 1,
+    "members_t": 1801.5186598273986,
+    "at_max": [
+     "diag:01",
+     "diag:05",
+     "keel:15"
+    ]
+   },
+   {
+    "iter": 2,
+    "members_t": 1633.3964822389407,
+    "at_max": [
+     "diag:01",
+     "diag:05",
+     "diag:08",
+     "diag:12",
+     "diag:13"
+    ]
+   },
+   {
+    "iter": 3,
+    "members_t": 1643.1827806136962,
+    "at_max": [
+     "diag:01",
+     "diag:05",
+     "diag:08",
+     "diag:12",
+     "diag:13",
+     "keel:15"
+    ]
+   }
+  ],
+  "verify": [
+   {
+    "name": "rail bay X -111",
+    "u_nom": 2.4393567622465833,
+    "f_emer": 0.5943576237819022,
+    "collapse_chain": [
+     "diag:01",
+     "diag:01",
+     "diag:01",
+     "modframe:02",
+     "modframe:02",
+     "frame:01",
+     "diag:02",
+     "diag:02"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X -111",
+    "u_nom": 3.1054591353032057,
+    "f_emer": 0.47201216295725146,
+    "collapse_chain": [
+     "diag:01",
+     "modframe:02",
+     "frame:01",
+     "diag:02",
+     "diag:02",
+     "frame:02",
+     "diag:01",
+     "diag:02"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail bay X -55",
+    "u_nom": 2.050291659463712,
+    "f_emer": 0.7082841146275636,
+    "collapse_chain": [
+     "diag:05",
+     "diag:05",
+     "frame:04",
+     "frame:04",
+     "modframe:05",
+     "modframe:04",
+     "frame:04",
+     "modframe:04"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X -55",
+    "u_nom": 11.749464736267754,
+    "f_emer": 0.15221289545799224,
+    "collapse_chain": [
+     "diag:04",
+     "frame:04",
+     "frame:04",
+     "modframe:04",
+     "frame:04",
+     "modframe:04",
+     "diag:03",
+     "diag:03"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail bay X +1",
+    "u_nom": 2.008734541912893,
+    "f_emer": 0.7192544412491548,
+    "collapse_chain": [
+     "diag:08",
+     "diag:08",
+     "modframe:09",
+     "modframe:09",
+     "frame:08",
+     "diag:09",
+     "diag:09",
+     "diag:09"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X +1",
+    "u_nom": 2.648612078356674,
+    "f_emer": 0.5532104155930365,
+    "collapse_chain": [
+     "diag:08",
+     "modframe:09",
+     "modframe:09",
+     "frame:08",
+     "diag:09",
+     "diag:09",
+     "frame:09",
+     "diag:08"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail bay X +57",
+    "u_nom": 1.8910420529884533,
+    "f_emer": 0.7637514324373703,
+    "collapse_chain": [
+     "diag:12",
+     "diag:12",
+     "frame:11",
+     "modframe:12",
+     "modframe:11",
+     "frame:11",
+     "modframe:11",
+     "frame:11"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X +57",
+    "u_nom": 15.690776670379451,
+    "f_emer": 0.1244401369758566,
+    "collapse_chain": [
+     "diag:11",
+     "frame:11",
+     "modframe:11",
+     "frame:11",
+     "modframe:11",
+     "frame:11",
+     "diag:10",
+     "diag:10"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail bay X +85",
+    "u_nom": 1.8588935698334812,
+    "f_emer": 0.7714048091376883,
+    "collapse_chain": [
+     "diag:13",
+     "diag:13",
+     "modframe:13",
+     "frame:14",
+     "frame:13",
+     "modframe:13",
+     "diag:14",
+     "modframe:13"
+    ],
+    "class": "COAST-ONLY"
+   },
+   {
+    "name": "rail joint X +85",
+    "u_nom": 2.5346831309006546,
+    "f_emer": 0.5742352728340132,
+    "collapse_chain": [
+     "diag:13",
+     "modframe:13",
+     "modframe:13",
+     "modframe:13",
+     "modframe:13",
+     "modframe:13",
+     "modframe:13",
+     "diag:13"
+    ],
+    "class": "COAST-ONLY"
+   }
+  ],
+  "by_family_t": {
+   "ring": 2.8664088691263943,
+   "frame": 84.87533622420783,
+   "trans": 27.538203502202663,
+   "modframe": 58.70407847096447,
+   "diag": 266.6717686108161,
+   "rail": 147.86600055337382,
+   "pickup": 11.700047567754048,
+   "spine": 24.54550605119611,
+   "hub": 12.283971168594114,
+   "tie": 4.438836923529605,
+   "keel": 24.419073532609755,
+   "collar": 369.5684048069505,
+   "hubcone": 12.48540198159029,
+   "deck": 595.2197423507802
+  }
+ }
+}

@@ -1,0 +1,356 @@
+# PSA Phase I: manufacturing-process library for Luna Yard and the lunar surface plants (STUDY / NONCANON).
+# Canon frame (Technology 43): ISM-32 Luna Yard is a multi-process robotic fabrication lattice with interchangeable print/process/tool
+# heads; ISM-33 metal deposition (primary load paths need qualification and full inspection); ISM-34 polymer/composite heads; ISM-35
+# ceramic/refractory cells; ISM-36 join/machine/place prebuilt modules; ISM-37 inspection/calibration/repair; ISM-14 part classes A/B/C
+# (C = pressure/propulsion/primary structure: dedicated validation or pre-stocked finished spares); ISM-16 no universal printer.
+# Throughputs are per machine or head, ESTIMATE ranges from terrestrial practice; Y155 fleet size is OPEN (ISM-28).
+# site: LS = lunar surface plant, OY = orbital yard (Luna Yard), BOTH. part_class: highest ISM-14 class the process can deliver with QA.
+
+[meta]
+status = "STUDY / NONCANON"
+verification = "UNVERIFIED (terrestrial practice ranges)"
+
+[[process]]
+id = "PRC-CAST"
+name = "Continuous / direct-chill casting"
+site = "LS"
+materials = ["AL", "MG", "STEEL_F", "MMC_AL"]
+throughput_kg_h = [500, 20000]
+energy_kWh_kg = [0.3, 1.0]
+tolerance_mm = "billet/slab, machined later"
+part_class = "feedstock"
+gravity = "needs gravity (melt handling, feeding): lunar-surface process"
+qa = "chemistry assay, ultrasonic of billet"
+notes = "Turns electrolytic metal into billet, slab, wire rod: the bulk-metal backbone of the network."
+
+[[process]]
+id = "PRC-EXTRUDE"
+name = "Extrusion of standard profiles (tubes, T/I sections, multi-cell profiles)"
+site = "LS"
+materials = ["AL", "MG", "TI"]
+throughput_kg_h = [200, 3000]
+energy_kWh_kg = [0.5, 1.5]
+tolerance_mm = "0.2-0.5 on section"
+max_length_m = "set by the Luna Lift climber or freight bay, not by a rocket fairing (OPEN; 12-30 m profiles assumed)"
+part_class = "C (with lot qualification)"
+gravity = "press tonnage independent of gravity; handling easier in 1/6 g"
+qa = "dimensional, UT, tensile coupons per lot"
+notes = "Standardised profiles are the cheapest qualified primary-structure stock; nested shipping of tubes."
+
+[[process]]
+id = "PRC-ROLL"
+name = "Plate/sheet rolling, roll forming"
+site = "LS"
+materials = ["AL", "MG", "STEEL_F", "STEEL_A", "TI", "REFRACTORY"]
+throughput_kg_h = [500, 10000]
+energy_kWh_kg = [0.3, 1.5]
+tolerance_mm = "0.05-0.2 thickness"
+part_class = "C"
+gravity = "surface"
+qa = "UT, coupons"
+notes = "Plate for frames, webs, skins and tank shells (flat-packed into freight, formed at the yard)."
+
+[[process]]
+id = "PRC-FORGE"
+name = "Closed-die / ring rolling forging"
+site = "LS"
+materials = ["AL", "TI", "STEEL_F", "NI", "REFRACTORY"]
+throughput_kg_h = [100, 2000]
+energy_kWh_kg = [1.0, 5.0]
+tolerance_mm = "1-3 (machined)"
+part_class = "C"
+gravity = "surface (heavy presses, billet handling)"
+qa = "UT, macro-etch, coupons"
+notes = "Best fatigue and toughness for critical lugs, pins, thrust-ring segments; limited size (press capacity)."
+
+[[process]]
+id = "PRC-DED-WIRE"
+name = "Wire-fed directed-energy deposition (EB, laser, arc), robot-mounted"
+site = "BOTH"
+materials = ["AL", "TI", "STEEL_F", "STEEL_A", "NI", "REFRACTORY"]
+throughput_kg_h = [1, 10]
+energy_kWh_kg = [5.0, 30.0]
+tolerance_mm = "1-3 as deposited; machined to 0.05"
+part_class = "C only after HIP-equivalent stress relief, machining and full volumetric inspection (ISM-33)"
+gravity = "EB-DED in vacuum is native to orbit (no chamber, no shielding gas); melt pool held by surface tension"
+qa = "in-process melt-pool monitoring, layer metrology, CT/UT after machining"
+canon = "ISM-02 (ISS 2024 demonstrator), ISM-33 (Y155 established tool family, qualification OPEN)"
+notes = "Topology-optimised nodes, thrust pickups, branching fittings. Slow: 1-10 kg/h means a 2 t node is ~200-2000 head-hours."
+
+[[process]]
+id = "PRC-PBF"
+name = "Powder-bed fusion (laser/EB)"
+site = "LS"
+materials = ["AL", "TI", "NI", "TIAL", "REFRACTORY", "STEEL_F"]
+throughput_kg_h = [0.1, 2]
+energy_kWh_kg = [20.0, 100.0]
+tolerance_mm = "0.1-0.3"
+part_class = "C with HIP and CT"
+gravity = "powder bed needs gravity: lunar surface or a pressurised orbital cell (ISM-09 powder escape)"
+qa = "CT, witness coupons"
+notes = "Small complex fittings, heat-exchanger cores, valve bodies; not large structure."
+
+[[process]]
+id = "PRC-EBM"
+name = "Electron-beam melting (powder, vacuum)"
+site = "LS"
+materials = ["TI", "TIAL", "REFRACTORY"]
+throughput_kg_h = [0.5, 3]
+energy_kWh_kg = [15.0, 60.0]
+tolerance_mm = "0.3"
+part_class = "C with HIP"
+gravity = "powder bed: surface"
+qa = "CT"
+notes = "TiAl and refractory fittings."
+
+[[process]]
+id = "PRC-CNC"
+name = "CNC machining and precision finishing (robot-mounted and fixed cells)"
+site = "BOTH"
+materials = ["all metals", "MMC_AL", "CMC (grinding)"]
+throughput_kg_h = "removal-rate limited"
+energy_kWh_kg = [1.0, 10.0]
+tolerance_mm = "0.005-0.05"
+part_class = "C"
+gravity = "chip control in microgravity needs suction/containment (ISM-12)"
+qa = "CMM / laser tracker"
+notes = "Every DED part and every interface face; bearing seats, splice faces, pin bores."
+
+[[process]]
+id = "PRC-FSW"
+name = "Friction-stir welding (robotic, orbital)"
+site = "BOTH"
+materials = ["AL", "MG", "MMC_AL", "TI (with W-Re tools)", "STEEL (PCBN tools)"]
+throughput_m_h = [10, 60]
+energy_kWh_kg = [0.1, 0.5]
+tolerance_mm = "joint fit-up 0.1-0.5"
+part_class = "C"
+gravity = "solid-state: no melt, no fumes; high axial force (5-50 kN) must be reacted by the yard fixture or a self-reacting bobbin tool"
+qa = "UT phased array, X-ray"
+notes = "The workhorse for aluminium in orbit: Ares/SLS tanks, 0.7-0.8 joint efficiency in 6xxx. Bobbin tools avoid a massive anvil."
+
+[[process]]
+id = "PRC-WELD-EB"
+name = "Electron-beam welding in natural vacuum"
+site = "OY"
+materials = ["TI", "STEEL_A", "STEEL_F", "NI", "REFRACTORY"]
+throughput_m_h = [2, 20]
+energy_kWh_kg = [0.5, 2.0]
+tolerance_mm = "0.05-0.2 fit-up"
+part_class = "C"
+gravity = "orbit is a free vacuum chamber (Soviet 'Vulkan' 1969, Paton URI 1984 EVA EB welding)"
+qa = "UT, radiography"
+notes = "Ti and refractory joints without inert-gas chambers; X-ray generation needs local shielding."
+
+[[process]]
+id = "PRC-WELD-ARC"
+name = "Arc welding (GTAW/GMAW) in a gas cell"
+site = "LS"
+materials = ["AL (5xxx)", "STEEL_F", "STEEL_A"]
+throughput_m_h = [1, 10]
+energy_kWh_kg = [1.0, 3.0]
+tolerance_mm = "0.5"
+part_class = "C"
+gravity = "needs shielding gas: surface or enclosed cell"
+qa = "radiography"
+notes = "Surface fabrication of large weldments (frames, tank segments)."
+
+[[process]]
+id = "PRC-BRAZE"
+name = "Vacuum brazing and diffusion brazing"
+site = "BOTH"
+materials = ["NI", "REFRACTORY", "TI", "CMC-to-metal", "STEEL_A"]
+throughput_kg_h = "furnace-batch"
+energy_kWh_kg = [2.0, 10.0]
+tolerance_mm = "0.02-0.1 gap"
+part_class = "C"
+gravity = "capillary flow works in microgravity (ISS brazing experiments)"
+qa = "UT, CT"
+notes = "Dissimilar joints (CMC-Mo, Ti-steel via interlayers), hot-loop fittings."
+
+[[process]]
+id = "PRC-DIFFBOND"
+name = "Diffusion bonding / superplastic forming"
+site = "LS"
+materials = ["TI", "STEEL_A", "NI"]
+throughput_kg_h = "batch"
+energy_kWh_kg = [5.0, 20.0]
+tolerance_mm = "0.01"
+part_class = "C"
+gravity = "press: surface"
+qa = "UT"
+notes = "Ti sandwich and multi-cell panels for node webs."
+
+[[process]]
+id = "PRC-AFP-TS"
+name = "Automated fibre placement, thermoset (with oven/autoclave or out-of-autoclave cure)"
+site = "OY (pressurised or heated cell) / LS"
+materials = ["CFRP_TS", "BFRP", "GFRP"]
+throughput_kg_h = [5, 50]
+energy_kWh_kg = [5.0, 20.0]
+tolerance_mm = "0.1-0.5"
+part_class = "C with cure qualification"
+gravity = "independent; resin outgassing and cure need controlled temperature, not pressure (OoA prepregs)"
+qa = "UT C-scan, porosity, FBG embedding"
+notes = "Tubes, struts, sandwich panels from imported prepreg."
+
+[[process]]
+id = "PRC-AFP-TP"
+name = "Thermoplastic AFP with in-situ consolidation"
+site = "OY"
+materials = ["CFRP_TP"]
+throughput_kg_h = [2, 20]
+energy_kWh_kg = [5.0, 15.0]
+tolerance_mm = "0.2-0.5"
+part_class = "B-C (in-situ consolidation gives ~0.85 of autoclave properties)"
+gravity = "native to open vacuum: no cure chemistry, no volatiles; laser heats the nip"
+qa = "UT, thermography, in-line laser profilometry"
+canon = "ISM-34 composite tape/fibre placement heads (established tool family)"
+notes = "Continuous truss members built in place (on-orbit 'truss beam machine' concepts: Tethers Unlimited, DARPA NOM4D)."
+
+[[process]]
+id = "PRC-TPWELD"
+name = "Thermoplastic welding (induction, resistance, ultrasonic)"
+site = "OY"
+materials = ["CFRP_TP"]
+throughput_m_h = [5, 30]
+energy_kWh_kg = [0.5, 2.0]
+part_class = "C"
+gravity = "independent"
+qa = "UT, thermography"
+notes = "Joins composite members without adhesives or fasteners; disassembly by re-heating."
+
+[[process]]
+id = "PRC-FW"
+name = "Filament winding (tubes, pressure vessels, rings)"
+site = "BOTH"
+materials = ["CFRP_TS", "CFRP_TP", "BFRP", "GFRP", "CNT"]
+throughput_kg_h = [10, 100]
+energy_kWh_kg = [3.0, 15.0]
+tolerance_mm = "0.1"
+part_class = "C"
+gravity = "independent"
+qa = "UT"
+notes = "Struts, tension rims, ring spokes, COPV."
+
+[[process]]
+id = "PRC-PULTRUDE"
+name = "Pultrusion of continuous profiles"
+site = "BOTH"
+materials = ["BFRP", "GFRP", "CFRP_TS", "MMC_AL (oxide fibre)"]
+throughput_kg_h = [20, 200]
+energy_kWh_kg = [1.0, 5.0]
+tolerance_mm = "0.2"
+part_class = "B-C"
+gravity = "independent"
+qa = "in-line UT"
+notes = "Lunar basalt-fibre profiles for secondary and tension members: the cheapest composite."
+
+[[process]]
+id = "PRC-FIBRE-BASALT"
+name = "Basalt / glass fibre melt-drawing"
+site = "LS"
+materials = ["BFRP", "GFRP"]
+throughput_kg_h = [5, 50]
+energy_kWh_kg = [1.5, 5.0]
+part_class = "feedstock"
+gravity = "drawing from a bushing needs gravity-fed melt (surface)"
+qa = "fibre strength per spool"
+notes = "Direct melt of sorted mare basalt; quality depends on composition control."
+
+[[process]]
+id = "PRC-MMC-INFIL"
+name = "Pressure infiltration / casting of fibre-reinforced aluminium"
+site = "LS"
+materials = ["MMC_AL"]
+throughput_kg_h = [2, 20]
+energy_kWh_kg = [5.0, 20.0]
+part_class = "C"
+gravity = "surface"
+qa = "UT, CT"
+notes = "Alumina-fibre/Al tubes and wires (all-lunar chemistry)."
+
+[[process]]
+id = "PRC-CMC-CVI"
+name = "CMC and C/C processing (CVI, PIP, melt infiltration)"
+site = "LS or imported"
+materials = ["CMC", "CC"]
+throughput_kg_h = [0.05, 1]
+energy_kWh_kg = [100.0, 1000.0]
+tolerance_mm = "0.1 after grinding"
+part_class = "C with CT"
+gravity = "furnace process (weeks)"
+qa = "CT, thermography"
+canon = "ISM-35: most high-temperature assemblies need separate processing cells"
+notes = "Hot-zone parts only; expensive and slow."
+
+[[process]]
+id = "PRC-SINTER"
+name = "Ceramic sintering"
+site = "LS"
+materials = ["CERAMIC"]
+throughput_kg_h = [1, 50]
+energy_kWh_kg = [5.0, 30.0]
+part_class = "B-C"
+gravity = "surface"
+qa = "visual, density, acoustic"
+notes = "Isolator pads, insulator bushings."
+
+[[process]]
+id = "PRC-STAMP"
+name = "Thermoforming / stamping of thermoplastic or metal sheet"
+site = "BOTH"
+materials = ["CFRP_TP", "AL", "TI"]
+throughput_kg_h = [20, 200]
+energy_kWh_kg = [0.5, 3.0]
+part_class = "B-C"
+gravity = "independent"
+qa = "dimensional"
+notes = "Clips, brackets, frame segments."
+
+[[process]]
+id = "PRC-BOND"
+name = "Structural adhesive bonding"
+site = "BOTH (controlled cell)"
+materials = ["CFRP_TS", "metal-to-composite"]
+throughput_m_h = [1, 10]
+energy_kWh_kg = [0.5, 2.0]
+part_class = "C only with bond-line proof testing; prefer bonded + mechanically fastened"
+gravity = "independent; outgassing"
+qa = "UT, proof load (kissing bonds are invisible to most NDT)"
+notes = "Limited to cool zones (< ~390 K)."
+
+[[process]]
+id = "PRC-ASSY"
+name = "Robotic mechanical assembly (bolting, pinning, clamping, module docking)"
+site = "OY"
+materials = ["all"]
+throughput = "set by robot count and metrology; ISM-36"
+part_class = "C"
+gravity = "native to orbit: microgravity removes crane loads, alignment by fixtures and laser trackers"
+qa = "torque/preload by ultrasonic bolt-load measurement, laser-tracker metrology"
+canon = "ISM-36 (established assembly doctrine)"
+notes = "The default for replaceable primary members: preload-monitored bolted splices."
+
+[[process]]
+id = "PRC-NDT"
+name = "In-situ metrology and nondestructive inspection (laser tracker, photogrammetry, UT, CT, thermography)"
+site = "BOTH"
+materials = ["all"]
+throughput = "inspection head-hours ~ comparable to deposition head-hours for class C parts"
+part_class = "enabling"
+gravity = "independent"
+canon = "ISM-03, ISM-13, ISM-37 (established QA function, instrument suite OPEN)"
+notes = "Portable CT for large nodes is the bottleneck; design nodes so CT can see every critical section."
+
+[[process]]
+id = "PRC-RECYCLE"
+name = "Vacuum re-melting of segregated scrap and chips"
+site = "BOTH"
+materials = ["AL", "TI", "STEEL", "CFRP_TP (re-melt)"]
+throughput_kg_h = [10, 500]
+energy_kWh_kg = [1.0, 5.0]
+part_class = "feedstock"
+gravity = "surface preferred"
+canon = "Technology 41 recycling (Established); ISM-15 closed-loop mass ledger"
+notes = "Machining chips of DED nodes (30-70 % buy-to-fly losses) go straight back to wire."

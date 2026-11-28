@@ -1,0 +1,169 @@
+[head]
+eyebrow = "G.U. WAYFARER 001 · PRIMARY STRUCTURAL ARCHITECTURE · PHASE II · STUDY, NOT CANON"
+title = "Primary structure, Phase II: real mass, real loads, real failure"
+lede = "Phase II sizes the H, HC, A and C concepts in a verified free-free frame model under thrust-bounded loads, tests six against three rails by breaking them, and ties the result to ISSA's systems layout. The honest answer is that a credible primary structure weighs about 1.1 to 1.2 kt, not 150 t, and that the long ship is limited by global stability under thrust, not by strength."
+chips = ["Branch claude/cloud/primary-structural-architecture", "ISSA SSI-1.0 / CP4", "F1 configuration", "No canon change", "No production geometry change"]
+phase1 = "<a href=\"phase1.html\">Phase I report</a> (7ea564b) recommended H with HC and set the 150 t line as a reference. The owner accepted it and approved Phase II on 2026-11-28 with decisions D01 to D08."
+footer = "Results are numerical screening of a beam-element model with PROTOTYPE allowables and joint models. Nothing here is canon, nothing changes the production ship, and nothing has been written to the owner workbooks."
+
+[gate]
+lede = "The most promising morphology is <b>H on the hub path, six rails in three paired sectors, F1 configuration, with a partial aft propellant reaction mass (G, with ISSA)</b>. HC is the lighter hybrid if carbon imports are accepted. Both are strength-closed and both fail the global stability target, which is the gate item for Phase III."
+cards = [
+  ["Primary structure, H hub F1", "1,176 t", "members 1,090 t + Ti node fittings 86 t; 1,223 t with casing and rotating structure"],
+  ["Same with G (30 % H2 aft)", "1,108 t", "68 t lighter, stability λ 0.71 to 0.82"],
+  ["HC hub F1", "1,135 t", "λ 0.50; more carbon imports (111 t vs 37 t)"],
+  ["Against the 150 t line", "+1.07 kt", "coupled departure mass +3.8 kt at F1 (coupling 3.52)"],
+  ["Global stability λ", "0.5 to 0.8", "target 1.87 (1.4 / 0.75); not closed in any variant"],
+  ["Six vs three rails", "−134 t", "six rails lighter intact; fail-safe penalty +134 t vs +426 t (still failing)"],
+]
+why = [
+  ["Why the hub path", "Routing the primary load through the rotor bay on the spine family with hub cones avoids the cage-end kink that the bypass collar must turn. Every concept is 290 to 830 t lighter on the hub path, and no bypass variant closes without members at their maximum size."],
+  ["Why H rather than C", "C is lighter (1,054 t) but rests on speculative materials and is kept as the benchmark (D06). A is the all-metal control at 1,318 t. H uses established Ti and Al-Li in the primary path, and HC adds carbon longerons where the import budget allows."],
+  ["Why G matters", "Moving 30 % of the H2 share aft (X −70 to −20 m, He-3 and D2 stay protected forward) shortens the heavy-nose lever. It is the only lever that raised λ and lowered mass at the same time. ISSA owns the tank layout, so this is a joint sensitivity, not a proposal."],
+  ["What is not closed", "λ below 1 means the linear model predicts divergence below limit thrust. Stiffness alone does not cure it (the static cantilever bound needs about 6x the rail area). Phase III must test mass placement, active TVC/GNC, damping and a nonlinear time-domain model before any morphology is frozen."],
+]
+
+[loads]
+intro = "D01 is applied as one factor per load class. Loads come from the thrust that the studied drive can produce (21.77 MN) in each configuration and depletion state. The historical 29.42 MN line is carried only as a reference, and the 1.5 g envelope stays a separate check that does not size members."
+classes = [
+  ["Operational", "steady thrust × dynamic load factor 1.04 (30 s linear ramp, f1 0.096 Hz)", "1.0", "stiffness, deflection, interface travel"],
+  ["Limit", "operational plus shutdown reversal, engine-out (3 of 4), 10 % differential thrust, 2 % TVC in y and z, ACS pair 2e5 N at the Brow", "1.0", "envelope per member"],
+  ["Ultimate", "limit × 1.4; column knockdown 0.75; shell knockdown 0.33 on 0.605 E t/r", "1.4", "member sizing"],
+  ["Proof", "limit × 1.10 for module acceptance", "1.10", "manufacturing, not sizing"],
+  ["Accidental", "damaged structure; emergency 50 % thrust", "1.0", "fail-safe check (section F)"],
+]
+fig = "Compression carried through each section of the H hub F1 frame from the thrust ring (left) to the Brow (right): departure in P, F1 and R, and F1 at end of burn. The load falls along the ship as mass is passed off; the farm deck takes the large step."
+recon = "The three figures quoted for 1.5 g describe different things and do not conflict once named. None of them sizes the frame under D01; they bound the separate 1.5 g envelope."
+recon_rows = [
+  ["63.5 MN", "1.5 g × 4,316 t, the payload without primary structure", "63.5"],
+  ["64.5 MN", "section load just forward of the thrust ring, including the structure forward of it", "64.5"],
+  ["65.7 MN", "whole-ship 1.5 g including all primary structure", "65.7"],
+]
+
+[solver]
+intro = "The frame model is a 3D Euler-Bernoulli beam solver, free-free with inertia relief by Lagrange multipliers (equilibrium residual about 1e-5 N). It reproduces the closed-form cases below to the precision shown."
+limits = "Limits: linear elastic beams, no local plate buckling except the shell check, joints as rigid or as a uniform 0.7 compliance factor, nonconservative stability in a reduced basis of the lowest 60 free-free modes. It is adequate to rank concepts and find the governing failure modes; it is not adequate to certify any of them."
+
+[concepts]
+intro = "Seventeen variants were sized for strength over every limit case in three depletion states, four passes, with explicit Ti node fittings. Mass below is primary structure only; casing and rotating structure follow in section J."
+fig = "Mass by family against the 150 t reference line. The common thrust deck is the largest single item in every hub variant (634 t of H hub F1): its depth is limited by the rotor sweep and the tank farm."
+findings = [
+  ["The hub path wins everywhere", "H 2,004 → 1,176 t, HC 1,422 → 1,135 t, A 1,931 → 1,318 t, C 1,480 → 1,054 t. The bypass collar has to turn the whole load around the rotor at the cage end and reaches the maximum member size there."],
+  ["Configuration matters less than expected", "H hub on P, F1 and R: 1,163, 1,176 and 1,267 t. Thrust is fixed, so the loads are thrust-bounded and the mass differences come from the deck and the lever arm."],
+  ["Radius", "Radius 9 m saves 157 t (1,019 t) but drops follower λ to 0.15 and clashes with the hot-loop trunk at r 6.52; radius 7 m gains nothing. 5 m stays."],
+  ["The deck", "A 634 t deck is a shared tankage/PSA item under D04. Phase III should test a deeper deck with the skirt counted once, which needs the rotor sweep and farm layout from ISSA."],
+]
+
+[stability]
+intro = "Global stability was computed for a fixed-direction (static) thrust, a full follower, partial followers and a follower with a simple TVC gain, with the thrust applied at the twelve thrust-ring nodes. λ is the multiple of limit thrust at which the linear model diverges or flutters. The target is 1.4 / 0.75 = 1.87."
+findings = [
+  ["Every variant is stability-critical", "λ lies between 0.15 and 0.82 for all variants and all thrust models. H hub F1: 0.71 static, 0.68 follower, 0.52 with TVC gain 1, 0.59 / 0.52 with joint compliance 0.7. The basis is converged (30 to 140 modes change λ by less than 2 %)."],
+  ["The analytic bounds agree", "From the rail EI with L = 243 m: the static heavy-nose cantilever bound gives 0.3 to 0.45, the Beck follower bound 2.4 to 3.7. The FE results sit between them, as they should for a heavy-nose free-free ship."],
+  ["What moves λ", "G (30 % H2 aft) raises H to 0.82, the only lever that also saves mass. Rail area does not scale well: closing the static bound needs about 6x the rail area. A naive TVC loop lowers λ, so control must be designed with the structure."],
+  ["What Phase III needs", "A nonlinear time-domain model with the real thrust law, slosh, damping and a GNC loop, and mass placement studied jointly with ISSA. Until then the morphology is not frozen."],
+]
+
+[rails]
+intro = "D03: six rails in three paired sectors against three rails. Each variant was damaged by removing a rail bay, a rail joint, the shared sector node, both rails of a sector, a pickup, a collar chord and a keel bay, then re-solved with mass transfer and classified."
+findings = [
+  ["Six rails are lighter intact", "H (six) 1,176 t, H3 (three) 1,310 t: the paired sectors give a deeper section and shorter diagonals."],
+  ["As strength-sized, damage tolerance is poor", "Most rail-bay and joint losses class COAST-ONLY or IMMEDIATE REPAIR because the diagonals next to the loss overload. Pickup, collar-chord and keel losses keep reduced thrust. A shared sector node is a common-mode failure (334 members overloaded in H). Utilisations in the hundreds or thousands mean the damaged Warren bay has become a mechanism: it has a single shear path, so the fail-safe districts need X-braced bays."],
+  ["Emergency and nominal thrust are separate", "A damaged ship is checked at 50 % thrust with factor 1.0 (emergency) and at 100 % with 1.4 (nominal). These give different penalties and different classes, and are never merged."],
+]
+failsafe = "<b>Reading the penalty.</b> The NOMINAL target for H costs <b>+134 t</b> (12 %) and moves every single rail-bay loss to REDUCED THRUST with full emergency thrust available; a lost joint still leaves the ship COAST-ONLY, so joints need twin-lug fail-safe fittings (Phase III). For H3 the same target costs <b>+426 t</b>, drives the diagonals to their maximum size and still fails. The EMERGENCY resizing does not change the outcome: member sizing alone does not make a 3-rail or 6-rail ship limp home after a rail loss without fail-safe joints. Six rails win on both intact and redundant mass."
+repair = [
+  ["1 Detect", "FBG strain and laser-tracker datum show a load redistribution; the GNC limits thrust to the damage class", "classified within one burn segment"],
+  ["2 Safe", "COAST-ONLY: shut down, hold attitude on ACS; REDUCED THRUST: continue at the class limit", "damaged frame under the accidental factor"],
+  ["3 Bypass", "clamp a jury strut across the lost bay from the neighbouring module frames (stored cassette of the same class)", "path restored at limit load"],
+  ["4 Replace", "unbolt the splice plates, drop the damaged cassette, fit a spare; re-align on the three kinematic cones", "proof 1.10 before full thrust"],
+  ["5 Return", "re-baseline the datum, log the cassette, resume nominal thrust", "intact envelope"],
+]
+
+[pickup]
+intro = "Section 3.2 audited the drive pickup. The Phase I result (three pin struts) is reproduced: strut force reaches 3.61 times nozzle thrust because the struts lie at a shallow angle to the axis."
+findings = [
+  ["Beam struts fix it", "Moment-carrying beam struts cut the maximum strut force to 0.70 T; an axial post gives 1.10 T; the combined option 0.90 T. The FE frame uses beam struts."],
+  ["Load", "At the studied 21.77 MN the beam-strut option carries about 15 MN per strut at limit and 21 MN at ultimate, inside the Ti node class C4 (40 MN)."],
+]
+
+[thermal]
+intro = "Section 3.5: thermal loads were applied to the sized H and HC frames with the spine on axial slides and one datum cone, and compared with a fully coupled spine."
+findings = [
+  ["The datum scheme works", "Sliding spine ties drop the spine-tie thermal utilisation from 0.46 to 0.01. A warm spine (+40 K) now slides about 31 mm at X 60 on its ties instead of loading the frame."],
+  ["Hot sector bow", "A hot sector bows the Brow by 189 mm in H (Ti/Al-Li) and 55 mm in HC (carbon longerons). Uniform soak grows H by 407 mm and HC by 101 mm. The Brow and the docking interface must accept this travel."],
+]
+backbone = "Section 3.6: per three blade planes, Nb-1Zr is heavy (34.9 t); a C/C backbone is light (4.0 t, no leak) but its joints to Ti frames are unproven; a segmented hot-cell backbone (8.0 t, 2.4 kW/m) and a hybrid (6.2 t, 1.5 kW/m) are the credible metallic options. Recommended for Phase III: hybrid D, with C/C as the advance to test."
+
+[materials]
+intro = "Allowables carry a low, nominal and high value, a class (established, demonstrated, speculative, fictional) and the advance that would bridge them (Phase I register, unchanged)."
+findings = [
+  ["The mass band", "The low and high allowables move H hub F1 by −78 / +56 t (about ±6 %), because stability and minimum gauges, not strength, set many members. The ranking of concepts does not change."],
+  ["C stays a benchmark", "C needs the speculative high-modulus composite allowables. Its 1,054 t shows the size of the prize, not a design."],
+]
+
+[ledger]
+intro = "D04 and D05: every shared item has one owner. Tankage owns shells, insulation, internals, cradles, skirts, mounts and containment; PSA owns the common decks, frames and their lugs; the spine structural shell is PSA, its pressure liner habitat, its utilities ISSA."
+findings = [
+  ["The real number", "PSA totals 1.07 to 2.05 kt across the variants (members, joints, 22.4 t casing, 12.4 t rotating structure per ring). The 150 t line is a target, not a reachable mass for this ship."],
+  ["Mission coupling", "Each tonne of dry mass costs 3.33 (P), 3.52 (F1) or 3.57 (R) tonnes at departure through propellant and tankage. H hub F1 adds 3.78 kt at departure; with G 3.54 kt; HC 3.64 kt."],
+]
+
+[sourcing]
+intro = "D07: imports by category under three supply scenarios (lunar first, balanced, Earth-preferred). Asteroid and terrestrial carbon are counted separately; longeron, structure and whole-ship fractions are reported apart."
+findings = [
+  ["H is lunar-friendly", "H imports 37 t (lunar first) to 186 t (Earth-preferred), mostly alloying elements and specialist fittings."],
+  ["HC trades imports for stiffness", "HC imports 111 to 315 t, carbon fibre dominant. Its value is the 4x smaller thermal bow; it is the hybrid to keep if carbon supply is accepted."],
+]
+
+[interface]
+intro = "Section 2: the frame was checked against ISSA's SSI-1.0 mounts and lanes. End-of-burn acceleration is about 0.56 g with the heavier structure, below ISSA's 0.736 g design figure."
+findings = [
+  ["MRU lane clash", "The hub cones and the collar cross the MRU carriage envelope (az 270, r 3.6) at X 93 to 94 by 0.5 to 1.2 m in every hub variant. The rail needs a jog or a gate through the rotor bay; ISSA owns the rail, PSA the cones."],
+  ["Hot-loop supports", "Ultimate anchor loads are 75 kN at departure and 174 kN at end of burn per section. Structure-induced shortening is 32 to 39 mm per 25.4 m section, added to ISSA's thermal travel."],
+  ["SSI-1.0 deltas", "ISSA's farm CG (133.9 vs 132.7 m) and Brow (163.95 vs about 161.5 m) differ slightly from this model. They are carried as a sensitivity; Phase III rebases on SSI-1.0."],
+]
+
+[hierarchy]
+intro = "Section 4 and 9: the frame is organised as components (L1), 4 m bays (L2), 8 to 12 m manufacturing modules (L3) and districts (L4), with a standard cassette family sharing one end fitting per load class."
+levels = [
+  ["L1 component", "tube cassette (material, radius, wall) with a class C1 to C4 Ti end fitting"],
+  ["L2 bay", "4 m bay; Warren production bay, X-braced fail-safe bay or open portal bay for equipment removal"],
+  ["L3 module", "8 to 12 m module, 15 to 35 t, joined in orbit by 6 (or 3) rail splices and bolted frames, aligned on three kinematic cones"],
+  ["L4 district", "propulsion, power, hot loop, equipment, workshop, radiator, rotating habitat, cryo, forward shielding"],
+]
+findings = [
+  ["Standardisation costs 20 to 36 %", "40 to 44 cassette types cover H; the penalty is 288 t, mostly in the deck, which uses few large members. Excluding the deck the penalty is moderate."],
+  ["The cassette idea holds", "A common end fitting per class lets any cassette of a class replace any other, which the repair procedure needs."],
+]
+
+[problems]
+rows = [
+  ["PSA-P2-01", "CRITICAL", "Global stability under thrust: λ 0.15 to 0.82 against 1.87 in every variant", "nonlinear time-domain model with GNC, slosh and damping; mass placement with ISSA"],
+  ["PSA-P2-02", "CRITICAL", "Mass 1.1 to 1.2 kt against the 150 t line; +3.5 to 3.8 kt at departure", "owner decision on the mass baseline; ship-level closure with ISSA"],
+  ["PSA-P2-03", "MAJOR", "Rail joint loss leaves the ship COAST-ONLY even after fail-safe resizing", "twin-lug fail-safe joints and X-braced bays in the drive and power districts"],
+  ["PSA-P2-04", "MAJOR", "Shared sector node is a common-mode failure", "separate the paired-rail nodes or make the node fitting dual-load-path"],
+  ["PSA-P2-05", "MAJOR", "Common deck 634 t, depth limited by rotor sweep and farm", "deeper deck with skirt counted once (D04 handoff with tankage)"],
+  ["PSA-P2-06", "MAJOR", "MRU lane clash with hub cones at X 93 to 94", "joint re-route with ISSA (rail jog or gate)"],
+  ["PSA-P2-07", "MAJOR", "Thermal bow 189 mm (H) at the Brow", "HC longerons or thermal control of the hot sector; Brow interface to accept travel"],
+  ["PSA-P2-08", "MINOR", "Standardisation penalty 20 to 36 %", "deck-specific cassette set"],
+  ["PSA-P2-09", "MINOR", "Model uses CP4 farm and Brow stations", "rebase on SSI-1.0"],
+]
+
+[roadmap]
+rows = [
+  ["III.1", "Stability closure", "Nonlinear time-domain thrust model with slosh, damping and a GNC loop; G and other mass placements with ISSA; decide whether the ship closes at 1.87 or needs a lower ultimate target with active control."],
+  ["III.2", "Fail-safe joints", "Twin-lug fittings and X-braced bays in the critical districts; re-run the damage set at emergency and nominal thrust."],
+  ["III.3", "Deck and tankage", "Deck depth and skirt ownership with tankage; rotor sweep and farm layout from ISSA."],
+  ["III.4", "Interfaces", "Rebase on SSI-1.0; resolve the MRU lane; per-frame reactions and stiffness to ISSA."],
+  ["III.5", "Detail", "Local shell and joint FE for the C4 fittings and the hub cones; thermal transient for the hot sector."],
+]
+
+[decisions]
+intro = "Phase II closes the questions the owner can answer now. None of these changes canon by itself."
+rows = [
+  ["P2-D1", "Accept H on the hub path, six paired rails, F1, with HC as the carbon hybrid, as the Phase III baseline."],
+  ["P2-D2", "Accept that the realistic primary structure is about 1.1 to 1.2 kt and decide whether the 150 t line is retired or kept as a stretch target."],
+  ["P2-D3", "Authorise a joint study with ISSA of G (partial aft H2 reaction mass) for stability and mass."],
+  ["P2-D4", "Set the stability target for Phase III: passive 1.87, or a lower passive margin with certified active control."],
+  ["P2-D5", "Accept fail-safe joints as a design requirement (+134 t class penalty for six rails)."],
+]

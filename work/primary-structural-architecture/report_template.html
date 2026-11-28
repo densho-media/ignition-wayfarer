@@ -1,0 +1,281 @@
+<title>Wayfarer Primary Structure</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Layout: ISSA review-page grammar (sticky section bar, cards, scroll tables); dark-first like the ISSA page it pairs with. */
+:root{--bg:#0A0F15;--surf:#121A24;--surf2:#18222F;--line:#263445;--ink:#DCE5EF;--muted:#9AA9BA;--accent:#D99AC9;--action:#FF843C;
+--good:#7FD39B;--warn:#E9B85A;--bad:#FF7F73;--info:#8FC1F0;--occ:#5E6B7C;
+--al:#9FB3C8;--ti:#C9A46A;--cf:#5B6470;--mmc:#7FB7A6;--ni:#D98C5F;--cer:#E3D3B0;--st:#8E8E99;--gf:#B7C77F;--cc:#3E3E46;
+--drive:#C8574B;--therm:#E08A3C;--hab:#5FA36A;--fwd:#5C8FD1;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#F4F6F9;--surf:#FFFFFF;--surf2:#EEF2F6;--line:#D3DBE5;--ink:#16202B;--muted:#55657A;--accent:#9C4C88;--action:#C0541A;
+--good:#2E8A4D;--warn:#9A6B0E;--bad:#B9382D;--info:#2C6BA8;--occ:#8C97A6;--al:#7C93AB;--ti:#A67C3A;--cf:#3B434D;--mmc:#3E8C76;--ni:#B8622F;--cer:#B8A479;--st:#6E6E79;--gf:#7D8E3E;--cc:#2A2A30;
+--drive:#B3443A;--therm:#C46F1F;--hab:#3F8A4C;--fwd:#3C6FB3;color-scheme:light}}
+:root[data-theme="light"]{--bg:#F4F6F9;--surf:#FFFFFF;--surf2:#EEF2F6;--line:#D3DBE5;--ink:#16202B;--muted:#55657A;--accent:#9C4C88;--action:#C0541A;
+--good:#2E8A4D;--warn:#9A6B0E;--bad:#B9382D;--info:#2C6BA8;--occ:#8C97A6;--al:#7C93AB;--ti:#A67C3A;--cf:#3B434D;--mmc:#3E8C76;--ni:#B8622F;--cer:#B8A479;--st:#6E6E79;--gf:#7D8E3E;--cc:#2A2A30;
+--drive:#B3443A;--therm:#C46F1F;--hab:#3F8A4C;--fwd:#3C6FB3;color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 "IBM Plex Sans",system-ui,sans-serif;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:1180px;margin:0 auto}
+header.top{padding-block:40px 24px;border-bottom:1px solid var(--line)}
+.eyebrow{font:600 12px/1 "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h1,h2,h3{font-family:"Space Grotesk",system-ui,sans-serif;text-wrap:balance;line-height:1.2}
+h1{font-size:clamp(28px,4vw,40px);margin:10px 0 12px}
+h2{font-size:24px;margin:0 0 6px}
+h3{font-size:17px;margin:22px 0 6px}
+p,li{max-width:72ch}
+.lede{font-size:17px;max-width:80ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{font:600 11px/1 "IBM Plex Mono",monospace;letter-spacing:.06em;padding:6px 8px;border:1px solid var(--line);border-radius:4px;color:var(--muted)}
+.chip.c-model{color:var(--good);border-color:var(--good)}.chip.c-concept{color:var(--accent);border-color:var(--accent)}.chip.c-sim{color:var(--info);border-color:var(--info)}.chip.c-warn{color:var(--warn);border-color:var(--warn)}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding:8px 0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+nav.toc a{font:600 12px/1 "IBM Plex Mono",monospace;color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:4px;white-space:nowrap}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink);background:var(--surf)}
+section{padding-block:36px 8px;border-bottom:1px solid var(--line);scroll-margin-top:52px}
+.letter{font:600 13px/1 "IBM Plex Mono",monospace;color:var(--accent);margin-bottom:8px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-block:16px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:14px 16px;min-width:0}
+.card h4{margin:0 0 6px;font:600 13px/1.3 "IBM Plex Mono",monospace;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.big{font:600 26px/1.1 "Space Grotesk",sans-serif;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin-block:12px;background:var(--surf)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{font:600 11px/1.2 "IBM Plex Mono",monospace;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--surf2)}
+td.num{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap;font-variant-numeric:tabular-nums}
+.mono{font-family:"IBM Plex Mono",monospace;font-size:12px;white-space:nowrap}
+.fn{color:var(--muted);font-size:12px;margin-top:3px}
+.bad{color:var(--bad)}.warn{color:var(--warn)}.good{color:var(--good)}
+.sev{font:600 10px/1 "IBM Plex Mono",monospace;padding:3px 6px;border-radius:3px;border:1px solid var(--line)}
+.sev.CRITICAL{color:var(--bad);border-color:var(--bad)}.sev.MAJOR{color:var(--warn);border-color:var(--warn)}.sev.MINOR{color:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:12px}
+select,label.tog,input[type=range]{font:500 13px "IBM Plex Sans",sans-serif;color:var(--ink);background:var(--surf);border:1px solid var(--line);border-radius:6px;padding:6px 10px;max-width:100%}
+label.tog{display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center;cursor:pointer;max-width:100%;min-width:0}label.tog select{min-width:0;flex:1 1 auto}
+figure{margin:16px 0}
+figure .frame{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;min-width:680px}
+figcaption{font-size:13px;color:var(--muted);margin-top:8px;max-width:90ch}
+svg text{fill:var(--muted);font-family:"IBM Plex Mono",monospace}
+svg .t9{font-size:9px}svg .t10{font-size:10px}svg .t11{font-size:11px}svg .t12{font-size:12px}svg .ink{fill:var(--ink)}svg .b{font-weight:600}
+.two{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}.two>*{min-width:0}
+details{background:var(--surf);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin-block:10px}
+details summary{cursor:pointer;font-weight:600}
+ol.dr{padding-left:0;list-style:none;display:grid;gap:10px}
+ol.dr li{background:var(--surf);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:10px 14px;max-width:none}
+ol.dr b.id{font-family:"IBM Plex Mono",monospace;color:var(--accent);margin-right:6px}
+.phase{display:grid;grid-template-columns:72px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.phase .n{font:600 13px "IBM Plex Mono",monospace;color:var(--action)}.phase p{margin:2px 0}
+code{font-family:"IBM Plex Mono",monospace;font-size:.9em;background:var(--surf2);padding:1px 4px;border-radius:3px}
+.callout{border:1px solid var(--warn);background:color-mix(in srgb,var(--warn) 8%,var(--surf));border-radius:8px;padding:12px 16px;margin-block:14px}
+.callout.k{border-color:var(--action);background:color-mix(in srgb,var(--action) 8%,var(--surf))}
+.rank{display:grid;gap:6px;margin-top:10px}
+.rank .r{display:grid;grid-template-columns:40px 1fr 60px;gap:10px;align-items:center;font-size:13px}
+.rank .bar{height:10px;border-radius:2px;background:var(--info)}
+.rank .r.top .bar{background:var(--good)}
+.wts{display:grid;gap:6px 14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:10px}
+.wts label{display:grid;grid-template-columns:minmax(0,110px) minmax(0,1fr) 28px;gap:8px;align-items:center;font-size:12px;color:var(--muted)}
+.wts input{padding:0;border:0;background:transparent;width:100%;min-width:0}
+.sw{display:inline-block;width:14px;height:3px;border-radius:2px;vertical-align:middle}
+a{color:var(--info)}
+:focus-visible{outline:2px solid var(--action);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">G.U. WAYFARER 001 · PSA · Phase I for owner review, 2026-11-28 · not canon</div>
+  <h1>Primary Structural Architecture</h1>
+  <p class="lede">Phase I asks what structure can carry Wayfarer's thrust to every mass ahead of it, be built at Luna Yard from mostly lunar material, and be repaired in flight. The drive is power-limited, so the section loads stay near 21 MN whether the ship weighs 4.5 kt or 12.9 kt. Against those loads, all-aluminium structure is about 240 t. Only multi-material zoning or moving the tanks aft gets close to the 150 t line. The study changes no canon, Drive data, production geometry or budget. It is built on main {{MAIN}} and ISSA {{ISSA}}.</p>
+  <div class="chips">
+    <span class="chip c-model">CANON: Drive row quoted by id</span>
+    <span class="chip c-sim">CALCULATED: first-order, ±30-50 %</span>
+    <span class="chip c-concept">PROTOTYPE: unsourced choice</span>
+    <span class="chip c-warn">F TRACK: fictional bridging advance</span>
+    <span class="chip c-warn">OPEN: owner decision or data needed</span>
+  </div>
+  <div class="grid">
+    <div class="card"><h4>Peak section load, flight</h4><div class="big">21.4 MN</div><p class="fn">At the thrust ring for P, F1 and R. With a 1.3 dynamic factor it is 27.8 MN. The canon envelope is 63.5 MN.</p></div>
+    <div class="card"><h4>All-aluminium frame (A)</h4><div class="big">239 t</div><p class="fn">Under flight loads, or 649 t under the canon 1.5 g envelope. The line is 150 t, and 25 t of it is rotating structure.</p></div>
+    <div class="card"><h4>Recommended pair</h4><div class="big">H · HC</div><p class="fn">A vertebral modular skeleton at ~197 t (lunar-first) and ~157 t (multi-material). Both are re-scored from FE in Phase II.</p></div>
+    <div class="card"><h4>Mass coupling</h4><div class="big">3.6 t / t</div><p class="fn">Each tonne of structure adds this much departure mass, in propellant and tankage.</p></div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+  <a href="#gate">Gate</a><a href="#loads">Loads</a><a href="#path">Load path</a><a href="#mat">Materials</a><a href="#yard">Luna Yard</a><a href="#concepts">Concepts</a><a href="#zoning">Zoning</a><a href="#issa">ISSA interface</a><a href="#mass">Ownership</a><a href="#lc">Load cases</a><a href="#problems">Problems</a><a href="#dual">R / F</a><a href="#road">Roadmap</a><a href="#decide">Decide</a>
+</nav>
+
+<section id="gate">
+  <div class="letter">OWNER REVIEW GATE</div>
+  <h2>What holds, and what to reconsider</h2>
+  <div class="two">
+    <div class="card"><h4>The existing design gets right</h4><ul>
+      <li>The topology: thrust enters through 4 nozzles, a 12-node ring and an 8 m transition into 3 sectors plus the spine.</li>
+      <li>The 4 m frames. At this pitch, bay buckling governs titanium and composite rails, not strength.</li>
+      <li>Kinematic mounting of the blades and tanks (one datum plus slides). It must extend to every long system.</li>
+      <li>The Q45 bypass collar around the rotor bay.</li>
+      <li>Locking the rings before thrust, so their spin torque never enters the frame.</li></ul></div>
+    <div class="card"><h4>Needs reconsidering</h4><ul>
+      <li>The design load. The canon rule of 1.5 g on the full ship asks for 3× what the drive can push.</li>
+      <li>Nozzle pickups at 78.7°. They turn each 7.35 MN share into 37.7 MN per strut. Re-angled, each strut carries ~1.9 MN.</li>
+      <li>3 single rails. One cut removes a third of the area, so PSA proposes 6 paired keels.</li>
+      <li>Tank shells booked inside the 150 t line while 458 t of tankage is modelled outside it.</li>
+      <li>The radiator blade backbone. It runs at 1650-1800 K, so it belongs to thermal and must be made of refractory material.</li></ul></div>
+  </div>
+</section>
+
+<section id="loads">
+  <div class="letter">1 · LOADS</div>
+  <h2>Compression along the ship</h2>
+  <p>The load at each station is N(x) = T · m<sub>ahead</sub>(x) / M, the inertial reaction of everything forward of x. Masses are placed by <code>mass_model</code> for P and by ISSA district for F1 and R. Configurations are never mixed.</p>
+  <div class="filters" id="axToggles" role="group" aria-label="Flight states"></div>
+  <figure><div class="frame"><svg id="axChart" viewBox="0 0 1100 340" role="img" aria-label="Axial compression along the ship for the selected states"></svg></div>
+  <figcaption>Thrust ring at X −135.25 on the left, Brow on the right. Each state's colour is shown beside its checkbox; end-of-burn states are paler. The dashed line is the canon envelope (1.5 g on the full P ship).</figcaption></figure>
+</section>
+
+<section id="path">
+  <div class="letter">2 · LOAD PATH</div>
+  <h2>From the thrust ring to the Brow</h2>
+  <figure><div class="frame">{{FIG_LOADPATH}}</div><figcaption>The mounting zones MZ-01..10 run along the top, the major masses in the middle and the primary load path along the bottom. The rotating rings break the straight path, so load goes around them through the Q45 collar.</figcaption></figure>
+</section>
+
+<section id="mat">
+  <div class="letter">3 · MATERIALS</div>
+  <h2>Preliminary material library</h2>
+  <p>The values are handbook ranges and are not yet PMDS-verified. Longeron mass is for 3 rails under P flight loads, sized by strength or local bay buckling with a 0.65 knockdown.</p>
+  <div class="filters"><label class="tog" for="mTrack">Track <select id="mTrack"><option value="">All</option><option value="R">R research</option><option value="F">F fiction</option><option value="EXCLUDED">Excluded</option></select></label>
+  <label class="tog" for="mLunar">Source <select id="mLunar"><option value="">All</option><option value="LOCAL">Lunar local</option><option value="PARTIAL">Partial</option><option value="IMPORT">Import</option></select></label></div>
+  <div class="scroll"><table id="mTable"><thead><tr><th>Id</th><th>Material</th><th>Track</th><th>Source</th><th>Magnetic</th><th>T max K</th><th>σc allow. MPa</th><th>E/ρ</th><th>α ppm/K</th><th>Longerons P t</th><th>Evidence</th></tr></thead><tbody></tbody></table></div>
+  <div class="two">
+    <div class="card"><h4>Restricted</h4><p>2xxx, 7xxx and Al-Li alloys need Cu, Zn or Li imports, and Al-Li is kept for tank shells. Steels are heavy and ferromagnetic, so none goes where |∇B| exceeds 10⁻³ T/m. Mg has flammability and creep problems. Additive parts need ISM-33 qualification before they enter a primary path.</p></div>
+    <div class="card"><h4>Excluded</h4><p>Fiji is not a structural material. Canon says it cannot be synthesised, and it is reserved for the drive.</p></div>
+  </div>
+</section>
+
+<section id="yard">
+  <div class="letter">4 · LUNA YARD</div>
+  <h2>How the structure is built</h2>
+  <figure><div class="frame">{{FIG_FLOW}}</div><figcaption>The yard builds one qualified module type, the vertebra, many times over. Embodied energy is 6.7-17 GWh per 150 t for all-lunar aluminium, 9-23 GWh for the H mix and 13-31 GWh for the composite-heavy C mix.</figcaption></figure>
+</section>
+
+<section id="concepts">
+  <div class="letter">5 · CONCEPTS</div>
+  <h2>Nine morphologies, one screening</h2>
+  <figure><div class="frame">{{FIG_MASS}}</div><figcaption>Primary structure mass for P under flight loads (blue) and under the canon 1.5 g envelope (grey). Each includes the fixed ring, collar, Brow keels and casing (70 t flight, 140 t canon).</figcaption></figure>
+  <h3>Weight the criteria yourself</h3>
+  <p class="fn">Pick a documented weight set or move the sliders. The mass score is the computed mass factor relative to A. The other scores are PSA judgement on a 1-5 scale. H and HC were proposed by the same author, so treat their scores with care.</p>
+  <div class="filters"><label class="tog" for="wSet">Weight set <select id="wSet"></select></label></div>
+  <div class="wts" id="wts"></div>
+  <div class="rank" id="rank" aria-live="polite"></div>
+  <details><summary>Concept descriptions</summary><div id="cdesc"></div></details>
+</section>
+
+<section id="zoning">
+  <div class="letter">6 · ZONING</div>
+  <h2>Concept HC material zoning</h2>
+  <figure><div class="frame">{{FIG_ZONING}}</div><figcaption>A side view, schematic and not to radial scale. Titanium is placed where loads concentrate, at the ring, the collar and the keel roots. Lunar MMC cassettes run through the midbody and CF/PEEK where the cold tank farm needs low CTE. Aluminium frames sit every 4 m. The hot loop rides on two-stage stand-offs.</figcaption></figure>
+</section>
+
+<section id="issa">
+  <div class="letter">7 · ISSA INTERFACE</div>
+  <h2>PSA-IF 0.1: zones, equipment, handoffs</h2>
+  <p>ISSA owns the equipment requirements. PSA owns the zones, hard-point classes (HP-S 10 kN, HP-M 50 kN, HP-L 250 kN, HP-X per item), stiffness, keep-outs and corridors. Unknowns stay OPEN and are never zero. Equipment mounts need a first mode of at least 5 Hz, or isolation below 1 Hz.</p>
+  <h3>Mounting zones</h3>
+  <div class="scroll"><table><thead><tr><th>Id</th><th>Zone</th><th>X m</th><th>Capacity</th><th>Temperature</th></tr></thead><tbody>{{ZONES}}</tbody></table></div>
+  <details><summary>Equipment entries (15)</summary><div class="scroll"><table><thead><tr><th>Id</th><th>Equipment</th><th>Mass t</th><th>Position</th><th>Attachment</th></tr></thead><tbody>{{EQUIP}}</tbody></table></div></details>
+  <h3>Handoffs to ISSA</h3>
+  <div class="scroll"><table><thead><tr><th>Id</th><th>Topic</th><th>Ask</th><th>Why</th></tr></thead><tbody>{{HANDOFF}}</tbody></table></div>
+</section>
+
+<section id="mass">
+  <div class="letter">8 · MASS OWNERSHIP</div>
+  <h2>One item, one budget owner</h2>
+  <div class="scroll"><table><thead><tr><th>Id</th><th>Item</th><th>Current owner</th><th>Proposed</th><th>PSA estimate t</th><th>Double-count risk</th></tr></thead><tbody>{{OWNERSHIP}}</tbody></table></div>
+</section>
+
+<section id="lc">
+  <div class="letter">9 · LOAD CASES</div>
+  <h2>Load-case register</h2>
+  <details><summary>LC-01 … LC-23 and LC-02b</summary><div class="scroll"><table><thead><tr><th>Id</th><th>Case</th><th>Configs</th><th>Magnitude</th><th>Evidence</th></tr></thead><tbody>{{LOADCASES}}</tbody></table></div></details>
+</section>
+
+<section id="problems">
+  <div class="letter">10 · PROBLEMS</div>
+  <h2>Problem register</h2>
+  <div class="filters"><label class="tog" for="pSev">Severity <select id="pSev"><option value="">All</option><option>CRITICAL</option><option>MAJOR</option><option>MINOR</option></select></label></div>
+  <div class="scroll"><table id="pTable"><thead><tr><th>Id</th><th>Problem</th><th>Severity</th><th>Kind</th><th>Closes with</th></tr></thead><tbody>{{PROBLEMS}}</tbody></table></div>
+</section>
+
+<section id="dual">
+  <div class="letter">11 · RESEARCH AND FICTION</div>
+  <h2>Where today's engineering stops</h2>
+  <div class="scroll"><table><thead><tr><th>Subsystem</th><th>Established physics</th><th>Today</th><th>Unresolved</th><th>Bridging advance</th><th>Adopted fiction</th></tr></thead><tbody>
+  <tr><td><b>Longitudinal structure</b></td><td>N = T·m<sub>ahead</sub>/M</td><td>Al, Ti and CFRP trusses</td><td>150 t with lunar material</td><td>lunar Al₂O₃f/Al MMC at scale</td><td>HC-class cassettes ~160 t</td></tr>
+  <tr><td><b>Thrust frame</b></td><td>load spreading, fatigue</td><td>Ti forgings, DED Ti</td><td>10¹⁰-10¹¹ pulse cycles per year</td><td>qualified DED + HIP endurance</td><td>fatigue-qualified frame</td></tr>
+  <tr><td><b>Hot interfaces</b></td><td>radiation, conduction</td><td>YSZ/Inconel stand-offs</td><td>1990 K trunks over 170 m</td><td>SiC/SiC at 1800 K</td><td>ISSA FT-01</td></tr>
+  <tr><td><b>Blade backbone</b></td><td>1800 K two-sided emitter</td><td>C/C in re-entry</td><td>long-life C/C in vacuum</td><td>oxidation-free C/C, SiC/SiC</td><td>refractory backbone owned by thermal</td></tr>
+  <tr><td><b>Manufacturing</b></td><td>electrolysis, FSW, DED</td><td>terrestrial, ISS-scale printing</td><td>150-250 t built in microgravity</td><td>Yard automation (ISM-32..37)</td><td>canon ISM chain</td></tr>
+  <tr><td><b>Health monitoring</b></td><td>strain, acoustic emission</td><td>FBG, AE in aircraft</td><td>full-ship digital twin</td><td>embedded sensing layer</td><td>F-SMART-LAYER</td></tr>
+  </tbody></table></div>
+  <p class="fn">No gap here needs a change of physical law. F-track materials never enter an R-track mass.</p>
+</section>
+
+<section id="road">
+  <div class="letter">12 · ROADMAP</div>
+  <h2>Proposed Phases II-V</h2>
+  {{ROADMAP}}
+</section>
+
+<section id="decide">
+  <div class="letter">13 · DECISIONS</div>
+  <h2>Owner questions</h2>
+  <ol class="dr">
+    <li><b class="id">PSA-D01</b>Design load. Keep 1.5 g on the full ship (63.5 MN, 2.4-2.7× the structure mass), or adopt a thrust-bounded load with explicit dynamic and proof factors? PSA recommends thrust-bounded.</li>
+    <li><b class="id">PSA-D02</b>Structure line. Hold 150 t, which needs imported fibre or a tanks-aft layout, or resize it (A ~240 t, H ~200 t, HC ~160 t)?</li>
+    <li><b class="id">PSA-D03</b>Rails. 3 single or 6 paired? PSA recommends 6 paired.</li>
+    <li><b class="id">PSA-D04</b>Tank shells. Inside the 150 t line, or in their own tankage line (458 t modelled)?</li>
+    <li><b class="id">PSA-D05</b>Momentum Spine shell. Power line or structure line?</li>
+    <li><b class="id">PSA-D06</b>Phase II candidates. H and HC, with G as a layout question for ISSA?</li>
+    <li><b class="id">PSA-D07</b>Carbon imports. Acceptable fraction for CF/PEEK cassettes?</li>
+    <li><b class="id">PSA-D08</b>Go for Phase II.</li>
+  </ol>
+</section>
+</div>
+
+<script>
+const AX={{AXIAL_JSON}};
+const CD={{CONCEPT_JSON}};
+const MT={{MAT_JSON}};
+const LABEL={P_departure:'P departure',P_burnout:'P burnout',P_dry_end:'P dry end',P_canon_1p5g_full:'P canon 1.5 g',F1_departure:'F1 departure',F1_end:'F1 end',R_departure:'R departure',R_end:'R end'};
+const COL={P_departure:'var(--info)',P_burnout:'var(--fwd)',P_dry_end:'var(--muted)',P_canon_1p5g_full:'var(--bad)',F1_departure:'var(--accent)',F1_end:'var(--accent)',R_departure:'var(--good)',R_end:'var(--good)'};
+const on=new Set(['P_departure','P_canon_1p5g_full','F1_departure','R_departure','F1_end']);
+function drawAx(){const s=document.getElementById('axChart');const W=1100,H=340,L=56,Rr=20,T=16,B=36;const x0=AX.x[0],x1=AX.x[AX.x.length-1];
+ let ymax=0;on.forEach(k=>{ymax=Math.max(ymax,...AX.states[k].N)});ymax=Math.ceil((ymax||25)/10)*10;
+ const X=v=>L+(v-x0)/(x1-x0)*(W-L-Rr),Y=v=>T+(1-v/ymax)*(H-T-B);let o='';
+ for(let v=0;v<=ymax;v+=ymax>40?10:5){o+=`<line x1="${L}" x2="${W-Rr}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end" class="t10">${v}</text>`}
+ for(const v of [-135,-100,-50,0,50,100,140]){o+=`<text x="${X(v)}" y="${H-B+16}" text-anchor="middle" class="t10">X ${v}</text>`}
+ o+=`<text x="12" y="${T+8}" class="t10">MN</text>`;
+ on.forEach(k=>{const N=AX.states[k].N;const d=N.map((n,i)=>(i?'L':'M')+X(AX.x[i]).toFixed(1)+','+Y(n).toFixed(1)).join('');
+  o+=`<path d="${d}" fill="none" stroke="${COL[k]}" stroke-width="2" ${k.includes('canon')?'stroke-dasharray="6 4"':''} ${k.endsWith('end')?'opacity=".6"':''}/>`;
+  if(k.includes('canon'))o+=`<text x="${X(AX.x[0])+6}" y="${Y(N[0])-6}" class="t10" style="fill:${COL[k]}">${LABEL[k]} ${N[0].toFixed(1)} MN</text>`});
+ s.innerHTML=o}
+const tg=document.getElementById('axToggles');Object.keys(AX.states).forEach(k=>{const id='ax_'+k;const l=document.createElement('label');l.className='tog';l.htmlFor=id;
+ l.innerHTML=`<input type="checkbox" id="${id}" ${on.has(k)?'checked':''}> <i class="sw" style="background:${COL[k]};${k.endsWith('end')?'opacity:.6':''}"></i> ${LABEL[k]||k} <span class="fn">${AX.states[k].M} t · ${AX.states[k].a} g</span>`;
+ l.querySelector('input').addEventListener('change',e=>{e.target.checked?on.add(k):on.delete(k);drawAx()});tg.appendChild(l)});drawAx();
+
+const mt=document.querySelector('#mTable tbody');function drawM(){const t=document.getElementById('mTrack').value,lu=document.getElementById('mLunar').value;
+ mt.innerHTML=MT.filter(m=>(!t||m.track===t)&&(!lu||String(m.lunar).startsWith(lu))).map(m=>`<tr><td class="mono">${m.id}</td><td>${m.name}</td><td class="mono">${m.track}</td><td>${m.lunar}</td><td>${m.mag}</td><td class="num">${m.Tmax}</td><td class="num">${m.sig}</td><td class="num">${m.Erho}</td><td class="num">${m.alpha}</td><td class="num">${m.mP}</td><td class="fn">${m.status}</td></tr>`).join('')}
+['mTrack','mLunar'].forEach(i=>document.getElementById(i).addEventListener('change',drawM));drawM();
+
+const W={...CD.weights[1].w};const wsel=document.getElementById('wSet');
+CD.weights.forEach((w,i)=>{const o=document.createElement('option');o.value=i;o.textContent=w.name;if(i===1)o.selected=true;wsel.appendChild(o)});
+const wts=document.getElementById('wts');
+function sliders(){wts.innerHTML=CD.criteria.map(c=>`<label for="w_${c.id}">${c.id}<input type="range" id="w_${c.id}" min="0" max="50" value="${Math.round(W[c.id]*100)}"><span class="mono">${Math.round(W[c.id]*100)}</span></label>`).join('');
+ CD.criteria.forEach(c=>document.getElementById('w_'+c.id).addEventListener('input',e=>{W[c.id]=e.target.value/100;e.target.nextElementSibling.textContent=e.target.value;rank()}))}
+function rank(){const sum=Object.values(W).reduce((a,b)=>a+b,0)||1;const r=Object.entries(CD.scores).map(([k,s])=>[k,CD.criteria.reduce((a,c)=>a+W[c.id]*s[c.id],0)/sum]).sort((a,b)=>b[1]-a[1]);
+ document.getElementById('rank').innerHTML=r.map(([k,v],i)=>`<div class="r ${i===0?'top':''}"><b class="mono">${k}</b><div><div class="bar" style="width:${(v*100).toFixed(0)}%"></div><div class="fn">${CD.names[k]} · ${CD.mass[k].P_flight} t flight${CD.pareto.includes(k)?' · Pareto':''}</div></div><span class="mono">${v.toFixed(3)}</span></div>`).join('')}
+wsel.addEventListener('change',()=>{Object.assign(W,CD.weights[wsel.value].w);sliders();rank()});sliders();rank();
+document.getElementById('cdesc').innerHTML=Object.entries(CD.names).map(([k,n])=>`<p><b class="mono">${k}</b> ${n}: ${CD.mass[k].P_flight} t flight, ${CD.mass[k].P_canon_1p5g} t canon, ${CD.mass[k].F1_flight} t F1.</p>`).join('');
+
+document.getElementById('pSev').addEventListener('change',e=>{document.querySelectorAll('#pTable tbody tr').forEach(r=>{r.hidden=!!e.target.value&&r.dataset.sev!==e.target.value})});
+</script>

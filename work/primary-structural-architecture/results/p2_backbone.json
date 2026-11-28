@@ -1,0 +1,81 @@
+{
+ "line_t_per_m": 1.234600262123198,
+ "a_limit": 7.190948990909091,
+ "options": [
+  {
+   "option": "A refractory backbone (Nb-1Zr, 1800 K)",
+   "backbone_kg_per_m": 76.25259237466936,
+   "r_m": 0.23799999999999996,
+   "t_mm": 5.949999999999998,
+   "leak_W_per_m": 0.0,
+   "cool_radiator_m2_per_m": 0.0,
+   "cool_radiator_kg_per_m": 0.0,
+   "total_kg_per_m": 76.25259237466936,
+   "growth_mm_per_section": 268.478,
+   "hot_structure": true,
+   "note": "Nb-1Zr creep-limited ~60 MPa at 1800 K for 10^5 h (LIT order); growth absorbed by axial slides at the frames",
+   "per_blade_plane_152m_t": 11.636145596374545,
+   "three_planes_t": 34.908436789123634
+  },
+  {
+   "option": "A2 refractory backbone (C/C, 1800 K)",
+   "backbone_kg_per_m": 8.75859342109862,
+   "r_m": 0.1785,
+   "t_mm": 4.4624999999999995,
+   "leak_W_per_m": 0.0,
+   "cool_radiator_m2_per_m": 0.0,
+   "cool_radiator_kg_per_m": 0.0,
+   "total_kg_per_m": 8.75859342109862,
+   "growth_mm_per_section": 38.35399999999999,
+   "hot_structure": true,
+   "note": "C/C keeps strength hot; joints to the metallic frames need a thermal break anyway (at the frame, not along the length)",
+   "per_blade_plane_152m_t": 1.3365613560596494,
+   "three_planes_t": 4.009684068178949
+  },
+  {
+   "option": "B isolated cool backbone (Al, MLI)",
+   "backbone_kg_per_m": 8.106136659576345,
+   "r_m": 0.13824999999999998,
+   "t_mm": 3.45625,
+   "leak_W_per_m": 5950.02270525625,
+   "cool_radiator_m2_per_m": 4.113256825983243,
+   "cool_radiator_kg_per_m": 20.566284129916216,
+   "total_kg_per_m": 30.172420789492563,
+   "growth_mm_per_section": 35.9664,
+   "hot_structure": false,
+   "note": "MLI effective emittance 0.01 at 1800 K is optimistic (high-T MLI is refractory foil, e* 0.02-0.05); 1 zirconia standoff per metre",
+   "per_blade_plane_152m_t": 4.604311412476565,
+   "three_planes_t": 13.812934237429694
+  },
+  {
+   "option": "C segmented hot cells on cool support",
+   "backbone_kg_per_m": 8.106136659576345,
+   "r_m": 0.13824999999999998,
+   "t_mm": 3.45625,
+   "leak_W_per_m": 2382.1090821025,
+   "cool_radiator_m2_per_m": 1.6467544625567618,
+   "cool_radiator_kg_per_m": 8.23377231278381,
+   "total_kg_per_m": 17.464908972360156,
+   "growth_mm_per_section": 35.9664,
+   "hot_structure": false,
+   "note": "three mounts per 4 m cell; only the gaps (2 cm per side) and mount pads see the hot root; growth per cell 4 m only",
+   "per_blade_plane_152m_t": 2.6651451091821596,
+   "three_planes_t": 7.995435327546479
+  },
+  {
+   "option": "D hybrid: SiC/SiC ribs + cool Al backbone",
+   "backbone_kg_per_m": 8.106136659576345,
+   "r_m": 0.13824999999999998,
+   "t_mm": 3.45625,
+   "leak_W_per_m": 1489.7556763140628,
+   "cool_radiator_m2_per_m": 1.0298696338138087,
+   "cool_radiator_kg_per_m": 5.149348169069043,
+   "total_kg_per_m": 13.630484828645388,
+   "growth_mm_per_section": 35.9664,
+   "hot_structure": false,
+   "note": "one SiC/SiC rib per 4 m carries the cell; rib conduction larger but fewer paths",
+   "per_blade_plane_152m_t": 2.080011984851286,
+   "three_planes_t": 6.240035954553859
+  }
+ ]
+}

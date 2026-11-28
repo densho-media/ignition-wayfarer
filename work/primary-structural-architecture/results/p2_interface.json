@@ -1,0 +1,2260 @@
+{
+ "cp3": {
+  "pitch_m": 6.4,
+  "supports_per_section": 4,
+  "section_m": 25.4,
+  "trunk_t_per_m": 0.211,
+  "saddle_t": 5.4,
+  "anchor_kN": 155.0,
+  "anchor_g": 0.736,
+  "travel_mm": [
+   38,
+   127
+  ],
+  "x_hot0": -111.6,
+  "hot_len": 152.6,
+  "r_trunk": 6.52
+ },
+ "variants": {
+  "H:bypass:F1": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.21291086731374573,
+     "anchor_axial_kN": 45.09955490995464,
+     "slide_lateral_kN": 0.37843843955099105,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.21818488945458372,
+     "anchor_axial_kN": 46.21671747726753,
+     "slide_lateral_kN": 0.38781275066210474,
+     "shutdown_reversal_anchor_kN": -1.1171625673128907
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.30545884523641714,
+     "anchor_axial_kN": 64.70340446817454,
+     "slide_lateral_kN": 0.5429378509269466,
+     "shutdown_reversal_anchor_kN": -1.5640275942380468
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.2400033784000421,
+     "anchor_axial_kN": 50.83838922499429,
+     "slide_lateral_kN": 0.4265940257283153,
+     "shutdown_reversal_anchor_kN": -1.2288788240441797
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.4430855837485675,
+     "anchor_axial_kN": 93.85600118114641,
+     "slide_lateral_kN": 0.6556570394373363,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.4540612714081949,
+     "anchor_axial_kN": 96.18091129271178,
+     "slide_lateral_kN": 0.6718983416612061,
+     "shutdown_reversal_anchor_kN": -2.3249101115653708
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.6356857799714728,
+     "anchor_axial_kN": 134.65327580979647,
+     "slide_lateral_kN": 0.9406576783256885,
+     "shutdown_reversal_anchor_kN": -3.254874156191519
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.4994673985490145,
+     "anchor_axial_kN": 105.79900242198296,
+     "slide_lateral_kN": 0.7390881758273269,
+     "shutdown_reversal_anchor_kN": -2.557401122721908
+    }
+   ],
+   "support_travel": [
+    {
+     "section": 1,
+     "x0": -111.6,
+     "x1": -86.19999999999999,
+     "shortening_mm": -30.4820000000002
+    },
+    {
+     "section": 2,
+     "x0": -86.19999999999999,
+     "x1": -60.79999999999999,
+     "shortening_mm": -38.52666666666664
+    },
+    {
+     "section": 3,
+     "x0": -60.8,
+     "x1": -35.4,
+     "shortening_mm": -33.57266666666669
+    },
+    {
+     "section": 4,
+     "x0": -35.400000000000006,
+     "x1": -10.000000000000007,
+     "shortening_mm": -32.352666666666664
+    },
+    {
+     "section": 5,
+     "x0": -10.0,
+     "x1": 15.399999999999999,
+     "shortening_mm": -38.02133333333313
+    },
+    {
+     "section": 6,
+     "x0": 15.400000000000006,
+     "x1": 40.800000000000004,
+     "shortening_mm": -33.15599999999995
+    }
+   ],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 0.5671938332699109,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 0.5671938332699107,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 0.567193833269911,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 0.5671938332699101,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 0.5671938332699108,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 0.5671938332699115,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": 0.007813807097461156,
+     "member": "collar:14",
+     "at_x": 94.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "spine",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "spine",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": 0.8742756248896809,
+     "member": "frame:01",
+     "at_x": -107.6,
+     "ok": true
+    }
+   ]
+  },
+  "H:hub:F1": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.23128866536136405,
+     "anchor_axial_kN": 48.992406987586044,
+     "slide_lateral_kN": 0.43011439298556015,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.24164841362465508,
+     "anchor_axial_kN": 51.18684657420003,
+     "slide_lateral_kN": 0.4493798283616811,
+     "shutdown_reversal_anchor_kN": -2.194439586613987
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.33830777907451715,
+     "anchor_axial_kN": 71.66158520388004,
+     "slide_lateral_kN": 0.6291317597063536,
+     "shutdown_reversal_anchor_kN": -3.072215421259582
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.26581325498712066,
+     "anchor_axial_kN": 56.305531231620044,
+     "slide_lateral_kN": 0.49431781119784934,
+     "shutdown_reversal_anchor_kN": -2.413883545275386
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.5308699209954474,
+     "anchor_axial_kN": 112.4507990317681,
+     "slide_lateral_kN": 0.7839076492963519,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.5546483397669569,
+     "anchor_axial_kN": 117.48763024939356,
+     "slide_lateral_kN": 0.8190199877920153,
+     "shutdown_reversal_anchor_kN": -5.036831217625473
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.7765076756737397,
+     "anchor_axial_kN": 164.48268234915096,
+     "slide_lateral_kN": 1.1466279829088215,
+     "shutdown_reversal_anchor_kN": -7.051563704675661
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.6101131737436527,
+     "anchor_axial_kN": 129.23639327433295,
+     "slide_lateral_kN": 0.900921986571217,
+     "shutdown_reversal_anchor_kN": -5.54051433938802
+    }
+   ],
+   "support_travel": [
+    {
+     "section": 1,
+     "x0": -111.6,
+     "x1": -86.19999999999999,
+     "shortening_mm": -32.049333333333266
+    },
+    {
+     "section": 2,
+     "x0": -86.19999999999999,
+     "x1": -60.79999999999999,
+     "shortening_mm": -38.96266666666662
+    },
+    {
+     "section": 3,
+     "x0": -60.8,
+     "x1": -35.4,
+     "shortening_mm": -33.53266666666673
+    },
+    {
+     "section": 4,
+     "x0": -35.400000000000006,
+     "x1": -10.000000000000007,
+     "shortening_mm": -32.909333333333336
+    },
+    {
+     "section": 5,
+     "x0": -10.0,
+     "x1": 15.399999999999999,
+     "shortening_mm": -37.662000000000006
+    },
+    {
+     "section": 6,
+     "x0": 15.400000000000006,
+     "x1": 40.800000000000004,
+     "shortening_mm": -32.82066666666668
+    }
+   ],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 0.5481938332699109,
+     "member": "frame:10",
+     "at_x": 28.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 0.5481938332699107,
+     "member": "frame:10",
+     "at_x": 28.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 0.548193833269911,
+     "member": "frame:10",
+     "at_x": 28.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 0.5481938332699101,
+     "member": "frame:10",
+     "at_x": 28.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 0.5481938332699108,
+     "member": "frame:10",
+     "at_x": 28.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 0.5481938332699114,
+     "member": "frame:10",
+     "at_x": 28.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": -0.5308474847020321,
+     "member": "hubcone",
+     "at_x": 93.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": 0.8742756248896809,
+     "member": "frame:01",
+     "at_x": -107.6,
+     "ok": true
+    }
+   ]
+  },
+  "HC:bypass:F1": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.225505071775028,
+     "anchor_axial_kN": 47.767305141847686,
+     "slide_lateral_kN": 0.41298862344560905,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.24009363734613048,
+     "anchor_axial_kN": 50.85750820349729,
+     "slide_lateral_kN": 0.43970603412658166,
+     "shutdown_reversal_anchor_kN": -3.0902030616496057
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.3361310922845826,
+     "anchor_axial_kN": 71.2005114848962,
+     "slide_lateral_kN": 0.6155884477772142,
+     "shutdown_reversal_anchor_kN": -4.3262842863094475
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.2641030010807435,
+     "anchor_axial_kN": 55.94325902384702,
+     "slide_lateral_kN": 0.48367663753923984,
+     "shutdown_reversal_anchor_kN": -3.399223367814567
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.5013563511410599,
+     "anchor_axial_kN": 106.19912723581746,
+     "slide_lateral_kN": 0.7407387135764476,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.5337905218918039,
+     "anchor_axial_kN": 113.06945134462158,
+     "slide_lateral_kN": 0.788659211368377,
+     "shutdown_reversal_anchor_kN": -6.8703241088041205
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.7473067306485254,
+     "anchor_axial_kN": 158.2972318824702,
+     "slide_lateral_kN": 1.1041228959157277,
+     "shutdown_reversal_anchor_kN": -9.618453752325768
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.5871695740809842,
+     "anchor_axial_kN": 124.37639647908375,
+     "slide_lateral_kN": 0.8675251325052148,
+     "shutdown_reversal_anchor_kN": -7.557356519684533
+    }
+   ],
+   "support_travel": [
+    {
+     "section": 1,
+     "x0": -111.6,
+     "x1": -86.19999999999999,
+     "shortening_mm": -22.28733333333321
+    },
+    {
+     "section": 2,
+     "x0": -86.19999999999999,
+     "x1": -60.79999999999999,
+     "shortening_mm": -28.56000000000006
+    },
+    {
+     "section": 3,
+     "x0": -60.8,
+     "x1": -35.4,
+     "shortening_mm": -23.242666666666764
+    },
+    {
+     "section": 4,
+     "x0": -35.400000000000006,
+     "x1": -10.000000000000007,
+     "shortening_mm": -23.25399999999979
+    },
+    {
+     "section": 5,
+     "x0": -10.0,
+     "x1": 15.399999999999999,
+     "shortening_mm": -28.240000000000123
+    },
+    {
+     "section": 6,
+     "x0": 15.400000000000006,
+     "x1": 40.800000000000004,
+     "shortening_mm": -24.56866666666656
+    }
+   ],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 0.5849938332699108,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 0.5849938332699106,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 0.5849938332699111,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 0.5849938332699102,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 0.5849938332699108,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 0.5849938332699115,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": 0.007813807097461156,
+     "member": "collar:14",
+     "at_x": 94.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "spine",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "spine",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": 0.895975624889681,
+     "member": "frame:01",
+     "at_x": -107.6,
+     "ok": true
+    }
+   ]
+  },
+  "HC:hub:F1": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.23227854295266412,
+     "anchor_axial_kN": 49.20208646212966,
+     "slide_lateral_kN": 0.4331361336702335,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.2535672172938217,
+     "anchor_axial_kN": 53.711530951848246,
+     "slide_lateral_kN": 0.4728337052921323,
+     "shutdown_reversal_anchor_kN": -4.509444489718592
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.35499410421135036,
+     "anchor_axial_kN": 75.19614333258755,
+     "slide_lateral_kN": 0.6619671874089853,
+     "shutdown_reversal_anchor_kN": -6.313222285606029
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.27892393902320384,
+     "anchor_axial_kN": 59.08268404703307,
+     "slide_lateral_kN": 0.5201170758213456,
+     "shutdown_reversal_anchor_kN": -4.960388938690452
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.5361139279478079,
+     "anchor_axial_kN": 113.56160367260237,
+     "slide_lateral_kN": 0.791584828095234,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.5852495677566281,
+     "anchor_axial_kN": 123.96969375063557,
+     "slide_lateral_kN": 0.8641347563172086,
+     "shutdown_reversal_anchor_kN": -10.408090078033203
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.8193493948592792,
+     "anchor_axial_kN": 173.5575712508898,
+     "slide_lateral_kN": 1.209788658844092,
+     "shutdown_reversal_anchor_kN": -14.571326109246483
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.6437745245322909,
+     "anchor_axial_kN": 136.36666312569912,
+     "slide_lateral_kN": 0.9505482319489293,
+     "shutdown_reversal_anchor_kN": -11.448899085836524
+    }
+   ],
+   "support_travel": [
+    {
+     "section": 1,
+     "x0": -111.6,
+     "x1": -86.19999999999999,
+     "shortening_mm": -22.654000000000053
+    },
+    {
+     "section": 2,
+     "x0": -86.19999999999999,
+     "x1": -60.79999999999999,
+     "shortening_mm": -29.30333333333334
+    },
+    {
+     "section": 3,
+     "x0": -60.8,
+     "x1": -35.4,
+     "shortening_mm": -24.361333333333278
+    },
+    {
+     "section": 4,
+     "x0": -35.400000000000006,
+     "x1": -10.000000000000007,
+     "shortening_mm": -23.623333333333363
+    },
+    {
+     "section": 5,
+     "x0": -10.0,
+     "x1": 15.399999999999999,
+     "shortening_mm": -28.73600000000002
+    },
+    {
+     "section": 6,
+     "x0": 15.400000000000006,
+     "x1": 40.800000000000004,
+     "shortening_mm": -24.9193333333333
+    }
+   ],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 0.5849938332699108,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 0.5849938332699106,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 0.5849938332699111,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 0.5849938332699102,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 0.5849938332699108,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 0.5849938332699115,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": -0.5308474847020321,
+     "member": "hubcone",
+     "at_x": 93.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": 0.8742756248896809,
+     "member": "modframe:01",
+     "at_x": -111.6,
+     "ok": true
+    }
+   ]
+  },
+  "A:bypass:F1": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.21442591733286015,
+     "anchor_axial_kN": 45.42047831978553,
+     "slide_lateral_kN": 0.3824174362890826,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.23923636408249505,
+     "anchor_axial_kN": 50.67591746031936,
+     "slide_lateral_kN": 0.4266655736280673,
+     "shutdown_reversal_anchor_kN": -5.25543914053383
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.33493090971549305,
+     "anchor_axial_kN": 70.9462844444471,
+     "slide_lateral_kN": 0.5973318030792942,
+     "shutdown_reversal_anchor_kN": -7.357614796747361
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.26316000049074456,
+     "anchor_axial_kN": 55.7435092063513,
+     "slide_lateral_kN": 0.46933213099087406,
+     "shutdown_reversal_anchor_kN": -5.780983054587214
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.4496980039708348,
+     "anchor_axial_kN": 95.25666810183668,
+     "slide_lateral_kN": 0.6653044822731758,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.5017309322647397,
+     "anchor_axial_kN": 106.2784723729106,
+     "slide_lateral_kN": 0.7422844557532868,
+     "shutdown_reversal_anchor_kN": -11.021804271073929
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.7024233051706356,
+     "anchor_axial_kN": 148.78986132207484,
+     "slide_lateral_kN": 1.0391982380546014,
+     "shutdown_reversal_anchor_kN": -15.430525979503498
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.5519040254912136,
+     "anchor_axial_kN": 116.90631961020166,
+     "slide_lateral_kN": 0.8165129013286155,
+     "shutdown_reversal_anchor_kN": -12.123984698181323
+    }
+   ],
+   "support_travel": [
+    {
+     "section": 1,
+     "x0": -111.6,
+     "x1": -86.19999999999999,
+     "shortening_mm": -36.60333333333324
+    },
+    {
+     "section": 2,
+     "x0": -86.19999999999999,
+     "x1": -60.79999999999999,
+     "shortening_mm": -47.18749999999977
+    },
+    {
+     "section": 3,
+     "x0": -60.8,
+     "x1": -35.4,
+     "shortening_mm": -40.57416666666677
+    },
+    {
+     "section": 4,
+     "x0": -35.400000000000006,
+     "x1": -10.000000000000007,
+     "shortening_mm": -38.960000000000036
+    },
+    {
+     "section": 5,
+     "x0": -10.0,
+     "x1": 15.399999999999999,
+     "shortening_mm": -46.23833333333346
+    },
+    {
+     "section": 6,
+     "x0": 15.400000000000006,
+     "x1": 40.800000000000004,
+     "shortening_mm": -40.41833333333352
+    }
+   ],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 0.6559766607942785,
+     "member": "diag:03",
+     "at_x": -76.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 0.6559766607942793,
+     "member": "diag:03",
+     "at_x": -80.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 0.6559766607942795,
+     "member": "diag:03",
+     "at_x": -76.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 0.6559766607942784,
+     "member": "diag:03",
+     "at_x": -80.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 0.65597666079428,
+     "member": "diag:03",
+     "at_x": -76.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 0.6559766607942801,
+     "member": "diag:03",
+     "at_x": -80.6,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": -0.12510207059617184,
+     "member": "collar:14",
+     "at_x": 94.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "spine",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "spine",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": 0.8742756248896809,
+     "member": "frame:01",
+     "at_x": -111.6,
+     "ok": true
+    }
+   ]
+  },
+  "A:hub:F1": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.22790353782121717,
+     "anchor_axial_kN": 48.27535695016789,
+     "slide_lateral_kN": 0.41998435217215435,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.24899925679703783,
+     "anchor_axial_kN": 52.7439289320433,
+     "slide_lateral_kN": 0.458859886761776,
+     "shutdown_reversal_anchor_kN": -4.468571981875412
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.34859895951585296,
+     "anchor_axial_kN": 73.84150050486062,
+     "slide_lateral_kN": 0.6424038414664863,
+     "shutdown_reversal_anchor_kN": -6.256000774625577
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.27389918247674166,
+     "anchor_axial_kN": 58.01832182524763,
+     "slide_lateral_kN": 0.5047458754379536,
+     "shutdown_reversal_anchor_kN": -4.915429180062954
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.5133679683128236,
+     "anchor_axial_kN": 108.74347170742695,
+     "slide_lateral_kN": 0.7583003724146329,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.560887486852334,
+     "anchor_axial_kN": 118.80922909551353,
+     "slide_lateral_kN": 0.8284918740852577,
+     "shutdown_reversal_anchor_kN": -10.065757388086588
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.7852424815932677,
+     "anchor_axial_kN": 166.33292073371894,
+     "slide_lateral_kN": 1.1598886237193609,
+     "shutdown_reversal_anchor_kN": -14.092060343321222
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.6169762355375675,
+     "anchor_axial_kN": 130.69015200506487,
+     "slide_lateral_kN": 0.9113410614937835,
+     "shutdown_reversal_anchor_kN": -11.072333126895249
+    }
+   ],
+   "support_travel": [
+    {
+     "section": 1,
+     "x0": -111.6,
+     "x1": -86.19999999999999,
+     "shortening_mm": -33.100000000000136
+    },
+    {
+     "section": 2,
+     "x0": -86.19999999999999,
+     "x1": -60.79999999999999,
+     "shortening_mm": -43.04833333333323
+    },
+    {
+     "section": 3,
+     "x0": -60.8,
+     "x1": -35.4,
+     "shortening_mm": -36.02583333333337
+    },
+    {
+     "section": 4,
+     "x0": -35.400000000000006,
+     "x1": -10.000000000000007,
+     "shortening_mm": -34.72999999999996
+    },
+    {
+     "section": 5,
+     "x0": -10.0,
+     "x1": 15.399999999999999,
+     "shortening_mm": -43.03416666666669
+    },
+    {
+     "section": 6,
+     "x0": 15.400000000000006,
+     "x1": 40.800000000000004,
+     "shortening_mm": -36.28916666666669
+    }
+   ],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 0.6559766607942785,
+     "member": "diag:03",
+     "at_x": -76.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 0.6559766607942793,
+     "member": "diag:03",
+     "at_x": -80.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 0.6559766607942795,
+     "member": "diag:03",
+     "at_x": -76.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 0.6559766607942784,
+     "member": "diag:03",
+     "at_x": -80.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 0.65597666079428,
+     "member": "diag:03",
+     "at_x": -76.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 0.6559766607942801,
+     "member": "diag:03",
+     "at_x": -80.6,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": -1.3384038682920183,
+     "member": "hubcone",
+     "at_x": 93.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": 0.895975624889681,
+     "member": "frame:01",
+     "at_x": -111.6,
+     "ok": true
+    }
+   ]
+  },
+  "C:bypass:F1": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.22419230498753331,
+     "anchor_axial_kN": 47.48923010244946,
+     "slide_lateral_kN": 0.4092203249975386,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.24969558562837757,
+     "anchor_axial_kN": 52.89142783973461,
+     "slide_lateral_kN": 0.4557717032570647,
+     "shutdown_reversal_anchor_kN": -5.402197737285156
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.3495738198797285,
+     "anchor_axial_kN": 74.04799897562846,
+     "slide_lateral_kN": 0.6380803845598905,
+     "shutdown_reversal_anchor_kN": -7.563076832199219
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.2746651441912153,
+     "anchor_axial_kN": 58.18057062370808,
+     "slide_lateral_kN": 0.5013488735827712,
+     "shutdown_reversal_anchor_kN": -5.942417511013672
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.4949133786141612,
+     "anchor_axial_kN": 104.83435334274978,
+     "slide_lateral_kN": 0.7313225896386728,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.5512128791184592,
+     "anchor_axial_kN": 116.759918469752,
+     "slide_lateral_kN": 0.8145151204598405,
+     "shutdown_reversal_anchor_kN": -11.925565127002221
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.7716980307658426,
+     "anchor_axial_kN": 163.4638858576528,
+     "slide_lateral_kN": 1.1403211686437766,
+     "shutdown_reversal_anchor_kN": -16.69579117780311
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.6063341670303051,
+     "anchor_axial_kN": 128.43591031672722,
+     "slide_lateral_kN": 0.8959666325058246,
+     "shutdown_reversal_anchor_kN": -13.118121639702444
+    }
+   ],
+   "support_travel": [
+    {
+     "section": 1,
+     "x0": -111.6,
+     "x1": -86.19999999999999,
+     "shortening_mm": -38.49750000000017
+    },
+    {
+     "section": 2,
+     "x0": -86.19999999999999,
+     "x1": -60.79999999999999,
+     "shortening_mm": -48.1091666666664
+    },
+    {
+     "section": 3,
+     "x0": -60.8,
+     "x1": -35.4,
+     "shortening_mm": -42.18916666666678
+    },
+    {
+     "section": 4,
+     "x0": -35.400000000000006,
+     "x1": -10.000000000000007,
+     "shortening_mm": -41.017500000000155
+    },
+    {
+     "section": 5,
+     "x0": -10.0,
+     "x1": 15.399999999999999,
+     "shortening_mm": -47.49166666666656
+    },
+    {
+     "section": 6,
+     "x0": 15.400000000000006,
+     "x1": 40.800000000000004,
+     "shortening_mm": -41.262500000000045
+    }
+   ],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 0.6678766607942785,
+     "member": "diag:03",
+     "at_x": -76.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 0.6678766607942793,
+     "member": "diag:03",
+     "at_x": -80.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 0.6678766607942795,
+     "member": "diag:03",
+     "at_x": -76.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 0.6678766607942784,
+     "member": "diag:03",
+     "at_x": -80.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 0.66787666079428,
+     "member": "diag:03",
+     "at_x": -76.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 0.6678766607942801,
+     "member": "diag:03",
+     "at_x": -80.6,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": -0.12510207059617184,
+     "member": "collar:14",
+     "at_x": 94.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "spine",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "spine",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": 0.8742756248896809,
+     "member": "frame:01",
+     "at_x": -111.6,
+     "ok": true
+    }
+   ]
+  },
+  "C:hub:F1": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.23425859807118055,
+     "anchor_axial_kN": 49.62150894473444,
+     "slide_lateral_kN": 0.43926512833397113,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.2642289113305491,
+     "anchor_axial_kN": 55.96992979127415,
+     "slide_lateral_kN": 0.4954633366750183,
+     "shutdown_reversal_anchor_kN": -6.348420846539708
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.36992047586276866,
+     "anchor_axial_kN": 78.3579017077838,
+     "slide_lateral_kN": 0.6936486713450256,
+     "shutdown_reversal_anchor_kN": -8.88778918515559
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.290651802463604,
+     "anchor_axial_kN": 61.56692277040157,
+     "slide_lateral_kN": 0.5450096703425201,
+     "shutdown_reversal_anchor_kN": -6.983262931193679
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.5467809479763112,
+     "anchor_axial_kN": 115.82113068299286,
+     "slide_lateral_kN": 0.8072083133785768,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.616734394424092,
+     "anchor_axial_kN": 130.63892434010685,
+     "slide_lateral_kN": 0.910480023431975,
+     "shutdown_reversal_anchor_kN": -14.817793657114004
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.8634281521937287,
+     "anchor_axial_kN": 182.89449407614958,
+     "slide_lateral_kN": 1.2746720328047647,
+     "shutdown_reversal_anchor_kN": -20.744911119959603
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.6784078338665012,
+     "anchor_axial_kN": 143.70281677411757,
+     "slide_lateral_kN": 1.0015280257751724,
+     "shutdown_reversal_anchor_kN": -16.299573022825406
+    }
+   ],
+   "support_travel": [
+    {
+     "section": 1,
+     "x0": -111.6,
+     "x1": -86.19999999999999,
+     "shortening_mm": -37.6583333333333
+    },
+    {
+     "section": 2,
+     "x0": -86.19999999999999,
+     "x1": -60.79999999999999,
+     "shortening_mm": -48.48750000000001
+    },
+    {
+     "section": 3,
+     "x0": -60.8,
+     "x1": -35.4,
+     "shortening_mm": -42.092499999999916
+    },
+    {
+     "section": 4,
+     "x0": -35.400000000000006,
+     "x1": -10.000000000000007,
+     "shortening_mm": -40.87583333333339
+    },
+    {
+     "section": 5,
+     "x0": -10.0,
+     "x1": 15.399999999999999,
+     "shortening_mm": -47.40499999999997
+    },
+    {
+     "section": 6,
+     "x0": 15.400000000000006,
+     "x1": 40.800000000000004,
+     "shortening_mm": -40.146666666666675
+    }
+   ],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 0.6749279343317739,
+     "member": "frame:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 0.6749279343317737,
+     "member": "frame:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 0.6749279343317743,
+     "member": "frame:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 0.6749279343317732,
+     "member": "frame:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 0.674927934331775,
+     "member": "frame:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 0.6749279343317748,
+     "member": "frame:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": -1.2442038682920182,
+     "member": "hubcone",
+     "at_x": 93.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": 0.8742756248896809,
+     "member": "frame:01",
+     "at_x": -111.6,
+     "ok": true
+    }
+   ]
+  },
+  "H3:hub:F1": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.22809747516625656,
+     "anchor_axial_kN": 48.31643746452607,
+     "slide_lateral_kN": 0.42055645711769707,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.24668454999537132,
+     "anchor_axial_kN": 52.25361931178154,
+     "slide_lateral_kN": 0.4548265179003358,
+     "shutdown_reversal_anchor_kN": -3.9371818472554705
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.3453583699935199,
+     "anchor_axial_kN": 73.15506703649416,
+     "slide_lateral_kN": 0.6367571250604701,
+     "shutdown_reversal_anchor_kN": -5.512054586157658
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.2713530049949085,
+     "anchor_axial_kN": 57.47898124295969,
+     "slide_lateral_kN": 0.5003091696903693,
+     "shutdown_reversal_anchor_kN": -4.330900031981018
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.5143530675948401,
+     "anchor_axial_kN": 108.95213902310506,
+     "slide_lateral_kN": 0.7597410812295536,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.5562663721985042,
+     "anchor_axial_kN": 117.83036776868195,
+     "slide_lateral_kN": 0.8216504220377913,
+     "shutdown_reversal_anchor_kN": -8.878228745576893
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.778772921077906,
+     "anchor_axial_kN": 164.96251487615476,
+     "slide_lateral_kN": 1.1503105908529077,
+     "shutdown_reversal_anchor_kN": -12.429520243807648
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.6118930094183547,
+     "anchor_axial_kN": 129.61340454555014,
+     "slide_lateral_kN": 0.9038154642415703,
+     "shutdown_reversal_anchor_kN": -9.766051620134583
+    }
+   ],
+   "support_travel": [
+    {
+     "section": 1,
+     "x0": -111.6,
+     "x1": -86.19999999999999,
+     "shortening_mm": -32.91833333333335
+    },
+    {
+     "section": 2,
+     "x0": -86.19999999999999,
+     "x1": -60.79999999999999,
+     "shortening_mm": -43.174999999999955
+    },
+    {
+     "section": 3,
+     "x0": -60.8,
+     "x1": -35.4,
+     "shortening_mm": -35.92833333333334
+    },
+    {
+     "section": 4,
+     "x0": -35.400000000000006,
+     "x1": -10.000000000000007,
+     "shortening_mm": -35.29000000000008
+    },
+    {
+     "section": 5,
+     "x0": -10.0,
+     "x1": 15.399999999999999,
+     "shortening_mm": -43.19833333333327
+    },
+    {
+     "section": 6,
+     "x0": 15.400000000000006,
+     "x1": 40.800000000000004,
+     "shortening_mm": -35.8475
+    }
+   ],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 0.6427279343317739,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 0.6427279343317737,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 0.6427279343317743,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 0.6427279343317732,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 0.642727934331775,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 0.6427279343317748,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": -1.1618038682920182,
+     "member": "hubcone",
+     "at_x": 93.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": 0.8742756248896809,
+     "member": "modframe:01",
+     "at_x": -111.6,
+     "ok": true
+    }
+   ]
+  },
+  "H:hub:F1:radius=7.0": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.2307267995175388,
+     "anchor_axial_kN": 48.873390519355304,
+     "slide_lateral_kN": 0.4284114434161627,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.26032101888072795,
+     "anchor_axial_kN": 55.14214578782452,
+     "slide_lateral_kN": 0.483361723403879,
+     "shutdown_reversal_anchor_kN": -6.2687552684692145
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.36444942643301914,
+     "anchor_axial_kN": 77.19900410295432,
+     "slide_lateral_kN": 0.6767064127654305,
+     "shutdown_reversal_anchor_kN": -8.7762573758569
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.2863531207688008,
+     "anchor_axial_kN": 60.65636036660698,
+     "slide_lateral_kN": 0.531697895744267,
+     "shutdown_reversal_anchor_kN": -6.895630795316137
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.5279191481818652,
+     "anchor_axial_kN": 111.82575559358207,
+     "slide_lateral_kN": 0.7795887119386608,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.5956328039426668,
+     "anchor_axial_kN": 126.16910863454201,
+     "slide_lateral_kN": 0.8795828149315602,
+     "shutdown_reversal_anchor_kN": -14.343353040959956
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.8338859255197335,
+     "anchor_axial_kN": 176.63675208835883,
+     "slide_lateral_kN": 1.231415940904184,
+     "shutdown_reversal_anchor_kN": -20.080694257343936
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.6551960843369335,
+     "anchor_axial_kN": 138.78601949799625,
+     "slide_lateral_kN": 0.9675410964247162,
+     "shutdown_reversal_anchor_kN": -15.777688345055953
+    }
+   ],
+   "support_travel": [],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 0.7826820450099218,
+     "member": "frame:09",
+     "at_x": 12.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 0.7826820450099216,
+     "member": "frame:09",
+     "at_x": 12.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 0.7826820450099216,
+     "member": "frame:09",
+     "at_x": 12.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 0.7826820450099218,
+     "member": "frame:09",
+     "at_x": 12.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 0.782682045009922,
+     "member": "frame:09",
+     "at_x": 12.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 0.7826820450099218,
+     "member": "frame:09",
+     "at_x": 12.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": -0.5591267731797387,
+     "member": "hubcone",
+     "at_x": 94.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": -0.10458165245366569,
+     "member": "frame:01",
+     "at_x": -107.6,
+     "ok": false
+    }
+   ]
+  },
+  "H:hub:F1:radius=9.0": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.23511653997847862,
+     "anchor_axial_kN": 49.80324132244686,
+     "slide_lateral_kN": 0.4419567916232636,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.2548066137504585,
+     "anchor_axial_kN": 53.974064420696166,
+     "slide_lateral_kN": 0.4789689126415728,
+     "shutdown_reversal_anchor_kN": -4.170823098249304
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.35672925925064186,
+     "anchor_axial_kN": 75.56369018897463,
+     "slide_lateral_kN": 0.6705564776982019,
+     "shutdown_reversal_anchor_kN": -5.8391523375490255
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.28028727512550433,
+     "anchor_axial_kN": 59.37147086276578,
+     "slide_lateral_kN": 0.5268658039057301,
+     "shutdown_reversal_anchor_kN": -4.587905408074235
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.55147794933473,
+     "anchor_axial_kN": 116.81606660781809,
+     "slide_lateral_kN": 0.8140909216822918,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.5976620310969699,
+     "anchor_axial_kN": 126.59894691675335,
+     "slide_lateral_kN": 0.8822677939112327,
+     "shutdown_reversal_anchor_kN": -9.782880308935272
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.8367268435357579,
+     "anchor_axial_kN": 177.2385256834547,
+     "slide_lateral_kN": 1.2351749114757256,
+     "shutdown_reversal_anchor_kN": -13.696032432509382
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.657428234206667,
+     "anchor_axial_kN": 139.2588416084287,
+     "slide_lateral_kN": 0.9704945733023559,
+     "shutdown_reversal_anchor_kN": -10.761168339828801
+    }
+   ],
+   "support_travel": [],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 2.742703847592355,
+     "member": "frame:10",
+     "at_x": 28.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 2.7427038475923555,
+     "member": "frame:10",
+     "at_x": 28.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 2.742703847592354,
+     "member": "frame:10",
+     "at_x": 28.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 2.742703847592355,
+     "member": "frame:10",
+     "at_x": 28.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 2.742703847592355,
+     "member": "frame:10",
+     "at_x": 28.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 2.7427038475923533,
+     "member": "frame:10",
+     "at_x": 28.400000000000006,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": -0.5308219161067012,
+     "member": "hubcone",
+     "at_x": 94.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": -0.05870000000000564,
+     "member": "tie:03",
+     "at_x": -87.6,
+     "ok": false
+    }
+   ]
+  },
+  "H:hub:F1:g_aft=0.3": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.23293756693771847,
+     "anchor_axial_kN": 49.341683321491175,
+     "slide_lateral_kN": 0.4351633793106538,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.24279838275033983,
+     "anchor_axial_kN": 51.43043722029019,
+     "slide_lateral_kN": 0.4535849073973087,
+     "shutdown_reversal_anchor_kN": -2.0887538987990153
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.33991773585047574,
+     "anchor_axial_kN": 72.00261210840627,
+     "slide_lateral_kN": 0.6350188703562322,
+     "shutdown_reversal_anchor_kN": -2.924255458318621
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.2670782210253739,
+     "anchor_axial_kN": 56.573480942319215,
+     "slide_lateral_kN": 0.49894339813703964,
+     "shutdown_reversal_anchor_kN": -2.297629288678917
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.5396377339663557,
+     "anchor_axial_kN": 114.30802909010511,
+     "slide_lateral_kN": 0.7967449154081201,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.562481916509077,
+     "anchor_axial_kN": 119.1469669891288,
+     "slide_lateral_kN": 0.830473072543816,
+     "shutdown_reversal_anchor_kN": -4.83893789902368
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.7874746831127077,
+     "anchor_axial_kN": 166.80575378478028,
+     "slide_lateral_kN": 1.1626623015613422,
+     "shutdown_reversal_anchor_kN": -6.7745130586331515
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.6187301081599849,
+     "anchor_axial_kN": 131.06166368804168,
+     "slide_lateral_kN": 0.9135203797981977,
+     "shutdown_reversal_anchor_kN": -5.3228316889260485
+    }
+   ],
+   "support_travel": [
+    {
+     "section": 1,
+     "x0": -111.6,
+     "x1": -86.19999999999999,
+     "shortening_mm": -29.25933333333336
+    },
+    {
+     "section": 2,
+     "x0": -86.19999999999999,
+     "x1": -60.79999999999999,
+     "shortening_mm": -35.877333333333354
+    },
+    {
+     "section": 3,
+     "x0": -60.8,
+     "x1": -35.4,
+     "shortening_mm": -30.853999999999928
+    },
+    {
+     "section": 4,
+     "x0": -35.400000000000006,
+     "x1": -10.000000000000007,
+     "shortening_mm": -30.310000000000002
+    },
+    {
+     "section": 5,
+     "x0": -10.0,
+     "x1": 15.399999999999999,
+     "shortening_mm": -34.23533333333339
+    },
+    {
+     "section": 6,
+     "x0": 15.400000000000006,
+     "x1": 40.800000000000004,
+     "shortening_mm": -29.74799999999999
+    }
+   ],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 0.5060938332699109,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 0.5060938332699106,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 0.506093833269911,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 0.5060938332699101,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 0.5060938332699108,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 0.5060938332699114,
+     "member": "frame:03",
+     "at_x": -75.6,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": -0.5004474847020322,
+     "member": "hubcone",
+     "at_x": 93.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": 0.8742756248896809,
+     "member": "modframe:01",
+     "at_x": -111.6,
+     "ok": true
+    }
+   ]
+  },
+  "HC:hub:F1:g_aft=0.3": {
+   "reactions": [
+    {
+     "left": 1.0,
+     "cls": "operating",
+     "a_axial_g": 0.23512424442114274,
+     "anchor_axial_kN": 49.80487330553614,
+     "slide_lateral_kN": 0.44198106388860603,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 1.0,
+     "cls": "limit",
+     "a_axial_g": 0.2634963292591222,
+     "anchor_axial_kN": 55.81475159030577,
+     "slide_lateral_kN": 0.49531424640366417,
+     "shutdown_reversal_anchor_kN": -6.009878284769619
+    },
+    {
+     "left": 1.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.3688948609627711,
+     "anchor_axial_kN": 78.14065222642806,
+     "slide_lateral_kN": 0.6934399449651298,
+     "shutdown_reversal_anchor_kN": -8.413829598677466
+    },
+    {
+     "left": 1.0,
+     "cls": "proof",
+     "a_axial_g": 0.28984596218503444,
+     "anchor_axial_kN": 61.39622674933634,
+     "slide_lateral_kN": 0.5448456710440306,
+     "shutdown_reversal_anchor_kN": -6.610866113246582
+    },
+    {
+     "left": 0.0,
+     "cls": "operating",
+     "a_axial_g": 0.5515203380561354,
+     "anchor_axial_kN": 116.82504554108112,
+     "slide_lateral_kN": 0.8141530436830128,
+     "shutdown_reversal_anchor_kN": 0.0
+    },
+    {
+     "left": 0.0,
+     "cls": "limit",
+     "a_axial_g": 0.6180714581234147,
+     "anchor_axial_kN": 130.92214603980926,
+     "slide_lateral_kN": 0.9123956527484542,
+     "shutdown_reversal_anchor_kN": -14.097100498728139
+    },
+    {
+     "left": 0.0,
+     "cls": "ultimate",
+     "a_axial_g": 0.8653000413727806,
+     "anchor_axial_kN": 183.29100445573297,
+     "slide_lateral_kN": 1.2773539138478358,
+     "shutdown_reversal_anchor_kN": -19.735940698219395
+    },
+    {
+     "left": 0.0,
+     "cls": "proof",
+     "a_axial_g": 0.6798786039357562,
+     "anchor_axial_kN": 144.01436064379018,
+     "slide_lateral_kN": 1.0036352180232997,
+     "shutdown_reversal_anchor_kN": -15.506810548600955
+    }
+   ],
+   "support_travel": [
+    {
+     "section": 1,
+     "x0": -111.6,
+     "x1": -86.19999999999999,
+     "shortening_mm": -22.645333333333326
+    },
+    {
+     "section": 2,
+     "x0": -86.19999999999999,
+     "x1": -60.79999999999999,
+     "shortening_mm": -26.310000000000088
+    },
+    {
+     "section": 3,
+     "x0": -60.8,
+     "x1": -35.4,
+     "shortening_mm": -23.331333333333276
+    },
+    {
+     "section": 4,
+     "x0": -35.400000000000006,
+     "x1": -10.000000000000007,
+     "shortening_mm": -21.968666666666678
+    },
+    {
+     "section": 5,
+     "x0": -10.0,
+     "x1": 15.399999999999999,
+     "shortening_mm": -26.439333333333366
+    },
+    {
+     "section": 6,
+     "x0": 15.400000000000006,
+     "x1": 40.800000000000004,
+     "shortening_mm": -22.331333333333305
+    }
+   ],
+   "lanes": [
+    {
+     "lane": "NaK pipe az 10",
+     "min_clear_m": 0.5060938332699109,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 50",
+     "min_clear_m": 0.5060938332699106,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 130",
+     "min_clear_m": 0.506093833269911,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 170",
+     "min_clear_m": 0.5060938332699101,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 250",
+     "min_clear_m": 0.5060938332699108,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "NaK pipe az 290",
+     "min_clear_m": 0.5060938332699114,
+     "member": "modframe:03",
+     "at_x": -79.6,
+     "ok": true
+    },
+    {
+     "lane": "MRU carriage lane (az 270, r 3.6, envelope 1.2 m PROTOTYPE)",
+     "min_clear_m": -0.5004474847020322,
+     "member": "hubcone",
+     "at_x": 93.0,
+     "ok": false
+    },
+    {
+     "lane": "ECLSS duct (X 99.2, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 98.9,
+     "ok": true
+    },
+    {
+     "lane": "ECLSS duct (X 101.4, r 1.4)",
+     "min_clear_m": 0.30999999999999994,
+     "member": "hub",
+     "at_x": 101.1,
+     "ok": true
+    },
+    {
+     "lane": "hot-loop trunk axis (r 6.52, az 90)",
+     "min_clear_m": 0.850975624889681,
+     "member": "modframe:02",
+     "at_x": -103.6,
+     "ok": true
+    }
+   ]
+  }
+ }
+}

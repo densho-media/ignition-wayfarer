@@ -1,0 +1,143 @@
+# PSA Phase II material allowables and uncertainty register (STUDY / NONCANON). Finished-member DESIGN values, not coupon values.
+#
+# Rule (owner D01): one safety factor, applied once. Loads are ultimate = 1.4 x limit (yield check 1.25 x limit). Allowables below are
+# design values for the finished member (statistical basis, process, environment); they carry NO further load factor. Buckling uses
+# a knockdown on the theoretical critical load (imperfection), not a factor on the load.
+#
+# Values: [low, nominal, high]; sizing uses nominal and the report shows the effect of low. Units: GPa (E, G), kg/m3, ppm/K, MPa.
+# class: LIT (handbook/literature, order of magnitude known), PATENT (coupon data from a patent), PHYS (physics-based estimate),
+#        PROTO (judgement). source: where the number comes from. Nothing here is PMDS-verified; PMDS (data/materials) is unchanged.
+
+[meta]
+load_factor_ultimate = 1.4
+load_factor_yield = 1.25
+column_knockdown = 0.75        # imperfect column vs Euler (initial bow L/500 + joint eccentricity), PROTO
+shell_knockdown = 0.33          # unstiffened thin cylinder, NASA SP-8007 lower bound order, LIT
+classic_shell_coeff = 0.605     # sigma_cr = 0.605 E t / r (isotropic)
+coupon_to_member_note = "Member design value = coupon basis value x process factor x environment factor. Joints are designed separately (fittings, splices) and are not knocked down into the member body."
+
+[[material]]
+id = "AL6061"
+name = "Al 6061-T6 extrusion (lunar Al-Mg-Si)"
+track = "R"
+E = [67.0, 68.9, 70.0]
+G = 26.0
+rho = 2700
+alpha = 23.6
+Fty = [230, 241, 260]
+Ftu = [255, 262, 290]
+Fcy = [230, 241, 260]
+T_max_K = 420
+k_T_350K = 0.95
+min_gauge_mm = 2.0
+class = "LIT"
+source = "MMPDS-class A/B-basis order for 6061-T6 extrusions; lunar alloy chemistry (no Cu > 0.4 %) assumed equivalent (PROTO)"
+uncertainty = "Lunar-refined alloy purity, Fe/Si impurity control and heat-treat in vacuum: no data. Fatigue 97 MPa at 1e7 (LIT)."
+
+[[material]]
+id = "AL5083"
+name = "Al 5083-H116 plate/extrusion (lunar Al-Mg)"
+track = "R"
+E = [69.0, 70.3, 71.0]
+G = 26.4
+rho = 2660
+alpha = 23.8
+Fty = [200, 215, 230]
+Ftu = [290, 305, 320]
+Fcy = [200, 215, 230]
+T_max_K = 340
+k_T_350K = 0.92
+min_gauge_mm = 2.0
+class = "LIT"
+source = "MMPDS-class; strain-hardened, FSW joints keep ~O-temper (125-145 MPa) locally"
+uncertainty = "Sensitization above 340 K limits hot zones."
+
+[[material]]
+id = "TI64"
+name = "Ti-6Al-4V (wrought or DED + HIP), nodes and high-load members"
+track = "R"
+E = [110, 114, 117]
+G = 44.0
+rho = 4430
+alpha = 8.6
+Fty = [760, 827, 880]
+Ftu = [830, 896, 950]
+Fcy = [790, 860, 900]
+T_max_K = 620
+k_T_350K = 0.96
+min_gauge_mm = 1.5
+class = "LIT"
+source = "MMPDS-class annealed Ti-6Al-4V; DED + HIP static properties comparable, fatigue knocked down (process factor 0.92 on Fty for DED)"
+uncertainty = "V is imported (4 wt%). DED porosity governs fatigue; qualification (ISM-33)."
+
+[[material]]
+id = "ALAL2O3F"
+name = "Alumina-fibre / Al MMC tube (Nextel 610-class, Vf 0.55-0.60, ~80 % axial plies + hoop/±45 wraps)"
+track = "R"
+E = [170, 190, 210]
+G = 45.0
+rho = 3350
+alpha = 6.8
+Fty = [700, 900, 1100]
+Ftu = [700, 900, 1100]
+Fcy = [300, 450, 700]
+T_max_K = 520
+k_T_350K = 0.97
+min_gauge_mm = 2.5
+class = "PATENT + PHYS"
+source = "Tension: 60 vol% Nextel 610/Al coupons 1,380-1,400 MPa longitudinal, 140 MPa transverse (3M patents EP0833952B1, US 6,447,927); fibre 3.1-3.3 GPa (Deve and McCullough, Compos. A 2000). Member design = 0.8 lay-up x 0.8 basis x coupon. Compression: no published longitudinal compression data found (search 2026-11-28); estimate from kink-band (Budiansky-Fleck) sigma_c ~ tau_y/(phi + gamma_y) with matrix shear yield 20-50 MPa and fibre misalignment 2-3 deg: 0.5-1.2 GPa unidirectional; design 450 [300, 700] for the tube."
+uncertainty = "HIGH: compression, microbuckling and fibre-matrix interface at 300-500 K unmeasured; conductor-core wire data (ACCR) are tension-only and do not qualify compression tubes. Joining (end fittings by diffusion bonding or bonded Ti sleeves) unproven at scale. Bridging advance: lunar alumina fibre drawing + pressure infiltration of metre-scale tubes, with compression qualification."
+
+[[material]]
+id = "CFPEEK"
+name = "Carbon fibre / PEEK thermoplastic tube (AS4/APC-2 class, ~60 % 0 deg, ±45, 90)"
+track = "R"
+E = [85, 95, 105]
+G = 15.0
+rho = 1600
+alpha = 0.5
+Fty = [500, 600, 700]
+Ftu = [500, 600, 700]
+Fcy = [280, 380, 500]
+T_max_K = 420
+k_T_350K = 0.95
+min_gauge_mm = 1.5
+class = "LIT (unverified) + PROTO"
+source = "Unidirectional AS4/PEEK compression ~1.1-1.4 GPa (manufacturer data, not verified here); laminate 60 % 0 deg ~0.7 GPa; design value with notch/impact and B-basis knockdown 0.55: 380 MPa. CMH-17 / NIAR qualification reports are the proper source (not yet read)."
+uncertainty = "MEDIUM: open-hole and after-impact compression govern; vacuum thermal cycling and radiation (PEEK tolerant) limited data; in-orbit thermoplastic welding of joints is a bridging advance. Carbon is imported."
+
+[[material]]
+id = "SICSIC"
+name = "SiC/SiC (radiator backbone option, hot)"
+track = "R"
+E = [200, 230, 260]
+G = 80.0
+rho = 2700
+alpha = 4.5
+Fty = [200, 250, 300]
+Ftu = [200, 250, 300]
+Fcy = [400, 550, 700]
+T_max_K = 1700
+k_T_350K = 1.0
+min_gauge_mm = 2.0
+class = "LIT"
+source = "CVI/MI SiC/SiC turbine-grade proportional limit ~150-250 MPa"
+uncertainty = "Long-life at 1600-1800 K in vacuum; joining."
+
+[[material]]
+id = "CC"
+name = "Carbon/carbon (radiator backbone option, hot)"
+track = "R"
+E = [60, 80, 100]
+G = 10.0
+rho = 1750
+alpha = 1.0
+Fty = [150, 200, 250]
+Ftu = [150, 200, 250]
+Fcy = [100, 150, 200]
+T_max_K = 2000
+k_T_350K = 1.0
+min_gauge_mm = 2.0
+class = "LIT"
+source = "2D C/C order of magnitude"
+uncertainty = "Sublimation/creep negligible at 1800 K in vacuum; oxidation absent; interlaminar strength low."

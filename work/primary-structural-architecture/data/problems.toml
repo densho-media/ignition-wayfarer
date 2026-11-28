@@ -1,0 +1,164 @@
+# PSA Phase I problem register (STUDY / NONCANON). severity: CRITICAL (blocks closure), MAJOR (moves mass or layout), MINOR.
+# kind: PHYSICS, CANON, BUDGET, INTERFACE, MANUFACTURING, DATA. Each item names what would close it.
+
+[[problem]]
+id = "PSA-P01"
+title = "Canon 1.5 g design envelope is ~3x what the drive can push"
+kind = "CANON"
+severity = "CRITICAL"
+finding = "07!A2 design thrust 29.42 MN = 1.5 g x 2,000 t; applied as 1.5 g on the full 4,466 t ship it gives 63.5 MN at the transition. The power-limited drive gives 21.77 MN; peak section load is 21.4 MN (27.8 MN with DLF 1.3)."
+consequence = "Structure 2.4-2.7x heavier under the canon envelope (A 649 t vs 239 t)."
+closure = "Owner decision PSA-D01: thrust-bounded design load with explicit DLF, abort and proof factors."
+
+[[problem]]
+id = "PSA-P02"
+title = "150 t main-structure line does not close with lunar aluminium"
+kind = "BUDGET"
+severity = "CRITICAL"
+finding = "Concept A (all Al 6061) 239 t; only C (138 t), G (117 t) and HC (157 t) approach 150 t, and the line must also hold the 25 t rotating allowance."
+consequence = "Either imported fibre, a layout change, or a larger line (~3.6 t departure per t)."
+closure = "Phase II FE sizing of HC and G; owner decision PSA-D02 on the line."
+
+[[problem]]
+id = "PSA-P03"
+title = "Tank shells and deck double-counted between the 150 t line and the 458 t tankage"
+kind = "BUDGET"
+severity = "CRITICAL"
+finding = "Owner note 2026-10-18 places tank shells, insulation, mounts and pipe supports inside the 150 t; mass_model books 458 t tankage outside it."
+closure = "Owner decision PSA-D04 (mass_ownership PSA-09)."
+
+[[problem]]
+id = "PSA-P04"
+title = "Nozzle pickups at 78.7 deg amplify thrust 5x"
+kind = "PHYSICS"
+severity = "MAJOR"
+finding = "37.7 MN per strut for 7.35 MN axial (m5 audit)."
+closure = "Re-angle pickups to <= 17 deg from the axis (1.9 MN per strut); Phase II thrust-frame FE."
+
+[[problem]]
+id = "PSA-P05"
+title = "Global stability and modes of a 245-290 m slender column under follower thrust"
+kind = "PHYSICS"
+severity = "MAJOR"
+finding = "f1 ~0.06-0.12 Hz; static Euler bound needs 386 t Al at r 5 m, the follower bound far less; TVC-structure coupling untested."
+closure = "Phase II modal FE (fe_frame.py) + Phase III GNC coupling study; radius trade (EI ~ r^2)."
+
+[[problem]]
+id = "PSA-P06"
+title = "Radiator blade backbone runs at 1650-1800 K"
+kind = "PHYSICS"
+severity = "MAJOR"
+finding = "No aluminium or titanium structure survives inside the blade; frames near the blade reach 851 K bare (552 K low-alpha coating) at view factor 0.05."
+closure = "C/C or refractory backbone owned by thermal; PSA root-lug boundary; coatings on the root band."
+
+[[problem]]
+id = "PSA-P07"
+title = "Aluminium structure grows ~1 m over the ship for 150 K"
+kind = "PHYSICS"
+severity = "MAJOR"
+finding = "Al 0.99 m, Ti 0.36 m, CFRP ~0; Al vs CFRP mismatch 9.6 mm per 4 m bay per 100 K."
+closure = "Kinematic mounting rule for every long system; thermal-gradient FE in Phase II."
+
+[[problem]]
+id = "PSA-P08"
+title = "3 single vs 6 paired rails (07!A33 OPEN)"
+kind = "CANON"
+severity = "MAJOR"
+finding = "Paired keels cost 0-40 % more rail mass (bay buckling) but survive one cut (LC-10)."
+closure = "Phase II progressive-collapse FE; owner decision PSA-D03."
+
+[[problem]]
+id = "PSA-P09"
+title = "Ferromagnetic structure in the drive field"
+kind = "PHYSICS"
+severity = "MAJOR"
+finding = "Force density 1.35 MN/m3 at 1 T/m; lunar steel is the cheapest metal but may be excluded aft."
+closure = "Stray-field map (HO-05); exclusion zone rule."
+
+[[problem]]
+id = "PSA-P10"
+title = "Pulse fatigue at kHz repetition"
+kind = "PHYSICS"
+severity = "MAJOR"
+finding = "1e10-1e11 cycles per year if the drive pulses at kHz; repetition rate OPEN."
+closure = "Drive pulse spectrum; fatigue-endurance allowables per material; isolation at the thrust frame."
+
+[[problem]]
+id = "PSA-P11"
+title = "ISSA hot loop H6a adds 565 t (F1) / 1,833 t (R) of supported mass at 1990 K"
+kind = "INTERFACE"
+severity = "MAJOR"
+finding = "Support pitch ~23 m in ISSA layout; frame pitch 4 m; growth 1.2-1.8 m per 170 m."
+closure = "HO-01 handoff; stand-off design; mass ownership PSA-11."
+
+[[problem]]
+id = "PSA-P12"
+title = "Forward tank farm keeps propellant ahead of the structure"
+kind = "PHYSICS"
+severity = "MAJOR"
+finding = "Moving tankage aft (concept G) cuts structure ~20-50 % but changes the shadow-shield geometry, CG travel and the Brow interface."
+closure = "Phase II layout variant G with ISSA (HO-03) and forward-defense review."
+
+[[problem]]
+id = "PSA-P13"
+title = "CFRP needs imported carbon"
+kind = "MANUFACTURING"
+severity = "MAJOR"
+finding = "MX-C needs ~54 % imports; lunar carbon is trace (solar-wind volatiles, carbonaceous asteroids)."
+closure = "Import mass budget and carbon source (asteroid C, Earth); basalt/alumina-fibre alternatives tested."
+
+[[problem]]
+id = "PSA-P14"
+title = "DED/additive throughput and qualification for primary members"
+kind = "MANUFACTURING"
+severity = "MAJOR"
+finding = "ISM-33 requires qualification of printed primary structure; DED rates 1-10 kg/h make 150 t a multi-year machine job."
+closure = "Process plan with rolled/extruded longerons and printed nodes only; qualification coupons."
+
+[[problem]]
+id = "PSA-P15"
+title = "Material properties are handbook values, not PMDS-verified"
+kind = "DATA"
+severity = "MAJOR"
+finding = "materials.toml ranges are UNVERIFIED; lunar-alloy properties lack test data."
+closure = "PMDS entries with sources for the selected 6-8 materials."
+
+[[problem]]
+id = "PSA-P16"
+title = "Cold welding and galling at vacuum joints"
+kind = "PHYSICS"
+severity = "MINOR"
+finding = "Clean metal pins and slides in vacuum can seize."
+closure = "Dissimilar or coated sliding pairs (joints.toml CN rules)."
+
+[[problem]]
+id = "PSA-P17"
+title = "Momentum Spine booked under the 50 t power line"
+kind = "BUDGET"
+severity = "MINOR"
+finding = "07 counts it as a load path; 10_WAYFARER_MASS books it under power/computers."
+closure = "Owner decision PSA-D05."
+
+[[problem]]
+id = "PSA-P18"
+title = "Startup/shutdown thrust ramp is not specified"
+kind = "DATA"
+severity = "MINOR"
+finding = "DLF 1.0 (ramp > 50 s) to 2.0 (step)."
+closure = "Drive operating rule for the ramp."
+
+[[problem]]
+id = "PSA-P19"
+title = "Separated engines need outriggers"
+kind = "PHYSICS"
+severity = "MINOR"
+finding = "48 MN m at r 12 m, 180 MN m at r 30 m per engine; engine-out up to 221 MN m before trim."
+closure = "Only if an alternative propulsion cluster is adopted (concept F)."
+
+[[problem]]
+id = "PSA-P20"
+title = "Configuration masses must never mix"
+kind = "DATA"
+severity = "MINOR"
+finding = "P, F1 and R differ by 2-3x in departure mass; tankage, hot loop and power districts differ."
+closure = "Keep config-tagged data; refresh on every ISSA revision."

@@ -1,0 +1,31 @@
+# PSA proposed roadmap Phases II-V (STUDY / NONCANON). Each phase starts only on an owner go.
+
+[[phase]]
+id = "II"
+name = "Load-path sizing and modal model"
+needs = ["PSA-D01 design-load rule", "PSA-D03 rail topology (or both carried)", "ISSA HO-01, HO-04 data"]
+tasks = ["3D frame FE of A, H, HC and G with fe_frame.py", "global modes and follower-thrust stability", "progressive collapse (one rail cut)", "thrust frame re-angled pickups", "thermal-gradient loads", "mass of each concept to +-20 %"]
+experiments = ["FE mesh convergence on one 8 m vertebra", "follower vs fixed thrust stability benchmark"]
+gate = "One or two concepts closing a stated structure line under the chosen design rule; owner review."
+
+[[phase]]
+id = "III"
+name = "Interfaces, joints and dynamics with ISSA"
+needs = ["Phase II concept", "ISSA 3D checkpoint 2"]
+tasks = ["adopt PSA-IF 1.0 jointly with ISSA", "hot-loop stand-off and slide design", "node and splice design per joint class", "GNC-structure coupling", "pulse isolation", "ring hub and collar"]
+experiments = ["stand-off thermal leak model", "joint knockdown coupons (spec)"]
+gate = "Interface register frozen for the chosen concept; no OPEN mass or load on primary items."
+
+[[phase]]
+id = "IV"
+name = "Manufacturing, Luna Yard build plan and materials qualification"
+needs = ["Phase III"]
+tasks = ["process route per member family", "PMDS entries for the selected materials", "Yard assembly sequence (cassettes, vertebrae)", "import mass and energy", "inspection and repair plan"]
+gate = "Credible build plan with throughput, energy and imports; owner review."
+
+[[phase]]
+id = "V"
+name = "Integration into the model"
+needs = ["owner approval of the concept and budget"]
+tasks = ["parameters and source map", "generator changes for the structure", "full pipeline and baseline accept", "Drive rows only with owner authorization"]
+gate = "Owner squash."

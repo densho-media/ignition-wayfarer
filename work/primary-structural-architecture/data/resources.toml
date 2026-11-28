@@ -1,0 +1,231 @@
+# PSA Phase I: extraterrestrial resource inventory and process chains (STUDY / NONCANON).
+# Values are literature ranges recalled by Claude from standard lunar-science and process references (Lunar Sourcebook, Heiken, Vaniman &
+# French 1991; Apollo/Lunar Prospector/LRO/LCROSS results; MRE/FFC/hydrogen-reduction process literature). Every number is a RANGE with
+# basis ESTIMATE and verification UNVERIFIED until checked against the cited primary source (the cloud session could not open the
+# primary documents). Elemental abundance is NOT economic extractability: `accessibility` and `extraction` carry that judgment.
+# Tracks: R = known physics and processes, extrapolated; Y155 capacity statements come from IGNITION canon where cited (Technology 43
+# ISM-29..37), otherwise OPEN.
+
+[meta]
+status = "STUDY / NONCANON"
+verification = "UNVERIFIED (handbook/literature recall; primary check pending)"
+units = { abundance = "wt% of bulk regolith or ore unless stated", energy = "kWh per kg of product, electrical-equivalent, at the process boundary" }
+canon_refs = ["Technology 43_SPACE_MANUFACTURING ISM-29 (Luna Lift), ISM-30 (Luna Harbor -> Luna Yard cargo chain), ISM-32 (Luna Yard)", "Technology 41 (recycling, no post-scarcity)", "Culture 31_ARCHITECTURE (Luna Lift / Harbor / Yard rows)"]
+priority_rule = "Established lunar network first; asteroid supply is an OPTIONAL scenario until its availability and capacity are established in canon."
+
+[[deposit]]
+id = "RES-LH"
+name = "Lunar highland regolith (anorthositic, plagioclase-rich)"
+source = "lunar surface, highlands (~83 % of the surface)"
+composition = { Al2O3 = [24.0, 30.0], CaO = [14.0, 17.0], SiO2 = [44.0, 46.0], FeO = [3.0, 7.0], MgO = [4.0, 9.0], TiO2 = [0.3, 1.0] }
+elements_of_interest = { Al = [13.0, 15.5], Si = [20.5, 21.5], O = [44.0, 45.0], Ca = [10.0, 12.0], Mg = [2.5, 5.5] }
+accessibility = "Very high: unconsolidated regolith, 4-15 m deep, no blasting; beneficiation by size and magnetic/electrostatic separation of plagioclase."
+products = ["Al (and Al alloys with local Mg/Si)", "alumina (Al2O3 fibre, ceramic isolators)", "silicon", "oxygen (by-product)", "Ca (reductant)", "glass/glass fibre"]
+limits = "Al is locked in plagioclase, which resists carbothermal and hydrogen reduction; extraction needs molten-salt or molten-oxide electrolysis or acid/ alkaline leaching with reagent recycling."
+status = "R: abundance ESTABLISHED (Apollo highland samples); extraction route RESEARCH (lab-scale molten-salt/FFC on simulants)"
+
+[[deposit]]
+id = "RES-MB"
+name = "Lunar mare basalt regolith"
+source = "lunar surface, maria (~17 % of the surface)"
+composition = { SiO2 = [38.0, 46.0], FeO = [14.0, 22.0], TiO2 = [1.0, 13.0], Al2O3 = [8.0, 14.0], MgO = [7.0, 12.0], CaO = [9.0, 12.0], Cr2O3 = [0.2, 0.6], MnO = [0.2, 0.3] }
+elements_of_interest = { Fe = [11.0, 17.0], Ti = [0.6, 7.8], Mg = [4.0, 7.0], Cr = [0.14, 0.41], Mn = [0.15, 0.23] }
+accessibility = "High (regolith); basalt also suits direct melting into cast basalt and drawn basalt fibre with no chemistry."
+products = ["iron and low-carbon steel", "Fe-Cr(-Ni) stainless with meteoritic Ni", "titanium (with ilmenite)", "cast basalt", "basalt fibre", "oxygen"]
+limits = "Cr and Mn are present only at tenths of a percent: stainless grades need concentration of a minor phase (chromite, spinel) or imports."
+status = "R: ESTABLISHED abundance; extraction RESEARCH/DEMONSTRATED at lab scale (MRE iron and silicon from simulants)"
+
+[[deposit]]
+id = "RES-IL"
+name = "Ilmenite-rich high-Ti mare regolith"
+source = "high-Ti maria (e.g. Mare Tranquillitatis)"
+composition = { ilmenite_FeTiO3_vol_pct = [5.0, 20.0] }
+elements_of_interest = { Ti = [3.0, 7.8], Fe = [13.0, 17.0] }
+accessibility = "High: ilmenite separates magnetically (weakly paramagnetic) and electrostatically to 60-90 % concentrates."
+products = ["oxygen by hydrogen reduction (FeTiO3 + H2 -> Fe + TiO2 + H2O, water electrolysed)", "metallic Fe", "TiO2 -> Ti metal (FFC-Cambridge, Armstrong or Kroll-type)"]
+limits = "Hydrogen reduction yields only ~1-5 % O2 per mass of raw regolith; Ti metal needs a second, energy-heavy reduction step."
+status = "R: hydrogen reduction DEMONSTRATED (lab/field reactors on simulant); Ti route RESEARCH"
+
+[[deposit]]
+id = "RES-KREEP"
+name = "KREEP-bearing regolith (Procellarum)"
+source = "Oceanus Procellarum / Imbrium region"
+elements_of_interest = { REE_total_ppm = [200.0, 1500.0], Th_ppm = [5.0, 20.0], Zr_ppm = [500.0, 2000.0], Sc_ppm = [30.0, 80.0] }
+accessibility = "Moderate; minor phases, needs large processing throughput per kg of product."
+products = ["rare-earth elements (Mg-RE alloys, magnets)", "zirconium (YSZ isolators)", "scandium (Al-Sc alloys)"]
+limits = "Trace concentrations: viable only as by-products of bulk processing, never as dedicated mining for structure."
+status = "R: abundance ESTABLISHED (orbital gamma-ray and samples); extraction SPECULATIVE at scale"
+
+[[deposit]]
+id = "RES-FENI"
+name = "Meteoritic Fe-Ni metal in regolith"
+source = "all lunar regolith (impactor debris)"
+elements_of_interest = { metal_wt_pct = [0.1, 0.5], Ni_in_metal = [5.0, 30.0], Co_in_metal = [0.3, 1.0] }
+accessibility = "Moderate: magnetic separation of a 0.1-0.5 % fraction means ~200-1000 t of regolith per tonne of metal."
+products = ["nickel and cobalt for steels and maraging grades", "PGM traces"]
+limits = "Low concentration; Ni supply for large-tonnage stainless or superalloy is not credible from this source alone."
+status = "R: ESTABLISHED abundance; extraction by magnetic rake RESEARCH"
+
+[[deposit]]
+id = "RES-PVOL"
+name = "Polar volatiles (permanently shadowed regions)"
+source = "lunar polar cold traps"
+elements_of_interest = { H2O_wt_pct = [0.5, 6.0], C_species = "CO, CO2, CH4 traces (LCROSS)", N_species = "NH3 traces" }
+accessibility = "Low-moderate: 40-100 K, dark, rugged; extraction by thermal mining."
+products = ["water (propellant, shielding, H2 for reduction)", "carbon and nitrogen in small quantities"]
+limits = "Carbon is a few tenths of a percent at best in cold-trap material; tonnage carbon fibre is not supported."
+status = "R: water ESTABLISHED (LCROSS ~5.6 wt% at Cabeus, M3); volatile carbon quantity OPEN"
+
+[[deposit]]
+id = "RES-SW"
+name = "Solar-wind implanted volatiles in mature regolith"
+source = "all mature regolith"
+elements_of_interest = { H_ppm = [30.0, 100.0], C_ppm = [50.0, 200.0], N_ppm = [50.0, 150.0], He3_ppb = [1.0, 15.0] }
+accessibility = "By-product of heating regolith already processed for metals or He-3."
+products = ["carbon (steel alloying, small polymer quantities)", "nitrogen", "hydrogen", "He-3 (fuel, owned by the propellant chain)"]
+limits = "~100 ppm C: 10,000 t of regolith per tonne of carbon. Adequate for alloying carbon in steels (0.05-0.3 %), not for CFRP tonnage."
+status = "R: ESTABLISHED abundance"
+
+[[deposit]]
+id = "RES-AM"
+name = "Metallic (M-type) asteroid"
+source = "near-Earth or main-belt M-type (e.g. 16 Psyche class)"
+elements_of_interest = { Fe = [85.0, 92.0], Ni = [5.0, 12.0], Co = [0.3, 0.8], PGM_ppm = [10.0, 100.0] }
+accessibility = "OPTIONAL scenario: native metal needs no reduction, but transport, cutting of tough alloy and capture logistics are OPEN in IGNITION."
+products = ["Fe-Ni steels and maraging stock", "Ni, Co"]
+limits = "No canon capacity in Y155; treat as an upside sensitivity, never as baseline supply."
+status = "R: composition from iron meteorites ESTABLISHED; IGNITION availability OPEN"
+
+[[deposit]]
+id = "RES-AC"
+name = "Carbonaceous (C-type) asteroid"
+source = "near-Earth C-type (CI/CM chondrite-like)"
+elements_of_interest = { C = [2.0, 5.0], H2O = [5.0, 20.0], organics = "insoluble organic matter, ~70 % of C" }
+accessibility = "OPTIONAL scenario; the only credible large off-Earth carbon source for carbon fibre and polymer matrices."
+products = ["carbon (fibre precursors via pitch/CVD routes)", "water", "polymer feedstock"]
+limits = "Carbon fibre from asteroid organics needs a full chemical industry (precursor synthesis, spinning, carbonisation); no canon capacity in Y155."
+status = "R: composition ESTABLISHED (meteorites, Ryugu/Bennu returns); IGNITION availability OPEN"
+
+[[deposit]]
+id = "RES-REC"
+name = "Orbital recycling (retired stations, stages, scrap, yard offcuts)"
+source = "cislunar inventory; Luna Yard machining chips and failed parts"
+accessibility = "High for segregated alloys; scrap from known alloys re-melts in vacuum with ~5-10 % loss per cycle."
+products = ["Al alloys (re-melt + re-alloy)", "Ti (re-melt in vacuum, EB/plasma hearth)", "steels"]
+limits = "Mixed or coated scrap needs sorting; composites are hard to recycle (thermoplastics re-melt, thermosets only to chopped fibre)."
+status = "R: terrestrial practice ESTABLISHED; Technology 41 recycling 'Established' (waste becomes feedstock but not perfectly)"
+
+[[deposit]]
+id = "RES-EARTH"
+name = "Terrestrial specialty imports"
+source = "Earth, via launch and cislunar freight"
+products = ["carbon fibre and PEEK/epoxy", "SiC fibre", "Nb, Mo, Re, V, Co, Cu, Zn", "precision bearings, sensors, electronics"]
+accessibility = "Always available in some quantity, at the highest delivered cost per kg; Technology 43 ISM-16/21/36: specialty modules are imported."
+limits = "Delivered cost and launch-energy: every imported kg must earn its place."
+status = "R/canon: ESTABLISHED pattern (ISM-21, ISM-30, ISM-36)"
+
+# Process chains: deposit -> beneficiation -> extraction -> refining/alloying -> semi-finished form. Energy ranges are electrical-equivalent
+# at the process boundary, ESTIMATE. Terrestrial references (cradle-to-gate, mostly fossil) are given only to anchor scale.
+[[chain]]
+id = "CH-AL"
+product = "Aluminium (5xxx/6xxx alloy stock: Al-Mg, Al-Mg-Si)"
+deposit = "RES-LH"
+steps = ["size/electrostatic beneficiation to plagioclase concentrate", "molten-salt or molten-oxide electrolysis of anorthite (or acid leach -> Al2O3 -> fluoride-free electrolysis)", "vacuum refining", "alloying with lunar Mg and Si", "continuous casting -> extrusion/rolling"]
+energy_kWh_kg = [30.0, 70.0]
+terrestrial_reference_kWh_kg = [13.0, 17.0]
+terrestrial_note = "Hall-Heroult smelting alone, plus Bayer refining; IGNITION lunar route has no bauxite and harder ore."
+imported_consumables = "electrode wear (inert anodes assumed; carbon anodes would need C imports ~0.4 kg/kg Al), salt make-up"
+yield_note = "~3.5-4.5 t of highland regolith per t of Al before losses; oxygen ~1.5-2 t per t Al as by-product (value to the propellant chain)."
+alloy_self_sufficiency = "5xxx and 6xxx fully lunar (Mg, Si local); 2xxx/7xxx/Al-Li need Cu, Zn, Li imports (lunar Cu, Zn ~ 10 ppm)."
+maturity_R = "TRL 3-4 (lab molten-salt electrolysis of anorthite simulant)"
+maturity_Y155 = "Assumed ESTABLISHED by canon pattern (ISM-30 'local lunar metals'), throughput OPEN"
+
+[[chain]]
+id = "CH-FE"
+product = "Iron and low-alloy steel"
+deposit = "RES-MB"
+steps = ["magnetic beneficiation", "molten regolith electrolysis (MRE) or hydrogen reduction of ilmenite", "vacuum decarburisation/refining", "alloying (solar-wind C, local Mn/Si, meteoritic Ni)", "continuous casting -> rolling/forming"]
+energy_kWh_kg = [10.0, 25.0]
+terrestrial_reference_kWh_kg = [5.0, 7.0]
+imported_consumables = "MRE anode (iridium/Cr-alloy inert anode) wear; H2 recycled"
+alloy_self_sufficiency = "Ferritic structural steels local; austenitic stainless partial (Cr from mare spinel/chromite, Ni meteoritic); maraging needs Co/Mo imports or M-type asteroid."
+maturity_R = "TRL 4 (MRE iron and O2 from simulant at lab scale)"
+maturity_Y155 = "ESTABLISHED by canon pattern; throughput OPEN"
+
+[[chain]]
+id = "CH-TI"
+product = "Titanium (CP and Ti-Al alloys)"
+deposit = "RES-IL"
+steps = ["ilmenite concentration", "H2 reduction -> Fe + TiO2 (rutile-rich slag)", "FFC-Cambridge electro-deoxidation of TiO2 pellets or Armstrong process", "vacuum arc / EB re-melting", "wire (for DED), billet, plate"]
+energy_kWh_kg = [40.0, 120.0]
+terrestrial_reference_kWh_kg = [100.0, 150.0]
+terrestrial_note = "Kroll process incl. chlorination and VAR re-melting."
+imported_consumables = "CaCl2 salt make-up (Ca local), V for Ti-6Al-4V (lunar V ~50-150 ppm: partial)"
+alloy_self_sufficiency = "CP-Ti, Ti-Al, Ti-Al-Fe local; Ti-6Al-4V needs V (partial); gamma-TiAl needs Nb (import)."
+maturity_R = "TRL 4 terrestrially (FFC pilot); lunar TRL 2-3"
+maturity_Y155 = "Plausible industrial extrapolation; must be stated as working assumption"
+
+[[chain]]
+id = "CH-MG"
+product = "Magnesium"
+deposit = "RES-MB"
+steps = ["MgO-rich fraction (olivine/pyroxene) concentration", "silicothermic (Pidgeon-type with lunar Si) or molten-salt electrolysis", "vacuum distillation (vacuum is free)"]
+energy_kWh_kg = [20.0, 45.0]
+terrestrial_reference_kWh_kg = [15.0, 40.0]
+alloy_self_sufficiency = "AZ31 needs Zn (trace import); WE43 needs Y/Nd (KREEP by-product)"
+maturity_R = "TRL 3 lunar"
+maturity_Y155 = "Plausible; restricted use (flammability in pressurised O2 zones)"
+
+[[chain]]
+id = "CH-SI"
+product = "Silicon and silica / glass / basalt fibre"
+deposit = "RES-LH"
+steps = ["melt regolith (basalt fibre: direct melt of mare basalt, drawn through Pt-Rh bushings at ~1600 K)", "silicon: MRE or carbothermal with recycled C"]
+energy_kWh_kg = [1.5, 5.0]
+terrestrial_reference_kWh_kg = [1.5, 3.0]
+terrestrial_note = "basalt/glass fibre melting and drawing"
+imported_consumables = "bushing alloy (Pt-Rh) wear, sizing agents"
+maturity_R = "Basalt fibre industrial on Earth (TRL 9); from lunar simulant demonstrated at lab scale (TRL 3-4)"
+maturity_Y155 = "Plausible ESTABLISHED; fibre quality from regolith variable (sorting needed)"
+
+[[chain]]
+id = "CH-ALOX"
+product = "Alumina fibre (continuous, Nextel-610 class) and alumina ceramics"
+deposit = "RES-LH"
+steps = ["Al2O3 from anorthite route (CH-AL intermediate)", "sol-gel fibre spinning (needs organic precursors: import or recycle)", "sintering"]
+energy_kWh_kg = [20.0, 60.0]
+imported_consumables = "sol-gel precursor organics (C, H) - small mass, import or recycle"
+maturity_R = "Fibre TRL 9 terrestrially; lunar TRL 2"
+maturity_Y155 = "Research-grounded extrapolation"
+
+[[chain]]
+id = "CH-CF"
+product = "Carbon fibre and polymer matrices"
+deposit = "RES-EARTH (baseline); RES-AC optional"
+steps = ["PAN or pitch precursor", "spinning, stabilisation, carbonisation (1300-3000 K)", "sizing; resin synthesis"]
+energy_kWh_kg = [55.0, 90.0]
+terrestrial_reference_kWh_kg = [55.0, 90.0]
+terrestrial_note = "PAN-based CF ~200-300 MJ/kg cradle-to-gate"
+imported_consumables = "everything (carbon is not a lunar bulk resource)"
+maturity_R = "TRL 9 terrestrial; no lunar route"
+maturity_Y155 = "Import; asteroid-carbon route OPEN"
+
+[[chain]]
+id = "CH-SIC"
+product = "SiC fibre and SiC/SiC, C/C"
+deposit = "RES-EARTH (C); Si local"
+steps = ["polycarbosilane precursor (C, Si, H)", "fibre spinning and pyrolysis", "CVI/PIP/melt infiltration (weeks of furnace time)"]
+energy_kWh_kg = [200.0, 1000.0]
+terrestrial_note = "CMC parts are energy- and time-intensive; costs 1,000-10,000 $/kg today"
+imported_consumables = "precursors"
+maturity_R = "TRL 9 for aero-engine CMCs (to ~1600 K); C/C TRL 9 (brakes, re-entry)"
+maturity_Y155 = "Imported finished or semi-finished parts; local furnace cells plausible"
+
+[[chain]]
+id = "CH-REF"
+product = "Refractory metals (Nb, Mo, W, Re)"
+deposit = "RES-EARTH"
+steps = ["import as powder/wire/plate", "EB/vacuum processing at the yard"]
+energy_kWh_kg = [50.0, 300.0]
+maturity_R = "TRL 9 terrestrial supply"
+maturity_Y155 = "Import only; use where nothing else survives"

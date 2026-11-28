@@ -1,0 +1,162 @@
+[
+ {
+  "strut_N_over_T": 5.099019513592869,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 4105.280887504862,
+  "nozzle_dx_mm_per_MN": 614.8942944623886,
+  "angle_deg": 78.69006752597979,
+  "name": "Phase I bound: 1 pin strut, production angle",
+  "strut_MN_at_canon_29.42MN": 37.50322478473163,
+  "strut_MN_at_flight_21.77MN": 27.752386340701406
+ },
+ {
+  "strut_N_over_T": 3.6064680510716065,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 2131.266703282695,
+  "nozzle_dx_mm_per_MN": 280.0439569229992,
+  "angle_deg": 78.69006752597979,
+  "name": "baseline: 3 pin struts, production angle (78.7 deg)",
+  "strut_MN_at_canon_29.42MN": 26.52552743478103,
+  "strut_MN_at_flight_21.77MN": 19.628890301737957
+ },
+ {
+  "strut_N_over_T": 1.7583792101353175,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 1171.0169907496606,
+  "nozzle_dx_mm_per_MN": 59.11773692840131,
+  "angle_deg": 62.65012421993012,
+  "name": "angle: dx 1.5 m (62.6 deg)",
+  "strut_MN_at_canon_29.42MN": 12.932857110805134,
+  "strut_MN_at_flight_21.77MN": 9.570314261995799
+ },
+ {
+  "strut_N_over_T": 1.2787602293148963,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 700.4401290305611,
+  "nozzle_dx_mm_per_MN": 25.507289264221427,
+  "angle_deg": 45.0,
+  "name": "angle: dx 2.9 m (45 deg)",
+  "strut_MN_at_canon_29.42MN": 9.405265502108195,
+  "strut_MN_at_flight_21.77MN": 6.959896471560064
+ },
+ {
+  "strut_N_over_T": 1.079977981142838,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 450.0347951999876,
+  "nozzle_dx_mm_per_MN": 14.33274785476748,
+  "angle_deg": 30.113733150982437,
+  "name": "angle: dx 5.0 m (30.1 deg)",
+  "strut_MN_at_canon_29.42MN": 7.943224551580809,
+  "strut_MN_at_flight_21.77MN": 5.877986168169799
+ },
+ {
+  "strut_N_over_T": 3.176222702306015,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 1598.7820606438208,
+  "nozzle_dx_mm_per_MN": 285.218154153637,
+  "angle_deg": 78.69006752597979,
+  "name": "strut count: 2",
+  "strut_MN_at_canon_29.42MN": 23.361078272676963,
+  "strut_MN_at_flight_21.77MN": 17.28719792178095
+ },
+ {
+  "strut_N_over_T": 2.985243751031762,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 1829.8856278294772,
+  "nozzle_dx_mm_per_MN": 198.21533667918627,
+  "angle_deg": 78.69006752597979,
+  "name": "strut count: 4",
+  "strut_MN_at_canon_29.42MN": 21.95643047329172,
+  "strut_MN_at_flight_21.77MN": 16.247758550235876
+ },
+ {
+  "strut_N_over_T": 3.361532035756402,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 1065.9087254164308,
+  "nozzle_dx_mm_per_MN": 556.6118327760515,
+  "angle_deg": 78.69006752597979,
+  "name": "load sharing: 3 struts, soft ring (r 0.2, t 0.015)",
+  "strut_MN_at_canon_29.42MN": 24.72402610383789,
+  "strut_MN_at_flight_21.77MN": 18.295779316840036
+ },
+ {
+  "strut_N_over_T": 4.222748486523624,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 3226.950455968453,
+  "nozzle_dx_mm_per_MN": 224.991331521277,
+  "angle_deg": 78.69006752597979,
+  "name": "load sharing: 3 struts, stiff ring (r 0.5, t 0.05)",
+  "strut_MN_at_canon_29.42MN": 31.058262334025173,
+  "strut_MN_at_flight_21.77MN": 22.983114127178627
+ },
+ {
+  "strut_N_over_T": 7.094218071911581,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 4162.179063808053,
+  "nozzle_dx_mm_per_MN": 1213.9959490441643,
+  "angle_deg": 78.69006752597979,
+  "name": "joint position: 0.3 m eccentric lug",
+  "strut_MN_at_canon_29.42MN": 52.17788524118378,
+  "strut_MN_at_flight_21.77MN": 38.611635078476
+ },
+ {
+  "strut_N_over_T": 0.7041264761947487,
+  "strut_M_kNm_per_MN": 564.6391400927381,
+  "ring_M_kNm_per_MN": 1175.443889411055,
+  "nozzle_dx_mm_per_MN": 54.20112734933509,
+  "angle_deg": 78.69006752597979,
+  "name": "local bending: fixed-end struts (beam), production angle",
+  "strut_MN_at_canon_29.42MN": 5.178841430831424,
+  "strut_MN_at_flight_21.77MN": 3.8323426588152536
+ },
+ {
+  "strut_N_over_T": 3.880900061376922,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 2540.8518019672642,
+  "nozzle_dx_mm_per_MN": 257.9257774958534,
+  "angle_deg": 78.69006752597979,
+  "name": "stiffness: struts 3x thicker",
+  "strut_MN_at_canon_29.42MN": 28.54397144017649,
+  "strut_MN_at_flight_21.77MN": 21.122538865730604
+ },
+ {
+  "strut_N_over_T": 3.5260510752826444,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 1910.8171266531897,
+  "nozzle_dx_mm_per_MN": 293.278910483228,
+  "angle_deg": 78.69006752597979,
+  "name": "asymmetry: one strut 50 % thinner",
+  "strut_MN_at_canon_29.42MN": 25.934061583065407,
+  "strut_MN_at_flight_21.77MN": 19.1912055714684
+ },
+ {
+  "strut_N_over_T": 3.6091789298928285,
+  "strut_M_kNm_per_MN": 0.0,
+  "ring_M_kNm_per_MN": 2131.6160467389836,
+  "nozzle_dx_mm_per_MN": 280.1266334199149,
+  "angle_deg": 78.69006752597979,
+  "name": "rails: 3 single rails",
+  "strut_MN_at_canon_29.42MN": 26.54546591462513,
+  "strut_MN_at_flight_21.77MN": 19.643644776822594
+ },
+ {
+  "strut_N_over_T": 1.1018472523768776,
+  "strut_M_kNm_per_MN": 798.4753157139277,
+  "ring_M_kNm_per_MN": 1205.3763508035374,
+  "nozzle_dx_mm_per_MN": 41.872530491834794,
+  "angle_deg": 78.69006752597979,
+  "name": "direct axial transfer: axial post + 3 spokes",
+  "strut_MN_at_canon_29.42MN": 8.10407276814128,
+  "strut_MN_at_flight_21.77MN": 5.997013848424547
+ },
+ {
+  "strut_N_over_T": 0.8988987144668275,
+  "strut_M_kNm_per_MN": 90.51966709225259,
+  "ring_M_kNm_per_MN": 713.656469758055,
+  "nozzle_dx_mm_per_MN": 9.446737956738692,
+  "angle_deg": 45.0,
+  "name": "combined: 4 beam struts at 45 deg, stiff ring",
+  "strut_MN_at_canon_29.42MN": 6.611388808669585,
+  "strut_MN_at_flight_21.77MN": 4.892427718415493
+ }
+]
