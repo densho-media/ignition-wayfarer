@@ -9,8 +9,8 @@
 <rect x="660.7" y="54.6" width="33.3" height="23.1" fill="#3a8fd0" fill-opacity="0.28" stroke="#3a8fd0"/>
 <rect x="665.1" y="84.0" width="11.0" height="126.0" fill="#2fa36b" fill-opacity="0.28" stroke="#2fa36b"/>
 <rect x="680.4" y="84.0" width="11.0" height="126.0" fill="#2fa36b" fill-opacity="0.28" stroke="#2fa36b"/>
-<rect x="701.1" y="65.1" width="125.7" height="112.4" fill="#8a6fd8" fill-opacity="0.28" stroke="#8a6fd8"/>
-<rect x="836.7" y="21.0" width="7.6" height="189.0" fill="#777" fill-opacity="0.28" stroke="#777"/>
+<rect x="701.1" y="65.1" width="137.8" height="112.4" fill="#8a6fd8" fill-opacity="0.28" stroke="#8a6fd8"/>
+<rect x="848.9" y="21.0" width="7.6" height="189.0" fill="#777" fill-opacity="0.28" stroke="#777"/>
 <rect x="184.1" y="187.7" width="40.8" height="20.2" fill="#e07b3a" fill-opacity="0.28" stroke="#e07b3a"/>
 <rect x="193.6" y="191.9" width="283.0" height="11.8" fill="#5aa0b8" fill-opacity="0.28" stroke="#5aa0b8"/>
 <rect x="479.2" y="191.9" width="28.0" height="11.8" fill="#3a6fd0" fill-opacity="0.28" stroke="#3a6fd0"/>
@@ -22,13 +22,13 @@
 <text x="665" y="38" class="t" font-size="10">tabs</text>
 <text x="666" y="71" class="t" font-size="10">rings</text>
 <text x="716" y="55" class="t" font-size="10">farm (T-A)</text>
-<text x="821" y="8" class="t" font-size="10">Brow</text>
+<text x="834" y="8" class="t" font-size="10">Brow</text>
 <text x="180" y="216" class="t" font-size="10">district</text>
 <text x="320" y="216" class="t" font-size="10">body bay</text>
 <text x="473" y="216" class="t" font-size="10">M10</text>
 <line x1="186" y1="225" x2="661" y2="225" stroke="#c9852a" stroke-width="3"/>
 <text x="372" y="239" class="m" font-size="10">MRU twin rails (az 270, shown below the axis)</text>
-<line x1="40" y1="210" x2="849" y2="210" stroke="#999" stroke-dasharray="4 3"/>
+<line x1="40" y1="210" x2="862" y2="210" stroke="#999" stroke-dasharray="4 3"/>
 <text x="58" y="390" class="m" font-size="10">-140</text>
 <text x="108" y="390" class="m" font-size="10">-120</text>
 <text x="160" y="390" class="m" font-size="10">-100</text>
@@ -46,5 +46,5 @@
 <text x="772" y="390" class="m" font-size="10">140</text>
 <text x="822" y="390" class="m" font-size="10">160</text>
 <text x="873" y="390" class="m" font-size="10">180</text>
-<text x="14" y="410" class="m">Ship 310.2 m (farm +20.70 m, Brow x 162.5); keep-outs: ring sweep x 93.65-106.95 r &lt; 31.5; Brow shadow r &lt; 37.</text>
+<text x="14" y="410" class="m">Ship 315.0 m (farm +25.45 m, Brow x 167.2); keep-outs: ring sweep x 93.65-106.95 r &lt; 31.5; Brow shadow r &lt; 37.</text>
 </svg>

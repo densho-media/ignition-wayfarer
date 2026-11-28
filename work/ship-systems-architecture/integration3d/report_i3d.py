@@ -62,7 +62,7 @@ def build():
                        + table(['Item', 't', 'Class'], [[E(r['item']), f'{r["t"]:.1f}', E(r['cls'])] for r in L['items']]
                                + [['Propellant', f'{L["propellant_t"]:,.0f}', 'coupled'], ['Added tankage', f'{L["tankage_t"]:,.0f}', 'coupled'],
                                   ['<b>Departure</b>', f'<b>{L["departure_t"]:,.0f}</b>', E(L['note'])]])))
-    return build_consolidation()+'\n'.join(out)+build_cp2()+build_cp3()+build_cp4()+build_ledger()
+    return build_closeout()+build_consolidation()+'\n'.join(out)+build_cp2()+build_cp3()+build_cp4()+build_ledger()
 
 
 def build_cp2():
@@ -226,14 +226,14 @@ def build_consolidation():
             ['HOT fins', 'aft-pointing halves (-0.77 GW in burns)', f'forward-pointing, {RA["fins"]["manifolds_per_blade"]} manifolds per blade', ''],
             ['L1 continuous / reactive peak (MW)', '14.3 / 93.5', f'{EL["continuous_W"]/1e6:.1f} / {EL["reactive_W"]/1e6:.1f}', 'proactive heat-pump duty retired']]
     rd = [[E(r['area']), E(r['state']), E(r['note'])] for r in C['readiness']]
-    out.append(section('c0', 'Consolidation', 'ISSA consolidation: one fictional working configuration, WF-F1-C1.0',
+    out.append(section('c0', 'Consolidation', f'ISSA consolidation: one fictional working configuration, {C["config"]}',
                        f'<p>The owner accepted the 19 developed systems (2026-11-28 09:15Z) and asked for consolidation rather than another research phase. This section '
                        f'implements the owner decisions, closes the radiator shortfalls, develops the heavy maintenance transport, reconciles electrical, cryogenic and '
                        f'mass accounting and hands a versioned interface to the primary-structure work (PSA). Nominal departure <b>{L["departure_t"]:,.0f} t</b> '
-                       f'(owner indicative ~8,671 t, not forced). Production ship unchanged; nothing written to Drive; Track R findings below stay as published evidence.</p>'
+                       f'(C1.0 was 8,655 t; see the closeout above for what changed). Production ship unchanged; nothing written to Drive; Track R findings below stay as published evidence.</p>'
                        + '<h3>Implemented owner decisions</h3>' + table(['Id', 'Decision', 'State'], dec)
-                       + '<h3>Comparison with Checkpoint 4</h3>' + table(['Quantity', 'Checkpoint 4', 'WF-F1-C1.0', 'Change'], cmp_)
-                       + img('cam_i3d_x_ship', 'Consolidated ship', 'WF-F1-C1.0 whole ship: final T-A farm and translated Brow envelope, HOT manifolds, LOW tip extensions, '
+                       + '<h3>Comparison with Checkpoint 4</h3>' + table(['Quantity', 'Checkpoint 4', E(C['config']), 'Change'], cmp_)
+                       + img('cam_i3d_x_ship', 'Consolidated ship', f'{C["config"]} whole ship: final T-A farm and translated Brow envelope, HOT manifolds, LOW tip extensions, '
                              'and every 3D-integration assembly.')
                        + svg('i3d_c_longitudinal.svg') + img('cam_i3d_x_long', 'Longitudinal section', 'Longitudinal section at the y = 0 plane (Blender).')
                        + svg('i3d_c_transverse.svg')
@@ -258,8 +258,8 @@ def build_consolidation():
           ['Expansion', E(RA['expansion']['note'])], ['Supports', E(RA['supports']['tab'])]]
     out.append(section('c1', 'Consolidation · thermal', 'Radiator geometry and the thermal ledger',
                        '<p>The shortfalls are closed without spending HOT. Moving L2/WARM/LOW aft into HOT fails the complete propulsion heat budget at the reactive-defense '
-                       'peak; widening breaks the Brow shadow; extending forward at full span hits the ring sweep. WARM therefore runs 11 K warmer on its existing area, '
-                       'LOW gains physical tip extensions where the rings leave room (r 31.5-37 m beside them) and runs 16 K warmer for the rest.</p>'
+                       f'peak; widening breaks the Brow shadow; extending forward at full span hits the ring sweep. WARM therefore runs {P["T_warm_K"]-440:.0f} K warmer on its existing area, '
+                       f'LOW gains physical tip extensions where the rings leave room (r 31.5-37 m beside them) and runs {P["T_low_K"]-300:.0f} K warmer for the rest.</p>'
                        + '<h3>Options</h3>' + table(['Id', 'Option', 'HOT used (GW)', 'Geometry', 'Verdict'], op)
                        + '<h3>Complete HOT budget (GW)</h3>' + table(['Item', 'GW'], bud)
                        + '<h3>Preferred configuration</h3>' + table(['Item', 'Value'], th)
@@ -271,7 +271,7 @@ def build_consolidation():
     fl = [[E(k), f'{T["need_m3"][k]:,.0f}', f'{T["capacity_m3"][k]:,.0f}', f'{100*T["fill"][k]:.1f} %'] for k in T['need_m3']]
     out.append(section('c2', 'Consolidation · tanks', 'T-A farm resized to the current coupled inventory',
                        f'<p>T-A is the reference (T-B mission-modular alternative, T-C research option, no densification). The stretch follows the coupled propellant '
-                       f'{T["propellant_t"]:,.0f} t (CP1 sized for {T["cp1_propellant_t"]:,.0f} t): <b>+{T["added_length_m"]:.2f} m</b> (CP1 {T["cp1_added_length_m"]:.2f} m), '
+                       f'{T["propellant_t"]:,.0f} t mission + {T["carried_t"]:,.0f} t residual and reserve: <b>+{T["added_length_m"]:.2f} m</b> (CP1 {T["cp1_added_length_m"]:.2f} m), '
                        f'vessels {T["vessel_length_m"]:.2f} m, farm x {T["farm_x"][0]:.2f}-{T["farm_x"][1]:.2f}, Brow x {T["brow_x"][0]:.2f}-{T["brow_x"][1]:.2f}, ship '
                        f'{T["ship_length_m"]:.1f} m; insulated shell {T["shell_area_m2"]:,.0f} m² (CP1 {T["cp1_shell_area_m2"]:,.0f}).</p>'
                        + table(['Species', 'Need m³', 'Capacity m³', 'Fill'], fl) + table(['Vessel', 'Species', 'Class', 'x', 'm³', 'Propellant t', 'Burn axial kN'], vs)
@@ -326,15 +326,16 @@ def build_consolidation():
     cats = {}
     for r in L['rows']: cats.setdefault(r['cat'], []).append(r)
     lr = [[E(r['item']), E(r['cat']), E(r['owner']), f'{r["t"]:.2f}', E(r['note'])] for r in L['rows']]
-    hist = L['end_t']-L['dry_with_payload_t']-L['tankage_t']
+    hist = L['end_t']-L['dry_with_payload_t']-L['tankage_t']-L.get('carried_t', 0.0)
     summ = [['Existing historical ship (production dry mass incl. payload, unchanged)', f'{hist:,.0f}'],
             ['New equipment', f'{sum(r["t"] for r in cats.get("NEW", [])):,.1f}'], ['Replacement equipment (increment)', f'{sum(r["t"] for r in cats.get("REPLACEMENT", [])):,.1f}'],
             ['Historical equipment moved', f'{sum(r["t"] for r in cats.get("HISTORICAL (moved)", [])):,.1f}'],
             ['Coolant inventory (NaK transport, inside the loop line)', f'{L["coolant"]["NaK_t"]:,.1f}'],
-            ['Mission payload additions', f'{sum(p["t"] for p in L["payload"]):,.2f}'], ['Propellant', f'{L["propellant_t"]:,.0f}'], ['Added tankage', f'{L["tankage_t"]:,.0f}'],
+            ['Mission payload additions', f'{sum(p["t"] for p in L["payload"]):,.2f}'], ['Propellant (mission)', f'{L["propellant_t"]:,.0f}'],
+            ['Propellant residual and boil-off reserve (loaded, carried to the end)', f'{L.get("carried_t", 0.0):,.1f}'], ['Added tankage', f'{L["tankage_t"]:,.0f}'],
             ['Structural additions confirmed by PSA', '0 (none confirmed yet)'], ['Structural additions OPEN', 'OPEN (PSA Phase II)'], ['Shielding additions OPEN', 'OPEN (Track R)'],
             ['<b>Nominal departure</b>', f'<b>{L["departure_t"]:,.0f}</b>']]
-    out.append(section('c5', 'Consolidation · mass', 'Reconciled live mass ledger (supersedes Checkpoint 4)',
+    out.append(section('c5', 'Consolidation · mass', 'Reconciled live mass ledger (ISSA side; supersedes C1.0 and Checkpoint 4)',
                        '<p>Every physical item has one owner. Audit results: restart packs were in both the L2 and the storage lines (removed from L2); new cryocooler stations '
                        'count only their increment over the existing coolers; pipe supports (saddles, slides) are ISSA machinery, the frames they bear on are PSA; module-10 '
                        'racks are ISSA, its frames PSA; displaced dry-store containers keep their historical mass; LOG-G1 tare is separate and not duplicated.</p>'
@@ -342,22 +343,87 @@ def build_consolidation():
     # registers, SSI, problems
     rg = [[E(a), E(b), E(c)] for a, b, c in C['registry']]
     ss = [[E(i['id']), E(i['owner']), f'{i["mass_t"]:.1f}' if isinstance(i['mass_t'], (int, float)) else 'PSA', str(len(i['mounts'])), E(i['maturity'])] for i in S['items']]
-    ds = [[E(d['id']), E(d['topic']), E(d['issa']), E(d['psa']), E(d['action'])] for d in S['disagreements']]
+    ds = [[E(d['id']), E(d['topic']), E(d['resolution'])] for d in S['disagreements']]
     pr = [[E(p['id']), E(p['sev']), E(p['what']), E(p['owner'])] for p in C['problems']]
     oq = [[E(q['id']), E(q['q']), E(q['rec'])] for q in C['owner_questions']]
     out.append(section('c6', 'Consolidation · handover', 'Registers, systems-to-structure interface and open problems',
-                       '<p>Technology register v1.1 (<code>data/technology_register.toml</code>): FT-03 carries the approved component set (0.94 / 0.90 / 0.97 / 2 %, 872 K '
+                       '<p>Technology register v1.2 (<code>data/technology_register.toml</code>): FT-09 (new) carries the 451 K WARM machinery; FT-03 carries the approved component set (0.94 / 0.90 / 0.97 / 2 %, 872 K '
                        'compressor inlet, 896 K L2, 9.38 m); FT-06 the forward-pointing fins (1.47 m pitch, 106 manifolds per blade); FT-07 the 24.7 t MRU carriage and the '
-                       'provisional EXT-TA arm, with the explicit limit that carrying a reactor-class mass is not in-flight reactor servicing.</p>'
+                       'reusable EXT-TA external handling system (DR-C-04), with the explicit limit that carrying a reactor-class mass is not in-flight reactor servicing.</p>'
                        + table(['System', 'Level (CP4)', 'Level (C1.0)'], rg)
                        + f'<h3>Systems-to-structure interface {E(S["version"])}</h3><p>{E(S["ownership_rule"])}. File: '
                        '<code style="overflow-wrap:anywhere">work/ship-systems-architecture/results/i3d_structure_interface.json</code> (position, mass, CG, envelope, mounts with anchor/slide type, load '
                        'cases, thermal growth, clearances, removal, utilities, environment, failure requirements; TAC and EM-pump excitation bands for PSA modal work).</p>'
                        + table(['Item', 'Owner', 't', 'Mounts', 'Maturity'], ss)
-                       + '<h3>Disagreements with PSA (not overridden)</h3>' + table(['Id', 'Topic', 'ISSA', 'PSA', 'Action'], ds)
+                       + '<h3>Interface disagreements with PSA</h3>' + table(['Id', 'Topic', 'Resolution'], ds)
                        + '<h3>Problem register</h3>' + table(['Id', 'State', 'Problem', 'Owner'], pr)
-                       + '<h3>Owner questions</h3>' + table(['Id', 'Question', 'Recommendation'], oq)
+                       + ('<h3>Owner questions</h3>' + table(['Id', 'Question', 'Recommendation'], oq) if oq else '')
                        + '<p class="fn">Review file: view layers C1 complete, C2 exterior, C3 structure and interfaces, C4 thermal, C5 electrical, C6 habitat and life support, '
                        'C7 logistics and maintenance, C8 research and fiction comparison. Machinery is solid; reservations, swept tubes and the translated Brow are '
                        'translucent; SSI markers are red (anchor), blue (slide) and white (other). Software checks passing does not establish physical feasibility.</p>'))
     return '\n'.join(out)
+
+
+def build_closeout():
+    if not (R/'i3d_consolidated.json').exists():
+        return ''
+    C = json.loads((R/'i3d_consolidated.json').read_text()); S = json.loads((R/'i3d_structure_interface.json').read_text())
+    T = C['tanks']; L = C['ledger']; c10 = C['c10']; LC = C['low_cases']; PF = C['pickup_fault']; WM = C['warm_machinery']; CM = C['combined']; MR = C['mru']
+    V = json.loads((R/'i3d_validation.json').read_text()) if (R/'i3d_validation.json').exists() else None
+    dec = [[E(d['id']), E(d['what']), E(d['state'])] for d in C['decisions'][:7]]
+    sp = [[E(k), f'{T["mission_t"][k]:,.1f}', f'{T["loaded_by_species_t"][k]:,.1f}', f'{T["usable_m3"][k]:,.0f}', f'{T["loaded_m3"][k]:,.0f}', f'{T["capacity_m3"][k]:,.0f}',
+           f'{100*T["fill"][k]:.1f} %', f'{T["capacity_m3"][k]-T["loaded_m3"][k]:,.0f}'] for k in T['mission_t']]
+    sp.append(['<b>total</b>', f'<b>{T["propellant_t"]:,.1f}</b>', f'<b>{T["loaded_t"]:,.1f}</b>', '', '', '', '', ''])
+    ex = [[E(x['species']), f'{x["T_store_K"]:.0f}', f'{100*x["beta_per_K"]:.1f} %/K', f'+{x["allowed_warm_K"]:.2f} K', E(x['note'])] for x in T['expansion']]
+    hd = [[E(h['item']), f'{h["t"]:.1f}', E(h['flight']), E(h['yard'])] for h in MR['handling'] if h['t'] > 3.0]
+    lc = [[E(r['case']), f'{r["load_W"]/1e3:,.0f}', f'{r["capacity_W"]/1e3:,.0f}', f'{r["margin_W"]/1e3:+,.0f}', f'{r["T_needed_K"]:.0f}'] for r in LC['rows']]
+    wm = [[E(r['item']), E(r['interface']), E(r['requirement'])] for r in WM['rows']]
+    cfg = [['Departure mass (t)', f'{c10["departure_t"]:,.0f}', f'{L["departure_t"]:,.0f}', f'{CM["departure_t"]:,.0f}'],
+           ['Mission propellant (t)', f'{c10["propellant_t"]:,.0f}', f'{L["propellant_t"]:,.0f}', f'{CM["propellant_t"]:,.0f}'],
+           ['Residual + boil-off reserve carried (t)', '0 (omitted)', f'{L["carried_t"]:,.1f}', f'{CM["carried_t"]:,.1f}'],
+           ['Farm stretch (m)', f'+{c10["added_length_m"]:.2f}', f'+{T["added_length_m"]:.2f}', f'+{CM["added_length_m"]:.1f}'],
+           ['Ship length (m)', f'{c10["ship_length_m"]:.1f}', f'{T["ship_length_m"]:.1f}', f'{CM["ship_length_m"]:.1f}'],
+           ['End-of-burn acceleration (g, F1 21.8 MN)', '0.736 (envelope)', f'{C["load_c11_g"]:.3f}', f'{CM["a_end_g"]:.3f}'],
+           ['LOW temperature (K)', '316', f'{C["radiators"]["preferred"]["T_low_K"]:.0f}', '–'],
+           ['Cryo operating input (kW)', '822', f'{C["cryo"]["operating_input_W"]/1e3:.0f}', '–']]
+    ig = [[E(i['id']), E(i['what']), E(i['owner'])] for i in C['integration']]
+    jt = [[E(j['id']), E(j['what']), E(j['state']), E(j['owner'])] for j in S['joint']]
+    lcs = [[E(l['id']), E(l['what']), f'{l["axial_g"]:.3f}', E(l.get('note', ''))] for l in S['shared']['load_cases']]
+    ko = [[E(k['id']), E(k['what']), E(', '.join(f'{a}={b}' for a, b in k.items() if a not in ('id', 'what')))] for k in S['shared']['keepouts']]
+    val = (f'<p>{E(V["summary"])}</p>' if V else '<p class="fn">Validation results are added after the pipeline run.</p>')
+    body = (f'<p>The owner accepted {E(c10["sha"])} (WF-F1-C1.0) as the working fictional architecture on 2026-11-28 and asked for a bounded closeout. This section is '
+            f'that closeout: <b>{E(C["config"])}</b> supersedes C1.0 after the targeted reconciliation, and <b>{E(S["version"])}</b> is the one shared definition for ISSA and '
+            f'PSA. The main correction: C1.0\'s vessel masses did not add up (5,378 t against 5,468 t) because it scaled a bare-liquid need and used a stale D2 density. '
+            f'Loading the production allowances (1.5 % residual, 0.5 % boil-off reserve, 3 % ullage) and carrying the unburned residual and reserve to the end of the '
+            f'mission raise the configuration to <b>{L["departure_t"]:,.0f} t</b> and <b>{T["ship_length_m"]:.1f} m</b>. With PSA\'s Phase II structure (provisional) the '
+            f'point moves to about {CM["departure_t"]:,.0f} t and {CM["ship_length_m"]:.0f} m, which T-A can hold but which needs a joint ISSA-PSA iteration to converge.</p>'
+            + '<h3>1. Owner decisions implemented</h3>' + table(['Id', 'Decision', 'State'], dec)
+            + '<h3>2. Targeted reconciliation</h3><h4>Propellant by species (vessel sums equal the totals)</h4>'
+            + table(['Species', 'Mission t', 'Loaded t', 'Usable m³', 'Loaded m³', 'Capacity m³', 'Fill', 'Ullage m³'], sp)
+            + f'<p class="fn">{E(T["c10_error"])}. Per-vessel values in the SSI (FARM-* contents) and in <code>i3d_consolidated.json</code> tanks.vessels.</p>'
+            + '<h4>Thermal expansion allowance (2 % of the 3 % ullage; 1 % is vapour cushion)</h4>' + table(['Species', 'Storage K', 'Expansion', 'Allowed warm excursion', 'Note'], ex)
+            + '<h4>Heavy items: in-flight and yard handling</h4>' + table(['Item', 't', 'In flight', 'Yard'], hd) + f'<p class="fn">{E(MR["shield_rule"])}.</p>'
+            + f'<h4>LOW: nominal rejection vs maximum cryogenic recovery at {LC["T_K"]:.0f} K</h4>' + table(['Case', 'Load kW', 'Capacity kW', 'Margin kW', 'LOW K needed'], lc)
+            + f'<p class="fn">{E(LC["rule"])}. {E(LC["hot_margin"])}. {E(LC["brow"])}. The larger farm raised the cryo load, so LOW settles at '
+            f'{LC["T_K"]:.0f} K rather than 316 K.</p>'
+            + '<h4>WARM at 451 K: machinery interfaces (DR-C-01, FT-09)</h4>' + table(['Machinery', 'Thermal interface', 'Requirement'], wm)
+            + '<h4>L1 pickup failure: controlled shutdown (DR-C-03)</h4><ol>' + ''.join(f'<li>{E(x)}</li>' for x in PF['sequence']) + '</ol><p><b>Transfer requirements:</b> '
+            + E('; '.join(PF['requirements'])) + f'. {E(PF["open"])}.</p>'
+            + f'<p class="fn">Mass ownership audit: {L["audit"]["items"]} ledger rows, duplicates: {len(L["audit"]["duplicates"])}; {E(L["audit"]["rule"])}. Overview figures '
+            'now read the reconciled ledger (the stale 8,573 t is gone); historical checkpoint sections below keep their own values as history.</p>'
+            + '<h3>3. Updated fictional configuration</h3>' + table(['Quantity', 'C1.0 (accepted)', E(C['config']), 'with PSA Phase II (provisional)'], cfg)
+            + f'<p class="fn">{E(CM["tank_verdict"])}. PSA variant {E(CM["psa"]["variant"])} ({CM["psa"]["total_t"]:,.0f} t, +{CM["psa"]["delta_t"]:,.0f} t over its 150 t '
+            f'reference line, commit {E(CM["psa"]["commit"])}); {E(CM["alt"]["variant"])} gives {CM["alt"]["departure_t"]:,.0f} t.</p>'
+            + '<h3>4. Registers</h3><p>Technology register v1.2: FT-09 (new) high-temperature WARM machinery; FT-07 adds the reusable EXT-TA system and the yard rule for '
+            'the shield; FT-03 and FT-06 unchanged from C1.0. Problems C-11 (He-3 expansion), C-12 and C-13 (closed), C-14 (LOW recovery with one loop lost) added; the '
+            'full register is in the handover section below.</p>'
+            + f'<h3>5. Systems-to-structure interface {E(S["version"])}</h3><p>{len(S["items"])} items, {sum(len(i["mounts"]) for i in S["items"])} mounts, one shared '
+            f'block (coordinates, dimensions, tank geometry, load cases, keep-outs) that both workstreams read. {E(S["shared"]["single_source"])}.</p>'
+            + table(['Load case', 'What', 'Axial g', 'Note'], lcs) + table(['Keep-out', 'What', 'Extent'], ko)
+            + '<h3>6. PSA coordination</h3><p>PSA accepted SSI-1.0 (SSI-D1 accepted, SSI-D2 withdrawn, SSI-D3 offered 40.8); the owner has since fixed x 41.0 as the preferred '
+            'station and PSA verifies it. PSA Phase II (c3138d8) returned frame properties, H6a anchor reactions (49 kN operating, 174 kN ultimate) and 32-39 mm of '
+            'structural shortening per section (now in the H6a slide travel); the MRU rail now ends at x 92.0, clear of the hub cones.</p>' + table(['Id', 'Joint item', 'State', 'Owner'], jt)
+            + '<h3>7. Remaining structural integration requirements</h3>' + table(['Id', 'Requirement', 'Owner'], ig)
+            + '<h3>8. Mass ledger</h3><p>See the reconciled ledger below (ISSA side, structure OPEN) and the provisional combined point in item 3.</p>'
+            + '<h3>9. Validation</h3>' + val)
+    return section('k0', 'Closeout', f'ISSA closeout: {C["config"]} and {S["version"]}', body)

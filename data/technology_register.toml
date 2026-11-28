@@ -14,9 +14,9 @@
 # values with these ids. Physical conservation holds in every entry.
 
 [register]
-version = "1.1"
+version = "1.2"
 created = "2026-11-28"
-basis = "owner ISSA Phase VI brief 2026-11-28 (DR5-01..08); PMDS levels; existing canon fictional technologies (Fiji/Lattice drive)"
+basis = "owner ISSA Phase VI brief 2026-11-28 (DR5-01..08); ISSA closeout 2026-11-28 10:51Z (DR-C-01..05); PMDS levels; existing canon fictional technologies (Fiji/Lattice drive)"
 civilization = """IGNITION's spacefaring civilization is a mature high-temperature and plasma civilization: it builds hermetic ceramic-matrix and \
 carbon-composite pressure systems that run near 2000 K for years, handles liquid alkali metals routinely, converts directly between plasma \
 motion and electricity, and maintains large ships with autonomous robots. It has NOT repealed any physical law: radiators still reject \
@@ -141,11 +141,13 @@ precedent = "ISS Canadarm2/Dextre ORU swaps; nuclear hot-cell manipulators; JET 
 limitation = "Dexterity and autonomy for unplanned repairs in a high-radiation zone without crew in the loop."
 advance = "Supervised autonomous robots replace any ORU up to 3 t (LOG-G1 class) along defined routes; crew supervise from shielded stations."
 adopted = { max_oru_t = 3.0, handling = "single-arm up to 3 t, MRU heavy carriage above", routes = "keel lane, district removal route, hub store", mru_carriage_rating_t = 24.7, mru_route_m = 186.0 }
-provisional = "EXT-TA external transfer arm at the drive-bay hatch for the 7.5 t H6a EM pump modules (two-joint luffing arm, 8 t at 6 m; PROVISIONAL, registered for fictional modelling only, owner brief 2026-11-28 09:15Z)"
+mru_route_m_c11 = 184.7
+provisional = "EXT-TA reusable external heavy-handling system (DR-C-04 APPROVED 2026-11-28 10:51Z as PROVISIONAL): an aft exterior rail (x -133.5..-125, az 270) on four PSA aft-frame lugs EXT-L1..L4 and a two-joint luffing arm (8 t at 6 m, 12 t at 3 m) with the MIF-A heavy pattern or the MIF-B grapple; users: H6a EM pump modules 7.5 t, aft HOT manifold and trunk sections, L2 heat-pipe rows and NaK headers, aft radiator panel rows, drive-bay hatch items; coast only; envelope provisional"
+yard_rule = "the 25.3 t shadow shield exceeds the 24.7 t carriage rating: it is a yard item for yard handling (crane, two segments); the carriage rating governs in-flight items only"
 limit = "the carriage moving a reactor-class mass does not make in-flight reactor servicing possible: decay heat, activation and shutdown gamma keep the reactor/IHX a yard item"
 dependents = ["power district maintenance", "H6a section replacement", "LOG-G1", "workshop", "MRU heavy carriage", "EXT-TA"]
 consequence = "Crewed servicing only after weeks of decay; maintenance windows stretch; spares mass rises."
-source = "work/ship-systems-architecture/phase6/study6.py layout"
+source = "work/ship-systems-architecture/phase6/study6.py layout; integration3d/consolidate.py mru() (C1.1)"
 
 [[technology]]
 id = "FT-08"
@@ -160,3 +162,18 @@ adopted = { structure = "CFRP allowable 600 MPa screening (vertex_engine.structu
 dependents = ["hull", "tank farm", "rings", "drive coils"]
 consequence = "None for ISSA: values are the production model's."
 source = "data/wayfarer_3d.toml; data/materials/catalogue.toml"
+
+[[technology]]
+id = "FT-09"
+name = "High-temperature power electronics and machinery for the 451 K WARM loop"
+status = "APPROVED"
+level = "B"
+decision = "DR-C-01 (owner 2026-11-28 10:51Z): WARM operates at 451 K on its existing radiator area; advanced high-temperature components where appropriate; separate thermal interfaces for temperature-sensitive machinery"
+principle = "Wide-bandgap semiconductors keep their junctions working at high temperature; ceramic-insulated windings and magnetic or gas bearings run without organic insulation or lubricants."
+precedent = "SiC MOSFETs rated to 448-473 K junction today, SiC devices demonstrated near 773 K in research; ceramic- and mica-insulated motor windings (class C, > 493 K); magnetic bearings in turbomachinery."
+limitation = "Commercial SiC power modules are packaged for <= 448-473 K junction; packaging, gate drivers and capacitors limit continuous high-temperature life."
+advance = "SiC/GaN-HT power stages and their packaging, gate drives and capacitors run continuously at <= 523 K junction on 440-451 K coolant; WARM-loop pump and fan motors use ceramic-insulated windings (>= 523 K) and magnetic or gas bearings."
+adopted = { warm_T_K = 451.0, coolant_supply_return_K = [440.0, 451.0], junction_max_K = 523.0, winding_class_K = 523.0, sensitive_items = "control electronics, sensors, lubricated mechanisms, batteries and capacitors on the LOW loop (316-320 K) through cold plates" }
+dependents = ["WARM radiator sections", "HVDC converters on the WARM loop", "WARM pumps", "ride-through stores (on LOW)"]
+consequence = "WARM must reject at <= 440 K: the 496 kW shortfall needs new WARM area that the envelope does not have, or HOT heat-pump duty returns (0.39 GW HOT reserve shrinks)."
+source = "work/ship-systems-architecture/integration3d/consolidate.py warm_machinery()"

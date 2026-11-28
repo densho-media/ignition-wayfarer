@@ -392,10 +392,10 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   WF-F0-P6.0, WF-F1-P6.0 (F1 = Track F reference with FT-03 1500 K), technology register `data/technology_register.toml`, Phase V
   reconciliation C6-01..09, direct conversion ledger (FT-04 conditional), ECLSS 7 units, OpenMC Track R step. Owner: DR6-01..06. Then the
   3D Systems Integration brief (2026-11-28 07:03Z) on the same branch.
-- [ ] **3D Systems Integration (Track F1) — consolidation WF-F1-C1.0 (2026-11-28).** `work/ship-systems-architecture/integration3d/`
-  (NOTES "Consolidation WF-F1-C1.0"). DR-3D-01..04 implemented; one configuration supersedes CP4 (8,655 t, T-A +20.70 m,
-  ship 310.2 m); SSI-1.0 handed to PSA. Owner: DR-C-01 (WARM 451 K), DR-C-02 (LOW tip extensions + 316 K),
-  DR-C-03 (pickup-fault doctrine), DR-C-04 (EXT-TA arm), DR-C-05 (lower the defense buffers for module-10 removal). PSA: SSI-D1..D3.
+- [ ] **ISSA–PSA coordinated integration (Track F1) — next.** C1.0 accepted (owner 2026-11-28 10:51Z); closeout WF-F1-C1.1 + SSI-1.1 in
+  `work/ship-systems-architecture/integration3d/` (NOTES "Closeout"). Next: converge the operating point with the PSA structure (I-01; provisional
+  13,193 t), PSA verifies L2 x 41.0 (I-02), LOW-tab and EXT-TA lugs (I-03/I-04), buffer relocation J-01, local modes I-07/I-08.
+  Open problems C-01 (shutdown transient), C-11 (He-3 expansion), C-14 (LOW recovery, one loop lost). Then owner review before production integration.
 - [ ] **ISSA Phase V — owner review (2026-11-27).** Thermal network and convergence on the ISSA page (`work/ship-systems-architecture/`,
   NOTES "Phase V"): config N2-R4a-P5.0, corrections C5-01..10, H6 network (walls dominate; material is the lever), R5-A 750 K
   cross-strapped L2, 3-D OpenMC (frame verified; scatter ~19 % of bare tank heating), coupled mass via `operating_point.mission(extra_end_kg)`,

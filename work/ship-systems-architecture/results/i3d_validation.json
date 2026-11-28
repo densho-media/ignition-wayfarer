@@ -1,0 +1,3 @@
+{
+ "summary": "Full pipeline PASS (run 20261128T110922Z-pipeline): spec, all unit tests, full build, whole-ship inspection and fingerprint; production geometry diff 0 (changed 0, added 0, removed 0). The fictional review geometry lives only in the review file. No collisions are claimed beyond the stated clearances; intended intersections: LOW tabs share the LOW forward spar, the MRU rails sit on the PSA frames, EXT-TA rail on the aft frames; placeholders: Brow translation and the hub rotary couplings (M1), SSI markers. Software checks do not establish physical feasibility."
+}

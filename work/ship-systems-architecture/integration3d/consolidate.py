@@ -25,8 +25,13 @@ P5, P6, PW, H6, RD, EL, EC, LG4, RM, TK, LD = (J(n) for n in ('phase5.json', 'ph
                                                            'i3d_electrical.json', 'i3d_eclss.json', 'i3d_logistics.json', 'i3d_remaining.json',
                                                            'i3d_tanks.json', 'i3d_ledger.json'))
 CIRC = 40.2e3
-CONFIG = 'WF-F1-C1.0'
-SSI_VERSION = 'SSI-1.0'
+CONFIG = 'WF-F1-C1.1'          # closeout (owner 2026-11-28 10:51Z): supersedes C1.0 (ec7c7a3) after the targeted reconciliation
+SSI_VERSION = 'SSI-1.1'
+MRU_X1 = 92.0                  # SSI-1.1: rail forward end pulled back clear of the PSA hub cones (x 93-94)
+# PSA Phase II provisional structure (claude/cloud/primary-structural-architecture c3138d8, results/p2_ledger.json, variant H:hub:F1; owner decisions
+# P2-D1..D5 pending, NOT confirmed): primary structure incl. casing and rotating structure, and its delta over the 150 t reference line
+PSA_P2 = dict(commit='c3138d8', variant='H:hub:F1', total_t=1222.9, line_t=150.0, delta_t=1072.9, alt=dict(variant='HC:hub:F1', total_t=1182.0, delta_t=1032.0),
+              a_end_g=0.56, EI=1.67e11, f1_Hz=0.096)
 G0 = 9.80665
 A_PEAK_G = H6['supports']['a_peak_g']                     # 0.736 g, peak burn acceleration (end of the last burn)
 LAY = {x['name']: x for x in P6['layout']}
@@ -148,23 +153,44 @@ def radiators(C, l1_reactive_W):
 
 
 # ============================================================================================================ tanks (DR-3D-01)
-def tanks(s, prop_t):
-    ts = fs.tanks(s); f = fs.farm_cfg(s); w, hr = f['wall_m'], f['head_ratio']
-    need6, _ = tanks3d.need_F1(s); base_prop = next(c for c in P6['mass']['F1']['cases'] if c['case'] == 'nom')['propellant_t']
-    k = prop_t/base_prop; need = {sp: v*k for sp, v in need6.items()}
+def tanks(s, prop_t, carried_t=None):
+    """Final T-A at the coupled inventory. The mission propellant splits by species in the production B01 proportions (operating_point.species);
+    the loaded liquid adds the residual (unusable) and the boil-off reserve; vessel capacity adds the ullage (fuel_storage.need_m3 rules).
+    C1.0 scaled the Phase VI bare-liquid need, which left out those allowances and used a stale D2 density: C1.1 corrects both."""
+    import operating_point
+    ts = fs.tanks(s); f = fs.farm_cfg(s); w, hr = f['wall_m'], f['head_ratio']; x0, x1 = fs.span(s)
+    al = fs.allowance(s); rho = fs.cfg(s)['density_kg_m3']; inv = operating_point.species(s); tot = sum(inv.values())
+    key = {'helium-3': 'helium_3', 'deuterium': 'deuterium', 'hydrogen': 'hydrogen'}
+    mission_t = {sp: prop_t*inv[key[sp]]/tot for sp in key}
+    load_f = 1+al['residual']+al['boiloff_reserve']
+    loaded_m3 = {sp: mission_t[sp]*1e3/rho[key[sp]]*load_f for sp in key}
+    need = {sp: v*(1+al['ullage']) for sp, v in loaded_m3.items()}
     dL, caps = tanks3d.stretch(s, ts, need); cap = caps(dL)
-    area = sum(tanks3d.area_at(t, dL) for t in ts); x0, x1 = fs.span(s)
-    fill = {sp: need[sp]/cap[sp] for sp in need}
+    area = sum(tanks3d.area_at(t, dL) for t in ts)
+    fill = {sp: loaded_m3[sp]/cap[sp] for sp in need}                                   # operational fill fraction (loaded liquid / capacity)
     per_vessel = []
     for t in ts:
-        v = fs.vessel_volume(t['a_env'], t['length']+dL, w, hr); rho = {'helium-3': 59.0, 'hydrogen': 70.8, 'deuterium': 162.4}[t['species']]
-        m_prop = v*fill[t['species']]*rho/1e3
-        per_vessel.append(dict(id=t['id'], species=t['species'], cls=t['tank_class'], az=t['azimuth_deg'], R=t['R'], a=t['a'], x0=t['x0'], x1=t['x1']+dL,
-                               volume_m3=v, prop_t=m_prop, axial_kN=m_prop*1e3*A_PEAK_G*G0/1e3))
+        sp = t['species']; v = fs.vessel_volume(t['a_env'], t['length']+dL, w, hr); share = v/cap[sp]
+        m_mis = mission_t[sp]*share; m_res = m_mis*al['residual']; m_rsv = m_mis*al['boiloff_reserve']; m_load = m_mis+m_res+m_rsv
+        per_vessel.append(dict(id=t['id'], species=sp, cls=t['tank_class'], az=t['azimuth_deg'], R=t['R'], a=t['a'], x0=t['x0'], x1=t['x1']+dL,
+                               volume_m3=v, loaded_m3=loaded_m3[sp]*share, ullage_m3=v-loaded_m3[sp]*share, fill=loaded_m3[sp]*share/v,
+                               mission_t=m_mis, residual_t=m_res, reserve_t=m_rsv, prop_t=m_load, axial_kN=m_load*1e3*A_PEAK_G*G0/1e3))
+    # thermal expansion: the 3 % ullage = 1 % vapour cushion (pressure control) + 2 % liquid expansion; allowed warm excursion = 2 % / beta
+    beta = {'helium-3': 0.20, 'hydrogen': 0.016, 'deuterium': 0.009}                     # 1/K near the storage points (saturated-liquid curves, PROTOTYPE)
+    T_store = {'helium-3': 3.0, 'hydrogen': 20.0, 'deuterium': 19.0}
+    expansion = [dict(species=sp, T_store_K=T_store[sp], beta_per_K=beta[sp], allowed_warm_K=0.02/beta[sp],
+                      note=('He-3 is 0.3 K below its 3.32 K critical point: its liquid expands ~20 %/K, so the 2 % allowance holds only +0.1 K; the 3 K stage must hold '
+                            '+/-0.05 K or the ullage must grow (problem C-11)') if sp == 'helium-3' else 'ample') for sp in key]
+    sums = {sp: sum(v['prop_t'] for v in per_vessel if v['species'] == sp) for sp in key}
     return dict(decision='DR-3D-01 APPROVED: T-A reference; T-B kept as mission-modular alternative; T-C research option (no densification adopted)',
-                propellant_t=prop_t, cp1_propellant_t=base_prop, scale=k, need_m3=need, added_length_m=dL, cp1_added_length_m=TK['alternatives'][0]['added_length_m'],
+                propellant_t=prop_t, mission_t=mission_t, loaded_t=sum(sums.values()), carried_t=sum(sums.values())-prop_t, loaded_by_species_t=sums,
+                vessel_mission_sum_t=sum(v['mission_t'] for v in per_vessel), allowances=dict(al, density_kg_m3=rho, split='production B01 proportions'),
+                loaded_m3=loaded_m3, need_m3=need, added_length_m=dL, cp1_added_length_m=TK['alternatives'][0]['added_length_m'], c10_added_length_m=20.70,
                 vessel_length_m=(x1-x0)+dL, farm_x=(x0, x1+dL), brow_x=(141.75+dL, 144.75+dL), ship_length_m=289.5+dL, capacity_m3=cap, fill=fill,
+                usable_m3={sp: mission_t[sp]*1e3/rho[key[sp]] for sp in key}, expansion=expansion,
                 shell_area_m2=area, cp1_shell_area_m2=TK['alternatives'][0]['shell_area_m2'], vessels=per_vessel,
+                c10_error='C1.0 per-vessel masses summed to 5,378 t against 5,468 t: they used fill x volume with a 162.4 kg/m3 D2 density (production 175.2) on '
+                          'a need without residual, reserve and ullage',
                 supports=dict(aft='each vessel on its aft skirt at the thrust deck (axial burn load, anchor)', forward='forward guide ring on the forward hoop (radial only, axial '
                               'slide for contraction: ' f'{fuel_loads.q(s)["thermal_contraction"]*(x1-x0)*1e3:.0f} mm on the historical length, '
                               f'{fuel_loads.q(s)["thermal_contraction"]*((x1-x0)+dL)*1e3:.0f} mm on the stretched barrel)',
@@ -318,7 +344,7 @@ def mru(s):
         cls = ('YARD' if p['key'] in ('reactor_ihx', 'shield', 'structure') else 'IN-FLIGHT (restricted)' if p['key'] in ('tac', 'ducts') else 'IN-FLIGHT (ORU)')
         items.append(dict(name=p['name'], t=t, env=e, oru=p['oru'], handling='robot / LOG-G1' if t <= 3.0 else 'MRU carriage', service=cls))
     def sweep(R_sw, r_c):
-        route = ((c['x'][0], *pz(270.0, r_c)), (c['x'][1], *pz(270.0, r_c))); near = []; ax = pz(270.0, r_c)
+        route = ((c['x'][0], *pz(270.0, r_c)), (MRU_X1, *pz(270.0, r_c))); near = []; ax = pz(270.0, r_c)
         def segdist(a0, a1, b0, b1, n=60):
             best = 9e9
             for i in range(n+1):
@@ -356,7 +382,7 @@ def mru(s):
     # rail: a single rail under the load (r 4.7) would sit 0.3 m under bus 3 (az 270, r 5.0): twin rails at az 270 +- 15 deg, r 4.6
     bus3 = pz(270.0, 5.0); single = math.dist(pz(270.0, 4.7), bus3)-0.25-0.09; twin = math.dist(pz(285.0, 4.6), bus3)-0.25-0.09
     rail = dict(single_rail_clear_to_bus3_m=single, twin_rail_clear_to_bus3_m=twin, layout='twin rails at az 255 and 285, r 4.6, 22 kg/m each',
-                rail_t=2*22.0*c['rail_m']/1e3, supports=f'rail chairs every 2.0 m onto the body-bay ring frames and keel longerons (PSA), {int(c["rail_m"]/2.0)+1} per rail',
+                rail_t=2*22.0*(MRU_X1-c['x'][0])/1e3, supports=f'rail chairs every 2.0 m onto the body-bay ring frames and keel longerons (PSA), {int((MRU_X1-c["x"][0])/2.0)+1} per rail',
                 chair_load_kN=(c['rating_t']+c['carriage_t'])*1e3*G0*A_PEAK_G/2/1e3)
     fixtures = [dict(id='MIF-A', name='heavy fixture adapter (reactor/IHX, TAC, gas ducts)', interface='four kinematic latch points (two cone, two flat) + two shear pins on the '
                      'equipment mount ring; the same pattern on the carriage cradle', mass_t=0.8),
@@ -375,16 +401,31 @@ def mru(s):
     decay = dict(unit_MWt=3.5/0.154, t_1h_W=3.5e6/0.154*0.066*(3600)**-0.2, t_1d_W=3.5e6/0.154*0.066*(86400)**-0.2, t_30d_W=3.5e6/0.154*0.066*(30*86400)**-0.2,
                  note='Way-Wigner decay heat (0.066 t^-0.2) on a long-run core: tens of kW after a month; the reactor/IHX needs active cooling during and after any move, '
                       'so its replacement is a yard operation')
-    ext = dict(item='H6a EM pump modules (7.5 t, outside the hull at the aft manifold)', interface='EXT-TA: provisional external transfer arm on a short rail at the drive-bay '
-               'hatch (two-joint luffing arm, 8 t at 6 m, PROTOTYPE, registered under FT-07)', mass_t=2.5,
-               note='handled only in coast with the HOT loop drained at that section; the hatch is the existing drive-bay hatch (OPEN in production)')
+    ext = dict(item='EXT-TA reusable external heavy-handling system (first user: H6a EM pump modules, 7.5 t)', interface='EXT-TA: provisional external transfer arm on a '
+               'short rail at the drive-bay hatch (two-joint luffing arm, 8 t at 6 m, PROTOTYPE, registered under FT-07, DR-C-04 APPROVED)', mass_t=2.5,
+               note='handled only in coast with the HOT loop drained at that section; the hatch is the existing drive-bay hatch (OPEN in production)',
+               architecture=dict(base='aft exterior rail (x -133.5..-125, az 270, 8.5 m) on two PSA aft-frame lug pairs; the arm travels on it and parks with four shear pins',
+                                 arm='two-joint luffing arm, 8 t at 6 m reach, 12 t at 3 m; joints are ORUs; tip carries the MIF-A heavy pattern or the MIF-B grapple',
+                                 users=[('H6a EM pump modules', 7.5, 'MIF-A'), ('HOT manifold / trunk sections (aft)', 4.0, 'MIF-A'),
+                                        ('L2 heat-pipe rows and NaK headers', 1.2, 'MIF-B'), ('WARM/LOW panel rows (aft reach)', 0.8, 'MIF-B'),
+                                        ('drive-bay hatch items and EVA cargo', 2.0, 'MIF-B')],
+                                 envelope='provisional reach envelope r 6 m sphere about the rail carriage (C1.0 geometry kept)',
+                                 handover='rail lugs EXT-L1..L4 and the park pins are SSI mounts for PSA (loads in SSI-1.1)'))
     return dict(items=items, envelope_max=big, swept_radius_m=R_sw, route=route, nearest=near[:8], flight=dict(item=big_f['name'], swept_radius_m=R_f, route_r=2.9, route=route_f, nearest=near_f[:8], clear=near_f[0][1] > 0.05), yard=dict(item=big['name'], swept_radius_m=R_sw, route_r=3.6, remove_first=yard_remove,
                 rule='the yard route for the reactor/IHX (and shield) runs on the lane centre r 3.6 after the sector-3 lane equipment listed is unbolted'), rail=rail, fixtures=fixtures, sequence=sequence, burn=burn,
-                recovery=recovery, decay=decay, external=ext, rating_t=c['rating_t'], route_m=c['rail_m'],
-                in_flight=[i['name'] for i in items if i['service'].startswith('IN-FLIGHT')], yard_items=[i['name'] for i in items if i['service'] == 'YARD'],
+                recovery=recovery, decay=decay, external=ext, rating_t=c['rating_t'], route_m=MRU_X1-c['x'][0], route_m_cp4=c['rail_m'],
+                in_flight=[i['name'] for i in items if i['service'].startswith('IN-FLIGHT')], rail_x=(c['x'][0], MRU_X1), route_m_c11=MRU_X1-c['x'][0],
+                handling=[dict(item=i['name'], t=i['t'], flight=('MRU carriage (restricted, after decay hold)' if i['service'].startswith('IN-FLIGHT (restricted)') else
+                                                                   'robot / LOG-G1' if i['handling'].startswith('robot') else 'MRU carriage' if i['service'] != 'YARD' else 'not handled in flight'),
+                               yard=('yard crane through the opened aft district wall, in two segments (W gamma layer, LiH neutron layer), not the MRU' if 'shield' in i['name'].lower()
+                                     else 'MRU carriage (yard route r 3.6) or yard crane' if i['t'] > 3.0 else 'robot / yard'),
+                               within_rating=i['t'] <= c['rating_t'] or 'shield' in i['name'].lower()) for i in items],
+                shield_rule=f'the {next(i["t"] for i in items if "shield" in i["name"].lower()):.1f} t shadow shield exceeds the {c["rating_t"]:.1f} t carriage rating: it is a yard '
+                            'item for yard handling (crane, two segments); the carriage rating governs in-flight items only, the largest being the TAC '
+                            f'{next(i["t"] for i in items if i["name"].startswith("Turbo")):.1f} t', yard_items=[i['name'] for i in items if i['service'] == 'YARD'],
                 claim='The carriage can move the reactor/IHX mass, but in-flight reactor servicing is NOT claimed: decay heat, activation and shutdown gamma make it a yard '
                       'operation; in flight the carriage serves the TAC (after a decay hold, restricted), and the ORU-class parts',
-                mass_t=dict(fixtures=sum(f['mass_t'] for f in fixtures), second_rail=22.0*c['rail_m']/1e3, burn_restraint=burn['mass_t'], ext_arm=ext['mass_t']))
+                mass_t=dict(fixtures=sum(f['mass_t'] for f in fixtures), second_rail=22.0*(MRU_X1-c['x'][0])/1e3, burn_restraint=burn['mass_t'], ext_arm=ext['mass_t']))
 
 
 # ============================================================================================================ module 10 (6)
@@ -418,7 +459,7 @@ def module10(s):
 
 
 # ============================================================================================================ mass ledger (7.5, 10)
-def ledger(s, rad, mr, cr):
+def ledger(s, rad, mr, cr, carried_t=0.0, extra_structure_t=0.0):
     rows = []
     def add(item, t, cat, owner, cls, note=''):
         rows.append(dict(item=item, t=t, cat=cat, owner=owner, cls=cls, note=note))
@@ -450,11 +491,16 @@ def ledger(s, rad, mr, cr):
     dry = sum(r['t'] for r in rows)
     payload = [dict(item='ECLSS emergency CO2 reserve (LiOH, 30 d for 4 persons)', t=0.16, cat='MISSION PAYLOAD')]
     dry_with_payload = dry+sum(p['t'] for p in payload)
-    m = mm.coupled_mission(s, CIRC+dry_with_payload*1e3)
+    m = mm.coupled_mission(s, CIRC+(dry_with_payload+carried_t+extra_structure_t)*1e3)
     coolant = dict(NaK_t=RD['nak']['transport']['length_m']*3*math.pi*(RD['nak']['transport']['D_m']/2)**2*780/1e3,
                    note='NaK transport inventory (inside the loop line); Li of the H6a inside the 565 t H6a line; WARM water and LOW ammonia inside the production radiators')
-    return dict(rows=rows, payload=payload, dry_added_t=dry, dry_with_payload_t=dry_with_payload, departure_t=m['departure_mass_kg']/1e3, propellant_t=m['propellant_kg']/1e3,
-                tankage_t=m['added_tank_kg']/1e3, end_t=m['end_mass_kg']/1e3, coolant=coolant)
+    owners = {}
+    for r in rows: owners.setdefault(r['item'], set()).add(r['owner'])
+    audit = dict(items=len(rows), duplicates=[k for k, v in owners.items() if len(v) > 1 or sum(1 for r in rows if r['item'] == k) > 1],
+                 rule='one row per physical item, one owner per row; supports split at the mount id (ISSA bracket / PSA frame lug)')
+    return dict(rows=rows, payload=payload, dry_added_t=dry, dry_with_payload_t=dry_with_payload, carried_t=carried_t, structure_t=extra_structure_t,
+                departure_t=m['departure_mass_kg']/1e3, propellant_t=m['propellant_kg']/1e3,
+                tankage_t=m['added_tank_kg']/1e3, end_t=m['end_mass_kg']/1e3, coolant=coolant, audit=audit)
 
 
 # ============================================================================================================ SSI handover (8)
@@ -512,9 +558,9 @@ def ssi(s, T, rad, mr, m10, cr):
        'shield', 'n/a', maturity='M1')
     c = LG4['carriage']
     it('MRU-RAIL', 'MRU heavy-carriage twin rails and park stations', 'ISSA (rails, chairs, locks) / PSA (frames, longerons)', mr['rail']['rail_t']+mr['burn']['mass_t'],
-       ((c['x'][0]+c['x'][1])/2,)+pz(270.0, 4.6), dict(x=c['x'], az=(255.0, 285.0), r=4.6),
+       ((c['x'][0]+MRU_X1)/2,)+pz(270.0, 4.6), dict(x=(c['x'][0], MRU_X1), az=(255.0, 285.0), r=4.6, note='SSI-1.1: forward end x 92.0, >= 0.5 m aft of the PSA hub cones'),
        [dict(id='MRU-CHAIRS', type='slide', pitch_m=2.0, note='rail chairs on frames; rail joints slide'), dict(id='MRU-PARK-D', type='anchor', x=c['x'][0]+2.0),
-        dict(id='MRU-PARK-W', type='anchor', x=c['x'][1]-2.0)], dict(chair_kN=mr['rail']['chair_load_kN'], park_lock_kN=(c['rating_t']+c['carriage_t'])*G0*a*1.5),
+        dict(id='MRU-PARK-W', type='anchor', x=MRU_X1-2.0)], dict(chair_kN=mr['rail']['chair_load_kN'], park_lock_kN=(c['rating_t']+c['carriage_t'])*G0*a*1.5),
        dict(growth='casing temperature, joints every 12 m'), f'in-flight swept radius {mr["flight"]["swept_radius_m"]:.2f} m at r 2.9: nearest {mr["flight"]["nearest"][0][0]} {mr["flight"]["nearest"][0][1]:.2f} m',
        'n/a', ['carriage power 20 kW from sector 3', 'data A/B'], 'casing interior 250-320 K', 'dead-man stop, pins drop')
     M = LG4['module10']
@@ -635,49 +681,216 @@ def svg_trans(T, mr, path):
     o.append('</svg>'); path.write_text('\n'.join(o))
 
 
+
+# ============================================================================================================ closeout (owner 2026-11-28 10:51Z)
+F1_THRUST_N = P6['hot']['F1']['a_g']*G0*next(c for c in P6['mass']['F1']['cases'] if c['case'] == 'nom')['end_t']*1e3   # 21.8 MN, the F1 drive (Phase VI a_g x end)
+
+
+def low_cases(RAD, C):
+    """DR-C-02: nominal LOW rejection vs maximum cryogenic recovery (installed 125 %) and degraded capacity, at the approved ~316 K."""
+    pr = RAD['preferred']; av = RAD['need']['avionics_W']; have = pr['low_have_at_T_W']; one = RAD['degraded']['low_one_loop']
+    rej = C['reject_operating_W']; rej_max = C['reject_installed_W']
+    rows = [dict(case='nominal (coolers at the operating point)', load_W=av+rej, capacity_W=have),
+            dict(case='maximum cryogenic recovery (all heads at the installed 125 %, re-cool after a fault, hours)', load_W=av+rej_max, capacity_W=have),
+            dict(case='one LOW loop lost, nominal', load_W=av+rej, capacity_W=have*one),
+            dict(case='one LOW loop lost, recovery', load_W=av+rej_max, capacity_W=have*one)]
+    for r in rows:
+        r['margin_W'] = r['capacity_W']-r['load_W']; r['ok'] = r['margin_W'] >= 0
+        r['T_needed_K'] = pr['T_low_K']*max(1.0, r['load_W']/r['capacity_W'])**0.25
+    lim = (have*one-av)/rej
+    return dict(T_K=pr['T_low_K'], rows=rows, recovery_limit_one_loop=lim,
+                rule=f'nominal margin {rows[0]["margin_W"]/1e3:.0f} kW; a full-rate re-cool (installed 125 %) uses the whole LOW margin ({rows[1]["margin_W"]/1e3:+.0f} kW, '
+                     f'i.e. at the limit); with one LOW loop lost the re-cool runs at <= {100*lim:.0f} % of the operating cooler input or LOW floats to '
+                     f'{rows[3]["T_needed_K"]:.0f} K for the recovery hours (C-14)',
+                hot_margin='HOT keeps the 20 % rule and the reactive-peak reserve unchanged (LOW and WARM close without HOT)',
+                brow='tabs end at r 37.0: the Brow protection envelope (shadow inside r 37) is unchanged; 8.0 m inside the r 45 Brow rim',
+                psa=dict(first_mode_min_Hz=1.0, tip_deflection_max_m=0.30, clearance_to_ring_rim_m=1.5,
+                         note='tab first mode >= 1 Hz (10x the 0.096 Hz global mode, 15x the 0.068 Hz ring spin); lateral tip deflection <= 0.30 m so 1.2 m of the 1.5 m '
+                              'clearance to the ring rim survives; thermal growth nil at 316 K (ammonia panels); two clevis lugs per blade on the PSA radiator root frame'))
+
+
+def pickup_fault(EL7):
+    """DR-C-03: controlled propulsion shutdown after an L1 pickup failure; power-transfer requirements."""
+    pumps = EL7['h6a_pump_W']; part = 0.15*pumps; sur = EL7['surplus_W']['EOL']; buf_J = 58.0*3.6e6; ramp = 30.0
+    bridge_J = max(0.0, ((pumps+part)/2-sur)*ramp)
+    essential = [('drive control, GNC and C&DH (A/B)', 0.35e6), ('H6a pumps at decay part flow (15 %)', part), ('L2 NaK pumps and TAC auxiliaries', 0.25e6),
+                 ('protection: forward defense sensors, shield cooling, buffer standby', 0.4e6), ('ECLSS, cabins, cryocoolers at operating input', None)]
+    return dict(doctrine='DR-C-03 APPROVED (Track F1 operational doctrine): an L1 pickup failure in a burn ends the burn by a controlled propulsion shutdown; continued full-power '
+                         'propulsion is not required',
+                sequence=['0 ms: pickup fault detected (bus undervoltage + converter trip); L1 bus isolators open; the essential drive-services bus transfers to the '
+                          'L2 tie and the defense buffer (automatic transfer < 50 ms)',
+                          '0-2 s: drive shutdown command; fuel feed throttled to zero; magnet and pulse systems to safe discharge (own stores)',
+                          f'0-{ramp:.0f} s: H6a pumps ramp from full flow ({pumps/1e6:.1f} MW) to the decay part flow ({part/1e6:.2f} MW); the buffer bridges the gap above the '
+                          f'L2 surplus ({bridge_J/1e6:.0f} MJ of {buf_J/1e6:.0f} MJ)',
+                          f'> {ramp:.0f} s: L2 carries the part-flow pumps and all essential loads; heat pumps off; reactive defense limited to buffer bursts after recharge',
+                          'cooldown: the drive and the HOT loop reject the drive decay and stored heat at part flow; restart only after the pickup is restored'],
+                requirements=[f'L2-to-drive-services bus tie rated >= {max(part, 3.0e6)/1e6:.1f} MW continuous, automatic transfer < 50 ms',
+                              f'defense buffer reserves >= {bridge_J/1e6:.0f} MJ (with 2x margin {2*bridge_J/1e6:.0f} MJ) for the shutdown bridge whenever the drive runs',
+                              f'H6a pump drives accept a 30 s ramp to 15 % flow from a {sur/1e6:.1f} MW (EOL) L2 surplus',
+                              'essential loads on the services bus: control, protection, coolant circulation and survival (list below)'],
+                essential=essential, part_flow_W=part, surplus_EOL_W=sur, bridge_J=bridge_J, buffer_J=buf_J,
+                open='the real shutdown transient (drive heat decay, HOT loop at part flow, Li freeze margins) and the cooldown are NOT verified: problem C-01 stays OPEN '
+                     '(owner: ISSA thermal with Track R)')
+
+
+def warm_machinery():
+    """DR-C-01: what runs at 451 K on the WARM loop, and what needs a separate thermal interface."""
+    rows = [('NaK insulation leak and structure heat', 'direct', 'none'), ('bus and converter losses (HVDC power stages)', 'direct, SiC/GaN-HT stages',
+             'junction <= 523 K: needs high-temperature power semiconductors (FT-09)'),
+            ('pump and fan motors on the WARM loop', 'direct, ceramic-insulated windings', 'winding class >= 523 K, magnetic or gas bearings (FT-09)'),
+            ('control electronics, sensors, lubricated mechanisms', 'SEPARATE: on the LOW loop (316 K) through cold plates', 'already in the 305 kW avionics LOW load'),
+            ('batteries and capacitors of the ride-through stores', 'SEPARATE: LOW loop', 'cell limit 330 K')]
+    return dict(T_K=451.0, supply_return_K=(440.0, 451.0), rows=[dict(item=a, interface=b, requirement=c) for a, b, c in rows],
+                register='FT-09 (new, PROVISIONAL): high-temperature power electronics and machinery for the 451 K WARM loop')
+
+
+def combined(s, RAD, MR, C, LGR):
+    """Combined ISSA + PSA ledger with the PSA Phase II structure (provisional) and the operating point it implies; tank check."""
+    prop = LGR['propellant_t']; T = None
+    for _ in range(8):
+        T = tanks(s, prop); L = ledger(s, RAD, MR, C, T['carried_t'], PSA_P2['delta_t'])
+        if abs(L['propellant_t']-prop) < 0.05: break
+        prop = L['propellant_t']
+    a_end = F1_THRUST_N/(L['end_t']*1e3)/G0
+    alt = None
+    prop2 = prop
+    for _ in range(8):
+        T2 = tanks(s, prop2); L2 = ledger(s, RAD, MR, C, T2['carried_t'], PSA_P2['alt']['delta_t'])
+        if abs(L2['propellant_t']-prop2) < 0.05: break
+        prop2 = L2['propellant_t']
+    alt = dict(variant=PSA_P2['alt']['variant'], departure_t=L2['departure_t'], propellant_t=L2['propellant_t'], added_length_m=T2['added_length_m'], ship_length_m=T2['ship_length_m'])
+    return dict(status='PROVISIONAL: PSA Phase II structure not confirmed (owner P2-D1..D5 pending); a sensitivity, not the configuration', psa=PSA_P2,
+                departure_t=L['departure_t'], propellant_t=L['propellant_t'], tankage_t=L['tankage_t'], end_t=L['end_t'], carried_t=L['carried_t'],
+                added_length_m=T['added_length_m'], ship_length_m=T['ship_length_m'], fill=T['fill'], a_end_g=a_end, thrust_N=F1_THRUST_N, alt=alt,
+                tank_verdict=(f'T-A accommodates it geometrically: +{T["added_length_m"]:.1f} m (ship {T["ship_length_m"]:.0f} m) with every species inside its ullage rule; but a '
+                              'longer farm column lowers the PSA global stability (already ~0.71 of flight thrust) and adds structure, so the point does not converge without '
+                              'a joint ISSA-PSA iteration (integration requirement I-01)'))
+
+
 # ============================================================================================================ main
 def main():
     s = spec.load()[0]
     E6 = P6['reconciliation']['electrical']; hp = E6['heat_pump']
     # iterate: dry mass -> propellant -> tank geometry -> cryo -> radiators -> dry mass
     prop = LD['propellant_t']; react0 = E6['sum_R']['continuous_reactive_W']-hp['proactive_W']
-    for _ in range(6):
+    for _ in range(12):
         T = tanks(s, prop); C = cryo(s, T['shell_area_m2']); RAD = radiators(C, react0); MR = mru(s); finalize_cryo(C, RAD['preferred'])
-        LGR = ledger(s, RAD, MR, C)
+        LGR = ledger(s, RAD, MR, C, T['carried_t'])
         if abs(LGR['propellant_t']-prop) < 0.05: break
         prop = LGR['propellant_t']
     EL7 = electrical(C, hp['proactive_W']); L2F = l2_failure(); ECL = eclss(); M10 = module10(s)
     SSI = ssi(s, T, RAD, MR, M10, C)
+    LOWC = low_cases(RAD, C); PF = pickup_fault(EL7); WM = warm_machinery(); CMB = combined(s, RAD, MR, C, LGR)
+    a_c11 = F1_THRUST_N/(LGR['end_t']*1e3)/G0
+    # SSI-1.1 additions: EXT-TA mounts, LOW-tab requirements, resolved disagreements, shared configuration block, joint items
+    ext = MR['external']['architecture']; m_arm = MR['external']['mass_t']+7.5
+    SSI['items'].append(dict(id='EXT-TA', name='EXT-TA external heavy-handling rail and arm (FT-07, provisional, DR-C-04)', owner='ISSA (rail, arm, pins) / PSA (aft frame lugs)',
+                             config='F1', maturity='M2', register='FT-07 (PROVISIONAL)', mass_t=MR['external']['mass_t'], cg=(-129.0,)+pz(270.0, 7.2),
+                             envelope=dict(x=(-133.5, -125.0), az=270.0, r=(6.5, 13.0), reach_m=6.0),
+                             mounts=[dict(id=f'EXT-L{k}', type='anchor' if k in (1, 2) else 'slide', x=-133.0+(k-1)//2*7.5, az=262.0 if k % 2 else 278.0, r=6.6) for k in (1, 2, 3, 4)],
+                             loads=dict(arm_moment_kNm=8.0*G0*6.0, lug_shear_kN=m_arm*G0*1.5/2, burn_axial_kN_parked=MR['external']['mass_t']*1e3*G0*A_PEAK_G/1e3,
+                                        note='handling in coast only (0 g): arm loads are inertial (0.05 m/s2 class) plus the tip moment; parked for burns'),
+                             thermal_expansion=dict(note='aft exterior 200-450 K: rail joints slide at EXT-L3/L4'), clearances='HOT trunk saddles 0.6 m, drive-bay hatch frame',
+                             removal='arm joints are ORUs; rail by EVA', utilities=['20 kW from sector 3', 'data A/B'], environment='aft exterior, drive radiation field after shutdown',
+                             failure='brakes hold on power loss; pins drop; load lashed', users=ext['users']))
+    for it_ in SSI['items']:
+        if it_['id'].startswith('RAD-LOWTAB'):
+            it_['requirements'] = LOWC['psa']; it_['maturity'] = 'M2 (DR-C-02 APPROVED)'
+        if it_['id'].startswith('RAD-L2'):
+            it_['mounts'][0]['x'] = 41.0; it_['mounts'][0]['note'] = 'structural interface station x 41.0 (owner SSI-D3); PSA verifies'
+        if it_['id'].startswith('FARM-'):
+            v = next(v for v in T['vessels'] if 'FARM-'+v['id'] == it_['id'])
+            it_['contents'] = dict(mission_t=v['mission_t'], residual_t=v['residual_t'], reserve_t=v['reserve_t'], loaded_m3=v['loaded_m3'], ullage_m3=v['ullage_m3'], fill=v['fill'])
+    SSI['disagreements'] = [dict(id='SSI-D1', topic='farm extension', resolution=f'RESOLVED (owner): the consolidated T-A value supersedes +18.2 m; after the final propellant '
+                                 f'reconciliation it is +{T["added_length_m"]:.2f} m (C1.0 said +20.70 m); PSA accepted 2026-11-28'),
+                            dict(id='SSI-D2', topic='propellant densification', resolution='RESOLVED (owner): T-A selected; T-C not adopted; T-B mission-modular and T-C research '
+                                 'alternatives kept; PSA withdrew the preference and keeps T-C only as a stability lever in its report'),
+                            dict(id='SSI-D3', topic='L2 frame station', resolution='RESOLVED (owner): x 41.0 is the preferred structural interface station; PSA verifies the load '
+                                 'path and the thermal machinery interfaces and returns a coordinated alternative if unsuitable (PSA had offered 40.8: superseded by the owner)')]
+    SSI['shared'] = dict(config=CONFIG, coordinate_system='ship axes: +X bow, +Z dorsal, azimuth from +Y toward +Z; metres, tonnes, kN; X datum = production layout (aft end of '
+                         'the drive unchanged)', dimensions=dict(ship_length_m=T['ship_length_m'], farm_x=T['farm_x'], brow_x=T['brow_x'], body_radius_m=6.5,
+                                                                   radiator_envelope=dict(blades=(90.0, 210.0, 330.0), r_max_m=37.0, hot_x=(-133.25, 41.02), l2_x=(41.02, 50.4),
+                                                                                          warm_x=(50.4, 72.9), low_x=(73.4, 93.4), low_tabs_x=RAD['preferred']['low_tab_x'])),
+                         tanks=[dict(id=v['id'], species=v['species'], x=(v['x0'], v['x1']), R=v['R'], az=v['az'], a=v['a']) for v in T['vessels']],
+                         load_cases=[dict(id='LC-ENV', what='ISSA machinery design envelope', axial_g=A_PEAK_G, lateral_g=0.05,
+                                          note='Phase VI F1 end-of-burn value, kept as the conservative machinery envelope'),
+                                     dict(id='LC-C11', what='end of the last burn, C1.1 ledger without the PSA structure', axial_g=a_c11, thrust_N=F1_THRUST_N),
+                                     dict(id='LC-CMB', what='end of the last burn with the PSA Phase II structure (provisional)', axial_g=CMB['a_end_g'],
+                                          note=f'PSA computed 0.56 g on CP4 stations'),
+                                     dict(id='LC-COAST', what='coast', axial_g=0.0, note='spin interfaces only')],
+                         keepouts=[dict(id='K-RING', what='ring sweep', x=(93.65, 106.95), r_max_m=31.5), dict(id='K-BROW', what='Brow shadow (radiators and tabs)', r_max_m=37.0),
+                                   dict(id='K-HUBCONE', what='PSA hub cones / collar', x=(93.0, 94.0), note='MRU rail ends at x 92.0'),
+                                   dict(id='K-MRU-F', what='in-flight MRU swept tube', r_lane_m=MR['flight']['route_r'], radius_m=MR['flight']['swept_radius_m'], x=MR['rail_x']),
+                                   dict(id='K-MRU-Y', what='yard MRU swept tube', r_lane_m=MR['yard']['route_r'], radius_m=MR['yard']['swept_radius_m'], x=MR['rail_x']),
+                                   dict(id='K-PLUME', what='drive plume cone', half_angle_deg=15.0), dict(id='K-SHADOW', what='L2 shadow-shield cones', half_angle_deg=12.5)],
+                         ownership=SSI['ownership_rule'], single_source='this file is the one definition of positions, masses, mounts, load cases and keep-outs for both '
+                         'workstreams; PSA returns reactions and stiffness against these mount ids')
+    SSI['joint'] = [dict(id='J-01', what='DR-C-05 defense-buffer relocation to r 4.6-5.5 (az-90 dry-store column forward extraction)', state='INVESTIGATE in the coordinated '
+                         'integration; adopt only if electrical, thermal, structural and maintenance requirements hold; else the yard-only aft route stays',
+                         owner='ISSA (buffers, buses) + PSA (frames)'),
+                    dict(id='J-02', what='concept G: part of the H2 aft (x -70..-20)', state='STUDY only if the owner starts it; conflicts with the body bay (dry store, MRU '
+                         'lane, buses) and adds LH2 nuclear heating to a tight LOW budget', owner='ISSA + PSA'),
+                    dict(id='J-03', what='MRU rail forward end x 92.0 vs hub cones', state='DONE in SSI-1.1', owner='ISSA')]
+    SSI['psa_phase2'] = dict(commit=PSA_P2['commit'], received=dict(a_end_g=PSA_P2['a_end_g'], EI_Nm2=PSA_P2['EI'], f1_Hz=PSA_P2['f1_Hz'],
+                                                                     h6a_anchor_kN=dict(operating=49, ultimate_departure=75, ultimate_end_of_burn=174),
+                                                                     structural_shortening_mm_per_section=(32, 39)),
+                             h6a_slide_travel_mm=dict(thermal=H6['supports']['end_travel_mm'], structural=(32, 39),
+                                                      total=(H6['supports']['end_travel_mm'][0]+32, H6['supports']['end_travel_mm'][1]+39),
+                                                      note='the slides take thermal growth plus the PSA structural shortening; bellows bound 10 mm/m covers it'))
     cp4 = dict(departure_t=LD['departure_t'], propellant_t=LD['propellant_t'], dry_added_t=LD['dry_added_t'], tankage_t=LD['tankage_t'],
                ship_length_m=TK['alternatives'][0]['ship_length_m'], farm_added_m=TK['alternatives'][0]['added_length_m'])
     reg = [('PWR-L2U', 'M3', 'M3'), ('PWR-DIST', 'M2', 'M2'), ('TH-H6A', 'M2', 'M2'), ('TH-H6A-AFT', 'M3', 'M3'), ('RAD-HOT', 'M2', 'M2 (forward fins drawn)'),
            ('RAD-L2', 'M3', 'M3'), ('RAD-WL', 'M2', 'M2 (451 K WARM, LOW tabs drawn)'), ('EPS-L1', 'M2', 'M2 (peak-rated)'), ('EPS-BUS', 'M2', 'M2'), ('EPS-STOR', 'M2', 'M2'),
            ('ECLSS-RING', 'M2', 'M2'), ('ECLSS-HUB', 'M3', 'M3'), ('LOG-G1', 'M3', 'M3'), ('MRO-WS', 'M2', 'M2'), ('MRO-ROB', 'M2', 'M2 (MRU architecture, EXT-TA)'),
            ('PROP-FARM', 'M2', 'M2 (final T-A)'), ('PROP-CRYO', 'M2', 'M2 (final T-A)'), ('GNC-CDH', 'M1', 'M1'), ('STRUCT-F1', 'M2', 'M2 (interfaces to PSA)')]
-    problems = [dict(id='C-01', sev='OPEN', what='L1 pickup fault in a burn forces a controlled drive shutdown (H6a pumps exceed the L2 surplus)', owner='owner / Track R'),
-                dict(id='C-02', sev='OPEN', what='WARM machinery at 451 K: power electronics on the WARM loop need ~200 C junction parts (SiC/GaN class)', owner='ISSA (next detail)'),
-                dict(id='C-03', sev='OPEN', what='az-90 dry-store column cannot slide forward past the retained defense buffers (yard extraction aft or DR-C-05)', owner='owner'),
-                dict(id='C-04', sev='OPEN', what='primary structure mass, frames and limit loads: PSA (not in this ledger)', owner='PSA'),
+    problems = [dict(id='C-01', sev='OPEN', what='L1 pickup fault: controlled shutdown is the approved doctrine (DR-C-03); the shutdown transient and cooldown are not verified',
+                     owner='ISSA thermal + Track R'),
+                dict(id='C-02', sev='REGISTERED', what='WARM machinery at 451 K needs high-temperature power stages and windings (FT-09); sensitive items on the LOW loop',
+                     owner='ISSA (FT-09)'),
+                dict(id='C-03', sev='OPEN', what='az-90 dry-store column: forward extraction blocked by the retained buffers; yard-only aft route stays unless J-01 succeeds',
+                     owner='ISSA + PSA (J-01)'),
+                dict(id='C-04', sev='OPEN', what='primary structure: PSA Phase II gives ~1.2 kt (provisional); with it the operating point moves to '
+                     f'{CMB["departure_t"]:,.0f} t and does not converge without a joint iteration', owner='PSA + ISSA (I-01)'),
                 dict(id='C-05', sev='OPEN', what='shielding: the OpenMC surrogate gives a sensitivity only; no crew dose or shielding approval', owner='Track R'),
-                dict(id='C-06', sev='OPEN', what='EXT-TA external arm and the drive-bay hatch are provisional (FT-07 register note)', owner='owner'),
+                dict(id='C-06', sev='REGISTERED', what='EXT-TA is a provisional FT-07 system (DR-C-04); drive-bay hatch OPEN in production', owner='ISSA (FT-07)'),
                 dict(id='C-07', sev='MITIGATED', what='NaK loop loss: safe degraded state at ~7 MWe, highest demand band sheds 1.2 MW', owner='ISSA'),
                 dict(id='C-08', sev='MITIGATED', what='ECLSS compound case (ring A + B unit + hub unit): 30-day CO2 reserve, no eighth unit', owner='ISSA'),
-                dict(id='C-09', sev='OPEN', what='TAC / EM-pump excitation bands are PROTOTYPE estimates for PSA modal work', owner='ISSA/PSA'),
-                dict(id='C-10', sev='CLOSED', what='restart packs were counted in both the L2 and the storage lines (-6.45 t)', owner='ISSA')]
-    readiness = [dict(area='geometry (fictional development model)', state='READY for coordinated integration', note='all 19 systems at target maturity; review file regenerated'),
-                 dict(area='mass', state='READY (ISSA side)', note='one owner per item; structure and shielding OPEN'),
-                 dict(area='structure', state='WAITING on PSA Phase II', note='SSI-1.0 handed over; reactions and stiffness come back from PSA'),
-                 dict(area='thermal', state='READY with C-02', note='every zone closes; HOT reserve positive at the reactive peak'),
-                 dict(area='electrical', state='READY with C-01', note='peak-rated L1; pickup-fault doctrine stated'),
+                dict(id='C-09', sev='OPEN', what='TAC / EM-pump excitation bands are PROTOTYPE estimates; PSA local frame modes OPEN (Phase III)', owner='ISSA/PSA'),
+                dict(id='C-10', sev='CLOSED', what='restart packs were counted in both the L2 and the storage lines (-6.45 t)', owner='ISSA'),
+                dict(id='C-11', sev='OPEN', what='He-3 stored 0.3 K below its critical point expands ~20 %/K: the 2 % expansion allowance holds only +0.1 K; the 3 K '
+                     'stage must hold +/-0.05 K or the He-3 ullage grows', owner='ISSA cryo + Track R'),
+                dict(id='C-12', sev='CLOSED', what=f'C1.0 vessel masses summed to 5,378 t vs 5,468 t (stale D2 density, no residual/reserve/ullage): reconciled in C1.1',
+                     owner='ISSA'),
+                dict(id='C-13', sev='CLOSED', what='25.3 t shield vs 24.7 t carriage: the shield is a yard item for yard handling (two segments); the rating governs in-flight '
+                     'items only', owner='ISSA'),
+                dict(id='C-14', sev='OPEN', what='LOW with one loop lost cannot take the full 125 % cryo recovery: recovery limited or LOW floats warmer for hours',
+                     owner='ISSA (operating rule)')]
+    readiness = [dict(area='geometry (fictional development model)', state='ACCEPTED (owner) / READY for coordinated integration', note='19 systems at accepted maturity; C1.1 review file'),
+                 dict(area='mass', state='READY (ISSA side)', note='one owner per item; structure provisional (PSA), shielding OPEN'),
+                 dict(area='structure', state='PSA Phase II received (provisional)', note='SSI-1.1 is the shared definition; I-01 joint iteration next'),
+                 dict(area='thermal', state='READY with C-01, C-11, C-14', note='every zone closes; HOT reserve unchanged'),
+                 dict(area='electrical', state='READY', note='peak-rated L1; pickup-fault transfer requirements defined'),
                  dict(area='canon / Drive', state='NOT STARTED (not authorized)', note='nothing written to Drive; production ship unchanged'),
-                 dict(area='production generators', state='NOT STARTED', note='integration into src/ after owner review and PSA Phase II')]
-    owner_q = [dict(id='DR-C-01', q='Accept WARM at 451 K (temperature redistribution) instead of new WARM area?', rec='yes: the only closure that keeps HOT at the reactive peak'),
-               dict(id='DR-C-02', q='Accept the LOW forward tip extensions beside the rings (r 31.5-37)?', rec='yes'),
-               dict(id='DR-C-03', q='Accept the pickup-fault doctrine (controlled drive shutdown)?', rec='yes for F1; Track R keeps it OPEN'),
-               dict(id='DR-C-04', q='Register EXT-TA as a provisional FT-07 item?', rec='yes'),
-               dict(id='DR-C-05', q='Lower the defense buffers to r 4.6-5.5 so the az-90 dry-store column can slide forward?', rec='yes, at the next detail pass')]
+                 dict(area='production generators', state='NOT STARTED', note='after the coordinated ISSA-PSA integration and owner review')]
+    integ = [dict(id='I-01', what='converge the operating point with the PSA structure: structure mass -> propellant -> farm length -> column stability -> structure',
+                  owner='ISSA + PSA'),
+             dict(id='I-02', what='PSA verifies the L2 station x 41.0 load path and returns a coordinated alternative if unsuitable', owner='PSA'),
+             dict(id='I-03', what='LOW tab supports: first mode >= 1 Hz, tip deflection <= 0.30 m, two clevis lugs per blade on the radiator root frame', owner='PSA (lugs) / ISSA (spar)'),
+             dict(id='I-04', what='EXT-TA rail lugs EXT-L1..L4 on the aft frames (loads in SSI-1.1)', owner='PSA'),
+             dict(id='I-05', what='H6a slides: thermal travel plus 32-39 mm structural shortening per section', owner='ISSA (done) / PSA (anchor reactions)'),
+             dict(id='I-06', what='J-01 defense-buffer relocation investigation', owner='ISSA + PSA'),
+             dict(id='I-07', what='local frame modes vs TAC 600-800 Hz and EM-pump 50-400 Hz excitation', owner='PSA Phase III'),
+             dict(id='I-08', what='ring spin 0.068 Hz vs first global mode 0.096 Hz (ratio 1.4): PSA to confirm separation', owner='PSA')]
+    owner_q = []
     out = dict(status=f'STUDY / PROTOTYPE, Track F1 working configuration {CONFIG}; noncanon; production unchanged', config=CONFIG,
-               decisions=[dict(id='DR-3D-01', what='T-A reference, resized to the current inventory', state='IMPLEMENTED'),
+               decisions=[dict(id='ACCEPT', what='WF-F1-C1.0 accepted as the working fictional architecture; 19 systems at their maturity (2026-11-28 10:51Z)', state='ACCEPTED'),
+                          dict(id='DR-C-01', what='WARM at 451 K on the existing area; FT-09 high-temperature machinery; sensitive items on LOW', state='IMPLEMENTED'),
+                          dict(id='DR-C-02', what='LOW 13 m forward tip extensions, ~316 K; Brow envelope kept; PSA support requirements', state='IMPLEMENTED'),
+                          dict(id='DR-C-03', what='controlled propulsion shutdown after an L1 pickup failure; transfer sequence and requirements', state='IMPLEMENTED (C-01 OPEN)'),
+                          dict(id='DR-C-04', what='EXT-TA registered under FT-07 as a reusable external heavy-handling system', state='IMPLEMENTED (register, SSI mounts)'),
+                          dict(id='DR-C-05', what='buffer relocation investigated in coordinated integration; yard-only aft route kept meanwhile', state='REGISTERED (J-01)'),
+                          dict(id='SSI-D1..D3', what='T-A value after reconciliation; no densification; L2 interface x 41.0', state='RESOLVED (SSI-1.1)'),
+                          dict(id='DR-3D-01', what='T-A reference, resized to the current inventory', state='IMPLEMENTED'),
                           dict(id='DR-3D-02', what='FT-03 component set (0.94 / 0.90 / 0.97 / 2 %), 896 K L2, 9.38 m', state='IMPLEMENTED (register)'),
                           dict(id='DR-3D-03', what='forward L2 kept; aft placement a research alternative', state='IMPLEMENTED'),
                           dict(id='DR-3D-04', what='forward-pointing HOT fins, 1.47 m manifold pitch', state='IMPLEMENTED (geometry, ledger, register)'),
@@ -685,7 +898,8 @@ def main():
                           dict(id='CP4-MRU', what='heavy MRU transport architecture', state='IMPLEMENTED (M2)'),
                           dict(id='CP4-M10', what='body-bay module 10', state='IMPLEMENTED (interfaces; az-90 yard route finding)')],
                tanks=T, radiators=RAD, cryo=C, electrical=EL7, l2_failure=L2F, eclss=ECL, mru=MR, module10=M10, ledger=LGR, cp4=cp4, registry=reg,
-               problems=problems, readiness=readiness, owner_questions=owner_q)
+               problems=problems, readiness=readiness, owner_questions=owner_q, low_cases=LOWC, pickup_fault=PF, warm_machinery=WM, combined=CMB,
+               integration=integ, load_c11_g=a_c11, c10=dict(departure_t=8655.0, propellant_t=5468.0, added_length_m=20.70, ship_length_m=310.2, sha='ec7c7a3'))
     (R/'i3d_consolidated.json').write_text(json.dumps(out, indent=1, default=str)); (R/'i3d_structure_interface.json').write_text(json.dumps(SSI, indent=1, default=str))
     svg_long(T, RAD, MR, R/'i3d_c_longitudinal.svg'); svg_trans(T, MR, R/'i3d_c_transverse.svg')
     print(f'propellant {LGR["propellant_t"]:.0f} t, dry {LGR["dry_added_t"]:.1f} t, departure {LGR["departure_t"]:.0f} t (CP4 {LD["departure_t"]:.0f}), farm +{T["added_length_m"]:.2f} m '

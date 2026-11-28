@@ -180,3 +180,17 @@ input bases (934 kW installed vs 776 kW mixed); corrected need is 1.2 x (avionic
 for the TAC; the reactor/IHX is a shipyard job after unbolting the sector-3 ride-through units and switchgear; twin rails az 255/285. Module 10
 cannot slide forward past the retained buffers (yard extraction aft, or DR-C-05). Review view layers C1-C8 in `REVIEW_I3D.blend`; page
 sections c0-c6. Owner questions DR-C-01..05; problems C-01..C-10; SSI disagreements SSI-D1..D3 stay with PSA.
+
+## Closeout WF-F1-C1.1 and SSI-1.1 (2026-11-28)
+
+Owner brief 2026-11-28 10:51Z: C1.0 (ec7c7a3) accepted as the working fictional architecture; DR-C-01..05 approved; bounded closeout, no new
+research phase. `consolidate.py` now writes C1.1. Correction: C1.0 vessel masses summed to 5,378 t vs 5,468 t (bare-liquid need scaled, D2
+162.4 instead of 175.2 kg/m3). C1.1 splits the mission propellant in the production B01 proportions, loads residual 1.5 % and boil-off reserve
+0.5 % (carried unburned to the end mass) and sizes capacity with 3 % ullage (2 % expansion + 1 % vapour cushion): mission 5,736 t,
+loaded 5,851 t, departure 9,078 t, T-A +25.45 m, ship 315.0 m; the larger farm raises
+the cryo input, so LOW settles at 320 K (owner said ~316). He-3 at 3 K expands ~20 %/K (C-11). Shield 25.3 t is yard-only (C-13). EXT-TA
+is a reusable aft rail + arm (FT-07); FT-09 (new) covers 451 K WARM machinery. Pickup-fault transfer: L2 tie >= 3 MW, transfer < 50 ms, buffer
+bridge 82 MJ. SSI-1.1 adds the shared block (coordinates, dimensions, tanks, load cases LC-ENV/C11/CMB, keep-outs),
+EXT-TA mounts, MRU rail end x 92.0, L2 station x 41.0 (owner), joint items J-01..03. With PSA Phase II H:hub:F1 (c3138d8, provisional +1,073 t)
+the point moves to 13,193 t, +48.7 m, 338 m, 0.46 g: T-A holds it, but it does not
+converge without the joint iteration I-01. Page section k0.

@@ -515,7 +515,7 @@ def hook5(r6):
         old.hide_viewport = True
         for o in old.all_objects: o.hide_render = True
     cf = coll('WORK_I3D_X_FARM_TA_FINAL', root); X5['FARM'] = cf; mats = {k: mat(f'I3D_{k}', v, 1.0) for k, v in SPC.items()}
-    base = dict(track='F1 (fiction)', config='WF-F1-C1.0', maturity='M2 arrangement', kind='machinery')
+    base = dict(track='F1 (fiction)', config=CX['config'], maturity='M2 arrangement', kind='machinery')
     for t in ts:
         cyl_x(f'I3D_X_{t["id"]}_Stretch', (x1+dL/2, t['y'], t['z']), dL, t['a_env'], t['a_env'], cf, mats[t['species']],
               dict(base, meaning=f'final T-A barrel of vessel {t["id"]} ({t["species"]}), +{dL:.2f} m (current coupled inventory)'))
@@ -552,13 +552,13 @@ def hook5(r6):
         if o: o.hide_render = True; o.hide_viewport = True
     mr = mat('I3D_mru_rail', (0.79, 0.52, 0.16), 1.0)
     for az in (255.0, 285.0):
-        a = math.radians(az); p0 = (cr['x'][0], 4.6*math.cos(a), 4.6*math.sin(a)); p1 = (cr['x'][1], 4.6*math.cos(a), 4.6*math.sin(a))
+        a = math.radians(az); p0 = (cr['x'][0], 4.6*math.cos(a), 4.6*math.sin(a)); p1 = (MR['rail_x'][1], 4.6*math.cos(a), 4.6*math.sin(a))
         seg(f'I3D_X_MRU_Rail_{az:.0f}', p0, p1, 0.09, cm, mr, dict(base, register='FT-07', meaning=f'MRU twin rail az {az:.0f}, r 4.6 (clear of bus 3 by '
                                                                                                    f'{MR["rail"]["twin_rail_clear_to_bus3_m"]:.2f} m)'))
     a = math.radians(270.0)
     _box_at('I3D_X_MRU_Cradle', (1.4, 0.7, 0.25), (-70.0, 3.9*math.cos(a), 3.9*math.sin(a)), cm, mat('I3D_mru_cradle', (0.92, 0.62, 0.10), 1.0),
             dict(base, meaning='carriage cradle with the MIF-A heavy fixture pattern (2 cone + 2 flat latches, 2 shear pins)'))
-    for nm_, x in (('District', cr['x'][0]+2.0), ('Workshop', cr['x'][1]-2.0)):
+    for nm_, x in (('District', cr['x'][0]+2.0), ('Workshop', MR['rail_x'][1]-2.0)):
         _box_at(f'I3D_X_MRU_Park_{nm_}', (0.6, 1.4, 0.3), (x, 4.6*math.cos(a), 4.6*math.sin(a)), cm, mat('I3D_mru_park', (0.55, 0.35, 0.27), 1.0),
                 dict(base, kind='structural interface', meaning=f'MRU park station ({nm_}): four shear-pin burn locks onto the PSA frame'))
     arm = mat('I3D_ext_ta', (0.95, 0.85, 0.20), 1.0); b0 = (-131.0, 0.0, -7.0)
@@ -567,7 +567,7 @@ def hook5(r6):
     # 5 removal swept volumes (transparent) and SSI markers
     cs = coll('WORK_I3D_X_REMOVAL_SWEEPS', root); X5['SWEEP'] = cs
     for tag, rr, R_ in (('Flight', MR['flight']['route_r'], MR['flight']['swept_radius_m']), ('Yard', MR['yard']['route_r'], MR['yard']['swept_radius_m'])):
-        p0 = (cr['x'][0], rr*math.cos(a), rr*math.sin(a)); p1 = (cr['x'][1], rr*math.cos(a), rr*math.sin(a))
+        p0 = (cr['x'][0], rr*math.cos(a), rr*math.sin(a)); p1 = (MR['rail_x'][1], rr*math.cos(a), rr*math.sin(a))
         seg(f'I3D_X_Sweep_{tag}', p0, p1, R_, cs, _ghost(f'I3D_sweep_{tag}', (0.95, 0.75, 0.25) if tag == 'Flight' else (0.85, 0.25, 0.25), 0.18),
             dict(base, kind='removal path', meaning=f'{tag} MRU swept tube: {MR[tag.lower()]["item"]}, r {R_:.2f} m at lane radius {rr}'))
     ck = coll('WORK_I3D_X_SSI_MARKERS', root); X5['SSI'] = ck; mk = {'anchor': mat('I3D_ssi_anchor', (0.85, 0.10, 0.10), 1.0), 'slide': mat('I3D_ssi_slide', (0.10, 0.55, 0.85), 1.0),
@@ -618,7 +618,7 @@ def hook5(r6):
     for vn, keep in views.items():
         vl = sc.view_layers.get(vn) or sc.view_layers.new(vn)
         for ch_ in vl.layer_collection.children: apply(ch_, keep)
-    sc.view_layers[0].name = 'C1_COMPLETE_F1_C1.0'
+    sc.view_layers[0].name = 'C1_COMPLETE_F1_' + CX['config'].split('-')[-1]
 
 
 def render5():

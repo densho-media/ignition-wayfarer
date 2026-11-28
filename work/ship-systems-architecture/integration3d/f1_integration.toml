@@ -4,7 +4,7 @@
 
 [config]
 reference = "WF-F1-P6.0"
-working = "WF-F1-C1.0"                # consolidation (owner 2026-11-28 09:15Z): integration3d/consolidate.py supersedes the CP4 ledger
+working = "WF-F1-C1.1"                # closeout (owner 2026-11-28 10:51Z, C1.0 accepted): integration3d/consolidate.py supersedes C1.0 and the CP4 ledger
 comparisons = ["WF-F0-P6.0", "WF-R-P6.0"]
 mass_note = "8,190 t nominal departure is a working estimate (owner 2026-11-28), recomputed by each checkpoint's ledger"
 hsfp = "research -> physics -> constraint -> engineering -> adaptation -> culture -> identity -> style"

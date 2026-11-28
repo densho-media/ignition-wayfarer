@@ -82,8 +82,9 @@ def main():
     page = (H / 'report_template.html').read_text()
     h6 = P5['transport']['topologies']['H6a']; rs = P5['radiation_summary']
     dep6 = {k: P6['mass'][k]['cases'][1]['departure_t'] for k in ('R', 'F0', 'F1')}
-    _lg = json.loads((R/'i3d_ledger.json').read_text()) if (R/'i3d_ledger.json').exists() else None; _rd = json.loads((R/'i3d_radiators.json').read_text()) if (R/'i3d_radiators.json').exists() else None
-    for k, v in dict(I3D_DEP=f"{_lg['departure_t']:,.0f}" if _lg else '–', I3D_L2=f"{_rd['section']['length_m']:.1f}" if _rd else '–', I3D_HOT=f"{_rd['hot_budget']['remaining_mitigated_W']/1e9:.2f}" if _rd else '–', I3D=report_i3d.build(), PHASE6=report6.build(), P6_F1=f"{dep6['F1']:,.0f}", P6_F0=f"{dep6['F0']:,.0f}", P6_R=f"{dep6['R']:,.0f}",
+    _cx = json.loads((R/'i3d_consolidated.json').read_text()) if (R/'i3d_consolidated.json').exists() else None
+    _lg = _cx['ledger'] if _cx else (json.loads((R/'i3d_ledger.json').read_text()) if (R/'i3d_ledger.json').exists() else None); _rd = json.loads((R/'i3d_radiators.json').read_text()) if (R/'i3d_radiators.json').exists() else None
+    for k, v in dict(I3D_DEP=f"{_lg['departure_t']:,.0f}" if _lg else '–', I3D_L2=f"{_rd['section']['length_m']:.1f}" if _rd else '–', I3D_HOT=f"{_cx['radiators']['budget']['reserve_nominal_W']/1e9:.2f}" if _cx else '–', I3D_CFG=_cx['config'] if _cx else '–', I3D_LEN=f"{_cx['tanks']['ship_length_m']:.1f}" if _cx else '–', I3D=report_i3d.build(), PHASE6=report6.build(), P6_F1=f"{dep6['F1']:,.0f}", P6_F0=f"{dep6['F0']:,.0f}", P6_R=f"{dep6['R']:,.0f}",
                      P6_HEAD=f"{P6['radiators']['F1']['hot_headroom_W']/1e6:,.0f}", P6_L2=f"{P6['radiators']['F1']['length_m']:.1f}",
                      P6_L1=f"{P6['reconciliation']['electrical']['sum_R']['continuous_proactive_W']/1e6:.1f}").items():
         page = page.replace('{{' + k + '}}', v)
