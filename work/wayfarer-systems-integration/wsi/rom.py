@@ -32,7 +32,7 @@ def cage_EI(rail_t, n_rails=6, r=mdl.R_RAIL, E=68.9e9, rho=2700.0, L=mdl.X_CAGE_
     return E*n_rails*A*r*r/2
 
 
-def mesh(P, h2_aft=None, dx=2.0, rail_t=170.0, E=68.9e9, rho=2700.0, r_rail=mdl.R_RAIL, farm_factor=FARM_EI_FACTOR, struct_t=1222.9, extra=None):
+def mesh(P, h2_aft=None, dx=2.0, rail_t=117.62, E=68.9e9, rho=2700.0, r_rail=mdl.R_RAIL, farm_factor=FARM_EI_FACTOR, struct_t=1222.9, extra=None):
     use_point(P); cfg = c11.config(1.0, True, h2_aft); bodies = cfg['bodies']
     x_aft = X_RING-6.0; x_fwd = cfg['brow'][1]+1.0
     xs = np.arange(x_aft, x_fwd+1e-9, dx); n = len(xs); m = np.zeros(n); J = np.zeros(n)
@@ -94,6 +94,9 @@ def stability(ms, partial=1.0, lam_hi=12.0, nbasis=40, cal=True):
     ahead = np.array([m[i+1:].sum() for i in range(len(xs)-1)])           # mass forward of each element
     N = -T*(ahead+0.0)/m.sum(); N[:i_ring] = 0.0                            # compression forward of the thrust station
     G = _kg(xs, N); Lf = np.zeros_like(K); Lf[2*i_ring, 2*i_ring+1] = T     # lateral thrust component T * slope at the ring
+    d = np.diag(M)
+    if not np.all(np.isfinite(d)) or d.min() <= 0:
+        raise ValueError(f'ROM mass matrix: min {d.min()} finite {np.all(np.isfinite(d))}')
     w2, V = sla.eigh(K, M); keep = w2 > (2*math.pi*0.003)**2; V = V[:, keep][:, :nbasis]
     k = V.T @ K @ V; mm_ = V.T @ M @ V; g = V.T @ G @ V; lf = V.T @ Lf @ V
     def status(lam):
