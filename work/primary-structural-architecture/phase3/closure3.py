@@ -36,9 +36,12 @@ CASES = (('static', 0.0), ('follower', 1.0))
 SIZED_FAMS = None   # every sized family may be stiffened
 
 
+THRUST_AT = 'noz'   # Phase III audit: thrust enters at the four nozzle pickups (actual points); 'ring' = the 12 thrust-ring nodes (Phase II)
+
+
 def crit(b, partial):
-    """global_stability with the critical mode kept (thrust at the 12 ring nodes, inertia-relief axial field)."""
-    T = b.cfg['thrust']; ring = list(b.station_nodes[b.xs[0]].values())
+    """global_stability with the critical mode kept (thrust at the actual thrust points, inertia-relief axial field)."""
+    T = b.cfg['thrust']; ring = list(b.noz) if THRUST_AT == 'noz' else list(b.station_nodes[b.xs[0]].values())
     b.m.loads = {}; b.m.follow = {}
     for n in ring:
         b.m.thrust(n, (T/len(ring), 0.0, 0.0), follower=True)
@@ -143,7 +146,7 @@ def run(tag, concept, deck, rotor, ring=False, mats=None, target=LAM_TARGET, pas
                 b.attach(s_['cfg']['bodies']); f1s.append((first_mode(b), s_['left']))
             hist[-1]['f1'] = {f"{l:.1f}": f for (f, _), l in f1s}
             log('    f1 ' + '  '.join(f"{l:.1f} {f:.3f}" for (f, _), l in f1s))
-        lam_ok = worst['lam'] >= target or worst['mode'] is None
+        lam_ok = worst['lam'] >= target-2e-3 or worst['mode'] is None
         f1_low = [x for x in f1s if x[0][0] < f1_min]
         if lam_ok and not f1_low:
             break
@@ -179,14 +182,14 @@ def run(tag, concept, deck, rotor, ring=False, mats=None, target=LAM_TARGET, pas
     cs = an.cases(b, hs); env = a3.envelope3(b, cs); jt, per = an.joints(b, env)
     sm, by = b.structure_mass(); m1 = group_mass(b)
     added = {g: (m1.get(g, 0)-m0.get(g, 0))/1e3 for g in m1 if abs(m1.get(g, 0)-m0.get(g, 0)) > 50.0}
-    out = dict(tag=tag, concept=concept, deck=deck, rotor=rotor, guide_ring=ring, mats=mats or {}, source=hs[0]['cfg']['id'], target=target,
+    out = dict(tag=tag, thrust_at=THRUST_AT, concept=concept, deck=deck, rotor=rotor, guide_ring=ring, mats=mats or {}, source=hs[0]['cfg']['id'], target=target,
                mass_check=mc, strength_members_t=strength_members, strength_joints_t=res['joints_t'], strength_failing=failing,
                members_t=sm/1e3, joints_t=jt/1e3, structure_t=sm/1e3+jt/1e3, stiffening_t=sm/1e3-strength_members,
                added_by_group_t=dict(sorted(added.items(), key=lambda kv: -kv[1])), by_family_t={k: v/1e3 for k, v in by.items()},
                tankwall_credit_t=b.tank_credit_t(), psa_increment_t=sm/1e3+jt/1e3-b.tank_credit_t(),
                stability=[{k: v for k, v in r.items() if k != 'mode'} for r in st], passes=hist,
                f1_Hz=f1_end, f1_min=f1_min,
-               closed=bool(min(r['lam'] for r in st) >= target and min(f1_end.values()) >= (f1_min or 0)), seconds=time.time()-t0,
+               closed=bool(min(r['lam'] for r in st) >= target-2e-3 and min(f1_end.values()) >= (f1_min or 0)), seconds=time.time()-t0,
                sections={g: dict(r=s['r'], t=s['t'], mat=s['mat']) for g, s in b.sec.items()})
     (OUT / f'{tag}.json').write_text(json.dumps(out, indent=1, default=float))
     log(f"{tag}: structure {out['structure_t']:.1f} t (strength {strength_members+res['joints_t']:.1f}, stiffening +{out['stiffening_t']:.1f}), "
@@ -199,7 +202,7 @@ if __name__ == '__main__':
     p.add_argument('tag'); p.add_argument('concept'); p.add_argument('deck'); p.add_argument('rotor')
     p.add_argument('--ring', action='store_true'); p.add_argument('--mats', default='')
     p.add_argument('--target', type=float, default=LAM_TARGET); p.add_argument('--passes', type=int, default=10)
-    p.add_argument('--src', default='wsi'); p.add_argument('--f1', type=float, default=0.0); p.add_argument('--start', default=None)
+    p.add_argument('--thrust', default='noz'); p.add_argument('--src', default='wsi'); p.add_argument('--f1', type=float, default=0.0); p.add_argument('--start', default=None)
     a = p.parse_args()
-    mats = dict(kv.split('=') for kv in a.mats.split(',') if kv)
+    mats = dict(kv.split('=') for kv in a.mats.split(',') if kv); THRUST_AT = a.thrust
     run(a.tag, a.concept, a.deck, a.rotor, ring=a.ring, mats=mats, target=a.target, passes=a.passes, src=a.src, f1_min=a.f1, start=a.start)

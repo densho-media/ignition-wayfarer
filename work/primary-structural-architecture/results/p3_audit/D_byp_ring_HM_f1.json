@@ -1,0 +1,172 @@
+{
+ "source": "../results/p3_closure/D_byp_ring_HM_f1.json",
+ "tag": "D_byp_ring_HM_f1",
+ "rows": [
+  {
+   "left": 1.0,
+   "ref_static": [
+    1.94999957238324,
+    "divergence"
+   ],
+   "ref_partial05": [
+    2.1067536260001365,
+    "divergence"
+   ],
+   "ref_follower": [
+    2.108409352507442,
+    "divergence"
+   ],
+   "nozzle_static": [
+    0.7154266497585923,
+    "divergence"
+   ],
+   "nozzle_follower": [
+    0.7153372993692758,
+    "divergence"
+   ],
+   "zeta0.002_follower": [
+    2.108409352507442,
+    "divergence"
+   ],
+   "zeta0.01_follower": [
+    2.1084093529265373,
+    "divergence"
+   ],
+   "mass0.9_static": [
+    1.95674507827498,
+    "divergence"
+   ],
+   "mass0.9_follower": [
+    2.106646817782894,
+    "divergence"
+   ],
+   "mass1.1_static": [
+    1.944449836062267,
+    "divergence"
+   ],
+   "mass1.1_follower": [
+    2.110128806484863,
+    "divergence"
+   ],
+   "puller_static": [
+    12.0,
+    "stable_to_12"
+   ],
+   "puller_follower": [
+    12.0,
+    "stable_to_12"
+   ]
+  },
+  {
+   "left": 0.5,
+   "ref_static": [
+    2.190846155025065,
+    "divergence"
+   ],
+   "ref_partial05": [
+    2.192694096872583,
+    "divergence"
+   ],
+   "ref_follower": [
+    2.1943366052582856,
+    "divergence"
+   ],
+   "nozzle_static": [
+    0.7323998065665364,
+    "divergence"
+   ],
+   "nozzle_follower": [
+    0.7323084445204585,
+    "divergence"
+   ],
+   "zeta0.002_follower": [
+    2.194336604699492,
+    "divergence"
+   ],
+   "zeta0.01_follower": [
+    2.194336605397984,
+    "divergence"
+   ],
+   "mass0.9_static": [
+    2.189163652807474,
+    "divergence"
+   ],
+   "mass0.9_follower": [
+    2.1926961584016684,
+    "divergence"
+   ],
+   "mass1.1_static": [
+    2.1922461834736167,
+    "divergence"
+   ],
+   "mass1.1_follower": [
+    2.195702017564326,
+    "divergence"
+   ],
+   "puller_static": [
+    12.0,
+    "stable_to_12"
+   ],
+   "puller_follower": [
+    12.0,
+    "stable_to_12"
+   ]
+  },
+  {
+   "left": 0.0,
+   "ref_static": [
+    1.9499854851979763,
+    "divergence"
+   ],
+   "ref_partial05": [
+    1.9500354025047275,
+    "divergence"
+   ],
+   "ref_follower": [
+    1.9500610681716353,
+    "divergence"
+   ],
+   "nozzle_static": [
+    0.7983265092596413,
+    "divergence"
+   ],
+   "nozzle_follower": [
+    0.7982186358422041,
+    "divergence"
+   ],
+   "zeta0.002_follower": [
+    1.9500610681716353,
+    "divergence"
+   ],
+   "zeta0.01_follower": [
+    1.9500610681716353,
+    "divergence"
+   ],
+   "mass0.9_static": [
+    2.2412228282075377,
+    "divergence"
+   ],
+   "mass0.9_follower": [
+    2.2413959478959438,
+    "divergence"
+   ],
+   "mass1.1_static": [
+    1.7533462485764173,
+    "divergence"
+   ],
+   "mass1.1_follower": [
+    1.7533883941825477,
+    "divergence"
+   ],
+   "puller_static": [
+    12.0,
+    "stable_to_12"
+   ],
+   "puller_follower": [
+    12.0,
+    "stable_to_12"
+   ]
+  }
+ ],
+ "seconds": 392.1315951347351
+}

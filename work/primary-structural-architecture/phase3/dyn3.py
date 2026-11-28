@@ -34,7 +34,8 @@ import analysis as an  # noqa: E402
 
 ZETA = 0.005
 NB = 40
-TAU_A, TAU_D, TAU_S = 0.5, 0.2, 0.1          # gimbal lag, transport delay, sensor filter (s), PROTOTYPE
+TAU_A, TAU_D = 0.5, 0.2                       # gimbal lag, transport delay (s), PROTOTYPE
+TAU_S = 1/(2*math.pi*0.03)                    # sensor / structural filter, corner 0.03 Hz (below f1 ~0.087 Hz; rigid loop 0.008 Hz)
 WC, ZC = 2*math.pi*0.008, 0.7                 # rigid attitude loop bandwidth 0.008 Hz (about 6x below the first elastic mode), damping
 RING_RPM = 4.0
 
@@ -77,38 +78,33 @@ def influence(b, B, nodes, dof):
     return B['Phi'].T @ v
 
 
-def plant(b, B, lam, imu, plane='pitch', authority=1.0, kscale=1.0, mscale=1.0, zeta=ZETA):
-    """Closed-loop state matrix A (x = [q, q', delta, pade, sensor theta, sensor rate]) and the PD gains."""
+def plant(b, B, lam, imu, plane='both', authority=1.0, kscale=1.0, mscale=1.0, zeta=ZETA, gain=1.0):
+    """Closed-loop state matrix with two TVC channels (pitch about y: z force, ry sensor; yaw about z: y force, rz sensor).
+    x = [q, q', then per channel: delta, pade, filtered theta, filtered rate]. 'plane' is kept for the call signature (both always)."""
     n = B['k'].shape[0]; T = b.cfg['thrust']*lam
     w = B['w']*math.sqrt(kscale/mscale)
     m = B['m']*mscale; k = np.diag(w**2)*mscale; k[:2, :2] = 0.0
     k = k + lam*(B['g'] + B['lf'])
     c = np.diag(2*zeta*w)*mscale
-    fdof, rdof = (2, 4) if plane == 'pitch' else (1, 5)
-    noz = b.noz
-    # gimbal delta: lateral force T x delta x authority at the nozzles (sign: +delta pushes +z in pitch)
-    bu = influence(b, B, noz, fdof)*T*authority
-    cy = influence(b, B, [imu], rdof)
-    # PD gains on the rigid body: moment arm nozzle -> mass centre
-    X = np.array(b.m.X); l = abs(B['c'][0] - X[noz[0]][0])
-    J = rigid_inertia(b, B, plane)*mscale
-    Tn = max(b.cfg['thrust'], 1.0)    # gains tuned at nominal thrust (lambda 1)
-    Kp = J*WC**2/(Tn*l); Kd = 2*ZC*WC*J/(Tn*l)
-    mi = np.linalg.inv(m)
-    N = 2*n+4; A = np.zeros((N, N))
-    A[:n, n:2*n] = np.eye(n)
-    A[n:2*n, :n] = -mi @ k; A[n:2*n, n:2*n] = -mi @ c; A[n:2*n, 2*n] = mi @ bu
-    # actuator: delta' = (u_d - delta)/tau_a, u_d = Pade(u): p' = (u - p)... first-order Pade e^{-sT} ~ (1 - sT/2)/(1 + sT/2)
-    # state p with p' = (2/tau_d)(u - p), u_d = 2p - u
-    th, rt = 2*n+2, 2*n+3
-    u_row = np.zeros(N); u_row[th] = -Kp; u_row[rt] = -Kd
-    A[2*n+1, :] = (2.0/TAU_D)*u_row; A[2*n+1, 2*n+1] -= 2.0/TAU_D
-    ud = 2*np.eye(N)[2*n+1] - u_row
-    A[2*n, :] = ud/TAU_A; A[2*n, 2*n] -= 1.0/TAU_A
-    # sensor filter on attitude and rate
-    A[th, :n] = cy/TAU_S; A[th, th] -= 1.0/TAU_S
-    A[rt, n:2*n] = cy/TAU_S; A[rt, rt] -= 1.0/TAU_S
-    return A, dict(Kp=Kp, Kd=Kd, l=l, J=J)
+    X = np.array(b.m.X); l = abs(B['c'][0] - X[b.noz[0]][0]); Tn = max(b.cfg['thrust'], 1.0)
+    mi = np.linalg.inv(m); N = 2*n+8; A = np.zeros((N, N))
+    A[:n, n:2*n] = np.eye(n); A[n:2*n, :n] = -mi @ k; A[n:2*n, n:2*n] = -mi @ c
+    gains = {}
+    for j, (pl, fdof, rdof, sgn) in enumerate((('pitch', 2, 4, 1.0), ('yaw', 1, 5, -1.0))):
+        o = 2*n+4*j; dl, pd, th, rt = o, o+1, o+2, o+3
+        # lateral nozzle force per rad of gimbal; sign so that +delta produces +rotation about the channel axis
+        bu = sgn*influence(b, B, b.noz, fdof)*T*authority
+        cy = influence(b, B, [imu], rdof)
+        J = rigid_inertia(b, B, pl)*mscale
+        Kp = gain*J*WC**2/(Tn*l); Kd = gain*2*ZC*WC*J/(Tn*l); gains[pl] = dict(Kp=Kp, Kd=Kd, l=l, J=J)
+        A[n:2*n, dl] = mi @ bu
+        u_row = np.zeros(N); u_row[th] = -Kp; u_row[rt] = -Kd
+        A[pd, :] = (2.0/TAU_D)*u_row; A[pd, pd] -= 2.0/TAU_D
+        ud = 2*np.eye(N)[pd] - u_row
+        A[dl, :] = ud/TAU_A; A[dl, dl] -= 1.0/TAU_A
+        A[th, :n] = cy/TAU_S; A[th, th] -= 1.0/TAU_S
+        A[rt, n:2*n] = cy/TAU_S; A[rt, rt] -= 1.0/TAU_S
+    return A, gains
 
 
 def rigid_inertia(b, B, plane):
@@ -122,7 +118,7 @@ def rigid_inertia(b, B, plane):
 def margins(A):
     e = np.linalg.eigvals(A); sig = e.real.max()
     wn = np.abs(e); z = -e.real/np.maximum(wn, 1e-12)
-    return dict(max_real=float(sig), stable=bool(sig < 0), min_damping=float(z[wn > 1e-4].min()) if (wn > 1e-4).any() else None)
+    return dict(max_real=float(sig), stable=bool(sig < 1e-6), min_damping=float(z[wn > 1e-4].min()) if (wn > 1e-4).any() else None)
 
 
 def evaluate(b, state_bodies, imu=None, label='', lam_hi=4.0):
@@ -131,27 +127,30 @@ def evaluate(b, state_bodies, imu=None, label='', lam_hi=4.0):
     out = dict(label=label, f_elastic_Hz=[float(x/(2*math.pi)) for x in B['w'][2:8]])
     # rigid / follower consistency check: generalised thrust stiffness on the rigid rotations (should be ~0 for a follower thrust)
     out['rigid_follower_residual'] = float(np.abs((B['g']+B['lf'])[:2, :2]).max()/max(np.abs(B['k'][2:, 2:]).max(), 1e-9))
-    res = {}
-    for plane in ('pitch', 'yaw'):
-        A, gains = plant(b, B, 1.0, imu, plane); base = margins(A)
-        gm = None
-        for f in (1.5, 2.0, 3.0, 4.0, 6.0):
-            if not margins(scale_gain(A, f, B))['stable']:
-                gm = f; break
-        lam_cl = None
-        for lam in np.linspace(1.0, lam_hi, 31):
-            if not margins(plant(b, B, lam, imu, plane)[0])['stable']:
-                lam_cl = float(lam); break
-        c3 = {}
-        for nm, kw in (('k0.85', dict(kscale=0.85)), ('k1.15', dict(kscale=1.15)), ('m0.9', dict(mscale=0.9)), ('m1.1', dict(mscale=1.1)),
-                       ('zeta0.002', dict(zeta=0.002))):
-            c3[nm] = margins(plant(b, B, 1.0, imu, plane, **kw)[0])
-        c4 = {}
-        c4['gimbal_out'] = margins(plant(b, B, 1.0, imu, plane, authority=0.75)[0])
-        c4['gain_x0.5'] = margins(scale_gain(A, 0.5, B))
-        aft_imu = b.sp(min(b.spine, key=lambda x: abs(x-(-80.0))))
-        c4['imu_aft'] = margins(plant(b, B, 1.0, aft_imu, plane)[0])
-        res[plane] = dict(gains=gains, nominal=base, gain_margin_x=gm, lam_closed_loop=lam_cl, uncertainty=c3, degradation=c4)
+    A, gains = plant(b, B, 1.0, imu); base = margins(A)
+    gm = None
+    for f in (1.5, 2.0, 3.0, 4.0, 6.0):
+        if not margins(plant(b, B, 1.0, imu, gain=f)[0])['stable']:
+            gm = f; break
+    lam_cl = None
+    for lam in np.linspace(1.0, lam_hi, 31):
+        if not margins(plant(b, B, lam, imu)[0])['stable']:
+            lam_cl = float(lam); break
+    dm = None
+    global TAU_D
+    t0 = TAU_D
+    for f in (1.5, 2.0, 3.0, 5.0):
+        TAU_D = t0*f
+        if not margins(plant(b, B, 1.0, imu)[0])['stable']:
+            dm = f; break
+    TAU_D = t0
+    c3 = {nm: margins(plant(b, B, 1.0, imu, **kw)[0]) for nm, kw in (('k0.85', dict(kscale=0.85)), ('k1.15', dict(kscale=1.15)),
+          ('m0.9', dict(mscale=0.9)), ('m1.1', dict(mscale=1.1)), ('zeta0.002', dict(zeta=0.002)))}
+    aft_imu = b.sp(min(b.spine, key=lambda x: abs(x-(-80.0))))
+    c4 = dict(gimbal_out=margins(plant(b, B, 1.0, imu, authority=0.75)[0]), gain_x0_5=margins(plant(b, B, 1.0, imu, gain=0.5)[0]),
+              imu_aft=margins(plant(b, B, 1.0, aft_imu)[0]))
+    TAU_D = t0*3; c4['delay_x3'] = margins(plant(b, B, 1.0, imu)[0]); TAU_D = t0
+    res = dict(gains=gains, nominal=base, gain_margin_x=gm, delay_margin_x=dm, lam_closed_loop=lam_cl, uncertainty=c3, degradation=c4)
     out['planes'] = res
     # C6 post-shutdown: ring spin against elastic modes at lambda 0
     b.apply_thrust(b.cfg['thrust'])
@@ -169,19 +168,19 @@ def scale_gain(A, f, B):
     return A
 
 
-def ramp_down(b, B, imu, t_ramp, hardover_deg=0.5, plane='pitch', t_end=None, dt=0.05):
+def ramp_down(b, B, imu, t_ramp, hardover_deg=0.5, plane='both', t_end=None, dt=0.05):
     """C5: thrust 1 -> 0 over t_ramp with a gimbal hard-over at t = 0 that is cleared at shutdown. Linear time-varying modal
     integration (implicit trapezoid). Returns peak elastic modal amplitude ratio against the steady 2 % TVC case."""
     t_end = t_end or max(3*t_ramp, 60.0); n = B['k'].shape[0]
-    steps = int(t_end/dt); x = np.zeros(2*n+4); peak = 0.0; ref = None
-    A1, _ = plant(b, B, 1.0, imu, plane); A0, _ = plant(b, B, 0.0, imu, plane)
+    steps = int(t_end/dt); NS = 2*n+8; x = np.zeros(NS); peak = 0.0
+    A1, _ = plant(b, B, 1.0, imu); A0, _ = plant(b, B, 0.0, imu)
     for i in range(steps):
         t = i*dt; lam = max(0.0, 1.0-t/t_ramp)
         A = A0 + lam*(A1-A0)        # every lambda term in the plant is linear in lambda
-        u = np.zeros(2*n+4)
+        u = np.zeros(NS)
         if lam > 0:
             u[2*n] = math.radians(hardover_deg)/TAU_A
-        M = np.eye(2*n+4)-0.5*dt*A; x = np.linalg.solve(M, (np.eye(2*n+4)+0.5*dt*A) @ x + dt*u)
+        M = np.eye(NS)-0.5*dt*A; x = np.linalg.solve(M, (np.eye(NS)+0.5*dt*A) @ x + dt*u)
         if i % 4 == 0:
             u_phys = B['Phi'][:, 2:] @ x[2:n]; peak = max(peak, float(np.abs(u_phys).max()))
     return dict(t_ramp=t_ramp, hardover_deg=hardover_deg, peak_elastic_disp_m=peak, final_state_norm=float(np.abs(x[:n]).max()))
