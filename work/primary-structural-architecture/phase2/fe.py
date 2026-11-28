@@ -40,6 +40,7 @@ class Model:
         self.X = []                 # node coordinates
         self.el = []                # element dicts
         self.pm = {}                # node -> point mass (kg)
+        self.pi = {}                # node -> 3x3 rotary inertia about the node (kg m2), global axes (remote rigid bodies, Phase III)
         self.loads = {}             # node -> 6 force vector
         self.follow = {}            # node -> (force vector, follower?) for nonconservative thrust
         self.fixed = {}             # node -> list of fixed dofs
@@ -62,6 +63,9 @@ class Model:
 
     def mass(self, n, m):
         self.pm[n] = self.pm.get(n, 0.0)+m
+
+    def inertia(self, n, J):
+        J0 = self.pi.get(n); self.pi[n] = np.array(J, float) if J0 is None else J0+np.array(J, float)
 
     def load(self, n, F=(0, 0, 0), M=(0, 0, 0)):
         v = self.loads.setdefault(n, np.zeros(6)); v[:3] += F; v[3:] += M
@@ -191,6 +195,14 @@ class Model:
             for nd, m in self.pm.items():
                 d[6*nd:6*nd+3] += m
             Kx = Kx + sp.diags(d)
+        if which == 'M' and self.pi:
+            rows, cols, vals = [], [], []
+            for nd, J in self.pi.items():
+                for a in range(3):
+                    for c in range(3):
+                        if J[a][c]:
+                            rows.append(6*nd+3+a); cols.append(6*nd+3+c); vals.append(J[a][c])
+            Kx = Kx + sp.coo_matrix((vals, (rows, cols)), shape=(n, n)).tocsr()
         return Kx
 
     def follower_stiffness(self):
