@@ -280,5 +280,5 @@
   ],
   "hash": "42d2a807fe23"
  },
- "baseline": "F0 (owner-approved assumptions only); F1 adds the PROPOSED FT-03"
+ "baseline": "F1 is the Track F reference (owner 2026-11-28); F0 = without FT-03, kept for comparison"
 }

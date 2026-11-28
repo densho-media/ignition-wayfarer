@@ -132,13 +132,14 @@ def _ww(d):
 
 
 def execute(name, model, ww=None, particle='neutron', iters=2):
-    """Run; with ww=(mesh, energy bounds) first iterate MAGIC weight windows (on-the-fly), then run with them fixed."""
+    """Run; with ww=(mesh, energy bounds) first iterate MAGIC weight windows (generated at the end of each iteration, never applied uncapped
+    inside it: on-the-fly windows without the split cap ran away in the ship model), then run with them fixed and capped."""
     d = RUNS/f'p6_{name}'; d.mkdir(parents=True, exist_ok=True); t0 = time.time(); info = {}
     if ww:
         mesh, eb = ww
         for k in range(iters):
             st = model.settings; st.weight_window_generators = openmc.WeightWindowGenerator(mesh, energy_bounds=eb, particle_type=particle, method='magic',
-                                                                                             max_realizations=st.batches, update_interval=1, on_the_fly=True)
+                                                                                             max_realizations=st.batches, update_interval=st.batches, on_the_fly=False)
             if k > 0:
                 st.weight_windows = _ww(d); st.weight_windows_on = True
             model.run(cwd=d, threads=4, output=False)
@@ -174,14 +175,16 @@ def ship_run(name, s, S1, inside, particles, particle=None, ww=False):
 
 
 def slab_benchmark(t_cm, particles, ww):
-    """2 MeV pencil beam along +x into a cylinder of shield material (r 50 cm, thickness t); uncollided track length in a 1 cm detector
-    behind it = transmission x 1 cm; compared with exp(-Sigma_t t) from the same HDF5 data."""
+    """2 MeV pencil beam along +x into a cylinder of shield material (r 50 cm, thickness t); a 1 cm thick, r 10 cm detector behind it.
+    Uncollided track length = transmission x 1 cm, compared with exp(-Sigma_t t) from the same HDF5 data (where it is measurable);
+    the total (collided) flux is what deep penetration needs: analog and weight-window runs are compared where both score, and the
+    weight windows alone reach the full 254 cm."""
     m = shield_material(); E = 2.0e6
     sig = 0.0
     for nuc, N in m.get_nuclide_atom_densities().items():
         d = openmc.data.IncidentNeutron.from_hdf5(str(XS/'neutron'/f'{nuc}.h5'))
         sig += N*d[1].xs['294K'](E)                  # 1/cm (atoms/b-cm x b)
-    x0 = openmc.XPlane(0.0); x1 = openmc.XPlane(t_cm); x2 = openmc.XPlane(t_cm+1.0); cyl = openmc.XCylinder(r=50.0); det = openmc.XCylinder(r=1.0)
+    x0 = openmc.XPlane(0.0); x1 = openmc.XPlane(t_cm); x2 = openmc.XPlane(t_cm+1.0); cyl = openmc.XCylinder(r=50.0); det = openmc.XCylinder(r=10.0)
     world = openmc.Sphere(r=t_cm+200.0, boundary_type='vacuum')
     slab = openmc.Cell(region=+x0 & -x1 & -cyl, fill=m); dc = openmc.Cell(region=+x1 & -x2 & -det)
     rest = openmc.Cell(region=-world & ~(+x0 & -x1 & -cyl) & ~(+x1 & -x2 & -det))
@@ -189,12 +192,16 @@ def slab_benchmark(t_cm, particles, ww):
     st = openmc.Settings(); st.run_mode = 'fixed source'; st.batches = 10; st.particles = particles//10; st.photon_transport = False
     st.source = openmc.IndependentSource(space=openmc.stats.Point((-1.0, 0, 0)), angle=openmc.stats.Monodirectional((1.0, 0, 0)), energy=openmc.stats.Discrete([E], [1.0]))
     t = openmc.Tally(name='unc'); t.filters = [openmc.CellFilter([dc]), openmc.CollisionFilter([0])]; t.scores = ['flux']
-    model = openmc.Model(geometry=geo, materials=openmc.Materials([m]), settings=st, tallies=openmc.Tallies([t]))
-    w = (ww_mesh((-2.0, -50.0, -50.0), (t_cm+2.0, 50.0, 50.0), (max(4, int(t_cm/10)), 1, 1)), [0.0, 2.1e6]) if ww else None
-    sp, info = execute(f'D{int(t_cm)}{"w" if ww else ""}', model, w, 'neutron', iters=3)
-    tt = sp.get_tally(name='unc'); v = float(tt.get_values(scores=['flux']).reshape(-1)[0]); e = float(tt.get_values(scores=['flux'], value='rel_err').reshape(-1)[0])
+    t2 = openmc.Tally(name='tot'); t2.filters = [openmc.CellFilter([dc])]; t2.scores = ['flux']
+    model = openmc.Model(geometry=geo, materials=openmc.Materials([m]), settings=st, tallies=openmc.Tallies([t, t2]))
+    w = (ww_mesh((-2.0, -50.0, -50.0), (t_cm+2.0, 50.0, 50.0), (max(8, int(t_cm/5)), 1, 1)), [0.0, 1e5, 2.1e6]) if ww else None
+    sp, info = execute(f'D{int(t_cm)}{"w" if ww else ""}', model, w, 'neutron', iters=6)
+    def g(n):
+        tt = sp.get_tally(name=n); return (float(tt.get_values(scores=['flux']).reshape(-1)[0]), float(tt.get_values(scores=['flux'], value='rel_err').reshape(-1)[0]))
+    (v, e), (vt, et) = g('unc'), g('tot')
     ana = math.exp(-sig*t_cm)
-    return dict(t_cm=t_cm, sigma_t_cm=sig, analytic=ana, openmc=v, rel_err=e, ratio=v/ana if ana else None, weight_windows=ww, **info)
+    return dict(t_cm=t_cm, sigma_t_cm=sig, analytic=ana, openmc=v, rel_err=e, ratio=v/ana if ana and v else None, total=vt, total_rel_err=et,
+                fom=1.0/(et**2*info['runtime_s']) if et == et and et > 0 else None, weight_windows=ww, **info)
 
 
 def main():
@@ -222,8 +229,8 @@ def main():
         ver[part] = dict(rows=rows, min=min(r_), max=max(r_), mean=sum(r_)/len(r_), passes=0.95 < sum(r_)/len(r_) < 1.05, **info)
     out['runs']['V6'] = ver
     # D: deep-penetration benchmark ladder
-    out['runs']['D'] = [slab_benchmark(30.0, particles//4, False), slab_benchmark(100.0, particles//4, False), slab_benchmark(254.0, particles//4, False),
-                        slab_benchmark(254.0, particles//4, True)]
+    out['runs']['D'] = [slab_benchmark(tc, particles//4, w) for tc, w in ((10.0, False), (20.0, False), (40.0, False), (60.0, False), (60.0, True),
+                                                                          (100.0, False), (100.0, True), (254.0, False), (254.0, True))]
     # ship runs
     rS, iS, tk = ship_run('S6', s, S1, False, particles)
     rTN, iTN, _ = ship_run('TN', s, S1, True, particles, 'neutron', ww=True)
@@ -232,7 +239,7 @@ def main():
     out['tanks'] = tk
     OUT.write_text(json.dumps(out, indent=1, default=float))
     print('V6', {k: (round(v['mean'], 3), round(v['min'], 3), round(v['max'], 3)) for k, v in ver.items()})
-    print('D', [(d['t_cm'], d['weight_windows'], f"{d['analytic']:.2e}", f"{d['openmc']:.2e}", round(d['rel_err'], 3)) for d in out['runs']['D']])
+    print('D', [(d['t_cm'], d['weight_windows'], f"{d['analytic']:.2e}", f"{d['openmc']:.2e}", round(d['rel_err'], 3), f"{d['total']:.2e}", round(d['total_rel_err'], 3)) for d in out['runs']['D']])
     print('times', round(iS['runtime_s']), round(iTN['runtime_s']), round(iTG['runtime_s']))
 
 

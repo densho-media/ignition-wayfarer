@@ -73,6 +73,24 @@ on a 550 K section; L1 reduced to drive-specific loads with heat-pipe hot blades
 **Unknowns / blockers.** Radiation transport (BLOCKER: no MCNP/OpenMC here); L1 900 K rejection; LOW margin at the high band; He-3 tank
 shadow; hot-loop pumps; channel refill time; unit restart energy; Brayton degradation; engagement frequency.
 
+## Phase VI (owner brief 2026-11-28 06:33Z): dual-baseline integration (Track R / Track F)
+
+**Function.** Make the Track R / Track F split permanent (AGENTS.md "Dual development"), reconcile Phase V (C6-01..09), write one
+machine-readable configuration per baseline (`results/phase6_config_R.json` WF-R-P6.0; `results/phase6_config_F.json` WF-F0-P6.0 and the
+F1 reference WF-F1-P6.0), start the fictional technology register (`data/technology_register.toml`, FT-00..08, noncanon), integrate the
+Track F systems in isolation (power district, H6a, R5-A + the 1500 K FT-03 section, electrical, ECLSS 7 vs 8, logistics), re-couple mass,
+tanks, CoM and acceleration, and continue OpenMC in Track R (void verification n/γ, deep-penetration benchmark, side scatter, transmission
+with weight windows, species heating).
+Run order after Phase V: `phase6/rad6.py [particles]` (OpenMC env; RAD_RUNS for the statepoints), `phase6/study6.py`, then
+`/snap/bin/blender -b assets/wayfarer/WF_WAYFARER_001.blend --python make_review6.py -- --render`, then `build_report.py`.
+**Fixed constraints.** Production geometry, canon and Drive unchanged; the 20 % HOT rule; Track R calculations are never softened; the
+900 K L1 rejection is not closed by choosing direct conversion (it moves the losses into the hot loop, ledgered).
+**Findings.** The two Phase V fictional figures were two configurations (42 t apart). Continuous L1 in a proactive burn is ~14 MW, not 271.5;
+the 210 MW heat-pump rating stays installed. F1 frees ~13 m of hot length (950 K reject) and lifts HOT headroom from 58 MW to ~1 GW, which
+is what lets reactive defense with direct conversion fit. ECLSS: 7 units pass 9 of 10 cases (8 pass all). Preheat is hours, not days.
+Fictional F1 departs ~8.2 kt nominal and still needs ~20 m more tank length (alternatives go to the 3D integration stage B).
+**Open.** DR6-01..06 on the page; shielding, crew dose and installed cryocooler rating (DR5-08); hot-loop boundary in Track R.
+
 ## Phase V (owner brief 2026-11-27 13:53Z): thermal network optimisation and convergence
 
 **Function.** Fix one configuration (N2-R4a-P5.0, `results/phase5_config.json`), correct Phase IV (C5-01..10), study the hot loop as a

@@ -203,6 +203,24 @@ count or mesh detail, determine when calculation is needed.
   should answer a consequential design decision; defer analysis that the next
   visible result does not need.
 
+## Dual development: Track R and Track F
+
+Wayfarer has two permanent, separate tracks (owner 2026-11-27/28).
+
+- **Track R (research)** investigates real physics, today's engineering and unresolved problems, and publishes the results on the
+  engineering website, including negative findings and architectures that do not close. Its calculations are never softened to suit
+  the fiction.
+- **Track F (fiction)** is the idealized hard-SF G.U. WAYFARER 001 of IGNITION's civilization. It may go beyond today's engineering,
+  never beyond established physics: conservation laws, radiation, thermodynamics and internal consistency hold in both tracks.
+  Research informs Track F but does not dictate its geometry, mass or architecture, and an open research problem does not block
+  Track F modelling.
+- Every Track F extrapolation is an entry in `data/technology_register.toml` (principle, precedent, today's limit, required advance,
+  adopted properties, dependents, consequence if unmet) before a value uses it; a Track F value names its entry. A non-closing research
+  result becomes a named technology requirement, never a silent pass, and a fictional assumption is never presented as demonstrated
+  engineering. No new technology to hide an accounting error.
+- Keep both baselines machine-readable and traceable to each other (configuration id, hash, register refs); label every published
+  value RESEARCH or FICTIONAL. Canon, Drive and production-geometry changes still need the owner.
+
 ## Drive canon
 
 - The IGNITION Table of Contents routes each fact to its owner workbook, then

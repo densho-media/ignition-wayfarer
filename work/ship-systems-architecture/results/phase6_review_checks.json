@@ -1,0 +1,2075 @@
+{
+ "note": "bounding-box screens only (a box around a blade or ring is mostly empty space); not a collision proof",
+ "objects": 206,
+ "unique_ids": true,
+ "production_overlaps": 195,
+ "cross_family_overlaps": 33,
+ "cross_family_first": [
+  [
+   "ISSA6_L2U1_ReactorEnvelope",
+   "ISSA6_L1_Bus"
+  ],
+  [
+   "ISSA6_L2U1_ShadowShieldEnvelope",
+   "ISSA6_L1_Bus"
+  ],
+  [
+   "ISSA6_L2U1_TAC",
+   "ISSA6_L1_Bus"
+  ],
+  [
+   "ISSA6_L2U1_Recuperator",
+   "ISSA6_L1_Bus"
+  ],
+  [
+   "ISSA6_L2U1_GasCooler",
+   "ISSA6_L1_Bus"
+  ],
+  [
+   "ISSA6_L2U1_PMAD",
+   "ISSA6_L1_Bus"
+  ],
+  [
+   "ISSA6_L2U1_MountFrame",
+   "ISSA6_L1_Bus"
+  ],
+  [
+   "ISSA6_District_RemovalRoute",
+   "ISSA6_Bulkhead_F1"
+  ],
+  [
+   "ISSA6_District_RemovalRoute",
+   "ISSA6_Switchgear_3"
+  ],
+  [
+   "ISSA6_District_RemovalRoute",
+   "ISSA6_RideThrough_3_1"
+  ],
+  [
+   "ISSA6_District_RemovalRoute",
+   "ISSA6_RideThrough_3_2"
+  ],
+  [
+   "ISSA6_District_RemovalRoute",
+   "ISSA6_RideThrough_3_3"
+  ],
+  [
+   "ISSA6_District_RemovalRoute",
+   "ISSA6_RideThrough_3_4"
+  ],
+  [
+   "ISSA6_Trunk_90_0",
+   "ISSA6_Bulkhead_F1"
+  ],
+  [
+   "ISSA6_Trunk_90_0",
+   "ISSA6_L1_DC_Pickup"
+  ],
+  [
+   "ISSA6_Trunk_90_1",
+   "ISSA6_Bulkhead_F1"
+  ],
+  [
+   "ISSA6_Trunk_90_1",
+   "ISSA6_L1_DC_Pickup"
+  ],
+  [
+   "ISSA6_DrainRecovery_90",
+   "ISSA6_L1_Conditioning"
+  ],
+  [
+   "ISSA6_DrainRecovery_90",
+   "ISSA6_L1_Bus"
+  ],
+  [
+   "ISSA6_Trunk_210_0",
+   "ISSA6_Bulkhead_F1"
+  ]
+ ],
+ "rows": [
+  {
+   "obj": "ISSA6_L2U1_ReactorEnvelope",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U1_ShadowShieldEnvelope",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U1_TAC",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U1_Recuperator",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U1_GasCooler",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U1_PMAD",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U1_MountFrame",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U2_ReactorEnvelope",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U2_ShadowShieldEnvelope",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U2_TAC",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U2_Recuperator",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U2_GasCooler",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U2_PMAD",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U2_MountFrame",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U3_ReactorEnvelope",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U3_ShadowShieldEnvelope",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U3_TAC",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U3_Recuperator",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 12,
+   "first": [
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U3_GasCooler",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U3_PMAD",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2U3_MountFrame",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules"
+   ]
+  },
+  {
+   "obj": "ISSA6_District_RemovalRoute",
+   "family": "POWER_DISTRICT",
+   "bbox_overlaps_production": 119,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_Trunk_90_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 67,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_EMPump_90_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "CL_CRYOGENIC_cryo"
+   ]
+  },
+  {
+   "obj": "ISSA6_Trunk_90_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 65,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_EMPump_90_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "CL_CRYOGENIC_cryo"
+   ]
+  },
+  {
+   "obj": "ISSA6_Accumulator_90",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 12,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_DrainRecovery_90",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_90_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA6_Valve_90_1_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 5,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_90_1_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 5,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_90_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 6,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_90_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 5,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_90_2",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA6_Valve_90_2_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 5,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_90_2_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 5,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_90_2",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_90_2",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 6,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_90_3",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA6_Valve_90_3_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 5,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_90_3_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 5,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_90_3",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_90_3",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 6,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_90_4",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Ext_Nav_Tracker_1_Head",
+    "Ext_Nav_Tracker_1_Pedestal",
+    "VTX_CRYOGENIC_cryo"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_90_4_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 5,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_90_4_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 5,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_90_4",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 15,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_90_4",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 14,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_90_5",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 39,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_90_5_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_90_5_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_90_5",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_90_5",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 6,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_90_6",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 0,
+   "first": []
+  },
+  {
+   "obj": "ISSA6_Valve_90_6_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 5,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_90_6_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 5,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_90_6",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_90_6",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 6,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_wayfinding"
+   ]
+  },
+  {
+   "obj": "ISSA6_Trunk_210_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 72,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_EMPump_210_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "CL_CRYOGENIC_cryo"
+   ]
+  },
+  {
+   "obj": "ISSA6_Trunk_210_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 95,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_EMPump_210_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 13,
+   "first": [
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "CL_CRYOGENIC_cryo"
+   ]
+  },
+  {
+   "obj": "ISSA6_Accumulator_210",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 13,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_DrainRecovery_210",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 12,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_210_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_210_1_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_210_1_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_210_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_210_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_210_2",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_210_2_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_210_2_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_210_2",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_210_2",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_210_3",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_210_3_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_210_3_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_210_3",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_210_3",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_210_4",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 23,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_210_4_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_210_4_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_210_4",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 17,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_210_4",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 17,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_210_5",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 49,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_210_5_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 12,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_210_5_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 14,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_210_5",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_210_5",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_210_6",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_210_6_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_210_6_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_210_6",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_210_6",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Trunk_330_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 95,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_EMPump_330_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 13,
+   "first": [
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "CL_CRYOGENIC_cryo"
+   ]
+  },
+  {
+   "obj": "ISSA6_Trunk_330_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 70,
+   "first": [
+    "Prod_SPK_Frames",
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints"
+   ]
+  },
+  {
+   "obj": "ISSA6_EMPump_330_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body",
+    "CL_CRYOGENIC_cryo"
+   ]
+  },
+  {
+   "obj": "ISSA6_Accumulator_330",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 13,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_DrainRecovery_330",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 12,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_330_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 6,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_330_1_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_330_1_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 6,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_330_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 6,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_330_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 6,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_330_2",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_330_2_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_330_2_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_330_2",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_330_2",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_RAD_FRAME_Clamps",
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_330_3",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_330_3_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_330_3_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_330_3",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_330_3",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_RAD_FRAME_Clamps",
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_330_4",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 21,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_330_4_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_330_4_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_330_4",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 15,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_330_4",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 17,
+   "first": [
+    "Prod_RAD_FRAME_Clamps",
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_330_5",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 48,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_330_5_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 13,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_330_5_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_330_5",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_330_5",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_RAD_FRAME_Clamps",
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_Header_330_6",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 6,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_330_6_0",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Valve_330_6_1",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Support_330_6",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Inspection_330_6",
+   "family": "THERMAL_H6A",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_RAD_FRAME_Clamps",
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2Section_F1_90",
+   "family": "RADIATOR_F1",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Radiator_Bulkhead_Layer_1_Battens",
+    "Radiator_Bulkhead_Layer_1_Gore_06",
+    "Radiator_Bulkhead_Layer_1_Gore_07"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2Section_F1_210",
+   "family": "RADIATOR_F1",
+   "bbox_overlaps_production": 45,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L2Section_F1_330",
+   "family": "RADIATOR_F1",
+   "bbox_overlaps_production": 44,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Hull_Aft_Body"
+   ]
+  },
+  {
+   "obj": "ISSA6_Bulkhead_F1",
+   "family": "RADIATOR_F1",
+   "bbox_overlaps_production": 22,
+   "first": [
+    "Prod_RAD_FRAME_Clamps",
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_MainBus_1",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 84,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_Switchgear_1",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules"
+   ]
+  },
+  {
+   "obj": "ISSA6_RideThrough_1_1",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_RideThrough_1_2",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 13,
+   "first": [
+    "Prod_RA_EXT_TRAY060_IN_trays",
+    "Prod_RB_EXT_TRAY060_IN_trays",
+    "Prod_SP_CASING_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_RideThrough_1_3",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_RideThrough_1_4",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 3,
+   "first": [
+    "Hull_Aft_Body",
+    "FPS_Farm_Flanges",
+    "FPS_Thermal_Intercepts"
+   ]
+  },
+  {
+   "obj": "ISSA6_RestartPack_1",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_MainBus_2",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 82,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_Switchgear_2",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_RideThrough_2_1",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_RideThrough_2_2",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_RideThrough_2_3",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_RideThrough_2_4",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 2,
+   "first": [
+    "Hull_Aft_Body",
+    "FPS_Thermal_Intercepts"
+   ]
+  },
+  {
+   "obj": "ISSA6_RestartPack_2",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_MainBus_3",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 79,
+   "first": [
+    "Prod_RA_EXT_AFT_cassettes",
+    "Prod_RA_EXT_AFT_joints",
+    "Prod_RA_EXT_AFT_markings"
+   ]
+  },
+  {
+   "obj": "ISSA6_Switchgear_3",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_RideThrough_3_1",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_RideThrough_3_2",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_RideThrough_3_3",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_RideThrough_3_4",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 3,
+   "first": [
+    "Hull_Aft_Body",
+    "FPS_Farm_Flanges",
+    "FPS_Thermal_Intercepts"
+   ]
+  },
+  {
+   "obj": "ISSA6_RestartPack_3",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 13,
+   "first": [
+    "Prod_RAD_FRAME_Gussets",
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules"
+   ]
+  },
+  {
+   "obj": "ISSA6_DefenseBuffer_1",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_DefenseBuffer_2",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_DefenseBuffer_3",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_DefenseBuffer_4",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L1_DC_Pickup",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 6,
+   "first": [
+    "CL_CRYOGENIC_cryo",
+    "CL_ELECTRICAL_power",
+    "CL_FUEL_fuel"
+   ]
+  },
+  {
+   "obj": "ISSA6_L1_Conditioning",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_L1_Bus",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 21,
+   "first": [
+    "Prod_SP_CASING_markings",
+    "Prod_SP_CASING_modules",
+    "Prod_SP_CASING_route"
+   ]
+  },
+  {
+   "obj": "ISSA6_SurvivalBridge",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 4,
+   "first": [
+    "Ring_2_Hoop_Inner",
+    "Ring_2_Hoop_Outer",
+    "FPS_Farm_Flanges"
+   ]
+  },
+  {
+   "obj": "ISSA6_DataNet_A",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 151,
+   "first": [
+    "Prod_CROWN_RIM_closeouts",
+    "Prod_CROWN_RIM_fasteners",
+    "Prod_CROWN_RIM_frames"
+   ]
+  },
+  {
+   "obj": "ISSA6_DataNet_B",
+   "family": "ELECTRICAL",
+   "bbox_overlaps_production": 135,
+   "first": [
+    "Prod_ENT_Bulkhead",
+    "Prod_ENT_Fasteners",
+    "Prod_ENT_Housings"
+   ]
+  },
+  {
+   "obj": "ISSA6_ECLSS_A1",
+   "family": "ECLSS",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Ring_1_Circ_Corridor_3",
+    "Ring_1_Circ_Door_AC3",
+    "Ring_1_Circ_Fit_Band_3"
+   ]
+  },
+  {
+   "obj": "ISSA6_ECLSS_A2",
+   "family": "ECLSS",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Ring_1_Circ_Corridor_1",
+    "Ring_1_Circ_Door_AC1",
+    "Ring_1_Circ_Fit_Band_1"
+   ]
+  },
+  {
+   "obj": "ISSA6_ECLSS_A3",
+   "family": "ECLSS",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Ring_1_Circ_Corridor_2",
+    "Ring_1_Circ_Door_AC2",
+    "Ring_1_Circ_Fit_Band_2"
+   ]
+  },
+  {
+   "obj": "ISSA6_RotaryCoupling_A",
+   "family": "ECLSS",
+   "bbox_overlaps_production": 23,
+   "first": [
+    "Crew_Trunk",
+    "Crew_Trunk_Light_1_3",
+    "Crew_Trunk_Light_2_3"
+   ]
+  },
+  {
+   "obj": "ISSA6_ECLSS_B1",
+   "family": "ECLSS",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Ring_2_Circ_Corridor_3",
+    "Ring_2_Circ_Door_BC3",
+    "Ring_2_Circ_Fit_Band_3"
+   ]
+  },
+  {
+   "obj": "ISSA6_ECLSS_B2",
+   "family": "ECLSS",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Ring_2_Circ_Corridor_1",
+    "Ring_2_Circ_Door_BC1",
+    "Ring_2_Circ_Fit_Band_1"
+   ]
+  },
+  {
+   "obj": "ISSA6_ECLSS_B3",
+   "family": "ECLSS",
+   "bbox_overlaps_production": 10,
+   "first": [
+    "Ring_2_Circ_Corridor_2",
+    "Ring_2_Circ_Door_BC2",
+    "Ring_2_Circ_Fit_Band_2"
+   ]
+  },
+  {
+   "obj": "ISSA6_RotaryCoupling_B",
+   "family": "ECLSS",
+   "bbox_overlaps_production": 27,
+   "first": [
+    "Crew_Port_2_2",
+    "Crew_Port_2_2_Gate",
+    "Crew_Trunk"
+   ]
+  },
+  {
+   "obj": "ISSA6_ECLSS_HUB",
+   "family": "ECLSS",
+   "bbox_overlaps_production": 5,
+   "first": [
+    "Ring_1_Hoop_Inner",
+    "Ring_1_Hoop_Outer",
+    "Crew_Tube_2_1"
+   ]
+  },
+  {
+   "obj": "ISSA6_HubDuct",
+   "family": "ECLSS",
+   "bbox_overlaps_production": 7,
+   "first": [
+    "Ring_1_Hoop_Inner",
+    "Ring_1_Hoop_Outer",
+    "Crew_Tube_2_1"
+   ]
+  },
+  {
+   "obj": "ISSA6_LOG_G1_1",
+   "family": "LOGISTICS",
+   "bbox_overlaps_production": 9,
+   "first": [
+    "Refuge_Light_5",
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop"
+   ]
+  },
+  {
+   "obj": "ISSA6_LOG_G1_2",
+   "family": "LOGISTICS",
+   "bbox_overlaps_production": 12,
+   "first": [
+    "Refuge_Light_5",
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop"
+   ]
+  },
+  {
+   "obj": "ISSA6_LOG_G1_3",
+   "family": "LOGISTICS",
+   "bbox_overlaps_production": 4,
+   "first": [
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA6_LOG_G1_4",
+   "family": "LOGISTICS",
+   "bbox_overlaps_production": 4,
+   "first": [
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA6_LOG_G1_5",
+   "family": "LOGISTICS",
+   "bbox_overlaps_production": 8,
+   "first": [
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA6_LOG_G1_6",
+   "family": "LOGISTICS",
+   "bbox_overlaps_production": 11,
+   "first": [
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA6_LOG_G1_7",
+   "family": "LOGISTICS",
+   "bbox_overlaps_production": 4,
+   "first": [
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA6_LOG_G1_8",
+   "family": "LOGISTICS",
+   "bbox_overlaps_production": 4,
+   "first": [
+    "Hull_Forward_Collar",
+    "Casing_Collar_Seams_Hoop",
+    "Casing_Collar_Seams_Long"
+   ]
+  },
+  {
+   "obj": "ISSA6_HubStoreRail",
+   "family": "LOGISTICS",
+   "bbox_overlaps_production": 16,
+   "first": [
+    "Ring_2_Fill_1",
+    "Ring_2_Hoop_Inner",
+    "Ring_2_Hoop_Outer"
+   ]
+  },
+  {
+   "obj": "ISSA6_Workshop",
+   "family": "LOGISTICS",
+   "bbox_overlaps_production": 20,
+   "first": [
+    "Crew_Tube_1_2",
+    "Crew_Tube_1_2_Hatch",
+    "Crew_Tube_1_3"
+   ]
+  },
+  {
+   "obj": "ISSA6_SparesRacks",
+   "family": "LOGISTICS",
+   "bbox_overlaps_production": 3,
+   "first": [
+    "Hull_Aft_Body",
+    "FPS_Farm_Flanges",
+    "FPS_Thermal_Intercepts"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_O1",
+   "family": null,
+   "bbox_overlaps_production": 37,
+   "first": [
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners",
+    "Prod_BROW_AFT_lane_lines"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_O2",
+   "family": null,
+   "bbox_overlaps_production": 37,
+   "first": [
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners",
+    "Prod_BROW_AFT_lane_lines"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_O3",
+   "family": null,
+   "bbox_overlaps_production": 36,
+   "first": [
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners",
+    "Prod_BROW_AFT_lane_lines"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_O4",
+   "family": null,
+   "bbox_overlaps_production": 59,
+   "first": [
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners",
+    "Prod_BROW_AFT_lane_lines"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_O5",
+   "family": null,
+   "bbox_overlaps_production": 37,
+   "first": [
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners",
+    "Prod_BROW_AFT_lane_lines"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_O6",
+   "family": null,
+   "bbox_overlaps_production": 59,
+   "first": [
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners",
+    "Prod_BROW_AFT_lane_lines"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_O7",
+   "family": null,
+   "bbox_overlaps_production": 35,
+   "first": [
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners",
+    "Prod_BROW_AFT_lane_lines"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_O8",
+   "family": null,
+   "bbox_overlaps_production": 44,
+   "first": [
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners",
+    "Prod_BROW_AFT_lane_lines"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_O9",
+   "family": null,
+   "bbox_overlaps_production": 37,
+   "first": [
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners",
+    "Prod_BROW_AFT_lane_lines"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_I1",
+   "family": null,
+   "bbox_overlaps_production": 47,
+   "first": [
+    "Prod_BROW_AFT_boundary",
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_I2",
+   "family": null,
+   "bbox_overlaps_production": 44,
+   "first": [
+    "Prod_BROW_AFT_boundary",
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_I3",
+   "family": null,
+   "bbox_overlaps_production": 48,
+   "first": [
+    "Prod_BROW_AFT_boundary",
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners"
+   ]
+  },
+  {
+   "obj": "ISSA6_TankExt_I4",
+   "family": null,
+   "bbox_overlaps_production": 47,
+   "first": [
+    "Prod_BROW_AFT_boundary",
+    "Prod_BROW_AFT_caps",
+    "Prod_BROW_AFT_fasteners"
+   ]
+  }
+ ],
+ "register_refs": [
+  "FT-01",
+  "FT-01/FT-02",
+  "FT-01/FT-06",
+  "FT-02",
+  "FT-03",
+  "FT-03 (F1 only)",
+  "FT-04",
+  "FT-05",
+  "FT-07"
+ ]
+}

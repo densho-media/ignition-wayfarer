@@ -69,6 +69,8 @@ def main():
     sys.path.insert(0, str(H / 'phase3')); import report3
     sys.path.insert(0, str(H / 'phase4')); import report4
     sys.path.insert(0, str(H / 'phase5')); import report5
+    sys.path.insert(0, str(H / 'phase6')); import report6
+    P6 = json.loads((R / 'phase6.json').read_text())
     P5 = json.loads((R / 'phase5.json').read_text())
     P4 = json.loads((R / 'phase4.json').read_text())
     h5 = next(r for r in P4['transport']['rows'] if r['name'].startswith('H5'))
@@ -78,6 +80,11 @@ def main():
     l2 = next(r for r in em['mass']['adds'] if r['budget'] == 'PROPOSED.ship_service_generation')
     page = (H / 'report_template.html').read_text()
     h6 = P5['transport']['topologies']['H6a']; rs = P5['radiation_summary']
+    dep6 = {k: P6['mass'][k]['cases'][1]['departure_t'] for k in ('R', 'F0', 'F1')}
+    for k, v in dict(PHASE6=report6.build(), P6_F1=f"{dep6['F1']:,.0f}", P6_F0=f"{dep6['F0']:,.0f}", P6_R=f"{dep6['R']:,.0f}",
+                     P6_HEAD=f"{P6['radiators']['F1']['hot_headroom_W']/1e6:,.0f}", P6_L2=f"{P6['radiators']['F1']['length_m']:.1f}",
+                     P6_L1=f"{P6['reconciliation']['electrical']['sum_R']['continuous_proactive_W']/1e6:.1f}").items():
+        page = page.replace('{{' + k + '}}', v)
     for k, v in dict(PHASE5=report5.build(), P5_H6=f"{h6['total_t'][1]:,.0f}", P5_TIN=f"{P5['transport']['inlet_T']['300']:.0f}",
                      P5_L2=f"{P5['radiators']['l2_750']['cross']['length_m']:.1f}", P5_SCAT=f"{100*rs['scatter_over_bare']:.0f}",
                      P5_DEP=f"{P5['mass']['cases'][1]['departure_t']:,.0f}", P5_FIC=f"{P5['mass_fictional']['cases'][1]['departure_t']:,.0f}").items():

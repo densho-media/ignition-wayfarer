@@ -388,6 +388,10 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   (210 MW at burnout, with F03); Heat Debt buffer for 50-80 MW bursts; the hot coolant choice. The Q38 candidate panels are removed (owner,
   2026-11-01); the RAD-ZONE sections aft of the rings reject the 5 MW warm base load and the 1 MW low-temperature load in every mode, burns included (Graded Thermal Blade). Keep all three loops separate.
 
+- [ ] **ISSA Phase VI — owner review (2026-11-28).** Dual-baseline integration on the ISSA page (NOTES "Phase VI"): configs WF-R-P6.0,
+  WF-F0-P6.0, WF-F1-P6.0 (F1 = Track F reference with FT-03 1500 K), technology register `data/technology_register.toml`, Phase V
+  reconciliation C6-01..09, direct conversion ledger (FT-04 conditional), ECLSS 7 units, OpenMC Track R step. Owner: DR6-01..06. Then the
+  3D Systems Integration brief (2026-11-28 07:03Z) on the same branch.
 - [ ] **ISSA Phase V — owner review (2026-11-27).** Thermal network and convergence on the ISSA page (`work/ship-systems-architecture/`,
   NOTES "Phase V"): config N2-R4a-P5.0, corrections C5-01..10, H6 network (walls dominate; material is the lever), R5-A 750 K
   cross-strapped L2, 3-D OpenMC (frame verified; scatter ~19 % of bare tank heating), coupled mass via `operating_point.mission(extra_end_kg)`,

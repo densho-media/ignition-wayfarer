@@ -72,14 +72,14 @@ source = "work/ship-systems-architecture/phase5/hot.py"
 [[technology]]
 id = "FT-03"
 name = "High-temperature closed-Brayton turbomachinery (1500 K turbine inlet)"
-status = "PROPOSED"
+status = "APPROVED"
 level = "B"
-decision = "owner DR5-01 asked for the investigation; adoption awaits the owner (DR6-02)"
+decision = "owner DR5-01 asked for the investigation (2026-11-28 06:33Z); approved as an explicit fictional development assumption in the 3D integration brief (2026-11-28 07:03Z), F1 = Track F reference"
 principle = "Brayton efficiency = Carnot fraction x (1 - T_reject / T_inlet)."
 precedent = "SiC/SiC CMC turbine shrouds and vanes near 1600 K in service; JIMO/Prometheus closed Brayton design at ~1150 K inlet; ceramic gas turbines (1990s demonstrators)."
 limitation = "Space closed-Brayton work is at ~1150 K turbine inlet (Track R, eta 0.146 at 750 K rejection); a reactor and recuperator at 1500 K for years are not demonstrated."
 advance = "Reactor outlet, IHX and turbine at 1500 K for the service life, using the FT-01 material family for the hot-gas boundary and CMC rotors."
-adopted = { turbine_inlet_K = 1500.0, carnot_fraction = 0.42, reject_K = 900.0, efficiency = 0.168 }
+adopted = { turbine_inlet_K = 1500.0, carnot_fraction = 0.42, reject_K = 950.0, efficiency = 0.154 }
 dependents = ["L2 power district (Track F variant F1)", "R5-A L2 radiator section length", "HOT headroom for L1 and the burn heat pumps"]
 consequence = "Track F returns to F0 (1150 K inlet, 750 K rejection): the L2 section stays 20.5 m and the HOT headroom under the 20 % rule is ~0.05 GW, too small for a reactive defense in a burn."
 source = "work/ship-systems-architecture/phase6/study6.py radiators_f"

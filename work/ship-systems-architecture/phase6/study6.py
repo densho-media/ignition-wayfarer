@@ -8,7 +8,7 @@ machine-readable baselines results/phase6_config_R.json (Track R, research) and 
 
 Track R = what today's physics and engineering support (Phase V research hardware, corrected here). Track F = the idealized hard-SF ship:
 the same physics, plus the advances written in the register (FT-xx), each Track F value naming the entry it depends on. F0 uses only the
-owner-approved entries; F1 adds the PROPOSED FT-03 high-temperature L2 conversion. Cases are correlated sensitivity cases (opt/nom/cons),
+owner-approved entries before 2026-11-28; F1 adds FT-03 (1500 K L2 turbines, approved by the owner 2026-11-28 07:03Z) and is the Track F reference. Cases are correlated sensitivity cases (opt/nom/cons),
 not statistical bounds. Every value here is STUDY / PROTOTYPE unless it cites canon.
 """
 import copy
@@ -284,6 +284,56 @@ def logistics6(P5):
 
 
 # ============================================================================ VI-A 4.4 cryogenic cooling =============================
+def species_heat(rad6):
+    """Per-species nuclear heating (W) from rad6's per-tank tallies. OpenMC tallies are per source particle; x the summed source strength
+    (particles per fission in each of the three units, cone fraction included) gives eV per fission-in-every-unit; x the fission rate of
+    one Track R 750 K unit at full power gives W. Components: TN neutrons split into uncollided (direct) and scattered with the uncollided
+    flux share, TN photons = shield and structure secondaries, TG = transmitted source photons, S6 = side scatter outside the cone."""
+    runs = rad6.get('runs', {})
+    if not all(k in runs for k in ('S6', 'TN', 'TG')): return None, None
+    import math as _m
+    S1 = json.loads((R/'phase4_rad_wayfarer.json').read_text())['S1']
+    mu_c = _m.cos(_m.radians(12.5)); fin = (1-mu_c)/2; fout = 1-fin
+    Nn, Ng = S1['neutrons_leaking_per_fission'], S1['photons_leaking_per_fission']
+    S_in_n, S_in_g, S_out = 3*Nn*fin, 3*Ng*fin, 3*(Nn+Ng)*fout
+    Pt = 3.5e6/0.146; f = Pt/(200e6*1.602e-19); ev = 1.602e-19*f
+    out = {}
+    for t in rad6['tanks']:
+        c = f'tank_{t["id"]}'; TN = runs['TN']['cells'][c]; TG = runs['TG']['cells'][c]; S6 = runs['S6']['cells'][c]
+        un = TN['unc_n']/TN['flux_n'] if TN['flux_n'] > 0 else 0.0
+        comp = dict(direct_n=TN['heat_n_eV']*un*S_in_n*ev, scattered_n=TN['heat_n_eV']*(1-un)*S_in_n*ev, secondary_g=TN['heat_g_eV']*S_in_n*ev,
+                    transmitted_g=TG['heat_g_eV']*S_in_g*ev, side_scatter=(S6['heat_n_eV']+S6['heat_g_eV'])*S_out*ev)
+        rel = max(TN['heat_n_rel'], S6['heat_n_rel'], S6['heat_g_rel']) if comp['side_scatter'] else TN['heat_n_rel']
+        d = out.setdefault(t['species'], dict(total_W=0.0, tanks=0, rel_max=0.0, **{k: 0.0 for k in comp}))
+        for k, v in comp.items(): d[k] += v; d['total_W'] += v
+        d['tanks'] += 1; d['rel_max'] = max(d['rel_max'], rel if rel == rel else 0.0)
+    basis = dict(unit_thermal_W=Pt, fission_rate_per_unit=f, strengths=dict(in_cone_n=S_in_n, in_cone_g=S_in_g, out_cone=S_out),
+                 note='Track R surrogate source at the 750 K unit power, all three units at full power; components as in the docstring; '
+                      'statistical rel_max is the worst tank tally; not a dose or design value')
+    return out, basis
+
+
+def rad_summary(rad6, CR):
+    if not rad6: return dict(status='not run')
+    r = {k: v for k, v in rad6.items() if k != 'tanks'}
+    sp = CR.get('species')
+    if sp:
+        keys = ['direct_n', 'scattered_n', 'secondary_g', 'transmitted_g', 'side_scatter']
+        comp = {k: dict(W=sum(v[k] for v in sp.values())*2/3, rel=max(v['rel_max'] for v in sp.values())) for k in keys}
+        top = max(comp, key=lambda k: comp[k]['W']); tot = sum(c['W'] for c in comp.values())
+        r['summary'] = dict(components=comp, total_W=tot,
+                            finding=f'All tanks at C load: {tot:.0f} W of nuclear heating, {100*comp[top]["W"]/tot:.0f} % from {top.replace("_", " ")} outside '
+                                    'the shadow cone (Phase V: ~161 W at the 700 K bulkhead station with the Phase V tally set; the cause of the difference is not '
+                                    'isolated). The through-shield components are below 0.001 W, but the benchmark ladder shows the weight windows are NOT '
+                                    'verified beyond 20 cm (40 cm: 1.3x at ±41 %, 60 cm: 9x high, 100 cm: 17x low against exp(-Sigma t), 254 cm: no score), so the 2.54 m transmission '
+                                    'is not a credible number yet: it needs adjoint-based variance reduction (CADIS/FW-CADIS). Statistical: the worst single tank '
+                                    'tally is ±100 %. Transport-informed on a surrogate source; shielding, crew dose and the installed cryocooler rating stay OPEN (DR5-08).')
+        D = rad6['runs'].get('D', [])
+        r['benchmark'] = dict(verified_to_cm=max([d['t_cm'] for d in D if d.get('ratio') and abs(d['ratio']-1) < 0.1 and d['rel_err'] < 0.1] or [0]),
+                              note='uncollided ratio within 10 % at <10 % statistics; weight-window runs beyond that disagree with the analytic value')
+    return r
+
+
 def cryo(rad6):
     """Required vs installed cooling of the He-3 3 K stage and the 20 K shields; nuclear heating by species from the OpenMC runs."""
     sys.path.insert(0, str(ROOT/'src/wayfarer')); import fuel_loads
@@ -291,8 +341,9 @@ def cryo(rad6):
     out = dict(he3_leak_lift_W=c['he3_stage_lift_W'], shield_leak_lift_W=c['shield_lift_W'], he3_W_per_W=1500.0, shield_W_per_W=60.0,
                note='fuel_loads.cooling gives the REQUIRED lift for the conduction/radiation leak (it sizes the cryocoolers to the leak; the canon '
                     'band spread 0.8-1.5 is on the input work). Phase V called 118 W the "lift": it is that requirement, not an installed margin.')
-    if rad6 and rad6.get('species_heat_W'):
-        sp = rad6['species_heat_W']
+    sp, basis = species_heat(rad6) if rad6 else (None, None)
+    if sp:
+        out['species'] = sp
         n3 = sp.get('helium-3', {}); n20 = {k: v for k, v in sp.items() if k != 'helium-3'}
         for load, frac in (('C (3 units at 2/3)', 2/3), ('full (3 units at 100 %)', 1.0)):
             q3 = n3.get('total_W', 0.0)*frac; q20 = sum(v.get('total_W', 0.0) for v in n20.values())*frac
@@ -300,7 +351,7 @@ def cryo(rad6):
                                                     shield_required_W=out['shield_leak_lift_W']+q20,
                                                     he3_installed_W=1.25*(out['he3_leak_lift_W']+q3),
                                                     added_input_W=q3*1500.0+q20*60.0, nuclear_share_he3=q3/(out['he3_leak_lift_W']+q3)))
-        out['basis'] = rad6.get('species_basis')
+        out['basis'] = basis
     return out
 
 
@@ -326,7 +377,7 @@ def tank_geometry(s, M):
                         ship_length_m=289.5+max(0.0, L*(f-1.0)), extra_liquid_m3={k: max(0.0, r['need_m3'][k]-r['capacity_m3'][k]) for k in r['need_m3']}))
     return dict(farm_x=(x0, x1), farm_length_m=L, rows=out,
                 options=['A: lengthen all 13 tanks forward (geometry below)', 'B: add a second farm forward of the first (more skirts, same diameters)',
-                         'C: larger diameters: blocked by the 12.5 deg shield shadow and the ring clearance'])
+                         'C: larger diameters or more vessels: blocked by the packing (1.0 m access gap, the three lanes and the girder panels are all at their limits), not by the Brow silhouette (r 45 m; the farm reaches 34.5 m)'])
 
 
 def accel_profile(s, M):
@@ -389,7 +440,7 @@ def layout(cfgF, HF, RF, D_trunk, L2len):
                 ['casing frame'], None, None, None)
             add('THERMAL_H6A', f'Inspection_{az:.0f}_{sct+1}', 'box', P((xa+xb)/2, 5.3, 1.6), (0.7, 0.7, 0.7), 'inspection and replacement port', [], 0.7, None, None)
     # radiators F0 / F1
-    for tag, L2x, cls in (('F0', L2len, 'R5-A 750 K cross-strapped (approved DR5-01)'), ('F1', RF['F1']['length_m'], 'FT-03 1500 K inlet, 900 K reject (PROPOSED)')):
+    for tag, L2x, cls in (('F0', L2len, 'R5-A 750 K cross-strapped (approved DR5-01)'), ('F1', RF['F1']['length_m'], 'FT-03 1500 K inlet, 950 K reject (APPROVED 2026-11-28)')):
         for az in AZ:
             add(f'RADIATOR_{tag}', f'L2Section_{tag}_{az:.0f}', 'sector', (BULK-L2x, az, 6.5), (BULK, 36.1, 0.45), f'L2 section {cls}', ['dual headers from two units'],
                 None, None, f'L2 section {az:.0f}', ft=('FT-03' if tag == 'F1' else None))
@@ -486,9 +537,9 @@ def main():
         if var == 'F1':
             k750 = 'L2 (3 x 3.5 MWe, 750 K)'; t = it.pop(k750)
             f = 0.5+0.5*pickF['reactor_MWt']/(3.5/e_R)            # unit mass ~ half reactor/shield (scales with MWt), half conversion (PROTOTYPE)
-            it['L2 (3 x 3.5 MWe, FT-03 1500 K inlet)'] = ([v*f for v in t[0]], t[1], t[2], 'FT-03 (PROPOSED)')
+            it['L2 (3 x 3.5 MWe, FT-03 1500 K inlet)'] = ([v*f for v in t[0]], t[1], t[2], 'FT-03 (APPROVED)')
             ks = 'L2 sections 750 K cross-strapped + dual headers'; t = it.pop(ks)
-            it[f'L2 sections {pickF["T_K"]:.0f} K cross-strapped + dual headers'] = ([v*pickF['length_m']/L750 for v in t[0]], BULK-pickF['length_m'], BULK, 'FT-03 (PROPOSED)')
+            it[f'L2 sections {pickF["T_K"]:.0f} K cross-strapped + dual headers'] = ([v*pickF['length_m']/L750 for v in t[0]], BULK-pickF['length_m'], BULK, 'FT-03 (APPROVED)')
         it, M, H, g = couple(s, it, True, 162.0-Lx)
         out_F[var] = dict(items=it, mass=M, H6a=H, a_end_g=g, P_dc_W=P_dc)
     HF = out_F['F0']['H6a']
@@ -568,13 +619,14 @@ def main():
         c['hash'] = h(c); return c
     cR = cfg('R'); cF0 = cfg('F', 'F0'); cF1 = cfg('F', 'F1')
     (R/'phase6_config_R.json').write_text(json.dumps(cR, indent=1, default=float))
-    (R/'phase6_config_F.json').write_text(json.dumps(dict(F0=cF0, F1=cF1, baseline='F0 (owner-approved assumptions only); F1 adds the PROPOSED FT-03'), indent=1, default=float))
-    LAY = layout(cF0, HF, RF, HF['net']['D_trunk'], L750)
+    (R/'phase6_config_F.json').write_text(json.dumps(dict(F0=cF0, F1=cF1, baseline='F1 is the Track F reference (owner 2026-11-28); F0 = without FT-03, kept for comparison'), indent=1, default=float))
+    LAY = layout(cF1, out_F['F1']['H6a'], RF, out_F['F1']['H6a']['net']['D_trunk'], pickF['length_m'])
     # problems and decisions
     probs = [
         dict(id='P6-01', track='R', sev='BLOCKER (research)', text=f'Hot-loop walls: {HR["total_t"][1]:,.0f} t nominal on the R5-A length; Mo-Re walls exceed their temperature limit at the nominal inlet.'),
         dict(id='P6-02', track='R', sev='HIGH', text=f'L1 thermal conversion rejects {rej900/1e6:.0f} MW at 900 K; a 900 K section needs {L900:.1f} m of hot length that the 20 % rule no longer has after R5-A.'),
-        dict(id='P6-03', track='R/F', sev='HIGH', text='He-3 stage: nuclear heating from structural scatter adds to the 118 W leak lift; final shielding and the installed cryocooler rating stay OPEN (rad6).'),
+        dict(id='P6-03', track='R/F', sev='HIGH', text='He-3 stage: OpenMC side scatter adds ~53 W (C load) to the 118 W leak lift (+45 %); the installed cryocooler rating and final shielding stay OPEN (DR5-08).'),
+        dict(id='P6-10', track='R', sev='HIGH', text='Deep penetration not verified: MAGIC weight windows are verified against exp(-Sigma t) only to 20 cm of LiH-W (40 cm within statistics); the 2.54 m shadow-shield transmission needs adjoint (CADIS) variance reduction before any through-shield number is used.'),
         dict(id='P6-04', track='F', sev='HIGH', text=f'F0: HOT headroom under the 20 % rule is {RF["F0"]["hot_headroom_W"]/1e6:.0f} MW; a reactive defense engagement in a burn (heat pumps + DC loss) does not fit. F1 (FT-03) frees {RF["F1"]["hot_headroom_W"]/1e6:,.0f} MW.'),
         dict(id='P6-05', track='R/F', sev='HIGH', text='Propellant does not fit the historical tank farm in any coupled case; the farm must grow (Track F geometry below).'),
         dict(id='P6-06', track='F', sev='MEDIUM', text='FT-04 needs a pulsed or modulated exhaust; the production drive repetition rate is OPEN in canon.'),
@@ -583,8 +635,8 @@ def main():
         dict(id='P6-09', track='R', sev='MEDIUM', text='OpenMC: surrogate source, simplified structure, no dose; deep-penetration convergence through the shadow shield reported with weight windows (rad6).'),
     ]
     decs = [
-        dict(id='DR6-01', q='Freeze F0 (approved assumptions only) as the Track F working configuration, with F1 as its candidate upgrade?', rec='yes'),
-        dict(id='DR6-02', q=f'Adopt FT-03 (1500 K turbine inlet, {RF["F1"]["T_K"]:.0f} K L2 reject) for Track F, making F1 the fictional baseline?', rec='yes: it is what lets L1 and a reactive defense fit the HOT rule'),
+        dict(id='DR6-01', q='Freeze F1 as the Track F working reference (8.2 kt class), with F0 and Track R as comparisons?', rec='yes (owner 3D brief)'),
+        dict(id='DR6-02', q=f'FT-03 approved (owner 07:03Z): confirm the {RF["F1"]["T_K"]:.0f} K L2 reject temperature chosen for F1 (most HOT length freed at no more reactor power than Track R)?', rec='yes'),
         dict(id='DR6-03', q='Track F tank farm: lengthen the 13 tanks forward (option A) in a fictional geometry variant?', rec='yes, as an isolated variant'),
         dict(id='DR6-04', q='Accept 7 ECLSS units with the hub unit served through each ring\'s rotary coupling (P6-07 stays open)?', rec='yes'),
         dict(id='DR6-05', q='Rate the Track F DC L1 at 100 MWe (reactive defense in a burn) only with F1, 20 MWe with F0?', rec='yes'),
@@ -610,10 +662,10 @@ def main():
                                wall_over_limit=HR['wall_over_limit']),
                         F0=dict(total_t=HF['total_t'], pump_W=HF['pump_W'], by_item_t=HF['by_item_t'], D_trunk=HF['net']['D_trunk'], t_trunk=HF['net']['t_trunk'],
                                 a_g=out_F['F0']['a_end_g']),
-                        F1=dict(total_t=out_F['F1']['H6a']['total_t'], pump_W=out_F['F1']['H6a']['pump_W'], a_g=out_F['F1']['a_end_g'])),
+                        F1=dict(total_t=out_F['F1']['H6a']['total_t'], pump_W=out_F['F1']['H6a']['pump_W'], by_item_t=out_F['F1']['H6a']['by_item_t'], D_trunk=out_F['F1']['H6a']['net']['D_trunk'], t_trunk=out_F['F1']['H6a']['net']['t_trunk'], a_g=out_F['F1']['a_end_g'])),
                mass=dict(R=MR, F0=out_F['F0']['mass'], F1=out_F['F1']['mass']), tanks=dict(R=tanksR, **tanksF), accel=dict(R=accR, **accF),
                missions=dict(R=pareto(msR), F0=pareto(msF), note='one hardware set per track; v^2 defense law shown; Pareto sets only (owner DR4-09)'),
-               layout=LAY, problems=probs, decisions=decs, radiation=rad6 or dict(status='not run'))
+               layout=LAY, problems=probs, decisions=decs, radiation=rad_summary(rad6, CR))
     (R/'phase6.json').write_text(json.dumps(out, indent=1, default=lambda o: list(o) if isinstance(o, tuple) else str(o)))
     print('configs', cR['id'], cR['hash'], cF0['id'], cF0['hash'], cF1['id'], cF1['hash'])
     print('4.1', round(rec41['convergence_departure_t']), round(rec41['mass_fictional_departure_t']), [(d['item'], round(d['delta_t'], 1)) for d in diff], round(rec41['sum_delta_t'], 1))
