@@ -1,0 +1,158 @@
+# Wayfarer fictional technology register (Track F). NONCANON working register, not a parameter source.
+#
+# Wayfarer has two tracks (AGENTS.md "Dual development"): Track R (research) computes what today's physics and engineering support and
+# publishes the result, including architectures that do not close. Track F (fiction) is the idealized hard-SF ship of IGNITION's
+# civilization: it may adopt an advance beyond today's engineering, never beyond established physics, and only when that advance is
+# written here first. Each entry records the physical principle, the existing precedent, today's limit, the advance needed, the adopted
+# fictional properties, the systems that depend on it, and the consequence if the assumption were not met. Research values stay in the
+# Track R results; an entry never replaces them.
+#
+# status: CANON (owner workbooks), APPROVED (owner direction, working fictional assumption), CONDITIONAL (approved as a direction,
+# acceptance waits for a stated ledger), PROPOSED (Claude candidate awaiting the owner), CONTEMPORARY (no fictional advance needed).
+# level: the PMDS material levels (docs/MATERIALS.md) applied to technology: A existing, B plausible development, C speculative.
+# Nothing in src/, tests/, tools/, godot/ or CI reads this file; the ISSA study (work/ship-systems-architecture/phase6) labels its Track F
+# values with these ids. Physical conservation holds in every entry.
+
+[register]
+version = "1.0"
+created = "2026-11-28"
+basis = "owner ISSA Phase VI brief 2026-11-28 (DR5-01..08); PMDS levels; existing canon fictional technologies (Fiji/Lattice drive)"
+civilization = """IGNITION's spacefaring civilization is a mature high-temperature and plasma civilization: it builds hermetic ceramic-matrix and \
+carbon-composite pressure systems that run near 2000 K for years, handles liquid alkali metals routinely, converts directly between plasma \
+motion and electricity, and maintains large ships with autonomous robots. It has NOT repealed any physical law: radiators still reject \
+heat as sigma T^4, energy and momentum are conserved, neutrons still need mass to stop, and cryogenic stages still pay Carnot. The register \
+keeps its advances to this one family (high-temperature materials, plasma electromagnetics, autonomy) so that they support each other \
+instead of being unrelated conveniences."""
+
+[[technology]]
+id = "FT-00"
+name = "Fiji/Lattice D-He3 fusion drive"
+status = "CANON"
+level = "C"
+principle = "D-3He fusion; magnetic nozzle directs charged products (exhaust velocity 19,201 km/s, directed efficiency 0.8)."
+precedent = "D-3He burn physics; magnetic-nozzle plasma experiments (VASIMR, MN-1); ICF/MIF ignition physics."
+limitation = "No D-3He ignition with gain; absorbed fraction 4e-5 of fusion power is a requirement, not a demonstrated property (data: physics.operating_point)."
+advance = "Canon Fiji lattice / optically gated manifold (owner workbooks)."
+adopted = { absorbed_fraction = 4.0e-5, exhaust_velocity_m_s = 19201172.08, thrust_cap_N = 21770763.0 }
+dependents = ["FT-04", "hot loop (H6a)", "HOT radiators"]
+consequence = "Outside the scope of ISSA: the drive is canon and its parked Vertex research stays parked (owner)."
+source = "data/wayfarer_3d.toml physics.operating_point; lab/studies/vertex-closure"
+
+[[technology]]
+id = "FT-01"
+name = "Refractory-composite pressure boundary"
+status = "APPROVED"
+level = "C"
+decision = "DR5-03 (owner 2026-11-28)"
+principle = "Hoop stress sigma = p D / 2 t; creep-limited allowable at temperature sets the wall."
+precedent = "C/C and C/SiC composites (re-entry thermal protection, rocket nozzle extensions, ~2000 K short duration); SiC/SiC CMC turbine parts (~1600 K, commercial engines); refractory-lined Li loops (SP-100, ~1350 K)."
+limitation = "No composite is hermetic to liquid Li at ~2000 K for years: Li attacks SiC and carbon, composites are porous and creep data near 2000 K for 1e4-1e5 h do not exist. Research walls use Mo-Re / W-Re at 8-30 MPa allowable and 10.2 t/m3 (Track R)."
+advance = "A hermetic, Li-compatible fibre-reinforced refractory composite tube with an integral liner, qualified for long-duration creep near 2000 K."
+adopted = { allowable_stress_Pa = 1.0e8, density_kg_m3 = 3000.0, max_temperature_K = 2000.0, coolant = "liquid lithium", hermetic = true }
+dependents = ["FT-02", "FT-03", "FT-06", "H6a hot network (Track F)", "L1 direct-conversion pickup cooling"]
+consequence = "Track F hot-network hardware rises from ~0.55 kt to ~2.3 kt (Track R H6a, 15 MPa Mo-Re), and the coupled departure mass with it (phase6.json mass)."
+apply_rule = "Use only for pressure boundaries above ~1300 K that carry Li or hot gas (hot loop, L2 hot side, DC pickup cooling). Not for cryogenic tanks, habitat pressure hulls, radiation shields or structure, where it brings no physical advantage."
+source = "work/ship-systems-architecture/phase5 (material sensitivity, C/C-SiC row)"
+
+[[technology]]
+id = "FT-02"
+name = "High-temperature lithium transport"
+status = "APPROVED"
+level = "B"
+decision = "DR5-02, DR5-04 (owner 2026-11-28)"
+principle = "Sensible heat transport m cp dT; EM pumping of a conducting liquid; vapour pressure and hydrostatic head set the pressure."
+precedent = "SP-100 and SNAP Li/NaK loops; annular linear induction pumps; Li-cooled reactor test loops at 1350-1500 K."
+limitation = "Li at ~1990 K inlet is beyond demonstrated loop temperatures; EM pump efficiency at high temperature is 0.25-0.45; frozen start needs ~140 GJ of thaw and preheat."
+advance = "Li loops and EM pumps run reliably near 2000 K inside FT-01 boundaries for the service life; trace heating and drain/recovery systems routine."
+adopted = { coolant = "Li", inlet_K = 1990.0, dT_K = 300.0, topology = "H6a: two redundant trunk paths, isolatable sections, heat-pipe fins, cross-feed", em_pump_efficiency = 0.35 }
+dependents = ["hot loop H6a", "HOT radiators", "FT-04 sink"]
+consequence = "Without it the HOT radiators cannot be fed at 1800 K mean surface; the drive's absorbed heat has no sink."
+source = "work/ship-systems-architecture/phase5/hot.py"
+
+[[technology]]
+id = "FT-03"
+name = "High-temperature closed-Brayton turbomachinery (1500 K turbine inlet)"
+status = "PROPOSED"
+level = "B"
+decision = "owner DR5-01 asked for the investigation; adoption awaits the owner (DR6-02)"
+principle = "Brayton efficiency = Carnot fraction x (1 - T_reject / T_inlet)."
+precedent = "SiC/SiC CMC turbine shrouds and vanes near 1600 K in service; JIMO/Prometheus closed Brayton design at ~1150 K inlet; ceramic gas turbines (1990s demonstrators)."
+limitation = "Space closed-Brayton work is at ~1150 K turbine inlet (Track R, eta 0.146 at 750 K rejection); a reactor and recuperator at 1500 K for years are not demonstrated."
+advance = "Reactor outlet, IHX and turbine at 1500 K for the service life, using the FT-01 material family for the hot-gas boundary and CMC rotors."
+adopted = { turbine_inlet_K = 1500.0, carnot_fraction = 0.42, reject_K = 900.0, efficiency = 0.168 }
+dependents = ["L2 power district (Track F variant F1)", "R5-A L2 radiator section length", "HOT headroom for L1 and the burn heat pumps"]
+consequence = "Track F returns to F0 (1150 K inlet, 750 K rejection): the L2 section stays 20.5 m and the HOT headroom under the 20 % rule is ~0.05 GW, too small for a reactive defense in a burn."
+source = "work/ship-systems-architecture/phase6/study6.py radiators_f"
+
+[[technology]]
+id = "FT-04"
+name = "Direct conversion of charged fusion products (L1)"
+status = "CONDITIONAL"
+level = "C"
+decision = "DR5-05 (owner 2026-11-28): conditional fictional L1 direction; thermal conversion stays the research reference"
+principle = "Faraday induction: expanding plasma doing work against a magnetic field changes the flux through a pickup winding (inductive conversion); decelerating charged particles in an electrostatic or travelling-wave field (Venetian blind, TWDEC)."
+precedent = "Daedalus (BIS 1978) induction-loop power from the exhaust; Venetian-blind and TWDEC designs for mirror and D-3He reactors (50-70 % calculated); pulsed inductive energy recovery in magneto-inertial fusion experiments; resonant pulsed-power recovery (Vertex C2 literature 0.8-0.95 per exchange)."
+limitation = "Never demonstrated at power on a fusion exhaust; refractory pickup conductors at ~1900 K are resistive (W ~6e-7 ohm m); the pickup sees the drive's radiation; steady flow induces no EMF without modulation."
+advance = "A refractory pickup winding cooled by the FT-02 loop inside the existing nozzle structure (no new intercept area), with plasma-to-bus efficiency 0.5-0.8 at 10-100 MWe."
+adopted = { efficiency = [0.8, 0.65, 0.5], rating_W = 1.0e8, loss_sink = "hot loop (HOT radiators, 1800 K)", requires = "pulsed or modulated exhaust; buffer store per pulse" }
+dependents = ["L1 bus", "burn heat pumps", "EYE Burn Watch", "hot-loop pumps in a burn"]
+consequence = "Track R L1: thermal conversion at ~0.27 with a ~900 K reject that has no radiator (OPEN). The 900 K problem is changed by FT-04, not removed by fiat: its losses go to the HOT loop and must fit the HOT headroom."
+source = "work/ship-systems-architecture/phase6/study6.py direct_conversion"
+
+[[technology]]
+id = "FT-05"
+name = "Electrical energy storage"
+status = "CONTEMPORARY"
+level = "A"
+principle = "Electrochemical and capacitive storage; energy = power x time; converter limits."
+precedent = "Li-ion packs 150-250 Wh/kg; film capacitors 1-4 kJ/kg; composite flywheels 50-200 kJ/kg."
+limitation = "Cycle life and radiation tolerance over a 10-20 year service life."
+advance = "None needed for capacity; Track F assumes radiation-tolerant cells with 20-year life at contemporary energy density (Level B life, Level A density)."
+adopted = { battery_Wh_kg = 150.0, capacitor_J_kg = 2.0e3, life_years = 20 }
+dependents = ["main battery", "restart packs R1b", "defense buffer", "ride-through", "survival bridge", "DC pulse buffer"]
+consequence = "Mass rises with replacement packs; no architecture change."
+source = "data/wayfarer_3d.toml (C2 storage literature ranges)"
+
+[[technology]]
+id = "FT-06"
+name = "Advanced high-temperature heat pipes"
+status = "APPROVED"
+level = "B"
+decision = "part of DR5-02 (local heat-pipe fins)"
+principle = "Capillary-pumped evaporation and condensation; capillary, sonic and entrainment limits."
+precedent = "Li/W and Na heat pipes at 1300-1800 K (space reactor and solar-thermal tests, 1e4 h class)."
+limitation = "Li heat pipes near 1800-2000 K over 1e5 h in a composite envelope; frozen-start transients."
+advance = "Li heat-pipe fins in FT-01 envelopes with reliable frozen start, fin spacing 2.94 m (2 x capillary limit)."
+adopted = { fluid = "Li", T_K = 1800.0, fin_spacing_m = 2.94 }
+dependents = ["HOT radiator fins", "H6a sections"]
+consequence = "Fins revert to pumped manifolds: more inventory and pump work."
+source = "work/ship-systems-architecture/phase5/hot.py"
+
+[[technology]]
+id = "FT-07"
+name = "Robotics and autonomous maintenance"
+status = "APPROVED"
+level = "B"
+decision = "owner Phase VI 6.6 (robotic handling); shutdown gamma keeps crew out of line of sight for weeks (Phase III)"
+principle = "Teleoperated and autonomous manipulation; radiation-hardened electronics."
+precedent = "ISS Canadarm2/Dextre ORU swaps; nuclear hot-cell manipulators; JET remote handling."
+limitation = "Dexterity and autonomy for unplanned repairs in a high-radiation zone without crew in the loop."
+advance = "Supervised autonomous robots replace any ORU up to 3 t (LOG-G1 class) along defined routes; crew supervise from shielded stations."
+adopted = { max_oru_t = 3.0, handling = "single-arm up to 3 t, dual-arm or rail above", routes = "keel lane, district removal route, hub store" }
+dependents = ["power district maintenance", "H6a section replacement", "LOG-G1", "workshop"]
+consequence = "Crewed servicing only after weeks of decay; maintenance windows stretch; spares mass rises."
+source = "work/ship-systems-architecture/phase6/study6.py layout"
+
+[[technology]]
+id = "FT-08"
+name = "Existing structural and manufacturing capabilities"
+status = "CANON"
+level = "A-B"
+principle = "Structure, cryogenic tanks and assembly within today's material physics."
+precedent = "CFRP primary structure; Al-Li cryogenic tanks; HTS coils; in-space assembly (ISS)."
+limitation = "Scale: a 289.5 m ship assembled in orbit; long-life HTS magnets."
+advance = "Industrial in-space assembly and HTS manufacture at ship scale (setting)."
+adopted = { structure = "CFRP allowable 600 MPa screening (vertex_engine.structure rule)", tanks = "Al-Li, zero boil-off", magnets = "HTS" }
+dependents = ["hull", "tank farm", "rings", "drive coils"]
+consequence = "None for ISSA: values are the production model's."
+source = "data/wayfarer_3d.toml; data/materials/catalogue.toml"
