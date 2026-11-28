@@ -1,0 +1,390 @@
+# PSA <-> ISSA shared engineering interface (PROPOSAL, STUDY / NONCANON). Version PSA-IF 0.1, 2026-11-28.
+#
+# Convention (proposed, not yet adopted by ISSA; no shared production file is changed):
+#  - Equipment ids are ISSA's (`systems.toml` ids EPS-xx, TMS-xx, ...; `data/systems.toml` on the ISSA branch) or, for systems ISSA does
+#    not own, the production budget id (physics.mass_budget) prefixed `MB.`. PSA never renames an ISSA id.
+#  - Structure-side ids are PSA's: MZ-nn mounting zones, KO-nn keep-outs, SC-nn service corridors, HP-<class> hard-point classes.
+#  - Every quantity is a value, a [low, nominal, high] band, or the string "OPEN <reason>". Zero is never a placeholder.
+#  - Positions are ship coordinates (metres, +X bow, +Z dorsal; layout datums AFT -144.75, RING_A 97.30, FWD 144.75 at main 11f1e94).
+#  - `source_rev` pins the commit the value was read from; a refresh at each PSA phase updates it and logs the change in the handoff.
+#  - Ownership: ISSA owns equipment requirements (mass, envelope, thermal, utilities, maintenance); PSA owns zones, capacities,
+#    stiffness, keep-outs and corridors. A value one side needs from the other and does not have is OPEN with `needed_by`.
+
+[meta]
+version = "PSA-IF 0.1"
+status = "PROPOSAL / STUDY / NONCANON"
+issa_source = "claude/cloud/ship-systems-architecture @ 5eae7016c1c31631c9437b2d7d06aa30b740a374 (Phase VI, F1 = Track F reference)"
+main_source = "main @ 11f1e94f1c36a6e53835343c3ad645ff7da8f2d5"
+equipment_fields = ["id", "owner", "source_rev", "track", "envelope", "position", "mass_t", "cg_m", "inertia", "T_operating_K", "T_survival_K", "loads", "attachment", "attachment_stiffness", "allowed_displacement", "thermal_expansion", "vibration", "radiation_em", "maintenance_envelope", "utilities", "redundancy", "evidence", "approval"]
+zone_fields = ["id", "x_m", "r_m", "azimuth_deg", "function", "hardpoints", "capacity", "stiffness", "keep_outs", "corridors", "temperature_K", "notes"]
+
+[hardpoint_class]
+HP-S = { capacity_kN = 10, stiffness_N_m = 1e7, pattern = "4 x M12 on a 200 mm square, frame-mounted", use = "racks, sensors, avionics boxes" }
+HP-M = { capacity_kN = 50, stiffness_N_m = 5e7, pattern = "6 x M20 or pinned clevis on a frame node", use = "ECLSS units, battery strings, pumps" }
+HP-L = { capacity_kN = 250, stiffness_N_m = 2e8, pattern = "pinned clevis pair on a longeron node", use = "L2 units, drive services, tank skirts" }
+HP-X = { capacity_kN = "OPEN (designed per item)", stiffness_N_m = "OPEN", pattern = "dedicated structure", use = "drive, Brow, rings, blades, tank farm" }
+capacity_basis = "design acceleration 1.5 g (canon) x mass x 1.4 ultimate; at the thrust-bounded flight peak (1.33 g on the dry P ship) the same hard-point carries ~13 % more mass"
+mount_rule = "Equipment on mounts: first mode >= 5 Hz (50x the global ~0.1 Hz mode, below pulse harmonics) or isolated below 1 Hz; never between."
+
+[[zone]]
+id = "MZ-01"
+name = "Aft thrust bay"
+x_m = [-144.75, -127.0]
+r_m = [0.0, 36.5]
+function = "engines/nozzles, thrust frame, 12-node ring, aft RCS, comms booms"
+hardpoints = "HP-X at 12 ring nodes; HP-L on transition frames X -135..-127"
+capacity = "thrust 21.77 MN flight, 29.42 MN canon design (07!A2); node design share OPEN pending LC-13"
+stiffness = "ring axial node stiffness OPEN (Phase II FE)"
+temperature_K = "OPEN (plume back-radiation, nozzle yokes 'warm')"
+keep_outs = ["KO-01 plume cone 15/20 deg", "KO-02 engine removal sweep aft"]
+corridors = ["SC-01 nozzle service umbilicals along the hub web"]
+
+[[zone]]
+id = "MZ-02"
+name = "Power district and transition (behind the shadow shield)"
+x_m = [-127.0, -75.0]
+r_m = [0.0, 6.0]
+function = "ISSA L2 units (X -92..-80), PMAD, batteries, drive services"
+hardpoints = "HP-L per L2 mount frame (ISSA L2Ux_MountFrame at X -86); HP-M on frames"
+capacity = "~97 t per L2 unit (F1 nominal 290.6 t / 3): 2.0 MN design per unit at 1.5 g x 1.4"
+temperature_K = "frames <= 350 K required; L2 reject 950 K (F1) / 750 K (R) on its own section"
+keep_outs = ["KO-03 L2 removal route (ISSA District_RemovalRoute rod X -92..93, Z -3.6)", "KO-04 crew exclusion in L2 line of sight"]
+corridors = ["SC-02 removal route", "SC-03 power trunks A/B"]
+notes = "No ferromagnetic structure if the drive stray field gradient exceeds 1e-3 T/m here (LC-20); field map OPEN."
+
+[[zone]]
+id = "MZ-03"
+name = "Hot-loop trunk lanes (ISSA H6a)"
+x_m = [-140.0, 30.0]
+r_m = [4.5, 6.4]
+azimuth_deg = [90, 210, 330]
+function = "lithium trunks, EM pumps, accumulators, drain recovery, headers, valves"
+hardpoints = "CN-08 thermal-break stand-offs on every 4 m frame (ISSA shows 6 supports per sector at ~23 m pitch: PSA proposes <= 8 m pitch for a 1990 K duct)"
+capacity = "hot loop 565 t (F1) / 1,833 t (R) distributed: 3.3 t/m (F1) to 10.8 t/m (R) over 170 m"
+temperature_K = "duct 1990 K; stand-off cold end <= 350 K; leak ~120 W per stand-off stage (YSZ) -> ~13 W into the frame (Inconel flexure)"
+thermal_expansion = "duct growth ~1.2-1.8 m over 170 m at 2000 K (Nb/Mo ~6-8 ppm/K): one axial anchor per section, slides elsewhere"
+keep_outs = ["KO-05 radiative view of bare 1990 K duct (0.76 MW/m2): multifoil insulation required (ISSA-side)"]
+notes = "Largest new structural load in F1/R and the strongest PSA-ISSA coupling."
+
+[[zone]]
+id = "MZ-04"
+name = "Midbody service bays"
+x_m = [-75.0, 48.9]
+r_m = [0.95, 6.0]
+function = "ISSA other systems (L1, L3, storage, distribution, ECLSS increment), workshop/spares/cargo (X 22..49)"
+hardpoints = "HP-S/HP-M on every frame at 12 azimuths; HP-L at sector nodes"
+capacity = "OPEN per bay (vertebra standard proposal: 40 t equipment per 8 m vertebra at 1.5 g)"
+temperature_K = "150-320 K (shadowed body)"
+keep_outs = ["KO-06 crew trunk and spine bore", "KO-07 crawler track DS-13 at 110 deg", "KO-08 radiator root band r 6.0-6.5"]
+corridors = ["SC-04 cage-to-skin corridor (casing access panels at 0/120/240 deg)", "SC-05 hydrogen feed corridor r 5.4 m"]
+
+[[zone]]
+id = "MZ-05"
+name = "Radiator root band"
+x_m = [-133.25, 48.9]
+r_m = [6.0, 6.5]
+azimuth_deg = [90, 210, 330]
+function = "blade root booms, posts, stays, feed/return chases, datum lugs and slides"
+hardpoints = "HP-X (blade datum at the aft root boom; slides +-0.20 m)"
+capacity = "1.47 MN blade inertial envelope (07!A30 DIAGNOSTIC)"
+temperature_K = "root transition band cooler than 1800 K (3 m non-emitting); frame at the boot <= 420 K required"
+keep_outs = ["KO-08 no equipment on the root band (thermal_geometry.root_construction_screen)"]
+
+[[zone]]
+id = "MZ-06"
+name = "RAD-ZONE (WARM/LOW sections and graded thermal bulkhead)"
+x_m = [48.9, 93.4]
+r_m = [0.95, 37.0]
+function = "450 K/300 K sections, bulkhead, cryocooler rejection; ISSA F1 L2 section 7.4 m and bulkhead at X 42.8"
+hardpoints = "HP-M/HP-L"
+capacity = "OPEN"
+temperature_K = "300-450 K"
+notes = "ISSA moves the graded bulkhead (F1 X 42.76 vs production): a PSA frame station, so a structural interface change."
+
+[[zone]]
+id = "MZ-07"
+name = "Rotor bay"
+x_m = [93.4, 107.0]
+r_m = [0.0, 35.0]
+function = "two counter-rotating rings (165 t each), hubs, bearings, locks; stationary bypass collar r 33-35 m"
+hardpoints = "HP-X: hub bearings, latches (CN-13)"
+capacity = "locked axial 2.2 MN per ring (flight peak), 2.4 MN (canon 1.5 g); spin torque 28 kN m per ring"
+keep_outs = ["KO-09 ring sweeps r <= 30 m + clearance; nothing crosses (Q45)"]
+corridors = ["SC-06 crew trunk and spine ports", "SC-07 rotary utility couplings (ISSA P6-07, OD-013)"]
+
+[[zone]]
+id = "MZ-08"
+name = "Forward service and refuge"
+x_m = [104.0, 109.25]
+r_m = [0.0, 6.5]
+function = "storm refuge (12), docking ports, EVA airlock"
+hardpoints = "HP-M/HP-L; docking rings HP-X"
+capacity = "refuge water 20 t; docking 10-50 kN (ESTIMATE)"
+
+[[zone]]
+id = "MZ-09"
+name = "Tank farm and thrust deck"
+x_m = [109.25, 137.85]
+r_m = [0.0, 13.0]
+function = "13 axial vessels, thrust deck (161 t in the tankage budget), skirts, V-links"
+hardpoints = "HP-X (aft fixity, forward links)"
+capacity = "propellant 2.8 kt (P) / 5.2 kt (F1) / 8.1 kt (R): deck reaction ~16 MN at flight peak, 48 MN at the canon 1.5 g envelope"
+temperature_K = "3-20 K vessels; deck ~150 K"
+keep_outs = ["KO-10 shadow cone 12.5 deg (tanks inside)", "KO-11 1.0 m vessel access gap"]
+notes = "ISSA Track F tank growth +16.4..23.9 m (stretch/tandem/densify) moves this zone: PSA needs the chosen option to place the collar."
+
+[[zone]]
+id = "MZ-10"
+name = "Brow root and forward collar"
+x_m = [137.85, 144.75]
+r_m = [0.0, 45.0]
+function = "Brow truss hub path, sector keels, Eye wells, Lance"
+hardpoints = "HP-X"
+capacity = "shield + Eye 125 t: 1.6 MN at the dry-ship flight peak, 1.8 MN at 1.5 g"
+
+[[equipment]]
+id = "EPS-02"
+name = "L2 ship-service generation unit (x3, fission-Brayton, strategy C)"
+owner = "ISSA"
+source_rev = "5eae701 phase6_config_F.json F1 items 'L2 (3 x 3.5 MWe, FT-03 1500 K inlet)'"
+track = "F1 (R: 750 K variant)"
+envelope = "per unit: reactor cyl 1.6 x r0.75, shadow shield 2.54 x r1.0, TAC, recuperator, gas cooler, PMAD; clearance box 8.0 x 2.4 x 2.4 m"
+position = "X -92..-80 at azimuth 90/210/330, r ~2.9 m"
+mass_t = [52.0, 96.9, 206.4]
+cg_m = "OPEN (unit CG along its axis not given by ISSA)"
+inertia = "bound: solid box 8 x 2.4 x 2.4 m of the unit mass"
+T_operating_K = "turbine inlet 1500 (F1) / 1150 (R); reject 950 (F1) / 750 (R)"
+T_survival_K = "OPEN"
+loads = "inertial 1.5 g x 1.4; turbomachinery imbalance OPEN; shutdown/restart transients OPEN"
+attachment = "ISSA L2Ux_MountFrame ring at X -86: PSA proposes 3-point kinematic HP-L mount + thermal-break to the frame"
+attachment_stiffness = "OPEN (needed_by Phase II modal model)"
+allowed_displacement = "OPEN (shaft alignment is internal to the unit; PSA assumes the unit is self-aligned)"
+thermal_expansion = "unit internal; mount must slide radially"
+vibration = "TAC rotor speed OPEN: keep frame modes away from 1x/2x rotor frequency"
+radiation_em = "shadow shield defines the crew exclusion cone; structure in the scatter band: dpa OPEN (LC-19)"
+maintenance_envelope = "District_RemovalRoute (ISSA) along X -92..93 at Z -3.6"
+utilities = ["power trunks A/B", "L2 sections 950 K (F1)", "control"]
+redundancy = "3 units, strategy C (B for maintenance)"
+evidence = "ISSA STUDY"
+approval = "NONCANON"
+
+[[equipment]]
+id = "TMS-01"
+name = "Hot loop H6a (lithium trunks, EM pumps, headers, valves, accumulators, drain recovery)"
+owner = "ISSA"
+source_rev = "5eae701 phase6.json layout THERMAL_H6A (108 entries); F1 items 'hot loop H6a'"
+track = "F1 (R separate)"
+envelope = "two trunks per sector X -140..30, headers in six sections per sector, pumps at X -134"
+position = "r ~4.5-6.4 m, azimuth 90/210/330"
+mass_t = [499.0, 565.2, 696.1]
+mass_t_R = [1073.3, 1833.0, 3310.0]
+cg_m = "OPEN (distributed; PSA assumes uniform over X -140..30)"
+inertia = "distributed line mass"
+T_operating_K = "~1990 inlet, 1800 mean surface"
+T_survival_K = "OPEN (freeze-thaw of Li at 454 K: drain recovery)"
+loads = "inertial; Li pressure ~2 MPa at the aft end in a 1.36 g burn (ISSA Phase V); thermal growth 1.2-1.8 m"
+attachment = "CN-08 thermal-break stand-offs, one axial anchor per section, slides elsewhere"
+attachment_stiffness = "OPEN"
+allowed_displacement = "axial slide >= section growth + 50 %"
+thermal_expansion = "see MZ-03"
+vibration = "EM pump pulsation OPEN"
+radiation_em = "EM pump fields: insulating breaks in nearby frames (CN-12) if dB/dt > 1 T/s"
+maintenance_envelope = "Inspection_* boxes every section (ISSA)"
+utilities = ["EM pump power", "drain/fill lines"]
+redundancy = "two paths per sector (A/B)"
+evidence = "ISSA STUDY"
+approval = "NONCANON"
+
+[[equipment]]
+id = "PROP-IF"
+name = "Drive package (core, lattice, coils, nozzles) and thrust frame interface"
+owner = "PROP (parked research; interfaces only)"
+source_rev = "main 11f1e94 physics.mass_budget drive_package"
+track = "P (Fiji canon) / Vertex cluster shown"
+envelope = "X -144.75..-113.2"
+position = "axis (Fiji, 4 nozzles at 2.6 m) or 4 engines on a 24-30 m pitch circle (Vertex cluster)"
+mass_t = 250.0
+cg_m = "OPEN"
+inertia = "OPEN"
+T_operating_K = "plasma-facing; yokes 'warm' OPEN"
+T_survival_K = "OPEN"
+loads = "thrust 21.77 MN flight, 29.42 MN design; internal coil forces 93-272 MN (Vertex 1.2, internal)"
+attachment = "nozzle pickups to ring nodes 0/3/6/9 (07!A9); re-angle toward the axis (LC-13)"
+attachment_stiffness = "OPEN"
+allowed_displacement = "thrust-axis alignment OPEN (GNC-04)"
+vibration = "pulse rate OPEN (LC-21)"
+radiation_em = "neutron source; stray field map OPEN"
+maintenance_envelope = "engine removal aft through the cradle (vertex_cluster.removal_sweep)"
+utilities = ["fuel feed (inside drive budget)", "HTS leads, cryogen", "hot loop tap"]
+redundancy = "4 nozzles/engines; engine-out trim LC-05"
+evidence = "canon WORKING / SPECULATIVE (Vertex)"
+approval = "CANON (allowance) / NONCANON (Vertex)"
+
+[[equipment]]
+id = "MB.tank_farm"
+name = "Tank farm (13 axial vessels) with thrust deck and propellant"
+owner = "production fuel system (fuel_storage, fuel_loads); ISSA Track F growth options"
+source_rev = "main 11f1e94 mass_model; ISSA 5eae701 tanks"
+track = "P / F1 / R"
+envelope = "X 109.25..137.85 (P); +16.4..+23.9 m (F1 options)"
+position = "forward, behind the Brow"
+mass_t = { P = 3255.0, F1 = "OPEN until DR6-03", note = "P: 2,797 t propellant + 458 t tankage (166 t deck/guides inside)" }
+cg_m = "P: X ~123"
+T_operating_K = "3 (He-3 stage), 20 K shields"
+loads = "deck reaction ~16 MN flight peak, 48 MN canon 1.5 g; cold contraction 0.095 m"
+attachment = "aft fixity + forward V-links (CN-10)"
+evidence = "CALCULATED (main)"
+approval = "WORKING"
+
+[[equipment]]
+id = "STRUCT-02"
+name = "Rotating habitat rings A and B with hubs, bearings and locks"
+owner = "habitat (production)"
+source_rev = "main 11f1e94 habitat_ring.dynamics"
+track = "P"
+envelope = "r <= 30 m sweep at X ~96.3..104.3"
+position = "RING_A 97.30, RING_B 103.30"
+mass_t = 165.0
+inertia = "1.2e8 kg m2 each about the axis"
+loads = "LC-14, LC-15"
+attachment = "hub bearings + latches to the stationary hub; locked under thrust"
+redundancy = "two rings"
+evidence = "CALCULATED (main)"
+approval = "WORKING"
+
+[[equipment]]
+id = "PROT-01"
+name = "Brow (forward shield, disruptor, Crown, Lance)"
+owner = "forward defense (production)"
+source_rev = "main 11f1e94 physics.mass_budget forward_impact_shielding"
+mass_t = 100.0
+position = "X 138.2..144.8, r <= 45 m"
+loads = "inertial 1.6-1.8 MN; impact OPEN (OD-014)"
+attachment = "hub path + three sector keels + Q45 bypass collar (07!A39, A54)"
+evidence = "CANON allowance"
+approval = "PROVISIONAL"
+
+[[equipment]]
+id = "PROT-02"
+name = "EYE sensing"
+owner = "forward defense"
+mass_t = 25.0
+position = "Brow hub wells, r ~31 m"
+allowed_displacement = "OPEN: pointing/alignment budget of the Eye array (coherent baseline OPEN) drives Brow stiffness"
+evidence = "CANON allowance"
+approval = "PROVISIONAL"
+
+[[equipment]]
+id = "MB.radiators_thermal"
+name = "Three fixed radiator blades (hot faces) and their trusses"
+owner = "thermal (production); ISSA radiator zoning"
+mass_t = "OPEN share of the 100 t thermal line (07!A30 note)"
+position = "X -133.25..48.9, r 6.5..37 at 90/210/330"
+T_operating_K = 1800
+loads = "LC-09"
+attachment = "aft datum + forward slides + 4 stays (production)"
+evidence = "CANON"
+approval = "BASELINE (geometry)"
+
+[[equipment]]
+id = "ECLSS-01"
+name = "ECLSS strings (7 units: 3 A + 3 B + 1 hub)"
+owner = "ISSA"
+source_rev = "5eae701 (DR6-04)"
+mass_t = "OPEN per unit (ISSA increment 3.6-6.4 t total)"
+position = "rings + hub"
+attachment = "HP-M"
+evidence = "ISSA STUDY"
+approval = "NONCANON"
+
+[[equipment]]
+id = "MRO-01"
+name = "Workshop and containers"
+owner = "ISSA"
+mass_t = "OPEN (inside 60 t workshop/spares/cargo)"
+position = "X 22..49 (production span)"
+attachment = "HP-S/HP-M"
+evidence = "CANON allowance"
+approval = "PROVISIONAL"
+
+[[equipment]]
+id = "LOG-02"
+name = "General cargo, LOG-G1 containers (3 t each)"
+owner = "ISSA"
+source_rev = "5eae701 (DR5-07 3 t LOG-G1)"
+mass_t = "per container 3 t; count per mission OPEN"
+attachment = "standard container rails on HP-M"
+evidence = "ISSA STUDY"
+approval = "NONCANON"
+
+[[equipment]]
+id = "GNC-02"
+name = "Control-moment gyros"
+owner = "ISSA"
+mass_t = "OPEN"
+loads = "gyroscopic reaction torques into the frame; wheel imbalance"
+attachment = "HP-M on a stiff frame near the CG (CG travels 11.4 m in the burn)"
+vibration = "wheel speed harmonics vs equipment mount modes"
+approval = "NONCANON"
+
+[[equipment]]
+id = "SAFETY-01"
+name = "Storm refuge (12) with 20 t water"
+owner = "production"
+mass_t = 20.0
+position = "X 106.4..109.2"
+attachment = "HP-L"
+approval = "WORKING"
+
+[[equipment]]
+id = "PROT-05"
+name = "Structural health, impact and vibration monitoring"
+owner = "ISSA (PROT) with PSA sensor layout"
+mass_t = "OPEN (sensing layer 0.5-2 % of composite mass, F-SMART-LAYER)"
+utilities = ["data", "power"]
+notes = "PSA proposes: FBG lines on every longeron cassette and frame, acoustic emission at nodes, Seraph digital twin of N(x)."
+approval = "NONCANON"
+
+[[equipment]]
+id = "MRO-03"
+name = "Maintenance drones, crawler track DS-13, docks"
+owner = "production / ISSA"
+mass_t = "OPEN"
+position = "spine crawler track at 110 deg (KO-07)"
+notes = "PSA needs drone reach envelopes to every node and cassette for in-flight exchange (LC-16)."
+approval = "WORKING"
+
+[[handoff]]
+id = "HO-01"
+to = "ISSA"
+topic = "Hot-loop support pitch and thermal-break stand-offs"
+ask = "Support pitch <= 8 m (frame pitch 4 m) for the 1990 K trunks; one axial anchor per section; multifoil on bare duct; send per-support load and growth."
+impact = "PSA sizes frames for 3.3 t/m (F1) or 10.8 t/m (R); the R hot loop is 3x the whole production main-structure line."
+
+[[handoff]]
+id = "HO-02"
+to = "ISSA"
+topic = "Thermal bulkhead relocation (F1 X 42.76)"
+ask = "Treat the bulkhead station as a PSA frame station: agree its X before 3D integration checkpoint 2."
+impact = "A primary frame moves; casing straps and access panels follow."
+
+[[handoff]]
+id = "HO-03"
+to = "ISSA"
+topic = "Track F tank-farm growth (stretch +18.2 m, tandem +23.9 m, densify +16.4 m)"
+ask = "Choose with PSA: stretch and tandem lengthen the 245 m compression column (global stiffness ~ L^2); densify keeps it."
+impact = "Euler-bound EI grows ~15-20 % for +18-24 m; PSA prefers densify or an aft move of part of the farm (concept G question)."
+
+[[handoff]]
+id = "HO-04"
+to = "ISSA"
+topic = "Equipment mass, CG and mount data"
+ask = "Fill cg_m, inertia, attachment stiffness need, vibration sources for EPS-02, TMS-01, GNC-02, ECLSS-01 (OPEN fields)."
+impact = "Needed for the Phase II modal model."
+
+[[handoff]]
+id = "HO-05"
+to = "ISSA"
+topic = "Magnetic stray-field map of the drive and EM pumps"
+ask = "Provide |B| and |grad B| at the frames X -145..-60 (or confirm unknown) so PSA can set the ferromagnetic exclusion zone."
+impact = "Decides whether lunar ferritic steel can be used anywhere aft (cheapest structural metal)."

@@ -1,0 +1,211 @@
+# PSA Phase I: structural load-case register (STUDY / NONCANON).
+# magnitude: Phase I screening values from psa_study.py (results/psa_phase1.json) or OPEN. evidence: CANON (Drive row), CALCULATED
+# (first-order, this study), ESTIMATE, OPEN. Loads are distributed inertial loads (mass x local acceleration), never the total thrust
+# applied to every section. Configurations: P production, F1 ISSA Track F reference, R ISSA Track R (never mixed).
+
+[meta]
+status = "STUDY / NONCANON"
+sizing_rule = "Phase I sizing: N_design = max over flight states of T x m_ahead / M, x DLF 1.3; ultimate factor 1.4, yield 1.25 (materials.toml). The canon 1.5 g at 2,000 t envelope (07!A2) is carried as a comparison case LC-02b."
+
+[[case]]
+id = "LC-01"
+name = "Nominal propulsion (power-limited burn)"
+configs = ["P", "F1", "R"]
+magnitude = "Thrust 21.77 MN in all three (power-limited drive); compression ~21 MN at the transition, ~16 MN at the tank farm aft face, ~0.3-1.6 MN at the shield root (stations in psa_phase1.json)"
+path = "thrust frame -> ring -> sectors/spine -> frames -> tank deck and collar -> Brow"
+evidence = "CALCULATED (mass_model placement for P; ISSA Phase VI masses placed by district for F1/R)"
+note = "Because thrust is fixed by drive power, a heavier ship (F1 8.2 kt, R 12.9 kt) sees LOWER acceleration and nearly the SAME section loads; growth moves load forward (propellant) not up."
+
+[[case]]
+id = "LC-02"
+name = "Maximum structural design load (thrust-bounded envelope)"
+configs = ["P", "F1", "R"]
+magnitude = "N_design ~27.8 MN at the transition (21.4 MN x DLF 1.3)"
+path = "as LC-01"
+evidence = "CALCULATED; DLF 1.3 PROTOTYPE pending LC-03"
+note = "Governs every longitudinal member."
+
+[[case]]
+id = "LC-02b"
+name = "Canon structural envelope: 1.5 g on the fully loaded ship"
+configs = ["P"]
+magnitude = "63.5 MN at the transition (1.5 g x 4,466 t) - 3x what the drive can produce"
+path = "as LC-01"
+evidence = "CANON rule 07!A2 (29.42 MN = 1.5 g x 2,000 t, DERIVED) as applied by the tank-deck study (DOP-03: every vessel full at 1.5 g)"
+note = "Owner decision PSA-D01: keep as a proof envelope (x2.4-2.7 structure mass) or replace by a thrust-bounded design load with explicit factors."
+
+[[case]]
+id = "LC-03"
+name = "Propulsion startup and shutdown transients"
+configs = ["P", "F1", "R"]
+magnitude = "DLF 1.0 (slow ramp, > 10 x first-mode period ~10 s) to 2.0 (step); ramp rate OPEN"
+path = "all longitudinal members; tank slosh and ring latches"
+evidence = "OPEN (drive thrust ramp not in canon; first_ignition ramp exists for the burn but not the structural transient)"
+note = "A thrust ramp slower than ~50 s keeps DLF ~1.0 for f1 ~0.1 Hz: an operating rule that saves structure."
+
+[[case]]
+id = "LC-04"
+name = "Global bending and torsion (steering, RCS, CMG, docking)"
+configs = ["P", "F1", "R"]
+magnitude = "steer torque 0.16-0.21 MN m trimmed, 0.83 MN m untrimmed (mass_model); RCS couples kN m class"
+path = "sector longerons as bending chords; frames and diagonals for torsion"
+evidence = "CALCULATED (mass_model)"
+note = "Small against axial compression; stiffness (modes) not strength governs."
+
+[[case]]
+id = "LC-05"
+name = "Engine or nozzle failure (asymmetric thrust)"
+configs = ["P", "F1", "R"]
+magnitude = "one of four out at the design share 7.35 MN: 19 MN m (canon nozzles at 2.6 m) / 88 MN m (Vertex cluster r 12 m) / 221 MN m (r 30 m) before trim"
+path = "thrust frame and ring in bending; whole ship as a beam until the opposite engine is throttled"
+evidence = "CALCULATED (psa_phase1 outriggers)"
+note = "Trim law (shut the opposite engine within one control cycle) bounds the structure; reaction time and transient OPEN (GNC-04)."
+
+[[case]]
+id = "LC-06"
+name = "Differential thrust and thrust vectoring"
+configs = ["P"]
+magnitude = "trim 0.29-0.37 % differential (mass_model); vector range OPEN (06!E52)"
+path = "nozzle pickups, ring"
+evidence = "CALCULATED / OPEN"
+
+[[case]]
+id = "LC-07"
+name = "Thrust transfer from widely separated engines"
+configs = ["alternative propulsion"]
+magnitude = "outrigger moment per engine 48 MN m at r 12 m, 180 MN m at r 30 m (design share); Ti chord mass ~0.8-22 t per engine"
+path = "engine cradles -> outrigger frame -> thrust ring or a wide cage (concept F)"
+evidence = "CALCULATED (first order)"
+
+[[case]]
+id = "LC-08"
+name = "Thermal expansion and gradients"
+configs = ["P", "F1", "R"]
+magnitude = "free growth over 280 m for 150 K: Al 0.99 m, Ti 0.36 m, Al2O3f/Al 0.27 m, CFRP -0.02 m; CTE mismatch Al vs CFRP 9.6 mm per 4 m per 100 K; hot trunks 1990 K in the body"
+path = "every long system on a structure of another material: tanks, hot loop, blades, spine vs cage"
+evidence = "CALCULATED"
+note = "Wayfarer's existing kinematic practice (one datum + slides on blades and tanks) is correct and must extend to the hot loop and the spine."
+
+[[case]]
+id = "LC-09"
+name = "Radiator blade inertial and thermal-dynamic loads"
+configs = ["P", "F1", "R"]
+magnitude = "1.47 MN total if the whole 100 t thermal allowance participates (07!A30 DIAGNOSTIC); blade modes and thermal snap OPEN"
+path = "blade truss -> root posts and stays -> sector frames"
+evidence = "CANON DIAGNOSTIC + OPEN"
+
+[[case]]
+id = "LC-10"
+name = "Local member failure and progressive collapse"
+configs = ["P", "F1", "R"]
+magnitude = "one rail lost: 3-rail cage loses 1/3 of axial area and its bending symmetry; 6-rail paired keels lose 1/6 and keep symmetry"
+path = "load shares to the surviving rails through frames"
+evidence = "CALCULATED (topology argument); redistribution FEA Phase II"
+note = "Rationale for the OPEN 07!A33 trade: paired keels cost ~0-40 % more rail mass (bay buckling) but survive a cut."
+
+[[case]]
+id = "LC-11"
+name = "Full and depleted propellant configurations"
+configs = ["P", "F1", "R"]
+magnitude = "midbody compression falls from ~19 MN (full) to ~14 MN (P dry), ~11.5 MN (F1 end): the aft structure carries ~20 MN in every state"
+path = "as LC-01"
+evidence = "CALCULATED"
+
+[[case]]
+id = "LC-12"
+name = "Cargo and equipment redistribution"
+configs = ["F1", "R"]
+magnitude = "ISSA districts: L2 ~290 t at X -92..-80; hot loop 565 t (F1) / 1,833 t (R) over X -140..30"
+path = "mounting zones -> frames"
+evidence = "ISSA 5eae701 (STUDY)"
+
+[[case]]
+id = "LC-13"
+name = "Nozzle pickup and thrust-node loads"
+configs = ["P"]
+magnitude = "built pickups at 78.7 deg from the axis carry 37.7 MN per strut for 7.35 MN axial (m5 audit): 5x amplification"
+path = "nozzle yoke -> pickup -> ring node"
+evidence = "CALCULATED (references/evidence/m5_drive_support.json)"
+note = "Re-angle pickups toward the axis (study thrust struts at 4.7-16.7 deg: 1.9 MN each)."
+
+[[case]]
+id = "LC-14"
+name = "Rotating habitat operation"
+configs = ["P", "F1", "R"]
+magnitude = "centripetal 0.78 MN per ring (internal to the ring); bearing loads from imbalance (0.1 % momentum tolerance) and ship acceleration in coast"
+path = "ring -> spokes -> hub bearing -> stationary hub structure"
+evidence = "CALCULATED (habitat_ring.dynamics)"
+
+[[case]]
+id = "LC-15"
+name = "Habitat spin-up, spin-down and locking"
+configs = ["P", "F1", "R"]
+magnitude = "spin torque 28 kN m per ring (reacted ring-against-ring when counter-rotating); locked axial load 2.2 MN per ring at the flight peak, 2.4 MN canon"
+path = "drive motors -> stator -> hub; latches -> collar"
+evidence = "CALCULATED"
+
+[[case]]
+id = "LC-16"
+name = "Maintenance configuration (member removed)"
+configs = ["P", "F1", "R"]
+magnitude = "coast loads only (micro-g, RCS, ring imbalance); a cassette exchange must not need thrust-off of other systems"
+path = "adjacent cassettes and frames"
+evidence = "OPEN"
+note = "Defines the replaceable-member philosophy: every primary member removable in coast with the ship statically safe."
+
+[[case]]
+id = "LC-17"
+name = "Impact and localized damage"
+configs = ["P", "F1", "R"]
+magnitude = "forward: dust at 0.016 c (owned by forward defense); aft and lateral: micrometeoroids; structural target: survive loss of one member anywhere (LC-10)"
+path = "Brow and disruptor (PROT-01); casing as Whipple layer"
+evidence = "OPEN (OD-014)"
+
+[[case]]
+id = "LC-18"
+name = "Docking, construction and yard-fixture loads"
+configs = ["P"]
+magnitude = "docking 10-50 kN class (ESTIMATE); partial-structure states during assembly (lab/studies/assembly-sequence); yard fixture reactions OPEN"
+path = "docking rings -> forward collar; yard jigs -> hard-points"
+evidence = "ESTIMATE / OPEN"
+
+[[case]]
+id = "LC-19"
+name = "Radiation heating and neutron damage"
+configs = ["P", "F1", "R"]
+magnitude = "OPEN: OpenMC scatter around the shadow cone ~19 % of unshielded tank heating (ISSA Phase V); structural dpa OPEN"
+path = "structure near the drive and L2 units"
+evidence = "ISSA STUDY / OPEN"
+
+[[case]]
+id = "LC-20"
+name = "Magnetic and electromagnetic forces"
+configs = ["P"]
+magnitude = "ferromagnetic force density 1.35 kN/m3 at 1 mT/m, 1.35 MN/m3 at 1 T/m; eddy heating 2 kW/m3 in 20 mm Al at 10 T/s; coil-to-coil forces internal to the engine (Vertex 1.2: 93-272 MN)"
+path = "structure in the drive and power-district fields"
+evidence = "CALCULATED (bounds)"
+
+[[case]]
+id = "LC-21"
+name = "Engine pulse excitation, vibration and fatigue"
+configs = ["P"]
+magnitude = "OPEN: canon repetition rate OPEN (ISSA P6-06); Vertex design point 5.7 kHz; strength-sized structure f1 ~0.06-0.12 Hz"
+path = "thrust frame -> ring -> everything"
+evidence = "OPEN"
+note = "Requirement proposal: no structural mode within +-15 % of any pulse harmonic below 100 Hz; cycles at kHz reach 1e10-1e11 per year: fatigue endurance governs thrust-frame details."
+
+[[case]]
+id = "LC-22"
+name = "Attitude-control manoeuvres"
+configs = ["P", "F1", "R"]
+magnitude = "flip/slew with CMG and 21 RCS jets (m5_attitude); inertia 2.3-2.5e10 kg m2 (P departure)"
+path = "global bending"
+evidence = "CALCULATED (mass_model)"
+
+[[case]]
+id = "LC-23"
+name = "Cryogenic contraction of the tank farm and supports"
+configs = ["P", "F1", "R"]
+magnitude = "0.095 m between aft fixity and forward links against 0.20 m slide (MODEL.md); skirt struts 0.47 MN at 1.5 g"
+path = "tank aft fixity -> thrust deck -> collar"
+evidence = "CALCULATED (fuel_loads, main)"

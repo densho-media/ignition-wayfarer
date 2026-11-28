@@ -1,0 +1,221 @@
+# PSA Phase I: structural morphology concepts and their comparative evaluation (STUDY / NONCANON).
+# Scores are Claude's engineering judgment on a 1-5 scale (5 = best for 'high' criteria; for 'mass' the score is an estimated primary
+# structure mass FACTOR relative to concept A = 1.0, lower is better), informed by psa_study.py screening where stated. They are
+# The mass score is REPLACED at run time by the computed build-up factor (psa_study concept_mass) relative to A.
+# normalised to 0-1 by each criterion's scale before weighting; weights are documented sets, and psa_study sweeps the mass weight to show
+# how the ranking depends on it. No unit-mixing: every criterion is normalised separately.
+
+[[criteria]]
+id = "mass"
+name = "Primary structure mass factor (vs A)"
+scale = [0.4, 1.6]
+better = "low"
+
+[[criteria]]
+id = "stiffness"
+name = "Global stiffness and stability (bending/torsion, buckling margin per tonne)"
+scale = [1, 5]
+better = "high"
+
+[[criteria]]
+id = "manufacturability"
+name = "Luna Yard manufacturability (qualified processes, throughput, QA access)"
+scale = [1, 5]
+better = "high"
+
+[[criteria]]
+id = "lunar_content"
+name = "Lunar-local material fraction / import independence"
+scale = [1, 5]
+better = "high"
+
+[[criteria]]
+id = "repairability"
+name = "Inspectability, replaceability and repair in flight"
+scale = [1, 5]
+better = "high"
+
+[[criteria]]
+id = "redundancy"
+name = "Damage tolerance and alternative load paths"
+scale = [1, 5]
+better = "high"
+
+[[criteria]]
+id = "thermal"
+name = "Thermal compatibility (isolation from hot systems, CTE management)"
+scale = [1, 5]
+better = "high"
+
+[[criteria]]
+id = "integration"
+name = "Subsystem integration (mounting zones, service corridors, ISSA volumes)"
+scale = [1, 5]
+better = "high"
+
+[[criteria]]
+id = "maturity"
+name = "Technical maturity / evidence (R-track credibility)"
+scale = [1, 5]
+better = "high"
+
+[[weights]]
+id = "W-MASS"
+name = "Mass-first (classic aerospace)"
+w = { mass = 0.40, stiffness = 0.15, manufacturability = 0.10, lunar_content = 0.05, repairability = 0.05, redundancy = 0.10, thermal = 0.05, integration = 0.05, maturity = 0.05 }
+consequence = "Rewards exotic composites and continuous lattices; penalises bolted modularity. Each tonne costs ~3.7 t of departure mass, so mass is never irrelevant."
+
+[[weights]]
+id = "W-LIFECYCLE"
+name = "Lifecycle (recommended: HSFP ship of an industrial civilisation)"
+w = { mass = 0.20, stiffness = 0.10, manufacturability = 0.15, lunar_content = 0.10, repairability = 0.15, redundancy = 0.15, thermal = 0.05, integration = 0.05, maturity = 0.05 }
+consequence = "Balances departure-mass coupling against yard throughput, imports and a 10-20 year service life with no shipyard en route."
+
+[[weights]]
+id = "W-YARD"
+name = "Manufacturing-first (Luna Yard throughput and lunar supply)"
+w = { mass = 0.10, stiffness = 0.10, manufacturability = 0.25, lunar_content = 0.20, repairability = 0.10, redundancy = 0.10, thermal = 0.05, integration = 0.05, maturity = 0.05 }
+consequence = "Rewards standard extruded aluminium and bolted bays; accepts mass."
+
+[[concept]]
+id = "A"
+build = { longeron = { "R-AL6061" = 1.0 }, rails = 3, frames = 0.30, bracing = 0.25, nodes = 0.25, assembly = 0.05, frame_material = 1.0 }
+name = "Conventional modular spaceframe"
+summary = "Standardised extruded tubes in triangulated bays, bolted/pinned replaceable members, engineered cast or forged nodes."
+load_path = "thrust frame -> 12-node ring -> 3 sector longerons (or 6 paired) -> 4 m frames with X-bracing -> forward collar -> Brow keels"
+materials = "Al 6061/5083 members, Ti or steel nodes, maraging pins"
+manufacturing = "lunar extrusion + forging, orbital bolting (PRC-EXTRUDE, PRC-FORGE, PRC-ASSY)"
+strengths = ["highest lunar content", "every member inspectable and replaceable", "mature analysis (beam/truss FEA)"]
+weaknesses = ["many joints (mass, preload maintenance, cold-weld risk)", "nodes are heavy at high load", "low specific stiffness of Al"]
+governing_cases = ["LC-02", "LC-05", "LC-10"]
+scores = { mass = 1.0, stiffness = 3, manufacturability = 5, lunar_content = 5, repairability = 5, redundancy = 4, thermal = 3, integration = 4, maturity = 5 }
+
+[[concept]]
+id = "B"
+build = { longeron = { "R-AL6061" = 1.0 }, rails = 3, frames = 0.30, bracing = 0.25, nodes = 0.15, assembly = 0.05, frame_material = 1.0 }
+name = "Hybrid metallic lattice (standard members + optimised branching nodes)"
+summary = "Concept A's standard members, but nodes are DED-deposited, topology-optimised branching titanium/aluminium nodes, so load paths meet at their true angles."
+load_path = "as A, with branching nodes at the thrust ring, transition, collar and Brow roots that merge 3-6 members without eccentricity"
+materials = "Al 6061/Al-Sc members; Ti-6Al-4V or Al-Sc DED nodes"
+manufacturing = "extrusion + orbital EB-DED nodes, machined interfaces, CT inspection (PRC-DED-WIRE, PRC-CNC, PRC-NDT)"
+strengths = ["node mass -20-40 % vs forged/welded nodes", "eccentricity moments removed", "organic form emerges only where loads branch"]
+weaknesses = ["DED throughput (1-10 kg/h) and CT of large nodes", "class C qualification of printed nodes (ISM-33)"]
+governing_cases = ["LC-02", "LC-05", "LC-13"]
+scores = { mass = 0.9, stiffness = 3, manufacturability = 4, lunar_content = 4, repairability = 4, redundancy = 4, thermal = 3, integration = 4, maturity = 4 }
+
+[[concept]]
+id = "C"
+build = { longeron = { "R-CFRP-TP" = 0.5, "R-ALAL2O3F" = 0.5 }, rails = 3, frames = 0.30, bracing = 0.25, nodes = 0.15, assembly = 0.05, frame_material = 0.75 }
+name = "Multi-material hybrid skeleton"
+summary = "Metallic primary nodes and thrust structure; composite (CF/PEEK or alumina-fibre/Al) compression longerons and tension members; thermally isolated interfaces to hot systems and cryogenic tanks."
+load_path = "Ti/Al-Sc nodes at ring, transition, frames; CF/PEEK or Al2O3f/Al longerons between them; CNT/CFRP tension stays (F) or CF tension rods (R); kinematic slip mounts to tanks, blades and hot loop"
+materials = "Ti-6Al-4V/Al-Sc nodes; CF/PEEK (import) or Al2O3f/Al (lunar) longerons; Al 5083 frames; G-10/CFRP cryo struts; Inconel/YSZ hot stand-offs"
+manufacturing = "lunar Al/Ti stock + imported fibre; orbital thermoplastic AFP with welded nodes; metal nodes by DED (PRC-AFP-TP, PRC-TPWELD, PRC-DED-WIRE)"
+strengths = ["each region gets its material: low CTE and high specific stiffness where length matters", "thermal isolation designed in", "low rotating mass"]
+weaknesses = ["dissimilar joints (CN-05, CN-07) must be qualified", "CFRP imports (carbon is not lunar)", "composite damage harder to see (needs sensing layer)"]
+governing_cases = ["LC-02", "LC-08", "LC-09", "LC-23"]
+scores = { mass = 0.72, stiffness = 4, manufacturability = 3, lunar_content = 3, repairability = 4, redundancy = 4, thermal = 5, integration = 4, maturity = 4 }
+
+[[concept]]
+id = "D"
+build = { longeron = { "R-ALSC" = 1.0 }, rails = 3, frames = 0.25, bracing = 0.20, nodes = 0.05, assembly = 0.02, frame_material = 0.85, process = "dED_hip_machined" }
+name = "Continuous manufactured lattice"
+summary = "Large-scale deposited or continuously formed truss (wire-DED or truss-beam machines) with locally optimised cross-sections and no bolted joints in the primary path."
+load_path = "monolithic lattice from thrust ring to collar, section graded with N(x)"
+materials = "Al-Sc DED or continuous CF/PEEK truss"
+manufacturing = "in-place continuous fabrication (PRC-DED-WIRE at scale, PRC-AFP-TP truss machines)"
+strengths = ["no joint mass", "section exactly follows the load", "fully orbital process"]
+weaknesses = ["throughput: 100+ t at 1-10 kg/h per head is 10^4-10^5 head-hours", "a defect anywhere is a defect in the primary path; repair means cutting the monolith", "QA of a continuous part (ISM-33/37)"]
+governing_cases = ["LC-02", "LC-17"]
+scores = { mass = 0.8, stiffness = 4, manufacturability = 2, lunar_content = 4, repairability = 2, redundancy = 2, thermal = 3, integration = 3, maturity = 2 }
+
+[[concept]]
+id = "E"
+build = { shell = true, radius_m = 6.5, sandwich_factor = 0.35, material = "R-AL6061", frames = 0.15, nodes = 0.05, assembly = 0.05, casing_credit = true }
+name = "Deep cellular / stressed-skin hull"
+summary = "The 13 m casing becomes the primary structure: stiffened or sandwich shell (isogrid, honeycomb) carrying axial, bending and torsion; frames double as bulkheads."
+load_path = "thrust ring -> conical transition shell -> stiffened cylindrical shell -> forward collar shell"
+materials = "Al 2195/6061 isogrid or Al-honeycomb sandwich; local Ti rings"
+manufacturing = "rolled/machined isogrid panels FSW-joined (PRC-ROLL, PRC-CNC, PRC-FSW)"
+strengths = ["largest radius for bending/torsion stiffness at a given mass (r 6.5 m vs 5 m rails)", "casing mass (already in the 150 t line) becomes structural", "micrometeoroid/radiation multifunction"]
+weaknesses = ["every opening (blade roots, ports, panels, ISSA penetrations) is a stress concentration", "access panels become structural doors", "shell buckling knockdowns; repair of shell damage", "hides equipment behind structure"]
+governing_cases = ["LC-02", "LC-04", "LC-17"]
+scores = { mass = 0.85, stiffness = 5, manufacturability = 4, lunar_content = 4, repairability = 2, redundancy = 3, thermal = 3, integration = 2, maturity = 4 }
+
+[[concept]]
+id = "F"
+build = { longeron = { "R-AL6061" = 1.0 }, rails = 6, path_factor = 1.1, frames = 0.40, bracing = 0.30, nodes = 0.20, assembly = 0.05, frame_material = 1.0, outriggers_r_m = 12.0 }
+name = "Alternative thrust transfer: wide cage / parallel keels"
+summary = "Thrust enters a wide distributed cage (bypass-collar radius ~33-35 m) or several parallel keels rather than the 5 m sector ring, so separated engines and long transfer distances do not concentrate in a slender body."
+load_path = "engines on a wide thrust frame -> 3-6 outer keels at r 10-35 m (in the radiator-root/stay planes or outside the ring sweep) -> forward collar"
+materials = "Al/Ti truss keels; tension-dominant diagonals (CF or CNT stays)"
+manufacturing = "as A/B at larger scale"
+strengths = ["global stiffness grows with r^2: a 20 m keel radius needs 1/16 of the 5 m rail area for the same EI", "natural home for widely separated engines (Vertex cluster r 12 m)"]
+weaknesses = ["conflicts with the rotating ring sweep (r 30 m) and radiator blades (r 6.5-37 m): keels must thread blade planes or ring bypass", "longer members, more exposed (dust)", "frontal area outside the shield shadow above r ~37 m"]
+governing_cases = ["LC-02", "LC-06", "LC-07"]
+scores = { mass = 0.95, stiffness = 5, manufacturability = 4, lunar_content = 4, repairability = 4, redundancy = 5, thermal = 3, integration = 2, maturity = 3 }
+
+[[concept]]
+id = "G"
+build = { longeron = { "R-AL6061" = 1.0 }, rails = 3, frames = 0.30, bracing = 0.25, nodes = 0.20, assembly = 0.05, frame_material = 1.0, tanks_aft_x0 = -105.0 }
+name = "Integral tank-structure (stressed tank farm)"
+summary = "The 13 axial propellant vessels and their thrust deck become part of the primary path (Atlas/Falcon principle), with the tank farm moved aft toward the drive so the heaviest mass sits near the thrust."
+load_path = "drive -> short thrust structure -> tank barrels (stiffened by pressure) -> forward structure carries only rings, Brow, Eye"
+materials = "Al-Li 2195 / Al 5083 tank shells (cryogenic toughness), CFRP skirts"
+manufacturing = "rolled and FSW tank segments (proven)"
+strengths = ["load path length to the heaviest mass falls from ~245 m to tens of m: N(x) over most of the ship drops ~5x", "tank shells already exist in the mass budget"]
+weaknesses = ["moves cryogenic He-3/D2 into the drive's neutron and heat zone: contradicts the shadow-shield and tank-heating constraints (ISSA P6-03)", "pressure-stabilised structure loses stiffness when drained", "major layout change: an ISSA-level decision"]
+governing_cases = ["LC-02", "LC-11", "LC-19"]
+scores = { mass = 0.65, stiffness = 3, manufacturability = 4, lunar_content = 4, repairability = 2, redundancy = 2, thermal = 1, integration = 1, maturity = 4 }
+
+[[concept]]
+id = "H"
+note = "Proposed and scored by the same author (PSA): Phase II must re-score H and HC from computed stiffness, joint and repair models, not judgment."
+build = { longeron = { "R-AL6061" = 0.5, "R-ALAL2O3F" = 0.3, "R-TI64" = 0.2 }, rails = 6, frames = 0.30, bracing = 0.20, nodes = 0.15, assembly = 0.08, frame_material = 0.9 }
+name = "Vertebral modular skeleton (proposed by PSA)"
+summary = "A stack of standard 'vertebrae': each 8-12 m bay is a qualified frame module (two deep frames, node rings, mounting hard-points, service corridors) joined by replaceable longeron cassettes; the Momentum Spine is the alignment/utility 'spinal cord', not the main load path; hot and cryogenic systems hang on kinematic mounts."
+load_path = "thrust ring -> transition vertebra -> N standard vertebrae (paired keels per sector, 6 rails) -> collar vertebra -> Brow keels; spine carries alignment, torsion share and utilities"
+materials = "B/C mix: Al 5083/6061 frames and rails (lunar), Ti DED nodes at the ring and collar, CF/PEEK or Al2O3f/Al longerons where length and CTE matter, sensing layer"
+manufacturing = "vertebrae built and proof-tested as class C modules in a yard jig, then stacked; cassettes exchangeable in flight (PRC-EXTRUDE, PRC-FSW, PRC-DED-WIRE, PRC-ASSY, PRC-NDT)"
+strengths = ["the yard builds one qualified module type many times (learning curve, QA repeatability)", "paired keels (6 rails) survive a cut rail; any cassette replaceable in flight", "mounting zones and service corridors are standard per vertebra (ISSA interface)", "fits the existing frame grammar (4 m frames, 12-node ring, 3 sectors)"]
+weaknesses = ["joint mass between vertebrae", "standard bays must accept the ISSA district variety (adapter frames)", "global stiffness still limited by the 5 m rail radius unless keels widen near the collar"]
+governing_cases = ["LC-02", "LC-05", "LC-10", "LC-16"]
+scores = { mass = 0.88, stiffness = 4, manufacturability = 5, lunar_content = 4, repairability = 5, redundancy = 5, thermal = 4, integration = 5, maturity = 4 }
+
+[[concept]]
+id = "HC"
+build = { longeron = { "R-CFRP-TP" = 0.4, "R-ALAL2O3F" = 0.4, "R-TI64" = 0.2 }, rails = 6, frames = 0.30, bracing = 0.20, nodes = 0.15, assembly = 0.08, frame_material = 0.8 }
+name = "Vertebral skeleton with multi-material zoning (H grammar + C materials)"
+summary = "Concept H's standard vertebrae and replaceable cassettes, with C's material zoning: Ti DED nodes, alumina-fibre/Al (lunar) and CF/PEEK (import) longeron cassettes, aluminium frames, isolated hot and cryogenic interfaces."
+load_path = "as H"
+materials = "Al 5083/6061 frames (lunar), Al2O3f/Al + CF/PEEK cassettes, Ti-6Al-4V nodes, Inconel/YSZ hot stand-offs, G-10 cryo struts, sensing layer"
+manufacturing = "as H plus orbital thermoplastic AFP for cassettes and lunar MMC infiltration"
+strengths = ["H's modularity, redundancy and integration", "C's mass and low CTE (cassettes 0.3-6.5 ppm/K vs Al 23.6)"]
+weaknesses = ["needs the lunar alumina-fibre route (RESEARCH) or more CF imports", "dissimilar joints at every cassette end (CN-05/CN-07)"]
+governing_cases = ["LC-02", "LC-05", "LC-08", "LC-10", "LC-16", "LC-23"]
+scores = { mass = 0.62, stiffness = 4, manufacturability = 4, lunar_content = 3, repairability = 5, redundancy = 5, thermal = 5, integration = 5, maturity = 3 }
+
+# Material mixes for resource-energy screening (mass fractions of the primary structure; buy-to-fly per material where not 1.3).
+[[mix]]
+id = "MX-A"
+name = "All-lunar aluminium spaceframe (A)"
+fractions = { "R-AL6061" = 0.70, "R-AL5083" = 0.15, "R-TICP" = 0.10, "R-STMAR300" = 0.05 }
+buy_to_fly = { "R-AL6061" = 1.2, "R-AL5083" = 1.2, "R-TICP" = 2.0, "R-STMAR300" = 3.0 }
+
+[[mix]]
+id = "MX-H"
+name = "Vertebral skeleton, lunar-first (H, R track)"
+fractions = { "R-AL6061" = 0.45, "R-AL5083" = 0.20, "R-TI64" = 0.15, "R-ALAL2O3F" = 0.10, "R-CFRP-TP" = 0.05, "R-STMAR300" = 0.05 }
+buy_to_fly = { "R-TI64" = 2.5, "R-ALAL2O3F" = 1.5, "R-CFRP-TP" = 1.2, "R-STMAR300" = 3.0 }
+
+[[mix]]
+id = "MX-C"
+name = "Composite-heavy hybrid (C)"
+fractions = { "R-CFRP-TP" = 0.40, "R-TI64" = 0.25, "R-AL6061" = 0.25, "R-IN718" = 0.05, "R-GFRP-G10" = 0.05 }
+buy_to_fly = { "R-TI64" = 2.5, "R-IN718" = 3.0 }
+
+[[mix]]
+id = "MX-D"
+name = "Continuous DED lattice (D)"
+fractions = { "R-ALSC" = 0.85, "R-TI64" = 0.15 }
+buy_to_fly = { "R-ALSC" = 1.8, "R-TI64" = 2.5 }

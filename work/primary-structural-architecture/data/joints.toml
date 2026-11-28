@@ -1,0 +1,356 @@
+# PSA Phase I: joining library and material-compatibility matrix (STUDY / NONCANON).
+# Families follow materials.toml `family`. Ratings: W = direct fusion weld acceptable, S = solid-state (FSW/diffusion/explosion clad),
+# B = braze, M = mechanical only (bolt/pin/clamp, with isolation where noted), X = avoid (no credible direct joint; use a transition
+# piece). Issues are the governing failure mechanisms. Space-specific notes: galvanic corrosion needs an electrolyte, so it matters only
+# in pressurised humid zones, during ground/lunar handling and with condensate; in vacuum, clean metal faces can cold-weld and gall
+# (fretting of clamped or sliding faces), so every sliding or separable metal joint needs a dry-film or ceramic coating.
+
+[meta]
+status = "STUDY / NONCANON"
+verification = "UNVERIFIED (welding/joining handbook recall: AWS, ASM Vol. 6, ECSS-Q-ST-70-71 cold-welding guidance)"
+
+[[pair]]
+a = "AL"
+b = "AL"
+rating = "W/S"
+issues = ["6xxx/7xxx HAZ strength loss (0.55 fusion, 0.75 FSW)", "hot cracking of 6xxx without filler"]
+recommended = "FSW (bobbin tool in orbit), 5xxx fusion weld"
+
+[[pair]]
+a = "AL"
+b = "TI"
+rating = "S/M"
+issues = ["TiAl3 brittle intermetallic above a few um", "CTE 23.6 vs 8.6 (15 ppm/K mismatch)"]
+recommended = "explosion-clad or FSW transition strip, then same-metal welds; or bolted with slotted holes"
+
+[[pair]]
+a = "AL"
+b = "STEEL_F"
+rating = "S/M"
+issues = ["FeAl3/Fe2Al5 brittle intermetallics", "galvanic (Al anodic) in humid zones", "CTE mismatch 11.6 ppm/K"]
+recommended = "explosion-bonded Al/steel transition joints (ship-building practice), or bolted with isolation"
+
+[[pair]]
+a = "AL"
+b = "STEEL_A"
+rating = "S/M"
+issues = ["intermetallics", "galvanic in humid zones", "CTE 7.6 ppm/K"]
+recommended = "explosion-bonded transition (cryogenic Al-SS transition joints are standard)"
+
+[[pair]]
+a = "AL"
+b = "CFRP_TS"
+rating = "M"
+issues = ["galvanic: carbon is cathodic, Al corrodes in electrolyte", "CTE: Al 23.6 vs CFRP ~0 axial (23 ppm/K)", "bond-line shear from thermal cycling"]
+recommended = "glass-ply isolation, titanium inserts, bolted+bonded with slotted holes; avoid long Al-CFRP bonded overlaps"
+
+[[pair]]
+a = "AL"
+b = "CFRP_TP"
+rating = "M"
+issues = ["as CFRP_TS", "thermoplastic welding cannot join metal"]
+recommended = "co-consolidated Ti insert, bolted"
+
+[[pair]]
+a = "AL"
+b = "MG"
+rating = "S/M"
+issues = ["Al12Mg17 intermetallic", "galvanic (Mg most anodic)"]
+recommended = "bolted with isolation"
+
+[[pair]]
+a = "AL"
+b = "MMC_AL"
+rating = "S/M"
+issues = ["particles disrupt fusion pool", "CTE 8 ppm/K"]
+recommended = "FSW or bolted"
+
+[[pair]]
+a = "AL"
+b = "BFRP"
+rating = "M"
+issues = ["CTE 15 ppm/K", "insulating: no galvanic issue"]
+recommended = "bonded+bolted fittings"
+
+[[pair]]
+a = "TI"
+b = "TI"
+rating = "W/S"
+issues = ["oxygen pick-up (none in vacuum)", "galling of threads and clamped faces"]
+recommended = "EB weld in vacuum, diffusion bond; coat faying surfaces"
+
+[[pair]]
+a = "TI"
+b = "CFRP_TS"
+rating = "M"
+issues = ["CTE 8.6 vs ~0 (8.6 ppm/K, the best metal match)", "galvanically compatible"]
+recommended = "bonded/co-cured titanium end fittings (aerospace standard)"
+
+[[pair]]
+a = "TI"
+b = "CFRP_TP"
+rating = "M"
+issues = ["as CFRP_TS"]
+recommended = "co-consolidated Ti inserts, bolted"
+
+[[pair]]
+a = "TI"
+b = "STEEL_F"
+rating = "M/S"
+issues = ["TiFe/TiFe2 brittle intermetallics on fusion", "hydrogen embrittlement of Ti"]
+recommended = "bolted, or explosion clad with an interlayer (Nb/V/Cu)"
+
+[[pair]]
+a = "TI"
+b = "STEEL_A"
+rating = "M/B"
+issues = ["intermetallics", "CTE 7.4 ppm/K"]
+recommended = "vacuum braze with Ag/Cu interlayer or bolted"
+
+[[pair]]
+a = "TI"
+b = "NI"
+rating = "B/M"
+issues = ["Ni-Ti intermetallics"]
+recommended = "braze or bolt"
+
+[[pair]]
+a = "TI"
+b = "TIAL"
+rating = "B/S"
+issues = ["TiAl brittle; residual stress"]
+recommended = "diffusion bond/braze; graded transition (F-FGM-TI-SIC)"
+
+[[pair]]
+a = "TI"
+b = "CMC"
+rating = "M/B"
+issues = ["CTE 8.6 vs 4.5", "Ti reacts with SiC above ~1000 K (Ti5Si3, TiC)"]
+recommended = "compliant clamps; braze only below 900 K with a barrier"
+
+[[pair]]
+a = "STEEL_A"
+b = "STEEL_A"
+rating = "W"
+issues = ["sensitisation (low in L grades)"]
+recommended = "EB/arc weld"
+
+[[pair]]
+a = "STEEL_A"
+b = "NI"
+rating = "W"
+issues = ["hot cracking with some fillers"]
+recommended = "Ni-filler weld"
+
+[[pair]]
+a = "STEEL_F"
+b = "STEEL_F"
+rating = "W"
+issues = ["hydrogen cracking (none in vacuum EB)", "DBTT in cold zones"]
+recommended = "weld"
+
+[[pair]]
+a = "NI"
+b = "REFRACTORY"
+rating = "B/M"
+issues = ["Ni-Mo/Nb intermetallics on fusion", "CTE 13 vs 5-8"]
+recommended = "braze or bolted with compliant washers"
+
+[[pair]]
+a = "REFRACTORY"
+b = "REFRACTORY"
+rating = "W/B"
+issues = ["Mo HAZ embrittlement (recrystallisation)", "Nb ductile"]
+recommended = "EB weld Nb; mechanical or braze Mo"
+
+[[pair]]
+a = "REFRACTORY"
+b = "CMC"
+rating = "B/M"
+issues = ["CTE close (Mo 5.3 vs 4.5: good)", "Mo-SiC reaction above ~1500 K (Mo5Si3)"]
+recommended = "active-metal braze, pinned clamps; the standard hot-zone transition"
+
+[[pair]]
+a = "REFRACTORY"
+b = "CC"
+rating = "M/B"
+issues = ["carbide formation above ~1300 K (Mo2C, NbC)", "CTE Mo 5.3 vs C/C ~1"]
+recommended = "clamps with a Re or HfC barrier"
+
+[[pair]]
+a = "CMC"
+b = "CMC"
+rating = "M"
+issues = ["no weld; brittle fastener holes"]
+recommended = "CMC pins/clips, bonded SiC (CVD) joints"
+
+[[pair]]
+a = "CC"
+b = "CC"
+rating = "M"
+issues = ["as CMC"]
+recommended = "C/C bolts, co-densification"
+
+[[pair]]
+a = "CFRP_TS"
+b = "CFRP_TS"
+rating = "M/B"
+issues = ["bond-line proof", "co-cure"]
+recommended = "co-cure or bonded+bolted"
+
+[[pair]]
+a = "CFRP_TP"
+b = "CFRP_TP"
+rating = "S"
+issues = ["weld-line consolidation quality"]
+recommended = "induction/resistance welding (in orbit)"
+
+[[pair]]
+a = "GFRP"
+b = "STEEL_A"
+rating = "M"
+issues = ["CTE 11 vs 16"]
+recommended = "bonded/pinned (cryogenic strap supports)"
+
+[[pair]]
+a = "CERAMIC"
+b = "NI"
+rating = "M"
+issues = ["ceramic in tension cracks"]
+recommended = "captured compression pad in a metal cup"
+
+[[pair]]
+a = "MG"
+b = "CFRP_TS"
+rating = "X"
+issues = ["severe galvanic couple", "CTE 26 ppm/K"]
+recommended = "avoid; use a titanium transition"
+
+[[pair]]
+a = "STEEL_F"
+b = "CFRP_TS"
+rating = "M"
+issues = ["galvanic (mild)", "CTE 12 ppm/K"]
+recommended = "isolated bolted"
+
+[[pair]]
+a = "CC"
+b = "AL"
+rating = "X"
+issues = ["Al4C3 formation, temperature mismatch"]
+recommended = "never adjacent"
+
+# Connection library: manufacturable, inspectable connection types with their typical efficiency and use.
+[[connection]]
+id = "CN-01"
+name = "Bolted splice sleeve (preload-monitored)"
+use = "primary member splices at mid-bay (the existing Thrust_Ring_Splice), replaceable longerons"
+efficiency = 0.85
+inspect = "ultrasonic bolt-load gauges; FBG in sleeve"
+replace = "yes (robot)"
+mass_penalty = "3-8 % of member"
+notes = "Coat faying faces (MoS2/DLC) against cold welding and fretting."
+
+[[connection]]
+id = "CN-02"
+name = "Pinned clevis/lug (statically determinate)"
+use = "kinematic mounts, thrust pickups, radiator datum, nozzle pickups"
+efficiency = 0.7
+inspect = "eddy current of bore, pin load cells"
+replace = "yes"
+mass_penalty = "lug 10-30 % of member force path"
+notes = "Maraging or Ti-6Al-4V pins; bushings Al-SiC or Cu-Be-free bronze substitutes."
+
+[[connection]]
+id = "CN-03"
+name = "FSW butt/lap joint (aluminium)"
+use = "frames, webs, cylindrical sections, tank shells"
+efficiency = 0.75
+inspect = "phased-array UT"
+replace = "cut and re-weld"
+mass_penalty = "joint land thickening ~1.3x locally"
+
+[[connection]]
+id = "CN-04"
+name = "EB weld (Ti, steel, Nb) in vacuum"
+use = "titanium nodes, refractory ducts"
+efficiency = 0.9
+inspect = "UT, radiography"
+replace = "cut and re-weld"
+
+[[connection]]
+id = "CN-05"
+name = "Co-cured/bonded titanium end fitting on composite tube"
+use = "composite struts and longerons"
+efficiency = 0.7
+inspect = "UT, proof load, FBG"
+replace = "strut exchange (fitting stays with strut)"
+notes = "Ti CTE 8.6 is the closest metal match to CFRP."
+
+[[connection]]
+id = "CN-06"
+name = "Thermoplastic welded node (CF/PEEK)"
+use = "composite truss nodes built in orbit"
+efficiency = 0.8
+inspect = "UT, thermography"
+replace = "re-heat and separate"
+
+[[connection]]
+id = "CN-07"
+name = "Explosion-bonded / FSW-clad transition strip"
+use = "Al-to-Ti, Al-to-steel transitions (weld each side to its own metal)"
+efficiency = 0.85
+inspect = "UT of bond line"
+replace = "with the attached section"
+
+[[connection]]
+id = "CN-08"
+name = "Thermal-break stand-off (Ti or Inconel flexure + YSZ compression pad + radiation shields)"
+use = "hot-loop trunk supports, hot equipment on cool frames"
+efficiency = 0.6
+inspect = "temperature sensors, visual"
+replace = "yes"
+notes = "Isolates a 1500-2000 K duct from a <420 K aluminium frame; heat leak computed in psa_study."
+
+[[connection]]
+id = "CN-09"
+name = "Low-conductivity cryogenic strut (G-10/CFRP tube with intercept)"
+use = "tank skirts, cryostat supports (existing fuel_loads skirt model)"
+efficiency = 0.7
+inspect = "strain, temperature"
+replace = "yes"
+
+[[connection]]
+id = "CN-10"
+name = "Kinematic slip mount (one fixed datum, guided slides)"
+use = "radiator blades (existing 0.20 m slides), tanks (V-links), long hot ducts"
+efficiency = 0.8
+inspect = "position sensors"
+replace = "yes"
+notes = "Lets CTE growth happen without load; the existing Wayfarer practice is right."
+
+[[connection]]
+id = "CN-11"
+name = "Functionally graded deposited transition (F-FGM)"
+use = "metal-to-ceramic hot interfaces"
+efficiency = 0.8
+inspect = "CT"
+replace = "with part"
+track = "F"
+
+[[connection]]
+id = "CN-12"
+name = "Electrically insulating break (BFRP/GFRP spacer + isolated bolts)"
+use = "break eddy-current loops in frames near pulsed or ramping fields; EMC zoning"
+efficiency = 0.8
+inspect = "insulation resistance"
+replace = "yes"
+
+[[connection]]
+id = "CN-13"
+name = "Latch/lock interface (habitat locking under thrust)"
+use = "ring stop-and-lock (operating_rules.habitat)"
+efficiency = 0.7
+inspect = "latch position + load cells"
+replace = "yes"
+notes = "Locks only stationary rings; every latch carries ring inertial load in a defined direction."
