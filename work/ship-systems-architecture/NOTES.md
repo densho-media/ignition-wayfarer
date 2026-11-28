@@ -73,6 +73,18 @@ on a 550 K section; L1 reduced to drive-specific loads with heat-pipe hot blades
 **Unknowns / blockers.** Radiation transport (BLOCKER: no MCNP/OpenMC here); L1 900 K rejection; LOW margin at the high band; He-3 tank
 shadow; hot-loop pumps; channel refill time; unit restart energy; Brayton degradation; engagement frequency.
 
+## 3D Systems Integration, Track F1 (owner brief 2026-11-28 07:03Z)
+
+**Function.** Build the F1 reference (WF-F1-P6.0, FT-03 1500 K approved as fiction) in 3D, stage by stage (A masterplan .. I remaining),
+maturity M0-M4 (most systems to M2, selected M3), checkpoints 1-4 committed separately; F0 and Track R stay comparisons; production unchanged.
+Code and config in `integration3d/` (`f1_integration.toml` = registry and zones). Run order after Phase VI: `integration3d/tanks3d.py`,
+`integration3d/masterplan.py`, then `/snap/bin/blender -b assets/wayfarer/WF_WAYFARER_001.blend --python integration3d/make_review_i3d.py -- --render`,
+then `build_report.py`.
+**Checkpoint 1 (A + B + registry).** Masterplan: production zones from the pure modules, F1 zones from `phase6.json`, keep-outs, live ledger
+(`results/i3d_masterplan.json`, side/farm/maturity SVGs). Tanks: all 13 vessels are at their packing limits, so volume comes from length or
+density: T-A stretch +18.2 m (exact; supersedes Phase VI's 20.1 m linear estimate), T-B tandem modular segment +23.9 m (+64 t tankage,
+mission-modular), T-C slush H2/D2 + re-allocation +16.4 m (FT-09 proposed, new balance search). Recommended T-A as reference (DR-3D-01).
+
 ## Phase VI (owner brief 2026-11-28 06:33Z): dual-baseline integration (Track R / Track F)
 
 **Function.** Make the Track R / Track F split permanent (AGENTS.md "Dual development"), reconcile Phase V (C6-01..09), write one

@@ -1,0 +1,573 @@
+{
+ "status": "STUDY / PROTOTYPE, Track F1 (WF-F1-P6.0); noncanon; production geometry unchanged",
+ "config": {
+  "reference": "WF-F1-P6.0",
+  "comparisons": [
+   "WF-F0-P6.0",
+   "WF-R-P6.0"
+  ],
+  "mass_note": "8,190 t nominal departure is a working estimate (owner 2026-11-28), recomputed by each checkpoint's ledger",
+  "hsfp": "research -> physics -> constraint -> engineering -> adaptation -> culture -> identity -> style"
+ },
+ "maturity_scale": {
+  "M0": "reservation: a volume held for a function; no internal arrangement",
+  "M1": "functional envelope: outer envelope, mass, interfaces and keep-outs named",
+  "M2": "arrangement: major components placed, routes, access and failure domains; clearances screened",
+  "M3": "engineering assembly: parts, supports, maintenance clearances and replacement paths; regenerable from parameters",
+  "M4": "production detail: not in scope of this brief"
+ },
+ "production_zones": [
+  {
+   "id": "P-DRIVE",
+   "name": "Drive and thrust ring",
+   "x0": -144.75,
+   "x1": -133.25,
+   "r0": 0.0,
+   "r1": 12.0,
+   "colour": "MAIN_PROPULSION",
+   "maturity": "M2",
+   "source": "production"
+  },
+  {
+   "id": "P-HOT",
+   "name": "HOT blades (3 x 120 deg)",
+   "x0": -133.25,
+   "x1": 48.899362477231335,
+   "r0": 6.5,
+   "r1": 37.0,
+   "colour": "HOT_RADIATOR",
+   "maturity": "M2",
+   "source": "production"
+  },
+  {
+   "id": "P-WARM",
+   "name": "WARM section 440 K",
+   "x0": 50.399362477231335,
+   "x1": 72.89936247723134,
+   "r0": 6.5,
+   "r1": 37.0,
+   "colour": "WARM_RADIATOR",
+   "maturity": "M2",
+   "source": "production"
+  },
+  {
+   "id": "P-LOW",
+   "name": "LOW section 300 K",
+   "x0": 73.39936247723134,
+   "x1": 93.39936247723134,
+   "r0": 6.5,
+   "r1": 37.0,
+   "colour": "LOW_RADIATOR",
+   "maturity": "M2",
+   "source": "production"
+  },
+  {
+   "id": "P-BODY",
+   "name": "Body bay: dry store, CMGs, batteries",
+   "x0": -89.75,
+   "x1": 21.25,
+   "r0": 0.0,
+   "r1": 6.0,
+   "colour": "SERVICE",
+   "maturity": "M2",
+   "source": "production"
+  },
+  {
+   "id": "P-RINGA",
+   "name": "Ring A (rotating)",
+   "x0": 95.14936247723134,
+   "x1": 99.44936247723135,
+   "r0": 0.0,
+   "r1": 30.0,
+   "colour": "HABITAT",
+   "maturity": "M2",
+   "source": "production"
+  },
+  {
+   "id": "P-RINGB",
+   "name": "Ring B (rotating)",
+   "x0": 101.14936247723134,
+   "x1": 105.44936247723135,
+   "r0": 0.0,
+   "r1": 30.0,
+   "colour": "HABITAT",
+   "maturity": "M2",
+   "source": "production"
+  },
+  {
+   "id": "P-FARM",
+   "name": "Propellant farm (13 vessels)",
+   "x0": 109.25,
+   "x1": 137.85,
+   "r0": 7.75,
+   "r1": 34.5,
+   "colour": "HELIUM3",
+   "maturity": "M2",
+   "source": "production"
+  },
+  {
+   "id": "P-BROW",
+   "name": "Brow shield and EYE",
+   "x0": 141.75,
+   "x1": 144.75,
+   "r0": 0.0,
+   "r1": 45.0,
+   "colour": "SHIELD",
+   "maturity": "M2",
+   "source": "production"
+  }
+ ],
+ "f1_zones": [
+  {
+   "id": "Z-DIST",
+   "name": "Power district",
+   "ref": "layout:POWER_DISTRICT",
+   "colour": "POWER",
+   "maturity": "M1",
+   "x0": -93.5,
+   "x1": -77.5,
+   "r0": 0.4995897985749642,
+   "r1": 5.3,
+   "source": "F1",
+   "assemblies": 25
+  },
+  {
+   "id": "Z-H6A",
+   "name": "H6a hot network",
+   "ref": "layout:THERMAL_H6A",
+   "colour": "HOT_RADIATOR",
+   "maturity": "M1",
+   "x0": -136.4,
+   "x1": 30.777,
+   "r0": 3.199911999031978,
+   "r1": 8.150306513569516,
+   "source": "F1",
+   "assemblies": 108
+  },
+  {
+   "id": "Z-L2RAD",
+   "name": "L2 950 K section (F1)",
+   "ref": "layout:RADIATOR_F1",
+   "colour": "WARM_RADIATOR",
+   "maturity": "M1",
+   "x0": 42.957,
+   "x1": 50.4,
+   "r0": 6.5,
+   "r1": 36.1,
+   "source": "F1",
+   "assemblies": 4
+  },
+  {
+   "id": "Z-ECLSS",
+   "name": "ECLSS hub and ring units",
+   "ref": "layout:ECLSS",
+   "colour": "HABITAT",
+   "maturity": "M1",
+   "x0": 95.299,
+   "x1": 105.299,
+   "r0": 0.0,
+   "r1": 29.8,
+   "source": "F1",
+   "assemblies": 10
+  },
+  {
+   "id": "Z-LOG",
+   "name": "Logistics, workshop, rail",
+   "ref": "layout:LOGISTICS",
+   "colour": "SERVICE",
+   "maturity": "M1",
+   "x0": 89.5,
+   "x1": 115.3,
+   "r0": 0.0,
+   "r1": 7.0,
+   "source": "F1",
+   "assemblies": 11
+  },
+  {
+   "id": "Z-FARM-X",
+   "name": "Propellant extension (T-A reference)",
+   "ref": "tanks:T-A",
+   "colour": "HELIUM3",
+   "maturity": "M0",
+   "x0": 137.85,
+   "x1": 156.05926112343957,
+   "r0": 6.5,
+   "r1": 34.5,
+   "source": "F1",
+   "added_length_m": 18.209261123439585
+  }
+ ],
+ "keepouts": [
+  {
+   "id": "K-RING",
+   "what": "ring sweep + service clearance",
+   "x0": 93.64936247723134,
+   "x1": 106.94936247723135,
+   "r1": 31.5
+  },
+  {
+   "id": "K-BROW",
+   "what": "Brow silhouette (shadow rule: rings and vulnerable radiators inside; 15 m ring / 8 m radiator margin)",
+   "r1": 45.0
+  },
+  {
+   "id": "K-L2CONE",
+   "what": "L2 reactor shadow cone 12.5 deg half-angle forward of each shield (no crewed or cryogenic volume in the direct path)",
+   "half_angle_deg": 12.5
+  },
+  {
+   "id": "K-LANES",
+   "what": "EVA airlock lane 50 deg, docking corridors 195 and 315 deg, full farm length"
+  },
+  {
+   "id": "K-HOTVIEW",
+   "what": "HOT blade view: no equipment in the blade planes outside the root radius 6.5 m (view factor and 1800 K surface)"
+  },
+  {
+   "id": "K-DRIVE",
+   "what": "drive exhaust and plume keep-out aft of the thrust ring"
+  }
+ ],
+ "registry": [
+  {
+   "id": "PWR-L2U",
+   "name": "L2 power unit (reusable assembly)",
+   "stage": "C",
+   "now": "M1",
+   "target": "M3",
+   "colour": "POWER",
+   "track": "F1",
+   "register": [
+    "FT-03"
+   ]
+  },
+  {
+   "id": "PWR-DIST",
+   "name": "Power district (three L2 units, shields, PMAD, restart packs)",
+   "stage": "C",
+   "now": "M1",
+   "target": "M2",
+   "colour": "POWER",
+   "track": "F1",
+   "register": [
+    "FT-03"
+   ]
+  },
+  {
+   "id": "TH-H6A",
+   "name": "H6a hot network (trunks, EM pumps, accumulators, drain/recovery)",
+   "stage": "D",
+   "now": "M1",
+   "target": "M2",
+   "colour": "HOT_RADIATOR",
+   "track": "F1",
+   "register": [
+    "FT-01",
+    "FT-02"
+   ]
+  },
+  {
+   "id": "TH-H6A-AFT",
+   "name": "H6a aft manifold and section valves",
+   "stage": "D",
+   "now": "M1",
+   "target": "M3",
+   "colour": "HOT_RADIATOR",
+   "track": "F1",
+   "register": [
+    "FT-01",
+    "FT-02"
+   ]
+  },
+  {
+   "id": "RAD-HOT",
+   "name": "HOT blades (production)",
+   "stage": "E",
+   "now": "M2",
+   "target": "M2",
+   "colour": "HOT_RADIATOR",
+   "track": "R/F",
+   "register": []
+  },
+  {
+   "id": "RAD-L2",
+   "name": "L2 radiator section, 950 K (F1, 7.4 m) with internal blade cross-section",
+   "stage": "E",
+   "now": "M1",
+   "target": "M3",
+   "colour": "WARM_RADIATOR",
+   "track": "F1",
+   "register": [
+    "FT-03",
+    "FT-06"
+   ]
+  },
+  {
+   "id": "RAD-WL",
+   "name": "WARM and LOW sections (production)",
+   "stage": "E",
+   "now": "M2",
+   "target": "M2",
+   "colour": "WARM_RADIATOR",
+   "track": "R/F",
+   "register": []
+  },
+  {
+   "id": "EPS-L1",
+   "name": "L1 burn power (direct conversion, conditional)",
+   "stage": "F",
+   "now": "M0",
+   "target": "M2",
+   "colour": "POWER",
+   "track": "F1",
+   "register": [
+    "FT-04"
+   ]
+  },
+  {
+   "id": "EPS-BUS",
+   "name": "Buses, switchgear, ride-through and data trunks",
+   "stage": "F",
+   "now": "M1",
+   "target": "M2",
+   "colour": "POWER",
+   "track": "R/F",
+   "register": []
+  },
+  {
+   "id": "EPS-STOR",
+   "name": "Restart, defense and survival storage; L3 survival source",
+   "stage": "F",
+   "now": "M1",
+   "target": "M2",
+   "colour": "POWER",
+   "track": "R/F",
+   "register": [
+    "FT-05"
+   ]
+  },
+  {
+   "id": "ECLSS-RING",
+   "name": "ECLSS ring units (3 + 3)",
+   "stage": "G",
+   "now": "M1",
+   "target": "M2",
+   "colour": "HABITAT",
+   "track": "R/F",
+   "register": []
+  },
+  {
+   "id": "ECLSS-HUB",
+   "name": "ECLSS hub unit and rotary couplings",
+   "stage": "G",
+   "now": "M1",
+   "target": "M3",
+   "colour": "HABITAT",
+   "track": "R/F",
+   "register": []
+  },
+  {
+   "id": "LOG-G1",
+   "name": "LOG-G1 parametric container (3 t)",
+   "stage": "H",
+   "now": "M1",
+   "target": "M3",
+   "colour": "SERVICE",
+   "track": "R/F",
+   "register": [
+    "FT-07"
+   ]
+  },
+  {
+   "id": "MRO-WS",
+   "name": "Workshop and fabrication cell",
+   "stage": "H",
+   "now": "M0",
+   "target": "M2",
+   "colour": "SERVICE",
+   "track": "R/F",
+   "register": [
+    "FT-07"
+   ]
+  },
+  {
+   "id": "MRO-ROB",
+   "name": "Robotics: rail, manipulators, drones",
+   "stage": "H",
+   "now": "M0",
+   "target": "M2",
+   "colour": "SERVICE",
+   "track": "F1",
+   "register": [
+    "FT-07"
+   ]
+  },
+  {
+   "id": "PROP-FARM",
+   "name": "Propellant farm (F1 volume, alternatives T-A/T-B/T-C)",
+   "stage": "B",
+   "now": "M1",
+   "target": "M2",
+   "colour": "HELIUM3",
+   "track": "F1",
+   "register": []
+  },
+  {
+   "id": "PROP-CRYO",
+   "name": "Cryocoolers and cold boxes",
+   "stage": "I",
+   "now": "M0",
+   "target": "M2",
+   "colour": "LOW_RADIATOR",
+   "track": "R/F",
+   "register": []
+  },
+  {
+   "id": "GNC-CDH",
+   "name": "CDH, GNC and comms equipment",
+   "stage": "I",
+   "now": "M0",
+   "target": "M1",
+   "colour": "SENSORS_COMMS",
+   "track": "R/F",
+   "register": []
+  },
+  {
+   "id": "STRUCT-F1",
+   "name": "Structure changes for F1 (spine stretch, Brow translation, deck)",
+   "stage": "I",
+   "now": "M0",
+   "target": "M2",
+   "colour": "STRUCTURE",
+   "track": "F1",
+   "register": [
+    "FT-08"
+   ]
+  }
+ ],
+ "targets": {
+  "M1": 1,
+  "M2": 13,
+  "M3": 5
+ },
+ "ledger": {
+  "config": "WF-F1-P6.0",
+  "departure_t": 8191.500939430233,
+  "dry_added_t": 989.1922041899537,
+  "propellant_t": 5175.746726295895,
+  "tankage_t": 686.3620089443841,
+  "end_t": 3015.754213134338,
+  "items": [
+   {
+    "item": "L1 (derived)",
+    "t": 70.0,
+    "cls": "FT-04 (CONDITIONAL)",
+    "x": [
+     -140.0,
+     -120.0
+    ]
+   },
+   {
+    "item": "L3",
+    "t": 12.0,
+    "cls": "NEW",
+    "x": [
+     95.0,
+     106.0
+    ]
+   },
+   {
+    "item": "storage (buffer + restart)",
+    "t": 21.5,
+    "cls": "NEW",
+    "x": [
+     -92.0,
+     40.0
+    ]
+   },
+   {
+    "item": "distribution",
+    "t": 8.0,
+    "cls": "NEW",
+    "x": [
+     -92.0,
+     100.0
+    ]
+   },
+   {
+    "item": "scatter allowance (OPEN)",
+    "t": 3.0,
+    "cls": "NEW (OPEN)",
+    "x": [
+     105.0,
+     140.0
+    ]
+   },
+   {
+    "item": "ECLSS modular increment",
+    "t": 4.800000000000001,
+    "cls": "NEW",
+    "x": [
+     95.0,
+     106.0
+    ]
+   },
+   {
+    "item": "bulkhead relocation",
+    "t": 2.0,
+    "cls": "EXISTING (moved)",
+    "x": [
+     26.0,
+     27.0
+    ]
+   },
+   {
+    "item": "LOG-G1 tare (3 t containers, 12 months)",
+    "t": 4.807860357015053,
+    "cls": "NEW (V-G tare)",
+    "x": [
+     95.0,
+     106.0
+    ]
+   },
+   {
+    "item": "L2 (3 x 3.5 MWe, FT-03 1500 K inlet)",
+    "t": 290.5765362444675,
+    "cls": "FT-03 (APPROVED)",
+    "x": [
+     -92.0,
+     -80.0
+    ]
+   },
+   {
+    "item": "L2 sections 950 K cross-strapped + dual headers",
+    "t": 7.311025602664686,
+    "cls": "FT-03 (APPROVED)",
+    "x": [
+     42.95698493009567,
+     50.4
+    ]
+   },
+   {
+    "item": "hot loop H6a",
+    "t": 565.1967819858065,
+    "cls": "FT-01/FT-02",
+    "x": [
+     -140.0,
+     26.0
+    ]
+   }
+  ],
+  "ship_length_m": {
+   "production": 289.5,
+   "F1_T_A": 307.7092611234396
+  },
+  "note": "nominal case; the 8,190 t figure is the working estimate the owner named; each checkpoint recomputes this ledger"
+ },
+ "findings": [
+  "The F1 additions sit in three bands: the aft power district and H6a network inside the HOT blade roots (x -94..-78 incl. buses), the hub between and around the rings (ECLSS hub, LOG, workshop), and the farm extension ahead of the farm.",
+  "Propellant extension (T-A) is 18.2 m with exact vessel volumes; Phase VI quoted 20.1 m from a linear fill estimate that also stretched the heads (superseded).",
+  "Every F1 radial band stays inside the Brow silhouette (r 45 m); the farm and the rings keep their production margins.",
+  "The L1 bus runs through the district envelope (bounding-box screen in the Phase VI review); Stage C gives it a dedicated routing slot."
+ ]
+}

@@ -1,0 +1,230 @@
+# Track F1 3D systems integration (owner brief 2026-11-28 07:03Z). Working config for work/ship-systems-architecture/integration3d/.
+# NONCANON, PROTOTYPE. Nothing in src/, tests/, tools/, godot/, web/ or CI reads this file. The production ship (data/wayfarer_3d.toml) is unchanged.
+# Reference configuration: WF-F1-P6.0 (results/phase6_config_F.json). Comparisons: WF-F0-P6.0 and WF-R-P6.0.
+
+[config]
+reference = "WF-F1-P6.0"
+comparisons = ["WF-F0-P6.0", "WF-R-P6.0"]
+mass_note = "8,190 t nominal departure is a working estimate (owner 2026-11-28), recomputed by each checkpoint's ledger"
+hsfp = "research -> physics -> constraint -> engineering -> adaptation -> culture -> identity -> style"
+
+# Maturity scale (owner brief): what a level promises.
+[maturity]
+M0 = "reservation: a volume held for a function; no internal arrangement"
+M1 = "functional envelope: outer envelope, mass, interfaces and keep-outs named"
+M2 = "arrangement: major components placed, routes, access and failure domains; clearances screened"
+M3 = "engineering assembly: parts, supports, maintenance clearances and replacement paths; regenerable from parameters"
+M4 = "production detail: not in scope of this brief"
+
+# Registry: every system the brief names, its level now and the level this integration targets (most M2, selected M3).
+# stage = brief stage (A masterplan .. I remaining); colour = functional_colors.PALETTE key (engineering colour, not a final material).
+[[system]]
+id = "PWR-L2U"
+name = "L2 power unit (reusable assembly)"
+stage = "C"
+now = "M1"
+target = "M3"
+colour = "POWER"
+track = "F1"
+register = ["FT-03"]
+[[system]]
+id = "PWR-DIST"
+name = "Power district (three L2 units, shields, PMAD, restart packs)"
+stage = "C"
+now = "M1"
+target = "M2"
+colour = "POWER"
+track = "F1"
+register = ["FT-03"]
+[[system]]
+id = "TH-H6A"
+name = "H6a hot network (trunks, EM pumps, accumulators, drain/recovery)"
+stage = "D"
+now = "M1"
+target = "M2"
+colour = "HOT_RADIATOR"
+track = "F1"
+register = ["FT-01", "FT-02"]
+[[system]]
+id = "TH-H6A-AFT"
+name = "H6a aft manifold and section valves"
+stage = "D"
+now = "M1"
+target = "M3"
+colour = "HOT_RADIATOR"
+track = "F1"
+register = ["FT-01", "FT-02"]
+[[system]]
+id = "RAD-HOT"
+name = "HOT blades (production)"
+stage = "E"
+now = "M2"
+target = "M2"
+colour = "HOT_RADIATOR"
+track = "R/F"
+register = []
+[[system]]
+id = "RAD-L2"
+name = "L2 radiator section, 950 K (F1, 7.4 m) with internal blade cross-section"
+stage = "E"
+now = "M1"
+target = "M3"
+colour = "WARM_RADIATOR"
+track = "F1"
+register = ["FT-03", "FT-06"]
+[[system]]
+id = "RAD-WL"
+name = "WARM and LOW sections (production)"
+stage = "E"
+now = "M2"
+target = "M2"
+colour = "WARM_RADIATOR"
+track = "R/F"
+register = []
+[[system]]
+id = "EPS-L1"
+name = "L1 burn power (direct conversion, conditional)"
+stage = "F"
+now = "M0"
+target = "M2"
+colour = "POWER"
+track = "F1"
+register = ["FT-04"]
+[[system]]
+id = "EPS-BUS"
+name = "Buses, switchgear, ride-through and data trunks"
+stage = "F"
+now = "M1"
+target = "M2"
+colour = "POWER"
+track = "R/F"
+register = []
+[[system]]
+id = "EPS-STOR"
+name = "Restart, defense and survival storage; L3 survival source"
+stage = "F"
+now = "M1"
+target = "M2"
+colour = "POWER"
+track = "R/F"
+register = ["FT-05"]
+[[system]]
+id = "ECLSS-RING"
+name = "ECLSS ring units (3 + 3)"
+stage = "G"
+now = "M1"
+target = "M2"
+colour = "HABITAT"
+track = "R/F"
+register = []
+[[system]]
+id = "ECLSS-HUB"
+name = "ECLSS hub unit and rotary couplings"
+stage = "G"
+now = "M1"
+target = "M3"
+colour = "HABITAT"
+track = "R/F"
+register = []
+[[system]]
+id = "LOG-G1"
+name = "LOG-G1 parametric container (3 t)"
+stage = "H"
+now = "M1"
+target = "M3"
+colour = "SERVICE"
+track = "R/F"
+register = ["FT-07"]
+[[system]]
+id = "MRO-WS"
+name = "Workshop and fabrication cell"
+stage = "H"
+now = "M0"
+target = "M2"
+colour = "SERVICE"
+track = "R/F"
+register = ["FT-07"]
+[[system]]
+id = "MRO-ROB"
+name = "Robotics: rail, manipulators, drones"
+stage = "H"
+now = "M0"
+target = "M2"
+colour = "SERVICE"
+track = "F1"
+register = ["FT-07"]
+[[system]]
+id = "PROP-FARM"
+name = "Propellant farm (F1 volume, alternatives T-A/T-B/T-C)"
+stage = "B"
+now = "M1"
+target = "M2"
+colour = "HELIUM3"
+track = "F1"
+register = []
+[[system]]
+id = "PROP-CRYO"
+name = "Cryocoolers and cold boxes"
+stage = "I"
+now = "M0"
+target = "M2"
+colour = "LOW_RADIATOR"
+track = "R/F"
+register = []
+[[system]]
+id = "GNC-CDH"
+name = "CDH, GNC and comms equipment"
+stage = "I"
+now = "M0"
+target = "M1"
+colour = "SENSORS_COMMS"
+track = "R/F"
+register = []
+[[system]]
+id = "STRUCT-F1"
+name = "Structure changes for F1 (spine stretch, Brow translation, deck)"
+stage = "I"
+now = "M0"
+target = "M2"
+colour = "STRUCTURE"
+track = "F1"
+register = ["FT-08"]
+
+# Stage A masterplan: functional zones along the ship. Production zones are resolved from the pure modules by masterplan.py; these are
+# the F1 additions and reservations. x in m (ship frame, +X bow), r = radial band. ref = how masterplan.py resolves the band.
+[[zone]]
+id = "Z-DIST"
+name = "Power district"
+ref = "layout:POWER_DISTRICT"
+colour = "POWER"
+maturity = "M1"
+[[zone]]
+id = "Z-H6A"
+name = "H6a hot network"
+ref = "layout:THERMAL_H6A"
+colour = "HOT_RADIATOR"
+maturity = "M1"
+[[zone]]
+id = "Z-L2RAD"
+name = "L2 950 K section (F1)"
+ref = "layout:RADIATOR_F1"
+colour = "WARM_RADIATOR"
+maturity = "M1"
+[[zone]]
+id = "Z-ECLSS"
+name = "ECLSS hub and ring units"
+ref = "layout:ECLSS"
+colour = "HABITAT"
+maturity = "M1"
+[[zone]]
+id = "Z-LOG"
+name = "Logistics, workshop, rail"
+ref = "layout:LOGISTICS"
+colour = "SERVICE"
+maturity = "M1"
+[[zone]]
+id = "Z-FARM-X"
+name = "Propellant extension (T-A reference)"
+ref = "tanks:T-A"
+colour = "HELIUM3"
+maturity = "M0"

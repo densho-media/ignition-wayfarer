@@ -70,6 +70,7 @@ def main():
     sys.path.insert(0, str(H / 'phase4')); import report4
     sys.path.insert(0, str(H / 'phase5')); import report5
     sys.path.insert(0, str(H / 'phase6')); import report6
+    sys.path.insert(0, str(H / 'integration3d')); import report_i3d
     P6 = json.loads((R / 'phase6.json').read_text())
     P5 = json.loads((R / 'phase5.json').read_text())
     P4 = json.loads((R / 'phase4.json').read_text())
@@ -81,7 +82,7 @@ def main():
     page = (H / 'report_template.html').read_text()
     h6 = P5['transport']['topologies']['H6a']; rs = P5['radiation_summary']
     dep6 = {k: P6['mass'][k]['cases'][1]['departure_t'] for k in ('R', 'F0', 'F1')}
-    for k, v in dict(PHASE6=report6.build(), P6_F1=f"{dep6['F1']:,.0f}", P6_F0=f"{dep6['F0']:,.0f}", P6_R=f"{dep6['R']:,.0f}",
+    for k, v in dict(I3D=report_i3d.build(), PHASE6=report6.build(), P6_F1=f"{dep6['F1']:,.0f}", P6_F0=f"{dep6['F0']:,.0f}", P6_R=f"{dep6['R']:,.0f}",
                      P6_HEAD=f"{P6['radiators']['F1']['hot_headroom_W']/1e6:,.0f}", P6_L2=f"{P6['radiators']['F1']['length_m']:.1f}",
                      P6_L1=f"{P6['reconciliation']['electrical']['sum_R']['continuous_proactive_W']/1e6:.1f}").items():
         page = page.replace('{{' + k + '}}', v)

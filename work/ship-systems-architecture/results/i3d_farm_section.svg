@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 760" font-family="IBM Plex Mono, monospace" font-size="11">
+<rect width="720" height="760" fill="#14161c"/>
+<text x="16" y="22" fill="#e8e6df" font-size="14">Farm section (looking aft) · 13 vessels at their packing limits</text>
+<circle cx="360" cy="360" r="315.0" fill="none" stroke="#d9a33a" stroke-dasharray="3 4"/><text x="364" y="41.0" fill="#d9a33a">Brow silhouette r 45</text>
+<circle cx="360" cy="360" r="210.0" fill="none" stroke="#9fe0a8" stroke-dasharray="3 4"/><text x="364" y="146.0" fill="#9fe0a8">ring sweep r 30 (aft)</text>
+<circle cx="360" cy="360" r="259.0" fill="none" stroke="#e06a5a" stroke-dasharray="3 4"/><text x="364" y="97.0" fill="#e06a5a">blade / girder r 37</text>
+<line x1="551.0" y1="249.8" x2="584.3" y2="230.5" stroke="#e06a5a" stroke-width="6"/>
+<line x1="169.0" y1="249.8" x2="135.7" y2="230.5" stroke="#e06a5a" stroke-width="6"/>
+<line x1="360.0" y1="580.5" x2="360.0" y2="619.0" stroke="#e06a5a" stroke-width="6"/>
+<line x1="360" y1="360" x2="540.0" y2="145.5" stroke="#f3e8c2" stroke-opacity=".35" stroke-width="44.1"/><text x="540.0" y="145.5" fill="#f3e8c2" font-size="10">airlock 50</text>
+<line x1="360" y1="360" x2="89.5" y2="432.5" stroke="#f3e8c2" stroke-opacity=".35" stroke-width="44.1"/><text x="89.5" y="432.5" fill="#f3e8c2" font-size="10">Dock_Primary</text>
+<line x1="360" y1="360" x2="558.0" y2="558.0" stroke="#f3e8c2" stroke-opacity=".35" stroke-width="44.1"/><text x="558.0" y="558.0" fill="#f3e8c2" font-size="10">Dock_Service</text>
+<circle cx="553.1" cy="339.0" r="47.2" fill="#8e4ce0" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="553.1" y="343.0" fill="#fff" text-anchor="middle">O1</text>
+<circle cx="423.6" cy="176.4" r="47.2" fill="#8e4ce0" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="423.6" y="180.4" fill="#fff" text-anchor="middle">O2</text>
+<circle cx="322.3" cy="169.4" r="47.2" fill="#2351ea" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="322.3" y="173.4" fill="#fff" text-anchor="middle">O3</text>
+<circle cx="231.3" cy="214.5" r="47.2" fill="#8e4ce0" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="231.3" y="218.5" fill="#fff" text-anchor="middle">O4</text>
+<circle cx="166.8" cy="340.0" r="47.2" fill="#8e4ce0" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="166.8" y="344.0" fill="#fff" text-anchor="middle">O5</text>
+<circle cx="229.1" cy="503.6" r="47.2" fill="#2351ea" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="229.1" y="507.6" fill="#fff" text-anchor="middle">O6</text>
+<circle cx="319.4" cy="550.0" r="47.2" fill="#8e4ce0" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="319.4" y="554.0" fill="#fff" text-anchor="middle">O7</text>
+<circle cx="439.3" cy="537.3" r="47.2" fill="#8e4ce0" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="439.3" y="541.3" fill="#fff" text-anchor="middle">O8</text>
+<circle cx="537.3" cy="439.3" r="47.2" fill="#2351ea" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="537.3" y="443.3" fill="#fff" text-anchor="middle">O9</text>
+<circle cx="353.9" cy="265.7" r="40.2" fill="#058e84" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="353.9" y="269.7" fill="#fff" text-anchor="middle">I1</text>
+<circle cx="277.9" cy="313.2" r="40.2" fill="#2351ea" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="277.9" y="317.2" fill="#fff" text-anchor="middle">I2</text>
+<circle cx="366.1" cy="454.3" r="40.2" fill="#058e84" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="366.1" y="458.3" fill="#fff" text-anchor="middle">I3</text>
+<circle cx="454.3" cy="366.2" r="40.2" fill="#2351ea" fill-opacity=".7" stroke="#fff" stroke-opacity=".6"/><text x="454.3" y="370.2" fill="#fff" text-anchor="middle">I4</text>
+<circle cx="360" cy="360" r="45.5" fill="#3a3d46" stroke="#888"/><text x="360" y="364" fill="#ccc" text-anchor="middle">collar</text>
+<rect x="16" y="730" width="12" height="12" fill="#8e4ce0"/><text x="32" y="741" fill="#e8e6df">helium-3</text>
+<rect x="186" y="730" width="12" height="12" fill="#2351ea"/><text x="202" y="741" fill="#e8e6df">hydrogen</text>
+<rect x="356" y="730" width="12" height="12" fill="#058e84"/><text x="372" y="741" fill="#e8e6df">deuterium</text>
+<text x="16" y="760" fill="#9aa0ad">gap 1.00 m (rule 1.0) · lanes 0.00 m · girder panels 0.50 m (rule 0.5)</text>
+</svg>

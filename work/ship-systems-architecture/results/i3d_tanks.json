@@ -1,0 +1,185 @@
+{
+ "status": "STUDY / PROTOTYPE (Track F1 reference WF-F1-P6.0, nominal case); noncanon; production farm unchanged",
+ "need_m3": {
+  "helium-3": 34550.772510336865,
+  "deuterium": 7718.3329781075,
+  "hydrogen": 25402.175306505902
+ },
+ "historical_capacity_m3": {
+  "helium-3": 20271.276608337346,
+  "hydrogen": 15022.137229208574,
+  "deuterium": 4886.498925039901
+ },
+ "farm": {
+  "x0": 109.25,
+  "x1": 137.85,
+  "length_m": 28.599999999999994,
+  "vessels": 13
+ },
+ "packing": {
+  "clearances_m": {
+   "vessel_to_vessel": 1.0047553451185571,
+   "lane_airlock": -0.0005205188803976135,
+   "lane_Dock_Primary": -0.0005205188804029426,
+   "lane_Dock_Service": -0.0006031125245100633,
+   "girder_panels": 0.5014692070336793,
+   "deck_to_ring_B_sweep": 1.700637522768659,
+   "collar": 1.25,
+   "brow_truss": 1.1377659574468169,
+   "eye_sleds": 0.8000000000000114,
+   "reach_m": 34.5
+  },
+  "gap_required_m": 1.0,
+  "girder_clearance_m": 0.5,
+  "brow_shield_radius_m": 45.0,
+  "farm_reach_m": 34.5
+ },
+ "alternatives": [
+  {
+   "id": "T-A",
+   "name": "Stretch",
+   "vessels": 13,
+   "decks": 1,
+   "added_length_m": 18.209261123439585,
+   "ship_length_m": 307.7092611234396,
+   "brow_translation_m": 18.209261123439585,
+   "vessel_length_m": 46.80926112343958,
+   "slenderness_LD": {
+    "L": 3.4673526758103397,
+    "M": 4.0703705324730075
+   },
+   "shell_area_m2": 24361.403896000586,
+   "capacity_m3": {
+    "helium-3": 34550.772510336865,
+    "hydrogen": 25560.21242039134,
+    "deuterium": 8284.826165222908
+   },
+   "prop_centroid_shift_m": 9.104630561719793,
+   "pros": [
+    "one vessel set, same tooling and supports",
+    "no new deck, outlets or ring mains",
+    "lowest shell area per m3"
+   ],
+   "cons": [
+    "ship +18.2 m; Brow, EYE, lances and forward assembly move forward (every forward interface re-anchored)",
+    "vessel L/D 3.5 (L) and 4.1 (M): forward guides and the keel rails grow; barrel buckling under lateral loads needs a check",
+    "propellant centroid moves forward: pitch inertia rises"
+   ],
+   "modular": false,
+   "tankage_t": 686.3620089443841,
+   "tankage_delta_vs_A_t": 0.0
+  },
+  {
+   "id": "T-B",
+   "name": "Tandem modular segment",
+   "vessels": 26,
+   "decks": 2,
+   "added_length_m": 23.859261123439584,
+   "ship_length_m": 313.3592611234396,
+   "brow_translation_m": 23.859261123439584,
+   "segment_vessel_length_m": 20.959261123439585,
+   "shell_area_m2": 26617.732496442823,
+   "capacity_m3": {
+    "helium-3": 34550.772510336865,
+    "hydrogen": 25622.421190920173,
+    "deuterium": 8347.034935751743
+   },
+   "prop_centroid_shift_m": 4.996055851355151,
+   "pros": [
+    "mission-modular: the forward segment and its deck are fitted only when a mission needs the volume",
+    "short barrels (no slenderness growth); the base farm and its interfaces are unchanged",
+    "a segment is an exchangeable unit (yard-level, not LOG-G1)"
+   ],
+   "cons": [
+    "23.9 m added (longer than T-A: a second deck, 13 more heads)",
+    "shell area +9 % over T-A: tankage and boil-off surface grow",
+    "13 more outlets, a second ring main per species, transfer lines through the base farm"
+   ],
+   "modular": true,
+   "tankage_t": 749.9321643282636,
+   "tankage_delta_vs_A_t": 63.57015538387952
+  },
+  {
+   "id": "T-C",
+   "name": "Densify and re-allocate",
+   "vessels": 13,
+   "decks": 1,
+   "added_length_m": 16.360185867998375,
+   "ship_length_m": 305.8601858679984,
+   "brow_translation_m": 16.360185867998375,
+   "added_length_without_reallocation_m": 18.209261123439585,
+   "reallocated": {
+    "before": {
+     "helium-3": {
+      "L": 6,
+      "M": 0
+     },
+     "deuterium": {
+      "L": 0,
+      "M": 2
+     },
+     "hydrogen": {
+      "L": 3,
+      "M": 2
+     }
+    },
+    "after": {
+     "helium-3": {
+      "L": 5,
+      "M": 2
+     },
+     "deuterium": {
+      "L": 0,
+      "M": 2
+     },
+     "hydrogen": {
+      "L": 4,
+      "M": 0
+     }
+    }
+   },
+   "slush_density_kg_m3": {
+    "hydrogen": 81.5,
+    "deuterium": 188.0
+   },
+   "need_m3": {
+    "helium-3": 34550.772510336865,
+    "deuterium": 7192.829456193797,
+    "hydrogen": 22067.165787737642
+   },
+   "capacity_m3": {
+    "helium-3": 35523.6973051261,
+    "hydrogen": 22067.165787737642,
+    "deuterium": 7939.740070454047
+   },
+   "shell_area_m2": 23433.700010223507,
+   "prop_centroid_shift_m": 8.180092933999187,
+   "pros": [
+    "saves 1.8 m against T-A",
+    "same vessel set"
+   ],
+   "cons": [
+    "slush production, transfer and ageing (solid fraction falls with boil-off) need a register entry (FT-09 proposed)",
+    "re-allocation breaks the per-species zero-moment placement: rerun the balance search (mass_model.balance)",
+    "helium-3 cannot be densified (no solid at tank pressure): it still sets most of the stretch"
+   ],
+   "modular": false,
+   "register": "FT-09 PROPOSED (densified hydrogen isotopes)",
+   "tankage_t": 660.2247343658858,
+   "tankage_delta_vs_A_t": -26.137274578498364
+  },
+  {
+   "id": "T-X",
+   "name": "Wider or more vessels (screened)",
+   "feasible": false,
+   "reason": "vessel-to-vessel gap 1.00 m (rule 1.0), lanes -0.001 m, girder panels 0.50 m (rule 0.5): every class is at its limit; the Brow silhouette (r 45 m) is not the limit (farm reach 34.5 m). Growth needs a new azimuth search with fewer, larger vessels; a +0.5 m envelope on the outer ring alone would close the gap to 0",
+   "capacity_gain_per_05m_outer": 0.16104801394146984
+  }
+ ],
+ "recommendation": {
+  "pick": "T-A (stretch) as the F1 3D reference; T-B kept as the mission-modular variant",
+  "why": "T-A adds 18.2 m with the least shell and no new interfaces; T-B costs 5.6 m and +64 t more but lets the farm follow the mission; T-C saves 1.8 m only with a new technology entry and a new balance search, so it stays an option",
+  "owner_question": "DR-3D-01: confirm T-A as the 3D reference, or ask for T-B (modular) or T-C (densified)"
+ },
+ "propellant_t": 5175.746726295895
+}
