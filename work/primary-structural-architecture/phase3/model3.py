@@ -410,8 +410,14 @@ class Build3(mdl.Build):
                     for i in range(len(chain)-1):
                         self.add(chain[i], chain[i+1], 'tankwall', extra=f'-{vid[0]}')
                 else:
+                    # the vessel's own wall stiffness (not PSA structure, massless here, mass is in the bodies): Al-Li shell of the
+                    # credited pressure-shell thickness. Phase III.0 first runs used the generic 0.6 m iface tube (EI 70x too low),
+                    # which let the loaded vessels buckle as columns (iface 24-31 % of the critical-mode energy)
+                    mt = next(q['m'] for q in bodies if q['kind'] == 'vessel' and q['vid'] == vid and q['owner'] == 'tankage')
+                    tv = TANKWALL_CREDIT*mt/(2700.0*2*math.pi*b['a']*L)
                     for i in range(len(chain)-1):
-                        self.link(chain[i], chain[i+1])
+                        self.m.beam(chain[i], chain[i+1], fe.tube(b['a'], tv), dict(E=7.0e10, G=2.7e10, rho=0.0, alpha=0.0), group='iface')
+                        self.meta.append(dict(fam='iface', group='vesselwall'))
                 for s in self.skirt_struct[vid]:
                     self.connect(aft, s, K_SKIRT, 'skirt')
                 for g in self.guide_struct[vid]:
