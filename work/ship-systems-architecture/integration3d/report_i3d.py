@@ -62,7 +62,7 @@ def build():
                        + table(['Item', 't', 'Class'], [[E(r['item']), f'{r["t"]:.1f}', E(r['cls'])] for r in L['items']]
                                + [['Propellant', f'{L["propellant_t"]:,.0f}', 'coupled'], ['Added tankage', f'{L["tankage_t"]:,.0f}', 'coupled'],
                                   ['<b>Departure</b>', f'<b>{L["departure_t"]:,.0f}</b>', E(L['note'])]])))
-    return '\n'.join(out)+build_cp2()
+    return '\n'.join(out)+build_cp2()+build_cp3()
 
 
 def build_cp2():
@@ -95,4 +95,60 @@ def build_cp2():
                        + img('cam_i3d_aft_manifold', 'Aft manifold', 'Aft manifold of one blade: HX interface arc, EM pumps on the returns (blue), bypasses, bellows, valves, accumulator.')
                        + '<h3>Findings</h3><ul>' + ''.join(f'<li>{E(f)}</li>' for f in H['findings']+H['corrections']) + '</ul>'
                        + img('cam_i3d_cp2_ship', 'Ship with Checkpoint 2 layers', 'Whole ship with the Checkpoint 2 layers.')))
+    return '\n'.join(out)
+
+
+def build_cp3():
+    if not (R/'i3d_radiators.json').exists():
+        return ''
+    RD = json.loads((R/'i3d_radiators.json').read_text()); EL = json.loads((R/'i3d_electrical.json').read_text()); LG = json.loads((R/'i3d_ledger.json').read_text())
+    S = RD['section']; HP = RD['heat_pipes']; NK = RD['nak']; CY = RD['cycle']; B = RD['hot_budget']; out = []
+    cyc = [[E(r['components']), f'{r["eta_at_950K"]:.3f}', f'{r["Tci_for_0154"]:.0f}', f'{r["PR"]:.2f}', f'{r["T_gc_in"]:.0f}'] for r in CY['rows']]
+    lim = [[f'{r["T_K"]:.0f}', E(r['state']), f'{r["load_W"]/1e3:.1f}', f'{r["sonic_W"]/1e3:.1f}', f'{r["capillary_W"]/1e3:.1f}' if r['capillary_W'] else '–',
+            f'{r["entrainment_W"]/1e3:.1f}', f'{r["margin"]:.2f}'] for r in HP['limits'] if r['state'] != 'burn, lowest acceleration']
+    fl = [[E(r['case']), ' / '.join(f'{w/1e6:.1f}' for w in r['blade_W']), E(r['header_split']), f'{r["use"]*100:.0f} %'] for r in RD['failures']['rows']]
+    bud = [['HOT headroom (Phase VI, 20 % rule)', f'{B["hot_headroom_W"]/1e9:+.2f}'], ['L2 section growth', f'{B["l2_growth_W"]/1e9:+.2f}'],
+           ['H6a trunk shading (bound, insulated trunks)', f'{B["trunk_shading_W"]/1e9:+.2f}'], ['<b>Remaining with forward-pointing HOT fins</b>', f'<b>{B["remaining_mitigated_W"]/1e9:+.2f}</b>'],
+           ['Aft-pointing HOT fins at peak burn (if not changed)', f'{B["fins_unmitigated_W"]/1e9:+.2f}'], ['Remaining without the fin change', f'{B["remaining_unmitigated_W"]/1e9:+.2f}']]
+    mass = [[E(k.replace('_', ' ')), f'{v:.1f}'] for k, v in RD['mass']['per_blade_t'].items()] + [['NaK transport loops (3)', f'{RD["mass"]["loops_t"]:.1f}'], ['EM pumps', f'{RD["mass"]["pumps_t"]:.1f}'],
+           ['<b>Gross (3 blades)</b>', f'<b>{RD["mass"]["gross_t"]:.1f}</b>'], ['Phase VI ledger line', f'{RD["mass"]["phase6_ledger_t"]:.1f}']]
+    out.append(section('i6', '3D · E', 'Checkpoint 3: radiators with internal cross-sections',
+                       f'<p>The L2 section of each blade is now an engineering assembly at M3 (<code>integration3d/radiators3d.py</code>, <code>[radiators]</code>): '
+                       f'NaK loops from each unit\'s gas cooler, dual header serpentines at the aft edge of two chord bays, and {HP["per_blade"]} potassium heat pipes per blade '
+                       f'on both face sheets. Section {S["length_m"]:.2f} m (x {S["x0"]:.2f} – {S["x1"]:.1f}), Phase VI {S["length_phase6_m"]:.2f} m.</p>'
+                       + '<h3>1 · The cycle behind FT-03</h3><p>' + E(CY['finding']) + '</p>'
+                       + table(['Components', 'eta at 950 K compressor inlet', 'Compressor inlet for eta 0.154 (K)', 'Pressure ratio', 'Gas-cooler inlet (K)'], cyc)
+                       + svg('i3d_l2_section.svg') + svg('i3d_l2_plan.svg')
+                       + img('cam_i3d_l2_cutaway', 'L2 section cutaway', 'L2 section of blade 90 with the + face of bay 1 left open: heat-pipe rows, headers, the closed face of bay 2.')
+                       + img('cam_i3d_l2_evap_detail', 'Evaporator detail', 'Chordwise cut at mid-span through the aft edge of bay 1: headers A and B between the two saddle strips, pipe rows on the face sheets.')
+                       + img('cam_i3d_loops', 'NaK loops', 'NaK transport loops arriving at the L2 sections: each unit feeds loop A of its own blade and loop B of the next.')
+                       + '<h3>2 · Heat-pipe limits</h3>' + table(['Vapour T (K)', 'State', 'Load kW', 'Sonic kW', 'Capillary kW', 'Entrainment kW', 'Margin'], lim)
+                       + '<h3>3 · Failure cases</h3>' + table(['Case', 'Blade loads MW', 'Header split', 'Use of design'], fl)
+                       + '<h3>4 · HOT, WARM and LOW (M2)</h3>' + svg('i3d_blade_sections.svg')
+                       + '<h3>5 · HOT budget at peak burn (GW)</h3>' + table(['Item', 'GW'], bud)
+                       + '<h3>6 · Mass</h3>' + table(['Item', 't'], mass)
+                       + '<h3>Findings</h3><ul>' + ''.join(f'<li>{E(f)}</li>' for f in RD['findings']) + '</ul>'
+                       + '<h3>Owner questions</h3>' + table(['Id', 'Question', 'Recommendation'], [[E(d['id']), E(d['q']), E(d['rec'])] for d in RD['decisions']])))
+    bu = [[E(r['id']), E(r['what']), f'{r["P_W"]/1e6:.2f}', f'{r["A_mm2"]:.0f}', f'{r["length_m"]:.0f}', f'{r["mass_t"]:.2f}'] for r in EL['buses']['rows'] if not r['id'].startswith('TIE')]
+    st = [[E(r['store']), E(r['duty']), f'{r["need_kWh"]:.1f}' if r['need_kWh'] is not None else '–', f'{r["have_kWh"]:.0f}', 'OK' if r['ok'] else 'SHORT', E(r['note'])] for r in EL['storage']['rows']]
+    fa = [[E(r['fault']), E(r['left']), E(r['shed']), E(r['bridge']), 'rides through' if r['ok'] else 'refuge case'] for r in EL['faults']]
+    sp = [[E(r['a']), E(r['b']), f'{r["clear_m"]:.2f}', E(r['action'])] for r in EL['separation']]
+    out.append(section('i7', '3D · F', 'Electrical L1 / L2 / L3, storage and data (M2)',
+                       '<p>Three HVDC sectors, one per L2 unit and failure domain, with normally-open ties at three stations; L1 on its own 10 kV bus for burns; the refuge on L3 '
+                       'with its own bus and no tie (<code>integration3d/electrical3d.py</code>, <code>[electrical]</code>).</p>'
+                       + svg('i3d_electrical_oneline.svg') + svg('i3d_electrical_section.svg')
+                       + img('cam_i3d_elec_overview', 'Electrical layer', 'Electrical layer only: three sector buses (blue, green, amber), breakers and load centres, L1 (red), defense bus and buffers (magenta), data A/B.')
+                       + img('cam_i3d_elec_section', 'Electrical section', 'Looking forward from x −76: buses, data networks and the NaK loops (orange) in the casing-hull annulus, each in its own domain.')
+                       + '<h3>Conductors</h3>' + table(['Id', 'What', 'MW', 'mm² per pole', 'm', 't'], bu)
+                       + '<h3>Storage against duty</h3>' + table(['Store', 'Duty', 'Need kWh', 'Have kWh', 'Result', 'Note'], st)
+                       + '<h3>Single faults</h3>' + table(['Fault', 'Left', 'Shed', 'Bridge', 'Result'], fa)
+                       + '<h3>Separation between failure domains (&lt; 1.5 m)</h3>' + table(['A', 'B', 'Clear m', 'Action'], sp)
+                       + '<h3>Findings</h3><ul>' + ''.join(f'<li>{E(f)}</li>' for f in EL['findings']) + '</ul>'))
+    lr = [[E(r['item']), E(r['stage']), f'{r["t"]:.1f}', E(r['cls'])] for r in LG['items']]
+    pe = [[E(p['id']), E(p['item']), f'{p["t"]:+.1f}', f'{p["departure_t"]:+.0f}'] for p in LG['pending']]
+    out.append(section('i8', '3D · ledger', 'Live mass ledger after Checkpoint 3',
+                       f'<p>Dry additions {LG["dry_added_t"]:,.1f} t give a nominal departure of <b>{LG["departure_t"]:,.0f} t</b> ({LG["change_t"]:+,.0f} t against Phase VI; '
+                       f'{LG["coupling_t_per_t"]:.2f} t of departure per tonne of dry mass). Propellant {LG["propellant_t"]:,.0f} t, added tankage {LG["tankage_t"]:,.0f} t.</p>'
+                       + table(['Item', 'Stage', 't', 'Class'], lr)
+                       + '<h3>Waiting for owner decisions (not added)</h3>' + table(['Decision', 'Item', 'Dry t', 'Departure t'], pe)))
     return '\n'.join(out)

@@ -1,0 +1,989 @@
+{
+ "status": "STUDY / PROTOTYPE / NONCANON (Track F1, M3 L2 section, M2 HOT/WARM/LOW)",
+ "cycle": {
+  "rows": [
+   {
+    "components": "contemporary-class components (eta_t 0.92, eta_c 0.88, recuperator 0.95, dp 3 %)",
+    "kw": {
+     "et": 0.92,
+     "ec": 0.88,
+     "eps": 0.95,
+     "dp": 0.03
+    },
+    "eta_at_950K": 0.02094843701548966,
+    "Tci_for_0154": 793.187683781391,
+    "T_ci": 793.187683781391,
+    "PR": 1.4166822058633102,
+    "T_gc_in": 948.304392913669,
+    "T_turb_out": 1335.2382121303115,
+    "T_comp_out": 927.9394550601614
+   },
+   {
+    "components": "FT-03 advanced components (eta_t 0.94, eta_c 0.90, recuperator 0.97, dp 2 %)",
+    "kw": {
+     "et": 0.94,
+     "ec": 0.9,
+     "eps": 0.97,
+     "dp": 0.02
+    },
+    "eta_at_950K": 0.09134646817796045,
+    "Tci_for_0154": 871.8148168633074,
+    "T_ci": 871.8148168633074,
+    "PR": 1.3127655414036716,
+    "T_gc_in": 994.6620111092959,
+    "T_turb_out": 1364.8345205776645,
+    "T_comp_out": 983.2133767958412
+   }
+  ],
+  "pick": {
+   "components": "FT-03 advanced components (eta_t 0.94, eta_c 0.90, recuperator 0.97, dp 2 %)",
+   "kw": {
+    "et": 0.94,
+    "ec": 0.9,
+    "eps": 0.97,
+    "dp": 0.02
+   },
+   "eta_at_950K": 0.09134646817796045,
+   "Tci_for_0154": 871.8148168633074,
+   "T_ci": 871.8148168633074,
+   "PR": 1.3127655414036716,
+   "T_gc_in": 994.6620111092959,
+   "T_turb_out": 1364.8345205776645,
+   "T_comp_out": 983.2133767958412
+  },
+  "carnot_model": {
+   "carnot_fraction": 0.42,
+   "T_reject_K": 950.0,
+   "eta": 0.154
+  },
+  "finding": "The Carnot-fraction relation (0.42 x (1 - 950/1500) = 0.154) is not a cycle: a recuperated He-Xe Brayton at 1500 K reaches only 0.021 (contemporary-class) or 0.091 (advanced) with a 950 K compressor inlet. eta 0.154 needs the compressor inlet at 793 K or 872 K. The working assumption here keeps eta 0.154 and the waste heat, adopts the advanced component set as part of FT-03 (owner decision DR-3D-02) and lets the radiator run cooler: gas cooler 995 -> 872 K."
+ },
+ "section": {
+  "T_nak_hot": 974.6620111092959,
+  "T_nak_cold": 851.8148168633074,
+  "T_vapour": [
+   964.6620111092959,
+   841.8148168633074
+  ],
+  "Q_design_per_blade_W": 15381818.18181818,
+  "planform_m2": 257.18418783784495,
+  "planform_iso950_m2": 204.10401325026524,
+  "T_emission_equivalent_K": 895.7966704780663,
+  "fin_overall": [
+   0.984520919936195,
+   0.9895733377262013
+  ],
+  "length_m": 9.379437922605577,
+  "length_phase6_m": 7.443015069904324,
+  "delta_m": 1.936422852701253,
+  "x0": 41.02056207739442,
+  "x1": 50.4,
+  "hot_headroom_change_W": -172582694.39265126,
+  "per_m_hot_W": 89124487.53220582,
+  "area_total_faces_m2": 1543.1051270270696
+ },
+ "heat_pipes": {
+  "per_blade": 2192,
+  "per_row": 548,
+  "rows_per_blade": 4,
+  "length_m": 4.539718961302788,
+  "condenser_m": 4.239718961302788,
+  "bay_chord_m": 4.6897189613027885,
+  "mass_t_per_blade": 5.970638377905427,
+  "limits": [
+   {
+    "T_K": 964.6620111092959,
+    "state": "coast",
+    "a_g": 0.0,
+    "load_W": 8393.154637036225,
+    "sonic_W": 47289.42220395576,
+    "capillary_W": 19705.01880817002,
+    "entrainment_W": 14238.013650925383,
+    "flooding_wickless_W": null,
+    "margin": 1.6963840494607023
+   },
+   {
+    "T_K": 964.6620111092959,
+    "state": "burn, lowest acceleration",
+    "a_g": 0.21633140133982065,
+    "load_W": 8393.154637036225,
+    "sonic_W": 47289.42220395576,
+    "capillary_W": null,
+    "entrainment_W": 14238.013650925383,
+    "flooding_wickless_W": 2041.4658769167575,
+    "margin": 1.6963840494607023
+   },
+   {
+    "T_K": 964.6620111092959,
+    "state": "burn, peak acceleration",
+    "a_g": 0.7361342613411239,
+    "load_W": 8393.154637036225,
+    "sonic_W": 47289.42220395576,
+    "capillary_W": null,
+    "entrainment_W": 14238.013650925383,
+    "flooding_wickless_W": 3072.7914557026766,
+    "margin": 1.6963840494607023
+   },
+   {
+    "T_K": 903.2384139863017,
+    "state": "coast",
+    "a_g": 0.0,
+    "load_W": 6468.723067581819,
+    "sonic_W": 24990.323920171286,
+    "capillary_W": 19840.92861389295,
+    "entrainment_W": 10792.53020613827,
+    "flooding_wickless_W": null,
+    "margin": 1.668417413047921
+   },
+   {
+    "T_K": 903.2384139863017,
+    "state": "burn, lowest acceleration",
+    "a_g": 0.21633140133982065,
+    "load_W": 6468.723067581819,
+    "sonic_W": 24990.323920171286,
+    "capillary_W": null,
+    "entrainment_W": 10792.53020613827,
+    "flooding_wickless_W": 1733.900968774685,
+    "margin": 1.668417413047921
+   },
+   {
+    "T_K": 903.2384139863017,
+    "state": "burn, peak acceleration",
+    "a_g": 0.7361342613411239,
+    "load_W": 6468.723067581819,
+    "sonic_W": 24990.323920171286,
+    "capillary_W": null,
+    "entrainment_W": 10792.53020613827,
+    "flooding_wickless_W": 2611.6231376296987,
+    "margin": 1.668417413047921
+   },
+   {
+    "T_K": 841.8148168633074,
+    "state": "coast",
+    "a_g": 0.0,
+    "load_W": 4892.37119458324,
+    "sonic_W": 12002.718426387679,
+    "capillary_W": 19827.344777948896,
+    "entrainment_W": 7798.612666950032,
+    "flooding_wickless_W": null,
+    "margin": 1.594035357657354
+   },
+   {
+    "T_K": 841.8148168633074,
+    "state": "burn, lowest acceleration",
+    "a_g": 0.21633140133982065,
+    "load_W": 4892.37119458324,
+    "sonic_W": 12002.718426387679,
+    "capillary_W": null,
+    "entrainment_W": 7798.612666950032,
+    "flooding_wickless_W": 1422.5286511193583,
+    "margin": 1.594035357657354
+   },
+   {
+    "T_K": 841.8148168633074,
+    "state": "burn, peak acceleration",
+    "a_g": 0.7361342613411239,
+    "load_W": 4892.37119458324,
+    "sonic_W": 12002.718426387679,
+    "capillary_W": null,
+    "entrainment_W": 7798.612666950032,
+    "flooding_wickless_W": 2143.992099175783,
+    "margin": 1.594035357657354
+   }
+  ],
+  "min_margin": 1.594035357657354,
+  "load_max_W": 8393.154637036225,
+  "wickless_rejected": "A wickless thermosyphon would be simpler, but its counter-current flooding limit at this vapour density is only 1.4-3.1 kW against 4.9-8.4 kW per pipe: the screen wick and arteries carry the liquid in burns as well as in coast.",
+  "orientation": "Evaporators at the AFT edge of each bay: in a burn the acceleration (0.22-0.74 g) drains the condensate back to them (thermosyphon). A forward evaporator would need 21.6 kPa of capillary head against 6.7 kPa available: it would dry out in every burn."
+ },
+ "nak": {
+  "x_gas_cooler": -81.56,
+  "run_m": 122.58056207739443,
+  "transport": {
+   "D_m": 0.22284737576452693,
+   "mdot": 177.85651261980274,
+   "kg_m": 51.482326813716085,
+   "length_m": 301.16112415478887,
+   "mass_t_per_loop": 14.365471272461985
+  },
+  "header": {
+   "D_m": 0.18195412038045244,
+   "mdot": 118.57100841320182,
+   "length_m": 59.2,
+   "mass_t_per_blade": 4.516283115810102,
+   "sized_for_W": 12818181.818181818
+  },
+  "pump_W_per_loop": 335890.99205454765,
+  "dp_Pa": 358824.5802771821,
+  "leak_W_per_loop": 33103.68934784884,
+  "clear_to_bus_m": 1.642741495778423,
+  "annulus": [
+   5.6,
+   6.0
+  ],
+  "fits_annulus": true,
+  "v_nominal_m_s": 4.0,
+  "dT_K": 122.84719424598848,
+  "route": "casing-hull annulus at the azimuth between the unit's two blades (150 / 270 / 30), supply and return at +-20 deg (clear of the bus ducts); branches through the hull at the two blade roots"
+ },
+ "failures": {
+  "rows": [
+   {
+    "case": "normal: three units at 2/3 load (strategy C)",
+    "blade_W": [
+     13340647.857889239,
+     13340647.857889239,
+     13340647.857889239
+    ],
+    "header_split": "50/50",
+    "ok": true,
+    "max_W": 13340647.857889239,
+    "use": 0.8672998016358253
+   },
+   {
+    "case": "unit trip, survivors at 100 %, fixed 50/50 split",
+    "blade_W": [
+     9613636.363636363,
+     9613636.363636363,
+     19227272.727272727
+    ],
+    "header_split": "50/50",
+    "ok": false,
+    "max_W": 19227272.727272727,
+    "use": 1.2500000000000002
+   },
+   {
+    "case": "unit trip, survivors at 100 %, header biasing 67/33",
+    "blade_W": [
+     12818181.818181818,
+     12818181.818181818,
+     12818181.818181818
+    ],
+    "header_split": "67/33 (flow control valves)",
+    "ok": true,
+    "max_W": 12818181.818181818,
+    "use": 0.8333333333333335
+   },
+   {
+    "case": "one NaK loop lost (unit runs on its other loop only: derated to its single-blade share)",
+    "blade_W": [
+     9613636.363636363,
+     19227272.727272727,
+     19227272.727272727
+    ],
+    "header_split": "100/0 on the faulted unit",
+    "ok": false,
+    "max_W": 19227272.727272727,
+    "use": 1.2500000000000002
+   }
+  ],
+  "design_W": 15381818.18181818,
+  "pipe_loss_allowance": 0.16666666666666652,
+  "note": "Each unit feeds loop A of its own blade and loop B of the next blade. A trip with a fixed split overloads the blade shared by the survivors; flow-control valves on each unit's two branches bias the split 67/33 and bring every blade to 12.8 MW of 15.4 MW. The 17 % left is the heat-pipe loss allowance (MMOD, freeze, priming) in that case."
+ },
+ "hot_fins": {
+  "fin_half_m": 1.47,
+  "capillary_head_Pa": 20000.0,
+  "gravity_Pa_per_m": 3248.5549742914195,
+  "aft_half_effective_m": 1.3049435619013032,
+  "aft_half_share": 0.8877167087763967,
+  "capacity_factor": 0.9438583543881984,
+  "capacity_loss_W": 773340617.9634035,
+  "mitigation_manifolds_per_blade": 106,
+  "manifold_walls_extra_t": 17.879208593459555,
+  "note": "Each radial manifold feeds Li heat-pipe fins 1.47 m fore and aft. In a burn the aft-pointing half returns its condensate against the acceleration: at 0.74 g it carries heat only over 1.30 m of 1.47 m, so the blade loses 5.6 % (0.77 GW) at peak acceleration. Mitigation: forward-pointing fins only (manifold at the aft end of every fin, pitch 1.47 m): 106 manifolds per blade and about +18 t of manifold walls."
+ },
+ "trunk_view": {
+  "shade_equiv_m": 1.0127223708194228,
+  "span_m": 29.6,
+  "fraction": 0.03421359360876428,
+  "loss_bound_W": 471285822.41965145,
+  "supply_only_fraction": 0.024852829919556844,
+  "note": "2D view factor from each HOT blade face to its own trunk pair (supply and return, return partly hidden behind the supply), integrated over the span. The bound counts that solid angle as lost to space; it holds for insulated trunks (refractory multi-foil, which keeps the network model's adiabatic trunks and keeps the hull at the root from seeing 1990 K). Bare trunks would add radiating area but cool the supply before the sections (network model OPEN)."
+ },
+ "warm": {
+  "T_K": 440.0,
+  "design_W": 5000000.0,
+  "x": [
+   50.4,
+   72.9
+  ],
+  "fluid": "pressurised water 1.1 MPa",
+  "tubes_per_face": 225,
+  "pitch_m": 0.1,
+  "eta_both_loops": 0.9252622839678517,
+  "eta_one_loop": 0.7322141459053086,
+  "capacity_after_loop_loss": 0.7913584705574679,
+  "mdot_kg_s": 29.069767441860463,
+  "note": "Interleaved A/B U-tubes from two root manifolds; with one loop lost the fin pitch doubles and the panel keeps 79 % of its capacity at the same temperature (margin 1.2 covers not all of it)."
+ },
+ "low": {
+  "T_K": 300.0,
+  "design_W": 1000000.0,
+  "x": [
+   73.4,
+   93.4
+  ],
+  "fluid": "ammonia (ISS heritage)",
+  "tubes_per_face": 166,
+  "pitch_m": 0.12,
+  "eta_both_loops": 0.9517414432644951,
+  "eta_one_loop": 0.8180298141050077,
+  "capacity_after_loop_loss": 0.8595084514751682,
+  "mdot_kg_s": 10.638297872340425,
+  "note": "Interleaved A/B U-tubes from two root manifolds; with one loop lost the fin pitch doubles and the panel keeps 86 % of its capacity at the same temperature (margin 1.2 covers all of it)."
+ },
+ "hot_budget": {
+  "hot_headroom_W": 1029010063.6813622,
+  "l2_growth_W": -172582694.39265126,
+  "trunk_shading_W": -471285822.41965145,
+  "fins_unmitigated_W": -773340617.9634035,
+  "remaining_mitigated_W": 385141546.8690594,
+  "remaining_unmitigated_W": -388199071.0943441
+ },
+ "mass": {
+  "per_blade_t": {
+   "heat_pipes": 5.970638377905427,
+   "headers": 4.516283115810102,
+   "face_sheets": 1.11103569145949,
+   "core_and_spar": 0.7715525635135347,
+   "saddles": 0.9116799999999999
+  },
+  "loops_t": 43.09641381738595,
+  "pumps_t": 3.5999999999999996,
+  "gross_t": 86.53998306345161,
+  "phase6_ledger_t": 7.311025602664686,
+  "hot_fin_credit_t": 0.844149413034502,
+  "ledger_add_t": 78.38480804775243
+ },
+ "ledger_add": [
+  {
+   "item": "L2 NaK transport loops + pumps (Stage E)",
+   "t": 46.69641381738595,
+   "cls": "FT-03 (APPROVED), NEW line",
+   "x": [
+    -81.56,
+    41.02056207739442
+   ]
+  },
+  {
+   "item": "L2 section hardware above the Phase VI header line (Stage E)",
+   "t": 31.688394230366477,
+   "cls": "FT-03 / FT-06",
+   "x": [
+    41.02056207739442,
+    50.4
+   ]
+  }
+ ],
+ "geometry": {
+  "parts": [
+   {
+    "kind": "hp_row",
+    "bay": 0,
+    "x0": 41.120562077394425,
+    "x1": 45.660281038697214,
+    "r0": 7.59,
+    "r1": 35.010000000000005,
+    "pitch": 0.05,
+    "d": 0.025,
+    "t": 0.2105
+   },
+   {
+    "kind": "header",
+    "bay": 0,
+    "loop": "A",
+    "x": 41.160562077394424,
+    "r0": 6.7,
+    "r1": 35.800000000000004,
+    "d": 0.18195412038045244
+   },
+   {
+    "kind": "header",
+    "bay": 0,
+    "loop": "B",
+    "x": 41.38056207739442,
+    "r0": 6.7,
+    "r1": 35.800000000000004,
+    "d": 0.18195412038045244
+   },
+   {
+    "kind": "saddle",
+    "bay": 0,
+    "x0": 41.050562077394424,
+    "x1": 41.49056207739442,
+    "r0": 7.59,
+    "r1": 35.010000000000005,
+    "t": 0.215
+   },
+   {
+    "kind": "hp_row",
+    "bay": 1,
+    "x0": 45.81028103869721,
+    "x1": 50.35,
+    "r0": 7.59,
+    "r1": 35.010000000000005,
+    "pitch": 0.05,
+    "d": 0.025,
+    "t": 0.2105
+   },
+   {
+    "kind": "header",
+    "bay": 1,
+    "loop": "A",
+    "x": 45.85028103869721,
+    "r0": 6.7,
+    "r1": 35.800000000000004,
+    "d": 0.18195412038045244
+   },
+   {
+    "kind": "header",
+    "bay": 1,
+    "loop": "B",
+    "x": 46.07028103869721,
+    "r0": 6.7,
+    "r1": 35.800000000000004,
+    "d": 0.18195412038045244
+   },
+   {
+    "kind": "saddle",
+    "bay": 1,
+    "x0": 45.74028103869721,
+    "x1": 46.18028103869721,
+    "r0": 7.59,
+    "r1": 35.010000000000005,
+    "t": 0.215
+   },
+   {
+    "kind": "face",
+    "x0": 41.02056207739442,
+    "x1": 50.4,
+    "r0": 6.5,
+    "r1": 36.1,
+    "t": 0.225,
+    "th": 0.0012
+   },
+   {
+    "kind": "spar",
+    "x0": 41.02056207739442,
+    "x1": 50.4,
+    "r0": 6.5,
+    "r1": 36.1
+   },
+   {
+    "kind": "crossover",
+    "x0": 41.27056207739442,
+    "x1": 45.96028103869721,
+    "r": 35.800000000000004,
+    "d": 0.18195412038045244
+   }
+  ],
+  "active_r": [
+   7.59,
+   35.010000000000005
+  ],
+  "blade_half_t": 0.225
+ },
+ "loops": [
+  {
+   "unit": 1,
+   "leg": "Supply",
+   "kind": "seg",
+   "p0": [
+    -81.56,
+    -5.711884967470806,
+    1.0071594304681957
+   ],
+   "p1": [
+    40.42056207739442,
+    -5.711884967470806,
+    1.0071594304681957
+   ],
+   "r": 0.14142368788226345
+  },
+  {
+   "unit": 1,
+   "leg": "Return",
+   "kind": "seg",
+   "p0": [
+    -81.56,
+    -3.728168136181928,
+    4.443057770090072
+   ],
+   "p1": [
+    40.42056207739442,
+    -3.728168136181928,
+    4.443057770090072
+   ],
+   "r": 0.14142368788226345
+  },
+  {
+   "unit": 1,
+   "leg": "Supply_A90",
+   "kind": "poly",
+   "points": [
+    [
+     40.42056207739442,
+     -5.711884967470806,
+     1.0071594304681957
+    ],
+    [
+     40.42056207739442,
+     3.888253587292846e-16,
+     6.35
+    ],
+    [
+     41.160562077394424,
+     4.0413344371862655e-16,
+     6.6
+    ]
+   ],
+   "r": 0.07571184394113173
+  },
+  {
+   "unit": 1,
+   "leg": "Return_A90",
+   "kind": "poly",
+   "points": [
+    [
+     40.42056207739442,
+     -3.728168136181928,
+     4.443057770090072
+    ],
+    [
+     40.42056207739442,
+     3.888253587292846e-16,
+     6.35
+    ],
+    [
+     45.85028103869721,
+     4.0413344371862655e-16,
+     6.6
+    ]
+   ],
+   "r": 0.07571184394113173
+  },
+  {
+   "unit": 1,
+   "leg": "Supply_B210",
+   "kind": "poly",
+   "points": [
+    [
+     40.42056207739442,
+     -5.711884967470806,
+     1.0071594304681957
+    ],
+    [
+     40.42056207739442,
+     -5.499261314031185,
+     -3.1750000000000007
+    ],
+    [
+     41.38056207739442,
+     -5.715767664977294,
+     -3.3000000000000007
+    ]
+   ],
+   "r": 0.07571184394113173
+  },
+  {
+   "unit": 1,
+   "leg": "Return_B210",
+   "kind": "poly",
+   "points": [
+    [
+     40.42056207739442,
+     -3.728168136181928,
+     4.443057770090072
+    ],
+    [
+     40.42056207739442,
+     -5.499261314031185,
+     -3.1750000000000007
+    ],
+    [
+     46.07028103869721,
+     -5.715767664977294,
+     -3.3000000000000007
+    ]
+   ],
+   "r": 0.07571184394113173
+  },
+  {
+   "unit": 1,
+   "leg": "FlowControl",
+   "kind": "box",
+   "c": [
+    -80.16,
+    -4.546633369868303,
+    2.6249999999999996
+   ],
+   "half": [
+    0.4,
+    0.25,
+    0.25
+   ],
+   "meaning": "flow-control valves on the two branches (67/33 bias after a trip)"
+  },
+  {
+   "unit": 1,
+   "leg": "EMPump",
+   "kind": "box",
+   "c": [
+    -78.96000000000001,
+    -4.192836427748288,
+    3.159528871548253
+   ],
+   "half": [
+    0.6,
+    0.22,
+    0.22
+   ],
+   "meaning": "NaK EM pump (336 kW), redundant pair"
+  },
+  {
+   "unit": 2,
+   "leg": "Supply",
+   "kind": "seg",
+   "p0": [
+    -81.56,
+    1.98371683128888,
+    -5.450217200558268
+   ],
+   "p1": [
+    40.42056207739442,
+    1.98371683128888,
+    -5.450217200558268
+   ],
+   "r": 0.14142368788226345
+  },
+  {
+   "unit": 2,
+   "leg": "Return",
+   "kind": "seg",
+   "p0": [
+    -81.56,
+    -1.9837168312888775,
+    -5.450217200558269
+   ],
+   "p1": [
+    40.42056207739442,
+    -1.9837168312888775,
+    -5.450217200558269
+   ],
+   "r": 0.14142368788226345
+  },
+  {
+   "unit": 2,
+   "leg": "Supply_A210",
+   "kind": "poly",
+   "points": [
+    [
+     40.42056207739442,
+     1.98371683128888,
+     -5.450217200558268
+    ],
+    [
+     40.42056207739442,
+     -5.499261314031185,
+     -3.1750000000000007
+    ],
+    [
+     41.160562077394424,
+     -5.715767664977294,
+     -3.3000000000000007
+    ]
+   ],
+   "r": 0.07571184394113173
+  },
+  {
+   "unit": 2,
+   "leg": "Return_A210",
+   "kind": "poly",
+   "points": [
+    [
+     40.42056207739442,
+     -1.9837168312888775,
+     -5.450217200558269
+    ],
+    [
+     40.42056207739442,
+     -5.499261314031185,
+     -3.1750000000000007
+    ],
+    [
+     45.85028103869721,
+     -5.715767664977294,
+     -3.3000000000000007
+    ]
+   ],
+   "r": 0.07571184394113173
+  },
+  {
+   "unit": 2,
+   "leg": "Supply_B330",
+   "kind": "poly",
+   "points": [
+    [
+     40.42056207739442,
+     1.98371683128888,
+     -5.450217200558268
+    ],
+    [
+     40.42056207739442,
+     5.499261314031183,
+     -3.1750000000000025
+    ],
+    [
+     41.38056207739442,
+     5.715767664977293,
+     -3.300000000000003
+    ]
+   ],
+   "r": 0.07571184394113173
+  },
+  {
+   "unit": 2,
+   "leg": "Return_B330",
+   "kind": "poly",
+   "points": [
+    [
+     40.42056207739442,
+     -1.9837168312888775,
+     -5.450217200558269
+    ],
+    [
+     40.42056207739442,
+     5.499261314031183,
+     -3.1750000000000025
+    ],
+    [
+     46.07028103869721,
+     5.715767664977293,
+     -3.300000000000003
+    ]
+   ],
+   "r": 0.07571184394113173
+  },
+  {
+   "unit": 2,
+   "leg": "FlowControl",
+   "kind": "box",
+   "c": [
+    -80.16,
+    -9.644093543285407e-16,
+    -5.25
+   ],
+   "half": [
+    0.4,
+    0.25,
+    0.25
+   ],
+   "meaning": "flow-control valves on the two branches (67/33 bias after a trip)"
+  },
+  {
+   "unit": 2,
+   "leg": "EMPump",
+   "kind": "box",
+   "c": [
+    -78.96000000000001,
+    -0.6398140528770226,
+    -5.210867296116941
+   ],
+   "half": [
+    0.6,
+    0.22,
+    0.22
+   ],
+   "meaning": "NaK EM pump (336 kW), redundant pair"
+  },
+  {
+   "unit": 3,
+   "leg": "Supply",
+   "kind": "seg",
+   "p0": [
+    -81.56,
+    3.7281681361819294,
+    4.443057770090071
+   ],
+   "p1": [
+    40.42056207739442,
+    3.7281681361819294,
+    4.443057770090071
+   ],
+   "r": 0.14142368788226345
+  },
+  {
+   "unit": 3,
+   "leg": "Return",
+   "kind": "seg",
+   "p0": [
+    -81.56,
+    5.711884967470807,
+    1.0071594304681935
+   ],
+   "p1": [
+    40.42056207739442,
+    5.711884967470807,
+    1.0071594304681935
+   ],
+   "r": 0.14142368788226345
+  },
+  {
+   "unit": 3,
+   "leg": "Supply_A330",
+   "kind": "poly",
+   "points": [
+    [
+     40.42056207739442,
+     3.7281681361819294,
+     4.443057770090071
+    ],
+    [
+     40.42056207739442,
+     5.499261314031183,
+     -3.1750000000000025
+    ],
+    [
+     41.160562077394424,
+     5.715767664977293,
+     -3.300000000000003
+    ]
+   ],
+   "r": 0.07571184394113173
+  },
+  {
+   "unit": 3,
+   "leg": "Return_A330",
+   "kind": "poly",
+   "points": [
+    [
+     40.42056207739442,
+     5.711884967470807,
+     1.0071594304681935
+    ],
+    [
+     40.42056207739442,
+     5.499261314031183,
+     -3.1750000000000025
+    ],
+    [
+     45.85028103869721,
+     5.715767664977293,
+     -3.300000000000003
+    ]
+   ],
+   "r": 0.07571184394113173
+  },
+  {
+   "unit": 3,
+   "leg": "Supply_B90",
+   "kind": "poly",
+   "points": [
+    [
+     40.42056207739442,
+     3.7281681361819294,
+     4.443057770090071
+    ],
+    [
+     40.42056207739442,
+     3.888253587292846e-16,
+     6.35
+    ],
+    [
+     41.38056207739442,
+     4.0413344371862655e-16,
+     6.6
+    ]
+   ],
+   "r": 0.07571184394113173
+  },
+  {
+   "unit": 3,
+   "leg": "Return_B90",
+   "kind": "poly",
+   "points": [
+    [
+     40.42056207739442,
+     5.711884967470807,
+     1.0071594304681935
+    ],
+    [
+     40.42056207739442,
+     3.888253587292846e-16,
+     6.35
+    ],
+    [
+     46.07028103869721,
+     4.0413344371862655e-16,
+     6.6
+    ]
+   ],
+   "r": 0.07571184394113173
+  },
+  {
+   "unit": 3,
+   "leg": "FlowControl",
+   "kind": "box",
+   "c": [
+    -80.16,
+    4.546633369868303,
+    2.625
+   ],
+   "half": [
+    0.4,
+    0.25,
+    0.25
+   ],
+   "meaning": "flow-control valves on the two branches (67/33 bias after a trip)"
+  },
+  {
+   "unit": 3,
+   "leg": "EMPump",
+   "kind": "box",
+   "c": [
+    -78.96000000000001,
+    4.832650480625313,
+    2.0513384245686854
+   ],
+   "half": [
+    0.6,
+    0.22,
+    0.22
+   ],
+   "meaning": "NaK EM pump (336 kW), redundant pair"
+  }
+ ],
+ "findings": [
+  "The Carnot-fraction relation (0.42 x (1 - 950/1500) = 0.154) is not a cycle: a recuperated He-Xe Brayton at 1500 K reaches only 0.021 (contemporary-class) or 0.091 (advanced) with a 950 K compressor inlet. eta 0.154 needs the compressor inlet at 793 K or 872 K. The working assumption here keeps eta 0.154 and the waste heat, adopts the advanced component set as part of FT-03 (owner decision DR-3D-02) and lets the radiator run cooler: gas cooler 995 -> 872 K.",
+  "L2 section: 9.38 m instead of 7.44 m (+1.94 m): the radiator runs at an emission-equivalent 896 K (NaK 975 -> 852 K) and the face-sheet fins reach 0.985-0.990. The HOT length falls by the same amount (-173 MW of HOT headroom).",
+  "Evaporators at the AFT edge of each bay: in a burn the acceleration (0.22-0.74 g) drains the condensate back to them (thermosyphon). A forward evaporator would need 21.6 kPa of capillary head against 6.7 kPa available: it would dry out in every burn.",
+  "Heat pipes: 2192 potassium pipes per blade, worst limit margin 1.59 (sonic, capillary in coast, entrainment, at the hottest and coldest pipe). The pipes are radiation-limited: losing one loop changes the header flow, not the pipe load. A wickless thermosyphon would be simpler, but its counter-current flooding limit at this vapour density is only 1.4-3.1 kW against 4.9-8.4 kW per pipe: the screen wick and arteries carry the liquid in burns as well as in coast.",
+  "Transport: Phase VI counted only the section headers (7.3 t). Three NaK loops, D 223 mm, 123 m from the gas coolers through the casing-hull annulus (fits the 0.4 m gap with insulation; 1.64 m to the bus duct) weigh 43 t and leak 99 kW into the annulus (a WARM-loop load).",
+  "L2 heat-rejection hardware 87 t gross against 7.3 t in the Phase VI ledger (credit for the HOT fins it replaces 0.8 t): +78 t dry in the live ledger.",
+  "Each unit feeds loop A of its own blade and loop B of the next blade. A trip with a fixed split overloads the blade shared by the survivors; flow-control valves on each unit's two branches bias the split 67/33 and bring every blade to 12.8 MW of 15.4 MW. The 17 % left is the heat-pipe loss allowance (MMOD, freeze, priming) in that case.",
+  "Each radial manifold feeds Li heat-pipe fins 1.47 m fore and aft. In a burn the aft-pointing half returns its condensate against the acceleration: at 0.74 g it carries heat only over 1.30 m of 1.47 m, so the blade loses 5.6 % (0.77 GW) at peak acceleration. Mitigation: forward-pointing fins only (manifold at the aft end of every fin, pitch 1.47 m): 106 manifolds per blade and about +18 t of manifold walls.",
+  "2D view factor from each HOT blade face to its own trunk pair (supply and return, return partly hidden behind the supply), integrated over the span. The bound counts that solid angle as lost to space; it holds for insulated trunks (refractory multi-foil, which keeps the network model's adiabatic trunks and keeps the hull at the root from seeing 1990 K). Bare trunks would add radiating area but cool the supply before the sections (network model OPEN).",
+  "HOT budget at peak burn: headroom 1.03 GW, L2 growth -0.17, trunk shading -0.47 -> 0.39 GW with forward-pointing fins; -0.39 GW without them.",
+  "WARM: interleaved A/B U-tubes from two root manifolds; with one loop lost the fin pitch doubles and the panel keeps 79 % of its capacity at the same temperature (margin 1.2 covers not all of it).",
+  "LOW: interleaved A/B U-tubes from two root manifolds; with one loop lost the fin pitch doubles and the panel keeps 86 % of its capacity at the same temperature (margin 1.2 covers all of it).",
+  "Alternative placement (owner question DR-3D-03): L2 sections at the AFT end of the HOT blades, beside the district, would cut the transport run from 123 m to ~20 m (about -36 t) but put the 950 K sections in the drive's radiation and plume field and remove the HOT/WARM grading at the bulkhead; not drawn."
+ ],
+ "decisions": [
+  {
+   "id": "DR-3D-02",
+   "q": "Amend FT-03 adopted properties with the component set that makes eta 0.154 a cycle (eta_t 0.94, eta_c 0.90, recuperator 0.97, dp 2 %), accepting a cooler L2 radiator (896 K, 9.4 m)?",
+   "rec": "yes: keeps reactor power and waste heat; the alternative (950 K, eta ~0.09) raises reactor heat ~70 %"
+  },
+  {
+   "id": "DR-3D-03",
+   "q": "L2 section placement: forward (drawn) or aft beside the district?",
+   "rec": "keep forward until the aft drive environment is quantified"
+  },
+  {
+   "id": "DR-3D-04",
+   "q": "HOT fins: forward-pointing only (manifold pitch 1.47 m) so that burns do not dry the aft halves?",
+   "rec": "yes: +18 t, restores 0.77 GW at peak acceleration"
+  }
+ ]
+}

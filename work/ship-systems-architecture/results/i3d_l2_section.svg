@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" font-family="Inter,system-ui,sans-serif" font-size="12" role="img" aria-label="L2 blade cross-section">
+<style>.t{fill:var(--fg,#223)} .m{fill:var(--muted,#667)}</style>
+<text x="20" y="22" class="t" font-weight="600">L2 section, chordwise cut at mid-span (one blade, t exaggerated 6x)</text>
+<rect x="90.0" y="82.0" width="820.0" height="236.0" fill="#d9d4c8" fill-opacity="0.35" stroke="#8a8478"/>
+<line x1="98.7" y1="88.3" x2="495.6" y2="88.3" stroke="#c0502a" stroke-width="4"/>
+<line x1="98.7" y1="311.7" x2="495.6" y2="311.7" stroke="#c0502a" stroke-width="4"/>
+<rect x="92.6" y="87.2" width="38.5" height="225.6" fill="#8a5a44" fill-opacity="0.55"/>
+<ellipse cx="102.2" cy="200.0" rx="8.0" ry="47.7" fill="#e0762f" stroke="#333"/><text x="98.2" y="204.0" font-size="10">A</text>
+<ellipse cx="121.5" cy="200.0" rx="8.0" ry="47.7" fill="#f0a050" stroke="#333"/><text x="117.5" y="204.0" font-size="10">B</text>
+<text x="255.0" y="340.0" class="m">bay 1: 4.69 m chord</text>
+<line x1="508.7" y1="88.3" x2="905.6" y2="88.3" stroke="#c0502a" stroke-width="4"/>
+<line x1="508.7" y1="311.7" x2="905.6" y2="311.7" stroke="#c0502a" stroke-width="4"/>
+<rect x="502.6" y="87.2" width="38.5" height="225.6" fill="#8a5a44" fill-opacity="0.55"/>
+<ellipse cx="512.2" cy="200.0" rx="8.0" ry="47.7" fill="#e0762f" stroke="#333"/><text x="508.2" y="204.0" font-size="10">A</text>
+<ellipse cx="531.5" cy="200.0" rx="8.0" ry="47.7" fill="#f0a050" stroke="#333"/><text x="527.5" y="204.0" font-size="10">B</text>
+<text x="665.0" y="340.0" class="m">bay 2: 4.69 m chord</text>
+<text x="15.0" y="204.0" class="m">aft</text><text x="918.0" y="204.0" class="m">fwd</text>
+<line x1="790.0" y1="362.0" x2="210.0" y2="362.0" stroke="#555" marker-end="url(#ar)"/><defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#555"/></marker></defs><text x="220.0" y="382.0" class="m">burn acceleration drains condensate aft, to the evaporators (thermosyphon)</text>
+<text x="20" y="420" class="t" font-weight="600">Face detail (to scale x40): heat pipes on the face sheet, spanwise pitch 50 mm</text>
+<circle cx="120.0" cy="490" r="20.0" fill="#c0502a" stroke="#333"/><circle cx="120.0" cy="490" r="17.1" fill="#f6d2b8"/>
+<circle cx="200.0" cy="490" r="20.0" fill="#c0502a" stroke="#333"/><circle cx="200.0" cy="490" r="17.1" fill="#f6d2b8"/>
+<circle cx="280.0" cy="490" r="20.0" fill="#c0502a" stroke="#333"/><circle cx="280.0" cy="490" r="17.1" fill="#f6d2b8"/>
+<circle cx="360.0" cy="490" r="20.0" fill="#c0502a" stroke="#333"/><circle cx="360.0" cy="490" r="17.1" fill="#f6d2b8"/>
+<circle cx="440.0" cy="490" r="20.0" fill="#c0502a" stroke="#333"/><circle cx="440.0" cy="490" r="17.1" fill="#f6d2b8"/>
+<circle cx="520.0" cy="490" r="20.0" fill="#c0502a" stroke="#333"/><circle cx="520.0" cy="490" r="17.1" fill="#f6d2b8"/>
+<rect x="100" y="510.0" width="480" height="3" fill="#333"/>
+<text x="100" y="550" class="m">K heat pipe OD 25 mm, wall 0.8 mm, screen wick + 2 arteries 2 mm; C-C face 1.2 mm, fin efficiency 0.985-0.990</text>
+<text x="100" y="570" class="m">2192 pipes per blade (4 rows x 548), 4.54 m long; worst limit margin 1.59; NaK headers D 182 mm, serpentine out along bay 1, back along bay 2</text>
+<text x="100" y="590" class="m">NaK 975 -> 852 K, vapour 965 -> 842 K, emission-equivalent 896 K; section 9.38 m (Phase VI 7.44 m)</text>
+</svg>

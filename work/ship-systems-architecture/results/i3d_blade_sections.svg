@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" font-family="Inter,system-ui,sans-serif" font-size="12" role="img" aria-label="Blade cross-sections">
+<style>.t{fill:var(--fg,#223)} .m{fill:var(--muted,#667)}</style>
+<text x="20" y="24" class="t" font-weight="600">HOT (M2): chordwise, 1800 K</text>
+<rect x="20" y="60" width="290" height="36" fill="#e14b2a" fill-opacity="0.22" stroke="#e14b2a"/>
+<text x="20" y="130" class="m">radial Li manifolds every 2.94 m, fins +-1.47 m</text>
+<text x="20" y="148" class="m">aft-pointing fins at 0.74 g: 1.30 m effective</text>
+<text x="20" y="166" class="m">capacity factor 0.944 (0.77 GW)</text>
+<text x="20" y="184" class="m">fix: forward fins only, 106 manifolds/blade</text>
+<text x="20" y="202" class="m">trunk shading bound 3.4 % (0.47 GW)</text>
+<rect x="30" y="56" width="6" height="44" fill="#8a2a1a"/><line x1="13" y1="62" x2="53" y2="62" stroke="#c0502a" stroke-width="2"/>
+<rect x="78" y="56" width="6" height="44" fill="#8a2a1a"/><line x1="61" y1="62" x2="101" y2="62" stroke="#c0502a" stroke-width="2"/>
+<rect x="126" y="56" width="6" height="44" fill="#8a2a1a"/><line x1="109" y1="62" x2="149" y2="62" stroke="#c0502a" stroke-width="2"/>
+<rect x="174" y="56" width="6" height="44" fill="#8a2a1a"/><line x1="157" y1="62" x2="197" y2="62" stroke="#c0502a" stroke-width="2"/>
+<rect x="222" y="56" width="6" height="44" fill="#8a2a1a"/><line x1="205" y1="62" x2="245" y2="62" stroke="#c0502a" stroke-width="2"/>
+<rect x="270" y="56" width="6" height="44" fill="#8a2a1a"/><line x1="253" y1="62" x2="293" y2="62" stroke="#c0502a" stroke-width="2"/>
+<text x="350" y="24" class="t" font-weight="600">WARM (M2): 440 K pumped panels</text>
+<rect x="350" y="60" width="290" height="36" fill="#f0b03a" fill-opacity="0.22" stroke="#f0b03a"/>
+<text x="350" y="130" class="m">pressurised water 1.1 MPa</text>
+<text x="350" y="148" class="m">A/B tubes interleaved, pitch 100 mm</text>
+<text x="350" y="166" class="m">eta both loops 0.925, one loop 0.732</text>
+<text x="350" y="184" class="m">after a loop loss 79 % capacity</text>
+<text x="350" y="202" class="m">225 tubes per face, x 50.4-72.9</text>
+<circle cx="362" cy="78" r="4" fill="#c77d10"/>
+<circle cx="386" cy="78" r="4" fill="#5a7ec8"/>
+<circle cx="410" cy="78" r="4" fill="#c77d10"/>
+<circle cx="434" cy="78" r="4" fill="#5a7ec8"/>
+<circle cx="458" cy="78" r="4" fill="#c77d10"/>
+<circle cx="482" cy="78" r="4" fill="#5a7ec8"/>
+<circle cx="506" cy="78" r="4" fill="#c77d10"/>
+<circle cx="530" cy="78" r="4" fill="#5a7ec8"/>
+<circle cx="554" cy="78" r="4" fill="#c77d10"/>
+<circle cx="578" cy="78" r="4" fill="#5a7ec8"/>
+<circle cx="602" cy="78" r="4" fill="#c77d10"/>
+<circle cx="626" cy="78" r="4" fill="#5a7ec8"/>
+<text x="680" y="24" class="t" font-weight="600">LOW (M2): 300 K pumped panels</text>
+<rect x="680" y="60" width="290" height="36" fill="#3a8fd0" fill-opacity="0.22" stroke="#3a8fd0"/>
+<text x="680" y="130" class="m">ammonia (ISS heritage)</text>
+<text x="680" y="148" class="m">A/B tubes interleaved, pitch 120 mm</text>
+<text x="680" y="166" class="m">eta both loops 0.952, one loop 0.818</text>
+<text x="680" y="184" class="m">after a loop loss 86 % capacity</text>
+<text x="680" y="202" class="m">166 tubes per face, x 73.4-93.4</text>
+<circle cx="694" cy="78" r="4" fill="#c77d10"/>
+<circle cx="722" cy="78" r="4" fill="#5a7ec8"/>
+<circle cx="750" cy="78" r="4" fill="#c77d10"/>
+<circle cx="778" cy="78" r="4" fill="#5a7ec8"/>
+<circle cx="806" cy="78" r="4" fill="#c77d10"/>
+<circle cx="834" cy="78" r="4" fill="#5a7ec8"/>
+<circle cx="862" cy="78" r="4" fill="#c77d10"/>
+<circle cx="890" cy="78" r="4" fill="#5a7ec8"/>
+<circle cx="918" cy="78" r="4" fill="#c77d10"/>
+<circle cx="946" cy="78" r="4" fill="#5a7ec8"/>
+<text x="20" y="340" class="m">Tube colours: loop A amber, loop B blue. Panels are pumped (no capillary or acceleration limit); HOT and L2 are heat-pipe sections.</text>
+</svg>

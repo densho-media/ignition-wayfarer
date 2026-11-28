@@ -394,7 +394,9 @@ packet (Q_src, T_src; H2 mdot, p, T, phase, enthalpy in/out; field/plume/dose ke
   3D Systems Integration brief (2026-11-28 07:03Z) on the same branch.
 - [ ] **3D Systems Integration (Track F1) — checkpoints 1-4.** `work/ship-systems-architecture/integration3d/` (NOTES "3D Systems
   Integration"). Checkpoint 1 (masterplan, tank alternatives T-A/T-B/T-C, maturity registry): owner DR-3D-01 (T-A stretch as reference).
-  Next: Stage C power unit and district (M3), D H6a, E radiators with blade cross-sections, F electrical, G ECLSS, H LOG-G1 and workshop, I rest.
+  Checkpoints 2-3 (power unit M3, H6a M2/M3, L2 section M3, HOT/WARM/LOW M2, electrical M2, live ledger 8,478 t): owner DR-3D-02 (FT-03
+  component set, 896 K L2 radiator), DR-3D-03 (L2 placement), DR-3D-04 (forward-pointing HOT fins); MRU heavy carriage; PSA HO-02 frame
+  station (~40.8). Next: G ECLSS, H LOG-G1 and workshop/robotics, I rest (Checkpoint 4).
 - [ ] **ISSA Phase V — owner review (2026-11-27).** Thermal network and convergence on the ISSA page (`work/ship-systems-architecture/`,
   NOTES "Phase V"): config N2-R4a-P5.0, corrections C5-01..10, H6 network (walls dominate; material is the lever), R5-A 750 K
   cross-strapped L2, 3-D OpenMC (frame verified; scatter ~19 % of bare tank heating), coupled mass via `operating_point.mission(extra_end_kg)`,

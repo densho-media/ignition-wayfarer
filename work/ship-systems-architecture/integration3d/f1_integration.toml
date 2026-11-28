@@ -67,7 +67,7 @@ register = []
 id = "RAD-L2"
 name = "L2 radiator section, 950 K (F1, 7.4 m) with internal blade cross-section"
 stage = "E"
-now = "M1"
+now = "M3"
 target = "M3"
 colour = "WARM_RADIATOR"
 track = "F1"
@@ -85,7 +85,7 @@ register = []
 id = "EPS-L1"
 name = "L1 burn power (direct conversion, conditional)"
 stage = "F"
-now = "M0"
+now = "M2"
 target = "M2"
 colour = "POWER"
 track = "F1"
@@ -94,7 +94,7 @@ register = ["FT-04"]
 id = "EPS-BUS"
 name = "Buses, switchgear, ride-through and data trunks"
 stage = "F"
-now = "M1"
+now = "M2"
 target = "M2"
 colour = "POWER"
 track = "R/F"
@@ -103,7 +103,7 @@ register = []
 id = "EPS-STOR"
 name = "Restart, defense and survival storage; L3 survival source"
 stage = "F"
-now = "M1"
+now = "M2"
 target = "M2"
 colour = "POWER"
 track = "R/F"
@@ -265,3 +265,42 @@ trunk_radius_m = 5.9
 trunk_offset_m = 0.9
 manifold = { x_m = -138.5, ring_radius_m = 5.9, tube_radius_m = 0.30, bellows = 2 }
 pump = { x_m = -134.0, length_m = 2.4, radius_m = 0.55, mass_t = 2.6 }
+
+# ---------------------------------------------------------------------------------------------------------------------- Stage E
+[radiators]
+# L2 section (RAD-L2, M3): pumped NaK transport loops from each unit's gas cooler to dual header pairs at the aft edge of two chord bays;
+# potassium heat pipes (dual-saddle evaporators) bonded to both face sheets; aft evaporators so that burn acceleration drains the
+# condensate back to them (thermosyphon in burns, capillary in coast). Every value PROTOTYPE unless a source is named.
+bays = 2
+span_active_m = 27.42                  # = FACE_PER_M / 6 (the Phase III-VI area relation), centred on the blade
+root_r_m = 6.5
+tip_r_m = 36.1
+blade_t_m = 0.45
+heat_pipe = { od_m = 0.025, wall_m = 0.0008, wick_m = 0.0010, pitch_m = 0.05, fluid = "K", artery_d_m = 0.002, arteries = 2, r_pore_m = 2.5e-5, dT_K = 10.0, kg_per_m = 0.60 }
+face = { k_W_mK = 250.0, t_m = 0.0012, rho_kg_m3 = 1800.0 }      # high-conductivity C-C face sheet (in-plane), pipe crown armour included
+nak = { cp = 880.0, rho = 760.0, v_m_s = 6.0, wall_m = 0.003, wall_rho = 8970.0, insul_kg_m = 3.0, eps_eff = 0.004, env_K = 400.0, pump_eff = 0.25 }
+loop = { radius_m = 5.8, offset_deg = 20.0, branch_m = 14.0, dp_fixed_Pa = 1.0e5 }   # casing-hull annulus at the azimuth between a unit's two blades
+cycle = { eta_t = 0.92, eta_c = 0.88, recup_eff = 0.95, dp_frac = 0.03, pinch_K = 20.0 }
+bus_duct_radius_m = 0.25
+# WARM / LOW pumped panels (M2): interleaved A/B tubes, radial U-tubes from root manifolds
+warm = { fluid = "pressurised water 1.1 MPa", tube_od_m = 0.012, pitch_m = 0.10, k_W_mK = 200.0, t_m = 0.0006, dT_K = 40.0, cp = 4300.0 }
+low = { fluid = "ammonia (ISS heritage)", tube_od_m = 0.010, pitch_m = 0.12, k_W_mK = 200.0, t_m = 0.0005, dT_K = 20.0, cp = 4700.0 }
+hot = { rho_li = 450.0, sigma_li = 0.25, r_pore_m = 2.5e-5 }
+
+# ---------------------------------------------------------------------------------------------------------------------- Stage F
+[electrical]
+voltage_V = 3000.0                     # HVDC pole-to-pole, PROTOTYPE
+J_A_mm2 = 1.5
+rho_al = 2.82e-8
+duct_factor = 1.6                      # insulation, duct, supports per conductor mass
+bus_x = [-92.0, 100.0]
+bus_radius_m = 5.0
+bus_az_deg = [30.0, 150.0, 270.0]
+unit_to_bus = { 1 = 1, 2 = 2, 3 = 3 }  # unit 90 -> bus 30, 210 -> 150, 330 -> 270
+tie_x = [-78.0, 14.0, 98.0]            # tie breakers: aft (district), main switchgear, forward (habitat)
+load_centres = [ { id = "LC-DRIVE", x = -120.0, what = "drive services (L1 in burns, L2 in coast)" },
+                 { id = "LC-DIST", x = -80.0, what = "district auxiliaries, H6a trace heat, L2 loop pumps" },
+                 { id = "LC-MID", x = 14.0, what = "main switchgear, defense bus feed, WARM/LOW pumps" },
+                 { id = "LC-HAB", x = 100.0, what = "rings A/B, hub, ECLSS, LOG-G1, workshop" },
+                 { id = "LC-FWD", x = 130.0, what = "Brow, EYE, forward sensors" } ]
+l3 = { x = 103.0, what = "refuge source L3 (type OPEN: radioisotope-Stirling or fuel cell, Phase IV)", t = 12.0 }

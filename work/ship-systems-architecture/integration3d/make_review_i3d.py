@@ -237,12 +237,134 @@ def render2():
     for o in bpy.data.objects: o.hide_render = keep.get(o.name, o.hide_render)
 
 
+# ============================================================================================================ Checkpoint 3 (Stages E, F)
+RD = json.loads((HERE / 'results' / 'i3d_radiators.json').read_text()); EL = json.loads((HERE / 'results' / 'i3d_electrical.json').read_text())
+ECOL = {'S1': (0.25, 0.44, 0.85), 'S2': (0.18, 0.64, 0.42), 'S3': (0.79, 0.52, 0.16), 'TIE': (0.15, 0.15, 0.17), 'L1': (0.88, 0.33, 0.23), 'BAR': (0.55, 0.55, 0.58),
+        'DEF': (0.82, 0.23, 0.42), 'REF': (0.47, 0.47, 0.47), 'DA': (0.35, 0.63, 0.72), 'DB': (0.22, 0.45, 0.58)}
+CP3 = {}
+
+
+def _hp_row_mesh(name, L, r0, r1, pitch, d):
+    """All heat pipes of one row of one bay as one mesh (square section d x d; pipes along +X, stacked along +Y = radius)."""
+    vs, fs = [], []; n = int((r1-r0)/pitch); h = d/2
+    for i in range(n):
+        y = r0+(i+0.5)*pitch; b = len(vs)
+        vs += [(x, y+sy*h, sz*h) for x in (0.0, L) for sy in (-1, 1) for sz in (-1, 1)]
+        fs += [(b, b+1, b+3, b+2), (b+4, b+6, b+7, b+5), (b, b+4, b+5, b+1), (b+2, b+3, b+7, b+6), (b, b+2, b+6, b+4), (b+1, b+5, b+7, b+3)]
+    me = bpy.data.meshes.new(name); me.from_pydata(vs, [], fs); me.update(); return me
+
+
+def hook3(r6):
+    coll, mat = ns['coll'], ns['mat']
+    for nm in ('WORK_ISSA6_F1_RADIATOR_F1', 'WORK_ISSA6_F1_ELECTRICAL'):
+        c = bpy.data.collections.get(nm)
+        if c:
+            c.hide_viewport = True
+            for o in c.all_objects: o.hide_render = True
+    root = coll('WORK_I3D_CP3_RADIATORS_AND_ELECTRICAL', r6)
+    S = RD['section']; G = RD['geometry']; hp = G['parts']; tf = G['blade_half_t']
+    m = dict(face=mat('I3D_l2_face', (0.62, 0.60, 0.56), 1.0), hp=mat('I3D_l2_heatpipe', (0.80, 0.34, 0.18), 1.0), A=mat('I3D_l2_hdrA', (0.88, 0.46, 0.18), 1.0),
+             B=mat('I3D_l2_hdrB', (0.94, 0.63, 0.31), 1.0), saddle=mat('I3D_l2_saddle', (0.54, 0.35, 0.27), 1.0), nak=mat('I3D_nak', (0.93, 0.50, 0.12), 1.0),
+             valve=mat('I3D_nak_valve', (0.25, 0.25, 0.28), 1.0), pump=mat('I3D_nak_pump', (0.30, 0.25, 0.66), 1.0))
+    shared = {}
+    for q in hp:
+        if q['kind'] == 'hp_row': shared[q['bay']] = _hp_row_mesh(f'I3D_HPRow_Bay{q["bay"]+1}', q['x1']-q['x0'], q['r0'], q['r1'], q['pitch'], q['d'])
+    for az in (90.0, 210.0, 330.0):
+        c = coll(f'WORK_I3D_E_L2_SECTION_{az:.0f}', root); CP3[f'L2_{az:.0f}'] = c
+        rot = Matrix.Rotation(math.radians(az), 4, 'X')
+        def place(o, x, r, t): o.matrix_world = rot @ Matrix.Translation((x, r, t))
+        base = dict(maturity='M3 engineering assembly', track='F1 (fiction)', register='FT-03 / FT-06', failure_domain=f'L2 section {az:.0f}')
+        for q in hp:
+            if q['kind'] == 'hp_row':
+                for sgn in (-1, 1):
+                    o = _obj(f'I3D_L2_{az:.0f}_HPRow_B{q["bay"]+1}_{"P" if sgn > 0 else "M"}', shared[q['bay']], c, m['hp'],
+                             dict(base, meaning=f'potassium heat pipes, bay {q["bay"]+1}, face {"+" if sgn > 0 else "-"} ({RD["heat_pipes"]["per_row"]} pipes, aft dual-saddle evaporators)'))
+                    place(o, q['x0'], 0.0, sgn*q['t'])
+            elif q['kind'] == 'header':
+                L = q['r1']-q['r0']; me = _cyl_mesh(f'I3D_L2_{az:.0f}_Hdr{q["loop"]}{q["bay"]+1}', q['d']/2, q['d']/2, L, 12)
+                o = _obj(me.name, me, c, m[q['loop']], dict(base, meaning=f'NaK header loop {q["loop"]}, bay {q["bay"]+1} (D {q["d"]*1e3:.0f} mm)'))
+                o.matrix_world = rot @ Matrix.Translation((q['x'], (q['r0']+q['r1'])/2, 0.0)) @ Matrix.Rotation(math.radians(-90), 4, 'X')
+            elif q['kind'] == 'saddle':
+                for sgn in (-1, 1):                       # one saddle strip per face row: conduction blocks from the pipe evaporators down to both headers
+                    me = _box_mesh(f'I3D_L2_{az:.0f}_Saddle{q["bay"]+1}{"P" if sgn > 0 else "M"}', (q['x1']-q['x0'])/2, (q['r1']-q['r0'])/2, 0.045)
+                    o = _obj(me.name, me, c, m['saddle'], dict(base, meaning=f'dual-saddle evaporator strip, bay {q["bay"]+1} (pipes to headers A and B)'))
+                    place(o, (q['x0']+q['x1'])/2, (q['r0']+q['r1'])/2, sgn*(q['t']-0.075))
+            elif q['kind'] == 'face':
+                bay = RD['heat_pipes']['bay_chord_m']
+                for nm_, x0, x1, t in (('FaceM', q['x0'], q['x1'], -q['t']), ('FaceP_fwd', q['x0']+bay, q['x1'], q['t'])):     # +t face of bay 1 left open (cutaway)
+                    me = _box_mesh(f'I3D_L2_{az:.0f}_{nm_}', (x1-x0)/2, (q['r1']-q['r0'])/2, 0.006)
+                    o = _obj(me.name, me, c, m['face'], dict(base, meaning=f'C-C face sheet {nm_} ({C3_FACE} mm); bay 1 + face open as a cutaway'))
+                    place(o, (x0+x1)/2, (q['r0']+q['r1'])/2, t)
+            elif q['kind'] == 'crossover':
+                seg(f'I3D_L2_{az:.0f}_Crossover', (q['x0'], 0, 0), (q['x1'], 0, 0), q['d']/2, c, m['A'], dict(base, meaning='header crossover at the tip (bay 1 -> bay 2)'))
+                ob = bpy.data.objects[f'I3D_L2_{az:.0f}_Crossover']; ob.matrix_world = rot @ Matrix.Translation(((q['x0']+q['x1'])/2, q['r'], 0.0)) @ Matrix.Rotation(math.radians(90), 4, 'Y')
+    cl = coll('WORK_I3D_E_L2_TRANSPORT_LOOPS', root); CP3['LOOPS'] = cl
+    for q in RD['loops']:
+        props = dict(meaning=q.get('meaning', f'unit {q["unit"]} NaK loop {q["leg"]}'), maturity='M3 routing', track='F1 (fiction)', failure_domain=f'L2 unit {q["unit"]}')
+        if q['kind'] == 'seg': seg(f'I3D_NaK_U{q["unit"]}_{q["leg"]}', q['p0'], q['p1'], q['r'], cl, m['nak'], props)
+        elif q['kind'] == 'poly':
+            for j in range(len(q['points'])-1): seg(f'I3D_NaK_U{q["unit"]}_{q["leg"]}_{j}', q['points'][j], q['points'][j+1], q['r'], cl, m['nak'], props)
+        elif q['kind'] == 'box':
+            o = _obj(f'I3D_NaK_U{q["unit"]}_{q["leg"]}', _box_mesh(f'I3D_NaK_U{q["unit"]}_{q["leg"]}', *q['half']), cl, m['valve' if 'Flow' in q['leg'] else 'pump'], props)
+            o.matrix_world = Matrix.Translation(q['c'])
+    ce = coll('WORK_I3D_F_ELECTRICAL', root); CP3['EL'] = ce
+    em = {k: mat(f'I3D_el_{k}', v, 1.0) for k, v in ECOL.items()}
+    for q in EL['geometry']:
+        props = dict(meaning=q['meaning'], maturity='M2 arrangement', track='F1 (fiction)', failure_domain=q['dom'])
+        if q['kind'] == 'seg': seg(q['name'], q['p0'], q['p1'], q['r'], ce, em[q['dom']], props)
+        elif q['kind'] == 'poly':
+            for j in range(len(q['points'])-1): seg(f'{q["name"]}_{j}', q['points'][j], q['points'][j+1], q['r'], ce, em[q['dom']], props)
+        elif q['kind'] in ('box', 'plate'):
+            o = _obj(q['name'], _box_mesh(q['name'], *q['half']), ce, em[q['dom']], props)
+            o.matrix_world = Matrix.Translation(q['c']) @ (Matrix.Rotation(math.radians(q.get('az', 0.0)-90.0), 4, 'X') if q['kind'] == 'plate' else Matrix.Identity(4))
+    for nm in ('RideThrough', 'RestartPack', 'DefenseBuffer', 'Switchgear', 'SurvivalBridge', 'L1_Conditioning', 'L1_DC_Pickup'):
+        for a in P6_LAY:
+            if a['name'].startswith(nm) and a['shape'] == 'box':
+                dom = 'DEF' if 'Defense' in nm else 'REF' if 'Survival' in nm else 'L1' if 'L1' in nm else 'S' + str(1+[30.0, 150.0, 270.0].index(min((30.0, 150.0, 270.0), key=lambda z: abs(((math.degrees(math.atan2(a['c'][2], a['c'][1])) % 360)-z+180) % 360-180))))
+                o = _obj(f'I3D_{a["name"]}', _box_mesh(f'I3D_{a["name"]}', a['d'][0]/2, a['d'][1]/2, a['d'][2]/2), ce, em[dom],
+                         dict(meaning=a['meaning'], maturity='M2 arrangement', track='F1 (fiction)', failure_domain=a['failure_domain'], register=a.get('register') or '-'))
+                o.matrix_world = Matrix.Translation(a['c'])
+    cam = ns['cam']; az = math.radians(90.0)
+    xm = (S['x0']+S['x1'])/2
+    cam(root, 'CAM_I3D_L2_CUTAWAY', (xm-9.0, -9.0, 14.0), (xm+0.5, 0.0, 10.0), 28)
+    o = cam(root, 'CAM_I3D_L2_EVAP_DETAIL', (S['x0']+0.35, 0.0, 60.0), (S['x0']+0.35, 0.0, -100.0), 50); o.data.type = 'ORTHO'; o.data.ortho_scale = 1.3; o.data.clip_start = 60.0-21.0
+    o = cam(root, 'CAM_I3D_L2_CHORD_CUT', (xm, 0.0, 60.0), (xm, 0.0, -100.0), 50); o.data.type = 'ORTHO'; o.data.ortho_scale = 11.5; o.data.clip_start = 60.0-21.0
+    o = cam(root, 'CAM_I3D_ELEC_SECTION', (-76.0, 0.0, 0.0), (200.0, 0.0, 0.0), 16); o.data.clip_start = 0.5; o.data.clip_end = 60.0
+    cam(root, 'CAM_I3D_ELEC_OVERVIEW', (60.0, -60.0, 40.0), (-10.0, 0.0, 0.0), 35)
+    cam(root, 'CAM_I3D_LOOPS', (22.0, -26.0, 20.0), (41.0, 0.0, 4.0), 30)
+    cam(root, 'CAM_I3D_CP3_SHIP', (40.0, -150.0, -70.0), (-60.0, 0.0, 0.0), 30)
+
+
+def render3():
+    if '--render' not in sys.argv: return
+    sc = bpy.context.scene; keep = {o.name: o.hide_render for o in bpy.data.objects}
+    def only(colls):
+        names = {o.name for c in colls for o in c.all_objects}
+        for o in bpy.data.objects:
+            if o.type in ('MESH', 'CURVE'): o.hide_render = o.name not in names
+            if o.type == 'FONT': o.hide_render = True
+    l2 = [CP3[k] for k in CP3 if k.startswith('L2_')]
+    for cname, colls in (('CAM_I3D_L2_CUTAWAY', [CP3['L2_90']]), ('CAM_I3D_L2_CHORD_CUT', [CP3['L2_90']]), ('CAM_I3D_L2_EVAP_DETAIL', [CP3['L2_90']]), ('CAM_I3D_ELEC_SECTION', [CP3['EL'], CP3['LOOPS']]+[CP2[k] for k in ('U1', 'U2', 'U3')]),
+                         ('CAM_I3D_ELEC_OVERVIEW', [CP3['EL']]), ('CAM_I3D_LOOPS', [CP3['LOOPS']]+l2+[CP2[k] for k in ('U1', 'U2', 'U3')])):
+        only(colls); sc.camera = bpy.data.objects[cname]
+        sc.render.filepath = str(HERE / 'results' / f'{cname.lower()}.jpg'); bpy.ops.render.render(write_still=True)
+    for o in bpy.data.objects: o.hide_render = keep.get(o.name, o.hide_render)
+    for o in bpy.data.objects:
+        if o.type == 'FONT': o.hide_render = True
+    sc.camera = bpy.data.objects['CAM_I3D_CP3_SHIP']; sc.render.filepath = str(HERE / 'results' / 'cam_i3d_cp3_ship.jpg'); bpy.ops.render.render(write_still=True)
+    for o in bpy.data.objects: o.hide_render = keep.get(o.name, o.hide_render)
+
+
+P6_LAY = json.loads((HERE / 'results' / 'phase6.json').read_text())['layout']
+C3_FACE = '1.2'
+
+
 def hook_all(r6):
-    hook(r6); hook2(r6)
+    hook(r6); hook2(r6); hook3(r6)
 
 
 def render_all():
-    render(); render2()
+    render(); render2(); render3()
 
 
 ns['I3D_HOOK'] = hook_all; ns['I3D_RENDER'] = render_all

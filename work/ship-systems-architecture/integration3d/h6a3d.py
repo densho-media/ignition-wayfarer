@@ -21,17 +21,23 @@ import study6 as s6  # noqa: E402
 
 CFG = tomllib.loads((HERE/'f1_integration.toml').read_text())
 P6 = json.loads((R/'phase6.json').read_text())
-BLADE_HALF_T = 0.225; GAP = 0.15; HULL_R = 6.0; ROOT_R = 6.5
+BLADE_HALF_T = 0.225; GAP = 0.15; HULL_R = 6.0; ROOT_R = 6.5; SUP_PITCH = 8.0      # PSA HO-01: trunk supports at <= 8 m
+
+
+def l2_length():
+    """Stage E (radiators3d.py) resizes the L2 section from the cycle; use its length when present, else the Phase VI value."""
+    f = R/'i3d_radiators.json'
+    return json.loads(f.read_text())['section']['length_m'] if f.exists() else P6['radiators']['F1']['length_m']
 
 
 def network():
-    F1len = P6['radiators']['F1']['length_m']; L_hdr = 162.0-F1len; a = P6['hot']['F1']['a_g']
+    F1len = l2_length(); L_hdr = 162.0-F1len; a = P6['hot']['F1']['a_g']
     n = s6.h6a(L_hdr, a, s6.COMPOSITE['allowable_stress_Pa'], s6.COMPOSITE['density_kg_m3'])
     return n, L_hdr, a
 
 
 def layout(n, L_hdr):
-    D = n['D_trunk']; rt = D/2; x_fwd = s6.BULK-P6['radiators']['F1']['length_m']; x_hot0 = x_fwd-L_hdr; m = CFG['h6a']['manifold']; pu = CFG['h6a']['pump']
+    D = n['D_trunk']; rt = D/2; x_fwd = s6.BULK-l2_length(); x_hot0 = x_fwd-L_hdr; m = CFG['h6a']['manifold']; pu = CFG['h6a']['pump']
     r_tr = HULL_R+rt+GAP                                     # trunk axis radius (outside the hull)
     t_sup = BLADE_HALF_T+GAP+rt; t_ret = t_sup+D+GAP
     parts = []; bt = {k: v[1]/3 for k, v in P6['hot']['F1']['by_item_t'].items()}   # nominal, per blade
@@ -59,8 +65,12 @@ def layout(n, L_hdr):
                         bt['bellows']/30, 'refractory bellows', f'section {k+1} expansion bellows (~10 mm/m)')
             add(f'S{k+1}_CrossFeedValve', 'seg', dict(p0=P(xb-1.2, r_tr+rt+0.3, -t_sup), p1=P(xb-1.2, r_tr+rt+0.3, t_sup), r=0.12), bt['valves']/34*0.5, 'FT-01',
                 f'section {k+1} cross-feed with valve (pair A <-> B)')
-            add(f'S{k+1}_Saddle', 'box', dict(c=P((xa+xb)/2, HULL_R+0.08, 0.0), half=(0.4, 0.08, t_ret+rt+0.2)), bt['supports']/ns, 'composite saddle on hull frame',
-                f'section {k+1} sliding trunk saddle (thermal growth)')
+            nsup = math.ceil((xb-xa)/SUP_PITCH); mid = nsup//2
+            for j in range(nsup):
+                xs = xa+(j+0.5)*(xb-xa)/nsup; anchor = j == mid
+                add(f'S{k+1}_{"Anchor" if anchor else "Slide"}{j+1}', 'box', dict(c=P(xs, HULL_R+0.08, 0.0), half=(0.4 if anchor else 0.3, 0.08, t_ret+rt+0.2)),
+                    bt['supports']/ns/nsup, 'composite saddle on a PSA frame',
+                    f'section {k+1} {"axial anchor" if anchor else "sliding saddle"} {j+1}/{nsup} (pitch {(xb-xa)/nsup:.1f} m; PSA HO-01)', domain=f'blade {az:.0f} section {k+1}')
             add(f'S{k+1}_Inspection', 'box', dict(c=P((xa+xb)/2+1.5, r_tr+rt+0.25, t_ret), half=(0.3, 0.2, 0.3)), bt['maintenance']/ns, 'port',
                 f'section {k+1} inspection and replacement port (robot access along the blade root)')
         # aft manifold (M3): HX interface ring, two EM pumps on the returns, accumulator, drain/recovery, manifold valves, bellows, trace heat
@@ -124,9 +134,20 @@ def main():
                          f'p max {n["p_trunk_max"]/1e6:.2f} MPa, pumps {n["pump_W"]/1e6:.1f} MW.',
                          f'Trunks outside the hull at r {G["r_trunk_axis"]:.2f} m flanking the blade root ({G["hull_clear_m"]:.2f} m off the hull); they reach '
                          f'{G["root_shade_m"]:.2f} m up the blade root ({100*G["root_shade_m"]/G["blade_width_m"]:.1f} % of the 30.5 m width) and partly shade the next metres '
-                         '(view factor re-run OPEN); the heat-pipe fins (13.9 t) belong to the blade and are not drawn.',
+                         '(view factor: Stage E, radiators3d.py); the heat-pipe fins (13.9 t) belong to the blade and are not drawn.',
                          f'Valves {valves} per blade (model {n["valves"]}), bellows {bel} (model {n["bellows"]}): the drawn network matches the mass model counts.',
                          f'EM pumps {P6["hot"]["F1"]["by_item_t"]["pumps"][1]/6:.1f} t each: {"within" if P6["hot"]["F1"]["by_item_t"]["pumps"][1]/6 <= 3 else "above"} the 3 t ORU limit.'])
+    # PSA HO-01 support table (per blade; the four trunks share each saddle)
+    kgm = math.pi*n['D_trunk']*n['t_trunk']*s6.COMPOSITE['density_kg_m3']+math.pi*n['D_trunk']**2/4*n['rho']; Ls = L_hdr/6; nsup = math.ceil(Ls/SUP_PITCH)
+    a_pk = P6['hot']['F1']['a_g']; T_mean = (n['T_in']+n['T_out'])/2
+    out['supports'] = dict(pitch_m=Ls/nsup, per_section=nsup, sections=6, anchors_per_section=1, trunk_t_per_m=kgm/1e3,
+                           saddle_carried_t=4*kgm*Ls/nsup/1e3, anchor_axial_N_per_trunk=kgm*Ls*a_pk*9.80665, anchor_axial_N_per_saddle=4*kgm*Ls*a_pk*9.80665,
+                           a_peak_g=a_pk, growth_mm_per_m=(3.0, 10.0), end_travel_mm=(3.0*Ls/2, 10.0*Ls/2), T_mean_K=T_mean,
+                           note='axial loads go to the mid-section anchor in burns; slides carry only radial/lateral loads (no spin, no gravity in coast); growth 3 mm/m '
+                                '(FT-01 composite, CTE ~2e-6/K) to 10 mm/m (bellows bound)')
+    out['findings'].append(f'Supports (PSA HO-01): {nsup} saddles per {Ls:.1f} m section (pitch {Ls/nsup:.1f} m), one axial anchor each; trunk {kgm/1e3:.3f} t/m, '
+                           f'{4*kgm*Ls/nsup/1e3:.1f} t per saddle, anchor {4*kgm*Ls*a_pk*9.80665/1e3:.0f} kN per section at {a_pk:.2f} g; section-end travel '
+                           f'+-{3.0*Ls/2:.0f} to +-{10.0*Ls/2:.0f} mm.')
     (R/'i3d_h6a.json').write_text(json.dumps(out, indent=1, default=float)); (R/'i3d_h6a_section.svg').write_text(svg(n, G))
     for f in out['findings']: print('-', f)
     print('parts', len(parts), 'mass drawn', round(tot, 1), 'phase6', round(out['mass_phase6_t'], 1))

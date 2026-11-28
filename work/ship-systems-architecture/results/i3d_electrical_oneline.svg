@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 470" font-family="Inter,system-ui,sans-serif" font-size="12" role="img" aria-label="Electrical one-line">
+<style>.t{fill:var(--fg,#223)} .m{fill:var(--muted,#667)}</style>
+<text x="20" y="22" class="t" font-weight="600">One-line: three L2 sectors, normally-open ties, L1 apart, refuge on L3</text>
+<rect x="30" y="72" width="135" height="36" rx="5" fill="#3f6fd8" fill-opacity="0.2" stroke="#3f6fd8"/><text x="38" y="94" class="t">L2 unit 1 3.5 MWe</text>
+<line x1="165" y1="90" x2="900" y2="90" stroke="#3f6fd8" stroke-width="5"/><text x="910" y="94" class="m">bus 1</text>
+<rect x="252" y="82" width="16" height="16" fill="#fff" stroke="#333"/>
+<rect x="512" y="82" width="16" height="16" fill="#fff" stroke="#333"/>
+<rect x="772" y="82" width="16" height="16" fill="#fff" stroke="#333"/>
+<line x1="330" y1="90" x2="330" y2="114" stroke="#555"/><text x="300" y="126" class="m" font-size="10">district</text>
+<line x1="590" y1="90" x2="590" y2="114" stroke="#555"/><text x="560" y="126" class="m" font-size="10">mid / WARM-LOW</text>
+<line x1="850" y1="90" x2="850" y2="114" stroke="#555"/><text x="820" y="126" class="m" font-size="10">habitat</text>
+<rect x="190" y="60" width="40" height="12" fill="#8a6fd8"/><text x="236" y="70" class="m" font-size="10">ride-through</text>
+<rect x="30" y="152" width="135" height="36" rx="5" fill="#2fa36b" fill-opacity="0.2" stroke="#2fa36b"/><text x="38" y="174" class="t">L2 unit 2 3.5 MWe</text>
+<line x1="165" y1="170" x2="900" y2="170" stroke="#2fa36b" stroke-width="5"/><text x="910" y="174" class="m">bus 2</text>
+<rect x="252" y="162" width="16" height="16" fill="#fff" stroke="#333"/>
+<rect x="512" y="162" width="16" height="16" fill="#fff" stroke="#333"/>
+<rect x="772" y="162" width="16" height="16" fill="#fff" stroke="#333"/>
+<line x1="330" y1="170" x2="330" y2="194" stroke="#555"/><text x="300" y="206" class="m" font-size="10">district</text>
+<line x1="590" y1="170" x2="590" y2="194" stroke="#555"/><text x="560" y="206" class="m" font-size="10">mid / WARM-LOW</text>
+<line x1="850" y1="170" x2="850" y2="194" stroke="#555"/><text x="820" y="206" class="m" font-size="10">habitat</text>
+<rect x="190" y="140" width="40" height="12" fill="#8a6fd8"/><text x="236" y="150" class="m" font-size="10">ride-through</text>
+<rect x="30" y="232" width="135" height="36" rx="5" fill="#c9852a" fill-opacity="0.2" stroke="#c9852a"/><text x="38" y="254" class="t">L2 unit 3 3.5 MWe</text>
+<line x1="165" y1="250" x2="900" y2="250" stroke="#c9852a" stroke-width="5"/><text x="910" y="254" class="m">bus 3</text>
+<rect x="252" y="242" width="16" height="16" fill="#fff" stroke="#333"/>
+<rect x="512" y="242" width="16" height="16" fill="#fff" stroke="#333"/>
+<rect x="772" y="242" width="16" height="16" fill="#fff" stroke="#333"/>
+<line x1="330" y1="250" x2="330" y2="274" stroke="#555"/><text x="300" y="286" class="m" font-size="10">district</text>
+<line x1="590" y1="250" x2="590" y2="274" stroke="#555"/><text x="560" y="286" class="m" font-size="10">mid / WARM-LOW</text>
+<line x1="850" y1="250" x2="850" y2="274" stroke="#555"/><text x="820" y="286" class="m" font-size="10">habitat</text>
+<rect x="190" y="220" width="40" height="12" fill="#8a6fd8"/><text x="236" y="230" class="m" font-size="10">ride-through</text>
+<line x1="260" y1="98" x2="260" y2="242" stroke="#333" stroke-dasharray="4 3"/>
+<line x1="520" y1="98" x2="520" y2="242" stroke="#333" stroke-dasharray="4 3"/>
+<line x1="780" y1="98" x2="780" y2="242" stroke="#333" stroke-dasharray="4 3"/>
+<text x="270" y="300" class="m">dashed: normally-open ties at x -78 / 14 / 98 (close in ~0.2 s on a sector fault)</text>
+<rect x="40" y="320" width="150" height="34" rx="5" fill="#e0553a" fill-opacity="0.2" stroke="#e0553a"/><text x="48" y="342" class="t">L1 (drive, burns) 10 kV</text>
+<rect x="230" y="320" width="190" height="34" rx="5" fill="#d23a6a" fill-opacity="0.2" stroke="#d23a6a"/><text x="238" y="342" class="t">defense bus + 4 buffers 21 MW</text>
+<rect x="460" y="320" width="200" height="34" rx="5" fill="#777" fill-opacity="0.2" stroke="#777"/><text x="468" y="342" class="t">refuge: L3 + survival bridge</text>
+<rect x="700" y="320" width="200" height="34" rx="5" fill="#5aa0b8" fill-opacity="0.2" stroke="#5aa0b8"/><text x="708" y="342" class="t">data A / B (fibre, 9.2 m apart)</text>
+<text x="40" y="390" class="m">Conductors: 4.9 t drawn (Phase VI distribution line 8.0 t); bus loss 27 kW at full load.</text>
+<text x="40" y="410" class="m">Single faults: 7 of 8 ride through; the district-loss case falls back to the main battery, restart packs and the refuge.</text>
+</svg>

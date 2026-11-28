@@ -1,0 +1,112 @@
+{
+ "config": "WF-F1-P6.0",
+ "items": [
+  {
+   "item": "L1 (derived)",
+   "t": 70.0,
+   "cls": "FT-04 (CONDITIONAL)",
+   "stage": "Phase VI"
+  },
+  {
+   "item": "L3",
+   "t": 12.0,
+   "cls": "NEW",
+   "stage": "Phase VI"
+  },
+  {
+   "item": "storage (buffer + restart)",
+   "t": 21.5,
+   "cls": "NEW",
+   "stage": "Phase VI"
+  },
+  {
+   "item": "distribution",
+   "t": 8.0,
+   "cls": "NEW",
+   "stage": "Phase VI"
+  },
+  {
+   "item": "scatter allowance (OPEN)",
+   "t": 3.0,
+   "cls": "NEW (OPEN)",
+   "stage": "Phase VI"
+  },
+  {
+   "item": "ECLSS modular increment",
+   "t": 4.800000000000001,
+   "cls": "NEW",
+   "stage": "Phase VI"
+  },
+  {
+   "item": "bulkhead relocation",
+   "t": 2.0,
+   "cls": "EXISTING (moved)",
+   "stage": "Phase VI"
+  },
+  {
+   "item": "LOG-G1 tare (3 t containers, 12 months)",
+   "t": 4.807860357015053,
+   "cls": "NEW (V-G tare)",
+   "stage": "Phase VI"
+  },
+  {
+   "item": "L2 (3 x 3.5 MWe, FT-03 1500 K inlet)",
+   "t": 290.5765362444675,
+   "cls": "FT-03 (APPROVED)",
+   "stage": "Phase VI"
+  },
+  {
+   "item": "L2 sections 950 K cross-strapped + dual headers",
+   "t": 7.311025602664686,
+   "cls": "FT-03 (APPROVED)",
+   "stage": "Phase VI"
+  },
+  {
+   "item": "hot loop H6a",
+   "t": 565.1967819858065,
+   "cls": "FT-01/FT-02",
+   "stage": "Phase VI"
+  },
+  {
+   "item": "L2 NaK transport loops + pumps (Stage E)",
+   "t": 46.69641381738595,
+   "cls": "FT-03 (APPROVED), NEW line",
+   "stage": "E"
+  },
+  {
+   "item": "L2 section hardware above the Phase VI header line (Stage E)",
+   "t": 31.688394230366477,
+   "cls": "FT-03 / FT-06",
+   "stage": "E"
+  },
+  {
+   "item": "distribution above the Phase VI line (Stage F)",
+   "t": 0.0,
+   "cls": "NEW",
+   "stage": "F"
+  }
+ ],
+ "dry_added_t": 1067.5770122377062,
+ "departure_t": 8478.225715715002,
+ "propellant_t": 5356.911916067214,
+ "tankage_t": 713.5367874100822,
+ "end_t": 3121.3137996477885,
+ "phase6_departure_t": 8191.500939430233,
+ "change_t": 286.72477628476827,
+ "coupling_t_per_t": 3.6579125907930257,
+ "pending": [
+  {
+   "id": "DR-3D-04",
+   "item": "HOT forward-pointing fins (double manifolds)",
+   "t": 17.879208593459555,
+   "departure_t": 65.40058222743058
+  },
+  {
+   "id": "DR-3D-03",
+   "item": "L2 sections aft beside the district (transport run ~20 m)",
+   "t": -36.0648889023385,
+   "departure_t": -131.92221120141568
+  }
+ ],
+ "note": "nominal case; H6a kept at the Phase VI line (the shorter hot length lowers it slightly); pending items wait for owner decisions"
+}

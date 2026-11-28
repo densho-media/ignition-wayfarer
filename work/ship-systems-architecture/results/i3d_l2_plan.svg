@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" font-family="Inter,system-ui,sans-serif" font-size="12" role="img" aria-label="L2 section plan">
+<style>.t{fill:var(--fg,#223)} .m{fill:var(--muted,#667)}</style>
+<text x="20" y="22" class="t" font-weight="600">L2 section plan, one blade face (x along the ship, radius up)</text>
+<rect x="378.4" y="54.8" width="41.6" height="355.2" fill="#e14b2a" fill-opacity="0.18"/><text x="258.4" y="248.0" class="m">HOT blade (1800 K)</text>
+<rect x="663.9" y="54.8" width="41.6" height="355.2" fill="#f0b03a" fill-opacity="0.18"/><text x="713.9" y="248.0" class="m">V-groove bulkhead, WARM (440 K)</text>
+<rect x="420.0" y="54.8" width="121.9" height="355.2" fill="#f2c9a8" fill-opacity="0.5" stroke="#b57a52"/>
+<line x1="422.6" y1="396.9" x2="540.6" y2="396.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="389.7" x2="540.6" y2="389.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="382.5" x2="540.6" y2="382.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="375.3" x2="540.6" y2="375.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="368.1" x2="540.6" y2="368.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="360.9" x2="540.6" y2="360.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="353.7" x2="540.6" y2="353.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="346.5" x2="540.6" y2="346.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="339.3" x2="540.6" y2="339.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="332.1" x2="540.6" y2="332.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="324.9" x2="540.6" y2="324.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="317.7" x2="540.6" y2="317.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="310.5" x2="540.6" y2="310.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="303.3" x2="540.6" y2="303.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="296.1" x2="540.6" y2="296.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="288.9" x2="540.6" y2="288.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="281.7" x2="540.6" y2="281.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="274.5" x2="540.6" y2="274.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="267.3" x2="540.6" y2="267.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="260.1" x2="540.6" y2="260.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="252.9" x2="540.6" y2="252.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="245.7" x2="540.6" y2="245.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="238.5" x2="540.6" y2="238.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="231.3" x2="540.6" y2="231.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="224.1" x2="540.6" y2="224.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="216.9" x2="540.6" y2="216.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="209.7" x2="540.6" y2="209.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="202.5" x2="540.6" y2="202.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="195.3" x2="540.6" y2="195.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="188.1" x2="540.6" y2="188.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="180.9" x2="540.6" y2="180.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="173.7" x2="540.6" y2="173.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="166.5" x2="540.6" y2="166.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="159.3" x2="540.6" y2="159.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="152.1" x2="540.6" y2="152.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="144.9" x2="540.6" y2="144.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="137.7" x2="540.6" y2="137.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="130.5" x2="540.6" y2="130.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="123.3" x2="540.6" y2="123.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="116.1" x2="540.6" y2="116.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="108.9" x2="540.6" y2="108.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="101.7" x2="540.6" y2="101.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="94.5" x2="540.6" y2="94.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="87.3" x2="540.6" y2="87.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="80.1" x2="540.6" y2="80.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="422.6" y1="72.9" x2="540.6" y2="72.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="423.6" y1="407.6" x2="423.6" y2="58.4" stroke="#e0762f" stroke-width="5"/>
+<line x1="429.4" y1="407.6" x2="429.4" y2="58.4" stroke="#f0a050" stroke-width="5"/>
+<rect x="541.9" y="54.8" width="121.9" height="355.2" fill="#f2c9a8" fill-opacity="0.5" stroke="#b57a52"/>
+<line x1="544.5" y1="396.9" x2="662.6" y2="396.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="389.7" x2="662.6" y2="389.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="382.5" x2="662.6" y2="382.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="375.3" x2="662.6" y2="375.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="368.1" x2="662.6" y2="368.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="360.9" x2="662.6" y2="360.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="353.7" x2="662.6" y2="353.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="346.5" x2="662.6" y2="346.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="339.3" x2="662.6" y2="339.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="332.1" x2="662.6" y2="332.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="324.9" x2="662.6" y2="324.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="317.7" x2="662.6" y2="317.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="310.5" x2="662.6" y2="310.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="303.3" x2="662.6" y2="303.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="296.1" x2="662.6" y2="296.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="288.9" x2="662.6" y2="288.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="281.7" x2="662.6" y2="281.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="274.5" x2="662.6" y2="274.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="267.3" x2="662.6" y2="267.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="260.1" x2="662.6" y2="260.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="252.9" x2="662.6" y2="252.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="245.7" x2="662.6" y2="245.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="238.5" x2="662.6" y2="238.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="231.3" x2="662.6" y2="231.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="224.1" x2="662.6" y2="224.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="216.9" x2="662.6" y2="216.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="209.7" x2="662.6" y2="209.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="202.5" x2="662.6" y2="202.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="195.3" x2="662.6" y2="195.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="188.1" x2="662.6" y2="188.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="180.9" x2="662.6" y2="180.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="173.7" x2="662.6" y2="173.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="166.5" x2="662.6" y2="166.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="159.3" x2="662.6" y2="159.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="152.1" x2="662.6" y2="152.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="144.9" x2="662.6" y2="144.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="137.7" x2="662.6" y2="137.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="130.5" x2="662.6" y2="130.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="123.3" x2="662.6" y2="123.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="116.1" x2="662.6" y2="116.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="108.9" x2="662.6" y2="108.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="101.7" x2="662.6" y2="101.7" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="94.5" x2="662.6" y2="94.5" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="87.3" x2="662.6" y2="87.3" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="80.1" x2="662.6" y2="80.1" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="544.5" y1="72.9" x2="662.6" y2="72.9" stroke="#c0502a" stroke-width="0.8"/>
+<line x1="545.6" y1="407.6" x2="545.6" y2="58.4" stroke="#e0762f" stroke-width="5"/>
+<line x1="551.3" y1="407.6" x2="551.3" y2="58.4" stroke="#f0a050" stroke-width="5"/>
+<path d="M423.6,58.4 L545.6,58.4" stroke="#e0762f" stroke-width="3" fill="none"/>
+<text x="415.0" y="428.0" class="m">x 41.02</text><text x="633.9" y="428.0" class="m">x 50.4</text>
+<text x="20" y="478" class="m">Headers A (dark) and B (light) at the aft edge of each bay; the NaK runs out along bay 1, crosses at the tip and returns along bay 2.</text>
+<text x="20" y="496" class="m">Every 12th heat pipe drawn (548 per row, both faces). Evaporator saddles clamp both headers: either loop drives every pipe.</text>
+<text x="20" y="514" class="m">Transport: two NaK loops per blade (from two units), D 223 mm in the casing-hull annulus, 123 m from the gas coolers.</text>
+</svg>
