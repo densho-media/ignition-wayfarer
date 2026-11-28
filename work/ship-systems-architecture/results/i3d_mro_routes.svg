@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" font-family="Inter,system-ui,sans-serif" font-size="11" role="img" aria-label="Maintenance routes">
+<style>.t{fill:var(--fg,#223)} .m{fill:var(--muted,#667)}</style>
+<text x="14" y="20" class="t" font-weight="600">Maintenance and logistics along the ship (x, m)</text>
+<line x1="66" y1="150" x2="737" y2="150" stroke="#c9852a" stroke-width="6"/><text x="66" y="140" class="t">MRU heavy carriage rail, keel lane az 270 (186 m, rated 25 t)</text>
+<rect x="72" y="170" width="43" height="34" fill="#e0553a" fill-opacity="0.25" stroke="#e0553a"/><text x="72" y="222" class="m">L2 district</text>
+<rect x="480" y="170" width="40" height="34" fill="#3a8fd0" fill-opacity="0.25" stroke="#3a8fd0"/><text x="480" y="222" class="m">module 10 (relocated dry store)</text>
+<rect x="737" y="170" width="14" height="34" fill="#2fa36b" fill-opacity="0.25" stroke="#2fa36b"/><text x="737" y="222" class="m">workshop</text>
+<rect x="780" y="170" width="32" height="34" fill="#8a6fd8" fill-opacity="0.25" stroke="#8a6fd8"/><text x="780" y="222" class="m">hub store (LOG-G1)</text>
+<text x="32" y="270" class="m" font-size="10">-100</text>
+<text x="104" y="270" class="m" font-size="10">-80</text>
+<text x="176" y="270" class="m" font-size="10">-60</text>
+<text x="248" y="270" class="m" font-size="10">-40</text>
+<text x="320" y="270" class="m" font-size="10">-20</text>
+<text x="392" y="270" class="m" font-size="10">0</text>
+<text x="464" y="270" class="m" font-size="10">20</text>
+<text x="536" y="270" class="m" font-size="10">40</text>
+<text x="608" y="270" class="m" font-size="10">60</text>
+<text x="680" y="270" class="m" font-size="10">80</text>
+<text x="752" y="270" class="m" font-size="10">100</text>
+<text x="824" y="270" class="m" font-size="10">120</text>
+<text x="896" y="270" class="m" font-size="10">140</text>
+<text x="14" y="290" class="m">Coast only; parks and locks before a burn. Single-arm manipulators (3 t) on lanes 30/150/270; six crawlers on the blade roots.</text>
+</svg>

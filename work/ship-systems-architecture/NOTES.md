@@ -77,7 +77,7 @@ shadow; hot-loop pumps; channel refill time; unit restart energy; Brayton degrad
 
 **Function.** Build the F1 reference (WF-F1-P6.0, FT-03 1500 K approved as fiction) in 3D, stage by stage (A masterplan .. I remaining),
 maturity M0-M4 (most systems to M2, selected M3), checkpoints 1-4 committed separately; F0 and Track R stay comparisons; production unchanged.
-Code and config in `integration3d/` (`f1_integration.toml` = registry and zones). Run order after Phase VI: `integration3d/tanks3d.py`, `power_unit.py`, `radiators3d.py`, `h6a3d.py`, `radiators3d.py` again, `electrical3d.py`,
+Code and config in `integration3d/` (`f1_integration.toml` = registry and zones). Run order after Phase VI: `integration3d/tanks3d.py`, `power_unit.py`, `radiators3d.py`, `h6a3d.py`, `radiators3d.py` again, `electrical3d.py`, `systems3d.py`,
 `integration3d/masterplan.py`, `ledger3d.py`, then `/snap/bin/blender -b assets/wayfarer/WF_WAYFARER_001.blend --python integration3d/make_review_i3d.py -- --render`,
 then `build_report.py`.
 **Checkpoint 1 (A + B + registry).** Masterplan: production zones from the pure modules, F1 zones from `phase6.json`, keep-outs, live ledger
@@ -89,7 +89,7 @@ the shadow boundary, recuperator/gas cooler/PMAD split under the 3 t ORU limit; 
 requirement), placed three times with shared mesh data; district clearances screened, L1 bus moved to its own slot (az 30), district displaces
 body-bay module 1 (6 dry-store containers). `h6a3d.py`: four trunks per blade (Phase VI drew one per path), outside the hull flanking the blade
 root (a 1990 K line inside would heat the bay), valves 34 and bellows 30 per blade = model, EM pumps 7.5 t each (MRU). Review file
-`REVIEW_I3D.blend` (built by `make_review_i3d.py`, CP1-CP3 layers).
+`REVIEW_I3D.blend` (built by `make_review_i3d.py`, CP1-CP4 layers; all 19 registry systems at their target level).
 **Checkpoint 3 (E + F).** `radiators3d.py`: the Carnot-fraction FT-03 figure is not a cycle; a recuperated He-Xe Brayton at 1500 K gives
 eta 0.154 only with a 793 K (contemporary components) or 872 K (advanced, proposed as FT-03 amendment DR-3D-02) compressor inlet, so the L2
 radiator runs at an emission-equivalent 896 K and the section grows to 9.38 m (x 41.02-50.4, -173 MW HOT headroom). L2 section at M3:
@@ -102,6 +102,13 @@ change, -0.39 GW without. WARM/LOW interleaved A/B pumped panels (79 % / 86 % af
 conductors within the 8 t line; 7 of 8 single faults ride through (district loss is the refuge case); L1/bus-1 0.93 m needs a barrier.
 `h6a3d.py` now reads the L2 length and puts trunk supports at <= 8 m (PSA HO-01: 4 per section, one anchor, 155 kN per section at 0.74 g).
 `ledger3d.py`: live departure 8,478 t (+287 t vs Phase VI, 3.66 t/t); pending DR-3D-04 +65 t, DR-3D-03 -132 t.
+**Checkpoint 4 (G + H + I).** `systems3d.py`: hub ECLSS unit at M3 as 8 ORUs (all <= 0.70 m, two levels, 990 kg + 210 kg frame, 3.4 kW) with
+D 0.28 m ducts through both transfer drums (24 Pa); ring units M2; 5/5 Phase V cases pass. LOG-G1 M3: `container(gross_t)` (3 t: 2.05 m,
+0.60 t tare, 4 grapples, 8 latches; shared meshes in the hub store). The six displaced dry-store containers move to body-bay module 10
+(x 22.25-33.25), defense buffers +3 m, closest data/bus clearance 0.69 m, +4 t racks. MRU heavy carriage on keel lane az 270 (rated 24.7 t,
+186 m rail, coast only, parks for burns); robots + rail 10.6 t. Cryocoolers at T-A area (1.60x) + OpenMC nuclear heating: 264 W at 3 K, 5.86 kW
+at 20 K, 934 kW input, 11.2 t, 13 stations; LOW short 76 kW, WARM short 496 kW (Phase VI 370 + NaK leak 99 + bus 27) -> pending +2.7 m
+WARM / +0.8 m LOW. GNC/CDH M1 placeholders; structure envelope only (mass is PSA's). Ledger 8,573 t (+381 t vs Phase VI).
 
 ## Phase VI (owner brief 2026-11-28 06:33Z): dual-baseline integration (Track R / Track F)
 

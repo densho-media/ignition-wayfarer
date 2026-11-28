@@ -1,0 +1,308 @@
+{
+ "unit": {
+  "crew": 4,
+  "mass_t": 1.2,
+  "power_kW": 3.4,
+  "cooling_kW": 3.4,
+  "envelope_m": [
+   2.0,
+   1.4,
+   2.2
+  ],
+  "orus_max_width_m": 0.7,
+  "maint_clear_m": 1.0,
+  "air_flow_m3_s": 0.24,
+  "functions": [
+   "air circulation",
+   "CO2 removal (amine swing)",
+   "O2 interface (from central electrolysis)",
+   "water recovery (urine + condensate)",
+   "trace contaminant control",
+   "local control + sensing"
+  ],
+  "interfaces": [
+   "28/120 V DC from two bus segments",
+   "cooling loop to the ring cold loop",
+   "O2 / N2 supply lines",
+   "water in/out",
+   "data (two networks)"
+  ],
+  "cls": "PROTOTYPE (ISS CDRA/CCAA/WRS class per crew)"
+ },
+ "hub": {
+  "c": [
+   100.299,
+   0,
+   3.2
+  ],
+  "env": [
+   2.0,
+   2.2,
+   1.4
+  ],
+  "orus": [
+   {
+    "name": "Fan pair (redundant)",
+    "mass_kg": 70,
+    "power_W": 450,
+    "size": [
+     0.6,
+     0.6,
+     0.5
+    ],
+    "c": [
+     -0.6499999999999999,
+     0.75,
+     -0.3999999999999999
+    ],
+    "level": 0,
+    "width_ok": true
+   },
+   {
+    "name": "CO2 amine swing bed A",
+    "mass_kg": 170,
+    "power_W": 700,
+    "size": [
+     0.6,
+     0.7,
+     0.55
+    ],
+    "c": [
+     5.551115123125783e-17,
+     0.7000000000000001,
+     -0.3749999999999999
+    ],
+    "level": 0,
+    "width_ok": true
+   },
+   {
+    "name": "CO2 amine swing bed B",
+    "mass_kg": 170,
+    "power_W": 700,
+    "size": [
+     0.6,
+     0.7,
+     0.55
+    ],
+    "c": [
+     -0.6499999999999999,
+     -0.7000000000000001,
+     -0.3749999999999999
+    ],
+    "level": 1,
+    "width_ok": true
+   },
+   {
+    "name": "Condensing heat exchanger + separator",
+    "mass_kg": 130,
+    "power_W": 150,
+    "size": [
+     0.6,
+     0.6,
+     0.5
+    ],
+    "c": [
+     5.551115123125783e-17,
+     -0.75,
+     -0.3999999999999999
+    ],
+    "level": 1,
+    "width_ok": true
+   },
+   {
+    "name": "Trace contaminant control",
+    "mass_kg": 90,
+    "power_W": 300,
+    "size": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "c": [
+     0.6000000000000001,
+     -0.8,
+     -0.3999999999999999
+    ],
+    "level": 1,
+    "width_ok": true
+   },
+   {
+    "name": "Water processor (urine + condensate)",
+    "mass_kg": 260,
+    "power_W": 800,
+    "size": [
+     0.7,
+     0.7,
+     0.6
+    ],
+    "c": [
+     -0.6,
+     0.7000000000000001,
+     0.35000000000000003
+    ],
+    "level": 2,
+    "width_ok": true
+   },
+   {
+    "name": "O2 / N2 interface panel",
+    "mass_kg": 60,
+    "power_W": 50,
+    "size": [
+     0.4,
+     0.6,
+     0.3
+    ],
+    "c": [
+     5.551115123125783e-17,
+     0.75,
+     0.20000000000000007
+    ],
+    "level": 2,
+    "width_ok": true
+   },
+   {
+    "name": "Controller + sensors (data A/B)",
+    "mass_kg": 40,
+    "power_W": 250,
+    "size": [
+     0.4,
+     0.4,
+     0.3
+    ],
+    "c": [
+     0.45000000000000007,
+     0.8500000000000001,
+     0.20000000000000007
+    ],
+    "level": 2,
+    "width_ok": true
+   }
+  ],
+  "structure_kg": 210.0,
+  "power_W": 3400,
+  "all_fit": true,
+  "maint_face": "+z (hub aisle), 1.0 m clear"
+ },
+ "duct": {
+  "D_m": 0.27639531957706837,
+  "v_m_s": 4.0,
+  "flow_m3_s": 0.24,
+  "length_m": 6.9999999999999885,
+  "drum_r": [
+   1.3,
+   1.5
+  ],
+  "leak_kg_d": [
+   0.05,
+   0.2,
+   1.0
+  ],
+  "dp_Pa": 23.938686719180332,
+  "fan_W": 11.49056962520656,
+  "fits_drum": true
+ },
+ "ring_units": [
+  {
+   "name": "ECLSS_A1",
+   "ring": "A",
+   "c": [
+    97.299,
+    23.902,
+    13.8
+   ],
+   "env": [
+    2.0,
+    1.4,
+    2.2
+   ]
+  },
+  {
+   "name": "ECLSS_A2",
+   "ring": "A",
+   "c": [
+    97.299,
+    -23.902,
+    13.8
+   ],
+   "env": [
+    2.0,
+    1.4,
+    2.2
+   ]
+  },
+  {
+   "name": "ECLSS_A3",
+   "ring": "A",
+   "c": [
+    97.299,
+    -0.0,
+    -27.6
+   ],
+   "env": [
+    2.0,
+    1.4,
+    2.2
+   ]
+  },
+  {
+   "name": "ECLSS_B1",
+   "ring": "B",
+   "c": [
+    103.299,
+    23.902,
+    13.8
+   ],
+   "env": [
+    2.0,
+    1.4,
+    2.2
+   ]
+  },
+  {
+   "name": "ECLSS_B2",
+   "ring": "B",
+   "c": [
+    103.299,
+    -23.902,
+    13.8
+   ],
+   "env": [
+    2.0,
+    1.4,
+    2.2
+   ]
+  },
+  {
+   "name": "ECLSS_B3",
+   "ring": "B",
+   "c": [
+    103.299,
+    -0.0,
+    -27.6
+   ],
+   "env": [
+    2.0,
+    1.4,
+    2.2
+   ]
+  }
+ ],
+ "cases": {
+  "layout": "7 (3 A + 3 B + 1 hub)",
+  "units": 7,
+  "mass_t": 8.4,
+  "results": {
+   "nominal 6 + 6": true,
+   "one unit lost in A": true,
+   "ring A lost (12 in B)": true,
+   "ring A lost + one B unit failed": true,
+   "ring A lost + hub unit failed": true
+  }
+ },
+ "findings": [
+  "Hub unit (M3): 8 ORUs, every one <= 0.70 m in its narrow dimension, inside the 2.0 x 2.2 x 1.4 m envelope (all fit); ORUs 990 kg + 210 kg frame, 3.4 kW. The CO2 beds and the fan are duplicated inside the unit; the water processor is the single heaviest ORU (260 kg).",
+  "Hub-to-ring ducts D 0.28 m at 4 m/s through each transfer drum (r 1.3-1.5 m): 24 Pa, fan 11 W; rotating air seal leak 0.05-1.0 kg/d (the make-up is in the O2/N2 reserve).",
+  "Seven units pass 5 of 5 Phase V failure cases (ring A lost + one B unit or the hub unit failed included)."
+ ],
+ "ledger_add": []
+}

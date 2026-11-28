@@ -62,7 +62,7 @@ def build():
                        + table(['Item', 't', 'Class'], [[E(r['item']), f'{r["t"]:.1f}', E(r['cls'])] for r in L['items']]
                                + [['Propellant', f'{L["propellant_t"]:,.0f}', 'coupled'], ['Added tankage', f'{L["tankage_t"]:,.0f}', 'coupled'],
                                   ['<b>Departure</b>', f'<b>{L["departure_t"]:,.0f}</b>', E(L['note'])]])))
-    return '\n'.join(out)+build_cp2()+build_cp3()
+    return '\n'.join(out)+build_cp2()+build_cp3()+build_cp4()+build_ledger()
 
 
 def build_cp2():
@@ -144,11 +144,65 @@ def build_cp3():
                        + '<h3>Single faults</h3>' + table(['Fault', 'Left', 'Shed', 'Bridge', 'Result'], fa)
                        + '<h3>Separation between failure domains (&lt; 1.5 m)</h3>' + table(['A', 'B', 'Clear m', 'Action'], sp)
                        + '<h3>Findings</h3><ul>' + ''.join(f'<li>{E(f)}</li>' for f in EL['findings']) + '</ul>'))
+    return '\n'.join(out)
+
+
+def build_ledger():
+    if not (R/'i3d_ledger.json').exists():
+        return ''
+    LG = json.loads((R/'i3d_ledger.json').read_text()); out = []
     lr = [[E(r['item']), E(r['stage']), f'{r["t"]:.1f}', E(r['cls'])] for r in LG['items']]
     pe = [[E(p['id']), E(p['item']), f'{p["t"]:+.1f}', f'{p["departure_t"]:+.0f}'] for p in LG['pending']]
-    out.append(section('i8', '3D · ledger', 'Live mass ledger after Checkpoint 3',
+    out.append(section('i8', '3D · ledger', 'Live mass ledger after Checkpoint 4',
                        f'<p>Dry additions {LG["dry_added_t"]:,.1f} t give a nominal departure of <b>{LG["departure_t"]:,.0f} t</b> ({LG["change_t"]:+,.0f} t against Phase VI; '
                        f'{LG["coupling_t_per_t"]:.2f} t of departure per tonne of dry mass). Propellant {LG["propellant_t"]:,.0f} t, added tankage {LG["tankage_t"]:,.0f} t.</p>'
                        + table(['Item', 'Stage', 't', 'Class'], lr)
                        + '<h3>Waiting for owner decisions (not added)</h3>' + table(['Decision', 'Item', 'Dry t', 'Departure t'], pe)))
+    return '\n'.join(out)
+
+
+def build_cp4():
+    if not (R/'i3d_eclss.json').exists():
+        return ''
+    EC = json.loads((R/'i3d_eclss.json').read_text()); LG = json.loads((R/'i3d_logistics.json').read_text()); RM = json.loads((R/'i3d_remaining.json').read_text()); out = []
+    oru = [[E(o['name']), f'{o["mass_kg"]}', f'{o["power_W"]}', ' x '.join(f'{v:.2f}' for v in o['size']), 'yes' if o['width_ok'] else 'NO'] for o in EC['hub']['orus']]
+    cs = [[E(k), 'pass' if v else 'FAIL'] for k, v in EC['cases']['results'].items()]
+    out.append(section('i9', '3D · G', 'Checkpoint 4: ECLSS hub unit (M3) and ring units (M2)',
+                       f'<p>Seven ECLSS-G1 units: three per ring and one in the hub that serves both rings through the rotary couplings '
+                       f'(<code>integration3d/systems3d.py</code>). The hub unit is drawn as replaceable units (ORUs) inside its envelope, with the maintenance face on the hub aisle.</p>'
+                       + svg('i3d_eclss_hub.svg')
+                       + img('cam_i3d_eclss_hub', 'Hub ECLSS unit', 'Hub ECLSS unit: eight ORUs on two levels inside the 2.0 x 2.2 x 1.4 m frame, and the two air ducts down to the rotary couplings.')
+                       + '<h3>ORUs</h3>' + table(['ORU', 'kg', 'W', 'Size m', 'Fits 0.70 m aisle'], oru)
+                       + '<h3>Failure cases (Phase V, seven units)</h3>' + table(['Case', 'Result'], cs)
+                       + '<h3>Findings</h3><ul>' + ''.join(f'<li>{E(f)}</li>' for f in EC['findings']) + '</ul>'))
+    G1 = LG['container']; c = LG['carriage']
+    hv = [[E(h['name']), f'{h["t"]:.1f}'] for h in LG['heavy_items']]
+    rb = [[E(r['kind']), f'{r["n"]}', f'{r["t_each"]:.2f}', E(r['base'])] for r in LG['robots']]
+    out.append(section('i10', '3D · H', 'LOG-G1 container (M3), workshop, robots and the heavy carriage (M2)',
+                       f'<p>The 3 t LOG-G1 container is a parametric part: <code>container(gross_t)</code> gives edge, tare split, grapples and latches from the Phase V relation. '
+                       f'Eight sit in the hub store on a transfer rail. The six dry-store containers that the L2 district displaced now have a tenth body-bay module.</p>'
+                       + svg('i3d_log_g1.svg')
+                       + img('cam_i3d_log_g1', 'LOG-G1 containers', f'Hub store: eight LOG-G1 containers ({G1["edge_m"]:.2f} m), frames, panels, grapple fixtures (magenta) and corner latches (amber).')
+                       + img('cam_i3d_module10', 'Body-bay module 10', 'Body-bay module 10 with the six relocated dry-store containers (blue) between the buses and data networks.')
+                       + svg('i3d_mro_routes.svg')
+                       + img('cam_i3d_mro_route', 'MRU carriage', 'The MRU heavy carriage on its rail along keel lane az 270, beside the three power units it must remove.')
+                       + '<h3>Items that need the heavy carriage (&gt; 3 t, the single-arm limit)</h3>' + table(['Item', 't per module'], hv)
+                       + '<h3>Robots</h3>' + table(['Kind', 'Number', 't each', 'Base'], rb)
+                       + f'<p class="fn">Supervision: {E(LG["supervision"]["where"])}; {E(LG["supervision"]["note"])}.</p>'
+                       + '<h3>Findings</h3><ul>' + ''.join(f'<li>{E(f)}</li>' for f in LG['findings']) + '</ul>'))
+    cr = RM['cryo']; wa = RM['warm']
+    ct = [['He-3 stage lift (3 K), incl. nuclear', f'{cr["he3_W"]:.0f} W', f'{cr["installed_he3_W"]:.0f} W'], ['Shield lift (20 K), incl. nuclear', f'{cr["shield_W"]/1e3:.2f} kW', f'{cr["installed_shield_W"]/1e3:.2f} kW'],
+          ['Input power', '', f'{cr["input_W"]/1e3:.0f} kW'], ['Cooler mass', '', f'{cr["mass_t"]:.1f} t'], ['LOW reject', f'{cr["low"]["cryo_reject_W"]/1e3:.0f} kW', f'margin {cr["low"]["margin_W"]/1e3:+.0f} kW']]
+    wt = [[E(k.replace('_W', '').replace('_', ' ')), f'{v/1e3:.0f}'] for k, v in wa['adds'].items()] + [['<b>WARM short</b>', f'<b>{wa["short_W"]/1e3:.0f}</b>']]
+    gn = [[E(g['name']), E(g['level'])] for g in RM['gnc']]
+    out.append(section('i11', '3D · I', 'Cryocoolers, heat sinks, farm, structure and GNC',
+                       '<p>The cryocooler stations are sized from the T-A vessel area and the OpenMC nuclear heating, and the WARM and LOW sections are checked against every '
+                       'heat load that Checkpoints 3 and 4 added.</p>'
+                       + img('cam_i3d_cryo', 'Cryocooler stations', 'T-A stretched farm with one cryocooler station at the forward end of each of the 13 vessels.')
+                       + svg('i3d_heat_sinks.svg')
+                       + '<h3>Cryogenics</h3>' + table(['Item', 'Load', 'Installed / result'], ct)
+                       + '<h3>WARM section shortfall (kW)</h3>' + table(['Item', 'kW'], wt)
+                       + '<h3>GNC / C&amp;DH placeholders</h3>' + table(['Block', 'Level'], gn)
+                       + f'<p class="fn">{E(RM["structure"]["note"])}.</p>'
+                       + '<h3>Findings</h3><ul>' + ''.join(f'<li>{E(f)}</li>' for f in RM['findings']) + '</ul>'))
     return '\n'.join(out)

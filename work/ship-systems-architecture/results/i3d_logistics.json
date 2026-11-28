@@ -1,0 +1,287 @@
+{
+ "container": {
+  "gross_t": 3.0,
+  "edge_m": 2.0462493363208125,
+  "tare_t": 0.6009825446268816,
+  "payload_t": 2.3990174553731185,
+  "volume_m3": 8.567924969892177,
+  "inner_m3": 7.3721715460637895,
+  "frame_t": 0.3305403995447849,
+  "panels_t": 0.18029476338806447,
+  "fittings_t": 0.09014738169403223,
+  "member_m": 0.08,
+  "grapples": 4,
+  "latches": 8,
+  "fits_hatch": true,
+  "handling": "single-arm (FT-07, <= 3 t)"
+ },
+ "hub_store": [
+  {
+   "name": "LOG_G1_1",
+   "c": [
+    106.5,
+    -2.2,
+    -3.0
+   ]
+  },
+  {
+   "name": "LOG_G1_2",
+   "c": [
+    108.75,
+    -2.2,
+    -3.0
+   ]
+  },
+  {
+   "name": "LOG_G1_3",
+   "c": [
+    111.0,
+    -2.2,
+    -3.0
+   ]
+  },
+  {
+   "name": "LOG_G1_4",
+   "c": [
+    113.25,
+    -2.2,
+    -3.0
+   ]
+  },
+  {
+   "name": "LOG_G1_5",
+   "c": [
+    106.5,
+    0.05,
+    -3.0
+   ]
+  },
+  {
+   "name": "LOG_G1_6",
+   "c": [
+    108.75,
+    0.05,
+    -3.0
+   ]
+  },
+  {
+   "name": "LOG_G1_7",
+   "c": [
+    111.0,
+    0.05,
+    -3.0
+   ]
+  },
+  {
+   "name": "LOG_G1_8",
+   "c": [
+    113.25,
+    0.05,
+    -3.0
+   ]
+  }
+ ],
+ "hub_tare_t": 4.807860357015053,
+ "displaced": {
+  "containers": 6,
+  "of": 54,
+  "modules": [
+   1
+  ],
+  "volume_m3": 268.8,
+  "x": [
+   -91.5,
+   -79.36
+  ]
+ },
+ "module10": {
+  "offset_m": 112.0,
+  "x": [
+   22.25,
+   33.25
+  ],
+  "containers": [
+   {
+    "name": "Dry_Store_M10_S1_1",
+    "module": 10,
+    "azimuth_deg": 90.0,
+    "x0": 22.65,
+    "x1": 27.65,
+    "r0": 1.5,
+    "r1": 4.3,
+    "width": 3.2,
+    "volume_m3": 44.800000000000004
+   },
+   {
+    "name": "Dry_Store_M10_S1_2",
+    "module": 10,
+    "azimuth_deg": 90.0,
+    "x0": 27.849999999999998,
+    "x1": 32.849999999999994,
+    "r0": 1.5,
+    "r1": 4.3,
+    "width": 3.2,
+    "volume_m3": 44.800000000000004
+   },
+   {
+    "name": "Dry_Store_M10_S2_1",
+    "module": 10,
+    "azimuth_deg": 210.0,
+    "x0": 22.65,
+    "x1": 27.65,
+    "r0": 1.5,
+    "r1": 4.3,
+    "width": 3.2,
+    "volume_m3": 44.800000000000004
+   },
+   {
+    "name": "Dry_Store_M10_S2_2",
+    "module": 10,
+    "azimuth_deg": 210.0,
+    "x0": 27.849999999999998,
+    "x1": 32.849999999999994,
+    "r0": 1.5,
+    "r1": 4.3,
+    "width": 3.2,
+    "volume_m3": 44.800000000000004
+   },
+   {
+    "name": "Dry_Store_M10_S3_1",
+    "module": 10,
+    "azimuth_deg": 330.0,
+    "x0": 22.65,
+    "x1": 27.65,
+    "r0": 1.5,
+    "r1": 4.3,
+    "width": 3.2,
+    "volume_m3": 44.800000000000004
+   },
+   {
+    "name": "Dry_Store_M10_S3_2",
+    "module": 10,
+    "azimuth_deg": 330.0,
+    "x0": 27.849999999999998,
+    "x1": 32.849999999999994,
+    "r0": 1.5,
+    "r1": 4.3,
+    "width": 3.2,
+    "volume_m3": 44.800000000000004
+   }
+  ],
+  "defense_buffer_shift_m": 3.049999999999997,
+  "min_clear_m": 0.6881373746196755,
+  "rack_t": 4.0
+ },
+ "workshop": {
+  "c": [
+   95.5,
+   0.0,
+   -3.0
+  ],
+  "d": [
+   4.0,
+   3.2,
+   2.6
+  ],
+  "power_kW": 25.0,
+  "functions": [
+   "additive (metal + polymer)",
+   "machining",
+   "electronics bench",
+   "ORU test stand",
+   "hot-cell glovebox (activated ORUs, OPEN shielding)"
+  ]
+ },
+ "spares": {
+  "c": [
+   92.5,
+   0.0,
+   3.4
+  ],
+  "d": [
+   3.0,
+   3.6,
+   1.2
+  ]
+ },
+ "heavy_items": [
+  {
+   "name": "Reactor + IHX envelope",
+   "t": 21.46728738872812
+  },
+  {
+   "name": "Turbo-alternator-compressor",
+   "t": 7.8713387092003115
+  },
+  {
+   "name": "Gas ducts (hot leg, return) around the shield",
+   "t": 5.724609970327499
+  },
+  {
+   "name": "H6a EM pump (outside hull, drive-bay hatch)",
+   "t": 7.531640998236472
+  }
+ ],
+ "carriage": {
+  "rating_t": 24.68738049703734,
+  "carriage_t": 4.443728489466721,
+  "rail_kg_m": 22.0,
+  "rail_m": 186.2,
+  "rail_t": 4.0964,
+  "x": [
+   -92.7,
+   93.5
+  ],
+  "az": 270.0,
+  "r": 3.6,
+  "speed_m_s": 0.05,
+  "a_max_m_s2": 0.002,
+  "transit_h": 1.0344444444444443,
+  "clear_m": 1.2,
+  "rule": "moves only in coast; parks and locks to the frame before a burn (0.2-0.74 g would put 40-160 kN on the rail)"
+ },
+ "robots": [
+  {
+   "kind": "single-arm manipulator (FT-07, 3 t)",
+   "n": 3,
+   "t_each": 0.45,
+   "base": "keel lanes az 30 / 150 / 270, hub store rail"
+  },
+  {
+   "kind": "radiator / H6a inspection crawler",
+   "n": 6,
+   "t_each": 0.12,
+   "base": "two per blade root, docking at the H6a inspection ports"
+  },
+  {
+   "kind": "MRU heavy carriage (new requirement)",
+   "n": 1,
+   "t_each": 4.443728489466721,
+   "base": "keel lane az 270, rail x -93 to 94"
+  }
+ ],
+ "robots_t": 10.610128489466721,
+ "supervision": {
+  "where": "hub, behind the workshop (shadow-shielded by the rings and farm), two consoles on data A and B",
+  "note": "crew supervise; no crew in the district while a unit runs (shutdown gamma for weeks, Phase III)"
+ },
+ "findings": [
+  "LOG-G1 (M3): 2.05 m cube, 0.60 t tare (0.33 frame, 0.18 panels, 0.09 fittings), 2.40 t payload, 7.4 m3 inside; 4 grapple fixtures (one per upper corner pair face), 8 latches; single-arm handling; parametric in gross mass (1.5 / 3 / 6 t rows of Phase V reproduce).",
+  "The six dry-store containers displaced by the district (269 m3) move to a tenth body-bay module at x 22.25-33.25 (offset 112 m, same racks); the Phase VI defense buffers shift +3.0 m forward to clear it; closest data/bus clearance 0.69 m.",
+  "MRU heavy carriage: rated 24.7 t (Reactor + IHX envelope 21.5 t, Turbo-alternator-compressor 7.9 t, Gas ducts (hot leg, return) around the shield 5.7 t), 4.4 t + 4.1 t of rail over 186 m on the az 270 keel lane (the district removal route) to the workshop; 1.0 h per trip at 5 cm/s; coast only.",
+  "Robots and rails 10.6 t (new line); the 60 t workshop/spares/cargo line holds the tools and spares themselves.",
+  "H6a EM pumps (7.5 t) sit outside the hull: they leave by the drive-bay hatch with an external manipulator (OPEN, not drawn)."
+ ],
+ "ledger_add": [
+  {
+   "item": "robots, crawlers, MRU carriage + rail (Stage H)",
+   "t": 10.610128489466721,
+   "cls": "FT-07 (APPROVED), NEW"
+  },
+  {
+   "item": "body-bay module 10 racks (relocated dry store, Stage H)",
+   "t": 4.0,
+   "cls": "NEW (PROTOTYPE)"
+  }
+ ]
+}

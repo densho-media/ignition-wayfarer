@@ -355,16 +355,153 @@ def render3():
     for o in bpy.data.objects: o.hide_render = keep.get(o.name, o.hide_render)
 
 
+EC4 = json.loads((HERE / 'results' / 'i3d_eclss.json').read_text()); LG4 = json.loads((HERE / 'results' / 'i3d_logistics.json').read_text())
+RM4 = json.loads((HERE / 'results' / 'i3d_remaining.json').read_text())
+CP4 = {}
+
+
+def _box_at(name, half, c, coll_, m, props, rot=None):
+    o = _obj(name, _box_mesh(name, *half), coll_, m, props)
+    o.matrix_world = (rot or Matrix.Identity(4)) @ Matrix.Translation(c) if rot is not None else Matrix.Translation(c)
+    return o
+
+
+def _g1_meshes(e, mm_):
+    """LOG-G1 frame (12 edge members), 6 panels, grapple fixtures and latches as separate meshes shared by every container."""
+    h = e/2; b = mm_/2; parts = {}
+    vs, fs = [], []
+    for axis in range(3):
+        for s1 in (-1, 1):
+            for s2 in (-1, 1):
+                c = [0.0, 0.0, 0.0]; o = [i for i in range(3) if i != axis]; c[o[0]] = s1*(h-b); c[o[1]] = s2*(h-b)
+                hx = [b, b, b]; hx[axis] = h; k = len(vs)
+                vs += [(c[0]+sx*hx[0], c[1]+sy*hx[1], c[2]+sz*hx[2]) for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)]
+                fs += [(k, k+1, k+3, k+2), (k+4, k+6, k+7, k+5), (k, k+4, k+5, k+1), (k+2, k+3, k+7, k+6), (k, k+2, k+6, k+4), (k+1, k+5, k+7, k+3)]
+    me = bpy.data.meshes.new('I3D_G1_Frame'); me.from_pydata(vs, [], fs); me.update(); parts['frame'] = me
+    vs, fs = [], []
+    for axis in range(3):
+        for s in (-1, 1):
+            c = [0.0, 0.0, 0.0]; c[axis] = s*(h-b); hx = [h-2*b, h-2*b, h-2*b]; hx[axis] = 0.01; k = len(vs)
+            vs += [(c[0]+sx*hx[0], c[1]+sy*hx[1], c[2]+sz*hx[2]) for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)]
+            fs += [(k, k+1, k+3, k+2), (k+4, k+6, k+7, k+5), (k, k+4, k+5, k+1), (k+2, k+3, k+7, k+6), (k, k+2, k+6, k+4), (k+1, k+5, k+7, k+3)]
+    me = bpy.data.meshes.new('I3D_G1_Panels'); me.from_pydata(vs, [], fs); me.update(); parts['panels'] = me
+    vs, fs = [], []
+    for (x, y) in ((-h/2, 0.0), (h/2, 0.0), (0.0, -h/2), (0.0, h/2)):             # grapple fixtures on the top face
+        k = len(vs); vs += [(x+sx*0.09, y+sy*0.09, h+0.02+sz*0.04) for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)]
+        fs += [(k, k+1, k+3, k+2), (k+4, k+6, k+7, k+5), (k, k+4, k+5, k+1), (k+2, k+3, k+7, k+6), (k, k+2, k+6, k+4), (k+1, k+5, k+7, k+3)]
+    me = bpy.data.meshes.new('I3D_G1_Grapples'); me.from_pydata(vs, [], fs); me.update(); parts['grapple'] = me
+    vs, fs = [], []
+    for sx_ in (-1, 1):
+        for sy_ in (-1, 1):
+            for sz_ in (-1, 1):                                                    # 8 corner latches
+                k = len(vs); cc = (sx_*(h+0.03), sy_*(h-0.1), sz_*(h-0.1))
+                vs += [(cc[0]+sx*0.03, cc[1]+sy*0.06, cc[2]+sz*0.06) for sx in (-1, 1) for sy in (-1, 1) for sz in (-1, 1)]
+                fs += [(k, k+1, k+3, k+2), (k+4, k+6, k+7, k+5), (k, k+4, k+5, k+1), (k+2, k+3, k+7, k+6), (k, k+2, k+6, k+4), (k+1, k+5, k+7, k+3)]
+    me = bpy.data.meshes.new('I3D_G1_Latches'); me.from_pydata(vs, [], fs); me.update(); parts['latch'] = me
+    return parts
+
+
+def hook4(r6):
+    coll, mat, cam = ns['coll'], ns['mat'], ns['cam']
+    for nm in ('WORK_ISSA6_F1_ECLSS', 'WORK_ISSA6_F1_LOGISTICS'):
+        c = bpy.data.collections.get(nm)
+        if c:
+            c.hide_viewport = True
+            for o in c.all_objects: o.hide_render = True
+    root = coll('WORK_I3D_CP4_SYSTEMS', r6)
+    m = dict(oru=mat('I3D_eclss_oru', (0.30, 0.66, 0.42), 1.0), env=mat('I3D_eclss_frame', (0.55, 0.58, 0.60), 1.0), duct=mat('I3D_eclss_duct', (0.62, 0.80, 0.70), 1.0),
+             ring=mat('I3D_eclss_ring', (0.24, 0.55, 0.36), 1.0), fr=mat('I3D_g1_frame', (0.36, 0.42, 0.48), 1.0), pan=mat('I3D_g1_panel', (0.80, 0.70, 0.30), 1.0),
+             gr=mat('I3D_g1_grapple', (0.82, 0.23, 0.42), 1.0), la=mat('I3D_g1_latch', (0.79, 0.52, 0.16), 1.0), dry=mat('I3D_drystore', (0.23, 0.56, 0.82), 1.0),
+             rail=mat('I3D_mru_rail', (0.79, 0.52, 0.16), 1.0), car=mat('I3D_mru_carriage', (0.92, 0.62, 0.10), 1.0), rob=mat('I3D_robot', (0.95, 0.85, 0.20), 1.0),
+             ws=mat('I3D_workshop', (0.85, 0.78, 0.25), 1.0), cryo=mat('I3D_cryo', (0.40, 0.70, 0.95), 1.0), gnc=mat('I3D_gnc', (0.60, 0.40, 0.80), 1.0))
+    # G: ECLSS hub unit (M3) as ORUs inside its envelope frame, ring units (M2), hub-to-ring ducts
+    cg = coll('WORK_I3D_G_ECLSS', root); CP4['G'] = cg; h = EC4['hub']; hc = Vector(h['c']); env = h['env']
+    base = dict(maturity='M3 engineering assembly', track='R/F', failure_domain='ECLSS hub unit')
+    for i, q in enumerate(h['orus']):
+        _box_at(f'I3D_ECLSS_HUB_ORU{i+1}', [v/2 for v in q['size']], tuple(hc+Vector(q['c'])), cg, m['oru'],
+                dict(base, meaning=f'ORU {q["name"]}: {q["mass_kg"]} kg, {q["power_W"]} W (<= {EC4["unit"]["orus_max_width_m"]:.2f} m wide)'))
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            seg(f'I3D_ECLSS_HUB_Post_{sx}{sy}', tuple(hc+Vector((sx*env[0]/2, sy*env[1]/2, -env[2]/2))), tuple(hc+Vector((sx*env[0]/2, sy*env[1]/2, env[2]/2))), 0.03, cg, m['env'],
+                dict(base, meaning='unit frame post'))
+        for z in (-1, 1):
+            seg(f'I3D_ECLSS_HUB_RailX_{sx}{z}', tuple(hc+Vector((-env[0]/2, sx*env[1]/2, z*env[2]/2))), tuple(hc+Vector((env[0]/2, sx*env[1]/2, z*env[2]/2))), 0.025, cg, m['env'],
+                dict(base, meaning='unit frame rail'))
+            seg(f'I3D_ECLSS_HUB_Rail_{sx}{z}', tuple(hc+Vector((sx*env[0]/2, -env[1]/2, z*env[2]/2))), tuple(hc+Vector((sx*env[0]/2, env[1]/2, z*env[2]/2))), 0.025, cg, m['env'],
+                dict(base, meaning='unit frame rail'))
+    D = EC4['duct']['D_m']
+    for tag, cx in (('A', 99.199), ('B', 101.399)):
+        p0 = (hc.x+(-0.9 if tag == 'A' else 0.9), 0.0, hc.z-0.5); p1 = (cx, 0.0, 1.40); p2 = (cx, 0.0, -1.40)
+        seg(f'I3D_ECLSS_Duct_{tag}_supply', p0, p1, D/2, cg, m['duct'], dict(base, meaning=f'hub-to-ring air duct D {D:.2f} m to rotary coupling {tag} (transfer drum r 1.3-1.5 m)'))
+        seg(f'I3D_ECLSS_Duct_{tag}_drum', p1, p2, D/2, cg, m['duct'], dict(base, meaning=f'duct passage through the transfer drum {tag}'))
+    for q in EC4['ring_units']:
+        _box_at(f'I3D_{q["name"]}', [v/2 for v in q['env']], tuple(q['c']), cg, m['ring'],
+                dict(maturity='M2 arrangement', track='R/F', failure_domain=f'ring {q["ring"]}', meaning=f'ECLSS-G1 ring unit {q["name"]} (same ORU set as the hub unit)'))
+    # H: LOG-G1 containers (M3, shared meshes), hub store, module 10 dry store, workshop, robots, MRU carriage
+    ch = coll('WORK_I3D_H_LOGISTICS', root); CP4['H'] = ch; G1 = LG4['container']; parts = _g1_meshes(G1['edge_m'], G1['member_m'])
+    for q in LG4['hub_store']:
+        for k, mk in (('frame', 'fr'), ('panels', 'pan'), ('grapple', 'gr'), ('latch', 'la')):
+            o = _obj(f'I3D_{q["name"]}_{k}', parts[k], ch, m[mk], dict(maturity='M3 engineering assembly', track='R/F', register='FT-07', failure_domain='hub store',
+                     meaning=f'LOG-G1 {k}: {G1["edge_m"]:.2f} m, {G1["tare_t"]:.2f} t tare, {G1["payload_t"]:.2f} t payload'))
+            o.matrix_world = Matrix.Translation(q['c'])
+    seg('I3D_HubStore_Rail', (105.2, 1.3, -4.2), (114.6, 1.3, -4.2), 0.06, ch, m['rail'], dict(maturity='M2', track='R/F', meaning='hub store transfer rail for the single-arm manipulator'))
+    M10 = LG4['module10']
+    for q in M10['containers']:
+        L = q['x1']-q['x0']; rc = (q['r0']+q['r1'])/2; rot = Matrix.Rotation(math.radians(q['azimuth_deg']), 4, 'X')
+        o = _obj(f'I3D_{q["name"]}', _box_mesh(f'I3D_{q["name"]}', L/2, (q['r1']-q['r0'])/2, q['width']/2), ch, m['dry'],
+                 dict(maturity='M2 arrangement', track='R/F', failure_domain='body bay module 10', meaning=f'relocated dry-store container ({q["volume_m3"]:.1f} m3), displaced by the L2 district'))
+        o.matrix_world = rot @ Matrix.Translation(((q['x0']+q['x1'])/2, rc, 0.0))
+    for o in bpy.data.objects:                                                       # Phase VI defense buffers move forward to clear module 10
+        if o.name.startswith('I3D_DefenseBuffer_'): o.matrix_world = Matrix.Translation((M10['defense_buffer_shift_m'], 0, 0)) @ o.matrix_world
+    ws = LG4['workshop']; _box_at('I3D_Workshop', [v/2 for v in ws['d']], tuple(ws['c']), ch, m['ws'], dict(maturity='M2 arrangement', track='R/F', meaning='workshop: ' + ', '.join(ws['functions'])))
+    c_ = LG4['carriage']; a = math.radians(c_['az']); ry, rz = c_['r']*math.cos(a), c_['r']*math.sin(a)
+    seg('I3D_MRU_Rail', (c_['x'][0], ry, rz), (c_['x'][1], ry, rz), 0.09, ch, m['rail'],
+        dict(maturity='M2 arrangement', track='F1', register='FT-07', meaning=f'MRU heavy-carriage rail, keel lane az {c_["az"]:.0f}, {c_["rail_m"]:.0f} m, {c_["rail_t"]:.1f} t'))
+    _box_at('I3D_MRU_Carriage', (1.6, 0.6, 0.6), (-70.0, ry*0.85, rz*0.85), ch, m['car'],
+            dict(maturity='M2 arrangement', track='F1', meaning=f'MRU heavy carriage, rated {c_["rating_t"]:.1f} t ({c_["carriage_t"]:.1f} t); {c_["rule"]}'))
+    for i, (x, az) in enumerate(((-20.0, 30.0), (10.0, 150.0), (60.0, 270.0))):
+        a = math.radians(az); _box_at(f'I3D_Manipulator_{i+1}', (0.5, 0.35, 0.35), (x, 3.0*math.cos(a), 3.0*math.sin(a)), ch, m['rob'],
+                                      dict(maturity='M2 arrangement', track='R/F', register='FT-07', meaning='single-arm 3 t manipulator on its keel-lane rail'))
+    # I: cryocooler stations (M2), GNC / CDH blocks (M1)
+    ci = coll('WORK_I3D_I_CRYO_GNC', root); CP4['I'] = ci
+    for q in RM4['cryo']['stations']:
+        _box_at(f'I3D_Cryo_{q["tank"]}', (0.8, 0.9, 0.9), tuple(q['c']), ci, m['cryo'],
+                dict(maturity='M2 arrangement', track='R/F', failure_domain=f'vessel {q["tank"]}', meaning=f'cryocooler station {q["stage"]} for {q["species"]} vessel {q["tank"]}'))
+    for q in RM4['gnc']:
+        _box_at('I3D_GNC_' + q['name'].split(' (')[0].replace(' ', '_').replace('/', ''), tuple(q['half']), tuple(q['c']), ci, m['gnc'],
+                dict(maturity='M1 placeholder', track='R/F', meaning=q['name']))
+    cam(root, 'CAM_I3D_ECLSS_HUB', (hc.x+3.2, hc.y-4.2, hc.z+3.0), tuple(hc), 30)
+    cam(root, 'CAM_I3D_LOG_G1', (104.0, -7.5, 1.5), (110.0, -1.0, -3.0), 30)
+    cam(root, 'CAM_I3D_MODULE10', (12.0, -14.0, 12.0), (28.0, 0.0, 1.0), 28)
+    cam(root, 'CAM_I3D_MRO_ROUTE', (-58.0, -16.0, -14.0), (-80.0, 0.0, -3.0), 26)
+    cam(root, 'CAM_I3D_CRYO', (175.0, -70.0, 40.0), (150.0, 0.0, 0.0), 35)
+
+
+def render4():
+    if '--render' not in sys.argv: return
+    sc = bpy.context.scene; keep = {o.name: o.hide_render for o in bpy.data.objects}
+    def only(colls):
+        names = {o.name for c in colls for o in c.all_objects}
+        for o in bpy.data.objects:
+            if o.type in ('MESH', 'CURVE'): o.hide_render = o.name not in names
+            if o.type == 'FONT': o.hide_render = True
+    for cname, colls in (('CAM_I3D_ECLSS_HUB', [CP4['G']]), ('CAM_I3D_LOG_G1', [CP4['H']]), ('CAM_I3D_MODULE10', [CP4['H'], CP3['EL']]), ('CAM_I3D_MRO_ROUTE', [CP4['H']]+[CP2[k] for k in ('U1', 'U2', 'U3')]),
+                         ('CAM_I3D_CRYO', [CP4['I']]+[c for c in (bpy.data.collections.get('WORK_I3D_TANKS_TA_STRETCH'),) if c])):
+        only(colls); sc.camera = bpy.data.objects[cname]
+        sc.render.filepath = str(HERE / 'results' / f'{cname.lower()}.jpg'); bpy.ops.render.render(write_still=True)
+    for o in bpy.data.objects: o.hide_render = keep.get(o.name, o.hide_render)
+
+
 P6_LAY = json.loads((HERE / 'results' / 'phase6.json').read_text())['layout']
 C3_FACE = '1.2'
 
 
 def hook_all(r6):
-    hook(r6); hook2(r6); hook3(r6)
+    hook(r6); hook2(r6); hook3(r6); hook4(r6)
 
 
 def render_all():
-    render(); render2(); render3()
+    render(); render2(); render3(); render4()
 
 
 ns['I3D_HOOK'] = hook_all; ns['I3D_RENDER'] = render_all

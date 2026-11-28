@@ -1,0 +1,259 @@
+{
+ "cryo": {
+  "area_factor": 1.600029914930077,
+  "A0_m2": 15225.59276466103,
+  "A_TA_m2": 24361.403896000586,
+  "power_factor": 0.9480519480519479,
+  "he3_W": 263.6426707484363,
+  "shield_W": 5860.46270012474,
+  "installed_he3_W": 329.55333843554536,
+  "installed_shield_W": 7325.578375155925,
+  "input_W": 933864.7101626736,
+  "stations": [
+   {
+    "tank": "O1",
+    "species": "helium-3",
+    "c": [
+     157.05926112343957,
+     27.58768925023175,
+     2.9969821208421337
+    ],
+    "stage": "3 K + 20 K"
+   },
+   {
+    "tank": "O2",
+    "species": "helium-3",
+    "c": [
+     157.05926112343957,
+     9.080296696670132,
+     26.22233231237148
+    ],
+    "stage": "3 K + 20 K"
+   },
+   {
+    "tank": "O3",
+    "species": "hydrogen",
+    "c": [
+     157.05926112343957,
+     -5.390003246354222,
+     27.221505560940066
+    ],
+    "stage": "20 K"
+   },
+   {
+    "tank": "O4",
+    "species": "helium-3",
+    "c": [
+     157.05926112343957,
+     -18.387706337986717,
+     20.783521251894808
+    ],
+    "stage": "3 K + 20 K"
+   },
+   {
+    "tank": "O5",
+    "species": "helium-3",
+    "c": [
+     157.05926112343957,
+     -27.603003175001586,
+     2.852492895846097
+    ],
+    "stage": "3 K + 20 K"
+   },
+   {
+    "tank": "O6",
+    "species": "hydrogen",
+    "c": [
+     157.05926112343957,
+     -18.69400137081989,
+     -20.50845710305346
+    ],
+    "stage": "20 K"
+   },
+   {
+    "tank": "O7",
+    "species": "helium-3",
+    "c": [
+     157.05926112343957,
+     -5.793234476286982,
+     -27.13855070380067
+    ],
+    "stage": "3 K + 20 K"
+   },
+   {
+    "tank": "O8",
+    "species": "helium-3",
+    "c": [
+     157.05926112343957,
+     11.331170275583437,
+     -25.331148418216934
+    ],
+    "stage": "3 K + 20 K"
+   },
+   {
+    "tank": "O9",
+    "species": "hydrogen",
+    "c": [
+     157.05926112343957,
+     25.33114841821693,
+     -11.33117027558345
+    ],
+    "stage": "20 K"
+   },
+   {
+    "tank": "I1",
+    "species": "deuterium",
+    "c": [
+     157.05926112343957,
+     -0.8758886748066362,
+     13.47155592458961
+    ],
+    "stage": "20 K"
+   },
+   {
+    "tank": "I2",
+    "species": "hydrogen",
+    "c": [
+     157.05926112343957,
+     -11.726525444915582,
+     6.6886920238375
+    ],
+    "stage": "20 K"
+   },
+   {
+    "tank": "I3",
+    "species": "deuterium",
+    "c": [
+     157.05926112343957,
+     0.8758886748066406,
+     -13.47155592458961
+    ],
+    "stage": "20 K"
+   },
+   {
+    "tank": "I4",
+    "species": "hydrogen",
+    "c": [
+     157.05926112343957,
+     13.47094115605268,
+     -0.8852933808439356
+    ],
+    "stage": "20 K"
+   }
+  ],
+  "n_he3": 6,
+  "mass_t": 11.206376521952084,
+  "low": {
+   "design_W": 1000000.0,
+   "cryo_reject_W": 775765.5477554738,
+   "phase6_reject_W": 395240.5162727445,
+   "margin_W": -75765.54775547376
+  }
+ },
+ "warm": {
+  "adds": {
+   "nak_insulation_leak_W": 99311.06804354652,
+   "bus_loss_W": 27004.32,
+   "phase6_shortfall_W": 370153.0132639855
+  },
+  "short_W": 496468.40130753204,
+  "ext_m": 2.680929367060673,
+  "per_m_W": 222222.22222222225
+ },
+ "gnc": [
+  {
+   "name": "CMG cluster (production, body bay)",
+   "c": [
+    -5.0,
+    0.0,
+    -2.6
+   ],
+   "half": [
+    1.6,
+    1.6,
+    1.2
+   ],
+   "level": "M1"
+  },
+  {
+   "name": "Flight computers A/B (hub)",
+   "c": [
+    98.2,
+    0.0,
+    -3.6
+   ],
+   "half": [
+    0.6,
+    0.5,
+    0.5
+   ],
+   "level": "M1"
+  },
+  {
+   "name": "Star trackers + IMU (Brow rim)",
+   "c": [
+    159.20926112343957,
+    0.0,
+    40.0
+   ],
+   "half": [
+    0.4,
+    0.4,
+    0.4
+   ],
+   "level": "M1"
+  },
+  {
+   "name": "Nav beacon / comm (Brow)",
+   "c": [
+    159.20926112343957,
+    0.0,
+    -40.0
+   ],
+   "half": [
+    0.6,
+    0.6,
+    0.6
+   ],
+   "level": "M1"
+  }
+ ],
+ "structure": {
+  "farm_x": [
+   109.25,
+   156.05926112343957
+  ],
+  "added_m": 18.209261123439585,
+  "brow_x": [
+   160.0092611234396,
+   163.0092611234396
+  ],
+  "note": "primary-structure members, frames and their mass belong to the PSA thread (PSA-IF 0.1); ISSA passes the envelope and the stretch only"
+ },
+ "pending": [
+  {
+   "id": "WARM",
+   "item": "WARM section +2.7 m to absorb 496 kW (Phase VI shortfall + Stage E/F leaks); blade mass ~2.6 t/m",
+   "t": 6.9704163543577495
+  },
+  {
+   "id": "LOW",
+   "item": "LOW section +0.8 m to absorb the 76 kW cryo shortfall (T-A area + nuclear heating)",
+   "t": 2.127496580973703
+  }
+ ],
+ "findings": [
+  "Cryocoolers (M2): T-A vessels have 1.60x the shell area, so the leak lift grows to 264 W at 3 K (He-3) and 5.86 kW at 20 K, nuclear heating included (OpenMC side scatter scaled to the F1 unit, 0.95x); installed with 25 % margin they need 934 kW of input and about 11.2 t of coolers, one station at the forward end of each vessel (13; the six He-3 stations carry a 3 K stage).",
+  "LOW section: the cryo heat it rejects rises from 395 kW to 776 kW; LOW margin -76 kW (SHORT).",
+  "WARM section: Phase VI shortfall 370 kW + NaK insulation leak 99 kW + bus loss 27 kW = 496 kW short; with the 1.2 margin that is +2.7 m of WARM length (owner question with the radiator decisions; the graded blade has no free length between WARM and LOW without moving the bulkheads).",
+  "Farm and structure (M2): T-A stretches the farm to x 109.25-156.06 and moves the Brow to x 160.0; primary-structure mass is the PSA thread's and is not in this ledger.",
+  "GNC / C&DH (M1): placeholder blocks for the production CMGs, flight computers A/B in the hub, star trackers and comms on the Brow rim."
+ ],
+ "ledger_add": [
+  {
+   "item": "cryocooler stations (13, T-A area, Stage I)",
+   "t": 11.206376521952084,
+   "cls": "NEW (PROTOTYPE)"
+  }
+ ]
+}

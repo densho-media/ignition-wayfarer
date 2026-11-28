@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="760" style="max-width:100%;height:auto" font-family="Inter,system-ui,sans-serif" font-size="11" role="img" aria-label="LOG-G1 container">
+<style>.t{fill:var(--fg,#223)} .m{fill:var(--muted,#667)}</style>
+<text x="14" y="20" class="t" font-weight="600">LOG-G1 3 t container (M3): frame, panels, grapples, latches</text>
+<line x1="140" y1="300" x2="140" y2="75" stroke="#5a6b7a" stroke-width="5"/>
+<line x1="140" y1="300" x2="241" y2="232" stroke="#5a6b7a" stroke-width="5"/>
+<line x1="140" y1="300" x2="365" y2="300" stroke="#5a6b7a" stroke-width="5"/>
+<line x1="140" y1="75" x2="241" y2="7" stroke="#5a6b7a" stroke-width="5"/>
+<line x1="140" y1="75" x2="365" y2="75" stroke="#5a6b7a" stroke-width="5"/>
+<line x1="241" y1="232" x2="241" y2="7" stroke="#5a6b7a" stroke-width="5"/>
+<line x1="241" y1="232" x2="466" y2="232" stroke="#5a6b7a" stroke-width="5"/>
+<line x1="241" y1="7" x2="466" y2="7" stroke="#5a6b7a" stroke-width="5"/>
+<line x1="365" y1="300" x2="365" y2="75" stroke="#5a6b7a" stroke-width="5"/>
+<line x1="365" y1="300" x2="466" y2="232" stroke="#5a6b7a" stroke-width="5"/>
+<line x1="365" y1="75" x2="466" y2="7" stroke="#5a6b7a" stroke-width="5"/>
+<line x1="466" y1="232" x2="466" y2="7" stroke="#5a6b7a" stroke-width="5"/>
+<circle cx="196" cy="75" r="7" fill="#d23a6a"/>
+<circle cx="309" cy="75" r="7" fill="#d23a6a"/>
+<rect x="135" y="295" width="10" height="10" fill="#c9852a"/>
+<rect x="360" y="295" width="10" height="10" fill="#c9852a"/>
+<rect x="135" y="70" width="10" height="10" fill="#c9852a"/>
+<rect x="360" y="70" width="10" height="10" fill="#c9852a"/>
+<text x="430" y="80" class="m">edge 2.05 m, inside 7.4 m3</text>
+<text x="430" y="100" class="m">tare 0.60 t: frame 0.33, panels 0.18, fittings 0.09</text>
+<text x="430" y="120" class="m">payload 2.40 t</text>
+<text x="430" y="140" class="m">4 grapple fixtures (magenta), 8 latches (amber, corner)</text>
+<text x="430" y="160" class="m">handling: single-arm (FT-07, <= 3 t)</text>
+<text x="430" y="180" class="m">tag: RFID + optical code (data A/B inventory)</text>
+<text x="430" y="200" class="m">parametric: container(gross_t) in systems3d.py</text>
+</svg>
