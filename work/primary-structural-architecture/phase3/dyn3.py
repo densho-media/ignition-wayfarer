@@ -35,8 +35,10 @@ import analysis as an  # noqa: E402
 ZETA = 0.005
 NB = 40
 TAU_A, TAU_D = 0.5, 0.2                       # gimbal lag, transport delay (s), PROTOTYPE
-TAU_S = 1/(2*math.pi*0.03)                    # sensor / structural filter, corner 0.03 Hz (below f1 ~0.087 Hz; rigid loop 0.008 Hz)
-WC, ZC = 2*math.pi*0.008, 0.7                 # rigid attitude loop bandwidth 0.008 Hz (about 6x below the first elastic mode), damping
+TAU_S = 1/(2*math.pi*0.03)                    # first-order sensor filter (Phase III first run), kept for the comparison
+FILTER = 1                                    # 1 = first-order filter TAU_S (best of the Phase III trials); 2 = second-order roll-off FC_HZ
+FC_HZ = 0.025                                 # roll-off corner (rigid loop 0.008 Hz, first bending 0.087-0.136 Hz)
+WC, ZC = 2*math.pi*0.004, 0.7                 # rigid attitude loop 0.004 Hz (Phase III: 0.008 Hz destabilised the first bending pair), damping 0.7
 RING_RPM = 4.0
 
 
@@ -87,11 +89,11 @@ def plant(b, B, lam, imu, plane='both', authority=1.0, kscale=1.0, mscale=1.0, z
     k = k + lam*(B['g'] + B['lf'])
     c = np.diag(2*zeta*w)*mscale
     X = np.array(b.m.X); l = abs(B['c'][0] - X[b.noz[0]][0]); Tn = max(b.cfg['thrust'], 1.0)
-    mi = np.linalg.inv(m); N = 2*n+8; A = np.zeros((N, N))
+    mi = np.linalg.inv(m); N = 2*n+12; A = np.zeros((N, N))
     A[:n, n:2*n] = np.eye(n); A[n:2*n, :n] = -mi @ k; A[n:2*n, n:2*n] = -mi @ c
     gains = {}
     for j, (pl, fdof, rdof, sgn) in enumerate((('pitch', 2, 4, 1.0), ('yaw', 1, 5, -1.0))):
-        o = 2*n+4*j; dl, pd, th, rt = o, o+1, o+2, o+3
+        o = 2*n+6*j; dl, pd, th, rt, thd, rtd = o, o+1, o+2, o+3, o+4, o+5
         # lateral nozzle force per rad of gimbal; sign so that +delta produces +rotation about the channel axis
         bu = sgn*influence(b, B, b.noz, fdof)*T*authority
         cy = influence(b, B, [imu], rdof)
@@ -102,8 +104,15 @@ def plant(b, B, lam, imu, plane='both', authority=1.0, kscale=1.0, mscale=1.0, z
         A[pd, :] = (2.0/TAU_D)*u_row; A[pd, pd] -= 2.0/TAU_D
         ud = 2*np.eye(N)[pd] - u_row
         A[dl, :] = ud/TAU_A; A[dl, dl] -= 1.0/TAU_A
-        A[th, :n] = cy/TAU_S; A[th, th] -= 1.0/TAU_S
-        A[rt, n:2*n] = cy/TAU_S; A[rt, rt] -= 1.0/TAU_S
+        if FILTER == 2:
+            wf = 2*math.pi*FC_HZ; zf = 0.7071
+            for f_, d_, src in ((th, thd, slice(0, n)), (rt, rtd, slice(n, 2*n))):
+                A[f_, d_] = 1.0
+                A[d_, src] = wf**2*cy; A[d_, f_] -= wf**2; A[d_, d_] -= 2*zf*wf
+        else:
+            A[th, :n] = cy/TAU_S; A[th, th] -= 1.0/TAU_S
+            A[rt, n:2*n] = cy/TAU_S; A[rt, rt] -= 1.0/TAU_S
+            A[thd, thd] = A[rtd, rtd] = -1.0
     return A, gains
 
 
@@ -119,6 +128,19 @@ def margins(A):
     e = np.linalg.eigvals(A); sig = e.real.max()
     wn = np.abs(e); z = -e.real/np.maximum(wn, 1e-12)
     return dict(max_real=float(sig), stable=bool(sig < 1e-6), min_damping=float(z[wn > 1e-4].min()) if (wn > 1e-4).any() else None)
+
+
+def node_imu(b, B):
+    """IMU at the spine node where the first two elastic modes rotate least relative to the rigid attitude (bending node)."""
+    best = None
+    for x, nd in b.spine.items():
+        if x < -90 or x > 92:
+            continue
+        cy = np.abs(influence(b, B, [nd], 4)) + np.abs(influence(b, B, [nd], 5))
+        r = cy[2:6].max()/max(cy[:2].max(), 1e-12)
+        if best is None or r < best[0]:
+            best = (r, nd, x)
+    return best
 
 
 def evaluate(b, state_bodies, imu=None, label='', lam_hi=4.0):
@@ -172,7 +194,7 @@ def ramp_down(b, B, imu, t_ramp, hardover_deg=0.5, plane='both', t_end=None, dt=
     """C5: thrust 1 -> 0 over t_ramp with a gimbal hard-over at t = 0 that is cleared at shutdown. Linear time-varying modal
     integration (implicit trapezoid). Returns peak elastic modal amplitude ratio against the steady 2 % TVC case."""
     t_end = t_end or max(3*t_ramp, 60.0); n = B['k'].shape[0]
-    steps = int(t_end/dt); NS = 2*n+8; x = np.zeros(NS); peak = 0.0
+    steps = int(t_end/dt); NS = 2*n+12; x = np.zeros(NS); peak = 0.0
     A1, _ = plant(b, B, 1.0, imu); A0, _ = plant(b, B, 0.0, imu)
     for i in range(steps):
         t = i*dt; lam = max(0.0, 1.0-t/t_ramp)
